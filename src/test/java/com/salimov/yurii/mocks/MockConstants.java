@@ -1,0 +1,42 @@
+package com.salimov.yurii.mocks;
+
+import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.entity.User;
+import org.junit.Ignore;
+
+import java.util.Date;
+
+@Ignore
+public interface MockConstants {
+    int DEFAULT_SIZE = 10;
+    int INDEX = 1;
+    Long ID = 1L;
+    Long UNKNOWN_ID = -1L;
+    String TITLE = "It`s a title of some content.";
+    String URL = "url";
+    String DESCRIPTION = "description";
+    String TEXT = "text";
+    String KEYWORDS = "keywords, key, words";
+    String NUMBER = "NuMbEr2016";
+    String NAME = "Yurii Salimov";
+    String LOGIN = "mr1993alex";
+    String PASSWORD = "mr19alex93password";
+    String EMAIL = "my_email@gmail.com";
+    String PHONE = "+380000000000";
+    String VKONTAKTE = "vkontakte";
+    String FACEBOOK = "facebook";
+    String TWITTER = "twitter";
+    String SKYPE = "skype";
+    String DOMAIN = "domain.com";
+    String TAGLINE = "It`s the best web-site.";
+    String INFORMATION = "I am a information about some content.";
+    String ADVANTAGES = "advantages";
+    String ADDRESS = "Ukraine, Kyiv, Some Str., 51";
+    String TIME = "12:00";
+    String GOOGLE_MAPS = "google maps";
+    String ANY_STRING = "Some unknown text.";
+    String PATH = "c:/some_dir/file.txt";
+    Date DATE = new Date();
+    Company.Type COMPANY_TYPE = Company.Type.PARTNER;
+    User.Role USER_ROLE = User.Role.ANOTHER;
+}
