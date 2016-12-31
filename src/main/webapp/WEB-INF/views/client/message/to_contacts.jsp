@@ -33,7 +33,7 @@
                     <b><span class="glyphicon glyphicon-user"
                              aria-hidden="true"></span>&nbsp;Представтесь, пожалуйста:</b>
                 </label>
-                <input type="text" class="form-control" name="name" minlength="2" maxlength="100"
+                <input type="text" class="form-control" name="name" minlength="2" maxlength="100" autofocus
                        placeholder="Иванов Иван Иванович" required>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">

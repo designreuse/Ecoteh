@@ -66,7 +66,7 @@
                                 <div class="inner-addon left-addon">
                                     <span class="glyphicon glyphicon-search"></span>
                                     <input type="text" class="form-control" name="keywords" value="${keywords}"
-                                           placeholder="Поиск" required/>
+                                           placeholder="Поиск" required autofocus/>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

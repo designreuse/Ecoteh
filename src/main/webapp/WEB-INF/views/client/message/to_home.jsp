@@ -25,7 +25,7 @@
                 <label>
                     <b><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Имя:</b>
                 </label>
-                <input type="text" class="form-control" name="name" minlength="2"
+                <input type="text" class="form-control" name="name" minlength="2" autofocus
                        maxlength="50" placeholder="Иванов Иван" required>
             </div>
             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
