@@ -2,7 +2,11 @@ package com.salimov.yurii.controller.advice;
 
 import com.salimov.yurii.exception.DisableException;
 import com.salimov.yurii.exception.DuplicateException;
+import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
+import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -95,6 +99,13 @@ public class AdviceController {
      */
     private final static String UNKNOWN_MESSAGE
             = "Неизвестная ошибка...";
+
+    private final MainMVFabric fabric;
+
+    @Autowired
+    public AdviceController(final ClientMVFabric fabric) {
+        this.fabric = new CacheMVFabricImpl(fabric);
+    }
 
     /**
      * Intercepts and handles NoHandlerFoundException.
@@ -334,11 +345,17 @@ public class AdviceController {
      * @return The ModelAndView object with information about exception.
      */
     @SuppressWarnings("SpringMVCViewInspection")
-    private static ModelAndView prepareModelAndView(
+    private ModelAndView prepareModelAndView(
             final String textError,
             final String messageError
     ) {
-        final ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView;
+        try {
+            modelAndView = this.fabric.getDefaultModelAndView();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            modelAndView = new ModelAndView();
+        }
         modelAndView.addObject("text", textError);
         modelAndView.addObject("message", messageError);
         modelAndView.setViewName("error/error_page");

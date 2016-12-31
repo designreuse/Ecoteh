@@ -106,8 +106,9 @@ public abstract class Model<E extends Number>
      */
     @Override
     public boolean equals(final Object object) {
-        return object != null &&
-                (this == object || getClass() == object.getClass());
+        return (object != null) && (
+                (this == object) || (getClass() == object.getClass())
+        );
     }
 
     /**
@@ -186,7 +187,7 @@ public abstract class Model<E extends Number>
     public static <T extends Model> List<T> getUnmodifiableList(
             final Collection<T> models
     ) {
-        return models != null && !models.isEmpty() ?
+        return ((models != null) && !models.isEmpty()) ?
                 Collections.unmodifiableList(
                         new ArrayList<>(models)
                 ) : new ArrayList<>();
@@ -208,7 +209,9 @@ public abstract class Model<E extends Number>
             final Random random = new Random(System.nanoTime());
             for (int i = 0; i < length; i++) {
                 int number = random.nextInt(pattern.length);
-                sb.append(pattern[number]);
+                sb.append(
+                        pattern[number]
+                );
             }
         }
         return sb.toString();
@@ -238,9 +241,11 @@ public abstract class Model<E extends Number>
      * @return The model string-date.
      */
     public static String getDateToString(final Date date) {
-        final DateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
-        final TimeZone timeZone = TimeZone.getTimeZone(TIME_ZONE);
-        return getDateToStringWithFormat(date, dateFormat, timeZone);
+        return getDateToStringWithFormat(
+                date,
+                new SimpleDateFormat(DATE_PATTERN),
+                TimeZone.getTimeZone(TIME_ZONE)
+        );
     }
 
     /**
@@ -260,6 +265,8 @@ public abstract class Model<E extends Number>
             final TimeZone timeZone
     ) {
         dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(date != null ? date : new Date());
+        return dateFormat.format(
+                date != null ? date : new Date()
+        );
     }
 }

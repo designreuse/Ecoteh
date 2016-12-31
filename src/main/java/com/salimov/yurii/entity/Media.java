@@ -82,7 +82,7 @@ public abstract class Media<ID extends Number> extends Model<ID> {
     public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
-            Media other = (Media) object;
+            final Media other = (Media) object;
             result = (
                     isNotBlank(this.title) ?
                             this.title.equalsIgnoreCase(other.title) :

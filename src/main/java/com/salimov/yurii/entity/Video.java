@@ -37,7 +37,10 @@ public final class Video extends Media<Long> {
      * @param title a title of the new video.
      * @param url   a URL of the new video.
      */
-    public Video(final String title, final String url) {
+    public Video(
+            final String title,
+            final String url
+    ) {
         super(title, url);
     }
 }

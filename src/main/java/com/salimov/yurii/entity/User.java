@@ -176,7 +176,11 @@ public final class User extends Model<Long> implements UserDetails {
      * @param email a email of the new user.
      * @param phone a phone of the new user.
      */
-    public User(final String name, final String email, final String phone) {
+    public User(
+            final String name,
+            final String email,
+            final String phone
+    ) {
         this();
         setName(name);
         setEmail(email);
@@ -303,7 +307,11 @@ public final class User extends Model<Long> implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> roles = new ArrayList<>(1);
-        roles.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+        roles.add(
+                new SimpleGrantedAuthority(
+                        "ROLE_" + this.role.name()
+                )
+        );
         return roles;
     }
 
@@ -453,7 +461,9 @@ public final class User extends Model<Long> implements UserDetails {
      * @see Translator
      */
     public void translateAndSetUrl(final String value) {
-        setUrl(Translator.fromCyrillicToLatin(value));
+        setUrl(
+                Translator.fromCyrillicToLatin(value)
+        );
     }
 
     /**

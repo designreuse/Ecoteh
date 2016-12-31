@@ -93,8 +93,14 @@ public class AdminMainController extends MainController {
     @RequestMapping(value = "/menu", method = RequestMethod.GET)
     public ModelAndView getAdminMenu() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject("user", this.userService.getAuthenticatedUser());
-        modelAndView.addObject("is_enabled", DefaultConfig.isClientEnabled());
+        modelAndView.addObject(
+                "user",
+                this.userService.getAuthenticatedUser()
+        );
+        modelAndView.addObject(
+                "is_enabled",
+                DefaultConfig.isClientEnabled()
+        );
         modelAndView.setViewName("admin/menu/menu_page");
         return modelAndView;
     }

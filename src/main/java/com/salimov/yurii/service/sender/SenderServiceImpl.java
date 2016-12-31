@@ -144,7 +144,7 @@ public final class SenderServiceImpl implements SenderService {
             final User recipient,
             final User sender
     ) {
-        if (recipient != null && recipient.isMailing()) {
+        if ((recipient != null) && recipient.isMailing()) {
             send(
                     subject,
                     text,
@@ -170,7 +170,7 @@ public final class SenderServiceImpl implements SenderService {
             final Collection<User> recipients,
             final User sender
     ) {
-        if (recipients != null && !recipients.isEmpty()) {
+        if ((recipients != null) && !recipients.isEmpty()) {
             for (User recipient : recipients) {
                 send(
                         subject,
@@ -200,7 +200,7 @@ public final class SenderServiceImpl implements SenderService {
             final String senderEmail,
             final String senderEmailPass
     ) {
-        if (recipients != null && !recipients.isEmpty()) {
+        if ((recipients != null) && !recipients.isEmpty()) {
             recipients.stream()
                     .filter(User::isMailing)
                     .forEach(

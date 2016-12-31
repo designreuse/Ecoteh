@@ -131,7 +131,9 @@ public final class MockController {
     }
 
     private static AdviceController initAdviceController() {
-        return new AdviceController();
+        return new AdviceController(
+                getClientMVFabric()
+        );
     }
 /*
     private static SeoController initSeoController() {

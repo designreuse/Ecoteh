@@ -34,7 +34,9 @@ public final class ToLatinImpl implements ToLatin {
         StringBuilder sb = new StringBuilder();
         if (isNotBlank(value)) {
             for (char ch : value.toLowerCase().toCharArray()) {
-                sb.append(translate(ch));
+                sb.append(
+                        translate(ch)
+                );
             }
         }
         return sb.toString();

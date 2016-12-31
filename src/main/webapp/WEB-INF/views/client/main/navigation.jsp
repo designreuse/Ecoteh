@@ -12,7 +12,16 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${reqmap}/"><c:out value="${main_company.title}"/></a>
+                <a class="navbar-brand" href="${reqmap}/">
+                    <c:choose>
+                        <c:when test="${main_company ne null}">
+                            <c:out value="${main_company.title}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Главная
+                        </c:otherwise>
+                    </c:choose>
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <%-- For not mobile device --%>
@@ -144,8 +153,8 @@
                     <c:if test="${main_company ne null}">
                         <li><a href="${reqmap}/company/main">О компании</a></li>
                         <li><a href="${reqmap}/contacts">Контакты</a></li>
+                        <li><a href="${reqmap}/responses">Отзывы</a></li>
                     </c:if>
-                    <li><a href="${reqmap}/responses">Отзывы</a></li>
                     <c:if test="${fn:length(partners) gt 0}">
                         <li><a href="${reqmap}/company/all">Партнеры</a></li>
                     </c:if>

@@ -104,7 +104,10 @@ public class AdminCategoryController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView newCategory() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("sections", this.sectionService.getAll(false));
+        modelAndView.addObject(
+                "sections",
+                this.sectionService.getAll(false)
+        );
         modelAndView.setViewName("admin/category/new_page");
         return modelAndView;
     }
@@ -139,7 +142,12 @@ public class AdminCategoryController {
         final Section section = isNotBlank(sectionUrl) ?
                 this.sectionService.getByUrl(sectionUrl, false) : null;
         final Category category = this.categoryService.initAndAdd(
-                title, description, keywords, photoFile, section, isValid
+                title,
+                description,
+                keywords,
+                photoFile,
+                section,
+                isValid
         );
         Cache.removeAll("All Categories");
         modelAndView.setViewName(
@@ -221,8 +229,14 @@ public class AdminCategoryController {
         final Section section = isNotBlank(sectionUrl) ?
                 this.sectionService.getByUrl(sectionUrl, false) : null;
         final Category category = this.categoryService.initAndUpdate(
-                url, title, description, keywords,
-                photoFile, photoAction, section, isValid
+                url,
+                title,
+                description,
+                keywords,
+                photoFile,
+                photoAction,
+                section,
+                isValid
         );
         Cache.removeAll("All Categories", category.getUrl());
         modelAndView.setViewName(

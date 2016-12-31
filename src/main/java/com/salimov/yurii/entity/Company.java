@@ -248,16 +248,26 @@ public final class Company extends Content<Long> {
      * @see Photo
      */
     public Company(
-            final String title, final String domain,
-            final String tagline, final String description,
-            final String information, final String advantages,
-            final String mobilePhone, final String landlinePhone,
-            final String fax, final String email,
-            final String senderEmail, final String senderEmailPass,
-            final String vkontakte, final String facebook,
-            final String twitter, final String skype,
-            final String address, final String keywords,
-            final String googleMaps, final Photo logo,
+            final String title,
+            final String domain,
+            final String tagline,
+            final String description,
+            final String information,
+            final String advantages,
+            final String mobilePhone,
+            final String landlinePhone,
+            final String fax,
+            final String email,
+            final String senderEmail,
+            final String senderEmailPass,
+            final String vkontakte,
+            final String facebook,
+            final String twitter,
+            final String skype,
+            final String address,
+            final String keywords,
+            final String googleMaps,
+            final Photo logo,
             final Photo favicon
     ) {
         super(title, description, keywords);
@@ -314,7 +324,7 @@ public final class Company extends Content<Long> {
     public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
-            Company other = (Company) object;
+            final Company other = (Company) object;
             result = (
                     this.type != null ?
                             this.type.equals(other.type) :
@@ -397,24 +407,34 @@ public final class Company extends Content<Long> {
      * @see Photo
      */
     public void initialize(
-            final String title, final String domain,
-            final String tagline, final String description,
-            final String information, final String advantages,
-            final String mobilePhone, final String landlinePhone,
-            final String fax, final String email,
-            final String senderEmail, final String senderPass,
-            final String vkontakte, final String facebook,
-            final String twitter, final String skype,
-            final String address, final String keywords,
-            final String googleMaps, final Photo logo,
+            final String title,
+            final String domain,
+            final String tagline,
+            final String description,
+            final String information,
+            final String advantages,
+            final String mobilePhone,
+            final String landlinePhone,
+            final String fax,
+            final String email,
+            final String senderEmail,
+            final String senderPass,
+            final String vkontakte,
+            final String facebook,
+            final String twitter,
+            final String skype,
+            final String address,
+            final String keywords,
+            final String googleMaps,
+            final Photo logo,
             final Photo favicon
     ) {
         initialize(
                 title, domain, tagline, description,
-                information, advantages, mobilePhone, landlinePhone,
-                fax, email, senderEmail, senderPass,
-                vkontakte, facebook, twitter, skype,
-                address, keywords, googleMaps
+                information, advantages, mobilePhone,
+                landlinePhone, fax, email, senderEmail,
+                senderPass, vkontakte, facebook, twitter,
+                skype,address, keywords, googleMaps
         );
         setLogo(logo);
         setFavicon(favicon);
@@ -444,15 +464,24 @@ public final class Company extends Content<Long> {
      * @param googleMaps    a new google maps url to the company.
      */
     public void initialize(
-            final String title, final String domain,
-            final String tagline, final String description,
-            final String information, final String advantages,
-            final String mobilePhone, final String landlinePhone,
-            final String fax, final String email,
-            final String senderEmail, final String senderPass,
-            final String vkontakte, final String facebook,
-            final String twitter, final String skype,
-            final String address, final String keywords,
+            final String title,
+            final String domain,
+            final String tagline,
+            final String description,
+            final String information,
+            final String advantages,
+            final String mobilePhone,
+            final String landlinePhone,
+            final String fax,
+            final String email,
+            final String senderEmail,
+            final String senderPass,
+            final String vkontakte,
+            final String facebook,
+            final String twitter,
+            final String skype,
+            final String address,
+            final String keywords,
             final String googleMaps
     ) {
         super.initialize(title, description, keywords);
@@ -900,7 +929,7 @@ public final class Company extends Content<Long> {
      * @see Photo
      */
     public void addSlides(final Collection<Photo> slides) {
-        if (slides != null && !slides.isEmpty()) {
+        if ((slides != null) && !slides.isEmpty()) {
             slides.forEach(this::addSlide);
         }
     }
@@ -1009,7 +1038,9 @@ public final class Company extends Content<Long> {
     public String getUrl() {
         String url = super.getUrl();
         if (url == null) {
-            url = Translator.fromCyrillicToLatin(getDomain());
+            url = Translator.fromCyrillicToLatin(
+                    getDomain()
+            );
         }
         return url;
     }
@@ -1102,7 +1133,6 @@ public final class Company extends Content<Long> {
             case Calendar.SUNDAY:
             case Calendar.SATURDAY:
                 result = false;
-                break;
         }
         return result;
     }

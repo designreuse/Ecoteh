@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
+    <script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script>
 </c:if>
 
 <%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

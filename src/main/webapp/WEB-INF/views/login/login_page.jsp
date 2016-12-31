@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ResourceBundle" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
 <compress:html removeIntertagSpaces="true">
@@ -32,6 +31,9 @@
     <jsp:include page="/WEB-INF/views/login/login_form.jsp"/>
         <%-- LOGIN FORM --%>
     <jsp:include page="/WEB-INF/views/login/forgot_password_form.jsp"/>
+        <%-- Scripts --%>
+    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
     </body>
     </html>
 </compress:html>

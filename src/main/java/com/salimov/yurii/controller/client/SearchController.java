@@ -100,7 +100,11 @@ public class SearchController {
             @RequestParam(value = "content") final String content,
             @RequestParam(value = "how_search") final boolean howSearch
     ) {
-        return this.searchService.search(keywords, content, howSearch);
+        return this.searchService.search(
+                keywords,
+                content,
+                howSearch
+        );
     }
 
     /**

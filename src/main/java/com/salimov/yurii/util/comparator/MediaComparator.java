@@ -43,7 +43,9 @@ public final class MediaComparator {
                 result = 1;
             } else {
                 result = media1.getTitle()
-                        .compareToIgnoreCase(media2.getTitle());
+                        .compareToIgnoreCase(
+                                media2.getTitle()
+                        );
             }
             return result;
         }
@@ -77,7 +79,10 @@ public final class MediaComparator {
             } else if (media2 == null) {
                 result = 1;
             } else {
-                result = media1.getUrl().compareTo(media2.getUrl());
+                result = media1.getUrl()
+                        .compareTo(
+                                media2.getUrl()
+                        );
             }
             return result;
         }

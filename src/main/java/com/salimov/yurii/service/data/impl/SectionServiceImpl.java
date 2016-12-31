@@ -108,10 +108,17 @@ public final class SectionServiceImpl
             final boolean isValid
     ) {
         final Photo photo = updatePhoto(
-                new Photo(), photoFile, title
+                new Photo(),
+                photoFile,
+                title
         );
         final Section section = new Section();
-        section.initialize(title, description, keywords, photo);
+        section.initialize(
+                title,
+                description,
+                keywords,
+                photo
+        );
         section.setValidated(isValid);
         return add(section);
     }
@@ -143,10 +150,19 @@ public final class SectionServiceImpl
             final boolean isValid
     ) {
         final Section section = getByUrl(url, false);
-        section.initialize(title, description, keywords);
+        section.initialize(
+                title,
+                description,
+                keywords
+        );
         section.setValidated(isValid);
         Photo photo = section.getPhoto();
-        updatePhoto(section, photoFile, title, photoAction);
+        updatePhoto(
+                section,
+                photoFile,
+                title,
+                photoAction
+        );
         final Section _section = update(section);
         removePhoto(photo, photoAction);
         return update(_section);

@@ -143,10 +143,10 @@ public final class Category extends Content<Long> {
      * @see Section
      */
     public void setSection(final Section section) {
-        if (this.section == null || !this.section.equals(section)) {
+        if ((this.section == null) || !this.section.equals(section)) {
             final Section temp = this.section;
             this.section = section;
-            if (this.section != null && !this.section.containsCategory(this)) {
+            if ((this.section != null) && !this.section.containsCategory(this)) {
                 this.section.addCategory(this);
             }
             if (temp != null) {
@@ -176,7 +176,7 @@ public final class Category extends Content<Long> {
         if (article != null) {
             this.articles.add(article);
             final Category category = article.getCategory();
-            if (category == null || !category.equals(this)) {
+            if ((category == null) || !category.equals(this)) {
                 article.setCategory(this);
             }
         }
@@ -190,7 +190,7 @@ public final class Category extends Content<Long> {
      * @see Article
      */
     public void addArticles(final Collection<Article> articles) {
-        if (articles != null && !articles.isEmpty()) {
+        if ((articles != null) && !articles.isEmpty()) {
             articles.forEach(this::addArticle);
         }
     }
@@ -202,10 +202,10 @@ public final class Category extends Content<Long> {
      * @see Article
      */
     public void removeArticle(final Article article) {
-        if (article != null && containsArticle(article)) {
+        if ((article != null) && containsArticle(article)) {
             this.articles.remove(article);
             final Category category = article.getCategory();
-            if (category != null && category.equals(this)) {
+            if ((category != null) && category.equals(this)) {
                 article.setCategory(null);
             }
         }
@@ -218,7 +218,7 @@ public final class Category extends Content<Long> {
      * @see Article
      */
     public void removeArticles(final Collection<Article> articles) {
-        if (articles != null && !articles.isEmpty()) {
+        if ((articles != null) && !articles.isEmpty()) {
             articles.forEach(this::removeArticle);
         }
     }
@@ -273,7 +273,9 @@ public final class Category extends Content<Long> {
      * @see Article
      */
     public void clearArticles() {
-        removeArticles(new ArrayList<>(this.articles));
+        removeArticles(
+                new ArrayList<>(this.articles)
+        );
         this.articles = new HashSet<>();
     }
 

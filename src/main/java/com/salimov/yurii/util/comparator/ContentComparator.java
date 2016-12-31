@@ -35,7 +35,7 @@ public final class ContentComparator {
         @Override
         public int compare(final T content1, final T content2) {
             int result;
-            if (content1 == null && content2 == null) {
+            if ((content1 == null) && (content2 == null)) {
                 result = 0;
             } else if (content1 == null) {
                 result = -1;
@@ -43,7 +43,9 @@ public final class ContentComparator {
                 result = 1;
             } else {
                 result = content1.getTitle()
-                        .compareToIgnoreCase(content2.getTitle());
+                        .compareToIgnoreCase(
+                                content2.getTitle()
+                        );
             }
             return result;
         }
@@ -78,7 +80,10 @@ public final class ContentComparator {
                 result = 1;
             } else {
                 result = content1.getUrl()
-                        .compareToIgnoreCase(content2.getUrl());
+                        .compareToIgnoreCase(
+                                content2.getUrl(
+
+                                ));
             }
             return result;
         }

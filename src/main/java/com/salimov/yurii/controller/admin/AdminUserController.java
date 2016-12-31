@@ -220,7 +220,10 @@ public class AdminUserController {
     @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
     public ModelAndView editUser(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("user", this.userService.getByUrl(url));
+        modelAndView.addObject(
+                "user",
+                this.userService.getByUrl(url)
+        );
         modelAndView.setViewName("admin/user/edit_page");
         return modelAndView;
     }
@@ -357,7 +360,6 @@ public class AdminUserController {
         new Thread(() -> {
             String _subject = subject;
             String message = text;
-            final Company mainCompany = this.companyService.getMainCompany();
             final User user = this.userService.getAuthenticatedUser();
             if (user != null) {
                 if (isNotBlank(user.getName())) {
@@ -371,6 +373,7 @@ public class AdminUserController {
                     message += "\nE-mail: " + user.getEmail();
                 }
             }
+            final Company mainCompany = this.companyService.getMainCompany();
             this.senderService.send(
                     _subject + " | " + mainCompany.getTitle(),
                     message,

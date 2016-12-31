@@ -129,16 +129,26 @@ public final class ArticleServiceImpl
     ) {
         final Article article = new Article();
         article.initialize(
-                title, description, text,
-                keywords, number, category
+                title,
+                description,
+                text,
+                keywords,
+                number,
+                category
         );
         article.setValidated(isValid);
         article.setMainPhoto(
                 updatePhoto(
-                        new Photo(), mainPhoto, title
+                        new Photo(),
+                        mainPhoto,
+                        title
                 )
         );
-        updateSlides(article, slides, title);
+        updateSlides(
+                article,
+                slides,
+                title
+        );
         addVideos(article, videos);
         return add(article);
     }
@@ -186,20 +196,41 @@ public final class ArticleServiceImpl
         final Article article = getByUrl(url, false);
         final Photo mainPhoto = article.getMainPhoto();
         updatesMainPhoto(
-                article, title, photoAction, mainPhoto, mainFile
+                article,
+                title,
+                photoAction,
+                mainPhoto,
+                mainFile
         );
         final List<Photo> slides = new ArrayList<>(article.getSlides());
-        updatesSlides(article, title, slidesAction, slideFiles);
+        updatesSlides(
+                article,
+                title,
+                slidesAction,
+                slideFiles
+        );
         final Collection<Video> videos = new ArrayList<>(article.getVideos());
-        updateVideos(article, videoUrls, title);
+        updateVideos(
+                article,
+                videoUrls,
+                title
+        );
         article.initialize(
-                title, description, text,
-                keywords, number, category
+                title,
+                description,
+                text,
+                keywords,
+                number,
+                category
         );
         article.setValidated(isValid);
         final Article upArticle = update(article);
         removeMainPhoto(mainPhoto, photoAction);
-        removeSlides(article, slidesAction, slides);
+        removeSlides(
+                article,
+                slidesAction,
+                slides
+        );
         this.videoService.remove(videos);
         return upArticle;
     }
@@ -558,7 +589,9 @@ public final class ArticleServiceImpl
                 if (slideFile != null && !slideFile.isEmpty()) {
                     article.addSlide(
                             updateSlide(
-                                    new Photo(), slideFile, title
+                                    new Photo(),
+                                    slideFile,
+                                    title
                             )
                     );
                 }
@@ -666,7 +699,11 @@ public final class ArticleServiceImpl
     ) {
         switch (photoAction) {
             case "replace":
-                updatePhoto(photo, file, title);
+                updatePhoto(
+                        photo,
+                        file,
+                        title
+                );
                 article.setMainPhoto(photo);
                 break;
             case "delete":
@@ -691,10 +728,18 @@ public final class ArticleServiceImpl
     ) {
         switch (action) {
             case "replace":
-                replaceSlides(article, title, files);
+                replaceSlides(
+                        article,
+                        title,
+                        files
+                );
                 break;
             case "add":
-                updateSlides(article, files, title);
+                updateSlides(
+                        article,
+                        files,
+                        title
+                );
                 break;
             case "delete":
                 article.setSlides(null);
@@ -720,7 +765,9 @@ public final class ArticleServiceImpl
                 if (slideFile != null && !slideFile.isEmpty()) {
                     slides.add(
                             updateSlide(
-                                    null, slideFile, title
+                                    null,
+                                    slideFile,
+                                    title
                             )
                     );
                 }
@@ -798,7 +845,10 @@ public final class ArticleServiceImpl
      * @param photo  the photo to remove.
      * @param action a action on the photo.
      */
-    private void removeMainPhoto(final Photo photo, final String action) {
+    private void removeMainPhoto(
+            final Photo photo,
+            final String action
+    ) {
         if (action.equals("delete")) {
             this.photoService.remove(photo);
         }

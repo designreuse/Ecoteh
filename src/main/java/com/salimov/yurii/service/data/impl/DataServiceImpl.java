@@ -328,7 +328,11 @@ public abstract class DataServiceImpl<T extends Model, E extends Number>
             final Collection<T> models,
             final Comparator<T> comparator
     ) {
-        return sort(models, comparator, false);
+        return sort(
+                models,
+                comparator,
+                false
+        );
     }
 
     /**
@@ -349,7 +353,10 @@ public abstract class DataServiceImpl<T extends Model, E extends Number>
             final int toIndex
     ) {
         List<T> result = new ArrayList<>(models);
-        return result.subList(fromIndex, toIndex);
+        return result.subList(
+                fromIndex,
+                toIndex
+        );
     }
 
     /**

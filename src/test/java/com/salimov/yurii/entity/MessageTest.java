@@ -8,7 +8,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getMessage;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
 
-public class MessageTest extends ModelTest<Message> {
+public final class MessageTest extends ModelTest<Message> {
 
     @Test
     public void whenPassInvalidParametersInConstructorThenSaveNull() {

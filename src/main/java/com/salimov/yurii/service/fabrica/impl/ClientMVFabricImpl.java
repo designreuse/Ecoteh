@@ -57,8 +57,12 @@ public final class ClientMVFabricImpl
             final ResponseService responseService
     ) {
         super(
-                articleService, categoryService, companyService,
-                sectionService, userService, responseService
+                articleService,
+                categoryService,
+                companyService,
+                sectionService,
+                userService,
+                responseService
         );
     }
 

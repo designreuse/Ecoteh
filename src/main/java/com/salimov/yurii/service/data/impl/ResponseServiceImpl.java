@@ -52,7 +52,10 @@ public final class ResponseServiceImpl
      */
     @Override
     @Transactional
-    public Response initAndAdd(final String username, final String text) {
+    public Response initAndAdd(
+            final String username,
+            final String text
+    ) {
         return add(
                 new Response(username, text)
         );
@@ -143,10 +146,13 @@ public final class ResponseServiceImpl
                 result.addAll(
                         responses.stream()
                                 .filter(
-                                        response -> (response.getDate()
-                                                .compareTo(startDate) == 1)
-                                                && (response.getDate()
-                                                .compareTo(finishDate) == -1)
+                                        response -> (
+                                                response.getDate()
+                                                        .compareTo(startDate) == 1
+                                        ) && (
+                                                response.getDate()
+                                                        .compareTo(finishDate) == -1
+                                        )
                                 ).collect(Collectors.toList())
                 );
 
@@ -167,8 +173,15 @@ public final class ResponseServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Response> getAndFilterByDate(Date startDate, Date finishDate) {
-        return filterByDate(getAll(), startDate, finishDate);
+    public List<Response> getAndFilterByDate(
+            final Date startDate,
+            final Date finishDate
+    ) {
+        return filterByDate(
+                getAll(),
+                startDate,
+                finishDate
+        );
     }
 
     /**

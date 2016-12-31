@@ -370,7 +370,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param key          a model and view key in the cache.
      * @param modelAndView a model and view to save.
      */
-    private void put(final ModelAndView modelAndView, final String key) {
+    private void put(
+            final ModelAndView modelAndView,
+            final String key
+    ) {
         Cache.put(
                 getKey(key),
                 modelAndView

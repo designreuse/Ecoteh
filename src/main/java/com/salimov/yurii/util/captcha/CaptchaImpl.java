@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  * @see Captcha
  */
-public class CaptchaImpl implements Captcha {
+public final class CaptchaImpl implements Captcha {
     /**
      * The reCAPTCHA user agent.
      */

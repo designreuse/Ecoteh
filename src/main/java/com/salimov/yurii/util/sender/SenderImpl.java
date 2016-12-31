@@ -270,7 +270,9 @@ public final class SenderImpl implements Sender {
                 text,
                 "text/plain;charset=" + SenderImpl.CHARSET
         );
-        message.setSentDate(new Date());
+        message.setSentDate(
+                new Date()
+        );
         return message;
     }
 

@@ -128,7 +128,7 @@ public final class Section extends Content<Long> {
     public void addCategory(final Category category) {
         if (category != null) {
             this.categories.add(category);
-            if (category.getSection() == null ||
+            if ((category.getSection() == null) ||
                             !category.getSection().equals(this)) {
                 category.setSection(this);
             }
@@ -143,7 +143,7 @@ public final class Section extends Content<Long> {
      * @see Category
      */
     public void addCategories(final Collection<Category> categories) {
-        if (categories != null && !categories.isEmpty()) {
+        if ((categories != null) && !categories.isEmpty()) {
             categories.forEach(this::addCategory);
         }
     }
@@ -157,7 +157,7 @@ public final class Section extends Content<Long> {
     public void removeCategory(final Category category) {
         if (category != null && containsCategory(category)) {
             this.categories.remove(category);
-            if (category.getSection() != null &&
+            if ((category.getSection() != null) &&
                     category.getSection().equals(this)) {
                 category.setSection(null);
             }
@@ -171,7 +171,7 @@ public final class Section extends Content<Long> {
      * @see Category
      */
     public void removeCategories(final Collection<Category> categories) {
-        if (categories != null && !categories.isEmpty()) {
+        if ((categories != null) && !categories.isEmpty()) {
             categories.forEach(this::removeCategory);
         }
     }
@@ -226,7 +226,9 @@ public final class Section extends Content<Long> {
      * @see Category
      */
     public void clearCategories() {
-        removeCategories(new ArrayList<>(this.categories));
+        removeCategories(
+                new ArrayList<>(this.categories)
+        );
         this.categories = new HashSet<>();
     }
 

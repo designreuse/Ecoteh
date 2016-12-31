@@ -115,10 +115,13 @@ public class AdminSectionController {
             final ModelAndView modelAndView
     ) {
         final Section section = this.sectionService.initAndAdd(
-                title, description, keywords, photoFile, isValid
+                title, description, keywords,
+                photoFile, isValid
         );
         Cache.removeAll("All Sections");
-        modelAndView.setViewName("redirect:/admin/section/" + section.getUrl());
+        modelAndView.setViewName(
+                "redirect:/admin/section/" + section.getUrl()
+        );
         return modelAndView;
     }
 
@@ -194,7 +197,9 @@ public class AdminSectionController {
                 photoFile, photoAction, isValid
         );
         Cache.removeAll("All Sections", section.getUrl());
-        modelAndView.setViewName("redirect:/admin/section/" + section.getUrl());
+        modelAndView.setViewName(
+                "redirect:/admin/section/" + section.getUrl()
+        );
         return modelAndView;
     }
 

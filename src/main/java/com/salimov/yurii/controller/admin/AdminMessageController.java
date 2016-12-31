@@ -80,7 +80,10 @@ public class AdminMessageController {
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public ModelAndView getMessages() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("messages", this.messageService.getAll(false));
+        modelAndView.addObject(
+                "messages",
+                this.messageService.getAll(false)
+        );
         modelAndView.setViewName("admin/message/all_page");
         return modelAndView;
     }

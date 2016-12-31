@@ -41,7 +41,8 @@ public class WorkController {
         new SecurityContextLogoutHandler().logout(
                 request,
                 response,
-                SecurityContextHolder.getContext().getAuthentication()
+                SecurityContextHolder.getContext()
+                        .getAuthentication()
         );
         Cache.removeAll("Admin");
         modelAndView.setViewName("redirect:/login?logout");

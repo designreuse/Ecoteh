@@ -177,7 +177,10 @@ public final class PhotoServiceImpl
      */
     @Override
     @Transactional
-    public void saveFile(final MultipartFile photo, final String rootPath) {
+    public void saveFile(
+            final MultipartFile photo,
+            final String rootPath
+    ) {
         if (photo != null && !photo.isEmpty()) {
             new Thread(() -> {
                 synchronized (Photo.PATH) {
@@ -250,18 +253,19 @@ public final class PhotoServiceImpl
             final String title,
             final String rootPath
     ) {
-        if (photo != null) {
-            if (file != null && !file.isEmpty()) {
-                deleteFile(photo.getUrl());
-                photo.setTitle(title + " " + file.getOriginalFilename());
-                photo.setUrl(
-                        rootPath + "/" +
-                        title.replace(" ", "_") +
-                        "_" + file.getOriginalFilename()
-                );
-                update(photo);
-                saveFile(file, photo.getUrl());
-            }
+        if ((photo != null) && (file != null) && (!file.isEmpty())) {
+            deleteFile(photo.getUrl());
+            photo.setTitle(title + " " + file.getOriginalFilename());
+            photo.setUrl(
+                    rootPath + "/" +
+                            title.replace(" ", "_") +
+                            "_" + file.getOriginalFilename()
+            );
+            update(photo);
+            saveFile(
+                    file,
+                    photo.getUrl()
+            );
         }
         return photo;
     }

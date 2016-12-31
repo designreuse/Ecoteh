@@ -157,7 +157,9 @@ public class AdminArticleController {
                 videoUrls, isValid
         );
         Cache.removeAll("All Articles");
-        modelAndView.setViewName("redirect:/admin/article/" + article.getUrl());
+        modelAndView.setViewName(
+                "redirect:/admin/article/" + article.getUrl()
+        );
         return modelAndView;
     }
 
@@ -251,7 +253,9 @@ public class AdminArticleController {
                 number, category, mainFile, photoAction,
                 slideFiles, slidesAction, videoUrls, isValid
         );
-        modelAndView.setViewName("redirect:/admin/article/" + article.getUrl());
+        modelAndView.setViewName(
+                "redirect:/admin/article/" + article.getUrl()
+        );
         Cache.removeAll("All Articles", article.getUrl());
         return modelAndView;
     }

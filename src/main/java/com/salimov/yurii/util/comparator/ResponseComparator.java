@@ -33,16 +33,22 @@ public final class ResponseComparator {
          * @see Response
          */
         @Override
-        public int compare(final Response response1, final Response response2) {
+        public int compare(
+                final Response response1,
+                final Response response2
+        ) {
             int result;
-            if (response1 == null && response2 == null) {
+            if ((response1 == null) && (response2 == null)) {
                 result = 0;
             } else if (response1 == null) {
                 result = -1;
             } else if (response2 == null) {
                 result = 1;
             } else {
-                result = response1.getDate().compareTo(response2.getDate());
+                result = response1.getDate()
+                        .compareTo(
+                                response2.getDate()
+                        );
             }
             return result;
         }

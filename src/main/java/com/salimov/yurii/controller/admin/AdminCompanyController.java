@@ -87,8 +87,14 @@ public class AdminCompanyController {
     public ModelAndView editMainCompany() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         final Company company = this.companyService.getMainCompanyToHome();
-        modelAndView.addObject("company", company);
-        modelAndView.addObject("slides", company.getSlides());
+        modelAndView.addObject(
+                "company",
+                company
+        );
+        modelAndView.addObject(
+                "slides",
+                company.getSlides()
+        );
         modelAndView.addObject("main", true);
         modelAndView.setViewName("admin/company/edit_page");
         return modelAndView;
@@ -268,7 +274,9 @@ public class AdminCompanyController {
                 address, googleMaps, logoFile, isValid
         );
         Cache.removeAll("Partners");
-        modelAndView.setViewName("redirect:/admin/company/" + company.getUrl());
+        modelAndView.setViewName(
+                "redirect:/admin/company/" + company.getUrl()
+        );
         return modelAndView;
     }
 
@@ -373,8 +381,13 @@ public class AdminCompanyController {
                 fax, email, vkontakte, facebook, twitter, skype,
                 address, googleMaps, logoFile, logoAction, isValid
         );
-        modelAndView.setViewName("redirect:/admin/company/" + company.getUrl());
-        Cache.removeAll("Partners", company.getUrl());
+        modelAndView.setViewName(
+                "redirect:/admin/company/" + company.getUrl()
+        );
+        Cache.removeAll(
+                "Partners",
+                company.getUrl()
+        );
         return modelAndView;
     }
 

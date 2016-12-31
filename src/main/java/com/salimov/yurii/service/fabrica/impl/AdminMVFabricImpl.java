@@ -64,8 +64,12 @@ public final class AdminMVFabricImpl
             final ResponseService responseService
     ) {
         super(
-                articleService, categoryService, companyService,
-                sectionService, userService, responseService
+                articleService,
+                categoryService,
+                companyService,
+                sectionService,
+                userService,
+                responseService
         );
         this.userService = userService;
     }

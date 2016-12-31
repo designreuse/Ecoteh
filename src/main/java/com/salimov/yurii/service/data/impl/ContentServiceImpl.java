@@ -201,7 +201,10 @@ public abstract class ContentServiceImpl<T extends Content, E extends Number>
     @Override
     @Transactional(readOnly = true)
     public List<T> getAndSortByTitle(final boolean revers) {
-        return sortByTitle(getAll(), revers);
+        return sortByTitle(
+                getAll(),
+                revers
+        );
     }
 
     /**
@@ -215,7 +218,10 @@ public abstract class ContentServiceImpl<T extends Content, E extends Number>
     @Override
     @Transactional(readOnly = true)
     public List<T> getAndSortByUrl(final boolean revers) {
-        return sortByUrl(getAll(), revers);
+        return sortByUrl(
+                getAll(),
+                revers
+        );
     }
 
     /**

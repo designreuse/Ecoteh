@@ -202,8 +202,13 @@ public final class CompanyServiceImpl
             final boolean isValid
     ) {
         final Company company = getByUrl(url, false);
-        Photo logo = company.getLogo();
-        updateLogo(company, logoFile, title, logoAction);
+        final Photo logo = company.getLogo();
+        updateLogo(
+                company,
+                logoFile,
+                title,
+                logoAction
+        );
         company.initialize(
                 title, domain, tagline, description,
                 information, advantages, mobilePhone,
@@ -282,9 +287,19 @@ public final class CompanyServiceImpl
     ) {
         final Company mainCompany = getMainCompany();
         final Photo logo = mainCompany.getLogo();
-        updateLogo(mainCompany, logoFile, title, slidesAction);
+        updateLogo(
+                mainCompany,
+                logoFile,
+                title,
+                slidesAction
+        );
         final Photo favicon = mainCompany.getFavicon();
-        updateFavicon(mainCompany, faviconFile, title, faviconAction);
+        updateFavicon(
+                mainCompany,
+                faviconFile,
+                title,
+                faviconAction
+        );
         mainCompany.initialize(
                 title, domain, tagline, description,
                 information, advantages, mobilePhone,
@@ -294,12 +309,29 @@ public final class CompanyServiceImpl
         );
         mainCompany.setWorkTimeFrom(workTimeFrom);
         mainCompany.setWorkTimeTo(workTimeTo);
-        final List<Photo> slides = new ArrayList<>(mainCompany.getSlides());
-        updateSlides(mainCompany, slideFiles, title, slidesAction);
+        final List<Photo> slides = new ArrayList<>(
+                mainCompany.getSlides()
+        );
+        updateSlides(
+                mainCompany,
+                slideFiles,
+                title,
+                slidesAction
+        );
         final Company company = update(mainCompany);
-        removePhoto(logo, logoAction);
-        removePhoto(favicon, faviconAction);
-        removeSlides(mainCompany, slides, slidesAction);
+        removePhoto(
+                logo,
+                logoAction
+        );
+        removePhoto(
+                favicon,
+                faviconAction
+        );
+        removeSlides(
+                mainCompany,
+                slides,
+                slidesAction
+        );
         return company;
     }
 
@@ -355,7 +387,10 @@ public final class CompanyServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public Company getByUrl(final String url, final boolean isValid) {
+    public Company getByUrl(
+            final String url,
+            final boolean isValid
+    ) {
         final Company company = super.getByUrl(url, isValid);
         company.getSlides();
         return company;
@@ -403,8 +438,9 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void removeMain() {
-        Company company = getMainCompany();
-        removeCompany(company);
+        removeCompany(
+                getMainCompany()
+        );
     }
 
     /**
@@ -415,8 +451,9 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void removeAll() {
-        Collection<Company> companies = getPartners(false);
-        remove(companies);
+        remove(
+                getPartners(false)
+        );
     }
 
     /**
@@ -447,8 +484,12 @@ public final class CompanyServiceImpl
      * @param company a selected company.
      */
     private void removePhoto(final Company company) {
-        this.photoService.remove(company.getLogo());
-        this.photoService.remove(company.getFavicon());
+        this.photoService.remove(
+                company.getLogo()
+        );
+        this.photoService.remove(
+                company.getFavicon()
+        );
         if (!company.getSlides().isEmpty()) {
             company.getSlides()
                     .forEach(this.photoService::remove);
@@ -555,7 +596,9 @@ public final class CompanyServiceImpl
                         if (file != null && !file.isEmpty()) {
                             company.addSlide(
                                     updateSlide(
-                                            new Photo(), file, title
+                                            new Photo(),
+                                            file,
+                                            title
                                     )
                             );
                         }
@@ -574,7 +617,10 @@ public final class CompanyServiceImpl
      * @param photo  the photo to remove.
      * @param action a action on the photo.
      */
-    private void removePhoto(final Photo photo, final String action) {
+    private void removePhoto(
+            final Photo photo,
+            final String action
+    ) {
         if (action.equals("delete")) {
             this.photoService.remove(photo);
         }

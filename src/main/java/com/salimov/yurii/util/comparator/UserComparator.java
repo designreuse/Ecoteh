@@ -35,14 +35,17 @@ public final class UserComparator {
         @Override
         public int compare(final User user1, final User user2) {
             int result;
-            if (user1 == null && user2 == null) {
+            if ((user1 == null) && (user2 == null)) {
                 result = 0;
             } else if (user1 == null) {
                 result = -1;
             } else if (user2 == null) {
                 result = 1;
             } else {
-                result = user1.getName().compareToIgnoreCase(user2.getName());
+                result = user1.getName()
+                        .compareToIgnoreCase(
+                                user2.getName()
+                        );
             }
             return result;
         }
@@ -76,7 +79,10 @@ public final class UserComparator {
             } else if (user2 == null) {
                 result = 1;
             } else {
-                result = user1.getUrl().compareToIgnoreCase(user2.getUrl());
+                result = user1.getUrl()
+                        .compareToIgnoreCase(
+                                user2.getUrl()
+                        );
             }
             return result;
         }
@@ -122,10 +128,10 @@ public final class UserComparator {
             } else if (user1 == null) {
                 result = -1;
             } else if (user2 == null ||
-                    (user1.getRole() != null && user1.getRole().equals(role))) {
+                    ((user1.getRole() != null) && (user1.getRole().equals(role)))) {
                 result = 1;
-            } else if (user2.getRole() != null &&
-                    user2.getRole().equals(role)) {
+            } else if ((user2.getRole() != null) &&
+                    (user2.getRole().equals(role))) {
                 result = -1;
             }
             return result;

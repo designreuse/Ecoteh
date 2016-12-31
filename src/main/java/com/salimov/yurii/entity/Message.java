@@ -128,7 +128,7 @@ public final class Message extends Model<Long> {
      * argument, {@code false} otherwise.
      */
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
             final Message other = (Message) object;

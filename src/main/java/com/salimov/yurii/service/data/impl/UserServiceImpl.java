@@ -169,7 +169,9 @@ public final class UserServiceImpl
                 twitter, skype, description
         );
         final Photo photo = updatePhotoFile(
-                new Photo(), photoFile, name
+                new Photo(),
+                photoFile,
+                name
         );
         user.setPhoto(photo);
         user.setRole(User.Role.ADMIN);
@@ -645,7 +647,8 @@ public final class UserServiceImpl
                     result.addAll(
                             roles.stream()
                                     .filter(
-                                            role -> user.getRole().equals(role)
+                                            role -> user.getRole()
+                                                    .equals(role)
                                     ).map(role -> user)
                                     .collect(Collectors.toList())
                     );
@@ -818,7 +821,10 @@ public final class UserServiceImpl
      * @param photo  the photo to remove.
      * @param action a action on the photo.
      */
-    private void removePhoto(final Photo photo, final String action) {
+    private void removePhoto(
+            final Photo photo,
+            final String action
+    ) {
         if (action.equals("delete")) {
             this.photoService.remove(photo);
         }

@@ -115,7 +115,11 @@ public final class CategoryServiceImpl
                 title,
                 description,
                 keywords,
-                updatePhoto(new Photo(), photoFile, title),
+                updatePhoto(
+                        new Photo(),
+                        photoFile,
+                        title
+                ),
                 section
         );
         category.setValidated(isValid);
@@ -154,8 +158,14 @@ public final class CategoryServiceImpl
         category.initialize(title, description, keywords);
         category.setSection(section);
         category.setValidated(isValid);
-        Photo photo = category.getPhoto();
-        updatePhoto(category, photo, photoFile, title, photoAction);
+        final Photo photo = category.getPhoto();
+        updatePhoto(
+                category,
+                photo,
+                photoFile,
+                title,
+                photoAction
+        );
         final Category _category = update(category);
         removePhotoIfAction(photo, photoAction);
         return _category;
@@ -348,8 +358,8 @@ public final class CategoryServiceImpl
         return this.photoService.updatePhoto(
                 photo != null ? photo : new Photo(),
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo "
-                , "categories"
+                Translator.fromCyrillicToLatin(title) + " photo ",
+                "categories"
         );
     }
 
@@ -371,8 +381,13 @@ public final class CategoryServiceImpl
     ) {
         switch (action) {
             case "replace":
-                final Photo _photo = updatePhoto(photo, file, title);
-                category.setPhoto(_photo);
+                category.setPhoto(
+                        updatePhoto(
+                                photo,
+                                file,
+                                title
+                        )
+                );
                 break;
             case "delete":
                 category.setPhoto(null);
@@ -386,7 +401,10 @@ public final class CategoryServiceImpl
      * @param photo  the photo to remove.
      * @param action a action on the photo.
      */
-    private void removePhotoIfAction(final Photo photo, final String action) {
+    private void removePhotoIfAction(
+            final Photo photo,
+            final String action
+    ) {
         if (action.equals("delete")) {
             this.photoService.remove(photo);
         }

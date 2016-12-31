@@ -196,7 +196,9 @@ public abstract class Content<ID extends Number> extends Model<ID> {
      * @param value a value to translate.
      */
     public void translateAndSetUrl(final String value) {
-        setUrl(Translator.fromCyrillicToLatin(value));
+        setUrl(
+                Translator.fromCyrillicToLatin(value)
+        );
     }
 
     /**

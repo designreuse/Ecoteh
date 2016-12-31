@@ -233,7 +233,9 @@ public final class Article extends Content<Long> {
             final String number,
             final Category category
     ) {
-        super.initialize(title, description, keywords);
+        super.initialize(
+                title, description, keywords
+        );
         setText(text);
         setNumber(number);
         setCategory(category);
@@ -267,7 +269,10 @@ public final class Article extends Content<Long> {
             final Collection<Photo> slides,
             final Collection<Video> videos
     ) {
-        this.initialize(title, description, text, keywords, number, category);
+        this.initialize(
+                title, description, text,
+                keywords, number, category
+        );
         setMainPhoto(mainPhoto);
         setSlides(slides);
         setVideos(videos);
@@ -302,7 +307,10 @@ public final class Article extends Content<Long> {
      * and length {@link Model#CODE_LENGTH}.
      */
     public void newNumber() {
-        this.number = createRandomString(Model.CODE_PATTERN, Model.CODE_LENGTH);
+        this.number = createRandomString(
+                CODE_PATTERN,
+                CODE_LENGTH
+        );
     }
 
     /**
@@ -349,7 +357,9 @@ public final class Article extends Content<Long> {
      * @return The article string-date.
      */
     public String getDateToString() {
-        return getDateToString(getDate());
+        return getDateToString(
+                getDate()
+        );
     }
 
     /**
@@ -362,10 +372,10 @@ public final class Article extends Content<Long> {
      * @see Category
      */
     public void setCategory(final Category category) {
-        if (this.category == null || !this.category.equals(category)) {
+        if ((this.category == null) || !this.category.equals(category)) {
             final Category temp = this.category;
             this.category = category;
-            if (this.category != null && !this.category.containsArticle(this)) {
+            if ((this.category != null) && !this.category.containsArticle(this)) {
                 this.category.addArticle(this);
             }
             if (temp != null) {
@@ -426,7 +436,7 @@ public final class Article extends Content<Long> {
      * @see Photo
      */
     public void addSlides(final Collection<Photo> slides) {
-        if (slides != null && !slides.isEmpty()) {
+        if ((slides != null) && !slides.isEmpty()) {
             slides.forEach(this::addSlide);
         }
     }
@@ -525,7 +535,7 @@ public final class Article extends Content<Long> {
      * @see Video
      */
     public void addVideos(final Collection<Video> videos) {
-        if (videos != null && !videos.isEmpty()) {
+        if ((videos != null) && !videos.isEmpty()) {
             videos.forEach(this::addVideo);
         }
     }

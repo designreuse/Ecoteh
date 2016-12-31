@@ -96,8 +96,8 @@ public class SeoServiceImpl implements SeoService {
         this.sectionService = sectionService;
         this.categoryService = categoryService;
         this.articleService = articleService;
-        final Company company = this.companyService.getMainCompany();
-        this.domain = company.getDomain()
+        this.domain = this.companyService.getMainCompany()
+                .getDomain()
                 .replace("http://", "")
                 .replace("https://", "");
     }
@@ -112,7 +112,11 @@ public class SeoServiceImpl implements SeoService {
         String robotsTxt = (String) Cache.get(key);
         if (isBlank(robotsTxt)) {
             robotsTxt = createRobotsTxt();
-            Cache.put(key, robotsTxt, DEFAULT_TIMEOUT);
+            Cache.put(
+                    key,
+                    robotsTxt,
+                    DEFAULT_TIMEOUT
+            );
         }
         return robotsTxt;
     }
@@ -128,7 +132,11 @@ public class SeoServiceImpl implements SeoService {
         String result = (String) Cache.get(key);
         if (isBlank(result)) {
             result = createSitemap();
-            Cache.put(key, result, DEFAULT_TIMEOUT);
+            Cache.put(
+                    key,
+                    result,
+                    DEFAULT_TIMEOUT
+            );
         }
         return result;
     }

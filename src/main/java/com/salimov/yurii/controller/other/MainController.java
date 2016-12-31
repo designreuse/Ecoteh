@@ -131,9 +131,9 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getHomePage() {
-        final ModelAndView modelAndView = this.fabric.homePage();
-        modelAndView.addObject("is_captcha", null);
-        return modelAndView;
+        /*final ModelAndView modelAndView = this.fabric.homePage();
+        modelAndView.addObject("is_captcha", null);*/
+        return this.fabric.homePage();
     }
 
     /**
@@ -277,9 +277,7 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getContactsPage() {
-        final ModelAndView modelAndView = this.fabric.contactsPage();
-        modelAndView.addObject("is_captcha", null);
-        return modelAndView;
+        return this.fabric.contactsPage();
     }
 
     /**
@@ -320,9 +318,7 @@ public abstract class MainController {
      */
     @RequestMapping(value = "/responses", method = RequestMethod.GET)
     public ModelAndView getResponsesPage() {
-        final ModelAndView modelAndView = this.fabric.allResponsesPage();
-        modelAndView.addObject("is_captcha", null);
-        return modelAndView;
+        return this.fabric.allResponsesPage();
     }
 
     /**
@@ -386,7 +382,13 @@ public abstract class MainController {
                     + "\nText: \n" + userMessage;
             final String subject = "New Message";
             sendToEmail(subject, _text);
-            saveMess(name, phone, email, userMessage, subject);
+            saveMess(
+                    name,
+                    phone,
+                    email,
+                    userMessage,
+                    subject
+            );
         }).start();
     }
 
@@ -422,10 +424,11 @@ public abstract class MainController {
      */
     protected void sendResp(final String name, final String text) {
         new Thread(() -> {
-            final String _text = "User name: " + name
-                    + "\n\nText: \n" + text;
-            final String subject = "New Response";
-            sendToEmail(subject, _text);
+            sendToEmail(
+                    "New Response",
+                    "User name: " + name
+                            + "\n\nText: \n" + text
+            );
             saveResp(name, text);
         }).start();
     }

@@ -57,7 +57,9 @@ public class AppInitializer
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebConfig.class};
+        return new Class<?>[]{
+                WebConfig.class
+        };
     }
 
     /**
@@ -70,7 +72,10 @@ public class AppInitializer
      */
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{RootConfig.class, SecurityConfig.class};
+        return new Class<?>[]{
+                RootConfig.class,
+                SecurityConfig.class
+        };
     }
 
     /**
@@ -95,20 +100,20 @@ public class AppInitializer
     public void onStartup(final ServletContext servletContext)
             throws ServletException {
         super.onStartup(servletContext);
-        final FilterRegistration.Dynamic encodingFilter =
+        final FilterRegistration.Dynamic filter =
                 servletContext.addFilter(
                         "encodingFilter",
                         new CharacterEncodingFilter()
                 );
-        encodingFilter.setInitParameter(
+        filter.setInitParameter(
                 "encoding",
                 ENCODING
         );
-        encodingFilter.setInitParameter(
+        filter.setInitParameter(
                 "forceEncoding",
                 Boolean.toString(FORCE_ENCODING)
         );
-        encodingFilter.addMappingForUrlPatterns(
+        filter.addMappingForUrlPatterns(
                 null,
                 MAPPING_FOR_URL_IS_MATH_AFTER,
                 MAPPING_FOR_URL_PATTERNS
