@@ -11,51 +11,49 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
+ * @see CacheCleaner
+ * @see ThreadDaemonFactory
+ * @see Key
  */
 public final class Cache {
 
     /**
-     * The time to delay first execution.
+     * The time to delay first execution (5 hours).
      */
-    private final static long SCHEDULER_INITIAL_DELAY = 5L; // 5 hours
+    private final static long SCHEDULER_INITIAL_DELAY = 5L;
 
     /**
-     * The period between successive executions.
+     * The period between successive executions (1 hour).
      */
-    private final static long SCHEDULER_PERIOD = 1L; // 1 hour
+    private final static long SCHEDULER_PERIOD = 1L;
 
     /**
-     * The default lifetime of objects (milliseconds).
-     * 864000000 milliseconds = 10 days
+     * Time unit representing one hour.
      */
-    private static final long DEFAULT_TIMEOUT = 864000000L;
-
-
-    /**
-     * The maximum size of objects which can be stored in the cache.
-     */
-    private static int maxSize = 100;
+    private final static TimeUnit TIME_UNIT = TimeUnit.HOURS;
 
     /**
      * The map where can be stored some objects.
      */
-    private static volatile Map<Key, Object> cacheMap =
-            new ConcurrentHashMap<>();
+    private static volatile Map<Key, Object> cache;
 
     /**
      * Static constructor.
      * Creates and starts ScheduledExecutorService.
+     * @see CacheCleaner
+     * @see ThreadDaemonFactory
      */
     static {
+        cache = new ConcurrentHashMap<>();
         final ScheduledExecutorService scheduler =
                 Executors.newSingleThreadScheduledExecutor(
                         new ThreadDaemonFactory()
                 );
         scheduler.scheduleAtFixedRate(
-                new Command(),
-                Cache.SCHEDULER_INITIAL_DELAY,
-                Cache.SCHEDULER_PERIOD,
-                TimeUnit.MINUTES
+                new CacheCleaner(cache),
+                SCHEDULER_INITIAL_DELAY,
+                SCHEDULER_PERIOD,
+                TIME_UNIT
         );
     }
 
@@ -68,10 +66,10 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
+     * @param <T>          a type of key.
      * @param key          a object key in the cache.
      * @param object       a object to save.
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      * @return The saving object.
      */
     public static <T> Object put(
@@ -80,8 +78,8 @@ public final class Cache {
             final long milliseconds
     ) {
         Object savingObject = object;
-        if (key != null && object != null) {
-            savingObject = cacheMap.put(
+        if ((key != null) && (object != null)) {
+            savingObject = cache.put(
                     new Key<>(
                             key,
                             milliseconds
@@ -89,17 +87,17 @@ public final class Cache {
                     object
             );
         }
-        return savingObject != null ? savingObject : object;
+        return savingObject;
     }
 
     /**
      * Saves object in the cache.
      *
+     * @param <T>          a type of key.
      * @param key          a object key in the cache.
      * @param object       a object to save.
      * @param seconds      a lifetime of objects (seconds).
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      * @return The saving object.
      */
     public static <T> Object put(
@@ -118,12 +116,12 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
+     * @param <T>          a type of key.
      * @param key          a object key in the cache.
      * @param object       a object to save.
      * @param minutes      a lifetime of objects (minutes).
      * @param seconds      a lifetime of objects (seconds).
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      * @return The saving object.
      */
     public static <T> Object put(
@@ -144,13 +142,13 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
+     * @param <T>          a type of key.
      * @param key          a object key in the cache.
      * @param object       a object to save.
      * @param hours        a lifetime of objects (hours).
      * @param minutes      a lifetime of objects (minutes).
      * @param seconds      a lifetime of objects (seconds).
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      * @return The saving object.
      */
     public static <T> Object put(
@@ -173,12 +171,15 @@ public final class Cache {
     /**
      * Saves object in the cache with default lifetime.
      *
+     * @param <T>    a type of key.
      * @param key    a object key in the cache.
      * @param object a object to save.
-     * @param <T>    a type of key.
      * @return The saving object.
      */
-    public static <T> Object put(final T key, final Object object) {
+    public static <T> Object put(
+            final T key,
+            final Object object
+    ) {
         final long milliseconds = -1;
         return put(
                 key,
@@ -191,9 +192,9 @@ public final class Cache {
      * Saves objects in the cache.
      * Saves objects if map is not empty.
      *
+     * @param <T>          a type of key.
      * @param map          a map with objects to save.
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -213,10 +214,10 @@ public final class Cache {
     /**
      * Saves objects in the cache.
      *
+     * @param <T>          a type of key.
      * @param map          a map with objects to save.
      * @param seconds      a lifetime of objects (seconds).
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -232,11 +233,11 @@ public final class Cache {
     /**
      * Saves objects in the cache.
      *
+     * @param <T>          a type of key.
      * @param map          a map with objects to save.
      * @param minutes      a lifetime of objects (minutes).
      * @param seconds      a lifetime of objects (seconds).
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -254,12 +255,12 @@ public final class Cache {
     /**
      * Saves objects in the cache.
      *
+     * @param <T>          a type of key.
      * @param map          a map with objects to save.
      * @param hours        a lifetime of objects (hours).
      * @param minutes      a lifetime of objects (minutes).
      * @param seconds      a lifetime of objects (seconds).
      * @param milliseconds a lifetime of objects (milliseconds).
-     * @param <T>          a type of key.
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -279,11 +280,11 @@ public final class Cache {
     /**
      * Saves objects in the cache with default lifetime..
      *
-     * @param map a map with objects to save.
      * @param <T> a type of key.
+     * @param map a map with objects to save.
      */
     public static <T> void putAll(final Map<T, Object> map) {
-        long milliseconds = -1;
+        final long milliseconds = -1;
         putAll(map, milliseconds);
     }
 
@@ -291,14 +292,14 @@ public final class Cache {
      * Returns object from cache with key.
      * Returns {@code null} if key is {@code null}.
      *
-     * @param key a object key in the cache.
      * @param <T> a type of key.
+     * @param key a object key in the cache.
      * @return The object with key or {@code null}.
      */
     public static <T> Object get(final T key) {
         Object object = null;
         if (key != null) {
-            object = cacheMap.get(
+            object = cache.get(
                     new Key<>(key)
             );
         }
@@ -312,13 +313,13 @@ public final class Cache {
      * @return The objects with key or empty list.
      */
     public static Collection<Object> getAll(final String subKey) {
-        return cacheMap.keySet()
+        return cache.keySet()
                 .stream()
                 .filter(
                         key -> key.getKey()
                                 .toString()
                                 .contains(subKey)
-                ).map(key -> cacheMap.get(key))
+                ).map(key -> cache.get(key))
                 .collect(Collectors.toList());
     }
 
@@ -326,12 +327,12 @@ public final class Cache {
      * Removes object from cache with key.
      * Removes object if key is not {@code null}.
      *
-     * @param key a object key in the cache.
      * @param <T> a type of key.
+     * @param key a object key in the cache.
      */
     public static <T> void remove(final T key) {
         if (key != null) {
-            cacheMap.remove(
+            cache.remove(
                     new Key<>(key)
             );
         }
@@ -343,20 +344,20 @@ public final class Cache {
      * Removes objects if subKey is not blank.
      * The objects are removed in a parallel thread.
      *
-     * @param subKey a key string.
+     * @param keys a key string.
      */
-    public static void removeAll(final String... subKey) {
-        if (subKey != null && subKey.length > 0) {
+    public static void removeAll(final String... keys) {
+        if (keys != null && keys.length > 0) {
             new Thread(() -> {
-                final Collection<Key> keys = new ArrayList<>(cacheMap.keySet());
-                for (String _key : subKey) {
+                final Collection<Key> cacheKeys = new ArrayList<>(cache.keySet());
+                for (String _key : keys) {
                     if (isNotBlank(_key)) {
-                        keys.stream()
+                        cacheKeys.stream()
                                 .filter(
                                         key -> key.getKey()
                                                 .toString()
                                                 .contains(_key)
-                                ).forEach(key -> cacheMap.remove(key));
+                                ).forEach(key -> cache.remove(key));
                     }
                 }
             }).start();
@@ -366,11 +367,11 @@ public final class Cache {
     /**
      * Sets map with objects.
      *
-     * @param map a map with objects.
      * @param <T> a type of key.
+     * @param map a map with objects.
      */
     public static <T> void setAll(final Map<T, Object> map) {
-        cacheMap = new ConcurrentHashMap<>();
+        cache = new ConcurrentHashMap<>();
         for (Map.Entry<T, Object> entry : map.entrySet()) {
             put(
                     entry.getKey(),
@@ -383,7 +384,7 @@ public final class Cache {
      * Clears the cache.
      */
     public static void clear() {
-        cacheMap.clear();
+        cache.clear();
     }
 
     /**
@@ -392,7 +393,7 @@ public final class Cache {
      * @param object a objects class to remove.
      */
     public static void clear(final Class object) {
-        cacheMap.entrySet()
+        cache.entrySet()
                 .stream()
                 .filter(
                         entry -> entry.getValue()
@@ -400,7 +401,7 @@ public final class Cache {
                                 .equals(object)
                 )
                 .forEach(
-                        entry -> cacheMap.remove(
+                        entry -> cache.remove(
                                 entry.getKey()
                         )
                 );
@@ -409,12 +410,12 @@ public final class Cache {
     /**
      * Checks if exist object with the key in the cache.
      *
-     * @param key a object key in the cache.
      * @param <T> a type of key.
+     * @param key a object key in the cache.
      * @return {@code true} if object is exist, {@code false} otherwise.
      */
     public static <T> boolean exist(final T key) {
-        return cacheMap.containsKey(new Key<>(key));
+        return cache.containsKey(new Key<>(key));
     }
 
     /**
@@ -423,10 +424,11 @@ public final class Cache {
      *
      * @return The maps with entries.
      */
+    @SuppressWarnings("unchecked")
     public static Map<String, String> getEntriesToString() {
         final String key = "Cache information";
-        Map<String, String> result = (Map<String, String>) get(key);
-        if ((result == null) || (result.size() != cacheMap.size())) {
+        Map<String, String> result = (Map) get(key);
+        if ((result == null) || (result.size() != cache.size())) {
             result = getNewEntriesToString(key);
             put(key, result);
         }
@@ -441,7 +443,7 @@ public final class Cache {
      */
     private static Map<String, String> getNewEntriesToString(final String key) {
         Map<String, String> result = new HashMap<>();
-        for (Map.Entry<Key, Object> entry : cacheMap.entrySet()) {
+        for (Map.Entry<Key, Object> entry : cache.entrySet()) {
             result.put(
                     entry.getKey()
                             .getKey()
@@ -464,234 +466,6 @@ public final class Cache {
      * @return The size of objects which storing in the cache.
      */
     public static int getSize() {
-        return cacheMap.size();
-    }
-
-    /**
-     * Gets maximum size of objects which
-     * can be stored in the cache.
-     *
-     * @return The maximum size of objects
-     * which can be stored in the cache.
-     */
-    public static int getMaxSize() {
-        return maxSize;
-    }
-
-    /**
-     * Sets maximum size of objects which
-     * can be stored in the cache.
-     *
-     * @param maxMapSize a maximum size of objects which
-     *                   can be stored in the cache.
-     */
-    public static void setMaxSize(final int maxMapSize) {
-        maxSize = maxMapSize > 0 ? maxMapSize : 1;
-    }
-
-    /**
-     * The class implements a set of methods
-     * for working with Key object in the cache.
-     *
-     * @param <T> a type of key.
-     */
-    private static class Key<T> implements Comparable {
-
-        /**
-         * Value of the Key.
-         */
-        private final T key;
-
-        /**
-         * The lifetime of objects.
-         */
-        private final long timeout;
-
-        /**
-         * Constructor.
-         *
-         * @param key          a object key in the cache.
-         * @param milliseconds a lifetime of objects (milliseconds).
-         */
-        private Key(final T key, final long milliseconds) {
-            this.key = key;
-            this.timeout = System.currentTimeMillis()
-                    + (milliseconds > 0 ? milliseconds : DEFAULT_TIMEOUT);
-        }
-
-        /**
-         * Constructor.
-         *
-         * @param key a object key in the cache.
-         */
-        private Key(final T key) {
-            this(key, DEFAULT_TIMEOUT);
-        }
-
-        /**
-         * Gets key value.
-         *
-         * @return The key.
-         */
-        private T getKey() {
-            return this.key;
-        }
-
-        /**
-         * Checks whether the object is dead.
-         *
-         * @return Returns true if object is dead, otherwise returns false.
-         */
-        private boolean isDead() {
-            return System.currentTimeMillis() > this.timeout;
-        }
-
-        /**
-         * Checks whether the object is alive.
-         *
-         * @return Returns true if object is alive, otherwise returns false.
-         */
-        private boolean isLive() {
-            return !isDead();
-        }
-
-        /**
-         * Indicates whether some other object is "equal to" this one.
-         *
-         * @param object a reference object with which to compare.
-         * @return Returns true if this object is the same
-         * as the object argument, otherwise returns false.
-         */
-        @Override
-        public boolean equals(final Object object) {
-            boolean result = false;
-            if (object != null) {
-                if (this == object) {
-                    result = true;
-                } else if (this.getClass() == object.getClass()) {
-                    final Key other = (Key) object;
-                    result = this.key != null ?
-                            this.key.equals(other.key)
-                            : other.key == null;
-                }
-            }
-            return result;
-        }
-
-        /**
-         * Returns a string representation of the object.
-         *
-         * @return A string representation of the object.
-         */
-        @Override
-        public String toString() {
-            return this.key.toString() + "\nTimeout = " + this.timeout;
-        }
-
-        /**
-         * Returns a hash code value for the object.
-         *
-         * @return The hash code value for this object.
-         */
-        @Override
-        public int hashCode() {
-            return this.key != null ? this.key.hashCode() : 0;
-        }
-
-        /**
-         * Compares this object with the specified object for order.
-         *
-         * @param object a object to be compared.
-         * @return A negative integer, zero, or a positive
-         * integer as this object is less than, equal to,
-         * or greater than the specified object.
-         */
-        @Override
-        public int compareTo(final Object object) {
-            int result = 0;
-            if (object == null) {
-                result = -1;
-            } else {
-                final Key other = (Key) object;
-                if (this.timeout < other.timeout) {
-                    result = 1;
-                } else if (this.timeout > other.timeout) {
-                    result = -1;
-                }
-            }
-            return result;
-        }
-    }
-
-    /**
-     * An object that creates new threads on demand.
-     */
-    private static class ThreadDaemonFactory implements ThreadFactory {
-
-        /**
-         * Constructs a new Thread.
-         *
-         * @param runnable a runnable to be executed by new thread instance.
-         * @return constructed thread, or null if the request
-         * to create a thread is rejected.
-         */
-        @Override
-        public Thread newThread(final Runnable runnable) {
-            final Thread thread = new Thread(runnable);
-            thread.setDaemon(true);
-            return thread;
-        }
-    }
-
-    /**
-     * The class implements a set of methods for checking cache at old objects.
-     */
-    private static class Command implements Runnable {
-
-        /**
-         * Used to create a SenderImpl thread, starting
-         * the thread causes the object's run method
-         * to be called in that separately executing thread.
-         */
-        @Override
-        public void run() {
-            removeDeadObject();
-            cleanCacheMapSize();
-        }
-
-        /**
-         * Removes dead objects from cache.
-         */
-        private void removeDeadObject() {
-            cacheMap.keySet()
-                    .stream()
-                    .filter(Key::isDead)
-                    .forEach(key -> cacheMap.remove(key));
-        }
-
-        /**
-         * Cleans cache when cacheMap.size() great Cache.maxSize.
-         */
-        private void cleanCacheMapSize() {
-            if (cacheMap.size() > Cache.maxSize) {
-                final List<Key> keys = new ArrayList<>(cacheMap.keySet());
-                Collections.sort(keys);
-                cleanToNormalSize(keys);
-            }
-        }
-
-        /**
-         * Cleans cache. Leaves last Cache.maxSize / 2 objects.
-         *
-         * @param keys a keys list.
-         */
-        private static void cleanToNormalSize(final List<Key> keys) {
-            for (Key key : keys) {
-                cacheMap.remove(key);
-                if (cacheMap.size() <= maxSize / 2) {
-                    break;
-                }
-            }
-        }
+        return cache.size();
     }
 }

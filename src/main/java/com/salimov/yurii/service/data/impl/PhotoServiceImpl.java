@@ -276,7 +276,7 @@ public final class PhotoServiceImpl
      * @return The Class object of {@link Photo} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Photo> getModelClass() {
         return Photo.class;
     }
 }

@@ -12,7 +12,6 @@ import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,7 +108,10 @@ public class ClientMainController extends MainController {
      * @return The ready object of class ModelAndView.
      * @see SenderService
      */
-    @RequestMapping(value = "/send_message", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/send_message",
+            method = RequestMethod.POST
+    )
     public ModelAndView sendMessage(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "name") final String name,
@@ -126,20 +128,18 @@ public class ClientMainController extends MainController {
     }
 
     /**
-     * The method throws an exception in the case of reference to it.
-     * The exception sender:
-     * "GET method in "/send_message" is not supported!"
+     * Redirects to "/home".
      * Request mapping: /send_message
-     * Method: POST
+     * Method: GET
      *
-     * @throws IllegalMappingException thrown when an error occurs reading
-     *                                 the mapping between object and datastore.
+     * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = "/send_message", method = RequestMethod.GET)
-    public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/send_message\" is not supported!"
-        );
+    @RequestMapping(
+            value = "/send_message",
+            method = RequestMethod.GET
+    )
+    public ModelAndView sendMessage() {
+        return getHomePage();
     }
 
     /**
@@ -154,7 +154,10 @@ public class ClientMainController extends MainController {
      * @return The ready object of class ModelAndView.
      * @see Response
      */
-    @RequestMapping(value = "/response/send", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/response/send",
+            method = RequestMethod.POST
+    )
     public ModelAndView sendResponse(
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "response") final String text,
@@ -168,19 +171,17 @@ public class ClientMainController extends MainController {
     }
 
     /**
-     * The method throws an exception in the case of reference to it.
-     * The exception sender:
-     * "GET method in "/response/send" is not supported!"
+     * Redirects to "/responses".
      * Request mapping: /send_response
-     * Method: POST
+     * Method: GET
      *
-     * @throws IllegalMappingException thrown when an error occurs reading
-     *                                 the mapping between object and datastore.
+     * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = "/response/send", method = RequestMethod.GET)
-    public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/response/send\" is not supported!"
-        );
+    @RequestMapping(
+            value = "/response/send",
+            method = RequestMethod.GET
+    )
+    public ModelAndView sendResponse() {
+        return getResponsesPage();
     }
 }

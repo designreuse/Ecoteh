@@ -77,7 +77,10 @@ public class AdminMessageController {
      * @return The ready object of class ModelAndView.
      * @see Message
      */
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    @RequestMapping(
+            value = {"", "/"},
+            method = RequestMethod.GET
+    )
     public ModelAndView getMessages() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
@@ -98,7 +101,10 @@ public class AdminMessageController {
      * @return The ready object of class ModelAndView.
      * @see Message
      */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/{id}",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteMessage(
             @PathVariable("id") final Long id,
             final ModelAndView modelAndView
@@ -117,7 +123,10 @@ public class AdminMessageController {
      * @return The ready object of class ModelAndView.
      * @see Message
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteAllMessages(final ModelAndView modelAndView) {
         this.messageService.removeAll();
         modelAndView.setViewName("redirect:/admin/messages");

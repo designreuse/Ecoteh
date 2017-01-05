@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Наша продукция | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Наша продукция | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="index,follow">
@@ -33,36 +33,31 @@
     <body>
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:set var="length" value="${fn:length(sections_list)}"/>
-    <c:if test="${(authorized_user ne null) and (length gt 0)}">
-        <c:set var="reqmap" value="/admin"/>
-        <%-- Actions --%>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <c:set var="length" value="${fn:length(sections_list)}"/>
+                    <c:if test="${authorized_user ne null}">
+                        <c:set var="reqmap" value="/admin"/>
+                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="/admin/section/new" title="Добавить новый раздел">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
                                 </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="/admin/section/delete/all" title="Удалить все разделы">
-                                <button class="btn btn-default">
+                            </a>
+                            <c:if test="${length gt 0}">
+                                &nbsp;&nbsp;
+                                <a href="/admin/section/delete/all" title="Удалить все разделы">
+                                    <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-remove red"
                                           aria-hidden="true"></span>&nbsp;Удалить все
-                                </button>
-                            </a>
+                                    </button>
+                                </a>
+                            </c:if>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="container">
-            <div class="row">
-                <div class="box">
+                    </c:if>
                         <%-- Path --%>
                     <p class="path">
                         <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
@@ -91,4 +86,4 @@
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

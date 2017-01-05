@@ -322,7 +322,9 @@ public final class Message extends Model<Long> {
      * @return The message string-date.
      */
     public String getDateToString() {
-        return getDateToString(getDate());
+        return getDateToString(
+                getDate()
+        );
     }
 
     /**

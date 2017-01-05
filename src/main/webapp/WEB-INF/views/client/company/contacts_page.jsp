@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Контакты | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Контакты | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="index,follow">
@@ -32,13 +32,13 @@
     <body>
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:if test="${authorized_user ne null}">
-        <c:set var="reqmap" value="/admin"/>
-        <%-- Actions --%>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <c:if test="${authorized_user ne null}">
+                        <c:set var="reqmap" value="/admin"/>
+                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="/admin/company/edit/main"
                                title="Редактировать информацию о компании &quot;<c:out value="${company.title}"/>&quot;">
@@ -47,15 +47,7 @@
                                 </button>
                             </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="container">
-            <div class="row">
-                <div class="box">
+                    </c:if>
                         <%-- Path --%>
                     <p class="path">
                         <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
@@ -86,13 +78,10 @@
     <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
     <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/resources/js/mask.min.js" type="text/javascript" async></script>
-    <c:if test="${authorized_user eq null}">
-        <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
-    </c:if>
     <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
     <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

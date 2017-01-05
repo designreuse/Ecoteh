@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
  */
@@ -27,6 +26,12 @@ public class CaptchaConfig {
      */
     @Value("${captcha.accept-language}")
     private String acceptLanguage;
+
+    /**
+     * The reCAPTCHA do output.
+     */
+    @Value("${captcha.do-output}")
+    private boolean doOutput;
 
     /**
      * The reCAPTCHA url.
@@ -62,6 +67,7 @@ public class CaptchaConfig {
         return new CaptchaImpl(
                 this.userAgent,
                 this.acceptLanguage,
+                this.doOutput,
                 this.url,
                 this.serverKey,
                 this.parameter,

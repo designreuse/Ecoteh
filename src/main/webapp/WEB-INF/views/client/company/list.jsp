@@ -32,12 +32,12 @@
                             </p>
                         </c:if>
                         <c:choose>
-                            <c:when test="${partner.advantages ne null}">
+                            <c:when test="${partner.description ne null}">
                                 <c:choose>
-                                    <c:when test="${fn:length(partner.advantages) gt desc_length}">
-                                        <p><c:out value="${fn:substring(partner.advantages, 0, desc_length)}"/>...</p>
+                                    <c:when test="${fn:length(partner.description) gt desc_length}">
+                                        <p><c:out value="${fn:substring(partner.description, 0, desc_length)}"/>...</p>
                                     </c:when>
-                                    <c:otherwise><p><c:out value="${partner.advantages}"/></p></c:otherwise>
+                                    <c:otherwise><p><c:out value="${partner.description}"/></p></c:otherwise>
                                 </c:choose>
                             </c:when>
                             <c:when test="${partner.information ne null}">
@@ -45,7 +45,7 @@
                                     <c:when test="${fn:length(partner.information) gt desc_length}">
                                         <c:out value="${fn:substring(partner.information, 0, desc_length)}"/>...
                                     </c:when>
-                                    <c:otherwise><c:out value="${partner.information}"/></c:otherwise>
+                                    <c:otherwise><p>${partner.information}</p></c:otherwise>
                                 </c:choose>
                             </c:when>
                             <c:otherwise><p><c:out value="${partner.tagline}"/></p></c:otherwise>

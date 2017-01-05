@@ -21,6 +21,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @see VideoRepository
  * @see Model
  */
-public interface DataRepository<T extends Model, E extends Number>
+public interface DataRepository<T extends Model<E>, E extends Number>
         extends JpaRepository<T, E> {
 }

@@ -19,6 +19,86 @@ import org.springframework.web.servlet.ModelAndView;
 public final class CacheMVFabricImpl implements CacheMVFabric {
 
     /**
+     * The home page key.
+     */
+    private final static String HOME_PAGE_KEY = "Home";
+
+    /**
+     * The all sections page key.
+     */
+    private final static String ALL_SECTIONS_KEY = "All Sections";
+
+    /**
+     * The sections with categories page key.
+     */
+    private final static String SECTIONS_WITH_CATEGORIES_KEY = "Sections With Categories";
+
+    /**
+     * The all categories page key.
+     */
+    private final static String ALL_CATEGORIES_KEY = "All Categories";
+
+    /**
+     * The all articles page key.
+     */
+    private final static String ALL_ARTICLES_KEY = "All Articles";
+
+    /**
+     * The main company page key.
+     */
+    private final static String MAIN_COMPANY_KEY = "Main Company";
+
+    /**
+     * The contacts (address) page key.
+     */
+    private final static String CONTACTS_KEY = "Contacts";
+
+    /**
+     * The all partners companies page key.
+     */
+    private final static String ALL_PARTNERS_KEY = "All Partners";
+
+    /**
+     * The section by url page key.
+     */
+    private final static String SECTION_BY_URL_KEY = "Section By Url ";
+
+    /**
+     * The categories in the section page key.
+     */
+    private final static String CATEGORIES_IN_SECTION_KEY = "Categories In The Section ";
+
+    /**
+     * The category by url page key.
+     */
+    private final static String CATEGORY_BY_URL_KEY = "Category By Url ";
+
+    /**
+     * The article by url page key.
+     */
+    private final static String ARTICLE_BY_URL_KEY = "Article By Url ";
+
+    /**
+     * The article by number page key.
+     */
+    private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number ";
+
+    /**
+     * The company by url page key.
+     */
+    private final static String COMPANY_BY_URL_KEY = "Company by url ";
+
+    /**
+     * The all responses page key.
+     */
+    private final static String ALL_RESPONSES_KEY = "All Responses";
+
+    /**
+     * The default modelAndView key.
+     */
+    private final static String DEFAULT_MAV_KEY = "Default ModelAndView";
+
+    /**
      * The interface provides a set of standard methods for creates
      * and returns the main modelAndViews.
      *
@@ -44,11 +124,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView homePage() {
-        final String key = "Home";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(HOME_PAGE_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.homePage();
-            put(modelAndView, key);
+            put(modelAndView, HOME_PAGE_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -62,11 +141,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView allSectionsPage() {
-        final String key = "All Sections";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ALL_SECTIONS_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.allSectionsPage();
-            put(modelAndView, key);
+            put(modelAndView, ALL_SECTIONS_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -81,11 +159,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView sectionsWithCategoriesPage() {
-        final String key = "Sections With Categories";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(SECTIONS_WITH_CATEGORIES_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.sectionsWithCategoriesPage();
-            put(modelAndView, key);
+            put(modelAndView, SECTIONS_WITH_CATEGORIES_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -99,11 +176,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView allCategoriesPage() {
-        final String key = "All Categories";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ALL_CATEGORIES_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.allCategoriesPage();
-            put(modelAndView, key);
+            put(modelAndView, ALL_CATEGORIES_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -117,11 +193,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView allArticlesPage() {
-        final String key = "All Articles";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ALL_ARTICLES_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.allArticlesPage();
-            put(modelAndView, key);
+            put(modelAndView, ALL_ARTICLES_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -135,11 +210,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView aboutCompanyPage() {
-        final String key = "Main Company";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(MAIN_COMPANY_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.aboutCompanyPage();
-            put(modelAndView, key);
+            put(modelAndView, MAIN_COMPANY_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -152,11 +226,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView contactsPage() {
-        final String key = "Contacts";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(CONTACTS_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.contactsPage();
-            put(modelAndView, key);
+            put(modelAndView, CONTACTS_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -170,11 +243,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView allPartnersPage() {
-        final String key = "All Partners";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ALL_PARTNERS_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.allPartnersPage();
-            put(modelAndView, key);
+            put(modelAndView, ALL_PARTNERS_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -189,11 +261,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView sectionPage(final String url) {
-        final String key = "Section " + url;
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(SECTION_BY_URL_KEY + url);
         if (modelAndView == null) {
             modelAndView = this.fabric.sectionPage(url);
-            put(modelAndView, key);
+            put(modelAndView, SECTION_BY_URL_KEY + url);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -210,11 +281,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView categoriesInTheSectionPage(final String url) {
-        final String key = "Category In The Section " + url;
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(CATEGORIES_IN_SECTION_KEY + url);
         if (modelAndView == null) {
             modelAndView = this.fabric.categoriesInTheSectionPage(url);
-            put(modelAndView, key);
+            put(modelAndView, CATEGORIES_IN_SECTION_KEY + url);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -229,11 +299,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView categoryPage(final String url) {
-        final String key = "Category By Url " + url;
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(CATEGORY_BY_URL_KEY + url);
         if (modelAndView == null) {
             modelAndView = this.fabric.categoryPage(url);
-            put(modelAndView, key);
+            put(modelAndView, CATEGORY_BY_URL_KEY + url);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -248,11 +317,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView articleByUrlPage(final String url) {
-        final String key = "Article By Url " + url;
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ARTICLE_BY_URL_KEY + url);
         if (modelAndView == null) {
             modelAndView = this.fabric.articleByUrlPage(url);
-            put(modelAndView, key);
+            put(modelAndView, ARTICLE_BY_URL_KEY + url);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -267,11 +335,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView articleByNumberPage(final String number) {
-        final String key = "Article By Number " + number;
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ARTICLE_BY_NUMBER_KEY + number);
         if (modelAndView == null) {
             modelAndView = this.fabric.articleByNumberPage(number);
-            put(modelAndView, key);
+            put(modelAndView, ARTICLE_BY_NUMBER_KEY + number);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -286,11 +353,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView partnerPage(final String url) {
-        final String key = "Company " + url;
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(COMPANY_BY_URL_KEY + url);
         if (modelAndView == null) {
             modelAndView = this.fabric.partnerPage(url);
-            put(modelAndView, key);
+            put(modelAndView, COMPANY_BY_URL_KEY + url);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -304,11 +370,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView allResponsesPage() {
-        final String key = "All Responses";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(ALL_RESPONSES_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.allResponsesPage();
-            put(modelAndView, key);
+            put(modelAndView, ALL_RESPONSES_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -321,11 +386,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView getDefaultModelAndView() {
-        final String key = "Default ModelAndView";
-        ModelAndView modelAndView = get(key);
+        ModelAndView modelAndView = get(DEFAULT_MAV_KEY);
         if (modelAndView == null) {
             modelAndView = this.fabric.getDefaultModelAndView();
-            put(modelAndView, key);
+            put(modelAndView, DEFAULT_MAV_KEY);
         }
         addAuthUser(modelAndView);
         return modelAndView;

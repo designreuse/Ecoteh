@@ -20,7 +20,7 @@ public final class MediaComparator {
      *
      * @see Media
      */
-    public static class ByTitle<T extends Media> implements Comparator<T> {
+    public final static class ByTitle<T extends Media> implements Comparator<T> {
 
         /**
          * Compares its two arguments for order.
@@ -57,7 +57,7 @@ public final class MediaComparator {
      *
      * @see Media
      */
-    public static class ByUrl<T extends Media> implements Comparator<T> {
+    public final static class ByUrl<T extends Media> implements Comparator<T> {
 
         /**
          * Compares its two arguments for order.

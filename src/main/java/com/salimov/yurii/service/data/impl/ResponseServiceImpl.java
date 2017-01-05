@@ -213,7 +213,7 @@ public final class ResponseServiceImpl
      * @return The Class object of {@link Response} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Response> getModelClass() {
         return Response.class;
     }
 
@@ -236,15 +236,16 @@ public final class ResponseServiceImpl
             boolean exist,
             boolean duplicate
     ) {
+        boolean result = true;
         if (response == null) {
-            return false;
+            result = false;
         }
-        if (requiredParameters && !Response.isValidated(response)) {
-            return false;
+        if (result && requiredParameters) {
+            result = Response.isValidated(response);
         }
-        if (exist && !exists(response)) {
-            return false;
+        if (result && exist) {
+            result = exists(response);
         }
-        return true;
+        return result;
     }
 }

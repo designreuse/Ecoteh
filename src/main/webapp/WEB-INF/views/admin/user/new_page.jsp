@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Добавление нового пользователя | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Добавление нового пользователя | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">

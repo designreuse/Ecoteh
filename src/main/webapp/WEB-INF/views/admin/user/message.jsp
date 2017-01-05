@@ -14,8 +14,8 @@
                 <label>
                     <b><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Тема сообщения:</b>
                 </label>
-                <input type="text" class="form-control" name="subject" minlength="2" autofocus
-                       maxlength="100" placeholder="Тема сообщения" required>
+                <input type="text" class="form-control" name="subject" minlength="2" maxlength="100"
+                       placeholder="Тема сообщения" required>
             </div>
             <div class="form-group col-lg-12">
                 <label>

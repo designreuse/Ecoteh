@@ -721,7 +721,7 @@ public final class UserServiceImpl
      * @return The Class object of {@link User} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<User> getModelClass() {
         return User.class;
     }
 

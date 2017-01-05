@@ -1479,7 +1479,7 @@ fieldset[disabled] .checkbox label {
 .btn {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin-bottom: 6px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.43;
@@ -2941,7 +2941,7 @@ a.label:focus {
 }
 
 .little, .path {
-    color: #808080;
+    color: #808080
 }
 
 .path, .response, .copyright {
@@ -2986,7 +2986,7 @@ a.label:focus {
 }
 
 .yellow {
-    color: #f90;
+    color: #f90
 }
 
 #toTop {

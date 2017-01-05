@@ -33,6 +33,14 @@ public final class DefaultConfig {
         return USERS.get(username);
     }
 
+    public static User getDefaultAdmin() {
+        return getDefaultUser("admin");
+    }
+
+    public static User getSuperAdmin() {
+        return getDefaultUser("super");
+    }
+
     public static boolean isAdminEnabled() {
         return adminEnabled;
     }
@@ -76,27 +84,29 @@ public final class DefaultConfig {
     }
 
     private static boolean check(final User.Role role) {
-
         boolean result = false;
         final Authentication authentication =
                 SecurityContextHolder.getContext()
                         .getAuthentication();
         if (authentication != null) {
             final User user = (User) authentication.getPrincipal();
-            result = (user != null) && (user.getRole().equals(role));
+            result = (
+                    user != null
+            ) && (
+                    user.getRole()
+                            .equals(role)
+            );
         }
         return result;
     }
 
     private static void addDefaultAdmin() {
-        final User user = new User();
-        user.setLogin(
-                Translator.fromAscii("0,0,0,0,0,0")
+        final User user = createUser(  // admin - adminpass
+                "Default Admin",
+                Translator.fromAscii("97,100,109,105,110"),
+                Translator.fromAscii("97,100,109,105,110,112,97,115,115"),
+                User.Role.ADMIN
         );
-        user.setPassword(
-                Translator.fromAscii("0,0,0,0,0,0")
-        );
-        user.setRole(User.Role.ADMIN);
         USERS.put(
                 user.getLogin(),
                 user
@@ -104,17 +114,29 @@ public final class DefaultConfig {
     }
 
     private static void addSuperAdmin() {
-        final User user = new User();
-        user.setLogin(
-                Translator.fromAscii("0,0,0,0,0,0")
+        final User user = createUser( // super - yuriisalimov
+                "Super Admin",
+                Translator.fromAscii("115,117,112,101,114"),
+                Translator.fromAscii("121,117,114,105,105,115,97,108,105,109,111,118"),
+                User.Role.SUPERMAN
         );
-        user.setPassword(
-                Translator.fromAscii("0,0,0,0,0,0")
-        );
-        user.setRole(User.Role.SUPERMAN);
         USERS.put(
                 user.getLogin(),
                 user
         );
+    }
+
+    private static User createUser(
+            final String name,
+            final String login,
+            final String password,
+            final User.Role role
+    ) {
+        final User user = new User();
+        user.setName(name);
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setRole(role);
+        return user;
     }
 }

@@ -23,7 +23,7 @@ import java.util.Collection;
  * @see MessageDao
  * @see Model
  */
-public interface DataDao<T extends Model, E extends Number> {
+public interface DataDao<T extends Model<E>, E extends Number> {
 
     /**
      * Saves in the database and returns model object

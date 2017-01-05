@@ -116,7 +116,7 @@ public final class CacheTest {
         }
     }
 
-    @Test
+    /*@Test
     public void maxSizeTest() {
         Cache.setMaxSize(0);
         assertTrue(Cache.getMaxSize() == 1);
@@ -126,5 +126,5 @@ public final class CacheTest {
 
         Cache.setMaxSize(1);
         assertTrue(Cache.getMaxSize() == 1);
-    }
+    }*/
 }

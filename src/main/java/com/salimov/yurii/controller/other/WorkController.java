@@ -32,7 +32,10 @@ public class WorkController {
      *                     response information for HTTP servlets.
      * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/logout",
+            method = RequestMethod.GET
+    )
     public ModelAndView logoutPage(
             final ModelAndView modelAndView,
             final HttpServletRequest request,
@@ -69,14 +72,20 @@ public class WorkController {
         );
     }
 
-    @RequestMapping(value = "/superman/on", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/superman/on",
+            method = RequestMethod.GET
+    )
     public ModelAndView on(final ModelAndView modelAndView) {
         DefaultConfig.superOn();
         modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/superman/off", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/superman/off",
+            method = RequestMethod.GET
+    )
     public ModelAndView off(final ModelAndView modelAndView) {
         DefaultConfig.superOff();
         Cache.clear();
@@ -84,7 +93,10 @@ public class WorkController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/superman/clear", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/superman/clear",
+            method = RequestMethod.GET
+    )
     public ModelAndView clear(final ModelAndView modelAndView) {
         Cache.clear();
         System.gc();

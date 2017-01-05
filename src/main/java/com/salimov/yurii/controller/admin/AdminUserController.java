@@ -115,7 +115,10 @@ public class AdminUserController {
      * @return The ready object of class ModelAndView.
      * @see User
      */
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView getAllUsers() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("users_list", this.userService.getAll(false));
@@ -131,7 +134,10 @@ public class AdminUserController {
      * @return The ready object of class ModelAndView.
      * @see User
      */
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/new",
+            method = RequestMethod.GET
+    )
     public ModelAndView newUser() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("admin/user/new_page");
@@ -162,7 +168,10 @@ public class AdminUserController {
      * @see User
      * @see Photo
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.POST
+    )
     public ModelAndView addUser(
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "login") final String login,
@@ -201,7 +210,10 @@ public class AdminUserController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.GET
+    )
     public void addUser() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/user/add\" is not supported!"
@@ -217,7 +229,10 @@ public class AdminUserController {
      * @return The ready object of class ModelAndView.
      * @see User
      */
-    @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/edit/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView editUser(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
@@ -255,7 +270,10 @@ public class AdminUserController {
      * @see User
      * @see Photo
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
     public ModelAndView updateUser(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "name") final String name,
@@ -297,7 +315,10 @@ public class AdminUserController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.GET
+    )
     public void updateUser() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/user/update\" is not supported!"
@@ -314,7 +335,10 @@ public class AdminUserController {
      * @return The ready object of class ModelAndView.
      * @see User
      */
-    @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteUser(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
@@ -334,7 +358,10 @@ public class AdminUserController {
      * @return The ready object of class ModelAndView.
      * @see User
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteAllUsers(final ModelAndView modelAndView) {
         this.userService.removeAll();
         Cache.removeAll("Main Company");
@@ -352,7 +379,10 @@ public class AdminUserController {
      * @return The ready object of class ModelAndView.
      * @see SenderService
      */
-    @RequestMapping(value = "/user/send_message", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/user/send_message",
+            method = RequestMethod.POST
+    )
     public ModelAndView sendMessage(
             @RequestParam(value = "subject") final String subject,
             @RequestParam(value = "sender") final String text
@@ -397,7 +427,10 @@ public class AdminUserController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/user/send_message", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/user/send_message",
+            method = RequestMethod.GET
+    )
     public void sendMessageForPersonnel() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/user/send_message\" is not supported!"

@@ -54,7 +54,10 @@ public class CaptchaServiceImpl implements CaptchaService {
      * @return Returns true if captcha is verify, otherwise returns false.
      */
     @Override
-    public boolean isVerify(final String captcha, final String ipAddress) {
+    public boolean isVerify(
+            final String captcha,
+            final String ipAddress
+    ) {
         return this.captcha.isVerify(captcha, ipAddress);
     }
 

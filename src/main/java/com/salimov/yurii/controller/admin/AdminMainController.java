@@ -90,7 +90,10 @@ public class AdminMainController extends MainController {
      *
      * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = "/menu", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/menu",
+            method = RequestMethod.GET
+    )
     public ModelAndView getAdminMenu() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
@@ -118,7 +121,10 @@ public class AdminMainController extends MainController {
      * @return The ready object of class ModelAndView.
      * @see SenderService
      */
-    @RequestMapping(value = "/send_message", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/send_message",
+            method = RequestMethod.POST
+    )
     public ModelAndView sendMessage(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "name") final String name,
@@ -140,7 +146,10 @@ public class AdminMainController extends MainController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/send_message", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/send_message",
+            method = RequestMethod.GET
+    )
     public void sendMessage() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/send_message\" is not supported!"
@@ -157,7 +166,10 @@ public class AdminMainController extends MainController {
      * @return The ready object of class ModelAndView.
      * @see Response
      */
-    @RequestMapping(value = "/response/send", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/response/send",
+            method = RequestMethod.POST
+    )
     public ModelAndView sendResponse(
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "response") final String text
@@ -177,7 +189,10 @@ public class AdminMainController extends MainController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/response/send", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/response/send",
+            method = RequestMethod.GET
+    )
     public void sendResponse() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/response/send\" is not supported!"
@@ -193,7 +208,9 @@ public class AdminMainController extends MainController {
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = "/site/off", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/site/off", method = RequestMethod.GET
+    )
     public ModelAndView siteOff(final ModelAndView modelAndView) {
         DefaultConfig.off();
         Cache.clear();
@@ -209,7 +226,10 @@ public class AdminMainController extends MainController {
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = "/site/on", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/site/on",
+            method = RequestMethod.GET
+    )
     public ModelAndView siteOn(final ModelAndView modelAndView) {
         DefaultConfig.on();
         modelAndView.setViewName("redirect:/admin/menu");

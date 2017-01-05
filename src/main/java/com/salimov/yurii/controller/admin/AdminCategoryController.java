@@ -114,7 +114,7 @@ public class AdminCategoryController {
 
     /**
      * Adds new category and redirects by url /admin/category/{url}.
-     * Request mapping: /admin/article/add
+     * Request mapping: /admin/category/add
      * Method: POST
      *
      * @param title        a title of the new category.

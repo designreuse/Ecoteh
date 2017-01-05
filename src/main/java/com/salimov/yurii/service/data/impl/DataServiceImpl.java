@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * The class of the service layer, describes a set of methods
  * for working with objects of {@link Model} class or subclasses.
  *
- * @param <T>  entity type, extends {@link Model}.
+ * @param <T> entity type, extends {@link Model}.
  * @param <E> entity id type, extends Number.
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see DataDao
  */
-public abstract class DataServiceImpl<T extends Model, E extends Number>
+public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         implements DataService<T, E> {
 
     /**
@@ -276,9 +276,13 @@ public abstract class DataServiceImpl<T extends Model, E extends Number>
     @Override
     @Transactional(readOnly = true)
     public boolean exists(final T model) {
-        return (model != null)
-                && (model.getId() != null)
-                && (exists((E) model.getId()));
+        boolean result = false;
+        if ((model != null) && (model.getId() != null)) {
+            result = exists(
+                    model.getId()
+            );
+        }
+        return result;
     }
 
     /**
@@ -427,12 +431,28 @@ public abstract class DataServiceImpl<T extends Model, E extends Number>
     }
 
     /**
+     * Creates new instance of the type.
+     *
+     * @param type Class object.
+     * @return The Class object.
+     */
+    T getInstance(Class<T> type) {
+        T instance = null;
+        try {
+            instance = type.newInstance();
+        } catch (InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
+        }
+        return instance;
+    }
+
+    /**
      * Return Class object of {@link Model} or subclasses.
      *
      * @return The Class object of {@link Model} or subclasses.
      * @see Model
      */
-    protected abstract Class getModelClass();
+    protected abstract Class<T> getModelClass();
 
     /**
      * Validates input object of class {@link Model} or subclasses.

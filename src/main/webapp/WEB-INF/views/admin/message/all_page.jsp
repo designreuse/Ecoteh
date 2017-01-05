@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Сообщения от пользователей | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Сообщения от пользователей | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="index,follow">
@@ -33,13 +33,13 @@
     <body>
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:set var="length" value="${fn:length(messages)}"/>
-        <%-- Actions --%>
-    <c:if test="${length gt 0}">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <c:set var="length" value="${fn:length(messages)}"/>
+                        <%-- Actions --%>
+                    <c:if test="${length gt 0}">
                         <div class="text-center">
                             <a href="/admin/messages/delete/all" title="Удалить все сообщения от клиентов">
                                 <button class="btn btn-default">
@@ -48,15 +48,7 @@
                                 </button>
                             </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="container">
-            <div class="row">
-                <div class="box">
+                    </c:if>
                         <%-- Path --%>
                     <p class="path">
                         <a href="/admin/" title="Перейти на главную страницу">Главная</a>
@@ -74,56 +66,56 @@
         </div>
             <%-- Messages --%>
         <c:if test="${length gt 0}">
-        <c:if test="${(print_messages eq null) or (print_messages gt length) or (print_messages le 0)}">
-            <c:set var="print_messages" value="${length}"/>
-        </c:if>
-        <div class="container">
-            <div class="row">
-                <div class="box">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <c:forEach items="${messages}" var="message" end="${print_messages - 1}">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <p class="response green">
-                                    <c:out value="${message.dateToString}"/>
-                                    <c:if test="${authorized_user ne null}">
-                                        &nbsp;&nbsp;&nbsp;
+            <c:if test="${(print_messages eq null) or (print_messages gt length) or (print_messages le 0)}">
+                <c:set var="print_messages" value="${length}"/>
+            </c:if>
+            <div class="container">
+                <div class="row">
+                    <div class="box">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <c:forEach items="${messages}" var="message" end="${print_messages - 1}">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <p class="response green">
+                                        <c:out value="${message.dateToString}"/>&nbsp;&nbsp;&nbsp;
                                         <a href="/admin/messages/delete/${message.id}" title="Удалить сообщение">
                                             <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-minus red"
                                                           aria-hidden="true"></span>&nbsp;Удалить
                                             </button>
                                         </a>
-                                    </c:if>
-                                </p>
-                                <p class="response"><c:out value="${message.text}"/></p>
-                                <p class="response">
-                                    <c:out value="${message.username}"/>,&nbsp;
-                                    <a href="tel:<c:out value="${message.phone}"/>">
-                                        <c:out value="${message.phone}"/></a>
-                                    <c:if test="${message.email}}">
-                                        ,&nbsp;
-                                        <a href="mailto:<c:out value="${message.email}"/>">
-                                            <c:out value="${message.email}"/>
-                                        </a>
-                                    </c:if>
-                                </p>
-                            </div>
-                        </c:forEach>
+                                    </p>
+                                    <p class="response"><c:out value="${message.text}"/></p>
+                                    <p class="response">
+                                        <c:out value="${message.username}"/>,&nbsp;
+                                        <a href="tel:<c:out value="${message.phone}"/>">
+                                            <c:out value="${message.phone}"/></a>
+                                        <c:if test="${message.email ne null}">
+                                            ,&nbsp;
+                                            <a href="mailto:<c:out value="${message.email}"/>">
+                                                <c:out value="${message.email}"/>
+                                            </a>
+                                        </c:if>
+                                    </p>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
             </div>
-        </div>
         </c:if>
-            <%-- FOOTER --%>
-            <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-            <%-- Scripts --%>
-        <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
+    </div>
+        <%-- FOOTER --%>
+    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
+    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
+    <c:if test="${length gt 0}">
         <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
         <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    </c:if>
     </body>
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

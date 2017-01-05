@@ -1,11 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page import="java.util.ResourceBundle" %>
-
-<%! private ResourceBundle resource = ResourceBundle.getBundle("captcha");
-    private String key = resource.getString("captcha.client-key");%>
-<c:set var="sitekey" value="<%= key %>"/>
 
 <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
     <hr>
@@ -56,11 +51,9 @@
                 <textarea class="form-control textarea" name="message" rows="6" maxlength="1000"
                           title="" placeholder="Ваше сообщение" required></textarea>
             </div>
-            <%-- Google reCaptcha --%>
+            <%-- GOOGLE reCAPTHCA --%>
             <c:if test="${authorized_user eq null}">
-                <div class="form-group col-lg-12">
-                    <div class="g-recaptcha" data-sitekey="${sitekey}"></div>
-                </div>
+                <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
             </c:if>
             <div class="form-group col-lg-12">
                 <button type="submit" class="btn btn-default">

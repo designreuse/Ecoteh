@@ -23,7 +23,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see MediaDao
  */
-public abstract class MediaServiceImpl<T extends Media, E extends Number>
+public abstract class MediaServiceImpl<T extends Media<E>, E extends Number>
         extends DataServiceImpl<T, E>
         implements MediaService<T, E> {
 
@@ -59,8 +59,12 @@ public abstract class MediaServiceImpl<T extends Media, E extends Number>
     @Override
     @Transactional
     public T initAndAdd(final String title, final String url) {
-        final T media = (T) new Object();
-        media.initialize(title, url);
+        final T media = getInstance(
+                getModelClass()
+        );
+        if (media != null) {
+            media.initialize(title, url);
+        }
         return add(media);
     }
 
@@ -213,12 +217,4 @@ public abstract class MediaServiceImpl<T extends Media, E extends Number>
         }
         return true;
     }
-
-    /**
-     * Return Class object of {@link Media} or subclasses.
-     *
-     * @return The Class object of {@link Media} or subclasses.
-     */
-    @Override
-    protected abstract Class getModelClass();
 }

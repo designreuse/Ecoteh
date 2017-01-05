@@ -106,8 +106,10 @@ public abstract class Model<E extends Number>
      */
     @Override
     public boolean equals(final Object object) {
-        return (object != null) && (
-                (this == object) || (getClass() == object.getClass())
+        return (
+                object != null
+        ) && (
+                super.equals(object) || (getClass() == object.getClass())
         );
     }
 
@@ -175,22 +177,6 @@ public abstract class Model<E extends Number>
      */
     public static boolean isValidated(final Model model) {
         return model != null;
-    }
-
-    /**
-     * Returns an unmodifiable list of models.
-     *
-     * @param models a list of models.
-     * @param <T>    an entity type, extends Model.
-     * @return The list of models.
-     */
-    public static <T extends Model> List<T> getUnmodifiableList(
-            final Collection<T> models
-    ) {
-        return ((models != null) && !models.isEmpty()) ?
-                Collections.unmodifiableList(
-                        new ArrayList<>(models)
-                ) : new ArrayList<>();
     }
 
     /**
