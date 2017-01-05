@@ -26,7 +26,7 @@ public class SeoController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param seoService  a implementation of the {@link SeoService} interface.
+     * @param seoService a implementation of the {@link SeoService} interface.
      * @see SeoService
      */
     @Autowired
@@ -37,28 +37,39 @@ public class SeoController {
 
     /**
      * Returns information about the site for the search engines.
+     * Request mapping: /robots.txt, /robots
+     * Produces: text/plain
      *
      * @return The information about a site.
      */
     @ResponseBody
     @RequestMapping(
-            value = {"/robots.txt", "/robots"},
-            produces = {"text/plain"}
+            value = {
+                    "/robots.txt",
+                    "/robots"
+            },
+            produces = "text/plain"
     )
     public String getRobotsTxt() {
         return this.seoService.getRobotsTxt();
     }
 
     /**
-     * Creates and returns a sitemap. This is a list of all pages on the site,
+     * Creates and returns a sitemap.
+     * This is a list of all pages on the site,
      * which consists of the links to these pages.
+     * Request mapping: /sitemap.xml, /sitemap
+     * Produces: text/plain
      *
      * @return Information about links on the site to search engines.
      */
     @ResponseBody
     @RequestMapping(
-            value = {"/sitemap.xml", "/sitemap"},
-            produces = {"application/xml"}
+            value = {
+                    "/sitemap.xml",
+                    "/sitemap"
+            },
+            produces = "application/xml"
     )
     public String getSiteMapXml() {
         return this.seoService.getSiteMapXml();

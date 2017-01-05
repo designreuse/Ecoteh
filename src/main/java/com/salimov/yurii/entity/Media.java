@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The abstract superclass class implements a set of standard methods
  * for working with entity of the {@link Media} class or subclasses.
  *
- * @param <ID> Media id type, extends Number.
+ * @param <E> Media id type, extends Number.
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Video
  */
 @MappedSuperclass
-public abstract class Media<ID extends Number> extends Model<ID> {
+public abstract class Media<E extends Number> extends Model<E> {
 
     /**
      * It is used during deserialization to verify that

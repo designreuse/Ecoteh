@@ -28,7 +28,7 @@ import java.util.Collection;
  * @see MessageDaoImpl
  * @see Model
  */
-public abstract class DataDaoImpl<T extends Model, E extends Number>
+public abstract class DataDaoImpl<T extends Model<E>, E extends Number>
         implements DataDao<T, E> {
 
     /**

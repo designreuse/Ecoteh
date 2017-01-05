@@ -1,7 +1,6 @@
 package com.salimov.yurii.service.sender;
 
 import com.salimov.yurii.entity.User;
-import com.salimov.yurii.util.sender.Sender;
 import com.salimov.yurii.util.sender.SenderImpl;
 import org.springframework.stereotype.Service;
 
@@ -34,14 +33,13 @@ public final class SenderServiceImpl implements SenderService {
             final String senderEmail,
             final String senderEmailPass
     ) {
-        final Sender sender = new SenderImpl(
+        new SenderImpl(
                 subject,
                 text,
                 recipientEmail,
                 senderEmail,
                 senderEmailPass
-        );
-        sender.send();
+        ).send();
     }
 
     /**

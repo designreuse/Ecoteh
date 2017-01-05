@@ -45,7 +45,7 @@ public final class MessageServiceImpl
      * @see Message
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Message> getModelClass() {
         return Message.class;
     }
 
@@ -67,15 +67,16 @@ public final class MessageServiceImpl
             final boolean exist,
             final boolean duplicate
     ) {
+        boolean result = true;
         if (message == null) {
-            return false;
+            result = false;
         }
-        if (requiredParameters && !Message.isValidated(message)) {
-            return false;
+        if (result && requiredParameters) {
+            result = Message.isValidated(message);
         }
-        if (exist && !exists(message)) {
-            return false;
+        if (result && exist) {
+            result = exists(message);
         }
-        return true;
+        return result;
     }
 }

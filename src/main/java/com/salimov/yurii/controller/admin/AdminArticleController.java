@@ -103,7 +103,10 @@ public class AdminArticleController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/new",
+            method = RequestMethod.GET
+    )
     public ModelAndView getNewArticlePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
@@ -135,7 +138,10 @@ public class AdminArticleController {
      * @see Category
      * @see Photo
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.POST
+    )
     public ModelAndView addArticle(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "description") final String description,
@@ -173,7 +179,10 @@ public class AdminArticleController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.GET
+    )
     public void addArticle() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/article/add\" is not supported!"
@@ -189,7 +198,10 @@ public class AdminArticleController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/edit/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView editArticle(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
@@ -229,7 +241,10 @@ public class AdminArticleController {
      * @see Category
      * @see Photo
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
     public ModelAndView updateArticle(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
@@ -270,7 +285,10 @@ public class AdminArticleController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.GET
+    )
     public void updateArticle() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/article/update\" is not supported!"
@@ -287,7 +305,10 @@ public class AdminArticleController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteArticle(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
@@ -307,7 +328,10 @@ public class AdminArticleController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteAllArticles(final ModelAndView modelAndView) {
         this.articleService.removeAll();
         modelAndView.setViewName("redirect:/admin/");

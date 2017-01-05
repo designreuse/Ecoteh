@@ -13,7 +13,7 @@ import com.salimov.yurii.entity.Content;
  * @see DataDao
  * @see Content
  */
-public interface ContentDao<T extends Content, E extends Number>
+public interface ContentDao<T extends Content<E>, E extends Number>
         extends DataDao<T, E> {
 
     /**

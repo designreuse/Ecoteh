@@ -20,7 +20,7 @@ public final class ContentComparator {
      *
      * @see Content
      */
-    public static class ByTitle<T extends Content> implements Comparator<T> {
+    public final static class ByTitle<T extends Content> implements Comparator<T> {
 
         /**
          * Compares its two arguments for order.
@@ -57,7 +57,7 @@ public final class ContentComparator {
      *
      * @see Content
      */
-    public static class ByUrl<T extends Content> implements Comparator<T> {
+    public final static class ByUrl<T extends Content> implements Comparator<T> {
 
         /**
          * Compares its two arguments for order.

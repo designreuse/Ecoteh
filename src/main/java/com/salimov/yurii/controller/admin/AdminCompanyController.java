@@ -83,7 +83,10 @@ public class AdminCompanyController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/edit/main", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/edit/main",
+            method = RequestMethod.GET
+    )
     public ModelAndView editMainCompany() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         final Company company = this.companyService.getMainCompanyToHome();
@@ -138,7 +141,10 @@ public class AdminCompanyController {
      * @see Company
      * @see Photo
      */
-    @RequestMapping(value = "/update/main", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/update/main",
+            method = RequestMethod.POST
+    )
     public ModelAndView updateMainCompany(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
@@ -179,7 +185,7 @@ public class AdminCompanyController {
                 favicon, faviconAction, slides, slidesAction
         );
         modelAndView.setViewName("redirect:/admin/company/main");
-        Cache.removeAll("Main Company", "home");
+        Cache.clear();
         return modelAndView;
     }
 
@@ -208,7 +214,10 @@ public class AdminCompanyController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/new",
+            method = RequestMethod.GET
+    )
     public ModelAndView newPartner() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("admin/company/new_page");
@@ -244,7 +253,10 @@ public class AdminCompanyController {
      * @see Company
      * @see Photo
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.POST
+    )
     public ModelAndView addPartner(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "domain") final String domain,
@@ -290,7 +302,10 @@ public class AdminCompanyController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.GET
+    )
     public void addPartner() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/company/add\" is not supported!"
@@ -306,7 +321,10 @@ public class AdminCompanyController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/edit/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView editPartner(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
@@ -350,7 +368,10 @@ public class AdminCompanyController {
      * @see Company
      * @see Photo
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
     public ModelAndView updatePartnerCompany(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
@@ -401,7 +422,10 @@ public class AdminCompanyController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.GET
+    )
     public void updatePartnerCompany() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/company/update\" is not supported!"
@@ -418,7 +442,10 @@ public class AdminCompanyController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView deletePartner(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
@@ -438,7 +465,10 @@ public class AdminCompanyController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteAllPartners(final ModelAndView modelAndView) {
         this.companyService.removeAll();
         modelAndView.setViewName("redirect:/admin/");

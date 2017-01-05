@@ -83,7 +83,10 @@ public class AdminSectionController {
      * @return The ready object of class ModelAndView.
      * @see Section
      */
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/new",
+            method = RequestMethod.GET
+    )
     public ModelAndView newSection() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("admin/section/new_page");
@@ -105,7 +108,10 @@ public class AdminSectionController {
      * @see Section
      * @see Photo
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.POST
+    )
     public ModelAndView addSection(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "description") final String description,
@@ -135,7 +141,10 @@ public class AdminSectionController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.GET
+    )
     public void addSection() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/section/add\" is not supported!"
@@ -151,7 +160,10 @@ public class AdminSectionController {
      * @return The ready object of class ModelAndView.
      * @see Section
      */
-    @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/edit/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView editSection(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
@@ -181,7 +193,10 @@ public class AdminSectionController {
      * @see Section
      * @see Photo
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
     public ModelAndView updateSection(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
@@ -213,7 +228,10 @@ public class AdminSectionController {
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
      */
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.GET
+    )
     public void updateSection() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/section/update\" is not supported!"
@@ -230,7 +248,10 @@ public class AdminSectionController {
      * @return The ready object of class ModelAndView.
      * @see Section
      */
-    @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteSection(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
@@ -250,7 +271,10 @@ public class AdminSectionController {
      * @return The ready object of class ModelAndView.
      * @see Section
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteAllSections(final ModelAndView modelAndView) {
         this.sectionService.removeAll();
         modelAndView.setViewName("redirect:/admin/");

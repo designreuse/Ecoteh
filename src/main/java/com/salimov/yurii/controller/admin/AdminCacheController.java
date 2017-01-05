@@ -58,7 +58,10 @@ public class AdminCacheController {
      * @return The ready object of class ModelAndView.
      * @see Cache
      */
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    @RequestMapping(
+            value = {"", "/"},
+            method = RequestMethod.GET
+    )
     public ModelAndView getCache() {
         ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("objects", Cache.getEntriesToString());
@@ -75,7 +78,10 @@ public class AdminCacheController {
      * @return The ready object of class ModelAndView.
      * @see Cache
      */
-    @RequestMapping(value = "/clear", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/clear",
+            method = RequestMethod.GET
+    )
     public ModelAndView clearCache(final ModelAndView modelAndView) {
         Cache.clear();
         modelAndView.setViewName("redirect:/admin/cache");
@@ -84,13 +90,18 @@ public class AdminCacheController {
 
     /**
      * Removes object from cache with key and redirect by url /admin/cache.
+     * Request mapping: /admin/cache/remove/{key}
+     * Method: GET
      *
      * @param key          a object key in the cache.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Cache
      */
-    @RequestMapping(value = "/remove/{key}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/remove/{key}",
+            method = RequestMethod.GET
+    )
     public ModelAndView removeObjectFromCache(
             @PathVariable("key") final String key,
             final ModelAndView modelAndView

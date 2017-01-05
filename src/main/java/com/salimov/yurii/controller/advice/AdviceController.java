@@ -103,6 +103,7 @@ public class AdviceController {
     private final MainMVFabric fabric;
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdviceController(final ClientMVFabric fabric) {
         this.fabric = new CacheMVFabricImpl(fabric);
     }
@@ -313,31 +314,6 @@ public class AdviceController {
     }
 
     /**
-     * Request logging.
-     *
-     * @param request to provide requested information for HTTP servlets.
-     */
-    private static void logRequest(final HttpServletRequest request) {
-        if (request != null) {
-            LOGGER.error(
-                    request.getRemoteAddr()
-                            + " : "
-                            + request.getRequestURL()
-            );
-        }
-    }
-
-    /**
-     * Error logging.
-     *
-     * @param exception an intercepted exception.
-     */
-    private static void logException(final Exception exception) {
-        LOGGER.error(exception.getMessage(), exception);
-        exception.printStackTrace();
-    }
-
-    /**
      * Creates and return ModelAndView object.
      *
      * @param textError    a text of the exception.
@@ -360,5 +336,33 @@ public class AdviceController {
         modelAndView.addObject("message", messageError);
         modelAndView.setViewName("error/error_page");
         return modelAndView;
+    }
+
+    /**
+     * Request logging.
+     *
+     * @param request to provide requested information for HTTP servlets.
+     */
+    private static void logRequest(final HttpServletRequest request) {
+        if (request != null) {
+            LOGGER.error(
+                    request.getRemoteAddr()
+                            + " : "
+                            + request.getRequestURL()
+            );
+        }
+    }
+
+    /**
+     * Error logging.
+     *
+     * @param exception an intercepted exception.
+     */
+    private static void logException(final Exception exception) {
+        LOGGER.error(
+                exception.getMessage(),
+                exception
+        );
+        exception.printStackTrace();
     }
 }

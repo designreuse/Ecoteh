@@ -127,12 +127,15 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {"", "/", "/index", "/home"},
+            value = {
+                    "",
+                    "/",
+                    "/index",
+                    "/home"
+            },
             method = RequestMethod.GET
     )
     public ModelAndView getHomePage() {
-        /*final ModelAndView modelAndView = this.fabric.homePage();
-        modelAndView.addObject("is_captcha", null);*/
         return this.fabric.homePage();
     }
 
@@ -144,7 +147,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Section
      */
-    @RequestMapping(value = "/section/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/section/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView getAllSectionsPage() {
         return this.fabric.allSectionsPage();
     }
@@ -158,7 +164,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Section
      */
-    @RequestMapping(value = "/section/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/section/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView getSectionPage(@PathVariable("url") final String url) {
         return this.fabric.sectionPage(url);
     }
@@ -171,7 +180,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Category
      */
-    @RequestMapping(value = "/category/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/category/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView getAllCategoriesPage() {
         return this.fabric.allCategoriesPage();
     }
@@ -187,7 +199,10 @@ public abstract class MainController {
      * @see Category
      * @see Section
      */
-    @RequestMapping(value = "/category/all/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/category/all/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView getCategoriesInTheSection(
             @PathVariable("url") final String url
     ) {
@@ -203,7 +218,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Category
      */
-    @RequestMapping(value = "/category/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/category/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView getCategoryPage(@PathVariable("url") final String url) {
         return this.fabric.categoryPage(url);
     }
@@ -217,7 +235,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/article/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/article/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView getArticlePage(@PathVariable("url") final String url) {
         return this.fabric.articleByUrlPage(url);
     }
@@ -231,7 +252,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/article/num_{number}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/article/num_{number}",
+            method = RequestMethod.GET
+    )
     public ModelAndView getArticleByNumberPage(
             @PathVariable("number") final String number
     ) {
@@ -246,7 +270,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Article
      */
-    @RequestMapping(value = "/article/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/article/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView getAllArticlesPage() {
         return this.fabric.allArticlesPage();
     }
@@ -259,7 +286,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = {"/company/main"}, method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/company/main",
+            method = RequestMethod.GET
+    )
     public ModelAndView getAboutCompanyPage() {
         return this.fabric.aboutCompanyPage();
     }
@@ -273,7 +303,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {"/contacts", "/address"},
+            value = {
+                    "/contacts",
+                    "/address"
+            },
             method = RequestMethod.GET
     )
     public ModelAndView getContactsPage() {
@@ -289,7 +322,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/company/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/company/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView getPartnersPage() {
         return this.fabric.allPartnersPage();
     }
@@ -303,7 +339,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Company
      */
-    @RequestMapping(value = "/company/{url}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/company/{url}",
+            method = RequestMethod.GET
+    )
     public ModelAndView getPartnerPage(@PathVariable("url") String url) {
         return this.fabric.partnerPage(url);
     }
@@ -316,7 +355,10 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      * @see Response
      */
-    @RequestMapping(value = "/responses", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/responses",
+            method = RequestMethod.GET
+    )
     public ModelAndView getResponsesPage() {
         return this.fabric.allResponsesPage();
     }
@@ -411,7 +453,13 @@ public abstract class MainController {
             final String subject
     ) {
         this.messageService.add(
-                new Message(name, email, phone, subject, text)
+                new Message(
+                        name,
+                        email,
+                        phone,
+                        subject,
+                        text
+                )
         );
     }
 

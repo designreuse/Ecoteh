@@ -20,7 +20,7 @@ public final class UserComparator {
      *
      * @see User
      */
-    public static class ByName implements Comparator<User> {
+    public final static class ByName implements Comparator<User> {
 
         /**
          * Compares its two arguments for order.
@@ -57,7 +57,7 @@ public final class UserComparator {
      *
      * @see User
      */
-    public static class ByUrl implements Comparator<User> {
+    public final static class ByUrl implements Comparator<User> {
 
         /**
          * Compares its two arguments for order.
@@ -94,7 +94,7 @@ public final class UserComparator {
      *
      * @see User
      */
-    public static class ByRole implements Comparator<User> {
+    public final static class ByRole implements Comparator<User> {
 
         /**
          * The role comparing.

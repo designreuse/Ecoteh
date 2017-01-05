@@ -6,6 +6,8 @@ package com.salimov.yurii.util.translator;
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
+ * @see Ascii
+ * @see ToLatin
  */
 public final class Translator {
 

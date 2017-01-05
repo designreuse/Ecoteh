@@ -261,7 +261,7 @@ public final class SectionServiceImpl
      * @return The Class object of {@link Section} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Section> getModelClass() {
         return Section.class;
     }
 

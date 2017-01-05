@@ -3,7 +3,8 @@ package com.salimov.yurii.util.captcha;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The class implements a set of methods for working with google reCAPTCHA.
+ * The class implements a set of methods
+ * for working with google reCAPTCHA.
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
@@ -15,7 +16,8 @@ public interface Captcha {
      * Verifies captcha from request.
      *
      * @param request a request from client.
-     * @return {@code true} if captcha is verify, {@code false} otherwise.
+     * @return {@code true} if captcha is verify,
+     * {@code false} otherwise.
      */
     boolean isVerify(final HttpServletRequest request);
 
@@ -24,7 +26,8 @@ public interface Captcha {
      *
      * @param captcha   a StaticCaptcha for check.
      * @param ipAddress a request ip address.
-     * @return {@code true} if captcha is verify, {@code false} otherwise.
+     * @return {@code true} if captcha is verify,
+     * {@code false} otherwise.
      */
     boolean isVerify(
             final String captcha,
@@ -32,9 +35,9 @@ public interface Captcha {
     );
 
     /**
-     * Return work status.
+     * Return a work status.
      *
-     * @return Work status.
+     * @return The work status.
      */
     String getStatus();
 }

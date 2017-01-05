@@ -29,7 +29,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
  * @see ContentDao
  */
-public abstract class ContentServiceImpl<T extends Content, E extends Number>
+public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
         extends DataServiceImpl<T, E>
         implements ContentService<T, E> {
 
@@ -262,12 +262,4 @@ public abstract class ContentServiceImpl<T extends Content, E extends Number>
         }
         return true;
     }
-
-    /**
-     * Return Class object of {@link Content} or subclasses.
-     *
-     * @return The Class object of {@link Content} or subclasses.
-     */
-    @Override
-    protected abstract Class getModelClass();
 }

@@ -43,7 +43,7 @@ public final class VideoServiceImpl
      * @return The Class object of {@link Video} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Video> getModelClass() {
         return Video.class;
     }
 }

@@ -13,7 +13,7 @@ import com.salimov.yurii.entity.Media;
  * @see DataDao
  * @see Media
  */
-public interface MediaDao<T extends Media, E extends Number>
+public interface MediaDao<T extends Media<E>, E extends Number>
         extends DataDao<T, E> {
 
     /**

@@ -87,10 +87,7 @@ public final class AdminMVFabricImpl
             throw new DisableException("Site is disabled!");
         }
         final ModelAndView modelAndView = super.getDefaultModelAndView();
-        modelAndView.addObject(
-                "authorized_user",
-                this.userService.getAuthenticatedUser()
-        );
+        addAuthUser(modelAndView);
         return modelAndView;
     }
 

@@ -20,7 +20,7 @@ public final class ArticleComparator {
      *
      * @see Article
      */
-    public static class ByNumber implements Comparator<Article> {
+    public final static class ByNumber implements Comparator<Article> {
         /**
          * Compares its two arguments for order.
          *
@@ -56,7 +56,7 @@ public final class ArticleComparator {
      *
      * @see Article
      */
-    public static class ByDate implements Comparator<Article> {
+    public final static class ByDate implements Comparator<Article> {
 
         /**
          * Compares its two arguments for order.

@@ -59,7 +59,10 @@ public class AdminResponseController {
      * @return The ready object of class ModelAndView.
      * @see Response
      */
-    @RequestMapping(value = "/valid/{id}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/valid/{id}",
+            method = RequestMethod.GET
+    )
     public ModelAndView reverseValidResponse(
             @PathVariable("id") final long id,
             final ModelAndView modelAndView
@@ -82,7 +85,10 @@ public class AdminResponseController {
      * @return The ready object of class ModelAndView.
      * @see Response
      */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/{id}",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteResponse(
             @PathVariable("id") final long id,
             final ModelAndView modelAndView
@@ -102,7 +108,10 @@ public class AdminResponseController {
      * @return The ready object of class ModelAndView.
      * @see Response
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/delete/all",
+            method = RequestMethod.GET
+    )
     public ModelAndView deleteAllResponses(final ModelAndView modelAndView) {
         this.responseService.removeAll();
         Cache.removeAll("Response", "Home");

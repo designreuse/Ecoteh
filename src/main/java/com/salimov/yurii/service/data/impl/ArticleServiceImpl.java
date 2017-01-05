@@ -568,7 +568,7 @@ public final class ArticleServiceImpl
      * @return The Class object of {@link Article} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Article> getModelClass() {
         return Article.class;
     }
 

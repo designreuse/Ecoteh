@@ -6,7 +6,6 @@ import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,7 +76,10 @@ public class SearchController {
      *
      * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    @RequestMapping(
+            value = {"", "/"},
+            method = RequestMethod.GET
+    )
     public ModelAndView search() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("client/search/result_page");
@@ -94,7 +96,10 @@ public class SearchController {
      * @param howSearch a search mode.
      * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = {"/result"}, method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/result",
+            method = RequestMethod.POST
+    )
     public ModelAndView searchResult(
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "content") final String content,
@@ -108,19 +113,17 @@ public class SearchController {
     }
 
     /**
-     * The method throws an exception in the case of reference to it.
-     * The exception sender:
-     * "GET method in "/search/result" is not supported!"
-     * Request mapping: /search/result
+     * Redirects to "/search/".
+     * Request mapping: /result
      * Method: GET
      *
-     * @throws IllegalMappingException thrown when an error occurs reading
-     *                                 the mapping between object and datastore.
+     * @return The ready object of class ModelAndView.
      */
-    @RequestMapping(value = {"/result"}, method = RequestMethod.GET)
-    public void searchResult() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/search/result\" is not supported!"
-        );
+    @RequestMapping(
+            value = "/result",
+            method = RequestMethod.GET
+    )
+    public ModelAndView searchResult() {
+        return search();
     }
 }

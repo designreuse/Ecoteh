@@ -20,7 +20,7 @@ public final class ResponseComparator {
      *
      * @see Response
      */
-    public static class ByDate implements Comparator<Response> {
+    public final static class ByDate implements Comparator<Response> {
 
         /**
          * Compares its two arguments for order.

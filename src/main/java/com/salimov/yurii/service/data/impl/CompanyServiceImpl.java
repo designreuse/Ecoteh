@@ -462,7 +462,7 @@ public final class CompanyServiceImpl
      * @return The Class object of {@link Company} class.
      */
     @Override
-    protected Class getModelClass() {
+    protected Class<Company> getModelClass() {
         return Company.class;
     }
 
