@@ -18,7 +18,7 @@ public class ClientMainControllerTest extends MainControllerTest {
         controller = getClientMainController();
     }
 
-    /*@com.salimov.yurii.controller.Test
+    /*@Test
     public void whenSendMessageWithNullUrlThenRedirectToHomePage() {
         ModelAndView modelAndView = controller.sendMessage(null, NAME, PHONE, EMAIL, ANY_STRING, new ModelAndView(), null);
         String viewName = "redirect:/";
@@ -30,17 +30,17 @@ public class ClientMainControllerTest extends MainControllerTest {
         controller.sendMessage();
     }
 
-    /*@com.salimov.yurii.controller.Test
+    /*@Test
     public void whenSendResponseThenRedirectPageWithAllResponses() {
         ModelAndView modelAndView = controller.sendResponse(NAME, ANY_STRING, new ModelAndView(), null);
         String viewName = "redirect:/responses";
         checkModelAndView(modelAndView, viewName, null);
     }*/
 
-    @Test(expected = IllegalMappingException.class)
+    /*@Test(expected = IllegalMappingException.class)
     public void whenSendResponseByGetMethodThenThrowsException() {
         controller.sendResponse();
-    }
+    }*/
 
     @Ignore
     @Override
