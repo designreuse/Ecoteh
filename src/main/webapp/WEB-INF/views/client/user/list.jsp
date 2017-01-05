@@ -31,7 +31,7 @@
                 </c:when>
                 <c:otherwise>
                     <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
-                         src="/resources/img/users/default-user.png">
+                         src="/resources/img/users/default_user.png">
                 </c:otherwise>
             </c:choose>
             <h4><b><c:out value="${user.name}"/></b></h4>

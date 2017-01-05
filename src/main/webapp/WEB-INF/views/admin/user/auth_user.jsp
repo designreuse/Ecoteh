@@ -12,7 +12,7 @@
         </c:when>
         <c:otherwise>
             <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
-                 src="/resources/img/users/default-user.png">
+                 src="/resources/img/users/default_user.png">
         </c:otherwise>
     </c:choose>
     <h3><c:out value="${authorized_user.name}"/></h3>
@@ -84,7 +84,7 @@
             <a href="/admin/user/edit/<c:out value="${authorized_user.url}"/>"
                title="Редактировать информацию о <c:out value="${authorized_user.name}"/>">
                 <button class="btn btn-default">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Редактировать
+                    <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
                 </button>
             </a>
         </div>

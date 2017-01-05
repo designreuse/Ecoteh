@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/></title>
         <meta name="title"
               content="О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/>">
@@ -33,64 +33,56 @@
     <body>
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:if test="${authorized_user ne null}">
-        <c:set var="reqmap" value="/admin"/>
-        <%-- Actions --%>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
-                        <div class="text-center">
-                            <a href="/admin/company/new" title="Добавить нового партнера">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
-                                </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="/admin/company/edit/<c:out value="${company.url}"/>"
-                               title="Редактировать партнера &quot;<c:out value="${company.title}"/>&quot;">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
-                                </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="/admin/company/delete/<c:out value="${company.url}"/>"
-                               title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
-                    <p class="path">
-                        <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
-                        → <a href="${reqmap}/company/all" title="Наши партнеры">Партнеры</a>
-                        → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
-                    </p>
-                    <c:if test="${company.logo ne null}">
-                        <hr>
-                        <h3 class="text-center"><c:out value="${company.title}"/></h3>
-                        <hr>
-                    </c:if>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <c:if test="${authorized_user ne null}">
+                            <c:set var="reqmap" value="/admin"/>
+                            <%-- Actions --%>
+                            <div class="text-center">
+                                <a href="/admin/company/new" title="Добавить нового партнера">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="/admin/company/edit/<c:out value="${company.url}"/>"
+                                   title="Редактировать партнера &quot;<c:out value="${company.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="/admin/company/delete/<c:out value="${company.url}"/>"
+                                   title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
+                                    </button>
+                                </a>
+                            </div>
+                        </c:if>
+                            <%-- Path --%>
+                        <p class="path">
+                            <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
+                            → <a href="${reqmap}/company/all" title="Наши партнеры">Партнеры</a>
+                            → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
+                        </p>
+                        <c:if test="${company.logo ne null}">
+                            <hr>
+                            <h3 class="text-center"><c:out value="${company.title}"/></h3>
+                            <hr>
+                        </c:if>
                             <%-- LOGO --%>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
-                    </div>
-                    <c:if test="${!company.validated}">
-                        <p class="no-valid" title="Не отображается для клиентов">
+                        <c:if test="${!company.validated}">
+                            <p class="no-valid" title="Не отображается для клиентов">
                             <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
                                   title="Не отображается для клиентов"></span>
-                        </p>
-                    </c:if>
-                    <p><c:out value="${company.description}"/></p>
-                    <p>${company.information}</p>
+                            </p>
+                        </c:if>
+                        <p><c:out value="${company.description}"/></p>
+                        <p>${company.information}</p>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -116,4 +108,4 @@
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

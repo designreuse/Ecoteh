@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title><c:out value="${article.title} | ${main_company.title}"/></title>
         <meta name="title" content="<c:out value="${article.title} | ${main_company.title}"/>">
         <meta name="robots" content="index,follow">
@@ -33,13 +33,13 @@
     <body>
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:if test="${authorized_user ne null}">
-        <c:set var="reqmap" value="/admin"/>
-        <%-- Actions --%>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <c:if test="${authorized_user ne null}">
+                        <c:set var="reqmap" value="/admin"/>
+                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="/admin/article/new" title="Добавить новую статью">
                                 <button class="btn btn-default">
@@ -49,7 +49,8 @@
                             <a href="/admin/article/edit/<c:out value="${article.url}"/>"
                                title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
+                                    <span class="glyphicon glyphicon-edit yellow"
+                                          aria-hidden="true"></span>&nbsp;Редактировать
                                 </button>
                             </a>&nbsp;&nbsp;
                             <a href="/admin/article/delete/<c:out value="${article.url}"/>"
@@ -59,15 +60,7 @@
                                 </button>
                             </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="container">
-            <div class="row">
-                <div class="box">
+                    </c:if>
                         <%-- Path --%>
                     <p class="path">
                         <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
@@ -145,4 +138,4 @@
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

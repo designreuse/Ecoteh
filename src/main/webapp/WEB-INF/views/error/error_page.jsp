@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Ошибка | <c:out value="${text}"/></title>
         <meta name="title" content="Ошибка | <c:out value="${text}"/>">
         <meta name="description" content="<c:out value="${message}"/>">
@@ -29,7 +29,6 @@
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
-                <%-- Error information --%>
             <div class="row">
                 <div class="box">
                         <%-- Path --%>
@@ -63,4 +62,4 @@
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

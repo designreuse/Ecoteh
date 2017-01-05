@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Все категории | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Все категории | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="index,follow">
@@ -35,13 +35,13 @@
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="length" value="${fn:length(categories_list)}"/>
-    <c:if test="${authorized_user ne null}">
-        <c:set var="reqmap" value="/admin"/>
-        <%-- Actions --%>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <c:if test="${authorized_user ne null}">
+                        <c:set var="reqmap" value="/admin"/>
+                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="/admin/category/new" title="Добавить новую категория">
                                 <button class="btn btn-default">
@@ -58,15 +58,7 @@
                                 </a>
                             </c:if>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="container">
-            <div class="row">
-                <div class="box">
+                    </c:if>
                         <%-- Path --%>
                     <p class="path">
                         <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
@@ -95,4 +87,4 @@
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

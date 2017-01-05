@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Главная | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Главная | <c:out value="${main_company.title}"/>">
         <meta name="description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>.">
@@ -66,13 +66,10 @@
     <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/resources/js/carousel.min.js" type="text/javascript"></script>
     <script src="/resources/js/mask.min.js" type="text/javascript" async></script>
-    <c:if test="${authorized_user eq null}">
-        <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
-    </c:if>
     <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
     <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

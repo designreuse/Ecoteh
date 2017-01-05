@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov">
+        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Редактирование &quot;<c:out value="${user.name}"/>&quot; | <c:out
                 value="${main_company.title}"/></title>
         <meta name="title"
@@ -233,18 +233,19 @@
                                     <th class="ths">
                                         <label title="Если пользователь позначен для отображения, он будет доступна любому пользователю, иначе еге сможет увидеть только адмиистратор.">
                                             <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span>
+                                                                      class="glyphicon glyphicon-info-sign"></span></b>
                                         </label>
                                     </th>
                                     <td class="tds">
                                         <label title="Отображать пользователя">
                                             <b><input type="radio" name="is_valid" value="true"
-                                                      <c:if test="${user.validated}">checked</c:if> required/>&nbsp;Отображать
+                                                      <c:if test="${user.validated}">checked</c:if>
+                                                      required/>&nbsp;Отображать</b>
                                         </label>&nbsp;&nbsp;
                                         <label title="Не отображать пользователя">
-                                            <b><input type="radio" name="is_valid" value="false" required
-                                                      <c:if test="${!user.validated}">checked</c:if>/>&nbsp;Не
-                                                отображать
+                                            <b><input type="radio" name="is_valid" value="false"
+                                                      <c:if test="${!user.validated}">checked</c:if>
+                                                      required/>&nbsp;Не отображать</b>
                                         </label>
                                     </td>
                                 </tr>
@@ -321,4 +322,4 @@
     </html>
 </compress:html>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

@@ -64,7 +64,9 @@
                                 </c:if>
                                 <c:if test="${main_company.skype ne null}">
                                     <a href="skype:<c:out value="${main_company.skype}"/>?call"
-                                       title="Позвонить в Skype"><span class="fa fa-skype fa-2x sk"></span></a>
+                                       title="Позвонить в Skype">
+                                        <span class="fa fa-skype fa-2x sk"></span>
+                                    </a>
                                 </c:if>
                             </p>
                         </div>
@@ -74,6 +76,7 @@
                 <div class="hidden-xs col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="text-right">
                         <p class="copyright">
+                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
                             <c:if test="${main_company.domain ne null}">
                                 <a href=" http://<c:out value="${main_company.domain}"/>"
                                    title="<c:out value="${main_company.title}"/>">
@@ -89,7 +92,6 @@
                                     <c:out value="${main_company.domain}"/>
                                 </a><br>
                             </c:if>
-                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
                             <a href="https://www.linkedin.com/in/yurii-salimov" target="_blank"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
                                 <img class="icon-size" src="/resources/img/static/mr_alex_icon.png"
@@ -102,23 +104,24 @@
                 <div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
                     <div class="text-center">
                         <p class="copyright">
+                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
                             <c:if test="${main_company.mobilePhone ne null}">
                                 <a href="tel:<c:out value="${main_company.mobilePhone}"/>" title="Мобильный телефон">
-                                    <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                                    &nbsp;<c:out value="${main_company.mobilePhone}"/>
+                                    <span class="glyphicon glyphicon-phone"
+                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.mobilePhone}"/>
                                 </a><br>
                             </c:if>
                             <c:if test="${main_company.fax ne null}">
                                 <a href="tel:<c:out value="${main_company.fax}"/>" title="Телефон / Факс">
-                                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                                    &nbsp;<c:out value="${main_company.fax}"/>
+                                    <span class="glyphicon glyphicon-print"
+                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.fax}"/>
                                 </a><br>
                             </c:if>
                             <c:if test="${main_company.email ne null}">
                                 <a href="mailto:<c:out value="${main_company.email}"/>"
                                    title="Написать письмо" target="_blank">
-                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                    &nbsp;<c:out value="${main_company.email}"/>
+                                    <span class="glyphicon glyphicon-envelope"
+                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.email}"/>
                                 </a><br>
                             </c:if>
                             <c:if test="${main_company.domain ne null}">
@@ -136,7 +139,6 @@
                                     &nbsp;<c:out value="${main_company.domain}"/>
                                 </a><br>
                             </c:if>
-                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
                             <a href="https://www.linkedin.com/in/yurii-salimov"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
                                 <img class="icon-size" src="/resources/img/static/mr_alex_icon.png"

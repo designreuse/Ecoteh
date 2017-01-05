@@ -26,8 +26,7 @@
                         <c:if test="${slide ne null}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
-                                <img class="slide" alt=""
-                                     src="/resources/img/<c:out value="${slide.url}"/>">
+                                <img class="slide" alt="" src="/resources/img/<c:out value="${slide.url}"/>">
                             </div>
                         </c:if>
                     </c:forEach>
