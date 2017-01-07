@@ -8,6 +8,7 @@ com.salimov.yurii.controller.seo
 com.salimov.yurii.dao.impl
 com.salimov.yurii.dao.interfaces
 com.salimov.yurii.entity
+com.salimov.yurii.enums
 com.salimov.yurii.exception
 com.salimov.yurii.repository
 com.salimov.yurii.service.captcha
