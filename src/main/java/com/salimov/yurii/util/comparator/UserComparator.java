@@ -1,6 +1,7 @@
 package com.salimov.yurii.util.comparator;
 
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 
 import java.util.Comparator;
 
@@ -99,14 +100,14 @@ public final class UserComparator {
         /**
          * The role comparing.
          */
-        private final User.Role role;
+        private final UserRole role;
 
         /**
          * Default constructor.
          *
          * @param role The role comparing.
          */
-        public ByRole(final User.Role role) {
+        public ByRole(final UserRole role) {
             this.role = role;
         }
 

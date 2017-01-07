@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.util.translator.Translator;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -8,11 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
+import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
-import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
 
 public final class UserTest extends ModelTest<User> {
 
@@ -416,7 +417,7 @@ public final class UserTest extends ModelTest<User> {
         );
 
         final Photo photo = getPhoto();
-        final User.Role role = User.Role.ANOTHER;
+        final UserRole role = UserRole.ANOTHER;
         user.initialize(
                 NAME, LOGIN, PASSWORD, EMAIL,
                 PHONE, DESCRIPTION, photo, role
@@ -882,7 +883,7 @@ public final class UserTest extends ModelTest<User> {
     @Test
     public void whenSetNotNullRoleThenGetThisRole() {
         final User user = getUser();
-        final User.Role role = User.Role.ANOTHER;
+        final UserRole role = UserRole.ANOTHER;
         user.setRole(role);
         assertNotNull(user.getRole());
         assertEquals(
@@ -913,15 +914,15 @@ public final class UserTest extends ModelTest<User> {
 
     @Test
     public void getRoleEnums() {
-        final  User.Role[] roles = User.Role.getEnumConstants();
+        final  UserRole[] roles = UserRole.getEnumConstants();
         assertNotNull(roles);
         assertFalse(roles.length == 0);
     }
 
     @Test
     public void userRoleValueOf() {
-        for (User.Role temp : User.Role.values()) {
-            final User.Role role = User.Role.valueOf(temp.name());
+        for (UserRole temp : UserRole.values()) {
+            final UserRole role = UserRole.valueOf(temp.name());
             assertNotNull(role);
             assertEquals(role, temp);
         }

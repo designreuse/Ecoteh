@@ -1,6 +1,7 @@
 package com.salimov.yurii.repository;
 
 import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.enums.CompanyType;
 
 import java.util.List;
 
@@ -42,8 +43,9 @@ public interface CompanyRepository extends DataRepository<Company, Long> {
      * @param type a type of the company to return.
      * @return The object of class {@link Company}.
      * @see Company
+     * @see CompanyType
      */
-    List<Company> findByType(final Company.Type type);
+    List<Company> findByType(final CompanyType type);
 
     /**
      * Removes company from a database,

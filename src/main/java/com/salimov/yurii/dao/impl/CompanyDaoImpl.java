@@ -2,6 +2,7 @@ package com.salimov.yurii.dao.impl;
 
 import com.salimov.yurii.dao.interfaces.CompanyDao;
 import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -100,10 +101,10 @@ public final class CompanyDaoImpl
      * @param type a type of the company to return.
      * @return The companies with parameter type.
      * @see Company
-     * @see Company.Type
+     * @see CompanyType
      */
     @Override
-    public List<Company> getByType(final Company.Type type) {
+    public List<Company> getByType(final CompanyType type) {
         return this.repository.findByType(type);
     }
 }

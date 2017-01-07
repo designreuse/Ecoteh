@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.util.translator.Translator;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -133,7 +134,7 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getType());
         assertEquals(
                 company.getType(),
-                Company.Type.PARTNER
+                CompanyType.PARTNER
         );
         final Photo logo = getPhoto();
         final Photo favicon = getPhoto();
@@ -250,7 +251,7 @@ public final class CompanyTest extends ContentTest<Company> {
     @Override
     public void toStringTest() {
         final Company company = getCompany();
-        company.setType(Company.Type.MAIN);
+        company.setType(CompanyType.MAIN);
         assertNotNull(company.toString());
         assertEquals(
                 company.toString(),
@@ -261,7 +262,7 @@ public final class CompanyTest extends ContentTest<Company> {
     @Test
     public void toStringTestWhenPartnerCompany() {
         final Company company = getCompany();
-        company.setType(Company.Type.PARTNER);
+        company.setType(CompanyType.PARTNER);
         assertNotNull(company.toString());
         assertEquals(
                 company.toString(),
@@ -295,8 +296,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertTrue(
                 company1.equals(company2)
         );
-        company1.setType(Company.Type.PARTNER);
-        company2.setType(Company.Type.PARTNER);
+        company1.setType(CompanyType.PARTNER);
+        company2.setType(CompanyType.PARTNER);
         assertTrue(
                 company1.equals(company2)
         );
@@ -1562,8 +1563,8 @@ public final class CompanyTest extends ContentTest<Company> {
 
     @Test
     public void companyTypeValueOf() {
-        for (Company.Type temp : Company.Type.values()) {
-            Company.Type type = Company.Type.valueOf(temp.name());
+        for (CompanyType temp : CompanyType.values()) {
+            CompanyType type = CompanyType.valueOf(temp.name());
             assertNotNull(type);
             assertEquals(type, temp);
         }
@@ -1614,7 +1615,7 @@ public final class CompanyTest extends ContentTest<Company> {
                 .append(" \nFacebook: ").append(company.getFacebook())
                 .append(" \nTwitter: ").append(company.getTwitter())
                 .append(" \nSkype: ").append(company.getSkype());
-        if (company.getType().equals(Company.Type.MAIN)) {
+        if (company.getType().equals(CompanyType.MAIN)) {
             sb.append(" \nSenderImpl E-mail: ").append(company.getSenderEmail())
                     .append(" \nSenderImpl Password: ").append(company.getSenderPass())
                     .append(" \nWork Time: ").append(company.getWorkTimeFrom())

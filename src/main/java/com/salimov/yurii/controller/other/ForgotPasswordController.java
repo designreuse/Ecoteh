@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  * @see SenderService
  */
 @Controller
+@SuppressWarnings("SpringMVCViewInspection")
 public class ForgotPasswordController {
 
     /**
@@ -34,7 +35,7 @@ public class ForgotPasswordController {
      *
      * @see UserService
      */
-    protected final UserService userService;
+    private final UserService userService;
 
     /**
      * The implementation of the interface describes a set of methods

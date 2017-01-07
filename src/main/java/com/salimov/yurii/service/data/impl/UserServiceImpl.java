@@ -4,6 +4,7 @@ import com.salimov.yurii.config.DefaultConfig;
 import com.salimov.yurii.dao.interfaces.UserDao;
 import com.salimov.yurii.entity.Photo;
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.PhotoService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
@@ -142,7 +143,7 @@ public final class UserServiceImpl
      * @return The new saving user.
      * @see User
      * @see Photo
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional
@@ -174,7 +175,7 @@ public final class UserServiceImpl
                 name
         );
         user.setPhoto(photo);
-        user.setRole(User.Role.ADMIN);
+        user.setRole(UserRole.ADMIN);
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
@@ -204,7 +205,7 @@ public final class UserServiceImpl
      * @return The updating user with parameter id or {@code null}.
      * @see User
      * @see Photo
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional
@@ -407,7 +408,7 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<User> getAdmins() {
-        return getAndFilterByRole(User.Role.ADMIN);
+        return getAndFilterByRole(UserRole.ADMIN);
     }
 
     /**
@@ -533,13 +534,13 @@ public final class UserServiceImpl
      * @param revers is ort in descending or ascending.
      * @return The sorted list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
     public List<User> sortByRole(
             final Collection<User> users,
-            final User.Role role,
+            final UserRole role,
             final boolean revers
     ) {
         return sort(
@@ -588,12 +589,12 @@ public final class UserServiceImpl
      * @param revers is ort in descending or ascending.
      * @return The sorted list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndSortByRole(
-            final User.Role role,
+            final UserRole role,
             final boolean revers
     ) {
         return sortByRole(
@@ -610,15 +611,15 @@ public final class UserServiceImpl
      * @param role  a role filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
     public List<User> filterByRole(
             final Collection<User> users,
-            final User.Role role
+            final UserRole role
     ) {
-        final List<User.Role> roles = new ArrayList<>(1);
+        final List<UserRole> roles = new ArrayList<>(1);
         roles.add(role);
         return filterByRoles(users, roles);
     }
@@ -632,13 +633,13 @@ public final class UserServiceImpl
      * @param roles a roles filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
     public List<User> filterByRoles(
             final Collection<User> users,
-            final List<User.Role> roles
+            final List<UserRole> roles
     ) {
         List<User> result = new ArrayList<>();
         if (users != null && !users.isEmpty()) {
@@ -666,11 +667,11 @@ public final class UserServiceImpl
      * @param role a role filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRole(final User.Role role) {
+    public List<User> getAndFilterByRole(final UserRole role) {
         return filterByRole(
                 getAll(),
                 role
@@ -683,11 +684,11 @@ public final class UserServiceImpl
      * @param roles a roles filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRoles(final List<User.Role> roles) {
+    public List<User> getAndFilterByRoles(final List<UserRole> roles) {
         return filterByRoles(
                 getAll(),
                 roles

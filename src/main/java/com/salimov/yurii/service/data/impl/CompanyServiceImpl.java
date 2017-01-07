@@ -3,6 +3,7 @@ package com.salimov.yurii.service.data.impl;
 import com.salimov.yurii.dao.interfaces.CompanyDao;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.PhotoService;
 import com.salimov.yurii.util.translator.Translator;
@@ -142,7 +143,7 @@ public final class CompanyServiceImpl
                 )
                 , null
         );
-        company.setType(Company.Type.PARTNER);
+        company.setType(CompanyType.PARTNER);
         company.setValidated(isValid);
         return add(company);
     }
@@ -347,7 +348,7 @@ public final class CompanyServiceImpl
     public Company getMainCompany() throws NullPointerException {
         try {
             final Company mainCompany =
-                    this.dao.getByType(Company.Type.MAIN).get(0);
+                    this.dao.getByType(CompanyType.MAIN).get(0);
             if (!Company.isValidated(mainCompany)) {
                 throw new NullPointerException(
                         "Information about main company is absent!"
@@ -406,7 +407,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Company> getPartners(final boolean isValid) {
-        List<Company> companies = this.dao.getByType(Company.Type.PARTNER);
+        List<Company> companies = this.dao.getByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
                     .filter(company -> company.isValidated())
@@ -425,7 +426,12 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void remove(final Company company) {
-        if ((company != null) && (!company.getType().equals(Company.Type.MAIN))) {
+        if ((
+                company != null
+        ) && (
+                !company.getType()
+                        .equals(CompanyType.MAIN)
+        )) {
             removeCompany(company);
         }
     }

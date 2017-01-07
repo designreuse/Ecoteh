@@ -1,6 +1,7 @@
 package com.salimov.yurii.mocks.service.data.test;
 
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -164,7 +165,7 @@ public class MockUserServiceTest extends MockDataServiceTest<User> {
         final User user = getUser();
         final List<User> users1 = new ArrayList<>();
         users1.add(user);
-        final List<User.Role> roles = new ArrayList<>();
+        final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
         Collection<User> users2 = this.service.filterByRoles(users1, roles);
         assertNotNull(users2);
@@ -178,7 +179,7 @@ public class MockUserServiceTest extends MockDataServiceTest<User> {
 
     @Test
     public void whenGetAndFilterUsersByRolesThenReturnReturnFilterUsers() {
-        final List<User.Role> roles = new ArrayList<>();
+        final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
         Collection<User> users = this.service.getAndFilterByRoles(roles);
         assertNotNull(users);

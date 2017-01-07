@@ -2,6 +2,7 @@ package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Photo;
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
@@ -21,24 +22,23 @@ public interface UserService extends DataService<User, Long> {
     /**
      * Initializes, saves and returns a new user.
      *
-     * @param name         a name of the new user.
-     * @param login        a login of the new user.
-     * @param password     a password of the new user.
-     * @param description  a description of the new user.
-     * @param phone        a phone of the new user.
-     * @param email        a e-mail of the new user.
-     * @param vkontakte    a vkontakte url of the new user.
-     * @param facebook     a facebook url of the new user.
-     * @param twitter      a twitter url of the new user.
-     * @param skype        a skype username of the new user.
-     * @param photoFile    a file of photo to the new user.
-     * @param isValid      a validated of the new user.
-     * @param isMailing    a permit to send a letters on the user email.
-     * @param isLocked     locked the user or not.
+     * @param name        a name of the new user.
+     * @param login       a login of the new user.
+     * @param password    a password of the new user.
+     * @param description a description of the new user.
+     * @param phone       a phone of the new user.
+     * @param email       a e-mail of the new user.
+     * @param vkontakte   a vkontakte url of the new user.
+     * @param facebook    a facebook url of the new user.
+     * @param twitter     a twitter url of the new user.
+     * @param skype       a skype username of the new user.
+     * @param photoFile   a file of photo to the new user.
+     * @param isValid     a validated of the new user.
+     * @param isMailing   a permit to send a letters on the user email.
+     * @param isLocked    locked the user or not.
      * @return The new saving user.
      * @see User
      * @see Photo
-     * @see User.Role
      */
     User initAndAdd(
             final String name,
@@ -60,26 +60,25 @@ public interface UserService extends DataService<User, Long> {
     /**
      * Initializes, updates and returns user with parameter id.
      *
-     * @param url          a url of the user to update.
-     * @param name         a new name to the user.
-     * @param login        a new login to the user.
-     * @param password     a new password to the user.
-     * @param description  a new description to the user.
-     * @param phone        a new phone to the user.
-     * @param email        a new e-mail to the user.
-     * @param vkontakte    a new vkontakte url to the user.
-     * @param facebook     a new facebook url to the user.
-     * @param twitter      a new twitter url to the user.
-     * @param skype        a new skype username to the user.
-     * @param photoFile    a file of photo to the user.
-     * @param photoAction  a action on the photo.
-     * @param isValid      a validated of the user.
-     * @param isMailing    a permit to send a letters on the user email.
-     * @param isLocked     locked the user or not.
+     * @param url         a url of the user to update.
+     * @param name        a new name to the user.
+     * @param login       a new login to the user.
+     * @param password    a new password to the user.
+     * @param description a new description to the user.
+     * @param phone       a new phone to the user.
+     * @param email       a new e-mail to the user.
+     * @param vkontakte   a new vkontakte url to the user.
+     * @param facebook    a new facebook url to the user.
+     * @param twitter     a new twitter url to the user.
+     * @param skype       a new skype username to the user.
+     * @param photoFile   a file of photo to the user.
+     * @param photoAction a action on the photo.
+     * @param isValid     a validated of the user.
+     * @param isMailing   a permit to send a letters on the user email.
+     * @param isLocked    locked the user or not.
      * @return The updating user with parameter id.
      * @see User
      * @see Photo
-     * @see User.Role
      */
     User initAndUpdate(
             final String url,
@@ -229,11 +228,11 @@ public interface UserService extends DataService<User, Long> {
      * @param revers Sort in descending or ascending.
      * @return The sorted list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     List<User> sortByRole(
             final Collection<User> users,
-            final User.Role role,
+            final UserRole role,
             final boolean revers
     );
 
@@ -262,9 +261,12 @@ public interface UserService extends DataService<User, Long> {
      * @param revers Sort in descending or ascending.
      * @return The sorted list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
-    List<User> getAndSortByRole(final User.Role role, final boolean revers);
+    List<User> getAndSortByRole(
+            final UserRole role,
+            final boolean revers
+    );
 
     /**
      * Filters and returns users by role.
@@ -273,9 +275,12 @@ public interface UserService extends DataService<User, Long> {
      * @param role  a role filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
-    List<User> filterByRole(final Collection<User> users, final User.Role role);
+    List<User> filterByRole(
+            final Collection<User> users,
+            final UserRole role
+    );
 
     /**
      * Filters and returns users by roles.
@@ -284,11 +289,11 @@ public interface UserService extends DataService<User, Long> {
      * @param roles a roles filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
     List<User> filterByRoles(
             final Collection<User> users,
-            final List<User.Role> roles
+            final List<UserRole> roles
     );
 
     /**
@@ -297,9 +302,9 @@ public interface UserService extends DataService<User, Long> {
      * @param role a role filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
-    List<User> getAndFilterByRole(final User.Role role);
+    List<User> getAndFilterByRole(final UserRole role);
 
     /**
      * Filters and returns users by roles.
@@ -307,7 +312,7 @@ public interface UserService extends DataService<User, Long> {
      * @param roles a roles filtering.
      * @return The filtered list of users.
      * @see User
-     * @see User.Role
+     * @see UserRole
      */
-    List<User> getAndFilterByRoles(final List<User.Role> roles);
+    List<User> getAndFilterByRoles(final List<UserRole> roles);
 }

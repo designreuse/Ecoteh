@@ -1,7 +1,7 @@
 package com.salimov.yurii.mocks;
 
-import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.CompanyType;
+import com.salimov.yurii.enums.UserRole;
 import org.junit.Ignore;
 
 import java.util.Date;
@@ -19,8 +19,8 @@ public interface MockConstants {
     String KEYWORDS = "keywords, key, words";
     String NUMBER = "NuMbEr2016";
     String NAME = "Yurii Salimov";
-    String LOGIN = "mr1993alex";
-    String PASSWORD = "mr19alex93password";
+    String LOGIN = "login";
+    String PASSWORD = "password";
     String EMAIL = "my_email@gmail.com";
     String PHONE = "+380000000000";
     String VKONTAKTE = "vkontakte";
@@ -37,6 +37,6 @@ public interface MockConstants {
     String ANY_STRING = "Some unknown text.";
     String PATH = "c:/some_dir/file.txt";
     Date DATE = new Date();
-    Company.Type COMPANY_TYPE = Company.Type.PARTNER;
-    User.Role USER_ROLE = User.Role.ANOTHER;
+    CompanyType COMPANY_TYPE = CompanyType.PARTNER;
+    UserRole USER_ROLE = UserRole.ANOTHER;
 }

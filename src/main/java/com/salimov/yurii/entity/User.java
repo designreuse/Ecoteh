@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,27 +33,6 @@ public final class User extends Model<Long> implements UserDetails {
      * with respect to serialization.
      */
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The role of some user.
-     */
-    public enum Role {
-        SUPERMAN, ADMIN, CLIENT, ANOTHER;
-
-        /**
-         * Returns the elements of this enum class or null if this
-         * Class object does not represent an enum type.
-         *
-         * @return an array containing the values comprising the enum class
-         * represented by this Class object in the order they're
-         * declared, or null if this Class object does not
-         * represent an enum type
-         */
-        public static Role[] getEnumConstants() {
-            Role[] roles = Role.class.getEnumConstants();
-            return Arrays.copyOfRange(roles, 1, roles.length);
-        }
-    }
 
     /**
      * The name of a user.
@@ -140,11 +119,11 @@ public final class User extends Model<Long> implements UserDetails {
     /**
      * The role of a user.
      *
-     * @see Role
+     * @see UserRole
      */
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private UserRole role;
 
     /**
      * The permit to send a letters on the user email.
@@ -162,10 +141,10 @@ public final class User extends Model<Long> implements UserDetails {
      * Default constructor.
      * Initializes a user role.
      *
-     * @see Role
+     * @see UserRole
      */
     public User() {
-        setRole(Role.ANOTHER);
+        setRole(UserRole.ANOTHER);
     }
 
     /**
@@ -394,7 +373,7 @@ public final class User extends Model<Long> implements UserDetails {
      * @param photo       a new photo of the user.
      * @param role        a new role of the user.
      * @see Photo
-     * @see Role
+     * @see UserRole
      */
     public void initialize(
             final String name,
@@ -404,7 +383,7 @@ public final class User extends Model<Long> implements UserDetails {
             final String phone,
             final String description,
             final Photo photo,
-            final Role role
+            final UserRole role
     ) {
         initialize(name, email, phone, description);
         setLogin(login);
@@ -686,9 +665,9 @@ public final class User extends Model<Long> implements UserDetails {
      * Returns a role of the user.
      *
      * @return The user role.
-     * @see Role
+     * @see UserRole
      */
-    public Role getRole() {
+    public UserRole getRole() {
         return this.role;
     }
 
@@ -697,9 +676,9 @@ public final class User extends Model<Long> implements UserDetails {
      * If parameter role is blank, then sets {@code null}.
      *
      * @param role a new role to the user.
-     * @see Role
+     * @see UserRole
      */
-    public void setRole(final Role role) {
+    public void setRole(final UserRole role) {
         this.role = role;
     }
 

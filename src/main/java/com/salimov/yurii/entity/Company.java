@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.util.translator.Translator;
 
 import javax.persistence.*;
@@ -28,13 +29,6 @@ public final class Company extends Content<Long> {
      * with respect to serialization.
      */
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The types of some company.
-     */
-    public enum Type {
-        MAIN, PARTNER
-    }
 
     /**
      * The tagline of a company.
@@ -203,21 +197,21 @@ public final class Company extends Content<Long> {
     /**
      * The type of a company.
      *
-     * @see Type
+     * @see CompanyType
      */
     @Column(
             name = "type",
             nullable = false
     )
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private CompanyType type;
 
     /**
      * Default constructor.
-     * Sets default company type {@link Company.Type#PARTNER}.
+     * Sets default company type {@link CompanyType#PARTNER}.
      */
     public Company() {
-        setType(Type.PARTNER);
+        setType(CompanyType.PARTNER);
     }
 
     /**
@@ -278,7 +272,7 @@ public final class Company extends Content<Long> {
                 facebook, twitter, skype, address,
                 keywords, googleMaps, logo, favicon
         );
-        setType(Type.PARTNER);
+        setType(CompanyType.PARTNER);
     }
 
     /**
@@ -302,7 +296,7 @@ public final class Company extends Content<Long> {
                 .append(" \nFacebook: ").append(facebook)
                 .append(" \nTwitter: ").append(twitter)
                 .append(" \nSkype: ").append(skype);
-        if (type.equals(Type.MAIN)) {
+        if (type.equals(CompanyType.MAIN)) {
             sb.append(" \nSenderImpl E-mail: ").append(senderEmail)
                     .append(" \nSenderImpl Password: ").append(senderPass)
                     .append(" \nWork Time: ").append(workTimeFrom)
@@ -1013,9 +1007,9 @@ public final class Company extends Content<Long> {
      * Returns a domain of the company.
      *
      * @return The company domain.
-     * @see Type
+     * @see CompanyType
      */
-    public Type getType() {
+    public CompanyType getType() {
         return this.type;
     }
 
@@ -1023,9 +1017,9 @@ public final class Company extends Content<Long> {
      * Sets a new type to the company.
      *
      * @param type a new logo to the company.
-     * @see Type
+     * @see CompanyType
      */
-    public void setType(final Type type) {
+    public void setType(final CompanyType type) {
         this.type = type;
     }
 

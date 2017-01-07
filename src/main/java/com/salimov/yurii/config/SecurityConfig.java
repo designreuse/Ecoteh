@@ -1,6 +1,7 @@
 package com.salimov.yurii.config;
 
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
@@ -95,16 +96,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .logout()
                 .invalidateHttpSession(false)
-                .and().authorizeRequests()
+                .and()
+                .authorizeRequests()
                 .antMatchers(MAIN_ADMIN_REQUEST_URL)
-                .hasRole(User.Role.SUPERMAN.name())
+                .hasRole(
+                        UserRole.SUPERMAN.name()
+                )
                 .antMatchers(this.requestAdmin)
                 .hasAnyRole(
-                        User.Role.ADMIN.name(),
-                        User.Role.SUPERMAN.name()
+                        UserRole.ADMIN.name(),
+                        UserRole.SUPERMAN.name()
                 )
                 .anyRequest().permitAll()
-                .and().formLogin().loginPage(this.requestLogin)
+                .and()
+                .formLogin()
+                .loginPage(this.requestLogin)
                 .usernameParameter(this.parameterUsername)
                 .passwordParameter(this.parameterPassword)
                 .defaultSuccessUrl(
@@ -115,7 +121,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage(
                         this.requestAccessDeniedPage
                 )
-                .and().csrf().disable();
+                .and()
+                .csrf().disable();
     }
 
     /**

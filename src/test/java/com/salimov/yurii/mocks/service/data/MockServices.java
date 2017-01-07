@@ -1,6 +1,7 @@
 package com.salimov.yurii.mocks.service.data;
 
 import com.salimov.yurii.entity.*;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.*;
 import com.salimov.yurii.util.comparator.ContentComparator;
 import com.salimov.yurii.util.comparator.ResponseComparator;
@@ -876,7 +877,7 @@ public final class MockServices {
         final User user = getUser();
         final List<User> users = new ArrayList<>();
         users.add(user);
-        final List<User.Role> roles = new ArrayList<>();
+        final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
         final UserService userService = mock(UserService.class);
         when(

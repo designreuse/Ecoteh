@@ -1,7 +1,7 @@
 package com.salimov.yurii.config;
 
 import com.salimov.yurii.entity.User;
-import com.salimov.yurii.util.translator.Translator;
+import com.salimov.yurii.enums.UserRole;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -76,14 +76,14 @@ public final class DefaultConfig {
     }
 
     private static boolean checkSuperUser() {
-        return check(User.Role.SUPERMAN);
+        return check(UserRole.SUPERMAN);
     }
 
     private static boolean checkUser() {
-        return check(User.Role.ADMIN);
+        return check(UserRole.ADMIN);
     }
 
-    private static boolean check(final User.Role role) {
+    private static boolean check(final UserRole role) {
         boolean result = false;
         final Authentication authentication =
                 SecurityContextHolder.getContext()
@@ -101,11 +101,11 @@ public final class DefaultConfig {
     }
 
     private static void addDefaultAdmin() {
-        final User user = createUser(  // admin - adminpass
+        final User user = createUser(
                 "Default Admin",
-                Translator.fromAscii("97,100,109,105,110"),
-                Translator.fromAscii("97,100,109,105,110,112,97,115,115"),
-                User.Role.ADMIN
+                "login",
+                "password",
+                UserRole.ADMIN
         );
         USERS.put(
                 user.getLogin(),
@@ -114,11 +114,11 @@ public final class DefaultConfig {
     }
 
     private static void addSuperAdmin() {
-        final User user = createUser( // super - yuriisalimov
+        final User user = createUser(
                 "Super Admin",
-                Translator.fromAscii("115,117,112,101,114"),
-                Translator.fromAscii("121,117,114,105,105,115,97,108,105,109,111,118"),
-                User.Role.SUPERMAN
+                "login",
+                "password",
+                UserRole.SUPERMAN
         );
         USERS.put(
                 user.getLogin(),
@@ -130,7 +130,7 @@ public final class DefaultConfig {
             final String name,
             final String login,
             final String password,
-            final User.Role role
+            final UserRole role
     ) {
         final User user = new User();
         user.setName(name);

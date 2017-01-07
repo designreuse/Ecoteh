@@ -1,6 +1,7 @@
 package com.salimov.yurii.dao.interfaces;
 
 import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.enums.CompanyType;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface CompanyDao extends ContentDao<Company, Long> {
      * @param type a type of the company to return.
      * @return The companies with parameter type.
      * @see Company
-     * @see Company.Type
+     * @see CompanyType
      */
-    List<Company> getByType(final Company.Type type);
+    List<Company> getByType(final CompanyType type);
 }
