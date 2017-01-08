@@ -10,11 +10,11 @@
                     <h3 class="text-center"><c:out value="${category.title}"/></h3>
                     <hr>
                     <c:if test="${category.photo ne null}">
-                        <a href="/resources/img/<c:out value="${category.photo.url}"/>"
+                        <a href="<c:url value="/resources/img/${category.photo.url}"/>"
                            rel="lightgallery" title="<c:out value="${category.title}"/>">
                             <img class="img-responsive img-border img-left img-section"
                                  alt="<c:out value="${category.title}"/>"
-                                 src="/resources/img/<c:out value="${category.photo.url}"/>">
+                                 src="<c:url value="/resources/img/${category.photo.url}"/>">
                         </a>
                         <hr class="visible-xs">
                     </c:if>

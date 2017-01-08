@@ -29,7 +29,7 @@
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- NAVIGATION --%>

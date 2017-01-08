@@ -27,11 +27,11 @@
                                     <c:when test="${in_line eq 2}">col-md-6 col-lg-6 col-xl-6</c:when>
                                     <c:otherwise>col-md-4 col-lg-4 col-xl-4</c:otherwise>
                                     </c:choose>">
-                        <a href="${reqmap}/category/<c:out value="${category.url}"/>"
+                        <a href="<c:url value="${reqmap}/category/${category.url}"/>"
                            title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
                             <c:if test="${category.photo ne null}">
                                 <img class="img-responsive img-in-list" alt="<c:out value="${category.title}"/>"
-                                     src="/resources/img/<c:out value="${category.photo.url}"/>">
+                                     src="<c:url value="/resources/img/${category.photo.url}"/>">
                             </c:if>
                             <h3 class="text-center"><c:out value="${category.title}"/></h3>
                         </a>

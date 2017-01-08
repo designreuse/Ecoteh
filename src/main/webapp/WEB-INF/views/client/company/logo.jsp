@@ -6,7 +6,7 @@
         <c:when test="${company.logo ne null}">
             <div class="brand">
                 <a href="http://<c:out value="${company.domain}"/>">
-                    <img src="/resources/img/<c:out value="${company.logo.url}"/>"
+                    <img src="<c:url value="/resources/img/${company.logo.url}"/>"
                          class="main-logo" alt="<c:out value="${company.title}"/>">
                 </a>
             </div>

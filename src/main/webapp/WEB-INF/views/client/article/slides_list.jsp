@@ -12,9 +12,9 @@
                     <hr>
                     <c:forEach items="${slides_list}" var="slide">
                         <c:if test="${slide ne null}">
-                            <a href="/resources/img/<c:out value="${slide.url}"/>"
+                            <a href="<c:url value="/resources/img/${slide.url}"/>"
                                rel="lightgallery[slides]" title="<c:out value="${slide.title}"/>">
-                                <img src="/resources/img/<c:out value="${slide.url}"/>"
+                                <img src="<c:url value="/resources/img/${slide.url}"/>"
                                      title="<c:out value="${slide.title}"/>" alt=""/>
                             </a>&nbsp;&nbsp;
                         </c:if>

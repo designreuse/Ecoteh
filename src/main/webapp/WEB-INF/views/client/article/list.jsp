@@ -12,7 +12,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
                         <h3 class="text-center">
-                            <a href="${reqmap}/article/<c:out value="${article.url}"/>">
+                            <a href="<c:url value="${reqmap}/article/${article.url}"/>">
                                 <c:out value="${article.title}"/>
                             </a>
                         </h3>
@@ -23,15 +23,15 @@
                                       title="Не отображается для клиентов"></span>&nbsp;
                             </c:if>
                             <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
-                            <a href="${reqmap}/article/num_<c:out value="${article.number}"/>">
+                            <a href="<c:url value="${reqmap}/article/num_${article.number}"/>">
                                 <c:out value="${article.number}"/>
                             </a>
                         </p>
                         <c:if test="${article.mainPhoto ne null}">
-                            <a href="${reqmap}/article/<c:out value="${article.url}"/>">
+                            <a href="<c:url value="${reqmap}/article/${article.url}"/>">
                                 <img class="img-responsive img-border img-left img-section"
                                      alt="<c:out value="${article.title}"/>"
-                                     src="/resources/img/<c:out value="${article.mainPhoto.url}"/>">
+                                     src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
                             </a>
                             <hr class="visible-xs">
                         </c:if>
@@ -54,7 +54,7 @@
                             </c:when>
                         </c:choose>
                         <p align="right">
-                            <a href="${reqmap}/article/<c:out value="${article.url}"/>"
+                            <a href="<c:url value="${reqmap}/article/${article.url}"/>"
                                title="Подробнее о &quot;<c:out value="${article.title}"/>&quot;">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Подробнее...

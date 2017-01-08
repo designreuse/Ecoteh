@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -26,23 +26,22 @@
                         <c:if test="${slide ne null}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
-                                <img class="slide" alt="" src="/resources/img/<c:out value="${slide.url}"/>">
+                                <img class="slide" alt="" src="<c:url value="/resources/img/${slide.url}"/>">
                             </div>
                         </c:if>
                     </c:forEach>
                 </div>
                 <%-- Controls --%>
-                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                    <span class="icon-prev"></span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic"
+                <a href="#carousel-example-generic" class="left carousel-control"
+                   data-slide="prev"><span class="icon-prev"></span></a>
+                <a href="#carousel-example-generic" class="right carousel-control"
                    data-slide="next"><span class="icon-next"></span></a>
             </c:when>
             <c:otherwise>
                 <%-- Default slide --%>
                 <div class="carousel-inner">
                     <div class="text-center item active">
-                        <img class="slide" alt="" src="/resources/img/static/default_slide.jpg">
+                        <img class="slide" alt="" src="<c:url value="/resources/img/static/default_slide.jpg"/>">
                     </div>
                 </div>
             </c:otherwise>

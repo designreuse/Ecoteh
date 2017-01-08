@@ -83,7 +83,7 @@
                                     <c:choose>
                                         <c:when test="${main_company.favicon ne null}">
                                             <img class="icon-size" alt=""
-                                                 src="/resources/img/<c:out value="${main_company.favicon.url}"/>">
+                                                 src="<c:url value="/resources/img/${main_company.favicon.url}"/>">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -94,7 +94,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov" target="_blank"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="/resources/img/static/mr_alex_icon.png"
+                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex_icon.png"/>"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>
@@ -130,7 +130,7 @@
                                     <c:choose>
                                         <c:when test="${main_company.favicon ne null}">
                                             <img class="icon-size" alt=""
-                                                 src="/resources/img/<c:out value="${main_company.favicon.url}"/>">
+                                                 src="<c:url value="/resources/img/${main_company.favicon.url}"/>">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -141,7 +141,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="/resources/img/static/mr_alex_icon.png"
+                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex_icon.png"/>"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>

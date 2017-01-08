@@ -5,14 +5,14 @@
     <br>
     <c:choose>
         <c:when test="${authorized_user.photo ne null}">
-            <a href="/resources/img/<c:out value="${authorized_user.photo.url}"/>" rel="lightgallery">
+            <a href="<c:url value="/resources/img/${authorized_user.photo.url}"/>" rel="lightgallery">
                 <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
-                     src="/resources/img/<c:out value="${authorized_user.photo.url}"/>">
+                     src="<c:url value="/resources/img/${authorized_user.photo.url}"/>">
             </a>
         </c:when>
         <c:otherwise>
             <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
-                 src="/resources/img/users/default_user.png">
+                 src="<c:url value="/resources/img/users/default_user.png"/>">
         </c:otherwise>
     </c:choose>
     <h3><c:out value="${authorized_user.name}"/></h3>
@@ -81,7 +81,7 @@
     </c:if>
     <c:if test="${authorized_user.id ne null}">
         <div class="pad">
-            <a href="/admin/user/edit/<c:out value="${authorized_user.url}"/>"
+            <a href="<c:url value="/admin/user/edit/${authorized_user.url}"/>"
                title="Редактировать информацию о <c:out value="${authorized_user.name}"/>">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать

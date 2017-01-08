@@ -24,14 +24,14 @@
         <div class="text-center">
             <c:choose>
                 <c:when test="${user.photo ne null}">
-                    <a href="/resources/img/<c:out value="${user.photo.url}"/>" rel="lightgallery">
+                    <a href="<c:url value="/resources/img/${user.photo.url}"/>" rel="lightgallery">
                         <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
-                             src="/resources/img/<c:out value="${user.photo.url}"/>">
+                             src="<c:url value="/resources/img/${user.photo.url}"/>">
                     </a>
                 </c:when>
                 <c:otherwise>
                     <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
-                         src="/resources/img/users/default_user.png">
+                         src="<c:url value="/resources/img/users/default_user.png"/>">
                 </c:otherwise>
             </c:choose>
             <h4><b><c:out value="${user.name}"/></b></h4>
@@ -100,13 +100,13 @@
             <c:if test="${authorized_user ne null}">
                 <br>
                 <div class="pad">
-                    <a href="/admin/user/edit/<c:out value="${user.url}"/>"
+                    <a href="<c:url value="/admin/user/edit/${user.url}"/>"
                        title="Редактировать информацию о &quot;<c:out value="${user.name}"/>&quot;">
                         <button class="btn btn-default">
                             <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
                         </button>
                     </a>&nbsp;&nbsp;
-                    <a href="/admin/user/delete/<c:out value="${user.url}"/>"
+                    <a href="<c:url value="/admin/user/delete/${user.url}"/>"
                        title="Удалить &quot;<c:out value="${user.name}"/>&quot;">
                         <button class="btn btn-default">
                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить

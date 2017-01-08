@@ -43,7 +43,7 @@
                         </c:choose>
                         <hr>
                         <p class="text-right">
-                            <a href="${reqmap}/company/main" title="Описание нашей компании">
+                            <a href="<c:url value="${reqmap}/company/main"/>" title="Описание нашей компании">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Подробнее о нас...
                             </a>
@@ -66,7 +66,7 @@
                         <p><c:out value="${company.description}"/></p>
                         <hr>
                         <p class="text-right">
-                            <a href="${reqmap}/company/main" title="Описание нашей компании">
+                            <a href="<c:url value="${reqmap}/company/main"/>" title="Описание нашей компании">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Подробнее о нас...
                             </a>

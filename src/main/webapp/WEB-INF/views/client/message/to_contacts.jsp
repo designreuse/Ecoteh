@@ -21,7 +21,8 @@
             <c:otherwise>в рабочие дни с 9:00 до 17:00.</c:otherwise>
         </c:choose>
     </p>
-    <form action="<c:if test="${authorized_user ne null}">/admin</c:if>/send_message" method="post">
+    <c:if test="${authorized_user ne null}"><c:set var="request" value="/admin"/></c:if>
+    <form action="<c:url value="${request}/send_message"/>" method="post">
         <div class="row">
             <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <label>

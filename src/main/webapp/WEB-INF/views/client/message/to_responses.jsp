@@ -14,7 +14,8 @@
         </c:when>
     </c:choose>
     <hr>
-    <form action="<c:if test="${authorized_user ne null}">/admin</c:if>/response/send" method="post">
+    <c:if test="${authorized_user ne null}"><c:set var="request" value="/admin"/></c:if>
+    <form action="<c:url value="${request}/response/send"/>" method="post">
         <div class="row">
             <div class="form-group col-lg-12">
                 <label>

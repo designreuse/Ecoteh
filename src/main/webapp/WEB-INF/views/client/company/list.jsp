@@ -12,13 +12,13 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
                         <h3 class="text-center">
-                            <b><a href="${reqmap}/company/<c:out value="${partner.url}"/>">
+                            <b><a href="<c:url value="${reqmap}/company/${partner.url}"/>">
                                 <c:out value="${partner.title}"/>
                             </a></b>
                         </h3>
                         <hr>
                         <c:if test="${partner.logo ne null}">
-                            <a href="${reqmap}/company/<c:out value="${partner.url}"/>">
+                            <a href="<c:url value="${reqmap}/company/${partner.url}"/>">
                                 <img class="img-responsive img-left logo-in-list"
                                      alt="<c:out value="${partner.title}"/>"
                                      src="/resources/img/<c:out value="${partner.logo.url}"/>">
@@ -51,7 +51,7 @@
                             <c:otherwise><p><c:out value="${partner.tagline}"/></p></c:otherwise>
                         </c:choose>
                         <p class="text-right">
-                            <a href="${reqmap}/company/<c:out value="${partner.url}"/>"
+                            <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
                                title="Подробнее о &quot;<c:out value="${partner.title}"/>&quot;">
                                         <span class="glyphicon glyphicon-share-alt"
                                               aria-hidden="true"></span>&nbsp;Подробнее...

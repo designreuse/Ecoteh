@@ -13,7 +13,9 @@
             <div class="box">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <hr>
-                    <h3 class="intro-text text-center"><a href="${reqmap}/responses">Отзывы</a></h3>
+                    <h3 class="intro-text text-center">
+                        <a href="<c:url value="${reqmap}/responses"/>">Отзывы</a>
+                    </h3>
                     <hr>
                     <c:forEach items="${responses}" var="response" end="${print_responses - 1}">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -27,7 +29,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <hr class="hidden-md hidden-lg hidden-xl">
                             <p class="text-right">
-                                <a href="${reqmap}/responses" title="Перейти ко всем отзывам о нашей компании">
+                                <a href="<c:url value="${reqmap}/responses"/>"
+                                   title="Перейти ко всем отзывам о нашей компании">
                                     <span class="glyphicon glyphicon-share-alt"
                                           aria-hidden="true"></span>&nbsp;Все отзывы...
                                 </a>

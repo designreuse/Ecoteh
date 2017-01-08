@@ -17,9 +17,9 @@
         <meta name="description" content="Отзывы о компании &quot;<c:out value="${main_company.title}"/>&quot;.">
         <meta name="keywords" content="Отзывы о компании, <c:out value="${main_company.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- NAVIGATION --%>
@@ -41,7 +41,7 @@
                         <c:set var="reqmap" value="/admin"/>
                         <%-- Actions --%>
                         <div class="text-center">
-                            <a href="/admin/response/delete/all" title="Удалить все отзывы о компании">
+                            <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-remove red"
                                           aria-hidden="true"></span>&nbsp;Удалить все
@@ -51,8 +51,10 @@
                     </c:if>
                         <%-- Path --%>
                     <p class="path">
-                        <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
-                        → <a href="${reqmap}/company/main" title="Описание нашей компании">Описание компании</a>
+                        <a href="<c:url value="${reqmap}/"/>"
+                           title="Перейти на главную страницу">Главная</a>
+                        → <a href="<c:url value="${reqmap}/company/main"/>"
+                             title="Описание нашей компании">Описание компании</a>
                         → <a href="#">Отзывы о компании &quot;<c:out value="${main_company.title}"/>&quot;</a>
                     </p>
                     <hr>
@@ -82,7 +84,7 @@
                                         <p class="response">
                                             <c:choose>
                                                 <c:when test="${response.validated eq true}">
-                                                    <a href="/admin/response/valid/${response.id}"
+                                                    <a href="<c:url value="/admin/response/valid/${response.id}"/>"
                                                        title="Не отображать отзыв, его не смогут увидеть клиенты.">
                                                         <button class="btn btn-default">
                                                             <span class="glyphicon glyphicon-ok yellow"
@@ -91,7 +93,7 @@
                                                     </a>&nbsp;
                                                 </c:when>
                                                 <c:when test="${response.validated eq false}">
-                                                    <a href="/admin/response/valid/${response.id}"
+                                                    <a href="<c:url value="/admin/response/valid/${response.id}"/>"
                                                        title="Одобрить отзыв, его смогут увидеть клиенты.">
                                                         <button class="btn btn-default">
                                                             <span class="glyphicon glyphicon-ok"
@@ -100,7 +102,8 @@
                                                     </a>&nbsp;
                                                 </c:when>
                                             </c:choose>&nbsp;&nbsp;
-                                            <a href="/admin/response/delete/${response.id}" title="Удалить отзыв">
+                                            <a href="<c:url value="/admin/response/delete/${response.id}"/>"
+                                               title="Удалить отзыв">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-minus red"
                                                           aria-hidden="true"></span>&nbsp;Удалить
@@ -130,11 +133,11 @@
         <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
         <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/js/mask.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

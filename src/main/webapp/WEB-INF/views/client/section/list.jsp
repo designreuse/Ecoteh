@@ -33,11 +33,11 @@
                                     <c:when test="${in_line eq 2}">col-md-6 col-lg-6 col-xl-6</c:when>
                                     <c:otherwise>col-md-4 col-lg-4 col-xl-4</c:otherwise>
                                     </c:choose>">
-                        <a href="${reqmap}/section/<c:out value="${section.url}"/>"
+                        <a href="<c:url value="${reqmap}/section/${section.url}"/>"
                            title="Перейти к разделу &quot;<c:out value="${section.title}"/>&quot;">
                             <c:if test="${section.photo ne null}">
                                 <img class="img-responsive img-in-list" alt="<c:out value="${section.title}"/>"
-                                     src="/resources/img/<c:out value="${section.photo.url}"/>">
+                                     src="<c:url value="/resources/img/${section.photo.url}"/>">
                             </c:if>
                             <h3 class="text-center"><c:out value="${section.title}"/></h3>
                         </a>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <p align="right">
-                            <a href="${reqmap}/section/all" title="Перейти к списку всех разделов">
+                            <a href="<c:url value="${reqmap}/section/all"/>" title="Перейти к списку всех разделов">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Все разделы...
                             </a>

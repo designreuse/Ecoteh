@@ -35,14 +35,14 @@
                         <div class="text-center">
                             <c:choose>
                                 <c:when test="${partner.logo ne null}">
-                                    <a href="${reqmap}/company/<c:out value="${partner.url}"/>"
+                                    <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <img class="img-logo" alt="<c:out value="${partner.title}"/>"
-                                             src="/resources/img/<c:out value="${partner.logo.url}"/>">
+                                             src="<c:url value="/resources/img/${partner.logo.url}"/>">
                                     </a>
                                 </c:when>
                                 <c:when test="${partner.title ne null}">
-                                    <a href="${reqmap}/company/<c:out value="${partner.url}"/>"
+                                    <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <h3 class="text-center"><c:out value="${partner.title}"/></h3>
                                     </a>
@@ -63,7 +63,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
                         <p align="right">
-                            <a href="${reqmap}/company/all" title="Перейти к списку всех партнеров">
+                            <a href="<c:url value="${reqmap}/company/all"/>" title="Перейти к списку всех партнеров">
                                 <span class="glyphicon glyphicon-share-alt"></span>&nbsp;Все партнеры...
                             </a>
                         </p>

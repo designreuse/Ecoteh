@@ -27,8 +27,8 @@
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
-        <link href="/resources/css/lightgallery.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -40,16 +40,16 @@
                 <div class="box">
                         <%-- Path --%>
                     <p class="path">
-                        <a href="/admin/" title="Перейти на главную странцу">Главная</a>
-                        → <a href="/admin/menu" title="Меню администратора">Меню</a>
-                        → <a href="/admin/article/all" title="Все статьи">Все статьи</a>
+                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
+                        → <a href="<c:url value="/admin/article/all"/>" title="Все статьи">Все статьи</a>
                         → <a href="#">Новая статья</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>
                     <hr>
                     <div class="text-center">
-                        <form enctype="multipart/form-data" method="post" action="/admin/article/add">
+                        <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <th class="ths"><span class="red">*</span>&nbsp;Название</th>
@@ -100,10 +100,10 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_article_photo.jpg"
+                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
                                            rel="lightgallery" title="Главное фото, это где?">
-                                            Главное фото&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                    aria-hidden="true"></span>
+                                            Главное фото&nbsp;<span class=" glyphicon glyphicon-info-sign"
+                                        aria-hidden="true"></span>
                                         </a>
                                     </th>
                                     <td class="tds">
@@ -113,10 +113,10 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_article_photo.jpg"
+                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
                                            rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span>
+                                            Слайды&nbsp;<span class=" glyphicon glyphicon-info-sign"
+                                        aria-hidden="true"></span>
                                         </a>
                                     </th>
                                     <td class="tds">
@@ -126,10 +126,10 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_article_video.jpg"
+                                        <a href="<c:url value="/resources/img/static/where_article_video.jpg"/>"
                                            rel="lightgallery" title="Видеоролики. Где их взять?">
-                                            Видеоролики&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Видеоролики&nbsp;<span class=" glyphicon glyphicon-info-sign"
+                                        aria-hidden="true"></span>
                                         </a>
                                     </th>
                                     <td class="tds">

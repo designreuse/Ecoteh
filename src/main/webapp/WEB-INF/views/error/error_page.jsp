@@ -14,15 +14,15 @@
         <meta name="title" content="Ошибка | <c:out value="${text}"/>">
         <meta name="description" content="<c:out value="${message}"/>">
         <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="/resources/img/static/error_icon.ico" type="image/x-icon">
-        <link rel="icon" href="/resources/img/static/error_icon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/error_icon.ico"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/img/static/error_icon.ico"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- NAVIGATION --%>
@@ -33,7 +33,7 @@
                 <div class="box">
                         <%-- Path --%>
                     <p class="path">
-                        <a href="/" title="Перейти на главную страницу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#" title="Ошибка работы сервера">Ошибка</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
@@ -56,8 +56,8 @@
         </div>
     </div>
         <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>
     </html>
 </compress:html>

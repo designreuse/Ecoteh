@@ -24,7 +24,9 @@
         <div class="row">
             <div class="box">
                 <hr>
-                <h3 class="intro-text text-center"><a href="${reqmap}/article/all">Последние статьи</a></h3>
+                <h3 class="intro-text text-center">
+                    <a href="<c:url value="${reqmap}/article/all"/>">Последние статьи</a>
+                    </h3>
                 <hr>
                 <c:forEach items="${articles_list}" var="article" end="${print_articles - 1}">
                     <c:if test="${(last_line ne print_articles) and (printed eq last_line)}">
@@ -35,11 +37,11 @@
                                     <c:when test="${in_line eq 2}">col-md-6 col-lg-6 col-xl-6</c:when>
                                     <c:otherwise>col-md-4 col-lg-4 col-xl-4</c:otherwise>
                                     </c:choose>">
-                        <a href="${reqmap}/article/<c:out value="${article.url}"/>"
+                        <a href="<c:url value="${reqmap}/article/${article.url}"/>"
                            title="Перейти к статьи &quot;<c:out value="${article.title}"/>&quot;">
                             <c:if test="${article.mainPhoto ne null}">
                                 <img class="img-responsive img-in-list" alt="<c:out value="${article.title}"/>"
-                                     src="/resources/img/<c:out value="${article.mainPhoto.url}"/>">
+                                     src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
                             </c:if>
                             <h3 class="text-center"><c:out value="${article.title}"/></h3>
                         </a>
@@ -49,7 +51,7 @@
                                       title="Не отображается для клиентов"></span>&nbsp;
                             </c:if>
                             <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
-                            <a href="${reqmap}/article/num_<c:out value="${article.number}"/>">
+                            <a href="<c:url value="${reqmap}/article/num_${article.number}"/>">
                                 <c:out value="${article.number}"/>
                             </a>
                         </p>
@@ -87,7 +89,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
                         <p align="right">
-                            <a href="${reqmap}/article/all" title="Перейти к списку всех статьям">
+                            <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех статьям">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Все статьи...
                             </a>

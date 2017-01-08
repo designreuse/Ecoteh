@@ -20,9 +20,9 @@
               content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
         <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -30,8 +30,8 @@
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
-        <link href="/resources/css/lightgallery.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- NAVIGATION --%>
@@ -42,24 +42,30 @@
                 <div class="box">
                         <%-- Path --%>
                     <p class="path">
-                        <a href="/admin/" title="Перейти на главную странцу">Главная</a>
-                        → <a href="/admin/menu" title="Меню администратора">Меню</a>
+                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:if test="${company ne main_company}">
-                            → <a href="/admin/company/all" title="Все партнеры">Все партнеры</a>
+                            → <a href="<c:url value="/admin/company/all"/>" title="Все партнеры">Все партнеры</a>
                         </c:if>
-                        → <a href="#">Редактирование компании</a>
+                        →
+                        <a href="#" title="Редактировать&nbsp;&quot;<c:out value="${company.title}&quot;"/>">
+                            Редактирование компании
+                        </a>
                     </p>
                     <hr>
                     <h3 class="text-center">
-                        Редактировать&nbsp;&quot;<a href="/admin/company/<c:choose>
-                            <c:when test="${main}">main</c:when>
-                            <c:otherwise><c:out value="${company.url}"/></c:otherwise>
-                        </c:choose>"><c:out value="${company.title}"/></a>&quot;
+                        <c:choose>
+                            <c:when test="${main}"><c:set var="com" value="main"/></c:when>
+                            <c:otherwise><c:set var="com" value="${company.url}"/></c:otherwise>
+                        </c:choose>
+                        Редактировать&nbsp;&quot;<a href="<c:url value="/admin/company/${com}"/>">
+                        <c:out value="${company.title}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form enctype="multipart/form-data" method="post"
-                              action="/admin/company/update<c:if test="${main}">/main</c:if>">
+                        <c:if test="${main}"><c:set var="main" value="/main"/> </c:if>
+                        <form action="<c:url value="/admin/company/update/${main}"/>" method="post"
+                              enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <th class="ths"><span class="red">*</span>&nbsp;Название</th>
@@ -240,16 +246,16 @@
                                     <th class="ths">
                                         <a href="https://www.google.com.ua/maps/"
                                            title="Перейти к Google Maps">Google Maps</a>&nbsp;
-                                        <a rel="lightgallery[maps]" href="/resources/img/static/google_maps/gm_1.jpg"
-                                           title="Офис на карте Google Maps. Где это взять?">
+                                        <a href="<c:url value="/resources/img/static/google_maps/gm_1.jpg"/>"
+                                           title="Офис на карте Google Maps. Где это взять?" rel="lightgallery[maps]">
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </a>
-                                        <a href="/resources/img/static/google_maps/gm_2.jpg" rel="lightgallery[maps]"
-                                           title="Офис на карте Google Maps."></a>
-                                        <a href="/resources/img/static/google_maps/gm_3.jpg" rel="lightgallery[maps]"
-                                           title="Офис на карте Google Maps."></a>
-                                        <a href="/resources/img/static/google_maps/gm_4.jpg" rel="lightgallery[maps]"
-                                           title="Офис на карте Google Maps."></a>
+                                        <a href="<c:url value="/resources/img/static/google_maps/gm_2.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="<c:url value="/resources/img/static/google_maps/gm_3.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="<c:url value="/resources/img/static/google_maps/gm_4.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                     </th>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="google_maps" title=""
@@ -259,8 +265,8 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_icon.jpg" rel="lightgallery"
-                                           title="Логотип, это где?">
+                                        <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
+                                           rel="lightgallery" title="Логотип, это где?">
                                             Логотип&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                aria-hidden="true"></span>
                                         </a>
@@ -268,10 +274,10 @@
                                     <td class="tds">
                                         <c:choose>
                                             <c:when test="${company.logo ne null}">
-                                                <a href="/resources/img/<c:out value="${company.logo.url}"/>"
+                                                <a href="<c:url value="/resources/img/${company.logo.url}"/>"
                                                    rel="lightgallery">
                                                     <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                                                         src="/resources/img/<c:out value="${company.logo.url}"/>">
+                                                         src="<c:url value="/resources/img/${company.logo.url}"/>">
                                                 </a><br><br>
                                                 <label title="Добавить новый значок">
                                                     <b><input type="radio" name="logo_action" value="replace" checked
@@ -294,8 +300,8 @@
                                     <c:when test="${main}">
                                         <tr>
                                             <th class="ths">
-                                                <a href="/resources/img/static/where_icon.jpg" rel="lightgallery"
-                                                   title="Значок, это где?">
+                                                <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
+                                                   rel="lightgallery" title="Значок, это где?">
                                                     Значок&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                       aria-hidden="true"></span>
                                                 </a>
@@ -303,10 +309,10 @@
                                             <td class="tds">
                                                 <c:choose>
                                                     <c:when test="${company.favicon ne null}">
-                                                        <a href="/resources/img/<c:out value="${company.favicon.url}"/>"
+                                                        <a href="<c:url value="/resources/img/${company.favicon.url}"/>"
                                                            rel="lightgallery">
                                                             <img class="img-favicon"
-                                                                 src="/resources/img/<c:out value="${company.favicon.url}"/>">
+                                                                 src="<c:url value="/resources/img/${company.favicon.url}"/>">
                                                         </a><br><br>
                                                         <label title="Добавить новый значок">
                                                             <b><input type="radio" name="favicon_action" value="replace"
@@ -328,8 +334,8 @@
                                         </tr>
                                         <tr>
                                             <th class="ths">
-                                                <a href="/resources/img/static/where_slides.jpg" rel="lightgallery"
-                                                   title="Слайды, это где?">
+                                                <a href="<c:url value="/resources/img/static/where_slides.jpg"/>"
+                                                   rel="lightgallery" title="Слайды, это где?">
                                                     Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                       aria-hidden="true"></span>
                                                 </a>
@@ -339,11 +345,11 @@
                                                     <c:when test="${fn:length(slides) gt 0}">
                                                         <c:forEach items="${slides}" var="slide">
                                                             <c:if test="${slide ne null}">
-                                                                <a href="/resources/img/<c:out value="${slide.url}"/>"
+                                                                <a href="<c:url value="/resources/img/${slide.url}"/>"
                                                                    rel="lightgallery[slides]"
                                                                    title="<c:out value="${slide.title}"/>">
                                                                     <img class="img-preview"
-                                                                         src="/resources/img/<c:out value="${slide.url}"/>"
+                                                                         src="<c:url value="/resources/img/${slide.url}"/>"
                                                                          alt="<c:out value="${slide.title}"/>"/>
                                                                 </a>
                                                             </c:if>
@@ -420,14 +426,14 @@
         <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
         <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
     <script>CKEDITOR.replace("information");</script>
-    <script src="/resources/js/lightgallery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/mask.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

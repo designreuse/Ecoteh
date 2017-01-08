@@ -21,9 +21,9 @@
         <meta name="keywords"
               content="Редактирование статии, <c:out value="${article.title}"/>, <c:out value="${article.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -31,8 +31,8 @@
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
-        <link href="/resources/css/lightgallery.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- NAVIGATION --%>
@@ -43,19 +43,22 @@
                 <div class="box">
                         <%-- Path --%>
                     <p class="path">
-                        <a href="/admin/" title="Перейти на главную странцу">Главная</a>
-                        → <a href="/admin/menu" title="Меню администратора">Меню</a>
-                        → <a href="/admin/article/all" title="Все статьи">Все статьи</a>
+                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
+                        → <a href="<c:url value="/admin/article/all"/>" title="Все статьи">Все статьи</a>
                         → <a href="#">Редактирование статьи</a>
                     </p>
                     <hr>
                     <h3 class="text-center">
-                        Редактирование статьи &quot;<a href="/admin/article/<c:out value="${article.url}"/>"><c:out
-                            value="${article.title}"/></a>&quot;
+                        Редактирование статьи
+                        &quot;<a href="<c:url value="/admin/article/${article.url}"/>">
+                        <c:out value="${article.title}"/>
+                    </a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form enctype="multipart/form-data" method="post" action="/admin/article/update">
+                        <form action="<c:url value="/admin/article/update"/>" method="post"
+                              enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <th class="ths"><span class="red">*</span>&nbsp;Название</th>
@@ -124,8 +127,8 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_article_photo.jpg" rel="lightgallery"
-                                           title="Главное фото, это где?">
+                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
+                                           rel="lightgallery" title="Главное фото, это где?">
                                             Главное фото&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                     aria-hidden="true"></span>
                                         </a>
@@ -133,10 +136,10 @@
                                     <td class="tds">
                                         <c:choose>
                                             <c:when test="${article.mainPhoto ne null}">
-                                                <a href="/resources/img/<c:out value="${article.mainPhoto.url}"/>"
+                                                <a href="<c:url value="/resources/img/${article.mainPhoto.url}"/>"
                                                    rel="lightgallery[slides]">
                                                     <img class="img-logo" alt="<c:out value="${article.title}"/>"
-                                                         src="/resources/img/<c:out value="${article.mainPhoto.url}"/>">
+                                                         src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
                                                 </a><br><br>
                                                 <label title="Заменить главное фото">
                                                     <b><input type="radio" name="photo_action" value="replace" checked
@@ -159,8 +162,8 @@
 
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_article_photo.jpg" rel="lightgallery"
-                                           title="Слайды, это где?">
+                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
+                                           rel="lightgallery" title="Слайды, это где?">
                                             Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                               aria-hidden="true"></span>
                                         </a>
@@ -170,12 +173,12 @@
                                             <c:when test="${fn:length(article.slides) gt 0}">
                                                 <c:forEach items="${article.slides}" var="slide">
                                                     <c:if test="${slide ne null}">
-                                                        <a href="/resources/img/<c:out value="${slide.url}"/>"
+                                                        <a href="<c:url value="/resources/img/${slide.url}"/>"
                                                            rel="lightgallery[slides]"
                                                            title="<c:out value="${slide.title}"/>">
                                                             <img class="img-preview"
                                                                  alt="<c:out value="${slide.title}"/>"
-                                                                 src="/resources/img/<c:out value="${slide.url}"/>"/>
+                                                                 src="<c:url value="/resources/img/${slide.url}"/>"/>
                                                         </a>&nbsp;&nbsp;
                                                     </c:if>
                                                 </c:forEach>
@@ -204,8 +207,8 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
-                                        <a href="/resources/img/static/where_article_video.jpg" rel="lightgallery"
-                                           title="Видеоролики. Где их взять?">
+                                        <a href="<c:url value="/resources/img/static/where_article_video.jpg"/>"
+                                           rel="lightgallery" title="Видеоролики. Где их взять?">
                                             Видеоролики&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                    aria-hidden="true"></span>
                                         </a>
@@ -265,13 +268,13 @@
         <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
         <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
     <script>CKEDITOR.replace("text");</script>
-    <script src="/resources/js/lightgallery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

@@ -17,9 +17,9 @@
         <meta name="description" content="<c:out value="${article.title} - ${article.description}"/>">
         <meta name="keywords" content="Статья<c:out value=", ${article.title}, ${article.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -27,8 +27,8 @@
               rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="/resources/css/style.min.css" rel="stylesheet" type="text/css">
-        <link href="/resources/css/lightgallery.min.css" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- NAVIGATION --%>
@@ -41,19 +41,19 @@
                         <c:set var="reqmap" value="/admin"/>
                         <%-- Actions --%>
                         <div class="text-center">
-                            <a href="/admin/article/new" title="Добавить новую статью">
+                            <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
                                 </button>
                             </a>&nbsp;&nbsp;
-                            <a href="/admin/article/edit/<c:out value="${article.url}"/>"
+                            <a href="<c:url value="/admin/article/edit/${article.url}"/>"
                                title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-edit yellow"
                                           aria-hidden="true"></span>&nbsp;Редактировать
                                 </button>
                             </a>&nbsp;&nbsp;
-                            <a href="/admin/article/delete/<c:out value="${article.url}"/>"
+                            <a href="<c:url value="/admin/article/delete/${article.url}"/>"
                                title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
@@ -63,32 +63,32 @@
                     </c:if>
                         <%-- Path --%>
                     <p class="path">
-                        <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
+                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         <c:choose>
                             <c:when test="${(article.category ne null) and ((article.category.validated) or (authorized_user ne null))}">
                                 <c:choose>
                                     <c:when test="${(article.category.section ne null) and ((article.category.section.validated) or (authorized_user ne null))}">
-                                        → <a href="${reqmap}/section/all"
+                                        → <a href="<c:url value="${reqmap}/section/all"/>"
                                              title="Перейти к всем разделам">Все разделы</a>
                                         →
-                                        <a href="${reqmap}/section/<c:out value="${article.category.section.url}"/>"
+                                        <a href="<c:url value="${reqmap}/section/${article.category.section.url}"/>"
                                            title="Перейти к разделу &quot;<c:out value="${article.category.section.title}"/>&quot;">
                                             <c:out value="${article.category.section.title}"/>
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        → <a href="${reqmap}/category/all"
+                                        → <a href="<c:url value="${reqmap}/category/all"/>"
                                              title="Перейти к всем категориям">Все категории</a>
                                     </c:otherwise>
                                 </c:choose>
                                 →
-                                <a href="${reqmap}/category/<c:out value="${article.category.url}"/>"
+                                <a href="<c:url value="${reqmap}/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
                                     <c:out value="${article.category.title}"/>
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                → <a href="${reqmap}/article/all" title="Статьи">Статьи</a>
+                                → <a href="<c:url value="${reqmap}/article/all"/>" title="Статьи">Статьи</a>
                             </c:otherwise>
                         </c:choose>
                         → <a href="#">Статья &quot;<c:out value="${article.title}"/>&quot;</a>
@@ -102,16 +102,16 @@
                                   title="Не отображается для клиентов"></span>&nbsp;
                         </c:if>
                         <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
-                        <a href="${reqmap}/article/num_<c:out value="${article.number}"/>">
+                        <a href="<c:url value="${reqmap}/article/num_${article.number}"/>">
                             <c:out value="${article.number}"/>
                         </a>
                     </p>
                     <c:if test="${article.mainPhoto ne null}">
-                        <a href="/resources/img/<c:out value="${article.mainPhoto.url}"/>" rel="lightgallery[slides]"
+                        <a href="<c:url value="/resources/img/${article.mainPhoto.url}"/>" rel="lightgallery[slides]"
                            title="<c:out value="${article.title}"/>">
                             <img class="img-responsive img-border img-left img-section"
                                  alt="<c:out value="${article.title}"/>"
-                                 src="/resources/img/<c:out value="${article.mainPhoto.url}"/>">
+                                 src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
                         </a>
                         <hr class="visible-xs">
                     </c:if>
@@ -129,11 +129,11 @@
         <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
         <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/js/lightgallery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

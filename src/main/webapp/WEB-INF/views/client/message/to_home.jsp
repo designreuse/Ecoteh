@@ -14,7 +14,8 @@
             <h4 class="message-text red">Вы не прошли верификацию капчи</h4>
         </c:when>
     </c:choose>
-    <form action="<c:if test="${authorized_user ne null}">/admin</c:if>/send_message" method="post">
+    <c:if test="${authorized_user ne null}"><c:set var="request" value="/admin"/></c:if>
+    <form action="<c:url value="${request}/send_message"/>" method="post">
         <div class="row">
             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <label>

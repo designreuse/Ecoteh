@@ -10,9 +10,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
-        <title>Авторизация</title>
-        <meta name="title" content="Авторизация">
-        <meta name="description" content="Авторизация">
+        <title>Напоминание пароля</title>
+        <meta name="title" content="Напоминание пароля">
+        <meta name="description" content="Напоминание пароля">
         <meta name="robots" content="noindex,nofollow">
         <link rel="shortcut icon" href="<c:url value="/resources/img/static/login_icon.ico"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="/resources/img/static/login_icon.ico"/>" type="image/x-icon">
@@ -31,63 +31,49 @@
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
-                    <p class="path">
-                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Авторизация</a>
-                    </p>
                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-xl-4 col-xl-offset-4">
                         <div class="text-center">
                             <hr>
-                            <h1 class="intro-text text-center">Авторизация</h1>
+                            <h1 class="intro-text text-center">Напомнить пароль</h1>
                             <c:choose>
-                                <c:when test="${param.error ne null}">
-                                    <div class="alert red" role="alert"><b>Неверный логин или пароль</b><br></div>
+                                <c:when test="${is_captcha eq false}">
+                                    <div class="alert red" role="alert">
+                                        <b>Вы не прошли верификацию капчи</b><br>
+                                    </div>
                                 </c:when>
-                                <c:when test="${param.logout ne null}">
-                                    <div class="alert green" role="alert"><b>Вы вышли из системы</b><br></div>
+                                <c:when test="${is_forgot eq false}">
+                                    <div class="alert red" role="alert"><b>Пользователь не найден</b><br></div>
+                                </c:when>
+                                <c:when test="${(is_forgot eq true) and (is_captcha eq true)}">
+                                    <div class="alert green" role="alert"><b>Сообщение отправлено на почту</b></div>
                                 </c:when>
                             </c:choose>
                             <hr>
-                                <%-- Login form --%>
-                            <form action="<c:url value="/login"/>" method="post">
+                                <%-- Forgot password form --%>
+                            <form action="<c:url value="/forgot"/>" method="post">
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <label title="Введите логин в формате (A-Z, a-z, 0-9, _)">
+                                        <label>
                                             <b><span class="glyphicon glyphicon-user"
-                                                     aria-hidden="true"></span>&nbsp;Имя пользователя:</b>
+                                                     aria-hidden="true"></span>&nbsp;Логин или e-mail:</b>
                                         </label>
-                                        <input id="username" class="form-control" type="text" name="username" required
-                                               pattern="[A-Za-z0-9_]{3,100}" minlength="3" maxlength="100" autofocus
-                                               placeholder="Введите логин">
+                                        <input class="form-control" type="text" name="username" required
+                                               minlength="3" maxlength="100" autofocus value="${username}"
+                                               placeholder="Введите логин или e-mail">
                                     </div>
-                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <label title="Введите пароль в формате (A-Z, a-z, 0-9)">
-                                            <b><span class="glyphicon glyphicon-check"
-                                                     aria-hidden="true"></span>&nbsp;Пароль:</b>
-                                        </label>
-                                        <input id="password" class="form-control" type="password" name="password"
-                                               pattern="[A-Za-z0-9]{3,100}" minlength="3" maxlength="100" required
-                                               placeholder="Введите пароль">
-                                    </div>
+                                        <%-- GOOGLE reCAPTHCA --%>
+                                    <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <button type="submit" class="btn btn-default">
-                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Войти
+                                            <span class="glyphicon glyphicon-send"
+                                                  aria-hidden="true"></span>&nbsp;Отправить
                                         </button>
-                                        <c:if test="${(param.error ne null)}">
-                                            &nbsp;&nbsp;
-                                            <a href="<c:url value="/forgot_password"/>"
-                                               title="Напомнить логин или пароль">
-                                                Забыли пароль?
-                                            </a>
-                                        </c:if>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class=" clearfix">
-                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
