@@ -146,20 +146,6 @@ public final class PhotoTest extends MediaTest<Photo> {
         );
     }
 
-    @Test
-    @Override
-    public void validConstants() {
-        super.validConstants();
-        assertTrue(
-                isNotBlank(Photo.PATH)
-        );
-        assertTrue(
-                isNotBlank(
-                        MockEntity.getPhoto().PATH
-                )
-        );
-    }
-
     @Ignore
     @Override
     protected Photo getObject() {

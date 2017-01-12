@@ -35,28 +35,28 @@
                     <li class="dropdown-top">
                         <a class="dropdown-top" href="<c:url value="${reqmap}/article/all"/>">Продукция</a>
                         <div class="dropdown-inside" role="menu">
-                            <c:set var="length" value="${fn:length(sections)}"/>
+                            <c:set var="length" value="${fn:length(categories)}"/>
                             <div class="<c:choose>
                                         <c:when test="${length eq 3}">nav-container-4</c:when>
                                         <c:when test="${length ne 0}">nav-container-5</c:when>
                                         </c:choose>">
                                 <c:if test="${length gt 0}">
-                                    <c:forEach items="${sections}" var="section" end="4">
+                                    <c:forEach items="${categories}" var="category" end="4">
                                         <div class="<c:choose>
                                             <c:when test="${(length eq 3) or (length le 2)}">
                                             col-sm-6 col-md-6 col-lg-6 col-xl-6</c:when>
                                             <c:otherwise>col-sm-4 col-md-4 col-lg-4 col-xl-4</c:otherwise>
                                             </c:choose>">
-                                            <a href="<c:url value="${reqmap}/section/${section.url}"/>"
-                                                title="Перейти к разделу &quot;<c:out value="${section.title}"/>&quot;">
-                                                <h4 class="text-center"><c:out value="${section.title}"/></h4>
+                                            <a href="<c:url value="${reqmap}/category/${category.url}"/>"
+                                                title="Перейти к &quot;<c:out value="${category.title}"/>&quot;">
+                                                <h4 class="text-center"><c:out value="${category.title}"/></h4>
                                             </a>
-                                            <c:forEach items="${section.categories}" var="category" end="4">
+                                            <%--<c:forEach items="${section.categories}" var="category" end="4">
                                                 <a href="<c:url value="${reqmap}/category/${category.url}"/>"
                                                    title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
                                                     <h5 class="text-center"><c:out value="${category.title}"/></h5>
                                                 </a>
-                                            </c:forEach>
+                                            </c:forEach>--%>
                                         </div>
                                     </c:forEach>
                                 </c:if>
@@ -67,9 +67,6 @@
                                             col-sm-12 col-md-12 col-lg-12 col-xl-12</c:when>
                                             <c:otherwise>col-sm-4 col-md-4 col-lg-4 col-xl-4</c:otherwise>
                                             </c:choose>">
-                                    <h4 class="text-center">
-                                        <a href="<c:url value="${reqmap}/section/all"/>">Разделы</a>
-                                    </h4>
                                     <h4 class="text-center">
                                         <a href="<c:url value="${reqmap}/category/all"/>">Категории</a>
                                     </h4>
@@ -129,7 +126,7 @@
                 <c:if test="${authorized_user ne null}">
                     <ul class="hidden-xs dropdown nav navbar-nav">
                         <li><a href="<c:url value="/admin/user/all"/>" title="Весь персонал">Персонал</a></li>
-                        <li><a href="<c:url value="/admin/cache/"/>" title="Список обьектов в памяти">Кэш</a></li>
+                        <li><a href="<c:url value="/admin/cache"/>" title="Список обьектов в памяти">Кэш</a></li>
                         <li>
                             <a href="<c:url value="/admin/menu"/>"
                                title="Mеню | <c:out value="${authorized_user.name}"/>">
@@ -156,9 +153,6 @@
                             <li><a href="<c:url value="/admin/category/all"/>">Категории</a></li>
                             <li><a href="<c:url value="/admin/article/all"/>">Статьи</a></li>
                         </c:when>
-                        <c:when test="${length gt 0}">
-                            <li><a href="<c:url value="${reqmap}/section/all"/>">Все разделы</a></li>
-                        </c:when>
                     </c:choose>
                     <c:if test="${main_company ne null}">
                         <li><a href="<c:url value="${reqmap}/company/main"/>">О компании</a></li>
@@ -173,7 +167,7 @@
                             <li><a href="<c:url value="/admin/user/all"/>">Персонал</a></li>
                             <li><a href="<c:url value="/admin/cache/"/>">Кэш</a></li>
                             <li>
-                                <a href="<c:url value="/admin/messages"/>">
+                                <a href="<c:url value="/admin/messages/"/>">
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Сообщения
                                 </a>
                             </li>

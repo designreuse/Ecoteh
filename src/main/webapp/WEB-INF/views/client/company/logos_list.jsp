@@ -62,7 +62,7 @@
                 <c:if test="${length gt print_partners}">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
-                        <p align="right">
+                        <p class="text-right">
                             <a href="<c:url value="${reqmap}/company/all"/>" title="Перейти к списку всех партнеров">
                                 <span class="glyphicon glyphicon-share-alt"></span>&nbsp;Все партнеры...
                             </a>

@@ -185,7 +185,7 @@ public class AdminUserController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "photo") final MultipartFile photoFile,
             @RequestParam(value = "is_valid") final boolean isValid,
-            @RequestParam(value = "is_set_email") final boolean isMailing,
+            @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
             final ModelAndView modelAndView
     ) {

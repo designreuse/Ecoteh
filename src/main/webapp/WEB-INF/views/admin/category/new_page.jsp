@@ -57,7 +57,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <th class="ths"><span class="red">*</span>Описание</th>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" required rows="6"
                                               placeholder="Краткое описание категории." title=""></textarea>
@@ -68,18 +68,6 @@
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" rows="3" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">Раздел</th>
-                                    <td class="tds">
-                                        <select class="form-control" name="section_url">
-                                            <option value="">Нет</option>
-                                            <c:forEach items="${sections}" var="section">
-                                                <option value="<c:out value="${section.url}"/>"><c:out
-                                                        value="${section.title}"/></option>
-                                            </c:forEach>
-                                        </select>
                                     </td>
                                 </tr>
                                 <tr>

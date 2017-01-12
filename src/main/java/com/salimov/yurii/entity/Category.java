@@ -40,18 +40,6 @@ public final class Category extends Content<Long> {
     private Photo photo;
 
     /**
-     * The section of a category.
-     *
-     * @see Section
-     */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(
-            name = "section_id",
-            referencedColumnName = "id"
-    )
-    private Section section;
-
-    /**
      * The set of a articles.
      *
      * @see Article
@@ -96,20 +84,16 @@ public final class Category extends Content<Long> {
      * @param description a new description of the category.
      * @param keywords    a new keywords of the category.
      * @param photo       a new photo of the category.
-     * @param section     a new section of the category.
      * @see Photo
-     * @see Section
      */
     public void initialize(
             final String title,
             final String description,
             final String keywords,
-            final Photo photo,
-            final Section section
+            final Photo photo
     ) {
         super.initialize(title, description, keywords);
         setPhoto(photo);
-        setSection(section);
     }
 
     /**
@@ -131,38 +115,6 @@ public final class Category extends Content<Long> {
      */
     public void setPhoto(final Photo photo) {
         this.photo = Photo.isValidated(photo) ? photo : null;
-    }
-
-    /**
-     * Sets a new section to the category.
-     * Sets a new section if this section equals null
-     * or this section not equals new section.
-     * Also the category deletes from old section and adds to new section.
-     *
-     * @param section a new section of the category.
-     * @see Section
-     */
-    public void setSection(final Section section) {
-        if ((this.section == null) || !this.section.equals(section)) {
-            final Section temp = this.section;
-            this.section = section;
-            if ((this.section != null) && !this.section.containsCategory(this)) {
-                this.section.addCategory(this);
-            }
-            if (temp != null) {
-                temp.removeCategory(this);
-            }
-        }
-    }
-
-    /**
-     * Returns a section of the category.
-     *
-     * @return The category section.
-     * @see Section
-     */
-    public Section getSection() {
-        return this.section;
     }
 
     /**

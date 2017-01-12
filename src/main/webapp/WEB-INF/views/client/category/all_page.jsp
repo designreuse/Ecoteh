@@ -17,7 +17,7 @@
         <meta name="description"
               content="Все категории <c:out value="${main_company.title}"/> - <c:out value="${main_company.tagline}"/>.">
         <meta name="keywords"
-              content="Все категории<c:forEach items="${section.categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>"/>
+              content="Все категории<c:forEach items="${categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>"/>
         <c:if test="${main_company.favicon ne null}">
             <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
                   type="image/x-icon">

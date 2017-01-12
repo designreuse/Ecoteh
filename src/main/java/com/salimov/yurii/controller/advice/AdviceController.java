@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -310,6 +311,8 @@ public class AdviceController {
                 exception.getClass().getSimpleName()
                         + " : "
                         + exception.getMessage()
+                        + "\n"
+                        + Arrays.toString(exception.getStackTrace())
         );
     }
 

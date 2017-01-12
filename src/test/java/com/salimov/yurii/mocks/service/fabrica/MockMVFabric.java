@@ -43,7 +43,6 @@ public final class MockMVFabric {
                 getArticleService(),
                 getCategoryService(),
                 getCompanyService(),
-                getSectionService(),
                 getUserService(),
                 getResponseService());
     }
@@ -53,7 +52,6 @@ public final class MockMVFabric {
                 getArticleService(),
                 getCategoryService(),
                 getCompanyService(),
-                getSectionService(),
                 getUserService(),
                 getResponseService()
         );

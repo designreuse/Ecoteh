@@ -70,7 +70,7 @@ public class AdminResponseController {
         final Response response = this.responseService.get(id);
         response.reverseValidated();
         this.responseService.update(response);
-        Cache.removeAll("Response", "Home");
+        Cache.clear();
         modelAndView.setViewName("redirect:/admin/responses");
         return modelAndView;
     }
@@ -94,7 +94,7 @@ public class AdminResponseController {
             final ModelAndView modelAndView
     ) {
         this.responseService.remove(id);
-        Cache.removeAll("Response", "Home");
+        Cache.clear();
         modelAndView.setViewName("redirect:/admin/responses");
         return modelAndView;
     }
@@ -114,7 +114,7 @@ public class AdminResponseController {
     )
     public ModelAndView deleteAllResponses(final ModelAndView modelAndView) {
         this.responseService.removeAll();
-        Cache.removeAll("Response", "Home");
+        Cache.clear();
         modelAndView.setViewName("redirect:/admin/responses");
         return modelAndView;
     }

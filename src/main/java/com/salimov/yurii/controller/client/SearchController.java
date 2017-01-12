@@ -41,10 +41,9 @@ public class SearchController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link com.salimov.yurii.entity.Section}
-     * class.
+     * for search for content on the site.
      *
-     * @see SectionService
+     * @see SearchService
      */
     private final SearchService searchService;
 

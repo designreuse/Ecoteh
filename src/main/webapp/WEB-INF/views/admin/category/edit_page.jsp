@@ -68,7 +68,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <th class="ths"><span class="red">*</span>Описание</th>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" required rows="6"
                                               placeholder="Краткое описание категории." title=""><c:out
@@ -81,31 +81,6 @@
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
                                               rows="3"><c:out value="${category.keywords}"/></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">Раздел</th>
-                                    <td class="tds">
-                                        <select class="form-control" name="section_url">
-                                            <c:choose>
-                                                <c:when test="${category.section eq null}">
-                                                    <option value="">Нет</option>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <option value="<c:out value="${category.section.url}"/>"><c:out
-                                                            value="${category.section.title}"/></option>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:forEach items="${sections}" var="section">
-                                                <c:if test="${section.id ne category.section.id}">
-                                                    <option value="<c:out value="${section.url}"/>"><c:out
-                                                            value="${section.title}"/></option>
-                                                </c:if>
-                                            </c:forEach>
-                                            <c:if test="${category.section ne null}">
-                                                <option value="">Нет</option>
-                                            </c:if>
-                                        </select>
                                     </td>
                                 </tr>
                                 <tr>

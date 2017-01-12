@@ -4,7 +4,6 @@ import com.salimov.yurii.dao.interfaces.CategoryDao;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.Photo;
-import com.salimov.yurii.entity.Section;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
 import com.salimov.yurii.service.data.interfaces.PhotoService;
@@ -93,11 +92,9 @@ public final class CategoryServiceImpl
      * @param description a description of the new category.
      * @param keywords    a keywords of the new category.
      * @param photoFile   a photo of the new category.
-     * @param section     a section of the new category.
      * @param isValid     validated of the new category.
      * @return The new saving category.
      * @see Category
-     * @see Section
      * @see Photo
      */
     @Override
@@ -107,7 +104,6 @@ public final class CategoryServiceImpl
             final String description,
             final String keywords,
             final MultipartFile photoFile,
-            final Section section,
             final boolean isValid
     ) {
         final Category category = new Category();
@@ -119,8 +115,7 @@ public final class CategoryServiceImpl
                         new Photo(),
                         photoFile,
                         title
-                ),
-                section
+                )
         );
         category.setValidated(isValid);
         return add(category);
@@ -135,11 +130,9 @@ public final class CategoryServiceImpl
      * @param keywords    a new keywords to the category.
      * @param photoFile   a new photo to the category.
      * @param photoAction a action on the main photo.
-     * @param section     a new section to the category.
      * @param isValid     a validated of the category.
      * @return The updating category with parameter id.
      * @see Category
-     * @see Section
      * @see Photo
      */
     @Override
@@ -151,23 +144,24 @@ public final class CategoryServiceImpl
             final String keywords,
             final MultipartFile photoFile,
             final String photoAction,
-            final Section section,
             final boolean isValid
     ) {
         final Category category = getByUrl(url, false);
-        category.initialize(title, description, keywords);
-        category.setSection(section);
+        category.initialize(
+                title,
+                description,
+                keywords
+        );
         category.setValidated(isValid);
         final Photo photo = category.getPhoto();
         updatePhoto(
                 category,
-                photo,
                 photoFile,
                 title,
                 photoAction
         );
         final Category _category = update(category);
-        removePhotoIfAction(photo, photoAction);
+        removePhoto(photo, photoAction);
         return _category;
     }
 
@@ -200,99 +194,8 @@ public final class CategoryServiceImpl
         if (category != null) {
             removePhoto(category);
             clearArticles(category);
-            category.setSection(null);
             super.remove(category);
         }
-    }
-
-    /**
-     * Filters and returns categories by the section.
-     *
-     * @param categories a categories to filter.
-     * @param section    a section filtering.
-     * @return The filtered list of categories.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    public List<Category> filterBySection(
-            final Collection<Category> categories,
-            final Section section
-    ) {
-        final List<Section> sections = new ArrayList<>(1);
-        sections.add(section);
-        return filterBySections(categories, sections);
-    }
-
-    /**
-     * Filters and returns categories by the sections.
-     * Returns empty list if categories is empty.
-     * Returns back categories if sections is empty.
-     *
-     * @param categories a categories to filter.
-     * @param sections   a sections filtering.
-     * @return The filtered list of categories.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public List<Category> filterBySections(
-            final Collection<Category> categories,
-            final Collection<Section> sections
-    ) {
-        final List<Category> result = new ArrayList<>();
-        if (categories != null && !categories.isEmpty()) {
-            if (sections != null && !sections.isEmpty()) {
-                for (Category category : categories) {
-                    result.addAll(
-                            sections.stream()
-                                    .filter(
-                                            section -> category.getSection()
-                                                    .equals(section)
-                                    ).map(section -> category)
-                                    .collect(Collectors.toList())
-                    );
-                }
-            } else {
-                result.addAll(categories);
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Filters and returns categories by the section.
-     *
-     * @param section a section filtering.
-     * @return The filtered list of categories.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public List<Category> getAndFilterBySection(final Section section) {
-        return filterBySection(
-                getAll(),
-                section
-        );
-    }
-
-    /**
-     * Filters and returns categories by the sections.
-     *
-     * @param sections a section filtering.
-     * @return The filtered list of categories.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public List<Category> getAndFilterBySections(final List<Section> sections) {
-        return filterBySections(
-                getAll(),
-                sections
-        );
     }
 
     /**
@@ -343,6 +246,36 @@ public final class CategoryServiceImpl
     }
 
     /**
+     * Updates category photo.
+     *
+     * @param category the category to update.
+     * @param file     a photo file.
+     * @param title    a photo title.
+     * @param action   a action on the photo.
+     */
+    private void updatePhoto(
+            final Category category,
+            final MultipartFile file,
+            final String title,
+            final String action
+    ) {
+        switch (action) {
+            case "replace":
+                category.setPhoto(
+                        updatePhoto(
+                                category.getPhoto(),
+                                file,
+                                title
+                        )
+                );
+                break;
+            case "delete":
+                category.setPhoto(null);
+                break;
+        }
+    }
+
+    /**
      * Updates photo.
      *
      * @param photo the photo to updates.
@@ -358,50 +291,18 @@ public final class CategoryServiceImpl
         return this.photoService.updatePhoto(
                 photo != null ? photo : new Photo(),
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo ",
+                Translator.fromCyrillicToLatin(title) + " photo",
                 "categories"
         );
     }
 
     /**
-     * Updates category photo.
-     *
-     * @param category the category to update.
-     * @param photo    a new photo.
-     * @param file     a photo file.
-     * @param action   a action on the photo.
-     * @param title    a photo title.
-     */
-    private void updatePhoto(
-            final Category category,
-            final Photo photo,
-            final MultipartFile file,
-            final String action,
-            final String title
-    ) {
-        switch (action) {
-            case "replace":
-                category.setPhoto(
-                        updatePhoto(
-                                photo,
-                                file,
-                                title
-                        )
-                );
-                break;
-            case "delete":
-                category.setPhoto(null);
-                break;
-        }
-    }
-
-    /**
-     * Removes main photo if action equals "delete".
+     * Removes photo if action equals "delete".
      *
      * @param photo  the photo to remove.
      * @param action a action on the photo.
      */
-    private void removePhotoIfAction(
+    private void removePhoto(
             final Photo photo,
             final String action
     ) {

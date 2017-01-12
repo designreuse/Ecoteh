@@ -60,9 +60,11 @@
                             <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
                         </p>
-                        <hr>
-                        <h3 class="text-center">О нашей компании</h3>
-                        <hr>
+                        <c:if test="${company.logo ne null}">
+                            <hr>
+                            <h3 class="text-center">О нашей компании</h3>
+                            <hr>
+                        </c:if>
                             <%-- LOGO --%>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <p><c:out value="${company.description}"/></p>

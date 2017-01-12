@@ -74,7 +74,7 @@ public final class Article extends Content<Long> {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "main_photo_id",
+            name = "photo_id",
             referencedColumnName = "id"
     )
     private Photo mainPhoto;

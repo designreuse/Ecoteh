@@ -285,7 +285,7 @@ public class AdminCompanyController {
                 fax, email, vkontakte, facebook, twitter, skype,
                 address, googleMaps, logoFile, isValid
         );
-        Cache.removeAll("Partners");
+        Cache.clear();
         modelAndView.setViewName(
                 "redirect:/admin/company/" + company.getUrl()
         );
@@ -405,10 +405,7 @@ public class AdminCompanyController {
         modelAndView.setViewName(
                 "redirect:/admin/company/" + company.getUrl()
         );
-        Cache.removeAll(
-                "Partners",
-                company.getUrl()
-        );
+        Cache.clear();
         return modelAndView;
     }
 
@@ -452,7 +449,7 @@ public class AdminCompanyController {
     ) {
         this.companyService.removeByUrl(url);
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Partners", url);
+        Cache.clear();
         return modelAndView;
     }
 
@@ -472,7 +469,7 @@ public class AdminCompanyController {
     public ModelAndView deleteAllPartners(final ModelAndView modelAndView) {
         this.companyService.removeAll();
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Partners", "Company", "Home");
+        Cache.clear();
         return modelAndView;
     }
 }

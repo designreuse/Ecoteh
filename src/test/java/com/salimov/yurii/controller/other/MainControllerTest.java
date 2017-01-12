@@ -28,36 +28,6 @@ public abstract class MainControllerTest {
     }
 
     @Test
-    public void whenGetAllSectionsPageThenReturnSomeModelAndView() {
-        checkModelAndView(
-                getController()
-                        .getAllSectionsPage(),
-                "client/section/all_page",
-                new String[]{
-                        "main_company",
-                        "sections",
-                        "partners"
-                }
-        );
-    }
-
-    @Test
-    public void whenGetSectionPageThenReturnSomeModelAndViewWithTheSection() {
-        checkModelAndView(
-                getController()
-                        .getSectionPage(URL),
-                "client/section/one_page",
-                new String[]{
-                        "main_company",
-                        "sections",
-                        "partners",
-                        "section",
-                        "categories"
-                }
-        );
-    }
-
-    @Test
     public void whenGetAllCategoriesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 getController()

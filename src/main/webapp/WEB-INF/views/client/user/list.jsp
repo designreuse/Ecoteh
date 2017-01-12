@@ -98,7 +98,6 @@
                 </a>
             </c:if>
             <c:if test="${authorized_user ne null}">
-                <br>
                 <div class="pad">
                     <a href="<c:url value="/admin/user/edit/${user.url}"/>"
                        title="Редактировать информацию о &quot;<c:out value="${user.name}"/>&quot;">

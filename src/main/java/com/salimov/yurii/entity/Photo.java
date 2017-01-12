@@ -20,16 +20,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Table(name = "photos")
 public final class Photo extends Media<Long> {
 
-
-    /**
-     * The directory path of images.
-     * System.getProperty("catalina.base") + path
-     * or
-     * System.getenv("CATALINA_HOME")+ path
-     */
-    public static final String PATH = System.getenv("CATALINA_HOME")
-            + "/webapps/ROOT/resources/img/";
-
     /**
      * It is used during deserialization to verify that
      * the sender and receiver of a serialized object have

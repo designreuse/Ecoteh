@@ -197,10 +197,9 @@ public final class ArticleServiceImpl
         final Photo mainPhoto = article.getMainPhoto();
         updatesMainPhoto(
                 article,
+                mainFile,
                 title,
-                photoAction,
-                mainPhoto,
-                mainFile
+                photoAction
         );
         final List<Photo> slides = new ArrayList<>(article.getSlides());
         updatesSlides(
@@ -687,24 +686,23 @@ public final class ArticleServiceImpl
      * @param article     the articles to update.
      * @param title       a photo title.
      * @param photoAction a action on the main photo.
-     * @param photo       a photo to update.
      * @param file        a photo file.
      */
     private void updatesMainPhoto(
             final Article article,
+            final MultipartFile file,
             final String title,
-            final String photoAction,
-            final Photo photo,
-            final MultipartFile file
+            final String photoAction
     ) {
         switch (photoAction) {
             case "replace":
-                updatePhoto(
-                        photo,
-                        file,
-                        title
+                article.setMainPhoto(
+                        updatePhoto(
+                                article.getMainPhoto(),
+                                file,
+                                title
+                        )
                 );
-                article.setMainPhoto(photo);
                 break;
             case "delete":
                 article.setMainPhoto(null);
@@ -794,7 +792,7 @@ public final class ArticleServiceImpl
         return updatePhotoFile(
                 photo,
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo "
+                Translator.fromCyrillicToLatin(title) + " photo"
         );
     }
 
@@ -814,7 +812,7 @@ public final class ArticleServiceImpl
         return updatePhotoFile(
                 slide,
                 file,
-                Translator.fromCyrillicToLatin(title) + " slide "
+                Translator.fromCyrillicToLatin(title) + " slide"
         );
     }
 

@@ -2,7 +2,9 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.PhotoDao;
 import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.exception.DuplicateException;
 import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.util.properties.ContentProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,11 @@ public final class PhotoServiceImpl
         implements PhotoService {
 
     /**
+     *
+     */
+    private final ContentProperties contentProperties;
+
+    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
@@ -44,8 +51,12 @@ public final class PhotoServiceImpl
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public PhotoServiceImpl(final PhotoDao dao) {
+    public PhotoServiceImpl(
+            final PhotoDao dao,
+            final ContentProperties contentProperties
+    ) {
         super(dao);
+        this.contentProperties = contentProperties;
     }
 
     /**
@@ -106,7 +117,9 @@ public final class PhotoServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Photo getByUrl(final String url) {
-        return super.getByUrl(Photo.PATH + url);
+        return super.getByUrl(
+                getPath(url)
+        );
     }
 
     /**
@@ -119,7 +132,7 @@ public final class PhotoServiceImpl
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        super.removeByUrl(Photo.PATH + url);
+        super.removeByUrl(getPath(url));
         deleteFile(url);
     }
 
@@ -182,21 +195,37 @@ public final class PhotoServiceImpl
             final String rootPath
     ) {
         if (photo != null && !photo.isEmpty()) {
-            new Thread(() -> {
-                synchronized (Photo.PATH) {
-                    final String path = Photo.PATH +
-                            (
-                                    isNotBlank(rootPath) ? rootPath :
-                                            photo.getOriginalFilename()
-                            );
-                    try (OutputStream stream = new FileOutputStream(path)) {
-                        stream.write(photo.getBytes());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }).start();
+            final String path = getPath(
+                    isNotBlank(rootPath)
+                            ? rootPath
+                            : photo.getOriginalFilename()
+            );
+            boolean isExist = checkPath(path);
+            try (final OutputStream stream = new FileOutputStream(path)) {
+                stream.write(photo.getBytes());
+            } catch (IOException ex) {
+                final DuplicateException exp =  new DuplicateException(
+                        ex.getMessage()
+                                + "; Path: " + path
+                                + "; isExist = " + isExist,
+                        ex
+                );
+                exp.setStackTrace(ex.getStackTrace());
+                throw exp;
+            }
         }
+    }
+
+    /**
+     * @param path
+     */
+    private static boolean checkPath(final String path) {
+        final File dir = new File(path).getParentFile();
+        boolean isExists = dir.exists();
+        if (!isExists) {
+            isExists = dir.mkdirs();
+        }
+        return isExists;
     }
 
     /**
@@ -226,7 +255,9 @@ public final class PhotoServiceImpl
     public boolean deleteFile(final String rootPath) {
         boolean result = false;
         if (isNotBlank(rootPath)) {
-            File file = new File(Photo.PATH + rootPath);
+            File file = new File(
+                    getPath(rootPath)
+            );
             if (file.exists() && file.isFile()) {
                 result = file.delete();
             }
@@ -278,6 +309,15 @@ public final class PhotoServiceImpl
     @Override
     protected Class<Photo> getModelClass() {
         return Photo.class;
+    }
+
+    /**
+     * @param subPath
+     * @return
+     */
+    private String getPath(final String subPath) {
+        return this.contentProperties.getResourcesPath()
+                + "img/" + subPath;
     }
 }
 

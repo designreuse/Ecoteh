@@ -177,7 +177,7 @@
                                                            rel="lightgallery[slides]"
                                                            title="<c:out value="${slide.title}"/>">
                                                             <img class="img-preview"
-                                                                 alt="<c:out value="${slide.title}"/>"
+                                                                 alt="<c:out value="${article.title}"/>"
                                                                  src="<c:url value="/resources/img/${slide.url}"/>"/>
                                                         </a>&nbsp;&nbsp;
                                                     </c:if>

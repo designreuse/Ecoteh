@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:set var="length" value="${fn:length(categories_list)}"/>
+<c:set var="length" value="${fn:length(categories)}"/>
 <c:if test="${length gt 0}">
     <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
     <c:set var="desc_length" value="350"/>
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="box">
-                <c:forEach items="${categories_list}" var="category">
+                <c:forEach items="${categories}" var="category">
                     <c:if test="${(last_line ne length ) and (printed eq last_line)}">
                         <c:set var="in_line" value="${length - last_line}"/>
                     </c:if>

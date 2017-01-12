@@ -90,6 +90,7 @@
                                 </tr>
                                 <tr>
                                     <th class="ths">
+                                        <span class="red">*</span>
                                         <c:choose>
                                             <c:when test="${user.phone ne null}">
                                                 <a href="tel:<c:out value="${user.phone}"/>"
@@ -101,13 +102,14 @@
                                         </c:choose>
                                     </th>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="phone"
+                                        <input type="text" class="phone form-control" name="phone" required
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
                                                value="<c:out value="${user.phone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="ths">
+                                        <span class="red">*</span>
                                         <c:choose>
                                             <c:when test="${user.email ne null}">
                                                 <a href="mailto:<c:out value="${user.email}"/>" target="_blank"
@@ -119,7 +121,7 @@
                                         </c:choose>
                                     </th>
                                     <td class="tds">
-                                        <input type="email" class="form-control" name="email" maxlength="100"
+                                        <input type="email" class="form-control" name="email" maxlength="100" required
                                                placeholder="name@mail.com" value="<c:out value="${user.email}"/>">
                                     </td>
                                 </tr>

@@ -21,7 +21,7 @@
                             <a href="<c:url value="${reqmap}/company/${partner.url}"/>">
                                 <img class="img-responsive img-left logo-in-list"
                                      alt="<c:out value="${partner.title}"/>"
-                                     src="/resources/img/<c:out value="${partner.logo.url}"/>">
+                                     src="<c:url value="/resources/img/${partner.logo.url}"/>">
                             </a>
                             <hr class="visible-xs">
                         </c:if>

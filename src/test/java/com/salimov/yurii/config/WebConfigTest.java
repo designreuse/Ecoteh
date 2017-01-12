@@ -40,12 +40,12 @@ public final class WebConfigTest {
 
     @Autowired
     private WorkController workController;
-
+/*
     @Test
     public void webConfigTest() {
         assertNotNull(new WebConfig());
     }
-
+*/
     @Test
     public void controllerTest() {
         assertNotNull(clientMainController);
@@ -55,9 +55,9 @@ public final class WebConfigTest {
         assertNotNull(seoController);
         assertNotNull(workController);
     }
-
+/*
     @Test
     public void viewResolverTest() {
         assertNotNull(new WebConfig().viewResolver());
-    }
+    }*/
 }

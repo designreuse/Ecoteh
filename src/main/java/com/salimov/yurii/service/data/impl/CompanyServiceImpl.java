@@ -667,7 +667,7 @@ public final class CompanyServiceImpl
         return updatePhotoFile(
                 photo,
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo "
+                Translator.fromCyrillicToLatin(title) + " photo"
         );
     }
 
@@ -687,7 +687,7 @@ public final class CompanyServiceImpl
         return updatePhotoFile(
                 slide,
                 file,
-                Translator.fromCyrillicToLatin(title) + " slide "
+                Translator.fromCyrillicToLatin(title) + " slide"
         );
     }
 

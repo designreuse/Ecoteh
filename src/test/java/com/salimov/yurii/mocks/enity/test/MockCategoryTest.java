@@ -23,7 +23,6 @@ public class MockCategoryTest extends MockModelTest<Category> {
         assertNotNull(category.getId());
         assertNotNull(category.getUrl());
         assertNull(category.getPhoto());
-        assertNull(category.getSection());
     }
 
     @Ignore

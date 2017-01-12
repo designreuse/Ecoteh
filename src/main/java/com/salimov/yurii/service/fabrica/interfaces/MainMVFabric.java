@@ -22,23 +22,6 @@ public interface MainMVFabric {
     ModelAndView homePage();
 
     /**
-     * Creates and returns page with all sections.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    ModelAndView allSectionsPage();
-
-    /**
-     * Creates and returns page wits all sections with categories.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     * @see Category
-     */
-    ModelAndView sectionsWithCategoriesPage();
-
-    /**
      * Creates and returns page with all categories.
      *
      * @return The ready object of class ModelAndView.
@@ -76,26 +59,6 @@ public interface MainMVFabric {
      * @see Company
      */
     ModelAndView allPartnersPage();
-
-    /**
-     * Creates and returns page with one section with parameter url.
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    ModelAndView sectionPage(final String url);
-
-    /**
-     * Creates and returns page with all categories
-     * in the section with parameter url.
-     *
-     * @param url a url of the section.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    ModelAndView categoriesInTheSectionPage(final String url);
 
     /**
      * Creates and returns page with one category with parameter url.

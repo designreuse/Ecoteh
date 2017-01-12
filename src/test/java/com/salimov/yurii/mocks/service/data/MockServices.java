@@ -24,7 +24,6 @@ public final class MockServices {
     private static CompanyService companyService;
     private static PhotoService photoService;
     private static ResponseService responseService;
-    private static SectionService sectionService;
     private static UserService userService;
     private static VideoService videoService;
 
@@ -61,13 +60,6 @@ public final class MockServices {
             responseService = initResponseService();
         }
         return responseService;
-    }
-
-    public static SectionService getSectionService() {
-        if (sectionService == null) {
-            sectionService = initSectionService();
-        }
-        return sectionService;
     }
 
     public static UserService getUserService() {
@@ -288,9 +280,6 @@ public final class MockServices {
         final List<Category> categories = new ArrayList<>();
         categories.add(category);
         final Photo photo = getPhoto();
-        final Section section = getSection();
-        final List<Section> sections = new ArrayList<>();
-        sections.add(section);
         final CategoryService categoryService = mock(CategoryService.class);
         when(
                 categoryService.add(category)
@@ -409,7 +398,7 @@ public final class MockServices {
                         TITLE,
                         DESCRIPTION,
                         KEYWORDS,
-                        null, section, true)
+                        null, true)
         ).thenReturn(category);
         when(
                 categoryService.initAndUpdate(
@@ -417,20 +406,8 @@ public final class MockServices {
                         TITLE,
                         DESCRIPTION,
                         KEYWORDS,
-                        null, null, section, true)
+                        null, null, true)
         ).thenReturn(category);
-        when(
-                categoryService.filterBySection(categories, section)
-        ).thenReturn(categories);
-        when(
-                categoryService.filterBySections(categories, sections)
-        ).thenReturn(categories);
-        when(
-                categoryService.getAndFilterBySection(section)
-        ).thenReturn(categories);
-        when(
-                categoryService.getAndFilterBySections(sections)
-        ).thenReturn(categories);
         return categoryService;
     }
 
@@ -743,134 +720,6 @@ public final class MockServices {
                 responseService.getAndFilterByDate(DATE, DATE)
         ).thenReturn(responses);
         return responseService;
-    }
-
-    private static SectionService initSectionService() {
-        final Section section = getSection();
-        final List<Section> sections = new ArrayList<>();
-        sections.add(section);
-        final SectionService sectionService = mock(SectionService.class);
-        when(
-                sectionService.add(section)
-        ).thenReturn(section);
-        when(
-                sectionService.add(sections)
-        ).thenReturn(sections);
-        when(
-                sectionService.update(section)
-        ).thenReturn(section);
-        when(
-                sectionService.update(sections)
-        ).thenReturn(sections);
-        when(
-                sectionService.get(ID)
-        ).thenReturn(section);
-        when(
-                sectionService.getAll()
-        ).thenReturn(sections);
-        when(
-                sectionService.getAll(true)
-        ).thenReturn(sections);
-        when(
-                sectionService.getAll(false)
-        ).thenReturn(sections);
-        when(
-                sectionService.exists(section)
-        ).thenReturn(true);
-        when(
-                sectionService.exists((Section) null)
-        ).thenReturn(false);
-        when(
-                sectionService.exists(ID)
-        ).thenReturn(true);
-        when(
-                sectionService.exists((Long) null)
-        ).thenReturn(false);
-        when(
-                sectionService.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                sectionService.sort(
-                        sections,
-                        new ContentComparator.ByTitle<>(),
-                        true
-                )
-        ).thenReturn(sections);
-        when(
-                sectionService.sort(
-                        sections,
-                        new ContentComparator.ByTitle<>(),
-                        false
-                )
-        ).thenReturn(sections);
-        when(
-                sectionService.sort(
-                        sections,
-                        new ContentComparator.ByTitle<>()
-                )
-        ).thenReturn(sections);
-        when(
-                sectionService.subList(sections, INDEX, INDEX)
-        ).thenReturn(sections);
-        when(
-                sectionService.getAndSubList(INDEX, INDEX)
-        ).thenReturn(sections);
-        when(
-                sectionService.filteredByValid(sections)
-        ).thenReturn(sections);
-        when(
-                sectionService.getByTitle(TITLE, true)
-        ).thenReturn(section);
-        when(
-                sectionService.getByUrl(URL, true)
-        ).thenReturn(section);
-        when(
-                sectionService.getByTitle(TITLE, false)
-        ).thenReturn(section);
-        when(
-                sectionService.getByUrl(URL, false)
-        ).thenReturn(section);
-        when(
-                sectionService.sortByTitle(sections, true)
-        ).thenReturn(sections);
-        when(
-                sectionService.sortByTitle(sections, false)
-        ).thenReturn(sections);
-        when(
-                sectionService.sortByUrl(sections, true)
-        ).thenReturn(sections);
-        when(
-                sectionService.sortByUrl(sections, false)
-        ).thenReturn(sections);
-        when(
-                sectionService.getAndSortByTitle(true)
-        ).thenReturn(sections);
-        when(
-                sectionService.getAndSortByTitle(false)
-        ).thenReturn(sections);
-        when(
-                sectionService.getAndSortByUrl(true)
-        ).thenReturn(sections);
-        when(
-                sectionService.getAndSortByUrl(false)
-        ).thenReturn(sections);
-        when(
-                sectionService.initAndAdd(
-                        TITLE,
-                        DESCRIPTION,
-                        KEYWORDS,
-                        null, true)
-        ).thenReturn(section);
-        when(
-                sectionService.initAndUpdate(
-                        URL,
-                        TITLE,
-                        DESCRIPTION,
-                        KEYWORDS,
-                        null, null, true
-                )
-        ).thenReturn(section);
-        return sectionService;
     }
 
     private static UserService initUserService() {

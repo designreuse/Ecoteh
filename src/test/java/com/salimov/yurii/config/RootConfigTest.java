@@ -40,9 +40,6 @@ public final class RootConfigTest {
     private ResponseRepository responseRepository;
 
     @Autowired
-    private SectionRepository sectionRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -55,7 +52,6 @@ public final class RootConfigTest {
         assertNotNull(companyRepository);
         assertNotNull(photoRepository);
         assertNotNull(responseRepository);
-        assertNotNull(sectionRepository);
         assertNotNull(userRepository);
         assertNotNull(videoRepository);
     }

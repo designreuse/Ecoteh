@@ -67,13 +67,6 @@ public final class MockEntity {
         return response;
     }
 
-    public static Section getSection() {
-        final Section section = new Section(TITLE, DESCRIPTION, KEYWORDS);
-        section.setId(ID);
-        section.setUrl(URL);
-        return section;
-    }
-
     public static User getUser() {
         final User user = new User();
         user.setId(ID);
@@ -181,21 +174,6 @@ public final class MockEntity {
             responses.add(response);
         }
         return responses;
-    }
-
-    public static List<Section> getSections() {
-        return getSections(DEFAULT_SIZE);
-    }
-
-    public static List<Section> getSections(final int size) {
-        final List<Section> sections = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            final Section section = getSection();
-            section.setId((long) i);
-            section.setTitle(section.getTitle() + " " + getRandomInt());
-            sections.add(section);
-        }
-        return sections;
     }
 
     public static List<User> getUsers() {

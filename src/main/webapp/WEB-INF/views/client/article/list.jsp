@@ -53,7 +53,7 @@
                                 </c:choose>
                             </c:when>
                         </c:choose>
-                        <p align="right">
+                        <p class="text-right">
                             <a href="<c:url value="${reqmap}/article/${article.url}"/>"
                                title="Подробнее о &quot;<c:out value="${article.title}"/>&quot;">
                                 <span class="glyphicon glyphicon-share-alt"

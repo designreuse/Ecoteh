@@ -53,25 +53,7 @@ CREATE TABLE `users` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 4) Sections -------------------------------------------------------------------------------*/
-
-CREATE TABLE `sections` (
-  `id`          INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title`       VARCHAR(200) NOT NULL,
-  `url`         VARCHAR(200) NOT NULL,
-  `description` TEXT                  DEFAULT NULL,
-  `keywords`    TEXT         NOT NULL,
-  `photo_id`    INT UNSIGNED          DEFAULT NULL,
-  `is_valid`    BIT(1)       NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
-  UNIQUE (`title`),
-  UNIQUE (`url`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*--- 5) Categories -------------------------------------------------------------------------------*/
+/*--- 4) Categories -------------------------------------------------------------------------------*/
 
 CREATE TABLE `categories` (
   `id`          INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -80,18 +62,16 @@ CREATE TABLE `categories` (
   `description` TEXT                  DEFAULT NULL,
   `keywords`    TEXT         NOT NULL,
   `photo_id`    INT UNSIGNED          DEFAULT NULL,
-  `section_id`  INT UNSIGNED          DEFAULT NULL,
   `is_valid`    BIT(1)       NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
-  FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`),
   UNIQUE (`title`),
   UNIQUE (`url`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 6) Articles -------------------------------------------------------------------------------*/
+/*--- 5) Articles -------------------------------------------------------------------------------*/
 
 CREATE TABLE `articles` (
   `id`            INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -102,7 +82,7 @@ CREATE TABLE `articles` (
   `text`          TEXT                  DEFAULT NULL,
   `keywords`      TEXT                  DEFAULT NULL,
   `date`          VARCHAR(30)  NOT NULL,
-  `main_photo_id` INT UNSIGNED          DEFAULT NULL,
+  `photo_id` INT UNSIGNED          DEFAULT NULL,
   `category_id`   INT UNSIGNED          DEFAULT NULL,
   `is_valid`      BIT(1)       NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
@@ -113,7 +93,7 @@ CREATE TABLE `articles` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 7) Companies -------------------------------------------------------------------------------*/
+/*--- 6) Companies -------------------------------------------------------------------------------*/
 
 CREATE TABLE `companies` (
   `id`             INT UNSIGNED             NOT NULL AUTO_INCREMENT,
@@ -152,7 +132,7 @@ CREATE TABLE `companies` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 8) Article photo -------------------------------------------------------------------------------*/
+/*--- 7) Article photo -------------------------------------------------------------------------------*/
 
 CREATE TABLE `article_photo` (
   `article_id` INT UNSIGNED NOT NULL,
@@ -163,7 +143,7 @@ CREATE TABLE `article_photo` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 9) Article video ------------------------------------------------------------------------------*/
+/*--- 8) Article video ------------------------------------------------------------------------------*/
 
 CREATE TABLE `article_video` (
   `article_id` INT UNSIGNED NOT NULL,
@@ -174,7 +154,7 @@ CREATE TABLE `article_video` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 10) Company photo ---------------------------------------------------------------------------------------*/
+/*--- 9) Company photo -------------------------------------------------------------------------------*/
 
 CREATE TABLE `company_photo` (
   `company_id` INT UNSIGNED NOT NULL,
@@ -185,7 +165,7 @@ CREATE TABLE `company_photo` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 11) Responses ---------------------------------------------------------------------------------------*/
+/*--- 10) Responses -----------------------------------------------------------------------------------*/
 
 CREATE TABLE `responses` (
   `id`       INT UNSIGNED NOT NULL AUTO_INCREMENT,

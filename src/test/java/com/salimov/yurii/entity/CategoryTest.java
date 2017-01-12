@@ -114,33 +114,29 @@ public final class CategoryTest extends ContentTest<Category> {
     public void whenInitializeObjectWithInvalidParametersThenGetNull() {
         super.whenInitializeObjectWithInvalidParametersThenGetNull();
         final Category category = new Category();
-        category.initialize(null, null, null, null, null);
+        category.initialize(null, null, null, null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhoto());
-        assertNull(category.getSection());
 
-        category.initialize("", "", "", null, null);
+        category.initialize("", "", "", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhoto());
-        assertNull(category.getSection());
 
-        category.initialize(" ", " ", " ", null, null);
+        category.initialize(" ", " ", " ", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhoto());
-        assertNull(category.getSection());
 
-        category.initialize("   ", "   ", "   ", null, null);
+        category.initialize("   ", "   ", "   ", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhoto());
-        assertNull(category.getSection());
     }
 
     @Test
@@ -149,16 +145,16 @@ public final class CategoryTest extends ContentTest<Category> {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Category category = new Category();
         final Photo photo = getPhoto();
-        final Section section = getSection();
         category.initialize(
-                TITLE, DESCRIPTION, KEYWORDS,
-                photo, section
+                TITLE,
+                DESCRIPTION,
+                KEYWORDS,
+                photo
         );
         assertNotNull(category.getTitle());
         assertNotNull(category.getDescription());
         assertNotNull(category.getKeywords());
         assertNotNull(category.getPhoto());
-        assertNotNull(category.getSection());
         assertEquals(
                 category.getTitle(),
                 TITLE
@@ -174,10 +170,6 @@ public final class CategoryTest extends ContentTest<Category> {
         assertEquals(
                 category.getPhoto(),
                 photo
-        );
-        assertEquals(
-                category.getSection(),
-                section
         );
     }
 
@@ -201,45 +193,6 @@ public final class CategoryTest extends ContentTest<Category> {
         assertEquals(
                 category.getPhoto(),
                 photo
-        );
-    }
-
-    @Test
-    public void whenSetNullSectionThenGetNull() {
-        final Category category = getCategory();
-        category.setSection(null);
-        assertNull(
-                category.getSection()
-        );
-    }
-
-    @Test
-    public void whenSetNotNullSectionThenGetThisSection() {
-        final Category category = getCategory();
-        final Section section = getSection();
-        section.setCategories(null);
-        category.setArticles(
-                getArticles()
-        );
-        category.setSection(null);
-        category.setSection(section);
-        assertNotNull(
-                category.getSection()
-        );
-        assertEquals(
-                category.getSection(),
-                section
-        );
-        assertTrue(
-                section.containsCategory(category)
-        );
-
-        category.setSection(null);
-        assertNull(
-                category.getSection()
-        );
-        assertFalse(
-                section.containsCategory(category)
         );
     }
 

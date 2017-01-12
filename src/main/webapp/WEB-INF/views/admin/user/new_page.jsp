@@ -78,16 +78,16 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Телефон</th>
+                                    <th class="ths"><span class="red">*</span>&nbsp;Телефон</th>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="phone"
+                                        <input type="text" class="phone form-control" name="phone" required
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Электронная почта</th>
+                                    <th class="ths"><span class="red">*</span>&nbsp;Электронная почта</th>
                                     <td class="tds">
-                                        <input type="email" class="form-control" name="email" maxlength="100"
+                                        <input type="email" class="form-control" name="email" maxlength="100" required
                                                placeholder="name@mail.com">
                                     </td>
                                 </tr>

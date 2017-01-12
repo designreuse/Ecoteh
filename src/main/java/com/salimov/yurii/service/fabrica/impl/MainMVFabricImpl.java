@@ -6,8 +6,6 @@ import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collection;
-
 /**
  * The abstract class implements a set of standard methods for creates
  * and returns the main modelAndViews.
@@ -47,14 +45,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Section}.
-     *
-     * @see SectionService
-     */
-    private final SectionService sectionService;
-
-    /**
-     * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link User}.
      *
      * @see UserService
@@ -79,8 +69,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      *                        of the {@link CategoryService} interface.
      * @param companyService  a implementation
      *                        of the {@link CompanyService} interface.
-     * @param sectionService  a implementation
-     *                        of the {@link SectionService} interface.
      * @param userService     a implementation
      *                        of the {@link UserService} interface.
      * @param responseService a implementation
@@ -88,7 +76,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      * @see ArticleService
      * @see CategoryService
      * @see CompanyService
-     * @see SectionService
      * @see UserService
      * @see ResponseService
      */
@@ -96,7 +83,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
             final ArticleService articleService,
             final CategoryService categoryService,
             final CompanyService companyService,
-            final SectionService sectionService,
             final UserService userService,
             final ResponseService responseService
     ) {
@@ -104,7 +90,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         this.articleService = articleService;
         this.categoryService = categoryService;
         this.companyService = companyService;
-        this.sectionService = sectionService;
         this.userService = userService;
         this.responseService = responseService;
     }
@@ -124,16 +109,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
                 "slides",
                 mainCompany.getSlides()
         );
-        modelAndView.addObject(
-                "articles_list",
-                this.articleService.sortByDate(
-                        this.articleService.getAll(
-                                isValidContent()
-                        ),
-                        true
-                )
-        );
-        modelAndView.addObject("print_articles", 6);
         modelAndView.addObject("print_partners", 6);
         modelAndView.addObject(
                 "responses",
@@ -141,50 +116,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         );
         modelAndView.addObject("print_responses", 3);
         modelAndView.setViewName("client/main/index_page");
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page with all sections.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @Override
-    public ModelAndView allSectionsPage() {
-        final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject(
-                "sections_list",
-                this.sectionService.sortByTitle(
-                        this.sectionService.getAll(
-                                isValidContent()
-                        ),
-                        false
-                )
-        );
-        modelAndView.setViewName("client/section/all_page");
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page wits all sections with categories.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     * @see Category
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public ModelAndView sectionsWithCategoriesPage() {
-        final ModelAndView modelAndView = getDefaultModelAndView();
-        final Collection<Section> sections = this.sectionService.getAll(
-                isValidContent()
-        );
-        for (Section section : sections) {
-            section.getCategories().size();
-        }
-        modelAndView.addObject("sections_list", sections);
-        modelAndView.setViewName("client/section/with_categories_page");
         return modelAndView;
     }
 
@@ -197,15 +128,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView allCategoriesPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject(
-                "categories_list",
-                this.categoryService.sortByTitle(
-                        this.categoryService.getAll(
-                                isValidContent()
-                        ),
-                        false
-                )
-        );
         modelAndView.setViewName("client/category/all_page");
         return modelAndView;
     }
@@ -284,50 +206,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
                 )
         );
         modelAndView.setViewName("client/company/all_page");
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page with one section with parameter url.
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @Override
-    public ModelAndView sectionPage(final String url) {
-        final ModelAndView modelAndView = getDefaultModelAndView();
-        final Section section = this.sectionService.getByUrl(
-                url,
-                isValidContent()
-        );
-        modelAndView.addObject("section", section);
-        modelAndView.addObject(
-                "categories_list",
-                this.categoryService.sortByTitle(
-                        this.categoryService.filteredByValid(
-                                section.getCategories()
-                        ),
-                        false
-                )
-        );
-        modelAndView.setViewName("client/section/one_page");
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page with all categories
-     * in the section with parameter url.
-     *
-     * @param url a url of the section.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    public ModelAndView categoriesInTheSectionPage(final String url) {
-        final ModelAndView modelAndView = sectionPage(url);
-        modelAndView.setViewName("client/category/all_page");
         return modelAndView;
     }
 
@@ -449,9 +327,9 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
                 this.companyService.getMainCompany()
         );
         modelAndView.addObject(
-                "sections",
-                this.sectionService.sortByTitle(
-                        this.sectionService.getAll(
+                "categories",
+                this.categoryService.sortByTitle(
+                        this.categoryService.getAll(
                                 isValidContent()
                         ),
                         false

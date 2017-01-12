@@ -162,7 +162,7 @@ public class AdminArticleController {
                 number, category, mainFile, slideFiles,
                 videoUrls, isValid
         );
-        Cache.removeAll("All Articles");
+        Cache.clear();
         modelAndView.setViewName(
                 "redirect:/admin/article/" + article.getUrl()
         );
@@ -271,7 +271,7 @@ public class AdminArticleController {
         modelAndView.setViewName(
                 "redirect:/admin/article/" + article.getUrl()
         );
-        Cache.removeAll("All Articles", article.getUrl());
+        Cache.clear();
         return modelAndView;
     }
 
@@ -315,7 +315,7 @@ public class AdminArticleController {
     ) {
         this.articleService.removeByUrl(url);
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("All Articles", url);
+        Cache.clear();
         return modelAndView;
     }
 
@@ -335,7 +335,7 @@ public class AdminArticleController {
     public ModelAndView deleteAllArticles(final ModelAndView modelAndView) {
         this.articleService.removeAll();
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Article", "Home");
+        Cache.clear();
         return modelAndView;
     }
 }

@@ -19,7 +19,6 @@ public final class MockDAO {
     private static CompanyDao companyDao;
     private static PhotoDao photoDAO;
     private static ResponseDao responseDAO;
-    private static SectionDao sectionDAO;
     private static UserDao userDAO;
     private static VideoDao videoDAO;
 
@@ -56,13 +55,6 @@ public final class MockDAO {
             responseDAO = initResponseDAO();
         }
         return responseDAO;
-    }
-
-    public static SectionDao getSectionDAO() {
-        if (sectionDAO == null) {
-            sectionDAO = initSectionDAO();
-        }
-        return sectionDAO;
     }
 
     public static UserDao getUserDAO() {
@@ -221,15 +213,6 @@ public final class MockDAO {
         ).thenReturn(null);
         when(
                 dao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getBySectionId(ID)
-        ).thenReturn(categories);
-        when(
-                dao.getBySectionId(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.getBySectionId(null)
         ).thenReturn(null);
         return dao;
     }
@@ -411,69 +394,6 @@ public final class MockDAO {
         when(
                 dao.exists(null)
         ).thenReturn(false);
-        return dao;
-    }
-
-    private static SectionDao initSectionDAO() {
-        final Section section = MockEntity.getSection();
-        final List<Section> sections = MockEntity.getSections();
-        final SectionDao dao = mock(SectionDao.class);
-        when(
-                dao.add(section)).thenReturn(section);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(sections)
-        ).thenReturn(sections);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(section)
-        ).thenReturn(section);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(section);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(sections);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
-        when(
-                dao.getByTitle(TITLE)
-        ).thenReturn(section);
-        when(
-                dao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                dao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(URL)
-        ).thenReturn(section);
-        when(
-                dao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
         return dao;
     }
 

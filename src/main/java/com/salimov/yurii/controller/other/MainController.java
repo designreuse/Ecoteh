@@ -140,39 +140,6 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with all sections.
-     * Request mapping: /section/all
-     * Method: GET
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @RequestMapping(
-            value = "/section/all",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getAllSectionsPage() {
-        return this.fabric.allSectionsPage();
-    }
-
-    /**
-     * Returns modelAndView with information about page with some section.
-     * Request mapping: /section/{url}
-     * Method: GET
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @RequestMapping(
-            value = "/section/{url}",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getSectionPage(@PathVariable("url") final String url) {
-        return this.fabric.sectionPage(url);
-    }
-
-    /**
      * Returns modelAndView with information about page with all categories.
      * Request mapping: /category/all
      * Method: GET
@@ -186,27 +153,6 @@ public abstract class MainController {
     )
     public ModelAndView getAllCategoriesPage() {
         return this.fabric.allCategoriesPage();
-    }
-
-    /**
-     * Returns modelAndView with information about page with
-     * all categories in some section.
-     * Request mapping: /category/all/{url}
-     * Method: GET
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    @RequestMapping(
-            value = "/category/all/{url}",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getCategoriesInTheSection(
-            @PathVariable("url") final String url
-    ) {
-        return this.fabric.categoriesInTheSectionPage(url);
     }
 
     /**

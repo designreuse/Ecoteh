@@ -66,21 +66,8 @@
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         <c:choose>
                             <c:when test="${(article.category ne null) and ((article.category.validated) or (authorized_user ne null))}">
-                                <c:choose>
-                                    <c:when test="${(article.category.section ne null) and ((article.category.section.validated) or (authorized_user ne null))}">
-                                        → <a href="<c:url value="${reqmap}/section/all"/>"
-                                             title="Перейти к всем разделам">Все разделы</a>
-                                        →
-                                        <a href="<c:url value="${reqmap}/section/${article.category.section.url}"/>"
-                                           title="Перейти к разделу &quot;<c:out value="${article.category.section.title}"/>&quot;">
-                                            <c:out value="${article.category.section.title}"/>
-                                        </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        → <a href="<c:url value="${reqmap}/category/all"/>"
-                                             title="Перейти к всем категориям">Все категории</a>
-                                    </c:otherwise>
-                                </c:choose>
+                                → <a href="<c:url value="${reqmap}/category/all"/>"
+                                     title="Перейти к всем категориям">Все категории</a>
                                 →
                                 <a href="<c:url value="${reqmap}/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">

@@ -4,22 +4,6 @@
 
 <c:set var="length" value="${fn:length(articles_list)}"/>
 <c:if test="${length gt 0}">
-    <c:set var="desc_length" value="350"/>
-    <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
-    <c:if test="${(print_articles eq null) or (print_articles gt length) or (print_articles le 0)}">
-        <c:set var="print_articles" value="${length}"/>
-    </c:if>
-    <c:choose>
-        <c:when test="${(print_articles % 3 eq 0) or (print_articles % 3 eq 2)}">
-            <c:set var="in_line" value="3"/>
-        </c:when>
-        <c:when test="${(print_articles % 2 eq 0) or (print_articles % 2 eq 1)}">
-            <c:set var="in_line" value="2"/>
-        </c:when>
-        <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
-    </c:choose>
-    <c:set var="last_line" value="${print_articles - print_articles % in_line}"/>
-    <c:set var="printed_in_line" value="0"/> <c:set var="printed" value="0"/>
     <div class="container">
         <div class="row">
             <div class="box">
@@ -28,6 +12,22 @@
                     <a href="<c:url value="${reqmap}/article/all"/>">Последние статьи</a>
                     </h3>
                 <hr>
+                <c:set var="desc_length" value="350"/>
+                <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
+                <c:if test="${(print_articles eq null) or (print_articles gt length) or (print_articles le 0)}">
+                    <c:set var="print_articles" value="${length}"/>
+                </c:if>
+                <c:choose>
+                    <c:when test="${(print_articles % 3 eq 0) or (print_articles % 3 eq 2)}">
+                        <c:set var="in_line" value="3"/>
+                    </c:when>
+                    <c:when test="${(print_articles % 2 eq 0) or (print_articles % 2 eq 1)}">
+                        <c:set var="in_line" value="2"/>
+                    </c:when>
+                    <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
+                </c:choose>
+                <c:set var="last_line" value="${print_articles - print_articles % in_line}"/>
+                <c:set var="printed_in_line" value="0"/> <c:set var="printed" value="0"/>
                 <c:forEach items="${articles_list}" var="article" end="${print_articles - 1}">
                     <c:if test="${(last_line ne print_articles) and (printed eq last_line)}">
                         <c:set var="in_line" value="${print_articles - last_line}"/>
@@ -88,7 +88,7 @@
                 <c:if test="${length gt print_articles}">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
-                        <p align="right">
+                        <p class="text-right">
                             <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех статьям">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Все статьи...

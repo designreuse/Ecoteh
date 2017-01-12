@@ -8,6 +8,7 @@ import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.PhotoService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
+import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.Authentication;
@@ -169,7 +170,7 @@ public final class UserServiceImpl
                 phone, vkontakte, facebook,
                 twitter, skype, description
         );
-        final Photo photo = updatePhotoFile(
+        final Photo photo = updatePhoto(
                 new Photo(),
                 photoFile,
                 name
@@ -782,7 +783,7 @@ public final class UserServiceImpl
         switch (action) {
             case "replace":
                 user.setPhoto(
-                        updatePhotoFile(
+                        updatePhoto(
                                 user.getPhoto(),
                                 file,
                                 title
@@ -803,7 +804,7 @@ public final class UserServiceImpl
      * @param title a photo title.
      * @return The updating photo.
      */
-    private Photo updatePhotoFile(
+    private Photo updatePhoto(
             final Photo photo,
             final MultipartFile file,
             final String title
@@ -811,7 +812,7 @@ public final class UserServiceImpl
         return this.photoService.updatePhoto(
                 photo != null ? photo : new Photo(),
                 file,
-                title,
+                Translator.fromCyrillicToLatin(title) + " photo",
                 "users"
         );
     }

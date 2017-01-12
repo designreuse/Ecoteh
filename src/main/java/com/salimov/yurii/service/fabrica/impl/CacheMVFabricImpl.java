@@ -134,41 +134,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * Creates and returns page with all sections.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @Override
-    public ModelAndView allSectionsPage() {
-        ModelAndView modelAndView = get(ALL_SECTIONS_KEY);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.allSectionsPage();
-            put(modelAndView, ALL_SECTIONS_KEY);
-        }
-        addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page wits all sections with categories.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     * @see Category
-     */
-    @Override
-    public ModelAndView sectionsWithCategoriesPage() {
-        ModelAndView modelAndView = get(SECTIONS_WITH_CATEGORIES_KEY);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.sectionsWithCategoriesPage();
-            put(modelAndView, SECTIONS_WITH_CATEGORIES_KEY);
-        }
-        addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
      * Creates and returns page with all categories.
      *
      * @return The ready object of class ModelAndView.
@@ -247,44 +212,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
         if (modelAndView == null) {
             modelAndView = this.fabric.allPartnersPage();
             put(modelAndView, ALL_PARTNERS_KEY);
-        }
-        addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page with one section with parameter url.
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @Override
-    public ModelAndView sectionPage(final String url) {
-        ModelAndView modelAndView = get(SECTION_BY_URL_KEY + url);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.sectionPage(url);
-            put(modelAndView, SECTION_BY_URL_KEY + url);
-        }
-        addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page with all categories
-     * in the section with parameter url.
-     *
-     * @param url a url of the section.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    public ModelAndView categoriesInTheSectionPage(final String url) {
-        ModelAndView modelAndView = get(CATEGORIES_IN_SECTION_KEY + url);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.categoriesInTheSectionPage(url);
-            put(modelAndView, CATEGORIES_IN_SECTION_KEY + url);
         }
         addAuthUser(modelAndView);
         return modelAndView;

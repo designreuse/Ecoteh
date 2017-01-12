@@ -72,21 +72,8 @@
                         <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        <c:choose>
-                            <c:when test="${((category.section ne null) and (category.section.validated)) or (authorized_user ne null)}">
-                                → <a href="<c:url value="${reqmap}/section/all"/>"
-                                     title="Перейти к всем разделам">Все разделы</a>
-                                →
-                                <a href="<c:url value="${reqmap}/section/${category.section.url}"/>"
-                                   title="Перейти к разделу &quot;<c:out value="${category.section.title}"/>&quot;">
-                                    <c:out value="${category.section.title}"/>
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                → <a href="<c:url value="${reqmap}/category/all"/>"
-                                     title="Перейти к всем категориям">Все категории</a>
-                            </c:otherwise>
-                        </c:choose>
+                        → <a href="<c:url value="${reqmap}/category/all"/>"
+                             title="Перейти к всем категориям">Все категории</a>
                         → <a href="#">Категория &quot;<c:out value="${category.title}"/>&quot;</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

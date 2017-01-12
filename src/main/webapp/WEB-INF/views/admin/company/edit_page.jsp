@@ -63,8 +63,11 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <c:if test="${main}"><c:set var="main" value="/main"/> </c:if>
-                        <form action="<c:url value="/admin/company/update/${main}"/>" method="post"
+                        <c:choose>
+                            <c:when test="${main}"><c:set var="action" value="/main"/></c:when>
+                            <c:otherwise><c:set var="action" value=""/></c:otherwise>
+                        </c:choose>
+                        <form action="<c:url value="/admin/company/update/${action}"/>" method="post"
                               enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
@@ -246,15 +249,15 @@
                                     <th class="ths">
                                         <a href="https://www.google.com.ua/maps/"
                                            title="Перейти к Google Maps">Google Maps</a>&nbsp;
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_1.jpg"/>"
+                                        <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
                                            title="Офис на карте Google Maps. Где это взять?" rel="lightgallery[maps]">
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </a>
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_2.jpg"/>"
+                                        <a href="<c:url value="/resources/img/static/google_map_2.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_3.jpg"/>"
+                                        <a href="<c:url value="/resources/img/static/google_maps_3.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_4.jpg"/>"
+                                        <a href="<c:url value="/resources/img/static/google_maps_4.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                     </th>
                                     <td class="tds">
@@ -350,7 +353,7 @@
                                                                    title="<c:out value="${slide.title}"/>">
                                                                     <img class="img-preview"
                                                                          src="<c:url value="/resources/img/${slide.url}"/>"
-                                                                         alt="<c:out value="${slide.title}"/>"/>
+                                                                         alt="<c:out value="${company.title}"/>"/>
                                                                 </a>
                                                             </c:if>
                                                         </c:forEach>
