@@ -19,7 +19,7 @@ import java.util.List;
  * @see CategoryService
  * @see ContentService
  * @see MediaService
- * @see PhotoService
+ * @see FileService
  * @see ResponseService
  * @see SectionService
  * @see UserService

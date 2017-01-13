@@ -10,14 +10,19 @@
             <div class="box">
                 <c:forEach items="${articles_list}" var="article">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <hr>
+                        <c:if test="${article.mainPhoto ne null}">
+                            <a href="<c:url value="${reqmap}/article/${article.url}"/>">
+                                <img class="img-responsive img-border img-left img-section"
+                                     alt="<c:out value="${article.title}"/>"
+                                     src="<c:url value="/resources/${article.mainPhoto.url}"/>">
+                            </a>
+                        </c:if>
                         <h3 class="text-center">
                             <a href="<c:url value="${reqmap}/article/${article.url}"/>">
                                 <c:out value="${article.title}"/>
                             </a>
                         </h3>
-                        <hr>
-                        <p class="little">
+                        <span class="little">
                             <c:if test="${!article.validated}">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
                                       title="Не отображается для клиентов"></span>&nbsp;
@@ -26,32 +31,10 @@
                             <a href="<c:url value="${reqmap}/article/num_${article.number}"/>">
                                 <c:out value="${article.number}"/>
                             </a>
-                        </p>
-                        <c:if test="${article.mainPhoto ne null}">
-                            <a href="<c:url value="${reqmap}/article/${article.url}"/>">
-                                <img class="img-responsive img-border img-left img-section"
-                                     alt="<c:out value="${article.title}"/>"
-                                     src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
-                            </a>
-                            <hr class="visible-xs">
-                        </c:if>
+                        </span>
                         <c:choose>
-                            <c:when test="${article.description ne null}">
-                                <c:choose>
-                                    <c:when test="${fn:length(article.description) gt desc_length}">
-                                        <p><c:out value="${fn:substring(article.description, 0, desc_length)}"/>...</p>
-                                    </c:when>
-                                    <c:otherwise><p><c:out value="${article.description}"/></p></c:otherwise>
-                                </c:choose>
-                            </c:when>
-                            <c:when test="${article.text ne null}">
-                                <c:choose>
-                                    <c:when test="${fn:length(article.text) gt desc_length}">
-                                        <c:out value="${fn:substring(article.text, 0, desc_length)}"/>...
-                                    </c:when>
-                                    <c:otherwise><c:out value="${article.text}"/></c:otherwise>
-                                </c:choose>
-                            </c:when>
+                            <c:when test="${article.description ne null}"><p>${article.description}</p></c:when>
+                            <c:when test="${article.text ne null}">${article.text}</c:when>
                         </c:choose>
                         <p class="text-right">
                             <a href="<c:url value="${reqmap}/article/${article.url}"/>"
@@ -60,6 +43,9 @@
                                       aria-hidden="true"></span>&nbsp;Подробнее...
                             </a>
                         </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <hr>
                     </div>
                 </c:forEach>
                 <div class="clearfix"></div>

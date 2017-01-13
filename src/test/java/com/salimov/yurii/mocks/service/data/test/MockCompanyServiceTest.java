@@ -23,7 +23,7 @@ public class MockCompanyServiceTest extends MockContentServiceTest<Company> {
 
     /*@Test
     public void whenInitAndAddCompanyThenReturnThisCompany() {
-        final Photo photo = MockEntity.getPhoto();
+        final Photo photo = MockEntity.getFile();
         Company company = this.service.initAndAdd(MockConstants.TITLE, MockConstants.DOMAIN, MockConstants.TAGLINE, MockConstants.DESCRIPTION, MockConstants.INFORMATION, MockConstants.ADVANTAGES,
                 MockConstants.PHONE, MockConstants.PHONE, MockConstants.PHONE, MockConstants.EMAIL, MockConstants.EMAIL, MockConstants.PASSWORD, MockConstants.VKONTAKTE, MockConstants.FACEBOOK, MockConstants.TWITTER, MockConstants.SKYPE, MockConstants.ADDRESS, MockConstants.KEYWORDS,
                 MockConstants.GOOGLE_MAPS, photo, photo);
@@ -32,7 +32,7 @@ public class MockCompanyServiceTest extends MockContentServiceTest<Company> {
 
     /*@Test
     public void whenInitAndUpdateCompanyThenReturnCompany() {
-        final Photo photo = MockEntity.getPhoto();
+        final Photo photo = MockEntity.getFile();
         Company company = this.service.initAndUpdate(MockConstants.ID, MockConstants.TITLE, MockConstants.DOMAIN, MockConstants.TAGLINE, MockConstants.DESCRIPTION, MockConstants.INFORMATION, MockConstants.ADVANTAGES,
                 MockConstants.PHONE, MockConstants.PHONE, MockConstants.PHONE, MockConstants.EMAIL, MockConstants.EMAIL, MockConstants.PASSWORD, MockConstants.VKONTAKTE, MockConstants.FACEBOOK, MockConstants.TWITTER, MockConstants.SKYPE, MockConstants.ADDRESS, MockConstants.KEYWORDS,
                 MockConstants.GOOGLE_MAPS, photo, photo);

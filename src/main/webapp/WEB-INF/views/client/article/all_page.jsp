@@ -19,9 +19,9 @@
         <meta name="keywords"
               content="<c:out value="${main_company.title}"/><c:forEach items="${articles_list}" var="article">, <c:out value="${article.title}"/></c:forEach>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="/resources/<c:out value="${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="/resources/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -62,7 +62,7 @@
                         <%-- Path --%>
                     <p class="path">
                         <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#" title="Все статьи">Cтатьи</a>
+                        → <a href="#">Все статьи</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>

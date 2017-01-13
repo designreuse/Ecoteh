@@ -2,10 +2,10 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.CompanyDao;
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -52,11 +52,11 @@ public final class CompanyServiceImpl
     /**
      * The interface of the service layer,
      * describes a set of methods for working
-     * with objects of the class {@link Photo}.
+     * with objects of the class {@link File}.
      *
-     * @see PhotoService
+     * @see FileService
      */
-    private final PhotoService photoService;
+    private final FileService fileService;
 
     /**
      * Constructor.
@@ -64,20 +64,20 @@ public final class CompanyServiceImpl
      *
      * @param dao          a implementation
      *                     of the {@link CompanyDao} interface.
-     * @param photoService a implementation
-     *                     of the {@link PhotoService} interface.
+     * @param fileService a implementation
+     *                     of the {@link FileService} interface.
      * @see CompanyDao
-     * @see PhotoService
+     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CompanyServiceImpl(
             final CompanyDao dao,
-            final PhotoService photoService
+            final FileService fileService
     ) {
         super(dao);
         this.dao = dao;
-        this.photoService = photoService;
+        this.fileService = fileService;
     }
 
     /**
@@ -104,7 +104,7 @@ public final class CompanyServiceImpl
      * @param isValid       a validated of the new company.
      * @return The new saving company.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @Override
     @Transactional
@@ -137,7 +137,7 @@ public final class CompanyServiceImpl
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
                 updatePhoto(
-                        new Photo(),
+                        new File(),
                         logoFile,
                         title
                 )
@@ -175,7 +175,7 @@ public final class CompanyServiceImpl
      * @param isValid       a validated of the article.
      * @return The updating company with parameter id.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @Override
     @Transactional
@@ -203,7 +203,7 @@ public final class CompanyServiceImpl
             final boolean isValid
     ) {
         final Company company = getByUrl(url, false);
-        final Photo logo = company.getLogo();
+        final File logo = company.getLogo();
         updateLogo(
                 company,
                 logoFile,
@@ -287,14 +287,14 @@ public final class CompanyServiceImpl
             final String slidesAction
     ) {
         final Company mainCompany = getMainCompany();
-        final Photo logo = mainCompany.getLogo();
+        final File logo = mainCompany.getLogo();
         updateLogo(
                 mainCompany,
                 logoFile,
                 title,
                 slidesAction
         );
-        final Photo favicon = mainCompany.getFavicon();
+        final File favicon = mainCompany.getFavicon();
         updateFavicon(
                 mainCompany,
                 faviconFile,
@@ -310,7 +310,7 @@ public final class CompanyServiceImpl
         );
         mainCompany.setWorkTimeFrom(workTimeFrom);
         mainCompany.setWorkTimeTo(workTimeTo);
-        final List<Photo> slides = new ArrayList<>(
+        final List<File> slides = new ArrayList<>(
                 mainCompany.getSlides()
         );
         updateSlides(
@@ -485,20 +485,20 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Remove photo in selected company.
+     * Remove file in selected company.
      *
      * @param company a selected company.
      */
     private void removePhoto(final Company company) {
-        this.photoService.remove(
+        this.fileService.remove(
                 company.getLogo()
         );
-        this.photoService.remove(
+        this.fileService.remove(
                 company.getFavicon()
         );
         if (!company.getSlides().isEmpty()) {
             company.getSlides()
-                    .forEach(this.photoService::remove);
+                    .forEach(this.fileService::remove);
         }
     }
 
@@ -549,7 +549,7 @@ public final class CompanyServiceImpl
 
         switch (action) {
             case "replace":
-                final Photo favicon = updatePhoto(
+                final File favicon = updatePhoto(
                         company.getFavicon(),
                         file,
                         title
@@ -579,12 +579,12 @@ public final class CompanyServiceImpl
         switch (action) {
             case "replace":
                 if (files != null && files.length > 0) {
-                    final List<Photo> slides = new ArrayList<>();
+                    final List<File> slides = new ArrayList<>();
                     for (MultipartFile file : files) {
                         if (file != null && !file.isEmpty()) {
                             slides.add(
                                     updateSlide(
-                                            new Photo(),
+                                            new File(),
                                             file,
                                             title
                                     )
@@ -602,7 +602,7 @@ public final class CompanyServiceImpl
                         if (file != null && !file.isEmpty()) {
                             company.addSlide(
                                     updateSlide(
-                                            new Photo(),
+                                            new File(),
                                             file,
                                             title
                                     )
@@ -618,17 +618,17 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Removes photo.
+     * Removes file.
      *
-     * @param photo  the photo to remove.
-     * @param action a action on the photo.
+     * @param file  the file to remove.
+     * @param action a action on the file.
      */
     private void removePhoto(
-            final Photo photo,
+            final File file,
             final String action
     ) {
         if (action.equals("delete")) {
-            this.photoService.remove(photo);
+            this.fileService.remove(file);
         }
     }
 
@@ -641,33 +641,33 @@ public final class CompanyServiceImpl
      */
     private void removeSlides(
             final Company company,
-            final Collection<Photo> slides,
+            final Collection<File> slides,
             final String action
     ) {
         if (action.equals("delete") || action.equals("replace")) {
             slides.stream()
                     .filter(slide -> !company.containsSlide(slide))
-                    .forEach(this.photoService::remove);
+                    .forEach(this.fileService::remove);
         }
     }
 
     /**
-     * Updates the photo.
+     * Updates the file.
      *
-     * @param photo the photo to update.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
+     * @param photo the file to update.
+     * @param file  a file file.
+     * @param title a file title.
+     * @return The updating file.
      */
-    private Photo updatePhoto(
-            final Photo photo,
+    private File updatePhoto(
+            final File photo,
             final MultipartFile file,
             final String title
     ) {
         return updatePhotoFile(
                 photo,
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo"
+                Translator.fromCyrillicToLatin(title) + " file"
         );
     }
 
@@ -679,8 +679,8 @@ public final class CompanyServiceImpl
      * @param title a slide title.
      * @return The updating slide.
      */
-    private Photo updateSlide(
-            final Photo slide,
+    private File updateSlide(
+            final File slide,
             final MultipartFile file,
             final String title
     ) {
@@ -692,23 +692,23 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Updates photo.
+     * Updates file.
      *
-     * @param photo the photo to updates.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
+     * @param photo the file to updates.
+     * @param file  a file file.
+     * @param title a file title.
+     * @return The updating file.
      */
-    private Photo updatePhotoFile(
-            final Photo photo,
+    private File updatePhotoFile(
+            final File photo,
             final MultipartFile file,
             final String title
     ) {
-        return this.photoService.updatePhoto(
-                photo != null ? photo : new Photo(),
+        return this.fileService.updatePhoto(
+                photo != null ? photo : new File(),
                 file,
                 title,
-                "company"
+                "img/company"
         );
     }
 }

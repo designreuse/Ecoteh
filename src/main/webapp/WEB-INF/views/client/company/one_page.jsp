@@ -18,9 +18,9 @@
               content="Описание компании &quot;<c:out value="${company.title}"/>&quot;: <c:out value="${company.description}"/>.">
         <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -65,7 +65,7 @@
                         <p class="path">
                             <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a>
-                            → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
+                            → <a href="#"><c:out value="${company.title}"/></a>
                         </p>
                         <c:if test="${company.logo ne null}">
                             <hr>
@@ -80,7 +80,7 @@
                                   title="Не отображается для клиентов"></span>
                             </p>
                         </c:if>
-                        <p><c:out value="${company.description}"/></p>
+                        <p>${company.description}</p>
                         <p>${company.information}</p>
                     </div>
                     <div class="clearfix"></div>

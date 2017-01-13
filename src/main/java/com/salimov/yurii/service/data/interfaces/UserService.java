@@ -1,6 +1,6 @@
 package com.salimov.yurii.service.data.interfaces;
 
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,7 +38,7 @@ public interface UserService extends DataService<User, Long> {
      * @param isLocked    locked the user or not.
      * @return The new saving user.
      * @see User
-     * @see Photo
+     * @see File
      */
     User initAndAdd(
             final String name,
@@ -78,7 +78,7 @@ public interface UserService extends DataService<User, Long> {
      * @param isLocked    locked the user or not.
      * @return The updating user with parameter id.
      * @see User
-     * @see Photo
+     * @see File
      */
     User initAndUpdate(
             final String url,

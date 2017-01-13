@@ -104,7 +104,7 @@ public final class User extends Model<Long> implements UserDetails {
     /**
      * The photo of a user.
      *
-     * @see Photo
+     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -114,7 +114,7 @@ public final class User extends Model<Long> implements UserDetails {
             name = "photo_id",
             referencedColumnName = "id"
     )
-    private Photo photo;
+    private File photo;
 
     /**
      * The role of a user.
@@ -370,9 +370,9 @@ public final class User extends Model<Long> implements UserDetails {
      * @param email       a new e-mail of the user.
      * @param phone       a new phone of the user.
      * @param description a new description of the user.
-     * @param photo       a new photo of the user.
+     * @param photo       a new file of the user.
      * @param role        a new role of the user.
-     * @see Photo
+     * @see File
      * @see UserRole
      */
     public void initialize(
@@ -382,7 +382,7 @@ public final class User extends Model<Long> implements UserDetails {
             final String email,
             final String phone,
             final String description,
-            final Photo photo,
+            final File photo,
             final UserRole role
     ) {
         initialize(name, email, phone, description);
@@ -643,22 +643,22 @@ public final class User extends Model<Long> implements UserDetails {
     /**
      * Returns a photo of the user.
      *
-     * @return The user photo.
-     * @see Photo
+     * @return The user file.
+     * @see File
      */
-    public Photo getPhoto() {
+    public File getPhoto() {
         return this.photo;
     }
 
     /**
      * Sets a new photo to the user.
-     * If parameter photo is invalid, then sets {@code null}.
+     * If parameter file is invalid, then sets {@code null}.
      *
-     * @param photo a new photo to the user.
-     * @see Photo
+     * @param photo a new file to the user.
+     * @see File
      */
-    public void setPhoto(final Photo photo) {
-        this.photo = Photo.isValidated(photo) ? photo : null;
+    public void setPhoto(final File photo) {
+        this.photo = File.isValidated(photo) ? photo : null;
     }
 
     /**

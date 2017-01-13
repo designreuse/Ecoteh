@@ -12,7 +12,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a href="<c:url value="${reqmap}/"/>" class="navbar-brand" >
+                <a href="<c:url value="${reqmap}/"/>" class="navbar-brand">
                     <c:choose>
                         <c:when test="${main_company ne null}">
                             <c:out value="${main_company.title}"/>
@@ -33,49 +33,27 @@
                         </a>
                     </li>
                     <li class="dropdown-top">
-                        <a class="dropdown-top" href="<c:url value="${reqmap}/article/all"/>">Продукция</a>
-                        <div class="dropdown-inside" role="menu">
-                            <c:set var="length" value="${fn:length(categories)}"/>
-                            <div class="<c:choose>
-                                        <c:when test="${length eq 3}">nav-container-4</c:when>
-                                        <c:when test="${length ne 0}">nav-container-5</c:when>
-                                        </c:choose>">
-                                <c:if test="${length gt 0}">
-                                    <c:forEach items="${categories}" var="category" end="4">
-                                        <div class="<c:choose>
-                                            <c:when test="${(length eq 3) or (length le 2)}">
-                                            col-sm-6 col-md-6 col-lg-6 col-xl-6</c:when>
-                                            <c:otherwise>col-sm-4 col-md-4 col-lg-4 col-xl-4</c:otherwise>
-                                            </c:choose>">
-                                            <a href="<c:url value="${reqmap}/category/${category.url}"/>"
-                                                title="Перейти к &quot;<c:out value="${category.title}"/>&quot;">
-                                                <h4 class="text-center"><c:out value="${category.title}"/></h4>
-                                            </a>
-                                            <%--<c:forEach items="${section.categories}" var="category" end="4">
-                                                <a href="<c:url value="${reqmap}/category/${category.url}"/>"
-                                                   title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
-                                                    <h5 class="text-center"><c:out value="${category.title}"/></h5>
-                                                </a>
-                                            </c:forEach>--%>
-                                        </div>
-                                    </c:forEach>
-                                </c:if>
-                                <div class="<c:choose>
-                                            <c:when test="${(length eq 3) or (length le 2)}">
-                                            col-sm-6 col-md-6 col-lg-6 col-xl-6</c:when>
-                                            <c:when test="${length eq 0}">
-                                            col-sm-12 col-md-12 col-lg-12 col-xl-12</c:when>
-                                            <c:otherwise>col-sm-4 col-md-4 col-lg-4 col-xl-4</c:otherwise>
-                                            </c:choose>">
-                                    <h4 class="text-center">
-                                        <a href="<c:url value="${reqmap}/category/all"/>">Категории</a>
-                                    </h4>
-                                    <h4 class="text-center">
-                                        <a href="<c:url value="${reqmap}/article/all"/>">Статьи</a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
+                        <a class="dropdown-top" href="<c:url value="${reqmap}/category/all"/>">Продукция</a>
+                        <c:set var="length" value="${fn:length(categories)}"/>
+                        <c:if test="${length gt 0}">
+                            <c:set var="count" value="1"/>
+                            <ul class="dropdown-inside" role="menu">
+                                <c:forEach items="${categories}" var="category">
+                                    <li class="text-center">
+                                        <a href="<c:url value="${reqmap}/category/${category.url}"/>"
+                                           title="Перейти к &quot;<c:out value="${category.title}"/>&quot;">
+                                            <h4 class="text-center">
+                                                <c:out value="${category.title}"/>
+                                            </h4>
+                                        </a>
+                                        <c:if test="${count ne length}">
+                                            <c:set var="count" value="${count + 1}"/>
+                                            <hr>
+                                        </c:if>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </c:if>
                     </li>
                     <c:if test="${main_company ne null}">
                         <li class="dropdown-top">

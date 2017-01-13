@@ -1,15 +1,14 @@
 package com.salimov.yurii.mocks.enity.test;
 
+import com.salimov.yurii.entity.User;
 import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Ignore;
 import org.junit.Test;
-import com.salimov.yurii.entity.User;
 
 import java.util.Collection;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static com.salimov.yurii.mocks.enity.MockEntity.getUsers;
 
 public class MockUserTest extends MockModelTest<User> {
 

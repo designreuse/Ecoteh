@@ -24,9 +24,10 @@
         <div class="text-center">
             <c:choose>
                 <c:when test="${user.photo ne null}">
-                    <a href="<c:url value="/resources/img/${user.photo.url}"/>" rel="lightgallery">
+                    <a href="<c:url value="/resources/${user.photo.url}"/>" rel="lightgallery"
+                       title="<c:out value="${user.name}"/>">
                         <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
-                             src="<c:url value="/resources/img/${user.photo.url}"/>">
+                             src="<c:url value="/resources/${user.photo.url}"/>">
                     </a>
                 </c:when>
                 <c:otherwise>

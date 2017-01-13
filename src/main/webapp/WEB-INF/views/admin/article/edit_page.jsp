@@ -21,9 +21,9 @@
         <meta name="keywords"
               content="Редактирование статии, <c:out value="${article.title}"/>, <c:out value="${article.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -45,7 +45,7 @@
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/article/all"/>" title="Все статьи">Все статьи</a>
+                        → <a href="<c:url value="/admin/article/all"/>">Все статьи</a>
                         → <a href="#">Редактирование статьи</a>
                     </p>
                     <hr>
@@ -136,10 +136,10 @@
                                     <td class="tds">
                                         <c:choose>
                                             <c:when test="${article.mainPhoto ne null}">
-                                                <a href="<c:url value="/resources/img/${article.mainPhoto.url}"/>"
+                                                <a href="<c:url value="/resources/${article.mainPhoto.url}"/>"
                                                    rel="lightgallery[slides]">
                                                     <img class="img-logo" alt="<c:out value="${article.title}"/>"
-                                                         src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
+                                                         src="<c:url value="/resources/${article.mainPhoto.url}"/>">
                                                 </a><br><br>
                                                 <label title="Заменить главное фото">
                                                     <b><input type="radio" name="photo_action" value="replace" checked
@@ -173,12 +173,12 @@
                                             <c:when test="${fn:length(article.slides) gt 0}">
                                                 <c:forEach items="${article.slides}" var="slide">
                                                     <c:if test="${slide ne null}">
-                                                        <a href="<c:url value="/resources/img/${slide.url}"/>"
+                                                        <a href="<c:url value="/resources/${slide.url}"/>"
                                                            rel="lightgallery[slides]"
                                                            title="<c:out value="${slide.title}"/>">
                                                             <img class="img-preview"
                                                                  alt="<c:out value="${article.title}"/>"
-                                                                 src="<c:url value="/resources/img/${slide.url}"/>"/>
+                                                                 src="<c:url value="/resources/${slide.url}"/>"/>
                                                         </a>&nbsp;&nbsp;
                                                     </c:if>
                                                 </c:forEach>

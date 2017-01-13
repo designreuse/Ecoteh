@@ -55,10 +55,10 @@ public final class MockEntity {
         return message;
     }
 
-    public static Photo getPhoto() {
-        final Photo photo = new Photo(TITLE, URL);
-        photo.setId(ID);
-        return photo;
+    public static File getPhoto() {
+        final File file = new File(TITLE, URL);
+        file.setId(ID);
+        return file;
     }
 
     public static Response getResponse() {
@@ -146,19 +146,19 @@ public final class MockEntity {
         return messages;
     }
 
-    public static List<Photo> getPhotos() {
+    public static List<File> getPhotos() {
         return getPhotos(DEFAULT_SIZE);
     }
 
-    public static List<Photo> getPhotos(final int size) {
-        final List<Photo> photos = new ArrayList<>();
+    public static List<File> getPhotos(final int size) {
+        final List<File> files = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            final Photo photo = getPhoto();
-            photo.setId((long) i);
-            photo.setTitle(photo.getTitle() + " " + getRandomInt());
-            photos.add(photo);
+            final File file = getPhoto();
+            file.setId((long) i);
+            file.setTitle(file.getTitle() + " " + getRandomInt());
+            files.add(file);
         }
-        return photos;
+        return files;
     }
 
     public static List<Response> getResponses() {

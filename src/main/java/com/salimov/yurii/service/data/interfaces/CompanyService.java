@@ -1,7 +1,7 @@
 package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public interface CompanyService extends ContentService<Company, Long> {
      * @param isValid       a validated of the new company.
      * @return The new saving company.
      * @see Company
-     * @see Photo
+     * @see File
      */
     Company initAndAdd(
             final String title,
@@ -93,7 +93,7 @@ public interface CompanyService extends ContentService<Company, Long> {
      * @param isValid       a validated of the article.
      * @return The updating company with parameter id.
      * @see Company
-     * @see Photo
+     * @see File
      */
     Company initAndUpdate(
             final String url,

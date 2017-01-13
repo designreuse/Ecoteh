@@ -15,9 +15,8 @@ import java.util.Collection;
  * @see ArticleDao
  * @see CategoryDao
  * @see CompanyDao
- * @see PhotoDao
+ * @see FileDao
  * @see ResponseDao
- * @see SectionDao
  * @see UserDao
  * @see VideoDao
  * @see MessageDao

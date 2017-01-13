@@ -18,9 +18,9 @@
         <meta name="keywords"
               content="Категория<c:out value=", ${category.title}, ${category.keywords}"/><c:forEach items="${articles_list}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -74,7 +74,7 @@
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="${reqmap}/category/all"/>"
                              title="Перейти к всем категориям">Все категории</a>
-                        → <a href="#">Категория &quot;<c:out value="${category.title}"/>&quot;</a>
+                        → <a href="#"><c:out value="${category.title}"/></a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>

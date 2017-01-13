@@ -1,9 +1,9 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @version 1.0
  * @see Category
  * @see CategoryService
- * @see PhotoService
+ * @see FileService
  * @see AdminMVFabric
  */
 @Controller
@@ -103,7 +103,7 @@ public class AdminCategoryController {
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Category
-     * @see Photo
+     * @see File
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addCategory(
@@ -181,7 +181,7 @@ public class AdminCategoryController {
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Category
-     * @see Photo
+     * @see File
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView updateCategory(

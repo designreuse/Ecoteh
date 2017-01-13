@@ -67,7 +67,7 @@ public final class Article extends Content<Long> {
     /**
      * The main photo of an article.
      *
-     * @see Photo
+     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -77,12 +77,12 @@ public final class Article extends Content<Long> {
             name = "photo_id",
             referencedColumnName = "id"
     )
-    private Photo mainPhoto;
+    private File mainPhoto;
 
     /**
      * The set of slides (photos).
      *
-     * @see Photo
+     * @see File
      */
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -103,7 +103,7 @@ public final class Article extends Content<Long> {
                     )
             }
     )
-    private Set<Photo> slides = new HashSet<>();
+    private Set<File> slides = new HashSet<>();
 
     /**
      * The set of videos.
@@ -255,7 +255,7 @@ public final class Article extends Content<Long> {
      * @param slides      a new slides to the article.
      * @param videos      a new videos to the article.
      * @see Category
-     * @see Photo
+     * @see File
      * @see Video
      */
     public void initialize(
@@ -265,8 +265,8 @@ public final class Article extends Content<Long> {
             final String keywords,
             final String number,
             final Category category,
-            final Photo mainPhoto,
-            final Collection<Photo> slides,
+            final File mainPhoto,
+            final Collection<File> slides,
             final Collection<Video> videos
     ) {
         this.initialize(
@@ -398,21 +398,21 @@ public final class Article extends Content<Long> {
      * Returns a main photo of the article.
      *
      * @return The article main photo.
-     * @see Photo
+     * @see File
      */
-    public Photo getMainPhoto() {
+    public File getMainPhoto() {
         return this.mainPhoto;
     }
 
     /**
      * Sets a new main photo to the article.
-     * If parameter mainPhoto is invalid, then sets {@code null}.
+     * If parameter mainFile is invalid, then sets {@code null}.
      *
      * @param mainPhoto a new main photo to the article.
-     * @see Photo
+     * @see File
      */
-    public void setMainPhoto(final Photo mainPhoto) {
-        this.mainPhoto = Photo.isValidated(mainPhoto) ? mainPhoto : null;
+    public void setMainPhoto(final File mainPhoto) {
+        this.mainPhoto = File.isValidated(mainPhoto) ? mainPhoto : null;
     }
 
     /**
@@ -420,10 +420,10 @@ public final class Article extends Content<Long> {
      * Adds a new photo, if it is valid.
      *
      * @param slide a photo to add.
-     * @see Photo
+     * @see File
      */
-    public void addSlide(final Photo slide) {
-        if (Photo.isValidated(slide)) {
+    public void addSlide(final File slide) {
+        if (File.isValidated(slide)) {
             this.slides.add(slide);
         }
     }
@@ -433,9 +433,9 @@ public final class Article extends Content<Long> {
      * Adds a new photos, if they are valid.
      *
      * @param slides a photos to add.
-     * @see Photo
+     * @see File
      */
-    public void addSlides(final Collection<Photo> slides) {
+    public void addSlides(final Collection<File> slides) {
         if ((slides != null) && !slides.isEmpty()) {
             slides.forEach(this::addSlide);
         }
@@ -445,9 +445,9 @@ public final class Article extends Content<Long> {
      * Removes photo from the list of slides.
      *
      * @param slide a photo to remove.
-     * @see Photo
+     * @see File
      */
-    public void removeSlide(final Photo slide) {
+    public void removeSlide(final File slide) {
         this.slides.remove(slide);
     }
 
@@ -455,16 +455,16 @@ public final class Article extends Content<Long> {
      * Removes photos from the list of slides.
      *
      * @param slides a photos to remove.
-     * @see Photo
+     * @see File
      */
-    public void removeSlides(final Collection<Photo> slides) {
+    public void removeSlides(final Collection<File> slides) {
         this.slides.removeAll(slides);
     }
 
     /**
      * Clears the list of slides.
      *
-     * @see Photo
+     * @see File
      */
     public void clearSlides() {
         this.slides = new HashSet<>();
@@ -474,9 +474,9 @@ public final class Article extends Content<Long> {
      * Returns a list of slides.
      *
      * @return The list of slides.
-     * @see Photo
+     * @see File
      */
-    public List<Photo> getSlides() {
+    public List<File> getSlides() {
         return new ArrayList<>(this.slides);
     }
 
@@ -485,9 +485,9 @@ public final class Article extends Content<Long> {
      * Clears the list of slides and adds new slides.
      *
      * @param slides a slides to add.
-     * @see Photo
+     * @see File
      */
-    public void setSlides(final Collection<Photo> slides) {
+    public void setSlides(final Collection<File> slides) {
         clearSlides();
         addSlides(slides);
     }
@@ -497,9 +497,9 @@ public final class Article extends Content<Long> {
      *
      * @param slide a photo to contain.
      * @return {@code true} if photo is contains, {@code false} otherwise.
-     * @see Photo
+     * @see File
      */
-    public boolean containsSlide(final Photo slide) {
+    public boolean containsSlide(final File slide) {
         return this.slides.contains(slide);
     }
 
@@ -508,9 +508,9 @@ public final class Article extends Content<Long> {
      *
      * @param slides a photos to contain.
      * @return {@code true} if photos are contains, {@code false} otherwise.
-     * @see Photo
+     * @see File
      */
-    public boolean containsSlides(final Collection<Photo> slides) {
+    public boolean containsSlides(final Collection<File> slides) {
         return this.slides.containsAll(slides);
     }
 

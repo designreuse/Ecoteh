@@ -17,7 +17,7 @@ public final class MockDAO {
     private static ArticleDao articleDao;
     private static CategoryDao categoryDao;
     private static CompanyDao companyDao;
-    private static PhotoDao photoDAO;
+    private static FileDao fileDAO;
     private static ResponseDao responseDAO;
     private static UserDao userDAO;
     private static VideoDao videoDAO;
@@ -43,11 +43,11 @@ public final class MockDAO {
         return companyDao;
     }
 
-    public static PhotoDao getPhotoDAO() {
-        if (photoDAO == null) {
-            photoDAO = initPhotoDAO();
+    public static FileDao getFileDAO() {
+        if (fileDAO == null) {
+            fileDAO = initPhotoDAO();
         }
-        return photoDAO;
+        return fileDAO;
     }
 
     public static ResponseDao getResponseDAO() {
@@ -287,31 +287,31 @@ public final class MockDAO {
         return dao;
     }
 
-    private static PhotoDao initPhotoDAO() {
-        final Photo photo = MockEntity.getPhoto();
-        final List<Photo> photos = MockEntity.getPhotos();
-        final PhotoDao dao = mock(PhotoDao.class);
+    private static FileDao initPhotoDAO() {
+        final File file = MockEntity.getPhoto();
+        final List<File> files = MockEntity.getPhotos();
+        final FileDao dao = mock(FileDao.class);
         when(
-                dao.add(photo)
-        ).thenReturn(photo);
+                dao.add(file)
+        ).thenReturn(file);
         when(
                 dao.add(null)
         ).thenReturn(null);
         when(
-                dao.addAll(photos)
-        ).thenReturn(photos);
+                dao.addAll(files)
+        ).thenReturn(files);
         when(
                 dao.addAll(null)
         ).thenReturn(null);
         when(
-                dao.update(photo)
-        ).thenReturn(photo);
+                dao.update(file)
+        ).thenReturn(file);
         when(
                 dao.update(null)
         ).thenReturn(null);
         when(
                 dao.get(ID)
-        ).thenReturn(photo);
+        ).thenReturn(file);
         when(
                 dao.get(UNKNOWN_ID)
         ).thenReturn(null);
@@ -320,7 +320,7 @@ public final class MockDAO {
         ).thenReturn(null);
         when(
                 dao.getAll()
-        ).thenReturn(photos);
+        ).thenReturn(files);
         when(
                 dao.exists(ID)
         ).thenReturn(true);
@@ -332,7 +332,7 @@ public final class MockDAO {
         ).thenReturn(false);
         when(
                 dao.getByTitle(TITLE)
-        ).thenReturn(photo);
+        ).thenReturn(file);
         when(
                 dao.getByTitle(null)
         ).thenReturn(null);
@@ -341,7 +341,7 @@ public final class MockDAO {
         ).thenReturn(null);
         when(
                 dao.getByUrl(URL)
-        ).thenReturn(photo);
+        ).thenReturn(file);
         when(
                 dao.getByUrl(null)
         ).thenReturn(null);

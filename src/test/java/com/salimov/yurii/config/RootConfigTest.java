@@ -34,7 +34,7 @@ public final class RootConfigTest {
     private CompanyRepository companyRepository;
 
     @Autowired
-    private PhotoRepository photoRepository;
+    private FileRepository fileRepository;
 
     @Autowired
     private ResponseRepository responseRepository;
@@ -50,7 +50,7 @@ public final class RootConfigTest {
         assertNotNull(articleRepository);
         assertNotNull(categoryRepository);
         assertNotNull(companyRepository);
-        assertNotNull(photoRepository);
+        assertNotNull(fileRepository);
         assertNotNull(responseRepository);
         assertNotNull(userRepository);
         assertNotNull(videoRepository);

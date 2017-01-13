@@ -25,7 +25,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see ContentService
  * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
  * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
- * @see com.salimov.yurii.service.data.impl.SectionServiceImpl
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
  * @see ContentDao
  */

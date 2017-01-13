@@ -23,9 +23,8 @@ import java.util.stream.Collectors;
  * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
  * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
- * @see com.salimov.yurii.service.data.impl.PhotoServiceImpl
+ * @see com.salimov.yurii.service.data.impl.FileServiceImpl
  * @see com.salimov.yurii.service.data.impl.ResponseServiceImpl
- * @see com.salimov.yurii.service.data.impl.SectionServiceImpl
  * @see com.salimov.yurii.service.data.impl.UserServiceImpl
  * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see DataDao

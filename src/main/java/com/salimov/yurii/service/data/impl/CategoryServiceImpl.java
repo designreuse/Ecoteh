@@ -3,10 +3,10 @@ package com.salimov.yurii.service.data.impl;
 import com.salimov.yurii.dao.interfaces.CategoryDao;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,11 +54,11 @@ public final class CategoryServiceImpl
     /**
      * The interface of the service layer,
      * describes a set of methods for working
-     * with objects of the class {@link Photo}.
+     * with objects of the class {@link File}.
      *
-     * @see PhotoService
+     * @see FileService
      */
-    private final PhotoService photoService;
+    private final FileService fileService;
 
     /**
      * Constructor.
@@ -67,22 +67,22 @@ public final class CategoryServiceImpl
      *                       of the {@link CategoryDao} interface.
      * @param articleService a implementation
      *                       of the {@link ArticleService} interface.
-     * @param photoService   a implementation
-     *                       of the {@link PhotoService} interface.
+     * @param fileService   a implementation
+     *                       of the {@link FileService} interface.
      * @see CategoryDao
      * @see ArticleService
-     * @see PhotoService
+     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CategoryServiceImpl(
             final CategoryDao dao,
             final ArticleService articleService,
-            final PhotoService photoService
+            final FileService fileService
     ) {
         super(dao);
         this.articleService = articleService;
-        this.photoService = photoService;
+        this.fileService = fileService;
     }
 
     /**
@@ -91,11 +91,11 @@ public final class CategoryServiceImpl
      * @param title       a title of the new category.
      * @param description a description of the new category.
      * @param keywords    a keywords of the new category.
-     * @param photoFile   a photo of the new category.
+     * @param photoFile   a file of the new category.
      * @param isValid     validated of the new category.
      * @return The new saving category.
      * @see Category
-     * @see Photo
+     * @see File
      */
     @Override
     @Transactional
@@ -112,7 +112,7 @@ public final class CategoryServiceImpl
                 description,
                 keywords,
                 updatePhoto(
-                        new Photo(),
+                        new File(),
                         photoFile,
                         title
                 )
@@ -128,12 +128,12 @@ public final class CategoryServiceImpl
      * @param title       a new title to the category.
      * @param description a new description to the category.
      * @param keywords    a new keywords to the category.
-     * @param photoFile   a new photo to the category.
-     * @param photoAction a action on the main photo.
+     * @param photoFile   a new file to the category.
+     * @param photoAction a action on the main file.
      * @param isValid     a validated of the category.
      * @return The updating category with parameter id.
      * @see Category
-     * @see Photo
+     * @see File
      */
     @Override
     @Transactional
@@ -153,7 +153,7 @@ public final class CategoryServiceImpl
                 keywords
         );
         category.setValidated(isValid);
-        final Photo photo = category.getPhoto();
+        final File file = category.getPhoto();
         updatePhoto(
                 category,
                 photoFile,
@@ -161,7 +161,7 @@ public final class CategoryServiceImpl
                 photoAction
         );
         final Category _category = update(category);
-        removePhoto(photo, photoAction);
+        removePhoto(file, photoAction);
         return _category;
     }
 
@@ -175,7 +175,10 @@ public final class CategoryServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public Category getByUrl(final String url, final boolean isValid) {
+    public Category getByUrl(
+            final String url,
+            final boolean isValid
+    ) {
         final Category category = super.getByUrl(url, isValid);
         category.getArticles().size();
         return category;
@@ -183,7 +186,7 @@ public final class CategoryServiceImpl
 
     /**
      * Removes the category. Removes category if it is not {@code null}.
-     * Also deletes photo file if category photo is not {@code null}
+     * Also deletes file file if category file is not {@code null}
      *
      * @param category the category to remove.
      * @see Category
@@ -246,12 +249,12 @@ public final class CategoryServiceImpl
     }
 
     /**
-     * Updates category photo.
+     * Updates category file.
      *
      * @param category the category to update.
-     * @param file     a photo file.
-     * @param title    a photo title.
-     * @param action   a action on the photo.
+     * @param file     a file file.
+     * @param title    a file title.
+     * @param action   a action on the file.
      */
     private void updatePhoto(
             final Category category,
@@ -276,48 +279,48 @@ public final class CategoryServiceImpl
     }
 
     /**
-     * Updates photo.
+     * Updates file.
      *
-     * @param photo the photo to updates.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
+     * @param photo the file to updates.
+     * @param file  a file file.
+     * @param title a file title.
+     * @return The updating file.
      */
-    private Photo updatePhoto(
-            final Photo photo,
+    private File updatePhoto(
+            final File photo,
             final MultipartFile file,
             final String title
     ) {
-        return this.photoService.updatePhoto(
-                photo != null ? photo : new Photo(),
+        return this.fileService.updatePhoto(
+                photo != null ? photo : new File(),
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo",
-                "categories"
+                Translator.fromCyrillicToLatin(title) + " file",
+                "img/categories"
         );
     }
 
     /**
-     * Removes photo if action equals "delete".
+     * Removes file if action equals "delete".
      *
-     * @param photo  the photo to remove.
-     * @param action a action on the photo.
+     * @param file  the file to remove.
+     * @param action a action on the file.
      */
     private void removePhoto(
-            final Photo photo,
+            final File file,
             final String action
     ) {
         if (action.equals("delete")) {
-            this.photoService.remove(photo);
+            this.fileService.remove(file);
         }
     }
 
     /**
-     * Remove photo in selected category.
+     * Remove file in selected category.
      *
      * @param category a selected category.
      */
     private void removePhoto(final Category category) {
-        this.photoService.remove(
+        this.fileService.remove(
                 category.getPhoto()
         );
     }

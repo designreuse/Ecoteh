@@ -2,10 +2,10 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.config.DefaultConfig;
 import com.salimov.yurii.dao.interfaces.UserDao;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
 import com.salimov.yurii.util.translator.Translator;
@@ -59,29 +59,29 @@ public final class UserServiceImpl
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Photo}.
+     * for working with objects of the class {@link File}.
      *
-     * @see PhotoService
+     * @see FileService
      */
-    private final PhotoService photoService;
+    private final FileService fileService;
 
     /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao          a implementation
-     *                     of the {@link UserDao} interface.
-     * @param photoService a implementation
-     *                     of the {@link PhotoService} interface.
+     * @param dao         a implementation
+     *                    of the {@link UserDao} interface.
+     * @param fileService a implementation
+     *                    of the {@link FileService} interface.
      * @see UserDao
-     * @see PhotoService
+     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public UserServiceImpl(final UserDao dao, final PhotoService photoService) {
+    public UserServiceImpl(final UserDao dao, final FileService fileService) {
         super(dao);
         this.dao = dao;
-        this.photoService = photoService;
+        this.fileService = fileService;
     }
 
     /**
@@ -137,13 +137,13 @@ public final class UserServiceImpl
      * @param facebook    a facebook url of the new user.
      * @param twitter     a twitter url of the new user.
      * @param skype       a skype username of the new user.
-     * @param photoFile   a file of photo to the new user.
+     * @param photoFile   a file of file to the new user.
      * @param isValid     a validated of the new user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The new saving user.
      * @see User
-     * @see Photo
+     * @see File
      * @see UserRole
      */
     @Override
@@ -170,12 +170,13 @@ public final class UserServiceImpl
                 phone, vkontakte, facebook,
                 twitter, skype, description
         );
-        final Photo photo = updatePhoto(
-                new Photo(),
-                photoFile,
-                name
+        user.setPhoto(
+                updatePhoto(
+                        new File(),
+                        photoFile,
+                        name
+                )
         );
-        user.setPhoto(photo);
         user.setRole(UserRole.ADMIN);
         user.setValidated(isValid);
         user.setMailing(isMailing);
@@ -198,14 +199,14 @@ public final class UserServiceImpl
      * @param facebook    a new facebook url to the user.
      * @param twitter     a new twitter url to the user.
      * @param skype       a new skype username to the user.
-     * @param photoFile   a file of photo to the user.
-     * @param photoAction a action on the photo.
+     * @param photoFile   a file of file to the user.
+     * @param photoAction a action on the file.
      * @param isValid     a validated of the user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The updating user with parameter id or {@code null}.
      * @see User
-     * @see Photo
+     * @see File
      * @see UserRole
      */
     @Override
@@ -229,7 +230,7 @@ public final class UserServiceImpl
             final boolean isLocked
     ) {
         final User user = getByUrl(url);
-        Photo photo = user.getPhoto();
+        File photo = user.getPhoto();
         updatePhoto(
                 user, photoFile, name, photoAction
         );
@@ -471,7 +472,7 @@ public final class UserServiceImpl
 
     /**
      * Removes user. Removes user if it is not {@code null}.
-     * Also removes photo file if it is not {@code null}.
+     * Also removes file file if it is not {@code null}.
      *
      * @param user the user to remove.
      * @see User
@@ -480,7 +481,9 @@ public final class UserServiceImpl
     @Transactional
     public void remove(final User user) {
         if (user != null) {
-            this.photoService.remove(user.getPhoto());
+            this.fileService.remove(
+                    user.getPhoto()
+            );
             super.remove(user);
         }
     }
@@ -758,8 +761,10 @@ public final class UserServiceImpl
         if (duplicate) {
             final String name = user.getName();
             final String url = user.getUrl();
-            if (this.dao.getByName(name) != null
-                    || this.dao.getByUrl(url) != null) {
+            if ((this.dao.getByName(name) != null
+            ) || (
+                    this.dao.getByUrl(url) != null
+            )) {
                 return false;
             }
         }
@@ -767,12 +772,12 @@ public final class UserServiceImpl
     }
 
     /**
-     * Updates user photo.
+     * Updates user file.
      *
      * @param user   the user to update.
-     * @param file   a file of photo to the user.
-     * @param title  a photo title.
-     * @param action a action on the photo.
+     * @param file   a file of file to the user.
+     * @param title  a file title.
+     * @param action a action on the file.
      */
     private void updatePhoto(
             final User user,
@@ -797,38 +802,38 @@ public final class UserServiceImpl
     }
 
     /**
-     * Updates photo.
+     * Updates file.
      *
-     * @param photo the photo to updates.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
+     * @param photo the file to updates.
+     * @param file  a file file.
+     * @param title a file title.
+     * @return The updating file.
      */
-    private Photo updatePhoto(
-            final Photo photo,
+    private File updatePhoto(
+            final File photo,
             final MultipartFile file,
             final String title
     ) {
-        return this.photoService.updatePhoto(
-                photo != null ? photo : new Photo(),
+        return this.fileService.updatePhoto(
+                photo != null ? photo : new File(),
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo",
+                Translator.fromCyrillicToLatin(title) + " file",
                 "users"
         );
     }
 
     /**
-     * Removes photo if action equals "delete".
+     * Removes file if action equals "delete".
      *
-     * @param photo  the photo to remove.
-     * @param action a action on the photo.
+     * @param file   the file to remove.
+     * @param action a action on the file.
      */
     private void removePhoto(
-            final Photo photo,
+            final File file,
             final String action
     ) {
         if (action.equals("delete")) {
-            this.photoService.remove(photo);
+            this.fileService.remove(file);
         }
     }
 }

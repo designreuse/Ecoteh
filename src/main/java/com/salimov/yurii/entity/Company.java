@@ -141,7 +141,7 @@ public final class Company extends Content<Long> {
     /**
      * The logo of a company.
      *
-     * @see Photo
+     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -151,12 +151,12 @@ public final class Company extends Content<Long> {
             name = "logo_id",
             referencedColumnName = "id"
     )
-    private Photo logo;
+    private File logo;
 
     /**
      * The favicon of a company.
      *
-     * @see Photo
+     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -166,12 +166,12 @@ public final class Company extends Content<Long> {
             name = "favicon_id",
             referencedColumnName = "id"
     )
-    private Photo favicon;
+    private File favicon;
 
     /**
      * The set of slides.
      *
-     * @see Photo
+     * @see File
      */
     @ManyToMany(
             fetch = FetchType.LAZY,
@@ -192,7 +192,7 @@ public final class Company extends Content<Long> {
                     )
             }
     )
-    private final Set<Photo> slides = new HashSet<>();
+    private final Set<File> slides = new HashSet<>();
 
     /**
      * The type of a company.
@@ -239,7 +239,7 @@ public final class Company extends Content<Long> {
      * @param googleMaps      a Google maps url of the new company.
      * @param logo            a logo of the new company.
      * @param favicon         a favicon of the new company.
-     * @see Photo
+     * @see File
      */
     public Company(
             final String title,
@@ -261,8 +261,8 @@ public final class Company extends Content<Long> {
             final String address,
             final String keywords,
             final String googleMaps,
-            final Photo logo,
-            final Photo favicon
+            final File logo,
+            final File favicon
     ) {
         super(title, description, keywords);
         initialize(
@@ -398,7 +398,7 @@ public final class Company extends Content<Long> {
      * @param googleMaps    a new google maps url to the company.
      * @param logo          a new logo to the company.
      * @param favicon       a new favicon to the company.
-     * @see Photo
+     * @see File
      */
     public void initialize(
             final String title,
@@ -420,8 +420,8 @@ public final class Company extends Content<Long> {
             final String address,
             final String keywords,
             final String googleMaps,
-            final Photo logo,
-            final Photo favicon
+            final File logo,
+            final File favicon
     ) {
         initialize(
                 title, domain, tagline, description,
@@ -864,9 +864,9 @@ public final class Company extends Content<Long> {
      * Returns a logo of the company.
      *
      * @return The company logo.
-     * @see Photo
+     * @see File
      */
-    public Photo getLogo() {
+    public File getLogo() {
         return this.logo;
     }
 
@@ -875,19 +875,19 @@ public final class Company extends Content<Long> {
      * If parameter logo is invalid, then sets {@code null}.
      *
      * @param logo a new logo to the article.
-     * @see Photo
+     * @see File
      */
-    public void setLogo(final Photo logo) {
-        this.logo = Photo.isValidated(logo) ? logo : null;
+    public void setLogo(final File logo) {
+        this.logo = File.isValidated(logo) ? logo : null;
     }
 
     /**
      * Returns a favicon of the company.
      *
      * @return The company favicon.
-     * @see Photo
+     * @see File
      */
-    public Photo getFavicon() {
+    public File getFavicon() {
         return this.favicon;
     }
 
@@ -896,10 +896,10 @@ public final class Company extends Content<Long> {
      * If parameter favicon is invalid, then sets {@code null}.
      *
      * @param favicon a new favicon to the article.
-     * @see Photo
+     * @see File
      */
-    public void setFavicon(final Photo favicon) {
-        this.favicon = Photo.isValidated(favicon) ? favicon : null;
+    public void setFavicon(final File favicon) {
+        this.favicon = File.isValidated(favicon) ? favicon : null;
     }
 
     /**
@@ -907,10 +907,10 @@ public final class Company extends Content<Long> {
      * Adds a new photo, if it is valid.
      *
      * @param slide a photo to add.
-     * @see Photo
+     * @see File
      */
-    public void addSlide(final Photo slide) {
-        if (Photo.isValidated(slide)) {
+    public void addSlide(final File slide) {
+        if (File.isValidated(slide)) {
             this.slides.add(slide);
         }
     }
@@ -920,9 +920,9 @@ public final class Company extends Content<Long> {
      * Adds a new photos, if they are valid.
      *
      * @param slides a photos to add.
-     * @see Photo
+     * @see File
      */
-    public void addSlides(final Collection<Photo> slides) {
+    public void addSlides(final Collection<File> slides) {
         if ((slides != null) && !slides.isEmpty()) {
             slides.forEach(this::addSlide);
         }
@@ -932,9 +932,9 @@ public final class Company extends Content<Long> {
      * Removes photo from the list of slides.
      *
      * @param slide a photo to remove.
-     * @see Photo
+     * @see File
      */
-    public void removeSlide(final Photo slide) {
+    public void removeSlide(final File slide) {
         this.slides.remove(slide);
     }
 
@@ -942,16 +942,16 @@ public final class Company extends Content<Long> {
      * Removes photos from the list of slides.
      *
      * @param slides a photos to remove.
-     * @see Photo
+     * @see File
      */
-    public void removeSlides(final Collection<Photo> slides) {
+    public void removeSlides(final Collection<File> slides) {
         this.slides.removeAll(slides);
     }
 
     /**
      * Clears the list of slides.
      *
-     * @see Photo
+     * @see File
      */
     public void clearSlides() {
         this.slides.clear();
@@ -961,9 +961,9 @@ public final class Company extends Content<Long> {
      * Returns a copy list of slides.
      *
      * @return The list of slides.
-     * @see Photo
+     * @see File
      */
-    public List<Photo> getSlides() {
+    public List<File> getSlides() {
         return new ArrayList<>(this.slides);
     }
 
@@ -972,9 +972,9 @@ public final class Company extends Content<Long> {
      * Clears the list of slides and adds new slides.
      *
      * @param slides a slides to add.
-     * @see Photo
+     * @see File
      */
-    public void setSlides(final Collection<Photo> slides) {
+    public void setSlides(final Collection<File> slides) {
         clearSlides();
         addSlides(slides);
     }
@@ -985,9 +985,9 @@ public final class Company extends Content<Long> {
      * @param slide a photo to contain.
      * @return Returns {@code true} if photo is contains,
      * otherwise returns {@code false}.
-     * @see Photo
+     * @see File
      */
-    public boolean containsSlide(final Photo slide) {
+    public boolean containsSlide(final File slide) {
         return this.slides.contains(slide);
     }
 
@@ -997,9 +997,9 @@ public final class Company extends Content<Long> {
      * @param slides a photos to contain.
      * @return Returns {@code true} if photos are contains,
      * otherwise returns {@code false}.
-     * @see Photo
+     * @see File
      */
-    public boolean containsSlides(final Collection<Photo> slides) {
+    public boolean containsSlides(final Collection<File> slides) {
         return this.slides.containsAll(slides);
     }
 

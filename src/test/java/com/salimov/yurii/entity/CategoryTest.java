@@ -144,12 +144,12 @@ public final class CategoryTest extends ContentTest<Category> {
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Category category = new Category();
-        final Photo photo = getPhoto();
+        final File file = getPhoto();
         category.initialize(
                 TITLE,
                 DESCRIPTION,
                 KEYWORDS,
-                photo
+                file
         );
         assertNotNull(category.getTitle());
         assertNotNull(category.getDescription());
@@ -169,7 +169,7 @@ public final class CategoryTest extends ContentTest<Category> {
         );
         assertEquals(
                 category.getPhoto(),
-                photo
+                file
         );
     }
 
@@ -178,21 +178,21 @@ public final class CategoryTest extends ContentTest<Category> {
         final Category category = new Category();
         category.setPhoto(null);
         assertNull(category.getPhoto());
-        final Photo photo = getPhoto();
-        photo.setUrl(null);
-        category.setPhoto(photo);
+        final File file = getPhoto();
+        file.setUrl(null);
+        category.setPhoto(file);
         assertNull(category.getPhoto());
     }
 
     @Test
     public void whenSetValidPhotoThenGetThisPhoto() {
         final Category category = new Category();
-        final Photo photo = getPhoto();
-        category.setPhoto(photo);
+        final File file = getPhoto();
+        category.setPhoto(file);
         assertNotNull(category.getPhoto());
         assertEquals(
                 category.getPhoto(),
-                photo
+                file
         );
     }
 

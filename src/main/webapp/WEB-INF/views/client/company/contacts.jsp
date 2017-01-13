@@ -12,11 +12,11 @@
                 <c:choose>
                     <c:when test="${company.logo ne null}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/img/${company.logo.url}"/>">
+                             src="<c:url value="/resources/${company.logo.url}"/>">
                     </c:when>
                     <c:when test="${company.favicon ne null}">
                         <br><img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="/resources/img/${company.favicon.url}"/>">
+                                 src="<c:url value="/resources/${company.favicon.url}"/>">
                         &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:when>
                     <c:otherwise>
@@ -33,7 +33,7 @@
                 <c:choose>
                     <c:when test="${company.favicon ne null}">
                         <img class="icon-size" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/img/${company.favicon.url}"/>">
+                             src="<c:url value="/resources/${company.favicon.url}"/>">
                     </c:when>
                     <c:otherwise><span class="glyphicon glyphicon-link" aria-hidden="true"></span></c:otherwise>
                 </c:choose>

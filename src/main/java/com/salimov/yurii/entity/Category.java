@@ -25,9 +25,9 @@ public final class Category extends Content<Long> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The photo of a category.
+     * The file of a category.
      *
-     * @see Photo
+     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -37,7 +37,7 @@ public final class Category extends Content<Long> {
             name = "photo_id",
             referencedColumnName = "id"
     )
-    private Photo photo;
+    private File photo;
 
     /**
      * The set of a articles.
@@ -83,38 +83,38 @@ public final class Category extends Content<Long> {
      * @param title       a new title of the category.
      * @param description a new description of the category.
      * @param keywords    a new keywords of the category.
-     * @param photo       a new photo of the category.
-     * @see Photo
+     * @param photo       a new file of the category.
+     * @see File
      */
     public void initialize(
             final String title,
             final String description,
             final String keywords,
-            final Photo photo
+            final File photo
     ) {
         super.initialize(title, description, keywords);
         setPhoto(photo);
     }
 
     /**
-     * Returns a photo of the category.
+     * Returns a file of the category.
      *
-     * @return The category photo.
-     * @see Photo
+     * @return The category file.
+     * @see File
      */
-    public Photo getPhoto() {
+    public File getPhoto() {
         return this.photo;
     }
 
     /**
-     * Sets a new photo to the category.
-     * If parameter photo is blank, then sets {@code null}.
+     * Sets a new file to the category.
+     * If parameter file is blank, then sets {@code null}.
      *
-     * @param photo a new main photo to the category.
-     * @see Photo
+     * @param photo a new main file to the category.
+     * @see File
      */
-    public void setPhoto(final Photo photo) {
-        this.photo = Photo.isValidated(photo) ? photo : null;
+    public void setPhoto(final File photo) {
+        this.photo = File.isValidated(photo) ? photo : null;
     }
 
     /**

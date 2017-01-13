@@ -17,9 +17,9 @@
         <meta name="description" content="Форма для добавления новой статьи.">
         <meta name="keywords" content="Новая статья, добавление статьи"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="/resources/<c:out value="${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="/resources/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -42,7 +42,7 @@
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/article/all"/>" title="Все статьи">Все статьи</a>
+                        → <a href="<c:url value="/admin/article/all"/>">Все статьи</a>
                         → <a href="#">Новая статья</a>
                     </p>
                     <hr>

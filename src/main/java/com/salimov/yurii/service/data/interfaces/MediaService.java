@@ -12,7 +12,7 @@ import com.salimov.yurii.entity.Media;
  * @version 1.0
  * @see Media
  * @see DataService
- * @see PhotoService
+ * @see FileService
  * @see VideoService
  */
 public interface MediaService<T extends Media, E extends Number>

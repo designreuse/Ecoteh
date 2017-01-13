@@ -17,9 +17,9 @@
         <meta name="description" content="<c:out value="${article.title} - ${article.description}"/>">
         <meta name="keywords" content="Статья<c:out value=", ${article.title}, ${article.keywords}"/>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -94,15 +94,15 @@
                         </a>
                     </p>
                     <c:if test="${article.mainPhoto ne null}">
-                        <a href="<c:url value="/resources/img/${article.mainPhoto.url}"/>" rel="lightgallery[slides]"
+                        <a href="<c:url value="/resources/${article.mainPhoto.url}"/>"
+                           rel="lightgallery[slides]"
                            title="<c:out value="${article.title}"/>">
                             <img class="img-responsive img-border img-left img-section"
                                  alt="<c:out value="${article.title}"/>"
-                                 src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
+                                 src="<c:url value="/resources/${article.mainPhoto.url}"/>">
                         </a>
-                        <hr class="visible-xs">
                     </c:if>
-                    <p><c:out value="${article.description}"/></p>
+                    <p>${article.description}</p>
                     <p>${article.text}</p>
                     <div class="clearfix"></div>
                 </div>

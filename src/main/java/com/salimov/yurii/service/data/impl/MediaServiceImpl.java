@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Media
  * @see MediaService
  * @see DataServiceImpl
- * @see com.salimov.yurii.service.data.impl.PhotoServiceImpl
+ * @see com.salimov.yurii.service.data.impl.FileServiceImpl
  * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see MediaDao
  */

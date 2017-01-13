@@ -2,10 +2,10 @@ package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.VideoService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
@@ -36,7 +36,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see ArticleService
  * @see CategoryService
  * @see VideoService
- * @see PhotoService
+ * @see FileService
  * @see AdminMVFabric
  */
 @Controller
@@ -136,7 +136,7 @@ public class AdminArticleController {
      * @return The ready object of class ModelAndView.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -239,7 +239,7 @@ public class AdminArticleController {
      * @return The ready object of class ModelAndView.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -309,7 +309,7 @@ public class AdminArticleController {
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteArticle(
+    public ModelAndView deleteArticleByUrl(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
     ) {

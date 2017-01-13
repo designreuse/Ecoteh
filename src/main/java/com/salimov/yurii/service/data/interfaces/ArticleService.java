@@ -2,7 +2,7 @@ package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.Video;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +38,7 @@ public interface ArticleService extends ContentService<Article, Long> {
      * @return The new saving article.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      * @see Video
      */
     Article initAndAdd(
@@ -73,7 +73,7 @@ public interface ArticleService extends ContentService<Article, Long> {
      * @return The updating article with parameter id or {@code null}.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      * @see Video
      */
     Article initAndUpdate(

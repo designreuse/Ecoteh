@@ -1,10 +1,10 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
@@ -36,7 +36,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see User
  * @see AdminMVFabric
  * @see UserService
- * @see PhotoService
+ * @see FileService
  */
 @Controller
 @RequestMapping(value = "/admin/user")
@@ -89,7 +89,7 @@ public class AdminUserController {
      *                       interface.
      * @see AdminMVFabric
      * @see UserService
-     * @see PhotoService
+     * @see FileService
      * @see CompanyService
      * @see SenderService
      */
@@ -166,7 +166,7 @@ public class AdminUserController {
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -268,7 +268,7 @@ public class AdminUserController {
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update",

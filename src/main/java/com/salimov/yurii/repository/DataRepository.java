@@ -14,9 +14,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @see ArticleRepository
  * @see CategoryRepository
  * @see CompanyRepository
- * @see PhotoRepository
+ * @see FileRepository
  * @see ResponseRepository
- * @see SectionRepository
  * @see UserRepository
  * @see VideoRepository
  * @see Model

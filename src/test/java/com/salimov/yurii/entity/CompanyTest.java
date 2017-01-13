@@ -46,8 +46,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getLogo());
         assertNull(company.getFavicon());
 
-        final Photo logo = new Photo();
-        final Photo favicon = new Photo();
+        final File logo = new File();
+        final File favicon = new File();
         company = new Company(
                 "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", "",
@@ -136,8 +136,8 @@ public final class CompanyTest extends ContentTest<Company> {
                 company.getType(),
                 CompanyType.PARTNER
         );
-        final Photo logo = getPhoto();
-        final Photo favicon = getPhoto();
+        final File logo = getPhoto();
+        final File favicon = getPhoto();
         company = new Company(
                 TITLE, DOMAIN, TAGLINE, DESCRIPTION,
                 INFORMATION, ADVANTAGES, PHONE, PHONE,
@@ -486,8 +486,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getLogo());
         assertNull(company.getFavicon());
 
-        final Photo logo = new Photo();
-        final Photo favicon = new Photo();
+        final File logo = new File();
+        final File favicon = new File();
         company.initialize(
                 "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", "",
@@ -573,8 +573,8 @@ public final class CompanyTest extends ContentTest<Company> {
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Company company = new Company();
-        final Photo logo = getPhoto();
-        final Photo favicon = getPhoto();
+        final File logo = getPhoto();
+        final File favicon = getPhoto();
         company.initialize(
                 TITLE, DOMAIN, TAGLINE, DESCRIPTION,
                 INFORMATION, ADVANTAGES, PHONE, PHONE,
@@ -1381,14 +1381,14 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setLogo(null);
         assertNull(company.getLogo());
-        company.setLogo(new Photo());
+        company.setLogo(new File());
         assertNull(company.getLogo());
     }
 
     @Test
     public void whenSetValidLogoThenGetThisLogo() {
         final Company company = getCompany();
-        final Photo logo = getPhoto();
+        final File logo = getPhoto();
         company.setLogo(logo);
         assertNotNull(company.getLogo());
         assertEquals(
@@ -1402,14 +1402,14 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setFavicon(null);
         assertNull(company.getFavicon());
-        company.setFavicon(new Photo());
+        company.setFavicon(new File());
         assertNull(company.getFavicon());
     }
 
     @Test
     public void whenSetValidFaviconThenGetThisFavicon() {
         final Company company = getCompany();
-        final Photo favicon = getPhoto();
+        final File favicon = getPhoto();
         company.setFavicon(favicon);
         assertNotNull(company.getFavicon());
         assertEquals(
@@ -1423,16 +1423,16 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setSlides(null);
         assertTrue(company.getSlides().isEmpty());
-        final List<Photo> photos = new ArrayList<>();
-        addInvalidSlides(10, company, photos);
+        final List<File> files = new ArrayList<>();
+        addInvalidSlides(10, company, files);
         assertTrue(
                 company.getSlides().isEmpty()
         );
-        company.setSlides(photos);
+        company.setSlides(files);
         assertTrue(
                 company.getSlides().isEmpty()
         );
-        company.addSlides(photos);
+        company.addSlides(files);
         assertTrue(
                 company.getSlides().isEmpty()
         );
@@ -1442,7 +1442,7 @@ public final class CompanyTest extends ContentTest<Company> {
     public void whenSlidesAreValidThenAddThey() {
         final Company company = getCompany();
 
-        final List<Photo> slides = getPhotos(DEFAULT_SIZE);
+        final List<File> slides = getPhotos(DEFAULT_SIZE);
         company.setSlides(slides);
         assertFalse(
                 company.getSlides().isEmpty()
@@ -1473,13 +1473,13 @@ public final class CompanyTest extends ContentTest<Company> {
         assertTrue(
                 company.containsSlides(slides)
         );
-        for (Photo photo : slides) {
+        for (File file : slides) {
             assertTrue(
-                    company.containsSlide(photo)
+                    company.containsSlide(file)
             );
-            company.removeSlide(photo);
+            company.removeSlide(file);
             assertFalse(
-                    company.containsSlide(photo)
+                    company.containsSlide(file)
             );
         }
     }
@@ -1580,15 +1580,15 @@ public final class CompanyTest extends ContentTest<Company> {
     private void addInvalidSlides(
             final int size,
             final Company company,
-            final List<Photo> photos
+            final List<File> files
     ) {
         for (int i = 0; i < size; i++) {
             if (i % 2 == 0) {
-                final Photo invalidPhoto = new Photo();
-                photos.add(invalidPhoto);
-                company.addSlide(invalidPhoto);
+                final File invalidFile = new File();
+                files.add(invalidFile);
+                company.addSlide(invalidFile);
             } else {
-                photos.add(null);
+                files.add(null);
                 company.addSlide(null);
             }
         }

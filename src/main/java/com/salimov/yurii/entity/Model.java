@@ -18,9 +18,8 @@ import java.util.*;
  * @see Article
  * @see Category
  * @see Company
- * @see Photo
+ * @see File
  * @see Response
- * @see Section
  * @see User
  * @see Video
  * @see Message

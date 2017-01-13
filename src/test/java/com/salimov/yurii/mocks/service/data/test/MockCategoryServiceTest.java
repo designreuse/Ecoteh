@@ -20,7 +20,7 @@ public class MockCategoryServiceTest extends MockContentServiceTest<Category> {
 
     /*@Test
     public void whenInitAndAddCategoryThenReturnThisCategory() {
-        final Photo photo = MockEntity.getPhoto();
+        final Photo photo = MockEntity.getFile();
         final Section section = MockEntity.getSection();
         Category category = this.service.initAndAdd(MockConstants.TITLE, MockConstants.DESCRIPTION, MockConstants.KEYWORDS, photo, section);
         assertNotNull(category);
@@ -28,7 +28,7 @@ public class MockCategoryServiceTest extends MockContentServiceTest<Category> {
 
     /*@Test
     public void whenInitAndUpdateCategoryThenReturnThisCategory() {
-        final Photo photo = MockEntity.getPhoto();
+        final Photo photo = MockEntity.getFile();
         final Section section = MockEntity.getSection();
         Category category = this.service.initAndUpdate(MockConstants.ID, MockConstants.TITLE, MockConstants.DESCRIPTION, MockConstants.KEYWORDS, photo, section);
         assertNotNull(category);

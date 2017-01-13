@@ -295,8 +295,8 @@ public final class UserTest extends ModelTest<User> {
         assertNull(user.getSkype());
         assertNull(user.getDescription());
 
-        final Photo photo = new Photo();
-        user.initialize(null, null, null, null, null, null, photo, null);
+        final File file = new File();
+        user.initialize(null, null, null, null, null, null, file, null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
@@ -306,7 +306,7 @@ public final class UserTest extends ModelTest<User> {
         assertNull(user.getPhoto());
         assertNull(user.getRole());
 
-        user.initialize("", "", "", "", "", "", photo, null);
+        user.initialize("", "", "", "", "", "", file, null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
@@ -316,7 +316,7 @@ public final class UserTest extends ModelTest<User> {
         assertNull(user.getPhoto());
         assertNull(user.getRole());
 
-        user.initialize(" ", " ", " ", " ", " ", " ", photo, null);
+        user.initialize(" ", " ", " ", " ", " ", " ", file, null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
@@ -326,7 +326,7 @@ public final class UserTest extends ModelTest<User> {
         assertNull(user.getPhoto());
         assertNull(user.getRole());
 
-        user.initialize("   ", "   ", "   ", "   ", "   ", "   ", photo, null);
+        user.initialize("   ", "   ", "   ", "   ", "   ", "   ", file, null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
@@ -416,11 +416,11 @@ public final class UserTest extends ModelTest<User> {
                 DESCRIPTION
         );
 
-        final Photo photo = getPhoto();
+        final File file = getPhoto();
         final UserRole role = UserRole.ANOTHER;
         user.initialize(
                 NAME, LOGIN, PASSWORD, EMAIL,
-                PHONE, DESCRIPTION, photo, role
+                PHONE, DESCRIPTION, file, role
         );
         assertNotNull(user.getName());
         assertNotNull(user.getLogin());
@@ -456,7 +456,7 @@ public final class UserTest extends ModelTest<User> {
         );
         assertEquals(
                 user.getPhoto(),
-                photo
+                file
         );
         assertEquals(
                 user.getRole(),
@@ -857,19 +857,19 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setPhoto(null);
         assertNull(user.getPhoto());
-        user.setPhoto(new Photo());
+        user.setPhoto(new File());
         assertNull(user.getPhoto());
     }
 
     @Test
     public void whenSetValidPhotoThenGetThisPhoto() {
         final User user = getUser();
-        final Photo photo = getPhoto();
-        user.setPhoto(photo);
+        final File file = getPhoto();
+        user.setPhoto(file);
         assertNotNull(user.getPhoto());
         assertEquals(
                 user.getPhoto(),
-                photo
+                file
         );
     }
 

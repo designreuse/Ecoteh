@@ -218,14 +218,14 @@ public final class ArticleTest extends ContentTest<Article> {
         assertTrue(article.getSlides().isEmpty());
         assertTrue(article.getVideos().isEmpty());
 
-        final Photo photo = new Photo();
-        final List<Photo> slides = new ArrayList<>();
-        slides.add(photo);
+        final File file = new File();
+        final List<File> slides = new ArrayList<>();
+        slides.add(file);
         final Video video = new Video();
         List<Video> videos = new ArrayList<>();
         videos.add(video);
 
-        article.initialize("", "", "", "", "", null, photo, slides, videos);
+        article.initialize("", "", "", "", "", null, file, slides, videos);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
@@ -239,7 +239,7 @@ public final class ArticleTest extends ContentTest<Article> {
         assertTrue(article.getSlides().isEmpty());
         assertTrue(article.getVideos().isEmpty());
 
-        article.initialize(" ", " ", " ", " ", " ", null, photo, slides, videos);
+        article.initialize(" ", " ", " ", " ", " ", null, file, slides, videos);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
@@ -253,7 +253,7 @@ public final class ArticleTest extends ContentTest<Article> {
         assertTrue(article.getSlides().isEmpty());
         assertTrue(article.getVideos().isEmpty());
 
-        article.initialize("   ", "   ", "   ", "   ", "   ", null, photo, slides, videos);
+        article.initialize("   ", "   ", "   ", "   ", "   ", null, file, slides, videos);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
@@ -274,8 +274,8 @@ public final class ArticleTest extends ContentTest<Article> {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Article article = new Article();
         final Category category = MockEntity.getCategory();
-        final Photo mainPhoto = MockEntity.getPhoto();
-        final Collection<Photo> slides = MockEntity.getPhotos();
+        final File mainFile = MockEntity.getPhoto();
+        final Collection<File> slides = MockEntity.getPhotos();
         final Collection<Video> videos = MockEntity.getVideos();
         article.initialize(
                 MockConstants.TITLE,
@@ -284,7 +284,7 @@ public final class ArticleTest extends ContentTest<Article> {
                 MockConstants.KEYWORDS,
                 MockConstants.NUMBER,
                 category,
-                mainPhoto,
+                mainFile,
                 slides,
                 videos
         );
@@ -334,7 +334,7 @@ public final class ArticleTest extends ContentTest<Article> {
         );
         assertEquals(
                 article.getMainPhoto(),
-                mainPhoto
+                mainFile
         );
         assertTrue(
                 article.containsSlides(slides)
@@ -450,25 +450,25 @@ public final class ArticleTest extends ContentTest<Article> {
         article.setMainPhoto(null);
         assertNull(article.getMainPhoto());
 
-        final Photo invalidPhoto = new Photo();
-        article.setMainPhoto(invalidPhoto);
+        final File invalidFile = new File();
+        article.setMainPhoto(invalidFile);
         assertNull(article.getMainPhoto());
 
-        final Photo photo = MockEntity.getPhoto();
-        photo.setUrl(null);
-        article.setMainPhoto(photo);
+        final File file = MockEntity.getPhoto();
+        file.setUrl(null);
+        article.setMainPhoto(file);
         assertNull(article.getMainPhoto());
     }
 
     @Test
     public void whenSetValidMainPhotoThenGetThisPhoto() {
         final Article article = MockEntity.getArticle();
-        final Photo photo = MockEntity.getPhoto();
-        article.setMainPhoto(photo);
+        final File file = MockEntity.getPhoto();
+        article.setMainPhoto(file);
         assertNotNull(article.getMainPhoto());
         assertEquals(
                 article.getMainPhoto(),
-                photo
+                file
         );
     }
 
@@ -477,25 +477,25 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article = MockEntity.getArticle();
         article.setSlides(null);
         assertTrue(article.getSlides().isEmpty());
-        List<Photo> photos = new ArrayList<>();
+        List<File> files = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             if (i % 2 == 0) {
-                final Photo invalidPhoto = new Photo();
-                photos.add(invalidPhoto);
-                article.addSlide(invalidPhoto);
+                final File invalidFile = new File();
+                files.add(invalidFile);
+                article.addSlide(invalidFile);
             } else {
-                photos.add(null);
+                files.add(null);
                 article.addSlide(null);
             }
         }
         assertTrue(
                 article.getSlides().isEmpty()
         );
-        article.setSlides(photos);
+        article.setSlides(files);
         assertTrue(
                 article.getSlides().isEmpty()
         );
-        article.addSlides(photos);
+        article.addSlides(files);
         assertTrue(
                 article.getSlides().isEmpty()
         );
@@ -505,7 +505,7 @@ public final class ArticleTest extends ContentTest<Article> {
     public void whenSlidesAreValidThenAddThey() {
         final Article article = MockEntity.getArticle();
 
-        final List<Photo> slides = MockEntity.getPhotos(
+        final List<File> slides = MockEntity.getPhotos(
                 MockConstants.DEFAULT_SIZE
         );
         article.setSlides(slides);
@@ -536,13 +536,13 @@ public final class ArticleTest extends ContentTest<Article> {
         assertTrue(
                 article.containsSlides(slides)
         );
-        for (Photo photo : slides) {
+        for (File file : slides) {
             assertTrue(
-                    article.containsSlide(photo)
+                    article.containsSlide(file)
             );
-            article.removeSlide(photo);
+            article.removeSlide(file);
             assertFalse(
-                    article.containsSlide(photo)
+                    article.containsSlide(file)
             );
         }
     }

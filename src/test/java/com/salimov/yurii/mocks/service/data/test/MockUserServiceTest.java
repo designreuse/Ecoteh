@@ -28,14 +28,14 @@ public class MockUserServiceTest extends MockDataServiceTest<User> {
 
     /*@Test
     public void whenInitAndAddUserThenReturnThisUser() {
-        final Photo photo = getPhoto();
+        final Photo photo = getFile();
         User user = this.service.initAndAdd(NAME, LOGIN, PASSWORD, EMAIL, PHONE, DESCRIPTION, photo, USER_ROLE);
         assertNotNull(user);
     }*/
 
     /*@Test
     public void whenInitAndUpdateUserThenReturnThisUser() {
-        final Photo photo = getPhoto();
+        final Photo photo = getFile();
         User user = this.service.initAndUpdate(ID, NAME, LOGIN, PASSWORD, EMAIL, PHONE, DESCRIPTION, photo, USER_ROLE);
         assertNotNull(user);
     }*/

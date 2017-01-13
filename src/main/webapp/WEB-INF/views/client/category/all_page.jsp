@@ -19,9 +19,9 @@
         <meta name="keywords"
               content="Все категории<c:forEach items="${categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>"/>
         <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -34,7 +34,7 @@
     <body>
         <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:set var="length" value="${fn:length(categories_list)}"/>
+    <c:set var="length" value="${fn:length(categories)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
@@ -62,11 +62,11 @@
                         <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Категории</a>
+                        → <a href="#">Все категории</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
-                        <h3 class="text-center">Категории<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <h3 class="text-center">Наша продукция<c:if test="${length le 0}"> - список пуст!</c:if></h3>
                         <hr>
                     </div>
                     <div class="clearfix"></div>

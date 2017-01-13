@@ -83,7 +83,7 @@
                                     <c:choose>
                                         <c:when test="${main_company.favicon ne null}">
                                             <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/img/${main_company.favicon.url}"/>">
+                                                 src="<c:url value="/resources/${main_company.favicon.url}"/>">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -130,7 +130,7 @@
                                     <c:choose>
                                         <c:when test="${main_company.favicon ne null}">
                                             <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/img/${main_company.favicon.url}"/>">
+                                                 src="<c:url value="/resources/${main_company.favicon.url}"/>">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>

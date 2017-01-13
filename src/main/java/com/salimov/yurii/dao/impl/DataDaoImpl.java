@@ -20,7 +20,7 @@ import java.util.Collection;
  * @see ArticleDaoImpl
  * @see CategoryDaoImpl
  * @see CategoryDaoImpl
- * @see PhotoDaoImpl
+ * @see FileDaoImpl
  * @see ResponseDaoImpl
  * @see SectionDaoImpl
  * @see UserDaoImpl

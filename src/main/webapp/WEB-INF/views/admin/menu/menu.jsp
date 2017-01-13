@@ -77,6 +77,23 @@
         </tr>
         <tr>
             <th class="pad">
+                <a href="<c:url value="/admin/file/all"/>" title="Сохраненный файлы на сервере">Файлы</a>
+            </th>
+            <td class="pad">
+                <a href="<c:url value="/admin/file/new"/>" title="Добавить новый файл">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
+                    </button>
+                </a>&nbsp;&nbsp;
+                <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить все
+                    </button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th class="pad">
                 <a href="<c:url value="/admin/responses"/>" title="Отзывы о компании">Отзывы</a>
             </th>
             <td class="pad">
@@ -89,7 +106,7 @@
         </tr>
         <tr>
             <th class="pad">
-                <a href="<c:url value="/admin/messages"/>" title="Сообщения от пользователей">Сообщения</a>
+                <a href="<c:url value="/admin/messages/"/>" title="Сообщения от пользователей">Сообщения</a>
             </th>
             <td class="pad">
                 <a href="<c:url value="/admin/messages/delete/all"/>" title="Удалить все cообщения от пользователей">

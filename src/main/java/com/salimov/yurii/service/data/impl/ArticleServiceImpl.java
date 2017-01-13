@@ -1,5 +1,6 @@
 package com.salimov.yurii.service.data.impl;
 
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.VideoService;
 import com.salimov.yurii.util.translator.Translator;
@@ -10,9 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.salimov.yurii.dao.interfaces.ArticleDao;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
 import com.salimov.yurii.entity.Video;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,11 +55,11 @@ public final class ArticleServiceImpl
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Photo}.
+     * for working with objects of the class {@link File}.
      *
-     * @see PhotoService
+     * @see FileService
      */
-    private final PhotoService photoService;
+    private final FileService fileService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -74,23 +74,23 @@ public final class ArticleServiceImpl
      *
      * @param dao          a implementation of
      *                     the {@link ArticleDao} interface.
-     * @param photoService a implementation of
-     *                     the {@link PhotoService} interface.
+     * @param fileService a implementation of
+     *                     the {@link FileService} interface.
      * @param videoService a implementation of
      *                     the {@link VideoService} interface.
      * @see ArticleDao
-     * @see PhotoService
+     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ArticleServiceImpl(
             final ArticleDao dao,
-            final PhotoService photoService,
+            final FileService fileService,
             final VideoService videoService
     ) {
         super(dao);
         this.dao = dao;
-        this.photoService = photoService;
+        this.fileService = fileService;
         this.videoService = videoService;
     }
 
@@ -103,14 +103,14 @@ public final class ArticleServiceImpl
      * @param keywords    a keywords of the new article.
      * @param number      a number of the new article.
      * @param category    a category of the new article.
-     * @param mainPhoto   a photo of the new article.
+     * @param mainPhoto   a file of the new article.
      * @param slides      a slides of the new article.
      * @param videos      a videos of the new article.
      * @param isValid     a value of validations of the model.
      * @return The new saving article.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      * @see Video
      */
     @Override
@@ -139,7 +139,7 @@ public final class ArticleServiceImpl
         article.setValidated(isValid);
         article.setMainPhoto(
                 updatePhoto(
-                        new Photo(),
+                        new File(),
                         mainPhoto,
                         title
                 )
@@ -164,8 +164,8 @@ public final class ArticleServiceImpl
      * @param keywords     a new keywords to the article.
      * @param number       a new number to the article.
      * @param category     a new category to the article.
-     * @param mainFile     a new photo to the article.
-     * @param photoAction  a action on the main photo.
+     * @param mainFile     a new file to the article.
+     * @param photoAction  a action on the main file.
      * @param slideFiles   a new slides to the article.
      * @param slidesAction a action on the slides.
      * @param videoUrls    a new videos to the article.
@@ -173,7 +173,7 @@ public final class ArticleServiceImpl
      * @return The updating article with parameter id or {@code null}.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      * @see Video
      */
     @Override
@@ -194,14 +194,14 @@ public final class ArticleServiceImpl
             final boolean isValid
     ) {
         final Article article = getByUrl(url, false);
-        final Photo mainPhoto = article.getMainPhoto();
+        final File mainPhoto = article.getMainPhoto();
         updatesMainPhoto(
                 article,
                 mainFile,
                 title,
                 photoAction
         );
-        final List<Photo> slides = new ArrayList<>(article.getSlides());
+        final List<File> slides = new ArrayList<>(article.getSlides());
         updatesSlides(
                 article,
                 title,
@@ -588,7 +588,7 @@ public final class ArticleServiceImpl
                 if (slideFile != null && !slideFile.isEmpty()) {
                     article.addSlide(
                             updateSlide(
-                                    new Photo(),
+                                    new File(),
                                     slideFile,
                                     title
                             )
@@ -618,13 +618,13 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Remove main photo in selected article.
+     * Remove main file in selected article.
      *
      * @param article a selected article.
      */
     private void removeMainPhoto(final Article article) {
         if (article.getMainPhoto() != null) {
-            this.photoService.deleteFile(
+            this.fileService.deleteFile(
                     article.getMainPhoto().getUrl()
             );
         }
@@ -637,8 +637,8 @@ public final class ArticleServiceImpl
      */
     private void removeSlides(final Article article) {
         if (!article.getSlides().isEmpty()) {
-            for (Photo slide : article.getSlides()) {
-                this.photoService.deleteFile(
+            for (File slide : article.getSlides()) {
+                this.fileService.deleteFile(
                         slide.getUrl()
                 );
             }
@@ -681,12 +681,12 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Updates the article main photo.
+     * Updates the article main file.
      *
      * @param article     the articles to update.
-     * @param title       a photo title.
-     * @param photoAction a action on the main photo.
-     * @param file        a photo file.
+     * @param title       a file title.
+     * @param photoAction a action on the main file.
+     * @param file        a file file.
      */
     private void updatesMainPhoto(
             final Article article,
@@ -758,7 +758,7 @@ public final class ArticleServiceImpl
             final MultipartFile[] files
     ) {
         if (files != null && files.length > 0) {
-            final List<Photo> slides = new ArrayList<>();
+            final List<File> slides = new ArrayList<>();
             for (MultipartFile slideFile : files) {
                 if (slideFile != null && !slideFile.isEmpty()) {
                     slides.add(
@@ -777,22 +777,22 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Updates the photo.
+     * Updates the file.
      *
-     * @param photo the photo to update.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
+     * @param photo the file to update.
+     * @param file  a file file.
+     * @param title a file title.
+     * @return The updating file.
      */
-    private Photo updatePhoto(
-            final Photo photo,
+    private File updatePhoto(
+            final File photo,
             final MultipartFile file,
             final String title
     ) {
         return updatePhotoFile(
                 photo,
                 file,
-                Translator.fromCyrillicToLatin(title) + " photo"
+                Translator.fromCyrillicToLatin(title) + " file"
         );
     }
 
@@ -804,8 +804,8 @@ public final class ArticleServiceImpl
      * @param title a slide title.
      * @return The updating slide.
      */
-    private Photo updateSlide(
-            final Photo slide,
+    private File updateSlide(
+            final File slide,
             final MultipartFile file,
             final String title
     ) {
@@ -817,38 +817,38 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Updates photo.
+     * Updates file.
      *
-     * @param photo the photo to updates.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
+     * @param photo the file to updates.
+     * @param file  a file file.
+     * @param title a file title.
+     * @return The updating file.
      */
-    private Photo updatePhotoFile(
-            final Photo photo,
+    private File updatePhotoFile(
+            final File photo,
             final MultipartFile file,
             final String title
     ) {
-        return this.photoService.updatePhoto(
-                photo != null ? photo : new Photo(),
+        return this.fileService.updatePhoto(
+                photo != null ? photo : new File(),
                 file,
                 title,
-                "articles"
+                "img/articles"
         );
     }
 
     /**
-     * Removes main photo if action equals "delete".
+     * Removes main file if action equals "delete".
      *
-     * @param photo  the photo to remove.
-     * @param action a action on the photo.
+     * @param file  the file to remove.
+     * @param action a action on the file.
      */
     private void removeMainPhoto(
-            final Photo photo,
+            final File file,
             final String action
     ) {
         if (action.equals("delete")) {
-            this.photoService.remove(photo);
+            this.fileService.remove(file);
         }
     }
 
@@ -862,12 +862,12 @@ public final class ArticleServiceImpl
     private void removeSlides(
             final Article article,
             final String slidesAction,
-            final List<Photo> slides
+            final List<File> slides
     ) {
         if (slidesAction.equals("delete") || slidesAction.equals("replace")) {
             slides.stream()
                     .filter(slide -> !article.containsSlide(slide))
-                    .forEach(this.photoService::remove);
+                    .forEach(this.fileService::remove);
         }
     }
 

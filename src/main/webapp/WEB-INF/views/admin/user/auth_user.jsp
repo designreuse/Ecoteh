@@ -5,9 +5,10 @@
     <br>
     <c:choose>
         <c:when test="${authorized_user.photo ne null}">
-            <a href="<c:url value="/resources/img/${authorized_user.photo.url}"/>" rel="lightgallery">
+            <a href="<c:url value="/resources/${authorized_user.photo.url}"/>" rel="lightgallery"
+               title="<c:out value="${authorized_user.name}"/>">
                 <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
-                     src="<c:url value="/resources/img/${authorized_user.photo.url}"/>">
+                     src="<c:url value="/resources/${authorized_user.photo.url}"/>">
             </a>
         </c:when>
         <c:otherwise>

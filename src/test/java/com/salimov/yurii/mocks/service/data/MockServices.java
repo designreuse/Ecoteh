@@ -22,7 +22,7 @@ public final class MockServices {
     private static ArticleService articleService;
     private static CategoryService categoryService;
     private static CompanyService companyService;
-    private static PhotoService photoService;
+    private static FileService fileService;
     private static ResponseService responseService;
     private static UserService userService;
     private static VideoService videoService;
@@ -48,11 +48,11 @@ public final class MockServices {
         return companyService;
     }
 
-    public static PhotoService getPhotoService() {
-        if (photoService == null) {
-            photoService = initPhotoService();
+    public static FileService getFileService() {
+        if (fileService == null) {
+            fileService = initPhotoService();
         }
-        return photoService;
+        return fileService;
     }
 
     public static ResponseService getResponseService() {
@@ -279,7 +279,7 @@ public final class MockServices {
         final Category category = getCategory();
         final List<Category> categories = new ArrayList<>();
         categories.add(category);
-        final Photo photo = getPhoto();
+        final File file = getPhoto();
         final CategoryService categoryService = mock(CategoryService.class);
         when(
                 categoryService.add(category)
@@ -415,7 +415,7 @@ public final class MockServices {
         final Company company = getCompany();
         final List<Company> companies = new ArrayList<>();
         companies.add(company);
-        final Photo photo = getPhoto();
+        final File file = getPhoto();
         final CompanyService companyService = mock(CompanyService.class);
         when(
                 companyService.add(company)
@@ -550,77 +550,77 @@ public final class MockServices {
         return companyService;
     }
 
-    private static PhotoService initPhotoService() {
-        final Photo photo = getPhoto();
-        final List<Photo> photos = new ArrayList<>();
-        photos.add(photo);
-        final PhotoService photoService = mock(PhotoService.class);
+    private static FileService initPhotoService() {
+        final File file = getPhoto();
+        final List<File> files = new ArrayList<>();
+        files.add(file);
+        final FileService fileService = mock(FileService.class);
         when(
-                photoService.add(photo)
-        ).thenReturn(photo);
+                fileService.add(file)
+        ).thenReturn(file);
         when(
-                photoService.add(photos)
-        ).thenReturn(photos);
+                fileService.add(files)
+        ).thenReturn(files);
         when(
-                photoService.update(photo)
-        ).thenReturn(photo);
+                fileService.update(file)
+        ).thenReturn(file);
         when(
-                photoService.update(photos)
-        ).thenReturn(photos);
+                fileService.update(files)
+        ).thenReturn(files);
         when(
-                photoService.get(ID)
-        ).thenReturn(photo);
+                fileService.get(ID)
+        ).thenReturn(file);
         when(
-                photoService.getAll()
-        ).thenReturn(photos);
+                fileService.getAll()
+        ).thenReturn(files);
         when(
-                photoService.getAll(true)
-        ).thenReturn(photos);
+                fileService.getAll(true)
+        ).thenReturn(files);
         when(
-                photoService.getAll(false)
-        ).thenReturn(photos);
+                fileService.getAll(false)
+        ).thenReturn(files);
         when(
-                photoService.exists(photo)
+                fileService.exists(file)
         ).thenReturn(true);
         when(
-                photoService.exists((Photo) null)
+                fileService.exists((File) null)
         ).thenReturn(false);
         when(
-                photoService.exists(ID)).thenReturn(true);
+                fileService.exists(ID)).thenReturn(true);
         when(
-                photoService.exists((Long) null)
+                fileService.exists((Long) null)
         ).thenReturn(false);
         when(
-                photoService.exists(UNKNOWN_ID)
+                fileService.exists(UNKNOWN_ID)
         ).thenReturn(false);
         when(
-                photoService.subList(photos, INDEX, INDEX)
-        ).thenReturn(photos);
+                fileService.subList(files, INDEX, INDEX)
+        ).thenReturn(files);
         when(
-                photoService.getAndSubList(INDEX, INDEX)
-        ).thenReturn(photos);
+                fileService.getAndSubList(INDEX, INDEX)
+        ).thenReturn(files);
         when(
-                photoService.filteredByValid(photos)
-        ).thenReturn(photos);
+                fileService.filteredByValid(files)
+        ).thenReturn(files);
         when(
-                photoService.getByTitle(TITLE)
-        ).thenReturn(photo);
+                fileService.getByTitle(TITLE)
+        ).thenReturn(file);
         when(
-                photoService.getByUrl(URL)
-        ).thenReturn(photo);
+                fileService.getByUrl(URL)
+        ).thenReturn(file);
         when(
-                photoService.initAndAdd(TITLE, URL, null)
-        ).thenReturn(photo);
+                fileService.initAndAdd(TITLE, URL, null)
+        ).thenReturn(file);
         when(
-                photoService.initAndUpdate(ID, TITLE, URL, null)
-        ).thenReturn(photo);
+                fileService.initAndUpdate(ID, TITLE, URL, null)
+        ).thenReturn(file);
         when(
-                photoService.deleteFile(PATH)
+                fileService.deleteFile(PATH)
         ).thenReturn(true);
         when(
-                photoService.updatePhoto(photo, null, TITLE, PATH)
-        ).thenReturn(photo);
-        return photoService;
+                fileService.updatePhoto(file, null, TITLE, PATH)
+        ).thenReturn(file);
+        return fileService;
     }
 
     private static ResponseService initResponseService() {

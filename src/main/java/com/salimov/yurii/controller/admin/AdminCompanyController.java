@@ -1,9 +1,9 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @version 1.0
  * @see Company
  * @see CompanyService
- * @see PhotoService
+ * @see FileService
  * @see AdminMVFabric
  */
 @Controller
@@ -139,7 +139,7 @@ public class AdminCompanyController {
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update/main",
@@ -251,7 +251,7 @@ public class AdminCompanyController {
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -366,7 +366,7 @@ public class AdminCompanyController {
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update",

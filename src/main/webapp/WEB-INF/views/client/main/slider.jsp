@@ -29,7 +29,7 @@
                         <c:if test="${slide ne null}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
-                                <img src="<c:url value="/resources/img/${slide.url}"/>"
+                                <img src="<c:url value="/resources/${slide.url}"/>"
                                      class="slide" alt="${slide.title}">
                             </div>
                         </c:if>

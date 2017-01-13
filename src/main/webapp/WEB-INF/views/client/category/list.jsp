@@ -31,7 +31,7 @@
                            title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
                             <c:if test="${category.photo ne null}">
                                 <img class="img-responsive img-in-list" alt="<c:out value="${category.title}"/>"
-                                     src="<c:url value="/resources/img/${category.photo.url}"/>">
+                                     src="<c:url value="/resources/${category.photo.url}"/>">
                             </c:if>
                             <h3 class="text-center"><c:out value="${category.title}"/></h3>
                         </a>
@@ -40,14 +40,6 @@
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
                                       title="Не отображается для клиентов"></span>&nbsp;
                             </p>
-                        </c:if>
-                        <c:if test="${category.description ne null}">
-                            <c:choose>
-                                <c:when test="${fn:length(category.description) gt desc_length}">
-                                    <p><c:out value="${fn:substring(category.description, 0, desc_length)}"/>...</p>
-                                </c:when>
-                                <c:otherwise><p><c:out value="${category.description}"/></p></c:otherwise>
-                            </c:choose>
                         </c:if>
                     </div>
                     <c:set var="printed" value="${printed + 1}"/>

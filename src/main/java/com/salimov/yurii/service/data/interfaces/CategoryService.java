@@ -1,7 +1,7 @@
 package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -26,7 +26,7 @@ public interface CategoryService extends ContentService<Category, Long> {
      * @param isValid     validated of the new category.
      * @return The new saving category.
      * @see Category
-     * @see Photo
+     * @see File
      */
     Category initAndAdd(
             final String title,
@@ -48,7 +48,7 @@ public interface CategoryService extends ContentService<Category, Long> {
      * @param isValid     a validated of the category.
      * @return The updating category with parameter id.
      * @see Category
-     * @see Photo
+     * @see File
      */
     Category initAndUpdate(
             final String url,

@@ -10,7 +10,7 @@
                 <hr>
                 <h3 class="intro-text text-center">
                     <a href="<c:url value="${reqmap}/article/all"/>">Последние статьи</a>
-                    </h3>
+                </h3>
                 <hr>
                 <c:set var="desc_length" value="350"/>
                 <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
@@ -41,7 +41,7 @@
                            title="Перейти к статьи &quot;<c:out value="${article.title}"/>&quot;">
                             <c:if test="${article.mainPhoto ne null}">
                                 <img class="img-responsive img-in-list" alt="<c:out value="${article.title}"/>"
-                                     src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
+                                     src="<c:url value="/resources/${article.mainPhoto.url}"/>">
                             </c:if>
                             <h3 class="text-center"><c:out value="${article.title}"/></h3>
                         </a>
@@ -56,22 +56,8 @@
                             </a>
                         </p>
                         <c:choose>
-                            <c:when test="${article.description ne null}">
-                                <c:choose>
-                                    <c:when test="${fn:length(article.description) gt desc_length}">
-                                        <p><c:out value="${fn:substring(article.description, 0, desc_length)}"/>...</p>
-                                    </c:when>
-                                    <c:otherwise><p><c:out value="${article.description}"/></p></c:otherwise>
-                                </c:choose>
-                            </c:when>
-                            <c:when test="${article.text ne null}">
-                                <c:choose>
-                                    <c:when test="${fn:length(article.text) gt desc_length}">
-                                        <c:out value="${fn:substring(article.text, 0, desc_length)}"/>...
-                                    </c:when>
-                                    <c:otherwise><c:out value="${article.text}"/></c:otherwise>
-                                </c:choose>
-                            </c:when>
+                            <c:when test="${article.description ne null}"><p>${article.description}</p></c:when>
+                            <c:when test="${article.text ne null}"><p>${article.text}</p></c:when>
                         </c:choose>
                     </div>
                     <c:set var="printed" value="${printed + 1}"/>

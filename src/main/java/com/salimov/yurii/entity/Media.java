@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
- * @see Photo
+ * @see File
  * @see Video
  */
 @MappedSuperclass
@@ -141,7 +141,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      */
     public void setTitle(final String title) {
         this.title = isNotBlank(title) ? title : null;
-        translateAndSetUrl(title);
+        //translateAndSetUrl(title);
     }
 
     /**
@@ -169,7 +169,9 @@ public abstract class Media<E extends Number> extends Model<E> {
      * @param value a value to translate.
      */
     public void translateAndSetUrl(final String value) {
-        setUrl(Translator.fromCyrillicToLatin(value));
+        setUrl(
+                Translator.fromCyrillicToLatin(value)
+        );
     }
 
     /**
