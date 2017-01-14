@@ -378,8 +378,6 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     private ModelAndView articlePage(final Article article) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("article", article);
-        modelAndView.addObject("slides_list", article.getSlides());
-        modelAndView.addObject("videos_list", article.getVideos());
         modelAndView.setViewName("client/article/one_page");
         return modelAndView;
     }
