@@ -8,12 +8,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
+ * The class describes a Content configurations.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see ContentProperties
  */
 @Configuration
 @PropertySource("classpath:content.properties")
 public class ContentConfig {
+
+    /**
+     * The implementation of the interface
+     * describes the methods for getting
+     * application properties.
+     */
+    private static ContentProperties contentProperties;
 
     /**
      * Content Type encoding.
@@ -69,8 +79,11 @@ public class ContentConfig {
     @Value("${login.view-url}")
     private String loginViewName;
 
-    private static ContentProperties contentProperties;
-
+    /**
+     * Return a content properties.
+     *
+     * @return The object with a content properties.
+     */
     @Bean
     public ContentProperties contentProperties() {
         if (contentProperties == null) {
@@ -79,12 +92,9 @@ public class ContentConfig {
         return contentProperties;
     }
 
-    public static ContentProperties getInstance() {
-        return contentProperties;
-    }
 
     /**
-     *
+     * Initializes the content properties object.
      */
     private void initContentProperties() {
         contentProperties = new ContentPropertiesImpl(
