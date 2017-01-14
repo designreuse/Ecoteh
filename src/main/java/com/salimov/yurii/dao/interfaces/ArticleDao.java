@@ -15,7 +15,8 @@ import java.util.List;
  * @see ContentDao
  * @see Article
  */
-public interface ArticleDao extends ContentDao<Article, Long> {
+public interface ArticleDao
+        extends ContentDao<Article, Long> {
 
     /**
      * Returns article with the parameter number from a database.

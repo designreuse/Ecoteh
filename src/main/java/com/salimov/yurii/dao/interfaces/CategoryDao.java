@@ -12,5 +12,6 @@ import com.salimov.yurii.entity.Category;
  * @see ContentDao
  * @see Category
  */
-public interface CategoryDao extends ContentDao<Category, Long> {
+public interface CategoryDao
+        extends ContentDao<Category, Long> {
 }

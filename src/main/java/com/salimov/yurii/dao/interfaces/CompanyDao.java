@@ -15,7 +15,8 @@ import java.util.List;
  * @see ContentDao
  * @see Company
  */
-public interface CompanyDao extends ContentDao<Company, Long> {
+public interface CompanyDao
+        extends ContentDao<Company, Long> {
 
     /**
      * Returns companies with the parameter type from a database.

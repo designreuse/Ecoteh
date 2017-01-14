@@ -21,9 +21,7 @@ import java.util.List;
  * @see MediaService
  * @see FileService
  * @see ResponseService
- * @see SectionService
  * @see UserService
- * @see VideoService
  */
 public interface DataService<T extends Model, E extends Number> {
 

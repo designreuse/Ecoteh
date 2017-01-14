@@ -18,7 +18,6 @@ import java.util.Collection;
  * @see FileDao
  * @see ResponseDao
  * @see UserDao
- * @see VideoDao
  * @see MessageDao
  * @see Model
  */

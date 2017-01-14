@@ -14,7 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
  * @see ContentService
  * @see DataService
  */
-public interface CategoryService extends ContentService<Category, Long> {
+public interface CategoryService
+        extends ContentService<Category, Long> {
 
     /**
      * Initializes, saves and returns a new category.

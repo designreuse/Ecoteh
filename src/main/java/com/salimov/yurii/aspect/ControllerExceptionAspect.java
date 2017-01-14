@@ -33,6 +33,8 @@ public class ControllerExceptionAspect {
             throwing = "exception"
     )
     public void afterThrowingAdvice(final Exception exception) {
-        LOGGER.error("EXCEPTION IN METHOD -> " + exception.getClass());
+        LOGGER.error(
+                "EXCEPTION IN METHOD -> " + exception.getClass()
+        );
     }
 }

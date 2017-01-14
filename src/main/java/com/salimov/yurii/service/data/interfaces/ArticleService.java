@@ -3,7 +3,6 @@ package com.salimov.yurii.service.data.interfaces;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
-import com.salimov.yurii.entity.Video;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
@@ -20,7 +19,8 @@ import java.util.List;
  * @see ContentService
  * @see DataService
  */
-public interface ArticleService extends ContentService<Article, Long> {
+public interface ArticleService
+        extends ContentService<Article, Long> {
 
     /**
      * Initializes, saves and returns a new article.
@@ -31,15 +31,13 @@ public interface ArticleService extends ContentService<Article, Long> {
      * @param keywords    a keywords of the new article.
      * @param number      a number of the new article.
      * @param category    a category of the new article.
-     * @param mainPhoto   a photo of the new article.
-     * @param slides      a slides of the new article.
-     * @param videos      a videos of the new article.
-     * @param isValid a value of validations of the model.
+     * @param file        a multipart file of main photo
+     *                    of the new article.
+     * @param isValid     a value of validations of the model.
      * @return The new saving article.
      * @see Article
      * @see Category
      * @see File
-     * @see Video
      */
     Article initAndAdd(
             final String title,
@@ -48,33 +46,28 @@ public interface ArticleService extends ContentService<Article, Long> {
             final String keywords,
             final String number,
             final Category category,
-            final MultipartFile mainPhoto,
-            final MultipartFile[] slides,
-            final String videos,
+            final MultipartFile file,
             final boolean isValid
     );
 
     /**
      * Initializes, updates and returns article with parameter id.
      *
-     * @param url          a url of the article to update.
-     * @param title        a new title to the article.
-     * @param description  a new description to the article.
-     * @param text         a new text to the article.
-     * @param keywords     a new keywords to the article.
-     * @param number       a new number to the article.
-     * @param category     a new category to the article.
-     * @param mainFile     a new photo to the article.
-     * @param photoAction  a action on the main photo.
-     * @param slideFiles   a new slides to the article.
-     * @param slidesAction a action on the slides.
-     * @param videoUrls    a new videos to the article.
-     * @param isValid      a validated of the article.
+     * @param url         a url of the article to update.
+     * @param title       a new title to the article.
+     * @param description a new description to the article.
+     * @param text        a new text to the article.
+     * @param keywords    a new keywords to the article.
+     * @param number      a new number to the article.
+     * @param category    a new category to the article.
+     * @param file        a new multipart file of main photo
+     *                    of the new article.
+     * @param photoAction a action on the main photo.
+     * @param isValid     a validated of the article.
      * @return The updating article with parameter id or {@code null}.
      * @see Article
      * @see Category
      * @see File
-     * @see Video
      */
     Article initAndUpdate(
             final String url,
@@ -84,11 +77,8 @@ public interface ArticleService extends ContentService<Article, Long> {
             final String keywords,
             final String number,
             final Category category,
-            final MultipartFile mainFile,
+            final MultipartFile file,
             final String photoAction,
-            final MultipartFile[] slideFiles,
-            final String slidesAction,
-            final String videoUrls,
             final boolean isValid
     );
 
@@ -100,7 +90,10 @@ public interface ArticleService extends ContentService<Article, Long> {
      * @return The object of class {@link Article}.
      * @see Article
      */
-    Article getByNumber(final String number, final boolean isValid);
+    Article getByNumber(
+            final String number,
+            final boolean isValid
+    );
 
     /**
      * Removes article the parameter number.
@@ -205,7 +198,10 @@ public interface ArticleService extends ContentService<Article, Long> {
      * @return The filtered list of articles.
      * @see Article
      */
-    List<Article> getAndFilterByDate(final Date startDate, final Date endDate);
+    List<Article> getAndFilterByDate(
+            final Date startDate,
+            final Date endDate
+    );
 
     /**
      * Filters and returns articles by the category.

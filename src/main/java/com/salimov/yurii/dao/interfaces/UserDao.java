@@ -12,7 +12,8 @@ import com.salimov.yurii.entity.User;
  * @see DataDao
  * @see User
  */
-public interface UserDao extends DataDao<User, Long> {
+public interface UserDao
+        extends DataDao<User, Long> {
 
     /**
      * Returns user with the parameter name from a database.

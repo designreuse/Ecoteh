@@ -17,7 +17,8 @@ import java.util.List;
  * @see User
  * @see DataService
  */
-public interface UserService extends DataService<User, Long> {
+public interface UserService
+        extends DataService<User, Long> {
 
     /**
      * Initializes, saves and returns a new user.
@@ -208,7 +209,10 @@ public interface UserService extends DataService<User, Long> {
      * @return The sorted list of users.
      * @see User
      */
-    List<User> sortByName(final Collection<User> users, final boolean revers);
+    List<User> sortByName(
+            final Collection<User> users,
+            final boolean revers
+    );
 
     /**
      * Sorts and returns users by url.
@@ -218,7 +222,10 @@ public interface UserService extends DataService<User, Long> {
      * @return The sorted list of users.
      * @see User
      */
-    List<User> sortByUrl(final Collection<User> users, final boolean revers);
+    List<User> sortByUrl(
+            final Collection<User> users,
+            final boolean revers
+    );
 
     /**
      * Sorts and returns users by by role.
@@ -314,5 +321,7 @@ public interface UserService extends DataService<User, Long> {
      * @see User
      * @see UserRole
      */
-    List<User> getAndFilterByRoles(final List<UserRole> roles);
+    List<User> getAndFilterByRoles(
+            final List<UserRole> roles
+    );
 }

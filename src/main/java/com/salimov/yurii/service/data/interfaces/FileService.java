@@ -13,7 +13,8 @@ import com.salimov.yurii.entity.File;
  * @see MediaService
  * @see DataService
  */
-public interface FileService extends MediaService<File, Long> {
+public interface FileService
+        extends MediaService<File, Long> {
 
     /**
      * Initializes, saves and returns a new photo.

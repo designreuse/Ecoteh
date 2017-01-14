@@ -13,7 +13,6 @@ import com.salimov.yurii.entity.Media;
  * @see Media
  * @see DataService
  * @see FileService
- * @see VideoService
  */
 public interface MediaService<T extends Media, E extends Number>
         extends DataService<T, E> {
@@ -27,7 +26,10 @@ public interface MediaService<T extends Media, E extends Number>
      * @return The new saving media.
      * @see Media
      */
-    T initAndAdd(final String title, final String url);
+    T initAndAdd(
+            final String title,
+            final String url
+    );
 
     /**
      * Updates, saves and returns media object of class {@link Media}
@@ -39,7 +41,11 @@ public interface MediaService<T extends Media, E extends Number>
      * @return The updating article with parameter id.
      * @see Media
      */
-    T initAndUpdate(final E id, final String title, final String url);
+    T initAndUpdate(
+            final E id,
+            final String title,
+            final String url
+    );
 
     /**
      * Returns media object of class {@link Media} or subclasses

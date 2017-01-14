@@ -11,5 +11,6 @@ import com.salimov.yurii.entity.Message;
  * @see Message
  * @see DataService
  */
-public interface MessageService extends DataService<Message, Long> {
+public interface MessageService
+        extends DataService<Message, Long> {
 }
