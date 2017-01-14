@@ -169,35 +169,35 @@ public class RootConfig {
      * Returns the transaction manager, which is suitable for applications
      * that use a single JPA EntityManagerFactory for transactional data access.
      *
-     * @param entityManagerFactory a object of class which implements
+     * @param factory a object of class which implements
      *                             EntityManagerFactory.
      * @return Returns the transaction manager.
      */
     @Bean
     public JpaTransactionManager transactionManager(
-            final EntityManagerFactory entityManagerFactory
+            final EntityManagerFactory factory
     ) {
-        return new JpaTransactionManager(entityManagerFactory);
+        return new JpaTransactionManager(factory);
     }
 
     /**
      * Create the entity manager factory.
      *
-     * @param dataSource                a object of the DataSource class with
-     *                                  configurations for to connection
-     *                                  to the database.
-     * @param hibernateJpaVendorAdapter Adapter to connect to the database.
+     * @param dataSource a object of the DataSource class with
+     *                   configurations for to connection
+     *                   to the database.
+     * @param adapter    Adapter to connect to the database.
      * @return The object of the LocalContainerEntityManagerFactoryBean class.
      */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             final DataSource dataSource,
-            final HibernateJpaVendorAdapter hibernateJpaVendorAdapter
+            final HibernateJpaVendorAdapter adapter
     ) {
         final LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(dataSource);
-        factory.setJpaVendorAdapter(hibernateJpaVendorAdapter);
+        factory.setJpaVendorAdapter(adapter);
         factory.setPackagesToScan(this.entityPackages);
         return factory;
     }
