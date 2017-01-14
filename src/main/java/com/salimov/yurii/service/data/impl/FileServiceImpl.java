@@ -17,8 +17,8 @@ import java.util.Collection;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * The class of the service layer, implements a set of methods for working
- * with objects of the {@link File} class.
+ * The class of the service layer, implements a set of methods
+ * for working  with objects of the {@link File} class.
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
@@ -35,25 +35,29 @@ public final class FileServiceImpl
         implements FileService {
 
     /**
-     *
+     * The implementation of the interface describes
+     * the methods for getting application properties..
      */
-    private final ContentProperties contentProperties;
+    private final ContentProperties properties;
 
     /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao a implementation of the {@link FileDao} interface.
+     * @param dao        a implementation of the
+     *                   {@link FileDao} interface.
+     * @param properties a implementation of the
+     *                   {@link ContentProperties} interface.
      * @see FileDao
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public FileServiceImpl(
             final FileDao dao,
-            final ContentProperties contentProperties
+            final ContentProperties properties
     ) {
         super(dao);
-        this.contentProperties = contentProperties;
+        this.properties = properties;
     }
 
     /**
@@ -75,7 +79,8 @@ public final class FileServiceImpl
         final File file = new File(
                 title,
                 createRelativePath(
-                        title, url, multipartFile
+                        title, url,
+                        multipartFile
                 )
         );
         saveFile(
@@ -115,7 +120,8 @@ public final class FileServiceImpl
                 file.getUrl().contains(url)
                         ? file.getUrl() :
                         createRelativePath(
-                                title, url, multipartFile
+                                title, url,
+                                multipartFile
                         )
         );
         if (multipartFile != null) {
@@ -188,7 +194,9 @@ public final class FileServiceImpl
     @Transactional
     public void remove(final Collection<File> files) {
         if (files != null && !files.isEmpty()) {
-            files.forEach(this::remove);
+            files.forEach(
+                    this::remove
+            );
         }
     }
 
@@ -285,7 +293,13 @@ public final class FileServiceImpl
             final String title,
             final String rootPath
     ) {
-        if ((photo != null) && (multipartFile != null) && (!multipartFile.isEmpty())) {
+        if ((
+                photo != null
+        ) && (
+                multipartFile != null
+        ) && (
+                !multipartFile.isEmpty()
+        )) {
             deleteFile(
                     photo.getUrl()
             );
@@ -317,13 +331,25 @@ public final class FileServiceImpl
     }
 
     /**
-     * @param subPath
-     * @return
+     * Creates and returns a absolute path to file.
+     *
+     * @param subPath a path to the file relative
+     *                to resources directory.
+     * @return The absolute path to file.
      */
     private String createAbsolutePath(final String subPath) {
-        return this.contentProperties.getResourcesPath() + subPath;
+        return this.properties.getResourcesAbsolutePath()
+                + subPath;
     }
 
+    /**
+     * Creates ad returns a relative path to file.
+     *
+     * @param title         a file title.
+     * @param url           a file URL.
+     * @param multipartFile a multipart file.
+     * @return The relative path to file.
+     */
     private static String createRelativePath(
             final String title,
             final String url,
@@ -334,6 +360,12 @@ public final class FileServiceImpl
                 + getMultipartFileType(multipartFile);
     }
 
+    /**
+     * Returns a multipart file type.
+     *
+     * @param multipartFile a multipart file.
+     * @return The multipart file type.
+     */
     private static String getMultipartFileType(
             final MultipartFile multipartFile
     ) {
