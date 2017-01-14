@@ -1,25 +1,37 @@
 package com.salimov.yurii.util.properties;
 
 /**
+ * The class implements the methods for getting application properties.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see ContentProperties
  */
 public final class ContentPropertiesImpl implements ContentProperties {
 
-    private final static String CATALINA_HOME;
+    /**
+     * The catalina home constant.
+     */
+    private final static String CATALINA_HOME
+            = System.getenv("CATALINA_HOME") + "/";
+    /*CATALINA_HOME = new File(".")
+                .getAbsoluteFile()
+                .getParentFile()
+                .getAbsolutePath()
+                .replace("bin", "") + "/";*/
 
     /**
-     * Content Type encoding.
+     * The content type encoding.
      */
     private final String contentType;
 
     /**
-     * View name prefix.
+     * The view name prefix.
      */
     private final String prefix;
 
     /**
-     * View name suffix.
+     * The view name suffix.
      */
     private final String suffix;
 
@@ -39,39 +51,32 @@ public final class ContentPropertiesImpl implements ContentProperties {
     private final String resourcesLocation;
 
     /**
-     * Request for authorization.
+     * The login request for authorization.
      */
-    private final String requestLogin;
+    private final String loginRequest;
 
     /**
-     * Login view name (path).
+     * The login view name (path).
      */
     private final String loginViewName;
 
     /**
-     *
+     * The project directory name.
      */
     private final String projectDirectory;
 
-    static {
-        CATALINA_HOME = System.getenv("CATALINA_HOME") + "/";
-        /*CATALINA_HOME = new File(".")
-                .getAbsoluteFile()
-                .getParentFile()
-                .getAbsolutePath()
-                .replace("bin", "") + "/"*/;
-    }
-
     /**
-     * @param contentType
-     * @param prefix
-     * @param suffix
-     * @param exposeContextBeansAsAttributes
-     * @param resourcesUrl
-     * @param resourcesLocation
-     * @param requestLogin
-     * @param loginViewName
-     * @param projectDirectory
+     * Constructor.
+     *
+     * @param contentType                    a content type encoding.
+     * @param prefix                         a view name prefix.
+     * @param suffix                         a view name prefix.
+     * @param exposeContextBeansAsAttributes is exposed context beans as attributes.
+     * @param resourcesUrl                   a url of resources.
+     * @param resourcesLocation              a location of resources.
+     * @param loginRequest                   a login request for authorization.
+     * @param loginViewName                  a login view name (path).
+     * @param projectDirectory               a project directory name.
      */
     public ContentPropertiesImpl(
             final String contentType,
@@ -80,7 +85,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
             final boolean exposeContextBeansAsAttributes,
             final String resourcesUrl,
             final String resourcesLocation,
-            final String requestLogin,
+            final String loginRequest,
             final String loginViewName,
             final String projectDirectory
     ) {
@@ -90,13 +95,15 @@ public final class ContentPropertiesImpl implements ContentProperties {
         this.exposeContextBeansAsAttributes = exposeContextBeansAsAttributes;
         this.resourcesUrl = resourcesUrl;
         this.resourcesLocation = resourcesLocation;
-        this.requestLogin = requestLogin;
+        this.loginRequest = loginRequest;
         this.loginViewName = loginViewName;
         this.projectDirectory = projectDirectory;
     }
 
     /**
-     * @return
+     * Returns a catalina home constant.
+     *
+     * @return The catalina home constant.
      */
     @Override
     public String getCatalinaHome() {
@@ -104,7 +111,9 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a content type encoding.
+     *
+     * @return The content type encoding.
      */
     @Override
     public String getContentType() {
@@ -112,7 +121,9 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a view name prefix.
+     *
+     * @return The view name prefix.
      */
     @Override
     public String getPrefix() {
@@ -120,7 +131,9 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a view name suffix.
+     *
+     * @return The view name suffix.
      */
     @Override
     public String getSuffix() {
@@ -128,7 +141,9 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns is exposed context beans as attributes.
+     *
+     * @return It is exposed context beans as attributes.
      */
     @Override
     public boolean isExposeContextBeansAsAttributes() {
@@ -136,7 +151,9 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a resources URL.
+     *
+     * @return The resources URL.
      */
     @Override
     public String getResourcesUrl() {
@@ -144,7 +161,9 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a resources location.
+     *
+     * @return The resources location.
      */
     @Override
     public String getResourcesLocation() {
@@ -152,15 +171,19 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a login request for authorization.
+     *
+     * @return The login request for authorization.
      */
     @Override
-    public String getRequestLogin() {
-        return this.requestLogin;
+    public String getLoginRequest() {
+        return this.loginRequest;
     }
 
     /**
-     * @return
+     * Returns a login view name (path).
+     *
+     * @return The login view name (path).
      */
     @Override
     public String getLoginViewName() {
@@ -168,15 +191,20 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a project directory name.
+     *
+     * @return The project directory name.
      */
     @Override
     public String getProjectDirectory() {
         return this.projectDirectory;
     }
 
+
     /**
-     * @return
+     * Returns a project absolute path.
+     *
+     * @return The project absolute path.
      */
     @Override
     public String getProjectAbsolutePath() {
@@ -186,10 +214,15 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
-     * @return
+     * Returns a resources path.
+     * It is an absolute path of project
+     * and a resources location.
+     *
+     * @return The resources path.
      */
     @Override
-    public String getResourcesPath() {
-        return getProjectAbsolutePath() + this.resourcesLocation;
+    public String getResourcesAbsolutePath() {
+        return getProjectAbsolutePath()
+                + getResourcesLocation();
     }
 }

@@ -1,67 +1,94 @@
 package com.salimov.yurii.util.properties;
 
 /**
+ * The interface describes the methods
+ * for getting application properties.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 public interface ContentProperties {
     /**
-     * @return
+     * Returns a catalina home constant.
+     *
+     * @return The catalina home constant.
      */
     String getCatalinaHome();
 
     /**
-     * @return
+     * Returns a content type encoding.
+     *
+     * @return The content type encoding.
      */
     String getContentType();
 
     /**
-     * @return
+     * Returns a view name prefix.
+     *
+     * @return The view name prefix.
      */
     String getPrefix();
 
     /**
-     * @return
+     * Returns a view name suffix.
+     *
+     * @return The view name suffix.
      */
     String getSuffix();
 
     /**
-     * @return
+     * Returns is exposed context beans as attributes.
+     *
+     * @return It is exposed context beans as attributes.
      */
     boolean isExposeContextBeansAsAttributes();
 
     /**
-     * @return
+     * Returns a resources URL.
+     *
+     * @return The resources URL.
      */
     String getResourcesUrl();
 
     /**
-     * @return
+     * Returns a resources location.
+     *
+     * @return The resources location.
      */
     String getResourcesLocation();
 
     /**
-     * @return
+     * Returns a login request for authorization.
+     *
+     * @return The login request for authorization.
      */
-    String getRequestLogin();
+    String getLoginRequest();
 
     /**
-     * @return
+     * Returns a login view name (path).
+     *
+     * @return The login view name (path).
      */
     String getLoginViewName();
 
     /**
-     * @return
+     * Returns a project directory name.
+     *
+     * @return The project directory name.
      */
     String getProjectDirectory();
 
     /**
-     * @return
+     * Returns a project absolute path.
+     *
+     * @return The project absolute path.
      */
     String getProjectAbsolutePath();
 
     /**
-     * @return
+     * Returns a resources path.
+     *
+     * @return The resources path.
      */
-    String getResourcesPath();
+    String getResourcesAbsolutePath();
 }
