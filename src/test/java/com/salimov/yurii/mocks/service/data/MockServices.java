@@ -25,7 +25,6 @@ public final class MockServices {
     private static FileService fileService;
     private static ResponseService responseService;
     private static UserService userService;
-    private static VideoService videoService;
 
     public static ArticleService getArticleService() {
         if (articleService == null) {
@@ -67,13 +66,6 @@ public final class MockServices {
             userService = initUserService();
         }
         return userService;
-    }
-
-    public static VideoService getVideoService() {
-        if (videoService == null) {
-            videoService = initVideoService();
-        }
-        return videoService;
     }
 
     private static ArticleService initArticleService() {
@@ -198,23 +190,17 @@ public final class MockServices {
         when(
                 articleService.initAndAdd(
                         TITLE,
-                        DESCRIPTION,
-                        TEXT,
-                        KEYWORDS,
-                        NUMBER,
-                        null, null, null, null, true
+                        DESCRIPTION, TEXT,
+                        KEYWORDS, NUMBER,
+                        null, null, true
                 )
         ).thenReturn(article);
         when(
                 articleService.initAndUpdate(
-                        URL,
-                        TITLE,
-                        DESCRIPTION,
-                        TEXT,
-                        KEYWORDS,
-                        NUMBER,
-                        null, null, null, null,
-                        null, null, true
+                        URL, TITLE,
+                        DESCRIPTION, TEXT,
+                        KEYWORDS, NUMBER,
+                        null, null, null, true
                 )
         ).thenReturn(article);
         when(
@@ -904,87 +890,5 @@ public final class MockServices {
                 userService.getAndFilterByRoles(roles)
         ).thenReturn(users);
         return userService;
-    }
-
-    private static VideoService initVideoService() {
-        final Video video = getVideo();
-        final List<Video> videos = new ArrayList<>();
-        videos.add(video);
-        final VideoService videoService = mock(VideoService.class);
-        when(
-                videoService.add(video)
-        ).thenReturn(video);
-        when(
-                videoService.add(videos)
-        ).thenReturn(videos);
-        when(
-                videoService.update(video)
-        ).thenReturn(video);
-        when(
-                videoService.update(videos)
-        ).thenReturn(videos);
-        when(
-                videoService.get(ID)
-        ).thenReturn(video);
-        when(
-                videoService.getAll()
-        ).thenReturn(videos);
-        when(
-                videoService.getAll(true)
-        ).thenReturn(videos);
-        when(
-                videoService.getAll(false)
-        ).thenReturn(videos);
-        when(
-                videoService.exists(video)
-        ).thenReturn(true);
-        when(
-                videoService.exists((Video) null)
-        ).thenReturn(false);
-        when(
-                videoService.exists(ID)
-        ).thenReturn(true);
-        when(
-                videoService.exists((Long) null)
-        ).thenReturn(false);
-        when(
-                videoService.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                videoService.subList(
-                        videos,
-                        INDEX,
-                        INDEX
-                )
-        ).thenReturn(videos);
-        when(
-                videoService.getAndSubList(
-                        INDEX,
-                        INDEX
-                )
-        ).thenReturn(videos);
-        when(
-                videoService.filteredByValid(videos)
-        ).thenReturn(videos);
-        when(
-                videoService.getByTitle(TITLE)
-        ).thenReturn(video);
-        when(
-                videoService.getByUrl(URL)
-        ).thenReturn(video);
-        when(
-                videoService.initAndAdd(
-                        TITLE,
-                        URL
-                )
-        ).thenReturn(video);
-        when(
-                videoService.initAndUpdate(
-                        ID,
-                        TITLE,
-                        URL
-                )
-        ).thenReturn(video);
-        return videoService;
     }
 }

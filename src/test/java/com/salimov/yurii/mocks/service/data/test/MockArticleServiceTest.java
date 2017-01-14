@@ -25,7 +25,7 @@ public class MockArticleServiceTest extends MockContentServiceTest<Article> {
 
     @Test
     public void whenInitAndAddArticleThenReturnThisArticle() {
-        //Article article = this.service.initAndAdd(TITLE, DESCRIPTION, TEXT, KEYWORDS, NUMBER, null, null, null, null);
+        //Article article = this.service.initAndAdd(TITLE, DESCRIPTION, TEXT, KEYWORDS, NUMBER, null, null);
         //assertNotNull(article);
     }
 

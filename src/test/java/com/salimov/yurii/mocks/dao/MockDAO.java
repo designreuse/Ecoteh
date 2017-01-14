@@ -20,7 +20,6 @@ public final class MockDAO {
     private static FileDao fileDAO;
     private static ResponseDao responseDAO;
     private static UserDao userDAO;
-    private static VideoDao videoDAO;
 
     public static ArticleDao getArticleDao() {
         if (articleDao == null) {
@@ -62,13 +61,6 @@ public final class MockDAO {
             userDAO = initUserDAO();
         }
         return userDAO;
-    }
-
-    public static VideoDao getVideoDAO() {
-        if (videoDAO == null) {
-            videoDAO = initVideoDAO();
-        }
-        return videoDAO;
     }
 
     private static ArticleDao initArticleDAO() {
@@ -484,70 +476,6 @@ public final class MockDAO {
         ).thenReturn(null);
         when(
                 dao.getByEmail(null)
-        ).thenReturn(null);
-        return dao;
-    }
-
-    private static VideoDao initVideoDAO() {
-        final Video video = MockEntity.getVideo();
-        final List<Video> videos = MockEntity.getVideos();
-        final VideoDao dao = mock(VideoDao.class);
-        when(
-                dao.add(video)
-        ).thenReturn(video);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(videos)
-        ).thenReturn(videos);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(video)
-        ).thenReturn(video);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(video);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(videos);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
-        when(
-                dao.getByTitle(TITLE)
-        ).thenReturn(video);
-        when(
-                dao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                dao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(URL)
-        ).thenReturn(video);
-        when(
-                dao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(ANY_STRING)
         ).thenReturn(null);
         return dao;
     }

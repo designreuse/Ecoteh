@@ -79,12 +79,6 @@ public final class MockEntity {
         return user;
     }
 
-    public static Video getVideo() {
-        final Video video = new Video(TITLE, URL);
-        video.setId(ID);
-        return video;
-    }
-
     public static List<Article> getArticles() {
         return getArticles(DEFAULT_SIZE);
     }
@@ -191,21 +185,6 @@ public final class MockEntity {
             users.add(user);
         }
         return users;
-    }
-
-    public static List<Video> getVideos() {
-        return getVideos(DEFAULT_SIZE);
-    }
-
-    public static List<Video> getVideos(final int size) {
-        final List<Video> videos = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            final Video video = getVideo();
-            video.setId((long) i);
-            video.setTitle(video.getTitle() + " " + getRandomInt());
-            videos.add(video);
-        }
-        return videos;
     }
 
     public static int getRandomInt(final int length) {

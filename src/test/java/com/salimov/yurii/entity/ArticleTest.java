@@ -5,10 +5,7 @@ import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -204,68 +201,46 @@ public final class ArticleTest extends ContentTest<Article> {
     public void whenInitializeObjectWithInvalidParametersThenGetNull() {
         super.whenInitializeObjectWithInvalidParametersThenGetNull();
         final Article article = new Article();
-        article.initialize(null, null, null, null, null, null, null, null, null);
+        article.initialize(null, null, null, null, null, null, null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getMainPhoto());
-        assertNotNull(article.getSlides());
-        assertNotNull(article.getVideos());
+        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
-        assertTrue(article.getSlides().isEmpty());
-        assertTrue(article.getVideos().isEmpty());
 
         final File file = new File();
-        final List<File> slides = new ArrayList<>();
-        slides.add(file);
-        final Video video = new Video();
-        List<Video> videos = new ArrayList<>();
-        videos.add(video);
-
-        article.initialize("", "", "", "", "", null, file, slides, videos);
+        article.initialize("", "", "", "", "", null, file);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getMainPhoto());
-        assertNotNull(article.getSlides());
-        assertNotNull(article.getVideos());
+        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
-        assertTrue(article.getSlides().isEmpty());
-        assertTrue(article.getVideos().isEmpty());
 
-        article.initialize(" ", " ", " ", " ", " ", null, file, slides, videos);
+        article.initialize(" ", " ", " ", " ", " ", null, file);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getMainPhoto());
-        assertNotNull(article.getSlides());
-        assertNotNull(article.getVideos());
+        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
-        assertTrue(article.getSlides().isEmpty());
-        assertTrue(article.getVideos().isEmpty());
 
-        article.initialize("   ", "   ", "   ", "   ", "   ", null, file, slides, videos);
+        article.initialize("   ", "   ", "   ", "   ", "   ", null, file);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getMainPhoto());
-        assertNotNull(article.getSlides());
-        assertNotNull(article.getVideos());
+        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
-        assertTrue(article.getSlides().isEmpty());
-        assertTrue(article.getVideos().isEmpty());
     }
 
     @Test
@@ -275,8 +250,6 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article = new Article();
         final Category category = MockEntity.getCategory();
         final File mainFile = MockEntity.getPhoto();
-        final Collection<File> slides = MockEntity.getPhotos();
-        final Collection<Video> videos = MockEntity.getVideos();
         article.initialize(
                 MockConstants.TITLE,
                 MockConstants.DESCRIPTION,
@@ -284,9 +257,7 @@ public final class ArticleTest extends ContentTest<Article> {
                 MockConstants.KEYWORDS,
                 MockConstants.NUMBER,
                 category,
-                mainFile,
-                slides,
-                videos
+                mainFile
         );
         assertNotNull(article.getTitle());
         assertNotNull(article.getDescription());
@@ -294,16 +265,8 @@ public final class ArticleTest extends ContentTest<Article> {
         assertNotNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNotNull(article.getCategory());
-        assertNotNull(article.getMainPhoto());
-        assertNotNull(article.getSlides());
-        assertNotNull(article.getVideos());
+        assertNotNull(article.getPhoto());
         assertNotNull(article.getDate());
-        assertFalse(
-                article.getSlides().isEmpty()
-        );
-        assertFalse(
-                article.getVideos().isEmpty()
-        );
         assertEquals(
                 article.getTitle(),
                 MockConstants.TITLE
@@ -333,14 +296,8 @@ public final class ArticleTest extends ContentTest<Article> {
                 category
         );
         assertEquals(
-                article.getMainPhoto(),
+                article.getPhoto(),
                 mainFile
-        );
-        assertTrue(
-                article.containsSlides(slides)
-        );
-        assertTrue(
-                article.containsVideos(videos)
         );
     }
 
@@ -447,179 +404,29 @@ public final class ArticleTest extends ContentTest<Article> {
     @Test
     public void whenSetInvalidMainPhotoThenGetNull() {
         final Article article = MockEntity.getArticle();
-        article.setMainPhoto(null);
-        assertNull(article.getMainPhoto());
+        article.setPhoto(null);
+        assertNull(article.getPhoto());
 
         final File invalidFile = new File();
-        article.setMainPhoto(invalidFile);
-        assertNull(article.getMainPhoto());
+        article.setPhoto(invalidFile);
+        assertNull(article.getPhoto());
 
         final File file = MockEntity.getPhoto();
         file.setUrl(null);
-        article.setMainPhoto(file);
-        assertNull(article.getMainPhoto());
+        article.setPhoto(file);
+        assertNull(article.getPhoto());
     }
 
     @Test
     public void whenSetValidMainPhotoThenGetThisPhoto() {
         final Article article = MockEntity.getArticle();
         final File file = MockEntity.getPhoto();
-        article.setMainPhoto(file);
-        assertNotNull(article.getMainPhoto());
+        article.setPhoto(file);
+        assertNotNull(article.getPhoto());
         assertEquals(
-                article.getMainPhoto(),
+                article.getPhoto(),
                 file
         );
-    }
-
-    @Test
-    public void whenSlidesAreInvalidThenNotAddThey() {
-        final Article article = MockEntity.getArticle();
-        article.setSlides(null);
-        assertTrue(article.getSlides().isEmpty());
-        List<File> files = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            if (i % 2 == 0) {
-                final File invalidFile = new File();
-                files.add(invalidFile);
-                article.addSlide(invalidFile);
-            } else {
-                files.add(null);
-                article.addSlide(null);
-            }
-        }
-        assertTrue(
-                article.getSlides().isEmpty()
-        );
-        article.setSlides(files);
-        assertTrue(
-                article.getSlides().isEmpty()
-        );
-        article.addSlides(files);
-        assertTrue(
-                article.getSlides().isEmpty()
-        );
-    }
-
-    @Test
-    public void whenSlidesAreValidThenAddThey() {
-        final Article article = MockEntity.getArticle();
-
-        final List<File> slides = MockEntity.getPhotos(
-                MockConstants.DEFAULT_SIZE
-        );
-        article.setSlides(slides);
-        assertFalse(article.getSlides().isEmpty());
-        assertEquals(
-                article.getSlides().size(),
-                slides.size()
-        );
-        article.clearSlides();
-        assertTrue(
-                article.getSlides().isEmpty()
-        );
-        for (int i = 0; i < slides.size(); i++) {
-            article.addSlides(slides);
-        }
-        assertFalse(
-                article.getSlides().isEmpty()
-        );
-        assertEquals(
-                article.getSlides().size(),
-                slides.size()
-        );
-        article.removeSlides(slides);
-        assertTrue(
-                article.getSlides().isEmpty()
-        );
-        article.setSlides(slides);
-        assertTrue(
-                article.containsSlides(slides)
-        );
-        for (File file : slides) {
-            assertTrue(
-                    article.containsSlide(file)
-            );
-            article.removeSlide(file);
-            assertFalse(
-                    article.containsSlide(file)
-            );
-        }
-    }
-
-    @Test
-    public void whenVideosAreInvalidThenNotAddThey() {
-        final Article article = MockEntity.getArticle();
-        article.setVideos(null);
-        assertTrue(
-                article.getVideos().isEmpty()
-        );
-        List<Video> videos = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            if (i % 2 == 0) {
-                Video invalidVideos = new Video();
-                videos.add(invalidVideos);
-                article.addVideo(invalidVideos);
-            } else {
-                videos.add(null);
-                article.addSlide(null);
-            }
-        }
-        assertTrue(
-                article.getVideos().isEmpty()
-        );
-        article.setVideos(videos);
-        assertTrue(
-                article.getVideos().isEmpty()
-        );
-        article.setVideos(videos);
-        assertTrue(
-                article.getVideos().isEmpty()
-        );
-    }
-
-    @Test
-    public void whenVideosAreValidThenAddThey() {
-        final Article article = MockEntity.getArticle();
-        final int size = 5;
-        final List<Video> videos = MockEntity.getVideos(size);
-        article.setVideos(videos);
-        assertFalse(
-                article.getVideos().isEmpty()
-        );
-        assertEquals(
-                article.getVideos().size(),
-                size
-        );
-        article.clearVideos();
-        assertTrue(
-                article.getVideos().isEmpty()
-        );
-        for (int i = 0; i < size; i++) {
-            article.addVideos(videos);
-        }
-        assertFalse(
-                article.getVideos().isEmpty()
-        );
-        assertEquals(
-                article.getVideos().size(),
-                size
-        );
-        article.removeVideos(videos);
-        assertTrue(
-                article.getVideos().isEmpty()
-        );
-        article.setVideos(videos);
-        assertTrue(article.containsVideos(videos));
-        for (Video video : videos) {
-            assertTrue(
-                    article.containsVideo(video)
-            );
-            article.removeVideo(video);
-            assertFalse(
-                    article.containsVideo(video)
-            );
-        }
     }
 
     @Test

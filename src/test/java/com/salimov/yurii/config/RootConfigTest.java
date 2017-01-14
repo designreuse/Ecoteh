@@ -22,6 +22,7 @@ import static org.mockito.Mockito.mock;
         @ContextConfiguration(classes = RootConfig.class),
         @ContextConfiguration(classes = WebConfig.class)
 })
+@SuppressWarnings("SpringJavaAutowiringInspection")
 public final class RootConfigTest {
 
     @Autowired
@@ -42,9 +43,6 @@ public final class RootConfigTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private VideoRepository videoRepository;
-
     @Test
     public void repositoryTest() {
         assertNotNull(articleRepository);
@@ -53,7 +51,6 @@ public final class RootConfigTest {
         assertNotNull(fileRepository);
         assertNotNull(responseRepository);
         assertNotNull(userRepository);
-        assertNotNull(videoRepository);
     }
 
     @Test

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
- * @see SectionService
  * @see CategoryService
  * @see ArticleService
  * @see CompanyService

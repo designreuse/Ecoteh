@@ -6,7 +6,6 @@ import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
 import com.salimov.yurii.service.data.interfaces.FileService;
-import com.salimov.yurii.service.data.interfaces.VideoService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -35,7 +34,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Article
  * @see ArticleService
  * @see CategoryService
- * @see VideoService
  * @see FileService
  * @see AdminMVFabric
  */
@@ -108,7 +106,8 @@ public class AdminArticleController {
             method = RequestMethod.GET
     )
     public ModelAndView getNewArticlePage() {
-        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        final ModelAndView modelAndView
+                = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
                 "categories",
                 this.categoryService.getAll(false)
@@ -128,9 +127,7 @@ public class AdminArticleController {
      * @param keywords     a keywords of the new article.
      * @param number       a number of the new article.
      * @param categoryUrl  a category url of the new article.
-     * @param mainFile     a file of main photo to the new article.
-     * @param slideFiles   a files of slides to the new article.
-     * @param videoUrls    a category url of the new article.
+     * @param file         a multipart file of main photo to the new article.
      * @param isValid      a validated of the new article.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -149,18 +146,17 @@ public class AdminArticleController {
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
-            @RequestParam(value = "main_photo") final MultipartFile mainFile,
-            @RequestParam(value = "slides[]") final MultipartFile[] slideFiles,
-            @RequestParam(value = "video_urls") final String videoUrls,
+            @RequestParam(value = "photo") final MultipartFile file,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Article article = this.articleService.initAndAdd(
-                title, description, text, keywords,
-                number, category, mainFile, slideFiles,
-                videoUrls, isValid
+                title, description, text,
+                keywords, number,
+                category, file,
+                isValid
         );
         Cache.clear();
         modelAndView.setViewName(
@@ -229,11 +225,8 @@ public class AdminArticleController {
      * @param keywords     a new keywords to the article.
      * @param number       a new number to the article.
      * @param categoryUrl  a category url of the article.
-     * @param mainFile     a file of main photo to the article.
+     * @param file         a multipart file of main photo to the article.
      * @param photoAction  a action on the main photo.
-     * @param slideFiles   a files of slides to the article.
-     * @param slidesAction a action on the slides.
-     * @param videoUrls    a category url of the article.
      * @param isValid      a validated of the article.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -253,20 +246,20 @@ public class AdminArticleController {
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
-            @RequestParam(value = "main_photo") final MultipartFile mainFile,
+            @RequestParam(value = "photo") final MultipartFile file,
             @RequestParam(value = "photo_action") final String photoAction,
-            @RequestParam(value = "slides[]") final MultipartFile[] slideFiles,
-            @RequestParam(value = "slides_action") final String slidesAction,
-            @RequestParam(value = "video_urls") final String videoUrls,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Article article = this.articleService.initAndUpdate(
-                url, title, description, text, keywords,
-                number, category, mainFile, photoAction,
-                slideFiles, slidesAction, videoUrls, isValid
+                url, title,
+                description, text,
+                keywords, number,
+                category,
+                file, photoAction,
+                isValid
         );
         modelAndView.setViewName(
                 "redirect:/admin/article/" + article.getUrl()
@@ -332,7 +325,9 @@ public class AdminArticleController {
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllArticles(final ModelAndView modelAndView) {
+    public ModelAndView deleteAllArticles(
+            final ModelAndView modelAndView
+    ) {
         this.articleService.removeAll();
         modelAndView.setViewName("redirect:/admin/");
         Cache.clear();
