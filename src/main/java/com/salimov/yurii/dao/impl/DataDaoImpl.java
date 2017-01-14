@@ -22,9 +22,7 @@ import java.util.Collection;
  * @see CategoryDaoImpl
  * @see FileDaoImpl
  * @see ResponseDaoImpl
- * @see SectionDaoImpl
  * @see UserDaoImpl
- * @see VideoDaoImpl
  * @see MessageDaoImpl
  * @see Model
  */
