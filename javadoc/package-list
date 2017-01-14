@@ -8,6 +8,7 @@ com.salimov.yurii.controller.seo
 com.salimov.yurii.dao.impl
 com.salimov.yurii.dao.interfaces
 com.salimov.yurii.entity
+com.salimov.yurii.entity.interfaces
 com.salimov.yurii.enums
 com.salimov.yurii.exception
 com.salimov.yurii.repository
@@ -22,5 +23,7 @@ com.salimov.yurii.service.seo
 com.salimov.yurii.util.cache
 com.salimov.yurii.util.captcha
 com.salimov.yurii.util.comparator
+com.salimov.yurii.util.properties
+com.salimov.yurii.util.saver
 com.salimov.yurii.util.sender
 com.salimov.yurii.util.translator
