@@ -8,12 +8,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
+ * The class describes a google captcha configurations.
+ *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
+ * @see Captcha
  */
 @Configuration
 @PropertySource("classpath:captcha.properties")
 public class CaptchaConfig {
+
+    /**
+     * The implementation of the interface
+     * describes a set of methods for working
+     * with google reCAPTCHA.
+     */
+    private static Captcha captcha;
 
     /**
      * The reCAPTCHA user agent.
@@ -64,7 +74,17 @@ public class CaptchaConfig {
      */
     @Bean
     public Captcha captcha() {
-        return new CaptchaImpl(
+        if (captcha == null) {
+            initCaptcha();
+        }
+        return captcha;
+    }
+
+    /**
+     * Initializes the captcha object.
+     */
+    private void initCaptcha() {
+        captcha = new CaptchaImpl(
                 this.userAgent,
                 this.acceptLanguage,
                 this.doOutput,
