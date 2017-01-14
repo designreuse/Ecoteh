@@ -17,6 +17,7 @@
         <meta name="keywords" content="<c:out value="${main_company.keywords}"/>"/>
         <meta name="robots" content="index,follow">
         <meta name="google-site-verification" content="pXHeyG2mW5VlObSDdZOQPx0gWj0dEc7FYi-bBKGv3EQ"/>
+        <meta name="yandex-verification" content="e64f0e5f75007a20" />
         <c:if test="${main_company.favicon ne null}">
             <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
                   type="image/x-icon">
