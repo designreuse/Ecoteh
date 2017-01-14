@@ -34,18 +34,21 @@ import org.springframework.web.servlet.view.JstlView;
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
-     *
+     * The implementation of the interface describes
+     * the methods for getting application properties..
      */
-    private final ContentProperties contentProperties;
+    private final ContentProperties properties;
 
     /**
+     * Constructor.
      *
-     * @param contentProperties
+     * @param properties implementation of the {@link ContentProperties}
+     *                   interface.
      */
     @Autowired
-    public WebConfig(final ContentProperties contentProperties) {
+    public WebConfig(final ContentProperties properties) {
         super();
-        this.contentProperties = contentProperties;
+        this.properties = properties;
     }
 
     /**
@@ -62,16 +65,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 JstlView.class
         );
         viewResolver.setContentType(
-                this.contentProperties.getContentType()
+                this.properties.getContentType()
         );
         viewResolver.setPrefix(
-                this.contentProperties.getPrefix()
+                this.properties.getPrefix()
         );
         viewResolver.setSuffix(
-                this.contentProperties.getSuffix()
+                this.properties.getSuffix()
         );
         viewResolver.setExposeContextBeansAsAttributes(
-                this.contentProperties.isExposeContextBeansAsAttributes()
+                this.properties.isExposeContextBeansAsAttributes()
         );
         return viewResolver;
     }
@@ -87,9 +90,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(
             final ResourceHandlerRegistry resource) {
         resource.addResourceHandler(
-                this.contentProperties.getResourcesUrl()
+                this.properties.getResourcesUrl()
         ).addResourceLocations(
-                this.contentProperties.getResourcesLocation()
+                this.properties.getResourcesLocation()
         );
     }
 
@@ -108,10 +111,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             final ViewControllerRegistry controller
     ) {
         controller.addViewController(
-                this.contentProperties.getRequestLogin()
+                this.properties.getLoginRequest()
         ).setViewName(
-                this.contentProperties.getLoginViewName()
+                this.properties.getLoginViewName()
         );
-        controller.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        controller.setOrder(
+                Ordered.HIGHEST_PRECEDENCE
+        );
     }
 }
