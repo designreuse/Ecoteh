@@ -78,7 +78,7 @@
                                 → <a href="<c:url value="${reqmap}/article/all"/>" title="Статьи">Статьи</a>
                             </c:otherwise>
                         </c:choose>
-                        → <a href="#">Статья &quot;<c:out value="${article.title}"/>&quot;</a>
+                        → <a href="#"><c:out value="${article.title}"/></a>
                     </p>
                     <hr>
                     <h3 class="text-center"><c:out value="${article.title}"/></h3>
@@ -93,34 +93,22 @@
                             <c:out value="${article.number}"/>
                         </a>
                     </p>
-                    <c:if test="${article.mainPhoto ne null}">
-                        <a href="<c:url value="/resources/${article.mainPhoto.url}"/>"
-                           rel="lightgallery[slides]"
-                           title="<c:out value="${article.title}"/>">
-                            <img class="img-responsive img-border img-left img-section"
-                                 alt="<c:out value="${article.title}"/>"
-                                 src="<c:url value="/resources/${article.mainPhoto.url}"/>">
-                        </a>
-                    </c:if>
-                    <p>${article.description}</p>
                     <p>${article.text}</p>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-            <%-- SLIDES --%>
-        <jsp:include page="/WEB-INF/views/client/article/slides_list.jsp"/>
-            <%-- VIDEOS --%>
-        <jsp:include page="/WEB-INF/views/client/article/videos_list.jsp"/>
     </div>
         <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    <c:if test="${article.text ne null}">
+        <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+        <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    </c:if>
     </body>
     </html>
 </compress:html>

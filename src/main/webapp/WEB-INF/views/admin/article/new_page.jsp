@@ -107,34 +107,7 @@
                                         </a>
                                     </th>
                                     <td class="tds">
-                                        <input type="file" name="main_photo" accept="image/*"
-                                               class="form-control">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                        aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                        <input type="file" name="slides[]" accept="image/*" multiple
-                                               class="form-control"><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_video.jpg"/>"
-                                           rel="lightgallery" title="Видеоролики. Где их взять?">
-                                            Видеоролики&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                        aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="video_urls" rows="3" title=""
-                                              placeholder="URL видеороликов через запятую &quot;,&quot;"></textarea>
+                                        <input type="file" name="photo" accept="image/*" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>

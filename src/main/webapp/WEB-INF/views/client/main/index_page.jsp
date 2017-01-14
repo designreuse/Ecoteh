@@ -51,8 +51,6 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <%-- LAST ARTICLES
-        <jsp:include page="/WEB-INF/views/client/article/litle_list.jsp"/>--%>
             <%-- CATEGORIES --%>
         <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
             <%-- ABOUT ADVANTAGES --%>

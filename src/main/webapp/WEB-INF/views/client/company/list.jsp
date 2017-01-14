@@ -4,7 +4,6 @@
 
 <c:if test="${fn:length(partners_list) gt 0}">
     <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
-    <c:set var="desc_length" value="650"/>
     <div class="container">
         <div class="row">
             <div class="box">

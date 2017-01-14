@@ -5,7 +5,6 @@
 <c:set var="length" value="${fn:length(categories)}"/>
 <c:if test="${length gt 0}">
     <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
-    <c:set var="desc_length" value="350"/>
     <c:choose>
         <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}"><c:set var="in_line" value="3"/></c:when>
         <c:when test="${(length % 2 eq 0) or (length % 2 eq 1)}"><c:set var="in_line" value="2"/></c:when>
@@ -53,6 +52,15 @@
                         <c:set var="printed_in_line" value="0"/>
                     </c:if>
                 </c:forEach>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <hr>
+                    <p class="text-right">
+                        <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех товаров">
+                                <span class="glyphicon glyphicon-share-alt"
+                                      aria-hidden="true"></span>&nbsp;Продукция...
+                        </a>
+                    </p>
+                </div>
                 <div class="clearfix"></div>
             </div>
         </div>

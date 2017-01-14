@@ -34,26 +34,25 @@
                     </li>
                     <li class="dropdown-top">
                         <a class="dropdown-top" href="<c:url value="${reqmap}/category/all"/>">Продукция</a>
-                        <c:set var="length" value="${fn:length(categories)}"/>
-                        <c:if test="${length gt 0}">
-                            <c:set var="count" value="1"/>
-                            <ul class="dropdown-inside" role="menu">
-                                <c:forEach items="${categories}" var="category">
-                                    <li class="text-center">
-                                        <a href="<c:url value="${reqmap}/category/${category.url}"/>"
-                                           title="Перейти к &quot;<c:out value="${category.title}"/>&quot;">
-                                            <h4 class="text-center">
-                                                <c:out value="${category.title}"/>
-                                            </h4>
-                                        </a>
-                                        <c:if test="${count ne length}">
-                                            <c:set var="count" value="${count + 1}"/>
-                                            <hr>
-                                        </c:if>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </c:if>
+                        <ul class="dropdown-inside" role="menu">
+                            <c:forEach items="${categories}" var="category">
+                                <li class="text-center">
+                                    <a href="<c:url value="${reqmap}/category/${category.url}"/>"
+                                       title="Перейти к &quot;<c:out value="${category.title}"/>&quot;">
+                                        <h4 class="text-center">
+                                            <c:out value="${category.title}"/>
+                                        </h4>
+                                    </a>
+                                    <hr>
+                                </li>
+                            </c:forEach>
+                            <li class="text-center">
+                                <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех товаров">
+                                    <h4 class="text-center">Продукция</h4>
+                                </a>
+                                <hr>
+                            </li>
+                        </ul>
                     </li>
                     <c:if test="${main_company ne null}">
                         <li class="dropdown-top">

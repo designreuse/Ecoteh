@@ -59,6 +59,7 @@
                     <div class="text-center">
                         <form action="<c:url value="/admin/article/update"/>" method="post"
                               enctype="multipart/form-data">
+                            <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
                                     <th class="ths"><span class="red">*</span>&nbsp;Название</th>
@@ -135,11 +136,11 @@
                                     </th>
                                     <td class="tds">
                                         <c:choose>
-                                            <c:when test="${article.mainPhoto ne null}">
-                                                <a href="<c:url value="/resources/${article.mainPhoto.url}"/>"
+                                            <c:when test="${article.photo ne null}">
+                                                <a href="<c:url value="/resources/${article.photo.url}"/>"
                                                    rel="lightgallery[slides]">
                                                     <img class="img-logo" alt="<c:out value="${article.title}"/>"
-                                                         src="<c:url value="/resources/${article.mainPhoto.url}"/>">
+                                                         src="<c:url value="/resources/${article.photo.url}"/>">
                                                 </a><br><br>
                                                 <label title="Заменить главное фото">
                                                     <b><input type="radio" name="photo_action" value="replace" checked
@@ -156,69 +157,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                         <br>
-                                        <input type="file" name="main_photo" accept="image/*" class="form-control"><br>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${fn:length(article.slides) gt 0}">
-                                                <c:forEach items="${article.slides}" var="slide">
-                                                    <c:if test="${slide ne null}">
-                                                        <a href="<c:url value="/resources/${slide.url}"/>"
-                                                           rel="lightgallery[slides]"
-                                                           title="<c:out value="${slide.title}"/>">
-                                                            <img class="img-preview"
-                                                                 alt="<c:out value="${article.title}"/>"
-                                                                 src="<c:url value="/resources/${slide.url}"/>"/>
-                                                        </a>&nbsp;&nbsp;
-                                                    </c:if>
-                                                </c:forEach>
-                                                <br><br>
-                                                <label title="Заменить существующие слайды">
-                                                    <b><input type="radio" name="slides_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Добавить новые сайды">
-                                                    <b><input type="radio" name="slides_action" value="add"
-                                                              required/>&nbsp;Добавить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить все сайды">
-                                                    <b><input type="radio" name="slides_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="slides_action" value="replace" checked
-                                                       required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br><input type="file" name="slides[]" accept="image/*" multiple
-                                                   class="form-control"><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_video.jpg"/>"
-                                           rel="lightgallery" title="Видеоролики. Где их взять?">
-                                            Видеоролики&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="video_urls" title=""
-                                              placeholder="URL видеороликов через запятую &quot;,&quot;"
-                                              rows="3"><c:forEach items="${article.videos}" var="video"><c:out
-                                            value="${video.url}, "/></c:forEach>
-                                    </textarea>
+                                        <input type="file" name="photo" accept="image/*" class="form-control"><br>
                                     </td>
                                 </tr>
                                 <tr>
@@ -242,7 +181,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить изменения">
                                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
