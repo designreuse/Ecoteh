@@ -114,7 +114,10 @@ public final class ResponseServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Response> getAndSortByDate(final boolean revers) {
-        return sortByDate(getAll(), revers);
+        return sortByDate(
+                getAll(),
+                revers
+        );
     }
 
     /**
@@ -138,11 +141,7 @@ public final class ResponseServiceImpl
     ) {
         final List<Response> result = new ArrayList<>();
         if (responses != null && !responses.isEmpty()) {
-            final boolean isDateOk = (startDate != null)
-                    && (finishDate != null)
-                    && (!startDate.equals(finishDate))
-                    && (startDate.getTime() <= finishDate.getTime());
-            if (isDateOk) {
+            if (checkDate(startDate, finishDate)) {
                 result.addAll(
                         responses.stream()
                                 .filter(
@@ -153,7 +152,10 @@ public final class ResponseServiceImpl
                                                 response.getDate()
                                                         .compareTo(finishDate) == -1
                                         )
-                                ).collect(Collectors.toList())
+                                )
+                                .collect(
+                                        Collectors.toList()
+                                )
                 );
 
             } else {
@@ -199,9 +201,15 @@ public final class ResponseServiceImpl
             result.addAll(
                     responses.stream()
                             .filter(
-                                    response -> (response != null)
-                                            && (response.isValidated())
-                            ).collect(Collectors.toList())
+                                    response -> (
+                                            response != null
+                                    ) && (
+                                            response.isValidated()
+                                    )
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -247,5 +255,30 @@ public final class ResponseServiceImpl
             result = exists(response);
         }
         return result;
+    }
+
+    /**
+     * Checks a dates to correction.
+     * Dates must be not {@code null}
+     * and not equals between themselves.
+     *
+     * @param startDate  a initial date.
+     * @param finishDate a final date.
+     * @return {@code true} if dates are correct,
+     * {@code false} otherwise.
+     */
+    private static boolean checkDate(
+            final Date startDate,
+            final Date finishDate
+    ) {
+        return (
+                startDate != null
+        ) && (
+                finishDate != null
+        ) && (
+                !startDate.equals(finishDate)
+        ) && (
+                startDate.getTime() <= finishDate.getTime()
+        );
     }
 }
