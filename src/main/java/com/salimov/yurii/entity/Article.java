@@ -1,7 +1,7 @@
 package com.salimov.yurii.entity;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -77,63 +77,16 @@ public final class Article extends Content<Long> {
             name = "photo_id",
             referencedColumnName = "id"
     )
-    private File mainPhoto;
-
-    /**
-     * The set of slides (photos).
-     *
-     * @see File
-     */
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinTable(
-            name = "article_photo",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "article_id",
-                            referencedColumnName = "id"
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "photo_id",
-                            referencedColumnName = "id"
-                    )
-            }
-    )
-    private Set<File> slides = new HashSet<>();
-
-    /**
-     * The set of videos.
-     *
-     * @see Video
-     */
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "article_video",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "article_id",
-                            referencedColumnName = "id"
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "video_id",
-                            referencedColumnName = "id"
-                    )
-            }
-    )
-    private Set<Video> videos = new HashSet<>();
+    private File photo;
 
     /**
      * Default constructor.
      * Initializes date and number.
      */
     public Article() {
-        setDate(new Date());
+        setDate(
+                new Date()
+        );
         newNumber();
     }
 
@@ -239,7 +192,9 @@ public final class Article extends Content<Long> {
         setText(text);
         setNumber(number);
         setCategory(category);
-        setDate(new Date());
+        setDate(
+                new Date()
+        );
     }
 
     /**
@@ -251,12 +206,9 @@ public final class Article extends Content<Long> {
      * @param keywords    a new keywords to the article.
      * @param number      a new number to the article.
      * @param category    a new category to the article.
-     * @param mainPhoto   a new main photo pf the article.
-     * @param slides      a new slides to the article.
-     * @param videos      a new videos to the article.
+     * @param photo       a new main photo pf the article.
      * @see Category
      * @see File
-     * @see Video
      */
     public void initialize(
             final String title,
@@ -265,17 +217,13 @@ public final class Article extends Content<Long> {
             final String keywords,
             final String number,
             final Category category,
-            final File mainPhoto,
-            final Collection<File> slides,
-            final Collection<Video> videos
+            final File photo
     ) {
         this.initialize(
                 title, description, text,
                 keywords, number, category
         );
-        setMainPhoto(mainPhoto);
-        setSlides(slides);
-        setVideos(videos);
+        setPhoto(photo);
     }
 
     /**
@@ -400,215 +348,19 @@ public final class Article extends Content<Long> {
      * @return The article main photo.
      * @see File
      */
-    public File getMainPhoto() {
-        return this.mainPhoto;
+    public File getPhoto() {
+        return this.photo;
     }
 
     /**
      * Sets a new main photo to the article.
      * If parameter mainFile is invalid, then sets {@code null}.
      *
-     * @param mainPhoto a new main photo to the article.
+     * @param photo a new main photo to the article.
      * @see File
      */
-    public void setMainPhoto(final File mainPhoto) {
-        this.mainPhoto = File.isValidated(mainPhoto) ? mainPhoto : null;
-    }
-
-    /**
-     * Adds new photo to the list of slides.
-     * Adds a new photo, if it is valid.
-     *
-     * @param slide a photo to add.
-     * @see File
-     */
-    public void addSlide(final File slide) {
-        if (File.isValidated(slide)) {
-            this.slides.add(slide);
-        }
-    }
-
-    /**
-     * Adds new photos to the list of slides.
-     * Adds a new photos, if they are valid.
-     *
-     * @param slides a photos to add.
-     * @see File
-     */
-    public void addSlides(final Collection<File> slides) {
-        if ((slides != null) && !slides.isEmpty()) {
-            slides.forEach(this::addSlide);
-        }
-    }
-
-    /**
-     * Removes photo from the list of slides.
-     *
-     * @param slide a photo to remove.
-     * @see File
-     */
-    public void removeSlide(final File slide) {
-        this.slides.remove(slide);
-    }
-
-    /**
-     * Removes photos from the list of slides.
-     *
-     * @param slides a photos to remove.
-     * @see File
-     */
-    public void removeSlides(final Collection<File> slides) {
-        this.slides.removeAll(slides);
-    }
-
-    /**
-     * Clears the list of slides.
-     *
-     * @see File
-     */
-    public void clearSlides() {
-        this.slides = new HashSet<>();
-    }
-
-    /**
-     * Returns a list of slides.
-     *
-     * @return The list of slides.
-     * @see File
-     */
-    public List<File> getSlides() {
-        return new ArrayList<>(this.slides);
-    }
-
-    /**
-     * Sets a new slides to the article.
-     * Clears the list of slides and adds new slides.
-     *
-     * @param slides a slides to add.
-     * @see File
-     */
-    public void setSlides(final Collection<File> slides) {
-        clearSlides();
-        addSlides(slides);
-    }
-
-    /**
-     * Contains slide in the list of slides.
-     *
-     * @param slide a photo to contain.
-     * @return {@code true} if photo is contains, {@code false} otherwise.
-     * @see File
-     */
-    public boolean containsSlide(final File slide) {
-        return this.slides.contains(slide);
-    }
-
-    /**
-     * Contains slides in the list of slides.
-     *
-     * @param slides a photos to contain.
-     * @return {@code true} if photos are contains, {@code false} otherwise.
-     * @see File
-     */
-    public boolean containsSlides(final Collection<File> slides) {
-        return this.slides.containsAll(slides);
-    }
-
-    /**
-     * Adds new video to the list of videos.
-     * Adds a new video, if it is valid.
-     *
-     * @param video a video to add.
-     * @see Video
-     */
-    public void addVideo(final Video video) {
-        if (Video.isValidated(video)) {
-            this.videos.add(video);
-        }
-    }
-
-    /**
-     * Adds new videos to the list of videos.
-     * Adds a new videos, if it are valid.
-     *
-     * @param videos a videos to add.
-     * @see Video
-     */
-    public void addVideos(final Collection<Video> videos) {
-        if ((videos != null) && !videos.isEmpty()) {
-            videos.forEach(this::addVideo);
-        }
-    }
-
-    /**
-     * Removes video from the list of videos.
-     *
-     * @param video a video to remove.
-     * @see Video
-     */
-    public void removeVideo(final Video video) {
-        this.videos.remove(video);
-    }
-
-    /**
-     * Removes videos from the list of videos.
-     *
-     * @param videos a videos to remove.
-     * @see Video
-     */
-    public void removeVideos(final Collection<Video> videos) {
-        this.videos.removeAll(videos);
-    }
-
-    /**
-     * Clears the list of videos.
-     */
-    public void clearVideos() {
-        this.videos = new HashSet<>();
-    }
-
-    /**
-     * Returns an list of article videos.
-     *
-     * @return The list of article videos.
-     * @see Video
-     */
-    public List<Video> getVideos() {
-        return new ArrayList<>(this.videos);
-    }
-
-    /**
-     * Sets a new videos to the article.
-     * Clears the list of videos and adds new videos.
-     *
-     * @param videos a videos to add.
-     * @see Video
-     */
-    public void setVideos(final Collection<Video> videos) {
-        clearVideos();
-        addVideos(videos);
-    }
-
-    /**
-     * Contains video in the list of videos.
-     *
-     * @param video a video to contain.
-     * @return {@code true} if video is contains, {@code false} otherwise.
-     * @see Video
-     */
-    public boolean containsVideo(final Video video) {
-        return this.videos.contains(video);
-    }
-
-    /**
-     * Contains videos in the list of videos.
-     *
-     * @param videos a videos to contain.
-     * @return {@code true} if videos are contains, {@code false} otherwise.
-     * @see Video
-     */
-    public boolean containsVideos(final Collection<Video> videos) {
-        return this.videos.containsAll(videos);
+    public void setPhoto(final File photo) {
+        this.photo = File.isValidated(photo) ? photo : null;
     }
 
     /**
@@ -617,8 +369,8 @@ public final class Article extends Content<Long> {
      * and it has text (text is not blank).
      *
      * @param article an article to validate.
-     * @return {@code true} if the article is valid, {@code false} otherwise.
-     * @see Video
+     * @return {@code true} if the article is valid,
+     * {@code false} otherwise.
      */
     public static boolean isValidated(final Article article) {
         boolean result = false;
