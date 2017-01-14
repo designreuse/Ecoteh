@@ -3,7 +3,7 @@ package com.salimov.yurii.util.captcha;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The class implements a set of methods
+ * The interface describes a set of methods
  * for working with google reCAPTCHA.
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
