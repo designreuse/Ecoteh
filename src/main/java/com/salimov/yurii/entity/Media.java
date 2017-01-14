@@ -17,7 +17,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  * @see Model
  * @see File
- * @see Video
  */
 @MappedSuperclass
 public abstract class Media<E extends Number> extends Model<E> {
@@ -118,7 +117,10 @@ public abstract class Media<E extends Number> extends Model<E> {
      * @param title a new title to the media.
      * @param url   a new url to the media.
      */
-    public void initialize(String title, String url) {
+    public void initialize(
+            final String title,
+            final String url
+    ) {
         setTitle(title);
         setUrl(url);
     }

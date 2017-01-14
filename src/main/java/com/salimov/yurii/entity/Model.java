@@ -21,7 +21,6 @@ import java.util.*;
  * @see File
  * @see Response
  * @see User
- * @see Video
  * @see Message
  */
 @MappedSuperclass

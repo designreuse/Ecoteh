@@ -19,7 +19,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Article
  * @see Category
  * @see Company
- * @see Section
  */
 @MappedSuperclass
 public abstract class Content<E extends Number> extends Model<E> {
