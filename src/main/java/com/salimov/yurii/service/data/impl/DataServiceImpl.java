@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  * @see com.salimov.yurii.service.data.impl.FileServiceImpl
  * @see com.salimov.yurii.service.data.impl.ResponseServiceImpl
  * @see com.salimov.yurii.service.data.impl.UserServiceImpl
- * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see DataDao
  */
 public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
@@ -84,8 +83,12 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         if (models != null && !models.isEmpty()) {
             result.addAll(
                     models.stream()
-                            .map(this::add)
-                            .collect(Collectors.toList())
+                            .map(
+                                    this::add
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -124,8 +127,12 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         if (models != null && !models.isEmpty()) {
             result.addAll(
                     models.stream()
-                            .map(this::update)
-                            .collect(Collectors.toList())
+                            .map(
+                                    this::update
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -154,7 +161,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         final T model = this.dao.get(id);
         if (model == null) {
             throw new NullPointerException(
-                    "Can`t find " + getClassSimpleName() + " by id " + id + "!"
+                    "Can`t find " + getClassSimpleName()
+                            + " by id " + id + "!"
             );
         }
         return model;
@@ -401,9 +409,15 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             result.addAll(
                     models.stream()
                             .filter(
-                                    model -> (model != null) &&
-                                            (model.isValidated())
-                            ).collect(Collectors.toList())
+                                    model -> (
+                                            model != null
+                                    ) && (
+                                            model.isValidated()
+                                    )
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;

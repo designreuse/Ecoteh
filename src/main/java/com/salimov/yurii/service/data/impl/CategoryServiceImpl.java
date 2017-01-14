@@ -148,9 +148,7 @@ public final class CategoryServiceImpl
     ) {
         final Category category = getByUrl(url, false);
         category.initialize(
-                title,
-                description,
-                keywords
+                title, description, keywords
         );
         category.setValidated(isValid);
         final File file = category.getPhoto();
@@ -160,9 +158,9 @@ public final class CategoryServiceImpl
                 title,
                 photoAction
         );
-        final Category _category = update(category);
+        final Category updatingCategory = update(category);
         removePhoto(file, photoAction);
-        return _category;
+        return updatingCategory;
     }
 
     /**
@@ -179,7 +177,9 @@ public final class CategoryServiceImpl
             final String url,
             final boolean isValid
     ) {
-        final Category category = super.getByUrl(url, isValid);
+        final Category category = super.getByUrl(
+                url, isValid
+        );
         category.getArticles().size();
         return category;
     }
@@ -219,9 +219,15 @@ public final class CategoryServiceImpl
             result.addAll(
                     categories.stream()
                             .filter(
-                                    category -> (category != null) &&
-                                            (category.isValidated())
-                            ).collect(Collectors.toList())
+                                    category -> (
+                                            category != null
+                                    ) && (
+                                            category.isValidated()
+                                    )
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;

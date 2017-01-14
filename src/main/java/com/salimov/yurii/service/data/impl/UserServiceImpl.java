@@ -11,7 +11,6 @@ import com.salimov.yurii.util.comparator.UserComparator;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -78,7 +77,10 @@ public final class UserServiceImpl
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public UserServiceImpl(final UserDao dao, final FileService fileService) {
+    public UserServiceImpl(
+            final UserDao dao,
+            final FileService fileService
+    ) {
         super(dao);
         this.dao = dao;
         this.fileService = fileService;
@@ -86,7 +88,6 @@ public final class UserServiceImpl
 
     /**
      * Returns authenticated user.
-     * Returns {@code null} if throws exception.
      *
      * @return The authenticated user.
      * @see User
@@ -94,10 +95,10 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public User getAuthenticatedUser() {
-        final Authentication authentication =
-                SecurityContextHolder.getContext()
-                        .getAuthentication();
-        return (User) authentication.getPrincipal();
+        return (User) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 
     /**
@@ -166,9 +167,10 @@ public final class UserServiceImpl
     ) {
         final User user = new User();
         user.initialize(
-                name, login, password, email,
-                phone, vkontakte, facebook,
-                twitter, skype, description
+                name, login, password,
+                email, phone,
+                vkontakte, facebook, twitter, skype,
+                description
         );
         user.setPhoto(
                 updatePhoto(
@@ -232,19 +234,23 @@ public final class UserServiceImpl
         final User user = getByUrl(url);
         File photo = user.getPhoto();
         updatePhoto(
-                user, photoFile, name, photoAction
+                user,
+                photoFile,
+                name,
+                photoAction
         );
         user.initialize(
-                name, login, password, email,
-                phone, vkontakte, facebook,
-                twitter, skype, description
+                name, login, password,
+                email, phone,
+                vkontakte, facebook, twitter, skype,
+                description
         );
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
-        final User _user = update(user);
+        final User updatingUser = update(user);
         removePhoto(photo, photoAction);
-        return _user;
+        return updatingUser;
     }
 
     /**
@@ -410,7 +416,9 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<User> getAdmins() {
-        return getAndFilterByRole(UserRole.ADMIN);
+        return getAndFilterByRole(
+                UserRole.ADMIN
+        );
     }
 
     /**
@@ -654,8 +662,13 @@ public final class UserServiceImpl
                                     .filter(
                                             role -> user.getRole()
                                                     .equals(role)
-                                    ).map(role -> user)
-                                    .collect(Collectors.toList())
+                                    )
+                                    .map(
+                                            role -> user
+                                    )
+                                    .collect(
+                                            Collectors.toList()
+                                    )
                     );
                 }
             } else {
@@ -692,7 +705,9 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRoles(final List<UserRole> roles) {
+    public List<User> getAndFilterByRoles(
+            final List<UserRole> roles
+    ) {
         return filterByRoles(
                 getAll(),
                 roles
@@ -708,13 +723,23 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional
-    public List<User> filteredByValid(final Collection<User> users) {
+    public List<User> filteredByValid(
+            final Collection<User> users
+    ) {
         List<User> result = new ArrayList<>();
         if (users != null && !users.isEmpty()) {
             result.addAll(
-                    users.stream().filter(
-                            user -> (user != null) && (user.isValidated())
-                    ).collect(Collectors.toList())
+                    users.stream()
+                            .filter(
+                                    user -> (
+                                            user != null
+                                    ) && (
+                                            user.isValidated()
+                                    )
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -759,11 +784,14 @@ public final class UserServiceImpl
             return false;
         }
         if (duplicate) {
-            final String name = user.getName();
-            final String url = user.getUrl();
-            if ((this.dao.getByName(name) != null
+            if ((
+                    this.dao.getByName(
+                            user.getName()
+                    ) != null
             ) || (
-                    this.dao.getByUrl(url) != null
+                    this.dao.getByUrl(
+                            user.getUrl()
+                    ) != null
             )) {
                 return false;
             }

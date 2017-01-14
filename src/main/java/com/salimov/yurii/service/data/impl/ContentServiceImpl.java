@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class of the service layer, describes a set of methods
  * for working with objects of {@link Content} class or subclass.
  *
- * @param <T>  entity type, extends {@link Content}.
+ * @param <T> entity type, extends {@link Content}.
  * @param <E> entity id type, extends Number.
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
@@ -73,7 +73,11 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             );
         }
         final T content = this.dao.getByTitle(title);
-        if (content == null || (isValid && !content.isValidated())) {
+        if ((
+                content == null
+        ) || (
+                isValid && !content.isValidated()
+        )) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName()
                             + " by title \"" + title + "\"!"
@@ -105,7 +109,11 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             );
         }
         final T content = this.dao.getByUrl(url);
-        if (content == null || (isValid && !content.isValidated())) {
+        if ((
+                content == null
+        ) || (
+                isValid && !content.isValidated()
+        )) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName()
                             + " by URL \"" + url + "\"!"
@@ -141,7 +149,9 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     @Transactional
     public void removeByUrl(final String url) {
         remove(
-                getByUrl(url, false)
+                getByUrl(
+                        url, false
+                )
         );
     }
 
@@ -252,10 +262,15 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             return false;
         }
         if (duplicate) {
-            final String title = content.getTitle();
-            final String url = content.getUrl();
-            if (this.dao.getByTitle(title) != null ||
-                    this.dao.getByUrl(url) != null) {
+            if ((
+                    this.dao.getByTitle(
+                            content.getTitle()
+                    ) != null
+            ) || (
+                    this.dao.getByUrl(
+                            content.getUrl()
+                    ) != null
+            )) {
                 return false;
             }
         }

@@ -131,9 +131,10 @@ public final class CompanyServiceImpl
     ) {
         final Company company = new Company();
         company.initialize(
-                title, domain, tagline, description,
-                information, advantages, mobilePhone,
-                landlinePhone, fax, email, null, null,
+                title, domain,
+                tagline, description, information, advantages,
+                mobilePhone, landlinePhone, fax, email,
+                null, null,
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
                 updatePhoto(
@@ -143,7 +144,9 @@ public final class CompanyServiceImpl
                 )
                 , null
         );
-        company.setType(CompanyType.PARTNER);
+        company.setType(
+                CompanyType.PARTNER
+        );
         company.setValidated(isValid);
         return add(company);
     }
@@ -211,16 +214,19 @@ public final class CompanyServiceImpl
                 logoAction
         );
         company.initialize(
-                title, domain, tagline, description,
-                information, advantages, mobilePhone,
-                landlinePhone, fax, email, null, null,
+                title, domain,
+                tagline, description, information, advantages,
+                mobilePhone, landlinePhone, fax, email,
+                null, null,
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps
         );
         company.setValidated(isValid);
-        final Company _company = update(company);
-        removePhoto(logo, logoAction);
-        return _company;
+        final Company updatingCompany = update(company);
+        removePhoto(
+                logo, logoAction
+        );
+        return updatingCompany;
     }
 
     /**
@@ -302,11 +308,12 @@ public final class CompanyServiceImpl
                 faviconAction
         );
         mainCompany.initialize(
-                title, domain, tagline, description,
-                information, advantages, mobilePhone,
-                landlinePhone, fax, email, senderEmail,
-                senderPass, vkontakte, facebook, twitter,
-                skype, address, keywords, googleMaps
+                title, domain,
+                tagline, description, information, advantages,
+                mobilePhone, landlinePhone, fax, email,
+                senderEmail, senderPass,
+                vkontakte, facebook, twitter, skype,
+                address, keywords, googleMaps
         );
         mainCompany.setWorkTimeFrom(workTimeFrom);
         mainCompany.setWorkTimeTo(workTimeTo);
@@ -319,21 +326,18 @@ public final class CompanyServiceImpl
                 title,
                 slidesAction
         );
-        final Company company = update(mainCompany);
+        final Company updatingCompany = update(mainCompany);
         removePhoto(
-                logo,
-                logoAction
+                logo, logoAction
         );
         removePhoto(
-                favicon,
-                faviconAction
+                favicon, faviconAction
         );
         removeSlides(
                 mainCompany,
-                slides,
-                slidesAction
+                slides, slidesAction
         );
-        return company;
+        return updatingCompany;
     }
 
     /**
@@ -348,7 +352,9 @@ public final class CompanyServiceImpl
     public Company getMainCompany() throws NullPointerException {
         try {
             final Company mainCompany =
-                    this.dao.getByType(CompanyType.MAIN).get(0);
+                    this.dao.getByType(
+                            CompanyType.MAIN
+                    ).get(0);
             if (!Company.isValidated(mainCompany)) {
                 throw new NullPointerException(
                         "Information about main company is absent!"
@@ -392,7 +398,9 @@ public final class CompanyServiceImpl
             final String url,
             final boolean isValid
     ) {
-        final Company company = super.getByUrl(url, isValid);
+        final Company company = super.getByUrl(
+                url, isValid
+        );
         company.getSlides();
         return company;
     }
@@ -407,11 +415,17 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Company> getPartners(final boolean isValid) {
-        List<Company> companies = this.dao.getByType(CompanyType.PARTNER);
+        List<Company> companies = this.dao.getByType(
+                CompanyType.PARTNER
+        );
         if (isValid) {
             companies = companies.stream()
-                    .filter(company -> company.isValidated())
-                    .collect(Collectors.toList());
+                    .filter(
+                            company -> company.isValidated()
+                    )
+                    .collect(
+                            Collectors.toList()
+                    );
         }
         return companies;
     }
@@ -430,7 +444,9 @@ public final class CompanyServiceImpl
                 company != null
         ) && (
                 !company.getType()
-                        .equals(CompanyType.MAIN)
+                        .equals(
+                                CompanyType.MAIN
+                        )
         )) {
             removeCompany(company);
         }
@@ -498,7 +514,9 @@ public final class CompanyServiceImpl
         );
         if (!company.getSlides().isEmpty()) {
             company.getSlides()
-                    .forEach(this.fileService::remove);
+                    .forEach(
+                            this.fileService::remove
+                    );
         }
     }
 
@@ -646,8 +664,12 @@ public final class CompanyServiceImpl
     ) {
         if (action.equals("delete") || action.equals("replace")) {
             slides.stream()
-                    .filter(slide -> !company.containsSlide(slide))
-                    .forEach(this.fileService::remove);
+                    .filter(
+                            slide -> !company.containsSlide(slide)
+                    )
+                    .forEach(
+                            this.fileService::remove
+                    );
         }
     }
 

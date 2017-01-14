@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class of the service layer, describes a set of methods
  * for working with objects of {@link Media} class or subclasses.
  *
- * @param <T>  entity type, extends {@link Media}.
+ * @param <T> entity type, extends {@link Media}.
  * @param <E> entity id type, extends Number.
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
@@ -20,7 +20,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see MediaService
  * @see DataServiceImpl
  * @see com.salimov.yurii.service.data.impl.FileServiceImpl
- * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see MediaDao
  */
 public abstract class MediaServiceImpl<T extends Media<E>, E extends Number>
@@ -58,7 +57,10 @@ public abstract class MediaServiceImpl<T extends Media<E>, E extends Number>
      */
     @Override
     @Transactional
-    public T initAndAdd(final String title, final String url) {
+    public T initAndAdd(
+            final String title,
+            final String url
+    ) {
         final T media = getInstance(
                 getModelClass()
         );
@@ -207,11 +209,15 @@ public abstract class MediaServiceImpl<T extends Media<E>, E extends Number>
             return false;
         }
         if (duplicate) {
-            final String title = media.getTitle();
-            final String url = media.getUrl();
-            if (this.dao.getByTitle(title) != null
-                    || this.dao.getByUrl(url) != null
-                    ) {
+            if ((
+                    this.dao.getByTitle(
+                            media.getTitle()
+                    ) != null
+            ) || (
+                    this.dao.getByUrl(
+                            media.getUrl()
+                    ) != null
+            )) {
                 return false;
             }
         }
