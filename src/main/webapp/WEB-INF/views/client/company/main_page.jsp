@@ -35,7 +35,6 @@
         </c:if>
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -44,7 +43,6 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <c:if test="${authorized_user ne null}">
                             <c:set var="reqmap" value="/admin"/>
-                            <%-- Actions --%>
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/edit/main"/>"
                                    title="Редактировать информацию о компании &quot;<c:out value="${company.title}"/>&quot;">
@@ -55,7 +53,6 @@
                                 </a>
                             </div>
                         </c:if>
-                            <%-- Path --%>
                         <p class="path">
                             <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
@@ -65,7 +62,6 @@
                             <h3 class="text-center">О нашей компании</h3>
                             <hr>
                         </c:if>
-                            <%-- LOGO --%>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <p>${company.description}</p>
                         <p>${company.information}</p>
@@ -82,7 +78,6 @@
                         <hr>
                         <h3 class="intro-text text-center">Наша команда</h3>
                         <hr>
-                            <%-- USER LIST --%>
                         <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
@@ -90,9 +85,7 @@
             </div>
         </c:if>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">

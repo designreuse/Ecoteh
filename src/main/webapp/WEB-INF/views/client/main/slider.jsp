@@ -44,7 +44,6 @@
                 </c:if>
             </c:when>
             <c:otherwise>
-                <%-- Default slide --%>
                 <div class="carousel-inner">
                     <div class="text-center item active">
                         <img class="slide" alt="" src="<c:url value="/resources/img/static/default_slide.jpg"/>">

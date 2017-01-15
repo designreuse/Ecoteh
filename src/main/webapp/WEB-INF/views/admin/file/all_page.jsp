@@ -36,7 +36,6 @@
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Actions --%>
                     <div class="text-center">
                         <a href="/admin/file/new" title="Добавить новый файл">
                             <button class="btn btn-default">
@@ -54,7 +53,6 @@
                             </a>
                         </c:if>
                     </div>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
@@ -121,9 +119,7 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>

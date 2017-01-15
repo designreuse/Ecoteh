@@ -31,7 +31,6 @@
         <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -39,7 +38,6 @@
                 <div class="box">
                     <c:if test="${authorized_user ne null}">
                         <c:set var="reqmap" value="/admin"/>
-                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class="btn btn-default">
@@ -61,7 +59,6 @@
                             </a>
                         </div>
                     </c:if>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         <c:choose>
@@ -99,9 +96,7 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${article.text ne null}">

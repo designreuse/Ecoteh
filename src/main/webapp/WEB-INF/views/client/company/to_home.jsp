@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
-<%-- Company Advantages --%>
 <div class="container">
     <div class="row">
         <div class="box">

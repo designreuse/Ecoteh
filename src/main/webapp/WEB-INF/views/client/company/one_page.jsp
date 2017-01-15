@@ -31,7 +31,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -40,7 +39,6 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <c:if test="${authorized_user ne null}">
                             <c:set var="reqmap" value="/admin"/>
-                            <%-- Actions --%>
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
                                     <button class="btn btn-default">
@@ -61,7 +59,6 @@
                                 </a>
                             </div>
                         </c:if>
-                            <%-- Path --%>
                         <p class="path">
                             <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a>
@@ -72,7 +69,6 @@
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>
                         </c:if>
-                            <%-- LOGO --%>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <c:if test="${!company.validated}">
                             <p class="no-valid" title="Не отображается для клиентов">
@@ -91,15 +87,12 @@
                     <hr>
                     <h3 class="intro-text text-center">Контакты</h3>
                     <hr>
-                        <%-- CONTACTS --%>
                     <jsp:include page="/WEB-INF/views/client/company/contacts.jsp"/>
                 </div>
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>

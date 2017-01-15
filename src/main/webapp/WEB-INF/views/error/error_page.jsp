@@ -14,8 +14,8 @@
         <meta name="title" content="Ошибка | <c:out value="${text}"/>">
         <meta name="description" content="<c:out value="${message}"/>">
         <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="<c:url value="/resources/static/error_icon.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/static/error_icon.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -25,7 +25,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">

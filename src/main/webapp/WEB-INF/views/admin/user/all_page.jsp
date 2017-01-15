@@ -35,13 +35,11 @@
         </c:if>
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Actions --%>
                     <div class="text-center">
                         <a href="<c:url value="/admin/user/new"/>" title="Добавить нового пользователя">
                             <button class="btn btn-default">
@@ -58,7 +56,6 @@
                             </a>
                         </c:if>
                     </div>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a> → Персонал
@@ -72,18 +69,15 @@
                 </div>
             </div>
         </div>
-            <%-- Users --%>
         <c:if test="${length gt 0}">
             <div class="container">
                 <div class="row">
                     <div class="box">
-                            <%-- USER LIST --%>
                         <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            <%-- Message form --%>
             <div class="container">
                 <div class="row">
                     <div class="box">
@@ -94,9 +88,7 @@
             </div>
         </c:if>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">

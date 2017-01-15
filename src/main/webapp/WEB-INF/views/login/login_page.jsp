@@ -14,8 +14,8 @@
         <meta name="title" content="Авторизация">
         <meta name="description" content="Авторизация">
         <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="<c:url value="/resources/static/login_icon.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/static/login_icon.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -92,7 +92,6 @@
             </div>
         </div>
     </div>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>

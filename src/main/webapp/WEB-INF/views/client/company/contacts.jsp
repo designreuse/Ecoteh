@@ -114,13 +114,7 @@
         <br>
     </div>
 </div>
-<%-- Google Maps --%>
-<c:if test="${company.googleMaps ne null}">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-        <iframe src="${company.googleMaps}" allowfullscreen
-                width="100%" height="500px" frameborder="0" style="border:0"></iframe>
-    </div>
-</c:if>
+<jsp:include page="/WEB-INF/views/google/map.jsp"/>
 <div class="clearfix"></div>
 
 <%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

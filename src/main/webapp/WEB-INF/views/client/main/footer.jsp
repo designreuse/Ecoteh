@@ -94,7 +94,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov" target="_blank"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex_icon.png"/>"
+                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex.png"/>"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>
@@ -141,7 +141,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex_icon.png"/>"
+                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex.png"/>"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>

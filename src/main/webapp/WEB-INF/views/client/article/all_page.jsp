@@ -32,7 +32,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -41,16 +40,15 @@
                     <c:set var="length" value="${fn:length(articles_list)}"/>
                     <c:if test="${authorized_user ne null}">
                         <c:set var="reqmap" value="/admin"/>
-                        <%-- Actions --%>
                         <div class="text-center">
-                            <a href="/admin/article/new" title="Добавить новую статью">
+                            <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
                                 </button>
                             </a>
                             <c:if test="${length gt 0}">
                                 &nbsp;&nbsp;
-                                <a href="/admin/article/delete/all" title="Удалить все статьи">
+                                <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red"
                                               aria-hidden="true"></span>&nbsp;Удалить все
@@ -59,9 +57,8 @@
                             </c:if>
                         </div>
                     </c:if>
-                        <%-- Path --%>
                     <p class="path">
-                        <a href="${reqmap}/" title="Перейти на главную страницу">Главная</a>
+                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Все статьи</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -73,16 +70,13 @@
                 </div>
             </div>
         </div>
-            <%-- ARTICLES --%>
         <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

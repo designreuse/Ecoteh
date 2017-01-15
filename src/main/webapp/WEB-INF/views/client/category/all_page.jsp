@@ -32,7 +32,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="length" value="${fn:length(categories)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -41,7 +40,6 @@
                 <div class="box">
                     <c:if test="${authorized_user ne null}">
                         <c:set var="reqmap" value="/admin"/>
-                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="<c:url value="/admin/category/new"/>" title="Добавить новую категория">
                                 <button class="btn btn-default">
@@ -59,7 +57,6 @@
                             </c:if>
                         </div>
                     </c:if>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Все категории</a>
@@ -73,12 +70,9 @@
                 </div>
             </div>
         </div>
-            <%-- CATEGORIES --%>
         <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>

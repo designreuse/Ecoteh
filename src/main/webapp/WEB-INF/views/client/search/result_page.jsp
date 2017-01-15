@@ -30,7 +30,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="categories_length" value="${fn:length(categories_list)}"/>
     <c:set var="articles_length" value="${fn:length(articles_list)}"/>
@@ -122,19 +121,16 @@
     <c:if test="${result}">
         <c:if test="${categories_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- CATEGORIES --%>
                 <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
             </div>
         </c:if>
         <c:if test="${articles_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- ARTICLES --%>
                 <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
             </div>
         </c:if>
         <c:if test="${partners_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- PARTNERS --%>
                 <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
             </div>
         </c:if>
@@ -143,7 +139,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="box">
-                                <%-- USERS --%>
                             <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                             <div class="clearfix"></div>
                         </div>
@@ -152,9 +147,7 @@
             </div>
         </c:if>
     </c:if>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>

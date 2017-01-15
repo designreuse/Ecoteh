@@ -30,7 +30,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="length" value="${fn:length(responses_list)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -64,7 +63,6 @@
                 </div>
             </div>
         </div>
-            <%-- Responses --%>
         <c:if test="${length gt 0}">
             <c:if test="${(print_responses eq null) or (print_responses gt length) or (print_responses le 0)}">
                 <c:set var="print_responses" value="${length}"/>
@@ -120,7 +118,6 @@
                 </div>
             </div>
         </c:if>
-            <%-- Response add form --%>
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -130,9 +127,7 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>

@@ -35,8 +35,8 @@
                         <p class="text-right">
                             <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
                                title="Подробнее о &quot;<c:out value="${partner.title}"/>&quot;">
-                                        <span class="glyphicon glyphicon-share-alt"
-                                              aria-hidden="true"></span>&nbsp;Подробнее...
+                                <span class="glyphicon glyphicon-share-alt"
+                                      aria-hidden="true"></span>&nbsp;Подробнее...
                             </a>
                         </p>
                     </div>

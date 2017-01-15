@@ -52,9 +52,8 @@
                 <textarea class="form-control textarea" name="message" rows="6" maxlength="1000"
                           title="" placeholder="Ваше сообщение" required></textarea>
             </div>
-            <%-- GOOGLE reCAPTHCA --%>
             <c:if test="${authorized_user eq null}">
-                <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
+                <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
             </c:if>
             <div class="form-group col-lg-12">
                 <button type="submit" class="btn btn-default">

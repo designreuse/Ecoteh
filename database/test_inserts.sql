@@ -1,68 +1,57 @@
 USE ecoteh;
 
-/*--- 1) Photos -------------------------------------------------------------------------------*/
+/*--- 1) Files -------------------------------------------------------------------------------*/
 
-INSERT INTO `photos` (id, title, url) VALUES
+INSERT INTO `files` (id, title, url) VALUES
   (1, 'Yurii Salimov', 'users/yurii_salimov.jpg'),
-  (2, 'Category 1 photo', 'categories/category_1_photo.jpg'),
-  (3, 'Category 2 photo', 'categories/category_2_photo.jpg'),
-  (4, 'Category 3 photo', 'categories/category_3_photo.jpg'),
-  (5, 'Category 4 photo', 'categories/category_4_photo.jpg'),
-  (6, 'Category 5 photo', 'categories/category_5_photo.jpg'),
-  (7, 'Category 6 photo', 'categories/category_6_photo.jpg'),
-  (8, 'Category 7 photo', 'categories/category_7_photo.jpg'),
-  (9, 'Category 8 photo', 'categories/category_8_photo.jpg'),
-  (10, 'Category 9 photo', 'categories/category_9_photo.jpg'),
-  (11, 'Category 10 photo', 'categories/category_10_photo.jpg'),
-  (12, 'Article 1 main photo', 'articles/main_photo_1.jpg'),
-  (13, 'Article 1 photo 1', 'articles/article_1_photo_1.jpg'),
-  (14, 'Article 1 photo 2', 'articles/article_1_photo_2.jpg'),
-  (15, 'Article 1 photo 3', 'articles/article_1_photo_3.jpg'),
-  (16, 'Article 2 main photo', 'articles/main_photo_2.jpg'),
-  (17, 'Article 2 photo 1', 'articles/article_2_photo_1.jpg'),
-  (18, 'Article 2 photo 2', 'articles/article_2_photo_2.jpg'),
-  (19, 'Article 2 photo 3', 'articles/article_2_photo_3.jpg'),
-  (20, 'Article 3 main photo', 'articles/main_photo_3.jpg'),
-  (21, 'Article 3 photo 1', 'articles/article_3_photo_1.jpg'),
-  (22, 'Article 3 photo 2', 'articles/article_3_photo_2.jpg'),
-  (23, 'Article 3 photo 3', 'articles/article_3_photo_3.jpg'),
-  (24, 'Article 4 main photo', 'articles/main_photo_4.jpg'),
-  (25, 'Article 4 photo 1', 'articles/article_4_photo_1.jpg'),
-  (26, 'Article 4 photo 2', 'articles/article_4_photo_2.jpg'),
-  (27, 'Article 4 photo 3', 'articles/article_4_photo_3.jpg'),
-  (28, 'Article 5 main photo', 'articles/main_photo_5.jpg'),
-  (29, 'Article 5 photo 1', 'articles/article_5_photo_1.jpg'),
-  (30, 'Article 5 photo 2', 'articles/article_5_photo_2.jpg'),
-  (31, 'Article 5 photo 3', 'articles/article_5_photo_3.jpg'),
-  (32, 'Logo', 'companies/logo.png'),
-  (33, 'Favicon', 'companies/favicon.png'),
-  (34, 'Slide 1', 'companies/slide-1.jpg'),
-  (35, 'Slide 2', 'companies/slide-2.jpg'),
-  (36, 'Slide 3', 'companies/slide-3.jpg'),
-  (37, 'Mr. Alex Logo', 'companies/mr_alex.png'),
-  (38, 'Logo logo', 'companies/another-logo.png'),
-  (39, 'Apple Logo', 'companies/apple.jpg'),
-  (40, 'Batman Logo', 'companies/batman.gif'),
-  (41, 'Beats Logo', 'companies/beats.png'),
-  (42, 'Fanta Logo', 'companies/fanta.jpg'),
-  (43, 'Article 20 main photo', 'articles/main_photo_20.jpg'),
-  (44, 'Article 21 main photo', 'articles/main_photo_21.jpg'),
-  (45, 'Article 22 main photo', 'articles/main_photo_22.jpg'),
-  (46, 'Article 23 main photo', 'articles/main_photo_23.jpg'),
-  (47, 'Article 24 main photo', 'articles/main_photo_24.jpg');
+  (2, 'Category 1 file', 'img/categories/category_1_photo.jpg'),
+  (3, 'Category 2 file', 'img/categories/category_2_photo.jpg'),
+  (4, 'Category 3 file', 'img/categories/category_3_photo.jpg'),
+  (5, 'Category 4 file', 'img/categories/category_4_photo.jpg'),
+  (6, 'Category 5 file', 'img/categories/category_5_photo.jpg'),
+  (7, 'Category 6 file', 'img/categories/category_6_photo.jpg'),
+  (8, 'Category 7 file', 'img/categories/category_7_photo.jpg'),
+  (9, 'Category 8 file', 'img/categories/category_8_photo.jpg'),
+  (10, 'Category 9 file', 'img/categories/category_9_photo.jpg'),
+  (11, 'Category 10 file', 'img/categories/category_10_photo.jpg'),
+  (12, 'Article 1 main file', 'img/articles/main_photo_1.jpg'),
+  (13, 'Article 1 file 1', 'img/articles/article_1_photo_1.jpg'),
+  (14, 'Article 1 file 2', 'img/articles/article_1_photo_2.jpg'),
+  (15, 'Article 1 file 3', 'img/articles/article_1_photo_3.jpg'),
+  (16, 'Article 2 main file', 'img/articles/main_photo_2.jpg'),
+  (17, 'Article 2 file 1', 'img/articles/article_2_photo_1.jpg'),
+  (18, 'Article 2 file 2', 'img/articles/article_2_photo_2.jpg'),
+  (19, 'Article 2 file 3', 'img/articles/article_2_photo_3.jpg'),
+  (20, 'Article 3 main file', 'img/articles/main_photo_3.jpg'),
+  (21, 'Article 3 file 1', 'img/articles/article_3_photo_1.jpg'),
+  (22, 'Article 3 file 2', 'img/articles/article_3_photo_2.jpg'),
+  (23, 'Article 3 file 3', 'img/articles/article_3_photo_3.jpg'),
+  (24, 'Article 4 main file', 'img/articles/main_photo_4.jpg'),
+  (25, 'Article 4 file 1', 'img/articles/article_4_photo_1.jpg'),
+  (26, 'Article 4 file 2', 'img/articles/article_4_photo_2.jpg'),
+  (27, 'Article 4 file 3', 'img/articles/article_4_photo_3.jpg'),
+  (28, 'Article 5 main file', 'img/articles/main_photo_5.jpg'),
+  (29, 'Article 5 file 1', 'img/articles/article_5_photo_1.jpg'),
+  (30, 'Article 5 file 2', 'img/articles/article_5_photo_2.jpg'),
+  (31, 'Article 5 file 3', 'img/articles/article_5_photo_3.jpg'),
+  (32, 'Logo', 'img/companies/logo.png'),
+  (33, 'Favicon', 'img/companies/favicon.png'),
+  (34, 'Slide 1', 'img/companies/slide-1.jpg'),
+  (35, 'Slide 2', 'img/companies/slide-2.jpg'),
+  (36, 'Slide 3', 'img/companies/slide-3.jpg'),
+  (37, 'Mr. Alex Logo', 'img/companies/mr_alex.png'),
+  (38, 'Logo logo', 'img/companies/another-logo.png'),
+  (39, 'Apple Logo', 'img/companies/apple.jpg'),
+  (40, 'Batman Logo', 'img/companies/batman.gif'),
+  (41, 'Beats Logo', 'img/companies/beats.png'),
+  (42, 'Fanta Logo', 'img/companies/fanta.jpg'),
+  (43, 'Article 20 main file', 'img/articles/main_photo_20.jpg'),
+  (44, 'Article 21 main file', 'img/articles/main_photo_21.jpg'),
+  (45, 'Article 22 main file', 'img/articles/main_photo_22.jpg'),
+  (46, 'Article 23 main file', 'img/articles/main_photo_23.jpg'),
+  (47, 'Article 24 main file', 'img/articles/main_photo_24.jpg');
 
-/*--- 2) Videos -------------------------------------------------------------------------------*/
-
-INSERT INTO `videos` (id, title, url) VALUES
-  (1, 'some_video', 'https://www.youtube.com/embed/IB_3jZA3lxo'),
-  (2, 'loboda', 'https://www.youtube.com/embed/aZirbtZKOu0'),
-  (3, 'some_video', 'https://www.youtube.com/embed/IB_3jZA3lxo'),
-  (4, 'loboda', 'https://www.youtube.com/embed/aZirbtZKOu0'),
-  (5, 'some_video', 'https://www.youtube.com/embed/IB_3jZA3lxo'),
-  (6, 'loboda', 'https://www.youtube.com/embed/aZirbtZKOu0');
-;
-
-/*--- 3) Users -------------------------------------------------------------------------------*/
+/*--- 2) Users -------------------------------------------------------------------------------*/
 
 INSERT INTO `users` (
   id, role,
@@ -82,7 +71,7 @@ INSERT INTO `users` (
   1, 1, 0
 );
 
-/*--- 4) Categories -------------------------------------------------------------------------------*/
+/*--- 3) Categories -------------------------------------------------------------------------------*/
 
 INSERT INTO `categories` (
   id,
@@ -91,37 +80,37 @@ INSERT INTO `categories` (
   photo_id, is_valid
 ) VALUES
   (1, 'Category 1', 'category_1', 'Some description about the category 1.', 'category 1 keywords', 2, 1),
-  (2, 'Category 2', 'category_2', 'Some description bout the category 2.', 'category 2 keywords', 3, 1),
-  (3, 'Category 3', 'category_3', 'Some description bout the category 3.', 'category 3 keywords', 4, 1),
-  (4, 'Category 4', 'category_4', 'Some description bout the category 4.', 'category 4 keywords', 5, 1),
-  (5, 'Category 5', 'category_5', 'Some description bout the category 5.', 'category 5 keywords', 6, 1),
-  (6, 'Category 6', 'category_6', 'Some description bout the category 6.', 'category 6 keywords', 7, 1),
-  (7, 'Category 7', 'category_7', 'Some description bout the category 7.', 'category 7 keywords', 8, 1),
-  (8, 'Category 8', 'category_8', 'Some description bout the category 8.', 'category 8 keywords', 9, 1),
-  (9, 'Category 9', 'category_9', 'Some description bout the category 9.', 'category 9 keywords', 10, 1),
-  (10, 'Category 10', 'category_10', 'Some description bout the category 10.', 'category 10 keywords', 11, 1),
-  (11, 'Category 11', 'category_11', 'Some description bout the category 11.', 'category 11 keywords', NULL, 0),
-  (12, 'Category 12', 'category_12', 'Some description bout the category 12.', 'category 12 keywords', NULL, 1),
-  (13, 'Category 13', 'category_13', 'Some description bout the category 13.', 'category 13 keywords', NULL, 0),
-  (14, 'Category 14', 'category_14', 'Some description bout the category 14.', 'category 14 keywords', NULL, 1),
-  (15, 'Category 15', 'category_15', 'Some description bout the category 15.', 'category 15 keywords', NULL, 0),
-  (16, 'Category 16', 'category_16', 'Some description bout the category 16.', 'category 16 keywords', NULL, 1),
-  (17, 'Category 17', 'category_17', 'Some description bout the category 17.', 'category 17 keywords', NULL, 0),
-  (18, 'Category 18', 'category_18', 'Some description bout the category 18.', 'category 18 keywords', NULL, 1),
-  (19, 'Category 19', 'category_19', 'Some description bout the category 19.', 'category 19 keywords', NULL, 0),
-  (20, 'Category 20', 'category_20', 'Some description bout the category 20.', 'category 20 keywords', NULL, 1),
-  (21, 'Category 21', 'category_21', 'Some description bout the category 21.', 'category 21 keywords', NULL, 0),
-  (22, 'Category 22', 'category_22', 'Some description bout the category 22.', 'category 22 keywords', NULL, 1),
-  (23, 'Category 23', 'category_23', 'Some description bout the category 23.', 'category 23 keywords', NULL, 0),
-  (24, 'Category 24', 'category_24', 'Some description bout the category 24.', 'category 24 keywords', NULL, 1),
-  (25, 'Category 25', 'category_25', 'Some description bout the category 25.', 'category 25 keywords', NULL, 0),
-  (26, 'Category 26', 'category_26', 'Some description bout the category 26.', 'category 26 keywords', NULL, 1),
-  (27, 'Category 27', 'category_27', 'Some description bout the category 27.', 'category 27 keywords', NULL, 0),
-  (28, 'Category 28', 'category_28', 'Some description bout the category 28.', 'category 28 keywords', NULL, 1),
-  (29, 'Category 29', 'category_29', 'Some description bout the category 29.', 'category 29 keywords', NULL, 0),
-  (30, 'Category 30', 'category_30', 'Some description bout the category 30.', 'category 30 keywords', NULL, 0);
+  (2, 'Category 2', 'category_2', 'Some description about the category 2.', 'category 2 keywords', 3, 1),
+  (3, 'Category 3', 'category_3', 'Some description about the category 3.', 'category 3 keywords', 4, 1),
+  (4, 'Category 4', 'category_4', 'Some description about the category 4.', 'category 4 keywords', 5, 1),
+  (5, 'Category 5', 'category_5', 'Some description about the category 5.', 'category 5 keywords', 6, 1),
+  (6, 'Category 6', 'category_6', 'Some description about the category 6.', 'category 6 keywords', 7, 1),
+  (7, 'Category 7', 'category_7', 'Some description about the category 7.', 'category 7 keywords', 8, 1),
+  (8, 'Category 8', 'category_8', 'Some description about the category 8.', 'category 8 keywords', 9, 1),
+  (9, 'Category 9', 'category_9', 'Some description about the category 9.', 'category 9 keywords', 10, 1),
+  (10, 'Category 10', 'category_10', 'Some description about the category 10.', 'category 10 keywords', 11, 1),
+  (11, 'Category 11', 'category_11', 'Some description about the category 11.', 'category 11 keywords', NULL, 0),
+  (12, 'Category 12', 'category_12', 'Some description about the category 12.', 'category 12 keywords', NULL, 1),
+  (13, 'Category 13', 'category_13', 'Some description about the category 13.', 'category 13 keywords', NULL, 0),
+  (14, 'Category 14', 'category_14', 'Some description about the category 14.', 'category 14 keywords', NULL, 1),
+  (15, 'Category 15', 'category_15', 'Some description about the category 15.', 'category 15 keywords', NULL, 0),
+  (16, 'Category 16', 'category_16', 'Some description about the category 16.', 'category 16 keywords', NULL, 1),
+  (17, 'Category 17', 'category_17', 'Some description about the category 17.', 'category 17 keywords', NULL, 0),
+  (18, 'Category 18', 'category_18', 'Some description about the category 18.', 'category 18 keywords', NULL, 1),
+  (19, 'Category 19', 'category_19', 'Some description about the category 19.', 'category 19 keywords', NULL, 0),
+  (20, 'Category 20', 'category_20', 'Some description about the category 20.', 'category 20 keywords', NULL, 1),
+  (21, 'Category 21', 'category_21', 'Some description about the category 21.', 'category 21 keywords', NULL, 0),
+  (22, 'Category 22', 'category_22', 'Some description about the category 22.', 'category 22 keywords', NULL, 1),
+  (23, 'Category 23', 'category_23', 'Some description about the category 23.', 'category 23 keywords', NULL, 0),
+  (24, 'Category 24', 'category_24', 'Some description about the category 24.', 'category 24 keywords', NULL, 1),
+  (25, 'Category 25', 'category_25', 'Some description about the category 25.', 'category 25 keywords', NULL, 0),
+  (26, 'Category 26', 'category_26', 'Some description about the category 26.', 'category 26 keywords', NULL, 1),
+  (27, 'Category 27', 'category_27', 'Some description about the category 27.', 'category 27 keywords', NULL, 0),
+  (28, 'Category 28', 'category_28', 'Some description about the category 28.', 'category 28 keywords', NULL, 1),
+  (29, 'Category 29', 'category_29', 'Some description about the category 29.', 'category 29 keywords', NULL, 0),
+  (30, 'Category 30', 'category_30', 'Some description about the category 30.', 'category 30 keywords', NULL, 0);
 
-/*--- 5) Articles -------------------------------------------------------------------------------*/
+/*--- 4) Articles -------------------------------------------------------------------------------*/
 
 INSERT INTO `articles` (
   id,
@@ -532,13 +521,13 @@ INSERT INTO `articles` (
         Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text',
        '2016-08-25 14:53:00', NULL, 1, 0);
 
-/*--- 6) Companies -------------------------------------------------------------------------------*/
+/*--- 5) Companies -------------------------------------------------------------------------------*/
 
 INSERT INTO `companies` (
   id, type,
   title, domain, url,
   tagline, description, information, advantages,
-  mobile_phone,landline_phone, fax, email,
+  mobile_phone, landline_phone, fax, email,
   sender_email, sender_pass,
   vkontakte, facebook, twitter, skype,
   address, keywords,
@@ -676,30 +665,12 @@ INSERT INTO `companies` (
    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12101.231188451986!2d30.46496854249532!3d50.38574881210299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4c8e75044d5f9%3A0xb47cad6bc4ff220a!2z0LLRg9C70LjRhtGPINCc0LjRhdCw0LnQu9CwINCb0L7QvNC-0L3QvtGB0L7QstCwLCA1NSwg0JrQuNGX0LI!5e0!3m2!1sru!2sua!4v1473607244254',
    '09:00', '17:00', 42, NULL);
 
-/*--- 7) Article photo -------------------------------------------------------------------------------*/
-
-INSERT INTO `article_photo` (article_id, photo_id) VALUES
-  (1, 13), (1, 14), (1, 15),
-  (2, 17), (2, 18), (2, 19),
-  (3, 21), (3, 22), (3, 23),
-  (4, 25), (4, 26), (4, 27),
-  (5, 29), (5, 30), (5, 31);
-
-/*--- 8) Article video -------------------------------------------------------------------------------*/
-
-INSERT INTO `article_video` (article_id, video_id) VALUES
-  (1, 1), (1, 2),
-  (2, 3),
-  (3, 4),
-  (4, 5),
-  (5, 6);
-
-/*--- 9) Company photo -------------------------------------------------------------------------------*/
+/*--- 6) Company file -------------------------------------------------------------------------------*/
 
 INSERT INTO `company_photo` (company_id, photo_id) VALUES
   (1, 34), (1, 35), (1, 36);
 
-/*--- 10) Responses -------------------------------------------------------------------------------*/
+/*--- 7) Responses -------------------------------------------------------------------------------*/
 
 INSERT INTO `responses` (id, username, date, text, is_valid) VALUES
   (1, 'Станислав Васильевич', '2016-06-09 14:53:00',

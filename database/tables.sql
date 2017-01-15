@@ -1,8 +1,8 @@
 USE ecoteh;
 
-/*--- 1) Photos -------------------------------------------------------------------------*/
+/*--- 1) Files -------------------------------------------------------------------------*/
 
-CREATE TABLE `photos` (
+CREATE TABLE `files` (
   `id`       INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title`    VARCHAR(100)          DEFAULT NULL,
   `url`      VARCHAR(200) NOT NULL,
@@ -12,19 +12,7 @@ CREATE TABLE `photos` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 2) Videos --------------------------------------------------------------------------*/
-
-CREATE TABLE `videos` (
-  `id`       INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title`    VARCHAR(100)          DEFAULT NULL,
-  `url`      VARCHAR(200) NOT NULL,
-  `is_valid` BIT(1)       NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*--- 3) Users -------------------------------------------------------------------------------*/
+/*--- 2) Users -------------------------------------------------------------------------------*/
 
 CREATE TABLE `users` (
   `id`          INT UNSIGNED NOT NULL  AUTO_INCREMENT,
@@ -45,7 +33,7 @@ CREATE TABLE `users` (
   `is_mailing`  BIT(1)       NOT NULL  DEFAULT 1,
   `is_locked`   BIT(1)       NOT NULL  DEFAULT 0,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
+  FOREIGN KEY (`photo_id`) REFERENCES `files` (`id`),
   UNIQUE (`url`),
   UNIQUE (`login`),
   UNIQUE (`password`)
@@ -53,7 +41,7 @@ CREATE TABLE `users` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 4) Categories -------------------------------------------------------------------------------*/
+/*--- 3) Categories -------------------------------------------------------------------------------*/
 
 CREATE TABLE `categories` (
   `id`          INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -64,14 +52,14 @@ CREATE TABLE `categories` (
   `photo_id`    INT UNSIGNED          DEFAULT NULL,
   `is_valid`    BIT(1)       NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
+  FOREIGN KEY (`photo_id`) REFERENCES `files` (`id`),
   UNIQUE (`title`),
   UNIQUE (`url`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 5) Articles -------------------------------------------------------------------------------*/
+/*--- 4) Articles -------------------------------------------------------------------------------*/
 
 CREATE TABLE `articles` (
   `id`            INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -93,7 +81,7 @@ CREATE TABLE `articles` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 6) Companies -------------------------------------------------------------------------------*/
+/*--- 5) Companies -------------------------------------------------------------------------------*/
 
 CREATE TABLE `companies` (
   `id`             INT UNSIGNED             NOT NULL AUTO_INCREMENT,
@@ -124,48 +112,26 @@ CREATE TABLE `companies` (
   `favicon_id`     INT UNSIGNED                      DEFAULT NULL,
   `is_valid`       BIT(1)                   NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`logo_id`) REFERENCES `photos` (`id`),
-  FOREIGN KEY (`favicon_id`) REFERENCES `photos` (`id`),
+  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
+  FOREIGN KEY (`favicon_id`) REFERENCES `files` (`id`),
   UNIQUE (`title`),
   UNIQUE (`url`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 7) Article photo -------------------------------------------------------------------------------*/
-
-CREATE TABLE `article_photo` (
-  `article_id` INT UNSIGNED NOT NULL,
-  `photo_id`   INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`),
-  FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*--- 8) Article video ------------------------------------------------------------------------------*/
-
-CREATE TABLE `article_video` (
-  `article_id` INT UNSIGNED NOT NULL,
-  `video_id`   INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`),
-  FOREIGN KEY (`video_id`) REFERENCES `videos` (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*--- 9) Company photo -------------------------------------------------------------------------------*/
+/*--- 6) Company photos -------------------------------------------------------------------------------*/
 
 CREATE TABLE `company_photo` (
   `company_id` INT UNSIGNED NOT NULL,
   `photo_id`   INT UNSIGNED NOT NULL,
   FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`),
-  FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`)
+  FOREIGN KEY (`photo_id`) REFERENCES `files` (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*--- 10) Responses -----------------------------------------------------------------------------------*/
+/*--- 7) Responses -----------------------------------------------------------------------------------*/
 
 CREATE TABLE `responses` (
   `id`       INT UNSIGNED NOT NULL AUTO_INCREMENT,
