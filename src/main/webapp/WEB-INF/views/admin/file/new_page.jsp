@@ -47,21 +47,21 @@
                         <form action="<c:url value="/admin/file/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title"
                                                maxlength="100" placeholder="Название файла" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Относительный путь директории</th>
+                                    <td class="ths">Относительный путь директории</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="path" maxlength="100"
                                                placeholder="Путь относительно папки &quot;/resources/&quot;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Файл</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Файл</td>
                                     <td class="tds">
                                         <input type="file" name="file" accept="image/*" class="form-control" required>
                                     </td>

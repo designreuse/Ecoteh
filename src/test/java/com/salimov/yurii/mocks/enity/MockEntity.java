@@ -34,11 +34,14 @@ public final class MockEntity {
     public static Company getCompany() {
         final Company company = new Company();
         company.initialize(
-                TITLE, DOMAIN, TAGLINE, DESCRIPTION,
-                INFORMATION, ADVANTAGES, PHONE, PHONE,
-                PHONE, EMAIL, EMAIL, PASSWORD, VKONTAKTE,
-                FACEBOOK, TWITTER, SKYPE, ADDRESS, KEYWORDS,
-                GOOGLE_MAPS, null, null
+                TITLE, DOMAIN,
+                TAGLINE, DESCRIPTION, INFORMATION,
+                PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
+                VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
+                ADDRESS,
+                KEYWORDS,
+                GOOGLE_MAPS,
+                null, null
         );
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);

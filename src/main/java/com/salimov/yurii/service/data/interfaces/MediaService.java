@@ -1,6 +1,10 @@
 package com.salimov.yurii.service.data.interfaces;
 
+import com.salimov.yurii.entity.Content;
 import com.salimov.yurii.entity.Media;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
@@ -84,4 +88,18 @@ public interface MediaService<T extends Media, E extends Number>
      * @see Media
      */
     void removeByUrl(final String url);
+
+    /**
+     * Sorts and returns objects of {@link Content} class
+     * or subclasses by title.
+     *
+     * @param contents the contents to sort.
+     * @param revers   is sort in descending or ascending.
+     * @return The sorted list of contents.
+     * @see Content
+     */
+    List<T> sortByTitle(
+            final Collection<T> contents,
+            final boolean revers
+    );
 }

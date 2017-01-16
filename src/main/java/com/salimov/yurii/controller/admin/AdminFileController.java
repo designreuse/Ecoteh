@@ -50,7 +50,13 @@ public class AdminFileController {
     )
     public ModelAndView getAllFile() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("files", this.fileService.getAll(false));
+        modelAndView.addObject(
+                "files",
+                this.fileService.sortByTitle(
+                        this.fileService.getAll(false),
+                        false
+                )
+        );
         modelAndView.setViewName("admin/file/all_page");
         return modelAndView;
     }

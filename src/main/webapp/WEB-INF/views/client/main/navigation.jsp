@@ -50,7 +50,6 @@
                                 <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех товаров">
                                     <h4 class="text-center">Продукция</h4>
                                 </a>
-                                <hr>
                             </li>
                         </ul>
                     </li>

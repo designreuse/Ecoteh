@@ -65,7 +65,6 @@
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <p>${company.description}</p>
                         <p>${company.information}</p>
-                        <p>${company.advantages}</p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

@@ -113,7 +113,6 @@ public class AdminCompanyController {
      * @param domain        a new domain to the main company.
      * @param tagline       a new tagline to the main company.
      * @param description   a new description to the main company.
-     * @param advantages    a new advantages to the main company.
      * @param information   a new information to the main company.
      * @param keywords      a new keywords to the main company.
      * @param workTimeFrom  a new start work time to the main company.
@@ -149,8 +148,7 @@ public class AdminCompanyController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "advantages") final String advantages,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "information") final String information,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "time_from") final String workTimeFrom,
@@ -176,13 +174,16 @@ public class AdminCompanyController {
             final ModelAndView modelAndView
     ) {
         this.companyService.initAndEditMainCompany(
-                title, domain, tagline, description,
-                advantages, information, keywords,
-                workTimeFrom, workTimeTo, mobilePhone,
-                landlinePhone, fax, email, senderEmail,
-                senderPass, vkontakte, facebook, twitter,
-                skype, address, googleMaps, logo, logoAction,
-                favicon, faviconAction, slides, slidesAction
+                title, domain,
+                tagline, description, information, keywords,
+                workTimeFrom, workTimeTo,
+                mobilePhone, landlinePhone, fax, email,
+                senderEmail, senderPass,
+                vkontakte, facebook, twitter,
+                skype, address, googleMaps,
+                logo, logoAction,
+                favicon, faviconAction,
+                slides, slidesAction
         );
         modelAndView.setViewName("redirect:/admin/company/main");
         Cache.clear();
@@ -233,7 +234,6 @@ public class AdminCompanyController {
      * @param domain        a domain of the new company.
      * @param tagline       a tagline of the new company.
      * @param description   a description of the new company.
-     * @param advantages    a advantages of the new company.
      * @param information   a information of the new company.
      * @param keywords      a keywords of the new company.
      * @param mobilePhone   a mobile phone of the new company.
@@ -261,8 +261,7 @@ public class AdminCompanyController {
             @RequestParam(value = "title") String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "advantages") final String advantages,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "information") final String information,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "mobile_phone") final String mobilePhone,
@@ -280,10 +279,13 @@ public class AdminCompanyController {
             final ModelAndView modelAndView
     ) {
         final Company company = this.companyService.initAndAdd(
-                title, domain, tagline, description, advantages,
-                information, keywords, mobilePhone, landlinePhone,
-                fax, email, vkontakte, facebook, twitter, skype,
-                address, googleMaps, logoFile, isValid
+                title, domain,
+                tagline, description, information, keywords,
+                mobilePhone, landlinePhone, fax, email,
+                vkontakte, facebook, twitter, skype,
+                address, googleMaps,
+                logoFile,
+                isValid
         );
         Cache.clear();
         modelAndView.setViewName(
@@ -347,7 +349,6 @@ public class AdminCompanyController {
      * @param domain        a new domain to the company.
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
-     * @param advantages    a new advantages to the company.
      * @param information   a new information to the company.
      * @param keywords      a new keywords to the company.
      * @param mobilePhone   a new mobile phone to the company.
@@ -377,8 +378,7 @@ public class AdminCompanyController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "advantages") final String advantages,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "information") final String information,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "mobile_phone") final String mobilePhone,
@@ -397,9 +397,10 @@ public class AdminCompanyController {
             final ModelAndView modelAndView
     ) {
         final Company company = this.companyService.initAndUpdate(
-                url, title, domain, tagline, description, advantages,
-                information, keywords, mobilePhone, landlinePhone,
-                fax, email, vkontakte, facebook, twitter, skype,
+                url, title, domain,
+                tagline, description, information, keywords,
+                mobilePhone, landlinePhone, fax, email,
+                vkontakte, facebook, twitter, skype,
                 address, googleMaps, logoFile, logoAction, isValid
         );
         modelAndView.setViewName(

@@ -46,12 +46,6 @@ public final class Company
     private String information;
 
     /**
-     * The advantages of a company.
-     */
-    @Column(name = "advantages")
-    private String advantages;
-
-    /**
      * The domain of a company.
      */
     @Column(name = "domain")
@@ -226,7 +220,6 @@ public final class Company
      * @param tagline         a tagline of the new company.
      * @param description     a description of the new company.
      * @param information     a information of the new company.
-     * @param advantages      a advantages of the new company.
      * @param mobilePhone     a mobile phone of the new company.
      * @param landlinePhone   a landline phone of the new company.
      * @param fax             a fax of the new company.
@@ -250,7 +243,6 @@ public final class Company
             final String tagline,
             final String description,
             final String information,
-            final String advantages,
             final String mobilePhone,
             final String landlinePhone,
             final String fax,
@@ -269,8 +261,9 @@ public final class Company
     ) {
         super(title, description, keywords);
         initialize(
-                title, domain, tagline, description, information,
-                advantages, mobilePhone, landlinePhone, fax,
+                title, domain,
+                tagline, description, information,
+                mobilePhone, landlinePhone, fax,
                 email, senderEmail, senderEmailPass, vkontakte,
                 facebook, twitter, skype, address,
                 keywords, googleMaps, logo, favicon
@@ -289,7 +282,6 @@ public final class Company
         sb.append(type.name()).append(" ").append(super.toString())
                 .append(" \nTagline: ").append(tagline)
                 .append(" \nInformation: ").append(information)
-                .append(" \nAdvantages: ").append(advantages)
                 .append(" \nDomain: ").append(domain)
                 .append(" \nMobile Phone: ").append(mobilePhone)
                 .append(" \nLandline Phone: ").append(landlinePhone)
@@ -385,7 +377,6 @@ public final class Company
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
      * @param information   a new information to the company.
-     * @param advantages    a new advantages to the company.
      * @param mobilePhone   a new mobile phone to the company.
      * @param landlinePhone a new landline phone to the company.
      * @param fax           a new fax to the company.
@@ -410,7 +401,6 @@ public final class Company
             final String tagline,
             final String description,
             final String information,
-            final String advantages,
             final String mobilePhone,
             final String landlinePhone,
             final String fax,
@@ -429,7 +419,7 @@ public final class Company
     ) {
         initialize(
                 title, domain, tagline, description,
-                information, advantages, mobilePhone,
+                information, mobilePhone,
                 landlinePhone, fax, email, senderEmail,
                 senderPass, vkontakte, facebook, twitter,
                 skype, address, keywords, googleMaps
@@ -446,7 +436,6 @@ public final class Company
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
      * @param information   a new information to the company.
-     * @param advantages    a new advantages to the company.
      * @param mobilePhone   a new mobile phone to the company.
      * @param landlinePhone a new landline phone to the company.
      * @param fax           a new fax to the company.
@@ -468,7 +457,6 @@ public final class Company
             final String tagline,
             final String description,
             final String information,
-            final String advantages,
             final String mobilePhone,
             final String landlinePhone,
             final String fax,
@@ -487,7 +475,6 @@ public final class Company
         setDomain(domain);
         setTagline(tagline);
         setInformation(information);
-        setAdvantages(advantages);
         setMobilePhone(mobilePhone);
         setLandlinePhone(landlinePhone);
         setFax(fax);
@@ -569,27 +556,6 @@ public final class Company
     @Override
     public void setInformation(final String information) {
         this.information = isNotBlank(information) ? information : null;
-    }
-
-    /**
-     * Returns a advantages of the company.
-     *
-     * @return The company advantages.
-     */
-    @Override
-    public String getAdvantages() {
-        return this.advantages;
-    }
-
-    /**
-     * Sets a new advantages to the company.
-     * If parameter advantages is blank, then sets {@code null}.
-     *
-     * @param advantages a new advantages to the company.
-     */
-    @Override
-    public void setAdvantages(final String advantages) {
-        this.advantages = isNotBlank(advantages) ? advantages : null;
     }
 
     /**

@@ -65,9 +65,9 @@
                         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xl-8 col-xl-offset-2">
                             <table align="center">
                                 <tr>
-                                    <th class="pad"><h4>Фото</h4></th>
-                                    <th class="pad"><h4>Название</h4></th>
-                                    <th class="pad"><h4>Действие</h4></th>
+                                    <th class="pad">Фото</th>
+                                    <th class="pad">Название</th>
+                                    <th class="pad">Действие</th>
                                 </tr>
                                 <c:set var="path" value="${pageContext.request.contextPath}"/>
                                 <c:forEach items="${files}" var="file">
@@ -76,7 +76,7 @@
                                             <a href="<c:url value="/resources/${file.url}"/>" title="${file.title}"
                                                rel="lightgallery">
                                                 <img src="<c:url value="/resources/${file.url}"/>" class="img-preview"
-                                                     alt="" title="Mr. Alex">
+                                                     alt="" title="Увеличить">
                                             </a>
                                         </td>
                                         <td class="pad">

@@ -510,21 +510,25 @@ public final class MockServices {
         when(
                 companyService.initAndAdd(
 
-                        TITLE, DOMAIN, TAGLINE, DESCRIPTION,
-                        ADVANTAGES, INFORMATION, KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL, VKONTAKTE,
-                        FACEBOOK, TWITTER, SKYPE, ADDRESS,
-                        GOOGLE_MAPS, null, true
+                        TITLE, DOMAIN,
+                        TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
+                        PHONE, PHONE, PHONE, EMAIL,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
+                        ADDRESS, GOOGLE_MAPS,
+                        null,
+                        true
                 )
         ).thenReturn(company);
         when(
                 companyService.initAndUpdate(
 
-                        URL, TITLE, DOMAIN, TAGLINE, DESCRIPTION,
-                        ADVANTAGES, INFORMATION, KEYWORDS, PHONE,
-                        PHONE, PHONE, EMAIL, VKONTAKTE, FACEBOOK,
-                        TWITTER, SKYPE, ADDRESS, GOOGLE_MAPS, null,
-                        null, true
+                        URL, TITLE, DOMAIN,
+                        TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
+                        PHONE, PHONE, PHONE, EMAIL,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
+                        ADDRESS, GOOGLE_MAPS,
+                        null, null,
+                        true
                 )
         ).thenReturn(company);
         when(

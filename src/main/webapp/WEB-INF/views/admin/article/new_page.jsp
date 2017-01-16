@@ -50,42 +50,42 @@
                         <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название статьи" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" rows="6" title=""
                                               placeholder="Краткое описание статьи (анонс)."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Основной текст</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Основной текст</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="text" required rows="10" title=""
                                               placeholder="Основная информация статьи."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" rows="3" title="" required
+                                    <textarea class="form-control textarea" name="keywords" rows="5" title="" required
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Артикль</th>
+                                    <td class="ths">Артикль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="number" minlength="2"
                                                maxlength="100" placeholder="Номер статьи, например: АС142.">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Категория</th>
+                                    <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
                                             <option value="">Нет</option>
@@ -97,32 +97,32 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
                                            rel="lightgallery" title="Главное фото, это где?">
                                             Главное фото&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                        aria-hidden="true"></span>
+                                                                    aria-hidden="true"></span>
                                         </a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="file" name="photo" accept="image/*" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <b><input type="radio" name="is_valid" value="true" checked
-                                                      required/>&nbsp;Отображать</b>
+                                            <input type="radio" name="is_valid" value="true" checked
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -148,13 +148,13 @@
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
     <script>CKEDITOR.replace("text");</script>
-    <script src="/resources/js/lightgallery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

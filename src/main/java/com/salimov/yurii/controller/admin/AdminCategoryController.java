@@ -108,7 +108,7 @@ public class AdminCategoryController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addCategory(
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "main_photo") final MultipartFile photoFile,
             @RequestParam(value = "is_valid") final boolean isValid,
@@ -187,7 +187,7 @@ public class AdminCategoryController {
     public ModelAndView updateCategory(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "main_photo") final MultipartFile photoFile,
             @RequestParam(value = "photo_action") final String photoAction,

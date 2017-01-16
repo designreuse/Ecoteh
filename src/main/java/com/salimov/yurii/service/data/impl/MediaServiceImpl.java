@@ -1,9 +1,14 @@
 package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.MediaDao;
+import com.salimov.yurii.entity.Content;
 import com.salimov.yurii.entity.Media;
 import com.salimov.yurii.service.data.interfaces.MediaService;
+import com.salimov.yurii.util.comparator.MediaComparator;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -222,5 +227,27 @@ public abstract class MediaServiceImpl<T extends Media<E>, E extends Number>
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts and returns objects of {@link Content} class
+     * or subclasses by title.
+     *
+     * @param contents the contents to sort.
+     * @param revers   is sort in descending or ascending.
+     * @return The sorted list of contents.
+     * @see Content
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<T> sortByTitle(
+            final Collection<T> contents,
+            final boolean revers
+    ) {
+        return sort(
+                contents,
+                new MediaComparator.ByTitle<>(),
+                revers
+        );
     }
 }

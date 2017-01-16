@@ -58,7 +58,7 @@
                               enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название категории" required
@@ -66,23 +66,23 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" required rows="6"
+                                    <textarea class="form-control textarea" name="text" rows="6"
                                               placeholder="Краткое описание категории." title=""><c:out
                                             value="${category.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="3"><c:out value="${category.keywords}"/></textarea>
+                                              rows="5"><c:out value="${category.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Фото</th>
+                                    <td class="ths">Фото</td>
                                     <td class="tds">
                                         <c:choose>
                                             <c:when test="${category.photo ne null}">
@@ -110,22 +110,22 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если категория позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Категорию смогут увидеть все пользователей">
                                             <input type="radio" name="is_valid" value="true"
                                                    <c:if test="${category.validated}">checked</c:if>
-                                                   required/>&nbsp;Отображать</b>
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Категорию смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      <c:if test="${!category.validated}">checked</c:if>
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   <c:if test="${!category.validated}">checked</c:if>
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -155,7 +155,7 @@
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
-    <script>CKEDITOR.replace("description");</script>
+    <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>

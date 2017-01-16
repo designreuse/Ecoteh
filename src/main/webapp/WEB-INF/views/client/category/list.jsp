@@ -16,6 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="box">
+                <hr>
                 <c:forEach items="${categories}" var="category">
                     <c:if test="${(last_line ne length ) and (printed eq last_line)}">
                         <c:set var="in_line" value="${length - last_line}"/>
@@ -45,9 +46,7 @@
                     <c:set var="printed_in_line" value="${printed_in_line + 1}"/>
                     <c:if test="${printed_in_line eq in_line}">
                         <c:if test="${length gt printed}">
-                            <div class="hidden-xs hidden-sm col-md-12 col-lg-12 col-xl-12">
-                                <hr>
-                            </div>
+                            <div class="hidden-xs hidden-sm col-md-12 col-lg-12 col-xl-12"></div>
                         </c:if>
                         <c:set var="printed_in_line" value="0"/>
                     </c:if>

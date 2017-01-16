@@ -67,7 +67,6 @@ public final class User
     @Column(name = "email", nullable = false)
     private String email;
 
-
     /**
      * The phone of a user.
      */
@@ -131,13 +130,13 @@ public final class User
     /**
      * The permit to send a letters on the user email.
      */
-    @Column(name = "is_mailing")
+    @Column(name = "mailing")
     private boolean isMailing;
 
     /**
      * Locked the user or not.
      */
-    @Column(name = "is_locked")
+    @Column(name = "locked")
     private boolean isLocked;
 
     /**

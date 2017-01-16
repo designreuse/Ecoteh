@@ -21,7 +21,6 @@ public interface ICompany<E extends Number>
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
      * @param information   a new information to the company.
-     * @param advantages    a new advantages to the company.
      * @param mobilePhone   a new mobile phone to the company.
      * @param landlinePhone a new landline phone to the company.
      * @param fax           a new fax to the company.
@@ -45,7 +44,6 @@ public interface ICompany<E extends Number>
             final String tagline,
             final String description,
             final String information,
-            final String advantages,
             final String mobilePhone,
             final String landlinePhone,
             final String fax,
@@ -71,7 +69,6 @@ public interface ICompany<E extends Number>
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
      * @param information   a new information to the company.
-     * @param advantages    a new advantages to the company.
      * @param mobilePhone   a new mobile phone to the company.
      * @param landlinePhone a new landline phone to the company.
      * @param fax           a new fax to the company.
@@ -92,7 +89,6 @@ public interface ICompany<E extends Number>
             final String tagline,
             final String description,
             final String information,
-            final String advantages,
             final String mobilePhone,
             final String landlinePhone,
             final String fax,
@@ -149,20 +145,6 @@ public interface ICompany<E extends Number>
      * @param information a new information to the company.
      */
     void setInformation(final String information);
-
-    /**
-     * Returns a advantages of the company.
-     *
-     * @return The company advantages.
-     */
-    String getAdvantages();
-
-    /**
-     * Sets a new advantages to the company.
-     *
-     * @param advantages a new advantages to the company.
-     */
-    void setAdvantages(final String advantages);
 
     /**
      * Returns a e-mail of the company.

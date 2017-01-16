@@ -30,7 +30,6 @@ public interface MockConstants {
     String DOMAIN = "domain.com";
     String TAGLINE = "It`s the best web-site.";
     String INFORMATION = "I am a information about some content.";
-    String ADVANTAGES = "advantages";
     String ADDRESS = "Ukraine, Kyiv, Some Str., 51";
     String TIME = "12:00";
     String GOOGLE_MAPS = "google maps";

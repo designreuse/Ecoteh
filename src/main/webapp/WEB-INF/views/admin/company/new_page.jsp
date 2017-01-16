@@ -49,21 +49,21 @@
                         <form action="<c:url value="/admin/company/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название компании" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Домен</th>
+                                    <td class="ths">Домен</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="domain" minlength="5"
                                                maxlength="200" placeholder="Адрес сайта компании в интернете">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Слоган</th>
+                                    <td class="ths">Слоган</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="tagline" rows="3" maxlength="200"
                                                   title=""
@@ -71,23 +71,16 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Описание</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="description" rows="6" title=""
+                                        <textarea class="form-control textarea" name="text" rows="6" title=""
                                                   placeholder="Краткое описание компании" required></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Преимущества</th>
-                                    <td class="tds">
-                                        <textarea class="form-control textarea" name="advantages" rows="6" title=""
-                                                  placeholder="Преимущества над другими компаниями"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <span class="red">*</span>&nbsp;Информация
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="information" rows="10" title=""
                                                   required
@@ -95,48 +88,48 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <span class="red">*</span>&nbsp;Ключевые слова
-                                    </th>
+                                    </td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="keywords" rows="3" title=""
+                                        <textarea class="form-control textarea" name="keywords" rows="5" title=""
                                                   required
                                                   placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Мобильный телефон</th>
+                                    <td class="ths">Мобильный телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="mobile_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Cтационарный телефон</th>
+                                    <td class="ths">Cтационарный телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="landline_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Факс</th>
+                                    <td class="ths">Факс</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="fax" maxlength="20"
                                                placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Электронная почта</th>
+                                    <td class="ths">Электронная почта</td>
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100"
                                                placeholder="name@mail.com">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://vk.com" target="_blank"
                                            title="Социальная сеть Vkontakte">Vkontakte</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte"
                                                minlength="5" maxlength="200"
@@ -144,10 +137,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://www.facebook.com" target="_blank"
                                            title="Социальная сеть Facebook">Facebook</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook"
                                                minlength="5" maxlength="200"
@@ -155,32 +148,32 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://twitter.com" target="_blank" title="Социальная сеть Twitter">Twitter</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка в социальной сети Twitter">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Skype</th>
+                                    <td class="ths">Skype</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <span class="red">*</span>&nbsp;Адрес офиса
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="address" maxlength="300" required
                                                placeholder="Адрес главного офиса компании">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://www.google.com.ua/maps/" target="_blank"
                                            title="Перейти к Google Maps">Google Maps</a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
@@ -193,7 +186,7 @@
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                         <a href="<c:url value="/resources/img/static/google_maps_4.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="google_maps" title=""
                                                   placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
@@ -201,33 +194,32 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
                                            rel="lightgallery" title="Логотип, это где?">
                                             Логотип&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                aria-hidden="true"></span>
                                         </a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="file" name="logo_photo" accept="image/*" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;
-                                                <span class="glyphicon glyphicon-info-sign"
-                                                      aria-hidden="true"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                      aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Компанию смогут увидеть все пользователей">
-                                            <b><input type="radio" name="is_valid" value="true" checked
-                                                      required/>&nbsp;Отображать</b>
+                                            <input type="radio" name="is_valid" value="true" checked
+                                                      required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Компанию смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                      required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -256,6 +248,7 @@
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
+    <script>CKEDITOR.replace("text");</script>
     <script>CKEDITOR.replace("information");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>

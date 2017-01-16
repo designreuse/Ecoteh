@@ -55,7 +55,7 @@
                         <form action="<c:url value="/admin/user/update"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Имя</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Имя</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="name" minlength="2"
                                                maxlength="100" placeholder="Имя пользователя" required
@@ -63,7 +63,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Логин</th>
+                                    <td class="ths">Логин</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="login" minlength="5"
                                                maxlength="100" placeholder="Логин для входа на сайт."
@@ -71,7 +71,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Пароль</th>
+                                    <td class="ths">Пароль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="password" minlength="5"
                                                maxlength="100" placeholder="Пароль для входа на сайт."
@@ -79,7 +79,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" title=""
                                               placeholder="Краткое описание компании"
@@ -87,7 +87,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <span class="red">*</span>
                                         <c:choose>
                                             <c:when test="${user.phone ne null}">
@@ -98,7 +98,7 @@
                                             </c:when>
                                             <c:otherwise>Телефон</c:otherwise>
                                         </c:choose>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="phone" required
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
@@ -106,7 +106,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <span class="red">*</span>
                                         <c:choose>
                                             <c:when test="${user.email ne null}">
@@ -117,14 +117,14 @@
                                             </c:when>
                                             <c:otherwise>Электронная почта</c:otherwise>
                                         </c:choose>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100" required
                                                placeholder="name@mail.com" value="<c:out value="${user.email}"/>">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.vkontakte ne null}">
                                                 <a href="https://vk.com/<c:out value="${user.vkontakte}"/>"
@@ -136,7 +136,7 @@
                                                    title="Социальная сеть Vkontakte">Vkontakte</a>
                                             </c:otherwise>
                                         </c:choose>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
                                                maxlength="200" value="<c:out value="${user.vkontakte}"/>"
@@ -144,7 +144,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.facebook ne null}">
                                                 <a href="https://www.facebook.com/<c:out value="${user.facebook}"/>"
@@ -156,7 +156,7 @@
                                                    title="Социальная сеть Facebook">Facebook</a>
                                             </c:otherwise>
                                         </c:choose>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook"
                                                minlength="5" maxlength="200"
@@ -165,7 +165,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.twitter ne null}">
                                                 <a href="https://twitter.com/<c:out value="${user.twitter}"/>"
@@ -177,7 +177,7 @@
                                                    title="Социальная сеть Twitter">Twitter</a>
                                             </c:otherwise>
                                         </c:choose>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка в социальной сети Twitter"
@@ -185,7 +185,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.skype ne null}">
                                                 <a href="skype:<c:out value="${user.skype}"/>?call"
@@ -195,7 +195,7 @@
                                             </c:when>
                                             <c:otherwise>Skype</c:otherwise>
                                         </c:choose>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype"
@@ -203,7 +203,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Фото профиля</th>
+                                    <td class="ths">Фото профиля</td>
                                     <td class="tds">
                                         <c:choose>
                                             <c:when test="${user.photo ne null}">
@@ -230,60 +230,60 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если пользователь позначен для отображения, он будет доступна любому пользователю, иначе еге сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span></b>
+                                            Отображение&nbsp;<span aria-hidden="true"
+                                                                   class="glyphicon glyphicon-info-sign"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Отображать пользователя">
-                                            <b><input type="radio" name="is_valid" value="true"
-                                                      <c:if test="${user.validated}">checked</c:if>
-                                                      required/>&nbsp;Отображать</b>
+                                            <input type="radio" name="is_valid" value="true"
+                                                   <c:if test="${user.validated}">checked</c:if>
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Не отображать пользователя">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      <c:if test="${!user.validated}">checked</c:if>
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   <c:if test="${!user.validated}">checked</c:if>
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Включить или отключить автоматическую рассылку писем от пользователей.">
-                                            <b>Рассылка&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span></b>
+                                            Рассылка&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Пользователю будут приходить письма от клиентов.">
-                                            <b><input type="radio" name="is_mailing" value="true"
-                                                      <c:if test="${user.mailing}">checked</c:if> required/>&nbsp;Включить</b>
+                                            <input type="radio" name="is_mailing" value="true"
+                                                   <c:if test="${user.mailing}">checked</c:if> required/>&nbsp;Включить
                                         </label>&nbsp;&nbsp;
                                         <label title="Не беспокоить пользователя.">
-                                            <b><input type="radio" name="is_mailing" value="false" required
-                                                      <c:if test="${!user.mailing}">checked</c:if>/>&nbsp;Отключить</b>
+                                            <input type="radio" name="is_mailing" value="false" required
+                                                   <c:if test="${!user.mailing}">checked</c:if>/>&nbsp;Отключить
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если пользователь включен, он сможет авторизироваться на сайте, иначе доступ для него будет запрещен.">
-                                            <b>Активность&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                     aria-hidden="true"></span></b>
+                                            Активность&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                  aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Разблокировать пользователя">
-                                            <b><input type="radio" name="is_locked" value="false"
-                                                      <c:if test="${!user.locked}">checked</c:if>
-                                                      required/>&nbsp;Разблокировать</b>
+                                            <input type="radio" name="is_locked" value="false"
+                                                   <c:if test="${!user.locked}">checked</c:if>
+                                                   required/>&nbsp;Разблокировать
                                         </label>&nbsp;&nbsp;
                                         <label title="Заблокировать пользователя">
-                                            <b><input type="radio" name="is_locked" value="true"
-                                                      <c:if test="${user.locked}">checked</c:if>
-                                                      required/>&nbsp;Заблокировать</b>
+                                            <input type="radio" name="is_locked" value="true"
+                                                   <c:if test="${user.locked}">checked</c:if>
+                                                   required/>&nbsp;Заблокировать
                                         </label>
                                     </td>
                                 </tr>

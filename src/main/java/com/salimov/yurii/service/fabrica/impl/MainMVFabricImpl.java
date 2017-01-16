@@ -182,7 +182,9 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView contactsPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject("company", this.companyService.getMainCompany());
+        final Company mainCompany = this.companyService.getMainCompany();
+        modelAndView.addObject("company", mainCompany);
+        modelAndView.addObject("map", mainCompany.getGoogleMaps());
         modelAndView.setViewName("client/company/contacts_page");
         return modelAndView;
     }
@@ -226,11 +228,11 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject("category", category);
         modelAndView.addObject(
                 "articles_list",
-                this.articleService.sortByTitle(
+                this.articleService.sortByDate(
                         this.articleService.filteredByValid(
                                 category.getArticles()
                         ),
-                        false
+                        true
                 )
         );
         modelAndView.setViewName("client/category/one_page");
@@ -281,13 +283,12 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView partnerPage(final String url) {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject(
-                "company",
-                this.companyService.getByUrl(
-                        url,
-                        isValidContent()
-                )
+        final Company company = this.companyService.getByUrl(
+                url,
+                isValidContent()
         );
+        modelAndView.addObject("company", company);
+        modelAndView.addObject("map", company.getGoogleMaps());
         modelAndView.setViewName("client/company/one_page");
         return modelAndView;
     }
@@ -328,11 +329,8 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         );
         modelAndView.addObject(
                 "categories",
-                this.categoryService.sortByTitle(
-                        this.categoryService.getAll(
-                                isValidContent()
-                        ),
-                        false
+                this.categoryService.getAll(
+                        isValidContent()
                 )
         );
         modelAndView.addObject(

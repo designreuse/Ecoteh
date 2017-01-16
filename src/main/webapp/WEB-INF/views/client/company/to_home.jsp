@@ -8,12 +8,6 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <c:set var="desc_length" value="650"/>
                 <c:choose>
-                    <c:when test="${company.advantages ne null}">
-                        <hr>
-                        <h3 class="intro-text text-center">Наши преимущества</h3>
-                        <hr>
-                        <p>${company.advantages}</p>
-                    </c:when>
                     <c:when test="${company.description ne null}">
                         <hr>
                         <h3 class="intro-text text-center">О нас</h3>

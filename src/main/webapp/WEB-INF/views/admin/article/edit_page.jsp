@@ -60,7 +60,7 @@
                             <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название статьи" required
@@ -68,7 +68,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" title=""
                                               placeholder="Краткое описание статьи (анонс)."
@@ -76,7 +76,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Основной текст</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Основной текст</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="text" required
                                               placeholder="Основная информация статьи." title=""
@@ -84,15 +84,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="3"><c:out value="${article.keywords}"/></textarea>
+                                              rows="5"><c:out value="${article.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Артикль</th>
+                                    <td class="ths">Артикль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="number" minlength="2"
                                                maxlength="100" placeholder="Номер статьи, например: АС142."
@@ -100,7 +100,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Категория</th>
+                                    <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
                                             <c:choose>
@@ -125,13 +125,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
                                            rel="lightgallery" title="Главное фото, это где?">
                                             Главное фото&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                     aria-hidden="true"></span>
                                         </a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <c:choose>
                                             <c:when test="${article.photo ne null}">
@@ -159,22 +159,22 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                      aria-hidden="true"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                      aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <b><input type="radio" name="is_valid" value="true"
+                                            <input type="radio" name="is_valid" value="true"
                                                       <c:if test="${article.validated}">checked</c:if>
-                                                      required/>&nbsp;Отображать</b>
+                                                      required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
+                                            <input type="radio" name="is_valid" value="false"
                                                       <c:if test="${!article.validated}">checked</c:if>
-                                                      required/>&nbsp;Не отображать</b>
+                                                      required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>

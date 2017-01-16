@@ -52,14 +52,14 @@
                             <input type="hidden" name="id" value="<c:out value="${file.id}"/>">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" maxlength="100" required
                                                placeholder="Название файла" value="<c:out value="${file.title}"/>">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Относительный путь директории</th>
+                                    <td class="ths">Относительный путь директории</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="path" maxlength="100"
                                                placeholder="Путь относительно папки &quot;/resources/&quot;"
@@ -67,7 +67,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Файл</th>
+                                    <td class="ths">Файл</td>
                                     <td class="tds">
                                         <a href="<c:url value="/resources/${file.url}"/>"
                                            rel="lightgallery[slides]">

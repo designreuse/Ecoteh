@@ -72,7 +72,7 @@ public abstract class Model<E extends Number>
     /**
      * The value of validations of the model.
      */
-    @Column(name = "is_valid")
+    @Column(name = "validated")
     private boolean validated;
 
     /**

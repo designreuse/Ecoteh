@@ -47,9 +47,9 @@
                         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xl-8 col-xl-offset-2">
                             <table align="center">
                                 <tr>
-                                    <th class="pad"><h4>№</h4></th>
-                                    <th class="pad"><h4>Ключ</h4></th>
-                                    <th class="hidden-xs pad"><h4>Объект</h4></th>
+                                    <th class="pad">№</th>
+                                    <th class="pad">Ключ</th>
+                                    <th class="hidden-xs pad">Объект</th>
                                     <th class="pad"></th>
                                 </tr>
                                 <c:forEach items="${objects}" var="object">

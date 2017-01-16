@@ -595,11 +595,19 @@ h6, .h6 {
 }
 
 p {
-    text-indent: 2em;
+    margin: 0 0 10px
+}
+
+p,
+table {
     font-size: 1.25em;
     line-height: 1.6;
     color: #000;
-    margin: 0 0 10px
+}
+
+p,
+.text-indent{
+    text-indent: 2em;
 }
 
 .text-left {
@@ -1204,7 +1212,7 @@ table {
 table.table-size {
     width: 70%
 }
-
+/*
 th {
     text-align: left
 }
@@ -1212,7 +1220,7 @@ th {
 td, th {
     padding: 0
 }
-
+*/
 th.ths {
     width: 20%
 }

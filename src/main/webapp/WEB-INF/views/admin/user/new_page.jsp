@@ -48,97 +48,97 @@
                         <form action="<c:url value="/admin/user/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Имя</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Имя</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="name" minlength="2"
                                                maxlength="100" placeholder="Имя пользователя" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Логин</th>
+                                    <td class="ths">Логин</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="login" minlength="5"
                                                maxlength="100" placeholder="Логин для входа на сайт.">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Пароль</th>
+                                    <td class="ths">Пароль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="password" minlength="5"
                                                maxlength="100" placeholder="Пароль для входа на сайт.">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" rows="3" title=""
                                               placeholder="Краткое описание пользователя"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Телефон</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="phone" required
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Электронная почта</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Электронная почта</td>
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100" required
                                                placeholder="name@mail.com">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://vk.com" target="_blank"
                                            title="Социальная сеть Vkontakte">Vkontakte</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
                                                maxlength="200" placeholder="Ссылка на профиль в Vkontakte">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://www.facebook.com" target="_blank"
                                            title="Социальная сеть Facebook">Facebook</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook" minlength="5"
                                                maxlength="200" placeholder="Ссылка на профиль или профиль в Facebook">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://twitter.com" target="_blank"
                                            title="Социальная сеть Twitter">Twitter</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка на профиль в Twitter">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Skype</th>
+                                    <td class="ths">Skype</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Фото профиля</th>
+                                    <td class="ths">Фото профиля</td>
                                     <td class="tds">
                                         <input type="file" name="photo" accept="image/*" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если пользователь позначен для отображения, он будет доступна любому пользователю, иначе еге сможет увидеть только адмиистратор.">
                                             <b>Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                       aria-hidden="true"></span></b>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Отображать пользователя">
                                             <b><input type="radio" name="is_valid" value="true" checked
@@ -151,12 +151,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Включить или отключить автоматическую рассылку писем от пользователей.">
                                             <b>Рассылка&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                    aria-hidden="true"></span></b>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Пользователю будут приходить письма от клиентов.">
                                             <b><input type="radio" name="is_mailing" value="true" checked
@@ -169,12 +169,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если пользователь включен, он сможет авторизироваться на сайте, иначе доступ для него будет запрещен.">
                                             <b>Активность&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                      aria-hidden="true"></span></b>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Разблокировать пользователя">
                                             <b><input type="radio" name="is_locked" value="false"

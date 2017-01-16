@@ -159,9 +159,15 @@ public class AdminArticleController {
                 isValid
         );
         Cache.clear();
-        modelAndView.setViewName(
-                "redirect:/admin/article/" + article.getUrl()
-        );
+        if (isNotBlank(article.getText())) {
+            modelAndView.setViewName(
+                    "redirect:/admin/article/" + article.getUrl()
+            );
+        } else {
+            modelAndView.setViewName(
+                    "redirect:/admin/article/all"
+            );
+        }
         return modelAndView;
     }
 

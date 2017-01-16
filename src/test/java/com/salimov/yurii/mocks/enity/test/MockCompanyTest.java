@@ -23,7 +23,6 @@ public class MockCompanyTest extends MockModelTest<Company> {
         assertNotNull(company.getTagline());
         assertNotNull(company.getDescription());
         assertNotNull(company.getInformation());
-        assertNotNull(company.getAdvantages());
         assertNotNull(company.getMobilePhone());
         assertNotNull(company.getLandlinePhone());
         assertNotNull(company.getFax());

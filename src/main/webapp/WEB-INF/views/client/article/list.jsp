@@ -9,14 +9,6 @@
             <div class="box">
                 <c:forEach items="${articles_list}" var="article">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <c:if test="${article.photo ne null}">
-                            <a href="<c:url value="/resources/${article.photo.url}"/>"
-                               title="${article.title}" rel="lightgallery">
-                                <img class="img-responsive img-border img-left img-section"
-                                     alt="<c:out value="${article.title}"/>"
-                                     src="<c:url value="/resources/${article.photo.url}"/>">
-                            </a>
-                        </c:if>
                         <c:set var="textNotNull" value="${article.text ne null}"/>
                         <h3 class="text-center">
                             <c:choose>
@@ -25,9 +17,35 @@
                                         <c:out value="${article.title}"/>
                                     </a>
                                 </c:when>
-                                <c:otherwise><c:out value="${article.title}"/></c:otherwise>
+                                <c:otherwise>
+                                    <c:out value="${article.title}"/>
+                                    <c:if test="${authorized_user ne null}">
+                                        <br><br>
+                                        <a href="<c:url value="/admin/article/edit/${article.url}"/>"
+                                           title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
+                                            <button class="btn btn-default">
+                                                <span class="glyphicon glyphicon-edit yellow"
+                                                      aria-hidden="true"></span>&nbsp;Редактировать
+                                            </button>
+                                        </a>&nbsp;&nbsp;
+                                        <a href="<c:url value="/admin/article/delete/${article.url}"/>"
+                                           title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
+                                            <button class="btn btn-default">
+                                                <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
+                                            </button>
+                                        </a>
+                                    </c:if>
+                                </c:otherwise>
                             </c:choose>
                         </h3>
+                        <c:if test="${article.photo ne null}">
+                            <a href="<c:url value="/resources/${article.photo.url}"/>"
+                               title="${article.title}" rel="lightgallery">
+                                <img class="img-responsive img-border img-left img-section"
+                                     alt="<c:out value="${article.title}"/>"
+                                     src="<c:url value="/resources/${article.photo.url}"/>">
+                            </a>
+                        </c:if>
                         <span class="little">
                             <c:if test="${!article.validated}">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"

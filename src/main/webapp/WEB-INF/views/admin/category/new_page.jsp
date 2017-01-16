@@ -48,21 +48,21 @@
                         <form action="<c:url value="/admin/category/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название категории" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" required rows="6"
+                                    <textarea class="form-control textarea" name="text" rows="6"
                                               placeholder="Краткое описание категории." title=""></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="keywords" rows="5" required
                                                   title=""
@@ -70,26 +70,26 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Фото</th>
+                                    <td class="ths">Фото</td>
                                     <td class="tds">
                                         <input type="file" name="main_photo" accept="image/*" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если категория позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span></b>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Категорию смогут увидеть все пользователей">
-                                            <b><input type="radio" name="is_valid" value="true" checked
-                                                      required/>&nbsp;Отображать</b>
+                                            <input type="radio" name="is_valid" value="true" checked
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Категорию смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -118,7 +118,7 @@
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
-    <script>CKEDITOR.replace("description");</script>
+    <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>

@@ -26,7 +26,6 @@ public interface CompanyService
      * @param domain        a domain of the new company.
      * @param tagline       a tagline of the new company.
      * @param description   a description of the new company.
-     * @param advantages    a advantages of the new company.
      * @param information   a information of the new company.
      * @param keywords      a keywords of the new company.
      * @param mobilePhone   a mobile phone of the new company.
@@ -50,7 +49,6 @@ public interface CompanyService
             final String domain,
             final String tagline,
             final String description,
-            final String advantages,
             final String information,
             final String keywords,
             final String mobilePhone,
@@ -76,7 +74,6 @@ public interface CompanyService
      * @param domain        a new domain to the company.
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
-     * @param advantages    a new advantages to the company.
      * @param information   a new information to the company.
      * @param keywords      a new keywords to the company.
      * @param mobilePhone   a new mobile phone to the company.
@@ -102,7 +99,6 @@ public interface CompanyService
             final String domain,
             final String tagline,
             final String description,
-            final String advantages,
             final String information,
             final String keywords,
             final String mobilePhone,
@@ -127,7 +123,6 @@ public interface CompanyService
      * @param domain        a new domain to the main company.
      * @param tagline       a new tagline to the main company.
      * @param description   a new description to the main company.
-     * @param advantages    a new advantages to the main company.
      * @param information   a new information to the main company.
      * @param keywords      a new keywords to the main company.
      * @param workTimeFrom  a new start work time to the main company.
@@ -157,7 +152,6 @@ public interface CompanyService
             final String domain,
             final String tagline,
             final String description,
-            final String advantages,
             final String information,
             final String keywords,
             final String workTimeFrom,

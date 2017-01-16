@@ -20,17 +20,14 @@ public final class CompanyTest extends ContentTest<Company> {
     @Test
     public void whenPassInvalidParametersInConstructorThenSaveNull() {
         Company company = new Company(
-                null, null, null, null, null, null,
-                null, null, null, null, null, null,
-                null, null, null, null, null, null,
-                null, null, null
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -49,16 +46,14 @@ public final class CompanyTest extends ContentTest<Company> {
         final File logo = new File();
         final File favicon = new File();
         company = new Company(
-                "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "",
-                "", logo, favicon
+                "", "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", logo, favicon
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -75,16 +70,14 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getFavicon());
 
         company = new Company(
-                " ", " ", " ", " ", " ", " ", " ",
-                " ", " ", " ", " ", " ", " ", " ",
-                " ", " ", " ", " ", " ", logo, favicon
+                " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                " ", " ", " ", " ", " ", " ", " ", logo, favicon
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -101,17 +94,14 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getFavicon());
 
         company = new Company(
-                "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", logo, favicon
+                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",
+                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", logo, favicon
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -139,18 +129,19 @@ public final class CompanyTest extends ContentTest<Company> {
         final File logo = getPhoto();
         final File favicon = getPhoto();
         company = new Company(
-                TITLE, DOMAIN, TAGLINE, DESCRIPTION,
-                INFORMATION, ADVANTAGES, PHONE, PHONE,
-                PHONE, EMAIL, EMAIL, PASSWORD, VKONTAKTE,
-                FACEBOOK, TWITTER, SKYPE, ADDRESS,
-                KEYWORDS, GOOGLE_MAPS, logo, favicon
+                TITLE, DOMAIN,
+                TAGLINE, DESCRIPTION, INFORMATION,
+                PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
+                VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
+                ADDRESS, KEYWORDS,
+                GOOGLE_MAPS,
+                logo, favicon
         );
         assertNotNull(company.getTitle());
         assertNotNull(company.getDomain());
         assertNotNull(company.getTagline());
         assertNotNull(company.getDescription());
         assertNotNull(company.getInformation());
-        assertNotNull(company.getAdvantages());
         assertNotNull(company.getLandlinePhone());
         assertNotNull(company.getMobilePhone());
         assertNotNull(company.getEmail());
@@ -184,10 +175,6 @@ public final class CompanyTest extends ContentTest<Company> {
         assertEquals(
                 company.getInformation(),
                 INFORMATION
-        );
-        assertEquals(
-                company.getAdvantages(),
-                ADVANTAGES
         );
         assertEquals(
                 company.getLandlinePhone(),
@@ -460,17 +447,14 @@ public final class CompanyTest extends ContentTest<Company> {
         super.whenInitializeObjectWithInvalidParametersThenGetNull();
         final Company company = new Company();
         company.initialize(
-                null, null, null, null, null, null,
-                null, null, null, null, null, null,
-                null, null, null, null, null, null,
-                null, null, null
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -489,16 +473,14 @@ public final class CompanyTest extends ContentTest<Company> {
         final File logo = new File();
         final File favicon = new File();
         company.initialize(
-                "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "",
-                "", logo, favicon
+                "", "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", logo, favicon
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -515,16 +497,14 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getFavicon());
 
         company.initialize(
-                " ", " ", " ", " ", " ", " ", " ",
-                " ", " ", " ", " ", " ", " ", " ",
-                " ", " ", " ", " ", " ", logo, favicon
+                " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                " ", " ", " ", " ", " ", " ", " ", " ", logo, favicon
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -541,17 +521,14 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getFavicon());
 
         company.initialize(
-                "   ", "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", "   ", "   ",
-                "   ", logo, favicon
+                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",
+                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", logo, favicon
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
         assertNull(company.getTagline());
         assertNull(company.getDescription());
         assertNull(company.getInformation());
-        assertNull(company.getAdvantages());
         assertNull(company.getLandlinePhone());
         assertNull(company.getMobilePhone());
         assertNull(company.getEmail());
@@ -576,10 +553,10 @@ public final class CompanyTest extends ContentTest<Company> {
         final File logo = getPhoto();
         final File favicon = getPhoto();
         company.initialize(
-                TITLE, DOMAIN, TAGLINE, DESCRIPTION,
-                INFORMATION, ADVANTAGES, PHONE, PHONE,
-                PHONE, EMAIL, EMAIL, PASSWORD, VKONTAKTE,
-                FACEBOOK, TWITTER, SKYPE, ADDRESS, KEYWORDS,
+                TITLE, DOMAIN,
+                TAGLINE, DESCRIPTION, INFORMATION,
+                PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
+                VKONTAKTE, FACEBOOK, TWITTER, SKYPE, ADDRESS, KEYWORDS,
                 GOOGLE_MAPS, logo, favicon
         );
         assertNotNull(company.getTitle());
@@ -587,7 +564,6 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getTagline());
         assertNotNull(company.getDescription());
         assertNotNull(company.getInformation());
-        assertNotNull(company.getAdvantages());
         assertNotNull(company.getLandlinePhone());
         assertNotNull(company.getMobilePhone());
         assertNotNull(company.getEmail());
@@ -621,10 +597,6 @@ public final class CompanyTest extends ContentTest<Company> {
         assertEquals(
                 company.getInformation(),
                 INFORMATION
-        );
-        assertEquals(
-                company.getAdvantages(),
-                ADVANTAGES
         );
         assertEquals(
                 company.getLandlinePhone(),
@@ -765,30 +737,6 @@ public final class CompanyTest extends ContentTest<Company> {
         assertEquals(
                 company.getInformation(),
                 INFORMATION
-        );
-    }
-
-    @Test
-    public void whenSetInvalidAdvantagesThenGetNull() {
-        final Company company = getCompany();
-        company.setAdvantages(null);
-        assertNull(company.getAdvantages());
-        company.setAdvantages("");
-        assertNull(company.getAdvantages());
-        company.setAdvantages(" ");
-        assertNull(company.getAdvantages());
-        company.setAdvantages("   ");
-        assertNull(company.getAdvantages());
-    }
-
-    @Test
-    public void whenSetValidAdvantagesThenGetThisAdvantages() {
-        final Company company = getCompany();
-        company.setAdvantages(ADVANTAGES);
-        assertNotNull(company.getAdvantages());
-        assertEquals(
-                company.getAdvantages(),
-                ADVANTAGES
         );
     }
 
@@ -1605,7 +1553,6 @@ public final class CompanyTest extends ContentTest<Company> {
                 .append(" \nDescription: ").append(company.getDescription())
                 .append(" \nTagline: ").append(company.getTagline())
                 .append(" \nInformation: ").append(company.getInformation())
-                .append(" \nAdvantages: ").append(company.getAdvantages())
                 .append(" \nDomain: ").append(company.getDomain())
                 .append(" \nMobile Phone: ").append(company.getMobilePhone())
                 .append(" \nLandline Phone: ").append(company.getLandlinePhone())
