@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IArticle;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,7 +19,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "articles")
-public final class Article extends Content<Long> {
+public final class Article
+        extends Content<Long>
+        implements IArticle<Long> {
 
     /**
      * It is used during deserialization to verify that

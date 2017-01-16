@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IMessage;
+
 import java.util.Date;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -13,7 +15,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  * @see Model
  */
-public final class Message extends Model<Long> {
+public final class Message
+        extends Model<Long>
+        implements IMessage<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -188,6 +192,7 @@ public final class Message extends Model<Long> {
      * @param subject  a subject of the new message.
      * @param text     a text of the new message.
      */
+    @Override
     public void initialize(
             final String username,
             final String email,
@@ -207,6 +212,7 @@ public final class Message extends Model<Long> {
      *
      * @return The client name.
      */
+    @Override
     public String getUsername() {
         return this.username;
     }
@@ -217,6 +223,7 @@ public final class Message extends Model<Long> {
      *
      * @param username a new name to the client.
      */
+    @Override
     public void setUsername(final String username) {
         this.username = isNotBlank(username) ? username : null;
     }
@@ -226,6 +233,7 @@ public final class Message extends Model<Long> {
      *
      * @return The client name.
      */
+    @Override
     public String getEmail() {
         return this.email;
     }
@@ -236,6 +244,7 @@ public final class Message extends Model<Long> {
      *
      * @param email a new email to the client.
      */
+    @Override
     public void setEmail(final String email) {
         this.email = isNotBlank(email) ? email : null;
     }
@@ -245,6 +254,7 @@ public final class Message extends Model<Long> {
      *
      * @return The client name.
      */
+    @Override
     public String getPhone() {
         return this.phone;
     }
@@ -255,6 +265,7 @@ public final class Message extends Model<Long> {
      *
      * @param phone a new phone to the client.
      */
+    @Override
     public void setPhone(final String phone) {
         this.phone = isNotBlank(phone) ? phone : null;
     }
@@ -264,6 +275,7 @@ public final class Message extends Model<Long> {
      *
      * @return The message subject.
      */
+    @Override
     public String getSubject() {
         return this.subject;
     }
@@ -274,6 +286,7 @@ public final class Message extends Model<Long> {
      *
      * @param subject a new subject to the message.
      */
+    @Override
     public void setSubject(final String subject) {
         this.subject = isNotBlank(subject) ? subject : null;
     }
@@ -283,6 +296,7 @@ public final class Message extends Model<Long> {
      *
      * @return The message text.
      */
+    @Override
     public String getText() {
         return this.text;
     }
@@ -293,6 +307,7 @@ public final class Message extends Model<Long> {
      *
      * @param text a new text to the message.
      */
+    @Override
     public void setText(final String text) {
         this.text = isNotBlank(text) ? text : null;
     }
@@ -302,6 +317,7 @@ public final class Message extends Model<Long> {
      *
      * @return The message date.
      */
+    @Override
     public Date getDate() {
         return this.date;
     }
@@ -312,6 +328,7 @@ public final class Message extends Model<Long> {
      *
      * @param date a new text to the message.
      */
+    @Override
     public void setDate(final Date date) {
         this.date = date != null ? date : new Date();
     }
@@ -321,9 +338,10 @@ public final class Message extends Model<Long> {
      *
      * @return The message string-date.
      */
+    @Override
     public String getDateToString() {
         return getDateToString(
-                getDate()
+                this.date
         );
     }
 

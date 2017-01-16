@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IResponse;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -18,7 +20,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "responses")
-public final class Response extends Model<Long> {
+public final class Response
+        extends Model<Long>
+        implements IResponse<Long> {
 
     /**
      * It is used during deserialization to verify that

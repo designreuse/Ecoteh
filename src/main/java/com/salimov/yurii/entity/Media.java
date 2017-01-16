@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IMedia;
 import com.salimov.yurii.util.translator.Translator;
 
 import javax.persistence.Column;
@@ -19,7 +20,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see File
  */
 @MappedSuperclass
-public abstract class Media<E extends Number> extends Model<E> {
+public abstract class Media<E extends Number>
+        extends Model<E>
+        implements IMedia<E> {
 
     /**
      * It is used during deserialization to verify that
@@ -117,6 +120,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      * @param title a new title to the media.
      * @param url   a new url to the media.
      */
+    @Override
     public void initialize(
             final String title,
             final String url
@@ -130,6 +134,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      *
      * @return The media title.
      */
+    @Override
     public String getTitle() {
         return this.title;
     }
@@ -141,6 +146,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      *
      * @param title a new title to the media.
      */
+    @Override
     public void setTitle(final String title) {
         this.title = isNotBlank(title) ? title : null;
         //translateAndSetUrl(title);
@@ -151,6 +157,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      *
      * @return The media url.
      */
+    @Override
     public String getUrl() {
         return this.url;
     }
@@ -161,6 +168,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      *
      * @param url a new url to the media.
      */
+    @Override
     public void setUrl(final String url) {
         this.url = isNotBlank(url) ? url : null;
     }
@@ -170,6 +178,7 @@ public abstract class Media<E extends Number> extends Model<E> {
      *
      * @param value a value to translate.
      */
+    @Override
     public void translateAndSetUrl(final String value) {
         setUrl(
                 Translator.fromCyrillicToLatin(value)

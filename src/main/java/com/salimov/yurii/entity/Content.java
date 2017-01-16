@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IContent;
 import com.salimov.yurii.util.translator.Translator;
 
 import javax.persistence.Column;
@@ -21,7 +22,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Company
  */
 @MappedSuperclass
-public abstract class Content<E extends Number> extends Model<E> {
+public abstract class Content<E extends Number>
+        extends Model<E>
+        implements IContent<E> {
 
     /**
      * It is used during deserialization to verify that
@@ -139,6 +142,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      * @param description a new description to the content.
      * @param keywords    a new keywords to the content.
      */
+    @Override
     public void initialize(
             final String title,
             final String description,
@@ -154,6 +158,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @return The content title.
      */
+    @Override
     public String getTitle() {
         return this.title;
     }
@@ -165,6 +170,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @param title a new title to the content.
      */
+    @Override
     public void setTitle(final String title) {
         this.title = isNotBlank(title) ? title : null;
         translateAndSetUrl(title);
@@ -175,6 +181,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @return The content url.
      */
+    @Override
     public String getUrl() {
         return this.url;
     }
@@ -185,6 +192,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @param url a new url to the content.
      */
+    @Override
     public void setUrl(final String url) {
         this.url = isNotBlank(url) ? url : null;
     }
@@ -194,6 +202,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @param value a value to translate.
      */
+    @Override
     public void translateAndSetUrl(final String value) {
         setUrl(
                 Translator.fromCyrillicToLatin(value)
@@ -205,6 +214,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @return The content description.
      */
+    @Override
     public String getDescription() {
         return this.description;
     }
@@ -215,6 +225,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @param description a new description to the content.
      */
+    @Override
     public void setDescription(final String description) {
         this.description = isNotBlank(description) ? description : null;
     }
@@ -224,6 +235,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @return The content keywords.
      */
+    @Override
     public String getKeywords() {
         return this.keywords;
     }
@@ -234,6 +246,7 @@ public abstract class Content<E extends Number> extends Model<E> {
      *
      * @param keywords a new keywords to the content.
      */
+    @Override
     public void setKeywords(final String keywords) {
         this.keywords = isNotBlank(keywords) ? keywords : null;
     }

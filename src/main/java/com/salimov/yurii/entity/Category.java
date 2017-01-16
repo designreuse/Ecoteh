@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.ICategory;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -14,7 +16,9 @@ import java.util.*;
  */
 @Entity
 @Table(name = "categories")
-public final class Category extends Content<Long> {
+public final class Category
+        extends Content<Long>
+        implements ICategory<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -86,6 +90,7 @@ public final class Category extends Content<Long> {
      * @param photo       a new file of the category.
      * @see File
      */
+    @Override
     public void initialize(
             final String title,
             final String description,
@@ -102,6 +107,7 @@ public final class Category extends Content<Long> {
      * @return The category file.
      * @see File
      */
+    @Override
     public File getPhoto() {
         return this.photo;
     }
@@ -113,6 +119,7 @@ public final class Category extends Content<Long> {
      * @param photo a new main file to the category.
      * @see File
      */
+    @Override
     public void setPhoto(final File photo) {
         this.photo = File.isValidated(photo) ? photo : null;
     }
@@ -124,6 +131,7 @@ public final class Category extends Content<Long> {
      * @param article an article to add.
      * @see Article
      */
+    @Override
     public void addArticle(final Article article) {
         if (article != null) {
             this.articles.add(article);
@@ -141,6 +149,7 @@ public final class Category extends Content<Long> {
      * @param articles an articles to add.
      * @see Article
      */
+    @Override
     public void addArticles(final Collection<Article> articles) {
         if ((articles != null) && !articles.isEmpty()) {
             articles.forEach(this::addArticle);
@@ -153,6 +162,7 @@ public final class Category extends Content<Long> {
      * @param article an article to remove.
      * @see Article
      */
+    @Override
     public void removeArticle(final Article article) {
         if ((article != null) && containsArticle(article)) {
             this.articles.remove(article);
@@ -169,6 +179,7 @@ public final class Category extends Content<Long> {
      * @param articles an articles to remove.
      * @see Article
      */
+    @Override
     public void removeArticles(final Collection<Article> articles) {
         if ((articles != null) && !articles.isEmpty()) {
             articles.forEach(this::removeArticle);
@@ -181,6 +192,7 @@ public final class Category extends Content<Long> {
      * @return The list of articles.
      * @see Article
      */
+    @Override
     public Collection<Article> getArticles() {
         return this.articles;
     }
@@ -192,6 +204,7 @@ public final class Category extends Content<Long> {
      * @param articles an articles to add.
      * @see Article
      */
+    @Override
     public void setArticles(final Collection<Article> articles) {
         clearArticles();
         addArticles(articles);
@@ -204,6 +217,7 @@ public final class Category extends Content<Long> {
      * @return {@code true} if article is contains, {@code false} otherwise.
      * @see Article
      */
+    @Override
     public boolean containsArticle(final Article article) {
         return this.articles.contains(article);
     }
@@ -212,9 +226,11 @@ public final class Category extends Content<Long> {
      * Contains articles in the list of articles.
      *
      * @param articles an articles to contain.
-     * @return {@code true} if articles are contains, {@code false} otherwise.
+     * @return {@code true} if articles are contains,
+     * {@code false} otherwise.
      * @see Article
      */
+    @Override
     public boolean containsArticles(final Collection<Article> articles) {
         return this.articles.containsAll(articles);
     }
@@ -224,6 +240,7 @@ public final class Category extends Content<Long> {
      *
      * @see Article
      */
+    @Override
     public void clearArticles() {
         removeArticles(
                 new ArrayList<>(this.articles)
@@ -237,7 +254,8 @@ public final class Category extends Content<Long> {
      * and if it has at least one article.
      *
      * @param category a category to validate.
-     * @return {@code true} if the article is valid, {@code false} otherwise.
+     * @return {@code true} if the article is valid,
+     * {@code false} otherwise.
      */
     public static boolean isValidated(final Category category) {
         boolean result = false;

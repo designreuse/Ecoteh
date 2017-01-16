@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IUser;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +25,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "users")
-public final class User extends Model<Long> implements UserDetails {
+public final class User
+        extends Model<Long>
+        implements IUser<Long>, UserDetails {
 
     /**
      * It is used during deserialization to verify that

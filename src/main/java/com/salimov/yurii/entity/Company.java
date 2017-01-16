@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.ICompany;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.util.translator.Translator;
 
@@ -20,7 +21,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "companies")
-public final class Company extends Content<Long> {
+public final class Company
+        extends Content<Long>
+        implements ICompany<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -400,6 +403,7 @@ public final class Company extends Content<Long> {
      * @param favicon       a new favicon to the company.
      * @see File
      */
+    @Override
     public void initialize(
             final String title,
             final String domain,
@@ -428,7 +432,7 @@ public final class Company extends Content<Long> {
                 information, advantages, mobilePhone,
                 landlinePhone, fax, email, senderEmail,
                 senderPass, vkontakte, facebook, twitter,
-                skype,address, keywords, googleMaps
+                skype, address, keywords, googleMaps
         );
         setLogo(logo);
         setFavicon(favicon);
@@ -457,6 +461,7 @@ public final class Company extends Content<Long> {
      * @param keywords      a new keywords to the company.
      * @param googleMaps    a new google maps url to the company.
      */
+    @Override
     public void initialize(
             final String title,
             final String domain,
@@ -502,6 +507,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company domain.
      */
+    @Override
     public String getDomain() {
         return this.domain;
     }
@@ -512,6 +518,7 @@ public final class Company extends Content<Long> {
      *
      * @param domain a new domain to the company.
      */
+    @Override
     public void setDomain(final String domain) {
         if (isNotBlank(domain)) {
             final String temp = domain.replace("http://", "")
@@ -527,6 +534,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company domain.
      */
+    @Override
     public String getTagline() {
         return this.tagline;
     }
@@ -537,6 +545,7 @@ public final class Company extends Content<Long> {
      *
      * @param tagline a new domain to the company.
      */
+    @Override
     public void setTagline(final String tagline) {
         this.tagline = isNotBlank(tagline) ? tagline : null;
     }
@@ -546,6 +555,7 @@ public final class Company extends Content<Long> {
      *
      * @return The information domain.
      */
+    @Override
     public String getInformation() {
         return this.information;
     }
@@ -556,6 +566,7 @@ public final class Company extends Content<Long> {
      *
      * @param information a new information to the company.
      */
+    @Override
     public void setInformation(final String information) {
         this.information = isNotBlank(information) ? information : null;
     }
@@ -565,6 +576,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company advantages.
      */
+    @Override
     public String getAdvantages() {
         return this.advantages;
     }
@@ -575,6 +587,7 @@ public final class Company extends Content<Long> {
      *
      * @param advantages a new advantages to the company.
      */
+    @Override
     public void setAdvantages(final String advantages) {
         this.advantages = isNotBlank(advantages) ? advantages : null;
     }
@@ -584,6 +597,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company e-mail.
      */
+    @Override
     public String getEmail() {
         return this.email;
     }
@@ -594,6 +608,7 @@ public final class Company extends Content<Long> {
      *
      * @param email a new e-mail to the company.
      */
+    @Override
     public void setEmail(final String email) {
         this.email = isNotBlank(email) ? email : null;
     }
@@ -603,6 +618,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company sender e-mail.
      */
+    @Override
     public String getSenderEmail() {
         return this.senderEmail;
     }
@@ -613,6 +629,7 @@ public final class Company extends Content<Long> {
      *
      * @param senderEmail a new sender e-mail to the company.
      */
+    @Override
     public void setSenderEmail(final String senderEmail) {
         this.senderEmail = isNotBlank(senderEmail) ? senderEmail : null;
     }
@@ -622,6 +639,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company sender password.
      */
+    @Override
     public String getSenderPass() {
         return this.senderPass;
     }
@@ -641,6 +659,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company mobile phone.
      */
+    @Override
     public String getMobilePhone() {
         return this.mobilePhone;
     }
@@ -651,6 +670,7 @@ public final class Company extends Content<Long> {
      *
      * @param mobilePhone a new mobile phone to the company.
      */
+    @Override
     public void setMobilePhone(final String mobilePhone) {
         this.mobilePhone = isNotBlank(mobilePhone) ? mobilePhone : null;
     }
@@ -660,6 +680,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company landline phone.
      */
+    @Override
     public String getLandlinePhone() {
         return this.landlinePhone;
     }
@@ -670,6 +691,7 @@ public final class Company extends Content<Long> {
      *
      * @param landlinePhone a new landline phone to the company.
      */
+    @Override
     public void setLandlinePhone(final String landlinePhone) {
         this.landlinePhone = isNotBlank(landlinePhone) ? landlinePhone : null;
     }
@@ -679,6 +701,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company fax.
      */
+    @Override
     public String getFax() {
         return this.fax;
     }
@@ -689,6 +712,7 @@ public final class Company extends Content<Long> {
      *
      * @param fax a new fax to the company.
      */
+    @Override
     public void setFax(final String fax) {
         this.fax = isNotBlank(fax) ? fax : null;
     }
@@ -698,6 +722,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company vkontakte url.
      */
+    @Override
     public String getVkontakte() {
         return this.vkontakte;
     }
@@ -708,6 +733,7 @@ public final class Company extends Content<Long> {
      *
      * @param vkontakte a new vkontakte url to the company.
      */
+    @Override
     public void setVkontakte(final String vkontakte) {
         final String temp = isNotBlank(vkontakte) ? vkontakte.toLowerCase()
                 .replace("http://", "").replace("https://", "")
@@ -720,6 +746,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company facebook url.
      */
+    @Override
     public String getFacebook() {
         return this.facebook;
     }
@@ -730,6 +757,7 @@ public final class Company extends Content<Long> {
      *
      * @param facebook a new facebook url to the company.
      */
+    @Override
     public void setFacebook(final String facebook) {
         String temp = isNotBlank(facebook) ? facebook.toLowerCase()
                 .replace("http://", "")
@@ -744,6 +772,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company twitter url.
      */
+    @Override
     public String getTwitter() {
         return this.twitter;
     }
@@ -754,6 +783,7 @@ public final class Company extends Content<Long> {
      *
      * @param twitter a new twitter url to the company.
      */
+    @Override
     public void setTwitter(final String twitter) {
         String temp = isNotBlank(twitter) ? twitter.toLowerCase()
                 .replace("http://", "")
@@ -768,6 +798,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company skype username.
      */
+    @Override
     public String getSkype() {
         return this.skype;
     }
@@ -778,6 +809,7 @@ public final class Company extends Content<Long> {
      *
      * @param skype a new skype username to the company.
      */
+    @Override
     public void setSkype(final String skype) {
         this.skype = isNotBlank(skype) ? skype : null;
     }
@@ -787,6 +819,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company address.
      */
+    @Override
     public String getAddress() {
         return this.address;
     }
@@ -797,6 +830,7 @@ public final class Company extends Content<Long> {
      *
      * @param address a new address to the company.
      */
+    @Override
     public void setAddress(final String address) {
         this.address = isNotBlank(address) ? address : null;
     }
@@ -806,6 +840,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company start work time.
      */
+    @Override
     public String getWorkTimeFrom() {
         return this.workTimeFrom;
     }
@@ -816,6 +851,7 @@ public final class Company extends Content<Long> {
      *
      * @param workTimeFrom a new start work time to the company.
      */
+    @Override
     public void setWorkTimeFrom(final String workTimeFrom) {
         this.workTimeFrom = isNotBlank(workTimeFrom) ?
                 correctTime(workTimeFrom) : "00:00";
@@ -826,6 +862,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company finish work time.
      */
+    @Override
     public String getWorkTimeTo() {
         return this.workTimeTo;
     }
@@ -836,6 +873,7 @@ public final class Company extends Content<Long> {
      *
      * @param workTimeTo a new finish work time to the company.
      */
+    @Override
     public void setWorkTimeTo(final String workTimeTo) {
         this.workTimeTo = isNotBlank(workTimeTo) ?
                 correctTime(workTimeTo) : "00:00";
@@ -846,6 +884,7 @@ public final class Company extends Content<Long> {
      *
      * @return The company google maps url.
      */
+    @Override
     public String getGoogleMaps() {
         return this.googleMaps;
     }
@@ -856,6 +895,7 @@ public final class Company extends Content<Long> {
      *
      * @param googleMaps a new google maps url to the company.
      */
+    @Override
     public void setGoogleMaps(final String googleMaps) {
         this.googleMaps = isNotBlank(googleMaps) ? googleMaps : null;
     }
@@ -866,6 +906,7 @@ public final class Company extends Content<Long> {
      * @return The company logo.
      * @see File
      */
+    @Override
     public File getLogo() {
         return this.logo;
     }
@@ -877,6 +918,7 @@ public final class Company extends Content<Long> {
      * @param logo a new logo to the article.
      * @see File
      */
+    @Override
     public void setLogo(final File logo) {
         this.logo = File.isValidated(logo) ? logo : null;
     }
@@ -887,6 +929,7 @@ public final class Company extends Content<Long> {
      * @return The company favicon.
      * @see File
      */
+    @Override
     public File getFavicon() {
         return this.favicon;
     }
@@ -898,6 +941,7 @@ public final class Company extends Content<Long> {
      * @param favicon a new favicon to the article.
      * @see File
      */
+    @Override
     public void setFavicon(final File favicon) {
         this.favicon = File.isValidated(favicon) ? favicon : null;
     }
@@ -909,6 +953,7 @@ public final class Company extends Content<Long> {
      * @param slide a photo to add.
      * @see File
      */
+    @Override
     public void addSlide(final File slide) {
         if (File.isValidated(slide)) {
             this.slides.add(slide);
@@ -922,6 +967,7 @@ public final class Company extends Content<Long> {
      * @param slides a photos to add.
      * @see File
      */
+    @Override
     public void addSlides(final Collection<File> slides) {
         if ((slides != null) && !slides.isEmpty()) {
             slides.forEach(this::addSlide);
@@ -934,6 +980,7 @@ public final class Company extends Content<Long> {
      * @param slide a photo to remove.
      * @see File
      */
+    @Override
     public void removeSlide(final File slide) {
         this.slides.remove(slide);
     }
@@ -944,6 +991,7 @@ public final class Company extends Content<Long> {
      * @param slides a photos to remove.
      * @see File
      */
+    @Override
     public void removeSlides(final Collection<File> slides) {
         this.slides.removeAll(slides);
     }
@@ -953,6 +1001,7 @@ public final class Company extends Content<Long> {
      *
      * @see File
      */
+    @Override
     public void clearSlides() {
         this.slides.clear();
     }
@@ -963,6 +1012,7 @@ public final class Company extends Content<Long> {
      * @return The list of slides.
      * @see File
      */
+    @Override
     public List<File> getSlides() {
         return new ArrayList<>(this.slides);
     }
@@ -974,6 +1024,7 @@ public final class Company extends Content<Long> {
      * @param slides a slides to add.
      * @see File
      */
+    @Override
     public void setSlides(final Collection<File> slides) {
         clearSlides();
         addSlides(slides);
@@ -987,6 +1038,7 @@ public final class Company extends Content<Long> {
      * otherwise returns {@code false}.
      * @see File
      */
+    @Override
     public boolean containsSlide(final File slide) {
         return this.slides.contains(slide);
     }
@@ -999,6 +1051,7 @@ public final class Company extends Content<Long> {
      * otherwise returns {@code false}.
      * @see File
      */
+    @Override
     public boolean containsSlides(final Collection<File> slides) {
         return this.slides.containsAll(slides);
     }
@@ -1009,6 +1062,7 @@ public final class Company extends Content<Long> {
      * @return The company domain.
      * @see CompanyType
      */
+    @Override
     public CompanyType getType() {
         return this.type;
     }
@@ -1019,6 +1073,7 @@ public final class Company extends Content<Long> {
      * @param type a new logo to the company.
      * @see CompanyType
      */
+    @Override
     public void setType(final CompanyType type) {
         this.type = type;
     }
@@ -1045,6 +1100,7 @@ public final class Company extends Content<Long> {
      * @return Returns {@code true} if the company is opened now,
      * otherwise returns {@code false}.
      */
+    @Override
     public boolean isOpen() {
         return isWorkDay() && isWorkHour(this.workTimeFrom, this.workTimeTo);
     }

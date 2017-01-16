@@ -1,10 +1,14 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IModel;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Random;
+import java.util.TimeZone;
 
 /**
  * The abstract superclass class implements a set of standard methods
@@ -25,7 +29,7 @@ import java.util.*;
  */
 @MappedSuperclass
 public abstract class Model<E extends Number>
-        implements Serializable, Cloneable {
+        implements IModel<E>, Serializable, Cloneable {
 
     /**
      * Default length of new generating string,
@@ -134,6 +138,7 @@ public abstract class Model<E extends Number>
      *
      * @return The unique identifier.
      */
+    @Override
     public E getId() {
         return this.id;
     }
@@ -143,16 +148,19 @@ public abstract class Model<E extends Number>
      *
      * @param id a new identifier to the model.
      */
+    @Override
     public void setId(final E id) {
         this.id = id;
     }
 
     /**
      * Sets validations of the model.
-     * Sets {@code true} if the model is valid, {@code false} is invalid.
+     * Sets {@code true} if the model is valid,
+     * {@code false} is invalid.
      *
      * @param validated a validations of the model.
      */
+    @Override
     public void setValidated(final boolean validated) {
         this.validated = validated;
     }
@@ -160,8 +168,10 @@ public abstract class Model<E extends Number>
     /**
      * Validates the model.
      *
-     * @return {@code true} if the model is valid, {@code false} otherwise.
+     * @return {@code true} if the model is valid,
+     * {@code false} otherwise.
      */
+    @Override
     public boolean isValidated() {
         return this.validated;
     }
@@ -171,7 +181,8 @@ public abstract class Model<E extends Number>
      * Model is valid if it is not {@code null}.
      *
      * @param model a model to validate.
-     * @return {@code true} if the model is valid, {@code false} otherwise.
+     * @return {@code true} if the model is valid,
+     * {@code false} otherwise.
      */
     public static boolean isValidated(final Model model) {
         return model != null;

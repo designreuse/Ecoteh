@@ -1,5 +1,6 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IFile;
 import com.salimov.yurii.util.translator.Translator;
 
 import javax.persistence.Entity;
@@ -18,7 +19,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "files")
-public final class File extends Media<Long> {
+public final class File
+        extends Media<Long>
+        implements IFile<Long> {
 
     /**
      * It is used during deserialization to verify that
