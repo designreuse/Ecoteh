@@ -248,6 +248,7 @@ public class Time implements ITime {
     /**
      * Returns the value of the given calendar field.
      *
+     * @param calendarFieldNumber a calendar field number.
      * @return The value for the given calendar field.
      */
     private static int getFromCalendar(final int calendarFieldNumber) {
