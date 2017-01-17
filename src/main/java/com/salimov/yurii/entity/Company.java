@@ -3,6 +3,7 @@ package com.salimov.yurii.entity;
 import com.salimov.yurii.entity.interfaces.ICompany;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.util.translator.Translator;
+import com.salimov.yurii.util.worktime.Time;
 
 import javax.persistence.*;
 import java.util.*;
@@ -264,9 +265,10 @@ public final class Company
                 title, domain,
                 tagline, description, information,
                 mobilePhone, landlinePhone, fax,
-                email, senderEmail, senderEmailPass, vkontakte,
-                facebook, twitter, skype, address,
-                keywords, googleMaps, logo, favicon
+                email, senderEmail, senderEmailPass,
+                vkontakte, facebook, twitter, skype,
+                address, keywords, googleMaps,
+                logo, favicon
         );
         setType(CompanyType.PARTNER);
     }
@@ -418,11 +420,12 @@ public final class Company
             final File favicon
     ) {
         initialize(
-                title, domain, tagline, description,
-                information, mobilePhone,
-                landlinePhone, fax, email, senderEmail,
-                senderPass, vkontakte, facebook, twitter,
-                skype, address, keywords, googleMaps
+                title, domain,
+                tagline, description, information,
+                mobilePhone, landlinePhone, fax, email,
+                senderEmail, senderPass,
+                vkontakte, facebook, twitter, skype,
+                address, keywords, googleMaps
         );
         setLogo(logo);
         setFavicon(favicon);
@@ -751,7 +754,7 @@ public final class Company
      */
     @Override
     public void setTwitter(final String twitter) {
-        String temp = isNotBlank(twitter) ? twitter.toLowerCase()
+        final String temp = isNotBlank(twitter) ? twitter.toLowerCase()
                 .replace("http://", "")
                 .replace("https://", "")
                 .replace("mobile.twitter.com", "")
@@ -819,8 +822,7 @@ public final class Company
      */
     @Override
     public void setWorkTimeFrom(final String workTimeFrom) {
-        this.workTimeFrom = isNotBlank(workTimeFrom) ?
-                correctTime(workTimeFrom) : "00:00";
+        this.workTimeFrom = new Time(workTimeFrom).getCorrectTime();
     }
 
     /**
@@ -841,8 +843,7 @@ public final class Company
      */
     @Override
     public void setWorkTimeTo(final String workTimeTo) {
-        this.workTimeTo = isNotBlank(workTimeTo) ?
-                correctTime(workTimeTo) : "00:00";
+        this.workTimeTo = new Time(workTimeTo).getCorrectTime();
     }
 
     /**
@@ -1068,105 +1069,9 @@ public final class Company
      */
     @Override
     public boolean isOpen() {
-        return isWorkDay() && isWorkHour(this.workTimeFrom, this.workTimeTo);
-    }
-
-    /**
-     * Corrects time.
-     * If input time has more than 24 hours or less than 0, then sets 0 hours.
-     * If input time has than 0 minutes, then sets 0 minutes.
-     * And If input time has more than 60 minutes, then adds one hours.
-     * Returns "00:00" if method throws some exception.
-     * Returns time in format "00:00".
-     * Parse input time: 13:17 - hours = 13 and minutes = 17.
-     * If hours greater or equal 24 or hours less or equal then sets hours = 0.
-     * If minutes less 0 then sets minutes = 0.
-     * If minutes greater 60 then sets hours = hours + minutes / 60.
-     * If minutes greater 60 then sets minutes = minutes - minutes / 60.
-     * If hours greater or equal 24 or hours less or equal then sets hours = 0.
-     * Returns time in format "00:00".
-     * Returns "00:00" if method throws some exception.
-     *
-     * @param time a time to check.
-     * @return The correct time.
-     */
-    private static String correctTime(final String time) {
-        String correctTime;
-        try {
-            int hours = Integer.parseInt(time.split(":")[0]);
-            int minutes = Integer.parseInt(time.split(":")[1]);
-            hours = hours >= 24 || hours <= 0 ? 0 : hours;
-            minutes = minutes < 0 ? 0 : minutes;
-            hours += minutes / 60;
-            minutes %= 60;
-            hours = hours >= 24 || hours <= 0 ? 0 : hours;
-            correctTime = (hours < 10 ? "0" + hours : hours) +
-                    ":" + (minutes < 10 ? "0" + minutes : minutes);
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-            correctTime = "00:00";
-        }
-        return correctTime;
-    }
-
-    /**
-     * Checks whether a now time belongs at a given time interval.
-     *
-     * @param workTimeFrom a start work time of a company.
-     * @param workTimeTo   a finish work time of a company.
-     * @return Returns {@code true} if a now time belongs at a given
-     * time interval, {@code false} otherwise.
-     */
-    private static boolean isWorkHour(
-            final String workTimeFrom,
-            final String workTimeTo
-    ) {
-        boolean result;
-        try {
-            final int from = getHour(workTimeFrom);
-            final int to = getHour(workTimeTo);
-            final Calendar calendar = Calendar.getInstance();
-            final int hourNow = calendar.get(Calendar.HOUR_OF_DAY);
-            result = hourNow >= from && hourNow < to;
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-            result = false;
-        }
-        return result;
-    }
-
-    /**
-     * Returns {@code true} if today is the working day.
-     *
-     * @return {@code true} if today is the working day,
-     * {@code false} otherwise.
-     */
-    private static boolean isWorkDay() {
-        final Calendar calendar = Calendar.getInstance();
-        final int day = calendar.get(Calendar.DAY_OF_WEEK);
-        boolean result = true;
-        switch (day) {
-            case Calendar.SUNDAY:
-            case Calendar.SATURDAY:
-                result = false;
-        }
-        return result;
-    }
-
-    /**
-     * Return number of hours in the inputted time.
-     * Also the number of minutes is rounded to zero.
-     *
-     * @param time a time to work.
-     * @return The number of hours in inputted time.
-     */
-    private static int getHour(final String time) {
-        final String hours = time.substring(0, time.indexOf(':'));
-        final String minutes = time.substring(time.indexOf(':') + 1);
-        int result = Integer.parseInt(hours);
-        if (Integer.parseInt(minutes) > 30) {
-            result++;
-        }
-        return result;
+        return Time.isWorkTime(
+                this.workTimeFrom,
+                this.workTimeTo
+        );
     }
 }
