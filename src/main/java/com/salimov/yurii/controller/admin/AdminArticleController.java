@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -127,7 +126,6 @@ public class AdminArticleController {
      * @param keywords     a keywords of the new article.
      * @param number       a number of the new article.
      * @param categoryUrl  a category url of the new article.
-     * @param file         a multipart file of main photo to the new article.
      * @param isValid      a validated of the new article.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -141,12 +139,11 @@ public class AdminArticleController {
     )
     public ModelAndView addArticle(
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "desc") final String description,
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
-            @RequestParam(value = "photo") final MultipartFile file,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -155,19 +152,13 @@ public class AdminArticleController {
         final Article article = this.articleService.initAndAdd(
                 title, description, text,
                 keywords, number,
-                category, file,
+                category,
                 isValid
         );
         Cache.clear();
-        if (isNotBlank(article.getText())) {
-            modelAndView.setViewName(
-                    "redirect:/admin/article/" + article.getUrl()
-            );
-        } else {
-            modelAndView.setViewName(
-                    "redirect:/admin/article/all"
-            );
-        }
+        modelAndView.setViewName(
+                getViewName(article)
+        );
         return modelAndView;
     }
 
@@ -231,8 +222,6 @@ public class AdminArticleController {
      * @param keywords     a new keywords to the article.
      * @param number       a new number to the article.
      * @param categoryUrl  a category url of the article.
-     * @param file         a multipart file of main photo to the article.
-     * @param photoAction  a action on the main photo.
      * @param isValid      a validated of the article.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -247,13 +236,11 @@ public class AdminArticleController {
     public ModelAndView updateArticle(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "desc") final String description,
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
-            @RequestParam(value = "photo") final MultipartFile file,
-            @RequestParam(value = "photo_action") final String photoAction,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -264,11 +251,10 @@ public class AdminArticleController {
                 description, text,
                 keywords, number,
                 category,
-                file, photoAction,
                 isValid
         );
         modelAndView.setViewName(
-                "redirect:/admin/article/" + article.getUrl()
+                getViewName(article)
         );
         Cache.clear();
         return modelAndView;
@@ -338,5 +324,32 @@ public class AdminArticleController {
         modelAndView.setViewName("redirect:/admin/");
         Cache.clear();
         return modelAndView;
+    }
+
+    /**
+     * Returns a view name for the article.
+     * If the article text is not blank then
+     * returns "redirect:/admin/article/{article_url}",
+     * else if the article category is not {@code null}
+     * then returns "redirect:/admin/category/{category_url}",
+     * else returns "redirect:/admin/article/all";
+     *
+     * @param article the article to get view name.
+     * @return The view name.
+     */
+    private static String getViewName(final Article article) {
+        String viewName;
+        if (isNotBlank(article.getText())) {
+            viewName = "redirect:/admin/article/" + article.getUrl();
+        } else if ((
+                article.getCategory() != null
+        ) && (
+                article.getCategory().isValidated()
+        )) {
+            viewName = "redirect:/admin/category/" + article.getCategory().getUrl();
+        } else {
+            viewName = "redirect:/admin/article/all";
+        }
+        return viewName;
     }
 }
