@@ -41,8 +41,8 @@ public final class AsciiImpl implements Ascii {
     @Override
     public String to() {
         StringBuilder sb = new StringBuilder();
-        if (isNotBlank(value)) {
-            for (Character character : value.toCharArray()) {
+        if (isNotBlank(this.value)) {
+            for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
             }
         }
@@ -58,8 +58,8 @@ public final class AsciiImpl implements Ascii {
     @Override
     public String from() {
         StringBuilder sb = new StringBuilder();
-        if (isNotBlank(value)) {
-            for (String st : value.split(",")) {
+        if (isNotBlank(this.value)) {
+            for (String st : this.value.split(",")) {
                 sb.append(
                         Character.toString(
                                 (char) Integer.parseInt(st)
