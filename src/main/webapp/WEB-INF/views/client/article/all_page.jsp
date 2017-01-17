@@ -59,11 +59,11 @@
                     </c:if>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Все статьи</a>
+                        → <a href="#">Все товары</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
-                        <h3 class="text-center">Статьи<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <h3 class="text-center">Все товары<c:if test="${length le 0}"> - список пуст!</c:if></h3>
                         <hr>
                     </div>
                     <div class="clearfix"></div>

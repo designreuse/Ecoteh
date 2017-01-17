@@ -38,14 +38,6 @@
                                 </c:otherwise>
                             </c:choose>
                         </h3>
-                        <c:if test="${article.photo ne null}">
-                            <a href="<c:url value="/resources/${article.photo.url}"/>"
-                               title="${article.title}" rel="lightgallery">
-                                <img class="img-responsive img-border img-left img-section"
-                                     alt="<c:out value="${article.title}"/>"
-                                     src="<c:url value="/resources/${article.photo.url}"/>">
-                            </a>
-                        </c:if>
                         <span class="little">
                             <c:if test="${!article.validated}">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
@@ -71,7 +63,7 @@
                         </c:if>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <hr>
+                        &nbsp;
                     </div>
                 </c:forEach>
                 <div class="clearfix"></div>

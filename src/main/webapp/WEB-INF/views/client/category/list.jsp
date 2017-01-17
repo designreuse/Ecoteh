@@ -46,7 +46,9 @@
                     <c:set var="printed_in_line" value="${printed_in_line + 1}"/>
                     <c:if test="${printed_in_line eq in_line}">
                         <c:if test="${length gt printed}">
-                            <div class="hidden-xs hidden-sm col-md-12 col-lg-12 col-xl-12"></div>
+                            <div class="hidden-xs hidden-sm col-md-12 col-lg-12 col-xl-12">
+                                &nbsp;
+                            </div>
                         </c:if>
                         <c:set var="printed_in_line" value="0"/>
                     </c:if>

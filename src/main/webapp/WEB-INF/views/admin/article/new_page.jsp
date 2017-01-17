@@ -57,16 +57,16 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Описание</td>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" rows="6" title=""
+                                    <textarea class="form-control textarea" name="desc" rows="10" title="" required
                                               placeholder="Краткое описание статьи (анонс)."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Основной текст</td>
+                                    <td class="ths">Основной текст</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="text" required rows="10" title=""
+                                    <textarea class="form-control textarea" name="text" rows="10" title=""
                                               placeholder="Основная информация статьи."></textarea>
                                     </td>
                                 </tr>
@@ -94,18 +94,6 @@
                                                         value="${category.title}"/></option>
                                             </c:forEach>
                                         </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Главное фото, это где?">
-                                            Главное фото&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                                                    aria-hidden="true"></span>
-                                        </a>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="file" name="photo" accept="image/*" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
@@ -151,6 +139,7 @@
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
+    <script>CKEDITOR.replace("desc");</script>
     <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
