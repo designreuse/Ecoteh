@@ -382,17 +382,15 @@ public final class MockServices {
         when(
                 categoryService.initAndAdd(
                         TITLE,
-                        DESCRIPTION,
-                        KEYWORDS,
+                        DESCRIPTION, KEYWORDS,
                         null, true)
         ).thenReturn(category);
         when(
                 categoryService.initAndUpdate(
-                        URL,
-                        TITLE,
-                        DESCRIPTION,
-                        KEYWORDS,
-                        null, null, true)
+                        URL, TITLE,
+                        DESCRIPTION, KEYWORDS,
+                        null,
+                        true)
         ).thenReturn(category);
         return categoryService;
     }
@@ -401,7 +399,6 @@ public final class MockServices {
         final Company company = getCompany();
         final List<Company> companies = new ArrayList<>();
         companies.add(company);
-        final File file = getPhoto();
         final CompanyService companyService = mock(CompanyService.class);
         when(
                 companyService.add(company)
@@ -521,7 +518,6 @@ public final class MockServices {
         ).thenReturn(company);
         when(
                 companyService.initAndUpdate(
-
                         URL, TITLE, DOMAIN,
                         TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
                         PHONE, PHONE, PHONE, EMAIL,
@@ -803,17 +799,11 @@ public final class MockServices {
         ).thenReturn(user);
         when(
                 userService.initAndUpdate(
-                        URL,
-                        NAME,
-                        LOGIN,
-                        PASSWORD,
+                        URL, NAME,
+                        LOGIN, PASSWORD,
                         DESCRIPTION,
-                        PHONE,
-                        EMAIL,
-                        VKONTAKTE,
-                        FACEBOOK,
-                        TWITTER,
-                        SKYPE,
+                        PHONE, EMAIL,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                         null, null,
                         true, true, true
                 )

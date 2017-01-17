@@ -118,25 +118,25 @@ public final class CategoryTest extends ContentTest<Category> {
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
-        assertNull(category.getPhoto());
+        assertNull(category.getPhotoUrl());
 
         category.initialize("", "", "", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
-        assertNull(category.getPhoto());
+        assertNull(category.getPhotoUrl());
 
         category.initialize(" ", " ", " ", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
-        assertNull(category.getPhoto());
+        assertNull(category.getPhotoUrl());
 
         category.initialize("   ", "   ", "   ", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
-        assertNull(category.getPhoto());
+        assertNull(category.getPhotoUrl());
     }
 
     @Test
@@ -144,17 +144,16 @@ public final class CategoryTest extends ContentTest<Category> {
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Category category = new Category();
-        final File file = getPhoto();
         category.initialize(
                 TITLE,
                 DESCRIPTION,
                 KEYWORDS,
-                file
+                ANY_STRING
         );
         assertNotNull(category.getTitle());
         assertNotNull(category.getDescription());
         assertNotNull(category.getKeywords());
-        assertNotNull(category.getPhoto());
+        assertNotNull(category.getPhotoUrl());
         assertEquals(
                 category.getTitle(),
                 TITLE
@@ -168,31 +167,26 @@ public final class CategoryTest extends ContentTest<Category> {
                 KEYWORDS
         );
         assertEquals(
-                category.getPhoto(),
-                file
+                category.getPhotoUrl(),
+                ANY_STRING
         );
     }
 
     @Test
     public void whenSetInvalidPhotoThenGetNull() {
         final Category category = new Category();
-        category.setPhoto(null);
-        assertNull(category.getPhoto());
-        final File file = getPhoto();
-        file.setUrl(null);
-        category.setPhoto(file);
-        assertNull(category.getPhoto());
+        category.setPhotoUrl(null);
+        assertNull(category.getPhotoUrl());
     }
 
     @Test
     public void whenSetValidPhotoThenGetThisPhoto() {
         final Category category = new Category();
-        final File file = getPhoto();
-        category.setPhoto(file);
-        assertNotNull(category.getPhoto());
+        category.setPhotoUrl(ANY_STRING);
+        assertNotNull(category.getPhotoUrl());
         assertEquals(
-                category.getPhoto(),
-                file
+                category.getPhotoUrl(),
+                ANY_STRING
         );
     }
 
