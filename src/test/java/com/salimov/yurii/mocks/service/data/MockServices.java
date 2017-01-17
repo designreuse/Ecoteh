@@ -192,7 +192,7 @@ public final class MockServices {
                         TITLE,
                         DESCRIPTION, TEXT,
                         KEYWORDS, NUMBER,
-                        null, null, true
+                        null, true
                 )
         ).thenReturn(article);
         when(
@@ -200,7 +200,7 @@ public final class MockServices {
                         URL, TITLE,
                         DESCRIPTION, TEXT,
                         KEYWORDS, NUMBER,
-                        null, null, null, true
+                        null, true
                 )
         ).thenReturn(article);
         when(

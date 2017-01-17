@@ -27,7 +27,6 @@ public class MockArticleTest extends MockModelTest<Article> {
         assertNotNull(article.getId());
         assertNotNull(article.getUrl());
         assertNull(article.getCategory());
-        assertNull(article.getPhoto());
     }
 
     @Ignore

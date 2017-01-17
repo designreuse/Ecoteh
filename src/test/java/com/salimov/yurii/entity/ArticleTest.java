@@ -201,45 +201,40 @@ public final class ArticleTest extends ContentTest<Article> {
     public void whenInitializeObjectWithInvalidParametersThenGetNull() {
         super.whenInitializeObjectWithInvalidParametersThenGetNull();
         final Article article = new Article();
-        article.initialize(null, null, null, null, null, null, null);
+        article.initialize(null, null, null, null, null, null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
 
-        final File file = new File();
-        article.initialize("", "", "", "", "", null, file);
+        article.initialize("", "", "", "", "", null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
 
-        article.initialize(" ", " ", " ", " ", " ", null, file);
+        article.initialize(" ", " ", " ", " ", " ", null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
 
-        article.initialize("   ", "   ", "   ", "   ", "   ", null, file);
+        article.initialize("   ", "   ", "   ", "   ", "   ", null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNull(article.getCategory());
-        assertNull(article.getPhoto());
         assertNotNull(article.getDate());
     }
 
@@ -249,15 +244,13 @@ public final class ArticleTest extends ContentTest<Article> {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Article article = new Article();
         final Category category = MockEntity.getCategory();
-        final File mainFile = MockEntity.getPhoto();
         article.initialize(
                 MockConstants.TITLE,
                 MockConstants.DESCRIPTION,
                 MockConstants.TEXT,
                 MockConstants.KEYWORDS,
                 MockConstants.NUMBER,
-                category,
-                mainFile
+                category
         );
         assertNotNull(article.getTitle());
         assertNotNull(article.getDescription());
@@ -265,7 +258,6 @@ public final class ArticleTest extends ContentTest<Article> {
         assertNotNull(article.getKeywords());
         assertNotNull(article.getNumber());
         assertNotNull(article.getCategory());
-        assertNotNull(article.getPhoto());
         assertNotNull(article.getDate());
         assertEquals(
                 article.getTitle(),
@@ -294,10 +286,6 @@ public final class ArticleTest extends ContentTest<Article> {
         assertEquals(
                 article.getCategory(),
                 category
-        );
-        assertEquals(
-                article.getPhoto(),
-                mainFile
         );
     }
 
@@ -399,34 +387,6 @@ public final class ArticleTest extends ContentTest<Article> {
         article.setCategory(null);
         assertNull(article.getCategory());
         assertFalse(category.containsArticle(article));
-    }
-
-    @Test
-    public void whenSetInvalidMainPhotoThenGetNull() {
-        final Article article = MockEntity.getArticle();
-        article.setPhoto(null);
-        assertNull(article.getPhoto());
-
-        final File invalidFile = new File();
-        article.setPhoto(invalidFile);
-        assertNull(article.getPhoto());
-
-        final File file = MockEntity.getPhoto();
-        file.setUrl(null);
-        article.setPhoto(file);
-        assertNull(article.getPhoto());
-    }
-
-    @Test
-    public void whenSetValidMainPhotoThenGetThisPhoto() {
-        final Article article = MockEntity.getArticle();
-        final File file = MockEntity.getPhoto();
-        article.setPhoto(file);
-        assertNotNull(article.getPhoto());
-        assertEquals(
-                article.getPhoto(),
-                file
-        );
     }
 
     @Test
