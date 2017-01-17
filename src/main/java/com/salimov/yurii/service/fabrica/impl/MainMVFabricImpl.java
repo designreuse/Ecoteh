@@ -229,9 +229,11 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject(
                 "articles_list",
                 this.articleService.sortByDate(
-                        this.articleService.filteredByValid(
-                                category.getArticles()
-                        ),
+                        isValidContent() ?
+                                this.articleService.filteredByValid(
+                                        category.getArticles()
+                                ) :
+                                category.getArticles(),
                         true
                 )
         );
