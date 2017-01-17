@@ -7,12 +7,10 @@ import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
-import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -92,8 +90,6 @@ public final class ArticleServiceImpl
      * @param keywords    a keywords of the new article.
      * @param number      a number of the new article.
      * @param category    a category of the new article.
-     * @param file        a multipart file of main photo
-     *                    of the new article.
      * @param isValid     a value of validations of the model.
      * @return The new saving article.
      * @see Article
@@ -109,7 +105,6 @@ public final class ArticleServiceImpl
             final String keywords,
             final String number,
             final Category category,
-            final MultipartFile file,
             final boolean isValid
     ) {
         final Article article = new Article();
@@ -120,13 +115,6 @@ public final class ArticleServiceImpl
                 category
         );
         article.setValidated(isValid);
-        article.setPhoto(
-                updatePhoto(
-                        new File(),
-                        file,
-                        title
-                )
-        );
         return add(article);
     }
 
@@ -141,9 +129,6 @@ public final class ArticleServiceImpl
      * @param keywords    a new keywords to the article.
      * @param number      a new number to the article.
      * @param category    a new category to the article.
-     * @param file        a new multipart file of main photo
-     *                    of the new article.
-     * @param photoAction a action on the main file.
      * @param isValid     a validated of the article.
      * @return The updating article with parameter id or {@code null}.
      * @see Article
@@ -160,18 +145,9 @@ public final class ArticleServiceImpl
             final String keywords,
             final String number,
             final Category category,
-            final MultipartFile file,
-            final String photoAction,
             final boolean isValid
     ) {
         final Article article = getByUrl(url, false);
-        final File photo = article.getPhoto();
-        updatesPhoto(
-                article,
-                file,
-                title,
-                photoAction
-        );
         article.initialize(
                 title,
                 description, text,
@@ -179,9 +155,7 @@ public final class ArticleServiceImpl
                 category
         );
         article.setValidated(isValid);
-        final Article updatingArticle = update(article);
-        removePhoto(photo, photoAction);
-        return updatingArticle;
+        return update(article);
     }
 
     /**
@@ -533,7 +507,6 @@ public final class ArticleServiceImpl
     @Transactional
     public void remove(final Article article) {
         if (article != null) {
-            removePhoto(article);
             article.setCategory(null);
             super.remove(article);
         }
@@ -547,19 +520,6 @@ public final class ArticleServiceImpl
     @Override
     protected Class<Article> getModelClass() {
         return Article.class;
-    }
-
-    /**
-     * Remove main photo in selected article.
-     *
-     * @param article a selected article.
-     */
-    private void removePhoto(final Article article) {
-        if (article.getPhoto() != null) {
-            this.fileService.deleteFile(
-                    article.getPhoto().getUrl()
-            );
-        }
     }
 
     /**
@@ -603,91 +563,5 @@ public final class ArticleServiceImpl
         ) && (
                 time <= finishDate.getTime()
         );
-    }
-
-    /**
-     * Updates the article main photo.
-     *
-     * @param article     the articles to update.
-     * @param title       a photo title.
-     * @param photoAction a action on the main file.
-     * @param file        a photo multipart file.
-     */
-    private void updatesPhoto(
-            final Article article,
-            final MultipartFile file,
-            final String title,
-            final String photoAction
-    ) {
-        switch (photoAction) {
-            case "replace":
-                article.setPhoto(
-                        updatePhoto(
-                                article.getPhoto(),
-                                file,
-                                title
-                        )
-                );
-                break;
-            case "delete":
-                article.setPhoto(null);
-                break;
-        }
-    }
-
-    /**
-     * Updates the photo.
-     *
-     * @param photo the photo to update.
-     * @param file  a photo multipart file.
-     * @param title a photo title.
-     * @return The updating photo.
-     */
-    private File updatePhoto(
-            final File photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return updatePhotoFile(
-                photo,
-                file,
-                Translator.fromCyrillicToLatin(title) + " file"
-        );
-    }
-
-    /**
-     * Updates the photo.
-     *
-     * @param photo the photo to updates.
-     * @param file  a photo multipart file.
-     * @param title a photo title.
-     * @return The updating photo.
-     */
-    private File updatePhotoFile(
-            final File photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return this.fileService.updatePhoto(
-                photo != null ? photo : new File(),
-                file,
-                title,
-                "img/articles"
-        );
-    }
-
-    /**
-     * Removes main photo if action equals "delete".
-     *
-     * @param photo  the photo to remove.
-     * @param action a action on the file.
-     */
-    private void removePhoto(
-            final File photo,
-            final String action
-    ) {
-        if (action.equals("delete")) {
-            this.fileService.remove(photo);
-        }
     }
 }
