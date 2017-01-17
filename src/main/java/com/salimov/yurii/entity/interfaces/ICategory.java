@@ -64,7 +64,7 @@ public interface ICategory<E extends Number>
      * @param articles an articles to add.
      * @see Article
      */
-    void addArticles(final Collection<Article> articles) ;
+    void addArticles(final Collection<Article> articles);
 
     /**
      * Removes article from the list of articles.
@@ -102,6 +102,8 @@ public interface ICategory<E extends Number>
      * Contains article in the list of articles.
      *
      * @param article an article to contain.
+     * @return {@code true} if article is contains,
+     * {@code false} otherwise.
      * @see Article
      */
     boolean containsArticle(final Article article);
@@ -110,6 +112,8 @@ public interface ICategory<E extends Number>
      * Contains articles in the list of articles.
      *
      * @param articles an articles to contain.
+     * @return {@code true} if articles are contains,
+     * {@code false} otherwise.
      * @see Article
      */
     boolean containsArticles(final Collection<Article> articles);
