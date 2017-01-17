@@ -35,13 +35,20 @@ public abstract class Media<E extends Number>
     /**
      * The title of the media.
      */
-    @Column(name = "title", nullable = false)
+    @Column(
+            name = "title",
+            nullable = false
+    )
     private String title;
 
     /**
      * The url of the media.
      */
-    @Column(name = "url", nullable = false, unique = true)
+    @Column(
+            name = "url",
+            nullable = false,
+            unique = true
+    )
     private String url;
 
     /**
@@ -57,7 +64,10 @@ public abstract class Media<E extends Number>
      * @param title a title of the new media.
      * @param url   a URL of the new media.
      */
-    public Media(final String title, final String url) {
+    public Media(
+            final String title,
+            final String url
+    ) {
         this();
         initialize(title, url);
     }
@@ -196,13 +206,7 @@ public abstract class Media<E extends Number>
     public static <ID extends Number> boolean isValidated(
             final Media<ID> media
     ) {
-        boolean result = false;
-        if (Model.isValidated(media)) {
-            if (media.isValidated()) {
-                result = true;
-            }
-        }
-        return result;
+        return Model.isValidated(media) && media.isValidated();
     }
 
     /**

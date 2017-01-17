@@ -175,15 +175,11 @@ public final class Article
             final String number,
             final Category category
     ) {
-        super.initialize(
-                title, description, keywords
-        );
+        super.initialize(title, description, keywords);
         setText(text);
         setNumber(number);
         setCategory(category);
-        setDate(
-                new Date()
-        );
+        setDate(new Date());
     }
 
     /**
@@ -280,10 +276,18 @@ public final class Article
      * @see Category
      */
     public void setCategory(final Category category) {
-        if ((this.category == null) || !this.category.equals(category)) {
+        if ((
+                this.category == null
+        ) || (
+                !this.category.equals(category)
+        )) {
             final Category temp = this.category;
             this.category = category;
-            if ((this.category != null) && !this.category.containsArticle(this)) {
+            if ((
+                    this.category != null
+            ) && (
+                    !this.category.containsArticle(this)
+            )) {
                 this.category.addArticle(this);
             }
             if (temp != null) {

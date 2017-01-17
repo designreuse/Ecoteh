@@ -44,7 +44,10 @@ public final class File
      * @param title a title of the new photo.
      * @param url   a url of the new photo.
      */
-    public File(final String title, final String url) {
+    public File(
+            final String title,
+            final String url
+    ) {
         super(title, url);
     }
 

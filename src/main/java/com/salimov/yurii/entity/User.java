@@ -194,8 +194,8 @@ public final class User
      */
     @Override
     public boolean equals(final Object object) {
-        boolean result = super.equals(object);
-        if (result) {
+        boolean result = false;
+        if (super.equals(object)) {
             final User other = (User) object;
             result = (
                     isNotBlank(this.name) ?
@@ -287,7 +287,7 @@ public final class User
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> roles = new ArrayList<>(1);
+        final List<GrantedAuthority> roles = new ArrayList<>(1);
         roles.add(
                 new SimpleGrantedAuthority(
                         "ROLE_" + this.role.name()
@@ -735,9 +735,13 @@ public final class User
     public static boolean isValidated(final User user) {
         boolean result = false;
         if (Model.isValidated(user)) {
-            result = isNotBlank(user.getName()) &&
-                    isNotBlank(user.getPhone()) &&
-                    isNotBlank(user.getEmail());
+            result = (
+                    isNotBlank(user.getName())
+            ) && (
+                    isNotBlank(user.getPhone())
+            ) && (
+                    isNotBlank(user.getEmail())
+            );
         }
         return result;
     }

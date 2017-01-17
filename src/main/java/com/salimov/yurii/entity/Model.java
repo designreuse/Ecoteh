@@ -110,9 +110,11 @@ public abstract class Model<E extends Number>
     public boolean equals(final Object object) {
         return (
                 object != null
-        ) && (
-                super.equals(object) || (getClass() == object.getClass())
-        );
+        ) && ((
+                super.equals(object)
+        ) || (
+                getClass() == object.getClass()
+        ));
     }
 
     /**
@@ -200,12 +202,17 @@ public abstract class Model<E extends Number>
             final int length
     ) {
         final StringBuilder sb = new StringBuilder();
-        if (pattern != null && pattern.length != 0 && length > 0) {
+        if ((
+                pattern != null
+        ) && (
+                pattern.length != 0
+        ) && (
+                length > 0
+        )) {
             final Random random = new Random(System.nanoTime());
             for (int i = 0; i < length; i++) {
-                int number = random.nextInt(pattern.length);
                 sb.append(
-                        pattern[number]
+                        pattern[random.nextInt(pattern.length)]
                 );
             }
         }

@@ -265,9 +265,11 @@ public abstract class Content<E extends Number>
     ) {
         boolean result = false;
         if (Model.isValidated(content)) {
-            final String title = content.getTitle();
-            final String url = content.getUrl();
-            if (isNotBlank(title) && isNotBlank(url)) {
+            if ((
+                    isNotBlank(content.getTitle())
+            ) && (
+                    isNotBlank(content.getUrl())
+            )) {
                 result = true;
             }
         }

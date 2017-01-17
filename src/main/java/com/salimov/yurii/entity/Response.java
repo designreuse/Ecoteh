@@ -66,7 +66,10 @@ public final class Response
      * @param username a username of the new response.
      * @param text     a text of the new response.
      */
-    public Response(final String username, final String text) {
+    public Response(
+            final String username,
+            final String text
+    ) {
         this();
         setUsername(username);
         setText(text);
@@ -81,8 +84,8 @@ public final class Response
      */
     @Override
     public boolean equals(final Object object) {
-        boolean result = super.equals(object);
-        if (result) {
+        boolean result = false;
+        if (super.equals(object)) {
             final Response other = (Response) object;
             result = (
                     isNotBlank(this.username) ?
@@ -132,7 +135,10 @@ public final class Response
      * @param username a new username to the response.
      * @param text     a new text to the response.
      */
-    public void initialize(final String username, final String text) {
+    public void initialize(
+            final String username,
+            final String text
+    ) {
         setUsername(username);
         setText(text);
         setDate(new Date());
