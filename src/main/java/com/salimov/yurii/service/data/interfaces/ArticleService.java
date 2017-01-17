@@ -3,7 +3,6 @@ package com.salimov.yurii.service.data.interfaces;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.Date;
@@ -31,8 +30,6 @@ public interface ArticleService
      * @param keywords    a keywords of the new article.
      * @param number      a number of the new article.
      * @param category    a category of the new article.
-     * @param file        a multipart file of main photo
-     *                    of the new article.
      * @param isValid     a value of validations of the model.
      * @return The new saving article.
      * @see Article
@@ -46,7 +43,6 @@ public interface ArticleService
             final String keywords,
             final String number,
             final Category category,
-            final MultipartFile file,
             final boolean isValid
     );
 
@@ -60,9 +56,6 @@ public interface ArticleService
      * @param keywords    a new keywords to the article.
      * @param number      a new number to the article.
      * @param category    a new category to the article.
-     * @param file        a new multipart file of main photo
-     *                    of the new article.
-     * @param photoAction a action on the main photo.
      * @param isValid     a validated of the article.
      * @return The updating article with parameter id or {@code null}.
      * @see Article
@@ -77,8 +70,6 @@ public interface ArticleService
             final String keywords,
             final String number,
             final Category category,
-            final MultipartFile file,
-            final String photoAction,
             final boolean isValid
     );
 
