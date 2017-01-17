@@ -29,9 +29,9 @@
                                     </c:choose>">
                         <a href="<c:url value="${reqmap}/category/${category.url}"/>"
                            title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
-                            <c:if test="${category.photo ne null}">
+                            <c:if test="${category.photoUrl ne null}">
                                 <img class="img-responsive img-in-list" alt="<c:out value="${category.title}"/>"
-                                     src="<c:url value="/resources/${category.photo.url}"/>">
+                                     src="<c:url value="/${category.photoUrl}"/>">
                             </c:if>
                             <h3 class="text-center"><c:out value="${category.title}"/></h3>
                         </a>

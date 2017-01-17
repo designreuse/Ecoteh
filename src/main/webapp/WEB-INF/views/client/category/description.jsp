@@ -6,14 +6,6 @@
         <div class="row">
             <div class="box">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <c:if test="${category.photo ne null}">
-                        <a href="<c:url value="/resources/${category.photo.url}"/>"
-                           rel="lightgallery" title="<c:out value="${category.title}"/>">
-                            <img class="img-responsive img-border img-left img-section"
-                                 alt="<c:out value="${category.title}"/>"
-                                 src="<c:url value="/resources/${category.photo.url}"/>">
-                        </a>
-                    </c:if>
                     <h3 class="text-center"><c:out value="${category.title}"/></h3>
                     <c:if test="${!category.validated}">
                         <p class="little">

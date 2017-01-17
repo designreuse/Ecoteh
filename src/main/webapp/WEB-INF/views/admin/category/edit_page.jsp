@@ -32,8 +32,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="
-        <c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -69,7 +68,7 @@
                                     <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="text" rows="6"
-                                              placeholder="Краткое описание категории." title=""><c:out
+                                              placeholder="Краткое описание категории" title=""><c:out
                                             value="${category.description}"/></textarea>
                                     </td>
                                 </tr>
@@ -82,31 +81,17 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Фото</td>
+                                    <td class="ths">
+                                        <a href="<c:url value="/resources/img/static/where_category_photo.jpg"/>"
+                                           rel="lightgallery" title="Главное фото категории. Где это?">
+                                            Фото&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                            aria-hidden="true"></span>
+                                        </a>
+                                    </td>
                                     <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${category.photo ne null}">
-                                                <a href="<c:url value="/resources/${category.photo.url}"/>"
-                                                   rel="lightgallery">
-                                                    <img class="img-logo" alt="<c:out value="${category.title}"/>"
-                                                         src="<c:url value="/resources/${category.photo.url}"/>">
-                                                </a><br><br>
-                                                <label title="Добавить новое фото">
-                                                    <b><input type="radio" name="photo_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить фото">
-                                                    <b><input type="radio" name="photo_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="photo_action" value="replace" checked
-                                                       required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br><input type="file" name="main_photo" accept="image/*"
-                                                   class="form-control"><br>
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на главное фото для категории"
+                                               value="${category.photoUrl}">
                                     </td>
                                 </tr>
                                 <tr>

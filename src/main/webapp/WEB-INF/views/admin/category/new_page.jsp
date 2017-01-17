@@ -28,6 +28,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -58,7 +59,7 @@
                                     <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="text" rows="6"
-                                              placeholder="Краткое описание категории." title=""></textarea>
+                                              placeholder="Краткое описание категории" title=""></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,16 +71,23 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Фото</td>
+                                    <td class="ths">
+                                        <a href="<c:url value="/resources/img/static/where_category_photo.jpg"/>"
+                                           rel="lightgallery" title="Главное фото категории. Где это?">
+                                            Фото&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                            aria-hidden="true"></span>
+                                        </a>
+                                    </td>
                                     <td class="tds">
-                                        <input type="file" name="main_photo" accept="image/*" class="form-control">
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на главное фото для категории">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <label title="Если категория позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
                                             Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span></b>
+                                                                   aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
@@ -119,6 +127,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
     <script>CKEDITOR.replace("text");</script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
