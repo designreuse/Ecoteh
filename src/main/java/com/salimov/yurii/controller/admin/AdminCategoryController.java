@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -98,7 +97,7 @@ public class AdminCategoryController {
      * @param title        a title of the new category.
      * @param description  a title of the new category.
      * @param keywords     a title of the new category.
-     * @param photoFile    a file of photo to the new category.
+     * @param photoUrl     a file of photo to the new category.
      * @param isValid      a validated of the new category.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -110,15 +109,13 @@ public class AdminCategoryController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "main_photo") final MultipartFile photoFile,
+            @RequestParam(value = "photo") final String photoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = this.categoryService.initAndAdd(
-                title,
-                description,
-                keywords,
-                photoFile,
+                title, description, keywords,
+                photoUrl,
                 isValid
         );
         Cache.clear();
@@ -175,8 +172,7 @@ public class AdminCategoryController {
      * @param title        a new title to the category.
      * @param description  a new description to the category.
      * @param keywords     a new description to the category.
-     * @param photoFile    a file of photo to the new category.
-     * @param photoAction  a action on the main photo.
+     * @param photoUrl    a file of photo to the new category.
      * @param isValid      a validated of the category.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -189,18 +185,14 @@ public class AdminCategoryController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "main_photo") final MultipartFile photoFile,
-            @RequestParam(value = "photo_action") final String photoAction,
+            @RequestParam(value = "photo") final String photoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = this.categoryService.initAndUpdate(
-                url,
-                title,
-                description,
-                keywords,
-                photoFile,
-                photoAction,
+                url, title,
+                description, keywords,
+                photoUrl,
                 isValid
         );
         Cache.clear();

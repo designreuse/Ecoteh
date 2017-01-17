@@ -24,14 +24,14 @@ public interface ICategory<E extends Number>
      * @param title       a new title of the category.
      * @param description a new description of the category.
      * @param keywords    a new keywords of the category.
-     * @param photo       a new file of the category.
+     * @param photoUrl    a new main photo URL of the category.
      * @see File
      */
     void initialize(
             final String title,
             final String description,
             final String keywords,
-            final File photo
+            final String photoUrl
     );
 
     /**
@@ -40,15 +40,15 @@ public interface ICategory<E extends Number>
      * @return The category file.
      * @see File
      */
-    File getPhoto();
+    String getPhotoUrl();
 
     /**
      * Sets a new file to the category.
      *
-     * @param photo a new main file to the category.
+     * @param photoUrl a new main file to the category.
      * @see File
      */
-    void setPhoto(final File photo);
+    void setPhotoUrl(final String photoUrl);
 
     /**
      * Adds new article to the list of articles.

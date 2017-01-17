@@ -5,6 +5,8 @@ import com.salimov.yurii.entity.interfaces.ICategory;
 import javax.persistence.*;
 import java.util.*;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 /**
  * The class implements a set of standard methods for working
  * with entity of the {@link Category} class.
@@ -29,19 +31,10 @@ public final class Category
     private static final long serialVersionUID = 1L;
 
     /**
-     * The file of a category.
-     *
-     * @see File
+     * The main photo URL.
      */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "photo_id",
-            referencedColumnName = "id"
-    )
-    private File photo;
+    @Column(name = "photo_url")
+    private String photoUrl;
 
     /**
      * The set of a articles.
@@ -67,7 +60,6 @@ public final class Category
 
     /**
      * Constructor.
-     * Initializes a main category parameters.
      *
      * @param title       a title of the new category.
      * @param description a description of the new category.
@@ -87,7 +79,7 @@ public final class Category
      * @param title       a new title of the category.
      * @param description a new description of the category.
      * @param keywords    a new keywords of the category.
-     * @param photo       a new file of the category.
+     * @param photoUrl    a new file of the category.
      * @see File
      */
     @Override
@@ -95,33 +87,32 @@ public final class Category
             final String title,
             final String description,
             final String keywords,
-            final File photo
+            final String photoUrl
     ) {
         super.initialize(title, description, keywords);
-        setPhoto(photo);
+        setPhotoUrl(photoUrl);
     }
 
     /**
-     * Returns a file of the category.
+     * Returns a main photo URL of the category.
      *
-     * @return The category file.
-     * @see File
+     * @return The main photo URL.
      */
     @Override
-    public File getPhoto() {
-        return this.photo;
+    public String getPhotoUrl() {
+        return this.photoUrl;
     }
 
     /**
      * Sets a new file to the category.
      * If parameter file is blank, then sets {@code null}.
      *
-     * @param photo a new main file to the category.
+     * @param photoUrl a new main photo URL to the category.
      * @see File
      */
     @Override
-    public void setPhoto(final File photo) {
-        this.photo = File.isValidated(photo) ? photo : null;
+    public void setPhotoUrl(final String photoUrl) {
+        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
     }
 
     /**
