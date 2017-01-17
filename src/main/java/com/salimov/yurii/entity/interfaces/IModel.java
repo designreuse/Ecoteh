@@ -3,8 +3,13 @@ package com.salimov.yurii.entity.interfaces;
 import java.io.Serializable;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of
+ * the {@link com.salimov.yurii.entity.Model} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see com.salimov.yurii.entity.Model
  */
 public interface IModel<E extends Number>
         extends Serializable, Cloneable {

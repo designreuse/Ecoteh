@@ -7,8 +7,14 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of
+ * the {@link com.salimov.yurii.entity.Company} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see IContent
+ * @see com.salimov.yurii.entity.Company
  */
 public interface ICompany<E extends Number>
         extends IContent<E> {

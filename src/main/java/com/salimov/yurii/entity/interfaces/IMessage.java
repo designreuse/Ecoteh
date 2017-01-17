@@ -3,8 +3,14 @@ package com.salimov.yurii.entity.interfaces;
 import java.util.Date;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of
+ * the {@link com.salimov.yurii.entity.Message} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see com.salimov.yurii.entity.Message
+ * @see IModel
  */
 public interface IMessage<E extends Number> extends IModel<E> {
 

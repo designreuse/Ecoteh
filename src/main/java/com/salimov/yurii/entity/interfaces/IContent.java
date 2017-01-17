@@ -1,8 +1,14 @@
 package com.salimov.yurii.entity.interfaces;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of
+ * the {@link com.salimov.yurii.entity.Content} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see IModel
+ * @see com.salimov.yurii.entity.Content
  */
 public interface IContent<E extends Number>
         extends IModel<E> {

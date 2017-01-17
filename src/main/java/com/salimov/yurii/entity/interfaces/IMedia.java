@@ -1,8 +1,14 @@
 package com.salimov.yurii.entity.interfaces;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of
+ * the {@link com.salimov.yurii.entity.Media} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see com.salimov.yurii.entity.Media
+ * @see IModel
  */
 public interface IMedia<E extends Number>
         extends IModel<E> {

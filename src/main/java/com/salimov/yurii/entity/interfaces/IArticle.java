@@ -1,13 +1,18 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.File;
 
 import java.util.Date;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of the {@link Article} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see IContent
+ * @see Article
  */
 public interface IArticle<E extends Number>
         extends IContent<E> {
@@ -30,29 +35,6 @@ public interface IArticle<E extends Number>
             final String keywords,
             final String number,
             final Category category
-    );
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @param photo       a new main photo pf the article.
-     * @see Category
-     * @see File
-     */
-    void initialize(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final File photo
     );
 
     /**
@@ -124,20 +106,4 @@ public interface IArticle<E extends Number>
      * @see Category
      */
     Category getCategory();
-
-    /**
-     * Returns a main photo of the article.
-     *
-     * @return The article main photo.
-     * @see File
-     */
-    File getPhoto();
-
-    /**
-     * Sets a new main photo to the article.
-     *
-     * @param photo a new main photo to the article.
-     * @see File
-     */
-    void setPhoto(final File photo);
 }
