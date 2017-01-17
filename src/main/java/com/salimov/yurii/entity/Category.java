@@ -214,7 +214,8 @@ public final class Category
      * Contains article in the list of articles.
      *
      * @param article an article to contain.
-     * @return {@code true} if article is contains, {@code false} otherwise.
+     * @return {@code true} if article is contains,
+     * {@code false} otherwise.
      * @see Article
      */
     @Override
