@@ -17,13 +17,6 @@ public interface ToLatin {
     String fromCyrillic();
 
     /**
-     * Sets a string to translate.
-     *
-     * @param value a string to translate.
-     */
-    void setValue(final String value);
-
-    /**
      * Returns a string to translate.
      *
      * @return The string to translate.
