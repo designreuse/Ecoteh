@@ -35,24 +35,32 @@ public final class Response
     /**
      * The username of a response.
      */
-    @Column(name = "username", nullable = false)
+    @Column(
+            name = "username",
+            nullable = false
+    )
     private String username;
 
     /**
      * The username of a response.
      */
-    @Column(name = "text", nullable = false)
+    @Column(
+            name = "text",
+            nullable = false
+    )
     private String text;
 
     /**
      * The date of a response.
      */
-    @Column(name = "date", nullable = false)
+    @Column(
+            name = "date",
+            nullable = false
+    )
     private Date date;
 
     /**
      * Default constructor.
-     * Initializes date.
      */
     public Response() {
         setDate(new Date());
@@ -61,7 +69,6 @@ public final class Response
 
     /**
      * Constructor.
-     * Initializes a main response parameters.
      *
      * @param username a username of the new response.
      * @param text     a text of the new response.

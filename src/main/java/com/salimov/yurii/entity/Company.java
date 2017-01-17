@@ -43,7 +43,10 @@ public final class Company
     /**
      * The information of a company.
      */
-    @Column(name = "information", nullable = false)
+    @Column(
+            name = "information",
+            nullable = false
+    )
     private String information;
 
     /**
@@ -115,7 +118,7 @@ public final class Company
     /**
      * The address of a company.
      */
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
     /**
@@ -214,7 +217,6 @@ public final class Company
 
     /**
      * Constructor.
-     * Initializes a main company parameters.
      *
      * @param title           a title of the new company.
      * @param domain          a domain of the new company.

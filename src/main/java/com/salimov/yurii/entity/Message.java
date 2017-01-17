@@ -59,7 +59,6 @@ public final class Message
 
     /**
      * Default constructor.
-     * Initializes a message date.
      */
     public Message() {
         setDate(
@@ -69,7 +68,6 @@ public final class Message
 
     /**
      * Constructor.
-     * Initializes a main user parameters.
      *
      * @param username a name of the client.
      * @param email    a name of the email.

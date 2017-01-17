@@ -39,7 +39,6 @@ public final class File
 
     /**
      * Constructor.
-     * Initializes a main photo parameters.
      *
      * @param title a title of the new photo.
      * @param url   a url of the new photo.

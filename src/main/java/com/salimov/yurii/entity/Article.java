@@ -81,7 +81,6 @@ public final class Article
 
     /**
      * Constructor.
-     * Initializes a main article parameters.
      *
      * @param title       a title of the new article.
      * @param description a description of the new article.

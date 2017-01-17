@@ -37,13 +37,20 @@ public abstract class Content<E extends Number>
     /**
      * The title of a content.
      */
-    @Column(name = "title", nullable = false)
+    @Column(
+            name = "title",
+            nullable = false
+    )
     private String title;
 
     /**
      * The url of a content.
      */
-    @Column(name = "url", nullable = false, unique = true)
+    @Column(
+            name = "url",
+            nullable = false,
+            unique = true
+    )
     private String url;
 
     /**
@@ -66,7 +73,6 @@ public abstract class Content<E extends Number>
 
     /**
      * Constrictor.
-     * Initializes a main content parameters.
      *
      * @param title       a title of the new content.
      * @param description a description of the new content.

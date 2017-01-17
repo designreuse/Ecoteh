@@ -59,7 +59,6 @@ public abstract class Media<E extends Number>
 
     /**
      * Constrictor.
-     * Initializes a main media parameters.
      *
      * @param title a title of the new media.
      * @param url   a URL of the new media.

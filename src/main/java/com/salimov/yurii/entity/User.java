@@ -40,37 +40,57 @@ public final class User
     /**
      * The name of a user.
      */
-    @Column(name = "name", nullable = false)
+    @Column(
+            name = "name",
+            nullable = false,
+            unique = true
+    )
     private String name;
 
     /**
      * The url of a user.
      */
-    @Column(name = "url", nullable = false, unique = true)
+    @Column(
+            name = "url",
+            nullable = false,
+            unique = true
+    )
     private String url;
 
     /**
      * The login of a user.
      */
-    @Column(name = "login", unique = true)
+    @Column(
+            name = "login",
+            unique = true
+    )
     private String login;
 
     /**
      * The password of a user.
      */
-    @Column(name = "password", unique = true)
+    @Column(
+            name = "password",
+            unique = true
+    )
     private String password;
 
     /**
      * The e-mail of a user.
      */
-    @Column(name = "email", nullable = false)
+    @Column(
+            name = "email",
+            nullable = false
+    )
     private String email;
 
     /**
      * The phone of a user.
      */
-    @Column(name = "phone", nullable = false)
+    @Column(
+            name = "phone",
+            nullable = false
+    )
     private String phone;
 
     /**
@@ -141,7 +161,6 @@ public final class User
 
     /**
      * Default constructor.
-     * Initializes a user role.
      *
      * @see UserRole
      */
@@ -151,7 +170,6 @@ public final class User
 
     /**
      * Constructor.
-     * Initializes a main user parameters.
      *
      * @param name  a name of the new user.
      * @param email a email of the new user.
