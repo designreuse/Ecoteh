@@ -166,9 +166,8 @@
                                     <tr>
                                         <td class="ths">
                                             <label title="Эта почта будет привязана к форме обратной связи.">
-                                                <b>Электронная почта (бот)&nbsp;
-                                                    <span class="glyphicon glyphicon-info-sign"
-                                                          aria-hidden="true"></span></b>
+                                                Электронная почта (бот)&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                                   aria-hidden="true"></span>
                                             </label>
                                         </td>
                                         <td class="tds">
@@ -382,13 +381,13 @@
                                             <td class="tds">
                                                 <label title="Компанию смогут увидеть все пользователей">
                                                     <input type="radio" name="is_valid" value="true"
-                                                              <c:if test="${company.validated}">checked</c:if>
-                                                              required/>&nbsp;Отображать
+                                                           <c:if test="${company.validated}">checked</c:if>
+                                                           required/>&nbsp;Отображать
                                                 </label>&nbsp;&nbsp;
                                                 <label title="Компанию смогут увидеть только администраторы">
                                                     <input type="radio" name="is_valid" value="false"
-                                                              <c:if test="${!company.validated}">checked</c:if>
-                                                              required/>&nbsp;Не отображать
+                                                           <c:if test="${!company.validated}">checked</c:if>
+                                                           required/>&nbsp;Не отображать
                                                 </label>
                                             </td>
                                         </tr>
