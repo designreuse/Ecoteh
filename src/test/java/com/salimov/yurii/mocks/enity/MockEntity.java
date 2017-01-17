@@ -28,6 +28,7 @@ public final class MockEntity {
         final Category category = new Category(TITLE, DESCRIPTION, KEYWORDS);
         category.setId(ID);
         category.setUrl(URL);
+        category.setPhotoUrl(PHOTO_URL);
         return category;
     }
 
@@ -46,6 +47,7 @@ public final class MockEntity {
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
         company.setWorkTimeTo(TIME);
+        company.addSlide(getPhoto());
         return company;
     }
 

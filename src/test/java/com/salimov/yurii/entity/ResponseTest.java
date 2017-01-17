@@ -1,13 +1,13 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.mocks.MockConstants;
-import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Date;
 
+import static com.salimov.yurii.mocks.enity.MockEntity.getResponse;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
@@ -81,7 +81,7 @@ public final class ResponseTest extends ModelTest<Response> {
     public void equalsValidObjects() {
         super.equalsValidObjects();
 
-        final Response response1 = MockEntity.getResponse();
+        final Response response1 = getResponse();
         final Response response2 = (Response) response1.clone();
         assertEquals(response1, response2);
 
@@ -122,7 +122,7 @@ public final class ResponseTest extends ModelTest<Response> {
     @Test
     @Override
     public void hashCodeValidObject() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         int value = (
                 isNotBlank(response.getUsername()) ?
                         response.getUsername().hashCode() : 0
@@ -140,7 +140,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void toStringTest() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         final String value = "Date: " + response.getDate()
                 + " \nUsername: " + response.getUsername()
                 + " \nText: " + response.getText();
@@ -193,7 +193,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void whenSetInvalidUsernameThenGetNull() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         response.setUsername(null);
         assertNull(response.getUsername());
         response.setUsername("");
@@ -206,7 +206,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void whenSetValidUsernameThenGetThisUsername() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         response.setUsername(MockConstants.NAME);
         assertNotNull(response.getUsername());
         Assert.assertEquals(
@@ -217,7 +217,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void whenSetInvalidTextThenGetNull() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         response.setText(null);
         assertNull(response.getText());
         response.setText("");
@@ -230,7 +230,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void whenSetValidTextThenGetThisText() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         response.setText(MockConstants.TEXT);
         assertNotNull(response.getText());
         Assert.assertEquals(
@@ -241,7 +241,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void whenSetNullDateThenGetNewDate() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         response.setDate(null);
         assertNotNull(response.getDate());
         assertNotNull(response.getDateToString());
@@ -249,7 +249,7 @@ public final class ResponseTest extends ModelTest<Response> {
 
     @Test
     public void whenSetNotNullDateThenGetThisDate() {
-        final Response response = MockEntity.getResponse();
+        final Response response = getResponse();
         final Date date = new Date();
         response.setDate(date);
         assertNotNull(response.getDate());
@@ -264,22 +264,34 @@ public final class ResponseTest extends ModelTest<Response> {
     @Override
     public void validObject() {
         super.validObject();
-        Response response = MockEntity.getResponse();
+        Response response = getResponse();
         assertFalse(Response.isValidated(null));
         assertTrue(Response.isValidated(response));
-        assertTrue(response.isValidated());
+        assertFalse(response.isValidated());
         response.setUsername(null);
         assertFalse(Response.isValidated(response));
         assertFalse(response.isValidated());
-        response = MockEntity.getResponse();
+        response = getResponse();
         response.setText(null);
         assertFalse(Response.isValidated(response));
         assertFalse(response.isValidated());
+        response = getResponse();
+        response.setValidated(true);
+        assertTrue(response.isValidated());
+    }
+
+    @Test
+    public void whenReverseValidatedThenChangeValidated() {
+        Response response = new Response();
+        response.setValidated(false);
+        assertFalse(response.isValidated());
+        response.reverseValidated();
+        assertTrue(response.isValidated());
     }
 
     @Ignore
     @Override
     protected Response getObject() {
-        return MockEntity.getResponse();
+        return getResponse();
     }
 }

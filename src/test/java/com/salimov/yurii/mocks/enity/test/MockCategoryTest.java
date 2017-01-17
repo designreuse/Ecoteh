@@ -41,6 +41,5 @@ public class MockCategoryTest extends MockModelTest<Category> {
     @Override
     protected Collection<Category> getObjects(int size) {
         return getCategories(size);
-
     }
 }

@@ -1190,19 +1190,19 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getWorkTimeFrom());
         assertEquals(
                 company.getWorkTimeFrom(),
-                "02:10"
+                "00:10"
         );
         company.setWorkTimeFrom("-25:130");
         assertNotNull(company.getWorkTimeFrom());
         assertEquals(
                 company.getWorkTimeFrom(),
-                "02:10"
+                "00:10"
         );
         company.setWorkTimeFrom("25:-130");
         assertNotNull(company.getWorkTimeFrom());
         assertEquals(
                 company.getWorkTimeFrom(),
-                "00:00"
+                "23:00"
         );
         company.setWorkTimeFrom("14:35");
         assertNotNull(company.getWorkTimeFrom());
@@ -1278,19 +1278,19 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getWorkTimeTo());
         assertEquals(
                 company.getWorkTimeTo(),
-                "02:10"
+                "00:10"
         );
         company.setWorkTimeTo("-25:130");
         assertNotNull(company.getWorkTimeTo());
         assertEquals(
                 company.getWorkTimeTo(),
-                "02:10"
+                "00:10"
         );
         company.setWorkTimeTo("25:-130");
         assertNotNull(company.getWorkTimeTo());
         assertEquals(
                 company.getWorkTimeTo(),
-                "00:00"
+                "23:00"
         );
         company.setWorkTimeTo("14:35");
         assertNotNull(company.getWorkTimeTo());

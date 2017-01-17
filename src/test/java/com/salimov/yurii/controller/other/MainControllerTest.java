@@ -16,13 +16,14 @@ public abstract class MainControllerTest {
                         .getHomePage(),
                 "client/main/index_page",
                 new String[]{
-                        "responses",
-                        "print_partners",
-                        "print_articles",
-                        "responses",
-                        "articles_list",
+                        "main_company",
+                        "categories",
+                        "partners",
+                        "company",
                         "slides",
-                        "company"
+                        "print_partners",
+                        "responses",
+                        "print_responses"
                 }
         );
     }
@@ -34,10 +35,9 @@ public abstract class MainControllerTest {
                         .getAllCategoriesPage(),
                 "client/category/all_page",
                 new String[]{
-                        "partners",
-                        "sections",
                         "main_company",
-                        "categories_list"
+                        "categories",
+                        "partners"
                 }
         );
     }
@@ -49,11 +49,11 @@ public abstract class MainControllerTest {
                         .getCategoryPage(URL),
                 "client/category/one_page",
                 new String[]{
-                        "partners",
-                        "sections",
                         "main_company",
-                        "articles_list",
-                        "category"
+                        "categories",
+                        "partners",
+                        "category",
+                        "articles_list"
                 }
         );
     }
@@ -66,11 +66,9 @@ public abstract class MainControllerTest {
                 "client/article/one_page",
                 new String[]{
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners",
-                        "article",
-                        "slides_list",
-                        "videos_list"
+                        "article"
                 }
         );
     }
@@ -83,7 +81,7 @@ public abstract class MainControllerTest {
                 "client/article/one_page",
                 new String[]{
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners",
                         "article"
                 }
@@ -99,7 +97,7 @@ public abstract class MainControllerTest {
                 new String[]{
                         "articles_list",
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners"
                 }
         );
@@ -113,7 +111,7 @@ public abstract class MainControllerTest {
                 "client/company/main_page",
                 new String[]{
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners",
                         "company",
                         "users_list"
@@ -129,9 +127,10 @@ public abstract class MainControllerTest {
                 "client/company/contacts_page",
                 new String[]{
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners",
-                        "company"
+                        "company",
+                        "map"
                 }
         );
     }
@@ -144,7 +143,7 @@ public abstract class MainControllerTest {
                 "client/company/all_page",
                 new String[]{
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners"
                 }
         );
@@ -158,9 +157,10 @@ public abstract class MainControllerTest {
                 "client/company/one_page",
                 new String[]{
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners",
-                        "company"
+                        "company",
+                        "map"
                 }
         );
     }
@@ -173,7 +173,7 @@ public abstract class MainControllerTest {
                 new String[]{
                         "responses_list",
                         "main_company",
-                        "sections",
+                        "categories",
                         "partners"
                 }
         );

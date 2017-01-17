@@ -928,6 +928,53 @@ public final class UserTest extends ModelTest<User> {
         }
     }
 
+    @Test
+    public void whenCallUserDetailsMethodsThenReturnsSomeBoolean() {
+        final User user = new User();
+        user.setLocked(false);
+        assertFalse(user.isLocked());
+        assertTrue(user.isAccountNonExpired());
+        assertTrue(user.isAccountNonLocked());
+        assertTrue(user.isCredentialsNonExpired());
+        assertTrue(user.isEnabled());
+        user.setLocked(true);
+        assertTrue(user.isLocked());
+        assertFalse(user.isAccountNonExpired());
+        assertFalse(user.isAccountNonLocked());
+        assertFalse(user.isCredentialsNonExpired());
+        assertFalse(user.isEnabled());
+    }
+
+    @Test
+    public void whenGetUsernameThenGetsLogin() {
+        final User user = new User();
+        assertNotNull(user.getUsername());
+        assertEquals(user.getUsername(), "");
+        user.setLogin(LOGIN);
+        assertNotNull(user.getUsername());
+        assertEquals(user.getUsername(), user.getLogin());
+    }
+
+    @Test
+    public void whenSetLockedThenGetsItValue() {
+        final User user = new User();
+        user.setLocked(true);
+        assertTrue(user.isLocked());
+        assertFalse(user.isValidated());
+        assertFalse(user.isMailing());
+        user.setLocked(false);
+        assertFalse(user.isLocked());
+    }
+
+    @Test
+    public void whenSetMailingThenGetsItValue() {
+        final User user = new User();
+        user.setMailing(true);
+        assertTrue(user.isMailing());
+        user.setMailing(false);
+        assertFalse(user.isMailing());
+    }
+
     @Ignore
     @Override
     protected User getObject() {

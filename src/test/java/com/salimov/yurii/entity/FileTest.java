@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static com.salimov.yurii.mocks.MockConstants.*;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
 
@@ -17,15 +18,12 @@ public final class FileTest extends MediaTest<File> {
         File file = new File(null, null);
         assertNull(file.getTitle());
         assertNull(file.getUrl());
-
         file = new File("", "");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
-
         file = new File(" ", " ");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
-
         file = new File("   ", "   ");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
@@ -35,17 +33,17 @@ public final class FileTest extends MediaTest<File> {
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
         final File file = new File(
                 MockConstants.TITLE,
-                MockConstants.URL
+                URL
         );
         assertNotNull(file.getTitle());
         assertNotNull(file.getUrl());
-        Assert.assertEquals(
+        assertEquals(
                 file.getTitle(),
                 MockConstants.TITLE
         );
-        Assert.assertEquals(
+        assertEquals(
                 file.getUrl(),
-                MockConstants.URL
+                URL
         );
     }
 
@@ -56,15 +54,13 @@ public final class FileTest extends MediaTest<File> {
         assertTrue(
                 file1.equals(file2)
         );
-
         file1.setTitle(MockConstants.TITLE);
         file2.setTitle(MockConstants.TITLE);
         assertTrue(
                 file1.equals(file2)
         );
-
-        file1.setUrl(MockConstants.URL);
-        file2.setUrl(MockConstants.URL);
+        file1.setUrl(URL);
+        file2.setUrl(URL);
         assertTrue(
                 file1.equals(file2)
         );
@@ -78,7 +74,6 @@ public final class FileTest extends MediaTest<File> {
                 file.hashCode(),
                 value
         );
-
         file.setTitle(MockConstants.TITLE);
         value += (
                 isNotBlank(file.getTitle()) ?
@@ -97,21 +92,12 @@ public final class FileTest extends MediaTest<File> {
     @Override
     public void whenSetValidTitleThenGetThisTitle() {
         final File file = MockEntity.getPhoto();
-        file.setTitle(MockConstants.TITLE);
+        file.setTitle(TITLE);
         assertNotNull(file.getTitle());
         assertNotNull(file.getUrl());
         Assert.assertEquals(
                 file.getTitle(),
-                MockConstants.TITLE
-        );
-
-        final String url = Translator.fromCyrillicToLatin(
-                MockConstants.TITLE
-                        .replace(".", "!")
-        );
-        assertEquals(
-                file.getUrl(),
-                isNotBlank(url) ?  url.replace("!", ".") : url
+                TITLE
         );
     }
 
@@ -120,13 +106,10 @@ public final class FileTest extends MediaTest<File> {
         final File file = MockEntity.getPhoto();
         file.setUrl(null);
         assertNull(file.getUrl());
-
         file.setUrl("");
         assertNull(file.getUrl());
-
         file.setUrl(" ");
         assertNull(file.getUrl());
-
         file.setUrl("   ");
         assertNull(file.getUrl());
     }
@@ -134,11 +117,11 @@ public final class FileTest extends MediaTest<File> {
     @Test
     public void whenTranslateAndSetValidUrlThenGetThisUrl() {
         final File file = MockEntity.getPhoto();
-        file.setUrl(MockConstants.URL);
+        file.setUrl(URL);
         assertNotNull(file.getUrl());
 
         final String url = Translator.fromCyrillicToLatin(
-                MockConstants.URL.replace(".", "!")
+                URL.replace(".", "!")
         );
         assertEquals(
                 file.getUrl(),

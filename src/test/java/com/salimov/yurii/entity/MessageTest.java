@@ -3,6 +3,8 @@ package com.salimov.yurii.entity;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.enity.MockEntity.getMessage;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -19,6 +21,7 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
+        assertNull(message.getPhone());
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
@@ -27,13 +30,6 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
-        assertNull(message.getSubject());
-        assertNull(message.getText());
-        assertNotNull(message.getDate());
-
-        message = new Message(" ", " ", " ", " ", " ");
-        assertNull(message.getUsername());
-        assertNull(message.getEmail());
         assertNull(message.getPhone());
         assertNull(message.getSubject());
         assertNull(message.getText());
@@ -43,6 +39,47 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
+        assertNull(message.getPhone());
+        assertNull(message.getSubject());
+        assertNull(message.getText());
+        assertNotNull(message.getDate());
+
+        message = new Message(" ", " ", " ", " ", " ");
+        assertNull(message.getUsername());
+        assertNull(message.getEmail());
+        assertNull(message.getPhone());
+        assertNull(message.getPhone());
+        assertNull(message.getSubject());
+        assertNull(message.getText());
+        assertNotNull(message.getDate());
+
+        message = new Message(null, null, null, null);
+        assertNull(message.getUsername());
+        assertNull(message.getEmail());
+        assertNull(message.getPhone());
+        assertNull(message.getSubject());
+        assertNull(message.getText());
+        assertNotNull(message.getDate());
+
+        message = new Message("", "", "", "");
+        assertNull(message.getUsername());
+        assertNull(message.getEmail());
+        assertNull(message.getPhone());
+        assertNull(message.getSubject());
+        assertNull(message.getText());
+        assertNotNull(message.getDate());
+
+        message = new Message(" ", " ", " ", " ");
+        assertNull(message.getUsername());
+        assertNull(message.getEmail());
+        assertNull(message.getPhone());
+        assertNull(message.getSubject());
+        assertNull(message.getText());
+        assertNotNull(message.getDate());
+
+        message = new Message(" ", " ", " ", " ");
+        assertNull(message.getUsername());
+        assertNull(message.getEmail());
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
@@ -50,7 +87,7 @@ public final class MessageTest extends ModelTest<Message> {
 
     @Test
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
-        final Message message = new Message(
+        Message message = new Message(
                 NAME, EMAIL, PHONE,
                 ANY_STRING, TEXT
         );
@@ -66,6 +103,32 @@ public final class MessageTest extends ModelTest<Message> {
         assertEquals(
                 message.getEmail(),
                 EMAIL
+        );
+        assertEquals(
+                message.getPhone(),
+                PHONE
+        );
+        assertEquals(
+                message.getSubject(),
+                ANY_STRING
+        );
+        assertEquals(
+                message.getText(),
+                TEXT
+        );
+
+        message = new Message(
+                NAME, PHONE,
+                ANY_STRING, TEXT
+        );
+        assertNotNull(message.getUsername());
+        assertNull(message.getEmail());
+        assertNotNull(message.getPhone());
+        assertNotNull(message.getSubject());
+        assertNotNull(message.getText());
+        assertEquals(
+                message.getUsername(),
+                NAME
         );
         assertEquals(
                 message.getPhone(),
@@ -351,20 +414,69 @@ public final class MessageTest extends ModelTest<Message> {
     @Test
     public void whenGetIdThenGetHashCode() {
         final Message message = getMessage();
-        assertEquals(
-                message.getId(),
-                new Long(message.hashCode())
+        assertTrue(
+                message.getId() ==
+                        (long) Math.abs(
+                                message.hashCode()
+                        )
         );
     }
 
-    @Ignore
+    @Test
     @Override
     public void whenSetInvalidIdThenGetNull() {
+        final Message message = getMessage();
+        message.setId(null);
+        assertNotNull(message.getId());
+        assertTrue(
+                message.getId() ==
+                        (long) Math.abs(
+                                message.hashCode()
+                        )
+        );
     }
 
-    @Ignore
+    @Test
     @Override
     public void whenSetValidIdThenGetThisId() {
+        final Message message = getMessage();
+        message.setId(1L);
+        assertNotNull(message.getId());
+        assertTrue(
+                message.getId() ==
+                        (long) Math.abs(
+                                message.hashCode()
+                        )
+        );
+    }
+
+    @Test
+    public void whenSetInvalidDateThenGetNewDate() {
+        final Message message = getMessage();
+        message.setDate(null);
+        assertNotNull(message.getDate());
+    }
+
+    @Test
+    public void whenSetValidDateThenGetThisDate() {
+        final Message message = getMessage();
+        final Date date = new Date();
+        message.setDate(date);
+        assertNotNull(message.getDate());
+        assertEquals(message.getDate(), date);
+    }
+
+    @Test
+    public void whenValidateMessageThenReturnSomeResult() {
+        assertFalse(Message.isValidated(null));
+        final Message message = new Message();
+        assertFalse(Message.isValidated(message));
+        message.setUsername(NAME);
+        assertFalse(Message.isValidated(message));
+        message.setPhone(PHONE);
+        assertFalse(Message.isValidated(message));
+        message.setText(TEXT);
+        assertTrue(Message.isValidated(message));
     }
 
     @Ignore

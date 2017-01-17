@@ -5,8 +5,9 @@ import com.salimov.yurii.controller.other.MainControllerTest;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.data.mapping.model.IllegalMappingException;
 
+import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.ModelAndViews.checkModelAndView;
 import static com.salimov.yurii.mocks.controller.MockController.getClientMainController;
 
 public class ClientMainControllerTest extends MainControllerTest {
@@ -18,29 +19,37 @@ public class ClientMainControllerTest extends MainControllerTest {
         controller = getClientMainController();
     }
 
-    /*@Test
+    @Test(expected = NullPointerException.class)
     public void whenSendMessageWithNullUrlThenRedirectToHomePage() {
-        ModelAndView modelAndView = controller.sendMessage(null, NAME, PHONE, EMAIL, ANY_STRING, new ModelAndView(), null);
-        String viewName = "redirect:/";
-        checkModelAndView(modelAndView, viewName, null);
-    }*/
+        checkModelAndView(
+                controller.sendMessage(
+                        URL, NAME, PHONE, EMAIL, ANY_STRING, null
+                ),
+                "redirect:/",
+                null
+        );
+    }
 
-    @Test(expected = IllegalMappingException.class)
+    @Test
     public void whenSendMessageByGetMethodThenThrowsException() {
         controller.sendMessage();
     }
 
-    /*@Test
+    @Test(expected = NullPointerException.class)
     public void whenSendResponseThenRedirectPageWithAllResponses() {
-        ModelAndView modelAndView = controller.sendResponse(NAME, ANY_STRING, new ModelAndView(), null);
-        String viewName = "redirect:/responses";
-        checkModelAndView(modelAndView, viewName, null);
-    }*/
+        checkModelAndView(
+                controller.sendResponse(
+                        NAME, ANY_STRING, null
+                ),
+                "redirect:/responses",
+                null
+        );
+    }
 
-    /*@Test(expected = IllegalMappingException.class)
+    @Test
     public void whenSendResponseByGetMethodThenThrowsException() {
         controller.sendResponse();
-    }*/
+    }
 
     @Ignore
     @Override

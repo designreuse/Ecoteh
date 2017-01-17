@@ -8,11 +8,6 @@ import com.salimov.yurii.controller.advice.AdviceController;
 import com.salimov.yurii.controller.client.ClientMainController;
 import com.salimov.yurii.controller.other.WorkController;
 import com.salimov.yurii.controller.seo.SeoController;
-import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.ResponseService;
-import com.salimov.yurii.service.data.interfaces.UserService;
-import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
-import com.salimov.yurii.service.sender.SenderService;
 import org.junit.Ignore;
 
 import static com.salimov.yurii.mocks.service.data.MockServices.*;
@@ -75,14 +70,14 @@ public final class MockController {
         }
         return adviceController;
     }
-/*
+
     public static SeoController getSeoController() {
         if (seoController == null) {
             seoController = initSeoController();
         }
         return seoController;
     }
-*/
+
     public static WorkController getWorkController() {
         if (workController == null) {
             workController = initWorkController();
@@ -91,12 +86,15 @@ public final class MockController {
     }
 
     private static ClientMainController initClientMainController() {
-        ClientMVFabric clientMVFabric = getClientMVFabric();
-        CompanyService companyService = getCompanyService();
-        UserService userService = getUserService();
-        ResponseService responseService = getResponseService();
-        SenderService senderService = getSenderService();
-        return null; //new ClientMainController(clientMVFabric, companyService, userService, responseService, null, senderService);
+        return new ClientMainController(
+                getClientMVFabric(),
+                getCompanyService(),
+                getUserService(),
+                getResponseService(),
+                null,
+                getSenderService(),
+                null
+        );
     }
 
     private static AdminMainController initAdminMainController() {
@@ -135,16 +133,13 @@ public final class MockController {
                 getClientMVFabric()
         );
     }
-/*
+
     private static SeoController initSeoController() {
-        CompanyService companyService = getCompanyService();
-        SectionService sectionService = getSectionService();
-        CategoryService categoryService = getCategoryService();
-        ArticleService articleService = getArticleService();
-        ResponseService responseService = getResponseService();
-        return new SeoController(companyService, sectionService, categoryService, articleService, responseService);
+        return new SeoController(
+                null
+        );
     }
-*/
+
     private static WorkController initWorkController() {
         return new WorkController();
     }

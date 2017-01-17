@@ -17,6 +17,7 @@ import java.util.Collection;
 import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
 import static com.salimov.yurii.mocks.enity.MockEntity.getPhotos;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextHierarchy({

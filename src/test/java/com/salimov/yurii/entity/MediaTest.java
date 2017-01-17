@@ -111,16 +111,12 @@ public abstract class MediaTest<T extends Media<Long>> extends ModelTest<T> {
         final T media = getObject();
         media.setTitle(null);
         assertNull(media.getTitle());
-        assertNull(media.getUrl());
         media.setTitle("");
         assertNull(media.getTitle());
-        assertNull(media.getUrl());
         media.setTitle(" ");
         assertNull(media.getTitle());
-        assertNull(media.getUrl());
         media.setTitle("    ");
         assertNull(media.getTitle());
-        assertNull(media.getUrl());
     }
 
     @Test

@@ -27,11 +27,11 @@ public class AdminMainControllerTest extends MainControllerTest {
                 controller.getAdminMenu(),
                 "admin/menu/menu_page",
                 new String[]{
-                        "main_company",
-                        "sections",
-                        "partners",
                         "user",
-                        "is_enabled"
+                        "is_enabled",
+                        "main_company",
+                        "categories",
+                        "partners"
                 }
         );
     }

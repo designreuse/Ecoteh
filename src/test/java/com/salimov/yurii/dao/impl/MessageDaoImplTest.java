@@ -1,11 +1,11 @@
 package com.salimov.yurii.dao.impl;
 
-
 import com.salimov.yurii.config.RootConfig;
 import com.salimov.yurii.config.WebConfig;
 import com.salimov.yurii.dao.interfaces.MessageDao;
 import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.util.cache.Cache;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getMessage;
 import static com.salimov.yurii.mocks.enity.MockEntity.getMessages;
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextHierarchy({

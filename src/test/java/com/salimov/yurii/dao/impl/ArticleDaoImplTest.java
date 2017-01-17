@@ -22,6 +22,7 @@ import java.util.List;
 import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextHierarchy({
