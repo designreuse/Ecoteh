@@ -69,21 +69,6 @@ public final class Article
     private Category category;
 
     /**
-     * The main photo of an article.
-     *
-     * @see File
-     */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "photo_id",
-            referencedColumnName = "id"
-    )
-    private File photo;
-
-    /**
      * Default constructor.
      * Initializes date and number.
      */
@@ -202,35 +187,6 @@ public final class Article
     }
 
     /**
-     * Initializes some parameter of the article.
-     *
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @param photo       a new main photo pf the article.
-     * @see Category
-     * @see File
-     */
-    public void initialize(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final File photo
-    ) {
-        this.initialize(
-                title, description, text,
-                keywords, number, category
-        );
-        setPhoto(photo);
-    }
-
-    /**
      * Returns a number of the article.
      *
      * @return The article number.
@@ -344,27 +300,6 @@ public final class Article
      */
     public Category getCategory() {
         return this.category;
-    }
-
-    /**
-     * Returns a main photo of the article.
-     *
-     * @return The article main photo.
-     * @see File
-     */
-    public File getPhoto() {
-        return this.photo;
-    }
-
-    /**
-     * Sets a new main photo to the article.
-     * If parameter mainFile is invalid, then sets {@code null}.
-     *
-     * @param photo a new main photo to the article.
-     * @see File
-     */
-    public void setPhoto(final File photo) {
-        this.photo = File.isValidated(photo) ? photo : null;
     }
 
     /**
