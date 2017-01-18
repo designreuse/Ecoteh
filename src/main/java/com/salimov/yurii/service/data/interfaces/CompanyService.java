@@ -1,7 +1,6 @@
 package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.File;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -38,11 +37,10 @@ public interface CompanyService
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
      * @param googleMaps    a google maps url of the new company.
-     * @param logoFile      a file of logo to the new company.
+     * @param logoUrl       a logo URL to the new company.
      * @param isValid       a validated of the new company.
      * @return The new saving company.
      * @see Company
-     * @see File
      */
     Company initAndAdd(
             final String title,
@@ -61,7 +59,7 @@ public interface CompanyService
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
+            final String logoUrl,
             final boolean isValid
     );
 
@@ -86,12 +84,10 @@ public interface CompanyService
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logoFile      a new file of logo to the company.
-     * @param logoAction    a action on the logo.
+     * @param logoUrl       a new logo URL to the company.
      * @param isValid       a validated of the article.
      * @return The updating company with parameter id.
      * @see Company
-     * @see File
      */
     Company initAndUpdate(
             final String url,
@@ -111,8 +107,7 @@ public interface CompanyService
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
-            final String logoAction,
+            final String logoUrl,
             final boolean isValid
     );
 
@@ -139,10 +134,8 @@ public interface CompanyService
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps url to the main company.
-     * @param logoFile      a new file of logo to the main company.
-     * @param logoAction    a action on the logo.
-     * @param faviconFile   a new file of favicon to the main company.
-     * @param faviconAction a action on the favicon.
+     * @param logoUrl       a new logo URL to the main company.
+     * @param faviconUrl    a new favicon URL to the main company.
      * @param slideFiles    a files of slides to the main company.
      * @param slidesAction  a new title to the main company.
      * @return The updating main company.
@@ -168,10 +161,8 @@ public interface CompanyService
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
-            final String logoAction,
-            final MultipartFile faviconFile,
-            final String faviconAction,
+            final String logoUrl,
+            final String faviconUrl,
             final MultipartFile[] slideFiles,
             final String slidesAction
     );

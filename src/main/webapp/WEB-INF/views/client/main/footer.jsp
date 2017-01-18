@@ -81,9 +81,9 @@
                                 <a href=" http://<c:out value="${main_company.domain}"/>"
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
-                                        <c:when test="${main_company.favicon ne null}">
+                                        <c:when test="${main_company.faviconUrl ne null}">
                                             <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/${main_company.favicon.url}"/>">
+                                                 src="<c:url value="/resources/${main_company.faviconUrl}"/>">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -128,9 +128,9 @@
                                 <a href="http://<c:out value="${main_company.domain}"/>"
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
-                                        <c:when test="${main_company.favicon ne null}">
+                                        <c:when test="${main_company.faviconUrl ne null}">
                                             <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/${main_company.favicon.url}"/>">
+                                                 src="<c:url value="/resources/${main_company.faviconUrl}"/>">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>

@@ -42,7 +42,7 @@ public final class MockEntity {
                 ADDRESS,
                 KEYWORDS,
                 GOOGLE_MAPS,
-                null, null
+                PHOTO_URL, PHOTO_URL
         );
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
@@ -76,7 +76,8 @@ public final class MockEntity {
         final User user = new User();
         user.setId(ID);
         user.initialize(
-                NAME, LOGIN, PASSWORD, EMAIL, PHONE,
+                NAME, LOGIN, PASSWORD,
+                EMAIL, PHONE,
                 VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                 DESCRIPTION
         );
@@ -93,7 +94,9 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final Article article = getArticle();
             article.setId((long) i);
-            article.setTitle(article.getTitle() + " " + getRandomInt());
+            article.setTitle(
+                    article.getTitle() + " " + getRandomInt()
+            );
             article.newNumber();
             articles.add(article);
         }
@@ -109,7 +112,9 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final Category category = getCategory();
             category.setId((long) i);
-            category.setTitle(category.getTitle() + " " + getRandomInt());
+            category.setTitle(
+                    category.getTitle() + " " + getRandomInt()
+            );
             categories.add(category);
         }
         return categories;
@@ -124,7 +129,9 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final Company company = getCompany();
             company.setId((long) i);
-            company.setTitle(company.getTitle() + " " + getRandomInt());
+            company.setTitle(
+                    company.getTitle() + " " + getRandomInt()
+            );
             companies.add(company);
         }
         return companies;
@@ -139,7 +146,9 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final Message message = getMessage();
             message.setId((long) i);
-            message.setSubject(message.getSubject() + " " + getRandomInt());
+            message.setSubject(
+                    message.getSubject() + " " + getRandomInt()
+            );
             messages.add(message);
         }
         return messages;
@@ -154,7 +163,9 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final File file = getPhoto();
             file.setId((long) i);
-            file.setTitle(file.getTitle() + " " + getRandomInt());
+            file.setTitle(
+                    file.getTitle() + " " + getRandomInt()
+            );
             files.add(file);
         }
         return files;
@@ -169,7 +180,9 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final Response response = getResponse();
             response.setId((long) i);
-            response.setUsername(response.getUsername() + " " + getRandomInt());
+            response.setUsername(
+                    response.getUsername() + " " + getRandomInt()
+            );
             responses.add(response);
         }
         return responses;
@@ -184,9 +197,15 @@ public final class MockEntity {
         for (int i = 0; i < size; i++) {
             final User user = getUser();
             user.setId((long) i);
-            user.setName(user.getName() + " " + getRandomInt());
-            user.setLogin(user.getLogin() + " " + getRandomInt());
-            user.setPassword(user.getPassword() + " " + getRandomInt());
+            user.setName(
+                    user.getName() + " " + getRandomInt()
+            );
+            user.setLogin(
+                    user.getLogin() + " " + getRandomInt()
+            );
+            user.setPassword(
+                    user.getPassword() + " " + getRandomInt()
+            );
             users.add(user);
         }
         return users;

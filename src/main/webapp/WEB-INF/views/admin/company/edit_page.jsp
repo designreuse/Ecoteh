@@ -19,10 +19,10 @@
         <meta name="description"
               content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
         <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -264,28 +264,16 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${company.logo ne null}">
-                                                <a href="<c:url value="/resources/${company.logo.url}"/>"
-                                                   rel="lightgallery">
-                                                    <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                                                         src="<c:url value="/resources/${company.logo.url}"/>">
-                                                </a><br><br>
-                                                <label title="Добавить новый значок">
-                                                    <b><input type="radio" name="logo_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить логотип">
-                                                    <b><input type="radio" name="logo_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="logo_action" value="replace" required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br>
-                                        <input type="file" name="logo_photo" accept="image/*" class="form-control"><br>
+                                        <a href="<c:url value="/resources/${company.logoUrl}"/>"
+                                           title="${company.title}" rel="lightgallery">
+                                            <img src="<c:url value="/resources/${company.logoUrl}"/>" class="file"
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'"
+                                                 alt="" title="Увеличить">
+                                        </a><br>
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на логотип компании"
+                                               value="${company.logoUrl}">
                                     </td>
                                 </tr>
                                 <c:choose>
@@ -299,29 +287,16 @@
                                                 </a>
                                             </td>
                                             <td class="tds">
-                                                <c:choose>
-                                                    <c:when test="${company.favicon ne null}">
-                                                        <a href="<c:url value="/resources/${company.favicon.url}"/>"
-                                                           rel="lightgallery">
-                                                            <img class="img-favicon"
-                                                                 src="<c:url value="/resources/${company.favicon.url}"/>">
-                                                        </a><br><br>
-                                                        <label title="Добавить новый значок">
-                                                            <b><input type="radio" name="favicon_action" value="replace"
-                                                                      checked required/>&nbsp;Заменить</b>
-                                                        </label>&nbsp;&nbsp;
-                                                        <label title="Удалить значок">
-                                                            <b><input type="radio" name="favicon_action" value="delete"
-                                                                      required/>&nbsp;Удалить</b>
-                                                        </label><br>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="hidden" name="favicon_action" value="replace"
-                                                               checked required/>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <input type="file" name="favicon_photo" accept="image/*"
-                                                       class="form-control"><br>
+                                                <a href="<c:url value="/resources/${company.faviconUrl}"/>"
+                                                   title="${company.title}" rel="lightgallery">
+                                                    <img src="<c:url value="/resources/${company.faviconUrl}"/>"
+                                                         class="file" alt="" title="Увеличить"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_file.gif"/>'">
+                                                </a><br>
+                                                <input type="text" class="form-control" name="photo" minlength="2"
+                                                       maxlength="100" placeholder="Ссылка на фавикон сайта"
+                                                       value="${faviconUrl.logoUrl}">
                                             </td>
                                         </tr>
                                         <tr>

@@ -129,10 +129,8 @@ public class AdminCompanyController {
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps url to the main company.
-     * @param logo          a new file of logo to the main company.
-     * @param logoAction    a action on the logo.
-     * @param favicon       a new file of favicon to the main company.
-     * @param faviconAction a action on the favicon.
+     * @param logoUrl       a new logo Url to the main company.
+     * @param faviconUrl    a new favicon Url to the main company.
      * @param slides        a files of slides to the main company.
      * @param slidesAction  a new title to the main company.
      * @param modelAndView  a object of class ModelAndView for to update.
@@ -165,10 +163,8 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final MultipartFile logo,
-            @RequestParam(value = "logo_action") final String logoAction,
-            @RequestParam(value = "favicon_photo") final MultipartFile favicon,
-            @RequestParam(value = "favicon_action") final String faviconAction,
+            @RequestParam(value = "logo_photo") final String logoUrl,
+            @RequestParam(value = "favicon_photo") final String faviconUrl,
             @RequestParam(value = "slides[]") final MultipartFile[] slides,
             @RequestParam(value = "slides_action") final String slidesAction,
             final ModelAndView modelAndView
@@ -181,8 +177,7 @@ public class AdminCompanyController {
                 senderEmail, senderPass,
                 vkontakte, facebook, twitter,
                 skype, address, googleMaps,
-                logo, logoAction,
-                favicon, faviconAction,
+                logoUrl, faviconUrl,
                 slides, slidesAction
         );
         modelAndView.setViewName("redirect:/admin/company/main");
@@ -246,7 +241,7 @@ public class AdminCompanyController {
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
      * @param googleMaps    a google maps url of the new company.
-     * @param logoFile      a file of logo to the new company.
+     * @param logoUrl       a  logo Url to the new company.
      * @param isValid       a validated of the new company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -274,7 +269,7 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final MultipartFile logoFile,
+            @RequestParam(value = "logo_photo") final String logoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -284,7 +279,7 @@ public class AdminCompanyController {
                 mobilePhone, landlinePhone, fax, email,
                 vkontakte, facebook, twitter, skype,
                 address, googleMaps,
-                logoFile,
+                logoUrl,
                 isValid
         );
         Cache.clear();
@@ -361,8 +356,7 @@ public class AdminCompanyController {
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logoFile      a new file of logo to the company.
-     * @param logoAction    a action on the logo.
+     * @param logoUrl       a new logo Url to the company.
      * @param isValid       a validated of the article.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -391,8 +385,7 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final MultipartFile logoFile,
-            @RequestParam(value = "logo_action") final String logoAction,
+            @RequestParam(value = "logo_photo") final String logoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -401,7 +394,9 @@ public class AdminCompanyController {
                 tagline, description, information, keywords,
                 mobilePhone, landlinePhone, fax, email,
                 vkontakte, facebook, twitter, skype,
-                address, googleMaps, logoFile, logoAction, isValid
+                address, googleMaps,
+                logoUrl,
+                isValid
         );
         modelAndView.setViewName(
                 "redirect:/admin/company/" + company.getUrl()

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
-<%--<compress:html removeIntertagSpaces="true">--%>
+<compress:html removeIntertagSpaces="true">
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
@@ -15,10 +15,10 @@
     <meta name="title" content="Файлы | <c:out value="${main_company.title}"/>">
     <meta name="robots" content="noindex,nofollow">
     <meta name="description" content="Сохраненный файлы на сервере.">
-    <c:if test="${main_company.favicon ne null}">
-        <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
+    <c:if test="${main_company.faviconUrl ne null}">
+        <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
               type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
     </c:if>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
           rel="stylesheet" type="text/css">
@@ -117,6 +117,6 @@
 <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
 </body>
 </html>
-<%--</compress:html>--%>
+</compress:html>
 
 <%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

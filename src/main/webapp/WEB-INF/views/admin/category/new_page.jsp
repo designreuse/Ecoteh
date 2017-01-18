@@ -16,10 +16,10 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Форма для добавления новой категории.">
         <meta name="keywords" content="Новая категория, добавление категории"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">

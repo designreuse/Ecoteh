@@ -523,7 +523,7 @@ public final class MockServices {
                         PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                         ADDRESS, GOOGLE_MAPS,
-                        null, null,
+                        PHOTO_URL,
                         true
                 )
         ).thenReturn(company);

@@ -140,34 +140,16 @@ public final class Company
     private String googleMaps;
 
     /**
-     * The logo of a company.
-     *
-     * @see File
+     * The logo URL of a company.
      */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "logo_id",
-            referencedColumnName = "id"
-    )
-    private File logo;
+    @Column(name = "logo")
+    private String logoUrl;
 
     /**
-     * The favicon of a company.
-     *
-     * @see File
+     * The favicon URL of a company.
      */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "favicon_id",
-            referencedColumnName = "id"
-    )
-    private File favicon;
+    @Column(name = "favicon")
+    private String faviconUrl;
 
     /**
      * The set of slides.
@@ -236,9 +218,8 @@ public final class Company
      * @param address         a address of the new company.
      * @param keywords        a keywords of the new company.
      * @param googleMaps      a Google maps url of the new company.
-     * @param logo            a logo of the new company.
-     * @param favicon         a favicon of the new company.
-     * @see File
+     * @param logoUrl         a logo of the new company.
+     * @param faviconUrl      a favicon of the new company.
      */
     public Company(
             final String title,
@@ -259,8 +240,8 @@ public final class Company
             final String address,
             final String keywords,
             final String googleMaps,
-            final File logo,
-            final File favicon
+            final String logoUrl,
+            final String faviconUrl
     ) {
         super(title, description, keywords);
         initialize(
@@ -270,7 +251,7 @@ public final class Company
                 email, senderEmail, senderEmailPass,
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
-                logo, favicon
+                logoUrl, faviconUrl
         );
         setType(CompanyType.PARTNER);
     }
@@ -394,9 +375,8 @@ public final class Company
      * @param address       a new address to the company.
      * @param keywords      a new keywords to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logo          a new logo to the company.
-     * @param favicon       a new favicon to the company.
-     * @see File
+     * @param logoUrl       a new logo URL to the company.
+     * @param faviconUrl    a new favicon URL to the company.
      */
     @Override
     public void initialize(
@@ -418,8 +398,8 @@ public final class Company
             final String address,
             final String keywords,
             final String googleMaps,
-            final File logo,
-            final File favicon
+            final String logoUrl,
+            final String faviconUrl
     ) {
         initialize(
                 title, domain,
@@ -429,8 +409,8 @@ public final class Company
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps
         );
-        setLogo(logo);
-        setFavicon(favicon);
+        setLogoUrl(logoUrl);
+        setFaviconUrl(faviconUrl);
     }
 
     /**
@@ -870,49 +850,48 @@ public final class Company
     }
 
     /**
-     * Returns a logo of the company.
+     * Returns a logo URL of the company.
      *
-     * @return The company logo.
-     * @see File
+     * @return The company logo URL.
      */
     @Override
-    public File getLogo() {
-        return this.logo;
+    public String getLogoUrl() {
+        return this.logoUrl;
     }
 
     /**
-     * Sets a new logo to the article.
-     * If parameter logo is invalid, then sets {@code null}.
+     * Sets a new logo URL to the article.
+     * If parameter logo URL is invalid
+     * then sets {@code null}.
      *
-     * @param logo a new logo to the article.
+     * @param logoUrl a new logo to the article.
      * @see File
      */
     @Override
-    public void setLogo(final File logo) {
-        this.logo = File.isValidated(logo) ? logo : null;
+    public void setLogoUrl(final String logoUrl) {
+        this.logoUrl = isNotBlank(logoUrl) ? logoUrl : null;
     }
 
     /**
-     * Returns a favicon of the company.
+     * Returns a favicon URL of the company.
      *
-     * @return The company favicon.
-     * @see File
+     * @return The company favicon URL.
      */
     @Override
-    public File getFavicon() {
-        return this.favicon;
+    public String getFaviconUrl() {
+        return this.faviconUrl;
     }
 
     /**
-     * Sets a new favicon to the article.
-     * If parameter favicon is invalid, then sets {@code null}.
+     * Sets a new favicon URL to the article.
+     * If parameter favicon URL is invalid
+     * then sets {@code null}.
      *
-     * @param favicon a new favicon to the article.
-     * @see File
+     * @param faviconUrl a new favicon to the article.
      */
     @Override
-    public void setFavicon(final File favicon) {
-        this.favicon = File.isValidated(favicon) ? favicon : null;
+    public void setFaviconUrl(final String faviconUrl) {
+        this.faviconUrl = isNotBlank(faviconUrl) ? faviconUrl : null;
     }
 
     /**

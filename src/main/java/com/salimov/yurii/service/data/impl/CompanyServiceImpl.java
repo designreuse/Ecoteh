@@ -62,10 +62,10 @@ public final class CompanyServiceImpl
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao          a implementation
-     *                     of the {@link CompanyDao} interface.
+     * @param dao         a implementation
+     *                    of the {@link CompanyDao} interface.
      * @param fileService a implementation
-     *                     of the {@link FileService} interface.
+     *                    of the {@link FileService} interface.
      * @see CompanyDao
      * @see FileService
      */
@@ -99,7 +99,7 @@ public final class CompanyServiceImpl
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
      * @param googleMaps    a google maps url of the new company.
-     * @param logoFile      a file of logo to the new company.
+     * @param logoUrl       a logo URL to the new company.
      * @param isValid       a validated of the new company.
      * @return The new saving company.
      * @see Company
@@ -124,7 +124,7 @@ public final class CompanyServiceImpl
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
+            final String logoUrl,
             final boolean isValid
     ) {
         final Company company = new Company();
@@ -135,12 +135,7 @@ public final class CompanyServiceImpl
                 null, null,
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
-                updatePhoto(
-                        new File(),
-                        logoFile,
-                        title
-                )
-                , null
+                logoUrl, null
         );
         company.setType(
                 CompanyType.PARTNER
@@ -170,8 +165,7 @@ public final class CompanyServiceImpl
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logoFile      a new file of logo to the company.
-     * @param logoAction    a action on the logo.
+     * @param logoUrl       a new logo Url to the company.
      * @param isValid       a validated of the article.
      * @return The updating company with parameter id.
      * @see Company
@@ -197,32 +191,21 @@ public final class CompanyServiceImpl
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
-            final String logoAction,
+            final String logoUrl,
             final boolean isValid
     ) {
         final Company company = getByUrl(url, false);
-        final File logo = company.getLogo();
-        updateLogo(
-                company,
-                logoFile,
-                title,
-                logoAction
-        );
         company.initialize(
                 title, domain,
                 tagline, description, information,
                 mobilePhone, landlinePhone, fax, email,
                 null, null,
                 vkontakte, facebook, twitter, skype,
-                address, keywords, googleMaps
+                address, keywords, googleMaps,
+                logoUrl, null
         );
         company.setValidated(isValid);
-        final Company updatingCompany = update(company);
-        removePhoto(
-                logo, logoAction
-        );
-        return updatingCompany;
+        return update(company);
     }
 
     /**
@@ -248,10 +231,8 @@ public final class CompanyServiceImpl
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps url to the main company.
-     * @param logoFile      a new file of logo to the main company.
-     * @param logoAction    a action on the logo.
-     * @param faviconFile   a new file of favicon to the main company.
-     * @param faviconAction a action on the favicon.
+     * @param logoUrl       a new logo URL to the main company.
+     * @param faviconUrl    a new favicon URL to the main company.
      * @param slideFiles    a files of slides to the main company.
      * @param slidesAction  a new title to the main company.
      * @return The updating main company.
@@ -279,28 +260,12 @@ public final class CompanyServiceImpl
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
-            final String logoAction,
-            final MultipartFile faviconFile,
-            final String faviconAction,
+            final String logoUrl,
+            final String faviconUrl,
             final MultipartFile[] slideFiles,
             final String slidesAction
     ) {
         final Company mainCompany = getMainCompany();
-        final File logo = mainCompany.getLogo();
-        updateLogo(
-                mainCompany,
-                logoFile,
-                title,
-                slidesAction
-        );
-        final File favicon = mainCompany.getFavicon();
-        updateFavicon(
-                mainCompany,
-                faviconFile,
-                title,
-                faviconAction
-        );
         mainCompany.initialize(
                 title, domain,
                 tagline, description, information,
@@ -308,6 +273,15 @@ public final class CompanyServiceImpl
                 senderEmail, senderPass,
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps
+        );
+        mainCompany.initialize(
+                title, domain,
+                tagline, description, information,
+                mobilePhone, landlinePhone, fax, email,
+                senderEmail, senderPass,
+                vkontakte, facebook, twitter, skype,
+                address, keywords, googleMaps,
+                logoUrl, faviconUrl
         );
         mainCompany.setWorkTimeFrom(workTimeFrom);
         mainCompany.setWorkTimeTo(workTimeTo);
@@ -321,12 +295,6 @@ public final class CompanyServiceImpl
                 slidesAction
         );
         final Company updatingCompany = update(mainCompany);
-        removePhoto(
-                logo, logoAction
-        );
-        removePhoto(
-                favicon, faviconAction
-        );
         removeSlides(
                 mainCompany,
                 slides, slidesAction
@@ -442,7 +410,7 @@ public final class CompanyServiceImpl
                                 CompanyType.MAIN
                         )
         )) {
-            removeCompany(company);
+            super.remove(company);
         }
     }
 
@@ -454,7 +422,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void removeMain() {
-        removeCompany(
+        super.remove(
                 getMainCompany()
         );
     }
@@ -480,98 +448,6 @@ public final class CompanyServiceImpl
     @Override
     protected Class<Company> getModelClass() {
         return Company.class;
-    }
-
-    /**
-     * Removes company. Removes company if it is not {@code null}.
-     * Also removes the company logo, favicon and slides.
-     *
-     * @param company the company to remove.
-     * @see Company
-     */
-    private void removeCompany(final Company company) {
-        removePhoto(company);
-        super.remove(company);
-    }
-
-    /**
-     * Remove file in selected company.
-     *
-     * @param company a selected company.
-     */
-    private void removePhoto(final Company company) {
-        this.fileService.remove(
-                company.getLogo()
-        );
-        this.fileService.remove(
-                company.getFavicon()
-        );
-        if (!company.getSlides().isEmpty()) {
-            company.getSlides()
-                    .forEach(
-                            this.fileService::remove
-                    );
-        }
-    }
-
-    /**
-     * Updates company logo.
-     *
-     * @param company the company to update.
-     * @param file    a logo file.
-     * @param title   a logo title.
-     * @param action  a action on the logo.
-     */
-    private void updateLogo(
-            final Company company,
-            final MultipartFile file,
-            final String title,
-            final String action
-    ) {
-        switch (action) {
-            case "replace":
-                company.setLogo(
-                        updatePhoto(
-                                company.getLogo(),
-                                file,
-                                title
-                        )
-                );
-                break;
-            case "delete":
-                company.setLogo(null);
-                break;
-        }
-    }
-
-    /**
-     * Updates company favicon.
-     *
-     * @param company the company to update.
-     * @param file    a favicon file.
-     * @param title   a favicon title.
-     * @param action  a action on the favicon.
-     */
-    private void updateFavicon(
-            final Company company,
-            final MultipartFile file,
-            final String title,
-            final String action
-    ) {
-
-        switch (action) {
-            case "replace":
-                final File favicon = updatePhoto(
-                        company.getFavicon(),
-                        file,
-                        title
-                );
-                company.setFavicon(favicon);
-                break;
-            case "delete":
-                company.setFavicon(null);
-                break;
-        }
     }
 
     /**
@@ -632,7 +508,7 @@ public final class CompanyServiceImpl
     /**
      * Removes file.
      *
-     * @param file  the file to remove.
+     * @param file   the file to remove.
      * @param action a action on the file.
      */
     private void removePhoto(

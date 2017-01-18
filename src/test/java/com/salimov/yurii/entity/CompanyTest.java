@@ -40,14 +40,12 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
 
-        final File logo = new File();
-        final File favicon = new File();
         company = new Company(
                 "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", logo, favicon
+                "", "", "", "", "", "", "", "", ""
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
@@ -66,12 +64,12 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
 
         company = new Company(
                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-                " ", " ", " ", " ", " ", " ", " ", logo, favicon
+                " ", " ", " ", " ", " ", " ", " ", " ", " "
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
@@ -90,12 +88,12 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
 
         company = new Company(
                 "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", logo, favicon
+                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
@@ -114,8 +112,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
     }
 
     @Test
@@ -126,8 +124,6 @@ public final class CompanyTest extends ContentTest<Company> {
                 company.getType(),
                 CompanyType.PARTNER
         );
-        final File logo = getPhoto();
-        final File favicon = getPhoto();
         company = new Company(
                 TITLE, DOMAIN,
                 TAGLINE, DESCRIPTION, INFORMATION,
@@ -135,7 +131,7 @@ public final class CompanyTest extends ContentTest<Company> {
                 VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                 ADDRESS, KEYWORDS,
                 GOOGLE_MAPS,
-                logo, favicon
+                PHOTO_URL, PHOTO_URL
         );
         assertNotNull(company.getTitle());
         assertNotNull(company.getDomain());
@@ -154,8 +150,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getAddress());
         assertNotNull(company.getKeywords());
         assertNotNull(company.getGoogleMaps());
-        assertNotNull(company.getLogo());
-        assertNotNull(company.getFavicon());
+        assertNotNull(company.getLogoUrl());
+        assertNotNull(company.getFaviconUrl());
         assertEquals(
                 company.getTitle(),
                 TITLE
@@ -225,12 +221,12 @@ public final class CompanyTest extends ContentTest<Company> {
                 GOOGLE_MAPS
         );
         assertEquals(
-                company.getLogo(),
-                logo
+                company.getLogoUrl(),
+                PHOTO_URL
         );
         assertEquals(
-                company.getFavicon(),
-                favicon
+                company.getFaviconUrl(),
+                PHOTO_URL
         );
     }
 
@@ -319,7 +315,6 @@ public final class CompanyTest extends ContentTest<Company> {
     @Override
     public void equalsValidObjects() {
         super.equalsValidObjects();
-
         final Company company1 = getCompany();
         final Company company2 = (Company) company1.clone();
         assertEquals(company1, company2);
@@ -467,14 +462,11 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
-
-        final File logo = new File();
-        final File favicon = new File();
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
         company.initialize(
                 "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", logo, favicon
+                "", "", "", "", "", "", "", "", ""
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
@@ -493,12 +485,12 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
 
         company.initialize(
                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-                " ", " ", " ", " ", " ", " ", " ", " ", logo, favicon
+                " ", " ", " ", " ", " ", " ", " ", " ", " ", " "
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
@@ -517,12 +509,12 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
 
         company.initialize(
                 "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",
-                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", logo, favicon
+                "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "
         );
         assertNull(company.getTitle());
         assertNull(company.getDomain());
@@ -541,8 +533,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getAddress());
         assertNull(company.getKeywords());
         assertNull(company.getGoogleMaps());
-        assertNull(company.getLogo());
-        assertNull(company.getFavicon());
+        assertNull(company.getLogoUrl());
+        assertNull(company.getFaviconUrl());
     }
 
     @Test
@@ -550,14 +542,12 @@ public final class CompanyTest extends ContentTest<Company> {
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Company company = new Company();
-        final File logo = getPhoto();
-        final File favicon = getPhoto();
         company.initialize(
                 TITLE, DOMAIN,
                 TAGLINE, DESCRIPTION, INFORMATION,
                 PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
                 VKONTAKTE, FACEBOOK, TWITTER, SKYPE, ADDRESS, KEYWORDS,
-                GOOGLE_MAPS, logo, favicon
+                GOOGLE_MAPS, PHOTO_URL, PHOTO_URL
         );
         assertNotNull(company.getTitle());
         assertNotNull(company.getDomain());
@@ -576,8 +566,8 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getAddress());
         assertNotNull(company.getKeywords());
         assertNotNull(company.getGoogleMaps());
-        assertNotNull(company.getLogo());
-        assertNotNull(company.getFavicon());
+        assertNotNull(company.getLogoUrl());
+        assertNotNull(company.getFaviconUrl());
         assertEquals(
                 company.getTitle(),
                 TITLE
@@ -647,12 +637,12 @@ public final class CompanyTest extends ContentTest<Company> {
                 GOOGLE_MAPS
         );
         assertEquals(
-                company.getLogo(),
-                logo
+                company.getLogoUrl(),
+                PHOTO_URL
         );
         assertEquals(
-                company.getFavicon(),
-                favicon
+                company.getFaviconUrl(),
+                PHOTO_URL
         );
     }
 
@@ -1327,42 +1317,40 @@ public final class CompanyTest extends ContentTest<Company> {
     @Test
     public void whenSetInvalidLogoThenGetNull() {
         final Company company = getCompany();
-        company.setLogo(null);
-        assertNull(company.getLogo());
-        company.setLogo(new File());
-        assertNull(company.getLogo());
+        company.setLogoUrl(null);
+        assertNull(company.getLogoUrl());
+        company.setLogoUrl(" ");
+        assertNull(company.getLogoUrl());
     }
 
     @Test
     public void whenSetValidLogoThenGetThisLogo() {
         final Company company = getCompany();
-        final File logo = getPhoto();
-        company.setLogo(logo);
-        assertNotNull(company.getLogo());
+        company.setLogoUrl(PHOTO_URL);
+        assertNotNull(company.getLogoUrl());
         assertEquals(
-                company.getLogo(),
-                logo
+                company.getLogoUrl(),
+                PHOTO_URL
         );
     }
 
     @Test
     public void whenSetInvalidFaviconThenGetNull() {
         final Company company = getCompany();
-        company.setFavicon(null);
-        assertNull(company.getFavicon());
-        company.setFavicon(new File());
-        assertNull(company.getFavicon());
+        company.setFaviconUrl(null);
+        assertNull(company.getFaviconUrl());
+        company.setFaviconUrl(" ");
+        assertNull(company.getFaviconUrl());
     }
 
     @Test
     public void whenSetValidFaviconThenGetThisFavicon() {
         final Company company = getCompany();
-        final File favicon = getPhoto();
-        company.setFavicon(favicon);
-        assertNotNull(company.getFavicon());
+        company.setFaviconUrl(PHOTO_URL);
+        assertNotNull(company.getFaviconUrl());
         assertEquals(
-                company.getFavicon(),
-                favicon
+                company.getFaviconUrl(),
+                PHOTO_URL
         );
     }
 

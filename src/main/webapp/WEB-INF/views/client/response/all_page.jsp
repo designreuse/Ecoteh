@@ -16,10 +16,10 @@
         <meta name="robots" content="index,follow">
         <meta name="description" content="Отзывы о компании &quot;<c:out value="${main_company.title}"/>&quot;.">
         <meta name="keywords" content="Отзывы о компании, <c:out value="${main_company.keywords}"/>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">

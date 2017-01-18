@@ -40,9 +40,8 @@ public interface ICompany<E extends Number>
      * @param address       a new address to the company.
      * @param keywords      a new keywords to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logo          a new logo to the company.
-     * @param favicon       a new favicon to the company.
-     * @see File
+     * @param logoUrl       a new logo URL to the company.
+     * @param faviconUrl    a new favicon URL to the company.
      */
     void initialize(
             final String title,
@@ -63,8 +62,8 @@ public interface ICompany<E extends Number>
             final String address,
             final String keywords,
             final String googleMaps,
-            final File logo,
-            final File favicon
+            final String logoUrl,
+            final String faviconUrl
     );
 
     /**
@@ -349,36 +348,37 @@ public interface ICompany<E extends Number>
     void setGoogleMaps(final String googleMaps);
 
     /**
-     * Returns a logo of the company.
+     * Returns a logo URL of the company.
      *
-     * @return The company logo.
-     * @see File
+     * @return The company logo URL.
      */
-    File getLogo();
+    public String getLogoUrl();
 
     /**
-     * Sets a new logo to the article.
+     * Sets a new logo URL to the article.
+     * If parameter logo URL is invalid
+     * then sets {@code null}.
      *
-     * @param logo a new logo to the article.
+     * @param logoUrl a new logo to the article.
      * @see File
      */
-    void setLogo(final File logo);
+    public void setLogoUrl(final String logoUrl);
 
     /**
-     * Returns a favicon of the company.
+     * Returns a favicon URL of the company.
      *
-     * @return The company favicon.
-     * @see File
+     * @return The company favicon URL.
      */
-    File getFavicon();
+    public String getFaviconUrl();
 
     /**
-     * Sets a new favicon to the article.
+     * Sets a new favicon URL to the article.
+     * If parameter favicon URL is invalid
+     * then sets {@code null}.
      *
-     * @param favicon a new favicon to the article.
-     * @see File
+     * @param faviconUrl a new favicon to the article.
      */
-    void setFavicon(final File favicon);
+    public void setFaviconUrl(final String faviconUrl);
 
     /**
      * Adds new photo to the list of slides.

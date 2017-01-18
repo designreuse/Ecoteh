@@ -16,10 +16,10 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Форма для добавления новой компании-партнера.">
         <meta name="keywords" content="Партнер, новый партнер, добавление партнера"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.favicon.url}"/>"
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
                   type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.favicon.url}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -202,24 +202,25 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <input type="file" name="logo_photo" accept="image/*" class="form-control">
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на логотип компании">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
                                             Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                      aria-hidden="true"></span>
+                                                                   aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Компанию смогут увидеть все пользователей">
                                             <input type="radio" name="is_valid" value="true" checked
-                                                      required/>&nbsp;Отображать
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Компанию смогут увидеть только администраторы">
                                             <input type="radio" name="is_valid" value="false"
-                                                      required/>&nbsp;Не отображать
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>

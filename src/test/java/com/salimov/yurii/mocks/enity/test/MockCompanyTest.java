@@ -36,8 +36,8 @@ public class MockCompanyTest extends MockModelTest<Company> {
         assertNotNull(company.getAddress());
         assertNotNull(company.getKeywords());
         assertNotNull(company.getGoogleMaps());
-        assertNotNull(company.getLogo());
-        assertNotNull(company.getFavicon());
+        assertNotNull(company.getLogoUrl());
+        assertNotNull(company.getFaviconUrl());
         assertNotNull(company.getWorkTimeFrom());
         assertNotNull(company.getWorkTimeTo());
     }

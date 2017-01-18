@@ -14,8 +14,8 @@
         <meta name="title" content="Напоминание пароля">
         <meta name="description" content="Напоминание пароля">
         <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="<c:url value="/resources/static/login_icon.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/static/login_icon.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -62,7 +62,7 @@
                                                placeholder="Введите логин или e-mail">
                                     </div>
                                         <%-- GOOGLE reCAPTHCA --%>
-                                    <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
+                                    <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <button type="submit" class="btn btn-default">
                                             <span class="glyphicon glyphicon-send"

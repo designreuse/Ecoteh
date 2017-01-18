@@ -28,7 +28,15 @@
                 <ul class="hidden-xs dropdown nav navbar-nav">
                     <li>
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">
-                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            <c:choose>
+                                <c:when test="${main_company.faviconUrl ne null}">
+                                    <img src="<c:url value="/resources/${main_company.faviconUrl}"/>"
+                                         class="icon-size" alt="" title="<c:out value="${main_company.title}"/>"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                </c:otherwise>
+                            </c:choose>
                             <span class="hidden-sm">&nbsp;Главная</span>
                         </a>
                     </li>
