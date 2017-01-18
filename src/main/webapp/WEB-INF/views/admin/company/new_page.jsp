@@ -78,12 +78,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <span class="red">*</span>&nbsp;Информация
-                                    </td>
+                                    <td class="ths">Информация</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="information" rows="10" title=""
-                                                  required
                                                   placeholder="Основная информация о компании"></textarea>
                                     </td>
                                 </tr>
@@ -164,28 +161,29 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <span class="red">*</span>&nbsp;Адрес офиса
-                                    </td>
+                                    <td class="ths">Адрес офиса</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="address" maxlength="300" required
+                                        <input type="text" class="form-control" name="address" maxlength="300"
                                                placeholder="Адрес главного офиса компании">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
-                                        <a href="https://www.google.com.ua/maps/" target="_blank"
-                                           title="Перейти к Google Maps">Google Maps</a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps. Где это взять?">
-                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                        </a>
+                                            Google Maps&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
+                                        </a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_2.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                         <a href="<c:url value="/resources/img/static/google_maps_3.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                         <a href="<c:url value="/resources/img/static/google_maps_4.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="https://www.google.com.ua/maps/" target="_blank"
+                                           title="Перейти к Google Maps">
+                                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                                        </a>
                                     </td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="google_maps" title=""

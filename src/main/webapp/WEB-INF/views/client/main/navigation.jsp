@@ -30,8 +30,10 @@
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">
                             <c:choose>
                                 <c:when test="${main_company.faviconUrl ne null}">
-                                    <img src="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                                         class="icon-size" alt="" title="<c:out value="${main_company.title}"/>"/>
+                                    <img src="<c:url value="/${main_company.faviconUrl}"/>"
+                                         class="icon-size" alt="" title="<c:out value="${main_company.title}"/>"
+                                         onerror="this.src='<c:url
+                                                 value="/resources/img/static/default_file.gif"/>'"/>
                                 </c:when>
                                 <c:otherwise>
                                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>

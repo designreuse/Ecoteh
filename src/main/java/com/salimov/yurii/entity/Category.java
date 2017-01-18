@@ -33,7 +33,7 @@ public final class Category
     /**
      * The main photo URL.
      */
-    @Column(name = "photo_url")
+    @Column(name = "photo")
     private String photoUrl;
 
     /**

@@ -38,7 +38,7 @@
                                     <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <img class="img-logo" alt="<c:out value="${partner.title}"/>"
-                                             src="<c:url value="/resources/${partner.logoUrl}"/>"
+                                             src="<c:url value="/${partner.logoUrl}"/>"
                                              onerror="this.src='<c:url
                                                      value="/resources/img/static/default_file.gif"/>'">
                                     </a>

@@ -27,7 +27,7 @@ public class MockUserTest extends MockModelTest<User> {
         assertNotNull(user.getTwitter());
         assertNotNull(user.getSkype());
         assertNotNull(user.getDescription());
-        assertNull(user.getPhoto());
+        assertNull(user.getPhotoUrl());
     }
 
     @Ignore

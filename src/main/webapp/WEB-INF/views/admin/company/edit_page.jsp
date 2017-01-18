@@ -101,7 +101,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Информация</td>
+                                    <td class="ths">Информация</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="information"
                                               placeholder="Основная информация о компании" title=""
@@ -227,27 +227,30 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Адрес офиса</td>
+                                    <td class="ths">Адрес офиса</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="address" maxlength="300"
-                                               placeholder="Адрес главного офиса компании." required
+                                               placeholder="Адрес главного офиса компании."
                                                value="<c:out value="${company.address}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
-                                        <a href="https://www.google.com.ua/maps/" target="_blank"
-                                           title="Перейти к Google Maps">Google Maps</a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
-                                           title="Офис на карте Google Maps. Где это взять?" rel="lightgallery[maps]">
-                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                        </a>
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps. Где это взять?">
+                                            Google Maps&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
+                                        </a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_2.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                         <a href="<c:url value="/resources/img/static/google_maps_3.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
                                         <a href="<c:url value="/resources/img/static/google_maps_4.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="https://www.google.com.ua/maps/" target="_blank"
+                                           title="Перейти к Google Maps">
+                                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                                        </a>
                                     </td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="google_maps" title=""
@@ -264,13 +267,13 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <a href="<c:url value="/resources/${company.logoUrl}"/>"
+                                        <a href="<c:url value="/${company.logoUrl}"/>"
                                            title="${company.title}" rel="lightgallery">
-                                            <img src="<c:url value="/resources/${company.logoUrl}"/>" class="file"
+                                            <img src="<c:url value="/${company.logoUrl}"/>"
+                                                 class="img-responsive img-in-list" alt="" title="Увеличить"
                                                  onerror="this.src='<c:url
-                                                         value="/resources/img/static/default_file.gif"/>'"
-                                                 alt="" title="Увеличить">
-                                        </a><br>
+                                                         value="/resources/img/static/default_file.gif"/>'">
+                                        </a><br><br>
                                         <input type="text" class="form-control" name="photo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на логотип компании"
                                                value="${company.logoUrl}">
@@ -287,16 +290,16 @@
                                                 </a>
                                             </td>
                                             <td class="tds">
-                                                <a href="<c:url value="/resources/${company.faviconUrl}"/>"
+                                                <a href="<c:url value="/${company.faviconUrl}"/>"
                                                    title="${company.title}" rel="lightgallery">
-                                                    <img src="<c:url value="/resources/${company.faviconUrl}"/>"
-                                                         class="file" alt="" title="Увеличить"
+                                                    <img src="<c:url value="/${company.faviconUrl}"/>"
+                                                         class="img-responsive img-in-list" alt="" title="Увеличить"
                                                          onerror="this.src='<c:url
                                                                  value="/resources/img/static/default_file.gif"/>'">
-                                                </a><br>
+                                                </a><br><br>
                                                 <input type="text" class="form-control" name="photo" minlength="2"
                                                        maxlength="100" placeholder="Ссылка на фавикон сайта"
-                                                       value="${faviconUrl.logoUrl}">
+                                                       value="<c:out value="${faviconUrl.logoUrl}"/>">
                                             </td>
                                         </tr>
                                         <tr>

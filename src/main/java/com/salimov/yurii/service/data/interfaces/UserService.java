@@ -1,9 +1,7 @@
 package com.salimov.yurii.service.data.interfaces;
 
-import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,13 +31,12 @@ public interface UserService
      * @param facebook    a facebook url of the new user.
      * @param twitter     a twitter url of the new user.
      * @param skype       a skype username of the new user.
-     * @param photoFile   a file of photo to the new user.
+     * @param photoUrl    a photo URL to the new user.
      * @param isValid     a validated of the new user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The new saving user.
      * @see User
-     * @see File
      */
     User initAndAdd(
             final String name,
@@ -52,7 +49,7 @@ public interface UserService
             final String facebook,
             final String twitter,
             final String skype,
-            final MultipartFile photoFile,
+            final String photoUrl,
             final boolean isValid,
             final boolean isMailing,
             final boolean isLocked
@@ -72,14 +69,12 @@ public interface UserService
      * @param facebook    a new facebook url to the user.
      * @param twitter     a new twitter url to the user.
      * @param skype       a new skype username to the user.
-     * @param photoFile   a file of photo to the user.
-     * @param photoAction a action on the photo.
+     * @param photoUrl    a photo URL to the user.
      * @param isValid     a validated of the user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The updating user with parameter id.
      * @see User
-     * @see File
      */
     User initAndUpdate(
             final String url,
@@ -93,8 +88,7 @@ public interface UserService
             final String facebook,
             final String twitter,
             final String skype,
-            final MultipartFile photoFile,
-            final String photoAction,
+            final String photoUrl,
             final boolean isValid,
             final boolean isMailing,
             final boolean isLocked

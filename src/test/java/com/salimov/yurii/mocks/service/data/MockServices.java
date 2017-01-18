@@ -807,7 +807,7 @@ public final class MockServices {
                         DESCRIPTION,
                         PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        null, null,
+                        PHOTO_URL,
                         true, true, true
                 )
         ).thenReturn(user);

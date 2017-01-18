@@ -205,28 +205,16 @@
                                 <tr>
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${user.photo ne null}">
-                                                <a href="<c:url value="/resources/${user.photo.url}"/>"
-                                                   rel="lightgallery">
-                                                    <img class="img-logo" alt="<c:out value="${user.name}"/>"
-                                                         src="<c:url value="/resources/${user.photo.url}"/>">
-                                                </a><br><br>
-                                                <label title="Добавить новое фото">
-                                                    <b><input type="radio" name="photo_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить фото">
-                                                    <b><input type="radio" name="photo_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label><br>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="photo_action" value="replace" checked
-                                                       required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br><input type="file" name="photo" accept="image/*" class="form-control"><br>
+                                        <a href="<c:url value="/${user.photoUrl}"/>"
+                                           title="${user.name}" rel="lightgallery">
+                                            <img src="<c:url value="/${user.photoUrl}"/>" alt=""
+                                                 class="img-responsive img-in-list" title="Увеличить"
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'">
+                                        </a><br><br>
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на главное фото пользователя"
+                                               value="${user.photoUrl}">
                                     </td>
                                 </tr>
                                 <tr>

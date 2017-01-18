@@ -129,7 +129,8 @@
                                 <tr>
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">
-                                        <input type="file" name="photo" accept="image/*" class="form-control">
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на главное фото пользователя">
                                     </td>
                                 </tr>
                                 <tr>

@@ -10,17 +10,15 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.logo ne null}">
+                    <c:when test="${company.logoUrl ne null}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/${company.logo.url}"/>"
-                             onerror="this.src='<c:url
-                                     value="/resources/img/static/default_file.gif"/>'">
+                             src="<c:url value="/${company.logoUrl}"/>"
+                             onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
-                    <c:when test="${company.favicon ne null}">
+                    <c:when test="${company.faviconUrl ne null}">
                         <br><img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="/resources/${company.favicon.url}"/>"
-                                 onerror="this.src='<c:url
-                                         value="/resources/img/static/default_file.gif"/>'">
+                                 src="<c:url value="/${company.faviconUrl}"/>"
+                                 onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                         &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:when>
                     <c:otherwise>
@@ -35,9 +33,10 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.favicon ne null}">
+                    <c:when test="${company.faviconUrl ne null}">
                         <img class="icon-size" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/${company.favicon.url}"/>">
+                             src="<c:url value="/${company.faviconUrl}"/>"
+                             onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
                     <c:otherwise><span class="glyphicon glyphicon-link" aria-hidden="true"></span></c:otherwise>
                 </c:choose>

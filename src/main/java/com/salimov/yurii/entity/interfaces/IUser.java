@@ -67,7 +67,7 @@ public interface IUser<E extends Number> extends IModel<E> {
      * @param email       a new e-mail of the user.
      * @param phone       a new phone of the user.
      * @param description a new description of the user.
-     * @param photo       a new file of the user.
+     * @param photoUrl    a new photo URL of the user.
      * @param role        a new role of the user.
      * @see File
      * @see UserRole
@@ -79,7 +79,7 @@ public interface IUser<E extends Number> extends IModel<E> {
             final String email,
             final String phone,
             final String description,
-            final File photo,
+            final String photoUrl,
             final UserRole role
     );
 
@@ -246,20 +246,19 @@ public interface IUser<E extends Number> extends IModel<E> {
     void setDescription(final String description);
 
     /**
-     * Returns a photo of the user.
+     * Returns a photo URL of the user.
      *
-     * @return The user file.
-     * @see File
+     * @return The user photo URL.
      */
-    File getPhoto();
+    String getPhotoUrl();
 
     /**
      * Sets a new photo to the user.
+     * If photo URL is blank, then sets {@code null}.
      *
-     * @param photo a new file to the user.
-     * @see File
+     * @param photoUrl a new photo URL to the user.
      */
-    void setPhoto(final File photo);
+    void setPhotoUrl(final String photoUrl);
 
     /**
      * Returns a role of the user.

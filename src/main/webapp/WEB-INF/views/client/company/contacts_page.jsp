@@ -58,7 +58,6 @@
                     <hr>
                     <h3 class="text-center">Контакты</h3>
                     <hr>
-                        <%-- CONTACTS --%>
                     <jsp:include page="/WEB-INF/views/client/company/contacts.jsp"/>
                 </div>
             </div>
@@ -73,9 +72,7 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>

@@ -124,19 +124,10 @@ public final class User
     private String description;
 
     /**
-     * The photo of a user.
-     *
-     * @see File
+     * The photo URL of a user.
      */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "photo_id",
-            referencedColumnName = "id"
-    )
-    private File photo;
+    @Column(name = "photo")
+    private String photoUrl;
 
     /**
      * The role of a user.
@@ -390,7 +381,7 @@ public final class User
      * @param email       a new e-mail of the user.
      * @param phone       a new phone of the user.
      * @param description a new description of the user.
-     * @param photo       a new file of the user.
+     * @param photoUrl    a new photo URL of the user.
      * @param role        a new role of the user.
      * @see File
      * @see UserRole
@@ -402,13 +393,13 @@ public final class User
             final String email,
             final String phone,
             final String description,
-            final File photo,
+            final String photoUrl,
             final UserRole role
     ) {
         initialize(name, email, phone, description);
         setLogin(login);
         setPassword(password);
-        setPhoto(photo);
+        setPhotoUrl(photoUrl);
         setRole(role);
     }
 
@@ -661,24 +652,22 @@ public final class User
     }
 
     /**
-     * Returns a photo of the user.
+     * Returns a photo URL of the user.
      *
-     * @return The user file.
-     * @see File
+     * @return The user photo URL.
      */
-    public File getPhoto() {
-        return this.photo;
+    public String getPhotoUrl() {
+        return this.photoUrl;
     }
 
     /**
      * Sets a new photo to the user.
-     * If parameter file is invalid, then sets {@code null}.
+     * If photo URL is blank, then sets {@code null}.
      *
-     * @param photo a new file to the user.
-     * @see File
+     * @param photoUrl a new photo URL to the user.
      */
-    public void setPhoto(final File photo) {
-        this.photo = File.isValidated(photo) ? photo : null;
+    public void setPhotoUrl(final String photoUrl) {
+        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
     }
 
     /**

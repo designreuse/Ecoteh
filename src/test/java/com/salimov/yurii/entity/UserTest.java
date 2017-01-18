@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
 import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -295,45 +294,44 @@ public final class UserTest extends ModelTest<User> {
         assertNull(user.getSkype());
         assertNull(user.getDescription());
 
-        final File file = new File();
-        user.initialize(null, null, null, null, null, null, file, null);
+        user.initialize(null, null, null, null, null, null, null, null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getDescription());
-        assertNull(user.getPhoto());
+        assertNull(user.getPhotoUrl());
         assertNull(user.getRole());
 
-        user.initialize("", "", "", "", "", "", file, null);
+        user.initialize("", "", "", "", "", "", "", null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getDescription());
-        assertNull(user.getPhoto());
+        assertNull(user.getPhotoUrl());
         assertNull(user.getRole());
 
-        user.initialize(" ", " ", " ", " ", " ", " ", file, null);
+        user.initialize(" ", " ", " ", " ", " ", " ", " ", null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getDescription());
-        assertNull(user.getPhoto());
+        assertNull(user.getPhotoUrl());
         assertNull(user.getRole());
 
-        user.initialize("   ", "   ", "   ", "   ", "   ", "   ", file, null);
+        user.initialize("   ", "   ", "   ", "   ", "   ", "   ", "   ", null);
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getDescription());
-        assertNull(user.getPhoto());
+        assertNull(user.getPhotoUrl());
         assertNull(user.getRole());
     }
 
@@ -415,12 +413,10 @@ public final class UserTest extends ModelTest<User> {
                 user.getDescription(),
                 DESCRIPTION
         );
-
-        final File file = getPhoto();
         final UserRole role = UserRole.ANOTHER;
         user.initialize(
                 NAME, LOGIN, PASSWORD, EMAIL,
-                PHONE, DESCRIPTION, file, role
+                PHONE, DESCRIPTION, PHOTO_URL, role
         );
         assertNotNull(user.getName());
         assertNotNull(user.getLogin());
@@ -428,7 +424,7 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getEmail());
         assertNotNull(user.getPhone());
         assertNotNull(user.getDescription());
-        assertNotNull(user.getPhoto());
+        assertNotNull(user.getPhotoUrl());
         assertNotNull(user.getRole());
         assertEquals(
                 user.getName(),
@@ -455,8 +451,8 @@ public final class UserTest extends ModelTest<User> {
                 DESCRIPTION
         );
         assertEquals(
-                user.getPhoto(),
-                file
+                user.getPhotoUrl(),
+                PHOTO_URL
         );
         assertEquals(
                 user.getRole(),
@@ -855,21 +851,18 @@ public final class UserTest extends ModelTest<User> {
     @Test
     public void whenSetInvalidPhotoThenGetNull() {
         final User user = getUser();
-        user.setPhoto(null);
-        assertNull(user.getPhoto());
-        user.setPhoto(new File());
-        assertNull(user.getPhoto());
+        user.setPhotoUrl(null);
+        assertNull(user.getPhotoUrl());
     }
 
     @Test
     public void whenSetValidPhotoThenGetThisPhoto() {
         final User user = getUser();
-        final File file = getPhoto();
-        user.setPhoto(file);
-        assertNotNull(user.getPhoto());
+        user.setPhotoUrl(PHOTO_URL);
+        assertNotNull(user.getPhotoUrl());
         assertEquals(
-                user.getPhoto(),
-                file
+                user.getPhotoUrl(),
+                PHOTO_URL
         );
     }
 

@@ -89,9 +89,9 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <a href="<c:url value="/resources/${category.photoUrl}"/>"
+                                        <a href="<c:url value="/${category.photoUrl}"/>"
                                            title="${category.title}" rel="lightgallery">
-                                            <img src="<c:url value="/resources/${category.photoUrl}"/>" class="file"
+                                            <img src="<c:url value="/${category.photoUrl}"/>" class="file"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'"
                                                  alt="" title="Увеличить">

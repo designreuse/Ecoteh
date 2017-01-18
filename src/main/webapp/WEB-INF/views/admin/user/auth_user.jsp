@@ -4,11 +4,11 @@
 <div class="text-center">
     <br>
     <c:choose>
-        <c:when test="${authorized_user.photo ne null}">
-            <a href="<c:url value="/resources/${authorized_user.photo.url}"/>" rel="lightgallery"
+        <c:when test="${authorized_user.photoUrl ne null}">
+            <a href="<c:url value="/${authorized_user.photoUrl}"/>" rel="lightgallery"
                title="<c:out value="${authorized_user.name}"/>">
                 <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
-                     src="<c:url value="/resources/${authorized_user.photo.url}"/>">
+                     src="<c:url value="/${authorized_user.photoUrl}"/>">
             </a>
         </c:when>
         <c:otherwise>
