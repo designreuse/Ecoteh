@@ -268,15 +268,15 @@
                                     </td>
                                     <td class="tds">
                                         <a href="<c:url value="/${company.logoUrl}"/>"
-                                           title="${company.title}" rel="lightgallery">
+                                           title="<c:out value="${company.title}"/>" rel="lightgallery">
                                             <img src="<c:url value="/${company.logoUrl}"/>"
-                                                 class="img-responsive img-in-list" alt="" title="Увеличить"
+                                                 class="main-logo" alt="" title="Увеличить"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'">
                                         </a><br><br>
-                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                        <input type="text" class="form-control" name="logo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на логотип компании"
-                                               value="${company.logoUrl}">
+                                               value="<c:out value="${company.logoUrl}"/>">
                                     </td>
                                 </tr>
                                 <c:choose>
@@ -291,15 +291,15 @@
                                             </td>
                                             <td class="tds">
                                                 <a href="<c:url value="/${company.faviconUrl}"/>"
-                                                   title="${company.title}" rel="lightgallery">
+                                                   title="<c:out value="${company.title}"/>" rel="lightgallery">
                                                     <img src="<c:url value="/${company.faviconUrl}"/>"
-                                                         class="img-responsive img-in-list" alt="" title="Увеличить"
+                                                         class="main-logo" alt="" title="Увеличить"
                                                          onerror="this.src='<c:url
                                                                  value="/resources/img/static/default_file.gif"/>'">
                                                 </a><br><br>
-                                                <input type="text" class="form-control" name="photo" minlength="2"
+                                                <input type="text" class="form-control" name="favicon" minlength="2"
                                                        maxlength="100" placeholder="Ссылка на фавикон сайта"
-                                                       value="<c:out value="${faviconUrl.logoUrl}"/>">
+                                                       value="<c:out value="${company.faviconUrl}"/>">
                                             </td>
                                         </tr>
                                         <tr>
@@ -318,7 +318,7 @@
                                                                 <a href="<c:url value="/resources/${slide.url}"/>"
                                                                    rel="lightgallery[slides]"
                                                                    title="<c:out value="${slide.title}"/>">
-                                                                    <img class="img-preview"
+                                                                    <img class="main-logo"
                                                                          src="<c:url value="/resources/${slide.url}"/>"
                                                                          alt="<c:out value="${company.title}"/>"/>
                                                                 </a>

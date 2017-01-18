@@ -200,7 +200,7 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                        <input type="text" class="form-control" name="logo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на логотип компании">
                                     </td>
                                 </tr>

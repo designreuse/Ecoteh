@@ -163,8 +163,8 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final String logoUrl,
-            @RequestParam(value = "favicon_photo") final String faviconUrl,
+            @RequestParam(value = "logo") final String logoUrl,
+            @RequestParam(value = "favicon") final String faviconUrl,
             @RequestParam(value = "slides[]") final MultipartFile[] slides,
             @RequestParam(value = "slides_action") final String slidesAction,
             final ModelAndView modelAndView
@@ -269,7 +269,7 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final String logoUrl,
+            @RequestParam(value = "logo") final String logoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -385,7 +385,7 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final String logoUrl,
+            @RequestParam(value = "logo") final String logoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
