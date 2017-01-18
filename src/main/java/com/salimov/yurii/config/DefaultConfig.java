@@ -164,9 +164,11 @@ public final class DefaultConfig {
      */
     private static boolean check(final UserRole role) {
         final User user = getAuthenticatedUser();
-        return user != null &&
-                user.getRole()
-                        .equals(role);
+        return (
+                user != null
+        ) && (
+                user.getRole().equals(role)
+        );
     }
 
     /**
@@ -176,8 +178,15 @@ public final class DefaultConfig {
      * @see User
      */
     private static User getAuthenticatedUser() {
-        return (User) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext()
+                    .getAuthentication().getPrincipal();
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            user = null;
+        }
+        return user;
     }
 
     /**
