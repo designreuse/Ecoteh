@@ -89,6 +89,13 @@
                                         </a>
                                     </td>
                                     <td class="tds">
+                                        <a href="<c:url value="/resources/${category.photoUrl}"/>"
+                                           title="${category.title}" rel="lightgallery">
+                                            <img src="<c:url value="/resources/${category.photoUrl}"/>" class="file"
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'"
+                                                 alt="" title="Увеличить">
+                                        </a><br>
                                         <input type="text" class="form-control" name="photo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на главное фото для категории"
                                                value="${category.photoUrl}">

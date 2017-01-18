@@ -13,7 +13,7 @@
         </c:when>
         <c:otherwise>
             <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
-                 src="<c:url value="/resources/img/users/default_user.png"/>">
+                 src="<c:url value="/resources/img/static/default_user.png"/>">
         </c:otherwise>
     </c:choose>
     <h3><c:out value="${authorized_user.name}"/></h3>

@@ -12,11 +12,15 @@
                 <c:choose>
                     <c:when test="${company.logo ne null}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/${company.logo.url}"/>">
+                             src="<c:url value="/resources/${company.logo.url}"/>"
+                             onerror="this.src='<c:url
+                                     value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
                     <c:when test="${company.favicon ne null}">
                         <br><img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="/resources/${company.favicon.url}"/>">
+                                 src="<c:url value="/resources/${company.favicon.url}"/>"
+                                 onerror="this.src='<c:url
+                                         value="/resources/img/static/default_file.gif"/>'">
                         &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:when>
                     <c:otherwise>

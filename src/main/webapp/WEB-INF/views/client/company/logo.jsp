@@ -7,7 +7,9 @@
             <div class="brand">
                 <a href="http://<c:out value="${company.domain}"/>">
                     <img src="<c:url value="/resources/${company.logo.url}"/>"
-                         class="main-logo" alt="<c:out value="${company.title}"/>">
+                         class="main-logo" alt="<c:out value="${company.title}"/>"
+                         onerror="this.src='<c:url
+                                 value="/resources/img/static/default_file.gif"/>'">
                 </a>
             </div>
         </c:when>
