@@ -14,26 +14,38 @@ public abstract class MockMediaServiceTest<T extends Media<Long>> extends MockDa
 
     @Test
     public void whenInitAndAddMediaThenReturnMedia() {
-        T media = (T) getService().initAndAdd(TITLE, URL);
-        assertNotNull(media);
+        assertNotNull(
+                getService()
+                        .initAndAdd(
+                                TITLE, URL
+                        )
+        );
     }
 
     @Test
     public void whenInitAndUpdateMediaThenReturnMedia() {
-        T media = (T) getService().initAndUpdate(ID, TITLE, URL);
-        assertNotNull(media);
+        assertNotNull(
+                getService()
+                        .initAndUpdate(
+                                ID, TITLE, URL
+                        )
+        );
     }
 
     @Test
     public void whenGetByTitleThenReturnSomeContent() {
-        T media = (T) getService().getByTitle(TITLE);
-        assertNotNull(media);
+        assertNotNull(
+                getService()
+                        .getByTitle(TITLE)
+        );
     }
 
     @Test
     public void whenGetByUrlThenReturnSomeContent() {
-        T media = (T) getService().getByUrl(URL);
-        assertNotNull(media);
+        assertNotNull(
+                getService()
+                        .getByUrl(URL)
+        );
     }
 
     @Ignore

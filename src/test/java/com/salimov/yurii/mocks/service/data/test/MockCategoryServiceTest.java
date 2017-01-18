@@ -6,8 +6,12 @@ import com.salimov.yurii.mocks.service.data.MockServices;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.Collection;
+
+import static com.salimov.yurii.mocks.MockConstants.*;
+import static org.junit.Assert.assertNotNull;
 
 public class MockCategoryServiceTest extends MockContentServiceTest<Category> {
 
@@ -18,21 +22,29 @@ public class MockCategoryServiceTest extends MockContentServiceTest<Category> {
         this.service = MockServices.getCategoryService();
     }
 
-    /*@Test
+    @Test
     public void whenInitAndAddCategoryThenReturnThisCategory() {
-        final Photo photo = MockEntity.getFile();
-        final Section section = MockEntity.getSection();
-        Category category = this.service.initAndAdd(MockConstants.TITLE, MockConstants.DESCRIPTION, MockConstants.KEYWORDS, photo, section);
-        assertNotNull(category);
-    }*/
+        assertNotNull(
+                this.service.initAndAdd(
+                        TITLE,
+                        DESCRIPTION, KEYWORDS,
+                        PHOTO_URL,
+                        true
+                )
+        );
+    }
 
-    /*@Test
+    @Test
     public void whenInitAndUpdateCategoryThenReturnThisCategory() {
-        final Photo photo = MockEntity.getFile();
-        final Section section = MockEntity.getSection();
-        Category category = this.service.initAndUpdate(MockConstants.ID, MockConstants.TITLE, MockConstants.DESCRIPTION, MockConstants.KEYWORDS, photo, section);
-        assertNotNull(category);
-    }*/
+        assertNotNull(
+                this.service.initAndUpdate(
+                        URL, TITLE,
+                        DESCRIPTION, KEYWORDS,
+                        PHOTO_URL,
+                        true
+                )
+        );
+    }
 
     @Ignore
     @Override

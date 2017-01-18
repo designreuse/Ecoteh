@@ -28,173 +28,204 @@ public class MockUserServiceTest extends MockDataServiceTest<User> {
 
     @Test
     public void whenInitAndAddUserThenReturnThisUser() {
-        User user = this.service.initAndAdd(
-                NAME, LOGIN, PASSWORD,
-                DESCRIPTION,
-                PHONE, EMAIL,
-                VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                PHOTO_URL,
-                true, true, true
+        assertNotNull(
+                this.service.initAndAdd(
+                        NAME, LOGIN, PASSWORD,
+                        DESCRIPTION,
+                        PHONE, EMAIL,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
+                        PHOTO_URL,
+                        true, true, true
+                )
         );
-        assertNotNull(user);
     }
 
     @Test
     public void whenInitAndUpdateUserThenReturnThisUser() {
-        User user = this.service.initAndUpdate(
-                URL, NAME, LOGIN, PASSWORD,
-                DESCRIPTION,
-                PHONE, EMAIL,
-                VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                PHOTO_URL,
-                true, true, true
+        assertNotNull(
+                this.service.initAndUpdate(
+                        URL, NAME, LOGIN, PASSWORD,
+                        DESCRIPTION,
+                        PHONE, EMAIL,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
+                        PHOTO_URL,
+                        true, true, true
+                )
         );
-        assertNotNull(user);
     }
 
     @Test
     public void whenGetUserByNameThenReturnSomeUser() {
-        User user = this.service.getByName(NAME);
-        assertNotNull(user);
+        assertNotNull(
+                this.service.getByName(NAME)
+        );
     }
 
     @Test
     public void whenGetUserByUrlThenReturnSomeUser() {
-        User user = this.service.getByUrl(URL);
-        assertNotNull(user);
+        assertNotNull(
+                this.service.getByUrl(URL)
+        );
     }
 
     @Test
     public void whenGetUserByLoginThenReturnSomeUser() {
-        User user = this.service.getByLogin(LOGIN);
-        assertNotNull(user);
+        assertNotNull(
+                this.service.getByLogin(LOGIN)
+        );
     }
 
     @Test
     public void whenGetUserByEmailThenReturnSomeUser() {
-        User user = this.service.getByEmail(EMAIL);
-        assertNotNull(user);
+        assertNotNull(
+                this.service.getByEmail(EMAIL)
+        );
     }
 
     @Test
     public void whenGetUserByPhoneThenReturnSomeUser() {
-        User user = this.service.getByPhone(PHONE);
-        assertNotNull(user);
+        assertNotNull(
+                this.service.getByPhone(PHONE)
+        );
     }
 
     @Test
     public void whenGetAuthenticatedUserThenReturnSomeUser() {
-        User user = this.service.getAuthenticatedUser();
-        assertNotNull(user);
+        assertNotNull(
+                this.service.getAuthenticatedUser()
+        );
     }
 
     @Test
     public void whenGetMainAdminThisReturnSomeUser() {
-        User admin = this.service.getMainAdmin();
-        assertNotNull(admin);
+        assertNotNull(
+                this.service.getMainAdmin()
+        );
     }
 
     @Test
     public void whenGetAdminsThenReturnAllAdmins() {
-        Collection<User> admins = this.service.getAdmins();
-        assertNotNull(admins);
+        assertNotNull(
+                this.service.getAdmins()
+        );
     }
 
     @Test
     public void whenGetPersonnelThenReturnAllPersonnel() {
-        Collection<User> personnel = this.service.getPersonnel();
-        assertNotNull(personnel);
+        assertNotNull(
+                this.service.getPersonnel()
+        );
     }
 
     @Test
     public void whenSortUsersByNameThenReturnSortUsers() {
-        final User user = getUser();
-        final List<User> users1 = new ArrayList<>();
-        users1.add(user);
-        List<User> users2 = this.service.sortByName(users1, true);
-        assertNotNull(users2);
-        users2 = this.service.sortByName(users1, false);
-        assertNotNull(users2);
+        final List<User> users = getUsers();
+        assertNotNull(
+                this.service.sortByName(users, true)
+        );
+        assertNotNull(
+                this.service.sortByName(users, false)
+        );
     }
 
     @Test
     public void whenSortUsersByUrlThenReturnSortUsers() {
-        final User user = getUser();
-        final List<User> users1 = new ArrayList<>();
-        users1.add(user);
-        List<User> users2 = this.service.sortByUrl(users1, true);
-        assertNotNull(users2);
-        users2 = this.service.sortByUrl(users1, false);
-        assertNotNull(users2);
+        assertNotNull(
+                this.service.sortByUrl(
+                        getUsers(), true
+                )
+        );
+        assertNotNull(
+                this.service.sortByUrl(
+                        getUsers(), false
+                )
+        );
     }
 
     @Test
     public void whenSortUsersByRoleThenReturnSortUsers() {
-        final User user = getUser();
-        final List<User> users1 = new ArrayList<>();
-        users1.add(user);
-        List<User> users2 = this.service.sortByRole(users1, USER_ROLE, true);
-        assertNotNull(users2);
-        users2 = this.service.sortByRole(users1, USER_ROLE, false);
-        assertNotNull(users2);
+        assertNotNull(
+                this.service.sortByRole(
+                        getUsers(), USER_ROLE, true
+                )
+        );
+        assertNotNull(
+                this.service.sortByRole(
+                        getUsers(), USER_ROLE, false
+                )
+        );
     }
 
     @Test
     public void whenGetAndSortUsersByNameThenReturnSortUsers() {
-        List<User> users = this.service.getAndSortByName(true);
-        assertNotNull(users);
-        users = this.service.getAndSortByName(false);
-        assertNotNull(users);
+        assertNotNull(
+                this.service.getAndSortByName(true)
+        );
+        assertNotNull(
+                this.service.getAndSortByName(false)
+        );
     }
 
     @Test
     public void whenGetAndSortUsersByUrlThenReturnSortUsers() {
-        List<User> users = this.service.getAndSortByUrl(true);
-        assertNotNull(users);
-        users = this.service.getAndSortByUrl(false);
-        assertNotNull(users);
+        assertNotNull(
+                this.service.getAndSortByUrl(true)
+        );
+        assertNotNull(
+                this.service.getAndSortByUrl(false)
+        );
     }
 
     @Test
     public void whenGetAndSortUsersByRoleThenReturnSortUsers() {
-        List<User> users = this.service.getAndSortByRole(USER_ROLE, true);
-        assertNotNull(users);
-        users = this.service.getAndSortByRole(USER_ROLE, false);
-        assertNotNull(users);
+        assertNotNull(
+                this.service.getAndSortByRole(
+                        USER_ROLE, true
+                )
+        );
+        assertNotNull(
+                this.service.getAndSortByRole(
+                        USER_ROLE, false
+                )
+        );
     }
 
     @Test
     public void whenFilterUsersByRoleThenReturnReturnFilterUsers() {
-        final User user = getUser();
-        final List<User> users1 = new ArrayList<>();
-        users1.add(user);
-        Collection<User> users2 = this.service.filterByRole(users1, USER_ROLE);
-        assertNotNull(users2);
+        assertNotNull(
+                this.service.filterByRole(
+                        getUsers(),
+                        USER_ROLE
+                )
+        );
     }
 
     @Test
     public void whenFilterUsersByRolesThenReturnReturnFilterUsers() {
-        final User user = getUser();
-        final List<User> users1 = new ArrayList<>();
-        users1.add(user);
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        Collection<User> users2 = this.service.filterByRoles(users1, roles);
-        assertNotNull(users2);
+        assertNotNull(
+                this.service.filterByRoles(
+                        getUsers(),
+                        roles
+                )
+        );
     }
 
     @Test
     public void whenGetAndFilterUsersByRoleThenReturnReturnFilterUsers() {
-        Collection<User> users = this.service.getAndFilterByRole(USER_ROLE);
-        assertNotNull(users);
+        assertNotNull(
+                this.service.getAndFilterByRole(USER_ROLE)
+        );
     }
 
     @Test
     public void whenGetAndFilterUsersByRolesThenReturnReturnFilterUsers() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        Collection<User> users = this.service.getAndFilterByRoles(roles);
-        assertNotNull(users);
+        assertNotNull(
+                this.service.getAndFilterByRoles(roles)
+        );
     }
 
     @Ignore

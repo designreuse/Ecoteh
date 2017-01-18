@@ -25,7 +25,9 @@ public final class MockEntity {
     }
 
     public static Category getCategory() {
-        final Category category = new Category(TITLE, DESCRIPTION, KEYWORDS);
+        final Category category = new Category(
+                TITLE, DESCRIPTION, KEYWORDS
+        );
         category.setId(ID);
         category.setUrl(URL);
         category.setPhotoUrl(PHOTO_URL);

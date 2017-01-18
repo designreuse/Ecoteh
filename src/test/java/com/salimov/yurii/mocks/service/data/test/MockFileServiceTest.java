@@ -35,27 +35,40 @@ public class MockFileServiceTest extends MockMediaServiceTest<File> {
 
     @Test
     public void whenInitAndAddPhotoThenReturnThisPhoto() {
-        File file = this.service.initAndAdd(TITLE, URL, null);
-        assertNotNull(file);
+        assertNotNull(
+                this.service.initAndAdd(
+                        TITLE, URL,
+                        null
+                )
+        );
     }
 
     @Test
     public void whenInitAndUpdatePhotoThenReturnThisPhoto() {
-        File file = this.service.initAndUpdate(ID, TITLE, URL, null);
-        assertNotNull(file);
+        assertNotNull(
+                this.service.initAndUpdate(
+                        ID, TITLE, URL,
+                        null
+                )
+        );
     }
 
     @Test
     public void whenDeleteFileThenReturnBoolean() {
-        boolean value = this.service.deleteFile(PATH);
-        assertNotNull(value);
+        assertNotNull(
+                this.service.deleteFile(PATH)
+        );
     }
 
     @Test
     public void whenUpdatePhotoThenReturnThisPhoto() {
-        final File file1 = getPhoto();
-        File file2 = this.service.updatePhoto(file1, null, TITLE, PATH);
-        assertNotNull(file2);
+        assertNotNull(
+                this.service.updatePhoto(
+                        getPhoto(),
+                        null,
+                        TITLE, PATH
+                )
+        );
     }
 
     @Ignore

@@ -18,6 +18,18 @@ public final class ExceptionTest {
                 new DuplicateException(TEXT),
                 TEXT
         );
+        checkException(
+                new DuplicateException(
+                        TEXT,
+                        new DuplicateException(TEXT)
+                ),
+                TEXT
+        );
+        assertNotNull(
+                new DuplicateException(
+                        new DuplicateException(TEXT)
+                )
+        );
     }
 
     @Test(expected = DuplicateException.class)
@@ -30,6 +42,21 @@ public final class ExceptionTest {
         throw new DuplicateException(TEXT);
     }
 
+    @Test(expected = DuplicateException.class)
+    public void throwDuplicateExceptionWithMessageAndThrowable() {
+        throw new DuplicateException(
+                TEXT,
+                new DuplicateException(TEXT)
+        );
+    }
+
+    @Test(expected = DuplicateException.class)
+    public void throwDuplicateExceptionWithThrowable() {
+        throw new DuplicateException(
+                new DuplicateException(TEXT)
+        );
+    }
+
     @Test
     public void disableExceptionConstructors() throws Exception {
         checkException(
@@ -37,6 +64,18 @@ public final class ExceptionTest {
         );
         checkException(
                 new DisableException(TEXT), TEXT
+        );
+        checkException(
+                new DisableException(
+                        TEXT,
+                        new DisableException(TEXT)
+                ),
+                TEXT
+        );
+        assertNotNull(
+                new DisableException(
+                        new DisableException(TEXT)
+                )
         );
     }
 
@@ -50,11 +89,32 @@ public final class ExceptionTest {
         throw new DisableException(TEXT);
     }
 
+    @Test(expected = DisableException.class)
+    public void throwDisableExceptionWithMessageAndThrowable() {
+        throw new DisableException(
+                TEXT,
+                new DisableException(TEXT)
+        );
+    }
+
+    @Test(expected = DisableException.class)
+    public void throwDisableExceptionWithThrowable() {
+        throw new DisableException(
+                new DisableException(TEXT)
+        );
+    }
+
     @Ignore
-    public static void checkException(final Exception ex, final String message) {
+    public static void checkException(
+            final Exception ex,
+            final String message
+    ) {
         assertNotNull(ex);
         if (!message.isEmpty()) {
-            assertEquals(ex.getMessage(), message);
+            assertEquals(
+                    ex.getMessage(),
+                    message
+            );
         }
     }
 }

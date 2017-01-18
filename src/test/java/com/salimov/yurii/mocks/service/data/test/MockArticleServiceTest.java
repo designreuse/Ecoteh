@@ -1,18 +1,17 @@
 package com.salimov.yurii.mocks.service.data.test;
 
+import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import com.salimov.yurii.entity.Article;
-import com.salimov.yurii.entity.Category;
 
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.enity.MockEntity.*;
-import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.service.data.MockServices.getArticleService;
+import static org.junit.Assert.assertNotNull;
 
 public class MockArticleServiceTest extends MockContentServiceTest<Article> {
 
@@ -25,95 +24,125 @@ public class MockArticleServiceTest extends MockContentServiceTest<Article> {
 
     @Test
     public void whenInitAndAddArticleThenReturnThisArticle() {
-        //Article article = this.service.initAndAdd(TITLE, DESCRIPTION, TEXT, KEYWORDS, NUMBER, null, null);
-        //assertNotNull(article);
+        assertNotNull(
+                this.service.initAndAdd(
+                        TITLE,
+                        DESCRIPTION, TEXT, KEYWORDS,
+                        NUMBER,
+                        getCategory(),
+                        true
+                )
+        );
     }
 
     @Test
     public void whenGetByValidNumberThenReturnSomeArticle() {
-        Article article = this.service.getByNumber(NUMBER, true);
-        assertNotNull(article);
+        assertNotNull(
+                this.service.getByNumber(NUMBER, true)
+        );
     }
 
     @Test
     public void whenSortedArticlesByNumberThenReturnThisSortCollection() {
-        Collection<Article> articles1 = getArticles();
-        Collection<Article> articles2 = this.service.sortByNumber(articles1, false);
-        assertNotNull(articles2);
-
-        articles2 = this.service.sortByNumber(articles1, true);
-        assertNotNull(articles2);
+        assertNotNull(
+                this.service.sortByNumber(
+                        getArticles(), false
+                )
+        );
+        assertNotNull(
+                this.service.sortByNumber(
+                        getArticles(), true
+                )
+        );
     }
 
     @Test
     public void whenSortedArticlesByDateThenReturnThisSortCollection() {
-        Collection<Article> articles1 = getArticles();
-        Collection<Article> articles2 = this.service.sortByDate(articles1, false);
-        assertNotNull(articles2);
-
-        articles2 = this.service.sortByDate(articles1, true);
-        assertNotNull(articles2);
+        assertNotNull(
+                this.service.sortByDate(
+                        getArticles(), false
+                )
+        );
+        assertNotNull(
+                this.service.sortByDate(
+                        getArticles(), true
+                )
+        );
     }
 
     @Test
     public void whenGetAndSortedArticlesByNumberThenReturnThisSortCollection() {
-        Collection<Article> articles = this.service.getAndSortByNumber(false);
-        assertNotNull(articles);
-
-        articles = this.service.getAndSortByNumber(true);
-        assertNotNull(articles);
+        assertNotNull(
+                this.service.getAndSortByNumber(false)
+        );
+        assertNotNull(
+                this.service.getAndSortByNumber(true)
+        );
     }
 
     @Test
     public void whenGetAndSortedArticlesByDateThenReturnThisSortCollection() {
-        Collection<Article> articles = this.service.getAndSortByDate(false);
-        assertNotNull(articles);
-
-        articles = this.service.getAndSortByDate(true);
-        assertNotNull(articles);
+        assertNotNull(
+                this.service.getAndSortByDate(false)
+        );
+        assertNotNull(
+                this.service.getAndSortByDate(true)
+        );
     }
 
     @Test
     public void whenFilteredArticlesByDateThenReturnThisFilterCollection() {
-        Collection<Article> articles1 = getArticles();
-        Collection<Article> articles2 = this.service.filterByDate(articles1, DATE, DATE);
-        assertNotNull(articles2);
+        assertNotNull(
+                this.service.filterByDate(
+                        getArticles(),
+                        DATE, DATE
+                )
+        );
     }
 
     @Test
     public void whenFilteredArticlesByCategoryThenReturnThisFilterCollection() {
-        Category category = getCategory();
-        Collection<Article> articles1 = getArticles();
-        Collection<Article> articles2 = this.service.filterByCategory(articles1, category);
-        assertNotNull(articles2);
+        assertNotNull(
+                this.service.filterByCategory(
+                        getArticles(),
+                        getCategory()
+                )
+        );
     }
 
     @Test
     public void whenFilteredArticlesByCategoriesThenReturnThisFilterCollection() {
-        Collection<Category> categories = getCategories();
-        Collection<Article> articles1 = getArticles();
-        Collection<Article> articles2 = this.service.filterByCategories(articles1, categories);
-        assertNotNull(articles2);
+        assertNotNull(
+                this.service.filterByCategories(
+                        getArticles(),
+                        getCategories()
+                )
+        );
     }
 
     @Test
     public void whenGetAndFilteredArticlesByDateThenReturnThisFilterCollection() {
-        Collection<Article> articles = this.service.getAndFilterByDate(DATE, DATE);
-        assertNotNull(articles);
+        assertNotNull(
+                this.service.getAndFilterByDate(DATE, DATE)
+        );
     }
 
     @Test
     public void whenGetAndFilteredArticlesByCategoryThenReturnThisFilterCollection() {
-        Category category = getCategory();
-        Collection<Article> articles2 = this.service.getAndFilterByCategory(category);
-        assertNotNull(articles2);
+        assertNotNull(
+                this.service.getAndFilterByCategory(
+                        getCategory()
+                )
+        );
     }
 
     @Test
     public void whenGetAndFilteredArticlesByCategoriesThenReturnThisFilterCollection() {
-        Collection<Category> categories = getCategories();
-        Collection<Article> articles = this.service.getAndFilterByCategories(categories);
-        assertNotNull(articles);
+        assertNotNull(
+                this.service.getAndFilterByCategories(
+                        getCategories()
+                )
+        );
     }
 
     @Ignore

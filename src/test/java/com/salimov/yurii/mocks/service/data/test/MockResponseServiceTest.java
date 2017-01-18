@@ -6,14 +6,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
-import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.enity.MockEntity.getResponse;
 import static com.salimov.yurii.mocks.enity.MockEntity.getResponses;
 import static com.salimov.yurii.mocks.service.data.MockServices.getResponseService;
+import static org.junit.Assert.assertNotNull;
 
 public class MockResponseServiceTest extends MockDataServiceTest<Response> {
 
@@ -26,48 +25,60 @@ public class MockResponseServiceTest extends MockDataServiceTest<Response> {
 
     @Test
     public void whenInitAndAddResponseThenRetutnThisResponse() {
-        Response response = this.service.initAndAdd(NAME, TEXT);
-        assertNotNull(response);
+        assertNotNull(
+                this.service.initAndAdd(NAME, TEXT)
+        );
     }
 
     @Test
     public void whenInitAndUpdateResponseThenReturnThisResponse() {
-        Response response = this.service.initAndUpdate(ID, NAME, TEXT);
-        assertNotNull(response);
+        assertNotNull(
+                this.service.initAndUpdate(ID, NAME, TEXT)
+        );
     }
 
     @Test
     public void whenSortRensonsesByDateThenReturnSortResponses() {
-        final Response response = getResponse();
-        final Collection<Response> responses1 = new ArrayList<>();
-        responses1.add(response);
-        Collection<Response> responses2 = this.service.sortByDate(responses1, true);
-        assertNotNull(responses2);
-        responses2 = this.service.sortByDate(responses1, false);
-        assertNotNull(responses2);
+        assertNotNull(
+                this.service.sortByDate(
+                        getResponses(), true
+                )
+        );
+        assertNotNull(
+                this.service.sortByDate(
+                        getResponses(), false
+                )
+        );
     }
 
     @Test
     public void whenGetAndSortRensonsesByDateThenReturnSortResponses() {
-        Collection<Response> responses2 = this.service.getAndSortByDate(true);
-        assertNotNull(responses2);
-        responses2 = this.service.getAndSortByDate(false);
-        assertNotNull(responses2);
+        assertNotNull(
+                this.service.getAndSortByDate(true)
+        );
+        assertNotNull(
+                this.service.getAndSortByDate(false)
+        );
     }
 
     @Test
     public void whenFilterResponsesByDateThenReturnFilterResponses() {
         final Response response = getResponse();
-        final Collection<Response> responses1 = new ArrayList<>();
-        responses1.add(response);
-        Collection<Response> responses2 = this.service.filterByDate(responses1, DATE, DATE);
-        assertNotNull(responses2);
+        assertNotNull(
+                this.service.filterByDate(
+                        getResponses(),
+                        DATE, DATE
+                )
+        );
     }
 
     @Test
     public void whenGetAndFilterResponsesByDateThenReturnFilterResponses() {
-        Collection<Response> responses = this.service.getAndFilterByDate(DATE, DATE);
-        assertNotNull(responses);
+        assertNotNull(
+                this.service.getAndFilterByDate(
+                        DATE, DATE
+                )
+        );
     }
 
     @Ignore

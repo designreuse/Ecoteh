@@ -17,95 +17,127 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
 
     @Test
     public void whenGetMockServiceThenReturnNotNull() {
-        DataService dataService = getService();
-        assertNotNull(dataService);
+        assertNotNull(
+                getService()
+        );
     }
 
     @Test
     public void whenGetObjectThenReturnSomeModel() {
-        T model = getObject();
-        assertNotNull(model);
+        assertNotNull(
+                getObject()
+        );
     }
 
     @Test
     public void whenGetObjectsThenReturnSomeModels() {
-        Collection<T> models = getObjects();
-        assertNotNull(models);
+        assertNotNull(
+                getObjects()
+        );
     }
 
     @Test
     public void whenAddModelThenReturnThisModel() {
-        T model1 = getObject();
-        T model2 = (T) getService().add(model1);
-        assertNotNull(model2);
+        assertNotNull(
+                getService().add(
+                        getObject()
+                )
+        );
     }
 
     @Test
     public void whenAddModelsThenReturnThisModels() {
-        Collection<T> models1 = getObjects();
-        Collection<T> models2 = getService().add(models1);
-        assertNotNull(models2);
+        assertNotNull(
+                getService()
+                        .add(
+                                getObjects()
+                        )
+        );
     }
 
     @Test
     public void whenUpdateModelThenReturnThisModel() {
-        T model1 = getObject();
-        getService().add(model1);
-        T model2 = (T) getService().update(model1);
-        assertNotNull(model2);
+        assertNotNull(
+                getService()
+                        .update(
+                                getService()
+                                        .add(
+                                                getObject()
+                                        )
+                        )
+        );
     }
 
     @Test
     public void whenUpdateModelsThenReturnThisModels() {
-        Collection<T> models1 = getObjects();
-        Collection<T> models2 = getService().update(models1);
-        assertNotNull(models2);
+        assertNotNull(
+                getService()
+                        .update(
+                                getObjects()
+                        )
+        );
     }
 
     @Test
     public void whenGetByValidIdThenReturnSomeModel() {
-        T model = (T) getService().get(ID);
-        assertNotNull(model);
+        assertNotNull(
+                getService()
+                        .get(ID)
+        );
     }
 
     @Test
     public void whenGetAllThenReturnSomeModels() {
-        Collection<T> models = getService().getAll();
-        assertNotNull(models);
-
-        models = getService().getAll(false);
-        assertNotNull(models);
-
-        models = getService().getAll(true);
-        assertNotNull(models);
+        assertNotNull(
+                getService()
+                        .getAll()
+        );
+        assertNotNull(
+                getService()
+                        .getAll(false)
+        );
+        assertNotNull(
+                getService()
+                        .getAll(true)
+        );
     }
 
     @Test
     public void whenExistsByInvalidModelThenReturnFalse() {
-        boolean value = getService().exists((Model) null);
-        assertFalse(value);
+        assertFalse(
+                getService()
+                        .exists((Model) null)
+        );
     }
 
     @Test
     public void whenExistsByValidModelThenReturnTrue() {
-        T model = getObject();
-        boolean value = getService().exists(model);
-        assertTrue(value);
+        assertTrue(
+                getService()
+                        .exists(
+                                getObject()
+                        )
+        );
     }
 
     @Test
     public void whenExistsByInvalidIDThenReturnFalse() {
-        boolean value = getService().exists((Long) null);
-        assertFalse(value);
-
-        value = getService().exists(UNKNOWN_ID);
-        assertFalse(value);
+        assertFalse(
+                getService()
+                        .exists((Long) null)
+        );
+        assertFalse(
+                getService()
+                        .exists(UNKNOWN_ID)
+        );
     }
 
     @Test
     public void whenExistsByValidIDThenReturnTrue() {
-        boolean value = getService().exists(ID);
-        assertTrue(value);
+        assertTrue(
+                getService()
+                        .exists(ID)
+        );
     }
 
     @Test

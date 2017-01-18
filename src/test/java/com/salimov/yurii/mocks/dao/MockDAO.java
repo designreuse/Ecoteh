@@ -2,12 +2,13 @@ package com.salimov.yurii.mocks.dao;
 
 import com.salimov.yurii.dao.interfaces.*;
 import com.salimov.yurii.entity.*;
-import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Ignore;
 
+import java.util.Collection;
 import java.util.List;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +19,7 @@ public final class MockDAO {
     private static CategoryDao categoryDao;
     private static CompanyDao companyDao;
     private static FileDao fileDAO;
+    private static MessageDao messageDao;
     private static ResponseDao responseDAO;
     private static UserDao userDAO;
 
@@ -49,6 +51,13 @@ public final class MockDAO {
         return fileDAO;
     }
 
+    public static MessageDao getMessageDAO() {
+        if (messageDao == null) {
+            messageDao = initMessageDAO();
+        }
+        return messageDao;
+    }
+
     public static ResponseDao getResponseDAO() {
         if (responseDAO == null) {
             responseDAO = initResponseDAO();
@@ -64,48 +73,14 @@ public final class MockDAO {
     }
 
     private static ArticleDao initArticleDAO() {
-        final Article article = MockEntity.getArticle();
-        final List<Article> articles = MockEntity.getArticles();
+        final Article article = getArticle();
+        final List<Article> articles = getArticles();
         final ArticleDao dao = mock(ArticleDao.class);
-        when(
-                dao.add(article)
-        ).thenReturn(article);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(articles)
-        ).thenReturn(articles);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(article)
-        ).thenReturn(article);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(article);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(articles);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        dataDao(
+                dao,
+                article,
+                articles
+        );
         when(
                 dao.getByTitle(TITLE)
         ).thenReturn(article);
@@ -146,48 +121,13 @@ public final class MockDAO {
     }
 
     private static CategoryDao initCategoryDAO() {
-        final Category category = MockEntity.getCategory();
-        final List<Category> categories = MockEntity.getCategories();
+        final Category category = getCategory();
         final CategoryDao dao = mock(CategoryDao.class);
-        when(
-                dao.add(category)
-        ).thenReturn(category);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(categories)
-        ).thenReturn(categories);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(category)
-        ).thenReturn(category);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(category);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(categories);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        dataDao(
+                dao,
+                category,
+                getCategories()
+        );
         when(
                 dao.getByTitle(TITLE)
         ).thenReturn(category);
@@ -210,48 +150,14 @@ public final class MockDAO {
     }
 
     private static CompanyDao initCompanyDAO() {
-        final Company company = MockEntity.getCompany();
-        final List<Company> companies = MockEntity.getCompanies();
+        final Company company = getCompany();
+        final List<Company> companies = getCompanies();
         final CompanyDao dao = mock(CompanyDao.class);
-        when(
-                dao.add(company)
-        ).thenReturn(company);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(companies)
-        ).thenReturn(companies);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(company)
-        ).thenReturn(company);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(company);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(companies);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        dataDao(
+                dao,
+                company,
+                companies
+        );
         when(
                 dao.getByTitle(TITLE)
         ).thenReturn(company);
@@ -280,48 +186,13 @@ public final class MockDAO {
     }
 
     private static FileDao initPhotoDAO() {
-        final File file = MockEntity.getPhoto();
-        final List<File> files = MockEntity.getPhotos();
+        final File file = getPhoto();
         final FileDao dao = mock(FileDao.class);
-        when(
-                dao.add(file)
-        ).thenReturn(file);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(files)
-        ).thenReturn(files);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(file)
-        ).thenReturn(file);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(file);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(files);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        dataDao(
+                dao,
+                file,
+                getPhotos()
+        );
         when(
                 dao.getByTitle(TITLE)
         ).thenReturn(file);
@@ -343,95 +214,34 @@ public final class MockDAO {
         return dao;
     }
 
+    private static MessageDao initMessageDAO() {
+        final MessageDao dao = mock(MessageDao.class);
+        dataDao(
+                dao,
+                getMessage(),
+                getMessages()
+        );
+        return dao;
+    }
+
     private static ResponseDao initResponseDAO() {
-        final Response response = MockEntity.getResponse();
-        final List<Response> responses = MockEntity.getResponses();
         final ResponseDao dao = mock(ResponseDao.class);
-        when(
-                dao.add(response)
-        ).thenReturn(response);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(responses)
-        ).thenReturn(responses);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(response)
-        ).thenReturn(response);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(response);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(responses);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        dataDao(
+                dao,
+                getResponse(),
+                getResponses()
+        );
         return dao;
     }
 
     private static UserDao initUserDAO() {
-        final User user = MockEntity.getUser();
-        final List<User> users = MockEntity.getUsers();
+        final User user = getUser();
         final UserDao dao = mock(UserDao.class);
-        when(
-                dao.add(user)
-        ).thenReturn(user);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(users)
-        ).thenReturn(users);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(user)
-        ).thenReturn(user);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(user);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(users);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        dataDao(
+                dao,
+                user,
+                getUsers()
+        );
         when(
                 dao.getByName(NAME)
         ).thenReturn(user);
@@ -478,5 +288,51 @@ public final class MockDAO {
                 dao.getByEmail(null)
         ).thenReturn(null);
         return dao;
+    }
+
+    private static <T extends Model, E extends DataDao> void dataDao(
+            final E dao,
+            final T model,
+            final Collection<T> models
+    ) {
+        when(
+                dao.add(model)
+        ).thenReturn(model);
+        when(
+                dao.add(null)
+        ).thenReturn(null);
+        when(
+                dao.addAll(models)
+        ).thenReturn(models);
+        when(
+                dao.addAll(null)
+        ).thenReturn(null);
+        when(
+                dao.update(model)
+        ).thenReturn(model);
+        when(
+                dao.update(null)
+        ).thenReturn(null);
+        when(
+                dao.get(ID)
+        ).thenReturn(model);
+        when(
+                dao.get(UNKNOWN_ID)
+        ).thenReturn(null);
+        when(
+                dao.get(null)
+        ).thenReturn(null);
+        when(
+                dao.getAll()
+        ).thenReturn(models);
+        when(
+                dao.exists(ID)
+        ).thenReturn(true);
+        when(
+                dao.exists(UNKNOWN_ID)
+        ).thenReturn(false);
+        when(
+                dao.exists(null)
+        ).thenReturn(false);
     }
 }
