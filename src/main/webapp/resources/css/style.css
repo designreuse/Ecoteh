@@ -29,7 +29,7 @@ a:hover {
 }
 
 a:active {
-    color: #008000
+    color: #080
 }
 
 a:focus {
@@ -118,6 +118,11 @@ img.img-responsive {
 img.icon-size {
     height: 20px;
     width: 20px
+}
+
+img.file {
+    width: 150px;
+    height: 150px
 }
 
 img.map {
