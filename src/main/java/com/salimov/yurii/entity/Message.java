@@ -350,7 +350,9 @@ public final class Message
      */
     @Override
     public Long getId() {
-        return (long) hashCode();
+        return (long) Math.abs(
+                hashCode()
+        );
     }
 
     /**
