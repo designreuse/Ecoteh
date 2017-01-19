@@ -38,6 +38,17 @@ public interface MainMVFabric {
     ModelAndView allArticlesPage();
 
     /**
+     *
+     * @param sortType
+     * @param revers
+     * @return
+     */
+    ModelAndView allSortArticlesPage(
+            final String sortType,
+            final boolean revers
+    );
+
+    /**
      * Creates and returns page with information about main company.
      *
      * @return The ready object of class ModelAndView.
@@ -61,6 +72,15 @@ public interface MainMVFabric {
     ModelAndView allPartnersPage();
 
     /**
+     *
+     * @param revers
+     * @return
+     */
+    ModelAndView allSortPartnersByTitlePage(
+            final boolean revers
+    );
+
+    /**
      * Creates and returns page with one category with parameter url.
      *
      * @param url a url of the category to return.
@@ -68,6 +88,19 @@ public interface MainMVFabric {
      * @see Category
      */
     ModelAndView categoryPage(final String url);
+
+    /**
+     *
+     * @param url
+     * @param sortType
+     * @param revers
+     * @return
+     */
+    ModelAndView categoryWithSortArticlesPage(
+            final String url,
+            final String sortType,
+            final boolean revers
+    );
 
     /**
      * Creates and returns page with one article with parameter url.
@@ -103,6 +136,15 @@ public interface MainMVFabric {
      * @see Response
      */
     ModelAndView allResponsesPage();
+
+    /**
+     *
+     * @param revers
+     * @return
+     */
+    ModelAndView allSortResponsesByDatePage(
+            final boolean revers
+    );
 
     /**
      * Creates and returns default modelAndView.

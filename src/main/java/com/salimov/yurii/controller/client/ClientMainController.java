@@ -122,7 +122,11 @@ public class ClientMainController extends MainController {
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            sendMess(name, phone, email, userMessage);
+            sendMess(
+                    name,
+                    phone, email,
+                    userMessage
+            );
         }
         return getMessageMV(url, isCaptcha);
     }
@@ -182,6 +186,6 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public ModelAndView sendResponse() {
-        return getResponsesPage();
+        return getAllResponsesPage();
     }
 }

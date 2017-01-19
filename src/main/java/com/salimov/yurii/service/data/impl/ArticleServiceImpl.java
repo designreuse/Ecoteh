@@ -53,32 +53,20 @@ public final class ArticleServiceImpl
     private final ArticleDao dao;
 
     /**
-     * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link File}.
-     *
-     * @see FileService
-     */
-    private final FileService fileService;
-
-    /**
      * Constructor.
      *
      * @param dao         a implementation of
      *                    the {@link ArticleDao} interface.
-     * @param fileService a implementation of
-     *                    the {@link FileService} interface.
      * @see ArticleDao
      * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ArticleServiceImpl(
-            final ArticleDao dao,
-            final FileService fileService
+            final ArticleDao dao
     ) {
         super(dao);
         this.dao = dao;
-        this.fileService = fileService;
     }
 
     /**

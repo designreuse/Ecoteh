@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -128,8 +130,7 @@ public abstract class MainController {
      */
     @RequestMapping(
             value = {
-                    "",
-                    "/",
+                    "", "/",
                     "/index",
                     "/home"
             },
@@ -170,6 +171,32 @@ public abstract class MainController {
     )
     public ModelAndView getCategoryPage(@PathVariable("url") final String url) {
         return this.fabric.categoryPage(url);
+    }
+
+    /**
+     * Returns modelAndView with information about page with some category.
+     * Request mapping: /category/{url}
+     * Method: GET
+     *
+     * @param url a url of the category to return.
+     * @return The ready object of class ModelAndView.
+     * @see Category
+     */
+    @RequestMapping(
+            value = "/category/{url}/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getCategoryWithSortArticlePage(
+            @PathVariable("url") final String url,
+            final HttpServletRequest request
+    ) {
+        return this.fabric.categoryWithSortArticlesPage(
+                url,
+                request.getParameter("type"),
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
     }
 
     /**
@@ -225,6 +252,26 @@ public abstract class MainController {
     }
 
     /**
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return
+     */
+    @RequestMapping(
+            value = "/article/all/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getAllSortArticlesPage(
+            final HttpServletRequest request
+    ) {
+        return this.fabric.allSortArticlesPage(
+                request.getParameter("type"),
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
+    }
+
+    /**
      * Returns modelAndView with information about page with main company.
      * Request mapping: /company/main
      * Method: GET
@@ -277,6 +324,25 @@ public abstract class MainController {
     }
 
     /**
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return
+     */
+    @RequestMapping(
+            value = "/company/all/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getAllSortPartnersPage(
+            final HttpServletRequest request
+    ) {
+        return this.fabric.allSortPartnersByTitlePage(
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
+    }
+
+    /**
      * Returns modelAndView with information about page with some company.
      * Request mapping: /company/{url}
      * Method: GET
@@ -289,7 +355,9 @@ public abstract class MainController {
             value = "/company/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getPartnerPage(@PathVariable("url") String url) {
+    public ModelAndView getPartnerPage(
+            @PathVariable("url") String url
+    ) {
         return this.fabric.partnerPage(url);
     }
 
@@ -305,8 +373,27 @@ public abstract class MainController {
             value = "/responses",
             method = RequestMethod.GET
     )
-    public ModelAndView getResponsesPage() {
+    public ModelAndView getAllResponsesPage() {
         return this.fabric.allResponsesPage();
+    }
+
+    /**
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return
+     */
+    @RequestMapping(
+            value = "/responses/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getAllSortResponsesByDatePage(
+            final HttpServletRequest request
+    ) {
+        return this.fabric.allSortResponsesByDatePage(
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
     }
 
     /**
@@ -467,7 +554,7 @@ public abstract class MainController {
      * @see Response
      */
     protected ModelAndView getResponsesMV(final boolean isCaptcha) {
-        final ModelAndView modelAndView = getResponsesPage();
+        final ModelAndView modelAndView = getAllResponsesPage();
         modelAndView.addObject("is_captcha", isCaptcha);
         return modelAndView;
     }

@@ -3,6 +3,8 @@ package com.salimov.yurii.service.data.impl;
 import com.salimov.yurii.dao.interfaces.CompanyDao;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.entity.Model;
+import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
@@ -78,6 +80,20 @@ public final class CompanyServiceImpl
         super(dao);
         this.dao = dao;
         this.fileService = fileService;
+    }
+
+    /**
+     * Returns all or valid partners
+     * depending on the parameter value.
+     *
+     * @param valid is returns all or valid companies.
+     * @return The all models.
+     * @see Model
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<Company> getAll(final boolean valid) {
+        return getPartners(valid);
     }
 
     /**
@@ -383,7 +399,7 @@ public final class CompanyServiceImpl
         if (isValid) {
             companies = companies.stream()
                     .filter(
-                            company -> company.isValidated()
+                            IModel::isValidated
                     )
                     .collect(
                             Collectors.toList()

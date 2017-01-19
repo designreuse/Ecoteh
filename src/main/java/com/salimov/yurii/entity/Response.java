@@ -215,7 +215,7 @@ public final class Response
      * @param date a new date to the article.
      */
     public void setDate(final Date date) {
-        this.date = date == null ? new Date() : date;
+        this.date = date != null ? date : new Date();
     }
 
     /**
@@ -224,7 +224,9 @@ public final class Response
      * @return The article string-date.
      */
     public String getDateToString() {
-        return getDateToString(getDate());
+        return getDateToString(
+                getDate()
+        );
     }
 
     /**
@@ -247,8 +249,11 @@ public final class Response
     public static boolean isValidated(final Response response) {
         boolean result = false;
         if (Model.isValidated(response)) {
-            result = isNotBlank(response.getUsername()) &&
-                    isNotBlank(response.getText());
+            result = ((
+                    isNotBlank(response.getUsername())
+            ) && (
+                    isNotBlank(response.getText())
+            ));
         }
         return result;
     }

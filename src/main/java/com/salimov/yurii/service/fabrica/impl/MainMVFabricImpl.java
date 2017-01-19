@@ -6,6 +6,8 @@ import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * The abstract class implements a set of standard methods for creates
  * and returns the main modelAndViews.
@@ -140,16 +142,35 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public ModelAndView allArticlesPage() {
-        final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject(
-                "articles_list",
-                this.articleService.sortByDate(
-                        this.articleService.getAll(
-                                isValidContent()
-                        ),
-                        true
-                )
-        );
+        final ModelAndView modelAndView = allSortByDateArticlesPage(true);
+        modelAndView.setViewName("client/article/all_page");
+        return modelAndView;
+    }
+
+    /**
+     * @param sortType
+     * @param revers
+     * @return
+     */
+    @Override
+    public ModelAndView allSortArticlesPage(
+            final String sortType,
+            final boolean revers
+    ) {
+        ModelAndView modelAndView;
+        switch (sortType) {
+            case "title":
+                modelAndView = allSortByTitleArticlesPage(revers);
+                break;
+            case "date":
+                modelAndView = allSortByDateArticlesPage(revers);
+                break;
+            case "number":
+                modelAndView = allSortByNumberArticlesPage(revers);
+                break;
+            default:
+                modelAndView = allArticlesPage();
+        }
         modelAndView.setViewName("client/article/all_page");
         return modelAndView;
     }
@@ -197,6 +218,18 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public ModelAndView allPartnersPage() {
+        return allSortPartnersByTitlePage(false);
+    }
+
+    /**
+     *
+     * @param revers
+     * @return
+     */
+    @Override
+    public ModelAndView allSortPartnersByTitlePage(
+            final boolean revers
+    ) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
                 "partners_list",
@@ -204,9 +237,10 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
                         this.companyService.getPartners(
                                 isValidContent()
                         ),
-                        false
+                        revers
                 )
         );
+        modelAndView.addObject("revers", !revers);
         modelAndView.setViewName("client/company/all_page");
         return modelAndView;
     }
@@ -220,23 +254,37 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public ModelAndView categoryPage(final String url) {
-        final ModelAndView modelAndView = getDefaultModelAndView();
-        final Category category = this.categoryService.getByUrl(
-                url,
-                isValidContent()
-        );
-        modelAndView.addObject("category", category);
-        modelAndView.addObject(
-                "articles_list",
-                this.articleService.sortByDate(
-                        isValidContent() ?
-                                this.articleService.filteredByValid(
-                                        category.getArticles()
-                                ) :
-                                category.getArticles(),
-                        true
-                )
-        );
+        final ModelAndView modelAndView = categoryWithSortByDateArticlesPage(url, true);
+        modelAndView.setViewName("client/category/one_page");
+        return modelAndView;
+    }
+
+    /**
+     * @param url
+     * @param sortType
+     * @param revers
+     * @return
+     */
+    @Override
+    public ModelAndView categoryWithSortArticlesPage(
+            final String url,
+            final String sortType,
+            final boolean revers
+    ) {
+        ModelAndView modelAndView;
+        switch (sortType) {
+            case "title":
+                modelAndView = categoryWithSortByTitleArticlesPage(url, revers);
+                break;
+            case "date":
+                modelAndView = categoryWithSortByDateArticlesPage(url, revers);
+                break;
+            case "number":
+                modelAndView = categoryWithSortByNumberArticlesPage(url, revers);
+                break;
+            default:
+                modelAndView = categoryPage(url);
+        }
         modelAndView.setViewName("client/category/one_page");
         return modelAndView;
     }
@@ -303,6 +351,17 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public ModelAndView allResponsesPage() {
+        return allSortResponsesByDatePage(true);
+    }
+
+    /**
+     *
+     * @param revers
+     * @return
+     */
+    public ModelAndView allSortResponsesByDatePage(
+            final boolean revers
+    ) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
                 "responses_list",
@@ -310,9 +369,10 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
                         this.responseService.getAll(
                                 isValidContent()
                         ),
-                        true
+                        revers
                 )
         );
+        modelAndView.addObject("revers", !revers);
         modelAndView.setViewName("client/response/all_page");
         return modelAndView;
     }
@@ -368,6 +428,162 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public abstract void addAuthUser(final ModelAndView modelAndView);
+
+    /**
+     * @param revers
+     * @return
+     */
+    private ModelAndView allSortByTitleArticlesPage(
+            final boolean revers
+    ) {
+        return sortArticlesPage(
+                "title", revers,
+                this.articleService.sortByTitle(
+                        this.articleService.getAll(
+                                isValidContent()
+                        ),
+                        revers
+                )
+        );
+    }
+
+    /**
+     * @param revers
+     * @return
+     */
+    private ModelAndView allSortByDateArticlesPage(
+            final boolean revers
+    ) {
+        return sortArticlesPage(
+                "date", revers,
+                this.articleService.sortByDate(
+                        this.articleService.getAll(
+                                isValidContent()
+                        ),
+                        revers
+                )
+        );
+    }
+
+    /**
+     * @param revers
+     * @return
+     */
+    private ModelAndView allSortByNumberArticlesPage(
+            final boolean revers
+    ) {
+        return sortArticlesPage(
+                "date", revers,
+                this.articleService.sortByNumber(
+                        this.articleService.getAll(
+                                isValidContent()
+                        ),
+                        revers
+                )
+        );
+    }
+
+    /**
+     * @param sortType
+     * @param revers
+     * @param articles
+     * @return
+     */
+    private ModelAndView sortArticlesPage(
+            final String sortType,
+            final boolean revers,
+            final List<Article> articles
+    ) {
+        final ModelAndView modelAndView = getDefaultModelAndView();
+        modelAndView.addObject("articles_list", articles);
+        modelAndView.addObject("sort", sortType);
+        modelAndView.addObject("revers", !revers);
+        return modelAndView;
+    }
+
+    /**
+     * @param url
+     * @param revers
+     * @return
+     */
+    private ModelAndView categoryWithSortByTitleArticlesPage(
+            final String url,
+            final boolean revers
+    ) {
+        final Category category = this.categoryService.getByUrl(
+                url,
+                isValidContent()
+        );
+        final ModelAndView modelAndView = sortArticlesPage(
+                "date", revers,
+                this.articleService.sortByTitle(
+                        isValidContent() ?
+                                this.articleService.filteredByValid(
+                                        category.getArticles()
+                                )
+                                : category.getArticles(),
+                        revers
+                )
+        );
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
+
+    /**
+     * @param url
+     * @param revers
+     * @return
+     */
+    private ModelAndView categoryWithSortByDateArticlesPage(
+            final String url,
+            final boolean revers
+    ) {
+        final Category category = this.categoryService.getByUrl(
+                url,
+                isValidContent()
+        );
+        final ModelAndView modelAndView = sortArticlesPage(
+                "date", revers,
+                this.articleService.sortByDate(
+                        isValidContent() ?
+                                this.articleService.filteredByValid(
+                                        category.getArticles()
+                                )
+                                : category.getArticles(),
+                        revers
+                )
+        );
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
+
+    /**
+     * @param url
+     * @param revers
+     * @return
+     */
+    private ModelAndView categoryWithSortByNumberArticlesPage(
+            final String url,
+            final boolean revers
+    ) {
+        final Category category = this.categoryService.getByUrl(
+                url,
+                isValidContent()
+        );
+        final ModelAndView modelAndView = sortArticlesPage(
+                "date", revers,
+                this.articleService.sortByNumber(
+                        isValidContent() ?
+                                this.articleService.filteredByValid(
+                                        category.getArticles()
+                                )
+                                : category.getArticles(),
+                        revers
+                )
+        );
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
 
     /**
      * Returns page with the article.
