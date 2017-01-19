@@ -10,8 +10,7 @@ import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static org.junit.Assert.assertNotNull;
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhotos;
+import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 
 public class MockFileServiceTest extends MockMediaServiceTest<File> {
@@ -64,7 +63,7 @@ public class MockFileServiceTest extends MockMediaServiceTest<File> {
     public void whenUpdatePhotoThenReturnThisPhoto() {
         assertNotNull(
                 this.service.updatePhoto(
-                        getPhoto(),
+                        getFile(),
                         null,
                         TITLE, PATH
                 )
@@ -80,12 +79,12 @@ public class MockFileServiceTest extends MockMediaServiceTest<File> {
     @Ignore
     @Override
     protected File getObject() {
-        return getPhoto();
+        return getFile();
     }
 
     @Ignore
     @Override
     protected Collection<File> getObjects() {
-        return getPhotos();
+        return getFiles();
     }
 }

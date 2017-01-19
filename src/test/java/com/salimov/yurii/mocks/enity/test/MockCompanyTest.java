@@ -53,10 +53,4 @@ public class MockCompanyTest extends MockModelTest<Company> {
     protected Collection<Company> getObjects() {
         return getCompanies();
     }
-
-    @Ignore
-    @Override
-    protected Collection<Company> getObjects(int size) {
-        return getCompanies(size);
-    }
 }

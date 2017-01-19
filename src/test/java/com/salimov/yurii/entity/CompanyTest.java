@@ -1378,7 +1378,7 @@ public final class CompanyTest extends ContentTest<Company> {
     public void whenSlidesAreValidThenAddThey() {
         final Company company = getCompany();
 
-        final List<File> slides = getPhotos(DEFAULT_SIZE);
+        final List<File> slides = getFiles();
         company.setSlides(slides);
         assertFalse(
                 company.getSlides().isEmpty()

@@ -40,10 +40,4 @@ public class MockArticleTest extends MockModelTest<Article> {
     protected Collection<Article> getObjects() {
         return getArticles();
     }
-
-    @Ignore
-    @Override
-    protected Collection<Article> getObjects(int size) {
-        return getArticles(size);
-    }
 }

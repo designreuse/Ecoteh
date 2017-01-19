@@ -14,8 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Collection;
 
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhotos;
+import static com.salimov.yurii.mocks.enity.MockEntity.*;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,12 +43,12 @@ public class FileDAOImplTest extends MediaDAOImplTest<File> {
     @Ignore
     @Override
     protected File getObject() {
-        return getPhoto();
+        return getFile();
     }
 
     @Ignore
     @Override
     protected Collection<File> getObjects() {
-        return getPhotos();
+        return getFiles();
     }
 }

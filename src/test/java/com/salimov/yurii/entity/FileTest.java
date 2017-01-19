@@ -1,13 +1,14 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.mocks.MockConstants;
-import com.salimov.yurii.mocks.enity.MockEntity;
 import com.salimov.yurii.util.translator.Translator;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.MockConstants.TITLE;
+import static com.salimov.yurii.mocks.MockConstants.URL;
+import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
 
@@ -91,7 +92,7 @@ public final class FileTest extends MediaTest<File> {
     @Test
     @Override
     public void whenSetValidTitleThenGetThisTitle() {
-        final File file = MockEntity.getPhoto();
+        final File file = getFile();
         file.setTitle(TITLE);
         assertNotNull(file.getTitle());
         assertNotNull(file.getUrl());
@@ -103,7 +104,7 @@ public final class FileTest extends MediaTest<File> {
 
     @Test
     public void whenTranslateAndSetInvalidUrlThenGetNull() {
-        final File file = MockEntity.getPhoto();
+        final File file = getFile();
         file.setUrl(null);
         assertNull(file.getUrl());
         file.setUrl("");
@@ -116,7 +117,7 @@ public final class FileTest extends MediaTest<File> {
 
     @Test
     public void whenTranslateAndSetValidUrlThenGetThisUrl() {
-        final File file = MockEntity.getPhoto();
+        final File file = getFile();
         file.setUrl(URL);
         assertNotNull(file.getUrl());
 
@@ -132,6 +133,6 @@ public final class FileTest extends MediaTest<File> {
     @Ignore
     @Override
     protected File getObject() {
-        return MockEntity.getPhoto();
+        return getFile();
     }
 }

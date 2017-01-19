@@ -186,12 +186,12 @@ public final class MockDAO {
     }
 
     private static FileDao initPhotoDAO() {
-        final File file = getPhoto();
+        final File file = getFile();
         final FileDao dao = mock(FileDao.class);
         dataDao(
                 dao,
                 file,
-                getPhotos()
+                getFiles()
         );
         when(
                 dao.getByTitle(TITLE)

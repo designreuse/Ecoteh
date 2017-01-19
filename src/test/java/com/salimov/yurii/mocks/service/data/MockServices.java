@@ -217,9 +217,9 @@ public final class MockServices {
     }
 
     private static FileService initPhotoService() {
-        final File file = getPhoto();
+        final File file = getFile();
         final FileService fileService = mock(FileService.class);
-        mediaService(fileService, file, getPhotos());
+        mediaService(fileService, file, getFiles());
         when(
                 fileService.initAndAdd(TITLE, URL, null)
         ).thenReturn(file);

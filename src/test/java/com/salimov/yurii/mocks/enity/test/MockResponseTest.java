@@ -34,10 +34,4 @@ public class MockResponseTest extends MockModelTest<Response> {
     protected Collection<Response> getObjects() {
         return getResponses();
     }
-
-    @Ignore
-    @Override
-    protected Collection<Response> getObjects(int size) {
-        return getResponses(size);
-    }
 }

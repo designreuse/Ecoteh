@@ -41,10 +41,4 @@ public class MockUserTest extends MockModelTest<User> {
     protected Collection<User> getObjects() {
         return MockEntity.getUsers();
     }
-
-    @Ignore
-    @Override
-    protected Collection<User> getObjects(int size) {
-        return MockEntity.getUsers(size);
-    }
 }

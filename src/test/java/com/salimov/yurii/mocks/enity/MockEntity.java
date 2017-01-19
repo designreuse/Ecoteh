@@ -12,30 +12,154 @@ import static com.salimov.yurii.mocks.MockConstants.*;
 @Ignore
 public final class MockEntity {
 
-    private final static Random random = new Random(System.nanoTime());
+    private final static Random RANDOM = new Random(System.nanoTime());
+
+    private static Article article;
+    private static Category category;
+    private static Company company;
+    private static File file;
+    private static Message message;
+    private static Response response;
+    private static User user;
+
+    private static List<Article> articles;
+    private static List<Category> categories;
+    private static List<Company> companies;
+    private static List<File> files;
+    private static List<Message> messages;
+    private static List<Response> responses;
+    private static List<User> users;
 
     public static Article getArticle() {
-        final Article article = new Article(
+        if (article == null) {
+            initArticle();
+        }
+        return article.clone();
+    }
+
+    public static Category getCategory() {
+        if (category == null) {
+            initCategory();
+        }
+        return category.clone();
+    }
+
+    public static Company getCompany() {
+        if (company == null) {
+            initCompany();
+        }
+        return company.clone();
+    }
+
+    public static Message getMessage() {
+        if (message == null) {
+            initMessage();
+        }
+        return message.clone();
+    }
+
+    public static File getFile() {
+        if (file == null) {
+            initFile();
+        }
+        return file.clone();
+    }
+
+    public static Response getResponse() {
+        if (response == null) {
+            initResponse();
+        }
+        return response.clone();
+    }
+
+    public static User getUser() {
+        if (user == null) {
+            initUser();
+        }
+        return user.clone();
+    }
+
+    public static List<Article> getArticles() {
+        if (articles == null || articles.isEmpty()) {
+            initArticles();
+        }
+        return new ArrayList<>(articles);
+    }
+
+    public static List<Category> getCategories() {
+        if (categories == null || categories.isEmpty()) {
+            initCategories();
+        }
+        return new ArrayList<>(categories);
+    }
+
+    public static List<Company> getCompanies() {
+        if (companies == null || companies.isEmpty()) {
+            initCompanies();
+        }
+        return new ArrayList<>(companies);
+    }
+
+    public static List<Message> getMessages() {
+        if (messages == null || messages.isEmpty()) {
+            initMessages();
+        }
+        return new ArrayList<>(messages);
+    }
+
+    public static List<File> getFiles() {
+        if (files == null || files.isEmpty()) {
+            initFiles();
+        }
+        return new ArrayList<>(files);
+    }
+
+    public static List<Response> getResponses() {
+        if (responses == null || responses.isEmpty()) {
+            initResponses();
+        }
+        return new ArrayList<>(responses);
+    }
+
+    public static List<User> getUsers() {
+        if (users == null || users.isEmpty()) {
+            initUsers();
+        }
+        return new ArrayList<>(users);
+    }
+
+    public static int getRandomInt(final int length) {
+        int number = 0;
+        for (int i = 0; i < (length > 0 ? length : 10); i++) {
+            number += (RANDOM.nextInt(8) + 1) * (int) Math.pow(10, i);
+        }
+        return number;
+    }
+
+    public static int getRandomInt() {
+        return getRandomInt(10);
+    }
+
+    private static void initArticle() {
+        article = new Article(
                 TITLE, DESCRIPTION,
                 TEXT, KEYWORDS, NUMBER
         );
         article.setId(ID);
         article.setUrl(URL);
-        return article;
     }
 
-    public static Category getCategory() {
-        final Category category = new Category(
+    private static void initCategory() {
+        category = new Category(
                 TITLE, DESCRIPTION, KEYWORDS
         );
         category.setId(ID);
         category.setUrl(URL);
         category.setPhotoUrl(PHOTO_URL);
-        return category;
     }
 
-    public static Company getCompany() {
-        final Company company = new Company();
+    private static void initCompany() {
+        company = new Company();
         company.initialize(
                 TITLE, DOMAIN,
                 TAGLINE, DESCRIPTION, INFORMATION,
@@ -49,33 +173,29 @@ public final class MockEntity {
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
         company.setWorkTimeTo(TIME);
-        company.addSlide(getPhoto());
-        return company;
+        company.addSlide(getFile());
     }
 
-    public static Message getMessage() {
-        final Message message = new Message(
+    private static void initMessage() {
+        message = new Message(
                 NAME, EMAIL, PHONE,
                 ANY_STRING, TEXT
         );
         message.setId(ID);
-        return message;
     }
 
-    public static File getPhoto() {
-        final File file = new File(TITLE, URL);
+    private static void initFile() {
+        file = new File(TITLE, URL);
         file.setId(ID);
-        return file;
     }
 
-    public static Response getResponse() {
-        final Response response = new Response(NAME, TEXT);
+    private static void initResponse() {
+        response = new Response(NAME, TEXT);
         response.setId(ID);
-        return response;
     }
 
-    public static User getUser() {
-        final User user = new User();
+    private static void initUser() {
+        user = new User();
         user.setId(ID);
         user.initialize(
                 NAME, LOGIN, PASSWORD,
@@ -84,16 +204,11 @@ public final class MockEntity {
                 DESCRIPTION
         );
         user.setRole(USER_ROLE);
-        return user;
     }
 
-    public static List<Article> getArticles() {
-        return getArticles(DEFAULT_SIZE);
-    }
-
-    public static List<Article> getArticles(final int size) {
-        final List<Article> articles = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+    private static void initArticles() {
+        articles = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             final Article article = getArticle();
             article.setId((long) i);
             article.setTitle(
@@ -102,16 +217,11 @@ public final class MockEntity {
             article.newNumber();
             articles.add(article);
         }
-        return articles;
     }
 
-    public static List<Category> getCategories() {
-        return getCategories(DEFAULT_SIZE);
-    }
-
-    public static List<Category> getCategories(final int size) {
-        final List<Category> categories = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+    private static void initCategories() {
+        categories = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             final Category category = getCategory();
             category.setId((long) i);
             category.setTitle(
@@ -119,16 +229,10 @@ public final class MockEntity {
             );
             categories.add(category);
         }
-        return categories;
     }
-
-    public static List<Company> getCompanies() {
-        return getCompanies(DEFAULT_SIZE);
-    }
-
-    public static List<Company> getCompanies(final int size) {
-        final List<Company> companies = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+    private static void initCompanies() {
+        companies = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             final Company company = getCompany();
             company.setId((long) i);
             company.setTitle(
@@ -136,16 +240,10 @@ public final class MockEntity {
             );
             companies.add(company);
         }
-        return companies;
     }
-
-    public static List<Message> getMessages() {
-        return getMessages(DEFAULT_SIZE);
-    }
-
-    public static List<Message> getMessages(final int size) {
-        final List<Message> messages = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+    private static void initMessages() {
+        messages = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             final Message message = getMessage();
             message.setId((long) i);
             message.setSubject(
@@ -153,33 +251,22 @@ public final class MockEntity {
             );
             messages.add(message);
         }
-        return messages;
     }
-
-    public static List<File> getPhotos() {
-        return getPhotos(DEFAULT_SIZE);
-    }
-
-    public static List<File> getPhotos(final int size) {
-        final List<File> files = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            final File file = getPhoto();
+    private static void initFiles() {
+        files = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
+            final File file = getFile();
             file.setId((long) i);
             file.setTitle(
                     file.getTitle() + " " + getRandomInt()
             );
             files.add(file);
         }
-        return files;
     }
 
-    public static List<Response> getResponses() {
-        return getResponses(DEFAULT_SIZE);
-    }
-
-    public static List<Response> getResponses(final int size) {
-        final List<Response> responses = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+    private static void initResponses() {
+        responses = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             final Response response = getResponse();
             response.setId((long) i);
             response.setUsername(
@@ -187,16 +274,11 @@ public final class MockEntity {
             );
             responses.add(response);
         }
-        return responses;
     }
 
-    public static List<User> getUsers() {
-        return getUsers(DEFAULT_SIZE);
-    }
-
-    public static List<User> getUsers(final int size) {
-        final List<User> users = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+    private static void initUsers() {
+        users = new ArrayList<>();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             final User user = getUser();
             user.setId((long) i);
             user.setName(
@@ -210,18 +292,5 @@ public final class MockEntity {
             );
             users.add(user);
         }
-        return users;
-    }
-
-    public static int getRandomInt(final int length) {
-        int number = 0;
-        for (int i = 0; i < (length > 0 ? length : 10); i++) {
-            number += (random.nextInt(8) + 1) * (int) Math.pow(10, i);
-        }
-        return number;
-    }
-
-    public static int getRandomInt() {
-        return getRandomInt(10);
     }
 }

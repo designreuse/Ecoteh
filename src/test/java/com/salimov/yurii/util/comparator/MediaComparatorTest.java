@@ -2,13 +2,14 @@ package com.salimov.yurii.util.comparator;
 
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.Media;
-import com.salimov.yurii.mocks.MockConstants;
-import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Comparator;
 
+import static com.salimov.yurii.mocks.MockConstants.TITLE;
+import static com.salimov.yurii.mocks.MockConstants.URL;
+import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -25,13 +26,13 @@ public class MediaComparatorTest {
         Comparator<Media> comparator = new MediaComparator.ByTitle<>();
         assertNotNull(comparator);
 
-        final File file1 = MockEntity.getPhoto();
-        final File file2 = MockEntity.getPhoto();
+        final File file1 = getFile();
+        final File file2 = getFile();
         int value = comparator.compare(file1, file2);
         assertEquals(value, 0);
 
-        final String title1 = MockConstants.TITLE + " 1";
-        final String title2 = MockConstants.TITLE + " 2";
+        final String title1 = TITLE + " 1";
+        final String title2 = TITLE + " 2";
         file1.setTitle(title1);
         file2.setTitle(title2);
         value = comparator.compare(file1, file2);
@@ -54,13 +55,13 @@ public class MediaComparatorTest {
         Comparator<Media> comparator = new MediaComparator.ByUrl<>();
         assertNotNull(comparator);
 
-        final File file1 = MockEntity.getPhoto();
-        final File file2 = MockEntity.getPhoto();
+        final File file1 = getFile();
+        final File file2 = getFile();
         int value = comparator.compare(file1, file2);
         assertEquals(value, 0);
 
-        final String url1 = MockConstants.URL + " 1";
-        final String url2 = MockConstants.URL + " 2";
+        final String url1 = URL + " 1";
+        final String url2 = URL + " 2";
         file1.setUrl(url1);
         file2.setUrl(url2);
         value = comparator.compare(file1, file2);
@@ -84,7 +85,7 @@ public class MediaComparatorTest {
         assertNotNull(value);
         assertEquals(value, 0);
 
-        final File file = MockEntity.getPhoto();
+        final File file = getFile();
         value = comparator.compare(file, null);
         assertNotNull(value);
         assertEquals(value, 1);

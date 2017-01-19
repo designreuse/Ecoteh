@@ -22,8 +22,6 @@ public abstract class MockModelTest<T extends Model<Long>> {
     public void whenGetObjectsThenReturnSomeModels() {
         Collection<T> articles = getObjects();
         assertNotNull(articles);
-        articles = getObjects(DEFAULT_SIZE);
-        assertNotNull(articles);
         assertEquals(articles.size(), DEFAULT_SIZE);
     }
 
@@ -35,7 +33,4 @@ public abstract class MockModelTest<T extends Model<Long>> {
 
     @Ignore
     protected abstract Collection<T> getObjects();
-
-    @Ignore
-    protected abstract Collection<T> getObjects(int size);
 }

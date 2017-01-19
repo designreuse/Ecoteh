@@ -7,8 +7,7 @@ import com.salimov.yurii.entity.File;
 
 import java.util.Collection;
 
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhoto;
-import static com.salimov.yurii.mocks.enity.MockEntity.getPhotos;
+import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static com.salimov.yurii.mocks.dao.MockDAO.getFileDAO;
 
 public class MockFileDAOTest extends MockMediaDAOTest<File> {
@@ -29,12 +28,12 @@ public class MockFileDAOTest extends MockMediaDAOTest<File> {
     @Ignore
     @Override
     protected File getObject() {
-        return getPhoto();
+        return getFile();
     }
 
     @Ignore
     @Override
     protected Collection<File> getObjects() {
-        return getPhotos();
+        return getFiles();
     }
 }
