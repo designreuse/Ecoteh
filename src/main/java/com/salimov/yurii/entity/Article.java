@@ -156,6 +156,16 @@ public final class Article
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Article clone() {
+        return (Article) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the article.
      *
      * @param title       a new title to the article.

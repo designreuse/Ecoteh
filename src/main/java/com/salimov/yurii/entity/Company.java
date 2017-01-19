@@ -355,6 +355,16 @@ public final class Company
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Company clone() {
+        return (Company) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the company.
      *
      * @param title         a new title to the company.

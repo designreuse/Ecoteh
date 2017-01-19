@@ -74,6 +74,16 @@ public final class Category
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Category clone() {
+        return (Category) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the category.
      *
      * @param title       a new title of the category.

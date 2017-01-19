@@ -68,4 +68,14 @@ public final class File
         }
         setUrl(newUrl);
     }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public File clone() {
+        return (File) super.clone();
+    }
 }

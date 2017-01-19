@@ -124,6 +124,16 @@ public abstract class Media<E extends Number>
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Media clone() {
+        return (Media) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the media.
      *
      * @param title a new title to the media.

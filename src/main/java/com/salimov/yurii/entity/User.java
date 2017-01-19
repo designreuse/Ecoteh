@@ -242,6 +242,16 @@ public final class User
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public User clone() {
+        return (User) super.clone();
+    }
+
+    /**
      * Indicates whether the user's account has expired.
      * An expired account cannot be authenticated.
      *

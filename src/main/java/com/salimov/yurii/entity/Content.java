@@ -142,6 +142,16 @@ public abstract class Content<E extends Number>
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Content clone() {
+        return (Content) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the content.
      *
      * @param title       a new title to the content.

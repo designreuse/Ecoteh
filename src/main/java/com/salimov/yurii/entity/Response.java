@@ -136,6 +136,16 @@ public final class Response
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Response clone() {
+        return (Response) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the response.
      * Also adds new date.
      *

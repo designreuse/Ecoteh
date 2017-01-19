@@ -182,6 +182,16 @@ public final class Message
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Message clone() {
+        return (Message) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the article.
      *
      * @param username a name of the client.
