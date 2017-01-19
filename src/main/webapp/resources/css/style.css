@@ -338,7 +338,7 @@ optgroup {
 .glyphicon {
     position: relative;
     top: 1px;
-    display: inline-block;
+    /*display: inline-block;*/
     font-family: 'Glyphicons Halflings';
     font-style: normal;
     font-weight: normal;
@@ -544,6 +544,7 @@ h1 {
     margin: .67em 0;
     font-size: 2em
 }
+
 /*
 h1, h2, h3 {
     text-transform: uppercase
@@ -611,7 +612,7 @@ table {
 }
 
 p,
-.text-indent{
+.text-indent {
     text-indent: 2em;
 }
 
@@ -1217,6 +1218,7 @@ table {
 table.table-size {
     width: 70%
 }
+
 /*
 th {
     text-align: left
@@ -2971,9 +2973,9 @@ a.label:focus {
 
 .video-frame {
     max-width: 500px;
+    min-width: 300px;
     max-height: 300px;
-    min-height: 250px;
-    margin-bottom: 10px
+    min-height: 250px
 }
 
 .no-valid {
