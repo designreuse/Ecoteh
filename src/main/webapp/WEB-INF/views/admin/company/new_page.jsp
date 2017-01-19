@@ -89,7 +89,7 @@
                                         <span class="red">*</span>&nbsp;Ключевые слова
                                     </td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="keywords" rows="5" title=""
+                                        <textarea class="form-control textarea" name="keywords" rows="7" title=""
                                                   required
                                                   placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
                                     </td>
@@ -188,7 +188,7 @@
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="google_maps" title=""
                                                   placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
-                                                  rows="5"></textarea>
+                                                  rows="4"></textarea>
                                     </td>
                                 </tr>
                                 <tr>

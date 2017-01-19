@@ -19,9 +19,10 @@
                     <hr>
                     <c:forEach items="${responses}" var="response" end="${print_responses - 1}">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <p class="response green">
-                                <c:out value="${response.dateToString}"/>,&nbsp;&nbsp;<c:out
-                                    value="${response.username}"/></p>
+                            <p>
+                                <span class="response green"><c:out value="${response.username}"/></span>&nbsp;
+                                <span class="little">(<c:out value="${response.dateToString}"/>)</span>
+                            </p>
                             <p class="response"><c:out value="${response.text}"/></p><br>
                         </div>
                     </c:forEach>

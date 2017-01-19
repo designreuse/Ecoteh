@@ -168,7 +168,8 @@ public abstract class MainControllerTest {
     @Test
     public void whenGetResponsesPageThenReturnSomeModelAndViewWithAllResponse() {
         checkModelAndView(
-                getController().getResponsesPage(),
+                getController()
+                        .getAllResponsesPage(),
                 "client/response/all_page",
                 new String[]{
                         "responses_list",

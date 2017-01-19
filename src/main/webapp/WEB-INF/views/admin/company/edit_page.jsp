@@ -56,8 +56,8 @@
                             <c:when test="${main}"><c:set var="com" value="main"/></c:when>
                             <c:otherwise><c:set var="com" value="${company.url}"/></c:otherwise>
                         </c:choose>
-                        Редактировать&nbsp;&quot;<a href="<c:url value="/admin/company/${com}"/>">
-                        <c:out value="${company.title}"/></a>&quot;
+                        Редактировать&nbsp;&quot;<a href="<c:url value="/admin/company/${com}"/>"><c:out
+                            value="${company.title}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
@@ -113,7 +113,7 @@
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="5"><c:out value="${company.keywords}"/></textarea>
+                                              rows="7"><c:out value="${company.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <c:if test="${main}">
@@ -255,7 +255,7 @@
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="google_maps" title=""
                                               placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
-                                              rows="5"><c:out value="${company.googleMaps}"/></textarea>
+                                              rows="4"><c:out value="${company.googleMaps}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -267,13 +267,15 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <a href="<c:url value="/${company.logoUrl}"/>"
-                                           title="<c:out value="${company.title}"/>" rel="lightgallery">
-                                            <img src="<c:url value="/${company.logoUrl}"/>"
-                                                 class="main-logo" alt="" title="Увеличить"
-                                                 onerror="this.src='<c:url
-                                                         value="/resources/img/static/default_file.gif"/>'">
-                                        </a><br><br>
+                                        <c:if test="${company.logoUrl ne null}">
+                                            <a href="<c:url value="/${company.logoUrl}"/>"
+                                               title="<c:out value="${company.title}"/>" rel="lightgallery">
+                                                <img src="<c:url value="/${company.logoUrl}"/>"
+                                                     class="main-logo" alt="" title="Увеличить"
+                                                     onerror="this.src='<c:url
+                                                             value="/resources/img/static/default_file.gif"/>'">
+                                            </a><br><br>
+                                        </c:if>
                                         <input type="text" class="form-control" name="logo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на логотип компании"
                                                value="<c:out value="${company.logoUrl}"/>">

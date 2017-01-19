@@ -58,7 +58,7 @@
                             </c:forEach>
                             <li class="text-center">
                                 <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех товаров">
-                                    <h4 class="text-center">Продукция</h4>
+                                    <h4 class="text-center">Все товары</h4>
                                 </a>
                             </li>
                         </ul>

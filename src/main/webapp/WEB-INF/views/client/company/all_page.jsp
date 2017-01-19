@@ -18,9 +18,8 @@
         <meta name="keywords"
               content="Партнеры<c:forEach items="${partners_list}" var="partner">, <c:out value="${partner.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -59,7 +58,7 @@
                     </c:if>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Партнеры</a>
+                        → <a href="<c:url value="${reqmap}/company/all"/>">Партнеры</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
@@ -71,6 +70,13 @@
                                  src="<c:url value="/resources/img/static/ukraine.gif"/>">
                         </a>
                     </div>
+                    <c:if test="${length gt 1}">
+                        <p class="path">
+                            <a href="#">Сортировка</a>:
+                            <a href="<c:url value="${reqmap}/company/all/sort?revers=${revers}"/>"
+                               title="Сортировать по названию">По названия</a>
+                        </p>
+                    </c:if>
                     <div class="clearfix"></div>
                 </div>
             </div>

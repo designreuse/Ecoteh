@@ -18,9 +18,8 @@
         <meta name="keywords"
               content="Категория<c:out value=", ${category.title}, ${category.keywords}"/><c:forEach items="${articles_list}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -29,8 +28,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="
-        <c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -71,16 +69,33 @@
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="${reqmap}/category/all"/>"
                              title="Перейти к всем категориям">Все категории</a>
-                        → <a href="#"><c:out value="${category.title}"/></a>
+                        →
+                        <a href="<c:url value="${reqmap}/category/${category.url}"/>">
+                            <c:out value="${category.title}"/>
+                        </a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
+                        <c:set var="length" value="${fn:length(articles_list)}"/>
                         <h3 class="text-center">
                             <c:out value="${category.title}"/><c:if
-                                test="${fn:length(articles_list) le 0}"> - список пуст!</c:if>
+                                test="${length le 0}"> - список пуст!</c:if>
                         </h3>
                         <hr>
                     </div>
+                    <c:if test="${length gt 1}">
+                        <p class="path">
+                            <a href="#">Сортировка</a>:
+                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=title&revers=${revers}"/>"
+                               title="Сортировать по названию">По названия</a>
+                            |
+                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=date&revers=${revers}"/>"
+                               title="Сортировать по дате">По дате</a>
+                            |
+                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=number&revers=${revers}"/>"
+                               title="Сортировать по номеру (артиклю)">По номеру</a>
+                        </p>
+                    </c:if>
                     <div class="clearfix"></div>
                 </div>
             </div>

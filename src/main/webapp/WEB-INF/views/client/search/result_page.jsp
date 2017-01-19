@@ -3,6 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
+<c:set var="categories_length" value="${fn:length(categories_list)}"/>
+<c:set var="articles_length" value="${fn:length(articles_list)}"/>
+<c:set var="partners_length" value="${fn:length(partners_list)}"/>
+<c:set var="users_length" value="${fn:length(users_list)}"/>
+<c:set var="result"
+       value="${(categories_length gt 0) or (articles_length gt 0) or (partners_length gt 0) or (users_length gt 0)}"/>
+
 <compress:html removeIntertagSpaces="true">
     <!DOCTYPE HTML>
     <html lang="ru">
@@ -17,9 +24,8 @@
         <meta name="description" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -28,15 +34,12 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <c:if test="${result}">
+            <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
+        </c:if>
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:set var="categories_length" value="${fn:length(categories_list)}"/>
-    <c:set var="articles_length" value="${fn:length(articles_list)}"/>
-    <c:set var="partners_length" value="${fn:length(partners_list)}"/>
-    <c:set var="users_length" value="${fn:length(users_list)}"/>
-    <c:set var="result"
-           value="${(categories_length gt 0) or (articles_length gt 0) or (partners_length gt 0) or (users_length gt 0)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
@@ -121,7 +124,7 @@
     <c:if test="${result}">
         <c:if test="${categories_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                <jsp:include page="/WEB-INF/views/client/category/list_to_search.jsp"/>
             </div>
         </c:if>
         <c:if test="${articles_length gt 0}">
@@ -150,8 +153,11 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    <c:if test="${result}">
+        <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+        <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    </c:if>
     </body>
     </html>
 </compress:html>

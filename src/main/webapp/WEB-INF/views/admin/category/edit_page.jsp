@@ -77,7 +77,7 @@
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="5"><c:out value="${category.keywords}"/></textarea>
+                                              rows="7"><c:out value="${category.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>

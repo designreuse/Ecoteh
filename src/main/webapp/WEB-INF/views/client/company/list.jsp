@@ -9,15 +9,6 @@
             <div class="box">
                 <c:forEach items="${partners_list}" var="partner">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <c:if test="${partner.logo ne null}">
-                            <a href="<c:url value="${reqmap}/company/${partner.url}"/>">
-                                <img class="img-responsive img-left logo-in-list"
-                                     alt="<c:out value="${partner.title}"/>"
-                                     src="<c:url value="/${partner.logo.url}"/>"
-                                     onerror="this.src='<c:url
-                                             value="/resources/img/static/default_file.gif"/>'">
-                            </a>
-                        </c:if>
                         <h3 class="text-center">
                             <b><a href="<c:url value="${reqmap}/company/${partner.url}"/>">
                                 <c:out value="${partner.title}"/>

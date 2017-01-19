@@ -19,9 +19,8 @@
         <meta name="keywords"
               content="<c:out value="${main_company.title}"/><c:forEach items="${articles_list}" var="article">, <c:out value="${article.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="/resources/<c:out value="${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="/resources/<c:out value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="/<c:out value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="/<c:out value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -59,13 +58,24 @@
                     </c:if>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Все товары</a>
+                        → <a href="<c:url value="${reqmap}/article/all"/>">Все товары</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
                         <h3 class="text-center">Все товары<c:if test="${length le 0}"> - список пуст!</c:if></h3>
                         <hr>
                     </div>
+                    <c:if test="${length gt 1}">
+                        <p class="path">
+                            <a href="#">Сортировка</a>:
+                            <a href="<c:url value="${reqmap}/article/all/sort?type=title&revers=${revers}"/>"
+                               title="Сортировать по названию">По названия</a>
+                            | <a href="<c:url value="${reqmap}/article/all/sort?type=date&revers=${revers}"/>"
+                                 title="Сортировать по дате">По дате</a>
+                            | <a href="<c:url value="${reqmap}/article/all/sort?type=number&revers=${revers}"/>"
+                                 title="Сортировать по номеру (артиклю)">По номеру</a>
+                        </p>
+                    </c:if>
                     <div class="clearfix"></div>
                 </div>
             </div>

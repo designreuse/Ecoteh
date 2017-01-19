@@ -82,8 +82,8 @@
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${main_company.faviconUrl ne null}">
-                                            <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/${main_company.faviconUrl}"/>">
+                                            <img src="<c:url value="/${main_company.faviconUrl}"/>"
+                                                 class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -129,8 +129,8 @@
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${main_company.faviconUrl ne null}">
-                                            <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/${main_company.faviconUrl}"/>">
+                                            <img src="<c:url value="/${main_company.faviconUrl}"/>"
+                                                 class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -141,7 +141,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex.png"/>"
+                                <img src="<c:url value="/resources/img/static/mr_alex.png"/>" class="icon-size"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>
