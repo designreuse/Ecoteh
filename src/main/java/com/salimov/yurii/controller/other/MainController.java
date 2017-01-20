@@ -169,7 +169,9 @@ public abstract class MainController {
             value = "/category/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getCategoryPage(@PathVariable("url") final String url) {
+    public ModelAndView getCategoryPage(
+            @PathVariable("url") final String url
+    ) {
         return this.fabric.categoryPage(url);
     }
 
@@ -178,7 +180,9 @@ public abstract class MainController {
      * Request mapping: /category/{url}
      * Method: GET
      *
-     * @param url a url of the category to return.
+     * @param url     a url of the category to return.
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
      * @see Category
      */
@@ -212,7 +216,9 @@ public abstract class MainController {
             value = "/article/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getArticlePage(@PathVariable("url") final String url) {
+    public ModelAndView getArticlePage(
+            @PathVariable("url") final String url
+    ) {
         return this.fabric.articleByUrlPage(url);
     }
 
@@ -252,9 +258,15 @@ public abstract class MainController {
     }
 
     /**
+     * Returns modelAndView with information about page with
+     * all sorted article.
+     * Request mapping: /article/all/sort
+     * Method: GET
+     *
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return
+     * @return The ready object of class ModelAndView.
+     * @see Article
      */
     @RequestMapping(
             value = "/article/all/sort",
@@ -324,9 +336,15 @@ public abstract class MainController {
     }
 
     /**
+     * Returns modelAndView with information about page with
+     * all sorted partner-companies.
+     * Request mapping: /company/all/sort
+     * Method: GET
+     *
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return
+     * @return The ready object of class ModelAndView.
+     * @see Company
      */
     @RequestMapping(
             value = "/company/all/sort",
@@ -378,9 +396,15 @@ public abstract class MainController {
     }
 
     /**
+     * Returns modelAndView with information about page with
+     * all sorted responses.
+     * Request mapping: /responses/sort
+     * Method: GET
+     *
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return
+     * @return The ready object of class ModelAndView.
+     * @see Response
      */
     @RequestMapping(
             value = "/responses/sort",
@@ -412,7 +436,10 @@ public abstract class MainController {
      * @param isCaptcha a result of google-captcha verification.
      * @return The ready object of class ModelAndView.
      */
-    protected ModelAndView getMessageMV(String url, boolean isCaptcha) {
+    protected ModelAndView getMessageMV(
+            final String url,
+            final boolean isCaptcha
+    ) {
         ModelAndView modelAndView = new ModelAndView();
         if (isNotBlank(url)) {
             switch (url) {
@@ -458,11 +485,8 @@ public abstract class MainController {
             final String subject = "New Message";
             sendToEmail(subject, _text);
             saveMess(
-                    name,
-                    phone,
-                    email,
-                    userMessage,
-                    subject
+                    name, phone, email,
+                    userMessage, subject
             );
         }).start();
     }
@@ -487,11 +511,8 @@ public abstract class MainController {
     ) {
         this.messageService.add(
                 new Message(
-                        name,
-                        email,
-                        phone,
-                        subject,
-                        text
+                        name, email, phone,
+                        subject, text
                 )
         );
     }
@@ -503,7 +524,10 @@ public abstract class MainController {
      * @param text a text of response.
      * @see Response
      */
-    protected void sendResp(final String name, final String text) {
+    protected void sendResp(
+            final String name,
+            final String text
+    ) {
         new Thread(() -> {
             sendToEmail(
                     "New Response",
@@ -522,7 +546,10 @@ public abstract class MainController {
      * @see ResponseService
      * @see Response
      */
-    private void saveResp(final String name, final String text) {
+    private void saveResp(
+            final String name,
+            final String text
+    ) {
         this.responseService.add(
                 new Response(name, text)
         );
@@ -535,7 +562,10 @@ public abstract class MainController {
      * @param subject a subject of message.
      * @param text    a text of message.
      */
-    private void sendToEmail(final String subject, final String text) {
+    private void sendToEmail(
+            final String subject,
+            final String text
+    ) {
         final Company mainCompany = this.companyService.getMainCompany();
         this.senderService.send(
                 subject + " | " + mainCompany.getTitle(),
