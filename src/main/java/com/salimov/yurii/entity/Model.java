@@ -17,7 +17,6 @@ import java.util.TimeZone;
  * @param <E> Model id type, extends Number.
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
- * @see Media
  * @see Content
  * @see Article
  * @see Category

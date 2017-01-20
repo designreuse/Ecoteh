@@ -20,6 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Article
  * @see Category
  * @see Company
+ * @see IContent
  */
 @MappedSuperclass
 public abstract class Content<E extends Number>
