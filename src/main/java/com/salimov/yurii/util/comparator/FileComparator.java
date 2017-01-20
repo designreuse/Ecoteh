@@ -1,50 +1,50 @@
 package com.salimov.yurii.util.comparator;
 
-import com.salimov.yurii.entity.Media;
+import com.salimov.yurii.entity.File;
 
 import java.util.Comparator;
 
 /**
  * The class implements a set of methods
- * for working with comparators for {@link Media}.
+ * for working with comparators for {@link File}.
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
- * @see Media
+ * @see File
  */
-public final class MediaComparator {
+public final class FileComparator {
 
     /**
-     * The class implements a method
-     * for working with comparator for {@link Media} by title.
+     * The class implements a method for working 
+     * with comparator for {@link File} by title.
      *
-     * @see Media
+     * @see File
      */
-    public final static class ByTitle<T extends Media> implements Comparator<T> {
+    public final static class ByTitle<T extends File> implements Comparator<T> {
 
         /**
          * Compares its two arguments for order.
          *
-         * @param media1 The first object to be compared.
-         * @param media2 The second object to be compared.
+         * @param file1 The first object to be compared.
+         * @param file2 The second object to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Media
+         * @see File
          */
         @Override
-        public int compare(final T media1, final T media2) {
+        public int compare(final T file1, final T file2) {
             int result;
-            if (media1 == null && media2 == null) {
+            if (file1 == null && file2 == null) {
                 result = 0;
-            } else if (media1 == null) {
+            } else if (file1 == null) {
                 result = -1;
-            } else if (media2 == null) {
+            } else if (file2 == null) {
                 result = 1;
             } else {
-                result = media1.getTitle()
+                result = file1.getTitle()
                         .compareToIgnoreCase(
-                                media2.getTitle()
+                                file2.getTitle()
                         );
             }
             return result;
@@ -53,35 +53,35 @@ public final class MediaComparator {
 
     /**
      * The class implements a method for working
-     * with comparator for {@link Media} by url.
+     * with comparator for {@link File} by url.
      *
-     * @see Media
+     * @see File
      */
-    public final static class ByUrl<T extends Media> implements Comparator<T> {
+    public final static class ByUrl<T extends File> implements Comparator<T> {
 
         /**
          * Compares its two arguments for order.
          *
-         * @param media1 The first object to be compared.
-         * @param media2 The second object to be compared.
+         * @param file1 The first object to be compared.
+         * @param file2 The second object to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Media
+         * @see File
          */
         @Override
-        public int compare(final T media1, final T media2) {
+        public int compare(final T file1, final T file2) {
             int result;
-            if (media1 == null && media2 == null) {
+            if (file1 == null && file2 == null) {
                 result = 0;
-            } else if (media1 == null) {
+            } else if (file1 == null) {
                 result = -1;
-            } else if (media2 == null) {
+            } else if (file2 == null) {
                 result = 1;
             } else {
-                result = media1.getUrl()
+                result = file1.getUrl()
                         .compareTo(
-                                media2.getUrl()
+                                file2.getUrl()
                         );
             }
             return result;

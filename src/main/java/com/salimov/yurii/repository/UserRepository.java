@@ -32,7 +32,7 @@ public interface UserRepository
      * @return The object of class {@link User}.
      * @see User
      */
-    User findByLogin(final String login);
+    User findByEncryptedLogin(final String login);
 
     /**
      * Returns user from a database,
@@ -80,7 +80,7 @@ public interface UserRepository
      * @param login a login of the user to remove.
      * @see User
      */
-    void deleteByLogin(final String login);
+    void deleteByEncryptedLogin(final String login);
 
     /**
      * Removes user from a database,
