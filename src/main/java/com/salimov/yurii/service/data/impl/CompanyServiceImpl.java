@@ -8,14 +8,11 @@ import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
-import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,34 +49,21 @@ public final class CompanyServiceImpl
     private final CompanyDao dao;
 
     /**
-     * The interface of the service layer,
-     * describes a set of methods for working
-     * with objects of the class {@link File}.
-     *
-     * @see FileService
-     */
-    private final FileService fileService;
-
-    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
      * @param dao         a implementation
      *                    of the {@link CompanyDao} interface.
-     * @param fileService a implementation
-     *                    of the {@link FileService} interface.
      * @see CompanyDao
      * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CompanyServiceImpl(
-            final CompanyDao dao,
-            final FileService fileService
+            final CompanyDao dao
     ) {
         super(dao);
         this.dao = dao;
-        this.fileService = fileService;
     }
 
     /**
@@ -249,8 +233,7 @@ public final class CompanyServiceImpl
      * @param googleMaps    a new google maps url to the main company.
      * @param logoUrl       a new logo URL to the main company.
      * @param faviconUrl    a new favicon URL to the main company.
-     * @param slideFiles    a files of slides to the main company.
-     * @param slidesAction  a new title to the main company.
+     * @param slides         a slides URL to the main company.
      * @return The updating main company.
      */
     @Override
@@ -278,18 +261,9 @@ public final class CompanyServiceImpl
             final String googleMaps,
             final String logoUrl,
             final String faviconUrl,
-            final MultipartFile[] slideFiles,
-            final String slidesAction
+            final String slides
     ) {
         final Company mainCompany = getMainCompany();
-        mainCompany.initialize(
-                title, domain,
-                tagline, description, information,
-                mobilePhone, landlinePhone, fax, email,
-                senderEmail, senderPass,
-                vkontakte, facebook, twitter, skype,
-                address, keywords, googleMaps
-        );
         mainCompany.initialize(
                 title, domain,
                 tagline, description, information,
@@ -299,23 +273,10 @@ public final class CompanyServiceImpl
                 address, keywords, googleMaps,
                 logoUrl, faviconUrl
         );
+        mainCompany.setSlides(slides);
         mainCompany.setWorkTimeFrom(workTimeFrom);
         mainCompany.setWorkTimeTo(workTimeTo);
-        final List<File> slides = new ArrayList<>(
-                mainCompany.getSlides()
-        );
-        updateSlides(
-                mainCompany,
-                slideFiles,
-                title,
-                slidesAction
-        );
-        final Company updatingCompany = update(mainCompany);
-        removeSlides(
-                mainCompany,
-                slides, slidesAction
-        );
-        return updatingCompany;
+        return update(mainCompany);
     }
 
     /**
@@ -410,7 +371,8 @@ public final class CompanyServiceImpl
 
     /**
      * Removes company.
-     * Removes company if it not {@code null} and has not type {@code MAIN}.
+     * Removes company if it not {@code null}
+     * and has not type {@code MAIN}.
      *
      * @param company the company to remove.
      * @see Company
@@ -464,159 +426,5 @@ public final class CompanyServiceImpl
     @Override
     protected Class<Company> getModelClass() {
         return Company.class;
-    }
-
-    /**
-     * Updates company slides.
-     *
-     * @param company the company to update.
-     * @param files   a slides files.
-     * @param title   a slides title.
-     * @param action  a action on the slides.
-     */
-    private void updateSlides(
-            final Company company,
-            final MultipartFile[] files,
-            final String title,
-            final String action
-    ) {
-        switch (action) {
-            case "replace":
-                if (files != null && files.length > 0) {
-                    final List<File> slides = new ArrayList<>();
-                    for (MultipartFile file : files) {
-                        if (file != null && !file.isEmpty()) {
-                            slides.add(
-                                    updateSlide(
-                                            new File(),
-                                            file,
-                                            title
-                                    )
-                            );
-                        }
-                    }
-                    if (!slides.isEmpty()) {
-                        company.setSlides(slides);
-                    }
-                }
-                break;
-            case "add":
-                if (files != null && files.length > 0) {
-                    for (MultipartFile file : files) {
-                        if (file != null && !file.isEmpty()) {
-                            company.addSlide(
-                                    updateSlide(
-                                            new File(),
-                                            file,
-                                            title
-                                    )
-                            );
-                        }
-                    }
-                }
-                break;
-            case "delete":
-                company.setSlides(null);
-                break;
-        }
-    }
-
-    /**
-     * Removes file.
-     *
-     * @param file   the file to remove.
-     * @param action a action on the file.
-     */
-    private void removePhoto(
-            final File file,
-            final String action
-    ) {
-        if (action.equals("delete")) {
-            this.fileService.remove(file);
-        }
-    }
-
-    /**
-     * Removes slides.
-     *
-     * @param company the company to update.
-     * @param slides  a slides to remove.
-     * @param action  a action on the slides.
-     */
-    private void removeSlides(
-            final Company company,
-            final Collection<File> slides,
-            final String action
-    ) {
-        if (action.equals("delete") || action.equals("replace")) {
-            slides.stream()
-                    .filter(
-                            slide -> !company.containsSlide(slide)
-                    )
-                    .forEach(
-                            this.fileService::remove
-                    );
-        }
-    }
-
-    /**
-     * Updates the file.
-     *
-     * @param photo the file to update.
-     * @param file  a file file.
-     * @param title a file title.
-     * @return The updating file.
-     */
-    private File updatePhoto(
-            final File photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return updatePhotoFile(
-                photo,
-                file,
-                Translator.fromCyrillicToLatin(title) + " file"
-        );
-    }
-
-    /**
-     * Updates slide.
-     *
-     * @param slide the slide to update.
-     * @param file  a slide file.
-     * @param title a slide title.
-     * @return The updating slide.
-     */
-    private File updateSlide(
-            final File slide,
-            final MultipartFile file,
-            final String title
-    ) {
-        return updatePhotoFile(
-                slide,
-                file,
-                Translator.fromCyrillicToLatin(title) + " slide"
-        );
-    }
-
-    /**
-     * Updates file.
-     *
-     * @param photo the file to updates.
-     * @param file  a file file.
-     * @param title a file title.
-     * @return The updating file.
-     */
-    private File updatePhotoFile(
-            final File photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return this.fileService.updatePhoto(
-                photo != null ? photo : new File(),
-                file,
-                title,
-                "img/company"
-        );
     }
 }

@@ -1,7 +1,10 @@
 package com.salimov.yurii.service.data.interfaces;
 
-import org.springframework.web.multipart.MultipartFile;
 import com.salimov.yurii.entity.File;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
@@ -10,11 +13,10 @@ import com.salimov.yurii.entity.File;
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
  * @see File
- * @see MediaService
  * @see DataService
  */
 public interface FileService
-        extends MediaService<File, Long> {
+        extends DataService<File, Long> {
 
     /**
      * Initializes, saves and returns a new photo.
@@ -46,6 +48,53 @@ public interface FileService
             final String title,
             final String url,
             final MultipartFile photoFile
+    );
+
+    /**
+     * Returns file object with the parameter title.
+     *
+     * @param title a title of the media to return.
+     * @return The media with parameter title.
+     * @see File
+     */
+    File getByTitle(final String title);
+
+    /**
+     * Returns file object with the parameter url.
+     *
+     * @param url a url of the file to return.
+     * @return The media with parameter url.
+     * @see File
+     */
+    File getByUrl(final String url);
+
+    /**
+     * Removes file object with the parameter title.
+     *
+     * @param title a title of the file to remove.
+     * @see File
+     */
+    void removeByTitle(final String title);
+
+    /**
+     * Removes file object with the parameter url.
+     *
+     * @param url a url of the file to remove.
+     * @see File
+     */
+    void removeByUrl(final String url);
+
+    /**
+     * Sorts and returns file objects by title.
+     *
+     * @param files  the files to sort.
+     * @param revers is sort in descending or ascending.
+     * @return The sorted list of files.
+     * @see File
+     */
+    List<File> sortByTitle(
+            final Collection<File> files,
+            final boolean revers
     );
 
     /**

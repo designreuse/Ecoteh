@@ -1,7 +1,6 @@
 package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Company;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -136,8 +135,7 @@ public interface CompanyService
      * @param googleMaps    a new google maps url to the main company.
      * @param logoUrl       a new logo URL to the main company.
      * @param faviconUrl    a new favicon URL to the main company.
-     * @param slideFiles    a files of slides to the main company.
-     * @param slidesAction  a new title to the main company.
+     * @param slides        a slides to the main company.
      * @return The updating main company.
      */
     Company initAndEditMainCompany(
@@ -163,8 +161,7 @@ public interface CompanyService
             final String googleMaps,
             final String logoUrl,
             final String faviconUrl,
-            final MultipartFile[] slideFiles,
-            final String slidesAction
+            final String slides
     );
 
     /**

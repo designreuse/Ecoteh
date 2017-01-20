@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -132,7 +131,6 @@ public class AdminCompanyController {
      * @param logoUrl       a new logo Url to the main company.
      * @param faviconUrl    a new favicon Url to the main company.
      * @param slides        a files of slides to the main company.
-     * @param slidesAction  a new title to the main company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
@@ -165,8 +163,7 @@ public class AdminCompanyController {
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final String logoUrl,
             @RequestParam(value = "favicon") final String faviconUrl,
-            @RequestParam(value = "slides[]") final MultipartFile[] slides,
-            @RequestParam(value = "slides_action") final String slidesAction,
+            @RequestParam(value = "slides") final String slides,
             final ModelAndView modelAndView
     ) {
         this.companyService.initAndEditMainCompany(
@@ -178,7 +175,7 @@ public class AdminCompanyController {
                 vkontakte, facebook, twitter,
                 skype, address, googleMaps,
                 logoUrl, faviconUrl,
-                slides, slidesAction
+                slides
         );
         modelAndView.setViewName("redirect:/admin/company/main");
         Cache.clear();
