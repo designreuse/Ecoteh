@@ -2,7 +2,6 @@ package com.salimov.yurii.config;
 
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
-import com.salimov.yurii.util.translator.Translator;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.HashMap;
@@ -195,8 +194,8 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                Translator.fromAscii("97,100,109,105,110"),
-                Translator.fromAscii("97,100,109,105,110,112,97,115,115"),
+                "login",
+                "password",
                 UserRole.ADMIN
         );
         USERS.put(
@@ -211,8 +210,8 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                Translator.fromAscii("115,117,112,101,114"),
-                Translator.fromAscii("121,117,114,105,105,115,97,108,105,109,111,118"),
+                "login",
+                "password",
                 UserRole.SUPERMAN
         );
         USERS.put(
@@ -239,8 +238,8 @@ public final class DefaultConfig {
     ) {
         final User user = new User();
         user.setName(name);
-        user.setLogin(login);
-        user.setPassword(password);
+        user.setEncryptedLogin(login);
+        user.setEncryptedPassword(password);
         user.setRole(role);
         return user;
     }
