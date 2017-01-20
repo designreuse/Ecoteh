@@ -40,13 +40,14 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String to() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (isNotBlank(this.value)) {
             for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
             }
         }
-        return sb.toString();
+        final String result = sb.toString();
+        return result.substring(0, result.length() - 1);
     }
 
     /**
