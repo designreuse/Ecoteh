@@ -109,7 +109,8 @@ public class AdminMainController extends MainController {
     }
 
     /**
-     * Sends sender and redirects by url if it is not blank, otherwise by url /.
+     * Sends sender and redirects by url if it is not blank,
+     * otherwise by url /.
      * Request mapping: /admin/send_message
      * Method: POST
      *
