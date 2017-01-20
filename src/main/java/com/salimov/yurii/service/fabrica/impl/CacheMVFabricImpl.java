@@ -178,9 +178,11 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * @param sortType
-     * @param revers
-     * @return
+     * Creates and returns page with all articles sorted by sortType.
+     *
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     @Override
     public ModelAndView allSortArticlesPage(
@@ -253,8 +255,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * @param revers
-     * @return
+     * Creates and returns page with all sorted partners.
+     *
+     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     public ModelAndView allSortPartnersByTitlePage(
             final boolean revers
@@ -289,10 +293,13 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * @param url
-     * @param sortType
-     * @param revers
-     * @return
+     * Creates and returns page with category
+     * with all articles sorted by sortType.
+     *
+     * @param url      a category URL.
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     public ModelAndView categoryWithSortArticlesPage(
             final String url,
@@ -388,8 +395,10 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * @param revers
-     * @return
+     * Creates and returns page with all sorted responses.
+     *
+     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     public ModelAndView allSortResponsesByDatePage(
             final boolean revers

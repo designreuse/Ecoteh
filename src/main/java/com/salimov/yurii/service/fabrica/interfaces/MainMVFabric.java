@@ -38,10 +38,11 @@ public interface MainMVFabric {
     ModelAndView allArticlesPage();
 
     /**
+     * Creates and returns page with all articles sorted by sortType.
      *
-     * @param sortType
-     * @param revers
-     * @return
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortArticlesPage(
             final String sortType,
@@ -72,9 +73,10 @@ public interface MainMVFabric {
     ModelAndView allPartnersPage();
 
     /**
+     * Creates and returns page with all sorted partners.
      *
-     * @param revers
-     * @return
+     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortPartnersByTitlePage(
             final boolean revers
@@ -90,11 +92,13 @@ public interface MainMVFabric {
     ModelAndView categoryPage(final String url);
 
     /**
+     * Creates and returns page with category
+     * with all articles sorted by sortType.
      *
-     * @param url
-     * @param sortType
-     * @param revers
-     * @return
+     * @param url      a category URL.
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     ModelAndView categoryWithSortArticlesPage(
             final String url,
@@ -138,9 +142,10 @@ public interface MainMVFabric {
     ModelAndView allResponsesPage();
 
     /**
+     * Creates and returns page with all sorted responses.
      *
-     * @param revers
-     * @return
+     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortResponsesByDatePage(
             final boolean revers
