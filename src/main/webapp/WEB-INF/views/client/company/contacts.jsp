@@ -12,7 +12,7 @@
                 <c:choose>
                     <c:when test="${company.logoUrl ne null}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/${company.logoUrl}"/>"
+                             src="<c:url value="${company.logoUrl}"/>"
                              onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
                     <c:when test="${company.faviconUrl ne null}">

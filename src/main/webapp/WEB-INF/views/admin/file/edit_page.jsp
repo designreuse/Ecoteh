@@ -18,9 +18,8 @@
         <meta name="description" content="Форма для редактирования файла &quot;<c:out value="${file.title}"/>&quot;">
         <meta name="keywords" content="Редактирование файла, <c:out value="${file.title}"/>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -69,10 +68,12 @@
                                 <tr>
                                     <td class="ths">Файл</td>
                                     <td class="tds">
-                                        <a href="<c:url value="/resources/${file.url}"/>"
+                                        <a href="<c:url value="${file.url}"/>"
                                            rel="lightgallery[slides]">
                                             <img class="img-logo" alt="<c:out value="${file.title}"/>"
-                                                 src="<c:url value="/resources/${file.url}"/>">
+                                                 src="<c:url value="${file.url}"/>"
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'">
                                         </a><br>
                                         <input type="file" name="file" accept="image/*" class="form-control">
                                     </td>

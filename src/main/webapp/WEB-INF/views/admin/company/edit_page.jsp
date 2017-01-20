@@ -20,9 +20,8 @@
               content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
         <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -93,10 +92,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="text" title=""
-                                              placeholder="Краткое описание компании" required
+                                              placeholder="Краткое описание компании"
                                               rows="6"><c:out value="${company.description}"/></textarea>
                                     </td>
                                 </tr>
@@ -109,23 +108,23 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
+                                    <td class="ths">Ключевые слова</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" required title=""
+                                    <textarea class="form-control textarea" name="keywords" title=""
                                               placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
                                               rows="7"><c:out value="${company.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <c:if test="${main}">
                                     <tr>
-                                        <td class="ths"><span class="red">*</span>&nbsp;Время работы</td>
+                                        <td class="ths">Время работы</td>
                                         <td class="tds">
-                                            <input type="text" class="time form-control" required
+                                            <input type="text" class="time form-control"
                                                    name="time_from" maxlength="10" placeholder="Начало рабочего дня"
                                                    value="<c:out value="${company.workTimeFrom}"/>">
                                             -
                                             <input type="text" class="time form-control" name="time_to"
-                                                   maxlength="10" placeholder="Конец рабочего дня" required
+                                                   maxlength="10" placeholder="Конец рабочего дня"
                                                    value="<c:out value="${company.workTimeTo}"/>">
                                         </td>
                                     </tr>
@@ -255,7 +254,7 @@
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="google_maps" title=""
                                               placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
-                                              rows="4"><c:out value="${company.googleMaps}"/></textarea>
+                                              rows="5"><c:out value="${company.googleMaps}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -270,7 +269,7 @@
                                         <c:if test="${company.logoUrl ne null}">
                                             <a href="<c:url value="/${company.logoUrl}"/>"
                                                title="<c:out value="${company.title}"/>" rel="lightgallery">
-                                                <img src="<c:url value="/${company.logoUrl}"/>"
+                                                <img src="<c:url value="${company.logoUrl}"/>"
                                                      class="main-logo" alt="" title="Увеличить"
                                                      onerror="this.src='<c:url
                                                              value="/resources/img/static/default_file.gif"/>'">
@@ -294,7 +293,7 @@
                                             <td class="tds">
                                                 <a href="<c:url value="/${company.faviconUrl}"/>"
                                                    title="<c:out value="${company.title}"/>" rel="lightgallery">
-                                                    <img src="<c:url value="/${company.faviconUrl}"/>"
+                                                    <img src="<c:url value="${company.faviconUrl}"/>"
                                                          class="main-logo" alt="" title="Увеличить"
                                                          onerror="this.src='<c:url
                                                                  value="/resources/img/static/default_file.gif"/>'">
@@ -313,40 +312,23 @@
                                                 </a>
                                             </td>
                                             <td class="tds">
-                                                <c:choose>
-                                                    <c:when test="${fn:length(slides) gt 0}">
-                                                        <c:forEach items="${slides}" var="slide">
-                                                            <c:if test="${slide ne null}">
-                                                                <a href="<c:url value="/resources/${slide.url}"/>"
-                                                                   rel="lightgallery[slides]"
-                                                                   title="<c:out value="${slide.title}"/>">
-                                                                    <img class="main-logo"
-                                                                         src="<c:url value="/resources/${slide.url}"/>"
-                                                                         alt="<c:out value="${company.title}"/>"/>
-                                                                </a>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                        <br><br>
-                                                        <label title="Заменить существующие слайды">
-                                                            <b><input type="radio" name="slides_action" value="replace"
-                                                                      checked required/>&nbsp;Заменить</b>
-                                                        </label>&nbsp;&nbsp;
-                                                        <label title="Добавить новые сайды">
-                                                            <b><input type="radio" name="slides_action" value="add"
-                                                                      required/>&nbsp;Добавить</b>
-                                                        </label>&nbsp;&nbsp;
-                                                        <label title="Удалить все сайды">
-                                                            <b><input type="radio" name="slides_action" value="delete"
-                                                                      required/>&nbsp;Удалить</b>
-                                                        </label><br>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="hidden" name="slides_action" value="replace"
-                                                               checked required/>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <input type="file" name="slides[]" accept="image/*" multiple
-                                                       class="form-control"><br>
+                                                <c:if test="${fn:length(company.slidesList) gt 0}">
+                                                    <c:forEach items="${company.slidesList}" var="slide">
+                                                        <c:if test="${slide ne null}">
+                                                            <a href="<c:url value="${slide}"/>"
+                                                               rel="lightgallery[slides]"
+                                                               title="<c:out value="${company.title}"/>">
+                                                                <img src="<c:url value="${slide}"/>" class="main-logo"
+                                                                     onerror="this.src='<c:url
+                                                                             value="/resources/img/static/default_file.gif"/>'"
+                                                                     alt="<c:out value="${company.title}"/>"/>
+                                                            </a>&nbsp;
+                                                        </c:if>
+                                                    </c:forEach><br><br>
+                                                </c:if>
+                                                <textarea class="form-control textarea" name="slides" title=""
+                                                          placeholder="URL слайдов, которые будут отображатся на главной страницы сайта. Вводите значение через запятую (,)ю"
+                                                          rows="5"><c:out value="${company.slides}"/></textarea>
                                             </td>
                                         </tr>
                                     </c:when>

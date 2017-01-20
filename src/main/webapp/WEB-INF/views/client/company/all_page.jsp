@@ -18,8 +18,8 @@
         <meta name="keywords"
               content="Партнеры<c:forEach items="${partners_list}" var="partner">, <c:out value="${partner.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -62,13 +62,8 @@
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr>
-                        <h3 class="text-center">Наши партнеры<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <h3 class="text-center">Наши партнеры</h3>
                         <hr>
-                        <a href="<c:url value="/resources/img/static/ukraine.gif"/>" rel="lightgallery"
-                           title="Наши партнеры на карте Украины">
-                            <img class="map" alt=""
-                                 src="<c:url value="/resources/img/static/ukraine.gif"/>">
-                        </a>
                     </div>
                     <c:if test="${length gt 1}">
                         <p class="path">
@@ -82,6 +77,21 @@
             </div>
         </div>
         <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <a href="<c:url value="/resources/img/static/ukraine.gif"/>" rel="lightgallery"
+                           title="Наши партнеры на карте Украины">
+                            <img src="<c:url value="/resources/img/static/ukraine.gif"/>" class="map"
+                                 alt="" title="Карта Украины">
+                        </a>
+                        <h4 class="text-center">Наши партнеры на карте Украины</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>

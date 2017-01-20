@@ -17,9 +17,8 @@
         <meta name="description" content="Форма для добавления новой компании-партнера.">
         <meta name="keywords" content="Партнер, новый партнер, добавление партнера"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -71,10 +70,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="text" rows="6" title=""
-                                                  placeholder="Краткое описание компании" required></textarea>
+                                                  placeholder="Краткое описание компании"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -85,12 +84,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <span class="red">*</span>&nbsp;Ключевые слова
-                                    </td>
+                                    <td class="ths">Ключевые слова</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="keywords" rows="7" title=""
-                                                  required
                                                   placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
                                     </td>
                                 </tr>
@@ -188,7 +184,7 @@
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="google_maps" title=""
                                                   placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
-                                                  rows="4"></textarea>
+                                                  rows="5"></textarea>
                                     </td>
                                 </tr>
                                 <tr>

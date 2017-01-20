@@ -19,8 +19,8 @@
         <meta name="keywords"
               content="Все категории<c:forEach items="${categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -69,7 +69,16 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+        <c:if test="${length gt 0}">
+            <div class="container">
+                <div class="row">
+                    <div class="box">
+                        <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
     </div>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>

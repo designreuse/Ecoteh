@@ -21,9 +21,8 @@
         <meta name="keywords"
               content="Редактирование категории, <c:out value="${category.title}"/>, <c:out value="${category.keywords}"/>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -89,13 +88,13 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <a href="<c:url value="/${category.photoUrl}"/>"
+                                        <a href="<c:url value="${category.photoUrl}"/>"
                                            title="${category.title}" rel="lightgallery">
-                                            <img src="<c:url value="/${category.photoUrl}"/>" class="file"
+                                            <img src="<c:url value="${category.photoUrl}"/>" class="file"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'"
                                                  alt="" title="Увеличить">
-                                        </a><br>
+                                        </a><br><br>
                                         <input type="text" class="form-control" name="photo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на главное фото для категории"
                                                value="${category.photoUrl}">

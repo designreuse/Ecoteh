@@ -16,9 +16,8 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Сохраненный файлы на сервере.">
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -65,32 +64,32 @@
                             <c:forEach items="${files}" var="file">
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                                     <div class="text-center">
-                                        <a href="<c:url value="/resources/${file.url}"/>" title="${file.title}"
+                                        <a href="<c:url value="${file.url}"/>" title="${file.title}"
                                            rel="lightgallery">
-                                            <img src="<c:url value="/resources/${file.url}"/>" class="file"
+                                            <img src="<c:url value="${file.url}"/>" class="file"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'"
                                                  alt="" title="Увеличить">
                                         </a><br>
-                                        <a href="<c:url value="/resources/${file.url}"/>" target="_blank"
+                                        <a href="<c:url value="${file.url}"/>" target="_blank"
                                            title="Открыть в новом окне">
                                             <c:out value="${file.title}"/>
                                         </a><br>
                                         <button class="btn-clipboard btn btn-default"
                                                 title="Скорировать ссылку файла &quot;${file.title}&quot;"
-                                                data-clipboard-text="<c:url value="/resources/${file.url}"/>">
+                                                data-clipboard-text="<c:url value="${file.url}"/>">
                                                 <span class="glyphicon glyphicon-floppy-disk green"
                                                       aria-hidden="true"></span>
                                         </button>
-                                        &nbsp;
-                                        <a href="<c:url value="/admin/file/edit/${file.id}"/>"
-                                           title="Редактировать файл &quot;${file.title}&quot;">
-                                            <button class="btn btn-default">
+                                        <c:if test="${file.validated}">
+                                            &nbsp;
+                                            <a href="<c:url value="/admin/file/edit/${file.id}"/>"
+                                               title="Редактировать файл &quot;${file.title}&quot;">
+                                                <button class="btn btn-default">
                                                 <span class="glyphicon glyphicon-edit yellow"
                                                       aria-hidden="true"></span>
-                                            </button>
-                                        </a>&nbsp;
-                                        <c:if test="${file.validated}">
+                                                </button>
+                                            </a>&nbsp;
                                             <a href="<c:url value="/admin/file/delete/${file.id}"/>"
                                                title="Удалить файл &quot;${file.title}&quot;">
                                                 <button class="btn btn-default">

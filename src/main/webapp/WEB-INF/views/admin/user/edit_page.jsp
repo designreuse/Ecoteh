@@ -20,9 +20,8 @@
               content="Форма для редактирования информации о &quot;<c:out value="${user.name}"/>&quot;.">
         <meta name="keywords" content="Редактирование, <c:out value="${user.name}"/>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -205,13 +204,13 @@
                                 <tr>
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">
-                                        <a href="<c:url value="/${user.photoUrl}"/>"
+                                        <a href="<c:url value="${user.photoUrl}"/>"
                                            title="${user.name}" rel="lightgallery">
-                                            <img src="<c:url value="/${user.photoUrl}"/>" alt=""
+                                            <img src="<c:url value="${user.photoUrl}"/>" alt=""
                                                  class="img-responsive img-in-list" title="Увеличить"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'">
-                                        </a><br><br>
+                                        </a><br>
                                         <input type="text" class="form-control" name="photo" minlength="2"
                                                maxlength="100" placeholder="Ссылка на главное фото пользователя"
                                                value="${user.photoUrl}">

@@ -30,7 +30,7 @@
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">
                             <c:choose>
                                 <c:when test="${main_company.faviconUrl ne null}">
-                                    <img src="<c:url value="/${main_company.faviconUrl}"/>"
+                                    <img src="<c:url value="${main_company.faviconUrl}"/>"
                                          class="icon-size" alt="" title="<c:out value="${main_company.title}"/>"
                                          onerror="this.src='<c:url
                                                  value="/resources/img/static/default_file.gif"/>'"/>
@@ -84,9 +84,7 @@
                             </ul>
                         </li>
                     </c:if>
-                    <c:if test="${fn:length(partners) gt 0}">
-                        <li><a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a></li>
-                    </c:if>
+                    <li><a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a></li>
                     <li>
                         <a href="<c:url value="/search"/>" title="Поиск необходимого контента">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>

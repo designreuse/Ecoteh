@@ -10,7 +10,9 @@
                 <c:choose>
                     <c:when test="${company.description ne null}">
                         <hr>
-                        <h3 class="intro-text text-center">О нас</h3>
+                        <h3 class="intro-text text-center">
+                            <a href="<c:url value="${reqmap}/company/main"/>" title="Описание нашей компании">О нас</a>
+                        </h3>
                         <hr>
                         <p>${company.description}</p>
                     </c:when>

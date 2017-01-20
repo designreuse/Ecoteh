@@ -18,8 +18,8 @@
         <meta name="keywords"
               content="Категория<c:out value=", ${category.title}, ${category.keywords}"/><c:forEach items="${articles_list}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -42,12 +42,6 @@
                             <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class=" btn btn-default">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая статья
-                                </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="<c:url value="/admin/category/new"/>" title="Добавить новую категорию">
-                                <button class=" btn btn-default">
-                                    <span class="glyphicon glyphicon-plus"
-                                          aria-hidden="true"></span>&nbsp;Новая категория
                                 </button>
                             </a>&nbsp;&nbsp;
                             <a href="<c:url value="/admin/category/edit/${category.url}"/>"

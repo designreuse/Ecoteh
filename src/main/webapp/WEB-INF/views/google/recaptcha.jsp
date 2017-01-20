@@ -6,9 +6,11 @@
             .getBundle("captcha")
             .getString("captcha.client-key");
 %>
-<div class="form-group col-lg-12">
-    <div class="g-recaptcha" data-sitekey="<%= KEY %>"></div>
-</div>
-<script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
+<c:if test="<%= KEY != null %>">
+    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="g-recaptcha" data-sitekey="<%= KEY %>"></div>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
+</c:if>
 
 <%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

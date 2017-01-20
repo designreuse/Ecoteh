@@ -18,8 +18,8 @@
         <meta name="robots" content="index,follow">
         <jsp:include page="/WEB-INF/views/client/main/verification.jsp"/>
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -44,7 +44,21 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+        <c:if test="${fn:length(categories) gt 0}">
+            <div class="container">
+                <div class="row">
+                    <div class="box">
+                        <hr>
+                        <h3 class="intro-text text-center">
+                            <a href="${reqmap}/category/all" title="Категории товаров">Товары</a>
+                        </h3>
+                        <hr>
+                        <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <jsp:include page="/WEB-INF/views/client/company/to_home.jsp"/>
         <jsp:include page="/WEB-INF/views/client/company/logos_list.jsp"/>
         <jsp:include page="/WEB-INF/views/client/response/list.jsp"/>

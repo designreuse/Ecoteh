@@ -82,7 +82,7 @@
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${main_company.faviconUrl ne null}">
-                                            <img src="<c:url value="/${main_company.faviconUrl}"/>"
+                                            <img src="<c:url value="${main_company.faviconUrl}"/>"
                                                  class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
@@ -129,7 +129,7 @@
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${main_company.faviconUrl ne null}">
-                                            <img src="<c:url value="/${main_company.faviconUrl}"/>"
+                                            <img src="<c:url value="${main_company.faviconUrl}"/>"
                                                  class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>

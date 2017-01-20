@@ -24,8 +24,8 @@
         <meta name="description" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <c:if test="${main_company.faviconUrl ne null}">
-            <link rel="shortcut icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="/${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -124,7 +124,17 @@
     <c:if test="${result}">
         <c:if test="${categories_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <jsp:include page="/WEB-INF/views/client/category/list_to_search.jsp"/>
+                <c:if test="${fn:length(categories_list) gt 0}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="box">
+                                <hr>
+                                <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
             </div>
         </c:if>
         <c:if test="${articles_length gt 0}">

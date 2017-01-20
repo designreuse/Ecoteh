@@ -5,14 +5,14 @@
 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
     <br>
     <div id="carousel-example-generic" class="carousel slide">
-        <c:set var="length" value="${fn:length(slides)}"/>
+        <c:set var="length" value="${fn:length(company.slidesList)}"/>
         <c:choose>
             <c:when test="${length gt 0}">
                 <%-- Indicators --%>
                 <c:if test="${length gt 1}">
                     <ol class="carousel-indicators hidden-xs">
                         <c:set var="count" value="0"/>
-                        <c:forEach items="${slides}" var="slide">
+                        <c:forEach items="${company.slidesList}" var="slide">
                             <c:if test="${slide ne null}">
                                 <li data-target="#carousel-example-generic" data-slide-to="${count}"
                                     <c:if test="${count eq 0}">class="active"</c:if>>
@@ -25,12 +25,13 @@
                 <%-- Slides --%>
                 <div class="carousel-inner">
                     <c:set var="count" value="true"/>
-                    <c:forEach items="${slides}" var="slide">
+                    <c:forEach items="${company.slidesList}" var="slide">
                         <c:if test="${slide ne null}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
-                                <img src="<c:url value="/resources/${slide.url}"/>"
-                                     class="slide" alt="${slide.title}">
+                                <img src="<c:url value="${slide}"/>" onerror="this.src='<c:url
+                                        value="/resources/img/static/default_slide.jpg"/>'"
+                                     class="slide" alt="${company.title}">
                             </div>
                         </c:if>
                     </c:forEach>
@@ -46,7 +47,7 @@
             <c:otherwise>
                 <div class="carousel-inner">
                     <div class="text-center item active">
-                        <img class="slide" alt="" src="<c:url value="/resources/img/static/default_slide.jpg"/>">
+                        <img src="<c:url value="/resources/img/static/default_slide.jpg"/>" class="slide" alt="">
                     </div>
                 </div>
             </c:otherwise>
