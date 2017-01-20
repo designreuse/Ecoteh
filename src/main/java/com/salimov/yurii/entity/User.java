@@ -2,6 +2,7 @@ package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IUser;
 import com.salimov.yurii.enums.UserRole;
+import com.salimov.yurii.util.encryption.Encryption;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +23,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
+ * @see IUser
  */
 @Entity
 @Table(name = "users")
@@ -64,7 +66,7 @@ public final class User
             name = "login",
             unique = true
     )
-    private String login;
+    private String encryptedLogin;
 
     /**
      * The password of a user.
@@ -73,7 +75,7 @@ public final class User
             name = "password",
             unique = true
     )
-    private String password;
+    private String encryptedPassword;
 
     /**
      * The e-mail of a user.
@@ -324,7 +326,8 @@ public final class User
      */
     @Override
     public String getUsername() {
-        return getLogin() != null ? getLogin() : "";
+        final String username = getLogin();
+        return isNotBlank(username) ? username : "";
     }
 
     /**
@@ -335,6 +338,7 @@ public final class User
      * @param phone       a new phone of the user.
      * @param description a new description of the user.
      */
+    @Override
     public void initialize(
             final String name,
             final String email,
@@ -361,6 +365,7 @@ public final class User
      * @param skype       a new skype username of the user.
      * @param description a new description of the user.
      */
+    @Override
     public void initialize(
             final String name,
             final String login,
@@ -396,6 +401,7 @@ public final class User
      * @see File
      * @see UserRole
      */
+    @Override
     public void initialize(
             final String name,
             final String login,
@@ -418,6 +424,7 @@ public final class User
      *
      * @return The user name.
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -429,6 +436,7 @@ public final class User
      *
      * @param name a new name to the user.
      */
+    @Override
     public void setName(final String name) {
         this.name = isNotBlank(name) ? name : null;
         translateAndSetUrl(name);
@@ -436,12 +444,14 @@ public final class User
 
     /**
      * Sets a new login to the user.
-     * If parameter login is blank, then sets {@code null}.
      *
      * @param login a new login to the user.
      */
+    @Override
     public void setLogin(final String login) {
-        this.login = isNotBlank(login) ? login : null;
+        setEncryptedLogin(
+                new Encryption(login).encrypt()
+        );
     }
 
     /**
@@ -449,8 +459,81 @@ public final class User
      *
      * @return The user login.
      */
+    @Override
     public String getLogin() {
-        return this.login;
+        return new Encryption(
+                getEncryptedLogin()
+        ).decrypt();
+    }
+
+    /**
+     * Returns a encrypted login.
+     *
+     * @return The encrypted login.
+     */
+    @Override
+    public String getEncryptedLogin() {
+        return this.encryptedLogin;
+    }
+
+    /**
+     * Sets a new encrypted login to the user.
+     * If parameter login is blank
+     * then sets {@code null}.
+     *
+     * @param login a new encrypted login to the user.
+     */
+    @Override
+    public void setEncryptedLogin(final String login) {
+        this.encryptedLogin = isNotBlank(login) ? login : null;
+    }
+
+    /**
+     * Returns a password of the user.
+     *
+     * @return The user password.
+     */
+    @Transient
+    @Override
+    public String getPassword() {
+        return Translator.fromAscii(
+                getEncryptedPassword()
+        );
+    }
+
+    /**
+     * Sets a new password to the user.
+     *
+     * @param password a new password to the user.
+     */
+    @Transient
+    @Override
+    public void setPassword(final String password) {
+        setEncryptedPassword(
+                Translator.toAscii(password)
+        );
+    }
+
+    /**
+     * Returns a encrypted password.
+     *
+     * @return The encrypted password..
+     */
+    @Override
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    /**
+     * Sets a new encrypted password to the user.
+     * If parameter password is blank
+     * then sets {@code null}.
+     *
+     * @param password a new encrypted password to the user.
+     */
+    @Override
+    public void setEncryptedPassword(final String password) {
+        this.encryptedPassword = isNotBlank(password) ? password : password;
     }
 
     /**
@@ -460,6 +543,7 @@ public final class User
      * @param value a value to translate.
      * @see Translator
      */
+    @Override
     public void translateAndSetUrl(final String value) {
         setUrl(
                 Translator.fromCyrillicToLatin(value)
@@ -471,6 +555,7 @@ public final class User
      *
      * @return The user url.
      */
+    @Override
     public String getUrl() {
         return this.url;
     }
@@ -481,27 +566,9 @@ public final class User
      *
      * @param url a new url to the user.
      */
+    @Override
     public void setUrl(final String url) {
         this.url = isNotBlank(url) ? url : null;
-    }
-
-    /**
-     * Returns a password of the user.
-     *
-     * @return The user password.
-     */
-    public String getPassword() {
-        return this.password;
-    }
-
-    /**
-     * Sets a new password to the user.
-     * If parameter password is blank, then sets {@code null}.
-     *
-     * @param password a new password to the user.
-     */
-    public void setPassword(final String password) {
-        this.password = isNotBlank(password) ? password : null;
     }
 
     /**
@@ -509,6 +576,7 @@ public final class User
      *
      * @return The user e-mail.
      */
+    @Override
     public String getEmail() {
         return this.email;
     }
@@ -519,6 +587,7 @@ public final class User
      *
      * @param email a new e-mail to the user.
      */
+    @Override
     public void setEmail(final String email) {
         this.email = isNotBlank(email) ? email : null;
     }
@@ -528,6 +597,7 @@ public final class User
      *
      * @return The user phone.
      */
+    @Override
     public String getPhone() {
         return this.phone;
     }
@@ -538,6 +608,7 @@ public final class User
      *
      * @param phone a new phone to the user.
      */
+    @Override
     public void setPhone(final String phone) {
         this.phone = isNotBlank(phone) ? phone : null;
     }
@@ -547,6 +618,7 @@ public final class User
      *
      * @return The user vkontakte url.
      */
+    @Override
     public String getVkontakte() {
         return this.vkontakte;
     }
@@ -557,6 +629,7 @@ public final class User
      *
      * @param vkontakte a new vkontakte url to the user.
      */
+    @Override
     public void setVkontakte(final String vkontakte) {
         String temp = null;
         if (isNotBlank(vkontakte)) {
@@ -574,6 +647,7 @@ public final class User
      *
      * @return The user facebook url.
      */
+    @Override
     public String getFacebook() {
         return this.facebook;
     }
@@ -584,6 +658,7 @@ public final class User
      *
      * @param facebook a new facebook url to the user.
      */
+    @Override
     public void setFacebook(final String facebook) {
         String temp = null;
         if (isNotBlank(facebook)) {
@@ -601,6 +676,7 @@ public final class User
      *
      * @return The user twitter url.
      */
+    @Override
     public String getTwitter() {
         return this.twitter;
     }
@@ -611,6 +687,7 @@ public final class User
      *
      * @param twitter a new twitter url to the user.
      */
+    @Override
     public void setTwitter(final String twitter) {
         String temp = null;
         if (isNotBlank(twitter)) {
@@ -628,6 +705,7 @@ public final class User
      *
      * @return The user skype username.
      */
+    @Override
     public String getSkype() {
         return this.skype;
     }
@@ -638,6 +716,7 @@ public final class User
      *
      * @param skype a new skype username to the user.
      */
+    @Override
     public void setSkype(final String skype) {
         this.skype = isNotBlank(skype) ? skype : null;
     }
@@ -647,6 +726,7 @@ public final class User
      *
      * @return The user description.
      */
+    @Override
     public String getDescription() {
         return this.description;
     }
@@ -657,6 +737,7 @@ public final class User
      *
      * @param description a new description to the user.
      */
+    @Override
     public void setDescription(final String description) {
         this.description = isNotBlank(description) ? description : null;
     }
@@ -666,6 +747,7 @@ public final class User
      *
      * @return The user photo URL.
      */
+    @Override
     public String getPhotoUrl() {
         return this.photoUrl;
     }
@@ -676,6 +758,7 @@ public final class User
      *
      * @param photoUrl a new photo URL to the user.
      */
+    @Override
     public void setPhotoUrl(final String photoUrl) {
         this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
     }
@@ -686,6 +769,7 @@ public final class User
      * @return The user role.
      * @see UserRole
      */
+    @Override
     public UserRole getRole() {
         return this.role;
     }
@@ -697,6 +781,7 @@ public final class User
      * @param role a new role to the user.
      * @see UserRole
      */
+    @Override
     public void setRole(final UserRole role) {
         this.role = role;
     }
@@ -706,6 +791,7 @@ public final class User
      *
      * @return The permit to send a letters on the user email.
      */
+    @Override
     public boolean isMailing() {
         return this.isMailing;
     }
@@ -715,6 +801,7 @@ public final class User
      *
      * @param isMailing a permit to send a letters on the user email.
      */
+    @Override
     public void setMailing(final boolean isMailing) {
         this.isMailing = isMailing;
     }
@@ -724,6 +811,7 @@ public final class User
      *
      * @return The value of the locked user or not.
      */
+    @Override
     public boolean isLocked() {
         return this.isLocked;
     }
@@ -733,6 +821,7 @@ public final class User
      *
      * @param locked a value of locked the user or not.
      */
+    @Override
     public void setLocked(final boolean locked) {
         this.isLocked = locked;
         if (locked) {

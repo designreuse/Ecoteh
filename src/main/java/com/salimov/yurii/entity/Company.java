@@ -18,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
- * @see Model
+ * @see ICompany
  */
 @Entity
 @Table(name = "companies")
@@ -156,26 +156,8 @@ public final class Company
      *
      * @see File
      */
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinTable(
-            name = "company_photo",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "company_id",
-                            referencedColumnName = "id"
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "photo_id",
-                            referencedColumnName = "id"
-                    )
-            }
-    )
-    private final Set<File> slides = new HashSet<>();
+    @Column(name = "slides")
+    private String slides = "";
 
     /**
      * The type of a company.
@@ -912,9 +894,10 @@ public final class Company
      * @see File
      */
     @Override
-    public void addSlide(final File slide) {
-        if (File.isValidated(slide)) {
-            this.slides.add(slide);
+    public void addSlide(final String slide) {
+        if (isNotBlank(slide)) {
+            this.slides += (isNotBlank(this.slides) ? ", " : "")
+                    + slide.replace(" ", "");
         }
     }
 
@@ -926,9 +909,21 @@ public final class Company
      * @see File
      */
     @Override
-    public void addSlides(final Collection<File> slides) {
+    public void addSlides(final Collection<String> slides) {
         if ((slides != null) && !slides.isEmpty()) {
             slides.forEach(this::addSlide);
+        }
+    }
+
+    /**
+     * Adds new photos to the list of slides.
+     *
+     * @param slides a photos to add.
+     */
+    @Override
+    public void addSlides(final String[] slides) {
+        for (String slide : slides) {
+            addSlide(slide);
         }
     }
 
@@ -939,8 +934,12 @@ public final class Company
      * @see File
      */
     @Override
-    public void removeSlide(final File slide) {
-        this.slides.remove(slide);
+    public void removeSlide(final String slide) {
+        if (isNotBlank(slide)) {
+            this.slides = this.slides.replace(
+                    "," + slide, ""
+            ).replace(slide, "");
+        }
     }
 
     /**
@@ -950,8 +949,10 @@ public final class Company
      * @see File
      */
     @Override
-    public void removeSlides(final Collection<File> slides) {
-        this.slides.removeAll(slides);
+    public void removeSlides(final Collection<String> slides) {
+        slides.forEach(
+                this::removeSlide
+        );
     }
 
     /**
@@ -961,7 +962,7 @@ public final class Company
      */
     @Override
     public void clearSlides() {
-        this.slides.clear();
+        this.slides = "";
     }
 
     /**
@@ -971,8 +972,19 @@ public final class Company
      * @see File
      */
     @Override
-    public List<File> getSlides() {
-        return new ArrayList<>(this.slides);
+    public List<String> getSlidesList() {
+        final List<String> result = new ArrayList<>();
+        for (String slide : this.slides.split(",")) {
+            if (isNotBlank(slide)) {
+                result.add(slide);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public String getSlides() {
+        return this.slides;
     }
 
     /**
@@ -980,12 +992,10 @@ public final class Company
      * Clears the list of slides and adds new slides.
      *
      * @param slides a slides to add.
-     * @see File
      */
     @Override
-    public void setSlides(final Collection<File> slides) {
-        clearSlides();
-        addSlides(slides);
+    public void setSlides(final String slides) {
+        this.slides = isNotBlank(slides) ? slides.replace(" ", "") : "";
     }
 
     /**
@@ -994,10 +1004,9 @@ public final class Company
      * @param slide a photo to contain.
      * @return Returns {@code true} if photo is contains,
      * otherwise returns {@code false}.
-     * @see File
      */
     @Override
-    public boolean containsSlide(final File slide) {
+    public boolean containsSlide(final String slide) {
         return this.slides.contains(slide);
     }
 
@@ -1007,11 +1016,17 @@ public final class Company
      * @param slides a photos to contain.
      * @return Returns {@code true} if photos are contains,
      * otherwise returns {@code false}.
-     * @see File
      */
     @Override
-    public boolean containsSlides(final Collection<File> slides) {
-        return this.slides.containsAll(slides);
+    public boolean containsSlides(final Collection<String> slides) {
+        boolean result = true;
+        for (String slide : slides) {
+            if (!this.slides.contains(slide)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
