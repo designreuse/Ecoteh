@@ -112,6 +112,48 @@ public interface IUser<E extends Number> extends IModel<E> {
     String getLogin();
 
     /**
+     * Returns a encrypted login.
+     *
+     * @return The encrypted login.
+     */
+    String getEncryptedLogin();
+
+    /**
+     * Sets a new encrypted login to the user.
+     *
+     * @param login a new encrypted login to the user.
+     */
+    void setEncryptedLogin(final String login);
+
+    /**
+     * Returns a password of the user.
+     *
+     * @return The user password.
+     */
+    String getPassword();
+
+    /**
+     * Sets a new password to the user.
+     *
+     * @param password a new password to the user.
+     */
+    void setPassword(final String password);
+
+    /**
+     * Returns a encrypted password.
+     *
+     * @return The encrypted password..
+     */
+    String getEncryptedPassword();
+
+    /**
+     * Sets a new encrypted password to the user.
+     *
+     * @param password a new encrypted password to the user.
+     */
+    void setEncryptedPassword(final String password);
+
+    /**
      * Translates value and sets to url.
      *
      * @param value a value to translate.
@@ -132,20 +174,6 @@ public interface IUser<E extends Number> extends IModel<E> {
      * @param url a new url to the user.
      */
     void setUrl(final String url);
-
-    /**
-     * Returns a password of the user.
-     *
-     * @return The user password.
-     */
-    String getPassword();
-
-    /**
-     * Sets a new password to the user.
-     *
-     * @param password a new password to the user.
-     */
-    void setPassword(final String password);
 
     /**
      * Returns a e-mail of the user.

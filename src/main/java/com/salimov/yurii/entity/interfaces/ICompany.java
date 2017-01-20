@@ -1,6 +1,5 @@
 package com.salimov.yurii.entity.interfaces;
 
-import com.salimov.yurii.entity.File;
 import com.salimov.yurii.enums.CompanyType;
 
 import java.util.Collection;
@@ -352,7 +351,7 @@ public interface ICompany<E extends Number>
      *
      * @return The company logo URL.
      */
-    public String getLogoUrl();
+    String getLogoUrl();
 
     /**
      * Sets a new logo URL to the article.
@@ -360,16 +359,15 @@ public interface ICompany<E extends Number>
      * then sets {@code null}.
      *
      * @param logoUrl a new logo to the article.
-     * @see File
      */
-    public void setLogoUrl(final String logoUrl);
+    void setLogoUrl(final String logoUrl);
 
     /**
      * Returns a favicon URL of the company.
      *
      * @return The company favicon URL.
      */
-    public String getFaviconUrl();
+    String getFaviconUrl();
 
     /**
      * Sets a new favicon URL to the article.
@@ -378,44 +376,46 @@ public interface ICompany<E extends Number>
      *
      * @param faviconUrl a new favicon to the article.
      */
-    public void setFaviconUrl(final String faviconUrl);
+    void setFaviconUrl(final String faviconUrl);
 
     /**
      * Adds new photo to the list of slides.
      *
      * @param slide a photo to add.
-     * @see File
      */
-    void addSlide(final File slide);
+    void addSlide(final String slide);
 
     /**
      * Adds new photos to the list of slides.
      *
      * @param slides a photos to add.
-     * @see File
      */
-    void addSlides(final Collection<File> slides);
+    void addSlides(final Collection<String> slides);
+
+    /**
+     * Adds new photos to the list of slides.
+     *
+     * @param slides a photos to add.
+     */
+    void addSlides(final String[] slides);
 
     /**
      * Removes photo from the list of slides.
      *
      * @param slide a photo to remove.
-     * @see File
      */
-    void removeSlide(final File slide);
+    void removeSlide(final String slide);
 
     /**
      * Removes photos from the list of slides.
      *
-     * @param slides a photos to remove.
-     * @see File
+     * @param slides a photos to remove.=
      */
-    void removeSlides(final Collection<File> slides);
+    void removeSlides(final Collection<String> slides);
 
     /**
      * Clears the list of slides.
      *
-     * @see File
      */
     void clearSlides();
 
@@ -423,17 +423,22 @@ public interface ICompany<E extends Number>
      * Returns a copy list of slides.
      *
      * @return The list of slides.
-     * @see File
      */
-    List<File> getSlides();
+    List<String> getSlidesList();
+
+    /**
+     * Returns a slides string.
+     *
+     * @return The slides string.
+     */
+    String getSlides();
 
     /**
      * Sets a new slides to the article.
      *
      * @param slides a slides to add.
-     * @see File
      */
-    void setSlides(final Collection<File> slides);
+    void setSlides(final String slides);
 
     /**
      * Contains slide in the list of slides.
@@ -441,9 +446,8 @@ public interface ICompany<E extends Number>
      * @param slide a photo to contain.
      * @return Returns {@code true} if photo is contains,
      * otherwise returns {@code false}.
-     * @see File
      */
-    boolean containsSlide(final File slide);
+    boolean containsSlide(final String slide);
 
     /**
      * Contains slides in the list of slides.
@@ -451,9 +455,8 @@ public interface ICompany<E extends Number>
      * @param slides a photos to contain.
      * @return Returns {@code true} if photos are contains,
      * otherwise returns {@code false}.
-     * @see File
      */
-    boolean containsSlides(final Collection<File> slides);
+    boolean containsSlides(final Collection<String> slides);
 
     /**
      * Returns a domain of the company.
