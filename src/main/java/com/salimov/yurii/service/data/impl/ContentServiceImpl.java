@@ -65,8 +65,10 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      */
     @Override
     @Transactional(readOnly = true)
-    public T getByTitle(final String title, final boolean isValid)
-            throws IllegalArgumentException, NullPointerException {
+    public T getByTitle(
+            final String title,
+            final boolean isValid
+    ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(title)) {
             throw new IllegalArgumentException(
                     getClassSimpleName() + " title is blank!"
@@ -101,8 +103,10 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      */
     @Override
     @Transactional(readOnly = true)
-    public T getByUrl(final String url, final boolean isValid)
-            throws IllegalArgumentException, NullPointerException {
+    public T getByUrl(
+            final String url,
+            final boolean isValid
+    ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
             throw new IllegalArgumentException(
                     getClassSimpleName() + " url is blank!"

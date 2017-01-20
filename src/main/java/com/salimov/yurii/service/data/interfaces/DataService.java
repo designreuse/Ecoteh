@@ -18,7 +18,6 @@ import java.util.List;
  * @see ArticleService
  * @see CategoryService
  * @see ContentService
- * @see MediaService
  * @see FileService
  * @see ResponseService
  * @see UserService
@@ -41,7 +40,9 @@ public interface DataService<T extends Model, E extends Number> {
      * @return The saving models.
      * @see Model
      */
-    Collection<T> add(final Collection<T> models);
+    Collection<T> addAll(
+            final Collection<T> models
+    );
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.

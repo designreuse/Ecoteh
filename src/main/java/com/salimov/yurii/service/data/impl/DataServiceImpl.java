@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  * @see Model
  * @see DataService
  * @see ContentServiceImpl
- * @see MediaServiceImpl
  * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
  * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
@@ -52,10 +51,10 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
 
     /**
      * Saves and returns object of {@link Model} class or subclasses.
-     * Returns {@code null} if model is not valid.
+     * Returns input object if model is not valid.
      *
      * @param model the model to add.
-     * @return The saving model or {@code null}.
+     * @return The saving model or input object.
      * @see Model
      */
     @Override
@@ -78,7 +77,9 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      */
     @Override
     @Transactional
-    public Collection<T> add(final Collection<T> models) {
+    public Collection<T> addAll(
+            final Collection<T> models
+    ) {
         final List<T> result = new ArrayList<>();
         if (models != null && !models.isEmpty()) {
             result.addAll(
