@@ -13,27 +13,17 @@ import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 
-public class MockFileServiceTest extends MockMediaServiceTest<File> {
+public class MockFileServiceTest extends MockDataServiceTest<File> {
 
     private FileService service;
 
     @Before
-    public void initPhotoService() {
+    public void initFileService() {
         this.service = getFileService();
     }
 
-    @Ignore
-    @Override
-    public void whenInitAndAddMediaThenReturnMedia() {
-    }
-
-    @Ignore
-    @Override
-    public void whenInitAndUpdateMediaThenReturnMedia() {
-    }
-
     @Test
-    public void whenInitAndAddPhotoThenReturnThisPhoto() {
+    public void whenInitAndAddFileThenReturnThisFile() {
         assertNotNull(
                 this.service.initAndAdd(
                         TITLE, URL,
@@ -43,7 +33,7 @@ public class MockFileServiceTest extends MockMediaServiceTest<File> {
     }
 
     @Test
-    public void whenInitAndUpdatePhotoThenReturnThisPhoto() {
+    public void whenInitAndUpdateFileThenReturnThisFile() {
         assertNotNull(
                 this.service.initAndUpdate(
                         ID, TITLE, URL,
@@ -60,13 +50,29 @@ public class MockFileServiceTest extends MockMediaServiceTest<File> {
     }
 
     @Test
-    public void whenUpdatePhotoThenReturnThisPhoto() {
+    public void whenUpdateFileThenReturnThisFile() {
         assertNotNull(
                 this.service.updatePhoto(
                         getFile(),
                         null,
                         TITLE, PATH
                 )
+        );
+    }
+
+    @Test
+    public void whenGetByTitleThenReturnSomeContent() {
+        assertNotNull(
+                getService()
+                        .getByTitle(TITLE)
+        );
+    }
+
+    @Test
+    public void whenGetByUrlThenReturnSomeContent() {
+        assertNotNull(
+                getService()
+                        .getByUrl(URL)
         );
     }
 

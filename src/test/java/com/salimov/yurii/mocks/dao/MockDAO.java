@@ -76,29 +76,11 @@ public final class MockDAO {
         final Article article = getArticle();
         final List<Article> articles = getArticles();
         final ArticleDao dao = mock(ArticleDao.class);
-        dataDao(
+        contentDao(
                 dao,
                 article,
                 articles
         );
-        when(
-                dao.getByTitle(TITLE)
-        ).thenReturn(article);
-        when(
-                dao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                dao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(URL)
-        ).thenReturn(article);
-        when(
-                dao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
         when(
                 dao.getByNumber(NUMBER)
         ).thenReturn(article);
@@ -121,61 +103,23 @@ public final class MockDAO {
     }
 
     private static CategoryDao initCategoryDAO() {
-        final Category category = getCategory();
         final CategoryDao dao = mock(CategoryDao.class);
-        dataDao(
+        contentDao(
                 dao,
-                category,
+                getCategory(),
                 getCategories()
         );
-        when(
-                dao.getByTitle(TITLE)
-        ).thenReturn(category);
-        when(
-                dao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                dao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(URL)
-        ).thenReturn(category);
-        when(
-                dao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
         return dao;
     }
 
     private static CompanyDao initCompanyDAO() {
-        final Company company = getCompany();
         final List<Company> companies = getCompanies();
         final CompanyDao dao = mock(CompanyDao.class);
-        dataDao(
+        contentDao(
                 dao,
-                company,
+                getCompany(),
                 companies
         );
-        when(
-                dao.getByTitle(TITLE)
-        ).thenReturn(company);
-        when(
-                dao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                dao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(URL)
-        ).thenReturn(company);
-        when(
-                dao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
         when(
                 dao.getByType(COMPANY_TYPE)
         ).thenReturn(companies);
@@ -188,11 +132,10 @@ public final class MockDAO {
     private static FileDao initPhotoDAO() {
         final File file = getFile();
         final FileDao dao = mock(FileDao.class);
-        dataDao(
-                dao,
-                file,
-                getFiles()
-        );
+        dataDao(dao, file, getFiles());
+        when(
+                dao.getByTitle(TITLE)
+        ).thenReturn(file);
         when(
                 dao.getByTitle(TITLE)
         ).thenReturn(file);
@@ -290,7 +233,33 @@ public final class MockDAO {
         return dao;
     }
 
-    private static <T extends Model, E extends DataDao> void dataDao(
+    private static <T extends Content<Long>, E extends ContentDao<T, Long>> void contentDao(
+            final E dao,
+            final T content,
+            final Collection<T> contents
+    ) {
+        dataDao(dao, content, contents);
+        when(
+                dao.getByTitle(TITLE)
+        ).thenReturn(content);
+        when(
+                dao.getByTitle(ANY_STRING)
+        ).thenReturn(null);
+        when(
+                dao.getByTitle(null)
+        ).thenReturn(null);
+        when(
+                dao.getByUrl(URL)
+        ).thenReturn(content);
+        when(
+                dao.getByUrl(ANY_STRING)
+        ).thenReturn(null);
+        when(
+                dao.getByUrl(null)
+        ).thenReturn(null);
+    }
+
+    private static <T extends Model<Long>, E extends DataDao<T, Long>> void dataDao(
             final E dao,
             final T model,
             final Collection<T> models

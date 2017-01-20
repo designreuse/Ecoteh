@@ -28,68 +28,71 @@ public final class MockServices {
 
     public static ArticleService getArticleService() {
         if (articleService == null) {
-            articleService = initArticleService();
+            initArticleService();
         }
         return MockServices.articleService;
     }
 
     public static CategoryService getCategoryService() {
         if (categoryService == null) {
-            categoryService = initCategoryService();
+            initCategoryService();
         }
         return categoryService;
     }
 
     public static CompanyService getCompanyService() {
         if (companyService == null) {
-            companyService = initCompanyService();
+            initCompanyService();
         }
         return companyService;
     }
 
     public static FileService getFileService() {
         if (fileService == null) {
-            fileService = initPhotoService();
+            initFileService();
         }
         return fileService;
     }
 
     public static MessageService getMessageService() {
         if (messageService == null) {
-            messageService = initMessageService();
+            initMessageService();
         }
         return messageService;
     }
 
     public static ResponseService getResponseService() {
         if (responseService == null) {
-            responseService = initResponseService();
+            initResponseService();
         }
         return responseService;
     }
 
     public static UserService getUserService() {
         if (userService == null) {
-            userService = initUserService();
+            initUserService();
         }
         return userService;
     }
 
-    private static ArticleService initArticleService() {
-        final Article article = getArticle();
-        final List<Article> articles = getArticles();
-        final Category category = getCategory();
-        final List<Category> categories = getCategories();
-        final ArticleService articleService = mock(ArticleService.class);
-        contentService(articleService, article, articles);
+    private static void initArticleService() {
+        articleService = mock(ArticleService.class);
+        contentService(
+                articleService,
+                getArticle(),
+                getArticles()
+        );
         when(
                 articleService.initAndAdd(
                         TITLE,
                         DESCRIPTION, TEXT,
                         KEYWORDS, NUMBER,
-                        null, true
+                        getCategory(),
+                        true
                 )
-        ).thenReturn(article);
+        ).thenReturn(
+                getArticle()
+        );
         when(
                 articleService.initAndUpdate(
                         URL, TITLE,
@@ -97,91 +100,148 @@ public final class MockServices {
                         KEYWORDS, NUMBER,
                         null, true
                 )
-        ).thenReturn(article);
+        ).thenReturn(
+                getArticle()
+        );
         when(
                 articleService.getByNumber(NUMBER, true)
-        ).thenReturn(article);
+        ).thenReturn(
+                getArticle()
+        );
         when(
                 articleService.getByNumber(NUMBER, false)
-        ).thenReturn(article);
+        ).thenReturn(
+                getArticle()
+        );
         when(
-                articleService.sortByNumber(articles, true)
-        ).thenReturn(articles);
+                articleService.sortByNumber(
+                        getArticles(), true
+                )
+        ).thenReturn(
+                getArticles()
+        );
         when(
-                articleService.sortByNumber(articles, false)
-        ).thenReturn(articles);
+                articleService.sortByNumber(
+                        getArticles(), false
+                )
+        ).thenReturn(
+                getArticles()
+        );
         when(
-                articleService.sortByDate(articles, true)
-        ).thenReturn(articles);
+                articleService.sortByDate(
+                        getArticles(), true
+                )
+        ).thenReturn(
+                getArticles()
+        );
         when(
-                articleService.sortByDate(articles, false)
-        ).thenReturn(articles);
+                articleService.sortByDate(
+                        getArticles(), false
+                )
+        ).thenReturn(
+                getArticles()
+        );
         when(
                 articleService.getAndSortByNumber(true)
-        ).thenReturn(articles);
+        ).thenReturn(
+                getArticles()
+        );
         when(
                 articleService.getAndSortByNumber(false)
-        ).thenReturn(articles);
+        ).thenReturn(
+                getArticles()
+        );
         when(
                 articleService.getAndSortByDate(true)
-        ).thenReturn(articles);
+        ).thenReturn(
+                getArticles()
+        );
         when(
                 articleService.getAndSortByDate(false)
-        ).thenReturn(articles);
+        ).thenReturn(
+                getArticles()
+        );
         when(
                 articleService.filterByDate(
-                        articles,
+                        getArticles(),
                         DATE,
                         DATE
                 )
-        ).thenReturn(articles);
+        ).thenReturn(
+                getArticles()
+        );
         when(
-                articleService.filterByCategory(articles, category)
-        ).thenReturn(articles);
+                articleService.filterByCategory(
+                        getArticles(),
+                        getCategory()
+                )
+        ).thenReturn(
+                getArticles()
+        );
         when(
-                articleService.filterByCategories(articles, categories)
-        ).thenReturn(articles);
+                articleService.filterByCategories(
+                        getArticles(),
+                        getCategories()
+                )
+        ).thenReturn(
+                getArticles()
+        );
         when(
                 articleService.getAndFilterByDate(
                         DATE,
                         DATE
                 )
-        ).thenReturn(articles);
+        ).thenReturn(
+                getArticles()
+        );
         when(
-                articleService.getAndFilterByCategory(category)
-        ).thenReturn(articles);
+                articleService.getAndFilterByCategory(
+                        getCategory()
+                )
+        ).thenReturn(getArticles());
         when(
-                articleService.getAndFilterByCategories(categories)
-        ).thenReturn(articles);
-        return articleService;
+                articleService.getAndFilterByCategories(
+                        getCategories()
+                )
+        ).thenReturn(
+                getArticles()
+        );
     }
 
-    private static CategoryService initCategoryService() {
-        final Category category = getCategory();
-        final CategoryService categoryService = mock(CategoryService.class);
-        contentService(categoryService, category, getCategories());
+    private static void initCategoryService() {
+        categoryService = mock(CategoryService.class);
+        contentService(
+                categoryService,
+                getCategory(),
+                getCategories()
+        );
         when(
                 categoryService.initAndAdd(
                         TITLE,
                         DESCRIPTION, KEYWORDS,
-                        null, true)
-        ).thenReturn(category);
+                        PHOTO_URL,
+                        true
+                )
+        ).thenReturn(getCategory());
         when(
                 categoryService.initAndUpdate(
                         URL, TITLE,
                         DESCRIPTION, KEYWORDS,
-                        null,
-                        true)
-        ).thenReturn(category);
-        return categoryService;
+                        PHOTO_URL,
+                        true
+                )
+        ).thenReturn(
+                getCategory()
+        );
     }
 
-    private static CompanyService initCompanyService() {
-        final Company company = getCompany();
-        final List<Company> companies = new ArrayList<>();
-        companies.add(company);
-        final CompanyService companyService = mock(CompanyService.class);
-        contentService(companyService, company, companies);
+    private static void initCompanyService() {
+        companyService = mock(CompanyService.class);
+        contentService(
+                companyService,
+                getCompany(),
+                getCompanies()
+        );
         when(
                 companyService.initAndAdd(
                         TITLE, DOMAIN,
@@ -189,10 +249,12 @@ public final class MockServices {
                         PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                         ADDRESS, GOOGLE_MAPS,
-                        null,
+                        PHOTO_URL,
                         true
                 )
-        ).thenReturn(company);
+        ).thenReturn(
+                getCompany()
+        );
         when(
                 companyService.initAndUpdate(
                         URL, TITLE, DOMAIN,
@@ -203,87 +265,143 @@ public final class MockServices {
                         PHOTO_URL,
                         true
                 )
-        ).thenReturn(company);
+        ).thenReturn(
+                getCompany()
+        );
         when(
                 companyService.getMainCompany()
-        ).thenReturn(company);
+        ).thenReturn(
+                getCompany()
+        );
         when(
                 companyService.getMainCompanyToHome()
-        ).thenReturn(company);
+        ).thenReturn(
+                getCompany()
+        );
         when(
                 companyService.getPartners(true)
-        ).thenReturn(companies);
-        return companyService;
+        ).thenReturn(
+                getCompanies()
+
+        );
     }
 
-    private static FileService initPhotoService() {
-        final File file = getFile();
-        final FileService fileService = mock(FileService.class);
-        mediaService(fileService, file, getFiles());
+    private static void initFileService() {
+        fileService = mock(FileService.class);
+        dateService(
+                fileService,
+                getFile(),
+                getFiles()
+        );
         when(
-                fileService.initAndAdd(TITLE, URL, null)
-        ).thenReturn(file);
+                fileService.getByTitle(TITLE)
+        ).thenReturn(
+                getFile()
+        );
         when(
-                fileService.initAndUpdate(ID, TITLE, URL, null)
-        ).thenReturn(file);
+                fileService.getByUrl(URL)
+        ).thenReturn(
+                getFile()
+        );
+        when(
+                fileService.initAndAdd(
+                        TITLE, URL, null
+                )
+        ).thenReturn(
+                getFile()
+        );
+        when(
+                fileService.initAndUpdate(
+                        ID, TITLE, URL, null
+                )
+        ).thenReturn(
+                getFile()
+        );
         when(
                 fileService.deleteFile(PATH)
         ).thenReturn(true);
         when(
-                fileService.updatePhoto(file, null, TITLE, PATH)
-        ).thenReturn(file);
-        return fileService;
+                fileService.updatePhoto(
+                        getFile(), null, TITLE, PATH
+                )
+        ).thenReturn(
+                getFile()
+        );
     }
 
-    private static MessageService initMessageService() {
-        final MessageService messageService = mock(MessageService.class);
+    private static void initMessageService() {
+        messageService = mock(MessageService.class);
         dateService(
                 messageService,
                 getMessage(),
                 getMessages()
         );
-        return messageService;
     }
 
-    private static ResponseService initResponseService() {
-        final Response response = getResponse();
-        final List<Response> responses = getResponses();
-        final ResponseService responseService = mock(ResponseService.class);
-        dateService(responseService, response, responses);
+    private static void initResponseService() {
+        responseService = mock(ResponseService.class);
+        dateService(
+                responseService,
+                getResponse(),
+                getResponses()
+        );
         when(
                 responseService.initAndAdd(NAME, TEXT)
-        ).thenReturn(response);
+        ).thenReturn(
+                getResponse()
+        );
         when(
-                responseService.initAndUpdate(ID, NAME, TEXT)
-        ).thenReturn(response);
+                responseService.initAndUpdate(
+                        ID, NAME, TEXT
+                )
+        ).thenReturn(
+                getResponse()
+        );
         when(
-                responseService.sortByDate(responses, true)
-        ).thenReturn(responses);
+                responseService.sortByDate(
+                        getResponses(), true
+                )
+        ).thenReturn(
+                getResponses()
+        );
         when(
-                responseService.sortByDate(responses, false)
-        ).thenReturn(responses);
+                responseService.sortByDate(
+                        getResponses(), false
+                )
+        ).thenReturn(
+                getResponses()
+        );
         when(
                 responseService.getAndSortByDate(true)
-        ).thenReturn(responses);
+        ).thenReturn(
+                getResponses()
+        );
         when(
                 responseService.getAndSortByDate(false)
-        ).thenReturn(responses);
+        ).thenReturn(
+                getResponses()
+        );
         when(
-                responseService.filterByDate(responses, DATE, DATE)
-        ).thenReturn(responses);
+                responseService.filterByDate(
+                        getResponses(), DATE, DATE
+                )
+        ).thenReturn(
+                getResponses()
+        );
         when(
                 responseService.getAndFilterByDate(DATE, DATE)
-        ).thenReturn(responses);
-        return responseService;
+        ).thenReturn(
+                getResponses()
+        );
     }
 
-    private static UserService initUserService() {
-        final User user = getUser();
-        final List<User> users = getUsers();
-        final List<UserRole> roles = new ArrayList<>();
-        roles.add(USER_ROLE);
-        final UserService userService = mock(UserService.class);
-        dateService(userService, user, users);
+    private static void initUserService() {
+        userService = mock(UserService.class);
+        dateService(
+                userService,
+                getUser(),
+                getUsers()
+        );
         when(
                 userService.initAndAdd(
                         NAME, LOGIN, PASSWORD,
@@ -292,7 +410,9 @@ public final class MockServices {
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                         PHOTO_URL,
                         true, true, true)
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.initAndUpdate(
                         URL, NAME,
@@ -303,95 +423,304 @@ public final class MockServices {
                         PHOTO_URL,
                         true, true, true
                 )
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getByName(NAME)
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getByUrl(URL)
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getByLogin(LOGIN)
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getByEmail(EMAIL)
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getByPhone(PHONE)
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getAuthenticatedUser()
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getMainAdmin()
-        ).thenReturn(user);
+        ).thenReturn(
+                getUser()
+        );
         when(
                 userService.getAdmins()
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getPersonnel()
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.sortByName(users, true)
-        ).thenReturn(users);
+                userService.sortByName(
+                        getUsers(), true
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.sortByName(users, false)
-        ).thenReturn(users);
+                userService.sortByName(
+                        getUsers(), false
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.sortByUrl(users, true)
-        ).thenReturn(users);
+                userService.sortByUrl(
+                        getUsers(), true
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.sortByUrl(users, false)
-        ).thenReturn(users);
+                userService.sortByUrl(
+                        getUsers(), false
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.sortByRole(
-                        users, USER_ROLE, true
+                        getUsers(), USER_ROLE, true
                 )
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.sortByRole(
-                        users, USER_ROLE, false
+                        getUsers(), USER_ROLE, false
                 )
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getAndSortByName(true)
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getAndSortByName(false)
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getAndSortByUrl(true)
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getAndSortByUrl(false)
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.getAndSortByRole(USER_ROLE, true)
-        ).thenReturn(users);
+                userService.getAndSortByRole(
+                        USER_ROLE, true
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.getAndSortByRole(USER_ROLE, false)
-        ).thenReturn(users);
+                userService.getAndSortByRole(
+                        USER_ROLE, false
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
-                userService.filterByRole(users, USER_ROLE)
-        ).thenReturn(users);
+                userService.filterByRole(
+                        getUsers(), USER_ROLE
+                )
+        ).thenReturn(
+                getUsers()
+        );
+        final List<UserRole> roles = new ArrayList<>();
+        roles.add(USER_ROLE);
         when(
-                userService.filterByRoles(users, roles)
-        ).thenReturn(users);
+                userService.filterByRoles(
+                        getUsers(), roles
+                )
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getAndFilterByRole(USER_ROLE)
-        ).thenReturn(users);
+        ).thenReturn(
+                getUsers()
+        );
         when(
                 userService.getAndFilterByRoles(roles)
-        ).thenReturn(users);
-        return userService;
+        ).thenReturn(
+                getUsers()
+        );
     }
 
-    private static <T extends Content, E extends ContentService> void contentService(
+    private static <T extends Content<Long>, E extends ContentService<T, Long>> void contentService(
             final E service,
             final T content,
             final Collection<T> contents
     ) {
         dateService(service, content, contents);
+        when(
+                service.getByTitle(TITLE, true)
+        ).thenReturn(content);
+        when(
+                service.getByTitle(TITLE, false)
+        ).thenReturn(content);
+        when(
+                service.getByTitle(ANY_STRING, true)
+        ).thenThrow(NullPointerException.class);
+        when(
+                service.getByTitle(ANY_STRING, false)
+        ).thenThrow(NullPointerException.class);
+        when(
+                service.getByTitle(null, true)
+        ).thenThrow(IllegalArgumentException.class);
+        when(
+                service.getByTitle(null, false)
+        ).thenThrow(IllegalArgumentException.class);
+        when(
+                service.getByUrl(URL, true)
+        ).thenReturn(content);
+        when(
+                service.getByUrl(URL, false)
+        ).thenReturn(content);
+        when(
+                service.getByUrl(ANY_STRING, true)
+        ).thenThrow(NullPointerException.class);
+        when(
+                service.getByUrl(ANY_STRING, false)
+        ).thenThrow(NullPointerException.class);
+        when(
+                service.getByUrl(null, true)
+        ).thenThrow(IllegalArgumentException.class);
+        when(
+                service.getByUrl(null, false)
+        ).thenThrow(IllegalArgumentException.class);
+        when(
+                service.sortByTitle(
+                        contents, true
+                )
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.sortByTitle(
+                        contents, false
+                )
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.sortByTitle(
+                        new ArrayList<>(), true
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByTitle(
+                        new ArrayList<>(), false
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByTitle(
+                        null, true
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByTitle(
+                        null, false
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByUrl(
+                        contents, true
+                )
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.sortByUrl(
+                        contents, false
+                )
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.sortByUrl(
+                        new ArrayList<>(), true
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByUrl(
+                        new ArrayList<>(), false
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByUrl(
+                        null, true
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.sortByUrl(
+                        null, false
+                )
+        ).thenReturn(
+                new ArrayList<>()
+        );
+        when(
+                service.getAndSortByTitle(true)
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.getAndSortByTitle(false)
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.getAndSortByUrl(true)
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
+        when(
+                service.getAndSortByUrl(false)
+        ).thenReturn(
+                new ArrayList<>(contents)
+        );
         when(
                 service.sort(
                         contents,
@@ -399,7 +728,7 @@ public final class MockServices {
                         true
                 )
         ).thenReturn(
-                new ArrayList(contents)
+                new ArrayList<>(contents)
         );
         when(
                 service.sort(
@@ -407,7 +736,7 @@ public final class MockServices {
                         new ContentComparator.ByTitle<>(), false
                 )
         ).thenReturn(
-                new ArrayList(contents)
+                new ArrayList<>(contents)
         );
         when(
                 service.sort(
@@ -415,25 +744,11 @@ public final class MockServices {
                         new ContentComparator.ByTitle<>()
                 )
         ).thenReturn(
-                new ArrayList(contents)
+                new ArrayList<>(contents)
         );
     }
 
-    private static <T extends Media, E extends MediaService> void mediaService(
-            final E service,
-            final T media,
-            final Collection<T> medias
-    ) {
-        dateService(service, media, medias);
-        when(
-                service.getByTitle(TITLE)
-        ).thenReturn(media);
-        when(
-                service.getByUrl(URL)
-        ).thenReturn(media);
-    }
-
-    private static <T extends Model, E extends DataService> void dateService(
+    private static <T extends Model<Long>, E extends DataService<T, Long>> void dateService(
             final E service,
             final T model,
             final Collection<T> models
@@ -442,7 +757,7 @@ public final class MockServices {
                 service.add(model)
         ).thenReturn(model);
         when(
-                service.add(models)
+                service.addAll(models)
         ).thenReturn(models);
         when(
                 service.update(model)
@@ -466,7 +781,7 @@ public final class MockServices {
                 service.exists(model)
         ).thenReturn(true);
         when(
-                service.exists((Article) null)
+                service.exists((T) null)
         ).thenReturn(false);
         when(
                 service.exists(ID)
@@ -484,7 +799,7 @@ public final class MockServices {
                         INDEX
                 )
         ).thenReturn(
-                new ArrayList(models)
+                new ArrayList<T>(models)
         );
         when(
                 service.getAndSubList(
@@ -492,12 +807,12 @@ public final class MockServices {
                         INDEX
                 )
         ).thenReturn(
-                new ArrayList(models)
+                new ArrayList<T>(models)
         );
         when(
                 service.filteredByValid(models)
         ).thenReturn(
-                new ArrayList(models)
+                new ArrayList<T>(models)
         );
     }
 }

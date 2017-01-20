@@ -49,7 +49,7 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
     public void whenAddModelsThenReturnThisModels() {
         assertNotNull(
                 getService()
-                        .add(
+                        .addAll(
                                 getObjects()
                         )
         );

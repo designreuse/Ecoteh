@@ -3,106 +3,125 @@ package com.salimov.yurii.mocks.dao.test;
 
 import com.salimov.yurii.dao.interfaces.DataDao;
 import com.salimov.yurii.entity.Model;
-import com.salimov.yurii.mocks.MockConstants;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collection;
 
+import static com.salimov.yurii.mocks.MockConstants.ID;
+import static com.salimov.yurii.mocks.MockConstants.UNKNOWN_ID;
 import static org.junit.Assert.*;
 
 public abstract class MockDataDAOTest<T extends Model<Long>> {
 
     @Test
     public void whenGetMockDaoThenReturnNotNull() {
-        assertNotNull(getDao());
+        assertNotNull(
+                getDao()
+        );
     }
 
     @Test
     public void whenGetObjectThenReturnSomeObject() {
-        assertNotNull(getObject());
+        assertNotNull(
+                getObject()
+        );
     }
 
     @Test
     public void whenGetObjectsThenReturnSomeObjects() {
-        assertNotNull(getObjects());
+        assertNotNull(
+                getObjects()
+        );
     }
 
     @Test
     public void whenAddInvalidModelThenReturnNull() {
-        T model = (T) getDao().add(null);
-        assertNull(model);
+        assertNull(
+                getDao().add(null)
+        );
     }
 
     @Test
     public void whenAddValidModelThenReturnThisModel() {
-        T model1 = getObject();
-        T model2 = (T) getDao().add(model1);
-        assertNotNull(model2);
-        assertEquals(model1, model2);
+        assertNotNull(
+                getDao().add(
+                        getObject()
+                )
+        );
     }
 
     @Test
     public void whenAddAllInvalidModelThenReturnNull() {
-        Collection<T> models = getDao().addAll(null);
-        assertNull(models);
+        assertNull(
+                getDao().addAll(null)
+        );
     }
 
     @Test
     public void whenAddAllValidModelThenReturnThisModels() {
-        Collection<T> models1 = getObjects();
-        Collection<T> models2 = getDao().addAll(models1);
-        assertNotNull(models2);
+        assertNotNull(
+                getDao().addAll(
+                        getObjects()
+                )
+        );
     }
 
     @Test
     public void whenUpdateInvalidModelThenReturnNull() {
-        T model = (T) getDao().update(null);
-        assertNull(model);
+        assertNull(
+                getDao().update(null)
+        );
     }
 
     @Test
     public void whenUpdateValidModelThenReturnThisModel() {
-        T model1 = getObject();
-        T model2 = (T) getDao().update(model1);
-        assertNotNull(model2);
-        assertEquals(model1, model2);
+        assertNotNull(
+                getDao().update(
+                        getObject()
+                )
+        );
     }
 
     @Test
     public void whenGetByInvalidIdThenReturnNull() {
-        T model = (T) getDao().get(null);
-        assertNull(model);
-
-        model = (T) getDao().get(MockConstants.UNKNOWN_ID);
-        assertNull(model);
+        assertNull(
+                getDao().get(null)
+        );
+        assertNull(
+                getDao().get(UNKNOWN_ID)
+        );
     }
 
     @Test
     public void whenGetByValidIdThenReturnSomeModel() {
-        T model = (T) getDao().get(MockConstants.ID);
-        assertNotNull(model);
+        assertNotNull(
+                getDao().get(ID)
+        );
     }
 
     @Test
     public void whenGetAllModelsThenReturnThem() {
-        Collection<T> models = getDao().getAll();
-        assertNotNull(models);
+        assertNotNull(
+                getDao().getAll()
+        );
     }
 
     @Test
     public void whenExistsByInvalidIdThenReturnFalse() {
-        boolean value = getDao().exists(null);
-        assertFalse(value);
-
-        value = getDao().exists(MockConstants.UNKNOWN_ID);
-        assertFalse(value);
+        assertFalse(
+                getDao().exists(null)
+        );
+        assertFalse(
+                getDao().exists(UNKNOWN_ID)
+        );
     }
 
     @Test
     public void whenExistsByValidIdThenReturnTrue() {
-        boolean value = getDao().exists(MockConstants.ID);
-        assertTrue(value);
+        assertTrue(
+                getDao().exists(ID)
+        );
     }
 
     @Ignore

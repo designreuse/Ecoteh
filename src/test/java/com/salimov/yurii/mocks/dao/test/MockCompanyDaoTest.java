@@ -26,14 +26,12 @@ public class MockCompanyDaoTest extends MockContentDAOTest<Company> {
 
     @Test
     public void whenGetByInvalidTypeThenReturnNull() {
-        Collection<Company> companies = this.dao.getByType(null);
-        assertNull(companies);
+        assertNull(this.dao.getByType(null));
     }
 
     @Test
     public void whenGetByValidTypeThenReturnSomeCompanies() {
-        Collection<Company> companies = this.dao.getByType(COMPANY_TYPE);
-        assertNotNull(companies);
+        assertNotNull(this.dao.getByType(COMPANY_TYPE));
     }
 
     @Ignore

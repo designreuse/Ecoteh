@@ -1,18 +1,19 @@
 package com.salimov.yurii.mocks.dao.test;
 
 import com.salimov.yurii.dao.interfaces.ArticleDao;
-import com.salimov.yurii.mocks.MockConstants;
+import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.mocks.dao.MockDAO;
-import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import com.salimov.yurii.entity.Article;
 
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static com.salimov.yurii.mocks.MockConstants.ANY_STRING;
+import static com.salimov.yurii.mocks.MockConstants.NUMBER;
+import static com.salimov.yurii.mocks.enity.MockEntity.getArticle;
 import static com.salimov.yurii.mocks.enity.MockEntity.getArticles;
+import static org.junit.Assert.*;
 
 public class MockArticleDaoTest extends MockContentDAOTest<Article> {
 
@@ -25,18 +26,22 @@ public class MockArticleDaoTest extends MockContentDAOTest<Article> {
 
     @Test
     public void whenGetByInvalidNumberThenReturnNull() {
-        Article article = this.dao.getByNumber(null);
-        assertNull(article);
-
-        article = this.dao.getByTitle(MockConstants.ANY_STRING);
-        assertNull(article);
+        assertNull(
+                this.dao.getByNumber(null)
+        );
+        assertNull(
+                this.dao.getByTitle(ANY_STRING)
+        );
     }
 
     @Test
     public void whenGetByValidNumberThenReturnSomeContent() {
-        Article article = this.dao.getByNumber(MockConstants.NUMBER);
+        final Article article = this.dao.getByNumber(NUMBER);
         assertNotNull(article);
-        assertEquals(article.getNumber(), MockConstants.NUMBER);
+        assertEquals(
+                article.getNumber(),
+                NUMBER
+        );
     }
 
     @Ignore
@@ -48,12 +53,12 @@ public class MockArticleDaoTest extends MockContentDAOTest<Article> {
     @Ignore
     @Override
     protected Article getObject() {
-        return MockEntity.getArticle();
+        return getArticle();
     }
 
     @Ignore
     @Override
     protected Collection<Article> getObjects() {
-        return MockEntity.getArticles();
+        return getArticles();
     }
 }

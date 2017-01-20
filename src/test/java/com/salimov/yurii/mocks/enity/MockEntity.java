@@ -156,6 +156,9 @@ public final class MockEntity {
         category.setId(ID);
         category.setUrl(URL);
         category.setPhotoUrl(PHOTO_URL);
+        category.addArticle(
+                getArticle()
+        );
     }
 
     private static void initCompany() {
@@ -173,7 +176,7 @@ public final class MockEntity {
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
         company.setWorkTimeTo(TIME);
-        company.addSlide(getFile());
+        company.addSlide(PHOTO_URL);
     }
 
     private static void initMessage() {

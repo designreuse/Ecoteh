@@ -18,11 +18,8 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "company",
-                        "slides",
                         "print_partners",
-                        "responses",
                         "print_responses"
                 }
         );
@@ -36,8 +33,7 @@ public abstract class MainControllerTest {
                 "client/category/all_page",
                 new String[]{
                         "main_company",
-                        "categories",
-                        "partners"
+                        "categories"
                 }
         );
     }
@@ -51,7 +47,6 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "category",
                         "articles_list"
                 }
@@ -67,7 +62,6 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "article"
                 }
         );
@@ -82,7 +76,6 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "article"
                 }
         );
@@ -97,8 +90,7 @@ public abstract class MainControllerTest {
                 new String[]{
                         "articles_list",
                         "main_company",
-                        "categories",
-                        "partners"
+                        "categories"
                 }
         );
     }
@@ -112,7 +104,6 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "company",
                         "users_list"
                 }
@@ -128,7 +119,6 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "company",
                         "map"
                 }
@@ -143,8 +133,7 @@ public abstract class MainControllerTest {
                 "client/company/all_page",
                 new String[]{
                         "main_company",
-                        "categories",
-                        "partners"
+                        "categories"
                 }
         );
     }
@@ -158,7 +147,6 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "partners",
                         "company",
                         "map"
                 }
@@ -174,8 +162,7 @@ public abstract class MainControllerTest {
                 new String[]{
                         "responses_list",
                         "main_company",
-                        "categories",
-                        "partners"
+                        "categories"
                 }
         );
     }

@@ -1,7 +1,6 @@
 package com.salimov.yurii.util.comparator;
 
 import com.salimov.yurii.entity.File;
-import com.salimov.yurii.entity.Media;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -13,17 +12,17 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class MediaComparatorTest {
+public class FileComparatorTest {
 
     @Test
     public void mediaComparator() {
-        MediaComparator comparator = new MediaComparator();
+        FileComparator comparator = new FileComparator();
         assertNotNull(comparator);
     }
 
     @Test
     public void getMediaComparatorByTitle() {
-        Comparator<Media> comparator = new MediaComparator.ByTitle<>();
+        final Comparator<File> comparator = new FileComparator.ByTitle<>();
         assertNotNull(comparator);
 
         final File file1 = getFile();
@@ -46,13 +45,14 @@ public class MediaComparatorTest {
 
     @Test
     public void getMediaComparatorByTitleWithInvalidMedias() {
-        Comparator<Media> comparator = new MediaComparator.ByTitle<>();
-        getMediaComparatorWithInvalidMedias(comparator);
+        getMediaComparatorWithInvalidMedias(
+                new FileComparator.ByTitle<>()
+        );
     }
 
     @Test
     public void getMediaComparatorByUrl() {
-        Comparator<Media> comparator = new MediaComparator.ByUrl<>();
+        final Comparator<File> comparator = new FileComparator.ByUrl<>();
         assertNotNull(comparator);
 
         final File file1 = getFile();
@@ -75,12 +75,15 @@ public class MediaComparatorTest {
 
     @Test
     public void getMediaComparatorByUrlWithInvalidMedias() {
-        Comparator<Media> comparator = new MediaComparator.ByUrl<>();
-        getMediaComparatorWithInvalidMedias(comparator);
+        getMediaComparatorWithInvalidMedias(
+                new FileComparator.ByUrl<>()
+        );
     }
 
     @Ignore
-    private static void getMediaComparatorWithInvalidMedias(Comparator<Media> comparator) {
+    private static void getMediaComparatorWithInvalidMedias(
+            final Comparator<File> comparator
+    ) {
         int value = comparator.compare(null, null);
         assertNotNull(value);
         assertEquals(value, 0);

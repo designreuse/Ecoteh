@@ -1364,27 +1364,41 @@ public final class CompanyTest extends ContentTest<Company> {
         assertTrue(
                 company.getSlides().isEmpty()
         );
-        company.setSlides(files);
+        company.setSlides(" ");
         assertTrue(
-                company.getSlides().isEmpty()
+                isBlank(
+                        company.getSlides()
+                )
         );
-        company.addSlides(files);
+        company.getSlidesList().forEach(System.out::println);
         assertTrue(
-                company.getSlides().isEmpty()
+                company.getSlidesList().isEmpty()
+        );
+        company.addSlides(new String[]{" "});
+        assertTrue(
+                isBlank(
+                        company.getSlides()
+                )
+        );
+        assertTrue(
+                company.getSlidesList().isEmpty()
         );
     }
 
     @Test
     public void whenSlidesAreValidThenAddThey() {
         final Company company = getCompany();
-
-        final List<File> slides = getFiles();
-        company.setSlides(slides);
-        assertFalse(
-                company.getSlides().isEmpty()
+        company.clearSlides();
+        final List<String> slides = new ArrayList<>();
+        slides.add(PHOTO_URL);
+        company.addSlides(slides);
+        assertTrue(
+                isNotBlank(
+                        company.getSlides()
+                )
         );
         assertEquals(
-                company.getSlides().size(),
+                company.getSlidesList().size(),
                 slides.size()
         );
         company.clearSlides();
@@ -1398,24 +1412,24 @@ public final class CompanyTest extends ContentTest<Company> {
                 company.getSlides().isEmpty()
         );
         assertEquals(
-                company.getSlides().size(),
+                company.getSlidesList().size(),
                 slides.size()
         );
         company.removeSlides(slides);
         assertTrue(
                 company.getSlides().isEmpty()
         );
-        company.setSlides(slides);
+        company.addSlides(slides);
         assertTrue(
                 company.containsSlides(slides)
         );
-        for (File file : slides) {
+        for (String slide : slides) {
             assertTrue(
-                    company.containsSlide(file)
+                    company.containsSlide(slide)
             );
-            company.removeSlide(file);
+            company.removeSlide(slide);
             assertFalse(
-                    company.containsSlide(file)
+                    company.containsSlide(slide)
             );
         }
     }
@@ -1520,9 +1534,7 @@ public final class CompanyTest extends ContentTest<Company> {
     ) {
         for (int i = 0; i < size; i++) {
             if (i % 2 == 0) {
-                final File invalidFile = new File();
-                files.add(invalidFile);
-                company.addSlide(invalidFile);
+                company.addSlides(new ArrayList<>());
             } else {
                 files.add(null);
                 company.addSlide(null);

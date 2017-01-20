@@ -263,7 +263,7 @@ public final class CategoryTest extends ContentTest<Category> {
         assertFalse(
                 Category.isValidated(null)
         );
-        assertFalse(
+        assertTrue(
                 Category.isValidated(category)
         );
         category.setTitle(null);

@@ -9,10 +9,150 @@ import org.junit.Test;
 import static com.salimov.yurii.mocks.MockConstants.TITLE;
 import static com.salimov.yurii.mocks.MockConstants.URL;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
 
-public final class FileTest extends MediaTest<File> {
+public final class FileTest extends ModelTest<File> {
+
+    @Test
+    @Override
+    public void validObject() {
+        final File file = getObject();
+        assertEquals(
+                file.isValidated(file),
+                file != null && isNotBlank(file.getUrl())
+        );
+    }
+
+    @Test
+    public void toStringTest() {
+        final File file = getObject();
+        assertTrue(
+                isNotBlank(
+                        file.toString()
+                )
+        );
+        String value = file.getClass().getSimpleName() + " " + file.getTitle()
+                + " \nURL: " + file.getUrl();
+        assertEquals(
+                file.toString(),
+                value
+        );
+    }
+
+    @Test
+    @Override
+    public void equalsValidObjects() {
+        super.equalsValidObjects();
+        final File file1 = getObject();
+        final File file2 = (File) file1.clone();
+        assertEquals(file1, file2);
+        final boolean value = (isNotBlank(file1.getTitle()) ?
+                file1.getTitle()
+                        .equalsIgnoreCase(
+                                file2.getTitle()
+                        ) :
+                isBlank(file2.getTitle())
+        ) && (
+                isNotBlank(file1.getUrl()) ?
+                        file1.getUrl()
+                                .equalsIgnoreCase(
+                                        file2.getUrl()
+                                ) :
+                        isBlank(file2.getUrl())
+        );
+        assertEquals(
+                file1.equals(file2),
+                value
+        );
+    }
+
+    @Test
+    @Override
+    public void hashCodeValidObject() {
+        super.hashCodeValidObject();
+        final File file = getObject();
+        final int value = (
+                isNotBlank(file.getTitle()) ? file.getTitle().hashCode() : 0
+        ) + (
+                isNotBlank(file.getUrl()) ? file.getUrl().hashCode() : 0
+        );
+        for (int i = 0; i < 10; i++) {
+            assertEquals(file.hashCode(), value);
+        }
+    }
+
+    @Test
+    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
+        final File file = getObject();
+        file.initialize(null, null);
+        assertNull(file.getTitle());
+        assertNull(file.getUrl());
+        file.initialize("", "");
+        assertNull(file.getTitle());
+        assertNull(file.getUrl());
+        file.initialize(" ", " ");
+        assertNull(file.getTitle());
+        assertNull(file.getUrl());
+        file.initialize("   ", "   ");
+        assertNull(file.getTitle());
+        assertNull(file.getUrl());
+    }
+
+    @Test
+    public void whenInitializeObjectWithValidParametersThenGetThisValue() {
+        final File file = getObject();
+        file.initialize(TITLE, URL);
+        assertNotNull(file.getTitle());
+        assertNotNull(file.getUrl());
+        assertEquals(file.getTitle(), TITLE);
+        assertEquals(file.getUrl(), URL);
+    }
+
+    @Test
+    public void whenSetInvalidTitleThenGetNull() {
+        final File file = getObject();
+        file.setTitle(null);
+        assertNull(file.getTitle());
+        file.setTitle("");
+        assertNull(file.getTitle());
+        file.setTitle(" ");
+        assertNull(file.getTitle());
+        file.setTitle("    ");
+        assertNull(file.getTitle());
+    }
+
+    @Test
+    public void whenSetInvalidUrlThenGetNull() {
+        final File file = getObject();
+        file.setUrl(null);
+        assertNull(file.getUrl());
+        file.setUrl("");
+        assertNull(file.getUrl());
+        file.setUrl(" ");
+        assertNull(file.getUrl());
+        file.setUrl("   ");
+        assertNull(file.getUrl());
+    }
+
+    @Test
+    public void whenSetValidUrlThenGetThisUrl() {
+        final File file = getObject();
+        file.setUrl(URL);
+        assertNotNull(file.getUrl());
+        final String url = Translator.fromCyrillicToLatin(URL);
+        assertEquals(
+                file.getUrl(), url
+        );
+        file.setUrl(null);
+        file.translateAndSetUrl(URL);
+        assertNotNull(file.getUrl());
+        assertEquals(
+                file.getUrl(),
+                url
+        );
+    }
 
     @Test
     public void whenPassInvalidParametersInConstructorThenSaveNull() {
@@ -90,7 +230,6 @@ public final class FileTest extends MediaTest<File> {
     }
 
     @Test
-    @Override
     public void whenSetValidTitleThenGetThisTitle() {
         final File file = getFile();
         file.setTitle(TITLE);
