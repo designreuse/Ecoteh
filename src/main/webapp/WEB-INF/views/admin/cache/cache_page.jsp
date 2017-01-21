@@ -43,7 +43,7 @@
                     <h3 class="text-center">Кэш<c:if test="${length le 0}"> пустой!</c:if></h3>
                     <hr>
                     <c:if test="${length gt 0}">
-                        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xl-8 col-xl-offset-2">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <table align="center">
                                 <tr>
                                     <th class="pad">№</th>
@@ -60,8 +60,8 @@
                                             <a href="<c:url value="/admin/cache/remove/${object.key}"/>"
                                                title="Удалить объект с кэша">
                                                 <button class="btn btn-default">
-                                                    <span class="glyphicon glyphicon-minus red"
-                                                          aria-hidden="true"></span>&nbsp;Удалить
+                                                    <span class="glyphicon glyphicon-remove red"
+                                                          aria-hidden="true"></span>
                                                 </button>
                                             </a>
                                         </td>

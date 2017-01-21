@@ -12,10 +12,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
         <title>Все статьи | <c:out value="${main_company.title}"/></title>
-        <meta name="title" content="Все статьи | <c:out value="${main_company.title}"/>">
+        <meta name="title" content="Все товары | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
         <meta name="description"
-              content="Все статьи <c:out value="${main_company.title}"/> - <c:out value="${main_company.tagline}"/>.">
+              content="Все товары <c:out value="${main_company.title}"/> - <c:out value="${main_company.tagline}"/>.">
         <meta name="keywords"
               content="<c:out value="${main_company.title}"/><c:forEach items="${articles_list}" var="article">, <c:out value="${article.title}"/></c:forEach>"/>
         <c:if test="${main_company.faviconUrl ne null}">
