@@ -446,22 +446,6 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     }
 
     /**
-     * Creates new instance of the type.
-     *
-     * @param type Class object.
-     * @return The Class object.
-     */
-    T getInstance(Class<T> type) {
-        T instance = null;
-        try {
-            instance = type.newInstance();
-        } catch (InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
-        }
-        return instance;
-    }
-
-    /**
      * Return Class object of {@link Model} or subclasses.
      *
      * @return The Class object of {@link Model} or subclasses.

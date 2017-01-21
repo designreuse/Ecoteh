@@ -248,14 +248,8 @@ public final class Response
      * @return {@code true} if the response is valid, {@code false} otherwise.
      */
     public static boolean isValidated(final Response response) {
-        boolean result = false;
-        if (Model.isValidated(response)) {
-            result = ((
-                    isNotBlank(response.getUsername())
-            ) && (
-                    isNotBlank(response.getText())
-            ));
-        }
-        return result;
+        return Model.isValidated(response)
+                && isNotBlank(response.getUsername())
+                && isNotBlank(response.getText());
     }
 }

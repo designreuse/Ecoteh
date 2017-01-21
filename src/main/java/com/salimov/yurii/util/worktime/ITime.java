@@ -21,7 +21,7 @@ public interface ITime {
      *
      * @return The correct time.
      */
-    public String getCorrectTime();
+    String getCorrectTime();
 
 
     /**

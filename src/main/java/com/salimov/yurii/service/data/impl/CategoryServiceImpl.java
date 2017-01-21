@@ -131,6 +131,7 @@ public final class CategoryServiceImpl
                 keywords,
                 photoUrl
         );
+        category.setValidated(isValid);
         return update(category);
     }
 

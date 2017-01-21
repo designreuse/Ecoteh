@@ -336,12 +336,7 @@ public final class Article
      * {@code false} otherwise.
      */
     public static boolean isValidated(final Article article) {
-        boolean result = false;
-        if (Content.isValidated(article)) {
-            if (isNotBlank(article.getText())) {
-                result = true;
-            }
-        }
-        return result;
+        return Content.isValidated(article)
+                && isNotBlank(article.getText());
     }
 }

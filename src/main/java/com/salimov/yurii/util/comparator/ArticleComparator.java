@@ -71,7 +71,7 @@ public final class ArticleComparator {
         @Override
         public int compare(final Article article1, final Article article2) {
             int result;
-            if ((article1 == null) && (article2 == null)) {
+            if (article1 == null && article2 == null) {
                 result = 0;
             } else if (article1 == null) {
                 result = -1;

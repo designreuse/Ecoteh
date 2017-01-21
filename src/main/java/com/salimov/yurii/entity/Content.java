@@ -280,16 +280,8 @@ public abstract class Content<E extends Number>
     public static <ID extends Number> boolean isValidated(
             final Content<ID> content
     ) {
-        boolean result = false;
-        if (Model.isValidated(content)) {
-            if ((
-                    isNotBlank(content.getTitle())
-            ) && (
-                    isNotBlank(content.getUrl())
-            )) {
-                result = true;
-            }
-        }
-        return result;
+        return Model.isValidated(content)
+                && isNotBlank(content.getTitle())
+                && isNotBlank(content.getUrl());
     }
 }

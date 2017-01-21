@@ -839,16 +839,9 @@ public final class User
      * @return {@code true} if the user is valid, {@code false} otherwise.
      */
     public static boolean isValidated(final User user) {
-        boolean result = false;
-        if (Model.isValidated(user)) {
-            result = (
-                    isNotBlank(user.getName())
-            ) && (
-                    isNotBlank(user.getPhone())
-            ) && (
-                    isNotBlank(user.getEmail())
-            );
-        }
-        return result;
+        return Model.isValidated(user)
+                && isNotBlank(user.getName())
+                && isNotBlank(user.getPhone())
+                && isNotBlank(user.getEmail());
     }
 }

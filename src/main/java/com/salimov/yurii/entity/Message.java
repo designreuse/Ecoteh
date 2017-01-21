@@ -375,12 +375,9 @@ public final class Message
      * @return {@code true} if the user is valid, {@code false} otherwise.
      */
     public static boolean isValidated(final Message message) {
-        boolean result = false;
-        if (Model.isValidated(message)) {
-            result = isNotBlank(message.getUsername())
-                    && isNotBlank(message.getPhone())
-                    && isNotBlank(message.getText());
-        }
-        return result;
+        return Model.isValidated(message)
+                && isNotBlank(message.getUsername())
+                && isNotBlank(message.getPhone())
+                && isNotBlank(message.getText());
     }
 }

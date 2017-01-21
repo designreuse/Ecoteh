@@ -5,7 +5,6 @@ import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
-import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
