@@ -194,8 +194,8 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "login",
-                "password",
+                "97,100,109,105,110",
+                "97,100,109,105,110,112,97,115,115",
                 UserRole.ADMIN
         );
         USERS.put(
@@ -210,8 +210,8 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "login",
-                "password",
+                "115,117,112,101,114",
+                "121,117,114,105,105,115,97,108,105,109,111,118",
                 UserRole.SUPERMAN
         );
         USERS.put(

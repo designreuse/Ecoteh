@@ -263,10 +263,11 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView allSortPartnersByTitlePage(
             final boolean revers
     ) {
-        ModelAndView modelAndView = get(ALL_SORT_PARTNERS_KEY);
+        final String key = ALL_SORT_PARTNERS_KEY + ", " + revers;
+        ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.allSortPartnersByTitlePage(revers);
-            put(modelAndView, ALL_SORT_PARTNERS_KEY);
+            put(modelAndView, key);
         }
         addAuthUser(modelAndView);
         modelAndView.addObject("revers", !revers);

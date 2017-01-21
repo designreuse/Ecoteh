@@ -49,16 +49,16 @@ public final class ArticleServiceImpl
      * for working {@link Article} objects a the database.
      *
      * @see ArticleDao
+     * @see Article
      */
     private final ArticleDao dao;
 
     /**
      * Constructor.
      *
-     * @param dao         a implementation of
-     *                    the {@link ArticleDao} interface.
+     * @param dao a implementation of
+     *            the {@link ArticleDao} interface.
      * @see ArticleDao
-     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -154,6 +154,7 @@ public final class ArticleServiceImpl
      * @return The article with the parameter url.
      * @see Article
      */
+    // TODO: Why I overrided this method?
     @Override
     @Transactional(readOnly = true)
     public Article getByUrl(

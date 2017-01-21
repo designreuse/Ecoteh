@@ -35,6 +35,7 @@ public final class ResponseServiceImpl
      *
      * @param dao a implementation of the {@link ResponseDao} interface.
      * @see ResponseDao
+     * @see Response
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

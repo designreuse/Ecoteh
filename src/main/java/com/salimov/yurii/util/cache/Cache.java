@@ -320,7 +320,9 @@ public final class Cache {
                                 .toString()
                                 .contains(subKey)
                 ).map(key -> cache.get(key))
-                .collect(Collectors.toList());
+                .collect(
+                        Collectors.toList()
+                );
     }
 
     /**
@@ -357,7 +359,10 @@ public final class Cache {
                                         key -> key.getKey()
                                                 .toString()
                                                 .contains(_key)
-                                ).forEach(key -> cache.remove(key));
+                                )
+                                .forEach(
+                                        key -> cache.remove(key)
+                                );
                     }
                 }
             }).start();

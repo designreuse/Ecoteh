@@ -35,6 +35,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      * for working {@link Model} objects with the database.
      *
      * @see DataDao
+     * @see Model
      */
     private final DataDao<T, E> dao;
 

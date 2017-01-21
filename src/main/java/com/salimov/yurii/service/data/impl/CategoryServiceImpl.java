@@ -45,6 +45,7 @@ public final class CategoryServiceImpl
      * with objects of the class {@link Article}.
      *
      * @see ArticleService
+     * @see Article
      */
     private final ArticleService articleService;
 

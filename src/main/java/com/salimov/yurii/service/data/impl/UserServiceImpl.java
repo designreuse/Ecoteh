@@ -5,7 +5,6 @@ import com.salimov.yurii.dao.interfaces.UserDao;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
-import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +50,7 @@ public final class UserServiceImpl
      * {@link User} objects with the database.
      *
      * @see UserDao
+     * @see User
      */
     private final UserDao dao;
 
@@ -60,7 +60,6 @@ public final class UserServiceImpl
      * @param dao a implementation of the {@link UserDao}
      *            interface.
      * @see UserDao
-     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

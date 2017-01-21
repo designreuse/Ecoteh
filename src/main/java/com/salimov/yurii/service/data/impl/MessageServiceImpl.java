@@ -1,6 +1,5 @@
 package com.salimov.yurii.service.data.impl;
 
-import com.salimov.yurii.dao.interfaces.DataDao;
 import com.salimov.yurii.dao.interfaces.MessageDao;
 import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.service.data.interfaces.MessageService;
@@ -30,7 +29,8 @@ public final class MessageServiceImpl
      * Initializes a implementations of the interfaces.
      *
      * @param dao a implementation of the {@link MessageDao} interface.
-     * @see DataDao
+     * @see MessageDao
+     * @see Message
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

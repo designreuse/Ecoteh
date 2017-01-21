@@ -37,7 +37,14 @@ public final class FileServiceImpl
         extends DataServiceImpl<File, Long>
         implements FileService {
 
-    final FileDao dao;
+    /**
+     * The interface provides a set of standard methods
+     * for working {@link File} objects a the database.
+     *
+     * @see FileDao
+     * @see File
+     */
+    private final FileDao dao;
 
     /**
      * The implementation of the interface describes

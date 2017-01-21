@@ -101,8 +101,20 @@ public class AdviceController {
     private final static String UNKNOWN_MESSAGE
             = "Неизвестная ошибка...";
 
+    /**
+     * The implementation of the interface provides a set of standard methods
+     * for creates and returns the main modelAndViews.
+     *
+     * @see MainMVFabric
+     */
     private final MainMVFabric fabric;
 
+    /**
+     * Constructor.
+     *
+     * @param fabric a implementation
+     *               of the {@link ClientMVFabric} interface.
+     */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdviceController(final ClientMVFabric fabric) {

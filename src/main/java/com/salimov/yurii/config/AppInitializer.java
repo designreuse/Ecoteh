@@ -132,8 +132,8 @@ public class AppInitializer
     protected DispatcherServlet createDispatcherServlet(
             final WebApplicationContext webApplicationContext
     ) {
-        final DispatcherServlet dispatcherServlet
-                = (DispatcherServlet) super.createDispatcherServlet(
+        final DispatcherServlet dispatcherServlet =
+                (DispatcherServlet) super.createDispatcherServlet(
                 webApplicationContext
         );
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(

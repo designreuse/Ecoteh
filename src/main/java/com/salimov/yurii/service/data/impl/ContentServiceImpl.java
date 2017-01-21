@@ -37,6 +37,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * for working {@link Content} objects with the database.
      *
      * @see ContentDao
+     * @see Content
      */
     private final ContentDao<T, E> dao;
 

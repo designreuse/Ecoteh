@@ -176,6 +176,7 @@ public final class Article
      * @param category    a new category to the article.
      * @see Category
      */
+    @Override
     public void initialize(
             final String title,
             final String description,
@@ -196,6 +197,7 @@ public final class Article
      *
      * @return The article number.
      */
+    @Override
     public String getNumber() {
         return this.number;
     }
@@ -206,6 +208,7 @@ public final class Article
      *
      * @param number a new number to the article.
      */
+    @Override
     public void setNumber(final String number) {
         if (isNotBlank(number)) {
             this.number = number;
@@ -219,6 +222,7 @@ public final class Article
      * To generate used a pattern {@link Model#CODE_PATTERN}
      * and length {@link Model#CODE_LENGTH}.
      */
+    @Override
     public void newNumber() {
         this.number = createRandomString(
                 CODE_PATTERN,
@@ -231,6 +235,7 @@ public final class Article
      *
      * @return The article text.
      */
+    @Override
     public String getText() {
         return this.text;
     }
@@ -241,6 +246,7 @@ public final class Article
      *
      * @param text a new text to the article.
      */
+    @Override
     public void setText(final String text) {
         this.text = isNotBlank(text) ? text : null;
     }
@@ -250,6 +256,7 @@ public final class Article
      *
      * @return The article date.
      */
+    @Override
     public Date getDate() {
         return this.date;
     }
@@ -260,6 +267,7 @@ public final class Article
      *
      * @param date a new date to the article.
      */
+    @Override
     public void setDate(final Date date) {
         this.date = date != null ? date : new Date();
     }
@@ -269,6 +277,7 @@ public final class Article
      *
      * @return The article string-date.
      */
+    @Override
     public String getDateToString() {
         return getDateToString(
                 getDate()
@@ -284,6 +293,7 @@ public final class Article
      * @param category a new category to the article.
      * @see Category
      */
+    @Override
     public void setCategory(final Category category) {
         if ((
                 this.category == null
@@ -311,6 +321,7 @@ public final class Article
      * @return The article category.
      * @see Category
      */
+    @Override
     public Category getCategory() {
         return this.category;
     }

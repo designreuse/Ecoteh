@@ -7,7 +7,6 @@ import com.salimov.yurii.entity.Model;
 import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,7 @@ public final class CompanyServiceImpl
      * {@link Company} objects with the database.
      *
      * @see CompanyDao
+     * @see Company
      */
     private final CompanyDao dao;
 
@@ -55,7 +55,6 @@ public final class CompanyServiceImpl
      * @param dao         a implementation
      *                    of the {@link CompanyDao} interface.
      * @see CompanyDao
-     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
