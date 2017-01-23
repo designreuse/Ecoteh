@@ -1,5 +1,8 @@
 package com.salimov.yurii.util.worktime;
 
+import com.salimov.yurii.config.DefaultConfig;
+import org.apache.log4j.Logger;
+
 import java.util.Calendar;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -14,6 +17,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see ITime
  */
 public class Time implements ITime {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER
+            = Logger.getLogger(DefaultConfig.class);
+
     /**
      * The input time;
      */
@@ -124,7 +134,8 @@ public class Time implements ITime {
             try {
                 this.correctTime = createTime();
             } catch (NumberFormatException ex) {
-                ex.printStackTrace();
+                LOGGER.error(ex.getMessage(), ex);
+                //ex.printStackTrace();
                 this.correctTime = "00:00";
             }
         } else {
@@ -201,7 +212,8 @@ public class Time implements ITime {
             final int hourNow = getHourOfDay();
             result = hourNow >= from && hourNow < to;
         } catch (NumberFormatException ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
+            //ex.printStackTrace();
             result = false;
         }
         return result;
