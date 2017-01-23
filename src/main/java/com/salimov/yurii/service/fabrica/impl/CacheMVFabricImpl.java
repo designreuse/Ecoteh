@@ -81,17 +81,17 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * The article by url page key.
      */
-    private final static String ARTICLE_BY_URL_KEY = "Article By Url ";
+    private final static String ARTICLE_BY_URL_KEY = "Article By Url";
 
     /**
      * The article by number page key.
      */
-    private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number ";
+    private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number";
 
     /**
      * The company by url page key.
      */
-    private final static String COMPANY_BY_URL_KEY = "Company by url ";
+    private final static String COMPANY_BY_URL_KEY = "Company by url";
 
     /**
      * The all responses page key.
@@ -308,7 +308,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
             final boolean revers
     ) {
         final String key = CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY
-                + ", " + sortType + ", " + revers;
+                + ", " + url + ", " + sortType + ", " + revers;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.categoryWithSortArticlesPage(
@@ -330,7 +330,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView articleByUrlPage(final String url) {
-        final String key = ARTICLE_BY_URL_KEY + url;
+        final String key = ARTICLE_BY_URL_KEY + " " + url;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.articleByUrlPage(url);
@@ -349,7 +349,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView articleByNumberPage(final String number) {
-        final String key = ARTICLE_BY_NUMBER_KEY + number;
+        final String key = ARTICLE_BY_NUMBER_KEY + " " + number;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.articleByNumberPage(number);
@@ -368,7 +368,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView partnerPage(final String url) {
-        final String key = COMPANY_BY_URL_KEY + url;
+        final String key = COMPANY_BY_URL_KEY + " " + url;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.partnerPage(url);
