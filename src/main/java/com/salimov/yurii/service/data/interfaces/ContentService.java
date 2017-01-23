@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @param <T>  entity type, extends {@link Content}.
  * @param <E> entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
  * @see DataService

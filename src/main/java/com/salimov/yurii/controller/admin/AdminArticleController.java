@@ -28,7 +28,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * or subclasses for admins. Class methods create and return modelsAndView,
  * depending on the request.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Article
  * @see ArticleService

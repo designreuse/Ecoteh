@@ -24,7 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * depending on the request. For the work used implementation of the interface
  * {@link CacheMVFabric} with implementation {@link MainMVFabric} interface.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see CacheMVFabric
  * @see MainMVFabric

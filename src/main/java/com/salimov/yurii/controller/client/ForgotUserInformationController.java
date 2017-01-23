@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * The class implements a set of methods for forgot password.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see CaptchaService
  * @see CompanyService

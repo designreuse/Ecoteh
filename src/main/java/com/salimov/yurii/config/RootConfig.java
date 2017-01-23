@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  * the package "com.salimov.yurii.repository" and set to interact with
  * the database in memory, using the JPA.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 @Configuration

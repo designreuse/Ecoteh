@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * The interface provides a set of standard methods
  * for working {@link Message} objects with the {@link Cache}.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see MessageDao
  * @see Message

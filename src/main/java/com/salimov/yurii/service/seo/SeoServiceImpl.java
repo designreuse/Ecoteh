@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * The class of the service layer, implements a set of methods
  * to adjust the search engine optimization (SEO).
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see SeoService
  */

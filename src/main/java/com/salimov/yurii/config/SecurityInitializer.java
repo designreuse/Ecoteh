@@ -7,7 +7,7 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * are included in the main application context
  * (them saw and inhaled the Root Application Context).
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see SecurityConfig
  * @see RootConfig

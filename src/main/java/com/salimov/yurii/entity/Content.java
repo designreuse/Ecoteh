@@ -14,7 +14,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * for working with entity of the {@link Content} class or subclasses.
  *
  * @param <E> Content id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
  * @see Article

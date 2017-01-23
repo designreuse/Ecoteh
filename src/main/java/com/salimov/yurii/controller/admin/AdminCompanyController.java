@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  * class or subclasses for admins. Class methods create
  * and return modelsAndView, depending on the request.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Company
  * @see CompanyService

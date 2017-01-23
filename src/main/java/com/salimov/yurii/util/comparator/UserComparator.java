@@ -9,7 +9,7 @@ import java.util.Comparator;
  * The class implements a set of methods
  * for working with comparators for {@link User}.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see User
  */

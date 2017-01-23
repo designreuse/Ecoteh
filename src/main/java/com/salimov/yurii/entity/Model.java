@@ -15,7 +15,7 @@ import java.util.TimeZone;
  * for working with entity of the {@link Model} class or subclasses.
  *
  * @param <E> Model id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
  * @see Article

@@ -3,7 +3,10 @@ package com.salimov.yurii.util.cache;
 import java.util.Comparator;
 
 /**
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * The class implements a set of methods for working
+ * with comparators for {@link Key}.
+ *
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Key
  */

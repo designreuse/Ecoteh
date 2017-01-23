@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * @param <T> entity type, extends {@link Model}.
  * @param <E> entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
  * @see DataService

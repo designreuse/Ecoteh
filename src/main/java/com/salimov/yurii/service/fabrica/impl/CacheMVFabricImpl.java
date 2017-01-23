@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * The class implements a set of standard methods for creates
  * and returns the main modelAndViews which saves in cache.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see MainMVFabric
  * @see CacheMVFabric

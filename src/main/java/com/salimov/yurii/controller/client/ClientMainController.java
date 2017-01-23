@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  * For the work used implementation of the interface CacheMVFabric
  * with implementation ClientMVFabric interface.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see CaptchaService
  * @see ClientMVFabric

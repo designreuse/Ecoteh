@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Class to work with the default users.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see User
  */

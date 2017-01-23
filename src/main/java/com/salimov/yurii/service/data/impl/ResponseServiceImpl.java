@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * The class of the service layer, implements a set of methods for working
  * with objects of the {@link Response} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Response
  * @see ResponseService

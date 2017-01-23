@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.JstlView;
  * Class Spring MVC configuration. Spring Indicates where the views components,
  * and how to display them. Class is the source of bean definitions.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see AppInitializer
  * @see RootConfig

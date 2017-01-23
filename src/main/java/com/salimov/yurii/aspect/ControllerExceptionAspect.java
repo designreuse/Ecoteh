@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * Class implements cross-cutting concerns - is the catching of exceptions.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 @Aspect

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * The default configuration controller.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DefaultConfig
  */

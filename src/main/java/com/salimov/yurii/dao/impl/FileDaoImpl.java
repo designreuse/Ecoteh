@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * The class implements a set of standard methods
  * for working {@link File} objects with a database.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see FileDao
  * @see File

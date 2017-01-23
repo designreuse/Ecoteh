@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
  * The interface provides a set of standard methods for creates
  * and returns the main modelAndViews.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ClientMVFabric
  * @see AdminMVFabric
