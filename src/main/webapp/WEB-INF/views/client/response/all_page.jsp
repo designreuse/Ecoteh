@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Отзывы о компании | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Отзывы о компании | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="index,follow">
@@ -147,4 +147,4 @@
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

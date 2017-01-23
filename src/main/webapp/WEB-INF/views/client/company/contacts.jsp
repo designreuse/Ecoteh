@@ -120,4 +120,4 @@
 <jsp:include page="/WEB-INF/views/google/map.jsp"/>
 <div class="clearfix"></div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

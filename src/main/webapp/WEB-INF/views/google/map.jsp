@@ -7,4 +7,4 @@
     </div>
 </c:if>
 
-<%-- Yuriy Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yuriy Salimov (yuriy.alex.salimov@gmail.com) --%>

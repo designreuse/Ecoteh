@@ -12,4 +12,4 @@
 <meta name="google-site-verification" content="<%= GOOGLE %>"/>
 <meta name="yandex-verification" content="<%= YANDEX %>"/>
 
-<%-- Yuriy Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yuriy Salimov (yuriy.alex.salimov@gmail.com) --%>

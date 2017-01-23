@@ -168,4 +168,4 @@
     </table>
 </div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>
