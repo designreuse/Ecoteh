@@ -167,7 +167,7 @@ public class AdminArticleController {
      * The exception sender:
      * "GET method in "/admin/article/add" is not supported!"
      * Request mapping: /admin/article/add
-     * Method: POST
+     * Method: GET
      *
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
@@ -265,7 +265,7 @@ public class AdminArticleController {
      * The exception sender:
      * "GET method in "/admin/article/update" is not supported!"
      * Request mapping: /admin/article/update
-     * Method: POST
+     * Method: GET
      *
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
