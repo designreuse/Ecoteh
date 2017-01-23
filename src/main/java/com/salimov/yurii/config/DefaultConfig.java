@@ -2,6 +2,7 @@ package com.salimov.yurii.config;
 
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
+import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.HashMap;
@@ -15,6 +16,12 @@ import java.util.Map;
  * @see User
  */
 public final class DefaultConfig {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER
+            = Logger.getLogger(DefaultConfig.class);
 
     /**
      * It is admin requests is enabled.
@@ -182,7 +189,8 @@ public final class DefaultConfig {
             user = (User) SecurityContextHolder.getContext()
                     .getAuthentication().getPrincipal();
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
+            //ex.printStackTrace();
             user = null;
         }
         return user;
