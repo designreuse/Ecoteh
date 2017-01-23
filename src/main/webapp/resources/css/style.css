@@ -60,26 +60,25 @@ img {
     vertical-align: middle
 }
 
-.img-border {
+/*.img-border {
     float: none;
     margin: 0 auto;
     border: #999 solid 1px
-}
+}*/
 
-img.img-section,
 img.main-logo {
     max-height: 200px;
     max-width: 300px
 }
 
-img.logo-in-list {
+/*img.logo-in-list {
     max-height: 120px;
     max-width: 160px
-}
+}*/
 
-img.logo {
+/*img.logo {
     text-align: center
-}
+}*/
 
 img.img-logo {
     float: none;
@@ -88,9 +87,9 @@ img.img-logo {
     margin: 1px 2px 3px 4px
 }
 
-img.img-favicon {
+/*img.img-favicon {
     height: 50px
-}
+}*/
 
 img.slide {
     width: 100%;
@@ -104,10 +103,10 @@ img.img-in-list {
     max-width: 300px
 }
 
-img.img-preview {
+/*img.img-preview {
     max-height: 100px;
     max-width: 100px
-}
+}*/
 
 img.img-responsive {
     display: block;
@@ -131,6 +130,10 @@ img.map {
     display: block;
     max-width: 100%;
     max-height: 400px
+}
+
+.img-center {
+    text-align: center
 }
 
 .gallery {
@@ -167,7 +170,7 @@ hr {
     border-top: 1px solid #999
 }
 
-button, input, optgroup, select, textarea {
+button, input, /*optgroup,*/ select, textarea {
     margin: 0;
     font: inherit;
     color: inherit
@@ -239,9 +242,9 @@ textarea {
     resize: none
 }
 
-optgroup {
+/*optgroup {
     font-weight: bold
-}
+}*/
 
 @media print {
     *,
@@ -271,14 +274,14 @@ optgroup {
         content: ""
     }
 
-    blockquote {
+    /*blockquote {
         border: 1px solid #999;
         page-break-inside: avoid
-    }
+    }*/
 
-    thead {
+    /*thead {
         display: table-header-group
-    }
+    }*/
 
     tr, img {
         page-break-inside: avoid
@@ -319,10 +322,10 @@ optgroup {
         background-color: #fff !important
     }
 
-    .table-bordered th,
+    /*.table-bordered th,
     .table-bordered td {
         border: 1px solid #ddd !important
-    }
+    }*/
 }
 
 @font-face {
@@ -745,10 +748,6 @@ ul.dropdown-inside hr {
     border-color: #999;
     margin-top: 8px;
     margin-bottom: 8px
-}
-
-.img-center {
-    text-align: center
 }
 
 .container {
@@ -1236,12 +1235,12 @@ ul.dropdown-inside hr {
     }
 }
 
-caption {
+/*caption {
     padding-top: 8px;
     padding-bottom: 8px;
     color: #777;
     text-align: left
-}
+}*/
 
 table {
     background-color: transparent
@@ -1279,7 +1278,7 @@ td.tds {
 th.ths, td.tds, .pad {
     padding: 10px
 }
-
+/*
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -1309,7 +1308,7 @@ th.ths, td.tds, .pad {
 .table > tbody + tbody {
     border-top: 2px solid #ddd
 }
-
+*/
 .table .table {
     background-color: #fff
 }
@@ -1497,7 +1496,7 @@ input[type="search"] {
     margin-top: 0;
     margin-left: 10px
 }
-
+/*
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],
 input[type="radio"].disabled,
@@ -1514,7 +1513,7 @@ fieldset[disabled] .radio label,
 fieldset[disabled] .checkbox label {
     cursor: not-allowed
 }
-
+*/
 .has-success .control-label,
 .has-success .radio,
 .has-success .checkbox,
@@ -2166,12 +2165,12 @@ tbody.collapse.in {
     margin-right: -15px;
     margin-left: -15px
 }
-
+/*
 .navbar-static-top {
     z-index: 100;
     border-width: 0 0 1px
 }
-
+*/
 .box {
     margin-bottom: 20px;
     padding: 15px;
