@@ -464,6 +464,10 @@ a .glyphicon:hover {
     content: "\e003";
 }
 
+.glyphicon-eye-open:before {
+    content: "\e105";
+}
+
 .glyphicon-eye-close:before {
     content: "\e106";
 }
@@ -478,6 +482,42 @@ a .glyphicon:hover {
 
 .glyphicon-send:before {
     content: "\e171";
+}
+
+.glyphicon-globe:before {
+    content: "\e135";
+}
+
+.glyphicon-file:before {
+    content: "\e022";
+}
+
+.glyphicon-sort-by-alphabet:before {
+    content: "\e151";
+}
+
+.glyphicon-sort-by-alphabet-alt:before {
+    content: "\e152";
+}
+
+.glyphicon-sort-by-order:before {
+    content: "\e153";
+}
+
+.glyphicon-sort-by-order-alt:before {
+    content: "\e154";
+}
+
+.glyphicon-sort-by-attributes:before {
+    content: "\e155";
+}
+
+.glyphicon-sort-by-attributes-alt:before {
+    content: "\e156";
+}
+
+.glyphicon-warning-sign:before {
+    content: "\e107";
 }
 
 .inner-addon {
