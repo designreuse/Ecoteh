@@ -1,48 +1,127 @@
 package com.salimov.yurii.dao.impl;
 
-import com.salimov.yurii.config.RootConfig;
-import com.salimov.yurii.config.WebConfig;
-import com.salimov.yurii.dao.interfaces.DataDao;
 import com.salimov.yurii.dao.interfaces.UserDao;
 import com.salimov.yurii.entity.User;
+import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.junit.Test;
 
 import java.util.Collection;
 
-import static com.salimov.yurii.mocks.enity.MockEntity.*;
+import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
+import static com.salimov.yurii.mocks.enity.MockEntity.getUsers;
+import static com.salimov.yurii.mocks.repository.MockRepository.getUserRepository;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextHierarchy({
-        @ContextConfiguration(classes = RootConfig.class),
-        @ContextConfiguration(classes = WebConfig.class)
-})
-@SuppressWarnings("SpringJavaAutowiringInspection")
-public class UserDAOImplTest extends DataDAOImplTest<User> {
+public final class UserDaoImplTest
+        extends DataDAOImplTest<User, Long> {
 
-    @Autowired
     private UserDao dao;
+
+    @Before
+    public void beforeTest() {
+        this.dao = new UserDaoImpl(
+                getUserRepository()
+        );
+    }
+
+    @Test
+    public void whenGetByInvalidNameThenReturnsNull() {
+        assertNull(
+                this.dao.getByName(null)
+        );
+        assertNull(
+                this.dao.getByName(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetByValidNameThenReturnsSomeUser() {
+        assertNotNull(
+                this.dao.getByName(NAME)
+        );
+    }
+
+    @Test
+    public void whenGetByInvalidUrlThenReturnsNull() {
+        assertNull(
+                this.dao.getByUrl(null)
+        );
+        assertNull(
+                this.dao.getByUrl(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetByValidUrlThenReturnsSomeUser() {
+        assertNotNull(
+                this.dao.getByUrl(URL)
+        );
+    }
+
+    @Test
+    public void whenGetByInvalidLoginThenReturnsNull() {
+        assertNull(
+                this.dao.getByLogin(null)
+        );
+        assertNull(
+                this.dao.getByLogin(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetByValidLoginThenReturnsSomeUser() {
+        assertNotNull(
+                this.dao.getByLogin(LOGIN)
+        );
+    }
+
+    @Test
+    public void whenGetByInvalidPhoneThenReturnsNull() {
+        assertNull(
+                this.dao.getByPhone(null)
+        );
+        assertNull(
+                this.dao.getByPhone(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetByValidPhoneThenReturnsSomeUser() {
+        assertNotNull(
+                this.dao.getByPhone(PHONE)
+        );
+    }
+
+    @Test
+    public void whenGetByInvalidEmailThenReturnsNull() {
+        assertNull(
+                this.dao.getByEmail(null)
+        );
+        assertNull(
+                this.dao.getByEmail(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetByValidEmailThenReturnsSomeUser() {
+        assertNotNull(
+                this.dao.getByEmail(EMAIL)
+        );
+    }
 
     @Ignore
     @Override
-    protected DataDao getDao() {
+    protected UserDao getDao() {
         return this.dao;
     }
 
     @Ignore
     @Override
     protected User getObject() {
-        final User user = getUser();
-        user.setName(user.getName() + " " + getRandomInt());
-        user.setLogin(user.getLogin() + " " + getRandomInt());
-        user.setId(Long.MAX_VALUE);
-        return user;
+        return getUser();
     }
 
     @Ignore

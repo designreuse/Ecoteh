@@ -1,106 +1,64 @@
 package com.salimov.yurii.dao.impl;
 
-import com.salimov.yurii.config.RootConfig;
-import com.salimov.yurii.config.WebConfig;
 import com.salimov.yurii.dao.interfaces.FileDao;
 import com.salimov.yurii.entity.File;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
+import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFiles;
+import static com.salimov.yurii.mocks.repository.MockRepository.getFileRepository;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
-@Ignore
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextHierarchy({
-        @ContextConfiguration(classes = RootConfig.class),
-        @ContextConfiguration(classes = WebConfig.class)
-})
-@SuppressWarnings("SpringJavaAutowiringInspection")
-public class FileDAOImplTest extends DataDAOImplTest<File> {
+public final class FileDaoImplTest
+        extends DataDAOImplTest<File, Long> {
 
-    @Autowired
     private FileDao dao;
 
-    @Test
-    @Transactional
-    public void whenGetByTitleThenReturnSomeFile() {
-        assertNotNull(
-                this.dao.getByTitle(
-                        this.dao.add(
-                                getObject()
-                        ).getTitle()
-                )
+    @Before
+    public void beforeTest() {
+        this.dao = new FileDaoImpl(
+                getFileRepository()
         );
     }
 
     @Test
-    @Transactional
-    public void whenGetByUrlThenReturnSomeMedia() {
+    public void whenGetByInvalidTitleThenReturnsNull() {
+        assertNull(
+                this.dao.getByTitle(null)
+        );
+        assertNull(
+                this.dao.getByTitle(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetByValidTitleThenReturnsSomeFile() {
         assertNotNull(
-                this.dao.getByUrl(
-                        this.dao.add(
-                                getObject()
-                        ).getUrl()
-                )
+                this.dao.getByTitle(TITLE)
         );
     }
 
-    @Transactional
-    public void whenRemoveByTitle() {
-        final File media = this.dao.add(
-                getObject()
+    @Test
+    public void whenGetByInvalidUrlThenReturnsNull() {
+        assertNull(
+                this.dao.getByUrl(null)
         );
-        assertTrue(
-                this.dao.exists(
-                        media.getId()
-                )
-        );
-        this.dao.removeByTitle(
-                media.getTitle()
-        );
-        assertTrue(
-                this.dao.exists(
-                        media.getId()
-                )
+        assertNull(
+                this.dao.getByUrl(ANY_STRING)
         );
     }
 
-    @Transactional
-    public void whenRemoveByUrl() {
-        final File media = this.dao.add(
-                getObject()
+    @Test
+    public void whenGetByValidUrlThenReturnsSomeFile() {
+        assertNotNull(
+                this.dao.getByUrl(URL)
         );
-        assertTrue(
-                this.dao.exists(
-                        media.getId()
-                )
-        );
-        this.dao.removeByUrl(
-                media.getUrl()
-        );
-        assertTrue(
-                this.dao.exists(
-                        media.getId()
-                )
-        );
-    }
-
-    @Ignore
-    @Override
-    public void whenRemoveByModels() {
     }
 
     @Ignore
