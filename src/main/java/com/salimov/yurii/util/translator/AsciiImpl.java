@@ -40,14 +40,16 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String to() {
-        final StringBuilder sb = new StringBuilder();
+        String result = null;
         if (isNotBlank(this.value)) {
+            final StringBuilder sb = new StringBuilder();
             for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
             }
+            result = sb.toString();
+            result = result.substring(0, result.length() - 1);
         }
-        final String result = sb.toString();
-        return result.substring(0, result.length() - 1);
+        return result;
     }
 
     /**
@@ -58,8 +60,9 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String from() {
-        StringBuilder sb = new StringBuilder();
+        String result = null;
         if (isNotBlank(this.value)) {
+            final StringBuilder sb = new StringBuilder();
             for (String st : this.value.split(",")) {
                 sb.append(
                         Character.toString(
@@ -67,8 +70,9 @@ public final class AsciiImpl implements Ascii {
                         )
                 );
             }
+            result = sb.toString();
         }
-        return sb.toString();
+        return result;
     }
 
     /**
