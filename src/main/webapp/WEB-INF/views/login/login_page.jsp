@@ -25,13 +25,11 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Авторизация</a>
@@ -49,7 +47,6 @@
                                 </c:when>
                             </c:choose>
                             <hr>
-                                <%-- Login form --%>
                             <form action="<c:url value="/login"/>" method="post">
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -78,7 +75,8 @@
                                             &nbsp;&nbsp;
                                             <a href="<c:url value="/forgot_password"/>"
                                                title="Напомнить логин или пароль">
-                                                Забыли пароль?
+                                                <span class="glyphicon glyphicon-question-sign"
+                                                      aria-hidden="true"></span>&nbsp;Забыли пароль?
                                             </a>
                                         </c:if>
                                     </div>

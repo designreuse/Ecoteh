@@ -110,16 +110,25 @@
                 <c:if test="${authorized_user ne null}">
                     <ul class="hidden-xs dropdown nav navbar-nav">
                         <li><a href="<c:url value="/admin/user/all"/>" title="Весь персонал">Персонал</a></li>
-                        <li><a href="<c:url value="/admin/cache"/>" title="Список обьектов в памяти">Кэш</a></li>
                         <li>
-                            <a href="<c:url value="/admin/menu"/>"
-                               title="Mеню | <c:out value="${authorized_user.name}"/>">
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <a href="<c:url value="/admin/file/all"/>" title="Сохраненный файлы на сервере">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<c:url value="/admin/cache"/>" title="Список обьектов в памяти (кеш)">
+                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                             </a>
                         </li>
                         <li>
                             <a href="<c:url value="/admin/messages"/>" title="Сообщения от пользователей">
                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<c:url value="/admin/menu"/>"
+                               title="Mеню | <c:out value="${authorized_user.name}"/>">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </a>
                         </li>
                     </ul>
@@ -149,7 +158,16 @@
                     <c:choose>
                         <c:when test="${authorized_user ne null}">
                             <li><a href="<c:url value="/admin/user/all"/>">Персонал</a></li>
-                            <li><a href="<c:url value="/admin/cache/"/>">Кэш</a></li>
+                            <li>
+                                <a href="<c:url value="/admin/file/all"/>">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Файлы
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/admin/cache/"/>">
+                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Кэш
+                                </a>
+                            </li>
                             <li>
                                 <a href="<c:url value="/admin/messages/"/>">
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Сообщения

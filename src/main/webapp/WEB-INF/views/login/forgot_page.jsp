@@ -25,7 +25,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -49,7 +48,6 @@
                                 </c:when>
                             </c:choose>
                             <hr>
-                                <%-- Forgot password form --%>
                             <form action="<c:url value="/forgot"/>" method="post">
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -61,10 +59,10 @@
                                                minlength="3" maxlength="100" autofocus value="${username}"
                                                placeholder="Введите логин или e-mail">
                                     </div>
-                                        <%-- GOOGLE reCAPTHCA --%>
                                     <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <button type="submit" class="btn btn-default">
+                                        <button type="submit" class="btn btn-default"
+                                                title="Отправить пароль на e-mail">
                                             <span class="glyphicon glyphicon-send"
                                                   aria-hidden="true"></span>&nbsp;Отправить
                                         </button>
@@ -78,7 +76,6 @@
             </div>
         </div>
     </div>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>

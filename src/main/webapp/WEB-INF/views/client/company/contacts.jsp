@@ -22,7 +22,7 @@
                         &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:when>
                     <c:otherwise>
-                        <br><span class="glyphicon glyphicon-link"
+                        <br><span class="glyphicon glyphicon-globe"
                                   aria-hidden="true"></span>&nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:otherwise>
                 </c:choose>

@@ -38,7 +38,12 @@
                     </p>
                     <hr>
                     <h3 class="text-center green">Меню администратора</h3>
-                    <c:if test="${!is_enabled}"><h4 class="text-center red"><b>Внимание! Сайт отключен!</b></h4></c:if>
+                    <c:if test="${!is_enabled}">
+                        <h4 class="text-center red">
+                            <b><span class="glyphicon glyphicon-warning-sign red"
+                                     aria-hidden="true"></span>&nbsp;Сайт отключен!</b>
+                        </h4>
+                    </c:if>
                     <hr>
                 </div>
             </div>

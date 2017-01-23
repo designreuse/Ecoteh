@@ -81,13 +81,46 @@
                         <p class="path">
                             <a href="#">Сортировка</a>:
                             <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=title&revers=${revers}"/>"
-                               title="Сортировать по названию">По названия</a>
-                            |
-                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=date&revers=${revers}"/>"
-                               title="Сортировать по дате">По дате</a>
+                               title="Сортировать по названию">
+                                <c:choose>
+                                    <c:when test="${revers}">
+                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                        aria-hidden="true"></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
+                                        aria-hidden="true"></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
                             |
                             <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=number&revers=${revers}"/>"
-                               title="Сортировать по номеру (артиклю)">По номеру</a>
+                               title="Сортировать по номеру (артиклю)">
+                                <c:choose>
+                                    <c:when test="${revers}">
+                                        По номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order-alt"
+                                        aria-hidden="true"></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        По номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order"
+                                        aria-hidden="true"></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
+                            |
+                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=date&revers=${revers}"/>"
+                               title="Сортировать по дате">
+                                <c:choose>
+                                    <c:when test="${revers}">
+                                        <span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                              aria-hidden="true"></span>&nbsp;По дате
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="glyphicon glyphicon-sort-by-attributes"
+                                              aria-hidden="true"></span>&nbsp;По дате
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
                         </p>
                     </c:if>
                     <div class="clearfix"></div>

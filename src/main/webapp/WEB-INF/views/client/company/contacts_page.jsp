@@ -29,7 +29,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -37,7 +36,6 @@
                 <div class="box">
                     <c:if test="${authorized_user ne null}">
                         <c:set var="reqmap" value="/admin"/>
-                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="<c:url value="/admin/company/edit/main"/>"
                                title="Редактировать информацию о компании &quot;<c:out value="${company.title}"/>&quot;">
@@ -47,7 +45,6 @@
                             </a>
                         </div>
                     </c:if>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="${reqmap}/company/main"/>"
@@ -61,7 +58,6 @@
                 </div>
             </div>
         </div>
-            <%-- Message Form --%>
         <div class="container">
             <div class="row">
                 <div class="box">

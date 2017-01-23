@@ -69,7 +69,18 @@
                         <p class="path">
                             <a href="#">Сортировка</a>:
                             <a href="<c:url value="${reqmap}/company/all/sort?revers=${revers}"/>"
-                               title="Сортировать по названию">По названия</a>
+                               title="Сортировать по названию">
+                                <c:choose>
+                                    <c:when test="${revers}">
+                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                        aria-hidden="true"></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
+                                        aria-hidden="true"></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
                         </p>
                     </c:if>
                     <div class="clearfix"></div>

@@ -37,7 +37,6 @@
                 <div class="box">
                     <c:if test="${(authorized_user ne null) and (length gt 0)}">
                         <c:set var="reqmap" value="/admin"/>
-                        <%-- Actions --%>
                         <div class="text-center">
                             <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании">
                                 <button class="btn btn-default">
@@ -47,7 +46,6 @@
                             </a>
                         </div>
                     </c:if>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="${reqmap}/"/>"
                            title="Перейти на главную страницу">Главная</a>
@@ -62,7 +60,18 @@
                         <p class="path">
                             <a href="#">Сортировка</a>:
                             <a href="<c:url value="${reqmap}/responses/sort?revers=${revers}"/>"
-                               title="Сортировать по дате">По дате</a>
+                               title="Сортировать по дате">
+                                <c:choose>
+                                    <c:when test="${revers}">
+                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                        aria-hidden="true"></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
+                                        aria-hidden="true"></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
                         </p>
                     </c:if>
                     <div class="clearfix"></div>
@@ -104,7 +113,7 @@
                                                     <a href="<c:url value="/admin/response/valid/${response.id}"/>"
                                                        title="Одобрить отзыв, его смогут увидеть клиенты.">
                                                         <button class="btn btn-default">
-                                                            <span class="glyphicon glyphicon-ok"
+                                                            <span class="glyphicon glyphicon-eye-open"
                                                                   aria-hidden="true"></span>&nbsp;Отображать
                                                         </button>
                                                     </a>&nbsp;

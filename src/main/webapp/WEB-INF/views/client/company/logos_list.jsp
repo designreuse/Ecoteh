@@ -25,7 +25,7 @@
             <div class="box">
                 <hr>
                 <h3 class="intro-text text-center">
-                    <a href="${reqmap}/company/all" title="Наши партнеры">Партнеры</a>
+                    <a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a>
                 </h3>
                 <hr>
                 <c:forEach items="${partners}" var="partner" end="${print_partners - 1}">

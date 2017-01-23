@@ -56,10 +56,19 @@
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="#">Файлы</a>
                     </p>
-                    <hr>
-                    <h3 class="text-center">Файлы<c:if test="${length le 0}"> - список пуст!</c:if></h3>
-                    <hr>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <hr>
+                        <h3 class="text-center">Файлы<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <hr>
+                    </div>
                     <c:if test="${length gt 0}">
+                        <c:if test="${length gt 1}">
+                            <p class="path">
+                                <a href="#">Сортировка</a>:
+                                <a href="<c:url value="/admin/file/all/sort?revers=${revers}"/>"
+                                   title="Сортировать по названию">По названия</a>
+                            </p><br>
+                        </c:if>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <c:forEach items="${files}" var="file">
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
@@ -78,16 +87,15 @@
                                         <button class="btn-clipboard btn btn-default"
                                                 title="Скорировать ссылку файла &quot;${file.title}&quot;"
                                                 data-clipboard-text="<c:url value="${file.url}"/>">
-                                                <span class="glyphicon glyphicon-floppy-disk green"
-                                                      aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                                         </button>
                                         <c:if test="${file.validated}">
                                             &nbsp;
                                             <a href="<c:url value="/admin/file/edit/${file.id}"/>"
                                                title="Редактировать файл &quot;${file.title}&quot;">
                                                 <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-edit yellow"
-                                                      aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-edit yellow"
+                                                          aria-hidden="true"></span>
                                                 </button>
                                             </a>&nbsp;
                                             <a href="<c:url value="/admin/file/delete/${file.id}"/>"

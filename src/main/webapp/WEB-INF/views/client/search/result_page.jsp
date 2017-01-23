@@ -73,8 +73,8 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label>
-                                    <b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                        Где искать?</b>
+                                    <b><span class="glyphicon glyphicon-question-sign"
+                                             aria-hidden="true"></span>&nbsp;Где искать?</b>
                                 </label>&nbsp;&nbsp;&nbsp;
                                 <label title="Искать среди категорий">
                                     <input type="checkbox" name="content" title="" value="in_categories"
@@ -96,8 +96,8 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label>
-                                    <b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                        Как искать?</b>
+                                    <b><span class="glyphicon glyphicon-question-sign"
+                                             aria-hidden="true"></span>&nbsp;Как искать?</b>
                                 </label>&nbsp;&nbsp;&nbsp;
                                 <label title="Искать по точному совпадению слов">
                                     <input type="radio" name="how_search" title="" value="true" required

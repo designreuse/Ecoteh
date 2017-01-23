@@ -41,10 +41,8 @@
                             <h2 class="intro-text">Упс... Ошибочка!</h2>
                             <hr>
                             <br><br>
-                                <%-- Error text --%>
                             <div class="error-text"><b><c:out value="${text}"/></b></div>
                             <br><br>
-                                <%-- Error message --%>
                             <div class="error-message"><c:out value="${message}"/></div>
                         </div>
                         <br><br><br><br>
@@ -54,7 +52,6 @@
             </div>
         </div>
     </div>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>
