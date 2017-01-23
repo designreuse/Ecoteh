@@ -146,27 +146,6 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Returns article with the parameter url.
-     *
-     * @param url     a url of the article to return.
-     * @param isValid is get valid article or not.
-     * @return The article with the parameter url.
-     * @see Article
-     */
-    // TODO: Why I overrided this method?
-    @Override
-    @Transactional(readOnly = true)
-    public Article getByUrl(
-            final String url,
-            final boolean isValid
-    ) {
-        return super.getByUrl(
-                url,
-                isValid
-        );
-    }
-
-    /**
      * Returns article with the parameter number.
      *
      * @param number  a title of the article to return.
