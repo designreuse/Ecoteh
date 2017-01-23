@@ -46,7 +46,6 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number>
      * @see DataRepository
      */
     DataDaoImpl(final DataRepository<T, E> repository) {
-        super();
         this.repository = repository;
     }
 

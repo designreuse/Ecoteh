@@ -365,11 +365,27 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             final int fromIndex,
             final int toIndex
     ) {
-        List<T> result = new ArrayList<>(models);
-        return result.subList(
-                fromIndex,
-                toIndex
-        );
+        List<T> result;
+        if (models == null || models.isEmpty()) {
+            result = new ArrayList<>();
+        } else {
+            if ((
+                    fromIndex < toIndex
+            ) && (
+                    fromIndex < models.size()
+            ) && (
+                    toIndex < models.size()
+            )) {
+                result = new ArrayList<>(models)
+                        .subList(
+                                fromIndex,
+                                toIndex
+                        );
+            } else {
+                result = new ArrayList<>(models);
+            }
+        }
+        return result;
     }
 
     /**
