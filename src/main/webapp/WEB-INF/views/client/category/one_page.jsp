@@ -112,12 +112,12 @@
                                title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        <span class="glyphicon glyphicon-sort-by-attributes-alt"
-                                              aria-hidden="true"></span>&nbsp;По дате
+                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                        aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span class="glyphicon glyphicon-sort-by-attributes"
-                                              aria-hidden="true"></span>&nbsp;По дате
+                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
+                                        aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
                             </a>
