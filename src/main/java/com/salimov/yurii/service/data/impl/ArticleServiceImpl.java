@@ -274,7 +274,7 @@ public final class ArticleServiceImpl
             final Date startDate,
             final Date finishDate
     ) {
-        List<Article> result = new ArrayList<>();
+        final List<Article> result = new ArrayList<>();
         if (articles != null && !articles.isEmpty()) {
             if (checkDate(startDate, finishDate)) {
                 result.addAll(

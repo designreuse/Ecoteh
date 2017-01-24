@@ -166,27 +166,19 @@ public class SeoServiceImpl implements SeoService {
                 " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
                 " xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9" +
                 " http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/index</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/home</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/company/main</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/contacts</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/address</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
-                "/responses</loc>\n</url>\n" +
+                "<url>\n  <loc>http://" + domain + "/responses</loc>\n</url>\n" +
                 getCategoriesUrls() +
                 getArticlesUrls() +
                 getPartnersUrls() +
