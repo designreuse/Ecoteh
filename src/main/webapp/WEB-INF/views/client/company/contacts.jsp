@@ -10,17 +10,19 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.logo ne null}">
+                    <c:when test="${company.logoUrl ne null}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/img/${company.logo.url}"/>">
+                             src="<c:url value="${company.logoUrl}"/>"
+                             onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
-                    <c:when test="${company.favicon ne null}">
+                    <c:when test="${company.faviconUrl ne null}">
                         <br><img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="/resources/img/${company.favicon.url}"/>">
+                                 src="<c:url value="/${company.faviconUrl}"/>"
+                                 onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                         &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:when>
                     <c:otherwise>
-                        <br><span class="glyphicon glyphicon-link"
+                        <br><span class="glyphicon glyphicon-globe"
                                   aria-hidden="true"></span>&nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:otherwise>
                 </c:choose>
@@ -31,9 +33,10 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.favicon ne null}">
+                    <c:when test="${company.faviconUrl ne null}">
                         <img class="icon-size" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/resources/img/${company.favicon.url}"/>">
+                             src="<c:url value="/${company.faviconUrl}"/>"
+                             onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
                     <c:otherwise><span class="glyphicon glyphicon-link" aria-hidden="true"></span></c:otherwise>
                 </c:choose>
@@ -114,13 +117,7 @@
         <br>
     </div>
 </div>
-<%-- Google Maps --%>
-<c:if test="${company.googleMaps ne null}">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-        <iframe src="${company.googleMaps}" allowfullscreen
-                width="100%" height="500px" frameborder="0" style="border:0"></iframe>
-    </div>
-</c:if>
+<jsp:include page="/WEB-INF/views/google/map.jsp"/>
 <div class="clearfix"></div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

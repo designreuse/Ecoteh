@@ -15,9 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * The class implements a set of methods for search for content on the site.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see SectionService
  * @see CategoryService
  * @see ArticleService
  * @see CompanyService
@@ -41,10 +40,9 @@ public class SearchController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link com.salimov.yurii.entity.Section}
-     * class.
+     * for search for content on the site.
      *
-     * @see SectionService
+     * @see SearchService
      */
     private final SearchService searchService;
 

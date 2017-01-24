@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out
                 value="${main_company.title}"/></title>
         <meta name="title"
@@ -20,10 +20,9 @@
               content="Форма для редактирования статьи &quot;<c:out value="${article.title}"/>&quot;.">
         <meta name="keywords"
               content="Редактирование статии, <c:out value="${article.title}"/>, <c:out value="${article.keywords}"/>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -35,33 +34,44 @@
         <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/article/all"/>" title="Все статьи">Все статьи</a>
+                        <c:choose>
+                            <c:when test="${article.category ne null}">
+                                → <a href="<c:url value="${reqmap}/category/all"/>"
+                                     title="Перейти к всем категориям">Все категории</a>
+                                →
+                                <a href="<c:url value="${reqmap}/category/${article.category.url}"/>"
+                                   title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
+                                    <c:out value="${article.category.title}"/>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                → <a href="<c:url value="${reqmap}/article/all"/>" title="Статьи">Статьи</a>
+                            </c:otherwise>
+                        </c:choose>
                         → <a href="#">Редактирование статьи</a>
                     </p>
                     <hr>
                     <h3 class="text-center">
                         Редактирование статьи
-                        &quot;<a href="<c:url value="/admin/article/${article.url}"/>">
-                        <c:out value="${article.title}"/>
-                    </a>&quot;
+                        &quot;<a href="<c:url value="/admin/article/${article.url}"/>"><c:out
+                            value="${article.title}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
                         <form action="<c:url value="/admin/article/update"/>" method="post"
                               enctype="multipart/form-data">
+                            <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название статьи" required
@@ -69,31 +79,31 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" title=""
+                                    <textarea class="form-control textarea" name="desc" title="" required
                                               placeholder="Краткое описание статьи (анонс)."
-                                              rows="6"><c:out value="${article.description}"/></textarea>
+                                              rows="10"><c:out value="${article.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Основной текст</th>
+                                    <td class="ths">Основной текст</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="text" required
+                                    <textarea class="form-control textarea" name="text"
                                               placeholder="Основная информация статьи." title=""
                                               rows="10"><c:out value="${article.text}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="3"><c:out value="${article.keywords}"/></textarea>
+                                              rows="7"><c:out value="${article.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Артикль</th>
+                                    <td class="ths">Артикль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="number" minlength="2"
                                                maxlength="100" placeholder="Номер статьи, например: АС142."
@@ -101,7 +111,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Категория</th>
+                                    <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
                                             <c:choose>
@@ -126,123 +136,26 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Главное фото, это где?">
-                                            Главное фото&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                    aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${article.mainPhoto ne null}">
-                                                <a href="<c:url value="/resources/img/${article.mainPhoto.url}"/>"
-                                                   rel="lightgallery[slides]">
-                                                    <img class="img-logo" alt="<c:out value="${article.title}"/>"
-                                                         src="<c:url value="/resources/img/${article.mainPhoto.url}"/>">
-                                                </a><br><br>
-                                                <label title="Заменить главное фото">
-                                                    <b><input type="radio" name="photo_action" value="replace" checked
-                                                              class="radio" required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить главное фото">
-                                                    <b><input type="radio" name="photo_action" value="delete"
-                                                              class="radio" required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="photo_action" value="replace" checked
-                                                       required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br>
-                                        <input type="file" name="main_photo" accept="image/*" class="form-control"><br>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${fn:length(article.slides) gt 0}">
-                                                <c:forEach items="${article.slides}" var="slide">
-                                                    <c:if test="${slide ne null}">
-                                                        <a href="<c:url value="/resources/img/${slide.url}"/>"
-                                                           rel="lightgallery[slides]"
-                                                           title="<c:out value="${slide.title}"/>">
-                                                            <img class="img-preview"
-                                                                 alt="<c:out value="${slide.title}"/>"
-                                                                 src="<c:url value="/resources/img/${slide.url}"/>"/>
-                                                        </a>&nbsp;&nbsp;
-                                                    </c:if>
-                                                </c:forEach>
-                                                <br><br>
-                                                <label title="Заменить существующие слайды">
-                                                    <b><input type="radio" name="slides_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Добавить новые сайды">
-                                                    <b><input type="radio" name="slides_action" value="add"
-                                                              required/>&nbsp;Добавить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить все сайды">
-                                                    <b><input type="radio" name="slides_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="slides_action" value="replace" checked
-                                                       required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br><input type="file" name="slides[]" accept="image/*" multiple
-                                                   class="form-control"><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_video.jpg"/>"
-                                           rel="lightgallery" title="Видеоролики. Где их взять?">
-                                            Видеоролики&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="video_urls" title=""
-                                              placeholder="URL видеороликов через запятую &quot;,&quot;"
-                                              rows="3"><c:forEach items="${article.videos}" var="video"><c:out
-                                            value="${video.url}, "/></c:forEach>
-                                    </textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                      aria-hidden="true"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <b><input type="radio" name="is_valid" value="true"
-                                                      <c:if test="${article.validated}">checked</c:if>
-                                                      required/>&nbsp;Отображать</b>
+                                            <input type="radio" name="is_valid" value="true"
+                                                   <c:if test="${article.validated}">checked</c:if>
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      <c:if test="${!article.validated}">checked</c:if>
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   <c:if test="${!article.validated}">checked</c:if>
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                             </table>
-                            <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить изменения">
                                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
@@ -265,12 +178,11 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
+    <script>CKEDITOR.replace("desc");</script>
     <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
@@ -279,4 +191,4 @@
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

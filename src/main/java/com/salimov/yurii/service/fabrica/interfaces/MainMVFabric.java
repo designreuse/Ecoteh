@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
  * The interface provides a set of standard methods for creates
  * and returns the main modelAndViews.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ClientMVFabric
  * @see AdminMVFabric
@@ -20,23 +20,6 @@ public interface MainMVFabric {
      * @return The ready object of class ModelAndView.
      */
     ModelAndView homePage();
-
-    /**
-     * Creates and returns page with all sections.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    ModelAndView allSectionsPage();
-
-    /**
-     * Creates and returns page wits all sections with categories.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     * @see Category
-     */
-    ModelAndView sectionsWithCategoriesPage();
 
     /**
      * Creates and returns page with all categories.
@@ -53,6 +36,18 @@ public interface MainMVFabric {
      * @see Article
      */
     ModelAndView allArticlesPage();
+
+    /**
+     * Creates and returns page with all articles sorted by sortType.
+     *
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
+     */
+    ModelAndView allSortArticlesPage(
+            final String sortType,
+            final boolean revers
+    );
 
     /**
      * Creates and returns page with information about main company.
@@ -78,24 +73,14 @@ public interface MainMVFabric {
     ModelAndView allPartnersPage();
 
     /**
-     * Creates and returns page with one section with parameter url.
+     * Creates and returns page with all sorted partners.
      *
-     * @param url a url of the section to return.
+     * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
-     * @see Section
      */
-    ModelAndView sectionPage(final String url);
-
-    /**
-     * Creates and returns page with all categories
-     * in the section with parameter url.
-     *
-     * @param url a url of the section.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    ModelAndView categoriesInTheSectionPage(final String url);
+    ModelAndView allSortPartnersByTitlePage(
+            final boolean revers
+    );
 
     /**
      * Creates and returns page with one category with parameter url.
@@ -105,6 +90,21 @@ public interface MainMVFabric {
      * @see Category
      */
     ModelAndView categoryPage(final String url);
+
+    /**
+     * Creates and returns page with category
+     * with all articles sorted by sortType.
+     *
+     * @param url      a category URL.
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
+     */
+    ModelAndView categoryWithSortArticlesPage(
+            final String url,
+            final String sortType,
+            final boolean revers
+    );
 
     /**
      * Creates and returns page with one article with parameter url.
@@ -140,6 +140,16 @@ public interface MainMVFabric {
      * @see Response
      */
     ModelAndView allResponsesPage();
+
+    /**
+     * Creates and returns page with all sorted responses.
+     *
+     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
+     */
+    ModelAndView allSortResponsesByDatePage(
+            final boolean revers
+    );
 
     /**
      * Creates and returns default modelAndView.

@@ -10,16 +10,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Новая статья | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Новая статья | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Форма для добавления новой статьи.">
         <meta name="keywords" content="Новая статья, добавление статьи"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="/resources/img/<c:out value="${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:out value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:out value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -32,17 +31,15 @@
 
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/article/all"/>" title="Все статьи">Все статьи</a>
+                        → <a href="<c:url value="/admin/article/all"/>">Все статьи</a>
                         → <a href="#">Новая статья</a>
                     </p>
                     <hr>
@@ -52,42 +49,42 @@
                         <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название статьи" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" rows="6" title=""
+                                    <textarea class="form-control textarea" name="desc" rows="10" title="" required
                                               placeholder="Краткое описание статьи (анонс)."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Основной текст</th>
+                                    <td class="ths">Основной текст</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="text" required rows="10" title=""
+                                    <textarea class="form-control textarea" name="text" rows="10" title=""
                                               placeholder="Основная информация статьи."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" rows="3" title="" required
+                                    <textarea class="form-control textarea" name="keywords" rows="7" title="" required
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Артикль</th>
+                                    <td class="ths">Артикль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="number" minlength="2"
                                                maxlength="100" placeholder="Номер статьи, например: АС142.">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Категория</th>
+                                    <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
                                             <option value="">Нет</option>
@@ -99,59 +96,20 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Главное фото, это где?">
-                                            Главное фото&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                        aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                        <input type="file" name="main_photo" accept="image/*"
-                                               class="form-control">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_photo.jpg"/>"
-                                           rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                        aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                        <input type="file" name="slides[]" accept="image/*" multiple
-                                               class="form-control"><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_article_video.jpg"/>"
-                                           rel="lightgallery" title="Видеоролики. Где их взять?">
-                                            Видеоролики&nbsp;<span class=" glyphicon glyphicon-info-sign"
-                                        aria-hidden="true"></span>
-                                        </a>
-                                    </th>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="video_urls" rows="3" title=""
-                                              placeholder="URL видеороликов через запятую &quot;,&quot;"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <b><input type="radio" name="is_valid" value="true" checked
-                                                      required/>&nbsp;Отображать</b>
+                                            <input type="radio" name="is_valid" value="true" checked
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -176,18 +134,17 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/resources/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
+    <script>CKEDITOR.replace("desc");</script>
     <script>CKEDITOR.replace("text");</script>
-    <script src="/resources/js/lightgallery.min.js" type="text/javascript"></script>
-    <script src="/resources/js/easing.min.js" type="text/javascript" async></script>
-    <script src="/resources/js/totop.min.js" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

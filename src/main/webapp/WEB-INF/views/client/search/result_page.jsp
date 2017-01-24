@@ -3,6 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
+<c:set var="categories_length" value="${fn:length(categories_list)}"/>
+<c:set var="articles_length" value="${fn:length(articles_list)}"/>
+<c:set var="partners_length" value="${fn:length(partners_list)}"/>
+<c:set var="users_length" value="${fn:length(users_list)}"/>
+<c:set var="result"
+       value="${(categories_length gt 0) or (articles_length gt 0) or (partners_length gt 0) or (users_length gt 0)}"/>
+
 <compress:html removeIntertagSpaces="true">
     <!DOCTYPE HTML>
     <html lang="ru">
@@ -10,16 +17,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Результаты поиска | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -28,17 +34,12 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <c:if test="${result}">
+            <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
+        </c:if>
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:set var="sections_length" value="${fn:length(sections_list)}"/>
-    <c:set var="categories_length" value="${fn:length(categories_list)}"/>
-    <c:set var="articles_length" value="${fn:length(articles_list)}"/>
-    <c:set var="partners_length" value="${fn:length(partners_list)}"/>
-    <c:set var="users_length" value="${fn:length(users_list)}"/>
-    <c:set var="result"
-           value="${(sections_length gt 0) or (categories_length gt 0) or (articles_length gt 0) or (partners_length gt 0) or (users_length gt 0)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
@@ -72,12 +73,8 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label>
-                                    <b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                        Где искать?</b>
-                                </label>&nbsp;&nbsp;&nbsp;
-                                <label title="Искать среди разделов">
-                                    <input type="checkbox" name="content" title="" value="in_sections"
-                                           <c:if test="${in_sections}">checked</c:if>>&nbsp;Разделы
+                                    <b><span class="glyphicon glyphicon-question-sign"
+                                             aria-hidden="true"></span>&nbsp;Где искать?</b>
                                 </label>&nbsp;&nbsp;&nbsp;
                                 <label title="Искать среди категорий">
                                     <input type="checkbox" name="content" title="" value="in_categories"
@@ -99,8 +96,8 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label>
-                                    <b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                        Как искать?</b>
+                                    <b><span class="glyphicon glyphicon-question-sign"
+                                             aria-hidden="true"></span>&nbsp;Как искать?</b>
                                 </label>&nbsp;&nbsp;&nbsp;
                                 <label title="Искать по точному совпадению слов">
                                     <input type="radio" name="how_search" title="" value="true" required
@@ -125,27 +122,28 @@
     </div>
         <%-- Search Result --%>
     <c:if test="${result}">
-        <c:if test="${sections_length gt 0}">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- SECTIONS --%>
-                <jsp:include page="/WEB-INF/views/client/section/list.jsp"/>
-            </div>
-        </c:if>
         <c:if test="${categories_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- CATEGORIES --%>
-                <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                <c:if test="${fn:length(categories_list) gt 0}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="box">
+                                <hr>
+                                <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
             </div>
         </c:if>
         <c:if test="${articles_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- ARTICLES --%>
                 <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
             </div>
         </c:if>
         <c:if test="${partners_length gt 0}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <%-- PARTNERS --%>
                 <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
             </div>
         </c:if>
@@ -154,7 +152,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="box">
-                                <%-- USERS --%>
                             <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                             <div class="clearfix"></div>
                         </div>
@@ -163,15 +160,16 @@
             </div>
         </c:if>
     </c:if>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    <c:if test="${result}">
+        <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+        <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    </c:if>
     </body>
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

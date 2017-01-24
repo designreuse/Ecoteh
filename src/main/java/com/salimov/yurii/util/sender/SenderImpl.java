@@ -13,7 +13,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 /**
  * The class implements a set of methods for sending letters by e-mail.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 public final class SenderImpl implements Sender {

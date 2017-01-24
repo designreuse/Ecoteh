@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -22,7 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * depending on the request. For the work used implementation of the interface
  * {@link CacheMVFabric} with implementation {@link MainMVFabric} interface.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see CacheMVFabric
  * @see MainMVFabric
@@ -128,8 +130,7 @@ public abstract class MainController {
      */
     @RequestMapping(
             value = {
-                    "",
-                    "/",
+                    "", "/",
                     "/index",
                     "/home"
             },
@@ -137,39 +138,6 @@ public abstract class MainController {
     )
     public ModelAndView getHomePage() {
         return this.fabric.homePage();
-    }
-
-    /**
-     * Returns modelAndView with information about page with all sections.
-     * Request mapping: /section/all
-     * Method: GET
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @RequestMapping(
-            value = "/section/all",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getAllSectionsPage() {
-        return this.fabric.allSectionsPage();
-    }
-
-    /**
-     * Returns modelAndView with information about page with some section.
-     * Request mapping: /section/{url}
-     * Method: GET
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @RequestMapping(
-            value = "/section/{url}",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getSectionPage(@PathVariable("url") final String url) {
-        return this.fabric.sectionPage(url);
     }
 
     /**
@@ -189,27 +157,6 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with
-     * all categories in some section.
-     * Request mapping: /category/all/{url}
-     * Method: GET
-     *
-     * @param url a url of the section to return.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    @RequestMapping(
-            value = "/category/all/{url}",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getCategoriesInTheSection(
-            @PathVariable("url") final String url
-    ) {
-        return this.fabric.categoriesInTheSectionPage(url);
-    }
-
-    /**
      * Returns modelAndView with information about page with some category.
      * Request mapping: /category/{url}
      * Method: GET
@@ -222,8 +169,38 @@ public abstract class MainController {
             value = "/category/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getCategoryPage(@PathVariable("url") final String url) {
+    public ModelAndView getCategoryPage(
+            @PathVariable("url") final String url
+    ) {
         return this.fabric.categoryPage(url);
+    }
+
+    /**
+     * Returns modelAndView with information about page with some category.
+     * Request mapping: /category/{url}
+     * Method: GET
+     *
+     * @param url     a url of the category to return.
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return The ready object of class ModelAndView.
+     * @see Category
+     */
+    @RequestMapping(
+            value = "/category/{url}/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getCategoryWithSortArticlePage(
+            @PathVariable("url") final String url,
+            final HttpServletRequest request
+    ) {
+        return this.fabric.categoryWithSortArticlesPage(
+                url,
+                request.getParameter("type"),
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
     }
 
     /**
@@ -239,7 +216,9 @@ public abstract class MainController {
             value = "/article/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getArticlePage(@PathVariable("url") final String url) {
+    public ModelAndView getArticlePage(
+            @PathVariable("url") final String url
+    ) {
         return this.fabric.articleByUrlPage(url);
     }
 
@@ -276,6 +255,32 @@ public abstract class MainController {
     )
     public ModelAndView getAllArticlesPage() {
         return this.fabric.allArticlesPage();
+    }
+
+    /**
+     * Returns modelAndView with information about page with
+     * all sorted article.
+     * Request mapping: /article/all/sort
+     * Method: GET
+     *
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return The ready object of class ModelAndView.
+     * @see Article
+     */
+    @RequestMapping(
+            value = "/article/all/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getAllSortArticlesPage(
+            final HttpServletRequest request
+    ) {
+        return this.fabric.allSortArticlesPage(
+                request.getParameter("type"),
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
     }
 
     /**
@@ -331,6 +336,31 @@ public abstract class MainController {
     }
 
     /**
+     * Returns modelAndView with information about page with
+     * all sorted partner-companies.
+     * Request mapping: /company/all/sort
+     * Method: GET
+     *
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return The ready object of class ModelAndView.
+     * @see Company
+     */
+    @RequestMapping(
+            value = "/company/all/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getAllSortPartnersPage(
+            final HttpServletRequest request
+    ) {
+        return this.fabric.allSortPartnersByTitlePage(
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
+    }
+
+    /**
      * Returns modelAndView with information about page with some company.
      * Request mapping: /company/{url}
      * Method: GET
@@ -343,7 +373,9 @@ public abstract class MainController {
             value = "/company/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getPartnerPage(@PathVariable("url") String url) {
+    public ModelAndView getPartnerPage(
+            @PathVariable("url") String url
+    ) {
         return this.fabric.partnerPage(url);
     }
 
@@ -359,8 +391,33 @@ public abstract class MainController {
             value = "/responses",
             method = RequestMethod.GET
     )
-    public ModelAndView getResponsesPage() {
+    public ModelAndView getAllResponsesPage() {
         return this.fabric.allResponsesPage();
+    }
+
+    /**
+     * Returns modelAndView with information about page with
+     * all sorted responses.
+     * Request mapping: /responses/sort
+     * Method: GET
+     *
+     * @param request a implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return The ready object of class ModelAndView.
+     * @see Response
+     */
+    @RequestMapping(
+            value = "/responses/sort",
+            method = RequestMethod.GET
+    )
+    public ModelAndView getAllSortResponsesByDatePage(
+            final HttpServletRequest request
+    ) {
+        return this.fabric.allSortResponsesByDatePage(
+                Boolean.parseBoolean(
+                        request.getParameter("revers")
+                )
+        );
     }
 
     /**
@@ -379,7 +436,10 @@ public abstract class MainController {
      * @param isCaptcha a result of google-captcha verification.
      * @return The ready object of class ModelAndView.
      */
-    protected ModelAndView getMessageMV(String url, boolean isCaptcha) {
+    protected ModelAndView getMessageMV(
+            final String url,
+            final boolean isCaptcha
+    ) {
         ModelAndView modelAndView = new ModelAndView();
         if (isNotBlank(url)) {
             switch (url) {
@@ -425,11 +485,8 @@ public abstract class MainController {
             final String subject = "New Message";
             sendToEmail(subject, _text);
             saveMess(
-                    name,
-                    phone,
-                    email,
-                    userMessage,
-                    subject
+                    name, phone, email,
+                    userMessage, subject
             );
         }).start();
     }
@@ -454,11 +511,8 @@ public abstract class MainController {
     ) {
         this.messageService.add(
                 new Message(
-                        name,
-                        email,
-                        phone,
-                        subject,
-                        text
+                        name, email, phone,
+                        subject, text
                 )
         );
     }
@@ -470,7 +524,10 @@ public abstract class MainController {
      * @param text a text of response.
      * @see Response
      */
-    protected void sendResp(final String name, final String text) {
+    protected void sendResp(
+            final String name,
+            final String text
+    ) {
         new Thread(() -> {
             sendToEmail(
                     "New Response",
@@ -489,7 +546,10 @@ public abstract class MainController {
      * @see ResponseService
      * @see Response
      */
-    private void saveResp(final String name, final String text) {
+    private void saveResp(
+            final String name,
+            final String text
+    ) {
         this.responseService.add(
                 new Response(name, text)
         );
@@ -502,7 +562,10 @@ public abstract class MainController {
      * @param subject a subject of message.
      * @param text    a text of message.
      */
-    private void sendToEmail(final String subject, final String text) {
+    private void sendToEmail(
+            final String subject,
+            final String text
+    ) {
         final Company mainCompany = this.companyService.getMainCompany();
         this.senderService.send(
                 subject + " | " + mainCompany.getTitle(),
@@ -521,7 +584,7 @@ public abstract class MainController {
      * @see Response
      */
     protected ModelAndView getResponsesMV(final boolean isCaptcha) {
-        final ModelAndView modelAndView = getResponsesPage();
+        final ModelAndView modelAndView = getAllResponsesPage();
         modelAndView.addObject("is_captcha", isCaptcha);
         return modelAndView;
     }

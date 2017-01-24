@@ -81,9 +81,9 @@
                                 <a href=" http://<c:out value="${main_company.domain}"/>"
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
-                                        <c:when test="${main_company.favicon ne null}">
-                                            <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/img/${main_company.favicon.url}"/>">
+                                        <c:when test="${main_company.faviconUrl ne null}">
+                                            <img src="<c:url value="${main_company.faviconUrl}"/>"
+                                                 class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -94,7 +94,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov" target="_blank"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex_icon.png"/>"
+                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex.png"/>"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>
@@ -128,9 +128,9 @@
                                 <a href="http://<c:out value="${main_company.domain}"/>"
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
-                                        <c:when test="${main_company.favicon ne null}">
-                                            <img class="icon-size" alt=""
-                                                 src="<c:url value="/resources/img/${main_company.favicon.url}"/>">
+                                        <c:when test="${main_company.faviconUrl ne null}">
+                                            <img src="<c:url value="${main_company.faviconUrl}"/>"
+                                                 class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -141,7 +141,7 @@
                             </c:if>
                             <a href="https://www.linkedin.com/in/yurii-salimov"
                                title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex_icon.png"/>"
+                                <img src="<c:url value="/resources/img/static/mr_alex.png"/>" class="icon-size"
                                      alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
                             </a>
                         </p>
@@ -152,4 +152,4 @@
     </footer>
 </div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

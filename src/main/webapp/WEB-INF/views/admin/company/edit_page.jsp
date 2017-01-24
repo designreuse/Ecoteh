@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Редактирование &quot;<c:out value="${company.title}"/>&quot; | <c:out
                 value="${main_company.title}"/></title>
         <meta name="title"
@@ -19,10 +19,9 @@
         <meta name="description"
               content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
         <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -34,18 +33,16 @@
         <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:if test="${company ne main_company}">
-                            → <a href="<c:url value="/admin/company/all"/>" title="Все партнеры">Все партнеры</a>
+                            → <a href="<c:url value="/admin/company/all"/>">Все партнеры</a>
                         </c:if>
                         →
                         <a href="#" title="Редактировать&nbsp;&quot;<c:out value="${company.title}&quot;"/>">
@@ -58,17 +55,20 @@
                             <c:when test="${main}"><c:set var="com" value="main"/></c:when>
                             <c:otherwise><c:set var="com" value="${company.url}"/></c:otherwise>
                         </c:choose>
-                        Редактировать&nbsp;&quot;<a href="<c:url value="/admin/company/${com}"/>">
-                        <c:out value="${company.title}"/></a>&quot;
+                        Редактировать&nbsp;&quot;<a href="<c:url value="/admin/company/${com}"/>"><c:out
+                            value="${company.title}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <c:if test="${main}"><c:set var="main" value="/main"/> </c:if>
-                        <form action="<c:url value="/admin/company/update/${main}"/>" method="post"
+                        <c:choose>
+                            <c:when test="${main}"><c:set var="action" value="/main"/></c:when>
+                            <c:otherwise><c:set var="action" value=""/></c:otherwise>
+                        </c:choose>
+                        <form action="<c:url value="/admin/company/update/${action}"/>" method="post"
                               enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название компании" required
@@ -76,7 +76,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Домен</th>
+                                    <td class="ths">Домен</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="domain" minlength="5"
                                                maxlength="200" placeholder="Адрес сайта компании в интернете"
@@ -84,7 +84,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Слоган</th>
+                                    <td class="ths">Слоган</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="tagline" maxlength="200" title=""
                                               placeholder="Короткий и броский рекламный призыв или девиз."
@@ -92,23 +92,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" title=""
-                                              placeholder="Краткое описание компании" required
+                                    <textarea class="form-control textarea" name="text" title=""
+                                              placeholder="Краткое описание компании"
                                               rows="6"><c:out value="${company.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Преимущества</th>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="advantages" title=""
-                                              placeholder="Преимущества над другими компаниями"
-                                              rows="6"><c:out value="${company.advantages}"/></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Информация</th>
+                                    <td class="ths">Информация</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="information"
                                               placeholder="Основная информация о компании" title=""
@@ -116,29 +108,29 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths">Ключевые слова</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" required title=""
+                                    <textarea class="form-control textarea" name="keywords" title=""
                                               placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="3"><c:out value="${company.keywords}"/></textarea>
+                                              rows="7"><c:out value="${company.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <c:if test="${main}">
                                     <tr>
-                                        <th class="ths"><span class="red">*</span>&nbsp;Время работы</th>
+                                        <td class="ths">Время работы</td>
                                         <td class="tds">
-                                            <input type="text" class="time form-control" required
+                                            <input type="text" class="time form-control"
                                                    name="time_from" maxlength="10" placeholder="Начало рабочего дня"
                                                    value="<c:out value="${company.workTimeFrom}"/>">
                                             -
                                             <input type="text" class="time form-control" name="time_to"
-                                                   maxlength="10" placeholder="Конец рабочего дня" required
+                                                   maxlength="10" placeholder="Конец рабочего дня"
                                                    value="<c:out value="${company.workTimeTo}"/>">
                                         </td>
                                     </tr>
                                 </c:if>
                                 <tr>
-                                    <th class="ths">Мобильный телефон</th>
+                                    <td class="ths">Мобильный телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="mobile_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
@@ -146,7 +138,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Cтационарный телефон</th>
+                                    <td class="ths">Cтационарный телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="landline_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
@@ -154,7 +146,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Факс</th>
+                                    <td class="ths">Факс</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="fax" maxlength="20"
                                                placeholder="+38 (000) 00-00-000"
@@ -162,7 +154,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Электронная почта</th>
+                                    <td class="ths">Электронная почта</td>
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100"
                                                minlength="3" placeholder="name@mail.com"
@@ -171,13 +163,12 @@
                                 </tr>
                                 <c:if test="${main}">
                                     <tr>
-                                        <th class="ths">
+                                        <td class="ths">
                                             <label title="Эта почта будет привязана к форме обратной связи.">
-                                                <b>Электронная почта (бот)&nbsp;
-                                                    <span class="glyphicon glyphicon-info-sign"
-                                                          aria-hidden="true"></span></b>
+                                                Электронная почта (бот)&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                                   aria-hidden="true"></span>
                                             </label>
-                                        </th>
+                                        </td>
                                         <td class="tds">
                                             <input type="email" class="form-control" name="sender_email"
                                                    minlength="3" maxlength="100" placeholder="name@mail.com"
@@ -185,7 +176,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th class="ths">Пароль электронной почты (бот)</th>
+                                        <td class="ths">Пароль электронной почты (бот)</td>
                                         <td class="tds">
                                             <input type="text" class="form-control" name="sender_pass"
                                                    minlength="3" maxlength="100" placeholder="password"
@@ -194,10 +185,10 @@
                                     </tr>
                                 </c:if>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://vk.com" target="_blank"
                                            title="Социальная сеть Vkontakte">Vkontakte</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
                                                maxlength="200" value="<c:out value="${company.vkontakte}"/>"
@@ -205,10 +196,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://www.facebook.com" target="_blank"
                                            title="Социальная сеть Facebook">Facebook</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook" minlength="5"
                                                maxlength="200" value="<c:out value="${company.facebook}"/>"
@@ -216,10 +207,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="https://twitter.com" target="_blank"
                                            title="Социальная сеть Twitter">Twitter</a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка в социальной сети Twitter"
@@ -227,7 +218,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Skype</th>
+                                    <td class="ths">Skype</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype"
@@ -235,28 +226,31 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Адрес офиса</th>
+                                    <td class="ths">Адрес офиса</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="address" maxlength="300"
-                                               placeholder="Адрес главного офиса компании." required
+                                               placeholder="Адрес главного офиса компании."
                                                value="<c:out value="${company.address}"/>">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
-                                        <a href="https://www.google.com.ua/maps/"
-                                           title="Перейти к Google Maps">Google Maps</a>&nbsp;
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_1.jpg"/>"
-                                           title="Офис на карте Google Maps. Где это взять?" rel="lightgallery[maps]">
-                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                    <td class="ths">
+                                        <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps. Где это взять?">
+                                            Google Maps&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
+                                        </a>&nbsp;
+                                        <a href="<c:url value="/resources/img/static/google_maps_2.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="<c:url value="/resources/img/static/google_maps_3.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="<c:url value="/resources/img/static/google_maps_4.jpg"/>"
+                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
+                                        <a href="https://www.google.com.ua/maps/" target="_blank"
+                                           title="Перейти к Google Maps">
+                                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                                         </a>
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_2.jpg"/>"
-                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_3.jpg"/>"
-                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
-                                        <a href="<c:url value="/resources/img/static/google_maps/gm_4.jpg"/>"
-                                           rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="google_maps" title=""
                                               placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
@@ -264,138 +258,98 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
                                            rel="lightgallery" title="Логотип, это где?">
                                             Логотип&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                aria-hidden="true"></span>
                                         </a>
-                                    </th>
+                                    </td>
                                     <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${company.logo ne null}">
-                                                <a href="<c:url value="/resources/img/${company.logo.url}"/>"
-                                                   rel="lightgallery">
-                                                    <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                                                         src="<c:url value="/resources/img/${company.logo.url}"/>">
-                                                </a><br><br>
-                                                <label title="Добавить новый значок">
-                                                    <b><input type="radio" name="logo_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить логотип">
-                                                    <b><input type="radio" name="logo_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="logo_action" value="replace" required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br>
-                                        <input type="file" name="logo_photo" accept="image/*" class="form-control"><br>
+                                        <c:if test="${company.logoUrl ne null}">
+                                            <a href="<c:url value="/${company.logoUrl}"/>"
+                                               title="<c:out value="${company.title}"/>" rel="lightgallery">
+                                                <img src="<c:url value="${company.logoUrl}"/>"
+                                                     class="main-logo" alt="" title="Увеличить"
+                                                     onerror="this.src='<c:url
+                                                             value="/resources/img/static/default_file.gif"/>'">
+                                            </a><br><br>
+                                        </c:if>
+                                        <input type="text" class="form-control" name="logo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на логотип компании"
+                                               value="<c:out value="${company.logoUrl}"/>">
                                     </td>
                                 </tr>
                                 <c:choose>
                                     <c:when test="${main}">
                                         <tr>
-                                            <th class="ths">
+                                            <td class="ths">
                                                 <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
                                                    rel="lightgallery" title="Значок, это где?">
                                                     Значок&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                       aria-hidden="true"></span>
                                                 </a>
-                                            </th>
+                                            </td>
                                             <td class="tds">
-                                                <c:choose>
-                                                    <c:when test="${company.favicon ne null}">
-                                                        <a href="<c:url value="/resources/img/${company.favicon.url}"/>"
-                                                           rel="lightgallery">
-                                                            <img class="img-favicon"
-                                                                 src="<c:url value="/resources/img/${company.favicon.url}"/>">
-                                                        </a><br><br>
-                                                        <label title="Добавить новый значок">
-                                                            <b><input type="radio" name="favicon_action" value="replace"
-                                                                      checked required/>&nbsp;Заменить</b>
-                                                        </label>&nbsp;&nbsp;
-                                                        <label title="Удалить значок">
-                                                            <b><input type="radio" name="favicon_action" value="delete"
-                                                                      required/>&nbsp;Удалить</b>
-                                                        </label><br>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="hidden" name="favicon_action" value="replace"
-                                                               checked required/>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <input type="file" name="favicon_photo" accept="image/*"
-                                                       class="form-control"><br>
+                                                <a href="<c:url value="/${company.faviconUrl}"/>"
+                                                   title="<c:out value="${company.title}"/>" rel="lightgallery">
+                                                    <img src="<c:url value="${company.faviconUrl}"/>"
+                                                         class="main-logo" alt="" title="Увеличить"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_file.gif"/>'">
+                                                </a><br><br>
+                                                <input type="text" class="form-control" name="favicon" minlength="2"
+                                                       maxlength="100" placeholder="Ссылка на фавикон сайта"
+                                                       value="<c:out value="${company.faviconUrl}"/>">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th class="ths">
+                                            <td class="ths">
                                                 <a href="<c:url value="/resources/img/static/where_slides.jpg"/>"
                                                    rel="lightgallery" title="Слайды, это где?">
                                                     Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
                                                                       aria-hidden="true"></span>
                                                 </a>
-                                            </th>
+                                            </td>
                                             <td class="tds">
-                                                <c:choose>
-                                                    <c:when test="${fn:length(slides) gt 0}">
-                                                        <c:forEach items="${slides}" var="slide">
-                                                            <c:if test="${slide ne null}">
-                                                                <a href="<c:url value="/resources/img/${slide.url}"/>"
-                                                                   rel="lightgallery[slides]"
-                                                                   title="<c:out value="${slide.title}"/>">
-                                                                    <img class="img-preview"
-                                                                         src="<c:url value="/resources/img/${slide.url}"/>"
-                                                                         alt="<c:out value="${slide.title}"/>"/>
-                                                                </a>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                        <br><br>
-                                                        <label title="Заменить существующие слайды">
-                                                            <b><input type="radio" name="slides_action" value="replace"
-                                                                      checked required/>&nbsp;Заменить</b>
-                                                        </label>&nbsp;&nbsp;
-                                                        <label title="Добавить новые сайды">
-                                                            <b><input type="radio" name="slides_action" value="add"
-                                                                      required/>&nbsp;Добавить</b>
-                                                        </label>&nbsp;&nbsp;
-                                                        <label title="Удалить все сайды">
-                                                            <b><input type="radio" name="slides_action" value="delete"
-                                                                      required/>&nbsp;Удалить</b>
-                                                        </label><br>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="hidden" name="slides_action" value="replace"
-                                                               checked required/>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <input type="file" name="slides[]" accept="image/*" multiple
-                                                       class="form-control"><br>
+                                                <c:if test="${fn:length(company.slidesList) gt 0}">
+                                                    <c:forEach items="${company.slidesList}" var="slide">
+                                                        <c:if test="${slide ne null}">
+                                                            <a href="<c:url value="${slide}"/>"
+                                                               rel="lightgallery[slides]"
+                                                               title="<c:out value="${company.title}"/>">
+                                                                <img src="<c:url value="${slide}"/>" class="main-logo"
+                                                                     onerror="this.src='<c:url
+                                                                             value="/resources/img/static/default_file.gif"/>'"
+                                                                     alt="<c:out value="${company.title}"/>"/>
+                                                            </a>&nbsp;
+                                                        </c:if>
+                                                    </c:forEach><br><br>
+                                                </c:if>
+                                                <textarea class="form-control textarea" name="slides" title=""
+                                                          placeholder="URL слайдов, которые будут отображатся на главной страницы сайта. Вводите значение через запятую (,)ю"
+                                                          rows="5"><c:out value="${company.slides}"/></textarea>
                                             </td>
                                         </tr>
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
-                                            <th class="ths">
+                                            <td class="ths">
                                                 <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                                    <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                              class="glyphicon glyphicon-info-sign"></span></b>
+                                                    Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                           aria-hidden="true"></span>
                                                 </label>
-                                            </th>
+                                            </td>
                                             <td class="tds">
                                                 <label title="Компанию смогут увидеть все пользователей">
-                                                    <b><input type="radio" name="is_valid" value="true"
-                                                              <c:if test="${company.validated}">checked</c:if>
-                                                              required/>&nbsp;Отображать</b>
+                                                    <input type="radio" name="is_valid" value="true"
+                                                           <c:if test="${company.validated}">checked</c:if>
+                                                           required/>&nbsp;Отображать
                                                 </label>&nbsp;&nbsp;
                                                 <label title="Компанию смогут увидеть только администраторы">
-                                                    <b><input type="radio" name="is_valid" value="false"
-                                                              <c:if test="${!company.validated}">checked</c:if>
-                                                              required/>&nbsp;Не отображать</b>
+                                                    <input type="radio" name="is_valid" value="false"
+                                                           <c:if test="${!company.validated}">checked</c:if>
+                                                           required/>&nbsp;Не отображать
                                                 </label>
                                             </td>
                                         </tr>
@@ -423,12 +377,11 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
+    <script>CKEDITOR.replace("text");</script>
     <script>CKEDITOR.replace("information");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
@@ -438,4 +391,4 @@
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

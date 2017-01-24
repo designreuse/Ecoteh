@@ -2,22 +2,19 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.config.DefaultConfig;
 import com.salimov.yurii.dao.interfaces.UserDao;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * The class of the service layer, implements a set of methods for working
  * with objects of the {@link User} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see User
  * @see UserService
@@ -53,39 +50,28 @@ public final class UserServiceImpl
      * {@link User} objects with the database.
      *
      * @see UserDao
+     * @see User
      */
     private final UserDao dao;
 
     /**
-     * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Photo}.
-     *
-     * @see PhotoService
-     */
-    private final PhotoService photoService;
-
-    /**
      * Constructor.
-     * Initializes a implementations of the interfaces.
      *
-     * @param dao          a implementation
-     *                     of the {@link UserDao} interface.
-     * @param photoService a implementation
-     *                     of the {@link PhotoService} interface.
+     * @param dao a implementation of the {@link UserDao}
+     *            interface.
      * @see UserDao
-     * @see PhotoService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public UserServiceImpl(final UserDao dao, final PhotoService photoService) {
+    public UserServiceImpl(
+            final UserDao dao
+    ) {
         super(dao);
         this.dao = dao;
-        this.photoService = photoService;
     }
 
     /**
      * Returns authenticated user.
-     * Returns {@code null} if throws exception.
      *
      * @return The authenticated user.
      * @see User
@@ -93,10 +79,10 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public User getAuthenticatedUser() {
-        final Authentication authentication =
-                SecurityContextHolder.getContext()
-                        .getAuthentication();
-        return (User) authentication.getPrincipal();
+        return (User) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 
     /**
@@ -136,13 +122,13 @@ public final class UserServiceImpl
      * @param facebook    a facebook url of the new user.
      * @param twitter     a twitter url of the new user.
      * @param skype       a skype username of the new user.
-     * @param photoFile   a file of photo to the new user.
+     * @param photoUrl    a photo Url to the new user.
      * @param isValid     a validated of the new user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The new saving user.
      * @see User
-     * @see Photo
+     * @see File
      * @see UserRole
      */
     @Override
@@ -158,23 +144,19 @@ public final class UserServiceImpl
             final String facebook,
             final String twitter,
             final String skype,
-            final MultipartFile photoFile,
+            final String photoUrl,
             final boolean isValid,
             final boolean isMailing,
             final boolean isLocked
     ) {
         final User user = new User();
         user.initialize(
-                name, login, password, email,
-                phone, vkontakte, facebook,
-                twitter, skype, description
+                name, login, password,
+                email, phone,
+                vkontakte, facebook, twitter, skype,
+                description
         );
-        final Photo photo = updatePhotoFile(
-                new Photo(),
-                photoFile,
-                name
-        );
-        user.setPhoto(photo);
+        user.setPhotoUrl(photoUrl);
         user.setRole(UserRole.ADMIN);
         user.setValidated(isValid);
         user.setMailing(isMailing);
@@ -197,14 +179,12 @@ public final class UserServiceImpl
      * @param facebook    a new facebook url to the user.
      * @param twitter     a new twitter url to the user.
      * @param skype       a new skype username to the user.
-     * @param photoFile   a file of photo to the user.
-     * @param photoAction a action on the photo.
+     * @param photoUrl    a new photo URL to the user.
      * @param isValid     a validated of the user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The updating user with parameter id or {@code null}.
      * @see User
-     * @see Photo
      * @see UserRole
      */
     @Override
@@ -221,28 +201,23 @@ public final class UserServiceImpl
             final String facebook,
             final String twitter,
             final String skype,
-            final MultipartFile photoFile,
-            final String photoAction,
+            final String photoUrl,
             final boolean isValid,
             final boolean isMailing,
             final boolean isLocked
     ) {
         final User user = getByUrl(url);
-        Photo photo = user.getPhoto();
-        updatePhoto(
-                user, photoFile, name, photoAction
-        );
         user.initialize(
-                name, login, password, email,
-                phone, vkontakte, facebook,
-                twitter, skype, description
+                name, login, password,
+                email, phone,
+                vkontakte, facebook, twitter, skype,
+                description
         );
+        user.setPhotoUrl(photoUrl);
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
-        final User _user = update(user);
-        removePhoto(photo, photoAction);
-        return _user;
+        return update(user);
     }
 
     /**
@@ -408,7 +383,9 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<User> getAdmins() {
-        return getAndFilterByRole(UserRole.ADMIN);
+        return getAndFilterByRole(
+                UserRole.ADMIN
+        );
     }
 
     /**
@@ -466,22 +443,6 @@ public final class UserServiceImpl
         remove(
                 getByLogin(login)
         );
-    }
-
-    /**
-     * Removes user. Removes user if it is not {@code null}.
-     * Also removes photo file if it is not {@code null}.
-     *
-     * @param user the user to remove.
-     * @see User
-     */
-    @Override
-    @Transactional
-    public void remove(final User user) {
-        if (user != null) {
-            this.photoService.remove(user.getPhoto());
-            super.remove(user);
-        }
     }
 
     /**
@@ -650,8 +611,13 @@ public final class UserServiceImpl
                                     .filter(
                                             role -> user.getRole()
                                                     .equals(role)
-                                    ).map(role -> user)
-                                    .collect(Collectors.toList())
+                                    )
+                                    .map(
+                                            role -> user
+                                    )
+                                    .collect(
+                                            Collectors.toList()
+                                    )
                     );
                 }
             } else {
@@ -688,7 +654,9 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRoles(final List<UserRole> roles) {
+    public List<User> getAndFilterByRoles(
+            final List<UserRole> roles
+    ) {
         return filterByRoles(
                 getAll(),
                 roles
@@ -704,13 +672,23 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional
-    public List<User> filteredByValid(final Collection<User> users) {
+    public List<User> filteredByValid(
+            final Collection<User> users
+    ) {
         List<User> result = new ArrayList<>();
         if (users != null && !users.isEmpty()) {
             result.addAll(
-                    users.stream().filter(
-                            user -> (user != null) && (user.isValidated())
-                    ).collect(Collectors.toList())
+                    users.stream()
+                            .filter(
+                                    user -> (
+                                            user != null
+                                    ) && (
+                                            user.isValidated()
+                                    )
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -755,79 +733,18 @@ public final class UserServiceImpl
             return false;
         }
         if (duplicate) {
-            final String name = user.getName();
-            final String url = user.getUrl();
-            if (this.dao.getByName(name) != null
-                    || this.dao.getByUrl(url) != null) {
+            if ((
+                    this.dao.getByName(
+                            user.getName()
+                    ) != null
+            ) || (
+                    this.dao.getByUrl(
+                            user.getUrl()
+                    ) != null
+            )) {
                 return false;
             }
         }
         return true;
-    }
-
-    /**
-     * Updates user photo.
-     *
-     * @param user   the user to update.
-     * @param file   a file of photo to the user.
-     * @param title  a photo title.
-     * @param action a action on the photo.
-     */
-    private void updatePhoto(
-            final User user,
-            final MultipartFile file,
-            final String title,
-            final String action
-    ) {
-        switch (action) {
-            case "replace":
-                user.setPhoto(
-                        updatePhotoFile(
-                                user.getPhoto(),
-                                file,
-                                title
-                        )
-                );
-                break;
-            case "delete":
-                user.setPhoto(null);
-                break;
-        }
-    }
-
-    /**
-     * Updates photo.
-     *
-     * @param photo the photo to updates.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
-     */
-    private Photo updatePhotoFile(
-            final Photo photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return this.photoService.updatePhoto(
-                photo != null ? photo : new Photo(),
-                file,
-                title,
-                "users"
-        );
-    }
-
-    /**
-     * Removes photo if action equals "delete".
-     *
-     * @param photo  the photo to remove.
-     * @param action a action on the photo.
-     */
-    private void removePhoto(
-            final Photo photo,
-            final String action
-    ) {
-        if (action.equals("delete")) {
-            this.photoService.remove(photo);
-        }
     }
 }

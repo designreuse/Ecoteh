@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * The class implements a set of standard methods for creates
  * and returns the main modelAndViews which saves in cache.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see MainMVFabric
  * @see CacheMVFabric
@@ -44,6 +44,11 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     private final static String ALL_ARTICLES_KEY = "All Articles";
 
     /**
+     * The all sort articles page key.
+     */
+    private final static String ALL_SORT_ARTICLES_KEY = "All sort Articles";
+
+    /**
      * The main company page key.
      */
     private final static String MAIN_COMPANY_KEY = "Main Company";
@@ -59,14 +64,9 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     private final static String ALL_PARTNERS_KEY = "All Partners";
 
     /**
-     * The section by url page key.
+     * The all sort partners companies page key.
      */
-    private final static String SECTION_BY_URL_KEY = "Section By Url ";
-
-    /**
-     * The categories in the section page key.
-     */
-    private final static String CATEGORIES_IN_SECTION_KEY = "Categories In The Section ";
+    private final static String ALL_SORT_PARTNERS_KEY = "All Sort Partners";
 
     /**
      * The category by url page key.
@@ -74,24 +74,34 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     private final static String CATEGORY_BY_URL_KEY = "Category By Url ";
 
     /**
+     * The category by url with sort articles page key.
+     */
+    private final static String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "Category By Url with sort articles";
+
+    /**
      * The article by url page key.
      */
-    private final static String ARTICLE_BY_URL_KEY = "Article By Url ";
+    private final static String ARTICLE_BY_URL_KEY = "Article By Url";
 
     /**
      * The article by number page key.
      */
-    private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number ";
+    private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number";
 
     /**
      * The company by url page key.
      */
-    private final static String COMPANY_BY_URL_KEY = "Company by url ";
+    private final static String COMPANY_BY_URL_KEY = "Company by url";
 
     /**
      * The all responses page key.
      */
     private final static String ALL_RESPONSES_KEY = "All Responses";
+
+    /**
+     * The all sort responses page key.
+     */
+    private final static String ALL_SORT_RESPONSES_KEY = "All Sort Responses";
 
     /**
      * The default modelAndView key.
@@ -134,41 +144,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * Creates and returns page with all sections.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     */
-    @Override
-    public ModelAndView allSectionsPage() {
-        ModelAndView modelAndView = get(ALL_SECTIONS_KEY);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.allSectionsPage();
-            put(modelAndView, ALL_SECTIONS_KEY);
-        }
-        addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page wits all sections with categories.
-     *
-     * @return The ready object of class ModelAndView.
-     * @see Section
-     * @see Category
-     */
-    @Override
-    public ModelAndView sectionsWithCategoriesPage() {
-        ModelAndView modelAndView = get(SECTIONS_WITH_CATEGORIES_KEY);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.sectionsWithCategoriesPage();
-            put(modelAndView, SECTIONS_WITH_CATEGORIES_KEY);
-        }
-        addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
      * Creates and returns page with all categories.
      *
      * @return The ready object of class ModelAndView.
@@ -199,6 +174,33 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
             put(modelAndView, ALL_ARTICLES_KEY);
         }
         addAuthUser(modelAndView);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns page with all articles sorted by sortType.
+     *
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
+     */
+    @Override
+    public ModelAndView allSortArticlesPage(
+            final String sortType,
+            final boolean revers
+    ) {
+        final String key = ALL_SORT_ARTICLES_KEY
+                + ", " + sortType + ", " + revers;
+        ModelAndView modelAndView = get(key);
+        if (modelAndView == null) {
+            modelAndView = this.fabric.allSortArticlesPage(
+                    sortType, revers
+            );
+            put(modelAndView, key);
+        }
+        addAuthUser(modelAndView);
+        modelAndView.addObject("sort", sortType);
+        modelAndView.addObject("revers", !revers);
         return modelAndView;
     }
 
@@ -253,40 +255,22 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * Creates and returns page with one section with parameter url.
+     * Creates and returns page with all sorted partners.
      *
-     * @param url a url of the section to return.
+     * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
-     * @see Section
      */
-    @Override
-    public ModelAndView sectionPage(final String url) {
-        ModelAndView modelAndView = get(SECTION_BY_URL_KEY + url);
+    public ModelAndView allSortPartnersByTitlePage(
+            final boolean revers
+    ) {
+        final String key = ALL_SORT_PARTNERS_KEY + ", " + revers;
+        ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
-            modelAndView = this.fabric.sectionPage(url);
-            put(modelAndView, SECTION_BY_URL_KEY + url);
+            modelAndView = this.fabric.allSortPartnersByTitlePage(revers);
+            put(modelAndView, key);
         }
         addAuthUser(modelAndView);
-        return modelAndView;
-    }
-
-    /**
-     * Creates and returns page with all categories
-     * in the section with parameter url.
-     *
-     * @param url a url of the section.
-     * @return The ready object of class ModelAndView.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    public ModelAndView categoriesInTheSectionPage(final String url) {
-        ModelAndView modelAndView = get(CATEGORIES_IN_SECTION_KEY + url);
-        if (modelAndView == null) {
-            modelAndView = this.fabric.categoriesInTheSectionPage(url);
-            put(modelAndView, CATEGORIES_IN_SECTION_KEY + url);
-        }
-        addAuthUser(modelAndView);
+        modelAndView.addObject("revers", !revers);
         return modelAndView;
     }
 
@@ -299,12 +283,41 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView categoryPage(final String url) {
-        ModelAndView modelAndView = get(CATEGORY_BY_URL_KEY + url);
+        final String key = CATEGORY_BY_URL_KEY + url;
+        ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.categoryPage(url);
-            put(modelAndView, CATEGORY_BY_URL_KEY + url);
+            put(modelAndView, key);
         }
         addAuthUser(modelAndView);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns page with category
+     * with all articles sorted by sortType.
+     *
+     * @param url      a category URL.
+     * @param sortType a sort type.
+     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
+     */
+    public ModelAndView categoryWithSortArticlesPage(
+            final String url,
+            final String sortType,
+            final boolean revers
+    ) {
+        final String key = CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY
+                + ", " + url + ", " + sortType + ", " + revers;
+        ModelAndView modelAndView = get(key);
+        if (modelAndView == null) {
+            modelAndView = this.fabric.categoryWithSortArticlesPage(
+                    url, sortType, revers
+            );
+            put(modelAndView, key);
+        }
+        addAuthUser(modelAndView);
+        modelAndView.addObject("revers", !revers);
         return modelAndView;
     }
 
@@ -317,10 +330,11 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView articleByUrlPage(final String url) {
-        ModelAndView modelAndView = get(ARTICLE_BY_URL_KEY + url);
+        final String key = ARTICLE_BY_URL_KEY + " " + url;
+        ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.articleByUrlPage(url);
-            put(modelAndView, ARTICLE_BY_URL_KEY + url);
+            put(modelAndView, key);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -335,10 +349,11 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView articleByNumberPage(final String number) {
-        ModelAndView modelAndView = get(ARTICLE_BY_NUMBER_KEY + number);
+        final String key = ARTICLE_BY_NUMBER_KEY + " " + number;
+        ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.articleByNumberPage(number);
-            put(modelAndView, ARTICLE_BY_NUMBER_KEY + number);
+            put(modelAndView, key);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -353,10 +368,11 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView partnerPage(final String url) {
-        ModelAndView modelAndView = get(COMPANY_BY_URL_KEY + url);
+        final String key = COMPANY_BY_URL_KEY + " " + url;
+        ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.partnerPage(url);
-            put(modelAndView, COMPANY_BY_URL_KEY + url);
+            put(modelAndView, key);
         }
         addAuthUser(modelAndView);
         return modelAndView;
@@ -376,6 +392,26 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
             put(modelAndView, ALL_RESPONSES_KEY);
         }
         addAuthUser(modelAndView);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns page with all sorted responses.
+     *
+     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @return The ready object of class ModelAndView.
+     */
+    public ModelAndView allSortResponsesByDatePage(
+            final boolean revers
+    ) {
+        final String key = ALL_SORT_RESPONSES_KEY + ", " + revers;
+        ModelAndView modelAndView = get(key);
+        if (modelAndView == null) {
+            modelAndView = this.fabric.allSortResponsesByDatePage(revers);
+            put(modelAndView, key);
+        }
+        addAuthUser(modelAndView);
+        modelAndView.addObject("revers", !revers);
         return modelAndView;
     }
 

@@ -187,7 +187,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>private <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/controller/admin/AdminContentController.html#photoService">photoService</a></span></code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/controller/admin/AdminContentController.html#fileService">fileService</a></span></code>
 <div class="block">The implementation of the interface describes a set of methods
  for working with objects of the <a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a> class.</div>
 </td>
@@ -225,7 +225,7 @@ extends java.lang.Object</pre>
                       <a href="../../../../../com/salimov/yurii/service/data/interfaces/ArticleService.html" title="interface in com.salimov.yurii.service.data.interfaces">ArticleService</a>&nbsp;articleService,
                       <a href="../../../../../com/salimov/yurii/service/data/interfaces/CategoryService.html" title="interface in com.salimov.yurii.service.data.interfaces">CategoryService</a>&nbsp;categoryService,
                       <a href="../../../../../com/salimov/yurii/service/data/interfaces/SectionService.html" title="interface in com.salimov.yurii.service.data.interfaces">SectionService</a>&nbsp;sectionService,
-                      <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;photoService,
+                      <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;fileService,
                       <a href="../../../../../com/salimov/yurii/service/data/interfaces/VideoService.html" title="interface in com.salimov.yurii.service.data.interfaces">VideoService</a>&nbsp;videoService,
                       <a href="../../../../../com/salimov/yurii/service/data/interfaces/CompanyService.html" title="interface in com.salimov.yurii.service.data.interfaces">CompanyService</a>&nbsp;companyService)</code>
 <div class="block">Default constructor.</div>
@@ -658,13 +658,13 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="photoService">
+<a name="fileService">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>photoService</h4>
-<pre>private final&nbsp;<a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a> photoService</pre>
+<h4>fileService</h4>
+<pre>private final&nbsp;<a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a> fileService</pre>
 <div class="block">The implementation of the interface describes a set of methods
  for working with objects of the <a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a> class.</div>
 <dl>
@@ -732,7 +732,7 @@ public&nbsp;AdminContentController(<a href="../../../../../com/salimov/yurii/ser
                                           <a href="../../../../../com/salimov/yurii/service/data/interfaces/ArticleService.html" title="interface in com.salimov.yurii.service.data.interfaces">ArticleService</a>&nbsp;articleService,
                                           <a href="../../../../../com/salimov/yurii/service/data/interfaces/CategoryService.html" title="interface in com.salimov.yurii.service.data.interfaces">CategoryService</a>&nbsp;categoryService,
                                           <a href="../../../../../com/salimov/yurii/service/data/interfaces/SectionService.html" title="interface in com.salimov.yurii.service.data.interfaces">SectionService</a>&nbsp;sectionService,
-                                          <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;photoService,
+                                          <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;fileService,
                                           <a href="../../../../../com/salimov/yurii/service/data/interfaces/VideoService.html" title="interface in com.salimov.yurii.service.data.interfaces">VideoService</a>&nbsp;videoService,
                                           <a href="../../../../../com/salimov/yurii/service/data/interfaces/CompanyService.html" title="interface in com.salimov.yurii.service.data.interfaces">CompanyService</a>&nbsp;companyService)</pre>
 <div class="block">Default constructor.
@@ -743,7 +743,7 @@ public&nbsp;AdminContentController(<a href="../../../../../com/salimov/yurii/ser
 <dd><code>articleService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/ArticleService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>ArticleService</code></a> interface.</dd>
 <dd><code>categoryService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/CategoryService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>CategoryService</code></a> interface.</dd>
 <dd><code>sectionService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/SectionService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>SectionService</code></a> interface.</dd>
-<dd><code>photoService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>PhotoService</code></a> interface.</dd>
+<dd><code>fileService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>PhotoService</code></a> interface.</dd>
 <dd><code>videoService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/VideoService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>VideoService</code></a> interface.</dd>
 <dd><code>companyService</code> - a implementation of the <a href="../../../../../com/salimov/yurii/service/data/interfaces/CompanyService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>CompanyService</code></a> interface.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -826,7 +826,7 @@ public&nbsp;org.springframework.web.servlet.ModelAndView&nbsp;addArticle(@Reques
 <dd><code>keywords</code> - a keywords of the new article.</dd>
 <dd><code>number</code> - a number of the new article.</dd>
 <dd><code>categoryUrl</code> - a category url of the new article.</dd>
-<dd><code>mainFile</code> - a file of main photo to the new article.</dd>
+<dd><code>mainFile</code> - a file of main file to the new article.</dd>
 <dd><code>slideFiles</code> - a files of slides to the new article.</dd>
 <dd><code>videoUrls</code> - a category url of the new article.</dd>
 <dd><code>isValid</code> - a validated of the new article.</dd>
@@ -932,8 +932,8 @@ public&nbsp;org.springframework.web.servlet.ModelAndView&nbsp;updateArticle(@Req
 <dd><code>keywords</code> - a new keywords to the article.</dd>
 <dd><code>number</code> - a new number to the article.</dd>
 <dd><code>categoryUrl</code> - a category url of the article.</dd>
-<dd><code>mainFile</code> - a file of main photo to the article.</dd>
-<dd><code>photoAction</code> - a action on the main photo.</dd>
+<dd><code>mainFile</code> - a file of main file to the article.</dd>
+<dd><code>photoAction</code> - a action on the main file.</dd>
 <dd><code>slideFiles</code> - a files of slides to the article.</dd>
 <dd><code>slidesAction</code> - a action on the slides.</dd>
 <dd><code>videoUrls</code> - a category url of the article.</dd>
@@ -1067,7 +1067,7 @@ public&nbsp;org.springframework.web.servlet.ModelAndView&nbsp;addCategory(@Reque
 <dd><code>description</code> - a title of the new category.</dd>
 <dd><code>keywords</code> - a title of the new category.</dd>
 <dd><code>sectionUrl</code> - a section url of the new category.</dd>
-<dd><code>photoFile</code> - a file of photo to the new category.</dd>
+<dd><code>photoFile</code> - a file of file to the new category.</dd>
 <dd><code>isValid</code> - a validated of the new category.</dd>
 <dd><code>modelAndView</code> - a object of class ModelAndView for to update.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -1159,8 +1159,8 @@ public&nbsp;org.springframework.web.servlet.ModelAndView&nbsp;updateCategory(@Re
 <dd><code>description</code> - a new description to the category.</dd>
 <dd><code>keywords</code> - a new description to the category.</dd>
 <dd><code>sectionUrl</code> - a section url of the new category.</dd>
-<dd><code>photoFile</code> - a file of photo to the new category.</dd>
-<dd><code>photoAction</code> - a action on the main photo.</dd>
+<dd><code>photoFile</code> - a file of file to the new category.</dd>
+<dd><code>photoAction</code> - a action on the main file.</dd>
 <dd><code>isValid</code> - a validated of the category.</dd>
 <dd><code>modelAndView</code> - a object of class ModelAndView for to update.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -1288,7 +1288,7 @@ public&nbsp;org.springframework.web.servlet.ModelAndView&nbsp;addSection(@Reques
 <dd><code>title</code> - a title of the new section.</dd>
 <dd><code>description</code> - a description of the new section.</dd>
 <dd><code>keywords</code> - a keywords of the new section.</dd>
-<dd><code>photoFile</code> - a file of main photo to the new section.</dd>
+<dd><code>photoFile</code> - a file of main file to the new section.</dd>
 <dd><code>isValid</code> - a validated of the new section.</dd>
 <dd><code>modelAndView</code> - a object of class ModelAndView for to update.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -1376,8 +1376,8 @@ public&nbsp;org.springframework.web.servlet.ModelAndView&nbsp;updateSection(@Req
 <dd><code>title</code> - a new title to the section.</dd>
 <dd><code>description</code> - a new title to the section.</dd>
 <dd><code>keywords</code> - a new title to the section.</dd>
-<dd><code>photoFile</code> - a file of photo to the section.</dd>
-<dd><code>photoAction</code> - a action on the photo.</dd>
+<dd><code>photoFile</code> - a file of file to the section.</dd>
+<dd><code>photoAction</code> - a action on the file.</dd>
 <dd><code>isValid</code> - a validated of the section.</dd>
 <dd><code>modelAndView</code> - a object of class ModelAndView for to update.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>

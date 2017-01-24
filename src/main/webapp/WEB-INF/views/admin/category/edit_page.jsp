@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Редактирование категории &quot;<c:out value="${category.title}"/>&quot; | <c:out
                 value="${main_company.title}"/></title>
         <meta name="title"
@@ -20,10 +20,9 @@
               content="Форма для редактирования категории &quot;<c:out value="${category.title}"/>&quot;.">
         <meta name="keywords"
               content="Редактирование категории, <c:out value="${category.title}"/>, <c:out value="${category.keywords}"/>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -32,21 +31,18 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="
-        <c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/category/all"/>" title="Все категории">Все категории</a>
+                        → <a href="<c:url value="/admin/category/all"/>">Все категории</a>
                         → <a href=" #">Редактирование категории</a>
                     </p>
                     <hr>
@@ -60,7 +56,7 @@
                               enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Название</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название категории" required
@@ -68,91 +64,59 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Описание</th>
+                                    <td class="ths">Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" required rows="6"
-                                              placeholder="Краткое описание категории." title=""><c:out
+                                    <textarea class="form-control textarea" name="text" rows="6"
+                                              placeholder="Краткое описание категории" title=""><c:out
                                             value="${category.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths"><span class="red">*</span>&nbsp;Ключевые слова</th>
+                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="3"><c:out value="${category.keywords}"/></textarea>
+                                              rows="7"><c:out value="${category.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Раздел</th>
+                                    <td class="ths">
+                                        <a href="<c:url value="/resources/img/static/where_category_photo.jpg"/>"
+                                           rel="lightgallery" title="Главное фото категории. Где это?">
+                                            Фото&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                            aria-hidden="true"></span>
+                                        </a>
+                                    </td>
                                     <td class="tds">
-                                        <select class="form-control" name="section_url">
-                                            <c:choose>
-                                                <c:when test="${category.section eq null}">
-                                                    <option value="">Нет</option>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <option value="<c:out value="${category.section.url}"/>"><c:out
-                                                            value="${category.section.title}"/></option>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:forEach items="${sections}" var="section">
-                                                <c:if test="${section.id ne category.section.id}">
-                                                    <option value="<c:out value="${section.url}"/>"><c:out
-                                                            value="${section.title}"/></option>
-                                                </c:if>
-                                            </c:forEach>
-                                            <c:if test="${category.section ne null}">
-                                                <option value="">Нет</option>
-                                            </c:if>
-                                        </select>
+                                        <a href="<c:url value="${category.photoUrl}"/>"
+                                           title="${category.title}" rel="lightgallery">
+                                            <img src="<c:url value="${category.photoUrl}"/>" class="file"
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'"
+                                                 alt="" title="Увеличить">
+                                        </a><br><br>
+                                        <input type="text" class="form-control" name="photo" minlength="2"
+                                               maxlength="100" placeholder="Ссылка на главное фото для категории"
+                                               value="${category.photoUrl}">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="ths">Фото</th>
-                                    <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${category.photo ne null}">
-                                                <a href="<c:url value="/resources/img/${category.photo.url}"/>"
-                                                   rel="lightgallery">
-                                                    <img class="img-logo" alt="<c:out value="${category.title}"/>"
-                                                         src="<c:url value="/resources/img/${category.photo.url}"/>">
-                                                </a><br><br>
-                                                <label title="Добавить новое фото">
-                                                    <b><input type="radio" name="photo_action" value="replace" checked
-                                                              required/>&nbsp;Заменить</b>
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Удалить фото">
-                                                    <b><input type="radio" name="photo_action" value="delete"
-                                                              required/>&nbsp;Удалить</b>
-                                                </label>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type="hidden" name="photo_action" value="replace" checked
-                                                       required/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br><input type="file" name="main_photo" accept="image/*"
-                                                   class="form-control"><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="ths">
+                                    <td class="ths">
                                         <label title="Если категория позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span aria-hidden="true"
-                                                                      class="glyphicon glyphicon-info-sign"></span></b>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
                                         </label>
-                                    </th>
+                                    </td>
                                     <td class="tds">
                                         <label title="Категорию смогут увидеть все пользователей">
                                             <input type="radio" name="is_valid" value="true"
                                                    <c:if test="${category.validated}">checked</c:if>
-                                                   required/>&nbsp;Отображать</b>
+                                                   required/>&nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Категорию смогут увидеть только администраторы">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      <c:if test="${!category.validated}">checked</c:if>
-                                                      required/>&nbsp;Не отображать</b>
+                                            <input type="radio" name="is_valid" value="false"
+                                                   <c:if test="${!category.validated}">checked</c:if>
+                                                   required/>&nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -178,11 +142,11 @@
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
+    <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
@@ -190,4 +154,4 @@
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

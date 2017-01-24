@@ -11,14 +11,13 @@ import java.util.List;
  *
  * @param <T>  entity type, extends {@link Content}.
  * @param <E> entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
  * @see DataService
  * @see ArticleService
  * @see CategoryService
  * @see CompanyService
- * @see SectionService
  */
 public interface ContentService<T extends Content, E extends Number>
         extends DataService<T, E> {
@@ -32,7 +31,10 @@ public interface ContentService<T extends Content, E extends Number>
      * @return The object of class {@link Content}.
      * @see Content
      */
-    T getByTitle(final String title, final boolean isValid);
+    T getByTitle(
+            final String title,
+            final boolean isValid
+    );
 
     /**
      * Returns content object of the {@link Content} class or subclasses
@@ -43,7 +45,10 @@ public interface ContentService<T extends Content, E extends Number>
      * @return The content with the parameter url .
      * @see Content
      */
-    T getByUrl(final String url, final boolean isValid);
+    T getByUrl(
+            final String url,
+            final boolean isValid
+    );
 
     /**
      * Removes content object of the {@link Content} class or subclasses
@@ -72,7 +77,10 @@ public interface ContentService<T extends Content, E extends Number>
      * @return The sorted list of contents.
      * @see Content
      */
-    List<T> sortByTitle(final Collection<T> contents, final boolean revers);
+    List<T> sortByTitle(
+            final Collection<T> contents,
+            final boolean revers
+    );
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by url.
@@ -82,7 +90,10 @@ public interface ContentService<T extends Content, E extends Number>
      * @return The sorted list of contents.
      * @see Content
      */
-    List<T> sortByUrl(final Collection<T> contents, final boolean revers);
+    List<T> sortByUrl(
+            final Collection<T> contents,
+            final boolean revers
+    );
 
     /**
      * Sorts and returns objects of {@link Content} class

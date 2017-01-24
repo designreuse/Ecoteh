@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * The class implements a set of methods for translate to ASCII and from ASCII.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Ascii
  */
@@ -40,13 +40,16 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String to() {
-        StringBuilder sb = new StringBuilder();
-        if (isNotBlank(value)) {
-            for (Character character : value.toCharArray()) {
+        String result = null;
+        if (isNotBlank(this.value)) {
+            final StringBuilder sb = new StringBuilder();
+            for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
             }
+            result = sb.toString();
+            result = result.substring(0, result.length() - 1);
         }
-        return sb.toString();
+        return result;
     }
 
     /**
@@ -57,17 +60,19 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String from() {
-        StringBuilder sb = new StringBuilder();
-        if (isNotBlank(value)) {
-            for (String st : value.split(",")) {
+        String result = null;
+        if (isNotBlank(this.value)) {
+            final StringBuilder sb = new StringBuilder();
+            for (String st : this.value.split(",")) {
                 sb.append(
                         Character.toString(
                                 (char) Integer.parseInt(st)
                         )
                 );
             }
+            result = sb.toString();
         }
-        return sb.toString();
+        return result;
     }
 
     /**

@@ -2,18 +2,16 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.CompanyDao;
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
+import com.salimov.yurii.entity.Model;
+import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
-import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +20,7 @@ import java.util.stream.Collectors;
  * The class of the service layer, implements a set of methods for working
  * with objects of the {@link Company} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Company
  * @see CompanyService
@@ -46,38 +44,39 @@ public final class CompanyServiceImpl
      * {@link Company} objects with the database.
      *
      * @see CompanyDao
+     * @see Company
      */
     private final CompanyDao dao;
-
-    /**
-     * The interface of the service layer,
-     * describes a set of methods for working
-     * with objects of the class {@link Photo}.
-     *
-     * @see PhotoService
-     */
-    private final PhotoService photoService;
 
     /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao          a implementation
-     *                     of the {@link CompanyDao} interface.
-     * @param photoService a implementation
-     *                     of the {@link PhotoService} interface.
+     * @param dao         a implementation
+     *                    of the {@link CompanyDao} interface.
      * @see CompanyDao
-     * @see PhotoService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CompanyServiceImpl(
-            final CompanyDao dao,
-            final PhotoService photoService
+            final CompanyDao dao
     ) {
         super(dao);
         this.dao = dao;
-        this.photoService = photoService;
+    }
+
+    /**
+     * Returns all or valid partners
+     * depending on the parameter value.
+     *
+     * @param valid is returns all or valid companies.
+     * @return The all models.
+     * @see Model
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<Company> getAll(final boolean valid) {
+        return getPartners(valid);
     }
 
     /**
@@ -87,7 +86,6 @@ public final class CompanyServiceImpl
      * @param domain        a domain of the new company.
      * @param tagline       a tagline of the new company.
      * @param description   a description of the new company.
-     * @param advantages    a advantages of the new company.
      * @param information   a information of the new company.
      * @param keywords      a keywords of the new company.
      * @param mobilePhone   a mobile phone of the new company.
@@ -100,11 +98,11 @@ public final class CompanyServiceImpl
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
      * @param googleMaps    a google maps url of the new company.
-     * @param logoFile      a file of logo to the new company.
+     * @param logoUrl       a logo URL to the new company.
      * @param isValid       a validated of the new company.
      * @return The new saving company.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @Override
     @Transactional
@@ -113,7 +111,6 @@ public final class CompanyServiceImpl
             final String domain,
             final String tagline,
             final String description,
-            final String advantages,
             final String information,
             final String keywords,
             final String mobilePhone,
@@ -126,24 +123,22 @@ public final class CompanyServiceImpl
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
+            final String logoUrl,
             final boolean isValid
     ) {
         final Company company = new Company();
         company.initialize(
-                title, domain, tagline, description,
-                information, advantages, mobilePhone,
-                landlinePhone, fax, email, null, null,
+                title, domain,
+                tagline, description, information,
+                mobilePhone, landlinePhone, fax, email,
+                null, null,
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
-                updatePhoto(
-                        new Photo(),
-                        logoFile,
-                        title
-                )
-                , null
+                logoUrl, null
         );
-        company.setType(CompanyType.PARTNER);
+        company.setType(
+                CompanyType.PARTNER
+        );
         company.setValidated(isValid);
         return add(company);
     }
@@ -157,7 +152,6 @@ public final class CompanyServiceImpl
      * @param domain        a new domain to the company.
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
-     * @param advantages    a new advantages to the company.
      * @param information   a new information to the company.
      * @param keywords      a new keywords to the company.
      * @param mobilePhone   a new mobile phone to the company.
@@ -170,12 +164,11 @@ public final class CompanyServiceImpl
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logoFile      a new file of logo to the company.
-     * @param logoAction    a action on the logo.
+     * @param logoUrl       a new logo Url to the company.
      * @param isValid       a validated of the article.
      * @return The updating company with parameter id.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @Override
     @Transactional
@@ -185,7 +178,6 @@ public final class CompanyServiceImpl
             final String domain,
             final String tagline,
             final String description,
-            final String advantages,
             final String information,
             final String keywords,
             final String mobilePhone,
@@ -198,29 +190,21 @@ public final class CompanyServiceImpl
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
-            final String logoAction,
+            final String logoUrl,
             final boolean isValid
     ) {
         final Company company = getByUrl(url, false);
-        final Photo logo = company.getLogo();
-        updateLogo(
-                company,
-                logoFile,
-                title,
-                logoAction
-        );
         company.initialize(
-                title, domain, tagline, description,
-                information, advantages, mobilePhone,
-                landlinePhone, fax, email, null, null,
+                title, domain,
+                tagline, description, information,
+                mobilePhone, landlinePhone, fax, email,
+                null, null,
                 vkontakte, facebook, twitter, skype,
-                address, keywords, googleMaps
+                address, keywords, googleMaps,
+                logoUrl, null
         );
         company.setValidated(isValid);
-        final Company _company = update(company);
-        removePhoto(logo, logoAction);
-        return _company;
+        return update(company);
     }
 
     /**
@@ -230,7 +214,6 @@ public final class CompanyServiceImpl
      * @param domain        a new domain to the main company.
      * @param tagline       a new tagline to the main company.
      * @param description   a new description to the main company.
-     * @param advantages    a new advantages to the main company.
      * @param information   a new information to the main company.
      * @param keywords      a new keywords to the main company.
      * @param workTimeFrom  a new start work time to the main company.
@@ -247,12 +230,9 @@ public final class CompanyServiceImpl
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps url to the main company.
-     * @param logoFile      a new file of logo to the main company.
-     * @param logoAction    a action on the logo.
-     * @param faviconFile   a new file of favicon to the main company.
-     * @param faviconAction a action on the favicon.
-     * @param slideFiles    a files of slides to the main company.
-     * @param slidesAction  a new title to the main company.
+     * @param logoUrl       a new logo URL to the main company.
+     * @param faviconUrl    a new favicon URL to the main company.
+     * @param slides         a slides URL to the main company.
      * @return The updating main company.
      */
     @Override
@@ -262,7 +242,6 @@ public final class CompanyServiceImpl
             final String domain,
             final String tagline,
             final String description,
-            final String advantages,
             final String information,
             final String keywords,
             final String workTimeFrom,
@@ -279,61 +258,24 @@ public final class CompanyServiceImpl
             final String skype,
             final String address,
             final String googleMaps,
-            final MultipartFile logoFile,
-            final String logoAction,
-            final MultipartFile faviconFile,
-            final String faviconAction,
-            final MultipartFile[] slideFiles,
-            final String slidesAction
+            final String logoUrl,
+            final String faviconUrl,
+            final String slides
     ) {
         final Company mainCompany = getMainCompany();
-        final Photo logo = mainCompany.getLogo();
-        updateLogo(
-                mainCompany,
-                logoFile,
-                title,
-                slidesAction
-        );
-        final Photo favicon = mainCompany.getFavicon();
-        updateFavicon(
-                mainCompany,
-                faviconFile,
-                title,
-                faviconAction
-        );
         mainCompany.initialize(
-                title, domain, tagline, description,
-                information, advantages, mobilePhone,
-                landlinePhone, fax, email, senderEmail,
-                senderPass, vkontakte, facebook, twitter,
-                skype, address, keywords, googleMaps
+                title, domain,
+                tagline, description, information,
+                mobilePhone, landlinePhone, fax, email,
+                senderEmail, senderPass,
+                vkontakte, facebook, twitter, skype,
+                address, keywords, googleMaps,
+                logoUrl, faviconUrl
         );
+        mainCompany.setSlides(slides);
         mainCompany.setWorkTimeFrom(workTimeFrom);
         mainCompany.setWorkTimeTo(workTimeTo);
-        final List<Photo> slides = new ArrayList<>(
-                mainCompany.getSlides()
-        );
-        updateSlides(
-                mainCompany,
-                slideFiles,
-                title,
-                slidesAction
-        );
-        final Company company = update(mainCompany);
-        removePhoto(
-                logo,
-                logoAction
-        );
-        removePhoto(
-                favicon,
-                faviconAction
-        );
-        removeSlides(
-                mainCompany,
-                slides,
-                slidesAction
-        );
-        return company;
+        return update(mainCompany);
     }
 
     /**
@@ -348,7 +290,9 @@ public final class CompanyServiceImpl
     public Company getMainCompany() throws NullPointerException {
         try {
             final Company mainCompany =
-                    this.dao.getByType(CompanyType.MAIN).get(0);
+                    this.dao.getByType(
+                            CompanyType.MAIN
+                    ).get(0);
             if (!Company.isValidated(mainCompany)) {
                 throw new NullPointerException(
                         "Information about main company is absent!"
@@ -392,7 +336,9 @@ public final class CompanyServiceImpl
             final String url,
             final boolean isValid
     ) {
-        final Company company = super.getByUrl(url, isValid);
+        final Company company = super.getByUrl(
+                url, isValid
+        );
         company.getSlides();
         return company;
     }
@@ -407,18 +353,25 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Company> getPartners(final boolean isValid) {
-        List<Company> companies = this.dao.getByType(CompanyType.PARTNER);
+        List<Company> companies = this.dao.getByType(
+                CompanyType.PARTNER
+        );
         if (isValid) {
             companies = companies.stream()
-                    .filter(company -> company.isValidated())
-                    .collect(Collectors.toList());
+                    .filter(
+                            IModel::isValidated
+                    )
+                    .collect(
+                            Collectors.toList()
+                    );
         }
         return companies;
     }
 
     /**
      * Removes company.
-     * Removes company if it not {@code null} and has not type {@code MAIN}.
+     * Removes company if it not {@code null}
+     * and has not type {@code MAIN}.
      *
      * @param company the company to remove.
      * @see Company
@@ -430,9 +383,11 @@ public final class CompanyServiceImpl
                 company != null
         ) && (
                 !company.getType()
-                        .equals(CompanyType.MAIN)
+                        .equals(
+                                CompanyType.MAIN
+                        )
         )) {
-            removeCompany(company);
+            super.remove(company);
         }
     }
 
@@ -444,7 +399,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void removeMain() {
-        removeCompany(
+        super.remove(
                 getMainCompany()
         );
     }
@@ -470,245 +425,5 @@ public final class CompanyServiceImpl
     @Override
     protected Class<Company> getModelClass() {
         return Company.class;
-    }
-
-    /**
-     * Removes company. Removes company if it is not {@code null}.
-     * Also removes the company logo, favicon and slides.
-     *
-     * @param company the company to remove.
-     * @see Company
-     */
-    private void removeCompany(final Company company) {
-        removePhoto(company);
-        super.remove(company);
-    }
-
-    /**
-     * Remove photo in selected company.
-     *
-     * @param company a selected company.
-     */
-    private void removePhoto(final Company company) {
-        this.photoService.remove(
-                company.getLogo()
-        );
-        this.photoService.remove(
-                company.getFavicon()
-        );
-        if (!company.getSlides().isEmpty()) {
-            company.getSlides()
-                    .forEach(this.photoService::remove);
-        }
-    }
-
-    /**
-     * Updates company logo.
-     *
-     * @param company the company to update.
-     * @param file    a logo file.
-     * @param title   a logo title.
-     * @param action  a action on the logo.
-     */
-    private void updateLogo(
-            final Company company,
-            final MultipartFile file,
-            final String title,
-            final String action
-    ) {
-        switch (action) {
-            case "replace":
-                company.setLogo(
-                        updatePhoto(
-                                company.getLogo(),
-                                file,
-                                title
-                        )
-                );
-                break;
-            case "delete":
-                company.setLogo(null);
-                break;
-        }
-    }
-
-    /**
-     * Updates company favicon.
-     *
-     * @param company the company to update.
-     * @param file    a favicon file.
-     * @param title   a favicon title.
-     * @param action  a action on the favicon.
-     */
-    private void updateFavicon(
-            final Company company,
-            final MultipartFile file,
-            final String title,
-            final String action
-    ) {
-
-        switch (action) {
-            case "replace":
-                final Photo favicon = updatePhoto(
-                        company.getFavicon(),
-                        file,
-                        title
-                );
-                company.setFavicon(favicon);
-                break;
-            case "delete":
-                company.setFavicon(null);
-                break;
-        }
-    }
-
-    /**
-     * Updates company slides.
-     *
-     * @param company the company to update.
-     * @param files   a slides files.
-     * @param title   a slides title.
-     * @param action  a action on the slides.
-     */
-    private void updateSlides(
-            final Company company,
-            final MultipartFile[] files,
-            final String title,
-            final String action
-    ) {
-        switch (action) {
-            case "replace":
-                if (files != null && files.length > 0) {
-                    final List<Photo> slides = new ArrayList<>();
-                    for (MultipartFile file : files) {
-                        if (file != null && !file.isEmpty()) {
-                            slides.add(
-                                    updateSlide(
-                                            new Photo(),
-                                            file,
-                                            title
-                                    )
-                            );
-                        }
-                    }
-                    if (!slides.isEmpty()) {
-                        company.setSlides(slides);
-                    }
-                }
-                break;
-            case "add":
-                if (files != null && files.length > 0) {
-                    for (MultipartFile file : files) {
-                        if (file != null && !file.isEmpty()) {
-                            company.addSlide(
-                                    updateSlide(
-                                            new Photo(),
-                                            file,
-                                            title
-                                    )
-                            );
-                        }
-                    }
-                }
-                break;
-            case "delete":
-                company.setSlides(null);
-                break;
-        }
-    }
-
-    /**
-     * Removes photo.
-     *
-     * @param photo  the photo to remove.
-     * @param action a action on the photo.
-     */
-    private void removePhoto(
-            final Photo photo,
-            final String action
-    ) {
-        if (action.equals("delete")) {
-            this.photoService.remove(photo);
-        }
-    }
-
-    /**
-     * Removes slides.
-     *
-     * @param company the company to update.
-     * @param slides  a slides to remove.
-     * @param action  a action on the slides.
-     */
-    private void removeSlides(
-            final Company company,
-            final Collection<Photo> slides,
-            final String action
-    ) {
-        if (action.equals("delete") || action.equals("replace")) {
-            slides.stream()
-                    .filter(slide -> !company.containsSlide(slide))
-                    .forEach(this.photoService::remove);
-        }
-    }
-
-    /**
-     * Updates the photo.
-     *
-     * @param photo the photo to update.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
-     */
-    private Photo updatePhoto(
-            final Photo photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return updatePhotoFile(
-                photo,
-                file,
-                Translator.fromCyrillicToLatin(title) + " photo "
-        );
-    }
-
-    /**
-     * Updates slide.
-     *
-     * @param slide the slide to update.
-     * @param file  a slide file.
-     * @param title a slide title.
-     * @return The updating slide.
-     */
-    private Photo updateSlide(
-            final Photo slide,
-            final MultipartFile file,
-            final String title
-    ) {
-        return updatePhotoFile(
-                slide,
-                file,
-                Translator.fromCyrillicToLatin(title) + " slide "
-        );
-    }
-
-    /**
-     * Updates photo.
-     *
-     * @param photo the photo to updates.
-     * @param file  a photo file.
-     * @param title a photo title.
-     * @return The updating photo.
-     */
-    private Photo updatePhotoFile(
-            final Photo photo,
-            final MultipartFile file,
-            final String title
-    ) {
-        return this.photoService.updatePhoto(
-                photo != null ? photo : new Photo(),
-                file,
-                title,
-                "company"
-        );
     }
 }

@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * Spring Security Configuration class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see com.salimov.yurii.service.data.interfaces.UserService
  * @see User
@@ -92,7 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception Exception maybe throws HttpSecurity class methods.
      */
     @Override
-    protected void configure(final HttpSecurity httpSecurity) throws Exception {
+    protected void configure(
+            final HttpSecurity httpSecurity
+    ) throws Exception {
         httpSecurity
                 .logout()
                 .invalidateHttpSession(false)

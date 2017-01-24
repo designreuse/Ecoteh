@@ -41,7 +41,9 @@ public enum UserRole {
      * represent an enum type
      */
     public static UserRole[] getEnumConstants() {
-        UserRole[] roles = UserRole.class.getEnumConstants();
-        return Arrays.copyOfRange(roles, 1, roles.length);
+        final UserRole[] roles = UserRole.class.getEnumConstants();
+        return Arrays.copyOfRange(
+                roles, 1, roles.length
+        );
     }
 }

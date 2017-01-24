@@ -5,7 +5,7 @@ package com.salimov.yurii.util.cache;
  * for working with Key object in the cache.
  *
  * @param <T> a type of key.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Cache
  */

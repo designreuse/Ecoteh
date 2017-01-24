@@ -18,9 +18,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class of the service layer, implements a set of methods
  * for search for content on the site.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see SectionService
  * @see CategoryService
  * @see ArticleService
  * @see CompanyService
@@ -38,12 +37,6 @@ public class SearchServiceImpl implements SearchService {
      */
     private final static String HOME_KEYWORDS
             = "домой, главная, index, home";
-
-    /**
-     * The keywords of page with all sections.
-     */
-    private final static String ALL_SECTIONS_KEYWORDS
-            = "все разделы, all sections";
 
     /**
      * The keywords of page with all categories.
@@ -100,15 +93,6 @@ public class SearchServiceImpl implements SearchService {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link com.salimov.yurii.entity.Section}
-     * class.
-     *
-     * @see SectionService
-     */
-    private final SectionService sectionService;
-
-    /**
-     * The implementation of the interface describes a set of methods
      * for working with objects of the {@link com.salimov.yurii.entity.Category}
      * class.
      *
@@ -149,8 +133,6 @@ public class SearchServiceImpl implements SearchService {
      *
      * @param fabric          a implementation
      *                        of the {@link ClientMVFabric} interface.
-     * @param sectionService  a implementation
-     *                        of the {@link SectionService} interface.
      * @param categoryService a implementation
      *                        of the {@link CategoryService} interface.
      * @param articleService  a implementation
@@ -160,7 +142,6 @@ public class SearchServiceImpl implements SearchService {
      * @param userService     a implementation
      *                        of the {@link UserService} interface.
      * @see ClientMVFabric
-     * @see SectionService
      * @see CategoryService
      * @see ArticleService
      * @see CompanyService
@@ -170,14 +151,12 @@ public class SearchServiceImpl implements SearchService {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public SearchServiceImpl(
             final ClientMVFabric fabric,
-            final SectionService sectionService,
             final CategoryService categoryService,
             final ArticleService articleService,
             final CompanyService companyService,
             final UserService userService
     ) {
         this.fabric = fabric;
-        this.sectionService = sectionService;
         this.categoryService = categoryService;
         this.articleService = articleService;
         this.companyService = companyService;
@@ -227,8 +206,6 @@ public class SearchServiceImpl implements SearchService {
         String viewName = null;
         if (HOME_KEYWORDS.contains(temp)) {
             viewName = "redirect:/home";
-        } else if (ALL_SECTIONS_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/section/all";
         } else if (ALL_CATEGORIES_KEYWORDS.contains(temp)) {
             viewName = "redirect:/category/all";
         } else if (ALL_ARTICLES_KEYWORDS.contains(temp)) {
@@ -296,13 +273,6 @@ public class SearchServiceImpl implements SearchService {
         searchFromModelAndAdd(
                 keywordArray,
                 howSearch,
-                this.sectionService,
-                "sections_list",
-                modelAndView
-        );
-        searchFromModelAndAdd(
-                keywordArray,
-                howSearch,
                 this.categoryService,
                 "categories_list",
                 modelAndView
@@ -345,15 +315,6 @@ public class SearchServiceImpl implements SearchService {
             final ModelAndView modelAndView
     ) {
         final String[] keywordArray = keywords.toLowerCase().split(", ");
-        if (content.contains("in_sections")) {
-            searchFromModelAndAdd(
-                    keywordArray,
-                    howSearch,
-                    this.sectionService,
-                    "sections_list",
-                    modelAndView
-            );
-        }
         if (content.contains("in_categories")) {
             searchFromModelAndAdd(
                     keywordArray,
@@ -468,10 +429,6 @@ public class SearchServiceImpl implements SearchService {
             final boolean howSearch,
             final ModelAndView modelAndView
     ) {
-        modelAndView.addObject(
-                "in_sections",
-                content.contains("in_sections")
-        );
         modelAndView.addObject(
                 "in_categories",
                 content.contains("in_categories")

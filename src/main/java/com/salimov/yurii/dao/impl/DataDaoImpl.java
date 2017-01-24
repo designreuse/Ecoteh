@@ -13,18 +13,16 @@ import java.util.Collection;
  *
  * @param <T>  Entity type, extends {@link Model}.
  * @param <E> Entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DataDao
  * @see DataRepository
  * @see ArticleDaoImpl
  * @see CategoryDaoImpl
  * @see CategoryDaoImpl
- * @see PhotoDaoImpl
+ * @see FileDaoImpl
  * @see ResponseDaoImpl
- * @see SectionDaoImpl
  * @see UserDaoImpl
- * @see VideoDaoImpl
  * @see MessageDaoImpl
  * @see Model
  */
@@ -48,7 +46,6 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number>
      * @see DataRepository
      */
     DataDaoImpl(final DataRepository<T, E> repository) {
-        super();
         this.repository = repository;
     }
 

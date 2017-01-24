@@ -8,7 +8,7 @@ import java.util.Comparator;
  * The class implements a set of methods for working
  * with comparators for {@link Article}.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Article
  */
@@ -71,7 +71,7 @@ public final class ArticleComparator {
         @Override
         public int compare(final Article article1, final Article article2) {
             int result;
-            if ((article1 == null) && (article2 == null)) {
+            if (article1 == null && article2 == null) {
                 result = 0;
             } else if (article1 == null) {
                 result = -1;

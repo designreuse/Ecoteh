@@ -1,6 +1,8 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IUser;
 import com.salimov.yurii.enums.UserRole;
+import com.salimov.yurii.util.encryption.Encryption;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,13 +20,16 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class implements a set of standard methods for working
  * with entity of the {@link User} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
+ * @see IUser
  */
 @Entity
 @Table(name = "users")
-public final class User extends Model<Long> implements UserDetails {
+public final class User
+        extends Model<Long>
+        implements IUser<Long>, UserDetails {
 
     /**
      * It is used during deserialization to verify that
@@ -37,38 +42,57 @@ public final class User extends Model<Long> implements UserDetails {
     /**
      * The name of a user.
      */
-    @Column(name = "name", nullable = false)
+    @Column(
+            name = "name",
+            nullable = false,
+            unique = true
+    )
     private String name;
 
     /**
      * The url of a user.
      */
-    @Column(name = "url", nullable = false, unique = true)
+    @Column(
+            name = "url",
+            nullable = false,
+            unique = true
+    )
     private String url;
 
     /**
      * The login of a user.
      */
-    @Column(name = "login", unique = true)
-    private String login;
+    @Column(
+            name = "login",
+            unique = true
+    )
+    private String encryptedLogin;
 
     /**
      * The password of a user.
      */
-    @Column(name = "password", unique = true)
-    private String password;
+    @Column(
+            name = "password",
+            unique = true
+    )
+    private String encryptedPassword;
 
     /**
      * The e-mail of a user.
      */
-    @Column(name = "email", nullable = false)
+    @Column(
+            name = "email",
+            nullable = false
+    )
     private String email;
-
 
     /**
      * The phone of a user.
      */
-    @Column(name = "phone", nullable = false)
+    @Column(
+            name = "phone",
+            nullable = false
+    )
     private String phone;
 
     /**
@@ -102,19 +126,10 @@ public final class User extends Model<Long> implements UserDetails {
     private String description;
 
     /**
-     * The photo of a user.
-     *
-     * @see Photo
+     * The photo URL of a user.
      */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "photo_id",
-            referencedColumnName = "id"
-    )
-    private Photo photo;
+    @Column(name = "photo")
+    private String photoUrl;
 
     /**
      * The role of a user.
@@ -128,18 +143,17 @@ public final class User extends Model<Long> implements UserDetails {
     /**
      * The permit to send a letters on the user email.
      */
-    @Column(name = "is_mailing")
+    @Column(name = "mailing")
     private boolean isMailing;
 
     /**
      * Locked the user or not.
      */
-    @Column(name = "is_locked")
+    @Column(name = "locked")
     private boolean isLocked;
 
     /**
      * Default constructor.
-     * Initializes a user role.
      *
      * @see UserRole
      */
@@ -149,7 +163,6 @@ public final class User extends Model<Long> implements UserDetails {
 
     /**
      * Constructor.
-     * Initializes a main user parameters.
      *
      * @param name  a name of the new user.
      * @param email a email of the new user.
@@ -192,8 +205,8 @@ public final class User extends Model<Long> implements UserDetails {
      */
     @Override
     public boolean equals(final Object object) {
-        boolean result = super.equals(object);
-        if (result) {
+        boolean result = false;
+        if (super.equals(object)) {
             final User other = (User) object;
             result = (
                     isNotBlank(this.name) ?
@@ -228,6 +241,16 @@ public final class User extends Model<Long> implements UserDetails {
         ) + (
                 isNotBlank(this.email) ? this.email.hashCode() : 0
         );
+    }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public User clone() {
+        return (User) super.clone();
     }
 
     /**
@@ -285,7 +308,7 @@ public final class User extends Model<Long> implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> roles = new ArrayList<>(1);
+        final List<GrantedAuthority> roles = new ArrayList<>(1);
         roles.add(
                 new SimpleGrantedAuthority(
                         "ROLE_" + this.role.name()
@@ -303,7 +326,8 @@ public final class User extends Model<Long> implements UserDetails {
      */
     @Override
     public String getUsername() {
-        return getLogin() != null ? getLogin() : "";
+        final String username = getLogin();
+        return isNotBlank(username) ? username : "";
     }
 
     /**
@@ -314,6 +338,7 @@ public final class User extends Model<Long> implements UserDetails {
      * @param phone       a new phone of the user.
      * @param description a new description of the user.
      */
+    @Override
     public void initialize(
             final String name,
             final String email,
@@ -340,6 +365,7 @@ public final class User extends Model<Long> implements UserDetails {
      * @param skype       a new skype username of the user.
      * @param description a new description of the user.
      */
+    @Override
     public void initialize(
             final String name,
             final String login,
@@ -370,11 +396,12 @@ public final class User extends Model<Long> implements UserDetails {
      * @param email       a new e-mail of the user.
      * @param phone       a new phone of the user.
      * @param description a new description of the user.
-     * @param photo       a new photo of the user.
+     * @param photoUrl    a new photo URL of the user.
      * @param role        a new role of the user.
-     * @see Photo
+     * @see File
      * @see UserRole
      */
+    @Override
     public void initialize(
             final String name,
             final String login,
@@ -382,13 +409,13 @@ public final class User extends Model<Long> implements UserDetails {
             final String email,
             final String phone,
             final String description,
-            final Photo photo,
+            final String photoUrl,
             final UserRole role
     ) {
         initialize(name, email, phone, description);
         setLogin(login);
         setPassword(password);
-        setPhoto(photo);
+        setPhotoUrl(photoUrl);
         setRole(role);
     }
 
@@ -397,6 +424,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user name.
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -408,6 +436,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param name a new name to the user.
      */
+    @Override
     public void setName(final String name) {
         this.name = isNotBlank(name) ? name : null;
         translateAndSetUrl(name);
@@ -415,12 +444,14 @@ public final class User extends Model<Long> implements UserDetails {
 
     /**
      * Sets a new login to the user.
-     * If parameter login is blank, then sets {@code null}.
      *
      * @param login a new login to the user.
      */
+    @Override
     public void setLogin(final String login) {
-        this.login = isNotBlank(login) ? login : null;
+        setEncryptedLogin(
+                new Encryption(login).encrypt()
+        );
     }
 
     /**
@@ -428,8 +459,81 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user login.
      */
+    @Override
     public String getLogin() {
-        return this.login;
+        return new Encryption(
+                getEncryptedLogin()
+        ).decrypt();
+    }
+
+    /**
+     * Returns a encrypted login.
+     *
+     * @return The encrypted login.
+     */
+    @Override
+    public String getEncryptedLogin() {
+        return this.encryptedLogin;
+    }
+
+    /**
+     * Sets a new encrypted login to the user.
+     * If parameter login is blank
+     * then sets {@code null}.
+     *
+     * @param login a new encrypted login to the user.
+     */
+    @Override
+    public void setEncryptedLogin(final String login) {
+        this.encryptedLogin = isNotBlank(login) ? login : null;
+    }
+
+    /**
+     * Returns a password of the user.
+     *
+     * @return The user password.
+     */
+    @Transient
+    @Override
+    public String getPassword() {
+        return Translator.fromAscii(
+                getEncryptedPassword()
+        );
+    }
+
+    /**
+     * Sets a new password to the user.
+     *
+     * @param password a new password to the user.
+     */
+    @Transient
+    @Override
+    public void setPassword(final String password) {
+        setEncryptedPassword(
+                Translator.toAscii(password)
+        );
+    }
+
+    /**
+     * Returns a encrypted password.
+     *
+     * @return The encrypted password..
+     */
+    @Override
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    /**
+     * Sets a new encrypted password to the user.
+     * If parameter password is blank
+     * then sets {@code null}.
+     *
+     * @param password a new encrypted password to the user.
+     */
+    @Override
+    public void setEncryptedPassword(final String password) {
+        this.encryptedPassword = isNotBlank(password) ? password : password;
     }
 
     /**
@@ -439,6 +543,7 @@ public final class User extends Model<Long> implements UserDetails {
      * @param value a value to translate.
      * @see Translator
      */
+    @Override
     public void translateAndSetUrl(final String value) {
         setUrl(
                 Translator.fromCyrillicToLatin(value)
@@ -450,6 +555,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user url.
      */
+    @Override
     public String getUrl() {
         return this.url;
     }
@@ -460,27 +566,9 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param url a new url to the user.
      */
+    @Override
     public void setUrl(final String url) {
         this.url = isNotBlank(url) ? url : null;
-    }
-
-    /**
-     * Returns a password of the user.
-     *
-     * @return The user password.
-     */
-    public String getPassword() {
-        return this.password;
-    }
-
-    /**
-     * Sets a new password to the user.
-     * If parameter password is blank, then sets {@code null}.
-     *
-     * @param password a new password to the user.
-     */
-    public void setPassword(final String password) {
-        this.password = isNotBlank(password) ? password : null;
     }
 
     /**
@@ -488,6 +576,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user e-mail.
      */
+    @Override
     public String getEmail() {
         return this.email;
     }
@@ -498,6 +587,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param email a new e-mail to the user.
      */
+    @Override
     public void setEmail(final String email) {
         this.email = isNotBlank(email) ? email : null;
     }
@@ -507,6 +597,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user phone.
      */
+    @Override
     public String getPhone() {
         return this.phone;
     }
@@ -517,6 +608,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param phone a new phone to the user.
      */
+    @Override
     public void setPhone(final String phone) {
         this.phone = isNotBlank(phone) ? phone : null;
     }
@@ -526,6 +618,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user vkontakte url.
      */
+    @Override
     public String getVkontakte() {
         return this.vkontakte;
     }
@@ -536,6 +629,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param vkontakte a new vkontakte url to the user.
      */
+    @Override
     public void setVkontakte(final String vkontakte) {
         String temp = null;
         if (isNotBlank(vkontakte)) {
@@ -553,6 +647,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user facebook url.
      */
+    @Override
     public String getFacebook() {
         return this.facebook;
     }
@@ -563,6 +658,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param facebook a new facebook url to the user.
      */
+    @Override
     public void setFacebook(final String facebook) {
         String temp = null;
         if (isNotBlank(facebook)) {
@@ -580,6 +676,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user twitter url.
      */
+    @Override
     public String getTwitter() {
         return this.twitter;
     }
@@ -590,6 +687,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param twitter a new twitter url to the user.
      */
+    @Override
     public void setTwitter(final String twitter) {
         String temp = null;
         if (isNotBlank(twitter)) {
@@ -607,6 +705,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user skype username.
      */
+    @Override
     public String getSkype() {
         return this.skype;
     }
@@ -617,6 +716,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param skype a new skype username to the user.
      */
+    @Override
     public void setSkype(final String skype) {
         this.skype = isNotBlank(skype) ? skype : null;
     }
@@ -626,6 +726,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The user description.
      */
+    @Override
     public String getDescription() {
         return this.description;
     }
@@ -636,29 +737,30 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param description a new description to the user.
      */
+    @Override
     public void setDescription(final String description) {
         this.description = isNotBlank(description) ? description : null;
     }
 
     /**
-     * Returns a photo of the user.
+     * Returns a photo URL of the user.
      *
-     * @return The user photo.
-     * @see Photo
+     * @return The user photo URL.
      */
-    public Photo getPhoto() {
-        return this.photo;
+    @Override
+    public String getPhotoUrl() {
+        return this.photoUrl;
     }
 
     /**
      * Sets a new photo to the user.
-     * If parameter photo is invalid, then sets {@code null}.
+     * If photo URL is blank, then sets {@code null}.
      *
-     * @param photo a new photo to the user.
-     * @see Photo
+     * @param photoUrl a new photo URL to the user.
      */
-    public void setPhoto(final Photo photo) {
-        this.photo = Photo.isValidated(photo) ? photo : null;
+    @Override
+    public void setPhotoUrl(final String photoUrl) {
+        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
     }
 
     /**
@@ -667,6 +769,7 @@ public final class User extends Model<Long> implements UserDetails {
      * @return The user role.
      * @see UserRole
      */
+    @Override
     public UserRole getRole() {
         return this.role;
     }
@@ -678,6 +781,7 @@ public final class User extends Model<Long> implements UserDetails {
      * @param role a new role to the user.
      * @see UserRole
      */
+    @Override
     public void setRole(final UserRole role) {
         this.role = role;
     }
@@ -687,6 +791,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The permit to send a letters on the user email.
      */
+    @Override
     public boolean isMailing() {
         return this.isMailing;
     }
@@ -696,6 +801,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param isMailing a permit to send a letters on the user email.
      */
+    @Override
     public void setMailing(final boolean isMailing) {
         this.isMailing = isMailing;
     }
@@ -705,6 +811,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @return The value of the locked user or not.
      */
+    @Override
     public boolean isLocked() {
         return this.isLocked;
     }
@@ -714,6 +821,7 @@ public final class User extends Model<Long> implements UserDetails {
      *
      * @param locked a value of locked the user or not.
      */
+    @Override
     public void setLocked(final boolean locked) {
         this.isLocked = locked;
         if (locked) {
@@ -731,12 +839,9 @@ public final class User extends Model<Long> implements UserDetails {
      * @return {@code true} if the user is valid, {@code false} otherwise.
      */
     public static boolean isValidated(final User user) {
-        boolean result = false;
-        if (Model.isValidated(user)) {
-            result = isNotBlank(user.getName()) &&
-                    isNotBlank(user.getPhone()) &&
-                    isNotBlank(user.getEmail());
-        }
-        return result;
+        return Model.isValidated(user)
+                && isNotBlank(user.getName())
+                && isNotBlank(user.getPhone())
+                && isNotBlank(user.getEmail());
     }
 }

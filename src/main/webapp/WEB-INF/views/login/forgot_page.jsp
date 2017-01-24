@@ -9,13 +9,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Напоминание пароля</title>
         <meta name="title" content="Напоминание пароля">
         <meta name="description" content="Напоминание пароля">
         <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login_icon.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/img/static/login_icon.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -25,7 +25,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -49,7 +48,6 @@
                                 </c:when>
                             </c:choose>
                             <hr>
-                                <%-- Forgot password form --%>
                             <form action="<c:url value="/forgot"/>" method="post">
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -61,10 +59,10 @@
                                                minlength="3" maxlength="100" autofocus value="${username}"
                                                placeholder="Введите логин или e-mail">
                                     </div>
-                                        <%-- GOOGLE reCAPTHCA --%>
-                                    <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
+                                    <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <button type="submit" class="btn btn-default">
+                                        <button type="submit" class="btn btn-default"
+                                                title="Отправить пароль на e-mail">
                                             <span class="glyphicon glyphicon-send"
                                                   aria-hidden="true"></span>&nbsp;Отправить
                                         </button>
@@ -78,11 +76,10 @@
             </div>
         </div>
     </div>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

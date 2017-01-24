@@ -1,10 +1,10 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -31,12 +30,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * depending on the request. For the work used implementation
  * of the interface {@link AdminMVFabric}.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see User
  * @see AdminMVFabric
  * @see UserService
- * @see PhotoService
+ * @see FileService
  */
 @Controller
 @RequestMapping(value = "/admin/user")
@@ -89,7 +88,7 @@ public class AdminUserController {
      *                       interface.
      * @see AdminMVFabric
      * @see UserService
-     * @see PhotoService
+     * @see FileService
      * @see CompanyService
      * @see SenderService
      */
@@ -159,14 +158,13 @@ public class AdminUserController {
      * @param facebook     a facebook url of the new user.
      * @param twitter      a twitter url of the new user.
      * @param skype        a skype username of the new user.
-     * @param photoFile    a file of photo to the new user.
+     * @param photoUrl     a photo URL to the new user.
      * @param isValid      a validated of the new user.
      * @param isMailing    a permit to send a letters on the user email.
      * @param isLocked     locked the user or not.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
-     * @see Photo
      */
     @RequestMapping(
             value = "/add",
@@ -183,16 +181,16 @@ public class AdminUserController {
             @RequestParam(value = "facebook") final String facebook,
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final MultipartFile photoFile,
+            @RequestParam(value = "photo") final String photoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
-            @RequestParam(value = "is_set_email") final boolean isMailing,
+            @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
             final ModelAndView modelAndView
     ) {
         this.userService.initAndAdd(
                 name, login, password, description,
                 phone, email, vkontakte, facebook,
-                twitter, skype, photoFile, isValid,
+                twitter, skype, photoUrl, isValid,
                 isMailing, isLocked
         );
         Cache.removeAll("Main Company");
@@ -260,15 +258,14 @@ public class AdminUserController {
      * @param facebook     a new facebook url to the user.
      * @param twitter      a new twitter url to the user.
      * @param skype        a new skype username to the user.
-     * @param photoFile    a file of photo to the user.
-     * @param photoAction  a action on the photo.
+     * @param photoUrl     a photo URL to the user.
      * @param isValid      a validated of the user.
      * @param isMailing    a permit to send a letters on the user email.
      * @param isLocked     locked the user or not.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -286,8 +283,7 @@ public class AdminUserController {
             @RequestParam(value = "facebook") final String facebook,
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final MultipartFile photoFile,
-            @RequestParam(value = "photo_action") final String photoAction,
+            @RequestParam(value = "photo") final String photoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
@@ -297,7 +293,7 @@ public class AdminUserController {
                 url, name, login, password,
                 description, phone, email,
                 vkontakte, facebook, twitter,
-                skype, photoFile, photoAction,
+                skype, photoUrl,
                 isValid, isMailing, isLocked
         );
         Cache.removeAll("Main Company");

@@ -1,20 +1,26 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.ICategory;
+
 import javax.persistence.*;
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class implements a set of standard methods for working
  * with entity of the {@link Category} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
- * @see Model
+ * @see ICategory
  */
 @Entity
 @Table(name = "categories")
-public final class Category extends Content<Long> {
+public final class Category
+        extends Content<Long>
+        implements ICategory<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -25,31 +31,10 @@ public final class Category extends Content<Long> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The photo of a category.
-     *
-     * @see Photo
+     * The main photo URL.
      */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "photo_id",
-            referencedColumnName = "id"
-    )
-    private Photo photo;
-
-    /**
-     * The section of a category.
-     *
-     * @see Section
-     */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(
-            name = "section_id",
-            referencedColumnName = "id"
-    )
-    private Section section;
+    @Column(name = "photo")
+    private String photoUrl;
 
     /**
      * The set of a articles.
@@ -75,7 +60,6 @@ public final class Category extends Content<Long> {
 
     /**
      * Constructor.
-     * Initializes a main category parameters.
      *
      * @param title       a title of the new category.
      * @param description a description of the new category.
@@ -90,79 +74,55 @@ public final class Category extends Content<Long> {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Category clone() {
+        return (Category) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the category.
      *
      * @param title       a new title of the category.
      * @param description a new description of the category.
      * @param keywords    a new keywords of the category.
-     * @param photo       a new photo of the category.
-     * @param section     a new section of the category.
-     * @see Photo
-     * @see Section
+     * @param photoUrl    a new file of the category.
+     * @see File
      */
+    @Override
     public void initialize(
             final String title,
             final String description,
             final String keywords,
-            final Photo photo,
-            final Section section
+            final String photoUrl
     ) {
         super.initialize(title, description, keywords);
-        setPhoto(photo);
-        setSection(section);
+        setPhotoUrl(photoUrl);
     }
 
     /**
-     * Returns a photo of the category.
+     * Returns a main photo URL of the category.
      *
-     * @return The category photo.
-     * @see Photo
+     * @return The main photo URL.
      */
-    public Photo getPhoto() {
-        return this.photo;
+    @Override
+    public String getPhotoUrl() {
+        return this.photoUrl;
     }
 
     /**
-     * Sets a new photo to the category.
-     * If parameter photo is blank, then sets {@code null}.
+     * Sets a new file to the category.
+     * If parameter file is blank, then sets {@code null}.
      *
-     * @param photo a new main photo to the category.
-     * @see Photo
+     * @param photoUrl a new main photo URL to the category.
+     * @see File
      */
-    public void setPhoto(final Photo photo) {
-        this.photo = Photo.isValidated(photo) ? photo : null;
-    }
-
-    /**
-     * Sets a new section to the category.
-     * Sets a new section if this section equals null
-     * or this section not equals new section.
-     * Also the category deletes from old section and adds to new section.
-     *
-     * @param section a new section of the category.
-     * @see Section
-     */
-    public void setSection(final Section section) {
-        if ((this.section == null) || !this.section.equals(section)) {
-            final Section temp = this.section;
-            this.section = section;
-            if ((this.section != null) && !this.section.containsCategory(this)) {
-                this.section.addCategory(this);
-            }
-            if (temp != null) {
-                temp.removeCategory(this);
-            }
-        }
-    }
-
-    /**
-     * Returns a section of the category.
-     *
-     * @return The category section.
-     * @see Section
-     */
-    public Section getSection() {
-        return this.section;
+    @Override
+    public void setPhotoUrl(final String photoUrl) {
+        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
     }
 
     /**
@@ -172,11 +132,16 @@ public final class Category extends Content<Long> {
      * @param article an article to add.
      * @see Article
      */
+    @Override
     public void addArticle(final Article article) {
         if (article != null) {
             this.articles.add(article);
             final Category category = article.getCategory();
-            if ((category == null) || !category.equals(this)) {
+            if ((
+                    category == null
+            ) || (
+                    !category.equals(this)
+            )) {
                 article.setCategory(this);
             }
         }
@@ -189,9 +154,16 @@ public final class Category extends Content<Long> {
      * @param articles an articles to add.
      * @see Article
      */
+    @Override
     public void addArticles(final Collection<Article> articles) {
-        if ((articles != null) && !articles.isEmpty()) {
-            articles.forEach(this::addArticle);
+        if ((
+                articles != null
+        ) && (
+                !articles.isEmpty()
+        )) {
+            articles.forEach(
+                    this::addArticle
+            );
         }
     }
 
@@ -201,11 +173,16 @@ public final class Category extends Content<Long> {
      * @param article an article to remove.
      * @see Article
      */
+    @Override
     public void removeArticle(final Article article) {
         if ((article != null) && containsArticle(article)) {
             this.articles.remove(article);
             final Category category = article.getCategory();
-            if ((category != null) && category.equals(this)) {
+            if ((
+                    category != null
+            ) && (
+                    category.equals(this)
+            )) {
                 article.setCategory(null);
             }
         }
@@ -217,9 +194,16 @@ public final class Category extends Content<Long> {
      * @param articles an articles to remove.
      * @see Article
      */
+    @Override
     public void removeArticles(final Collection<Article> articles) {
-        if ((articles != null) && !articles.isEmpty()) {
-            articles.forEach(this::removeArticle);
+        if ((
+                articles != null
+        ) && (
+                !articles.isEmpty()
+        )) {
+            articles.forEach(
+                    this::removeArticle
+            );
         }
     }
 
@@ -229,6 +213,7 @@ public final class Category extends Content<Long> {
      * @return The list of articles.
      * @see Article
      */
+    @Override
     public Collection<Article> getArticles() {
         return this.articles;
     }
@@ -240,6 +225,7 @@ public final class Category extends Content<Long> {
      * @param articles an articles to add.
      * @see Article
      */
+    @Override
     public void setArticles(final Collection<Article> articles) {
         clearArticles();
         addArticles(articles);
@@ -249,9 +235,11 @@ public final class Category extends Content<Long> {
      * Contains article in the list of articles.
      *
      * @param article an article to contain.
-     * @return {@code true} if article is contains, {@code false} otherwise.
+     * @return {@code true} if article is contains,
+     * {@code false} otherwise.
      * @see Article
      */
+    @Override
     public boolean containsArticle(final Article article) {
         return this.articles.contains(article);
     }
@@ -260,10 +248,14 @@ public final class Category extends Content<Long> {
      * Contains articles in the list of articles.
      *
      * @param articles an articles to contain.
-     * @return {@code true} if articles are contains, {@code false} otherwise.
+     * @return {@code true} if articles are contains,
+     * {@code false} otherwise.
      * @see Article
      */
-    public boolean containsArticles(final Collection<Article> articles) {
+    @Override
+    public boolean containsArticles(
+            final Collection<Article> articles
+    ) {
         return this.articles.containsAll(articles);
     }
 
@@ -272,6 +264,7 @@ public final class Category extends Content<Long> {
      *
      * @see Article
      */
+    @Override
     public void clearArticles() {
         removeArticles(
                 new ArrayList<>(this.articles)
@@ -285,7 +278,8 @@ public final class Category extends Content<Long> {
      * and if it has at least one article.
      *
      * @param category a category to validate.
-     * @return {@code true} if the article is valid, {@code false} otherwise.
+     * @return {@code true} if the article is valid,
+     * {@code false} otherwise.
      */
     public static boolean isValidated(final Category category) {
         boolean result = false;

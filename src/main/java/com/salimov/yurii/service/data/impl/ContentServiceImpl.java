@@ -16,16 +16,15 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class of the service layer, describes a set of methods
  * for working with objects of {@link Content} class or subclass.
  *
- * @param <T>  entity type, extends {@link Content}.
+ * @param <T> entity type, extends {@link Content}.
  * @param <E> entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
  * @see DataServiceImpl
  * @see ContentService
  * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
  * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
- * @see com.salimov.yurii.service.data.impl.SectionServiceImpl
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
  * @see ContentDao
  */
@@ -38,6 +37,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * for working {@link Content} objects with the database.
      *
      * @see ContentDao
+     * @see Content
      */
     private final ContentDao<T, E> dao;
 
@@ -66,15 +66,21 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      */
     @Override
     @Transactional(readOnly = true)
-    public T getByTitle(final String title, final boolean isValid)
-            throws IllegalArgumentException, NullPointerException {
+    public T getByTitle(
+            final String title,
+            final boolean isValid
+    ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(title)) {
             throw new IllegalArgumentException(
                     getClassSimpleName() + " title is blank!"
             );
         }
         final T content = this.dao.getByTitle(title);
-        if (content == null || (isValid && !content.isValidated())) {
+        if ((
+                content == null
+        ) || (
+                isValid && !content.isValidated()
+        )) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName()
                             + " by title \"" + title + "\"!"
@@ -98,15 +104,21 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      */
     @Override
     @Transactional(readOnly = true)
-    public T getByUrl(final String url, final boolean isValid)
-            throws IllegalArgumentException, NullPointerException {
+    public T getByUrl(
+            final String url,
+            final boolean isValid
+    ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
             throw new IllegalArgumentException(
                     getClassSimpleName() + " url is blank!"
             );
         }
         final T content = this.dao.getByUrl(url);
-        if (content == null || (isValid && !content.isValidated())) {
+        if ((
+                content == null
+        ) || (
+                isValid && !content.isValidated()
+        )) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName()
                             + " by URL \"" + url + "\"!"
@@ -142,7 +154,9 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     @Transactional
     public void removeByUrl(final String url) {
         remove(
-                getByUrl(url, false)
+                getByUrl(
+                        url, false
+                )
         );
     }
 
@@ -253,10 +267,15 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             return false;
         }
         if (duplicate) {
-            final String title = content.getTitle();
-            final String url = content.getUrl();
-            if (this.dao.getByTitle(title) != null ||
-                    this.dao.getByUrl(url) != null) {
+            if ((
+                    this.dao.getByTitle(
+                            content.getTitle()
+                    ) != null
+            ) || (
+                    this.dao.getByUrl(
+                            content.getUrl()
+                    ) != null
+            )) {
                 return false;
             }
         }

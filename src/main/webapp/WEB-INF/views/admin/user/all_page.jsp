@@ -10,17 +10,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Персонал | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Персонал | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="На этой странице отображаются весь персонал компании.">
         <meta name="keywords"
               content="<c:out value="${main_company.title}"/><c:forEach items="${users}" var="user">, <c:out value="${user.name}"/></c:forEach>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -35,13 +34,11 @@
         </c:if>
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Actions --%>
                     <div class="text-center">
                         <a href="<c:url value="/admin/user/new"/>" title="Добавить нового пользователя">
                             <button class="btn btn-default">
@@ -58,7 +55,6 @@
                             </a>
                         </c:if>
                     </div>
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/admin/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a> → Персонал
@@ -72,18 +68,15 @@
                 </div>
             </div>
         </div>
-            <%-- Users --%>
         <c:if test="${length gt 0}">
             <div class="container">
                 <div class="row">
                     <div class="box">
-                            <%-- USER LIST --%>
                         <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            <%-- Message form --%>
             <div class="container">
                 <div class="row">
                     <div class="box">
@@ -94,9 +87,7 @@
             </div>
         </c:if>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">
@@ -108,4 +99,4 @@
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

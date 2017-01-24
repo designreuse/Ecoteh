@@ -33,9 +33,8 @@
                 <textarea class="form-control textarea" name="response" rows="5" minlength="10" maxlength="1500"
                           placeholder="Ваш отзыв" required></textarea>
             </div>
-            <%-- GOOGLE reCAPTHCA --%>
             <c:if test="${authorized_user eq null}">
-                <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
+                <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
             </c:if>
             <div class="form-group col-lg-12">
                 <button type="submit" class="btn btn-default">
@@ -47,4 +46,4 @@
     </form>
 </div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

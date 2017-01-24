@@ -171,7 +171,7 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>private <a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#photoService">photoService</a></span></code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#fileService">fileService</a></span></code>
 <div class="block">The interface of the service layer, describes
  a set of methods for working with objects
  of the class <a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a>.</div>
@@ -194,7 +194,7 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#SectionServiceImpl-com.salimov.yurii.dao.interfaces.SectionDao-com.salimov.yurii.service.data.interfaces.CategoryService-com.salimov.yurii.service.data.interfaces.PhotoService-">SectionServiceImpl</a></span>(<a href="../../../../../../com/salimov/yurii/dao/interfaces/SectionDao.html" title="interface in com.salimov.yurii.dao.interfaces">SectionDao</a>&nbsp;dao,
                   <a href="../../../../../../com/salimov/yurii/service/data/interfaces/CategoryService.html" title="interface in com.salimov.yurii.service.data.interfaces">CategoryService</a>&nbsp;categoryService,
-                  <a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;photoService)</code>
+                  <a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;fileService)</code>
 <div class="block">Constructor.</div>
 </td>
 </tr>
@@ -268,23 +268,23 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#removePhoto-com.salimov.yurii.entity.Photo-java.lang.String-">removePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#removePhoto-com.salimov.yurii.entity.Photo-java.lang.String-">removePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
            java.lang.String&nbsp;action)</code>
-<div class="block">Removes photo if action equals "delete".</div>
+<div class="block">Removes file if action equals "delete".</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>private void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#removePhoto-com.salimov.yurii.entity.Section-">removePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Section.html" title="class in com.salimov.yurii.entity">Section</a>&nbsp;section)</code>
-<div class="block">Removes section photo.</div>
+<div class="block">Removes section file.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>private <a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-">updatePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/SectionServiceImpl.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-">updatePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
            org.springframework.web.multipart.MultipartFile&nbsp;file,
            java.lang.String&nbsp;title)</code>
-<div class="block">Updates photo.</div>
+<div class="block">Updates file.</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
@@ -293,7 +293,7 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
            org.springframework.web.multipart.MultipartFile&nbsp;file,
            java.lang.String&nbsp;title,
            java.lang.String&nbsp;action)</code>
-<div class="block">Updates section photo.</div>
+<div class="block">Updates section file.</div>
 </td>
 </tr>
 </table>
@@ -362,13 +362,13 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 </dl>
 </li>
 </ul>
-<a name="photoService">
+<a name="fileService">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>photoService</h4>
-<pre>private final&nbsp;<a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a> photoService</pre>
+<h4>fileService</h4>
+<pre>private final&nbsp;<a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a> fileService</pre>
 <div class="block">The interface of the service layer, describes
  a set of methods for working with objects
  of the class <a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a>.</div>
@@ -395,7 +395,7 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 <pre>@Autowired
 public&nbsp;SectionServiceImpl(<a href="../../../../../../com/salimov/yurii/dao/interfaces/SectionDao.html" title="interface in com.salimov.yurii.dao.interfaces">SectionDao</a>&nbsp;dao,
                                       <a href="../../../../../../com/salimov/yurii/service/data/interfaces/CategoryService.html" title="interface in com.salimov.yurii.service.data.interfaces">CategoryService</a>&nbsp;categoryService,
-                                      <a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;photoService)</pre>
+                                      <a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a>&nbsp;fileService)</pre>
 <div class="block">Constructor.
  Initializes a implementations of the interfaces.</div>
 <dl>
@@ -404,7 +404,7 @@ public&nbsp;SectionServiceImpl(<a href="../../../../../../com/salimov/yurii/dao/
                         of the <a href="../../../../../../com/salimov/yurii/dao/interfaces/SectionDao.html" title="interface in com.salimov.yurii.dao.interfaces"><code>SectionDao</code></a> interface.</dd>
 <dd><code>categoryService</code> - a implementation
                         of the <a href="../../../../../../com/salimov/yurii/service/data/interfaces/CategoryService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>CategoryService</code></a> interface.</dd>
-<dd><code>photoService</code> - a implementation
+<dd><code>fileService</code> - a implementation
                         of the <a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces"><code>PhotoService</code></a> interface.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/dao/interfaces/SectionDao.html" title="interface in com.salimov.yurii.dao.interfaces"><code>SectionDao</code></a>, 
@@ -441,7 +441,7 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Section.html" ti
 <dd><code>title</code> - a title of the new section.</dd>
 <dd><code>description</code> - a description of the new section.</dd>
 <dd><code>keywords</code> - a keywords of the new section.</dd>
-<dd><code>photoFile</code> - a file of main photo to the new section.</dd>
+<dd><code>photoFile</code> - a file of main file to the new section.</dd>
 <dd><code>isValid</code> - a validated of the new section.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The new saving section.</dd>
@@ -475,8 +475,8 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Section.html" ti
 <dd><code>title</code> - a new title to the section.</dd>
 <dd><code>description</code> - a new title to the section.</dd>
 <dd><code>keywords</code> - a new title to the section.</dd>
-<dd><code>photoFile</code> - a file of photo to the section.</dd>
-<dd><code>photoAction</code> - a action on the photo.</dd>
+<dd><code>photoFile</code> - a file of file to the section.</dd>
+<dd><code>photoAction</code> - a action on the file.</dd>
 <dd><code>isValid</code> - a validated of the section.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The updating section with parameter id or <code>null</code>.</dd>
@@ -496,13 +496,13 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Section.html" ti
                          org.springframework.web.multipart.MultipartFile&nbsp;file,
                          java.lang.String&nbsp;title,
                          java.lang.String&nbsp;action)</pre>
-<div class="block">Updates section photo.</div>
+<div class="block">Updates section file.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>section</code> - the section to update.</dd>
-<dd><code>file</code> - a photo file.</dd>
-<dd><code>title</code> - a photo title.</dd>
-<dd><code>action</code> - a action on the photo.</dd>
+<dd><code>file</code> - a file file.</dd>
+<dd><code>title</code> - a file title.</dd>
+<dd><code>action</code> - a action on the file.</dd>
 </dl>
 </li>
 </ul>
@@ -540,7 +540,7 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Section.html" ti
 <pre>@Transactional
 public&nbsp;void&nbsp;remove(<a href="../../../../../../com/salimov/yurii/entity/Section.html" title="class in com.salimov.yurii.entity">Section</a>&nbsp;section)</pre>
 <div class="block">Removes section. Removes section if it is not <code>null</code>.
- Also deletes photo file if category photo is not <code>null</code></div>
+ Also deletes file file if category file is not <code>null</code></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html#remove-T-">remove</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html" title="interface in com.salimov.yurii.service.data.interfaces">DataService</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Section.html" title="class in com.salimov.yurii.entity">Section</a>,java.lang.Long&gt;</code></dd>
@@ -602,10 +602,10 @@ public&nbsp;java.util.List&lt;<a href="../../../../../../com/salimov/yurii/entit
 <li class="blockList">
 <h4>removePhoto</h4>
 <pre>private&nbsp;void&nbsp;removePhoto(<a href="../../../../../../com/salimov/yurii/entity/Section.html" title="class in com.salimov.yurii.entity">Section</a>&nbsp;section)</pre>
-<div class="block">Removes section photo.</div>
+<div class="block">Removes section file.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>section</code> - the section to remove photo.</dd>
+<dd><code>section</code> - the section to remove file.</dd>
 </dl>
 </li>
 </ul>
@@ -629,17 +629,17 @@ public&nbsp;java.util.List&lt;<a href="../../../../../../com/salimov/yurii/entit
 <ul class="blockList">
 <li class="blockList">
 <h4>updatePhoto</h4>
-<pre>private&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;updatePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<pre>private&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;updatePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
                           org.springframework.web.multipart.MultipartFile&nbsp;file,
                           java.lang.String&nbsp;title)</pre>
-<div class="block">Updates photo.</div>
+<div class="block">Updates file.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the photo to updates.</dd>
-<dd><code>file</code> - a photo file.</dd>
-<dd><code>title</code> - a photo title.</dd>
+<dd><code>file</code> - the file to updates.</dd>
+<dd><code>file</code> - a file file.</dd>
+<dd><code>title</code> - a file title.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The updating photo.</dd>
+<dd>The updating file.</dd>
 </dl>
 </li>
 </ul>
@@ -649,13 +649,13 @@ public&nbsp;java.util.List&lt;<a href="../../../../../../com/salimov/yurii/entit
 <ul class="blockListLast">
 <li class="blockList">
 <h4>removePhoto</h4>
-<pre>private&nbsp;void&nbsp;removePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<pre>private&nbsp;void&nbsp;removePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
                          java.lang.String&nbsp;action)</pre>
-<div class="block">Removes photo if action equals "delete".</div>
+<div class="block">Removes file if action equals "delete".</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the photo to remove.</dd>
-<dd><code>action</code> - a action on the photo.</dd>
+<dd><code>file</code> - the file to remove.</dd>
+<dd><code>action</code> - a action on the file.</dd>
 </dl>
 </li>
 </ul>

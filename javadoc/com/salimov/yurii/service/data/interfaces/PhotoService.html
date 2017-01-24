@@ -153,7 +153,7 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#initAndAdd-java.lang.String-java.lang.String-org.springframework.web.multipart.MultipartFile-">initAndAdd</a></span>(java.lang.String&nbsp;title,
           java.lang.String&nbsp;url,
           org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</code>
-<div class="block">Initializes, saves and returns a new photo.</div>
+<div class="block">Initializes, saves and returns a new file.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -162,29 +162,29 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
              java.lang.String&nbsp;title,
              java.lang.String&nbsp;url,
              org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</code>
-<div class="block">Initializes, updates and returns photo with parameter id.</div>
+<div class="block">Initializes, updates and returns file with parameter id.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#saveFile-org.springframework.web.multipart.MultipartFile-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;photo)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#saveFile-org.springframework.web.multipart.MultipartFile-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;file)</code>
 <div class="block">Save the multipart file in the file system.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#saveFile-org.springframework.web.multipart.MultipartFile-java.lang.String-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;photo,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#saveFile-org.springframework.web.multipart.MultipartFile-java.lang.String-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;file,
         java.lang.String&nbsp;rootPath)</code>
 <div class="block">Save the multipart file in the file system in the directory rootPath.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-java.lang.String-">updatePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-java.lang.String-">updatePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
            org.springframework.web.multipart.MultipartFile&nbsp;file,
            java.lang.String&nbsp;title,
            java.lang.String&nbsp;rootPath)</code>
-<div class="block">Updates and returns the photo.</div>
+<div class="block">Updates and returns the file.</div>
 </td>
 </tr>
 </table>
@@ -225,14 +225,14 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
 <pre><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;initAndAdd(java.lang.String&nbsp;title,
                  java.lang.String&nbsp;url,
                  org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</pre>
-<div class="block">Initializes, saves and returns a new photo.</div>
+<div class="block">Initializes, saves and returns a new file.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>title</code> - a title of the new photo.</dd>
-<dd><code>url</code> - a url of the new photo.</dd>
-<dd><code>photoFile</code> - a photo file (image) of the new photo.</dd>
+<dd><code>title</code> - a title of the new file.</dd>
+<dd><code>url</code> - a url of the new file.</dd>
+<dd><code>photoFile</code> - a file file (image) of the new file.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The new saving photo.</dd>
+<dd>The new saving file.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -248,15 +248,15 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
                     java.lang.String&nbsp;title,
                     java.lang.String&nbsp;url,
                     org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</pre>
-<div class="block">Initializes, updates and returns photo with parameter id.</div>
+<div class="block">Initializes, updates and returns file with parameter id.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>id</code> - a id of the photo to update.</dd>
-<dd><code>title</code> - a new title of the photo.</dd>
-<dd><code>url</code> - a new title of the photo.</dd>
-<dd><code>photoFile</code> - a new photo file (image) of the photo.</dd>
+<dd><code>id</code> - a id of the file to update.</dd>
+<dd><code>title</code> - a new title of the file.</dd>
+<dd><code>url</code> - a new title of the file.</dd>
+<dd><code>photoFile</code> - a new file file (image) of the file.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The updating photo with parameter id.</dd>
+<dd>The updating file with parameter id.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -268,12 +268,12 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
 <ul class="blockList">
 <li class="blockList">
 <h4>saveFile</h4>
-<pre>void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;photo,
+<pre>void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;file,
               java.lang.String&nbsp;rootPath)</pre>
 <div class="block">Save the multipart file in the file system in the directory rootPath.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - a file to save.</dd>
+<dd><code>file</code> - a file to save.</dd>
 <dd><code>rootPath</code> - a directory path.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
@@ -286,11 +286,11 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
 <ul class="blockList">
 <li class="blockList">
 <h4>saveFile</h4>
-<pre>void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;photo)</pre>
+<pre>void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;file)</pre>
 <div class="block">Save the multipart file in the file system.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - a file to save.</dd>
+<dd><code>file</code> - a file to save.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -320,19 +320,19 @@ extends <a href="../../../../../../com/salimov/yurii/service/data/interfaces/Med
 <ul class="blockListLast">
 <li class="blockList">
 <h4>updatePhoto</h4>
-<pre><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;updatePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<pre><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;updatePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
                   org.springframework.web.multipart.MultipartFile&nbsp;file,
                   java.lang.String&nbsp;title,
                   java.lang.String&nbsp;rootPath)</pre>
-<div class="block">Updates and returns the photo.</div>
+<div class="block">Updates and returns the file.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the photo to update.</dd>
+<dd><code>file</code> - the file to update.</dd>
 <dd><code>file</code> - a file to save.</dd>
-<dd><code>title</code> - a new title of the photo.</dd>
+<dd><code>title</code> - a new title of the file.</dd>
 <dd><code>rootPath</code> - a directory path.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The updating photo.</dd>
+<dd>The updating file.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>

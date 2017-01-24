@@ -2,19 +2,16 @@ package com.salimov.yurii.dao.impl;
 
 import com.salimov.yurii.dao.interfaces.CategoryDao;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Section;
 import com.salimov.yurii.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * The class implements a set of standard methods for working {@link Category}
  * objects with a database.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see CategoryDao
  * @see Category
@@ -71,19 +68,6 @@ public final class CategoryDaoImpl
     @Override
     public Category getByUrl(final String url) {
         return this.repository.findByUrl(url);
-    }
-
-    /**
-     * Returns categories with the parameter section id from a database.
-     *
-     * @param id a section id of the categories to return.
-     * @return The categories with parameter section id.
-     * @see Category
-     * @see Section
-     */
-    @Override
-    public List<Category> getBySectionId(final Long id) {
-        return this.repository.findBySectionId(id);
     }
 
     /**

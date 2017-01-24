@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * An object that creates new threads on demand.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Cache
  */

@@ -1,6 +1,5 @@
 package com.salimov.yurii.service.data.impl;
 
-import com.salimov.yurii.dao.interfaces.DataDao;
 import com.salimov.yurii.dao.interfaces.MessageDao;
 import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.service.data.interfaces.MessageService;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
  * The class of the service layer, implements a set of methods for working
  * with objects of the {@link Message} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Message
  * @see MessageService
@@ -30,7 +29,8 @@ public final class MessageServiceImpl
      * Initializes a implementations of the interfaces.
      *
      * @param dao a implementation of the {@link MessageDao} interface.
-     * @see DataDao
+     * @see MessageDao
+     * @see Message
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

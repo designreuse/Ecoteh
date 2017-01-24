@@ -1,9 +1,7 @@
 package com.salimov.yurii.service.data.interfaces;
 
-import com.salimov.yurii.entity.Photo;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,12 +10,13 @@ import java.util.List;
  * The interface of the service layer, describes a set of methods
  * for working with objects of the class {@link User}.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see User
  * @see DataService
  */
-public interface UserService extends DataService<User, Long> {
+public interface UserService
+        extends DataService<User, Long> {
 
     /**
      * Initializes, saves and returns a new user.
@@ -32,13 +31,12 @@ public interface UserService extends DataService<User, Long> {
      * @param facebook    a facebook url of the new user.
      * @param twitter     a twitter url of the new user.
      * @param skype       a skype username of the new user.
-     * @param photoFile   a file of photo to the new user.
+     * @param photoUrl    a photo URL to the new user.
      * @param isValid     a validated of the new user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The new saving user.
      * @see User
-     * @see Photo
      */
     User initAndAdd(
             final String name,
@@ -51,7 +49,7 @@ public interface UserService extends DataService<User, Long> {
             final String facebook,
             final String twitter,
             final String skype,
-            final MultipartFile photoFile,
+            final String photoUrl,
             final boolean isValid,
             final boolean isMailing,
             final boolean isLocked
@@ -71,14 +69,12 @@ public interface UserService extends DataService<User, Long> {
      * @param facebook    a new facebook url to the user.
      * @param twitter     a new twitter url to the user.
      * @param skype       a new skype username to the user.
-     * @param photoFile   a file of photo to the user.
-     * @param photoAction a action on the photo.
+     * @param photoUrl    a photo URL to the user.
      * @param isValid     a validated of the user.
      * @param isMailing   a permit to send a letters on the user email.
      * @param isLocked    locked the user or not.
      * @return The updating user with parameter id.
      * @see User
-     * @see Photo
      */
     User initAndUpdate(
             final String url,
@@ -92,8 +88,7 @@ public interface UserService extends DataService<User, Long> {
             final String facebook,
             final String twitter,
             final String skype,
-            final MultipartFile photoFile,
-            final String photoAction,
+            final String photoUrl,
             final boolean isValid,
             final boolean isMailing,
             final boolean isLocked
@@ -208,7 +203,10 @@ public interface UserService extends DataService<User, Long> {
      * @return The sorted list of users.
      * @see User
      */
-    List<User> sortByName(final Collection<User> users, final boolean revers);
+    List<User> sortByName(
+            final Collection<User> users,
+            final boolean revers
+    );
 
     /**
      * Sorts and returns users by url.
@@ -218,7 +216,10 @@ public interface UserService extends DataService<User, Long> {
      * @return The sorted list of users.
      * @see User
      */
-    List<User> sortByUrl(final Collection<User> users, final boolean revers);
+    List<User> sortByUrl(
+            final Collection<User> users,
+            final boolean revers
+    );
 
     /**
      * Sorts and returns users by by role.
@@ -314,5 +315,7 @@ public interface UserService extends DataService<User, Long> {
      * @see User
      * @see UserRole
      */
-    List<User> getAndFilterByRoles(final List<UserRole> roles);
+    List<User> getAndFilterByRoles(
+            final List<UserRole> roles
+    );
 }

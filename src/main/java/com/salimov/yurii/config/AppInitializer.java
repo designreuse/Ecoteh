@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
  * Dispatcher servlet that is responsible for initializing
  * Spring MVC and mapping for URL.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see WebConfig
  * @see RootConfig
@@ -74,7 +74,8 @@ public class AppInitializer
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
                 RootConfig.class,
-                SecurityConfig.class
+                SecurityConfig.class,
+                ContentConfig.class
         };
     }
 
@@ -131,8 +132,8 @@ public class AppInitializer
     protected DispatcherServlet createDispatcherServlet(
             final WebApplicationContext webApplicationContext
     ) {
-        final DispatcherServlet dispatcherServlet
-                = (DispatcherServlet) super.createDispatcherServlet(
+        final DispatcherServlet dispatcherServlet =
+                (DispatcherServlet) super.createDispatcherServlet(
                 webApplicationContext
         );
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(

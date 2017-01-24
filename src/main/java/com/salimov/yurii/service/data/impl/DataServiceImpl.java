@@ -14,20 +14,17 @@ import java.util.stream.Collectors;
  *
  * @param <T> entity type, extends {@link Model}.
  * @param <E> entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
  * @see DataService
  * @see ContentServiceImpl
- * @see MediaServiceImpl
  * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
  * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
- * @see com.salimov.yurii.service.data.impl.PhotoServiceImpl
+ * @see com.salimov.yurii.service.data.impl.FileServiceImpl
  * @see com.salimov.yurii.service.data.impl.ResponseServiceImpl
- * @see com.salimov.yurii.service.data.impl.SectionServiceImpl
  * @see com.salimov.yurii.service.data.impl.UserServiceImpl
- * @see com.salimov.yurii.service.data.impl.VideoServiceImpl
  * @see DataDao
  */
 public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
@@ -38,6 +35,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      * for working {@link Model} objects with the database.
      *
      * @see DataDao
+     * @see Model
      */
     private final DataDao<T, E> dao;
 
@@ -54,10 +52,10 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
 
     /**
      * Saves and returns object of {@link Model} class or subclasses.
-     * Returns {@code null} if model is not valid.
+     * Returns input object if model is not valid.
      *
      * @param model the model to add.
-     * @return The saving model or {@code null}.
+     * @return The saving model or input object.
      * @see Model
      */
     @Override
@@ -80,13 +78,19 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      */
     @Override
     @Transactional
-    public Collection<T> add(final Collection<T> models) {
+    public Collection<T> addAll(
+            final Collection<T> models
+    ) {
         final List<T> result = new ArrayList<>();
         if (models != null && !models.isEmpty()) {
             result.addAll(
                     models.stream()
-                            .map(this::add)
-                            .collect(Collectors.toList())
+                            .map(
+                                    this::add
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -125,8 +129,12 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         if (models != null && !models.isEmpty()) {
             result.addAll(
                     models.stream()
-                            .map(this::update)
-                            .collect(Collectors.toList())
+                            .map(
+                                    this::update
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -155,7 +163,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         final T model = this.dao.get(id);
         if (model == null) {
             throw new NullPointerException(
-                    "Can`t find " + getClassSimpleName() + " by id " + id + "!"
+                    "Can`t find " + getClassSimpleName()
+                            + " by id " + id + "!"
             );
         }
         return model;
@@ -356,11 +365,27 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             final int fromIndex,
             final int toIndex
     ) {
-        List<T> result = new ArrayList<>(models);
-        return result.subList(
-                fromIndex,
-                toIndex
-        );
+        List<T> result;
+        if (models == null || models.isEmpty()) {
+            result = new ArrayList<>();
+        } else {
+            if ((
+                    fromIndex < toIndex
+            ) && (
+                    fromIndex < models.size()
+            ) && (
+                    toIndex < models.size()
+            )) {
+                result = new ArrayList<>(models)
+                        .subList(
+                                fromIndex,
+                                toIndex
+                        );
+            } else {
+                result = new ArrayList<>(models);
+            }
+        }
+        return result;
     }
 
     /**
@@ -402,9 +427,15 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             result.addAll(
                     models.stream()
                             .filter(
-                                    model -> (model != null) &&
-                                            (model.isValidated())
-                            ).collect(Collectors.toList())
+                                    model -> (
+                                            model != null
+                                    ) && (
+                                            model.isValidated()
+                                    )
+                            )
+                            .collect(
+                                    Collectors.toList()
+                            )
             );
         }
         return result;
@@ -428,22 +459,6 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      */
     String getClassSimpleName() {
         return getModelClass().getSimpleName();
-    }
-
-    /**
-     * Creates new instance of the type.
-     *
-     * @param type Class object.
-     * @return The Class object.
-     */
-    T getInstance(Class<T> type) {
-        T instance = null;
-        try {
-            instance = type.newInstance();
-        } catch (InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
-        }
-        return instance;
     }
 
     /**

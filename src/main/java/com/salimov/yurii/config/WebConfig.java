@@ -1,10 +1,10 @@
 package com.salimov.yurii.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.salimov.yurii.util.properties.ContentProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.JstlView;
  * Class Spring MVC configuration. Spring Indicates where the views components,
  * and how to display them. Class is the source of bean definitions.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see AppInitializer
  * @see RootConfig
@@ -31,56 +31,25 @@ import org.springframework.web.servlet.view.JstlView;
                 "com.salimov.yurii.config"
         }
 )
-@PropertySource("classpath:content.properties")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
-     * Content Type encoding.
+     * The implementation of the interface describes
+     * the methods for getting application properties..
      */
-    @Value("${view.type}")
-    private String contentType;
+    private final ContentProperties properties;
 
     /**
-     * View name prefix.
+     * Constructor.
+     *
+     * @param properties implementation of the {@link ContentProperties}
+     *                   interface.
      */
-    @Value("${view.name-prefix}")
-    private String prefix;
-
-    /**
-     * View name suffix.
-     */
-    @Value("${view.name-suffix}")
-    private String suffix;
-
-    /**
-     * It is exposed context beans as attributes.
-     */
-    @Value("${view.expose_beans_as_attributes}")
-    private boolean exposeContextBeansAsAttributes;
-
-    /**
-     * The url of resources.
-     */
-    @Value("${resources.url}")
-    private String resourcesUrl;
-
-    /**
-     * The location of resources.
-     */
-    @Value("${resources.location}")
-    private String resourcesLocation;
-
-    /**
-     * Request for authorization.
-     */
-    @Value("${login.request}")
-    private String requestLogin;
-
-    /**
-     * Login view name (path).
-     */
-    @Value("${login.view-url}")
-    private String loginViewName;
+    @Autowired
+    public WebConfig(final ContentProperties properties) {
+        super();
+        this.properties = properties;
+    }
 
     /**
      * Indicates to Spring where are the views components,
@@ -92,12 +61,20 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver() {
         final InternalResourceViewResolver viewResolver
                 = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setContentType(this.contentType);
-        viewResolver.setPrefix(this.prefix);
-        viewResolver.setSuffix(this.suffix);
+        viewResolver.setViewClass(
+                JstlView.class
+        );
+        viewResolver.setContentType(
+                this.properties.getContentType()
+        );
+        viewResolver.setPrefix(
+                this.properties.getPrefix()
+        );
+        viewResolver.setSuffix(
+                this.properties.getSuffix()
+        );
         viewResolver.setExposeContextBeansAsAttributes(
-                this.exposeContextBeansAsAttributes
+                this.properties.isExposeContextBeansAsAttributes()
         );
         return viewResolver;
     }
@@ -110,9 +87,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * @param resource The object of the ResourceHandlerRegistry class.
      */
     @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry resource) {
-        resource.addResourceHandler(this.resourcesUrl)
-                .addResourceLocations(this.resourcesLocation);
+    public void addResourceHandlers(
+            final ResourceHandlerRegistry resource) {
+        resource.addResourceHandler(
+                this.properties.getResourcesUrl()
+        ).addResourceLocations(
+                this.properties.getResourcesLocation()
+        );
     }
 
     /**
@@ -129,8 +110,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(
             final ViewControllerRegistry controller
     ) {
-        controller.addViewController(this.requestLogin)
-                .setViewName(this.loginViewName);
-        controller.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        controller.addViewController(
+                this.properties.getLoginRequest()
+        ).setViewName(
+                this.properties.getLoginViewName()
+        );
+        controller.setOrder(
+                Ordered.HIGHEST_PRECEDENCE
+        );
     }
 }

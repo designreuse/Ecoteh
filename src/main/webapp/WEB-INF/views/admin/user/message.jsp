@@ -8,7 +8,7 @@
         <div class="alert green text-center" role="alert"><b>Сообщение отправлено</b></div>
     </c:if>
     <hr>
-    <form action="<c:url value="/admin/user/send_message"/> method="post">
+    <form action="<c:url value="/admin/user/send_message"/>" method="post">
         <div class="row">
             <div class="form-group col-lg-12">
                 <label>
@@ -33,4 +33,4 @@
     </form>
 </div>
 
-<!-- Yurii Salimov (yurii.alex.salimov@gmail.com) -->
+<!-- Yurii Salimov (yuriy.alex.salimov@gmail.com) -->

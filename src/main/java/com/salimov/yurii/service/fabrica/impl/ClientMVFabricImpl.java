@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  * The class implements a set of standard methods for creates
  * and returns the main modelAndViews for clients.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ClientMVFabric
  * @see MainMVFabricImpl
@@ -34,8 +34,6 @@ public final class ClientMVFabricImpl
      *                        of the {@link CategoryService} interface.
      * @param companyService  a implementation
      *                        of the {@link CompanyService} interface.
-     * @param sectionService  a implementation
-     *                        of the {@link SectionService} interface.
      * @param userService     a implementation
      *                        of the {@link UserService} interface.
      * @param responseService a implementation
@@ -43,7 +41,6 @@ public final class ClientMVFabricImpl
      * @see ArticleService
      * @see CategoryService
      * @see CompanyService
-     * @see SectionService
      * @see UserService
      * @see ResponseService
      */
@@ -52,7 +49,6 @@ public final class ClientMVFabricImpl
             final ArticleService articleService,
             final CategoryService categoryService,
             final CompanyService companyService,
-            final SectionService sectionService,
             final UserService userService,
             final ResponseService responseService
     ) {
@@ -60,7 +56,6 @@ public final class ClientMVFabricImpl
                 articleService,
                 categoryService,
                 companyService,
-                sectionService,
                 userService,
                 responseService
         );

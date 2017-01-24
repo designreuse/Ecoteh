@@ -10,12 +10,13 @@ import java.util.List;
  * The interface of the service layer, describes a set of methods
  * for working with objects of the class {@link Response}.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Response
  * @see DataService
  */
-public interface ResponseService extends DataService<Response, Long> {
+public interface ResponseService
+        extends DataService<Response, Long> {
 
     /**
      * Initializes, saves and returns a new response.
@@ -25,7 +26,10 @@ public interface ResponseService extends DataService<Response, Long> {
      * @return The new saving response.
      * @see Response
      */
-    Response initAndAdd(final String username, final String text);
+    Response initAndAdd(
+            final String username,
+            final String text
+    );
 
     /**
      * Initializes, updates and returns response with parameter id.

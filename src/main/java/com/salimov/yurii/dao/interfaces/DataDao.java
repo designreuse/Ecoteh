@@ -10,16 +10,14 @@ import java.util.Collection;
  *
  * @param <T>  Entity type, extends {@link Model}.
  * @param <E> Entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ArticleDao
  * @see CategoryDao
  * @see CompanyDao
- * @see PhotoDao
+ * @see FileDao
  * @see ResponseDao
- * @see SectionDao
  * @see UserDao
- * @see VideoDao
  * @see MessageDao
  * @see Model
  */

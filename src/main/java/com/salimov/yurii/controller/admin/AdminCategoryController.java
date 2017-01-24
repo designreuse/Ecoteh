@@ -1,11 +1,9 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
-import com.salimov.yurii.entity.Section;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
-import com.salimov.yurii.service.data.interfaces.SectionService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -18,10 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class implements a set of methods for working with
@@ -29,12 +24,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * or subclasses for admins. Class methods create and return modelsAndView,
  * depending on the request.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Category
  * @see CategoryService
- * @see SectionService
- * @see PhotoService
+ * @see FileService
  * @see AdminMVFabric
  */
 @Controller
@@ -60,14 +54,6 @@ public class AdminCategoryController {
     private final CategoryService categoryService;
 
     /**
-     * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Section} class.
-     *
-     * @see SectionService
-     */
-    private final SectionService sectionService;
-
-    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
@@ -75,22 +61,17 @@ public class AdminCategoryController {
      *                        interface.
      * @param categoryService a implementation of the {@link CategoryService}
      *                        interface.
-     * @param sectionService  a implementation of the {@link SectionService}
-     *                        interface.
      * @see AdminMVFabric
      * @see CategoryService
-     * @see SectionService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminCategoryController(
             final AdminMVFabric fabric,
-            final CategoryService categoryService,
-            final SectionService sectionService
+            final CategoryService categoryService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);
         this.categoryService = categoryService;
-        this.sectionService = sectionService;
     }
 
     /**
@@ -104,10 +85,6 @@ public class AdminCategoryController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView newCategory() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "sections",
-                this.sectionService.getAll(false)
-        );
         modelAndView.setViewName("admin/category/new_page");
         return modelAndView;
     }
@@ -120,36 +97,28 @@ public class AdminCategoryController {
      * @param title        a title of the new category.
      * @param description  a title of the new category.
      * @param keywords     a title of the new category.
-     * @param sectionUrl   a section url of the new category.
-     * @param photoFile    a file of photo to the new category.
+     * @param photoUrl     a file of photo to the new category.
      * @param isValid      a validated of the new category.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Category
-     * @see Section
-     * @see Photo
+     * @see File
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addCategory(
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "section_url") final String sectionUrl,
-            @RequestParam(value = "main_photo") final MultipartFile photoFile,
+            @RequestParam(value = "photo") final String photoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Section section = isNotBlank(sectionUrl) ?
-                this.sectionService.getByUrl(sectionUrl, false) : null;
         final Category category = this.categoryService.initAndAdd(
-                title,
-                description,
-                keywords,
-                photoFile,
-                section,
+                title, description, keywords,
+                photoUrl,
                 isValid
         );
-        Cache.removeAll("All Categories");
+        Cache.clear();
         modelAndView.setViewName(
                 "redirect:/admin/category/" + category.getUrl()
         );
@@ -189,7 +158,6 @@ public class AdminCategoryController {
                 "category",
                 this.categoryService.getByUrl(url, false)
         );
-        modelAndView.addObject("sections", this.sectionService.getAll(false));
         modelAndView.setViewName("admin/category/edit_page");
         return modelAndView;
     }
@@ -204,41 +172,30 @@ public class AdminCategoryController {
      * @param title        a new title to the category.
      * @param description  a new description to the category.
      * @param keywords     a new description to the category.
-     * @param sectionUrl   a section url of the new category.
-     * @param photoFile    a file of photo to the new category.
-     * @param photoAction  a action on the main photo.
+     * @param photoUrl    a file of photo to the new category.
      * @param isValid      a validated of the category.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Category
-     * @see Section
-     * @see Photo
+     * @see File
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView updateCategory(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "section_url") final String sectionUrl,
-            @RequestParam(value = "main_photo") final MultipartFile photoFile,
-            @RequestParam(value = "photo_action") final String photoAction,
+            @RequestParam(value = "photo") final String photoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Section section = isNotBlank(sectionUrl) ?
-                this.sectionService.getByUrl(sectionUrl, false) : null;
         final Category category = this.categoryService.initAndUpdate(
-                url,
-                title,
-                description,
-                keywords,
-                photoFile,
-                photoAction,
-                section,
+                url, title,
+                description, keywords,
+                photoUrl,
                 isValid
         );
-        Cache.removeAll("All Categories", category.getUrl());
+        Cache.clear();
         modelAndView.setViewName(
                 "redirect:/admin/category/" + category.getUrl()
         );
@@ -278,8 +235,8 @@ public class AdminCategoryController {
             final ModelAndView modelAndView
     ) {
         this.categoryService.removeByUrl(url);
+        Cache.clear();
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("All Categories", url);
         return modelAndView;
     }
 
@@ -296,7 +253,7 @@ public class AdminCategoryController {
     public ModelAndView deleteAllCategories(final ModelAndView modelAndView) {
         this.categoryService.removeAll();
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Category", "Home");
+        Cache.clear();
         return modelAndView;
     }
 }

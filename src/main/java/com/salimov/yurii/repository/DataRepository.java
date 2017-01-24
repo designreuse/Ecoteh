@@ -9,16 +9,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @param <T>  Entity type, extends {@link Model}.
  * @param <E> Entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ArticleRepository
  * @see CategoryRepository
  * @see CompanyRepository
- * @see PhotoRepository
+ * @see FileRepository
  * @see ResponseRepository
- * @see SectionRepository
  * @see UserRepository
- * @see VideoRepository
  * @see Model
  */
 public interface DataRepository<T extends Model<E>, E extends Number>

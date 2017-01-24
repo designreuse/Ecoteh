@@ -4,7 +4,7 @@ package com.salimov.yurii.util.translator;
  * The class implements a set of methods for translate:
  * from Cyrillic to Latin, to ASCII, from ASCII.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Ascii
  * @see ToLatin

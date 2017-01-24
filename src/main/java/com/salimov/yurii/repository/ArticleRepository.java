@@ -9,12 +9,13 @@ import java.util.List;
  * The interface provides a set of JPA methods for working
  * {@link Article} objects with a database.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DataRepository
  * @see Article
  */
-public interface ArticleRepository extends DataRepository<Article, Long> {
+public interface ArticleRepository
+        extends DataRepository<Article, Long> {
 
     /**
      * Returns article from a database,

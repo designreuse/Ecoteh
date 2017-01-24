@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
  * For the work used implementation of the interface
  * {@link AdminMVFabric} interface.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see AdminMVFabric
  * @see CompanyService
@@ -109,7 +109,8 @@ public class AdminMainController extends MainController {
     }
 
     /**
-     * Sends sender and redirects by url if it is not blank, otherwise by url /.
+     * Sends sender and redirects by url if it is not blank,
+     * otherwise by url /.
      * Request mapping: /admin/send_message
      * Method: POST
      *

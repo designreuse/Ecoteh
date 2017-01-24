@@ -1,33 +1,34 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IModel;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Random;
+import java.util.TimeZone;
 
 /**
  * The abstract superclass class implements a set of standard methods
  * for working with entity of the {@link Model} class or subclasses.
  *
  * @param <E> Model id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Media
  * @see Content
  * @see Article
  * @see Category
  * @see Company
- * @see Photo
+ * @see File
  * @see Response
- * @see Section
  * @see User
- * @see Video
  * @see Message
  */
 @MappedSuperclass
 public abstract class Model<E extends Number>
-        implements Serializable, Cloneable {
+        implements IModel<E>, Serializable, Cloneable {
 
     /**
      * Default length of new generating string,
@@ -64,18 +65,20 @@ public abstract class Model<E extends Number>
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(
+            name = "id",
+            nullable = false
+    )
     private E id;
 
     /**
      * The value of validations of the model.
      */
-    @Column(name = "is_valid")
+    @Column(name = "validated")
     private boolean validated;
 
     /**
      * Default constructor.
-     * Sets validations {@code true}.
      */
     public Model() {
         this.validated = true;
@@ -108,9 +111,11 @@ public abstract class Model<E extends Number>
     public boolean equals(final Object object) {
         return (
                 object != null
-        ) && (
-                super.equals(object) || (getClass() == object.getClass())
-        );
+        ) && ((
+                super.equals(object)
+        ) || (
+                getClass() == object.getClass()
+        ));
     }
 
     /**
@@ -136,6 +141,7 @@ public abstract class Model<E extends Number>
      *
      * @return The unique identifier.
      */
+    @Override
     public E getId() {
         return this.id;
     }
@@ -145,16 +151,19 @@ public abstract class Model<E extends Number>
      *
      * @param id a new identifier to the model.
      */
+    @Override
     public void setId(final E id) {
         this.id = id;
     }
 
     /**
      * Sets validations of the model.
-     * Sets {@code true} if the model is valid, {@code false} is invalid.
+     * Sets {@code true} if the model is valid,
+     * {@code false} is invalid.
      *
      * @param validated a validations of the model.
      */
+    @Override
     public void setValidated(final boolean validated) {
         this.validated = validated;
     }
@@ -162,8 +171,10 @@ public abstract class Model<E extends Number>
     /**
      * Validates the model.
      *
-     * @return {@code true} if the model is valid, {@code false} otherwise.
+     * @return {@code true} if the model is valid,
+     * {@code false} otherwise.
      */
+    @Override
     public boolean isValidated() {
         return this.validated;
     }
@@ -173,7 +184,8 @@ public abstract class Model<E extends Number>
      * Model is valid if it is not {@code null}.
      *
      * @param model a model to validate.
-     * @return {@code true} if the model is valid, {@code false} otherwise.
+     * @return {@code true} if the model is valid,
+     * {@code false} otherwise.
      */
     public static boolean isValidated(final Model model) {
         return model != null;
@@ -191,12 +203,17 @@ public abstract class Model<E extends Number>
             final int length
     ) {
         final StringBuilder sb = new StringBuilder();
-        if (pattern != null && pattern.length != 0 && length > 0) {
+        if ((
+                pattern != null
+        ) && (
+                pattern.length != 0
+        ) && (
+                length > 0
+        )) {
             final Random random = new Random(System.nanoTime());
             for (int i = 0; i < length; i++) {
-                int number = random.nextInt(pattern.length);
                 sb.append(
-                        pattern[number]
+                        pattern[random.nextInt(pattern.length)]
                 );
             }
         }

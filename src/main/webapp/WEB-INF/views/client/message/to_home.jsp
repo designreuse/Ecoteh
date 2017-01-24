@@ -21,7 +21,7 @@
                 <label>
                     <b><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Имя:</b>
                 </label>
-                <input type="text" class="form-control" name="name" minlength="2" autofocus
+                <input type="text" class="form-control" name="name" minlength="2"
                        maxlength="50" placeholder="Иванов Иван" required>
             </div>
             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -37,9 +37,8 @@
                 <textarea class="form-control textarea" name="message" rows="3" title=""
                           maxlength="300" placeholder="Ваш коментарий"></textarea>
             </div>
-            <%-- GOOGLE reCAPTHCA --%>
             <c:if test="${authorized_user eq null}">
-                <jsp:include page="/WEB-INF/views/captcha/google_recaptcha.jsp"/>
+                <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
             </c:if>
             <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <button type="submit" class="btn btn-default">
@@ -60,4 +59,4 @@
     <hr>
 </div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

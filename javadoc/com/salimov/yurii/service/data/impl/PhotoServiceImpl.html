@@ -107,7 +107,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../../com/salimov/yurii/service/data/impl/MediaServiceImpl.html" title="class in com.salimov.yurii.service.data.impl">com.salimov.yurii.service.data.impl.MediaServiceImpl</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</li>
 <li>
 <ul class="inheritance">
-<li>com.salimov.yurii.service.data.impl.PhotoServiceImpl</li>
+<li>com.salimov.yurii.service.data.impl.FileServiceImpl</li>
 </ul>
 </li>
 </ul>
@@ -189,7 +189,7 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#getByUrl-java.lang.String-">getByUrl</a></span>(java.lang.String&nbsp;url)</code>
-<div class="block">Returns photo with parameter url.</div>
+<div class="block">Returns file with parameter url.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -203,7 +203,7 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#initAndAdd-java.lang.String-java.lang.String-org.springframework.web.multipart.MultipartFile-">initAndAdd</a></span>(java.lang.String&nbsp;title,
           java.lang.String&nbsp;url,
           org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</code>
-<div class="block">Initializes, saves and returns a new photo.</div>
+<div class="block">Initializes, saves and returns a new file.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -212,49 +212,49 @@ implements <a href="../../../../../../com/salimov/yurii/service/data/interfaces/
              java.lang.String&nbsp;title,
              java.lang.String&nbsp;url,
              org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</code>
-<div class="block">Initializes, updates and returns photo with parameter id.</div>
+<div class="block">Initializes, updates and returns file with parameter id.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#remove-java.util.Collection-">remove</a></span>(java.util.Collection&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&gt;&nbsp;photos)</code>
-<div class="block">Removes photos.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#remove-java.util.Collection-">remove</a></span>(java.util.Collection&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&gt;&nbsp;files)</code>
+<div class="block">Removes files.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#remove-com.salimov.yurii.entity.Photo-">remove</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo)</code>
-<div class="block">Removes photo.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#remove-com.salimov.yurii.entity.Photo-">remove</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file)</code>
+<div class="block">Removes file.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#removeAll--">removeAll</a></span>()</code>
-<div class="block">Removes all photos.</div>
+<div class="block">Removes all files.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#removeByUrl-java.lang.String-">removeByUrl</a></span>(java.lang.String&nbsp;url)</code>
-<div class="block">Removes photo with parameter url.</div>
+<div class="block">Removes file with parameter url.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#saveFile-org.springframework.web.multipart.MultipartFile-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;photo)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#saveFile-org.springframework.web.multipart.MultipartFile-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;file)</code>
 <div class="block">Saves the multipart file in the file system.</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#saveFile-org.springframework.web.multipart.MultipartFile-java.lang.String-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;photo,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#saveFile-org.springframework.web.multipart.MultipartFile-java.lang.String-">saveFile</a></span>(org.springframework.web.multipart.MultipartFile&nbsp;file,
         java.lang.String&nbsp;rootPath)</code>
 <div class="block">Saves the multipart file in the file system in the directory rootPath.</div>
 </td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-java.lang.String-">updatePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/salimov/yurii/service/data/impl/PhotoServiceImpl.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-java.lang.String-">updatePhoto</a></span>(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
            org.springframework.web.multipart.MultipartFile&nbsp;file,
            java.lang.String&nbsp;title,
            java.lang.String&nbsp;rootPath)</code>
@@ -347,16 +347,16 @@ public&nbsp;PhotoServiceImpl(<a href="../../../../../../com/salimov/yurii/dao/in
 public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;initAndAdd(java.lang.String&nbsp;title,
                                         java.lang.String&nbsp;url,
                                         org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</pre>
-<div class="block">Initializes, saves and returns a new photo.</div>
+<div class="block">Initializes, saves and returns a new file.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#initAndAdd-java.lang.String-java.lang.String-org.springframework.web.multipart.MultipartFile-">initAndAdd</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>title</code> - a title of the new photo.</dd>
-<dd><code>url</code> - a title of the new photo.</dd>
-<dd><code>photoFile</code> - a photo file (image) of the new photo.</dd>
+<dd><code>title</code> - a title of the new file.</dd>
+<dd><code>url</code> - a title of the new file.</dd>
+<dd><code>photoFile</code> - a file file (image) of the new file.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The new saving photo.</dd>
+<dd>The new saving file.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -373,18 +373,18 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" titl
                                            java.lang.String&nbsp;title,
                                            java.lang.String&nbsp;url,
                                            org.springframework.web.multipart.MultipartFile&nbsp;photoFile)</pre>
-<div class="block">Initializes, updates and returns photo with parameter id.
+<div class="block">Initializes, updates and returns file with parameter id.
  Returns <code>null</code> if id is <code>null</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#initAndUpdate-java.lang.Long-java.lang.String-java.lang.String-org.springframework.web.multipart.MultipartFile-">initAndUpdate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>id</code> - a id of the photo to update.</dd>
-<dd><code>title</code> - a new title to the photo.</dd>
-<dd><code>url</code> - a new url to the photo.</dd>
-<dd><code>photoFile</code> - a new photo file (image) to the photo.</dd>
+<dd><code>id</code> - a id of the file to update.</dd>
+<dd><code>title</code> - a new title to the file.</dd>
+<dd><code>url</code> - a new url to the file.</dd>
+<dd><code>photoFile</code> - a new file file (image) to the file.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The updating photo with parameter id or <code>null</code>.</dd>
+<dd>The updating file with parameter id or <code>null</code>.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -398,7 +398,7 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" titl
 <h4>getByUrl</h4>
 <pre>@Transactional(readOnly=true)
 public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;getByUrl(java.lang.String&nbsp;url)</pre>
-<div class="block">Returns photo with parameter url.
+<div class="block">Returns file with parameter url.
  if url is blank then return <code>null</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -406,9 +406,9 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" titl
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/impl/MediaServiceImpl.html#getByUrl-java.lang.String-">getByUrl</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/impl/MediaServiceImpl.html" title="class in com.salimov.yurii.service.data.impl">MediaServiceImpl</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>url</code> - a url of the photo to return.</dd>
+<dd><code>url</code> - a url of the file to return.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The photo with parameter url or <code>null</code>.</dd>
+<dd>The file with parameter url or <code>null</code>.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -422,15 +422,15 @@ public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" titl
 <h4>removeByUrl</h4>
 <pre>@Transactional
 public&nbsp;void&nbsp;removeByUrl(java.lang.String&nbsp;url)</pre>
-<div class="block">Removes photo with parameter url.
- Removes photo if url is not blank.</div>
+<div class="block">Removes file with parameter url.
+ Removes file if url is not blank.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/MediaService.html#removeByUrl-java.lang.String-">removeByUrl</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/MediaService.html" title="interface in com.salimov.yurii.service.data.interfaces">MediaService</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/impl/MediaServiceImpl.html#removeByUrl-java.lang.String-">removeByUrl</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/impl/MediaServiceImpl.html" title="class in com.salimov.yurii.service.data.impl">MediaServiceImpl</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>url</code> - a url of the photo to remove.</dd>
+<dd><code>url</code> - a url of the file to remove.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -443,16 +443,16 @@ public&nbsp;void&nbsp;removeByUrl(java.lang.String&nbsp;url)</pre>
 <li class="blockList">
 <h4>remove</h4>
 <pre>@Transactional
-public&nbsp;void&nbsp;remove(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo)</pre>
-<div class="block">Removes photo.
- Removes photo if it is not <code>null</code>.</div>
+public&nbsp;void&nbsp;remove(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file)</pre>
+<div class="block">Removes file.
+ Removes file if it is not <code>null</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html#remove-T-">remove</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html" title="interface in com.salimov.yurii.service.data.interfaces">DataService</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/impl/DataServiceImpl.html#remove-T-">remove</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/impl/DataServiceImpl.html" title="class in com.salimov.yurii.service.data.impl">DataServiceImpl</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the photo to remove.</dd>
+<dd><code>file</code> - the file to remove.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -465,16 +465,16 @@ public&nbsp;void&nbsp;remove(<a href="../../../../../../com/salimov/yurii/entity
 <li class="blockList">
 <h4>remove</h4>
 <pre>@Transactional
-public&nbsp;void&nbsp;remove(java.util.Collection&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&gt;&nbsp;photos)</pre>
-<div class="block">Removes photos.
- Removes photos if are not empty.</div>
+public&nbsp;void&nbsp;remove(java.util.Collection&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&gt;&nbsp;files)</pre>
+<div class="block">Removes files.
+ Removes files if are not empty.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html#remove-java.util.Collection-">remove</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html" title="interface in com.salimov.yurii.service.data.interfaces">DataService</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/impl/DataServiceImpl.html#remove-java.util.Collection-">remove</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/impl/DataServiceImpl.html" title="class in com.salimov.yurii.service.data.impl">DataServiceImpl</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photos</code> - The photos to remove.</dd>
+<dd><code>files</code> - The files to remove.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -488,7 +488,7 @@ public&nbsp;void&nbsp;remove(java.util.Collection&lt;<a href="../../../../../../
 <h4>removeAll</h4>
 <pre>@Transactional
 public&nbsp;void&nbsp;removeAll()</pre>
-<div class="block">Removes all photos.</div>
+<div class="block">Removes all files.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html#removeAll--">removeAll</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/DataService.html" title="interface in com.salimov.yurii.service.data.interfaces">DataService</a>&lt;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
@@ -506,7 +506,7 @@ public&nbsp;void&nbsp;removeAll()</pre>
 <li class="blockList">
 <h4>saveFile</h4>
 <pre>@Transactional
-public&nbsp;void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;photo,
+public&nbsp;void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;file,
                                      java.lang.String&nbsp;rootPath)</pre>
 <div class="block">Saves the multipart file in the file system in the directory rootPath.
  Saves file if it is not <code>null</code> and path is not blank.</div>
@@ -514,7 +514,7 @@ public&nbsp;void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&n
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#saveFile-org.springframework.web.multipart.MultipartFile-java.lang.String-">saveFile</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the file to save.</dd>
+<dd><code>file</code> - the file to save.</dd>
 <dd><code>rootPath</code> - a directory path.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
@@ -528,14 +528,14 @@ public&nbsp;void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&n
 <li class="blockList">
 <h4>saveFile</h4>
 <pre>@Transactional
-public&nbsp;void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;photo)</pre>
+public&nbsp;void&nbsp;saveFile(org.springframework.web.multipart.MultipartFile&nbsp;file)</pre>
 <div class="block">Saves the multipart file in the file system.
  Saves file if it is not <code>null</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#saveFile-org.springframework.web.multipart.MultipartFile-">saveFile</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the file to save.</dd>
+<dd><code>file</code> - the file to save.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -571,22 +571,22 @@ public&nbsp;boolean&nbsp;deleteFile(java.lang.String&nbsp;rootPath)</pre>
 <li class="blockList">
 <h4>updatePhoto</h4>
 <pre>@Transactional
-public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;updatePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;photo,
+public&nbsp;<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;updatePhoto(<a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;file,
                                          org.springframework.web.multipart.MultipartFile&nbsp;file,
                                          java.lang.String&nbsp;title,
                                          java.lang.String&nbsp;rootPath)</pre>
 <div class="block">Updates and returns object of class <a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a>.
- Updates photo if file is not <code>null</code>.</div>
+ Updates file if file is not <code>null</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html#updatePhoto-com.salimov.yurii.entity.Photo-org.springframework.web.multipart.MultipartFile-java.lang.String-java.lang.String-">updatePhoto</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/salimov/yurii/service/data/interfaces/PhotoService.html" title="interface in com.salimov.yurii.service.data.interfaces">PhotoService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>photo</code> - the photo to update.</dd>
+<dd><code>file</code> - the file to update.</dd>
 <dd><code>file</code> - a file to save.</dd>
-<dd><code>title</code> - a new title to the photo</dd>
+<dd><code>title</code> - a new title to the file</dd>
 <dd><code>rootPath</code> - a directory path.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The updating photo.</dd>
+<dd>The updating file.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>

@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IResponse;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,13 +14,16 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class implements a set of standard methods for working
  * with entity of the {@link Response} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
+ * @see IResponse
  */
 @Entity
 @Table(name = "responses")
-public final class Response extends Model<Long> {
+public final class Response
+        extends Model<Long>
+        implements IResponse<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -31,24 +36,32 @@ public final class Response extends Model<Long> {
     /**
      * The username of a response.
      */
-    @Column(name = "username", nullable = false)
+    @Column(
+            name = "username",
+            nullable = false
+    )
     private String username;
 
     /**
      * The username of a response.
      */
-    @Column(name = "text", nullable = false)
+    @Column(
+            name = "text",
+            nullable = false
+    )
     private String text;
 
     /**
      * The date of a response.
      */
-    @Column(name = "date", nullable = false)
+    @Column(
+            name = "date",
+            nullable = false
+    )
     private Date date;
 
     /**
      * Default constructor.
-     * Initializes date.
      */
     public Response() {
         setDate(new Date());
@@ -57,12 +70,14 @@ public final class Response extends Model<Long> {
 
     /**
      * Constructor.
-     * Initializes a main response parameters.
      *
      * @param username a username of the new response.
      * @param text     a text of the new response.
      */
-    public Response(final String username, final String text) {
+    public Response(
+            final String username,
+            final String text
+    ) {
         this();
         setUsername(username);
         setText(text);
@@ -77,8 +92,8 @@ public final class Response extends Model<Long> {
      */
     @Override
     public boolean equals(final Object object) {
-        boolean result = super.equals(object);
-        if (result) {
+        boolean result = false;
+        if (super.equals(object)) {
             final Response other = (Response) object;
             result = (
                     isNotBlank(this.username) ?
@@ -122,13 +137,26 @@ public final class Response extends Model<Long> {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Response clone() {
+        return (Response) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the response.
      * Also adds new date.
      *
      * @param username a new username to the response.
      * @param text     a new text to the response.
      */
-    public void initialize(final String username, final String text) {
+    public void initialize(
+            final String username,
+            final String text
+    ) {
         setUsername(username);
         setText(text);
         setDate(new Date());
@@ -188,7 +216,7 @@ public final class Response extends Model<Long> {
      * @param date a new date to the article.
      */
     public void setDate(final Date date) {
-        this.date = date == null ? new Date() : date;
+        this.date = date != null ? date : new Date();
     }
 
     /**
@@ -197,7 +225,9 @@ public final class Response extends Model<Long> {
      * @return The article string-date.
      */
     public String getDateToString() {
-        return getDateToString(getDate());
+        return getDateToString(
+                getDate()
+        );
     }
 
     /**
@@ -218,11 +248,8 @@ public final class Response extends Model<Long> {
      * @return {@code true} if the response is valid, {@code false} otherwise.
      */
     public static boolean isValidated(final Response response) {
-        boolean result = false;
-        if (Model.isValidated(response)) {
-            result = isNotBlank(response.getUsername()) &&
-                    isNotBlank(response.getText());
-        }
-        return result;
+        return Model.isValidated(response)
+                && isNotBlank(response.getUsername())
+                && isNotBlank(response.getText());
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
  * The interface of the service layer, describes a set of methods
  * for search for content on the site.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 public interface SearchService {

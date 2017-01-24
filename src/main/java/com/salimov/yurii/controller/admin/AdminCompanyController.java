@@ -1,9 +1,9 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,11 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
  * class or subclasses for admins. Class methods create
  * and return modelsAndView, depending on the request.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Company
  * @see CompanyService
- * @see PhotoService
+ * @see FileService
  * @see AdminMVFabric
  */
 @Controller
@@ -113,7 +112,6 @@ public class AdminCompanyController {
      * @param domain        a new domain to the main company.
      * @param tagline       a new tagline to the main company.
      * @param description   a new description to the main company.
-     * @param advantages    a new advantages to the main company.
      * @param information   a new information to the main company.
      * @param keywords      a new keywords to the main company.
      * @param workTimeFrom  a new start work time to the main company.
@@ -130,16 +128,13 @@ public class AdminCompanyController {
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps url to the main company.
-     * @param logo          a new file of logo to the main company.
-     * @param logoAction    a action on the logo.
-     * @param favicon       a new file of favicon to the main company.
-     * @param faviconAction a action on the favicon.
+     * @param logoUrl       a new logo Url to the main company.
+     * @param faviconUrl    a new favicon Url to the main company.
      * @param slides        a files of slides to the main company.
-     * @param slidesAction  a new title to the main company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update/main",
@@ -149,8 +144,7 @@ public class AdminCompanyController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "advantages") final String advantages,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "information") final String information,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "time_from") final String workTimeFrom,
@@ -167,22 +161,21 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final MultipartFile logo,
-            @RequestParam(value = "logo_action") final String logoAction,
-            @RequestParam(value = "favicon_photo") final MultipartFile favicon,
-            @RequestParam(value = "favicon_action") final String faviconAction,
-            @RequestParam(value = "slides[]") final MultipartFile[] slides,
-            @RequestParam(value = "slides_action") final String slidesAction,
+            @RequestParam(value = "logo") final String logoUrl,
+            @RequestParam(value = "favicon") final String faviconUrl,
+            @RequestParam(value = "slides") final String slides,
             final ModelAndView modelAndView
     ) {
         this.companyService.initAndEditMainCompany(
-                title, domain, tagline, description,
-                advantages, information, keywords,
-                workTimeFrom, workTimeTo, mobilePhone,
-                landlinePhone, fax, email, senderEmail,
-                senderPass, vkontakte, facebook, twitter,
-                skype, address, googleMaps, logo, logoAction,
-                favicon, faviconAction, slides, slidesAction
+                title, domain,
+                tagline, description, information, keywords,
+                workTimeFrom, workTimeTo,
+                mobilePhone, landlinePhone, fax, email,
+                senderEmail, senderPass,
+                vkontakte, facebook, twitter,
+                skype, address, googleMaps,
+                logoUrl, faviconUrl,
+                slides
         );
         modelAndView.setViewName("redirect:/admin/company/main");
         Cache.clear();
@@ -233,7 +226,6 @@ public class AdminCompanyController {
      * @param domain        a domain of the new company.
      * @param tagline       a tagline of the new company.
      * @param description   a description of the new company.
-     * @param advantages    a advantages of the new company.
      * @param information   a information of the new company.
      * @param keywords      a keywords of the new company.
      * @param mobilePhone   a mobile phone of the new company.
@@ -246,12 +238,12 @@ public class AdminCompanyController {
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
      * @param googleMaps    a google maps url of the new company.
-     * @param logoFile      a file of logo to the new company.
+     * @param logoUrl       a  logo Url to the new company.
      * @param isValid       a validated of the new company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -261,8 +253,7 @@ public class AdminCompanyController {
             @RequestParam(value = "title") String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "advantages") final String advantages,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "information") final String information,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "mobile_phone") final String mobilePhone,
@@ -275,17 +266,20 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final MultipartFile logoFile,
+            @RequestParam(value = "logo") final String logoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Company company = this.companyService.initAndAdd(
-                title, domain, tagline, description, advantages,
-                information, keywords, mobilePhone, landlinePhone,
-                fax, email, vkontakte, facebook, twitter, skype,
-                address, googleMaps, logoFile, isValid
+                title, domain,
+                tagline, description, information, keywords,
+                mobilePhone, landlinePhone, fax, email,
+                vkontakte, facebook, twitter, skype,
+                address, googleMaps,
+                logoUrl,
+                isValid
         );
-        Cache.removeAll("Partners");
+        Cache.clear();
         modelAndView.setViewName(
                 "redirect:/admin/company/" + company.getUrl()
         );
@@ -347,7 +341,6 @@ public class AdminCompanyController {
      * @param domain        a new domain to the company.
      * @param tagline       a new tagline to the company.
      * @param description   a new description to the company.
-     * @param advantages    a new advantages to the company.
      * @param information   a new information to the company.
      * @param keywords      a new keywords to the company.
      * @param mobilePhone   a new mobile phone to the company.
@@ -360,13 +353,12 @@ public class AdminCompanyController {
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logoFile      a new file of logo to the company.
-     * @param logoAction    a action on the logo.
+     * @param logoUrl       a new logo Url to the company.
      * @param isValid       a validated of the article.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -377,8 +369,7 @@ public class AdminCompanyController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "advantages") final String advantages,
+            @RequestParam(value = "text") final String description,
             @RequestParam(value = "information") final String information,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "mobile_phone") final String mobilePhone,
@@ -391,24 +382,23 @@ public class AdminCompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo_photo") final MultipartFile logoFile,
-            @RequestParam(value = "logo_action") final String logoAction,
+            @RequestParam(value = "logo") final String logoUrl,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Company company = this.companyService.initAndUpdate(
-                url, title, domain, tagline, description, advantages,
-                information, keywords, mobilePhone, landlinePhone,
-                fax, email, vkontakte, facebook, twitter, skype,
-                address, googleMaps, logoFile, logoAction, isValid
+                url, title, domain,
+                tagline, description, information, keywords,
+                mobilePhone, landlinePhone, fax, email,
+                vkontakte, facebook, twitter, skype,
+                address, googleMaps,
+                logoUrl,
+                isValid
         );
         modelAndView.setViewName(
                 "redirect:/admin/company/" + company.getUrl()
         );
-        Cache.removeAll(
-                "Partners",
-                company.getUrl()
-        );
+        Cache.clear();
         return modelAndView;
     }
 
@@ -452,7 +442,7 @@ public class AdminCompanyController {
     ) {
         this.companyService.removeByUrl(url);
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Partners", url);
+        Cache.clear();
         return modelAndView;
     }
 
@@ -472,7 +462,7 @@ public class AdminCompanyController {
     public ModelAndView deleteAllPartners(final ModelAndView modelAndView) {
         this.companyService.removeAll();
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Partners", "Company", "Home");
+        Cache.clear();
         return modelAndView;
     }
 }

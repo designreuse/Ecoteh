@@ -9,13 +9,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>Авторизация</title>
         <meta name="title" content="Авторизация">
         <meta name="description" content="Авторизация">
         <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login_icon.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/img/static/login_icon.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -25,13 +25,11 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Авторизация</a>
@@ -49,7 +47,6 @@
                                 </c:when>
                             </c:choose>
                             <hr>
-                                <%-- Login form --%>
                             <form action="<c:url value="/login"/>" method="post">
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -78,7 +75,8 @@
                                             &nbsp;&nbsp;
                                             <a href="<c:url value="/forgot_password"/>"
                                                title="Напомнить логин или пароль">
-                                                Забыли пароль?
+                                                <span class="glyphicon glyphicon-question-sign"
+                                                      aria-hidden="true"></span>&nbsp;Забыли пароль?
                                             </a>
                                         </c:if>
                                     </div>
@@ -92,11 +90,10 @@
             </div>
         </div>
     </div>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

@@ -15,25 +15,10 @@
             </td>
         </tr>
         <tr>
-            <th class="pad"><a href="<c:url value="/admin/section/any"/>" title="ВСЕ наявные разделы">Разделы</a></th>
-            <td class="pad">
-                <a href="<c:url value="/admin/section/new"/>" title="Добавить новый раздел">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
-                    </button>
-                </a>&nbsp;&nbsp;
-                <a href="<c:url value="/admin/section/delete/all"/>" title="Удалить все разделы">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить все
-                    </button>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <th class="pad"><a href="<c:url value="/admin/category/any"/>" title="ВСЕ наявные категории">Категории</a>
+            <th class="pad"><a href="<c:url value="/admin/category/all"/>" title="Все категории">Категории</a>
             </th>
             <td class="pad">
-                <a href="/admin/category/new" title="Добавить новую категорию">
+                <a href="<c:url value="/admin/category/new"/>" title="Добавить новую категорию">
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
                     </button>
@@ -46,7 +31,7 @@
             </td>
         </tr>
         <tr>
-            <th class="pad"><a href="<c:url value="/admin/article/any"/>" title="ВСЕ наявные статьи">Статьи</a></th>
+            <th class="pad"><a href="<c:url value="/admin/article/all"/>" title="Все статьи">Статьи</a></th>
             <td class="pad">
                 <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                     <button class="btn btn-default">
@@ -92,6 +77,23 @@
         </tr>
         <tr>
             <th class="pad">
+                <a href="<c:url value="/admin/file/all"/>" title="Сохраненный файлы на сервере">Файлы</a>
+            </th>
+            <td class="pad">
+                <a href="<c:url value="/admin/file/new"/>" title="Добавить новый файл">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
+                    </button>
+                </a>&nbsp;&nbsp;
+                <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить все
+                    </button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th class="pad">
                 <a href="<c:url value="/admin/responses"/>" title="Отзывы о компании">Отзывы</a>
             </th>
             <td class="pad">
@@ -104,7 +106,7 @@
         </tr>
         <tr>
             <th class="pad">
-                <a href="<c:url value="/admin/messages"/>" title="Сообщения от пользователей">Сообщения</a>
+                <a href="<c:url value="/admin/messages/"/>" title="Сообщения от пользователей">Сообщения</a>
             </th>
             <td class="pad">
                 <a href="<c:url value="/admin/messages/delete/all"/>" title="Удалить все cообщения от пользователей">
@@ -166,4 +168,4 @@
     </table>
 </div>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

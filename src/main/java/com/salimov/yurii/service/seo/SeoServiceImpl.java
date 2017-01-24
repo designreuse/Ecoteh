@@ -3,8 +3,9 @@ package com.salimov.yurii.service.seo;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.Company;
-import com.salimov.yurii.entity.Section;
-import com.salimov.yurii.service.data.interfaces.*;
+import com.salimov.yurii.service.data.interfaces.ArticleService;
+import com.salimov.yurii.service.data.interfaces.CategoryService;
+import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * The class of the service layer, implements a set of methods
  * to adjust the search engine optimization (SEO).
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see SeoService
  */
@@ -39,14 +40,6 @@ public class SeoServiceImpl implements SeoService {
      * @see CompanyService
      */
     private final CompanyService companyService;
-
-    /**
-     * The describes a set of methods for working
-     * with objects of the {@link Section} class.
-     *
-     * @see SectionService
-     */
-    private final SectionService sectionService;
 
     /**
      * The describes a set of methods for working
@@ -75,26 +68,21 @@ public class SeoServiceImpl implements SeoService {
      *
      * @param companyService  a implementation
      *                        of the {@link CompanyService} interface.
-     * @param sectionService  a implementation
-     *                        of the {@link SectionService} interface.
      * @param categoryService a implementation
      *                        of the {@link CategoryService} interface.
      * @param articleService  a implementation
      *                        of the {@link ArticleService} interface.
      * @see CompanyService
-     * @see SectionService
      * @see CategoryService
      * @see ArticleService
      */
     @Autowired
     public SeoServiceImpl(
             final CompanyService companyService,
-            final SectionService sectionService,
             final CategoryService categoryService,
             final ArticleService articleService
     ) {
         this.companyService = companyService;
-        this.sectionService = sectionService;
         this.categoryService = categoryService;
         this.articleService = articleService;
         this.domain = this.companyService.getMainCompany()
@@ -178,63 +166,23 @@ public class SeoServiceImpl implements SeoService {
                 " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
                 " xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9" +
                 " http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/index</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/home</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/company/main</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/contacts</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
+                "<url>\n  <loc>http://" + domain +
                 "/address</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" +
-                domain +
-                "/responses</loc>\n</url>\n" +
-                getSectionsUrls() +
+                "<url>\n  <loc>http://" + domain + "/responses</loc>\n</url>\n" +
                 getCategoriesUrls() +
                 getArticlesUrls() +
                 getPartnersUrls() +
                 "</urlset>";
-    }
-
-    /**
-     * Creates and returns a list of all pages of sections on the site,
-     * which consists of the links to these pages.
-     *
-     * @return Information about links on the all pages of sections
-     * to search engines.
-     * @see Section
-     */
-    private String getSectionsUrls() {
-        final Collection<Section> sections = this.sectionService.getAll();
-        final StringBuilder sb = new StringBuilder();
-        if (sections != null && !sections.isEmpty()) {
-            sb.append("<url>\n  <loc>http://")
-                    .append(domain)
-                    .append("/section/all</loc>\n</url>\n");
-            for (Section section : sections) {
-                sb.append("<url>\n  <loc>http://")
-                        .append(domain)
-                        .append("/section/")
-                        .append(section.getUrl())
-                        .append("</loc>\n</url>\n")
-                        .append("<url>\n  <loc>http://")
-                        .append(domain)
-                        .append("/category/all/")
-                        .append(section.getUrl())
-                        .append("</loc>\n</url>\n");
-            }
-        }
-        return sb.toString();
     }
 
     /**

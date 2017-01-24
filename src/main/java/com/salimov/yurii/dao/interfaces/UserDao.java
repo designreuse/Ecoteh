@@ -6,13 +6,14 @@ import com.salimov.yurii.entity.User;
  * The interface provides a set of standard methods
  * for working {@link User} objects with a database.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see com.salimov.yurii.dao.impl.UserDaoImpl
  * @see DataDao
  * @see User
  */
-public interface UserDao extends DataDao<User, Long> {
+public interface UserDao
+        extends DataDao<User, Long> {
 
     /**
      * Returns user with the parameter name from a database.

@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Yurii Salimov (yurii.alex.salimov@gmail.com)">
+        <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/></title>
         <meta name="title"
               content="О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/>">
@@ -17,10 +17,9 @@
         <meta name="description"
               content="Описание компании &quot;<c:out value="${company.title}"/>&quot;: <c:out value="${company.description}"/>.">
         <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.favicon ne null}">
-            <link rel="shortcut icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>"
-                  type="image/x-icon">
-            <link rel="icon" href="<c:url value="/resources/img/${main_company.favicon.url}"/>" type="image/x-icon">
+        <c:if test="${main_company.faviconUrl ne null}">
+            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
+            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
@@ -31,7 +30,6 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%-- NAVIGATION --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="container">
@@ -40,7 +38,6 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <c:if test="${authorized_user ne null}">
                             <c:set var="reqmap" value="/admin"/>
-                            <%-- Actions --%>
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
                                     <button class="btn btn-default">
@@ -61,26 +58,25 @@
                                 </a>
                             </div>
                         </c:if>
-                            <%-- Path --%>
                         <p class="path">
                             <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a>
-                            → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
+                            → <a href="#"><c:out value="${company.title}"/></a>
                         </p>
-                        <c:if test="${company.logo ne null}">
+                        <c:if test="${company.logoUrl ne null}">
                             <hr>
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>
                         </c:if>
-                            <%-- LOGO --%>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <c:if test="${!company.validated}">
                             <p class="no-valid" title="Не отображается для клиентов">
-                            <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
-                                  title="Не отображается для клиентов"></span>
+                                <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
+                                      title="Не отображается для клиентов"></span>
                             </p>
                         </c:if>
-                        <p><c:out value="${company.description}"/></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <p>${company.information}</p>
                     </div>
                     <div class="clearfix"></div>
@@ -91,15 +87,12 @@
                     <hr>
                     <h3 class="intro-text text-center">Контакты</h3>
                     <hr>
-                        <%-- CONTACTS --%>
                     <jsp:include page="/WEB-INF/views/client/company/contacts.jsp"/>
                 </div>
             </div>
         </div>
     </div>
-        <%-- FOOTER --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
-        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
@@ -108,4 +101,4 @@
     </html>
 </compress:html>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

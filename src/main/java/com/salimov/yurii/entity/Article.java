@@ -1,7 +1,9 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IArticle;
+
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -10,14 +12,16 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class implements a set of standard methods for working
  * with entity of the {@link Article} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
- * @see Model
+ * @see IArticle
  */
 @Entity
 @Table(name = "articles")
-public final class Article extends Content<Long> {
+public final class Article
+        extends Content<Long>
+        implements IArticle<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -65,81 +69,18 @@ public final class Article extends Content<Long> {
     private Category category;
 
     /**
-     * The main photo of an article.
-     *
-     * @see Photo
-     */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "main_photo_id",
-            referencedColumnName = "id"
-    )
-    private Photo mainPhoto;
-
-    /**
-     * The set of slides (photos).
-     *
-     * @see Photo
-     */
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinTable(
-            name = "article_photo",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "article_id",
-                            referencedColumnName = "id"
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "photo_id",
-                            referencedColumnName = "id"
-                    )
-            }
-    )
-    private Set<Photo> slides = new HashSet<>();
-
-    /**
-     * The set of videos.
-     *
-     * @see Video
-     */
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "article_video",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "article_id",
-                            referencedColumnName = "id"
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "video_id",
-                            referencedColumnName = "id"
-                    )
-            }
-    )
-    private Set<Video> videos = new HashSet<>();
-
-    /**
      * Default constructor.
      * Initializes date and number.
      */
     public Article() {
-        setDate(new Date());
+        setDate(
+                new Date()
+        );
         newNumber();
     }
 
     /**
      * Constructor.
-     * Initializes a main article parameters.
      *
      * @param title       a title of the new article.
      * @param description a description of the new article.
@@ -215,6 +156,16 @@ public final class Article extends Content<Long> {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Article clone() {
+        return (Article) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the article.
      *
      * @param title       a new title to the article.
@@ -225,6 +176,7 @@ public final class Article extends Content<Long> {
      * @param category    a new category to the article.
      * @see Category
      */
+    @Override
     public void initialize(
             final String title,
             final String description,
@@ -233,9 +185,7 @@ public final class Article extends Content<Long> {
             final String number,
             final Category category
     ) {
-        super.initialize(
-                title, description, keywords
-        );
+        super.initialize(title, description, keywords);
         setText(text);
         setNumber(number);
         setCategory(category);
@@ -243,46 +193,11 @@ public final class Article extends Content<Long> {
     }
 
     /**
-     * Initializes some parameter of the article.
-     *
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @param mainPhoto   a new main photo pf the article.
-     * @param slides      a new slides to the article.
-     * @param videos      a new videos to the article.
-     * @see Category
-     * @see Photo
-     * @see Video
-     */
-    public void initialize(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final Photo mainPhoto,
-            final Collection<Photo> slides,
-            final Collection<Video> videos
-    ) {
-        this.initialize(
-                title, description, text,
-                keywords, number, category
-        );
-        setMainPhoto(mainPhoto);
-        setSlides(slides);
-        setVideos(videos);
-    }
-
-    /**
      * Returns a number of the article.
      *
      * @return The article number.
      */
+    @Override
     public String getNumber() {
         return this.number;
     }
@@ -293,6 +208,7 @@ public final class Article extends Content<Long> {
      *
      * @param number a new number to the article.
      */
+    @Override
     public void setNumber(final String number) {
         if (isNotBlank(number)) {
             this.number = number;
@@ -306,6 +222,7 @@ public final class Article extends Content<Long> {
      * To generate used a pattern {@link Model#CODE_PATTERN}
      * and length {@link Model#CODE_LENGTH}.
      */
+    @Override
     public void newNumber() {
         this.number = createRandomString(
                 CODE_PATTERN,
@@ -318,6 +235,7 @@ public final class Article extends Content<Long> {
      *
      * @return The article text.
      */
+    @Override
     public String getText() {
         return this.text;
     }
@@ -328,6 +246,7 @@ public final class Article extends Content<Long> {
      *
      * @param text a new text to the article.
      */
+    @Override
     public void setText(final String text) {
         this.text = isNotBlank(text) ? text : null;
     }
@@ -337,6 +256,7 @@ public final class Article extends Content<Long> {
      *
      * @return The article date.
      */
+    @Override
     public Date getDate() {
         return this.date;
     }
@@ -347,6 +267,7 @@ public final class Article extends Content<Long> {
      *
      * @param date a new date to the article.
      */
+    @Override
     public void setDate(final Date date) {
         this.date = date != null ? date : new Date();
     }
@@ -356,6 +277,7 @@ public final class Article extends Content<Long> {
      *
      * @return The article string-date.
      */
+    @Override
     public String getDateToString() {
         return getDateToString(
                 getDate()
@@ -371,11 +293,20 @@ public final class Article extends Content<Long> {
      * @param category a new category to the article.
      * @see Category
      */
+    @Override
     public void setCategory(final Category category) {
-        if ((this.category == null) || !this.category.equals(category)) {
+        if ((
+                this.category == null
+        ) || (
+                !this.category.equals(category)
+        )) {
             final Category temp = this.category;
             this.category = category;
-            if ((this.category != null) && !this.category.containsArticle(this)) {
+            if ((
+                    this.category != null
+            ) && (
+                    !this.category.containsArticle(this)
+            )) {
                 this.category.addArticle(this);
             }
             if (temp != null) {
@@ -390,225 +321,9 @@ public final class Article extends Content<Long> {
      * @return The article category.
      * @see Category
      */
+    @Override
     public Category getCategory() {
         return this.category;
-    }
-
-    /**
-     * Returns a main photo of the article.
-     *
-     * @return The article main photo.
-     * @see Photo
-     */
-    public Photo getMainPhoto() {
-        return this.mainPhoto;
-    }
-
-    /**
-     * Sets a new main photo to the article.
-     * If parameter mainPhoto is invalid, then sets {@code null}.
-     *
-     * @param mainPhoto a new main photo to the article.
-     * @see Photo
-     */
-    public void setMainPhoto(final Photo mainPhoto) {
-        this.mainPhoto = Photo.isValidated(mainPhoto) ? mainPhoto : null;
-    }
-
-    /**
-     * Adds new photo to the list of slides.
-     * Adds a new photo, if it is valid.
-     *
-     * @param slide a photo to add.
-     * @see Photo
-     */
-    public void addSlide(final Photo slide) {
-        if (Photo.isValidated(slide)) {
-            this.slides.add(slide);
-        }
-    }
-
-    /**
-     * Adds new photos to the list of slides.
-     * Adds a new photos, if they are valid.
-     *
-     * @param slides a photos to add.
-     * @see Photo
-     */
-    public void addSlides(final Collection<Photo> slides) {
-        if ((slides != null) && !slides.isEmpty()) {
-            slides.forEach(this::addSlide);
-        }
-    }
-
-    /**
-     * Removes photo from the list of slides.
-     *
-     * @param slide a photo to remove.
-     * @see Photo
-     */
-    public void removeSlide(final Photo slide) {
-        this.slides.remove(slide);
-    }
-
-    /**
-     * Removes photos from the list of slides.
-     *
-     * @param slides a photos to remove.
-     * @see Photo
-     */
-    public void removeSlides(final Collection<Photo> slides) {
-        this.slides.removeAll(slides);
-    }
-
-    /**
-     * Clears the list of slides.
-     *
-     * @see Photo
-     */
-    public void clearSlides() {
-        this.slides = new HashSet<>();
-    }
-
-    /**
-     * Returns a list of slides.
-     *
-     * @return The list of slides.
-     * @see Photo
-     */
-    public List<Photo> getSlides() {
-        return new ArrayList<>(this.slides);
-    }
-
-    /**
-     * Sets a new slides to the article.
-     * Clears the list of slides and adds new slides.
-     *
-     * @param slides a slides to add.
-     * @see Photo
-     */
-    public void setSlides(final Collection<Photo> slides) {
-        clearSlides();
-        addSlides(slides);
-    }
-
-    /**
-     * Contains slide in the list of slides.
-     *
-     * @param slide a photo to contain.
-     * @return {@code true} if photo is contains, {@code false} otherwise.
-     * @see Photo
-     */
-    public boolean containsSlide(final Photo slide) {
-        return this.slides.contains(slide);
-    }
-
-    /**
-     * Contains slides in the list of slides.
-     *
-     * @param slides a photos to contain.
-     * @return {@code true} if photos are contains, {@code false} otherwise.
-     * @see Photo
-     */
-    public boolean containsSlides(final Collection<Photo> slides) {
-        return this.slides.containsAll(slides);
-    }
-
-    /**
-     * Adds new video to the list of videos.
-     * Adds a new video, if it is valid.
-     *
-     * @param video a video to add.
-     * @see Video
-     */
-    public void addVideo(final Video video) {
-        if (Video.isValidated(video)) {
-            this.videos.add(video);
-        }
-    }
-
-    /**
-     * Adds new videos to the list of videos.
-     * Adds a new videos, if it are valid.
-     *
-     * @param videos a videos to add.
-     * @see Video
-     */
-    public void addVideos(final Collection<Video> videos) {
-        if ((videos != null) && !videos.isEmpty()) {
-            videos.forEach(this::addVideo);
-        }
-    }
-
-    /**
-     * Removes video from the list of videos.
-     *
-     * @param video a video to remove.
-     * @see Video
-     */
-    public void removeVideo(final Video video) {
-        this.videos.remove(video);
-    }
-
-    /**
-     * Removes videos from the list of videos.
-     *
-     * @param videos a videos to remove.
-     * @see Video
-     */
-    public void removeVideos(final Collection<Video> videos) {
-        this.videos.removeAll(videos);
-    }
-
-    /**
-     * Clears the list of videos.
-     */
-    public void clearVideos() {
-        this.videos = new HashSet<>();
-    }
-
-    /**
-     * Returns an list of article videos.
-     *
-     * @return The list of article videos.
-     * @see Video
-     */
-    public List<Video> getVideos() {
-        return new ArrayList<>(this.videos);
-    }
-
-    /**
-     * Sets a new videos to the article.
-     * Clears the list of videos and adds new videos.
-     *
-     * @param videos a videos to add.
-     * @see Video
-     */
-    public void setVideos(final Collection<Video> videos) {
-        clearVideos();
-        addVideos(videos);
-    }
-
-    /**
-     * Contains video in the list of videos.
-     *
-     * @param video a video to contain.
-     * @return {@code true} if video is contains, {@code false} otherwise.
-     * @see Video
-     */
-    public boolean containsVideo(final Video video) {
-        return this.videos.contains(video);
-    }
-
-    /**
-     * Contains videos in the list of videos.
-     *
-     * @param videos a videos to contain.
-     * @return {@code true} if videos are contains, {@code false} otherwise.
-     * @see Video
-     */
-    public boolean containsVideos(final Collection<Video> videos) {
-        return this.videos.containsAll(videos);
     }
 
     /**
@@ -617,16 +332,11 @@ public final class Article extends Content<Long> {
      * and it has text (text is not blank).
      *
      * @param article an article to validate.
-     * @return {@code true} if the article is valid, {@code false} otherwise.
-     * @see Video
+     * @return {@code true} if the article is valid,
+     * {@code false} otherwise.
      */
     public static boolean isValidated(final Article article) {
-        boolean result = false;
-        if (Content.isValidated(article)) {
-            if (isNotBlank(article.getText())) {
-                result = true;
-            }
-        }
-        return result;
+        return Content.isValidated(article)
+                && isNotBlank(article.getText());
     }
 }

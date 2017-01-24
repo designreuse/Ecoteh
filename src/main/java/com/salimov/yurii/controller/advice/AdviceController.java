@@ -17,13 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Class intercepts exceptions that are not specified in the controller.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DisableException
  * @see DuplicateException
@@ -100,8 +101,20 @@ public class AdviceController {
     private final static String UNKNOWN_MESSAGE
             = "Неизвестная ошибка...";
 
+    /**
+     * The implementation of the interface provides a set of standard methods
+     * for creates and returns the main modelAndViews.
+     *
+     * @see MainMVFabric
+     */
     private final MainMVFabric fabric;
 
+    /**
+     * Constructor.
+     *
+     * @param fabric a implementation
+     *               of the {@link ClientMVFabric} interface.
+     */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdviceController(final ClientMVFabric fabric) {
@@ -310,6 +323,8 @@ public class AdviceController {
                 exception.getClass().getSimpleName()
                         + " : "
                         + exception.getMessage()
+                        + "\n"
+                        + Arrays.toString(exception.getStackTrace())
         );
     }
 

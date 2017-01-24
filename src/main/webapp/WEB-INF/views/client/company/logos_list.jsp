@@ -9,9 +9,12 @@
         <c:set var="print_partners" value="${length}"/>
     </c:if>
     <c:choose>
-        <c:when test="${(print_partners % 4 eq 0) or (print_partners % 4 eq 3)}"><c:set var="in_line" value="4"/></c:when>
-        <c:when test="${(print_partners % 3 eq 0) or (print_partners % 3 eq 2)}"><c:set var="in_line" value="3"/></c:when>
-        <c:when test="${(print_partners % 2 eq 0) or (print_partners % 2 eq 1)}"><c:set var="in_line" value="2"/></c:when>
+        <c:when test="${(print_partners % 4 eq 0) or (print_partners % 4 eq 3)}"><c:set var="in_line"
+                                                                                        value="4"/></c:when>
+        <c:when test="${(print_partners % 3 eq 0) or (print_partners % 3 eq 2)}"><c:set var="in_line"
+                                                                                        value="3"/></c:when>
+        <c:when test="${(print_partners % 2 eq 0) or (print_partners % 2 eq 1)}"><c:set var="in_line"
+                                                                                        value="2"/></c:when>
         <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
     </c:choose>
     <c:set var="last_line" value="${print_partners - print_partners % in_line}"/>
@@ -21,7 +24,9 @@
         <div class="row">
             <div class="box">
                 <hr>
-                <h3 class="intro-text text-center"><a href="${reqmap}/company/all">Партнеры</a></h3>
+                <h3 class="intro-text text-center">
+                    <a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a>
+                </h3>
                 <hr>
                 <c:forEach items="${partners}" var="partner" end="${print_partners - 1}">
                     <c:if test="${(last_line ne print_partners) and (printed eq last_line)}">
@@ -34,11 +39,13 @@
                                     </c:choose>">
                         <div class="text-center">
                             <c:choose>
-                                <c:when test="${partner.logo ne null}">
+                                <c:when test="${partner.logoUrl ne null}">
                                     <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <img class="img-logo" alt="<c:out value="${partner.title}"/>"
-                                             src="<c:url value="/resources/img/${partner.logo.url}"/>">
+                                             src="<c:url value="${partner.logoUrl}"/>"
+                                             onerror="this.src='<c:url
+                                                     value="/resources/img/static/default_file.gif"/>'">
                                     </a>
                                 </c:when>
                                 <c:when test="${partner.title ne null}">
@@ -62,7 +69,7 @@
                 <c:if test="${length gt print_partners}">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
-                        <p align="right">
+                        <p class="text-right">
                             <a href="<c:url value="${reqmap}/company/all"/>" title="Перейти к списку всех партнеров">
                                 <span class="glyphicon glyphicon-share-alt"></span>&nbsp;Все партнеры...
                             </a>
@@ -75,4 +82,4 @@
     </div>
 </c:if>
 
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>
+<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

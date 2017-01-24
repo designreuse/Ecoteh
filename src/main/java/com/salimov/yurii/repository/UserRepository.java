@@ -6,12 +6,13 @@ import com.salimov.yurii.entity.User;
  * The interface provides a set of JPA methods
  * for working {@link User} objects with a database.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DataRepository
  * @see User
  */
-public interface UserRepository extends DataRepository<User, Long> {
+public interface UserRepository
+        extends DataRepository<User, Long> {
 
     /**
      * Returns user from a database,
@@ -31,7 +32,7 @@ public interface UserRepository extends DataRepository<User, Long> {
      * @return The object of class {@link User}.
      * @see User
      */
-    User findByLogin(final String login);
+    User findByEncryptedLogin(final String login);
 
     /**
      * Returns user from a database,
@@ -79,7 +80,7 @@ public interface UserRepository extends DataRepository<User, Long> {
      * @param login a login of the user to remove.
      * @see User
      */
-    void deleteByLogin(final String login);
+    void deleteByEncryptedLogin(final String login);
 
     /**
      * Removes user from a database,

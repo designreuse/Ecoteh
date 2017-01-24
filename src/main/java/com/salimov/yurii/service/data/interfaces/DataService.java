@@ -12,18 +12,15 @@ import java.util.List;
  *
  * @param <T> Entity type, extends {@link Model}.
  * @param <E> Entity id type, extends Number.
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
  * @see ArticleService
  * @see CategoryService
  * @see ContentService
- * @see MediaService
- * @see PhotoService
+ * @see FileService
  * @see ResponseService
- * @see SectionService
  * @see UserService
- * @see VideoService
  */
 public interface DataService<T extends Model, E extends Number> {
 
@@ -43,7 +40,9 @@ public interface DataService<T extends Model, E extends Number> {
      * @return The saving models.
      * @see Model
      */
-    Collection<T> add(final Collection<T> models);
+    Collection<T> addAll(
+            final Collection<T> models
+    );
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.

@@ -3,7 +3,7 @@ package com.salimov.yurii.exception;
 /**
  * An exception is thrown when site is disabled.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 public final class DisableException extends RuntimeException {

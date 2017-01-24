@@ -2,11 +2,10 @@ package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
-import com.salimov.yurii.entity.Photo;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
-import com.salimov.yurii.service.data.interfaces.PhotoService;
-import com.salimov.yurii.service.data.interfaces.VideoService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -30,13 +28,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * or subclasses for admins. Class methods create and return modelsAndView,
  * depending on the request.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Article
  * @see ArticleService
  * @see CategoryService
- * @see VideoService
- * @see PhotoService
+ * @see FileService
  * @see AdminMVFabric
  */
 @Controller
@@ -108,7 +105,8 @@ public class AdminArticleController {
             method = RequestMethod.GET
     )
     public ModelAndView getNewArticlePage() {
-        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        final ModelAndView modelAndView
+                = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
                 "categories",
                 this.categoryService.getAll(false)
@@ -128,15 +126,12 @@ public class AdminArticleController {
      * @param keywords     a keywords of the new article.
      * @param number       a number of the new article.
      * @param categoryUrl  a category url of the new article.
-     * @param mainFile     a file of main photo to the new article.
-     * @param slideFiles   a files of slides to the new article.
-     * @param videoUrls    a category url of the new article.
      * @param isValid      a validated of the new article.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -144,27 +139,25 @@ public class AdminArticleController {
     )
     public ModelAndView addArticle(
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "desc") final String description,
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
-            @RequestParam(value = "main_photo") final MultipartFile mainFile,
-            @RequestParam(value = "slides[]") final MultipartFile[] slideFiles,
-            @RequestParam(value = "video_urls") final String videoUrls,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Article article = this.articleService.initAndAdd(
-                title, description, text, keywords,
-                number, category, mainFile, slideFiles,
-                videoUrls, isValid
+                title, description, text,
+                keywords, number,
+                category,
+                isValid
         );
-        Cache.removeAll("All Articles");
+        Cache.clear();
         modelAndView.setViewName(
-                "redirect:/admin/article/" + article.getUrl()
+                getViewName(article)
         );
         return modelAndView;
     }
@@ -174,7 +167,7 @@ public class AdminArticleController {
      * The exception sender:
      * "GET method in "/admin/article/add" is not supported!"
      * Request mapping: /admin/article/add
-     * Method: POST
+     * Method: GET
      *
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
@@ -229,17 +222,12 @@ public class AdminArticleController {
      * @param keywords     a new keywords to the article.
      * @param number       a new number to the article.
      * @param categoryUrl  a category url of the article.
-     * @param mainFile     a file of main photo to the article.
-     * @param photoAction  a action on the main photo.
-     * @param slideFiles   a files of slides to the article.
-     * @param slidesAction a action on the slides.
-     * @param videoUrls    a category url of the article.
      * @param isValid      a validated of the article.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Article
      * @see Category
-     * @see Photo
+     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -248,30 +236,27 @@ public class AdminArticleController {
     public ModelAndView updateArticle(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "desc") final String description,
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
-            @RequestParam(value = "main_photo") final MultipartFile mainFile,
-            @RequestParam(value = "photo_action") final String photoAction,
-            @RequestParam(value = "slides[]") final MultipartFile[] slideFiles,
-            @RequestParam(value = "slides_action") final String slidesAction,
-            @RequestParam(value = "video_urls") final String videoUrls,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Article article = this.articleService.initAndUpdate(
-                url, title, description, text, keywords,
-                number, category, mainFile, photoAction,
-                slideFiles, slidesAction, videoUrls, isValid
+                url, title,
+                description, text,
+                keywords, number,
+                category,
+                isValid
         );
         modelAndView.setViewName(
-                "redirect:/admin/article/" + article.getUrl()
+                getViewName(article)
         );
-        Cache.removeAll("All Articles", article.getUrl());
+        Cache.clear();
         return modelAndView;
     }
 
@@ -280,7 +265,7 @@ public class AdminArticleController {
      * The exception sender:
      * "GET method in "/admin/article/update" is not supported!"
      * Request mapping: /admin/article/update
-     * Method: POST
+     * Method: GET
      *
      * @throws IllegalMappingException thrown when an error occurs reading
      *                                 the mapping between object and datastore.
@@ -309,13 +294,13 @@ public class AdminArticleController {
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteArticle(
+    public ModelAndView deleteArticleByUrl(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
     ) {
         this.articleService.removeByUrl(url);
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("All Articles", url);
+        Cache.clear();
         return modelAndView;
     }
 
@@ -332,10 +317,39 @@ public class AdminArticleController {
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllArticles(final ModelAndView modelAndView) {
+    public ModelAndView deleteAllArticles(
+            final ModelAndView modelAndView
+    ) {
         this.articleService.removeAll();
         modelAndView.setViewName("redirect:/admin/");
-        Cache.removeAll("Article", "Home");
+        Cache.clear();
         return modelAndView;
+    }
+
+    /**
+     * Returns a view name for the article.
+     * If the article text is not blank then
+     * returns "redirect:/admin/article/{article_url}",
+     * else if the article category is not {@code null}
+     * then returns "redirect:/admin/category/{category_url}",
+     * else returns "redirect:/admin/article/all";
+     *
+     * @param article the article to get view name.
+     * @return The view name.
+     */
+    private static String getViewName(final Article article) {
+        String viewName;
+        if (isNotBlank(article.getText())) {
+            viewName = "redirect:/admin/article/" + article.getUrl();
+        } else if ((
+                article.getCategory() != null
+        ) && (
+                article.getCategory().isValidated()
+        )) {
+            viewName = "redirect:/admin/category/" + article.getCategory().getUrl();
+        } else {
+            viewName = "redirect:/admin/article/all";
+        }
+        return viewName;
     }
 }

@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../com/salimov/yurii/dao/impl/DataDaoImpl.html" title="class in com.salimov.yurii.dao.impl">com.salimov.yurii.dao.impl.DataDaoImpl</a>&lt;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</li>
 <li>
 <ul class="inheritance">
-<li>com.salimov.yurii.dao.impl.PhotoDaoImpl</li>
+<li>com.salimov.yurii.dao.impl.FileDaoImpl</li>
 </ul>
 </li>
 </ul>
@@ -177,7 +177,7 @@ implements <a href="../../../../../com/salimov/yurii/dao/interfaces/PhotoDao.htm
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/dao/impl/PhotoDaoImpl.html#PhotoDaoImpl-com.salimov.yurii.repository.PhotoRepository-">PhotoDaoImpl</a></span>(<a href="../../../../../com/salimov/yurii/repository/PhotoRepository.html" title="interface in com.salimov.yurii.repository">PhotoRepository</a>&nbsp;repository)</code>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/dao/impl/PhotoDaoImpl.html#PhotoDaoImpl-com.salimov.yurii.repository.FileRepository-">PhotoDaoImpl</a></span>(<a href="../../../../../com/salimov/yurii/repository/PhotoRepository.html" title="interface in com.salimov.yurii.repository">PhotoRepository</a>&nbsp;repository)</code>
 <div class="block">Constructor.</div>
 </td>
 </tr>
@@ -199,25 +199,25 @@ implements <a href="../../../../../com/salimov/yurii/dao/interfaces/PhotoDao.htm
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/dao/impl/PhotoDaoImpl.html#getByTitle-java.lang.String-">getByTitle</a></span>(java.lang.String&nbsp;title)</code>
-<div class="block">Returns photo with the parameter title from a database.</div>
+<div class="block">Returns file with the parameter title from a database.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/dao/impl/PhotoDaoImpl.html#getByUrl-java.lang.String-">getByUrl</a></span>(java.lang.String&nbsp;url)</code>
-<div class="block">Returns photo with the parameter url from a database.</div>
+<div class="block">Returns file with the parameter url from a database.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/dao/impl/PhotoDaoImpl.html#removeByTitle-java.lang.String-">removeByTitle</a></span>(java.lang.String&nbsp;title)</code>
-<div class="block">Removes photo with the parameter title from a database.</div>
+<div class="block">Removes file with the parameter title from a database.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/salimov/yurii/dao/impl/PhotoDaoImpl.html#removeByUrl-java.lang.String-">removeByUrl</a></span>(java.lang.String&nbsp;url)</code>
-<div class="block">Removes photo with the parameter url from a database.</div>
+<div class="block">Removes file with the parameter url from a database.</div>
 </td>
 </tr>
 </table>
@@ -313,14 +313,14 @@ public&nbsp;PhotoDaoImpl(<a href="../../../../../com/salimov/yurii/repository/Ph
 <li class="blockList">
 <h4>getByTitle</h4>
 <pre>public&nbsp;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;getByTitle(java.lang.String&nbsp;title)</pre>
-<div class="block">Returns photo with the parameter title from a database.</div>
+<div class="block">Returns file with the parameter title from a database.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html#getByTitle-java.lang.String-">getByTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html" title="interface in com.salimov.yurii.dao.interfaces">MediaDao</a>&lt;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>title</code> - a title of photo to return.</dd>
+<dd><code>title</code> - a title of file to return.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The photo with the parameter title.</dd>
+<dd>The file with the parameter title.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -333,14 +333,14 @@ public&nbsp;PhotoDaoImpl(<a href="../../../../../com/salimov/yurii/repository/Ph
 <li class="blockList">
 <h4>getByUrl</h4>
 <pre>public&nbsp;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>&nbsp;getByUrl(java.lang.String&nbsp;url)</pre>
-<div class="block">Returns photo with the parameter url from a database.</div>
+<div class="block">Returns file with the parameter url from a database.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html#getByUrl-java.lang.String-">getByUrl</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html" title="interface in com.salimov.yurii.dao.interfaces">MediaDao</a>&lt;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>url</code> - a url of photo to return.</dd>
+<dd><code>url</code> - a url of file to return.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The photo with the parameter url.</dd>
+<dd>The file with the parameter url.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -353,12 +353,12 @@ public&nbsp;PhotoDaoImpl(<a href="../../../../../com/salimov/yurii/repository/Ph
 <li class="blockList">
 <h4>removeByTitle</h4>
 <pre>public&nbsp;void&nbsp;removeByTitle(java.lang.String&nbsp;title)</pre>
-<div class="block">Removes photo with the parameter title from a database.</div>
+<div class="block">Removes file with the parameter title from a database.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html#removeByTitle-java.lang.String-">removeByTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html" title="interface in com.salimov.yurii.dao.interfaces">MediaDao</a>&lt;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>title</code> - a title of the photo to remove.</dd>
+<dd><code>title</code> - a title of the file to remove.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>
@@ -371,12 +371,12 @@ public&nbsp;PhotoDaoImpl(<a href="../../../../../com/salimov/yurii/repository/Ph
 <li class="blockList">
 <h4>removeByUrl</h4>
 <pre>public&nbsp;void&nbsp;removeByUrl(java.lang.String&nbsp;url)</pre>
-<div class="block">Removes photo with the parameter url from a database.</div>
+<div class="block">Removes file with the parameter url from a database.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html#removeByUrl-java.lang.String-">removeByUrl</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/salimov/yurii/dao/interfaces/MediaDao.html" title="interface in com.salimov.yurii.dao.interfaces">MediaDao</a>&lt;<a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity">Photo</a>,java.lang.Long&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>url</code> - a url of the photo to remove.</dd>
+<dd><code>url</code> - a url of the file to remove.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../com/salimov/yurii/entity/Photo.html" title="class in com.salimov.yurii.entity"><code>Photo</code></a></dd>
 </dl>

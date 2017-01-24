@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * The class implements a set of methods for translate to Latin.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ToLatin
  */
@@ -14,7 +14,7 @@ public final class ToLatinImpl implements ToLatin {
     /**
      * The string to translate.
      */
-    private String value;
+    private final String value;
 
     /**
      * Constructor.
@@ -33,24 +33,14 @@ public final class ToLatinImpl implements ToLatin {
     @Override
     public String fromCyrillic() {
         StringBuilder sb = new StringBuilder();
-        if (isNotBlank(value)) {
-            for (char ch : value.toLowerCase().toCharArray()) {
+        if (isNotBlank(this.value)) {
+            for (char ch : convertToChars(this.value)) {
                 sb.append(
                         translate(ch)
                 );
             }
         }
-        return sb.toString();
-    }
-
-    /**
-     * Sets a string to translate.
-     *
-     * @param value a string to translate.
-     */
-    @Override
-    public void setValue(final String value) {
-        this.value = value;
+        return sb.toString().replace("__", "_");
     }
 
     /**
@@ -61,6 +51,17 @@ public final class ToLatinImpl implements ToLatin {
     @Override
     public String getValue() {
         return this.value;
+    }
+
+    /**
+     * Converts an input value to chars array
+     * and returns it.
+     *
+     * @param value a value to convert.
+     * @return The chars array.
+     */
+    private static char[] convertToChars(final String value) {
+        return value.toLowerCase().toCharArray();
     }
 
     /**
@@ -143,7 +144,17 @@ public final class ToLatinImpl implements ToLatin {
             case ',':
             case '!':
             case '?':
+            case '/':
+            case '\\':
                 return "_";
+            case '(':
+            case ')':
+            case '{':
+            case '}':
+            case '[':
+            case ']':
+            case '-':
+                return "";
             default:
                 return String.valueOf(ch);
         }

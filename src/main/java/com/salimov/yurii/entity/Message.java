@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity;
 
+import com.salimov.yurii.entity.interfaces.IMessage;
+
 import java.util.Date;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -9,11 +11,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The class implements a set of standard methods for working
  * with entity of the {@link Message} class.
  *
- * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
+ * @see IMessage
  */
-public final class Message extends Model<Long> {
+public final class Message
+        extends Model<Long>
+        implements IMessage<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -55,7 +60,6 @@ public final class Message extends Model<Long> {
 
     /**
      * Default constructor.
-     * Initializes a message date.
      */
     public Message() {
         setDate(
@@ -65,7 +69,6 @@ public final class Message extends Model<Long> {
 
     /**
      * Constructor.
-     * Initializes a main user parameters.
      *
      * @param username a name of the client.
      * @param email    a name of the email.
@@ -180,6 +183,16 @@ public final class Message extends Model<Long> {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Message clone() {
+        return (Message) super.clone();
+    }
+
+    /**
      * Initializes some parameter of the article.
      *
      * @param username a name of the client.
@@ -188,6 +201,7 @@ public final class Message extends Model<Long> {
      * @param subject  a subject of the new message.
      * @param text     a text of the new message.
      */
+    @Override
     public void initialize(
             final String username,
             final String email,
@@ -207,6 +221,7 @@ public final class Message extends Model<Long> {
      *
      * @return The client name.
      */
+    @Override
     public String getUsername() {
         return this.username;
     }
@@ -217,6 +232,7 @@ public final class Message extends Model<Long> {
      *
      * @param username a new name to the client.
      */
+    @Override
     public void setUsername(final String username) {
         this.username = isNotBlank(username) ? username : null;
     }
@@ -226,6 +242,7 @@ public final class Message extends Model<Long> {
      *
      * @return The client name.
      */
+    @Override
     public String getEmail() {
         return this.email;
     }
@@ -236,6 +253,7 @@ public final class Message extends Model<Long> {
      *
      * @param email a new email to the client.
      */
+    @Override
     public void setEmail(final String email) {
         this.email = isNotBlank(email) ? email : null;
     }
@@ -245,6 +263,7 @@ public final class Message extends Model<Long> {
      *
      * @return The client name.
      */
+    @Override
     public String getPhone() {
         return this.phone;
     }
@@ -255,6 +274,7 @@ public final class Message extends Model<Long> {
      *
      * @param phone a new phone to the client.
      */
+    @Override
     public void setPhone(final String phone) {
         this.phone = isNotBlank(phone) ? phone : null;
     }
@@ -264,6 +284,7 @@ public final class Message extends Model<Long> {
      *
      * @return The message subject.
      */
+    @Override
     public String getSubject() {
         return this.subject;
     }
@@ -274,6 +295,7 @@ public final class Message extends Model<Long> {
      *
      * @param subject a new subject to the message.
      */
+    @Override
     public void setSubject(final String subject) {
         this.subject = isNotBlank(subject) ? subject : null;
     }
@@ -283,6 +305,7 @@ public final class Message extends Model<Long> {
      *
      * @return The message text.
      */
+    @Override
     public String getText() {
         return this.text;
     }
@@ -293,6 +316,7 @@ public final class Message extends Model<Long> {
      *
      * @param text a new text to the message.
      */
+    @Override
     public void setText(final String text) {
         this.text = isNotBlank(text) ? text : null;
     }
@@ -302,6 +326,7 @@ public final class Message extends Model<Long> {
      *
      * @return The message date.
      */
+    @Override
     public Date getDate() {
         return this.date;
     }
@@ -312,6 +337,7 @@ public final class Message extends Model<Long> {
      *
      * @param date a new text to the message.
      */
+    @Override
     public void setDate(final Date date) {
         this.date = date != null ? date : new Date();
     }
@@ -321,9 +347,10 @@ public final class Message extends Model<Long> {
      *
      * @return The message string-date.
      */
+    @Override
     public String getDateToString() {
         return getDateToString(
-                getDate()
+                this.date
         );
     }
 
@@ -334,7 +361,9 @@ public final class Message extends Model<Long> {
      */
     @Override
     public Long getId() {
-        return (long) hashCode();
+        return (long) Math.abs(
+                hashCode()
+        );
     }
 
     /**
@@ -346,12 +375,9 @@ public final class Message extends Model<Long> {
      * @return {@code true} if the user is valid, {@code false} otherwise.
      */
     public static boolean isValidated(final Message message) {
-        boolean result = false;
-        if (Model.isValidated(message)) {
-            result = isNotBlank(message.getUsername())
-                    && isNotBlank(message.getPhone())
-                    && isNotBlank(message.getText());
-        }
-        return result;
+        return Model.isValidated(message)
+                && isNotBlank(message.getUsername())
+                && isNotBlank(message.getPhone())
+                && isNotBlank(message.getText());
     }
 }
