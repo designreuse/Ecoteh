@@ -1,0 +1,76 @@
+package com.salimov.yurii.service.data.impl;
+
+import com.salimov.yurii.entity.Category;
+import com.salimov.yurii.service.data.interfaces.CategoryService;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.util.Collection;
+
+import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.dao.MockDao.getCategoryDao;
+import static com.salimov.yurii.mocks.enity.MockEntity.getCategories;
+import static com.salimov.yurii.mocks.enity.MockEntity.getCategory;
+import static com.salimov.yurii.mocks.service.data.MockServices.getArticleService;
+import static org.junit.Assert.assertNotNull;
+
+// TODO: empty
+public final class CategoryServiceImplTest extends ContentServiceImplTest<Category, Long> {
+
+    private CategoryService service;
+
+    @Before
+    public void beforeTest() {
+        this.service = new CategoryServiceImpl(
+                getCategoryDao(),
+                getArticleService()
+        );
+    }
+
+    @Test
+    public void whenInitAndAddThenReturnsSomeCategory() {
+        assertNotNull(
+                this.service.initAndAdd(
+                        TITLE,
+                        DESCRIPTION, KEYWORDS,
+                        PHOTO_URL, true
+                )
+        );
+    }
+
+    @Test
+    public void whenInitAndUpdateThenReturnsSomeCategory() {
+        assertNotNull(
+                this.service.initAndUpdate(
+                        URL, TITLE,
+                        DESCRIPTION, KEYWORDS,
+                        PHOTO_URL, true
+                )
+        );
+    }
+
+    @Ignore
+    @Override
+    protected CategoryService getService() {
+        return this.service;
+    }
+
+    @Ignore
+    @Override
+    protected Category getObject() {
+        return getCategory();
+    }
+
+    @Ignore
+    @Override
+    protected Collection<Category> getObjects() {
+        return getCategories();
+    }
+
+    @Ignore
+    @Override
+    protected Category getInvalidObject() {
+        return new Category();
+    }
+}
