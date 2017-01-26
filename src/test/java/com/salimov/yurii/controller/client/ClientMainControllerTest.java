@@ -5,6 +5,7 @@ import com.salimov.yurii.controller.other.MainControllerTest;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.data.mapping.model.IllegalMappingException;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.ModelAndViews.checkModelAndView;
@@ -30,7 +31,7 @@ public class ClientMainControllerTest extends MainControllerTest {
         );
     }
 
-    @Test
+    @Test(expected = IllegalMappingException.class)
     public void whenSendMessageByGetMethodThenThrowsException() {
         controller.sendMessage();
     }
@@ -46,7 +47,7 @@ public class ClientMainControllerTest extends MainControllerTest {
         );
     }
 
-    @Test
+    @Test(expected = IllegalMappingException.class)
     public void whenSendResponseByGetMethodThenThrowsException() {
         controller.sendResponse();
     }

@@ -15,23 +15,30 @@ import static org.junit.Assert.*;
 public final class ResponseTest extends ModelTest<Response> {
 
     @Test
+    public void whenInitializeByConstructorThenSetNotNulDate() {
+        final Response response = new Response(null, null);
+        assertNotNull(response.getDate());
+    }
+
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final Response response = new Response("", "");
+        assertNull(response.getUsername());
+        assertNull(response.getText());
+        assertNotNull(response.getDate());
+    }
+
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final Response response = new Response(" ", " ");
+        assertNull(response.getUsername());
+        assertNull(response.getText());
+        assertNotNull(response.getDate());
+    }
+
+    @Test
     public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        Response response = new Response(null, null);
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-
-        response = new Response("", "");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-
-        response = new Response(" ", " ");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-
-        response = new Response("   ", "   ");
+        final Response response = new Response("   ", "   ");
         assertNull(response.getUsername());
         assertNull(response.getText());
         assertNotNull(response.getDate());

@@ -17,34 +17,47 @@ import static org.junit.Assert.*;
 public final class UserTest extends ModelTest<User> {
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        User user = new User();
+    public void whenInitializeByConstructorThenSetNotNullRole() {
+        final User user = new User();
         assertNotNull(user.getRole());
-        user = new User(null, null, null);
+    }
+
+    @Test
+    public void whenPassNullParametersInConstructorThenSaveNull() {
+        final User user = new User(null, null, null);
         assertNotNull(user.getRole());
         assertNull(user.getName());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getUrl());
         assertNotNull(user.getRole());
+    }
 
-        user = new User("", "", "");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final User user = new User("", "", "");
         assertNotNull(user.getRole());
         assertNull(user.getName());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getUrl());
         assertNotNull(user.getRole());
+    }
 
-        user = new User(" ", " ", " ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final User user = new User(" ", " ", " ");
         assertNotNull(user.getRole());
         assertNull(user.getName());
         assertNull(user.getEmail());
         assertNull(user.getPhone());
         assertNull(user.getUrl());
         assertNotNull(user.getRole());
+    }
 
-        user = new User("   ", "   ", "   ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+        final User user = new User("   ", "   ", "   ");
         assertNotNull(user.getRole());
         assertNull(user.getName());
         assertNull(user.getEmail());

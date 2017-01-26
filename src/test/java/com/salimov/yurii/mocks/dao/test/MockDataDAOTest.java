@@ -102,8 +102,8 @@ public abstract class MockDataDAOTest<T extends Model<Long>> {
 
     @Test
     public void whenGetAllModelsThenReturnThem() {
-        assertNotNull(
-                getDao().getAll()
+        assertFalse(
+                getDao().getAll().isEmpty()
         );
     }
 

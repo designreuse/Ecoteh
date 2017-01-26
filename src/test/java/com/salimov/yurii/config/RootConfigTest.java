@@ -44,13 +44,33 @@ public final class RootConfigTest {
     private UserRepository userRepository;
 
     @Test
-    public void repositoryTest() {
-        assertNotNull(articleRepository);
-        assertNotNull(categoryRepository);
-        assertNotNull(companyRepository);
-        assertNotNull(fileRepository);
-        assertNotNull(responseRepository);
-        assertNotNull(userRepository);
+    public void articleRepositoryNotNull() {
+        assertNotNull(this.articleRepository);
+    }
+
+    @Test
+    public void categoryRepositoryNotNull() {
+        assertNotNull(this.categoryRepository);
+    }
+
+    @Test
+    public void companyRepositoryNotNull() {
+        assertNotNull(this.companyRepository);
+    }
+
+    @Test
+    public void fileRepositoryNotNull() {
+        assertNotNull(this.fileRepository);
+    }
+
+    @Test
+    public void responseRepositoryNotNull() {
+        assertNotNull(this.responseRepository);
+    }
+
+    @Test
+    public void userRepositoryNotNull() {
+        assertNotNull(this.userRepository);
     }
 
     @Test

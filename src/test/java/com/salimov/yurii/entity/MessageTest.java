@@ -13,11 +13,14 @@ import static org.junit.Assert.*;
 public final class MessageTest extends ModelTest<Message> {
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        Message message = new Message();
+    public void whenInitializeByConstructorThenSetNotNulDate() {
+        final Message message = new Message();
         assertNotNull(message.getDate());
+    }
 
-        message = new Message(null, null, null, null, null);
+    @Test
+    public void whenPassNullParametersInConstructorThenSaveNull() {
+        final Message message = new Message(null, null, null, null, null);
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
@@ -25,8 +28,11 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
+    }
 
-        message = new Message("", "", "", "", "");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final Message message = new Message("", "", "", "", "");
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
@@ -34,8 +40,11 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
+    }
 
-        message = new Message(" ", " ", " ", " ", " ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final Message message = new Message(" ", " ", " ", " ", " ");
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
@@ -43,43 +52,15 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
+    }
 
-        message = new Message(" ", " ", " ", " ", " ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+        final Message message = new Message("   ", "   ", "   ", "   ", "   ");
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
         assertNull(message.getPhone());
-        assertNull(message.getSubject());
-        assertNull(message.getText());
-        assertNotNull(message.getDate());
-
-        message = new Message(null, null, null, null);
-        assertNull(message.getUsername());
-        assertNull(message.getEmail());
-        assertNull(message.getPhone());
-        assertNull(message.getSubject());
-        assertNull(message.getText());
-        assertNotNull(message.getDate());
-
-        message = new Message("", "", "", "");
-        assertNull(message.getUsername());
-        assertNull(message.getEmail());
-        assertNull(message.getPhone());
-        assertNull(message.getSubject());
-        assertNull(message.getText());
-        assertNotNull(message.getDate());
-
-        message = new Message(" ", " ", " ", " ");
-        assertNull(message.getUsername());
-        assertNull(message.getEmail());
-        assertNull(message.getPhone());
-        assertNull(message.getSubject());
-        assertNull(message.getText());
-        assertNotNull(message.getDate());
-
-        message = new Message(" ", " ", " ", " ");
-        assertNull(message.getUsername());
-        assertNull(message.getEmail());
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());

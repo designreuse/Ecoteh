@@ -111,6 +111,27 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
         );
     }
 
+    @Test
+    public void whenGetDaoThenReturnNotNull() {
+        assertNotNull(
+                getDao()
+        );
+    }
+
+    @Test
+    public void whenGetObjectThenReturnNotNull() {
+        assertNotNull(
+                getObject()
+        );
+    }
+
+    @Test
+    public void whenGetObjectsThenReturnNotEmptyCollecton() {
+        assertFalse(
+                getObjects().isEmpty()
+        );
+    }
+
     @Ignore
     protected abstract DataDao<T, E> getDao();
 

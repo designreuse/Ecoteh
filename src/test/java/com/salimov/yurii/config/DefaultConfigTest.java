@@ -1,17 +1,14 @@
 package com.salimov.yurii.config;
 
 import org.junit.Test;
-import com.salimov.yurii.entity.User;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static com.salimov.yurii.mocks.MockConstants.ANY_STRING;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -22,52 +19,87 @@ import static com.salimov.yurii.mocks.MockConstants.ANY_STRING;
 public final class DefaultConfigTest {
 
     @Test
-    public void whenGetDefaultUserWithInvalidUsernameThenReturnNull() {
-        User user = DefaultConfig.getDefaultUser(null);
-        assertNull(user);
-        user = DefaultConfig.getDefaultUser("");
-        assertNull(user);
-        user = DefaultConfig.getDefaultUser(" ");
-        assertNull(user);
-        user = DefaultConfig.getDefaultUser("   ");
-        assertNull(user);
-        user = DefaultConfig.getDefaultUser(ANY_STRING);
-        assertNull(user);
+    public void whenGetDefaultUserWithNullUsernameThenReturnNull() {
+        assertNull(
+                DefaultConfig.getDefaultUser(null)
+        );
     }
 
     @Test
-    public void whenGetDefaultUserWithValidUsernameThenReturnSomeUser() {
-        User user = DefaultConfig.getDefaultUser("admin");
-        assertNotNull(user);
-        user = DefaultConfig.getDefaultUser("super");
-        assertNotNull(user);
+    public void whenGetDefaultUserWithBlankUsernameThenReturnNull() {
+        assertNull(
+                DefaultConfig.getDefaultUser("")
+        );
+        assertNull(
+                DefaultConfig.getDefaultUser(" ")
+        );
+        assertNull(
+                DefaultConfig.getDefaultUser("   ")
+        );
+    }
+
+    @Test
+    public void whenGetDefaultUserWithUnknownUsernameThenReturnNull() {
+        assertNull(
+                DefaultConfig.getDefaultUser(ANY_STRING)
+        );
+    }
+
+    @Test
+    public void whenGetAdminUserThenReturnSomeUser() {
+        assertNotNull(
+                DefaultConfig.getDefaultUser("admin")
+        );
+    }
+
+    @Test
+    public void whenGetSuperAdminUserThenReturnSomeUser() {
+        assertNotNull(
+                DefaultConfig.getDefaultUser("super")
+        );
     }
 
     @Test
     public void whenDefaultIsAdminEnabledThenReturnTrue() {
-        assertTrue(DefaultConfig.isAdminEnabled());
+        assertTrue(
+                DefaultConfig.isAdminEnabled()
+        );
     }
 
     @Test
     public void whenDefaultIsClientEnabledThenReturnTrue() {
-        assertTrue(DefaultConfig.isClientEnabled());
+        assertTrue(
+                DefaultConfig.isClientEnabled()
+        );
     }
 
     @Test
     public void whenDefaultSuperOnOrOffThenToDoNothing() {
         DefaultConfig.superOff();
-        assertTrue(DefaultConfig.isAdminEnabled());
-        assertTrue(DefaultConfig.isClientEnabled());
+        assertTrue(
+                DefaultConfig.isAdminEnabled()
+        );
+        assertTrue(
+                DefaultConfig.isClientEnabled()
+        );
         DefaultConfig.superOn();
-        assertTrue(DefaultConfig.isAdminEnabled());
-        assertTrue(DefaultConfig.isClientEnabled());
+        assertTrue(
+                DefaultConfig.isAdminEnabled()
+        );
+        assertTrue(
+                DefaultConfig.isClientEnabled()
+        );
     }
 
     @Test
     public void whenDefaultOnOrOffThenToDoNothing() {
         DefaultConfig.off();
-        assertTrue(DefaultConfig.isClientEnabled());
+        assertTrue(
+                DefaultConfig.isClientEnabled()
+        );
         DefaultConfig.on();
-        assertTrue(DefaultConfig.isClientEnabled());
+        assertTrue(
+                DefaultConfig.isClientEnabled()
+        );
     }
 }

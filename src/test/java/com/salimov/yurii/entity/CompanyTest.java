@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
-import static com.salimov.yurii.mocks.enity.MockEntity.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
 public final class CompanyTest extends ContentTest<Company> {
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        Company company = new Company(
+    public void whenInitializeByConstructorThenSetNotNulDateAndNumber() {
+        final Company company = new Company(
                 null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null
         );
@@ -42,8 +42,11 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getGoogleMaps());
         assertNull(company.getLogoUrl());
         assertNull(company.getFaviconUrl());
+    }
 
-        company = new Company(
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final Company company = new Company(
                 "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", ""
         );
@@ -66,8 +69,11 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getGoogleMaps());
         assertNull(company.getLogoUrl());
         assertNull(company.getFaviconUrl());
+    }
 
-        company = new Company(
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final Company company = new Company(
                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                 " ", " ", " ", " ", " ", " ", " ", " ", " "
         );
@@ -90,8 +96,11 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getGoogleMaps());
         assertNull(company.getLogoUrl());
         assertNull(company.getFaviconUrl());
+    }
 
-        company = new Company(
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+        final Company company = new Company(
                 "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",
                 "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "
         );
@@ -316,7 +325,7 @@ public final class CompanyTest extends ContentTest<Company> {
     public void equalsValidObjects() {
         super.equalsValidObjects();
         final Company company1 = getCompany();
-        final Company company2 = (Company) company1.clone();
+        final Company company2 = company1.clone();
         assertEquals(company1, company2);
         final boolean value = (
                 company1.getType() != null ?
@@ -438,8 +447,8 @@ public final class CompanyTest extends ContentTest<Company> {
 
     @Test
     @Override
-    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
-        super.whenInitializeObjectWithInvalidParametersThenGetNull();
+    public void whenInitializeObjectWithNullParametersThenGetNull() {
+        super.whenInitializeObjectWithNullParametersThenGetNull();
         final Company company = new Company();
         company.initialize(
                 null, null, null, null, null, null, null, null, null, null,
@@ -464,6 +473,13 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getGoogleMaps());
         assertNull(company.getLogoUrl());
         assertNull(company.getFaviconUrl());
+    }
+
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_1();
+        final Company company = new Company();
         company.initialize(
                 "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", ""
@@ -487,7 +503,13 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getGoogleMaps());
         assertNull(company.getLogoUrl());
         assertNull(company.getFaviconUrl());
+    }
 
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_2();
+        final Company company = new Company();
         company.initialize(
                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " "
@@ -511,7 +533,13 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getGoogleMaps());
         assertNull(company.getLogoUrl());
         assertNull(company.getFaviconUrl());
+    }
 
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_3();
+        final Company company = new Company();
         company.initialize(
                 "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",
                 "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "
@@ -1435,7 +1463,7 @@ public final class CompanyTest extends ContentTest<Company> {
     }
 
     @Test
-    public void whenSetInvalidTypeThenGetNull() {
+    public void whenSetNullTypeThenGetNull() {
         final Company company = getCompany();
         company.setType(null);
         assertNull(company.getType());
@@ -1468,10 +1496,16 @@ public final class CompanyTest extends ContentTest<Company> {
 
     @Test
     @Override
-    public void whenSetInvalidTitleThenGetNull() {
+    public void whenSetNullTitleThenGetNull() {
         final Company company = getCompany();
         company.setTitle(null);
         assertNull(company.getTitle());
+    }
+
+    @Ignore
+    @Override
+    public void whenSetBlankTitleThenGetNull() {
+        final Company company = getCompany();
         company.setTitle("");
         assertNull(company.getTitle());
         company.setTitle(" ");
@@ -1480,19 +1514,24 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNull(company.getTitle());
     }
 
-    @Ignore
-    @Override
-    public void whenSetInvalidUrlThenGetNull() {
-    }
-
     @Test
-    public void whenSetInvalidUrlThenGetNotNull() {
+    public void whenSetNullUrlThenGetNotNull() {
         final Company company = new Company();
-        final String url = Translator.fromCyrillicToLatin(company.getDomain());
+        final String url = Translator.fromCyrillicToLatin(
+                company.getDomain()
+        );
         company.setUrl(null);
         assertNotNull(company.getUrl());
         assertEquals(
                 company.getUrl(), url
+        );
+    }
+
+    @Test
+    public void whenSetBlankUrlThenGetNotNull() {
+        final Company company = new Company();
+        final String url = Translator.fromCyrillicToLatin(
+                company.getDomain()
         );
         company.setUrl("");
         assertNotNull(company.getUrl());
@@ -1509,6 +1548,16 @@ public final class CompanyTest extends ContentTest<Company> {
         assertEquals(
                 company.getUrl(), url
         );
+    }
+
+    @Test
+    @Override
+    public void whenSetBlankUrlThenGetNull() {
+    }
+
+    @Test
+    @Override
+    public void whenSetNullUrlThenGetNull() {
     }
 
     @Test

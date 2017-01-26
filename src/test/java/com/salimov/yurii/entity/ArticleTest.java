@@ -1,12 +1,13 @@
 package com.salimov.yurii.entity;
 
-import com.salimov.yurii.mocks.MockConstants;
-import com.salimov.yurii.mocks.enity.MockEntity;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Date;
 
+import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getArticle;
+import static com.salimov.yurii.mocks.enity.MockEntity.getCategory;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
@@ -14,33 +15,45 @@ import static org.junit.Assert.*;
 public final class ArticleTest extends ContentTest<Article> {
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        Article article = new Article();
+    public void whenInitializeByConstructorThenSetNotNulDateAndNumber() {
+        final Article article = new Article();
         assertNotNull(article.getDate());
         assertNotNull(article.getNumber());
+    }
 
-        article = new Article(null, null, null, null, null);
+    @Test
+    public void whenPassNullParametersInConstructorThenSaveNull() {
+        final Article article = new Article(null, null, null, null, null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
+    }
 
-        article = new Article("", "", "", "", "");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final Article article = new Article("", "", "", "", "");
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
+    }
 
-        article = new Article(" ", " ", " ", " ", " ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final Article article = new Article(" ", " ", " ", " ", " ");
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
+    }
 
-        article = new Article("   ", "   ", "   ", "   ", "   ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+        final Article article = new Article("   ", "   ", "   ", "   ", "   ");
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
@@ -51,11 +64,9 @@ public final class ArticleTest extends ContentTest<Article> {
     @Test
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
         final Article article = new Article(
-                MockConstants.TITLE,
-                MockConstants.DESCRIPTION,
-                MockConstants.TEXT,
-                MockConstants.KEYWORDS,
-                MockConstants.NUMBER
+                TITLE,
+                DESCRIPTION, TEXT,
+                KEYWORDS, NUMBER
         );
         assertNotNull(article.getTitle());
         assertNotNull(article.getDescription());
@@ -64,30 +75,30 @@ public final class ArticleTest extends ContentTest<Article> {
         assertNotNull(article.getDate());
         assertEquals(
                 article.getTitle(),
-                MockConstants.TITLE
+                TITLE
         );
         assertEquals(
                 article.getDescription(),
-                MockConstants.DESCRIPTION
+                DESCRIPTION
         );
         assertEquals(
                 article.getText(),
-                MockConstants.TEXT
+                TEXT
         );
         assertEquals(
                 article.getKeywords(),
-                MockConstants.KEYWORDS
+                KEYWORDS
         );
         assertEquals(
                 article.getNumber(),
-                MockConstants.NUMBER
+                NUMBER
         );
     }
 
     @Test
     @Override
     public void toStringTest() {
-        final Article article = MockEntity.getArticle();
+        final Article article = getArticle();
         final String value = article.getClass().getSimpleName() +
                 " " + article.getTitle()
                 + " \nKeywords: " + article.getKeywords()
@@ -113,8 +124,8 @@ public final class ArticleTest extends ContentTest<Article> {
                                 article2.getNumber()
                         )
         );
-        article1.setTitle(MockConstants.TITLE);
-        article2.setTitle(MockConstants.TITLE);
+        article1.setTitle(TITLE);
+        article2.setTitle(TITLE);
         assertEquals(
                 article1.equals(article2),
                 article1.getNumber()
@@ -122,8 +133,8 @@ public final class ArticleTest extends ContentTest<Article> {
                                 article2.getNumber()
                         )
         );
-        article1.setText(MockConstants.TEXT);
-        article2.setText(MockConstants.TEXT);
+        article1.setText(TEXT);
+        article2.setText(TEXT);
         assertEquals(
                 article1.equals(article2),
                 article1.getNumber()
@@ -137,8 +148,8 @@ public final class ArticleTest extends ContentTest<Article> {
     @Override
     public void equalsValidObjects() {
         super.equalsValidObjects();
-        final Article article1 = MockEntity.getArticle();
-        final Article article2 = (Article) article1.clone();
+        final Article article1 = getArticle();
+        final Article article2 = article1.clone();
         assertEquals(article1, article2);
         final boolean value = (
                 isNotBlank(article1.getTitle())
@@ -163,14 +174,14 @@ public final class ArticleTest extends ContentTest<Article> {
                 article.hashCode(),
                 value
         );
-        article.setTitle(MockConstants.TITLE);
+        article.setTitle(TITLE);
         value += (isNotBlank(article.getTitle()) ? article.getTitle().hashCode() : 0)
                 + (isNotBlank(article.getUrl()) ? article.getUrl().hashCode() : 0);
         assertEquals(
                 article.hashCode(),
                 value
         );
-        article.setText(MockConstants.TEXT);
+        article.setText(TEXT);
         value += isNotBlank(article.getText()) ? article.getText().hashCode() : 0;
         assertEquals(
                 article.hashCode(),
@@ -181,7 +192,7 @@ public final class ArticleTest extends ContentTest<Article> {
     @Test
     @Override
     public void hashCodeValidObject() {
-        final Article article = MockEntity.getArticle();
+        final Article article = getArticle();
         final int value = (
                 isNotBlank(article.getTitle()) ? article.getTitle().hashCode() : 0
         ) + (
@@ -198,37 +209,10 @@ public final class ArticleTest extends ContentTest<Article> {
 
     @Test
     @Override
-    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
-        super.whenInitializeObjectWithInvalidParametersThenGetNull();
+    public void whenInitializeObjectWithNullParametersThenGetNull() {
+        super.whenInitializeObjectWithNullParametersThenGetNull();
         final Article article = new Article();
         article.initialize(null, null, null, null, null, null);
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
-        assertNull(article.getKeywords());
-        assertNotNull(article.getNumber());
-        assertNull(article.getCategory());
-        assertNotNull(article.getDate());
-
-        article.initialize("", "", "", "", "", null);
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
-        assertNull(article.getKeywords());
-        assertNotNull(article.getNumber());
-        assertNull(article.getCategory());
-        assertNotNull(article.getDate());
-
-        article.initialize(" ", " ", " ", " ", " ", null);
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
-        assertNull(article.getKeywords());
-        assertNotNull(article.getNumber());
-        assertNull(article.getCategory());
-        assertNotNull(article.getDate());
-
-        article.initialize("   ", "   ", "   ", "   ", "   ", null);
         assertNull(article.getTitle());
         assertNull(article.getDescription());
         assertNull(article.getText());
@@ -240,16 +224,60 @@ public final class ArticleTest extends ContentTest<Article> {
 
     @Test
     @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_1();
+        final Article article = new Article();
+        article.initialize("", "", "", "", "", null);
+        assertNull(article.getTitle());
+        assertNull(article.getDescription());
+        assertNull(article.getText());
+        assertNull(article.getKeywords());
+        assertNotNull(article.getNumber());
+        assertNull(article.getCategory());
+        assertNotNull(article.getDate());
+    }
+
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_2();
+        final Article article = new Article();
+        article.initialize(" ", " ", " ", " ", " ", null);
+        assertNull(article.getTitle());
+        assertNull(article.getDescription());
+        assertNull(article.getText());
+        assertNull(article.getKeywords());
+        assertNotNull(article.getNumber());
+        assertNull(article.getCategory());
+        assertNotNull(article.getDate());
+    }
+
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_3();
+        final Article article = new Article();
+        article.initialize("  ", "  ", "  ", "  ", "  ", null);
+        assertNull(article.getTitle());
+        assertNull(article.getDescription());
+        assertNull(article.getText());
+        assertNull(article.getKeywords());
+        assertNotNull(article.getNumber());
+        assertNull(article.getCategory());
+        assertNotNull(article.getDate());
+    }
+
+
+    @Test
+    @Override
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         super.whenInitializeObjectWithValidParametersThenGetThisValue();
         final Article article = new Article();
-        final Category category = MockEntity.getCategory();
+        final Category category = getCategory();
         article.initialize(
-                MockConstants.TITLE,
-                MockConstants.DESCRIPTION,
-                MockConstants.TEXT,
-                MockConstants.KEYWORDS,
-                MockConstants.NUMBER,
+                TITLE,
+                DESCRIPTION, TEXT,
+                KEYWORDS, NUMBER,
                 category
         );
         assertNotNull(article.getTitle());
@@ -261,27 +289,27 @@ public final class ArticleTest extends ContentTest<Article> {
         assertNotNull(article.getDate());
         assertEquals(
                 article.getTitle(),
-                MockConstants.TITLE
+                TITLE
         );
         assertEquals(
                 article.getDescription(),
-                MockConstants.DESCRIPTION
+                DESCRIPTION
         );
         assertEquals(
                 article.getText(),
-                MockConstants.TEXT
+                TEXT
         );
         assertEquals(
                 article.getKeywords(),
-                MockConstants.KEYWORDS
+                KEYWORDS
         );
         assertEquals(
                 article.getKeywords(),
-                MockConstants.KEYWORDS
+                KEYWORDS
         );
         assertEquals(
                 article.getNumber(),
-                MockConstants.NUMBER
+                NUMBER
         );
         assertEquals(
                 article.getCategory(),
@@ -290,10 +318,15 @@ public final class ArticleTest extends ContentTest<Article> {
     }
 
     @Test
-    public void whenSetInvalidNumberThenGetNull() {
-        final Article article = MockEntity.getArticle();
+    public void whenSetNullNumberThenGetNull() {
+        final Article article = getArticle();
         article.setNumber(null);
         assertNotNull(article.getNumber());
+    }
+
+    @Test
+    public void whenSetBlankNumberThenGetNull() {
+        final Article article = getArticle();
         article.setNumber("");
         assertNotNull(article.getNumber());
         article.setNumber(" ");
@@ -304,26 +337,31 @@ public final class ArticleTest extends ContentTest<Article> {
 
     @Test
     public void whenSetValidNumberThenGetThisNumber() {
-        final Article article = MockEntity.getArticle();
-        article.setNumber(MockConstants.NUMBER);
+        final Article article = getArticle();
+        article.setNumber(NUMBER);
         assertNotNull(article.getNumber());
         assertEquals(
                 article.getNumber(),
-                MockConstants.NUMBER
+                NUMBER
         );
         article.newNumber();
         assertNotNull(article.getNumber());
         assertNotEquals(
                 article.getNumber(),
-                MockConstants.NUMBER
+                NUMBER
         );
     }
 
     @Test
-    public void whenSetInvalidTextThenGetNull() {
-        final Article article = MockEntity.getArticle();
+    public void whenSetNullTextThenGetNull() {
+        final Article article = getArticle();
         article.setText(null);
         assertNull(article.getText());
+    }
+
+    @Test
+    public void whenSetBlankTextThenGetNull() {
+        final Article article = getArticle();
         article.setText("");
         assertNull(article.getText());
         article.setText(" ");
@@ -334,26 +372,25 @@ public final class ArticleTest extends ContentTest<Article> {
 
     @Test
     public void whenSetValidTextThenGetThisText() {
-        final Article article = MockEntity.getArticle();
-        article.setText(MockConstants.TEXT);
+        final Article article = getArticle();
+        article.setText(TEXT);
         assertNotNull(article.getText());
         assertEquals(
                 article.getText(),
-                MockConstants.TEXT
+                TEXT
         );
     }
 
     @Test
     public void whenSetInvalidDateThenGetNewDate() {
-        final Article article = MockEntity.getArticle();
+        final Article article = getArticle();
         article.setDate(null);
         assertNotNull(article.getDate());
-        assertNotNull(article.getDateToString());
     }
 
     @Test
     public void whenSetValidDateThenGetThisDate() {
-        final Article article = MockEntity.getArticle();
+        final Article article = getArticle();
         final Date date = new Date();
         article.setDate(date);
         assertNotNull(article.getDate());
@@ -361,20 +398,37 @@ public final class ArticleTest extends ContentTest<Article> {
                 article.getDate(),
                 date
         );
-        assertNotNull(article.getDateToString());
+    }
+
+    @Test
+    public void whenSetInvalidDateThenGetNewDateToString() {
+        final Article article = getArticle();
+        article.setDate(null);
+        assertNotNull(
+                article.getDateToString()
+        );
+    }
+
+    @Test
+    public void whenSetValidDateThenGetThisDateToString() {
+        final Article article = getArticle();
+        article.setDate(new Date());
+        assertNotNull(
+                article.getDateToString()
+        );
     }
 
     @Test
     public void whenSetNullCategoryThenGetNull() {
-        final Article article = MockEntity.getArticle();
+        final Article article = getArticle();
         article.setCategory(null);
         assertNull(article.getCategory());
     }
 
     @Test
     public void whenSetNotNullCategoryThenGetThisCategory() {
-        final Article article = MockEntity.getArticle();
-        final Category category = MockEntity.getCategory();
+        final Article article = getArticle();
+        final Category category = getCategory();
         category.setArticles(null);
         article.setCategory(null);
         article.setCategory(category);
@@ -393,7 +447,7 @@ public final class ArticleTest extends ContentTest<Article> {
     @Override
     public void validObject() {
         super.validObject();
-        Article article = MockEntity.getArticle();
+        Article article = getArticle();
         assertFalse(Article.isValidated(null));
         assertTrue(
                 Article.isValidated(article)
@@ -402,12 +456,12 @@ public final class ArticleTest extends ContentTest<Article> {
         assertFalse(
                 Article.isValidated(article)
         );
-        article = MockEntity.getArticle();
+        article = getArticle();
         article.setUrl(null);
         assertFalse(
                 Article.isValidated(article)
         );
-        article = MockEntity.getArticle();
+        article = getArticle();
         article.setText(null);
         assertFalse(
                 Article.isValidated(article)
@@ -417,6 +471,6 @@ public final class ArticleTest extends ContentTest<Article> {
     @Ignore
     @Override
     protected Article getObject() {
-        return MockEntity.getArticle();
+        return getArticle();
     }
 }

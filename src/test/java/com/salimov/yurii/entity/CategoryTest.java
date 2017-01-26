@@ -13,23 +13,32 @@ import static org.junit.Assert.*;
 public final class CategoryTest extends ContentTest<Category> {
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        Category category = new Category(null, null, null);
+    public void whenPassNullParametersInConstructorThenSaveNull() {
+        final Category category = new Category(null, null, null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
+    }
 
-        category = new Category("", "", "");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final Category category = new Category("", "", "");
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
+    }
 
-        category = new Category(" ", " ", " ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final Category category = new Category(" ", " ", " ");
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
+    }
 
-        category = new Category("   ", "   ", "   ");
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+        final Category category = new Category("   ", "   ", "   ");
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
@@ -111,28 +120,46 @@ public final class CategoryTest extends ContentTest<Category> {
 
     @Test
     @Override
-    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
-        super.whenInitializeObjectWithInvalidParametersThenGetNull();
+    public void whenInitializeObjectWithNullParametersThenGetNull() {
+        super.whenInitializeObjectWithNullParametersThenGetNull();
         final Category category = new Category();
         category.initialize(null, null, null, null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhotoUrl());
+    }
 
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_1();
+        final Category category = new Category();
         category.initialize("", "", "", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhotoUrl());
+    }
 
-        category.initialize(" ", " ", " ", null);
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_2();
+        final Category category = new Category();
+        category.initialize("", "", "", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());
         assertNull(category.getPhotoUrl());
+    }
 
-        category.initialize("   ", "   ", "   ", null);
+    @Test
+    @Override
+    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
+        super.whenInitializeObjectWithBlankParametersThenGetNull_3();
+        final Category category = new Category();
+        category.initialize("", "", "", null);
         assertNull(category.getTitle());
         assertNull(category.getDescription());
         assertNull(category.getKeywords());

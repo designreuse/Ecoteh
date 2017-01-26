@@ -46,7 +46,7 @@ public final class FileTest extends ModelTest<File> {
     public void equalsValidObjects() {
         super.equalsValidObjects();
         final File file1 = getObject();
-        final File file2 = (File) file1.clone();
+        final File file2 = file1.clone();
         assertEquals(file1, file2);
         final boolean value = (isNotBlank(file1.getTitle()) ?
                 file1.getTitle()

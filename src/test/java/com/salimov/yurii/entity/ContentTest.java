@@ -5,6 +5,9 @@ import com.salimov.yurii.util.translator.Translator;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static com.salimov.yurii.mocks.MockConstants.DESCRIPTION;
+import static com.salimov.yurii.mocks.MockConstants.KEYWORDS;
+import static com.salimov.yurii.mocks.MockConstants.TITLE;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
@@ -67,21 +70,36 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     }
 
     @Test
-    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
+    public void whenInitializeObjectWithNullParametersThenGetNull() {
         final T content = getObject();
         content.initialize(null, null, null);
         assertNull(content.getTitle());
         assertNull(content.getDescription());
         assertNull(content.getKeywords());
+    }
+
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
+        final T content = getObject();
         content.initialize("", "", "");
         assertNull(content.getTitle());
         assertNull(content.getDescription());
         assertNull(content.getKeywords());
+    }
+
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
+        final T content = getObject();
         content.initialize(" ", " ", " ");
         assertNull(content.getTitle());
         assertNull(content.getDescription());
         assertNull(content.getKeywords());
-        content.initialize("   ", "   ", "   ");
+    }
+
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
+        final T content = getObject();
+        content.initialize("  ", "  ", "  ");
         assertNull(content.getTitle());
         assertNull(content.getDescription());
         assertNull(content.getKeywords());
@@ -91,29 +109,27 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         final T content = getObject();
         content.initialize(
-                MockConstants.TITLE,
-                MockConstants.DESCRIPTION,
-                MockConstants.KEYWORDS
+                TITLE, DESCRIPTION, KEYWORDS
         );
         assertNotNull(content.getTitle());
         assertNotNull(content.getDescription());
         assertNotNull(content.getKeywords());
-        Assert.assertEquals(
+        assertEquals(
                 content.getTitle(),
-                MockConstants.TITLE
+                TITLE
         );
-        Assert.assertEquals(
+        assertEquals(
                 content.getDescription(),
-                MockConstants.DESCRIPTION
+                DESCRIPTION
         );
-        Assert.assertEquals(
+        assertEquals(
                 content.getKeywords(),
-                MockConstants.KEYWORDS
+                KEYWORDS
         );
     }
 
     @Test
-    public void whenSetInvalidTitleThenGetNull() {
+    public void whenSetNullTitleThenGetNull() {
         final T content = getObject();
         content.setTitle(null);
         assertNull(content.getTitle());
@@ -130,26 +146,45 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     }
 
     @Test
+    public void whenSetBlankTitleThenGetNull() {
+        final T content = getObject();
+        content.setTitle("");
+        assertNull(content.getTitle());
+        assertNull(content.getUrl());
+        content.setTitle(" ");
+        assertNull(content.getTitle());
+        assertNull(content.getUrl());
+        content.setTitle("    ");
+        assertNull(content.getTitle());
+        assertNull(content.getUrl());
+    }
+
+    @Test
     public void whenSetValidTitleThenGetThisTitle() {
         final T content = getObject();
-        content.setTitle(MockConstants.TITLE);
+        content.setTitle(TITLE);
         assertNotNull(content.getTitle());
         assertNotNull(content.getUrl());
-        Assert.assertEquals(
+        assertEquals(
                 content.getTitle(),
-                MockConstants.TITLE
+                TITLE
         );
         assertEquals(
                 content.getUrl(),
-                Translator.fromCyrillicToLatin(MockConstants.TITLE)
+                Translator.fromCyrillicToLatin(TITLE)
         );
     }
 
     @Test
-    public void whenSetInvalidUrlThenGetNull() {
+    public void whenSetNullUrlThenGetNull() {
         final T content = getObject();
         content.setUrl(null);
         assertNull(content.getUrl());
+    }
+
+    @Test
+    public void whenSetBlankUrlThenGetNull() {
+        final T content = getObject();
         content.setUrl("");
         assertNull(content.getUrl());
         content.setUrl(" ");
@@ -177,10 +212,15 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     }
 
     @Test
-    public void whenSetInvalidDescriptionThenReturnNull() {
+    public void whenSetNullDescriptionThenReturnNull() {
         final T content = getObject();
         content.setDescription(null);
         assertNull(content.getDescription());
+    }
+
+    @Test
+    public void whenSetBlankDescriptionThenReturnNull() {
+        final T content = getObject();
         content.setDescription("");
         assertNull(content.getDescription());
         content.setDescription(" ");
@@ -192,19 +232,24 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     @Test
     public void whenSetValidDescriptionThenReturnThisDescription() {
         final T content = getObject();
-        content.setDescription(MockConstants.DESCRIPTION);
+        content.setDescription(DESCRIPTION);
         assertNotNull(content.getDescription());
         Assert.assertEquals(
                 content.getDescription(),
-                MockConstants.DESCRIPTION
+                DESCRIPTION
         );
     }
 
     @Test
-    public void whenSetInvalidKeywordsThenReturnNull() {
+    public void whenSetNullKeywordsThenReturnNull() {
         final T content = getObject();
         content.setKeywords(null);
         assertNull(content.getKeywords());
+    }
+
+    @Test
+    public void whenSetBlankKeywordsThenReturnNull() {
+        final T content = getObject();
         content.setKeywords("");
         assertNull(content.getKeywords());
         content.setKeywords(" ");
@@ -216,11 +261,11 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     @Test
     public void whenSetValidKeywordsThenReturnThisKeywords() {
         final T content = getObject();
-        content.setKeywords(MockConstants.KEYWORDS);
+        content.setKeywords(KEYWORDS);
         assertNotNull(content.getKeywords());
         Assert.assertEquals(
                 content.getKeywords(),
-                MockConstants.KEYWORDS
+                KEYWORDS
         );
     }
 
@@ -228,9 +273,15 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
     @Override
     public void validObject() {
         final T content = getObject();
-        final boolean value = content != null &&
-                isNotBlank(content.getTitle()) &&
-                isNotBlank(content.getUrl());
-        assertEquals(Content.isValidated(content), value);
+        assertEquals(
+                Content.isValidated(content),
+                (
+                        content != null
+                ) && (
+                        isNotBlank(content.getTitle())
+                ) && (
+                        isNotBlank(content.getUrl())
+                )
+        );
     }
 }

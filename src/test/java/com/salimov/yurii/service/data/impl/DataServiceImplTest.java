@@ -278,6 +278,34 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
         assertFalse(models.isEmpty());
     }
 
+    @Test
+    public void whenGetServiceThenReturnNotNull() {
+        assertNotNull(
+                getService()
+        );
+    }
+
+    @Test
+    public void whenGetObjectThenReturnNotNull() {
+        assertNotNull(
+                getObject()
+        );
+    }
+
+    @Test
+    public void whenGetObjectsThenReturnNotEmptyCollecton() {
+        assertFalse(
+                getObjects().isEmpty()
+        );
+    }
+
+    @Test
+    public void whenGetInvalidObjectThenReturnNotNull() {
+        assertNotNull(
+                getInvalidObject()
+        );
+    }
+
     @Ignore
     protected abstract DataService<T, E> getService();
 
