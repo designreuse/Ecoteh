@@ -44,16 +44,16 @@
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:choose>
                             <c:when test="${article.category ne null}">
-                                → <a href="<c:url value="${reqmap}/category/all"/>"
+                                → <a href="<c:url value="/admin/category/all"/>"
                                      title="Перейти к всем категориям">Все категории</a>
                                 →
-                                <a href="<c:url value="${reqmap}/category/${article.category.url}"/>"
+                                <a href="<c:url value="/admin/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
                                     <c:out value="${article.category.title}"/>
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                → <a href="<c:url value="${reqmap}/article/all"/>" title="Статьи">Статьи</a>
+                                → <a href="<c:url value="/admin/article/all"/>" title="Статьи">Статьи</a>
                             </c:otherwise>
                         </c:choose>
                         → <a href="#">Редактирование статьи</a>

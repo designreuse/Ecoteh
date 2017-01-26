@@ -77,7 +77,12 @@
                         </c:if>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <p>${company.information}</p>
+                        <p>
+                            <c:choose>
+                                <c:when test="${company.information ne null}">${company.information}</c:when>
+                                <c:otherwise>${company.description}</c:otherwise>
+                            </c:choose>
+                        </p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

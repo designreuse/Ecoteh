@@ -153,7 +153,6 @@ public final class ToLatinImpl implements ToLatin {
             case '}':
             case '[':
             case ']':
-            case '-':
                 return "";
             default:
                 return String.valueOf(ch);

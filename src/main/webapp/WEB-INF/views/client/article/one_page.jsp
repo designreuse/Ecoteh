@@ -89,7 +89,12 @@
                             <c:out value="${article.number}"/>
                         </a>
                     </p>
-                    <p>${article.text}</p>
+                    <p>
+                        <c:choose>
+                            <c:when test="${article.text ne null}">${article.text}</c:when>
+                            <c:otherwise>${article.description}</c:otherwise>
+                        </c:choose>
+                    </p>
                     <div class="clearfix"></div>
                 </div>
             </div>

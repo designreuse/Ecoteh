@@ -143,7 +143,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public ModelAndView allArticlesPage() {
-        final ModelAndView modelAndView = allSortByTitleArticlesPage(true);
+        final ModelAndView modelAndView = allSortByTitleArticlesPage(false);
         modelAndView.setViewName("client/article/all_page");
         return modelAndView;
     }
@@ -261,7 +261,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public ModelAndView categoryPage(final String url) {
-        final ModelAndView modelAndView = categoryWithSortByTitleArticlesPage(url, true);
+        final ModelAndView modelAndView = categoryWithSortByTitleArticlesPage(url, false);
         modelAndView.setViewName("client/category/one_page");
         return modelAndView;
     }
