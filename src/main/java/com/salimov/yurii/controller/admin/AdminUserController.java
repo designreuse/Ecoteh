@@ -120,7 +120,11 @@ public class AdminUserController {
     )
     public ModelAndView getAllUsers() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("users_list", this.userService.getAll(false));
+        modelAndView.addObject(
+                "users_list",
+                this.userService.getAll(false)
+        );
+        modelAndView.addObject("is_captcha", null);
         modelAndView.setViewName("admin/user/all_page");
         return modelAndView;
     }

@@ -63,15 +63,13 @@
                             <table align="center">
                                 <tr>
                                     <th class="pad">№</th>
-                                    <th class="pad">Ключ</th>
-                                    <th class="hidden-xs pad">Объект</th>
+                                    <th class="pad">Объект</th>
                                     <th class="pad"></th>
                                 </tr>
                                 <c:forEach items="${objects}" var="object">
                                     <tr>
                                         <td class="pad"><c:set var="count" value="${count + 1}"/>${count}</td>
                                         <td class="pad"><c:out value="${object.key}"/></td>
-                                        <td class="hidden-xs pad"><c:out value="${object.value}"/></td>
                                         <td class="pad">
                                             <a href="<c:url value="/admin/cache/remove/${object.key}"/>"
                                                title="Удалить объект с кэша">

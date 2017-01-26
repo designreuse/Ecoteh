@@ -137,7 +137,9 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getHomePage() {
-        return this.fabric.homePage();
+        final ModelAndView modelAndView = this.fabric.homePage();
+        modelAndView.addObject("is_captcha", null);
+        return modelAndView;
     }
 
     /**
@@ -315,7 +317,9 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getContactsPage() {
-        return this.fabric.contactsPage();
+        final ModelAndView modelAndView = this.fabric.contactsPage();
+        modelAndView.addObject("is_captcha", null);
+        return modelAndView;
     }
 
     /**
@@ -392,7 +396,9 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getAllResponsesPage() {
-        return this.fabric.allResponsesPage();
+        final ModelAndView modelAndView = this.fabric.allResponsesPage();
+        modelAndView.addObject("is_captcha", null);
+        return modelAndView;
     }
 
     /**

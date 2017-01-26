@@ -140,7 +140,7 @@ public class AdminMainController extends MainController {
     /**
      * The method throws an exception in the case of reference to it.
      * The exception sender:
-     * "GET method in "/send_message" is not supported!"
+     * "GET method in "/admin/send_message" is not supported!"
      * Request mapping: /admin/send_message
      * Method: POST
      *
@@ -153,7 +153,7 @@ public class AdminMainController extends MainController {
     )
     public void sendMessage() throws IllegalMappingException {
         throw new IllegalMappingException(
-                "GET method in \"/send_message\" is not supported!"
+                "GET method in \"/admin/send_message\" is not supported!"
         );
     }
 
@@ -182,8 +182,7 @@ public class AdminMainController extends MainController {
     /**
      * The method throws an exception in the case of reference to it.
      * The exception sender:
-     * "GET method in "/admin/response/send"
-     * is not supported!"
+     * "GET method in "/admin/response/send" is not supported!"
      * Request mapping: /admin/send_response
      * Method: POST
      *

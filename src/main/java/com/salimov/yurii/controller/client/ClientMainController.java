@@ -12,6 +12,7 @@ import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -132,18 +133,23 @@ public class ClientMainController extends MainController {
     }
 
     /**
-     * Redirects to "/home".
+     * The method throws an exception in the case of reference to it.
+     * The exception sender:
+     * "GET method in "/send_message" is not supported!"
      * Request mapping: /send_message
-     * Method: GET
+     * Method: POST
      *
-     * @return The ready object of class ModelAndView.
+     * @throws IllegalMappingException thrown when an error occurs reading
+     *                                 the mapping between object and datastore.
      */
     @RequestMapping(
             value = "/send_message",
             method = RequestMethod.GET
     )
-    public ModelAndView sendMessage() {
-        return getHomePage();
+    public void sendMessage() throws IllegalMappingException {
+        throw new IllegalMappingException(
+                "GET method in \"/send_message\" is not supported!"
+        );
     }
 
     /**
@@ -175,17 +181,23 @@ public class ClientMainController extends MainController {
     }
 
     /**
-     * Redirects to "/responses".
+     * The method throws an exception in the case of reference to it.
+     * The exception sender:
+     * "GET method in "/response/send"
+     * is not supported!"
      * Request mapping: /send_response
-     * Method: GET
+     * Method: POST
      *
-     * @return The ready object of class ModelAndView.
+     * @throws IllegalMappingException thrown when an error occurs reading
+     *                                 the mapping between object and datastore.
      */
     @RequestMapping(
             value = "/response/send",
             method = RequestMethod.GET
     )
-    public ModelAndView sendResponse() {
-        return getAllResponsesPage();
+    public void sendResponse() throws IllegalMappingException {
+        throw new IllegalMappingException(
+                "GET method in \"/response/send\" is not supported!"
+        );
     }
 }
