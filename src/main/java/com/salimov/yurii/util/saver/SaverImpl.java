@@ -1,6 +1,6 @@
 package com.salimov.yurii.util.saver;
 
-import com.salimov.yurii.exception.DuplicateException;
+import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -18,6 +18,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 public class SaverImpl implements Sever {
+
+    /**
+     * The object for logging information.
+     */
+    private final static Logger LOGGER = Logger.getLogger(
+            SaverImpl.class
+    );
 
     /**
      * The file to write.
@@ -56,28 +63,19 @@ public class SaverImpl implements Sever {
 
     /**
      * Saves a file in the file system.
-     *
-     * @throws DuplicateException a temporary error.
      */
-    // TODO: Remove catch block.
     @Override
-    public void write() throws DuplicateException {
+    public void write()  {
         if (this.file != null) {
             final String path = getPathToFile();
-            boolean isExist = checkPath(path);
+            checkPath(path);
             try (final OutputStream stream = new FileOutputStream(path)) {
                 stream.write(
                         this.file.getBytes()
                 );
             } catch (IOException ex) {
-                final DuplicateException exp = new DuplicateException(
-                        ex.getMessage()
-                                + "; Path: " + path
-                                + "; isExist = " + isExist,
-                        ex
-                );
-                exp.setStackTrace(ex.getStackTrace());
-                throw exp;
+                LOGGER.error(ex.getMessage(), ex);
+                ex.printStackTrace();
             }
         }
     }
