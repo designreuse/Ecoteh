@@ -602,9 +602,9 @@ public final class UserServiceImpl
             final Collection<User> users,
             final List<UserRole> roles
     ) {
-        List<User> result = new ArrayList<>();
-        if (users != null && !users.isEmpty()) {
-            if (roles != null && !roles.isEmpty()) {
+        final List<User> result = new ArrayList<>();
+        if ((users != null) && !users.isEmpty()) {
+            if ((roles != null) && !roles.isEmpty()) {
                 for (User user : users) {
                     result.addAll(
                             roles.stream()
@@ -639,7 +639,7 @@ public final class UserServiceImpl
     @Transactional(readOnly = true)
     public List<User> getAndFilterByRole(final UserRole role) {
         return filterByRole(
-                getAll(),
+                getAll(false),
                 role
         );
     }

@@ -371,7 +371,7 @@ public class AdminUserController {
 
     /**
      * Sends sender to personnel and redirects by url /admin/user/all.
-     * Request mapping: /admin/send_message
+     * Request mapping: /admin//user/send_message
      * Method: POST
      *
      * @param subject a subject of the sender.
@@ -380,7 +380,7 @@ public class AdminUserController {
      * @see SenderService
      */
     @RequestMapping(
-            value = "/user/send_message",
+            value = "/send_message",
             method = RequestMethod.POST
     )
     public ModelAndView sendMessage(
