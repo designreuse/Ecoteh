@@ -2,6 +2,7 @@ package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @see DataService
  */
 public interface UserService
-        extends DataService<User, Long> {
+        extends DataService<User, Long>, UserDetailsService {
 
     /**
      * Initializes, saves and returns a new user.

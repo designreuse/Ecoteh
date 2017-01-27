@@ -173,14 +173,6 @@ public interface CompanyService
     Company getMainCompany();
 
     /**
-     * Returns main company to home page.
-     *
-     * @return The main company.
-     * @see Company
-     */
-    Company getMainCompanyToHome();
-
-    /**
      * Removes main company.
      *
      * @see Company

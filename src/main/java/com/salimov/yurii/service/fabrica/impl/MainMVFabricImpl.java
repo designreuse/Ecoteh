@@ -104,7 +104,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     @Transactional(readOnly = true)
     public ModelAndView homePage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        final Company mainCompany = this.companyService.getMainCompanyToHome();
+        final Company mainCompany = this.companyService.getMainCompany();
         modelAndView.addObject("company", mainCompany);
         modelAndView.addObject(
                 "partners",

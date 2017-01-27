@@ -107,11 +107,11 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     @Override
     @Transactional
     public T update(final T model) {
-        T result = model;
+        T result = null;
         if (validated(model, true, true, false)) {
             result = this.dao.update(model);
         }
-        return result;
+        return result != null ? result : model;
     }
 
     /**

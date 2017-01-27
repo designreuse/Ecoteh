@@ -120,9 +120,15 @@ public final class MessageDaoImpl implements MessageDao {
     public Collection<Message> getAll() {
         return Cache.getAll(KEY)
                 .stream()
-                .filter(object -> object instanceof Message)
-                .map(object -> (Message) object)
-                .collect(Collectors.toList());
+                .filter(
+                        object -> object instanceof Message
+                )
+                .map(
+                        object -> (Message) object
+                )
+                .collect(
+                        Collectors.toList()
+                );
     }
 
     /**
@@ -146,7 +152,9 @@ public final class MessageDaoImpl implements MessageDao {
      */
     @Override
     public void remove(final Message message) {
-        remove(message.getId());
+        remove(
+                message.getId()
+        );
     }
 
     /**

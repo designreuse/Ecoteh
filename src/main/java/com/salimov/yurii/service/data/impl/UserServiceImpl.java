@@ -580,8 +580,11 @@ public final class UserServiceImpl
             final Collection<User> users,
             final UserRole role
     ) {
-        final List<UserRole> roles = new ArrayList<>(1);
-        roles.add(role);
+        List<UserRole> roles = null;
+        if (role != null) {
+            roles = new ArrayList<>(1);
+            roles.add(role);
+        }
         return filterByRoles(users, roles);
     }
 

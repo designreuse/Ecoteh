@@ -88,7 +88,7 @@ public class AdminCompanyController {
     )
     public ModelAndView editMainCompany() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        final Company company = this.companyService.getMainCompanyToHome();
+        final Company company = this.companyService.getMainCompany();
         modelAndView.addObject(
                 "company",
                 company

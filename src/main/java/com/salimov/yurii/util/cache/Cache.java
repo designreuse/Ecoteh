@@ -77,7 +77,7 @@ public final class Cache {
             final Object object,
             final long milliseconds
     ) {
-        Object savingObject = object;
+        Object savingObject = null;
         if ((key != null) && (object != null)) {
             savingObject = cache.put(
                     new Key<>(
@@ -87,7 +87,7 @@ public final class Cache {
                     object
             );
         }
-        return savingObject;
+        return savingObject != null ? savingObject : object;
     }
 
     /**

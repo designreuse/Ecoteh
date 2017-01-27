@@ -52,8 +52,8 @@ public final class CompanyServiceImpl
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao         a implementation
-     *                    of the {@link CompanyDao} interface.
+     * @param dao a implementation
+     *            of the {@link CompanyDao} interface.
      * @see CompanyDao
      */
     @Autowired
@@ -232,7 +232,7 @@ public final class CompanyServiceImpl
      * @param googleMaps    a new google maps url to the main company.
      * @param logoUrl       a new logo URL to the main company.
      * @param faviconUrl    a new favicon URL to the main company.
-     * @param slides         a slides URL to the main company.
+     * @param slides        a slides URL to the main company.
      * @return The updating main company.
      */
     @Override
@@ -308,42 +308,6 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Returns main company to home page.
-     * Also loads main company sides
-     *
-     * @return The main company with slides.
-     * @see Company
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Company getMainCompanyToHome() {
-        final Company mainCompany = getMainCompany();
-        mainCompany.getSlides();
-        return mainCompany;
-    }
-
-    /**
-     * Returns company with the parameter url.
-     *
-     * @param url     a url of the company to return.
-     * @param isValid is get valid company or not.
-     * @return The company with the parameter url.
-     * @see Company
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Company getByUrl(
-            final String url,
-            final boolean isValid
-    ) {
-        final Company company = super.getByUrl(
-                url, isValid
-        );
-        company.getSlides();
-        return company;
-    }
-
-    /**
      * Returns partners companies.
      *
      * @param isValid is get valid company or not.
@@ -382,10 +346,9 @@ public final class CompanyServiceImpl
         if ((
                 company != null
         ) && (
-                !company.getType()
-                        .equals(
-                                CompanyType.MAIN
-                        )
+                !company.getType().equals(
+                        CompanyType.MAIN
+                )
         )) {
             super.remove(company);
         }
