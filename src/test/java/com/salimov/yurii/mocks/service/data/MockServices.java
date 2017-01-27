@@ -274,11 +274,6 @@ public final class MockServices {
                 getCompany()
         );
         when(
-                companyService.getMainCompanyToHome()
-        ).thenReturn(
-                getCompany()
-        );
-        when(
                 companyService.getPartners(true)
         ).thenReturn(
                 getCompanies()

@@ -173,6 +173,7 @@ public final class MockEntity {
                 GOOGLE_MAPS,
                 PHOTO_URL, PHOTO_URL
         );
+        company.setId(ID);
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
         company.setWorkTimeTo(TIME);
@@ -195,6 +196,7 @@ public final class MockEntity {
     private static void initResponse() {
         response = new Response(NAME, TEXT);
         response.setId(ID);
+        response.setValidated(true);
     }
 
     private static void initUser() {

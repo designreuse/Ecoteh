@@ -84,11 +84,16 @@ public final class FileTest extends ModelTest<File> {
     }
 
     @Test
-    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
+    public void whenInitializeObjectWithNullParametersThenGetNull() {
         final File file = getObject();
         file.initialize(null, null);
         assertNull(file.getTitle());
         assertNull(file.getUrl());
+    }
+
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull() {
+        final File file = getObject();
         file.initialize("", "");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
@@ -111,10 +116,15 @@ public final class FileTest extends ModelTest<File> {
     }
 
     @Test
-    public void whenSetInvalidTitleThenGetNull() {
+    public void whenSetNullTitleThenGetNull() {
         final File file = getObject();
         file.setTitle(null);
         assertNull(file.getTitle());
+    }
+
+    @Test
+    public void whenSetBlankTitleThenGetNull() {
+        final File file = getObject();
         file.setTitle("");
         assertNull(file.getTitle());
         file.setTitle(" ");
@@ -124,10 +134,15 @@ public final class FileTest extends ModelTest<File> {
     }
 
     @Test
-    public void whenSetInvalidUrlThenGetNull() {
+    public void whenSetNullUrlThenGetNull() {
         final File file = getObject();
         file.setUrl(null);
         assertNull(file.getUrl());
+    }
+
+    @Test
+    public void whenSetBlankUrlThenGetNull() {
+        final File file = getObject();
         file.setUrl("");
         assertNull(file.getUrl());
         file.setUrl(" ");
@@ -149,23 +164,34 @@ public final class FileTest extends ModelTest<File> {
         file.translateAndSetUrl(URL);
         assertNotNull(file.getUrl());
         assertEquals(
-                file.getUrl(),
-                url
+                file.getUrl(), url
         );
     }
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
-        File file = new File(null, null);
+    public void whenPassNullParametersInConstructorThenSaveNull() {
+        final File file = new File(null, null);
         assertNull(file.getTitle());
         assertNull(file.getUrl());
-        file = new File("", "");
+    }
+
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+        final File file = new File("", "");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
-        file = new File(" ", " ");
+    }
+
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+        final File file = new File(" ", " ");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
-        file = new File("   ", "   ");
+    }
+
+    @Test
+    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+        final File file = new File("  ", "  ");
         assertNull(file.getTitle());
         assertNull(file.getUrl());
     }
@@ -173,18 +199,15 @@ public final class FileTest extends ModelTest<File> {
     @Test
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
         final File file = new File(
-                MockConstants.TITLE,
-                URL
+                TITLE, URL
         );
         assertNotNull(file.getTitle());
         assertNotNull(file.getUrl());
         assertEquals(
-                file.getTitle(),
-                MockConstants.TITLE
+                file.getTitle(), TITLE
         );
         assertEquals(
-                file.getUrl(),
-                URL
+                file.getUrl(), URL
         );
     }
 
@@ -242,10 +265,16 @@ public final class FileTest extends ModelTest<File> {
     }
 
     @Test
-    public void whenTranslateAndSetInvalidUrlThenGetNull() {
+    public void whenTranslateAndSetNullUrlThenGetNull() {
         final File file = getFile();
         file.setUrl(null);
         assertNull(file.getUrl());
+    }
+
+
+    @Test
+    public void whenTranslateAndSetBlankUrlThenGetNull() {
+        final File file = getFile();
         file.setUrl("");
         assertNull(file.getUrl());
         file.setUrl(" ");

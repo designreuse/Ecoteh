@@ -38,5 +38,5 @@ public interface MockConstants {
     String PHOTO_URL = "resources/img/some_photo.jpg";
     Date DATE = new Date();
     CompanyType COMPANY_TYPE = CompanyType.PARTNER;
-    UserRole USER_ROLE = UserRole.ANOTHER;
+    UserRole USER_ROLE = UserRole.ADMIN;
 }

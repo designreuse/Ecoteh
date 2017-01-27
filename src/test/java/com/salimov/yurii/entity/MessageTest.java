@@ -67,7 +67,7 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    public void whenPassValidParametersInConstructorThenSaveThisValues() {
+    public void whenPassValidParametersInConstructorThenSaveThisValues_1() {
         Message message = new Message(
                 NAME, EMAIL, PHONE,
                 ANY_STRING, TEXT
@@ -78,27 +78,25 @@ public final class MessageTest extends ModelTest<Message> {
         assertNotNull(message.getSubject());
         assertNotNull(message.getText());
         assertEquals(
-                message.getUsername(),
-                NAME
+                message.getUsername(), NAME
         );
         assertEquals(
-                message.getEmail(),
-                EMAIL
+                message.getEmail(), EMAIL
         );
         assertEquals(
-                message.getPhone(),
-                PHONE
+                message.getPhone(), PHONE
         );
         assertEquals(
-                message.getSubject(),
-                ANY_STRING
+                message.getSubject(), ANY_STRING
         );
         assertEquals(
-                message.getText(),
-                TEXT
+                message.getText(), TEXT
         );
+    }
 
-        message = new Message(
+    @Test
+    public void whenPassValidParametersInConstructorThenSaveThisValues_2() {
+        final Message message = new Message(
                 NAME, PHONE,
                 ANY_STRING, TEXT
         );
@@ -108,20 +106,16 @@ public final class MessageTest extends ModelTest<Message> {
         assertNotNull(message.getSubject());
         assertNotNull(message.getText());
         assertEquals(
-                message.getUsername(),
-                NAME
+                message.getUsername(), NAME
         );
         assertEquals(
-                message.getPhone(),
-                PHONE
+                message.getPhone(), PHONE
         );
         assertEquals(
-                message.getSubject(),
-                ANY_STRING
+                message.getSubject(), ANY_STRING
         );
         assertEquals(
-                message.getText(),
-                TEXT
+                message.getText(), TEXT
         );
     }
 
@@ -181,43 +175,37 @@ public final class MessageTest extends ModelTest<Message> {
         final Message message = new Message();
         int value = 0;
         assertEquals(
-                message.hashCode(),
-                value
+                message.hashCode(), value
         );
         message.setUsername(NAME);
         value += isNotBlank(message.getUsername()) ? message.getUsername().hashCode() : 0;
         assertEquals(
-                message.hashCode(),
-                value
+                message.hashCode(), value
         );
         message.setEmail(EMAIL);
         value += isNotBlank(message.getEmail()) ? message.getEmail().hashCode() : 0;
         assertEquals(
-                message.hashCode(),
-                value
+                message.hashCode(), value
         );
         message.setPhone(PHONE);
         value += isNotBlank(message.getPhone()) ? message.getPhone().hashCode() : 0;
         assertEquals(
-                message.hashCode(),
-                value
+                message.hashCode(), value
         );
         message.setSubject(ANY_STRING);
         value += isNotBlank(message.getSubject()) ? message.getSubject().hashCode() : 0;
         assertEquals(
-                message.hashCode(),
-                value
+                message.hashCode(), value
         );
         message.setText(TEXT);
         value += isNotBlank(message.getText()) ? message.getText().hashCode() : 0;
         assertEquals(
-                message.hashCode(),
-                value
+                message.hashCode(), value
         );
     }
 
     @Test
-    public void whenInitializeObjectWithInvalidParametersThenGetNull() {
+    public void whenInitializeObjectWithNullParametersThenGetNull() {
         final Message message = new Message();
         message.initialize(null, null, null, null, null);
         assertNull(message.getUsername());
@@ -226,7 +214,11 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
+    }
 
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
+        final Message message = new Message();
         message.initialize("", "", "", "", "");
         assertNull(message.getUsername());
         assertNull(message.getEmail());
@@ -234,7 +226,11 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
+    }
 
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
+        final Message message = new Message();
         message.initialize(" ", " ", " ", " ", " ");
         assertNull(message.getUsername());
         assertNull(message.getEmail());
@@ -242,8 +238,12 @@ public final class MessageTest extends ModelTest<Message> {
         assertNull(message.getSubject());
         assertNull(message.getText());
         assertNotNull(message.getDate());
+    }
 
-        message.initialize(" ", " ", " ", " ", " ");
+    @Test
+    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
+        final Message message = new Message();
+        message.initialize("   ", "   ", "   ", "   ", "   ");
         assertNull(message.getUsername());
         assertNull(message.getEmail());
         assertNull(message.getPhone());
@@ -266,32 +266,32 @@ public final class MessageTest extends ModelTest<Message> {
         assertNotNull(message.getText());
         assertNotNull(message.getDate());
         assertEquals(
-                message.getUsername(),
-                NAME
+                message.getUsername(), NAME
         );
         assertEquals(
-                message.getEmail(),
-                EMAIL
+                message.getEmail(), EMAIL
         );
         assertEquals(
-                message.getPhone(),
-                PHONE
+                message.getPhone(), PHONE
         );
         assertEquals(
-                message.getSubject(),
-                ANY_STRING
+                message.getSubject(), ANY_STRING
         );
         assertEquals(
-                message.getText(),
-                TEXT
+                message.getText(), TEXT
         );
     }
 
     @Test
-    public void whenSetInvalidUsernameThenGetNull() {
+    public void whenSetNullUsernameThenGetNull() {
         final Message message = new Message();
         message.setUsername(null);
         assertNull(message.getUsername());
+    }
+
+    @Test
+    public void whenSetBlankUsernameThenGetNull() {
+        final Message message = new Message();
         message.setUsername("");
         assertNull(message.getUsername());
         message.setUsername(" ");
@@ -309,10 +309,15 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    public void whenSetInvalidEmailThenGetNull() {
+    public void whenSetNullEmailThenGetNull() {
         final Message message = new Message();
         message.setEmail(null);
         assertNull(message.getEmail());
+    }
+
+    @Test
+    public void whenSetBlankEmailThenGetNull() {
+        final Message message = new Message();
         message.setEmail("");
         assertNull(message.getEmail());
         message.setEmail(" ");
@@ -330,10 +335,15 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    public void whenSetInvalidPhoneThenGetNull() {
+    public void whenSetNullPhoneThenGetNull() {
         final Message message = new Message();
         message.setPhone(null);
         assertNull(message.getPhone());
+    }
+
+    @Test
+    public void whenSetBlankPhoneThenGetNull() {
+        final Message message = new Message();
         message.setPhone("");
         assertNull(message.getPhone());
         message.setPhone(" ");
@@ -351,10 +361,15 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    public void whenSetInvalidSubjectThenGetNull() {
+    public void whenSetNullSubjectThenGetNull() {
         final Message message = new Message();
         message.setSubject(null);
         assertNull(message.getSubject());
+    }
+
+    @Test
+    public void whenSetBlankSubjectThenGetNull() {
+        final Message message = new Message();
         message.setSubject("");
         assertNull(message.getSubject());
         message.setSubject(" ");
@@ -372,10 +387,15 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    public void whenSetInvalidTextThenGetNull() {
+    public void whenSetNullTextThenGetNull() {
         final Message message = new Message();
         message.setText(null);
         assertNull(message.getText());
+    }
+
+    @Test
+    public void whenSetBlankTextThenGetNull() {
+        final Message message = new Message();
         message.setText("");
         assertNull(message.getText());
         message.setText(" ");
@@ -404,8 +424,7 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    @Override
-    public void whenSetInvalidIdThenGetNull() {
+    public void whenSetInvalidIdThenGetModelHashCode() {
         final Message message = getMessage();
         message.setId(null);
         assertNotNull(message.getId());
@@ -432,7 +451,7 @@ public final class MessageTest extends ModelTest<Message> {
     }
 
     @Test
-    public void whenSetInvalidDateThenGetNewDate() {
+    public void whenSetNullDateThenGetNewDate() {
         final Message message = getMessage();
         message.setDate(null);
         assertNotNull(message.getDate());
@@ -458,6 +477,12 @@ public final class MessageTest extends ModelTest<Message> {
         assertFalse(Message.isValidated(message));
         message.setText(TEXT);
         assertTrue(Message.isValidated(message));
+    }
+
+    @Ignore
+    @Test
+    @Override
+    public void whenSetInvalidIdThenGetNull() {
     }
 
     @Ignore

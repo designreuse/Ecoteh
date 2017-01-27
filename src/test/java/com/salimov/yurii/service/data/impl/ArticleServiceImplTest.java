@@ -74,11 +74,14 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenGetByValidNumberThenReturnsSomeArticle() {
+    public void whenGetByValidNumberAndTrueValidThenReturnsSomeArticle() {
         assertNotNull(
                 this.service.getByNumber(NUMBER, true)
         );
+    }
 
+    @Test
+    public void whenGetByValidNumberAndFalseValidThenReturnsSomeArticle() {
         assertNotNull(
                 this.service.getByNumber(NUMBER, false)
         );
@@ -95,22 +98,34 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenSortByNumberAndInvalidInputCollectionThenReturnsEmptyList() {
+    public void whenSortByNumberWithNullCollectionAndTrueReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByNumber(
                         null, true
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByNumberWithNullCollectionAndFalseReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByNumber(
                         null, false
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByNumberWithEmptyCollectionAndTrueReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByNumber(
                         new ArrayList<>(), true
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByNumberWithEmptyCollectionAndFalseReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByNumber(
                         new ArrayList<>(), false
@@ -119,12 +134,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenSortByNumberAndValidInputCollectionThenReturnsEmptyList() {
-        assertFalse(
-                this.service.sortByNumber(
-                        getArticles(), true
-                ).isEmpty()
-        );
+    public void whenSortByNumberWithValidInputCollectionAndTrueReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.sortByNumber(
                         getArticles(), false
@@ -133,22 +143,43 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenSortByDateAndInvalidInputCollectionThenReturnsEmptyList() {
+    public void whenSortByNumberWithValidInputCollectionAndFalseReversThenReturnsEmptyList() {
+        assertFalse(
+                this.service.sortByNumber(
+                        getArticles(), true
+                ).isEmpty()
+        );
+    }
+
+    @Test
+    public void whenSortByDateWithNullCollectionAndTrueReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByDate(
                         null, true
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByDateWithNullCollectionAndFalseReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByDate(
                         null, false
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByDateWithEmptyCollectionAndTrueReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByDate(
                         new ArrayList<>(), true
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByDateWithEmptyCollectionAndFalseReversThenReturnsEmptyList() {
         assertTrue(
                 this.service.sortByDate(
                         new ArrayList<>(), false
@@ -157,12 +188,16 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenSortByDateAndValidInputCollectionThenReturnsEmptyList() {
+    public void whenSortByDateAndValidInputCollectionWithTrueReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.sortByDate(
                         getArticles(), true
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenSortByDateAndValidInputCollectionWithFalseReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.sortByDate(
                         getArticles(), false
@@ -171,27 +206,35 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenGetAndSortByNumberThenReturnsEmptyList() {
+    public void whenGetAndSortByNumberWithTrueReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.getAndSortByNumber(true).isEmpty()
         );
+    }
+
+    @Test
+    public void whenGetAndSortByNumberWithFalseReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.getAndSortByNumber(false).isEmpty()
         );
     }
 
     @Test
-    public void whenGetAndSortByDateThenReturnsEmptyList() {
+    public void whenGetAndSortByDateWithTrueReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.getAndSortByDate(true).isEmpty()
         );
+    }
+
+    @Test
+    public void whenGetAndSortByDateWithFalseReversThenReturnsEmptyList() {
         assertFalse(
                 this.service.getAndSortByDate(false).isEmpty()
         );
     }
 
     @Test
-    public void whenFilterByDateWithInvalidInputCollectionThenReturnsEmptyList() {
+    public void whenFilterByDateWithNullCollectionThenReturnsEmptyList() {
         final Date startDate = new Date();
         try {
             Thread.sleep(1000);
@@ -206,6 +249,17 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
                         finishDate
                 ).isEmpty()
         );
+    }
+
+    @Test
+    public void whenFilterByDateWithEmptyCollectionThenReturnsEmptyList() {
+        final Date startDate = new Date();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        final Date finishDate = new Date();
         assertTrue(
                 this.service.filterByDate(
                         new ArrayList<>(),
@@ -216,28 +270,38 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenFilterByDateWithInvalidInputDatesThenReturnsEmptyList() {
+    public void whenFilterByDateWithNullStartDateThenReturnsEmptyList() {
         final List<Article> articles = getArticles();
-        final List<Article> articles1 = this.service.filterByDate(
+        final List<Article> filterArticles = this.service.filterByDate(
                 articles,
                 null,
                 new Date()
         );
-        assertFalse(articles1.isEmpty());
+        assertFalse(filterArticles.isEmpty());
         assertEquals(
                 articles.size(),
-                articles1.size()
+                filterArticles.size()
         );
-        final List<Article> articles2 = this.service.filterByDate(
+    }
+
+    @Test
+    public void whenFilterByDateWithNullEndDateThenReturnsEmptyList() {
+        final List<Article> articles = getArticles();
+        final List<Article> filterArticles = this.service.filterByDate(
                 articles,
                 new Date(),
                 null
         );
-        assertFalse(articles2.isEmpty());
+        assertFalse(filterArticles.isEmpty());
         assertEquals(
                 articles.size(),
-                articles2.size()
+                filterArticles.size()
         );
+    }
+
+    @Test
+    public void whenFilterByByDateThenReturnsSomeList() {
+        final List<Article> articles = getArticles();
         final Date finishDate = new Date();
         try {
             Thread.sleep(1000);
@@ -245,15 +309,15 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
             ex.printStackTrace();
         }
         final Date startDate = new Date();
-        final List<Article> articles3 = this.service.filterByDate(
+        final List<Article> filterArticles = this.service.filterByDate(
                 articles,
                 startDate,
                 finishDate
         );
-        assertFalse(articles3.isEmpty());
+        assertFalse(filterArticles.isEmpty());
         assertEquals(
                 articles.size(),
-                articles3.size()
+                filterArticles.size()
         );
     }
 

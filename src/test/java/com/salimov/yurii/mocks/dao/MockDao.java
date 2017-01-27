@@ -2,6 +2,7 @@ package com.salimov.yurii.mocks.dao;
 
 import com.salimov.yurii.dao.interfaces.*;
 import com.salimov.yurii.entity.*;
+import com.salimov.yurii.enums.CompanyType;
 import org.junit.Ignore;
 
 import java.util.Collection;
@@ -25,222 +26,218 @@ public final class MockDao {
 
     public static ArticleDao getArticleDao() {
         if (articleDao == null) {
-            articleDao = initArticleDao();
+            initArticleDao();
         }
         return articleDao;
     }
 
     public static CategoryDao getCategoryDao() {
         if (categoryDao == null) {
-            categoryDao = initCategoryDao();
+            initCategoryDao();
         }
         return categoryDao;
     }
 
     public static CompanyDao getCompanyDao() {
         if (companyDao == null) {
-            companyDao = initCompanyDao();
+            initCompanyDao();
         }
         return companyDao;
     }
 
     public static FileDao getFileDao() {
         if (fileDao == null) {
-            fileDao = initFileDao();
+            initFileDao();
         }
         return fileDao;
     }
 
     public static MessageDao getMessageDao() {
         if (messageDao == null) {
-            messageDao = initMessageDao();
+            initMessageDao();
         }
         return messageDao;
     }
 
     public static ResponseDao getResponseDao() {
         if (responseDao == null) {
-            responseDao = initResponseDao();
+            initResponseDao();
         }
         return responseDao;
     }
 
     public static UserDao getUserDao() {
         if (userDao == null) {
-            userDao = initUserDao();
+            initUserDao();
         }
         return userDao;
     }
 
-    private static ArticleDao initArticleDao() {
+    private static void initArticleDao() {
         final Article article = getArticle();
         final List<Article> articles = getArticles();
-        final ArticleDao dao = mock(ArticleDao.class);
+        articleDao = mock(ArticleDao.class);
         contentDao(
-                dao,
+                articleDao,
                 article,
                 new Article(),
                 articles
         );
         when(
-                dao.getByNumber(NUMBER)
+                articleDao.getByNumber(NUMBER)
         ).thenReturn(article);
         when(
-                dao.getByNumber(null)
+                articleDao.getByNumber(null)
         ).thenReturn(null);
         when(
-                dao.getByNumber(ANY_STRING)
+                articleDao.getByNumber(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByCategoryId(ID)
+                articleDao.getByCategoryId(ID)
         ).thenReturn(articles);
         when(
-                dao.getByCategoryId(UNKNOWN_ID)
+                articleDao.getByCategoryId(UNKNOWN_ID)
         ).thenReturn(null);
         when(
-                dao.getByCategoryId(null)
+                articleDao.getByCategoryId(null)
         ).thenReturn(null);
-        return dao;
     }
 
-    private static CategoryDao initCategoryDao() {
-        final CategoryDao dao = mock(CategoryDao.class);
+    private static void initCategoryDao() {
+        categoryDao = mock(CategoryDao.class);
         contentDao(
-                dao,
+                categoryDao,
                 getCategory(),
                 new Category(),
                 getCategories()
         );
-        return dao;
     }
 
-    private static CompanyDao initCompanyDao() {
+    private static void initCompanyDao() {
         final List<Company> companies = getCompanies();
-        final CompanyDao dao = mock(CompanyDao.class);
+        companyDao = mock(CompanyDao.class);
         contentDao(
-                dao,
+                companyDao,
                 getCompany(),
                 new Company(),
                 companies
         );
         when(
-                dao.getByType(COMPANY_TYPE)
+                companyDao.getByType(CompanyType.PARTNER)
         ).thenReturn(companies);
         when(
-                dao.getByType(null)
+                companyDao.getByType(CompanyType.MAIN)
+        ).thenReturn(companies);
+        when(
+                companyDao.getByType(null)
         ).thenReturn(null);
-        return dao;
     }
 
-    private static FileDao initFileDao() {
+    private static void initFileDao() {
         final File file = getFile();
-        final FileDao dao = mock(FileDao.class);
+        fileDao = mock(FileDao.class);
         dataDao(
-                dao,
+                fileDao,
                 file,
                 new File(),
                 getFiles()
         );
         when(
-                dao.getByTitle(TITLE)
+                fileDao.getByTitle(TITLE)
         ).thenReturn(file);
         when(
-                dao.getByTitle(TITLE)
+                fileDao.getByTitle(TITLE)
         ).thenReturn(file);
         when(
-                dao.getByTitle(null)
+                fileDao.getByTitle(null)
         ).thenReturn(null);
         when(
-                dao.getByTitle(ANY_STRING)
+                fileDao.getByTitle(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByUrl(URL)
+                fileDao.getByUrl(URL)
         ).thenReturn(file);
         when(
-                dao.getByUrl(null)
+                fileDao.getByUrl(null)
         ).thenReturn(null);
         when(
-                dao.getByUrl(ANY_STRING)
+                fileDao.getByUrl(ANY_STRING)
         ).thenReturn(null);
-        return dao;
     }
 
-    private static MessageDao initMessageDao() {
-        final MessageDao Dao = mock(MessageDao.class);
+    private static void initMessageDao() {
+        messageDao = mock(MessageDao.class);
         dataDao(
-                Dao,
+                messageDao,
                 getMessage(),
                 new Message(),
                 getMessages()
         );
-        return Dao;
     }
 
-    private static ResponseDao initResponseDao() {
-        final ResponseDao dao = mock(ResponseDao.class);
+    private static void initResponseDao() {
+        responseDao = mock(ResponseDao.class);
         dataDao(
-                dao,
+                responseDao,
                 getResponse(),
                 new Response(),
                 getResponses()
         );
-        return dao;
     }
 
-    private static UserDao initUserDao() {
+    private static void initUserDao() {
         final User user = getUser();
-        final UserDao dao = mock(UserDao.class);
+        userDao = mock(UserDao.class);
         dataDao(
-                dao, user,
+                userDao, user,
                 new User(),
                 getUsers()
         );
         when(
-                dao.getByName(NAME)
+                userDao.getByName(NAME)
         ).thenReturn(user);
         when(
-                dao.getByName(ANY_STRING)
+                userDao.getByName(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByName(null)
+                userDao.getByName(null)
         ).thenReturn(null);
         when(
-                dao.getByUrl(URL)
+                userDao.getByUrl(URL)
         ).thenReturn(user);
         when(
-                dao.getByUrl(ANY_STRING)
+                userDao.getByUrl(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByUrl(null)
+                userDao.getByUrl(null)
         ).thenReturn(null);
         when(
-                dao.getByLogin(LOGIN)
+                userDao.getByLogin(LOGIN)
         ).thenReturn(user);
         when(
-                dao.getByLogin(ANY_STRING)
+                userDao.getByLogin(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByLogin(null)
+                userDao.getByLogin(null)
         ).thenReturn(null);
         when(
-                dao.getByPhone(PHONE)
+                userDao.getByPhone(PHONE)
         ).thenReturn(user);
         when(
-                dao.getByPhone(ANY_STRING)
+                userDao.getByPhone(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByPhone(null)
+                userDao.getByPhone(null)
         ).thenReturn(null);
         when(
-                dao.getByEmail(EMAIL)
+                userDao.getByEmail(EMAIL)
         ).thenReturn(user);
         when(
-                dao.getByEmail(ANY_STRING)
+                userDao.getByEmail(ANY_STRING)
         ).thenReturn(null);
         when(
-                dao.getByEmail(null)
+                userDao.getByEmail(null)
         ).thenReturn(null);
-        return dao;
     }
 
     private static <T extends Content<Long>, E extends ContentDao<T, Long>> void contentDao(

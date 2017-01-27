@@ -1551,22 +1551,26 @@ public final class CompanyTest extends ContentTest<Company> {
     }
 
     @Test
+    public void companyTypeValueOf() {
+        for (CompanyType temp : CompanyType.values()) {
+            CompanyType type = CompanyType.valueOf(
+                    temp.name()
+            );
+            assertNotNull(type);
+            assertEquals(type, temp);
+        }
+    }
+
+    @Ignore
+    @Test
     @Override
     public void whenSetBlankUrlThenGetNull() {
     }
 
+    @Ignore
     @Test
     @Override
     public void whenSetNullUrlThenGetNull() {
-    }
-
-    @Test
-    public void companyTypeValueOf() {
-        for (CompanyType temp : CompanyType.values()) {
-            CompanyType type = CompanyType.valueOf(temp.name());
-            assertNotNull(type);
-            assertEquals(type, temp);
-        }
     }
 
     @Ignore

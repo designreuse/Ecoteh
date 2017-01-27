@@ -8,7 +8,8 @@ import org.junit.Ignore;
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.dao.MockDao.getFileDao;
-import static com.salimov.yurii.mocks.enity.MockEntity.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
+import static com.salimov.yurii.mocks.enity.MockEntity.getFiles;
 
 // TODO: empty
 public final class FileServiceImplTest extends DataServiceImplTest<File, Long> {
