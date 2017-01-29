@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -161,24 +162,24 @@ public class SeoServiceImpl implements SeoService {
      * @return The sitemap information.
      */
     private String createSitemap() {
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                 "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"" +
                 " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
                 " xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9" +
                 " http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" +
-                "<url>\n  <loc>http://" + domain +
-                "/</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" + domain +
-                "/index</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" + domain +
-                "/home</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" + domain +
-                "/company/main</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" + domain +
-                "/contacts</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" + domain +
-                "/address</loc>\n<priority>1.0</priority>\n</url>\n" +
-                "<url>\n  <loc>http://" + domain + "/responses</loc>\n</url>\n" +
+                "<url><loc>http://" + this.domain +
+                "/</loc><priority>1.0</priority></url>" +
+                "<url><loc>http://" + this.domain +
+                "/index</loc><priority>1.0</priority></url>" +
+                "<url><loc>http://" + this.domain +
+                "/home</loc><priority>1.0</priority></url>" +
+                "<url><loc>http://" + this.domain +
+                "/company/main</loc><priority>1.0</priority></url>" +
+                "<url><loc>http://" + this.domain +
+                "/contacts</loc><priority>1.0</priority></url>" +
+                "<url><loc>http://" + this.domain +
+                "/address</loc><priority>1.0</priority></url>" +
+                "<url><loc>http://" + this.domain + "/responses</loc></url>" +
                 getCategoriesUrls() +
                 getArticlesUrls() +
                 getPartnersUrls() +
@@ -197,15 +198,15 @@ public class SeoServiceImpl implements SeoService {
         final Collection<Category> categories = this.categoryService.getAll();
         final StringBuilder sb = new StringBuilder();
         if (categories != null && !categories.isEmpty()) {
-            sb.append("<url>\n  <loc>http://")
-                    .append(domain)
-                    .append("/category/all</loc>\n</url>\n");
+            sb.append("<url><loc>http://")
+                    .append(this.domain)
+                    .append("/category/all</loc></url>");
             for (Category category : categories) {
-                sb.append("<url>\n  <loc>http://")
-                        .append(domain)
+                sb.append("<url><loc>http://")
+                        .append(this.domain)
                         .append("/category/")
                         .append(category.getUrl())
-                        .append("</loc>\n</url>\n");
+                        .append("</loc></url>");
             }
         }
         return sb.toString();
@@ -223,17 +224,19 @@ public class SeoServiceImpl implements SeoService {
         final Collection<Article> articles = this.articleService.getAll();
         final StringBuilder sb = new StringBuilder();
         if (articles != null && !articles.isEmpty()) {
+            sb.append("<url><loc>http://")
+                    .append(this.domain)
+                    .append("/article/all</loc></url>");
             for (Article article : articles) {
-                sb.append("<url>\n  <loc>http://")
-                        .append(domain)
+                sb.append("<url><loc>http://")
+                        .append(this.domain)
                         .append("/article/")
                         .append(article.getUrl())
-                        .append("</loc>\n</url>\n")
-                        .append("<url>\n  <loc>http://")
-                        .append(domain)
+                        .append("</loc></url><url><loc>http://")
+                        .append(this.domain)
                         .append("/article/num_")
                         .append(article.getNumber())
-                        .append("</loc>\n</url>\n");
+                        .append("</loc></url>");
             }
         }
         return sb.toString();
@@ -252,18 +255,20 @@ public class SeoServiceImpl implements SeoService {
                 = this.companyService.getPartners(true);
         final StringBuilder sb = new StringBuilder();
         if (partners != null && !partners.isEmpty()) {
-            sb.append("<url>\n  <loc>http://")
+            sb.append("<url><loc>http://")
                     .append(domain)
-                    .append("/company/all</loc>\n</url>\n");
+                    .append("/company/all</loc></url>");
             for (Company partner : partners) {
-                sb.append("<url>\n  <loc>http://")
-                        .append(domain)
+                sb.append("<url><loc>http://")
+                        .append(this.domain)
                         .append("/company/")
                         .append(partner.getUrl())
-                        .append("</loc>\n</url>\n")
-                        .append("<url>\n  <loc>http://")
-                        .append(partner.getDomain())
-                        .append("</loc>\n</url>\n");
+                        .append("</loc></url>");
+                if (isNotBlank(partner.getDomain())) {
+                    sb.append("<url><loc>http://")
+                            .append(partner.getDomain())
+                            .append("</loc></url>");
+                }
             }
         }
         return sb.toString();
