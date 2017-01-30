@@ -1,6 +1,5 @@
 package com.salimov.yurii.util.sender;
 
-import com.salimov.yurii.controller.advice.AdviceController;
 import org.apache.log4j.Logger;
 
 import javax.mail.*;
@@ -25,7 +24,7 @@ public final class SenderImpl implements Sender {
      * The object for logging information.
      */
     private static final Logger LOGGER
-            = Logger.getLogger(AdviceController.class);
+            = Logger.getLogger(SenderImpl.class);
 
     /**
      * The sender charset.
