@@ -153,6 +153,7 @@ public final class Response
      * @param username a new username to the response.
      * @param text     a new text to the response.
      */
+    @Override
     public void initialize(
             final String username,
             final String text
@@ -167,6 +168,7 @@ public final class Response
      *
      * @return The response username.
      */
+    @Override
     public String getUsername() {
         return this.username;
     }
@@ -177,6 +179,7 @@ public final class Response
      *
      * @param username a new text to the response.
      */
+    @Override
     public void setUsername(final String username) {
         this.username = isNotBlank(username) ? username : null;
     }
@@ -186,6 +189,7 @@ public final class Response
      *
      * @return The response text.
      */
+    @Override
     public String getText() {
         return this.text;
     }
@@ -196,6 +200,7 @@ public final class Response
      *
      * @param text a new text to the response.
      */
+    @Override
     public void setText(final String text) {
         this.text = isNotBlank(text) ? text : null;
     }
@@ -205,6 +210,7 @@ public final class Response
      *
      * @return The response date.
      */
+    @Override
     public Date getDate() {
         return this.date;
     }
@@ -215,6 +221,7 @@ public final class Response
      *
      * @param date a new date to the article.
      */
+    @Override
     public void setDate(final Date date) {
         this.date = date != null ? date : new Date();
     }
@@ -224,6 +231,7 @@ public final class Response
      *
      * @return The article string-date.
      */
+    @Override
     public String getDateToString() {
         return getDateToString(
                 getDate()
@@ -233,6 +241,7 @@ public final class Response
     /**
      * Changes response validation.
      */
+    @Override
     public void reverseValidated() {
         setValidated(
                 !isValidated()
