@@ -4,7 +4,6 @@ import com.salimov.yurii.dao.interfaces.DataDao;
 import com.salimov.yurii.entity.Model;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -23,7 +22,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
     public void whenAddValidModelThenReturnThisModel() {
         assertNotNull(
                 getDao().add(getObject())
@@ -31,7 +29,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
     public void whenAddNullsThenReturnEmptyCollection() {
         final Collection<T> models = getDao().addAll(null);
         assertNotNull(models);
@@ -39,7 +36,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
     public void whenAddModelsThenReturnThisModels() {
         final Collection<T> models = getDao().addAll(getObjects());
         assertNotNull(models);
@@ -54,7 +50,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
     public void whenUpdateModelThenReturnThisModel() {
         assertNotNull(
                 getDao()
@@ -72,7 +67,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
     public void whenGetByIdThenReturnSomeModel() {
         assertNotNull(
                 getDao().get((E) ID)
@@ -80,7 +74,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
     public void whenGetAllThenReturnSomeModels() {
         assertNotNull(
                 getDao().getAll()
@@ -95,8 +88,15 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    @Transactional
-    public void whenExistsByIdThenReturnBoolean() {
+    public void whenExistsByUnknownIdThenReturnFalse() {
+        assertFalse(
+                getDao()
+                        .exists((E) UNKNOWN_ID)
+        );
+    }
+
+    @Test
+    public void whenExistsByIdThenReturnTrue() {
         assertTrue(
                 getDao()
                         .exists((E) ID)
@@ -104,10 +104,6 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
         assertFalse(
                 getDao()
                         .exists((E) UNKNOWN_ID)
-        );
-        assertFalse(
-                getDao()
-                        .exists(null)
         );
     }
 
@@ -126,9 +122,28 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    public void whenGetObjectsThenReturnNotEmptyCollecton() {
+    public void whenGetObjectsThenReturnNotEmptyCollection() {
         assertFalse(
                 getObjects().isEmpty()
+        );
+    }
+
+    @Test
+    public void whenRemoveByIdThenDoIt() {
+        getDao().remove((E) ID);
+    }
+
+    @Test
+    public void whenRemoveByModelThenDoIt() {
+        getDao().remove(
+                getObject()
+        );
+    }
+
+    @Test
+    public void whneRemoveByModelsThenDoIt() {
+        getDao().remove(
+                getObjects()
         );
     }
 

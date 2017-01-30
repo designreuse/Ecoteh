@@ -1562,13 +1562,11 @@ public final class CompanyTest extends ContentTest<Company> {
     }
 
     @Ignore
-    @Test
     @Override
     public void whenSetBlankUrlThenGetNull() {
     }
 
     @Ignore
-    @Test
     @Override
     public void whenSetNullUrlThenGetNull() {
     }

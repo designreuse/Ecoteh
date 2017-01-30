@@ -321,6 +321,23 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
         );
     }
 
+    @Test
+    public void whenRemoveByNullNumberThenDoNothing() {
+        getService().removeByNumber(null);
+    }
+
+    @Test
+    public void whenRemoveByBlankNumberThenDoNothing() {
+        getService().removeByNumber("");
+        getService().removeByNumber(" ");
+        getService().removeByNumber("  ");
+    }
+
+    @Test
+    public void whenRemoveByNumberThenDoIt() {
+        getService().removeByNumber(NUMBER);
+    }
+
     @Ignore
     @Override
     protected ArticleService getService() {

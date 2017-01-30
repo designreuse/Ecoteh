@@ -148,7 +148,7 @@ public final class MessageDaoImplTest {
     }
 
     @Test
-    public void whenExistMessageByInvalIdThenReturnFalse() {
+    public void whenExistMessageByInvalidIdThenReturnFalse() {
         final Message message = getMessage();
         this.dao.remove(
                 message.getId()

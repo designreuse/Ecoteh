@@ -1,6 +1,7 @@
 package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -92,6 +93,25 @@ public final class CompanyServiceImplTest
         assertFalse(
                 this.service.getPartners(false).isEmpty()
         );
+    }
+
+    @Test
+    public void whenRemoveCompanyWithMainTypeThenDoNothing() {
+        final Company company = getObject();
+        company.setType(CompanyType.MAIN);
+        this.service.remove(company);
+    }
+
+    @Test
+    public void whenRemoveCompanyWithNotMainTypeThenDoIt() {
+        final Company company = getObject();
+        company.setType(CompanyType.PARTNER);
+        this.service.remove(company);
+    }
+
+    @Test
+    public void whenRemoveMainCompanyThenDoIt() {
+        this.service.removeMain();
     }
 
     @Ignore

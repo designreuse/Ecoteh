@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.enity.MockEntity.getArticle;
 
-public class ContentComparatorTest {
+public final class ContentComparatorTest {
 
     @Test
     public void contentComparator() {

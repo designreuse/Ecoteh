@@ -552,6 +552,57 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
         );
     }
 
+    @Test
+    public void whenRemoveByNullNameThenDoNothing() {
+        this.service.removeByName(null);
+    }
+
+    @Test
+    public void whenRemoveByBlankNameThenDoNothing() {
+        this.service.removeByName("");
+        this.service.removeByName(" ");
+        this.service.removeByName("  ");
+    }
+
+    @Test
+    public void whenRemoveByNameThenDoIt() {
+        this.service.removeByName(NAME);
+    }
+
+    @Test
+    public void whenRemoveByNullUrlThenDoNothing() {
+        this.service.removeByName(null);
+    }
+
+    @Test
+    public void whenRemoveByBlankUrlThenDoNothing() {
+        this.service.removeByUrl("");
+        this.service.removeByUrl(" ");
+        this.service.removeByUrl("  ");
+    }
+
+    @Test
+    public void whenRemoveByUrlThenDoIt() {
+        this.service.removeByUrl(URL);
+    }
+
+    @Test
+    public void whenRemoveByNullLoginThenDoNothing() {
+        this.service.removeByLogin(null);
+    }
+
+    @Test
+    public void whenRemoveByBlankLoginThenDoNothing() {
+        this.service.removeByLogin("");
+        this.service.removeByLogin(" ");
+        this.service.removeByLogin("  ");
+    }
+
+    @Test
+    public void whenRemoveByLoginThenDoIt() {
+        this.service.removeByLogin(LOGIN);
+    }
+
     @Ignore
     @Override
     protected UserService getService() {

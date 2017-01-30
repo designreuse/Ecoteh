@@ -4,7 +4,6 @@ import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.service.data.interfaces.MessageService;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 
 import java.util.Collection;
 
@@ -25,7 +24,7 @@ public class MessageServiceImplTest
     }
 
     @Ignore
-    @Test
+    @Override
     public void whenExistsByModelThenReturnsTrue() {
     }
 

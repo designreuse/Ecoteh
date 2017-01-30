@@ -31,12 +31,16 @@ public final class CompanyDaoImplTest
     }
 
     @Test
+    public void whenGetByNullTitleThenReturnsNull() {
+        assertNull(
+                this.dao.getByTitle(ANY_STRING)
+        );
+    }
+
+    @Test
     public void whenGetByInvalidTitleThenReturnsNull() {
         assertNull(
                 this.dao.getByTitle(null)
-        );
-        assertNull(
-                this.dao.getByTitle(ANY_STRING)
         );
     }
 
@@ -48,10 +52,14 @@ public final class CompanyDaoImplTest
     }
 
     @Test
-    public void whenGetByInvalidUrlThenReturnsNull() {
+    public void whenGetByNullUrlThenReturnsNull() {
         assertNull(
                 this.dao.getByUrl(null)
         );
+    }
+
+    @Test
+    public void whenGetByInvalidUrlThenReturnsNull() {
         assertNull(
                 this.dao.getByUrl(ANY_STRING)
         );
@@ -62,6 +70,16 @@ public final class CompanyDaoImplTest
         assertNotNull(
                 this.dao.getByUrl(URL)
         );
+    }
+
+    @Test
+    public void whenRemoveByTitleThenDoIt() {
+        this.dao.removeByTitle(TITLE);
+    }
+
+    @Test
+    public void whenRemoveByUrlThenDoIt() {
+        this.dao.removeByUrl(URL);
     }
 
     @Ignore

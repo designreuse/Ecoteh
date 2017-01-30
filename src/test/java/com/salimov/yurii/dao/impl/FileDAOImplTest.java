@@ -28,10 +28,14 @@ public final class FileDaoImplTest
     }
 
     @Test
-    public void whenGetByInvalidTitleThenReturnsNull() {
+    public void whenGetByNullTitleThenReturnsNull() {
         assertNull(
                 this.dao.getByTitle(null)
         );
+    }
+
+    @Test
+    public void whenGetByInvalidTitleThenReturnsNull() {
         assertNull(
                 this.dao.getByTitle(ANY_STRING)
         );
@@ -45,10 +49,14 @@ public final class FileDaoImplTest
     }
 
     @Test
-    public void whenGetByInvalidUrlThenReturnsNull() {
+    public void whenGetByNullUrlThenReturnsNull() {
         assertNull(
                 this.dao.getByUrl(null)
         );
+    }
+
+    @Test
+    public void whenGetByInvalidUrlThenReturnsNull() {
         assertNull(
                 this.dao.getByUrl(ANY_STRING)
         );
@@ -59,6 +67,16 @@ public final class FileDaoImplTest
         assertNotNull(
                 this.dao.getByUrl(URL)
         );
+    }
+
+    @Test
+    public void whenRemoveByTitleThenDoIt() {
+        this.dao.removeByTitle(TITLE);
+    }
+
+    @Test
+    public void whenRemoveByUrlThenDoIt() {
+        this.dao.removeByUrl(URL);
     }
 
     @Ignore

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.MockConstants.NUMBER;
 import static com.salimov.yurii.mocks.enity.MockEntity.getArticle;
 
-public class ArticleComparatorTest {
+public final class ArticleComparatorTest {
 
     @Test
     public void articleComparator() {

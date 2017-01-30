@@ -11,7 +11,8 @@ import static com.salimov.yurii.mocks.dao.MockDao.getFileDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFiles;
 
-// TODO: empty
+// TODO: Ignored test class
+@Ignore
 public final class FileServiceImplTest extends DataServiceImplTest<File, Long> {
 
     private FileService service;

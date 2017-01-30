@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import static com.salimov.yurii.mocks.MockConstants.ID;
 import static com.salimov.yurii.mocks.MockConstants.UNKNOWN_ID;
@@ -101,20 +100,18 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenUpdateAllNullThenReturnEmptyCollection() {
-        final Collection<T> models = getService().update(
+        assertTrue(getService().update(
                 (Collection<T>) null
-        );
-        assertNotNull(models);
-        assertTrue(models.isEmpty());
+        ).isEmpty());
     }
 
     @Test
     public void whenUpdateAllInvalidModelThenReturnEmptyCollection() {
-        final Collection<T> models = getService().update(
-                new ArrayList<>()
+        assertTrue(
+                getService().update(
+                        new ArrayList<>()
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertTrue(models.isEmpty());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -131,23 +128,29 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenGetAllThenReturnSomeModels() {
-        final Collection<T> models = getService().getAll();
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
+        assertFalse(
+                getService()
+                        .getAll()
+                        .isEmpty()
+        );
     }
 
     @Test
     public void whenGetAllWithFalseValidThenReturnSomeModels() {
-        final Collection<T> models = getService().getAll(false);
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
+        assertFalse(
+                getService()
+                        .getAll(false)
+                        .isEmpty()
+        );
     }
 
     @Test
     public void whenGetAllWithTrueValidThenReturnSomeModels() {
-        final Collection<T> models = getService().getAll(true);
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
+        assertFalse(
+                getService()
+                        .getAll(true)
+                        .isEmpty()
+        );
     }
 
     @Test
@@ -199,121 +202,174 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenSubListForNullThenReturnsEmptyList() {
-        final List<T> models = getService().subList(null, 1, 1);
-        assertNotNull(models);
-        assertTrue(models.isEmpty());
+        assertTrue(
+                getService()
+                        .subList(null, 1, 1)
+                        .isEmpty()
+        );
     }
 
     @Test
     public void whenSubListForEmptyCollectionsThenReturnsEmptyList() {
-        final List<T> models = getService().subList(
-                new ArrayList<>(), 1, 1
+        assertTrue(
+                getService().subList(
+                        new ArrayList<>(), 1, 1
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertTrue(models.isEmpty());
     }
 
     @Test
     public void whenSubListWithFromIndexGreatToIndexThenReturnEmptyList() {
-        final List<T> models = getService().subList(
-                getObjects(), 2, 1
+        assertFalse(
+                getService().subList(
+                        getObjects(), 2, 1
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
     }
 
     @Test
     public void whenSubListWithMoreBigIndexThenReturnEmptyList() {
         final Collection<T> objects = getObjects();
-        final List<T> models = getService().subList(
-                objects,
-                objects.size() + 1,
-                objects.size() + 2
+        assertFalse(
+                getService().subList(
+                        objects,
+                        objects.size() + 1,
+                        objects.size() + 2
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
     }
 
     @Test
     public void whenSubListWithMoreBigToIndexThenReturnEmptyList() {
         final Collection<T> objects = getObjects();
-        final List<T> models = getService().subList(
-                objects,
-                1, objects.size() + 1
+        assertFalse(
+                getService().subList(
+                        objects,
+                        1, objects.size() + 1
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
     }
 
     @Test
     public void whenSubListWithAllValidIndexThenReturnSubList() {
-        List<T> models = getService().subList(
-                getObjects(), 1, 2
+        assertEquals(
+                getService().subList(
+                        getObjects(), 1, 2
+                ).size(),
+                1
         );
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
-        assertEquals(models.size(), 1);
     }
 
     @Test
     public void whenGetAndSubListWithFromIndexGreatToIndexThenReturnEmptyList() {
-        final List<T> models = getService().getAndSubList(2, 1);
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
+        assertFalse(
+                getService()
+                        .getAndSubList(2, 1)
+                        .isEmpty()
+        );
     }
 
     @Test
     public void whenGetAndSubListWithMoreBigIndexThenReturnEmptyList() {
-        final List<T> models = getService().getAndSubList(
-                Integer.MAX_VALUE - 1,
-                Integer.MAX_VALUE
+        assertFalse(
+                getService().getAndSubList(
+                        Integer.MAX_VALUE - 1,
+                        Integer.MAX_VALUE
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
     }
 
     @Test
     public void whenGetAndSubListWithMoreBigToIndexThenReturnEmptyList() {
-        final List<T> models = getService().getAndSubList(
-                1, Integer.MAX_VALUE
+        assertFalse(
+                getService().getAndSubList(
+                        1, Integer.MAX_VALUE
+                ).isEmpty()
         );
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
     }
 
     @Test
     public void whenFilteredByValidForNullThenReturnsEmptyList() {
-        final List<T> models = getService().filteredByValid(null);
-        assertNotNull(models);
-        assertTrue(models.isEmpty());
+        assertTrue(
+                getService()
+                        .filteredByValid(null)
+                        .isEmpty()
+        );
     }
 
     @Test
     public void whenFilteredByValidForEmptyListThenReturnsEmptyList() {
-        final List<T> models = getService().filteredByValid(
-                new ArrayList<>()
+        assertTrue(
+                getService()
+                        .filteredByValid(
+                                new ArrayList<>()
+                        ).isEmpty()
         );
-        assertNotNull(models);
-        assertTrue(models.isEmpty());
     }
 
     @Test
     public void whenFilteredByValidForValidModelsThenReturnsEmptyList() {
-        final List<T> temp = new ArrayList<>();
-        for (T model : getObjects()) {
-            model.setValidated(true);
-            temp.add(model);
-        }
-        final List<T> models1 = getService().filteredByValid(temp);
-        assertNotNull(models1);
-        assertFalse(models1.isEmpty());
+        assertFalse(
+                getService()
+                        .filteredByValid(
+                                getObjects()
+                        ).isEmpty()
+        );
     }
 
     @Test
-    public void whenGetAndSubListWithAllValidParemetersThenReturnSubList() {
-        List<T> models = getService().getAndSubList(1, 2);
-        assertNotNull(models);
-        assertFalse(models.isEmpty());
+    public void whenGetAndSubListWithAllValidParametersThenReturnSubList() {
+        assertFalse(
+                getService()
+                        .getAndSubList(1, 2)
+                        .isEmpty()
+        );
+    }
+
+    @Test
+    public void whenRemoveByNullIdThenDoNothing() {
+        getService().remove((E) null);
+    }
+
+    @Test
+    public void whenRemoveByIdThenDoIt() {
+        getService().remove((E) ID);
+    }
+
+    @Test
+    public void whenRemoveByNullModelThenDoNothing() {
+        getService().remove((T) null);
+    }
+
+    @Test
+    public void whenRemoveByModelThenDoIt() {
+        getService().remove(
+                getObject()
+        );
+    }
+
+    @Test
+    public void whenRemoveByNullModelsThenDoNothing() {
+        getService().remove((Collection<T>) null);
+    }
+
+    @Test
+    public void whenRemoveByEmptyModelsThenDoNothing() {
+        getService().remove(
+                new ArrayList<>()
+        );
+    }
+
+    @Test
+    public void whenRemoveByModelsThenDoIt() {
+        getService().remove(
+                getObjects()
+        );
+    }
+
+    @Test
+    public void whenRemoveAllThenDoIt() {
+        getService().removeAll();
     }
 
     @Test

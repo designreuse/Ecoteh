@@ -1,19 +1,21 @@
-package com.salimov.yurii.util;
+package com.salimov.yurii.util.translator;
 
-import com.salimov.yurii.mocks.MockConstants;
-import com.salimov.yurii.util.translator.Translator;
-import org.junit.Assert;
 import org.junit.Test;
 
+import static com.salimov.yurii.mocks.MockConstants.INFORMATION;
 import static org.junit.Assert.*;
 
 public final class TranslatorTest {
 
     @Test
-    public void whenTranslateInvalidValueFromCyrillicToLatinThenReturnNotNull() {
+    public void whenTranslateNullValueFromCyrillicToLatinThenReturnNotNull() {
         assertNotNull(
                 Translator.fromCyrillicToLatin(null)
         );
+    }
+
+    @Test
+    public void whenTranslateInvalidValueFromCyrillicToLatinThenReturnNotNull() {
         assertNotNull(
                 Translator.fromCyrillicToLatin("")
         );
@@ -45,10 +47,14 @@ public final class TranslatorTest {
     }
 
     @Test
-    public void whenTranslateInvalidValueToAsciiThenReturnNull() {
+    public void whenTranslateNullValueToAsciiThenReturnNull() {
         assertNull(
                 Translator.toAscii(null)
         );
+    }
+
+    @Test
+    public void whenTranslateInvalidValueToAsciiThenReturnNull() {
         assertNull(
                 Translator.toAscii("")
         );
@@ -63,20 +69,59 @@ public final class TranslatorTest {
     @Test
     public void whenTranslateValidValueToAsciiThenReturnTranslateValue() {
         assertNotNull(
-                Translator.toAscii(
-                        MockConstants.INFORMATION
-                )
+                Translator.toAscii(INFORMATION)
+        );
+    }
+
+    @Test
+    public void whenTranslateValidIntegerToAsciiThenReturnTranslateValue() {
+        assertNotNull(
+                Translator.toAscii(123)
+        );
+    }
+
+    @Test
+    public void whenTranslateNullValueFromAsciiThenReturnNull() {
+        assertNull(
+                Translator.fromAscii(null)
+        );
+    }
+
+    @Test
+    public void whenTranslateInvalidValueFromAsciiThenReturnNull() {
+        assertNull(
+                Translator.fromAscii("")
+        );
+        assertNull(
+                Translator.fromAscii(" ")
+        );
+        assertNull(
+                Translator.fromAscii("   ")
+        );
+    }
+
+    @Test
+    public void whenTranslateValidValueFromAsciiThenReturnTranslateValue() {
+        assertNotNull(
+                Translator.fromAscii("123")
+        );
+    }
+
+    @Test
+    public void whenTranslateValidIntegerFromAsciiThenReturnTranslateValue() {
+        assertNotNull(
+                Translator.fromAscii(123)
         );
     }
 
     @Test
     public void whenTranslateValidValueToAsciiAndBackThenEqualsResults() {
-        final String temp = Translator.toAscii(MockConstants.INFORMATION);
+        final String temp = Translator.toAscii(INFORMATION);
         assertNotNull(temp);
         final String result = Translator.fromAscii(temp);
         assertNotNull(result);
-        Assert.assertEquals(
-                MockConstants.INFORMATION,
+        assertEquals(
+                INFORMATION,
                 result
         );
     }

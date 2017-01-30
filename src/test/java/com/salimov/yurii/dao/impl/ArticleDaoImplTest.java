@@ -29,12 +29,16 @@ public final class ArticleDaoImplTest
     }
 
     @Test
+    public void whenGetByNullTitleThenReturnsNull() {
+        assertNull(
+                this.dao.getByTitle(ANY_STRING)
+        );
+    }
+
+    @Test
     public void whenGetByInvalidTitleThenReturnsNull() {
         assertNull(
                 this.dao.getByTitle(null)
-        );
-        assertNull(
-                this.dao.getByTitle(ANY_STRING)
         );
     }
 
@@ -46,10 +50,14 @@ public final class ArticleDaoImplTest
     }
 
     @Test
-    public void whenGetByInvalidUrlThenReturnsNull() {
+    public void whenGetByNullUrlThenReturnsNull() {
         assertNull(
                 this.dao.getByUrl(null)
         );
+    }
+
+    @Test
+    public void whenGetByInvalidUrlThenReturnsNull() {
         assertNull(
                 this.dao.getByUrl(ANY_STRING)
         );
@@ -63,10 +71,14 @@ public final class ArticleDaoImplTest
     }
 
     @Test
-    public void whenGetByInvalidNumberThenReturnsNull() {
+    public void whenGetByNullNumberThenReturnsNull() {
         assertNull(
                 this.dao.getByNumber(null)
         );
+    }
+
+    @Test
+    public void whenGetByInvalidNumberThenReturnsNull() {
         assertNull(
                 this.dao.getByNumber(ANY_STRING)
         );
@@ -80,14 +92,17 @@ public final class ArticleDaoImplTest
     }
 
     @Test
-    public void whenGetByInvalidCategoryIdThenReturnsEmptyColection() {
-        final Collection<Article> articles1 = this.dao.getByCategoryId(null);
-        assertNotNull(articles1);
-        assertTrue(articles1.isEmpty());
+    public void whenGetByNullCategoryIdThenReturnsEmptyColection() {
+        assertTrue(
+                this.dao.getByCategoryId(null).isEmpty()
+        );
+    }
 
-        final Collection<Article> articles2 = this.dao.getByCategoryId(UNKNOWN_ID);
-        assertNotNull(articles2);
-        assertTrue(articles2.isEmpty());
+    @Test
+    public void whenGetByUnknownCategoryIdThenReturnsEmptyColection() {
+        assertTrue(
+                this.dao.getByCategoryId(UNKNOWN_ID).isEmpty()
+        );
     }
 
     @Test
@@ -95,6 +110,21 @@ public final class ArticleDaoImplTest
         assertNotNull(
                 this.dao.getByCategoryId(ID)
         );
+    }
+
+    @Test
+    public void whenRemoveByTitleThenDoIt() {
+        this.dao.removeByTitle(TITLE);
+    }
+
+    @Test
+    public void whenRemoveByUrlThenDoIt() {
+        this.dao.removeByUrl(URL);
+    }
+
+    @Test
+    public void whenRemoveByNumberThenDoIt() {
+        getDao().removeByNumber(NUMBER);
     }
 
     @Ignore

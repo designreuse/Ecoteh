@@ -12,7 +12,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class FileComparatorTest {
+public final class FileComparatorTest {
 
     @Test
     public void mediaComparator() {

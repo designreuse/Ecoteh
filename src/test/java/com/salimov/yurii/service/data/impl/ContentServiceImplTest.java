@@ -257,7 +257,39 @@ public abstract class ContentServiceImplTest<T extends Content<E>, E extends Num
         );
     }
 
-    // TODO: protected boolean validated()
+    @Test
+    public void whenRemoveByNullTitleThenDoNothing() {
+        getService().removeByTitle(null);
+    }
+
+    @Test
+    public void whenRemoveByBlankTitleThenDoNothing() {
+        getService().removeByTitle("");
+        getService().removeByTitle(" ");
+        getService().removeByTitle("  ");
+    }
+
+    @Test
+    public void whenRemoveByTitleThenDoIt() {
+        getService().removeByTitle(TITLE);
+    }
+
+    @Test
+    public void whenRemoveByNullUrlThenDoNothing() {
+        getService().removeByUrl(null);
+    }
+
+    @Test
+    public void whenRemoveByBlankUrlThenDoNothing() {
+        getService().removeByUrl("");
+        getService().removeByUrl(" ");
+        getService().removeByUrl("  ");
+    }
+
+    @Test
+    public void whenRemoveByUrlThenDoIt() {
+        getService().removeByUrl(URL);
+    }
 
     @Ignore
     @Override

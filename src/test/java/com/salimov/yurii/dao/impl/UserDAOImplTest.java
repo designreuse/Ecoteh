@@ -112,6 +112,21 @@ public final class UserDaoImplTest
         );
     }
 
+    @Test
+    public void whenRemoveByNameThenDoIt() {
+        this.dao.removeByName(NAME);
+    }
+
+    @Test
+    public void whenRemoveByUrlThenDoIt() {
+        this.dao.removeByUrl(URL);
+    }
+
+    @Test
+    public void whenRemoveByLoginThenDoIt() {
+        this.dao.removeByLogin(LOGIN);
+    }
+
     @Ignore
     @Override
     protected UserDao getDao() {
