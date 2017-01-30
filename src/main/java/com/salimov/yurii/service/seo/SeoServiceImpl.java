@@ -10,11 +10,7 @@ import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -33,6 +29,16 @@ public class SeoServiceImpl implements SeoService {
      * 86400000 milliseconds = 1 day
      */
     private static final long DEFAULT_TIMEOUT = 86400000L;
+
+    /**
+     * The robots txt key.
+     */
+    private final static String ROBOTS_KEY = "SEO robots.txt";
+
+    /**
+     * The sitemap xml key.
+     */
+    private final static String SITEMAP_KEY = "SEO sitemap.xml";
 
     /**
      * The describes a set of methods for working
@@ -97,13 +103,12 @@ public class SeoServiceImpl implements SeoService {
      *
      * @return Information about the site for the search engines.
      */
-    public String getRobotsTxt() {
-        final String key = "SEO robots.txt";
-        String robotsTxt = (String) Cache.get(key);
-        if (isBlank(robotsTxt)) {
+    public ModelAndView getRobotsTxt() {
+        ModelAndView robotsTxt = (ModelAndView) Cache.get(ROBOTS_KEY);
+        if (robotsTxt == null) {
             robotsTxt = createRobotsTxt();
             Cache.put(
-                    key,
+                    ROBOTS_KEY,
                     robotsTxt,
                     DEFAULT_TIMEOUT
             );
@@ -117,18 +122,17 @@ public class SeoServiceImpl implements SeoService {
      *
      * @return Information about links on the site to search engines.
      */
-    public String getSiteMapXml() {
-        final String key = "SEO sitemap.xml";
-        String result = (String) Cache.get(key);
-        if (isBlank(result)) {
-            result = createSitemap();
+    public ModelAndView getSiteMapXml() {
+        ModelAndView sitemap = (ModelAndView) Cache.get(SITEMAP_KEY);
+        if (sitemap == null) {
+            sitemap = createSitemap();
             Cache.put(
-                    key,
-                    result,
+                    SITEMAP_KEY,
+                    sitemap,
                     DEFAULT_TIMEOUT
             );
         }
-        return result;
+        return sitemap;
     }
 
     /**
@@ -136,24 +140,17 @@ public class SeoServiceImpl implements SeoService {
      *
      * @return The information about the site for the search engines.
      */
-    private String createRobotsTxt() {
-        return "User-agent: Yandex" +
-                "\nDisallow: /admin" +
-                "\nDisallow: /login" +
-                "\nDisallow: /resources" +
-                "\nHost: " + this.domain +
-                "\nUser-agent: Googlebot" +
-                "\nDisallow: /admin" +
-                "\nDisallow: /manager" +
-                "\nDisallow: /login" +
-                "\nDisallow: /resources\n" +
-                "\nUser-agent: *" +
-                "\nCrawl-delay: 30" +
-                "\nDisallow: /admin" +
-                "\nDisallow: /login" +
-                "\nDisallow: /search" +
-                "\nDisallow: /resources\n" +
-                "\nSitemap: http://" + this.domain + "/sitemap.xml";
+    private ModelAndView createRobotsTxt() {
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(
+                "domain",
+                this.companyService.getMainCompany()
+                        .getDomain()
+                        .replace("http://", "")
+                        .replace("https://", "")
+        );
+        modelAndView.setViewName("seo/robots");
+        return modelAndView;
     }
 
     /**
@@ -161,116 +158,28 @@ public class SeoServiceImpl implements SeoService {
      *
      * @return The sitemap information.
      */
-    private String createSitemap() {
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"" +
-                " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-                " xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9" +
-                " http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" +
-                "<url><loc>http://" + this.domain +
-                "/</loc><priority>1.0</priority></url>" +
-                "<url><loc>http://" + this.domain +
-                "/index</loc><priority>1.0</priority></url>" +
-                "<url><loc>http://" + this.domain +
-                "/home</loc><priority>1.0</priority></url>" +
-                "<url><loc>http://" + this.domain +
-                "/company/main</loc><priority>1.0</priority></url>" +
-                "<url><loc>http://" + this.domain +
-                "/contacts</loc><priority>1.0</priority></url>" +
-                "<url><loc>http://" + this.domain +
-                "/address</loc><priority>1.0</priority></url>" +
-                "<url><loc>http://" + this.domain + "/responses</loc></url>" +
-                getCategoriesUrls() +
-                getArticlesUrls() +
-                getPartnersUrls() +
-                "</urlset>";
-    }
-
-    /**
-     * Creates and returns a list of all pages of categories on the site,
-     * which consists of the links to these pages.
-     *
-     * @return Information about links on the all pages
-     * of categories to search engines.
-     * @see Category
-     */
-    private String getCategoriesUrls() {
-        final Collection<Category> categories = this.categoryService.getAll();
-        final StringBuilder sb = new StringBuilder();
-        if (categories != null && !categories.isEmpty()) {
-            sb.append("<url><loc>http://")
-                    .append(this.domain)
-                    .append("/category/all</loc></url>");
-            for (Category category : categories) {
-                sb.append("<url><loc>http://")
-                        .append(this.domain)
-                        .append("/category/")
-                        .append(category.getUrl())
-                        .append("</loc></url>");
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Creates and returns a list of all pages of articles on the site,
-     * which consists of the links to these pages.
-     *
-     * @return Information about links on the all pages
-     * of articles to search engines.
-     * @see Article
-     */
-    private String getArticlesUrls() {
-        final Collection<Article> articles = this.articleService.getAll();
-        final StringBuilder sb = new StringBuilder();
-        if (articles != null && !articles.isEmpty()) {
-            sb.append("<url><loc>http://")
-                    .append(this.domain)
-                    .append("/article/all</loc></url>");
-            for (Article article : articles) {
-                sb.append("<url><loc>http://")
-                        .append(this.domain)
-                        .append("/article/")
-                        .append(article.getUrl())
-                        .append("</loc></url><url><loc>http://")
-                        .append(this.domain)
-                        .append("/article/num_")
-                        .append(article.getNumber())
-                        .append("</loc></url>");
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Creates and returns a list of all pages of partners on the site,
-     * which consists of the links to these pages.
-     *
-     * @return Information about links on the all pages
-     * of partners to search engines.
-     * @see Company
-     */
-    private String getPartnersUrls() {
-        final Collection<Company> partners
-                = this.companyService.getPartners(true);
-        final StringBuilder sb = new StringBuilder();
-        if (partners != null && !partners.isEmpty()) {
-            sb.append("<url><loc>http://")
-                    .append(domain)
-                    .append("/company/all</loc></url>");
-            for (Company partner : partners) {
-                sb.append("<url><loc>http://")
-                        .append(this.domain)
-                        .append("/company/")
-                        .append(partner.getUrl())
-                        .append("</loc></url>");
-                if (isNotBlank(partner.getDomain())) {
-                    sb.append("<url><loc>http://")
-                            .append(partner.getDomain())
-                            .append("</loc></url>");
-                }
-            }
-        }
-        return sb.toString();
+    private ModelAndView createSitemap() {
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(
+                "domain",
+                this.companyService.getMainCompany()
+                        .getDomain()
+                        .replace("http://", "")
+                        .replace("https://", "")
+        );
+        modelAndView.addObject(
+                "categories",
+                this.categoryService.getAll()
+        );
+        modelAndView.addObject(
+                "articles",
+                this.articleService.getAll()
+        );
+        modelAndView.addObject(
+                "companies",
+                this.companyService.getPartners(true)
+        );
+        modelAndView.setViewName("seo/sitemap");
+        return modelAndView;
     }
 }

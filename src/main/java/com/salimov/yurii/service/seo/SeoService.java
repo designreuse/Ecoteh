@@ -1,5 +1,7 @@
 package com.salimov.yurii.service.seo;
 
+import org.springframework.web.servlet.ModelAndView;
+
 /**
  * The interface of the service layer, describes a set of methods
  * to adjust the search engine optimization (SEO).
@@ -14,7 +16,7 @@ public interface SeoService {
      *
      * @return Information about the site for the search engines.
      */
-    String getRobotsTxt();
+    ModelAndView getRobotsTxt();
 
     /**
      * Creates and returns a sitemap. This is a list of all pages on the site,
@@ -22,5 +24,5 @@ public interface SeoService {
      *
      * @return Information about links on the site to search engines.
      */
-    String getSiteMapXml();
+    ModelAndView getSiteMapXml();
 }

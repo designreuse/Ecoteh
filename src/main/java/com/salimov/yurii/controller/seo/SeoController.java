@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The class of controller to adjust the search engine optimization (SEO).
@@ -36,7 +37,7 @@ public class SeoController {
     }
 
     /**
-     * Returns information about the site for the search engines.
+     * Returns information about the site for search engines.
      * Request mapping: /robots.txt, /robots
      * Produces: text/plain
      *
@@ -50,7 +51,7 @@ public class SeoController {
             },
             produces = "text/plain"
     )
-    public String getRobotsTxt() {
+    public ModelAndView getRobotsTxt() {
         return this.seoService.getRobotsTxt();
     }
 
@@ -71,7 +72,7 @@ public class SeoController {
             },
             produces = "application/xml"
     )
-    public String getSiteMapXml() {
+    public ModelAndView getSiteMapXml() {
         return this.seoService.getSiteMapXml();
     }
 }
