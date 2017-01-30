@@ -1,5 +1,7 @@
 package com.salimov.yurii.util.translator;
 
+import org.apache.log4j.Logger;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -10,6 +12,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Ascii
  */
 public final class AsciiImpl implements Ascii {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER
+            = Logger.getLogger(AsciiImpl.class);
 
     /**
      * The string to translate.
@@ -62,15 +70,19 @@ public final class AsciiImpl implements Ascii {
     public String from() {
         String result = null;
         if (isNotBlank(this.value)) {
-            final StringBuilder sb = new StringBuilder();
-            for (String st : this.value.split(",")) {
-                sb.append(
-                        Character.toString(
-                                (char) Integer.parseInt(st)
-                        )
-                );
+            try {
+                final StringBuilder sb = new StringBuilder();
+                for (String st : this.value.split(",")) {
+                    sb.append(
+                            Character.toString(
+                                    (char) Integer.parseInt(st)
+                            )
+                    );
+                }
+                result = sb.toString();
+            } catch (NumberFormatException ex) {
+                LOGGER.error(ex.getMessage(), ex);
             }
-            result = sb.toString();
         }
         return result;
     }

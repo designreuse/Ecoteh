@@ -23,9 +23,9 @@ public final class Cache {
     private final static long SCHEDULER_INITIAL_DELAY = 5L;
 
     /**
-     * The period between successive executions (1 hour).
+     * The period between successive executions (3 hour).
      */
-    private final static long SCHEDULER_PERIOD = 1L;
+    private final static long SCHEDULER_PERIOD = 3L;
 
     /**
      * Time unit representing one hour.
@@ -313,16 +313,20 @@ public final class Cache {
      * @return The objects with key or empty list.
      */
     public static Collection<Object> getAll(final String subKey) {
-        return cache.keySet()
-                .stream()
-                .filter(
-                        key -> key.getKey()
-                                .toString()
-                                .contains(subKey)
-                ).map(key -> cache.get(key))
-                .collect(
-                        Collectors.toList()
-                );
+        Collection<Object> objects = null;
+        if (isNotBlank(subKey)) {
+            objects = cache.keySet()
+                    .stream()
+                    .filter(
+                            key -> key.getKey()
+                                    .toString()
+                                    .contains(subKey)
+                    ).map(key -> cache.get(key))
+                    .collect(
+                            Collectors.toList()
+                    );
+        }
+        return objects;
     }
 
     /**
@@ -377,11 +381,13 @@ public final class Cache {
      */
     public static <T> void setAll(final Map<T, Object> map) {
         cache = new ConcurrentHashMap<>();
-        for (Map.Entry<T, Object> entry : map.entrySet()) {
-            put(
-                    entry.getKey(),
-                    entry.getValue()
-            );
+        if (map != null) {
+            for (Map.Entry<T, Object> entry : map.entrySet()) {
+                put(
+                        entry.getKey(),
+                        entry.getValue()
+                );
+            }
         }
     }
 
@@ -398,18 +404,20 @@ public final class Cache {
      * @param object a objects class to remove.
      */
     public static void clear(final Class object) {
-        cache.entrySet()
-                .stream()
-                .filter(
-                        entry -> entry.getValue()
-                                .getClass()
-                                .equals(object)
-                )
-                .forEach(
-                        entry -> cache.remove(
-                                entry.getKey()
-                        )
-                );
+        if (object != null) {
+            cache.entrySet()
+                    .stream()
+                    .filter(
+                            entry -> entry.getValue()
+                                    .getClass()
+                                    .equals(object)
+                    )
+                    .forEach(
+                            entry -> cache.remove(
+                                    entry.getKey()
+                            )
+                    );
+        }
     }
 
     /**
@@ -417,10 +425,13 @@ public final class Cache {
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
-     * @return {@code true} if object is exist, {@code false} otherwise.
+     * @return {@code true} if object is exist,
+     * {@code false} otherwise.
      */
     public static <T> boolean exist(final T key) {
-        return cache.containsKey(new Key<>(key));
+        return cache.containsKey(
+                new Key<>(key)
+        );
     }
 
     /**

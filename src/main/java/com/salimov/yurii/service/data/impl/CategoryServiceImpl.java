@@ -16,6 +16,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 /**
  * The class of the service layer, implements a set of methods for working
  * with objects of the class {@link Category}.
@@ -154,6 +156,55 @@ public final class CategoryServiceImpl
         );
         category.getArticles().size();
         return category;
+    }
+
+    /**
+     * Removes category with parameter id.
+     *
+     * @param id a id of category to remove.
+     * @see Article
+     */
+    @Override
+    @Transactional
+    public void remove(final Long id) {
+        if (id != null) {
+            remove(
+                    get(id)
+            );
+        }
+    }
+
+    /**
+     * Removes category with the parameter title.
+     * Removes content if title is not blank.
+     *
+     * @param title a title of the category to remove.
+     * @see Category
+     */
+    @Override
+    @Transactional
+    public void removeByTitle(final String title) {
+        if (isNotBlank(title)) {
+            remove(
+                    getByTitle(title, false)
+            );
+        }
+    }
+
+    /**
+     * Removes category with the parameter url.
+     *
+     * @param url a url of the category to remove.
+     * @see Category
+     */
+    @Override
+    @Transactional
+    public void removeByUrl(final String url) {
+        if (isNotBlank(url)) {
+            remove(
+                    getByUrl(url, false)
+            );
+        }
     }
 
     /**

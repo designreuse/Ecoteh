@@ -72,24 +72,6 @@ public final class ToLatinImpl implements ToLatin {
      */
     private static String translate(char ch) {
         switch (ch) {
-            case 'а':
-                return "a";
-            case 'б':
-                return "b";
-            case 'в':
-                return "v";
-            case 'г':
-                return "g";
-            case 'д':
-                return "d";
-            case 'е':
-                return "e";
-            case 'ё':
-                return "je";
-            case 'ж':
-                return "zh";
-            case 'з':
-                return "z";
             case 'і':
             case 'и':
                 return "i";
@@ -153,6 +135,7 @@ public final class ToLatinImpl implements ToLatin {
             case '}':
             case '[':
             case ']':
+            case '&':
                 return "";
             default:
                 return String.valueOf(ch);

@@ -147,17 +147,15 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * Removes object of {@link Content} or subclasses
      * with the parameter url.
      *
-     * @param url The url of the content to remove.
+     * @param url a url of the content to remove.
      * @see Content
      */
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        remove(
-                getByUrl(
-                        url, false
-                )
-        );
+        if (isNotBlank(url)) {
+            this.dao.removeByUrl(url);
+        }
     }
 
     /**

@@ -208,9 +208,9 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     @Override
     @Transactional
     public void remove(final E id) {
-        remove(
-                get(id)
-        );
+        if (id != null) {
+            this.dao.remove(id);
+        }
     }
 
     /**
@@ -251,9 +251,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     @Override
     @Transactional
     public void removeAll() {
-        remove(
-                getAll(false)
-        );
+        this.dao.removeAll();
     }
 
     /**

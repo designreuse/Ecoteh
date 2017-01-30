@@ -150,7 +150,7 @@ public final class CaptchaImpl implements Captcha {
     /**
      * Create work status.
      *
-     * @param url          a request url.
+     * @param url          a request URL.
      * @param postParams   a post parameters.
      * @param responseCode a response code.
      */
@@ -171,9 +171,12 @@ public final class CaptchaImpl implements Captcha {
      * @return The ip address.
      */
     private String getIpAddress(final HttpServletRequest request) {
-        String ipAddress = request.getHeader(this.header);
-        if (ipAddress == null) {
-            ipAddress = request.getRemoteAddr();
+        String ipAddress = null;
+        if (request != null) {
+            ipAddress = request.getHeader(this.header);
+            if (ipAddress == null) {
+                ipAddress = request.getRemoteAddr();
+            }
         }
         return ipAddress;
     }
@@ -181,7 +184,7 @@ public final class CaptchaImpl implements Captcha {
     /**
      * Send request and return response.
      *
-     * @param url       a request url.
+     * @param url       a request URL.
      * @param captcha   a StaticCaptcha for check.
      * @param ipAddress a request ip address.
      * @return The response to string.
@@ -192,15 +195,8 @@ public final class CaptchaImpl implements Captcha {
             final String captcha,
             final String ipAddress
     ) throws IOException {
-        final HttpsURLConnection connection = new Connection(
-                url,
-                this.userAgent,
-                this.acceptLanguage,
-                this.doOutput
-        ).getHttpsURLConnection();
-        final String postParams = "secret=" + this.serverKey
-                + "&response=" + captcha
-                + "&remoteip=" + ipAddress;
+        final HttpsURLConnection connection = getConnection(url);
+        final String postParams = getPostParams(captcha, ipAddress);
         Stream.write(
                 postParams,
                 connection.getOutputStream()
@@ -213,5 +209,39 @@ public final class CaptchaImpl implements Captcha {
         return Stream.read(
                 connection.getInputStream()
         );
+    }
+
+    /**
+     * Returns a https URL connection.
+     *
+     * @param url a request URL.
+     * @return The https URL connection.
+     * @throws IOException If an I/O error occurs.
+     */
+    private HttpsURLConnection getConnection(
+            final URL url
+    ) throws IOException {
+        return new Connection(
+                url,
+                this.userAgent,
+                this.acceptLanguage,
+                this.doOutput
+        ).getHttpsURLConnection();
+    }
+
+    /**
+     * Returns a post params.
+     *
+     * @param captcha   a StaticCaptcha for check.
+     * @param ipAddress a request ip address.
+     * @return The post params.
+     */
+    private String getPostParams(
+            final String captcha,
+            final String ipAddress
+    ) {
+        return "secret=" + this.serverKey
+                + "&response=" + captcha
+                + "&remoteip=" + ipAddress;
     }
 }

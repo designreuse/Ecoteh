@@ -4,6 +4,7 @@ import com.salimov.yurii.config.DefaultConfig;
 import org.apache.log4j.Logger;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -131,13 +132,7 @@ public class Time implements ITime {
      */
     private void initCorrectTime() {
         if (isNotBlankTime()) {
-            try {
-                this.correctTime = createTime();
-            } catch (NumberFormatException ex) {
-                LOGGER.error(ex.getMessage(), ex);
-                //ex.printStackTrace();
-                this.correctTime = "00:00";
-            }
+            this.correctTime = createTime();
         } else {
             this.correctTime = "00:00";
         }
@@ -148,9 +143,14 @@ public class Time implements ITime {
      */
     private void initHours() {
         if (isNotBlankTime()) {
-            final String[] times = this.time.split(":");
-            final int hours = Integer.parseInt(times[0]) + Integer.parseInt(times[1]) / 60;
-            this.hours = (hours >= 24 || hours <= 0) ? 0 : hours;
+            try {
+                final String[] times = this.time.split(":");
+                final int hours = Integer.parseInt(times[0])
+                        + Integer.parseInt(times[1]) / 60;
+                this.hours = (hours >= 24 || hours <= 0) ? 0 : hours;
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+            }
         }
     }
 
@@ -159,10 +159,14 @@ public class Time implements ITime {
      */
     private void initMinutes() {
         if (isNotBlankTime()) {
-            final int minutes = Integer.parseInt(
-                    time.split(":")[1]
-            );
-            this.minutes = minutes < 0 ? 0 : minutes % 60;
+            try {
+                final int minutes = Integer.parseInt(
+                        time.split(":")[1]
+                );
+                this.minutes = minutes < 0 ? 0 : minutes % 60;
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+            }
         }
     }
 
@@ -181,16 +185,63 @@ public class Time implements ITime {
     /**
      * Returns {@code true} if now time is the working time.
      *
-     * @param start  a start work time of a company.
-     * @param finish a finish work time of a company.
+     * @param startHour  a start work time of a company.
+     * @param finishHour a finish work time of a company.
      * @return {@code true} if now time is the working time,
      * {@code false} otherwise.
      */
     public static boolean isWorkTime(
-            final String start,
-            final String finish
+            final String startHour,
+            final String finishHour
     ) {
-        return isWorkDay() && isWorkHour(start, finish);
+        return isWorkDay() && isWorkHour(startHour, finishHour);
+    }
+
+    /**
+     * Checks whether the current time
+     * is included in the interval.
+     *
+     * @param currentTime a time to checks.
+     * @param startDate   a initial date.
+     * @param finishDate  a final date.
+     * @return {@code true} if time is correct,
+     * {@code false} otherwise.
+     */
+    public static boolean checkTime(
+            final Date currentTime,
+            final Date startDate,
+            final Date finishDate
+    ) {
+        boolean result = false;
+        if (currentTime != null && startDate != null && finishDate != null) {
+            final long time = currentTime.getTime();
+            result = (
+                    time >= startDate.getTime()
+            ) && (
+                    time <= finishDate.getTime()
+            );
+        }
+        return result;
+    }
+
+    /**
+     * Checks on the correct date.
+     *
+     * @param startDate  a initial date.
+     * @param finishDate a final date.
+     * @return {@code true} if dates are correct, {@code false} otherwise.
+     */
+    public static boolean checkDate(
+            final Date startDate,
+            final Date finishDate
+    ) {
+        return (
+                startDate != null
+        ) && (
+                finishDate != null
+        ) && (
+                startDate.getTime() <= finishDate.getTime()
+        );
     }
 
     /**
@@ -213,7 +264,6 @@ public class Time implements ITime {
             result = hourNow >= from && hourNow < to;
         } catch (NumberFormatException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            //ex.printStackTrace();
             result = false;
         }
         return result;

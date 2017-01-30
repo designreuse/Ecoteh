@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -410,9 +411,9 @@ public final class UserServiceImpl
     @Override
     @Transactional
     public void removeByName(final String name) {
-        remove(
-                getByName(name)
-        );
+        if(isNotBlank(name)) {
+            this.dao.removeByName(name);
+        }
     }
 
     /**
@@ -425,9 +426,9 @@ public final class UserServiceImpl
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        remove(
-                getByUrl(url)
-        );
+        if (isNotBlank(url)) {
+            this.dao.removeByUrl(url);
+        }
     }
 
     /**
@@ -440,9 +441,9 @@ public final class UserServiceImpl
     @Override
     @Transactional
     public void removeByLogin(final String login) {
-        remove(
-                getByLogin(login)
-        );
+        if (isNotBlank(login)) {
+            this.dao.removeByLogin(login);
+        }
     }
 
     /**

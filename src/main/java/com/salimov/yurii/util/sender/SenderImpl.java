@@ -1,5 +1,8 @@
 package com.salimov.yurii.util.sender;
 
+import com.salimov.yurii.controller.advice.AdviceController;
+import org.apache.log4j.Logger;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -17,6 +20,12 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * @version 1.0
  */
 public final class SenderImpl implements Sender {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER
+            = Logger.getLogger(AdviceController.class);
 
     /**
      * The sender charset.
@@ -95,6 +104,7 @@ public final class SenderImpl implements Sender {
     /**
      * Sends a message to an e-mail in new thread.
      */
+    @Override
     public void send() {
         if (validate()) {
             final Thread thread = new Thread(this);
@@ -119,7 +129,7 @@ public final class SenderImpl implements Sender {
                     this.senderEmailPass
             );
         } catch (UnsupportedEncodingException | MessagingException ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
             destroyObject();
         }
     }
@@ -162,21 +172,17 @@ public final class SenderImpl implements Sender {
         try {
             doWork(
                     getTLSProperties(),
-                    subject,
-                    text,
+                    subject, text,
                     recipientEmail,
-                    senderEmail,
-                    senderEmailPass
+                    senderEmail, senderEmailPass
             );
         } catch (UnsupportedEncodingException | MessagingException ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
             doWork(
                     getSSLProperties(),
-                    subject,
-                    text,
+                    subject, text,
                     recipientEmail,
-                    senderEmail,
-                    senderEmailPass
+                    senderEmail, senderEmailPass
             );
         }
     }
@@ -205,19 +211,17 @@ public final class SenderImpl implements Sender {
             final String senderEmail,
             final String senderEmailPass
     ) throws UnsupportedEncodingException, MessagingException {
-        final Session session = getSession(
-                properties,
-                senderEmail,
-                senderEmailPass
+        sendMessage(
+                generateMessage(
+                        getSession(
+                                properties,
+                                senderEmail, senderEmailPass
+                        ),
+                        subject, text,
+                        recipientEmail,
+                        senderEmail
+                )
         );
-        final Message message = generateMessage(
-                session,
-                subject,
-                text,
-                recipientEmail,
-                senderEmail
-        );
-        sendMessage(message);
     }
 
     /**
@@ -312,23 +316,7 @@ public final class SenderImpl implements Sender {
      */
     private Properties getTLSProperties() {
         if (this.tlsProperties == null) {
-            this.tlsProperties = new Properties();
-            this.tlsProperties.put(
-                    "mail.smtp.auth",
-                    "true"
-            );
-            this.tlsProperties.put(
-                    "mail.smtp.starttls.enable",
-                    "true"
-            );
-            this.tlsProperties.put(
-                    "mail.smtp.host",
-                    "smtp.gmail.com"
-            );
-            this.tlsProperties.put(
-                    "mail.smtp.port",
-                    "587"
-            );
+            initTlsProperties();
         }
         return this.tlsProperties;
     }
@@ -340,29 +328,59 @@ public final class SenderImpl implements Sender {
      */
     private Properties getSSLProperties() {
         if (this.sslProperties == null) {
-            this.sslProperties = new Properties();
-            this.sslProperties.put(
-                    "mail.smtp.host",
-                    "smtp.gmail.com"
-            );
-            this.sslProperties.put(
-                    "mail.smtp.socketFactory.port",
-                    "465"
-            );
-            this.sslProperties.put(
-                    "mail.smtp.socketFactory.class",
-                    "javax.net.ssl.SSLSocketFactory"
-            );
-            this.sslProperties.put(
-                    "mail.smtp.auth",
-                    "true"
-            );
-            this.sslProperties.put(
-                    "mail.smtp.port",
-                    "465"
-            );
+            initSslProperties();
         }
         return this.sslProperties;
+    }
+
+    /**
+     * Initializes Tls properties.
+     */
+    private void initTlsProperties() {
+        this.tlsProperties = new Properties();
+        this.tlsProperties.put(
+                "mail.smtp.auth",
+                "true"
+        );
+        this.tlsProperties.put(
+                "mail.smtp.starttls.enable",
+                "true"
+        );
+        this.tlsProperties.put(
+                "mail.smtp.host",
+                "smtp.gmail.com"
+        );
+        this.tlsProperties.put(
+                "mail.smtp.port",
+                "587"
+        );
+    }
+
+    /**
+     * Initializes SSL properties.
+     */
+    private void initSslProperties() {
+        this.sslProperties = new Properties();
+        this.sslProperties.put(
+                "mail.smtp.host",
+                "smtp.gmail.com"
+        );
+        this.sslProperties.put(
+                "mail.smtp.socketFactory.port",
+                "465"
+        );
+        this.sslProperties.put(
+                "mail.smtp.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory"
+        );
+        this.sslProperties.put(
+                "mail.smtp.auth",
+                "true"
+        );
+        this.sslProperties.put(
+                "mail.smtp.port",
+                "465"
+        );
     }
 
     /**

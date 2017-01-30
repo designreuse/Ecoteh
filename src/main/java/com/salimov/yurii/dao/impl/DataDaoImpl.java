@@ -1,7 +1,6 @@
 package com.salimov.yurii.dao.impl;
 
 import com.salimov.yurii.dao.interfaces.DataDao;
-import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.Model;
 import com.salimov.yurii.repository.DataRepository;
 
@@ -41,8 +40,8 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number>
      * Constructor.
      *
      * @param repository a implementation of the interface provides
-     *                   a set of JPA methods for working {@link Company}
-     *                   objects with a database.
+     *                   a set of JPA methods for working objects
+     *                   with a database.
      * @see DataRepository
      */
     DataDaoImpl(final DataRepository<T, E> repository) {

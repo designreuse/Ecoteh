@@ -74,7 +74,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                                     <div class="text-center">
                                         <a href="<c:url value="${file.url}"/>" title="${file.title}"
-                                           rel="lightgallery">
+                                           rel="lightgallery[files]">
                                             <img src="<c:url value="${file.url}"/>" class="file"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'"

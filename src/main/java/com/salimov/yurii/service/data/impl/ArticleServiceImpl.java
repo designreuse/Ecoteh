@@ -6,6 +6,7 @@ import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
+import com.salimov.yurii.util.worktime.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -275,12 +276,12 @@ public final class ArticleServiceImpl
             final Date finishDate
     ) {
         final List<Article> result = new ArrayList<>();
-        if (articles != null && !articles.isEmpty()) {
-            if (checkDate(startDate, finishDate)) {
+        if ((articles != null) && !articles.isEmpty()) {
+            if (Time.checkDate(startDate, finishDate)) {
                 result.addAll(
                         articles.stream()
                                 .filter(
-                                        article -> checkTime(
+                                        article -> Time.checkTime(
                                                 article.getDate(),
                                                 startDate,
                                                 finishDate
@@ -335,8 +336,8 @@ public final class ArticleServiceImpl
             final Collection<Category> categories
     ) {
         final List<Article> result = new ArrayList<>();
-        if (articles != null && !articles.isEmpty()) {
-            if (categories != null && !categories.isEmpty()) {
+        if ((articles != null) && !articles.isEmpty()) {
+            if ((categories != null) && !categories.isEmpty()) {
                 for (Article article : articles) {
                     result.addAll(
                             categories.stream()
@@ -428,7 +429,7 @@ public final class ArticleServiceImpl
             final Collection<Article> articles
     ) {
         List<Article> result = new ArrayList<>();
-        if (articles != null && !articles.isEmpty()) {
+        if ((articles != null) && !articles.isEmpty()) {
             result.addAll(
                     articles.stream()
                             .filter(
@@ -444,6 +445,55 @@ public final class ArticleServiceImpl
             );
         }
         return result;
+    }
+
+    /**
+     * Removes article with parameter id.
+     *
+     * @param id a id of article to remove.
+     * @see Article
+     */
+    @Override
+    @Transactional
+    public void remove(final Long id) {
+        if (id != null) {
+            remove(
+                    get(id)
+            );
+        }
+    }
+
+    /**
+     * Removes article with the parameter title.
+     * Removes content if title is not blank.
+     *
+     * @param title a title of the article to remove.
+     * @see Article
+     */
+    @Override
+    @Transactional
+    public void removeByTitle(final String title) {
+        if (isNotBlank(title)) {
+            remove(
+                    getByTitle(title, false)
+            );
+        }
+    }
+
+    /**
+     * Removes article with the parameter url.
+     *
+     * @param url a url of the article to remove.
+     * @see Article
+     */
+    @Override
+    @Transactional
+    public void removeByUrl(final String url) {
+        if (isNotBlank(url)) {
+            remove(
+                    getByUrl(url, false)
+            );
+        }
     }
 
     /**
@@ -480,6 +530,17 @@ public final class ArticleServiceImpl
     }
 
     /**
+     * Removes all articles.
+     *
+     * @see Article
+     */
+    @Override
+    @Transactional
+    public void removeAll() {
+        getAll(false).forEach(this::remove);
+    }
+
+    /**
      * Return Class object of {@link Article} class.
      *
      * @return The Class object of {@link Article} class.
@@ -487,48 +548,5 @@ public final class ArticleServiceImpl
     @Override
     protected Class<Article> getModelClass() {
         return Article.class;
-    }
-
-    /**
-     * Checks on the correct date.
-     *
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
-     * @return {@code true} if dates are correct, {@code false} otherwise.
-     */
-    private static boolean checkDate(
-            final Date startDate,
-            final Date finishDate
-    ) {
-        return (
-                startDate != null
-        ) && (
-                finishDate != null
-        ) && (
-                startDate.getTime() <= finishDate.getTime()
-        );
-    }
-
-    /**
-     * Checks whether the current time
-     * is included in the interval.
-     *
-     * @param currentTime a time to checks.
-     * @param startDate   a initial date.
-     * @param finishDate  a final date.
-     * @return {@code true} if time is correct,
-     * {@code false} otherwise.
-     */
-    private static boolean checkTime(
-            final Date currentTime,
-            final Date startDate,
-            final Date finishDate
-    ) {
-        final long time = currentTime.getTime();
-        return (
-                time >= startDate.getTime()
-        ) && (
-                time <= finishDate.getTime()
-        );
     }
 }
