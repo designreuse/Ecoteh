@@ -670,6 +670,10 @@ p,
     text-align: center
 }
 
+.text-justify {
+    text-align: justify
+}
+
 .text-lowercase {
     text-transform: lowercase
 }
