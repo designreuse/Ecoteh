@@ -74,6 +74,8 @@ public class WorkController {
 
     /**
      * Enables the site.
+     * Request mapping: /superman/on
+     * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -90,6 +92,8 @@ public class WorkController {
 
     /**
      * Disables the site.
+     * Request mapping: /superman/off
+     * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -107,6 +111,8 @@ public class WorkController {
 
     /**
      * Clears the cache.
+     * Request mapping: /superman/clear
+     * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
