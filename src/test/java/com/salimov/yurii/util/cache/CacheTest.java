@@ -218,7 +218,7 @@ public final class CacheTest {
 
     @Test
     public void whenRemoveAllByNullKeyThenDoNothing() {
-        Cache.removeAll(null);
+        Cache.removeAll((String) null);
     }
 
     @Test

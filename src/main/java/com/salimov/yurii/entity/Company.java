@@ -2,11 +2,12 @@ package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.ICompany;
 import com.salimov.yurii.enums.CompanyType;
-import com.salimov.yurii.util.translator.Translator;
 import com.salimov.yurii.util.worktime.Time;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -936,9 +937,8 @@ public final class Company
     @Override
     public void removeSlide(final String slide) {
         if (isNotBlank(slide)) {
-            this.slides = this.slides.replace(
-                    "," + slide, ""
-            ).replace(slide, "");
+            this.slides = this.slides.replace(", " + slide, "")
+                    .replace(slide, "");
         }
     }
 
@@ -974,7 +974,7 @@ public final class Company
     @Override
     public List<String> getSlidesList() {
         final List<String> result = new ArrayList<>();
-        for (String slide : this.slides.split(",")) {
+        for (String slide : this.slides.replace(" ", "").split(",")) {
             if (isNotBlank(slide)) {
                 result.add(slide);
             }
@@ -995,7 +995,7 @@ public final class Company
      */
     @Override
     public void setSlides(final String slides) {
-        this.slides = isNotBlank(slides) ? slides.replace(" ", "") : "";
+        this.slides = isNotBlank(slides) ? slides.replace("  ", " ") : "";
     }
 
     /**
@@ -1060,9 +1060,7 @@ public final class Company
     public String getUrl() {
         String url = super.getUrl();
         if (url == null) {
-            url = Translator.fromCyrillicToLatin(
-                    getDomain()
-            );
+            url = getDomain();
         }
         return url;
     }

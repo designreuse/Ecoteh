@@ -1,6 +1,5 @@
 package com.salimov.yurii.util.worktime;
 
-import com.salimov.yurii.config.DefaultConfig;
 import org.apache.log4j.Logger;
 
 import java.util.Calendar;
@@ -23,7 +22,7 @@ public class Time implements ITime {
      * The object for logging information.
      */
     private static final Logger LOGGER
-            = Logger.getLogger(DefaultConfig.class);
+            = Logger.getLogger(Time.class);
 
     /**
      * The input time;

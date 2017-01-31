@@ -395,10 +395,10 @@ public class AdminCompanyController {
                 logoUrl,
                 isValid
         );
+        Cache.clear();
         modelAndView.setViewName(
                 "redirect:/admin/company/" + company.getUrl()
         );
-        Cache.clear();
         return modelAndView;
     }
 
