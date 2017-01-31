@@ -72,6 +72,12 @@ public class WorkController {
         );
     }
 
+    /**
+     * Enables the site.
+     *
+     * @param modelAndView a object of class ModelAndView for to update.
+     * @return The ready object of class ModelAndView.
+     */
     @RequestMapping(
             value = "/superman/on",
             method = RequestMethod.GET
@@ -82,6 +88,12 @@ public class WorkController {
         return modelAndView;
     }
 
+    /**
+     * Disables the site.
+     *
+     * @param modelAndView a object of class ModelAndView for to update.
+     * @return The ready object of class ModelAndView.
+     */
     @RequestMapping(
             value = "/superman/off",
             method = RequestMethod.GET
@@ -93,11 +105,17 @@ public class WorkController {
         return modelAndView;
     }
 
+    /**
+     * Clears the cache.
+     *
+     * @param modelAndView a object of class ModelAndView for to update.
+     * @return The ready object of class ModelAndView.
+     */
     @RequestMapping(
             value = "/superman/clear",
             method = RequestMethod.GET
     )
-    public ModelAndView clear(final ModelAndView modelAndView) {
+    public ModelAndView clearCache(final ModelAndView modelAndView) {
         Cache.clear();
         System.gc();
         modelAndView.setViewName("redirect:/");
