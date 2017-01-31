@@ -109,7 +109,7 @@
                 <a href="<c:url value="/admin/messages/"/>" title="Сообщения от пользователей">Сообщения</a>
             </th>
             <td class="pad">
-                <a href="<c:url value="/admin/messages/delete/all"/>" title="Удалить все cообщения от пользователей">
+                <a href="<c:url value="/admin/messages/delete/all"/>" title="Удалить все сообщения от пользователей">
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить все
                     </button>
@@ -147,12 +147,32 @@
             <td class="pad">
                 <c:choose>
                     <c:when test="${is_enabled}">
-                        <a href="<c:url value="/admin/site/off"/>" title="Отключить сайт для пользователей.">
-                            <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-off red"
-                                      aria-hidden="true"></span>&nbsp;<b>Отключить сайт!</b>
-                            </button>
-                        </a>
+                        <button class="open btn btn-default" data-type="zoomin"
+                                title="Отключить сайт для пользователей.">
+                            <span class="glyphicon glyphicon-off red"
+                                  aria-hidden="true"></span>&nbsp;<b>Отключить сайт!</b>
+                        </button>
+                        <div class="overlay-container">
+                            <div class="window-container zoomin">
+                                <h3>Отключение сайта</h3>
+                                <h5 class="text-center">
+                                    Вы уверены, что хотите отключить сайт?<br>
+                                    Клиенты не будут иметь доступа к информации на сайте.
+                                </h5><br>
+                                <div class="text-center">
+                                    <a href="<c:url value="/admin/site/off"/>">
+                                        <button class="btn btn-default">
+                                             <span class="glyphicon glyphicon-off red"
+                                                   aria-hidden="true"></span>&nbsp;Да, отключить сайт
+                                        </button>
+                                    </a>&nbsp;&nbsp;
+                                    <button class="close btn btn-default">
+                                        <span class="glyphicon glyphicon-remove"
+                                              aria-hidden="true"></span>&nbsp;Нет, закрыть окно
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </c:when>
                     <c:otherwise>
                         <a href="<c:url value="/admin/site/on"/>" title="Возобновить сайт для пользователей">

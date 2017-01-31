@@ -25,6 +25,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/demo.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -69,6 +70,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/demo.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>
