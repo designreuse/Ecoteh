@@ -31,7 +31,7 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -68,9 +68,9 @@
             <div class="container">
                 <div class="row">
                     <div class="box">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <c:forEach items="${messages}" var="message" end="${print_messages - 1}">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <p class="response green">
                                         <c:out value="${message.dateToString}"/>&nbsp;&nbsp;&nbsp;
                                         <a href="<c:url value="/admin/messages/delete/${message.id}"/>"

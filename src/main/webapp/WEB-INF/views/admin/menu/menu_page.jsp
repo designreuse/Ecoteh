@@ -28,7 +28,7 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -49,14 +49,14 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <jsp:include page="/WEB-INF/views/admin/user/auth_user.jsp"/>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <jsp:include page="/WEB-INF/views/admin/menu/menu.jsp"/>
                     </div>
                     <div class="clearfix"></div>

@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-xs-12 col-sm-12 <c:choose>
-            <c:when test="${company.googleMaps ne null}">col-md-4 col-lg-4 col-xl-4</c:when>
-            <c:otherwise>col-md-12 col-lg-12 col-xl-12</c:otherwise>
+            <c:when test="${company.googleMaps ne null}">col-md-4 col-lg-4</c:when>
+            <c:otherwise>col-md-12 col-lg-12</c:otherwise>
         </c:choose>">
     <div class="text-contact">
         <div class="text-center hidden-xs">

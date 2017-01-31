@@ -35,11 +35,11 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <c:if test="${authorized_user ne null}">
                             <c:set var="reqmap" value="/admin"/>
                             <div class="text-center">
@@ -63,7 +63,7 @@
                         </c:if>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p>${company.description}</p>
                         <p>${company.information}</p>
                     </div>

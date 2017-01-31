@@ -31,11 +31,11 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <c:if test="${authorized_user ne null}">
                             <c:set var="reqmap" value="/admin"/>
                             <div class="text-center">
@@ -76,13 +76,11 @@
                             </p>
                         </c:if>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <p>
-                            <c:choose>
-                                <c:when test="${company.information ne null}">${company.information}</c:when>
-                                <c:otherwise>${company.description}</c:otherwise>
-                            </c:choose>
-                        </p>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <c:choose>
+                            <c:when test="${company.information ne null}"><p>${company.information}</p></c:when>
+                            <c:otherwise><p>${company.description}</p></c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="clearfix"></div>
                 </div>

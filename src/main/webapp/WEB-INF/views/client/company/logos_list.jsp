@@ -9,12 +9,12 @@
         <c:set var="print_partners" value="${length}"/>
     </c:if>
     <c:choose>
-        <c:when test="${(print_partners % 4 eq 0) or (print_partners % 4 eq 3)}"><c:set var="in_line"
-                                                                                        value="4"/></c:when>
-        <c:when test="${(print_partners % 3 eq 0) or (print_partners % 3 eq 2)}"><c:set var="in_line"
-                                                                                        value="3"/></c:when>
-        <c:when test="${(print_partners % 2 eq 0) or (print_partners % 2 eq 1)}"><c:set var="in_line"
-                                                                                        value="2"/></c:when>
+        <c:when test="${(print_partners % 4 eq 0) or (print_partners % 4 eq 3)}">
+            <c:set var="in_line" value="4"/></c:when>
+        <c:when test="${(print_partners % 3 eq 0) or (print_partners % 3 eq 2)}">
+            <c:set var="in_line" value="3"/></c:when>
+        <c:when test="${(print_partners % 2 eq 0) or (print_partners % 2 eq 1)}">
+            <c:set var="in_line" value="2"/></c:when>
         <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
     </c:choose>
     <c:set var="last_line" value="${print_partners - print_partners % in_line}"/>
@@ -33,9 +33,9 @@
                         <c:set var="in_line" value="${print_partners - last_line}"/>
                     </c:if>
                     <div class="col-xs-12 <c:choose>
-                                    <c:when test="${in_line eq 1}">col-sm-12 col-md-12 col-lg-12 col-xl-12</c:when>
-                                    <c:when test="${in_line eq 2}">col-sm-6 col-md-6 col-lg-6 col-xl-6</c:when>
-                                    <c:otherwise>col-sm-4 col-md-4 col-lg-4 col-xl-4</c:otherwise>
+                                    <c:when test="${in_line eq 1}">col-sm-12 col-md-12 col-lg-12</c:when>
+                                    <c:when test="${in_line eq 2}">col-sm-6 col-md-6 col-lg-6</c:when>
+                                    <c:otherwise>col-sm-4 col-md-4 col-lg-4</c:otherwise>
                                     </c:choose>">
                         <div class="text-center">
                             <c:choose>
@@ -61,13 +61,13 @@
                     <c:set var="printed_in_line" value="${printed_in_line + 1}"/>
                     <c:if test="${printed_in_line eq in_line}">
                         <c:if test="${length gt printed}">
-                            <div class="hidden-xs hidden-sm hidden-md col-lg-12 col-xl-12"></div>
+                            <div class="hidden-xs hidden-sm hidden-md col-lg-12"></div>
                         </c:if>
                         <c:set var="printed_in_line" value="0"/>
                     </c:if>
                 </c:forEach>
                 <c:if test="${length gt print_partners}">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
                         <p class="text-right">
                             <a href="<c:url value="${reqmap}/company/all"/>" title="Перейти к списку всех партнеров">

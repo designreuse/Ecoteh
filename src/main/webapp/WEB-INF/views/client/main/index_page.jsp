@@ -32,7 +32,7 @@
     <body>
     <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <c:if test="${fn:length(categories) gt 0}">
             <div class="container">
                 <div class="row">

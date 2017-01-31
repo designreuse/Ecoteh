@@ -33,7 +33,7 @@
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="length" value="${fn:length(categories)}"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -60,7 +60,7 @@
                         <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Все категории</a>
                     </p>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
                         <h3 class="text-center">Наша продукция<c:if test="${length le 0}"> - список пуст!</c:if></h3>
                         <hr>

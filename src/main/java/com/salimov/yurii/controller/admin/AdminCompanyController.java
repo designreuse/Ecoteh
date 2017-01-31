@@ -89,14 +89,8 @@ public class AdminCompanyController {
     public ModelAndView editMainCompany() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         final Company company = this.companyService.getMainCompany();
-        modelAndView.addObject(
-                "company",
-                company
-        );
-        modelAndView.addObject(
-                "slides",
-                company.getSlides()
-        );
+        modelAndView.addObject("company", company);
+        modelAndView.addObject("slides", company.getSlides());
         modelAndView.addObject("main", true);
         modelAndView.setViewName("admin/company/edit_page");
         return modelAndView;

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-xl-8 col-xl-offset-2">
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
     <hr>
     <h3 class="intro-text text-center">Написать отзыв</h3>
     <c:choose>
@@ -42,7 +42,7 @@
                 </button>
             </div>
         </div>
-        <input type="hidden" name="url" value="/contacts">
+        <input type="hidden" name="url" value="${request}/responses">
     </form>
 </div>
 

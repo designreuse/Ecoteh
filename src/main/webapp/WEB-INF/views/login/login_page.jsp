@@ -26,7 +26,7 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -34,7 +34,7 @@
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Авторизация</a>
                     </p>
-                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-xl-4 col-xl-offset-4">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
                         <div class="text-center">
                             <hr>
                             <h1 class="intro-text text-center">Авторизация</h1>
@@ -49,7 +49,7 @@
                             <hr>
                             <form action="<c:url value="/login"/>" method="post">
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <label title="Введите логин в формате (A-Z, a-z, 0-9, _)">
                                             <b><span class="glyphicon glyphicon-user"
                                                      aria-hidden="true"></span>&nbsp;Имя пользователя:</b>
@@ -58,7 +58,7 @@
                                                pattern="[A-Za-z0-9_]{3,100}" minlength="3" maxlength="100" autofocus
                                                placeholder="Введите логин">
                                     </div>
-                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <label title="Введите пароль в формате (A-Z, a-z, 0-9)">
                                             <b><span class="glyphicon glyphicon-check"
                                                      aria-hidden="true"></span>&nbsp;Пароль:</b>
@@ -67,7 +67,7 @@
                                                pattern="[A-Za-z0-9]{3,100}" minlength="3" maxlength="100" required
                                                placeholder="Введите пароль">
                                     </div>
-                                    <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <button type="submit" class="btn btn-default">
                                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Войти
                                         </button>

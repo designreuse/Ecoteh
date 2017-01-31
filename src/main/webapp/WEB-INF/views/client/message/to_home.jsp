@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
     <hr>
     <h3 class="intro-text text-center">Закажите бесплатный звонок</h3>
     <hr>
@@ -17,37 +17,31 @@
     <c:if test="${authorized_user ne null}"><c:set var="request" value="/admin"/></c:if>
     <form action="<c:url value="${request}/send_message"/>" method="post">
         <div class="row">
-            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <label>
-                    <b><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Имя:</b>
-                </label>
-                <input type="text" class="form-control" name="name" minlength="2"
-                       maxlength="50" placeholder="Иванов Иван" required>
+            <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="inner-addon left-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input type="text" class="form-control" name="name" minlength="2" maxlength="50"
+                           placeholder="Представтесь, пожалуйста" required/>
+                </div>
             </div>
-            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <label>
-                    <b><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;Телефона:</b>
-                </label>
-                <input type="text" class="phone form-control" name="phone" placeholder="+38 (000) 00-00-000" required>
-            </div>
-            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <label>
-                    <b><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;Коментарий:</b>
-                </label>
-                <textarea class="form-control textarea" name="message" rows="3" title=""
-                          maxlength="300" placeholder="Ваш коментарий"></textarea>
+            <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="inner-addon left-addon">
+                    <span class="glyphicon glyphicon-phone"></span>
+                    <input type="text" class="phone form-control" name="phone"
+                           placeholder="Ваш номер телефона" required/>
+                </div>
             </div>
             <c:if test="${authorized_user eq null}">
                 <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
             </c:if>
-            <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <button type="submit" class="btn btn-default">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Перезвоните
                 </button>
             </div>
         </div>
-        <input type="hidden" name="url" value="/">
-        <input type="hidden" name="email" value="">
+        <input type="hidden" name="url" value="${request}/">
+        <input type="hidden" name="message" value="Перезвоните мне, пожалуйста!">
     </form>
     <div class="message-text">
         Оставьте нам свое сообщение, и мы перезвоним Вам

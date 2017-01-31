@@ -8,7 +8,7 @@
         <div class="row">
             <div class="box">
                 <c:forEach items="${articles_list}" var="article">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <c:set var="textNotNull" value="${article.text ne null}"/>
                         <h3 class="text-center">
                             <c:choose>
@@ -62,7 +62,7 @@
                             </p>
                         </c:if>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
                     </div>
                 </c:forEach>

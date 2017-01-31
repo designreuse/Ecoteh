@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <hr>
     <h3 class="intro-text text-center">Оставить сообщение</h3>
     <c:choose>
@@ -24,7 +24,7 @@
     <c:if test="${authorized_user ne null}"><c:set var="request" value="/admin"/></c:if>
     <form action="<c:url value="${request}/send_message"/>" method="post">
         <div class="row">
-            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <label>
                     <b><span class="glyphicon glyphicon-user"
                              aria-hidden="true"></span>&nbsp;Представтесь, пожалуйста:</b>
@@ -32,14 +32,14 @@
                 <input type="text" class="form-control" name="name" minlength="2" maxlength="100"
                        placeholder="Иванов Иван Иванович" required>
             </div>
-            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <label>
                     <b><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Ваш E-mail:</b>
                 </label>
                 <input type="email" class="form-control" name="email" minlength="5" maxlength="200"
                        placeholder="myemail@email.com">
             </div>
-            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <label>
                     <b><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;Ваш номер телефона:</b>
                 </label>
@@ -62,7 +62,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <input type="hidden" name="url" value="/contacts">
+        <input type="hidden" name="url" value="${request}/contacts">
     </form>
 </div>
 

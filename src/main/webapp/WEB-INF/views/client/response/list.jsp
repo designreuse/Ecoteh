@@ -11,14 +11,14 @@
     <div class="container">
         <div class="row">
             <div class="box">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <hr>
                     <h3 class="intro-text text-center">
                         <a href="<c:url value="${reqmap}/responses"/>">Отзывы</a>
                     </h3>
                     <hr>
                     <c:forEach items="${responses}" var="response" end="${print_responses - 1}">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <p>
                                 <span class="response green"><c:out value="${response.username}"/></span>&nbsp;
                                 <span class="little">(<c:out value="${response.dateToString}"/>)</span>
@@ -27,7 +27,7 @@
                         </div>
                     </c:forEach>
                     <c:if test="${length gt print_responses}">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <hr class="hidden-md hidden-lg hidden-xl">
                             <p class="text-right">
                                 <a href="<c:url value="${reqmap}/responses"/>"

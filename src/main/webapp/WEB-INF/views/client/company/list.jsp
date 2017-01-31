@@ -8,7 +8,7 @@
         <div class="row">
             <div class="box">
                 <c:forEach items="${partners_list}" var="partner">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h3 class="text-center">
                             <b><a href="<c:url value="${reqmap}/company/${partner.url}"/>">
                                 <c:out value="${partner.title}"/>
@@ -33,7 +33,7 @@
                             </a>
                         </p>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
                     </div>
                 </c:forEach>

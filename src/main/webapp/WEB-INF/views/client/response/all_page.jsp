@@ -31,7 +31,7 @@
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="length" value="${fn:length(responses_list)}"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -85,9 +85,9 @@
             <div class="container">
                 <div class="row">
                     <div class="box">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <c:forEach items="${responses_list}" var="response" end="${print_responses - 1}">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <p>
                                         <c:if test="${!response.validated}">
                                             <span class="glyphicon glyphicon-eye-close little red" aria-hidden="true"

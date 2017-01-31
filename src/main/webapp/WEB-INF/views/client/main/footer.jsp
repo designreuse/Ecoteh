@@ -9,12 +9,12 @@
     <c:when test="${now ne start}"><c:set var="years" value="${start}-${now}"/></c:when>
     <c:otherwise><c:set var="years" value="${start}"/></c:otherwise>
 </c:choose>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <footer>
         <div class="container">
             <div class="row">
                 <%-- Left --%>
-                <div class="hidden-xs col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <div class="hidden-xs col-sm-6 col-md-4 col-lg-4">
                     <div class="text-left">
                         <p>
                             <c:if test="${main_company.mobilePhone ne null}">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <%-- Center --%>
-                <div class="hidden-xs hidden-sm col-md-4 col-lg-4 col-xl-4">
+                <div class="hidden-xs hidden-sm col-md-4 col-lg-4">
                     <div class="text-center">
                         <div style="margin-top: 20px">
                             <p>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <%-- Right --%>
-                <div class="hidden-xs col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <div class="hidden-xs col-sm-6 col-md-4 col-lg-4">
                     <div class="text-right">
                         <p class="copyright">
                             <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>

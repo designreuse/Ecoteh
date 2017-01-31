@@ -26,11 +26,11 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-xl-4 col-xl-offset-4">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
                         <div class="text-center">
                             <hr>
                             <h1 class="intro-text text-center">Напомнить пароль</h1>
@@ -50,7 +50,7 @@
                             <hr>
                             <form action="<c:url value="/forgot"/>" method="post">
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <label>
                                             <b><span class="glyphicon glyphicon-user"
                                                      aria-hidden="true"></span>&nbsp;Логин или e-mail:</b>
@@ -60,7 +60,7 @@
                                                placeholder="Введите логин или e-mail">
                                     </div>
                                     <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
-                                    <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <button type="submit" class="btn btn-default"
                                                 title="Отправить пароль на e-mail">
                                             <span class="glyphicon glyphicon-send"

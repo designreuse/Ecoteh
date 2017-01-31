@@ -14,7 +14,7 @@
             </div>
         </c:when>
         <c:when test="${company.title ne null}">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <hr>
                 <a href="http://<c:out value="${company.domain}"/>">
                     <h1 class="text-center"><b><c:out value="${company.title}"/></b></h1>
@@ -24,7 +24,7 @@
         </c:when>
     </c:choose>
     <c:if test="${company.tagline ne null}">
-        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
             <div class="address-bar">
                 <c:out value="${company.tagline}"/>
             </div>

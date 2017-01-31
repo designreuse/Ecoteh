@@ -40,11 +40,10 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                        <%-- Path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Поиск</a>
@@ -55,8 +54,8 @@
                         <h4 class="text-center red"><b>Поиск не дал результатов</b></h4>
                     </c:if>
                     <hr>
-                    <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xl-8 col-xl-offset-2">
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <label title="Введите ключевые слова для поиска. Если ключевых слов несколько, их стоит вводить через запятую &quot;,&quot;.">
                                 <b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                                     <c:if test="${is_search and !result}">Может попробуем еще?</c:if>
@@ -64,14 +63,14 @@
                             </label>
                         </div>
                         <form action="<c:url value="/search/result"/>" method="post">
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div class="inner-addon left-addon">
                                     <span class="glyphicon glyphicon-search"></span>
                                     <input type="text" class="form-control" name="keywords" value="${keywords}"
                                            placeholder="Поиск" required autofocus/>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label>
                                     <b><span class="glyphicon glyphicon-question-sign"
                                              aria-hidden="true"></span>&nbsp;Где искать?</b>
@@ -94,7 +93,7 @@
                                 </label>
                                 <input type="hidden" name="content" value="">
                             </div>
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label>
                                     <b><span class="glyphicon glyphicon-question-sign"
                                              aria-hidden="true"></span>&nbsp;Как искать?</b>
@@ -108,7 +107,7 @@
                                            <c:if test="${!how_search}">checked</c:if>>&nbsp;Любое из ключевых слов
                                 </label>&nbsp;&nbsp;&nbsp;
                             </div>
-                            <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <button type="submit" class="btn btn-default">
                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Поиск
                                 </button>
@@ -120,46 +119,48 @@
             </div>
         </div>
     </div>
-        <%-- Search Result --%>
-    <c:if test="${result}">
-        <c:if test="${categories_length gt 0}">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <c:if test="${fn:length(categories_list) gt 0}">
+    <c:choose>
+        <c:when test="${result}">
+            <c:if test="${categories_length gt 0}">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <c:if test="${fn:length(categories_list) gt 0}">
+                        <div class="container">
+                            <div class="row">
+                                <div class="box">
+                                    <hr>
+                                    <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                </div>
+            </c:if>
+            <c:if test="${articles_length gt 0}">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
+                </div>
+            </c:if>
+            <c:if test="${partners_length gt 0}">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
+                </div>
+            </c:if>
+            <c:if test="${users_length gt 0}">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="container">
                         <div class="row">
                             <div class="box">
-                                <hr>
-                                <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                                <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
-                </c:if>
-            </div>
-        </c:if>
-        <c:if test="${articles_length gt 0}">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
-            </div>
-        </c:if>
-        <c:if test="${partners_length gt 0}">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
-            </div>
-        </c:if>
-        <c:if test="${users_length gt 0}">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <div class="container">
-                    <div class="row">
-                        <div class="box">
-                            <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </c:if>
-    </c:if>
+            </c:if>
+        </c:when>
+        <c:otherwise><br><br><br></c:otherwise>
+    </c:choose>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>

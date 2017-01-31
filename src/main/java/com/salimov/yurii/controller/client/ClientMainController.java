@@ -117,17 +117,13 @@ public class ClientMainController extends MainController {
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "phone") final String phone,
-            @RequestParam(value = "email") final String email,
-            @RequestParam(value = "message") final String userMessage,
+            @RequestParam(value = "email", required = false) final String email,
+            @RequestParam(value = "message", required = false) final String userMessage,
             final HttpServletRequest request
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            sendMess(
-                    name,
-                    phone, email,
-                    userMessage
-            );
+            sendMess(name, phone, email, userMessage);
         }
         return getMessageMV(url, isCaptcha);
     }

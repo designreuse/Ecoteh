@@ -30,7 +30,7 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
@@ -56,7 +56,7 @@
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="#">Файлы</a>
                     </p>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
                         <h3 class="text-center">Файлы<c:if test="${length le 0}"> - список пуст!</c:if></h3>
                         <hr>
@@ -69,9 +69,9 @@
                                    title="Сортировать по названию">По названия</a>
                             </p><br>
                         </c:if>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <c:forEach items="${files}" var="file">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                     <div class="text-center">
                                         <a href="<c:url value="${file.url}"/>" title="${file.title}"
                                            rel="lightgallery[files]">

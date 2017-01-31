@@ -129,11 +129,7 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {
-                    "", "/",
-                    "/index",
-                    "/home"
-            },
+            value = {"", "/", "/index", "/home"},
             method = RequestMethod.GET
     )
     public ModelAndView getHomePage() {
@@ -487,7 +483,7 @@ public abstract class MainController {
             final String _text = "User name: " + name
                     + "\nPhone: " + phone
                     + (isNotBlank(email) ? "E-mail: " + email : "")
-                    + "\nText: \n" + userMessage;
+                    + (isNotBlank(userMessage) ? "\nText: \n: " + userMessage : "");
             final String subject = "New Message";
             sendToEmail(subject, _text);
             saveMess(

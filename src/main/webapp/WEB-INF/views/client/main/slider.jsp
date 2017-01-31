@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
     <br>
     <div id="carousel-example-generic" class="carousel slide">
         <c:set var="length" value="${fn:length(company.slidesList)}"/>

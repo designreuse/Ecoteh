@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -140,13 +140,7 @@
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Главная
                         </a>
                     </li>
-                    <c:choose>
-                        <c:when test="${authorized_user ne null}">
-                            <li><a href="<c:url value="/admin/section/all"/>">Разделы</a></li>
-                            <li><a href="<c:url value="/admin/category/all"/>">Категории</a></li>
-                            <li><a href="<c:url value="/admin/article/all"/>">Статьи</a></li>
-                        </c:when>
-                    </c:choose>
+                    <li><a href="<c:url value="${reqmap}/category/all"/>">Продукция</a></li>
                     <c:if test="${main_company ne null}">
                         <li><a href="<c:url value="${reqmap}/company/main"/>">О компании</a></li>
                         <li><a href="<c:url value="${reqmap}/contacts"/>">Контакты</a></li>

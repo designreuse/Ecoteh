@@ -18,9 +18,9 @@
     </c:if>
     <div class="col-xs-12 col-sm-12
                                     <c:choose>
-                                    <c:when test="${in_line eq 1}">col-md-12 col-lg-12 col-xl-12</c:when>
-                                    <c:when test="${in_line eq 2}">col-md-6 col-lg-6 col-xl-6</c:when>
-                                    <c:otherwise>col-md-4 col-lg-4 col-xl-4</c:otherwise>
+                                    <c:when test="${in_line eq 1}">col-md-12 col-lg-12</c:when>
+                                    <c:when test="${in_line eq 2}">col-md-6 col-lg-6</c:when>
+                                    <c:otherwise>col-md-4 col-lg-4</c:otherwise>
                                     </c:choose>">
         <a href="<c:url value="${reqmap}/category/${category.url}"/>"
            title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
@@ -42,12 +42,12 @@
     <c:set var="printed_in_line" value="${printed_in_line + 1}"/>
     <c:if test="${printed_in_line eq in_line}">
         <c:if test="${length gt printed}">
-            <div class="hidden-xs hidden-sm col-md-12 col-lg-12 col-xl-12">&nbsp;</div>
+            <div class="hidden-xs hidden-sm col-md-12 col-lg-12">&nbsp;</div>
         </c:if>
         <c:set var="printed_in_line" value="0"/>
     </c:if>
 </c:forEach>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <hr>
     <p class="text-right">
         <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех товаров">
