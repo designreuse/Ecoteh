@@ -19,9 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "articles")
-public final class Article
-        extends Content<Long>
-        implements IArticle<Long> {
+public final class Article extends Content<Long> implements IArticle<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -148,11 +146,9 @@ public final class Article
      */
     @Override
     public int hashCode() {
-        return super.hashCode() + (
-                isNotBlank(this.number) ? this.number.hashCode() : 0
-        ) + (
-                isNotBlank(this.text) ? this.text.hashCode() : 0
-        );
+        return super.hashCode()
+                + (isNotBlank(this.number) ? this.number.hashCode() : 0)
+                + (isNotBlank(this.text) ? this.text.hashCode() : 0);
     }
 
     /**
@@ -224,10 +220,7 @@ public final class Article
      */
     @Override
     public void newNumber() {
-        this.number = createRandomString(
-                CODE_PATTERN,
-                CODE_LENGTH
-        );
+        this.number = createRandomString(CODE_PATTERN, CODE_LENGTH);
     }
 
     /**

@@ -21,8 +21,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
 public final class ResponseDaoImpl
-        extends DataDaoImpl<Response, Long>
-        implements ResponseDao {
+        extends DataDaoImpl<Response, Long> implements ResponseDao {
 
     /**
      * Constructor.

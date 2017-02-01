@@ -137,11 +137,7 @@ public final class Category
         if (article != null) {
             this.articles.add(article);
             final Category category = article.getCategory();
-            if ((
-                    category == null
-            ) || (
-                    !category.equals(this)
-            )) {
+            if ((category == null) || (!category.equals(this))) {
                 article.setCategory(this);
             }
         }
@@ -156,11 +152,7 @@ public final class Category
      */
     @Override
     public void addArticles(final Collection<Article> articles) {
-        if ((
-                articles != null
-        ) && (
-                !articles.isEmpty()
-        )) {
+        if ((articles != null) && (!articles.isEmpty())) {
             articles.forEach(
                     this::addArticle
             );
@@ -178,11 +170,7 @@ public final class Category
         if ((article != null) && containsArticle(article)) {
             this.articles.remove(article);
             final Category category = article.getCategory();
-            if ((
-                    category != null
-            ) && (
-                    category.equals(this)
-            )) {
+            if ((category != null) && (category.equals(this))) {
                 article.setCategory(null);
             }
         }
@@ -196,14 +184,8 @@ public final class Category
      */
     @Override
     public void removeArticles(final Collection<Article> articles) {
-        if ((
-                articles != null
-        ) && (
-                !articles.isEmpty()
-        )) {
-            articles.forEach(
-                    this::removeArticle
-            );
+        if ((articles != null) && (!articles.isEmpty())) {
+            articles.forEach(this::removeArticle);
         }
     }
 
@@ -266,9 +248,7 @@ public final class Category
      */
     @Override
     public void clearArticles() {
-        removeArticles(
-                new ArrayList<>(this.articles)
-        );
+        removeArticles(new ArrayList<>(this.articles));
         this.articles = new HashSet<>();
     }
 

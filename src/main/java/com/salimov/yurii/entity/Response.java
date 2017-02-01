@@ -21,9 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "responses")
-public final class Response
-        extends Model<Long>
-        implements IResponse<Long> {
+public final class Response extends Model<Long> implements IResponse<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -117,11 +115,8 @@ public final class Response
      */
     @Override
     public int hashCode() {
-        return (
-                isNotBlank(this.username) ? this.username.hashCode() : 0
-        ) + (
-                isNotBlank(this.text) ? this.text.hashCode() : 0
-        );
+        return (isNotBlank(this.username) ? this.username.hashCode() : 0)
+                + (isNotBlank(this.text) ? this.text.hashCode() : 0);
     }
 
     /**
@@ -233,9 +228,7 @@ public final class Response
      */
     @Override
     public String getDateToString() {
-        return getDateToString(
-                getDate()
-        );
+        return getDateToString(getDate());
     }
 
     /**
@@ -243,9 +236,7 @@ public final class Response
      */
     @Override
     public void reverseValidated() {
-        setValidated(
-                !isValidated()
-        );
+        setValidated(!isValidated());
     }
 
     /**

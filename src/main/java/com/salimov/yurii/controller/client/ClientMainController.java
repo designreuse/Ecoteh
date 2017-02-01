@@ -84,10 +84,8 @@ public class ClientMainController extends MainController {
     ) {
         super(
                 new CacheMVFabricImpl(fabric),
-                companyService,
-                userService,
-                responseService,
-                messageService,
+                companyService, userService,
+                responseService, messageService,
                 senderService
         );
         this.captchaService = captchaService;

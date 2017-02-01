@@ -365,9 +365,7 @@ public class SearchServiceImpl implements SearchService {
         modelAndView.addObject(
                 name,
                 searchFromModel(
-                        keywordArray,
-                        howSearch,
-                        dataService
+                        keywordArray, howSearch, dataService
                 )
         );
     }
@@ -393,9 +391,7 @@ public class SearchServiceImpl implements SearchService {
                 if (howSearch) {
                     keyword = " " + keyword + " ";
                 }
-                if (model.toString()
-                        .toLowerCase()
-                        .contains(keyword)) {
+                if (model.toString().toLowerCase().contains(keyword)) {
                     models.add(model);
                     break;
                 }
@@ -430,16 +426,13 @@ public class SearchServiceImpl implements SearchService {
             final ModelAndView modelAndView
     ) {
         modelAndView.addObject(
-                "in_categories",
-                content.contains("in_categories")
+                "in_categories", content.contains("in_categories")
         );
         modelAndView.addObject(
-                "in_articles",
-                content.contains("in_articles")
+                "in_articles", content.contains("in_articles")
         );
         modelAndView.addObject(
-                "in_companies",
-                content.contains("in_companies")
+                "in_companies", content.contains("in_companies")
         );
         modelAndView.addObject("all", content.contains("all"));
         modelAndView.addObject("is_search", true);

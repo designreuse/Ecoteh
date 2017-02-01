@@ -24,8 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @MappedSuperclass
 public abstract class Content<E extends Number>
-        extends Model<E>
-        implements IContent<E> {
+        extends Model<E> implements IContent<E> {
 
     /**
      * It is used during deserialization to verify that
@@ -135,11 +134,8 @@ public abstract class Content<E extends Number>
      */
     @Override
     public int hashCode() {
-        return (
-                isNotBlank(this.title) ? this.title.hashCode() : 0
-        ) + (
-                isNotBlank(this.url) ? this.url.hashCode() : 0
-        );
+        return (isNotBlank(this.title) ? this.title.hashCode() : 0)
+                + (isNotBlank(this.url) ? this.url.hashCode() : 0);
     }
 
     /**
@@ -221,9 +217,7 @@ public abstract class Content<E extends Number>
      */
     @Override
     public void translateAndSetUrl(final String value) {
-        setUrl(
-                Translator.fromCyrillicToLatin(value)
-        );
+        setUrl(Translator.fromCyrillicToLatin(value));
     }
 
     /**

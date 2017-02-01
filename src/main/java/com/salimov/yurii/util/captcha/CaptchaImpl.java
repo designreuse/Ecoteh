@@ -123,8 +123,7 @@ public final class CaptchaImpl implements Captcha {
                 result = new JsonParser(
                         getResponse(
                                 new URL(this.url),
-                                captcha,
-                                ipAddress
+                                captcha, ipAddress
                         )
                 ).parse();
             } catch (IOException ex) {
@@ -197,18 +196,9 @@ public final class CaptchaImpl implements Captcha {
     ) throws IOException {
         final HttpsURLConnection connection = getConnection(url);
         final String postParams = getPostParams(captcha, ipAddress);
-        Stream.write(
-                postParams,
-                connection.getOutputStream()
-        );
-        setStatus(
-                url,
-                postParams,
-                connection.getResponseCode()
-        );
-        return Stream.read(
-                connection.getInputStream()
-        );
+        Stream.write(postParams, connection.getOutputStream());
+        setStatus(url, postParams, connection.getResponseCode());
+        return Stream.read(connection.getInputStream());
     }
 
     /**
@@ -222,10 +212,8 @@ public final class CaptchaImpl implements Captcha {
             final URL url
     ) throws IOException {
         return new Connection(
-                url,
-                this.userAgent,
-                this.acceptLanguage,
-                this.doOutput
+                url, this.userAgent,
+                this.acceptLanguage, this.doOutput
         ).getHttpsURLConnection();
     }
 

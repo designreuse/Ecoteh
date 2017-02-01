@@ -62,9 +62,7 @@ public final class ArticleServiceImpl
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public ArticleServiceImpl(
-            final ArticleDao dao
-    ) {
+    public ArticleServiceImpl(final ArticleDao dao) {
         super(dao);
         this.dao = dao;
     }
@@ -170,11 +168,7 @@ public final class ArticleServiceImpl
             );
         }
         final Article article = this.dao.getByNumber(number);
-        if ((
-                article == null
-        ) || (
-                isValid && !article.isValidated()
-        )) {
+        if ((article == null) || (isValid && !article.isValidated())) {
             throw new NullPointerException(
                     "Can`t find article by number \"" + number + "\"!"
             );
@@ -196,11 +190,7 @@ public final class ArticleServiceImpl
             final Collection<Article> articles,
             final boolean revers
     ) {
-        return sort(
-                articles,
-                new ArticleComparator.ByNumber(),
-                revers
-        );
+        return sort(articles, new ArticleComparator.ByNumber(), revers);
     }
 
     /**
@@ -217,11 +207,7 @@ public final class ArticleServiceImpl
             final Collection<Article> articles,
             final boolean revers
     ) {
-        return sort(
-                articles,
-                new ArticleComparator.ByDate(),
-                revers
-        );
+        return sort(articles, new ArticleComparator.ByDate(), revers);
     }
 
     /**
@@ -234,10 +220,7 @@ public final class ArticleServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Article> getAndSortByNumber(final boolean revers) {
-        return sortByNumber(
-                getAll(),
-                revers
-        );
+        return sortByNumber(getAll(), revers);
     }
 
     /**
@@ -250,10 +233,7 @@ public final class ArticleServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Article> getAndSortByDate(final boolean revers) {
-        return sortByDate(
-                getAll(),
-                revers
-        );
+        return sortByDate(getAll(), revers);
     }
 
     /**
@@ -286,10 +266,7 @@ public final class ArticleServiceImpl
                                                 startDate,
                                                 finishDate
                                         )
-                                )
-                                .collect(
-                                        Collectors.toList()
-                                )
+                                ).collect(Collectors.toList())
                 );
             } else {
                 result.addAll(articles);
@@ -344,11 +321,8 @@ public final class ArticleServiceImpl
                                     .filter(
                                             category -> article.getCategory()
                                                     .equals(category)
-                                    )
-                                    .map(category -> article)
-                                    .collect(
-                                            Collectors.toList()
-                                    )
+                                    ).map(category -> article)
+                                    .collect(Collectors.toList())
                     );
                 }
             } else {
@@ -372,11 +346,7 @@ public final class ArticleServiceImpl
             final Date startDate,
             final Date finishDate
     ) {
-        return filterByDate(
-                getAll(),
-                startDate,
-                finishDate
-        );
+        return filterByDate(getAll(), startDate, finishDate);
     }
 
     /**
@@ -390,10 +360,7 @@ public final class ArticleServiceImpl
     @Override
     @Transactional
     public List<Article> getAndFilterByCategory(final Category category) {
-        return filterByCategory(
-                getAll(),
-                category
-        );
+        return filterByCategory(getAll(), category);
     }
 
     /**
@@ -409,10 +376,7 @@ public final class ArticleServiceImpl
     public List<Article> getAndFilterByCategories(
             final Collection<Category> categories
     ) {
-        return filterByCategories(
-                getAll(),
-                categories
-        );
+        return filterByCategories(getAll(), categories);
     }
 
     /**
@@ -433,15 +397,9 @@ public final class ArticleServiceImpl
             result.addAll(
                     articles.stream()
                             .filter(
-                                    article -> (
-                                            article != null
-                                    ) && (
-                                            article.isValidated()
-                                    )
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                                    article -> (article != null)
+                                            && article.isValidated()
+                            ).collect(Collectors.toList())
             );
         }
         return result;
@@ -457,9 +415,7 @@ public final class ArticleServiceImpl
     @Transactional
     public void remove(final Long id) {
         if (id != null) {
-            remove(
-                    get(id)
-            );
+            remove(get(id));
         }
     }
 
@@ -474,9 +430,7 @@ public final class ArticleServiceImpl
     @Transactional
     public void removeByTitle(final String title) {
         if (isNotBlank(title)) {
-            remove(
-                    getByTitle(title, false)
-            );
+            remove(getByTitle(title, false));
         }
     }
 
@@ -490,9 +444,7 @@ public final class ArticleServiceImpl
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotBlank(url)) {
-            remove(
-                    getByUrl(url, false)
-            );
+            remove(getByUrl(url, false));
         }
     }
 
@@ -507,9 +459,7 @@ public final class ArticleServiceImpl
     @Transactional
     public void removeByNumber(final String number) {
         if (isNotBlank(number)) {
-            remove(
-                    getByNumber(number, false)
-            );
+            remove(getByNumber(number, false));
         }
     }
 

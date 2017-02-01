@@ -105,8 +105,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView homePage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
-                "company",
-                this.companyService.getMainCompany()
+                "company", this.companyService.getMainCompany()
         );
         modelAndView.addObject(
                 "partners",
@@ -116,8 +115,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         );
         modelAndView.addObject("print_partners", 6);
         modelAndView.addObject(
-                "responses",
-                this.responseService.getAndSortByDate(true)
+                "responses", this.responseService.getAndSortByDate(true)
         );
         modelAndView.addObject("print_responses", 3);
         modelAndView.setViewName("client/main/index_page");
@@ -190,14 +188,10 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView aboutCompanyPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
-                "company",
-                this.companyService.getMainCompany()
+                "company", this.companyService.getMainCompany()
         );
         modelAndView.addObject(
-                "users_list",
-                this.userService.getAll(
-                        isValidContent()
-                )
+                "users_list", this.userService.getAll(isValidContent())
         );
         modelAndView.setViewName("client/company/main_page");
         return modelAndView;
@@ -311,10 +305,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView articleByUrlPage(final String url) {
         return articlePage(
-                this.articleService.getByUrl(
-                        url,
-                        isValidContent()
-                )
+                this.articleService.getByUrl(url, isValidContent())
         );
     }
 
@@ -328,10 +319,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView articleByNumberPage(final String number) {
         return articlePage(
-                this.articleService.getByNumber(
-                        number,
-                        isValidContent()
-                )
+                this.articleService.getByNumber(number, isValidContent())
         );
     }
 
@@ -346,8 +334,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView partnerPage(final String url) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company company = this.companyService.getByUrl(
-                url,
-                isValidContent()
+                url, isValidContent()
         );
         modelAndView.addObject("company", company);
         modelAndView.addObject("map", company.getGoogleMaps());
@@ -399,14 +386,10 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView getDefaultModelAndView() {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(
-                "main_company",
-                this.companyService.getMainCompany()
+                "main_company", this.companyService.getMainCompany()
         );
         modelAndView.addObject(
-                "categories",
-                this.categoryService.getAll(
-                        isValidContent()
-                )
+                "categories", this.categoryService.getAll(isValidContent())
         );
         return modelAndView;
     }
@@ -527,8 +510,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
             final boolean revers
     ) {
         final Category category = this.categoryService.getByUrl(
-                url,
-                isValidContent()
+                url, isValidContent()
         );
         final ModelAndView modelAndView = sortArticlesPage(
                 "date", revers,
@@ -558,8 +540,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
             final boolean revers
     ) {
         final Category category = this.categoryService.getByUrl(
-                url,
-                isValidContent()
+                url, isValidContent()
         );
         final ModelAndView modelAndView = sortArticlesPage(
                 "date", revers,
@@ -589,8 +570,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
             final boolean revers
     ) {
         final Category category = this.categoryService.getByUrl(
-                url,
-                isValidContent()
+                url, isValidContent()
         );
         final ModelAndView modelAndView = sortArticlesPage(
                 "date", revers,

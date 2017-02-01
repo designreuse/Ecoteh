@@ -155,8 +155,7 @@ public class AdminCategoryController {
     public ModelAndView editCategory(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
-                "category",
-                this.categoryService.getByUrl(url, false)
+                "category", this.categoryService.getByUrl(url, false)
         );
         modelAndView.setViewName("admin/category/edit_page");
         return modelAndView;
@@ -190,10 +189,7 @@ public class AdminCategoryController {
             final ModelAndView modelAndView
     ) {
         final Category category = this.categoryService.initAndUpdate(
-                url, title,
-                description, keywords,
-                photoUrl,
-                isValid
+                url, title, description, keywords, photoUrl, isValid
         );
         Cache.clear();
         modelAndView.setViewName(

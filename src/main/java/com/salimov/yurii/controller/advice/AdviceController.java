@@ -123,79 +123,72 @@ public class AdviceController {
     /**
      * Intercepts and handles NoHandlerFoundException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ModelAndView Exception(
-            final NoHandlerFoundException exception,
+            final NoHandlerFoundException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                NO_HANDLER_FOUND_MESSAGE
+                ex, request, NO_HANDLER_FOUND_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles NullPointerException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ModelAndView nullPointerException(
-            final NullPointerException exception,
+            final NullPointerException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                NULL_POINTER_MESSAGE
+                ex, request, NULL_POINTER_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles IllegalArgumentException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ModelAndView illegalArgumentException(
-            final IllegalArgumentException exception,
+            final IllegalArgumentException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                ILLEGAL_ARGUMENT_MESSAGE
+                ex, request, ILLEGAL_ARGUMENT_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles HttpRequestMethodNotSupportedException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ModelAndView httpRequestMethodNotSupportedException(
-            final HttpRequestMethodNotSupportedException exception,
+            final HttpRequestMethodNotSupportedException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
+                ex, request,
                 HTTP_REQUEST_METHOD_NOT_SUPPORTED_MESSAGE
         );
     }
@@ -203,47 +196,43 @@ public class AdviceController {
     /**
      * Intercepts and handles IllegalAccessException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(IllegalAccessException.class)
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     public ModelAndView illegalAccessException(
-            final IllegalAccessException exception,
+            final IllegalAccessException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                ILLEGAL_ACCESS_MESSAGE
+                ex, request, ILLEGAL_ACCESS_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles IllegalMappingException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(IllegalMappingException.class)
     @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
     public ModelAndView illegalMappingException(
-            final IllegalMappingException exception,
+            final IllegalMappingException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                ILLEGAL_MAPPING_MESSAGE
+                ex, request, ILLEGAL_MAPPING_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles DuplicateException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      * @see DuplicateException
@@ -251,20 +240,18 @@ public class AdviceController {
     @ExceptionHandler(DuplicateException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     public ModelAndView duplicateException(
-            final DuplicateException exception,
+            final DuplicateException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                DUPLICATE_MESSAGE
+                ex, request, DUPLICATE_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles DisableException.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      * @see DisableException
@@ -272,56 +259,50 @@ public class AdviceController {
     @ExceptionHandler(DisableException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ModelAndView disableException(
-            final DisableException exception,
+            final DisableException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                DISABLE_MESSAGE
+                ex, request, DISABLE_MESSAGE
         );
     }
 
     /**
      * Intercepts and handles all other Exception.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView otherException(
-            final Exception exception,
+            final Exception ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                exception,
-                request,
-                OTHER_MESSAGE
+                ex, request, OTHER_MESSAGE
         );
     }
 
     /**
      * Handles all other Exception.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      * @param request   to provide requested information for HTTP servlets.
      * @param text      a text of the exception.
      * @return The ModelAndView object with information about exception.
      */
     private ModelAndView handleException(
-            final Exception exception,
+            final Exception ex,
             final HttpServletRequest request,
             final String text
     ) {
         logRequest(request);
-        logException(exception);
+        logException(ex);
         return prepareModelAndView(
                 isNotBlank(text) ? text : UNKNOWN_MESSAGE,
-                exception.getClass().getSimpleName()
-                        + " : "
-                        + exception.getMessage()
+                ex.getClass().getSimpleName() + " : " + ex.getMessage()
         );
     }
 
@@ -359,8 +340,7 @@ public class AdviceController {
         if (request != null) {
             LOGGER.error(
                     request.getRemoteAddr()
-                            + " : "
-                            + request.getRequestURL()
+                            + " : " + request.getRequestURL()
             );
         }
     }
@@ -368,13 +348,10 @@ public class AdviceController {
     /**
      * Error logging.
      *
-     * @param exception an intercepted exception.
+     * @param ex an intercepted exception.
      */
-    private static void logException(final Exception exception) {
-        LOGGER.error(
-                exception.getMessage(),
-                exception
-        );
-        exception.printStackTrace();
+    private static void logException(final Exception ex) {
+        LOGGER.error(ex.getMessage(), ex);
+        ex.printStackTrace();
     }
 }

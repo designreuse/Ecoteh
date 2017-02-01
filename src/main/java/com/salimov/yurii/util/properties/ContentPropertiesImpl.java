@@ -14,11 +14,6 @@ public final class ContentPropertiesImpl implements ContentProperties {
      */
     private final static String CATALINA_HOME
             = System.getenv("CATALINA_HOME") + "/";
-    /*CATALINA_HOME = new File(".")
-                .getAbsoluteFile()
-                .getParentFile()
-                .getAbsolutePath()
-                .replace("bin", "") + "/";*/
 
     /**
      * The content type encoding.
@@ -208,8 +203,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
      */
     @Override
     public String getProjectAbsolutePath() {
-        return CATALINA_HOME
-                + "webapps/"
+        return CATALINA_HOME + "webapps/"
                 + this.projectDirectory;
     }
 
@@ -222,7 +216,6 @@ public final class ContentPropertiesImpl implements ContentProperties {
      */
     @Override
     public String getResourcesAbsolutePath() {
-        return getProjectAbsolutePath()
-                + getResourcesLocation();
+        return getProjectAbsolutePath() + getResourcesLocation();
     }
 }

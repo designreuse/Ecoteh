@@ -12,6 +12,5 @@ import com.salimov.yurii.entity.Response;
  * @see DataDao
  * @see Response
  */
-public interface ResponseDao
-        extends DataDao<Response, Long> {
+public interface ResponseDao extends DataDao<Response, Long> {
 }

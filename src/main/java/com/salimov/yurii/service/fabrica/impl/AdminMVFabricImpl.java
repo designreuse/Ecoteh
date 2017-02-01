@@ -21,8 +21,7 @@ import com.salimov.yurii.exception.DisableException;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.service.data")
-public final class AdminMVFabricImpl
-        extends MainMVFabricImpl
+public final class AdminMVFabricImpl extends MainMVFabricImpl
         implements AdminMVFabric {
 
     /**
@@ -60,10 +59,8 @@ public final class AdminMVFabricImpl
             final ResponseService responseService
     ) {
         super(
-                articleService,
-                categoryService,
-                companyService,
-                userService,
+                articleService, categoryService,
+                companyService, userService,
                 responseService
         );
         this.userService = userService;

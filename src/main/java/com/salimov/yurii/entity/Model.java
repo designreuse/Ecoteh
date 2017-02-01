@@ -119,24 +119,6 @@ public abstract class Model<E extends Number>
     }
 
     /**
-     * Returns a hash code value for the object.
-     * This method is supported for the benefit
-     * of hash tables such as those provided by HashMap.
-     *
-     * @return A hash code value for this object.
-     */
-    @Override
-    public abstract int hashCode();
-
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return A string representation of the object.
-     */
-    @Override
-    public abstract String toString();
-
-    /**
      * Returns a unique identifier of the model.
      *
      * @return The unique identifier.
@@ -250,6 +232,24 @@ public abstract class Model<E extends Number>
                 TimeZone.getTimeZone(TIME_ZONE)
         );
     }
+
+    /**
+     * Returns a hash code value for the object.
+     * This method is supported for the benefit
+     * of hash tables such as those provided by HashMap.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public abstract int hashCode();
+
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return A string representation of the object.
+     */
+    @Override
+    public abstract String toString();
 
     /**
      * Returns a model date in string format with some date format.

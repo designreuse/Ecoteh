@@ -16,8 +16,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Model
  * @see IMessage
  */
-public final class Message
-        extends Model<Long>
+public final class Message extends Model<Long>
         implements IMessage<Long> {
 
     /**
@@ -169,17 +168,11 @@ public final class Message
      */
     @Override
     public int hashCode() {
-        return (
-                isNotBlank(this.username) ? this.username.hashCode() : 0
-        ) + (
-                isNotBlank(this.email) ? this.email.hashCode() : 0
-        ) + (
-                isNotBlank(this.phone) ? this.phone.hashCode() : 0
-        ) + (
-                isNotBlank(this.subject) ? this.subject.hashCode() : 0
-        ) + (
-                isNotBlank(this.text) ? this.text.hashCode() : 0
-        );
+        return (isNotBlank(this.username) ? this.username.hashCode() : 0)
+                + (isNotBlank(this.email) ? this.email.hashCode() : 0)
+                + (isNotBlank(this.phone) ? this.phone.hashCode() : 0)
+                + (isNotBlank(this.subject) ? this.subject.hashCode() : 0)
+                + (isNotBlank(this.text) ? this.text.hashCode() : 0);
     }
 
     /**
@@ -349,9 +342,7 @@ public final class Message
      */
     @Override
     public String getDateToString() {
-        return getDateToString(
-                this.date
-        );
+        return getDateToString(this.date);
     }
 
     /**
@@ -361,9 +352,7 @@ public final class Message
      */
     @Override
     public Long getId() {
-        return (long) Math.abs(
-                hashCode()
-        );
+        return (long) Math.abs(hashCode());
     }
 
     /**

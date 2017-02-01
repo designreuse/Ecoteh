@@ -61,18 +61,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver() {
         final InternalResourceViewResolver viewResolver
                 = new InternalResourceViewResolver();
-        viewResolver.setViewClass(
-                JstlView.class
-        );
-        viewResolver.setContentType(
-                this.properties.getContentType()
-        );
-        viewResolver.setPrefix(
-                this.properties.getPrefix()
-        );
-        viewResolver.setSuffix(
-                this.properties.getSuffix()
-        );
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setContentType(this.properties.getContentType());
+        viewResolver.setPrefix(this.properties.getPrefix());
+        viewResolver.setSuffix(this.properties.getSuffix());
         viewResolver.setExposeContextBeansAsAttributes(
                 this.properties.isExposeContextBeansAsAttributes()
         );
@@ -89,11 +81,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(
             final ResourceHandlerRegistry resource) {
-        resource.addResourceHandler(
-                this.properties.getResourcesUrl()
-        ).addResourceLocations(
-                this.properties.getResourcesLocation()
-        );
+        resource.addResourceHandler(this.properties.getResourcesUrl()
+        ).addResourceLocations(this.properties.getResourcesLocation());
     }
 
     /**

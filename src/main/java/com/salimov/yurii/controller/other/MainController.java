@@ -193,8 +193,7 @@ public abstract class MainController {
             final HttpServletRequest request
     ) {
         return this.fabric.categoryWithSortArticlesPage(
-                url,
-                request.getParameter("type"),
+                url, request.getParameter("type"),
                 Boolean.parseBoolean(
                         request.getParameter("revers")
                 )
@@ -306,10 +305,7 @@ public abstract class MainController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {
-                    "/contacts",
-                    "/address"
-            },
+            value = {"/contacts", "/address"},
             method = RequestMethod.GET
     )
     public ModelAndView getContactsPage() {
@@ -486,10 +482,7 @@ public abstract class MainController {
                     + (isNotBlank(userMessage) ? "\nText: \n: " + userMessage : "");
             final String subject = "New Message";
             sendToEmail(subject, _text);
-            saveMess(
-                    name, phone, email,
-                    userMessage, subject
-            );
+            saveMess(name, phone, email, userMessage, subject);
         }).start();
     }
 
@@ -512,10 +505,7 @@ public abstract class MainController {
             final String subject
     ) {
         this.messageService.add(
-                new Message(
-                        name, email, phone,
-                        subject, text
-                )
+                new Message(name, email, phone, subject, text)
         );
     }
 
@@ -570,11 +560,9 @@ public abstract class MainController {
     ) {
         final Company mainCompany = this.companyService.getMainCompany();
         this.senderService.send(
-                subject + " | " + mainCompany.getTitle(),
-                text,
+                subject + " | " + mainCompany.getTitle(), text,
                 this.userService.getPersonnel(),
-                mainCompany.getSenderEmail(),
-                mainCompany.getSenderPass()
+                mainCompany.getSenderEmail(), mainCompany.getSenderPass()
         );
     }
 

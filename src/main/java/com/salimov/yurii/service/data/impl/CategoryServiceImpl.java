@@ -93,12 +93,7 @@ public final class CategoryServiceImpl
             final boolean isValid
     ) {
         final Category category = new Category();
-        category.initialize(
-                title,
-                description,
-                keywords,
-                photoUrl
-        );
+        category.initialize(title, description, keywords, photoUrl);
         category.setValidated(isValid);
         return add(category);
     }
@@ -127,12 +122,7 @@ public final class CategoryServiceImpl
             final boolean isValid
     ) {
         final Category category = getByUrl(url, false);
-        category.initialize(
-                title,
-                description,
-                keywords,
-                photoUrl
-        );
+        category.initialize(title, description, keywords, photoUrl);
         category.setValidated(isValid);
         return update(category);
     }
@@ -151,9 +141,7 @@ public final class CategoryServiceImpl
             final String url,
             final boolean isValid
     ) {
-        final Category category = super.getByUrl(
-                url, isValid
-        );
+        final Category category = super.getByUrl(url, isValid);
         category.getArticles().size();
         return category;
     }
@@ -168,9 +156,7 @@ public final class CategoryServiceImpl
     @Transactional
     public void remove(final Long id) {
         if (id != null) {
-            remove(
-                    get(id)
-            );
+            remove(get(id));
         }
     }
 
@@ -185,9 +171,7 @@ public final class CategoryServiceImpl
     @Transactional
     public void removeByTitle(final String title) {
         if (isNotBlank(title)) {
-            remove(
-                    getByTitle(title, false)
-            );
+            remove(getByTitle(title, false));
         }
     }
 
@@ -201,9 +185,7 @@ public final class CategoryServiceImpl
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotBlank(url)) {
-            remove(
-                    getByUrl(url, false)
-            );
+            remove(getByUrl(url, false));
         }
     }
 
@@ -241,15 +223,9 @@ public final class CategoryServiceImpl
             result.addAll(
                     categories.stream()
                             .filter(
-                                    category -> (
-                                            category != null
-                                    ) && (
-                                            category.isValidated()
-                                    )
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                                    category -> (category != null)
+                                            && (category.isValidated())
+                            ).collect(Collectors.toList())
             );
         }
         return result;

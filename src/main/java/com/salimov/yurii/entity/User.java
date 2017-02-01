@@ -27,8 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "users")
-public final class User
-        extends Model<Long>
+public final class User extends Model<Long>
         implements IUser<Long>, UserDetails {
 
     /**
@@ -234,13 +233,9 @@ public final class User
      */
     @Override
     public int hashCode() {
-        return (
-                isNotBlank(this.name) ? this.name.hashCode() : 0
-        ) + (
-                isNotBlank(this.phone) ? this.phone.hashCode() : 0
-        ) + (
-                isNotBlank(this.email) ? this.email.hashCode() : 0
-        );
+        return (isNotBlank(this.name) ? this.name.hashCode() : 0)
+                + (isNotBlank(this.phone) ? this.phone.hashCode() : 0)
+                + (isNotBlank(this.email) ? this.email.hashCode() : 0);
     }
 
     /**
@@ -545,9 +540,7 @@ public final class User
      */
     @Override
     public void translateAndSetUrl(final String value) {
-        setUrl(
-                Translator.fromCyrillicToLatin(value)
-        );
+        setUrl(Translator.fromCyrillicToLatin(value));
     }
 
     /**

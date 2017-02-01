@@ -101,9 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(MAIN_ADMIN_REQUEST_URL)
-                .hasRole(
-                        UserRole.SUPERMAN.name()
-                )
+                .hasRole(UserRole.SUPERMAN.name())
                 .antMatchers(this.requestAdmin)
                 .hasAnyRole(
                         UserRole.ADMIN.name(),
@@ -120,9 +118,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         this.alwaysUseDefaultSuccess
                 )
                 .and().exceptionHandling()
-                .accessDeniedPage(
-                        this.requestAccessDeniedPage
-                )
+                .accessDeniedPage(this.requestAccessDeniedPage)
                 .and()
                 .csrf().disable();
     }

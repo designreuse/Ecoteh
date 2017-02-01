@@ -121,8 +121,7 @@ public class AdminUserController {
     public ModelAndView getAllUsers() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
-                "users_list",
-                this.userService.getAll(false)
+                "users_list", this.userService.getAll(false)
         );
         modelAndView.addObject("is_captcha", null);
         modelAndView.setViewName("admin/user/all_page");
@@ -238,8 +237,7 @@ public class AdminUserController {
     public ModelAndView editUser(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
-                "user",
-                this.userService.getByUrl(url)
+                "user", this.userService.getByUrl(url)
         );
         modelAndView.setViewName("admin/user/edit_page");
         return modelAndView;
@@ -405,11 +403,9 @@ public class AdminUserController {
             }
             final Company mainCompany = this.companyService.getMainCompany();
             this.senderService.send(
-                    _subject + " | " + mainCompany.getTitle(),
-                    message,
+                    _subject + " | " + mainCompany.getTitle(), message,
                     this.userService.getPersonnel(),
-                    mainCompany.getSenderEmail(),
-                    mainCompany.getSenderPass()
+                    mainCompany.getSenderEmail(), mainCompany.getSenderPass()
             );
         }).start();
         final ModelAndView modelAndView = getAllUsers();

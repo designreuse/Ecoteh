@@ -217,8 +217,7 @@ public final class SenderImpl implements Sender {
                                 senderEmail, senderEmailPass
                         ),
                         subject, text,
-                        recipientEmail,
-                        senderEmail
+                        recipientEmail, senderEmail
                 )
         );
     }
@@ -270,12 +269,9 @@ public final class SenderImpl implements Sender {
                 )
         );
         message.setContent(
-                text,
-                "text/plain;charset=" + SenderImpl.CHARSET
+                text, "text/plain;charset=" + SenderImpl.CHARSET
         );
-        message.setSentDate(
-                new Date()
-        );
+        message.setSentDate(new Date());
         return message;
     }
 
@@ -300,8 +296,7 @@ public final class SenderImpl implements Sender {
                     protected PasswordAuthentication
                     getPasswordAuthentication() {
                         return new PasswordAuthentication(
-                                senderEmail,
-                                senderEmailPass
+                                senderEmail, senderEmailPass
                         );
                     }
                 });
@@ -338,20 +333,16 @@ public final class SenderImpl implements Sender {
     private void initTlsProperties() {
         this.tlsProperties = new Properties();
         this.tlsProperties.put(
-                "mail.smtp.auth",
-                "true"
+                "mail.smtp.auth", "true"
         );
         this.tlsProperties.put(
-                "mail.smtp.starttls.enable",
-                "true"
+                "mail.smtp.starttls.enable", "true"
         );
         this.tlsProperties.put(
-                "mail.smtp.host",
-                "smtp.gmail.com"
+                "mail.smtp.host", "smtp.gmail.com"
         );
         this.tlsProperties.put(
-                "mail.smtp.port",
-                "587"
+                "mail.smtp.port", "587"
         );
     }
 
@@ -361,24 +352,20 @@ public final class SenderImpl implements Sender {
     private void initSslProperties() {
         this.sslProperties = new Properties();
         this.sslProperties.put(
-                "mail.smtp.host",
-                "smtp.gmail.com"
+                "mail.smtp.host", "smtp.gmail.com"
         );
         this.sslProperties.put(
-                "mail.smtp.socketFactory.port",
-                "465"
+                "mail.smtp.socketFactory.port", "465"
         );
         this.sslProperties.put(
                 "mail.smtp.socketFactory.class",
                 "javax.net.ssl.SSLSocketFactory"
         );
         this.sslProperties.put(
-                "mail.smtp.auth",
-                "true"
+                "mail.smtp.auth", "true"
         );
         this.sslProperties.put(
-                "mail.smtp.port",
-                "465"
+                "mail.smtp.port", "465"
         );
     }
 

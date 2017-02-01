@@ -81,9 +81,8 @@ public final class ContentComparator {
             } else {
                 result = content1.getUrl()
                         .compareToIgnoreCase(
-                                content2.getUrl(
-
-                                ));
+                                content2.getUrl()
+                        );
             }
             return result;
         }

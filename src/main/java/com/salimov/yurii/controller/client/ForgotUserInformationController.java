@@ -143,11 +143,7 @@ public class ForgotUserInformationController {
                 }
             }
         }
-        return createModelAndView(
-                username,
-                isCaptcha,
-                isForgot
-        );
+        return createModelAndView(username, isCaptcha, isForgot);
     }
 
     /**
@@ -173,10 +169,7 @@ public class ForgotUserInformationController {
      */
     private void searchByLoginAndSend(final String username) {
         final User user = this.userService.getByLogin(username);
-        sendUserInformationToEmail(
-                user,
-                user.getEmail()
-        );
+        sendUserInformationToEmail(user, user.getEmail());
     }
 
     /**
@@ -187,10 +180,7 @@ public class ForgotUserInformationController {
      */
     private void searchByEmailAndSend(final String email) {
         final User user = this.userService.getByEmail(email);
-        sendUserInformationToEmail(
-                user,
-                user.getEmail()
-        );
+        sendUserInformationToEmail(user, user.getEmail());
     }
 
     /**
@@ -224,10 +214,8 @@ public class ForgotUserInformationController {
         final Company company = this.companyService.getMainCompany();
         this.senderService.send(
                 "Напоминание пароля | " + company.getTitle(),
-                getMessageText(user),
-                recipientEmail,
-                company.getSenderEmail(),
-                company.getSenderPass()
+                getMessageText(user), recipientEmail,
+                company.getSenderEmail(), company.getSenderPass()
         );
     }
 

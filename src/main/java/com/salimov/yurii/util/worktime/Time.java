@@ -159,9 +159,7 @@ public class Time implements ITime {
     private void initMinutes() {
         if (isNotBlankTime()) {
             try {
-                final int minutes = Integer.parseInt(
-                        time.split(":")[1]
-                );
+                final int minutes = Integer.parseInt(time.split(":")[1]);
                 this.minutes = minutes < 0 ? 0 : minutes % 60;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                 LOGGER.error(ex.getMessage(), ex);
@@ -214,11 +212,8 @@ public class Time implements ITime {
         boolean result = false;
         if (currentTime != null && startDate != null && finishDate != null) {
             final long time = currentTime.getTime();
-            result = (
-                    time >= startDate.getTime()
-            ) && (
-                    time <= finishDate.getTime()
-            );
+            result = (time >= startDate.getTime())
+                    && (time <= finishDate.getTime());
         }
         return result;
     }
@@ -234,13 +229,8 @@ public class Time implements ITime {
             final Date startDate,
             final Date finishDate
     ) {
-        return (
-                startDate != null
-        ) && (
-                finishDate != null
-        ) && (
-                startDate.getTime() <= finishDate.getTime()
-        );
+        return (startDate != null) && (finishDate != null)
+                && (startDate.getTime() <= finishDate.getTime());
     }
 
     /**

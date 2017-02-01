@@ -65,11 +65,6 @@ public class SeoServiceImpl implements SeoService {
     private final ArticleService articleService;
 
     /**
-     * The domain of the main company.
-     */
-    private final String domain;
-
-    /**
      * Constructor.
      * Initializes a implementation of the interface.
      *
@@ -92,10 +87,6 @@ public class SeoServiceImpl implements SeoService {
         this.companyService = companyService;
         this.categoryService = categoryService;
         this.articleService = articleService;
-        this.domain = this.companyService.getMainCompany()
-                .getDomain()
-                .replace("http://", "")
-                .replace("https://", "");
     }
 
     /**
@@ -107,11 +98,7 @@ public class SeoServiceImpl implements SeoService {
         ModelAndView robotsTxt = (ModelAndView) Cache.get(ROBOTS_KEY);
         if (robotsTxt == null) {
             robotsTxt = createRobotsTxt();
-            Cache.put(
-                    ROBOTS_KEY,
-                    robotsTxt,
-                    DEFAULT_TIMEOUT
-            );
+            Cache.put(ROBOTS_KEY, robotsTxt, DEFAULT_TIMEOUT);
         }
         return robotsTxt;
     }
@@ -126,11 +113,7 @@ public class SeoServiceImpl implements SeoService {
         ModelAndView sitemap = (ModelAndView) Cache.get(SITEMAP_KEY);
         if (sitemap == null) {
             sitemap = createSitemap();
-            Cache.put(
-                    SITEMAP_KEY,
-                    sitemap,
-                    DEFAULT_TIMEOUT
-            );
+            Cache.put(SITEMAP_KEY, sitemap, DEFAULT_TIMEOUT);
         }
         return sitemap;
     }
@@ -168,16 +151,13 @@ public class SeoServiceImpl implements SeoService {
                         .replace("https://", "")
         );
         modelAndView.addObject(
-                "categories",
-                this.categoryService.getAll()
+                "categories", this.categoryService.getAll()
         );
         modelAndView.addObject(
-                "articles",
-                this.articleService.getAll()
+                "articles", this.articleService.getAll()
         );
         modelAndView.addObject(
-                "companies",
-                this.companyService.getPartners(true)
+                "companies", this.companyService.getPartners(true)
         );
         modelAndView.setViewName("seo/sitemap");
         return modelAndView;

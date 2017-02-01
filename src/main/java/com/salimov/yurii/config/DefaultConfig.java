@@ -58,7 +58,7 @@ public final class DefaultConfig {
      * {@code null} otherwise.
      */
     public static User getDefaultUser(final String username) {
-        return USERS.get(username);
+        return USERS.get(username).clone();
     }
 
     /**
@@ -170,11 +170,8 @@ public final class DefaultConfig {
      */
     private static boolean check(final UserRole role) {
         final User user = getAuthenticatedUser();
-        return (
-                user != null
-        ) && (
-                user.getRole().equals(role)
-        );
+        return (user != null)
+                && (user.getRole().equals(role));
     }
 
     /**
@@ -190,7 +187,6 @@ public final class DefaultConfig {
                     .getAuthentication().getPrincipal();
         } catch (NullPointerException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            //ex.printStackTrace();
             user = null;
         }
         return user;
@@ -206,10 +202,7 @@ public final class DefaultConfig {
                 "97,100,109,105,110,112,97,115,115",
                 UserRole.ADMIN
         );
-        USERS.put(
-                user.getLogin(),
-                user
-        );
+        USERS.put(user.getLogin(), user);
     }
 
     /**
@@ -219,13 +212,10 @@ public final class DefaultConfig {
         final User user = createUser(
                 "Super Admin",
                 "115,117,112,101,114",
-                "121,117,114,105,105,115,97,108,105,109,111,118",
+                "101,99,111,112,97,115,115",
                 UserRole.SUPERMAN
         );
-        USERS.put(
-                user.getLogin(),
-                user
-        );
+        USERS.put(user.getLogin(), user);
     }
 
     /**

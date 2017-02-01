@@ -57,9 +57,7 @@ public final class ResponseServiceImpl
             final String username,
             final String text
     ) {
-        return add(
-                new Response(username, text)
-        );
+        return add(new Response(username, text));
     }
 
     /**
@@ -98,11 +96,7 @@ public final class ResponseServiceImpl
             final Collection<Response> responses,
             final boolean revers
     ) {
-        return sort(
-                responses,
-                new ResponseComparator.ByDate(),
-                revers
-        );
+        return sort(responses, new ResponseComparator.ByDate(), revers);
     }
 
     /**
@@ -115,10 +109,7 @@ public final class ResponseServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Response> getAndSortByDate(final boolean revers) {
-        return sortByDate(
-                getAll(),
-                revers
-        );
+        return sortByDate(getAll(), revers);
     }
 
     /**
@@ -146,17 +137,12 @@ public final class ResponseServiceImpl
                 result.addAll(
                         responses.stream()
                                 .filter(
-                                        response -> (
-                                                response.getDate()
-                                                        .compareTo(startDate) == 1
-                                        ) && (
-                                                response.getDate()
-                                                        .compareTo(finishDate) == -1
-                                        )
+                                        response -> (response.getDate()
+                                                .compareTo(startDate) == 1)
+                                                && (response.getDate()
+                                                .compareTo(finishDate) == -1)
                                 )
-                                .collect(
-                                        Collectors.toList()
-                                )
+                                .collect(Collectors.toList())
                 );
 
             } else {
@@ -180,11 +166,7 @@ public final class ResponseServiceImpl
             final Date startDate,
             final Date finishDate
     ) {
-        return filterByDate(
-                getAll(),
-                startDate,
-                finishDate
-        );
+        return filterByDate(getAll(), startDate, finishDate);
     }
 
     /**
@@ -202,15 +184,10 @@ public final class ResponseServiceImpl
             result.addAll(
                     responses.stream()
                             .filter(
-                                    response -> (
-                                            response != null
-                                    ) && (
-                                            response.isValidated()
+                                    response -> (response != null)
+                                            && (response.isValidated()
                                     )
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                            ).collect(Collectors.toList())
             );
         }
         return result;
@@ -272,14 +249,8 @@ public final class ResponseServiceImpl
             final Date startDate,
             final Date finishDate
     ) {
-        return (
-                startDate != null
-        ) && (
-                finishDate != null
-        ) && (
-                !startDate.equals(finishDate)
-        ) && (
-                startDate.getTime() <= finishDate.getTime()
-        );
+        return (startDate != null) && (finishDate != null)
+                && !startDate.equals(finishDate)
+                && (startDate.getTime() <= finishDate.getTime());
     }
 }

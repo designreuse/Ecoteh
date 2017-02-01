@@ -80,10 +80,7 @@ public final class Cache {
         Object savingObject = null;
         if ((key != null) && (object != null)) {
             savingObject = cache.put(
-                    new Key<>(
-                            key,
-                            milliseconds
-                    ),
+                    new Key<>(key, milliseconds),
                     object
             );
         }
@@ -106,11 +103,7 @@ public final class Cache {
             final long seconds,
             final long milliseconds
     ) {
-        return put(
-                key,
-                object,
-                milliseconds + 1000 * seconds
-        );
+        return put(key, object, milliseconds + 1000 * seconds);
     }
 
     /**
@@ -131,12 +124,7 @@ public final class Cache {
             final long seconds,
             final long milliseconds
     ) {
-        return put(
-                key,
-                object,
-                seconds + 60 * minutes,
-                milliseconds
-        );
+        return put(key, object, seconds + 60 * minutes, milliseconds);
     }
 
     /**
@@ -160,11 +148,8 @@ public final class Cache {
             final long milliseconds
     ) {
         return put(
-                key,
-                object,
-                minutes + 60 * hours,
-                seconds,
-                milliseconds
+                key, object,
+                minutes + 60 * hours, seconds, milliseconds
         );
     }
 
@@ -181,11 +166,7 @@ public final class Cache {
             final Object object
     ) {
         final long milliseconds = -1;
-        return put(
-                key,
-                object,
-                milliseconds
-        );
+        return put(key, object, milliseconds);
     }
 
     /**
@@ -202,11 +183,7 @@ public final class Cache {
     ) {
         if (map != null && !map.isEmpty()) {
             for (Map.Entry<T, Object> entry : map.entrySet()) {
-                put(
-                        entry.getKey(),
-                        entry.getValue(),
-                        milliseconds
-                );
+                put(entry.getKey(), entry.getValue(), milliseconds);
             }
         }
     }
@@ -224,10 +201,7 @@ public final class Cache {
             final long seconds,
             final long milliseconds
     ) {
-        putAll(
-                map,
-                milliseconds + 1000 * seconds
-        );
+        putAll(map, milliseconds + 1000 * seconds);
     }
 
     /**
@@ -245,11 +219,7 @@ public final class Cache {
             final long seconds,
             final long milliseconds
     ) {
-        putAll(
-                map,
-                seconds + 60 * minutes,
-                milliseconds
-        );
+        putAll(map, seconds + 60 * minutes, milliseconds);
     }
 
     /**
@@ -269,12 +239,7 @@ public final class Cache {
             final long seconds,
             final long milliseconds
     ) {
-        putAll(
-                map,
-                minutes + 60 * hours,
-                seconds,
-                milliseconds
-        );
+        putAll(map, minutes + 60 * hours, seconds, milliseconds);
     }
 
     /**
@@ -299,9 +264,7 @@ public final class Cache {
     public static <T> Object get(final T key) {
         Object object = null;
         if (key != null) {
-            object = cache.get(
-                    new Key<>(key)
-            );
+            object = cache.get(new Key<>(key));
         }
         return object;
     }
@@ -318,13 +281,10 @@ public final class Cache {
             objects = cache.keySet()
                     .stream()
                     .filter(
-                            key -> key.getKey()
-                                    .toString()
+                            key -> key.getKey().toString()
                                     .contains(subKey)
                     ).map(key -> cache.get(key))
-                    .collect(
-                            Collectors.toList()
-                    );
+                    .collect(Collectors.toList());
         }
         return objects;
     }
@@ -338,9 +298,7 @@ public final class Cache {
      */
     public static <T> void remove(final T key) {
         if (key != null) {
-            cache.remove(
-                    new Key<>(key)
-            );
+            cache.remove(new Key<>(key));
         }
     }
 
@@ -363,10 +321,7 @@ public final class Cache {
                                         key -> key.getKey()
                                                 .toString()
                                                 .contains(_key)
-                                )
-                                .forEach(
-                                        key -> cache.remove(key)
-                                );
+                                ).forEach(key -> cache.remove(key));
                     }
                 }
             }).start();
@@ -383,10 +338,7 @@ public final class Cache {
         cache = new ConcurrentHashMap<>();
         if (map != null) {
             for (Map.Entry<T, Object> entry : map.entrySet()) {
-                put(
-                        entry.getKey(),
-                        entry.getValue()
-                );
+                put(entry.getKey(), entry.getValue());
             }
         }
     }
@@ -429,9 +381,7 @@ public final class Cache {
      * {@code false} otherwise.
      */
     public static <T> boolean exist(final T key) {
-        return cache.containsKey(
-                new Key<>(key)
-        );
+        return cache.containsKey(new Key<>(key));
     }
 
     /**
@@ -469,10 +419,7 @@ public final class Cache {
                             .getName()
             );
         }
-        result.put(
-                key,
-                Map.class.getName()
-        );
+        result.put(key, Map.class.getName());
         return result;
     }
 

@@ -70,12 +70,9 @@ public class SaverImpl implements Sever {
             final String path = getPathToFile();
             checkPath(path);
             try (final OutputStream stream = new FileOutputStream(path)) {
-                stream.write(
-                        this.file.getBytes()
-                );
+                stream.write(this.file.getBytes());
             } catch (IOException ex) {
                 LOGGER.error(ex.getMessage(), ex);
-                ex.printStackTrace();
             }
         }
     }

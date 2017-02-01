@@ -42,8 +42,7 @@ public class WorkController {
             final HttpServletResponse response
     ) {
         new SecurityContextLogoutHandler().logout(
-                request,
-                response,
+                request, response,
                 SecurityContextHolder.getContext()
                         .getAuthentication()
         );

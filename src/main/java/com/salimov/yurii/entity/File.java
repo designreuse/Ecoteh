@@ -21,9 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "files")
-public final class File
-        extends Model<Long>
-        implements IFile<Long> {
+public final class File extends Model<Long> implements IFile<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -106,11 +104,8 @@ public final class File
      */
     @Override
     public int hashCode() {
-        return (
-                isNotBlank(this.title) ? this.title.hashCode() : 0
-        ) + (
-                isNotBlank(this.url) ? this.url.hashCode() : 0
-        );
+        return (isNotBlank(this.title) ? this.title.hashCode() : 0)
+                + (isNotBlank(this.url) ? this.url.hashCode() : 0);
     }
 
     /**
@@ -158,7 +153,6 @@ public final class File
     @Override
     public void setTitle(final String title) {
         this.title = isNotBlank(title) ? title : null;
-        //translateAndSetUrl(title);
     }
 
     /**
@@ -219,20 +213,7 @@ public final class File
      * @param file a content to validate.
      * @return {@code true} if the media is valid, {@code false} otherwise.
      */
-    public static boolean isValidated(
-            final File file
-    ) {
+    public static boolean isValidated(final File file) {
         return Model.isValidated(file) && file.isValidated();
     }
-
-    /**
-     * Validates the media.
-     * Media is validated if url is not blank.
-     *
-     * @return {@code true} if the media is valid, {@code false} otherwise.
-
-     @Override public boolean isValidated() {
-     return isNotBlank(this.url);
-     }
-     */
 }

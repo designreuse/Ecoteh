@@ -58,9 +58,7 @@ public final class CompanyServiceImpl
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public CompanyServiceImpl(
-            final CompanyDao dao
-    ) {
+    public CompanyServiceImpl(final CompanyDao dao) {
         super(dao);
         this.dao = dao;
     }
@@ -136,9 +134,7 @@ public final class CompanyServiceImpl
                 address, keywords, googleMaps,
                 logoUrl, null
         );
-        company.setType(
-                CompanyType.PARTNER
-        );
+        company.setType(CompanyType.PARTNER);
         company.setValidated(isValid);
         return add(company);
     }
@@ -289,10 +285,9 @@ public final class CompanyServiceImpl
     @Transactional(readOnly = true)
     public Company getMainCompany() throws NullPointerException {
         try {
-            final Company mainCompany =
-                    this.dao.getByType(
-                            CompanyType.MAIN
-                    ).get(0);
+            final Company mainCompany = this.dao.getByType(
+                    CompanyType.MAIN
+            ).get(0);
             if (!Company.isValidated(mainCompany)) {
                 throw new NullPointerException(
                         "Information about main company is absent!"
@@ -322,12 +317,8 @@ public final class CompanyServiceImpl
         );
         if (isValid) {
             companies = companies.stream()
-                    .filter(
-                            IModel::isValidated
-                    )
-                    .collect(
-                            Collectors.toList()
-                    );
+                    .filter(IModel::isValidated)
+                    .collect(Collectors.toList());
         }
         return companies;
     }
@@ -343,13 +334,8 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void remove(final Company company) {
-        if ((
-                company != null
-        ) && (
-                !company.getType().equals(
-                        CompanyType.MAIN
-                )
-        )) {
+        if ((company != null)
+                && !company.getType().equals(CompanyType.MAIN)) {
             super.remove(company);
         }
     }
@@ -362,9 +348,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void removeMain() {
-        super.remove(
-                getMainCompany()
-        );
+        super.remove(getMainCompany());
     }
 
     /**
@@ -375,9 +359,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void removeAll() {
-        remove(
-                getPartners(false)
-        );
+        remove(getPartners(false));
     }
 
     /**

@@ -106,13 +106,9 @@ public class AppInitializer
                         "encodingFilter",
                         new CharacterEncodingFilter()
                 );
+        filter.setInitParameter("encoding", ENCODING);
         filter.setInitParameter(
-                "encoding",
-                ENCODING
-        );
-        filter.setInitParameter(
-                "forceEncoding",
-                Boolean.toString(FORCE_ENCODING)
+                "forceEncoding", Boolean.toString(FORCE_ENCODING)
         );
         filter.addMappingForUrlPatterns(
                 null,

@@ -55,11 +55,12 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
 
     /**
      * Returns object of {@link Content} or subclasses with the parameter title.
-     * Returns {@code null} if title is blank.
      *
      * @param title   a title of the content to return.
      * @param isValid is get valid content or not.
      * @return The content with parameter title or {@code null}.
+     * @throws IllegalArgumentException Throw exception when object
+     *                                  parameter title is blank.
      * @throws NullPointerException Throw exception when object
      *                              with parameter title is not exist.
      * @see Content
@@ -76,11 +77,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             );
         }
         final T content = this.dao.getByTitle(title);
-        if ((
-                content == null
-        ) || (
-                isValid && !content.isValidated()
-        )) {
+        if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName()
                             + " by title \"" + title + "\"!"
@@ -91,7 +88,6 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
 
     /**
      * Returns object of {@link Content} or subclasses with the parameter url.
-     * Returns {@code null} if title is blank.
      *
      * @param url     a url of the content to return.
      * @param isValid is get valid content or not.
@@ -114,11 +110,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             );
         }
         final T content = this.dao.getByUrl(url);
-        if ((
-                content == null
-        ) || (
-                isValid && !content.isValidated()
-        )) {
+        if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName()
                             + " by URL \"" + url + "\"!"
@@ -173,11 +165,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             final Collection<T> contents,
             final boolean revers
     ) {
-        return sort(
-                contents,
-                new ContentComparator.ByTitle<>(),
-                revers
-        );
+        return sort(contents, new ContentComparator.ByTitle<>(), revers);
     }
 
     /**
@@ -195,11 +183,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             final Collection<T> contents,
             final boolean revers
     ) {
-        return sort(
-                contents,
-                new ContentComparator.ByUrl<>(),
-                revers
-        );
+        return sort(contents, new ContentComparator.ByUrl<>(), revers);
     }
 
     /**
@@ -213,10 +197,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     @Override
     @Transactional(readOnly = true)
     public List<T> getAndSortByTitle(final boolean revers) {
-        return sortByTitle(
-                getAll(),
-                revers
-        );
+        return sortByTitle(getAll(), revers);
     }
 
     /**
@@ -230,10 +211,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     @Override
     @Transactional(readOnly = true)
     public List<T> getAndSortByUrl(final boolean revers) {
-        return sortByUrl(
-                getAll(),
-                revers
-        );
+        return sortByUrl(getAll(), revers);
     }
 
     /**
@@ -265,15 +243,8 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             return false;
         }
         if (duplicate) {
-            if ((
-                    this.dao.getByTitle(
-                            content.getTitle()
-                    ) != null
-            ) || (
-                    this.dao.getByUrl(
-                            content.getUrl()
-                    ) != null
-            )) {
+            if ((this.dao.getByTitle(content.getTitle()) != null)
+                    || (this.dao.getByUrl(content.getUrl()) != null)) {
                 return false;
             }
         }

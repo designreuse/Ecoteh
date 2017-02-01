@@ -411,7 +411,7 @@ public final class UserServiceImpl
     @Override
     @Transactional
     public void removeByName(final String name) {
-        if(isNotBlank(name)) {
+        if (isNotBlank(name)) {
             this.dao.removeByName(name);
         }
     }
@@ -460,11 +460,7 @@ public final class UserServiceImpl
             final Collection<User> users,
             final boolean revers
     ) {
-        return sort(
-                users,
-                new UserComparator.ByName(),
-                revers
-        );
+        return sort(users, new UserComparator.ByName(), revers);
     }
 
     /**
@@ -481,11 +477,7 @@ public final class UserServiceImpl
             final Collection<User> users,
             final boolean revers
     ) {
-        return sort(
-                users,
-                new UserComparator.ByUrl(),
-                revers
-        );
+        return sort(users, new UserComparator.ByUrl(), revers);
     }
 
     /**
@@ -505,11 +497,7 @@ public final class UserServiceImpl
             final UserRole role,
             final boolean revers
     ) {
-        return sort(
-                users,
-                new UserComparator.ByRole(role),
-                revers
-        );
+        return sort(users, new UserComparator.ByRole(role), revers);
     }
 
     /**
@@ -522,10 +510,7 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndSortByName(final boolean revers) {
-        return sortByName(
-                getAll(),
-                revers
-        );
+        return sortByName(getAll(), revers);
     }
 
     /**
@@ -538,10 +523,7 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndSortByUrl(final boolean revers) {
-        return sortByUrl(
-                getAll(),
-                revers
-        );
+        return sortByUrl(getAll(), revers);
     }
 
     /**
@@ -559,11 +541,7 @@ public final class UserServiceImpl
             final UserRole role,
             final boolean revers
     ) {
-        return sortByRole(
-                getAll(),
-                role,
-                revers
-        );
+        return sortByRole(getAll(), role, revers);
     }
 
     /**
@@ -615,13 +593,8 @@ public final class UserServiceImpl
                                     .filter(
                                             role -> user.getRole()
                                                     .equals(role)
-                                    )
-                                    .map(
-                                            role -> user
-                                    )
-                                    .collect(
-                                            Collectors.toList()
-                                    )
+                                    ).map(role -> user)
+                                    .collect(Collectors.toList())
                     );
                 }
             } else {
@@ -642,10 +615,7 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndFilterByRole(final UserRole role) {
-        return filterByRole(
-                getAll(false),
-                role
-        );
+        return filterByRole(getAll(false), role);
     }
 
     /**
@@ -661,10 +631,7 @@ public final class UserServiceImpl
     public List<User> getAndFilterByRoles(
             final List<UserRole> roles
     ) {
-        return filterByRoles(
-                getAll(),
-                roles
-        );
+        return filterByRoles(getAll(), roles);
     }
 
     /**
@@ -684,15 +651,9 @@ public final class UserServiceImpl
             result.addAll(
                     users.stream()
                             .filter(
-                                    user -> (
-                                            user != null
-                                    ) && (
-                                            user.isValidated()
-                                    )
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                                    user -> (user != null)
+                                            && (user.isValidated())
+                            ).collect(Collectors.toList())
             );
         }
         return result;
@@ -737,15 +698,8 @@ public final class UserServiceImpl
             return false;
         }
         if (duplicate) {
-            if ((
-                    this.dao.getByName(
-                            user.getName()
-                    ) != null
-            ) || (
-                    this.dao.getByUrl(
-                            user.getUrl()
-                    ) != null
-            )) {
+            if ((this.dao.getByName(user.getName()) != null)
+                    || (this.dao.getByUrl(user.getUrl()) != null)) {
                 return false;
             }
         }

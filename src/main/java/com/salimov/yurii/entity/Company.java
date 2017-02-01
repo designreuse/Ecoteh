@@ -24,8 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Entity
 @Table(name = "companies")
 public final class Company
-        extends Content<Long>
-        implements ICompany<Long> {
+        extends Content<Long> implements ICompany<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -322,19 +321,13 @@ public final class Company
      */
     @Override
     public int hashCode() {
-        return super.hashCode() + (
-                this.type != null ? this.type.hashCode() : 0
-        ) + (
-                isNotBlank(this.domain) ? this.domain.hashCode() : 0
-        ) + (
-                isNotBlank(this.tagline) ? this.tagline.hashCode() : 0
-        ) + (
-                isNotBlank(getDescription()) ? getDescription().hashCode() : 0
-        ) + (
-                isNotBlank(this.information) ? this.information.hashCode() : 0
-        ) + (
-                isNotBlank(this.address) ? this.address.hashCode() : 0
-        );
+        return super.hashCode()
+                + (this.type != null ? this.type.hashCode() : 0)
+                + (isNotBlank(this.domain) ? this.domain.hashCode() : 0)
+                + (isNotBlank(this.tagline) ? this.tagline.hashCode() : 0)
+                + (isNotBlank(getDescription()) ? getDescription().hashCode() : 0)
+                + (isNotBlank(this.information) ? this.information.hashCode() : 0)
+                + (isNotBlank(this.address) ? this.address.hashCode() : 0);
     }
 
     /**

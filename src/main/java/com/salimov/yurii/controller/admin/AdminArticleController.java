@@ -108,8 +108,7 @@ public class AdminArticleController {
         final ModelAndView modelAndView
                 = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
-                "categories",
-                this.categoryService.getAll(false)
+                "categories", this.categoryService.getAll(false)
         );
         modelAndView.setViewName("admin/article/new_page");
         return modelAndView;
@@ -150,10 +149,8 @@ public class AdminArticleController {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Article article = this.articleService.initAndAdd(
-                title, description, text,
-                keywords, number,
-                category,
-                isValid
+                title, description, text, keywords,
+                number, category, isValid
         );
         Cache.clear();
         modelAndView.setViewName(
@@ -198,12 +195,10 @@ public class AdminArticleController {
     public ModelAndView editArticle(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
-                "article",
-                this.articleService.getByUrl(url, false)
+                "article", this.articleService.getByUrl(url, false)
         );
         modelAndView.addObject(
-                "categories",
-                this.categoryService.getAll(false)
+                "categories", this.categoryService.getAll(false)
         );
         modelAndView.setViewName("admin/article/edit_page");
         return modelAndView;
@@ -247,11 +242,8 @@ public class AdminArticleController {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Article article = this.articleService.initAndUpdate(
-                url, title,
-                description, text,
-                keywords, number,
-                category,
-                isValid
+                url, title, description, text, keywords,
+                number, category, isValid
         );
         modelAndView.setViewName(
                 getViewName(article)
@@ -341,11 +333,8 @@ public class AdminArticleController {
         String viewName;
         if (isNotBlank(article.getText())) {
             viewName = "redirect:/admin/article/" + article.getUrl();
-        } else if ((
-                article.getCategory() != null
-        ) && (
-                article.getCategory().isValidated()
-        )) {
+        } else if ((article.getCategory() != null) && (
+                article.getCategory().isValidated())) {
             viewName = "redirect:/admin/category/" + article.getCategory().getUrl();
         } else {
             viewName = "redirect:/admin/article/all";

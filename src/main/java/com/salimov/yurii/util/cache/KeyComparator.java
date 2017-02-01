@@ -29,7 +29,6 @@ final class KeyComparator implements Comparator<Key> {
             result = 1;
         } else {
             result = (int) (key1.getTimeout() - key2.getTimeout());
-
         }
         return result;
     }

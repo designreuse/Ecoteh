@@ -270,8 +270,7 @@ public class AdminCompanyController {
                 mobilePhone, landlinePhone, fax, email,
                 vkontakte, facebook, twitter, skype,
                 address, googleMaps,
-                logoUrl,
-                isValid
+                logoUrl, isValid
         );
         Cache.clear();
         modelAndView.setViewName(
@@ -316,8 +315,7 @@ public class AdminCompanyController {
     public ModelAndView editPartner(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject(
-                "company",
-                this.companyService.getByUrl(url, false)
+                "company", this.companyService.getByUrl(url, false)
         );
         modelAndView.addObject("main", false);
         modelAndView.setViewName("admin/company/edit_page");
@@ -386,8 +384,7 @@ public class AdminCompanyController {
                 mobilePhone, landlinePhone, fax, email,
                 vkontakte, facebook, twitter, skype,
                 address, googleMaps,
-                logoUrl,
-                isValid
+                logoUrl, isValid
         );
         Cache.clear();
         modelAndView.setViewName(

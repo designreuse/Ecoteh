@@ -75,11 +75,8 @@ public class AdminMainController extends MainController {
             final ResponseService responseService) {
         super(
                 new CacheMVFabricImpl(fabric),
-                companyService,
-                userService,
-                responseService,
-                messageService,
-                senderService
+                companyService, userService, responseService,
+                messageService, senderService
         );
     }
 
@@ -97,12 +94,10 @@ public class AdminMainController extends MainController {
     public ModelAndView getAdminMenu() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
-                "user",
-                this.userService.getAuthenticatedUser()
+                "user", this.userService.getAuthenticatedUser()
         );
         modelAndView.addObject(
-                "is_enabled",
-                DefaultConfig.isClientEnabled()
+                "is_enabled", DefaultConfig.isClientEnabled()
         );
         modelAndView.setViewName("admin/menu/menu_page");
         return modelAndView;

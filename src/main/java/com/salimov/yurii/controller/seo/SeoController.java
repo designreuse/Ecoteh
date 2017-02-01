@@ -45,10 +45,7 @@ public class SeoController {
      */
     @ResponseBody
     @RequestMapping(
-            value = {
-                    "/robots.txt",
-                    "/robots"
-            },
+            value = {"/robots.txt", "/robots"},
             produces = "text/plain"
     )
     public ModelAndView getRobotsTxt() {
@@ -66,10 +63,7 @@ public class SeoController {
      */
     @ResponseBody
     @RequestMapping(
-            value = {
-                    "/sitemap.xml",
-                    "/sitemap"
-            },
+            value = {"/sitemap.xml", "/sitemap"},
             produces = "application/xml"
     )
     public ModelAndView getSiteMapXml() {

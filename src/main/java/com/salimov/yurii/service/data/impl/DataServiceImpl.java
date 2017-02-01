@@ -85,12 +85,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         if (models != null && !models.isEmpty()) {
             result.addAll(
                     models.stream()
-                            .map(
-                                    this::add
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                            .map(this::add)
+                            .collect(Collectors.toList())
             );
         }
         return result;
@@ -129,12 +125,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         if (models != null && !models.isEmpty()) {
             result.addAll(
                     models.stream()
-                            .map(
-                                    this::update
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                            .map(this::update)
+                            .collect(Collectors.toList())
             );
         }
         return result;
@@ -285,9 +277,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     public boolean exists(final T model) {
         boolean result = false;
         if ((model != null) && (model.getId() != null)) {
-            result = exists(
-                    model.getId()
-            );
+            result = exists(model.getId());
         }
         return result;
     }
@@ -315,8 +305,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             if (comparator != null) {
                 Collections.sort(
                         result,
-                        revers ?
-                                Collections.reverseOrder(comparator) :
+                        revers ? Collections.reverseOrder(comparator) :
                                 comparator
                 );
             }
@@ -339,11 +328,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             final Collection<T> models,
             final Comparator<T> comparator
     ) {
-        return sort(
-                models,
-                comparator,
-                false
-        );
+        return sort(models, comparator, false);
     }
 
     /**
@@ -367,18 +352,11 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         if (models == null || models.isEmpty()) {
             result = new ArrayList<>();
         } else {
-            if ((
-                    fromIndex < toIndex
-            ) && (
-                    fromIndex < models.size()
-            ) && (
-                    toIndex < models.size()
-            )) {
+            if ((fromIndex < toIndex)
+                    && (fromIndex < models.size())
+                    && (toIndex < models.size())) {
                 result = new ArrayList<>(models)
-                        .subList(
-                                fromIndex,
-                                toIndex
-                        );
+                        .subList(fromIndex, toIndex);
             } else {
                 result = new ArrayList<>(models);
             }
@@ -401,11 +379,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             final int toIndex
     ) {
         return subList(
-                new ArrayList<>(
-                        getAll()
-                ),
-                fromIndex,
-                toIndex
+                new ArrayList<>(getAll()),
+                fromIndex, toIndex
         );
     }
 
@@ -425,15 +400,9 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             result.addAll(
                     models.stream()
                             .filter(
-                                    model -> (
-                                            model != null
-                                    ) && (
-                                            model.isValidated()
-                                    )
-                            )
-                            .collect(
-                                    Collectors.toList()
-                            )
+                                    model -> (model != null)
+                                            && (model.isValidated())
+                            ).collect(Collectors.toList())
             );
         }
         return result;
