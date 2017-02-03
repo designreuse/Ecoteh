@@ -75,7 +75,7 @@
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'">
                                         </a><br>
-                                        <input type="file" name="file" accept="image/*" class="form-control">
+                                        <input type="file" name="file" class="form-control">
                                     </td>
                                 </tr>
                             </table>

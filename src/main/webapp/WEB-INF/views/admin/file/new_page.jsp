@@ -62,7 +62,7 @@
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Файл</td>
                                     <td class="tds">
-                                        <input type="file" name="file" accept="image/*" class="form-control" required>
+                                        <input type="file" name="file" class="form-control" required>
                                     </td>
                                 </tr>
                             </table>

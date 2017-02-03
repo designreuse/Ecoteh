@@ -624,15 +624,7 @@ public final class User extends Model<Long>
      */
     @Override
     public void setVkontakte(final String vkontakte) {
-        String temp = null;
-        if (isNotBlank(vkontakte)) {
-            temp = vkontakte.toLowerCase()
-                    .replace("http://", "")
-                    .replace("https://", "")
-                    .replace("m.vk.com", "")
-                    .replace("vk.com", "");
-        }
-        this.vkontakte = isNotBlank(temp) ? temp : null;
+        this.vkontakte = isNotBlank(vkontakte) ? vkontakte : null;
     }
 
     /**
@@ -653,15 +645,7 @@ public final class User extends Model<Long>
      */
     @Override
     public void setFacebook(final String facebook) {
-        String temp = null;
-        if (isNotBlank(facebook)) {
-            temp = facebook.toLowerCase()
-                    .replace("http://", "")
-                    .replace("https://", "")
-                    .replace("m.facebook.com", "")
-                    .replace("www.facebook.com", "");
-        }
-        this.facebook = isNotBlank(temp) ? temp : null;
+        this.facebook = isNotBlank(facebook) ? facebook : null;
     }
 
     /**
@@ -682,15 +666,7 @@ public final class User extends Model<Long>
      */
     @Override
     public void setTwitter(final String twitter) {
-        String temp = null;
-        if (isNotBlank(twitter)) {
-            temp = twitter.toLowerCase()
-                    .replace("http://", "")
-                    .replace("https://", "")
-                    .replace("mobile.twitter.com", "")
-                    .replace("twitter.com", "");
-        }
-        this.twitter = isNotBlank(temp) ? temp : null;
+        this.twitter = isNotBlank(twitter) ? twitter : null;
     }
 
     /**

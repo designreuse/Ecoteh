@@ -126,7 +126,7 @@
                                     <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.vkontakte ne null}">
-                                                <a href="https://vk.com/<c:out value="${user.vkontakte}"/>"
+                                                <a href="<c:out value="${user.vkontakte}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
                                             </c:when>
@@ -146,7 +146,7 @@
                                     <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.facebook ne null}">
-                                                <a href="https://www.facebook.com/<c:out value="${user.facebook}"/>"
+                                                <a href="<c:out value="${user.facebook}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Facebook"
                                                    target="_blank">Facebook</a>
                                             </c:when>
@@ -167,7 +167,7 @@
                                     <td class="ths">
                                         <c:choose>
                                             <c:when test="${user.twitter ne null}">
-                                                <a href="https://twitter.com/<c:out value="${user.twitter}"/>"
+                                                <a href="<c:out value="${user.twitter}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Twitter"
                                                    target="_blank">Twitter</a>
                                             </c:when>

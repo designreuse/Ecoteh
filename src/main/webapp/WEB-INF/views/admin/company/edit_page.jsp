@@ -138,7 +138,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Cтационарный телефон</td>
+                                    <td class="ths">Стационарный телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="landline_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
@@ -186,8 +186,17 @@
                                 </c:if>
                                 <tr>
                                     <td class="ths">
-                                        <a href="https://vk.com" target="_blank"
-                                           title="Социальная сеть Vkontakte">Vkontakte</a>
+                                        <c:choose>
+                                            <c:when test="${company.vkontakte ne null}">
+                                                <a href="<c:out value="${company.vkontakte}"/>"
+                                                   title="Профиль &quot;<c:out value="${company.title}"/>&quot; в ВКонтакте"
+                                                   target="_blank">Vkontakte</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="https://vk.com" target="_blank"
+                                                   title="Социальная сеть Vkontakte">Vkontakte</a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
@@ -197,8 +206,17 @@
                                 </tr>
                                 <tr>
                                     <td class="ths">
-                                        <a href="https://www.facebook.com" target="_blank"
-                                           title="Социальная сеть Facebook">Facebook</a>
+                                        <c:choose>
+                                            <c:when test="${company.facebook ne null}">
+                                                <a href="<c:out value="${company.facebook}"/>"
+                                                   title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Facebook"
+                                                   target="_blank">Facebook</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="https://www.facebook.com" target="_blank"
+                                                   title="Социальная сеть Facebook">Facebook</a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook" minlength="5"
@@ -208,8 +226,17 @@
                                 </tr>
                                 <tr>
                                     <td class="ths">
-                                        <a href="https://twitter.com" target="_blank"
-                                           title="Социальная сеть Twitter">Twitter</a>
+                                        <c:choose>
+                                            <c:when test="${company.twitter ne null}">
+                                                <a href="<c:out value="${company.twitter}"/>"
+                                                   title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Twitter"
+                                                   target="_blank">Twitter</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="https://twitter.com" target="_blank"
+                                                   title="Социальная сеть Twitter">Twitter</a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"

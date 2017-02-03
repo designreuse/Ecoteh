@@ -82,14 +82,12 @@
                 </a>&nbsp;&nbsp;
             </c:if>
             <c:if test="${user.facebook ne null}">
-                <a href="https://www.facebook.com/<c:out value="${user.facebook}"/>" title="Профиль в Facebook"
-                   target="_blank">
+                <a href="<c:out value="${user.facebook}"/>" title="Профиль в Facebook" target="_blank">
                     <span class="fa fa-facebook-official fa-2x fb"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
             <c:if test="${user.twitter ne null}">
-                <a href="https://twitter.com/<c:out value="${user.twitter}"/>" title="Профиль в Twitter"
-                   target="_blank">
+                <a href="<c:out value="${user.twitter}"/>" title="Профиль в Twitter" target="_blank">
                     <span class="fa fa-twitter fa-2x tw"></span>
                 </a>&nbsp;&nbsp;
             </c:if>

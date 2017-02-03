@@ -23,8 +23,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "companies")
-public final class Company
-        extends Content<Long> implements ICompany<Long> {
+public final class Company extends Content<Long> implements ICompany<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -672,10 +671,7 @@ public final class Company
      */
     @Override
     public void setVkontakte(final String vkontakte) {
-        final String temp = isNotBlank(vkontakte) ? vkontakte.toLowerCase()
-                .replace("http://", "").replace("https://", "")
-                .replace("m.vk.com", "").replace("vk.com", "") : null;
-        this.vkontakte = isNotBlank(temp) ? temp : null;
+        this.vkontakte = isNotBlank(vkontakte) ? vkontakte : null;
     }
 
     /**
@@ -696,12 +692,7 @@ public final class Company
      */
     @Override
     public void setFacebook(final String facebook) {
-        String temp = isNotBlank(facebook) ? facebook.toLowerCase()
-                .replace("http://", "")
-                .replace("https://", "")
-                .replace("www.facebook.com", "")
-                .replace("m.facebook.com", "") : null;
-        this.facebook = isNotBlank(temp) ? temp : null;
+        this.facebook = isNotBlank(facebook) ? facebook : null;
     }
 
     /**
@@ -722,12 +713,7 @@ public final class Company
      */
     @Override
     public void setTwitter(final String twitter) {
-        final String temp = isNotBlank(twitter) ? twitter.toLowerCase()
-                .replace("http://", "")
-                .replace("https://", "")
-                .replace("mobile.twitter.com", "")
-                .replace("twitter.com", "") : null;
-        this.twitter = isNotBlank(temp) ? temp : null;
+        this.twitter = isNotBlank(twitter) ? twitter : null;
     }
 
     /**

@@ -91,18 +91,15 @@
             <div class="text-center">
                 <br>В социальных сетях:<br>
                 <c:if test="${company.vkontakte ne null}">
-                    <a href="https://vk.com/<c:out value="${company.vkontakte}"/>"
-                       title="Группа &quot;${company.title}&quot; в ВКонтакте"
+                    <a href="<c:out value="${company.vkontakte}"/>" title="Группа &quot;${company.title}&quot; в ВКонтакте"
                        target="_blank"><span class="fa fa-vk fa-2x vk"></span></a>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${company.facebook ne null}">
-                    <a href="https://www.facebook.com/<c:out value="${company.facebook}"/>"
-                       title="Группа &quot;${company.title}&quot; в Facebook"
+                    <a href="<c:out value="${company.facebook}"/>" title="Группа &quot;${company.title}&quot; в Facebook"
                        target="_blank"><span class="fa fa-facebook-official fa-2x fb"></span></a>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${company.twitter ne null}">
-                    <a href="https://twitter.com/<c:out value="${company.twitter}"/>"
-                       title="&quot;${company.title}&quot; в Twitter"
+                    <a href="<c:out value="${company.twitter}"/>" title="&quot;${company.title}&quot; в Twitter"
                        target="_blank"><span class="fa fa-twitter fa-2x tw"></span></a>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${company.skype ne null}">
