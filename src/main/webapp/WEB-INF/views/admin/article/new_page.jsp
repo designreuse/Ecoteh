@@ -46,7 +46,7 @@
                     <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
+                        <form action="<c:url value="/admin/article/add"/>" method="post">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
@@ -58,8 +58,8 @@
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="desc" rows="10" title="" required
-                                              placeholder="Краткое описание статьи (анонс)."></textarea>
+                                        <textarea class="form-control textarea" name="desc" rows="10" title="" required
+                                                  placeholder="Краткое описание статьи (анонс)."></textarea>
                                     </td>
                                 </tr>
                                 <tr>

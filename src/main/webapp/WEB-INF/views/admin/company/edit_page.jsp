@@ -64,8 +64,7 @@
                             <c:when test="${main}"><c:set var="action" value="/main"/></c:when>
                             <c:otherwise><c:set var="action" value=""/></c:otherwise>
                         </c:choose>
-                        <form action="<c:url value="/admin/company/update/${action}"/>" method="post"
-                              enctype="multipart/form-data">
+                        <form action="<c:url value="/admin/company/update/${action}"/>" method="post">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>

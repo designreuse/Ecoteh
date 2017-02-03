@@ -45,7 +45,7 @@
                     <h3 class="text-center" title="Добавление новой категории">Новая категория</h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/category/add"/>" method="post" enctype="multipart/form-data">
+                        <form action="<c:url value="/admin/category/add"/>" method="post">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>

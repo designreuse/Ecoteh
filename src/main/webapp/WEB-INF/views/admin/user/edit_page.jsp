@@ -51,7 +51,7 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/user/update"/>" method="post" enctype="multipart/form-data">
+                        <form action="<c:url value="/admin/user/update"/>" method="post">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Имя</td>

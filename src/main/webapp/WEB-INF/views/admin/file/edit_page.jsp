@@ -47,7 +47,7 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/file/update"/>" method="post" enctype="multipart/form-data">
+                        <form action="<c:url value="/admin/file/update"/>" method="post">
                             <input type="hidden" name="id" value="<c:out value="${file.id}"/>">
                             <table align="center" class="table-size">
                                 <tr>

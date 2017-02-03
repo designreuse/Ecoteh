@@ -66,8 +66,7 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/article/update"/>" method="post"
-                              enctype="multipart/form-data">
+                        <form action="<c:url value="/admin/article/update"/>" method="post">
                             <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
