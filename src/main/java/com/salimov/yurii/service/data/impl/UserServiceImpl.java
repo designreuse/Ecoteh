@@ -36,12 +36,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see UserDao
  */
 @Service
-@ComponentScan(
-        basePackages = {
-                "com.salimov.yurii.dao",
-                "com.salimov.yurii.service.data"
-        }
-)
+@ComponentScan(basePackages = "com.salimov.yurii.dao")
 public final class UserServiceImpl
         extends DataServiceImpl<User, Long>
         implements UserService, UserDetailsService {
@@ -64,9 +59,7 @@ public final class UserServiceImpl
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public UserServiceImpl(
-            final UserDao dao
-    ) {
+    public UserServiceImpl(final UserDao dao) {
         super(dao);
         this.dao = dao;
     }
