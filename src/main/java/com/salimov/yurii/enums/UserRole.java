@@ -17,12 +17,12 @@ public enum UserRole {
     SUPERMAN,
 
     /**
-     * The superman role.
+     * The admin role.
      */
     ADMIN,
 
     /**
-     * The superman role.
+     * The client role.
      */
     CLIENT,
 
