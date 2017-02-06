@@ -35,9 +35,7 @@ public final class ToLatinImpl implements ToLatin {
         StringBuilder sb = new StringBuilder();
         if (isNotBlank(this.value)) {
             for (char ch : convertToChars(this.value)) {
-                sb.append(
-                        translate(ch)
-                );
+                sb.append(translate(ch));
             }
         }
         return sb.toString().replace("__", "_");

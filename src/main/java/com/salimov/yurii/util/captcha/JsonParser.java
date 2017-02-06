@@ -38,8 +38,7 @@ final class JsonParser {
                             new StringReader(response)
                     )
             ) {
-                result = jsonReader.readObject()
-                        .getBoolean("success");
+                result = jsonReader.readObject().getBoolean("success");
             }
         }
         return result;

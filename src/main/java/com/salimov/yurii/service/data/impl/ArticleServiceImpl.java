@@ -95,10 +95,8 @@ public final class ArticleServiceImpl
     ) {
         final Article article = new Article();
         article.initialize(
-                title,
-                description, text,
-                keywords, number,
-                category
+                title, description, text,
+                keywords, number, category
         );
         article.setValidated(isValid);
         return add(article);
@@ -116,7 +114,7 @@ public final class ArticleServiceImpl
      * @param number      a new number to the article.
      * @param category    a new category to the article.
      * @param isValid     a validated of the article.
-     * @return The updating article with parameter id or {@code null}.
+     * @return The updating article with parameter id.
      * @see Article
      * @see Category
      * @see File
@@ -135,10 +133,8 @@ public final class ArticleServiceImpl
     ) {
         final Article article = getByUrl(url, false);
         article.initialize(
-                title,
-                description, text,
-                keywords, number,
-                category
+                title, description, text,
+                keywords, number, category
         );
         article.setValidated(isValid);
         return update(article);

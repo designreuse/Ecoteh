@@ -43,9 +43,7 @@ public final class FileComparator {
                 result = 1;
             } else {
                 result = file1.getTitle()
-                        .compareToIgnoreCase(
-                                file2.getTitle()
-                        );
+                        .compareToIgnoreCase(file2.getTitle());
             }
             return result;
         }
@@ -80,9 +78,7 @@ public final class FileComparator {
                 result = 1;
             } else {
                 result = file1.getUrl()
-                        .compareTo(
-                                file2.getUrl()
-                        );
+                        .compareTo(file2.getUrl());
             }
             return result;
         }

@@ -22,9 +22,8 @@ public class SaverImpl implements Sever {
     /**
      * The object for logging information.
      */
-    private final static Logger LOGGER = Logger.getLogger(
-            SaverImpl.class
-    );
+    private final static Logger LOGGER
+            = Logger.getLogger(SaverImpl.class);
 
     /**
      * The file to write.

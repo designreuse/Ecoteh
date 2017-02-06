@@ -15,8 +15,7 @@ import java.util.Collection;
  * @see IContent
  * @see com.salimov.yurii.entity.Category
  */
-public interface ICategory<E extends Number>
-        extends IContent<E> {
+public interface ICategory<E extends Number> extends IContent<E> {
 
     /**
      * Initializes some parameter of the category.

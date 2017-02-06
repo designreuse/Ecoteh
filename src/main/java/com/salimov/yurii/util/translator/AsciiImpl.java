@@ -16,8 +16,7 @@ public final class AsciiImpl implements Ascii {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER
-            = Logger.getLogger(AsciiImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(AsciiImpl.class);
 
     /**
      * The string to translate.
@@ -104,9 +103,7 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public void setValue(final int value) {
-        setValue(
-                Integer.toString(value)
-        );
+        setValue(Integer.toString(value));
     }
 
     /**

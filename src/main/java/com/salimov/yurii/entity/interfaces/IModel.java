@@ -11,8 +11,7 @@ import java.io.Serializable;
  * @version 1.0
  * @see com.salimov.yurii.entity.Model
  */
-public interface IModel<E extends Number>
-        extends Serializable, Cloneable {
+public interface IModel<E extends Number> extends Serializable, Cloneable {
 
     /**
      * Creates and returns a copy of this object.

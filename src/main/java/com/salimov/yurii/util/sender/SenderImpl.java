@@ -263,13 +263,11 @@ public final class SenderImpl implements Sender {
         );
         message.setSubject(
                 MimeUtility.encodeText(
-                        subject,
-                        SenderImpl.CHARSET,
-                        SenderImpl.ENCODING
+                        subject, CHARSET, ENCODING
                 )
         );
         message.setContent(
-                text, "text/plain;charset=" + SenderImpl.CHARSET
+                text, "text/plain;charset=" + CHARSET
         );
         message.setSentDate(new Date());
         return message;

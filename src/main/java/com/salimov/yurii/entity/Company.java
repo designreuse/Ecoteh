@@ -770,7 +770,6 @@ public final class Company extends Content<Long> implements ICompany<Long> {
 
     /**
      * Sets a new start work time to the company.
-     * If parameter start work time is blank, then sets "00:00".
      *
      * @param workTimeFrom a new start work time to the company.
      */
@@ -791,7 +790,6 @@ public final class Company extends Content<Long> implements ICompany<Long> {
 
     /**
      * Sets a new finish work time to the company.
-     * If parameter finish work time is blank, then sets "00:00".
      *
      * @param workTimeTo a new finish work time to the company.
      */
@@ -929,9 +927,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public void removeSlides(final Collection<String> slides) {
-        slides.forEach(
-                this::removeSlide
-        );
+        slides.forEach(this::removeSlide);
     }
 
     /**
@@ -1052,9 +1048,6 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public boolean isOpen() {
-        return Time.isWorkTime(
-                this.workTimeFrom,
-                this.workTimeTo
-        );
+        return Time.isWorkTime(this.workTimeFrom, this.workTimeTo);
     }
 }

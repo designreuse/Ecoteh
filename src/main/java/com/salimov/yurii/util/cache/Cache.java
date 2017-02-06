@@ -165,8 +165,7 @@ public final class Cache {
             final T key,
             final Object object
     ) {
-        final long milliseconds = -1;
-        return put(key, object, milliseconds);
+        return put(key, object, -1L);
     }
 
     /**

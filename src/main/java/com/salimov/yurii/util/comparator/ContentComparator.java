@@ -43,9 +43,7 @@ public final class ContentComparator {
                 result = 1;
             } else {
                 result = content1.getTitle()
-                        .compareToIgnoreCase(
-                                content2.getTitle()
-                        );
+                        .compareToIgnoreCase(content2.getTitle());
             }
             return result;
         }
@@ -80,9 +78,7 @@ public final class ContentComparator {
                 result = 1;
             } else {
                 result = content1.getUrl()
-                        .compareToIgnoreCase(
-                                content2.getUrl()
-                        );
+                        .compareToIgnoreCase(content2.getUrl());
             }
             return result;
         }

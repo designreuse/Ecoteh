@@ -21,8 +21,7 @@ public class Time implements ITime {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER
-            = Logger.getLogger(Time.class);
+    private static final Logger LOGGER = Logger.getLogger(Time.class);
 
     /**
      * The input time;

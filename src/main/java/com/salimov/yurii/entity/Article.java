@@ -71,9 +71,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      * Initializes date and number.
      */
     public Article() {
-        setDate(
-                new Date()
-        );
+        setDate(new Date());
         newNumber();
     }
 
@@ -272,9 +270,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public String getDateToString() {
-        return getDateToString(
-                getDate()
-        );
+        return getDateToString(getDate());
     }
 
     /**
@@ -288,18 +284,10 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public void setCategory(final Category category) {
-        if ((
-                this.category == null
-        ) || (
-                !this.category.equals(category)
-        )) {
+        if ((this.category == null) || !this.category.equals(category)) {
             final Category temp = this.category;
             this.category = category;
-            if ((
-                    this.category != null
-            ) && (
-                    !this.category.containsArticle(this)
-            )) {
+            if ((this.category != null) && !this.category.containsArticle(this)) {
                 this.category.addArticle(this);
             }
             if (temp != null) {

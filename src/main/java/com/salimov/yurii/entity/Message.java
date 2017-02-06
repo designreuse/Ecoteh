@@ -16,8 +16,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Model
  * @see IMessage
  */
-public final class Message extends Model<Long>
-        implements IMessage<Long> {
+public final class Message extends Model<Long> implements IMessage<Long> {
 
     /**
      * It is used during deserialization to verify that
@@ -61,9 +60,7 @@ public final class Message extends Model<Long>
      * Default constructor.
      */
     public Message() {
-        setDate(
-                new Date()
-        );
+        setDate(new Date());
     }
 
     /**

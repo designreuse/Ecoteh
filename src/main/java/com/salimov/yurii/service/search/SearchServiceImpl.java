@@ -271,29 +271,25 @@ public class SearchServiceImpl implements SearchService {
     ) {
         final String[] keywordArray = keywords.toLowerCase().split(", ");
         searchFromModelAndAdd(
-                keywordArray,
-                howSearch,
+                keywordArray, howSearch,
                 this.categoryService,
                 "categories_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray,
-                howSearch,
+                keywordArray, howSearch,
                 this.articleService,
                 "articles_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray,
-                howSearch,
+                keywordArray, howSearch,
                 this.companyService,
                 "partners_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray,
-                howSearch,
+                keywordArray, howSearch,
                 this.userService,
                 "users_list",
                 modelAndView
@@ -317,8 +313,7 @@ public class SearchServiceImpl implements SearchService {
         final String[] keywordArray = keywords.toLowerCase().split(", ");
         if (content.contains("in_categories")) {
             searchFromModelAndAdd(
-                    keywordArray,
-                    howSearch,
+                    keywordArray, howSearch,
                     this.categoryService,
                     "categories_list",
                     modelAndView
@@ -326,8 +321,7 @@ public class SearchServiceImpl implements SearchService {
         }
         if (content.contains("in_articles")) {
             searchFromModelAndAdd(
-                    keywordArray,
-                    howSearch,
+                    keywordArray, howSearch,
                     this.articleService,
                     "articles_list",
                     modelAndView
@@ -335,8 +329,7 @@ public class SearchServiceImpl implements SearchService {
         }
         if (content.contains("in_companies")) {
             searchFromModelAndAdd(
-                    keywordArray,
-                    howSearch,
+                    keywordArray, howSearch,
                     this.companyService,
                     "partners_list",
                     modelAndView

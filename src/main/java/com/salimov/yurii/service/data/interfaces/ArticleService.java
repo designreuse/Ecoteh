@@ -57,7 +57,7 @@ public interface ArticleService
      * @param number      a new number to the article.
      * @param category    a new category to the article.
      * @param isValid     a validated of the article.
-     * @return The updating article with parameter id or {@code null}.
+     * @return The updating article with parameter id.
      * @see Article
      * @see Category
      * @see File

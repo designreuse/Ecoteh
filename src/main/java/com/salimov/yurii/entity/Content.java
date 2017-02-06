@@ -23,8 +23,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see IContent
  */
 @MappedSuperclass
-public abstract class Content<E extends Number>
-        extends Model<E> implements IContent<E> {
+public abstract class Content<E extends Number> extends Model<E> implements IContent<E> {
 
     /**
      * It is used during deserialization to verify that
