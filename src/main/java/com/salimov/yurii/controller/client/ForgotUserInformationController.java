@@ -6,6 +6,8 @@ import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.captcha.CaptchaService;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.UserService;
+import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,6 +33,14 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ForgotUserInformationController {
+
+    /**
+     * The implementation of the interface provides a set of standard methods
+     * for creates and returns the main modelAndViews.
+     *
+     * @see MainMVFabric
+     */
+    private final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
@@ -64,6 +74,8 @@ public class ForgotUserInformationController {
     /**
      * Constructor.
      *
+     * @param fabric         a implementation
+     *                       of the {@link MainMVFabric} interface.
      * @param userService    a implementation
      *                       of the {@link UserService} interface.
      * @param companyService a implementation
@@ -80,11 +92,13 @@ public class ForgotUserInformationController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ForgotUserInformationController(
+            final MainMVFabric fabric,
             final UserService userService,
             final CompanyService companyService,
             final SenderService senderService,
             final CaptchaService captchaService
     ) {
+        this.fabric = new CacheMVFabricImpl(fabric);
         this.userService = userService;
         this.companyService = companyService;
         this.senderService = senderService;
@@ -102,8 +116,8 @@ public class ForgotUserInformationController {
             value = "/forgot_password",
             method = RequestMethod.GET
     )
-    public String getForgotPage() {
-        return "login/forgot_page";
+    public ModelAndView getForgotPage() {
+        return createModelAndView(null, null, null);
     }
 
     /**
@@ -251,10 +265,16 @@ public class ForgotUserInformationController {
      */
     private ModelAndView createModelAndView(
             final String username,
-            final boolean isCaptcha,
-            final boolean isForgot
+            final Boolean isCaptcha,
+            final Boolean isForgot
     ) {
-        final ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView;
+        try {
+            modelAndView = this.fabric.getDefaultModelAndView();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            modelAndView = new ModelAndView();
+        }
         modelAndView.addObject("username", username);
         modelAndView.addObject("is_captcha", isCaptcha);
         modelAndView.addObject("is_forgot", isForgot);

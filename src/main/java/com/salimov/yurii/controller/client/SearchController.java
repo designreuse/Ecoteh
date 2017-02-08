@@ -1,7 +1,9 @@
 package com.salimov.yurii.controller.client;
 
-import com.salimov.yurii.service.data.interfaces.*;
-import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
+import com.salimov.yurii.service.data.interfaces.ArticleService;
+import com.salimov.yurii.service.data.interfaces.CategoryService;
+import com.salimov.yurii.service.data.interfaces.CompanyService;
+import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @see CompanyService
  * @see UserService
  * @see MainMVFabric
- * @see ClientMVFabric
+ * @see MainMVFabric
  */
 @Controller
 @RequestMapping(value = "/search")
@@ -50,17 +52,17 @@ public class SearchController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric        a implementation of the {@link ClientMVFabric}
+     * @param fabric        a implementation of the {@link MainMVFabric}
      *                      interface.
      * @param searchService a implementation of the {@link SearchService}
      *                      interface.
-     * @see ClientMVFabric
+     * @see MainMVFabric
      * @see SearchService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public SearchController(
-            final ClientMVFabric fabric,
+            final MainMVFabric fabric,
             final SearchService searchService
     ) {
         this.fabric = fabric;
