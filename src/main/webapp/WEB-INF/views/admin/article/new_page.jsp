@@ -37,9 +37,9 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
-                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/article/all"/>">Все статьи</a>
+                        <a href="<c:url value="//"/>" title="Перейти на главную странцу">Главная</a>
+                        → <a href="<c:url value="/menu"/>" title="Меню администратора">Меню</a>
+                        → <a href="<c:url value="/article/all"/>">Все статьи</a>
                         → <a href="#">Новая статья</a>
                     </p>
                     <hr>

@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${fn:length(articles_list) gt 0}">
-    <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
     <div class="container">
         <div class="row">
             <div class="box">
@@ -13,7 +12,7 @@
                         <h3 class="text-center">
                             <c:choose>
                                 <c:when test="${textNotNull}">
-                                    <a href="<c:url value="${reqmap}/article/${article.url}"/>">
+                                    <a href="<c:url value="/article/${article.url}"/>">
                                         <c:out value="${article.title}"/>
                                     </a>
                                 </c:when>
@@ -44,7 +43,7 @@
                                       title="Не отображается для клиентов"></span>&nbsp;
                             </c:if>
                             <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
-                            <a href="<c:url value="${reqmap}/article/num_${article.number}"/>">
+                            <a href="<c:url value="/article/num_${article.number}"/>">
                                 <c:out value="${article.number}"/>
                             </a>
                         </span>
@@ -54,7 +53,7 @@
                         </c:choose>
                         <c:if test="${textNotNull}">
                             <p class="text-right">
-                                <a href="<c:url value="${reqmap}/article/${article.url}"/>"
+                                <a href="<c:url value="/article/${article.url}"/>"
                                    title="Подробнее о &quot;<c:out value="${article.title}"/>&quot;">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Подробнее...

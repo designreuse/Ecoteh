@@ -3,14 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${fn:length(partners_list) gt 0}">
-    <c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
     <div class="container">
         <div class="row">
             <div class="box">
                 <c:forEach items="${partners_list}" var="partner">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h3 class="text-center">
-                            <b><a href="<c:url value="${reqmap}/company/${partner.url}"/>">
+                            <b><a href="<c:url value="/company/${partner.url}"/>">
                                 <c:out value="${partner.title}"/>
                             </a></b>
                         </h3>
@@ -26,7 +25,7 @@
                             <c:otherwise><p>${partner.tagline}</p></c:otherwise>
                         </c:choose>
                         <p class="text-right">
-                            <a href="<c:url value="${reqmap}/company/${partner.url}"/>"
+                            <a href="<c:url value="/company/${partner.url}"/>"
                                title="Подробнее о &quot;<c:out value="${partner.title}"/>&quot;">
                                 <span class="glyphicon glyphicon-share-alt"
                                       aria-hidden="true"></span>&nbsp;Подробнее...

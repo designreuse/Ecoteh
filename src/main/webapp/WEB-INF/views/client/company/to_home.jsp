@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
 <div class="container">
     <div class="row">
         <div class="box">
@@ -11,7 +10,7 @@
                     <c:when test="${company.description ne null}">
                         <hr>
                         <h3 class="intro-text text-center">
-                            <a href="<c:url value="${reqmap}/company/main"/>" title="Описание нашей компании">О нас</a>
+                            <a href="<c:url value="/company/main"/>" title="Описание нашей компании">О нас</a>
                         </h3>
                         <hr>
                         <p>${company.description}</p>
@@ -31,7 +30,7 @@
                 </c:choose>
                 <hr>
                 <p class="text-right">
-                    <a href="<c:url value="${reqmap}/company/main"/>" title="Описание нашей компании">
+                    <a href="<c:url value="/company/main"/>" title="Описание нашей компании">
                         <span class="glyphicon glyphicon-share-alt"
                               aria-hidden="true"></span>&nbsp;Подробнее о нас...
                     </a>

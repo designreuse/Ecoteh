@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:if test="${authorized_user ne null}"><c:set var="reqmap" value="/admin"/></c:if>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <nav class="navbar navbar-default">
         <div class="container">
@@ -12,7 +11,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a href="<c:url value="${reqmap}/"/>" class="navbar-brand">
+                <a href="<c:url value="/"/>" class="navbar-brand">
                     <c:choose>
                         <c:when test="${main_company ne null}">
                             <c:out value="${main_company.title}"/>
@@ -27,7 +26,7 @@
                 <%-- For not mobile device --%>
                 <ul class="hidden-xs dropdown nav navbar-nav">
                     <li>
-                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">
                             <c:choose>
                                 <c:when test="${main_company.faviconUrl ne null}">
                                     <img src="<c:url value="${main_company.faviconUrl}"/>"
@@ -43,11 +42,11 @@
                         </a>
                     </li>
                     <li class="dropdown-top">
-                        <a class="dropdown-top" href="<c:url value="${reqmap}/category/all"/>">Продукция</a>
+                        <a class="dropdown-top" href="<c:url value="/category/all"/>">Продукция</a>
                         <ul class="dropdown-inside" role="menu">
                             <c:forEach items="${categories}" var="category">
                                 <li class="text-center">
-                                    <a href="<c:url value="${reqmap}/category/${category.url}"/>"
+                                    <a href="<c:url value="/category/${category.url}"/>"
                                        title="Перейти к &quot;<c:out value="${category.title}"/>&quot;">
                                         <h4 class="text-center">
                                             <c:out value="${category.title}"/>
@@ -57,7 +56,7 @@
                                 </li>
                             </c:forEach>
                             <li class="text-center">
-                                <a href="<c:url value="${reqmap}/article/all"/>" title="Перейти к списку всех товаров">
+                                <a href="<c:url value="/article/all"/>" title="Перейти к списку всех товаров">
                                     <h4 class="text-center">Все товары</h4>
                                 </a>
                             </li>
@@ -65,26 +64,26 @@
                     </li>
                     <c:if test="${main_company ne null}">
                         <li class="dropdown-top">
-                            <a class="dropdown-top" href="<c:url value="${reqmap}/company/main"/>">О компании</a>
+                            <a class="dropdown-top" href="<c:url value="/company/main"/>">О компании</a>
                             <ul class="dropdown-inside" role="menu">
                                 <li class="text-center">
-                                    <a href="<c:url value="${reqmap}/company/main"/>"
+                                    <a href="<c:url value="/company/main"/>"
                                        title="Описание нашей компании">Описание</a>
                                     <hr>
                                 </li>
                                 <li class="text-center">
-                                    <a href="<c:url value="${reqmap}/contacts"/>"
+                                    <a href="<c:url value="/contacts"/>"
                                        title="Как с нами связаться">Контакты</a>
                                     <hr>
                                 </li>
                                 <li class="text-center">
-                                    <a href="<c:url value="${reqmap}/responses"/>"
+                                    <a href="<c:url value="/responses"/>"
                                        title="Отзывы о нашей компании">Отзывы</a>
                                 </li>
                             </ul>
                         </li>
                     </c:if>
-                    <li><a href="<c:url value="${reqmap}/company/all"/>" title="Наши партнеры">Партнеры</a></li>
+                    <li><a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a></li>
                     <li>
                         <a href="<c:url value="/search"/>" title="Поиск необходимого контента">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -136,18 +135,18 @@
                 <%-- For mobile device --%>
                 <ul class="hidden-sm hidden-md hidden-lg hidden-xl dropdown nav navbar-nav">
                     <li>
-                        <a href="<c:url value="${reqmap}/"/>">
+                        <a href="<c:url value="/"/>">
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Главная
                         </a>
                     </li>
-                    <li><a href="<c:url value="${reqmap}/category/all"/>">Продукция</a></li>
+                    <li><a href="<c:url value="/category/all"/>">Продукция</a></li>
                     <c:if test="${main_company ne null}">
-                        <li><a href="<c:url value="${reqmap}/company/main"/>">О компании</a></li>
-                        <li><a href="<c:url value="${reqmap}/contacts"/>">Контакты</a></li>
-                        <li><a href="<c:url value="${reqmap}/responses"/>">Отзывы</a></li>
+                        <li><a href="<c:url value="/company/main"/>">О компании</a></li>
+                        <li><a href="<c:url value="/contacts"/>">Контакты</a></li>
+                        <li><a href="<c:url value="/responses"/>">Отзывы</a></li>
                     </c:if>
                     <c:if test="${fn:length(partners) gt 0}">
-                        <li><a href="<c:url value="${reqmap}/company/all"/>">Партнеры</a></li>
+                        <li><a href="<c:url value="/company/all"/>">Партнеры</a></li>
                     </c:if>
                     <c:choose>
                         <c:when test="${authorized_user ne null}">

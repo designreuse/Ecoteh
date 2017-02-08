@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/admin/file/all"/>">Все файлы</a>
                         → <a href="#">Новый файл</a>
@@ -43,20 +43,13 @@
                     <h3 class="text-center" title="Добавление нового файла">Новый файл</h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/file/add"/>" method="post">
+                        <form action="<c:url value="/admin/file/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title"
                                                maxlength="100" placeholder="Название файла" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">Относительный путь директории</td>
-                                    <td class="tds">
-                                        <input type="text" class="form-control" name="path" maxlength="100"
-                                               placeholder="Путь относительно папки &quot;/resources/&quot;">
                                     </td>
                                 </tr>
                                 <tr>

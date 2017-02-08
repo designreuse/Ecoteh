@@ -39,10 +39,10 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:if test="${company ne main_company}">
-                            → <a href="<c:url value="/admin/company/all"/>">Все партнеры</a>
+                            → <a href="<c:url value="/company/all"/>">Все партнеры</a>
                         </c:if>
                         →
                         <a href="#" title="Редактировать&nbsp;&quot;<c:out value="${company.title}&quot;"/>">
@@ -55,7 +55,7 @@
                             <c:when test="${main}"><c:set var="com" value="main"/></c:when>
                             <c:otherwise><c:set var="com" value="${company.url}"/></c:otherwise>
                         </c:choose>
-                        Редактировать&nbsp;&quot;<a href="<c:url value="/admin/company/${com}"/>"><c:out
+                        Редактировать&nbsp;&quot;<a href="<c:url value="/company/${com}"/>"><c:out
                             value="${company.title}"/></a>&quot;
                     </h3>
                     <hr>

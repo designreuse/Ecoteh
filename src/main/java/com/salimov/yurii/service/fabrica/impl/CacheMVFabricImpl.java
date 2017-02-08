@@ -24,16 +24,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     private final static String HOME_PAGE_KEY = "Home";
 
     /**
-     * The all sections page key.
-     */
-    private final static String ALL_SECTIONS_KEY = "All Sections";
-
-    /**
-     * The sections with categories page key.
-     */
-    private final static String SECTIONS_WITH_CATEGORIES_KEY = "Sections With Categories";
-
-    /**
      * The all categories page key.
      */
     private final static String ALL_CATEGORIES_KEY = "All Categories";
@@ -443,25 +433,13 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
-     * Return fabric name which working.
-     *
-     * @return The fabric class name.
-     */
-    @Override
-    public String getFabricName() {
-        return this.fabric.getFabricName();
-    }
-
-    /**
      * Returns model and view from cache with key.
      *
      * @param key a model and view key in the cache.
      * @return The model and view with key.
      */
     private ModelAndView get(final String key) {
-        return (ModelAndView) Cache.get(
-                getKey(key)
-        );
+        return (ModelAndView) Cache.get(key);
     }
 
     /**
@@ -474,19 +452,26 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
             final ModelAndView modelAndView,
             final String key
     ) {
-        Cache.put(
-                getKey(key),
-                modelAndView
-        );
+        Cache.put(getKey(key), modelAndView);
     }
 
     /**
-     * Return fabric key + the key.
+     * Returns a key to cache.
      *
-     * @param key a model and view key in the cache.
-     * @return The fabric key.
+     * @param key a input key.
+     * @return The key to cache.
      */
     private String getKey(final String key) {
-        return getFabricName() + " - " + key;
+        return key + (isValidContent() ? " for admin" : " for client");
+    }
+
+    /**
+     * Validates output objects.
+     *
+     * @return Returns {@code true} if need to return valid objects,
+     * {@code false} otherwise.
+     */
+    public boolean isValidContent() {
+        return this.fabric.isValidContent();
     }
 }

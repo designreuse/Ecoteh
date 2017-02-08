@@ -4,7 +4,7 @@
 <div class="text-center">
     <table align="center">
         <tr>
-            <th class="pad"><a href="<c:url value="/admin/company/main"/>">Компания</a></th>
+            <th class="pad"><a href="<c:url value="/company/main"/>">Компания</a></th>
             <td class="pad">
                 <a href="<c:url value="/admin/company/edit/main"/>"
                    title="Редактировать информацию о компании &quot;<c:out value="${main_company.title}"/>&quot;">
@@ -15,7 +15,7 @@
             </td>
         </tr>
         <tr>
-            <th class="pad"><a href="<c:url value="/admin/category/all"/>" title="Все категории">Категории</a>
+            <th class="pad"><a href="<c:url value="/category/all"/>" title="Все категории">Категории</a>
             </th>
             <td class="pad">
                 <a href="<c:url value="/admin/category/new"/>" title="Добавить новую категорию">
@@ -31,7 +31,7 @@
             </td>
         </tr>
         <tr>
-            <th class="pad"><a href="<c:url value="/admin/article/all"/>" title="Все статьи">Статьи</a></th>
+            <th class="pad"><a href="<c:url value="/article/all"/>" title="Все статьи">Статьи</a></th>
             <td class="pad">
                 <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                     <button class="btn btn-default">
@@ -46,7 +46,7 @@
             </td>
         </tr>
         <tr>
-            <th class="pad"><a href="<c:url value="/admin/company/all"/>" title="Наши партнеры">Партнеры</a></th>
+            <th class="pad"><a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a></th>
             <td class="pad">
                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
                     <button class="btn btn-default">
@@ -94,7 +94,7 @@
         </tr>
         <tr>
             <th class="pad">
-                <a href="<c:url value="/admin/responses"/>" title="Отзывы о компании">Отзывы</a>
+                <a href="<c:url value="/responses"/>" title="Отзывы о компании">Отзывы</a>
             </th>
             <td class="pad">
                 <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании">
@@ -136,53 +136,6 @@
                         <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>&nbsp;Очистить
                     </button>
                 </a>
-            </td>
-        </tr>
-        <tr>
-            <th class="pad"></th>
-            <td class="pad"></td>
-        </tr>
-        <tr>
-            <th class="pad"></th>
-            <td class="pad">
-                <c:choose>
-                    <c:when test="${is_enabled}">
-                        <button class="open btn btn-default" data-type="zoomin"
-                                title="Отключить сайт для пользователей.">
-                            <span class="glyphicon glyphicon-off red"
-                                  aria-hidden="true"></span>&nbsp;<b>Отключить сайт!</b>
-                        </button>
-                        <div class="overlay-container">
-                            <div class="window-container zoomin">
-                                <h3>Отключение сайта</h3>
-                                <h5 class="text-center">
-                                    Вы уверены, что хотите отключить сайт?<br>
-                                    Клиенты не будут иметь доступа к информации на сайте.
-                                </h5><br>
-                                <div class="text-center">
-                                    <a href="<c:url value="/admin/site/off"/>">
-                                        <button class="btn btn-default">
-                                             <span class="glyphicon glyphicon-off red"
-                                                   aria-hidden="true"></span>&nbsp;Да, отключить сайт
-                                        </button>
-                                    </a>&nbsp;&nbsp;
-                                    <button class="close btn btn-default">
-                                        <span class="glyphicon glyphicon-remove"
-                                              aria-hidden="true"></span>&nbsp;Нет, закрыть окно
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="<c:url value="/admin/site/on"/>" title="Возобновить сайт для пользователей">
-                            <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-off"
-                                      aria-hidden="true"></span>&nbsp;<b>Включить сайт!</b>
-                            </button>
-                        </a>
-                    </c:otherwise>
-                </c:choose>
             </td>
         </tr>
     </table>

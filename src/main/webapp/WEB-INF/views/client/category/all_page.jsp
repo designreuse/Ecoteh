@@ -38,7 +38,6 @@
             <div class="row">
                 <div class="box">
                     <c:if test="${authorized_user ne null}">
-                        <c:set var="reqmap" value="/admin"/>
                         <div class="text-center">
                             <a href="<c:url value="/admin/category/new"/>" title="Добавить новую категория">
                                 <button class="btn btn-default">
@@ -57,7 +56,7 @@
                         </div>
                     </c:if>
                     <p class="path">
-                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Все категории</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

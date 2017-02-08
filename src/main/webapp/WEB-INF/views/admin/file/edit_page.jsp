@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/admin/file/all"/>">Все файлы</a>
                         → <a href="#">Редактирование файла</a>
@@ -47,22 +47,17 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/file/update"/>" method="post">
+                        <form action="<c:url value="/admin/file/update"/>" method="post" enctype="multipart/form-data"
+                              <c:if test="${file.validated eq false}">disabled</c:if>>
                             <input type="hidden" name="id" value="<c:out value="${file.id}"/>">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" maxlength="100" required
-                                               placeholder="Название файла" value="<c:out value="${file.title}"/>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">Относительный путь директории</td>
-                                    <td class="tds">
-                                        <input type="text" class="form-control" name="path" maxlength="100"
-                                               placeholder="Путь относительно папки &quot;/resources/&quot;"
-                                               value="${file.url}">
+                                               placeholder="Название файла" value="<c:out value="${file.title}"/>"
+                                        <c:if test="${file.validated eq false}"> disabled
+                                               title="Статические файлы редактировать запрещено"</c:if>>
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,16 +70,22 @@
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'">
                                         </a><br>
-                                        <input type="file" name="file" class="form-control">
+                                        <input type="file" name="file" class="form-control"
+                                        <c:if test="${file.validated eq false}"> disabled
+                                               title="Статические файлы редактировать запрещено"</c:if>>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin: 10px">
-                                <button type="submit" class="btn btn-default" title="Добавить файл">
+                                <button type="submit" class="btn btn-default" title="Добавить файл"
+                                        <c:if test="${file.validated eq false}"> disabled
+                                            title="Статические файлы редактировать запрещено"</c:if>>
                                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
-                                <button type="reset" class="btn btn-default" title="Сбросить информацию">
+                                <button type="reset" class="btn btn-default" title="Сбросить информацию"
+                                        <c:if test="${file.validated eq false}"> disabled
+                                            title="Статические файлы редактировать запрещено"</c:if>>
                                     <span class="glyphicon glyphicon-retweet yellow"
                                           aria-hidden="true"></span>&nbsp;Сброс
                                 </button>

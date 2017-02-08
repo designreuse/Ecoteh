@@ -18,8 +18,7 @@ import java.util.List;
  * @see ContentService
  * @see DataService
  */
-public interface ArticleService
-        extends ContentService<Article, Long> {
+public interface ArticleService extends ContentService<Article, Long> {
 
     /**
      * Initializes, saves and returns a new article.

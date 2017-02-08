@@ -8,8 +8,6 @@ package com.salimov.yurii.service.fabrica.interfaces;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see MainMVFabric
- * @see ClientMVFabric
- * @see AdminMVFabric
  */
 public interface CacheMVFabric extends MainMVFabric {
 }

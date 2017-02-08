@@ -36,7 +36,6 @@
             <div class="row">
                 <div class="box">
                     <c:if test="${(authorized_user ne null) and (length gt 0)}">
-                        <c:set var="reqmap" value="/admin"/>
                         <div class="text-center">
                             <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании">
                                 <button class="btn btn-default">
@@ -47,11 +46,11 @@
                         </div>
                     </c:if>
                     <p class="path">
-                        <a href="<c:url value="${reqmap}/"/>"
+                        <a href="<c:url value="/"/>"
                            title="Перейти на главную страницу">Главная</a>
-                        → <a href="<c:url value="${reqmap}/company/main"/>"
+                        → <a href="<c:url value="/company/main"/>"
                              title="Описание нашей компании">Описание компании</a>
-                        → <a href="<c:url value="${reqmap}/responses"/>">Отзывы о компании</a>
+                        → <a href="<c:url value="/responses"/>">Отзывы о компании</a>
                     </p>
                     <hr>
                     <h3 class="text-center">Отзывы о компании</h3>
@@ -59,7 +58,7 @@
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
-                            <a href="<c:url value="${reqmap}/responses/sort?revers=${revers}"/>"
+                            <a href="<c:url value="/responses/sort?revers=${revers}"/>"
                                title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">

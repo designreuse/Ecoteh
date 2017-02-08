@@ -48,7 +48,7 @@
                         </div>
                     </c:if>
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную страницу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href=" <c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="#">Сообщения</a>
                     </p>

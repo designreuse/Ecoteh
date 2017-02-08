@@ -40,20 +40,20 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:choose>
                             <c:when test="${article.category ne null}">
-                                → <a href="<c:url value="/admin/category/all"/>"
+                                → <a href="<c:url value="/category/all"/>"
                                      title="Перейти к всем категориям">Все категории</a>
                                 →
-                                <a href="<c:url value="/admin/category/${article.category.url}"/>"
+                                <a href="<c:url value="/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
                                     <c:out value="${article.category.title}"/>
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                → <a href="<c:url value="/admin/article/all"/>" title="Статьи">Статьи</a>
+                                → <a href="<c:url value="/article/all"/>" title="Статьи">Статьи</a>
                             </c:otherwise>
                         </c:choose>
                         → <a href="#">Редактирование статьи</a>
@@ -61,7 +61,7 @@
                     <hr>
                     <h3 class="text-center">
                         Редактирование статьи
-                        &quot;<a href="<c:url value="/admin/article/${article.url}"/>"><c:out
+                        &quot;<a href="<c:url value="/article/${article.url}"/>"><c:out
                             value="${article.title}"/></a>&quot;
                     </h3>
                     <hr>

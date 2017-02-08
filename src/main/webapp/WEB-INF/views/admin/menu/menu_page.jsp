@@ -25,7 +25,6 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="<c:url value="/resources/css/demo.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -34,17 +33,11 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="/admin/"/>" title="Перейти на главную странцу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="#" title="">Меню администратора</a>
                     </p>
                     <hr>
                     <h3 class="text-center green">Меню администратора</h3>
-                    <c:if test="${!is_enabled}">
-                        <h4 class="text-center red">
-                            <b><span class="glyphicon glyphicon-warning-sign red"
-                                     aria-hidden="true"></span>&nbsp;Сайт отключен!</b>
-                        </h4>
-                    </c:if>
                     <hr>
                 </div>
             </div>
@@ -70,7 +63,6 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/demo.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

@@ -77,7 +77,6 @@ public final class FileServiceImpl
      * Initializes, saves and returns a new file.
      *
      * @param title         a title of the new file.
-     * @param url           a title of the new file.
      * @param multipartFile a multipart file of the new file.
      * @return The new saving file.
      * @see File
@@ -86,20 +85,13 @@ public final class FileServiceImpl
     @Transactional
     public File initAndAdd(
             final String title,
-            final String url,
             final MultipartFile multipartFile
     ) {
+        checkMultipartFile(multipartFile);
         final File file = new File(
-                title,
-                createRelativePath(
-                        title, url,
-                        multipartFile
-                )
+                title, createRelativePath(title, multipartFile)
         );
-        saveFile(
-                multipartFile,
-                file.getUrl()
-        );
+        saveFile(multipartFile, file.getUrl());
         return add(file);
     }
 
@@ -109,7 +101,6 @@ public final class FileServiceImpl
      *
      * @param id            a id of the file to update.
      * @param title         a new title to the file.
-     * @param url           a new url to the file.
      * @param multipartFile a new multipart file to the file.
      * @return The updating file with parameter id or {@code null}.
      * @see File
@@ -119,29 +110,20 @@ public final class FileServiceImpl
     public File initAndUpdate(
             final Long id,
             final String title,
-            final String url,
             final MultipartFile multipartFile
-    ) {
+    ) throws IllegalArgumentException {
         final File file = get(id);
-        if (multipartFile != null) {
-            deleteFile(
-                    file.getUrl()
+        if (!file.isValidated()) {
+            throw new IllegalArgumentException(
+                    "Static files forbidden to edit!"
             );
         }
-        file.initialize(
-                title,
-                file.getUrl().contains(url)
-                        ? file.getUrl() :
-                        createRelativePath(
-                                title, url,
-                                multipartFile
-                        )
-        );
-        if (multipartFile != null) {
-            saveFile(
-                    multipartFile,
-                    file.getUrl()
-            );
+        file.setTitle(title);
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            checkMultipartFile(multipartFile);
+            deleteFile(file.getUrl());
+            file.setUrl(createRelativePath(title, multipartFile));
+            saveFile(multipartFile, file.getUrl());
         }
         return update(file);
     }
@@ -195,11 +177,10 @@ public final class FileServiceImpl
                     getClassSimpleName() + " url is blank!"
             );
         }
-        final String path = createAbsolutePath(url);
-        final File file = this.dao.getByUrl(path);
+        final File file = this.dao.getByUrl(url);
         if (file == null) {
             throw new NullPointerException(
-                    "Can`t find file object by URL \"" + path + "\"!"
+                    "Can`t find file object by URL \"" + url + "\"!"
             );
         }
         return file;
@@ -229,11 +210,7 @@ public final class FileServiceImpl
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        remove(
-                getByUrl(
-                        createAbsolutePath(url)
-                )
-        );
+        remove(getByUrl(url));
     }
 
     /**
@@ -245,11 +222,15 @@ public final class FileServiceImpl
      */
     @Override
     @Transactional
-    public void remove(final File file) {
+    public void remove(final File file)
+            throws IllegalArgumentException {
         if (file != null) {
-            deleteFile(
-                    file.getUrl()
-            );
+            if (!file.isValidated()) {
+                throw new IllegalArgumentException(
+                        "Static files forbidden to remove!"
+                );
+            }
+            deleteFile(file.getUrl());
             super.remove(file);
         }
     }
@@ -265,9 +246,7 @@ public final class FileServiceImpl
     @Transactional
     public void remove(final Collection<File> files) {
         if (files != null && !files.isEmpty()) {
-            files.forEach(
-                    this::remove
-            );
+            files.forEach(this::remove);
         }
     }
 
@@ -279,14 +258,12 @@ public final class FileServiceImpl
     @Override
     @Transactional
     public void removeAll() {
-        remove(
-                getAll()
-        );
+        remove(getAll());
     }
 
     /**
      * Saves the multipart file in the file system in the directory rootPath.
-     * Saves file if it is not {@code null} and path is not blank.
+     * Saves file if it is not {@code null} and not empty.
      *
      * @param multipartFile the multipart file to save.
      * @param rootPath      a directory path.
@@ -301,11 +278,9 @@ public final class FileServiceImpl
         if (multipartFile != null && !multipartFile.isEmpty()) {
             new SaverImpl(
                     multipartFile,
-                    createAbsolutePath(
-                            isNotBlank(rootPath)
-                                    ? rootPath
-                                    : multipartFile.getOriginalFilename()
-                    )
+                    this.properties.getProjectAbsolutePath()
+                            + (isNotBlank(rootPath) ? rootPath
+                            : multipartFile.getOriginalFilename())
             ).write();
         }
     }
@@ -322,10 +297,7 @@ public final class FileServiceImpl
     public void saveFile(
             final MultipartFile multipartFile
     ) {
-        saveFile(
-                multipartFile,
-                null
-        );
+        saveFile(multipartFile, multipartFile.getOriginalFilename());
     }
 
     /**
@@ -341,60 +313,14 @@ public final class FileServiceImpl
     @Transactional
     public boolean deleteFile(final String rootPath) {
         return new SaverImpl(
-                createAbsolutePath(rootPath)
+                this.properties.getProjectAbsolutePath() + rootPath
         ).delete();
-    }
-
-    /**
-     * Updates and returns object of class {@link File}.
-     * Updates file if file is not {@code null}.
-     *
-     * @param photo         the file to update.
-     * @param multipartFile a multipart file to save.
-     * @param title         a new title to the file
-     * @param rootPath      a directory path.
-     * @return The updating file.
-     * @see File
-     */
-    @Override
-    @Transactional
-    public File updatePhoto(
-            final File photo,
-            final MultipartFile multipartFile,
-            final String title,
-            final String rootPath
-    ) {
-        if ((
-                photo != null
-        ) && (
-                multipartFile != null
-        ) && (
-                !multipartFile.isEmpty()
-        )) {
-            deleteFile(
-                    photo.getUrl()
-            );
-            photo.setTitle(
-                    title + " " + multipartFile.getOriginalFilename()
-            );
-            photo.setUrl(
-                    rootPath + "/" +
-                            title.replace(" ", "_") +
-                            "_" + multipartFile.getOriginalFilename()
-            );
-            update(photo);
-            saveFile(
-                    multipartFile,
-                    photo.getUrl()
-            );
-        }
-        return photo;
     }
 
     /**
      * Validates input file object.
      *
-     * @param file              the file to valid.
+     * @param file               the file to valid.
      * @param requiredParameters is validate by required parameters.
      * @param exist              is validate by exists.
      * @param duplicate          is validate by duplicate.
@@ -418,15 +344,8 @@ public final class FileServiceImpl
             return false;
         }
         if (duplicate) {
-            if ((
-                    this.dao.getByTitle(
-                            file.getTitle()
-                    ) != null
-            ) || (
-                    this.dao.getByUrl(
-                            file.getUrl()
-                    ) != null
-            )) {
+            if ((this.dao.getByTitle(file.getTitle()) != null)
+                    || (this.dao.getByUrl(file.getUrl()) != null)) {
                 return false;
             }
         }
@@ -436,8 +355,8 @@ public final class FileServiceImpl
     /**
      * Sorts and returns file objects by title.
      *
-     * @param files the files to sort.
-     * @param revers   is sort in descending or ascending.
+     * @param files  the files to sort.
+     * @param revers is sort in descending or ascending.
      * @return The sorted list of files.
      * @see Content
      */
@@ -447,11 +366,7 @@ public final class FileServiceImpl
             final Collection<File> files,
             final boolean revers
     ) {
-        return sort(
-                files,
-                new FileComparator.ByTitle<>(),
-                revers
-        );
+        return sort(files, new FileComparator.ByTitle<>(), revers);
     }
 
     /**
@@ -464,32 +379,31 @@ public final class FileServiceImpl
         return File.class;
     }
 
-    /**
-     * Creates and returns a absolute path to file.
-     *
-     * @param subPath a path to the file relative
-     *                to resources directory.
-     * @return The absolute path to file.
-     */
-    private String createAbsolutePath(final String subPath) {
-        return this.properties.getResourcesAbsolutePath()
-                + subPath;
+    private void checkMultipartFile(final MultipartFile multipartFile)
+            throws NullPointerException, IllegalArgumentException {
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            throw new NullPointerException("Can`t find multipart file!");
+        }
+        if (multipartFile.getSize() > this.properties.getMaxFileSize()) {
+            throw new IllegalArgumentException(
+                    "Maximum file size must be no larger than " + this.properties.getMaxFileSize() + " bytes. "
+                            + "Size of the input file is " + multipartFile.getSize() + " bytes."
+            );
+        }
     }
 
     /**
      * Creates ad returns a relative path to file.
      *
      * @param title         a file title.
-     * @param url           a file URL.
      * @param multipartFile a multipart file.
      * @return The relative path to file.
      */
-    private static String createRelativePath(
+    private String createRelativePath(
             final String title,
-            final String url,
             final MultipartFile multipartFile
     ) {
-        return (isNotBlank(url) ? url + "/" : "")
+        return this.properties.getResourcesLocation()
                 + Translator.fromCyrillicToLatin(title)
                 + getMultipartFileType(multipartFile);
     }
@@ -503,12 +417,14 @@ public final class FileServiceImpl
     private static String getMultipartFileType(
             final MultipartFile multipartFile
     ) {
+        String type;
         final String name = multipartFile.getOriginalFilename();
-        final String type = name.substring(
-                name.lastIndexOf("."),
-                name.length()
-        );
-        return isNotBlank(type) ? type : multipartFile.getContentType();
+        if (name.contains(".")) {
+            type = name.substring(name.lastIndexOf("."), name.length());
+        } else {
+            type = "";
+        }
+        return type;
     }
 }
 

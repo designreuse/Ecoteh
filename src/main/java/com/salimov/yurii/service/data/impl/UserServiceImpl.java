@@ -7,6 +7,7 @@ import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,6 +42,10 @@ public final class UserServiceImpl
         extends DataServiceImpl<User, Long>
         implements UserService, UserDetailsService {
 
+    private final static Logger LOGGER = Logger.getLogger(
+            UserServiceImpl.class
+    );
+
     /**
      * The interface provides a set of standard methods for working
      * {@link User} objects with the database.
@@ -73,10 +78,15 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public User getAuthenticatedUser() {
-        return (User) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        User authenticatedUser;
+        try {
+            authenticatedUser = (User) SecurityContextHolder.getContext()
+                    .getAuthentication().getPrincipal();
+        } catch (ClassCastException ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            authenticatedUser = null;
+        }
+        return authenticatedUser;
     }
 
     /**
@@ -345,7 +355,7 @@ public final class UserServiceImpl
     public User getByEmail(final String email) throws NullPointerException {
         if (isBlank(email)) {
             throw new IllegalArgumentException(
-                    getClassSimpleName() + " email is blank!"
+                    "Input E-mail is blank!"
             );
         }
         final User user = this.dao.getByEmail(email);
@@ -377,9 +387,7 @@ public final class UserServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<User> getAdmins() {
-        return getAndFilterByRole(
-                UserRole.ADMIN
-        );
+        return getAndFilterByRole(UserRole.ADMIN);
     }
 
     /**
@@ -621,9 +629,7 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRoles(
-            final List<UserRole> roles
-    ) {
+    public List<User> getAndFilterByRoles(final List<UserRole> roles) {
         return filterByRoles(getAll(), roles);
     }
 
@@ -636,9 +642,7 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional
-    public List<User> filteredByValid(
-            final Collection<User> users
-    ) {
+    public List<User> filteredByValid(final Collection<User> users) {
         List<User> result = new ArrayList<>();
         if (users != null && !users.isEmpty()) {
             result.addAll(

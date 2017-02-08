@@ -38,7 +38,6 @@
                 <div class="box">
                     <c:set var="length" value="${fn:length(partners_list)}"/>
                     <c:if test="${authorized_user ne null}">
-                        <c:set var="reqmap" value="/admin"/>
                         <div class="text-center">
                             <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
                                 <button class="btn btn-default">
@@ -57,8 +56,8 @@
                         </div>
                     </c:if>
                     <p class="path">
-                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="<c:url value="${reqmap}/company/all"/>">Партнеры</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
+                        → <a href="<c:url value="/company/all"/>">Партнеры</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
@@ -68,7 +67,7 @@
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
-                            <a href="<c:url value="${reqmap}/company/all/sort?revers=${revers}"/>"
+                            <a href="<c:url value="/company/all/sort?revers=${revers}"/>"
                                title="Сортировать по названию">
                                 <c:choose>
                                     <c:when test="${revers}">

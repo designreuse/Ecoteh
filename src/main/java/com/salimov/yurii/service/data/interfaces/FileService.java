@@ -15,21 +15,18 @@ import java.util.List;
  * @see File
  * @see DataService
  */
-public interface FileService
-        extends DataService<File, Long> {
+public interface FileService extends DataService<File, Long> {
 
     /**
      * Initializes, saves and returns a new photo.
      *
      * @param title     a title of the new photo.
-     * @param url       a url of the new photo.
      * @param photoFile a photo file (image) of the new photo.
      * @return The new saving photo.
      * @see File
      */
     File initAndAdd(
             final String title,
-            final String url,
             final MultipartFile photoFile
     );
 
@@ -38,7 +35,6 @@ public interface FileService
      *
      * @param id        a id of the photo to update.
      * @param title     a new title of the photo.
-     * @param url       a new title of the photo.
      * @param photoFile a new photo file (image) of the photo.
      * @return The updating photo with parameter id.
      * @see File
@@ -46,7 +42,6 @@ public interface FileService
     File initAndUpdate(
             final Long id,
             final String title,
-            final String url,
             final MultipartFile photoFile
     );
 
@@ -100,19 +95,22 @@ public interface FileService
     /**
      * Save the multipart file in the file system in the directory rootPath.
      *
-     * @param photo    a file to save.
+     * @param multipartFile    a file to save.
      * @param rootPath a directory path.
      * @see File
      */
-    void saveFile(final MultipartFile photo, final String rootPath);
+    void saveFile(
+            final MultipartFile multipartFile,
+            final String rootPath
+    );
 
     /**
      * Save the multipart file in the file system.
      *
-     * @param photo a file to save.
+     * @param multipartFile a file to save.
      * @see File
      */
-    void saveFile(final MultipartFile photo);
+    void saveFile(final MultipartFile multipartFile);
 
     /**
      * Deletes file in the file system.
@@ -122,21 +120,4 @@ public interface FileService
      * @see File
      */
     boolean deleteFile(final String rootPath);
-
-    /**
-     * Updates and returns the photo.
-     *
-     * @param photo    the photo to update.
-     * @param file     a file to save.
-     * @param title    a new title of the photo.
-     * @param rootPath a directory path.
-     * @return The updating photo.
-     * @see File
-     */
-    File updatePhoto(
-            final File photo,
-            final MultipartFile file,
-            final String title,
-            final String rootPath
-    );
 }

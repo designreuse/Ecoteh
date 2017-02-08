@@ -9,8 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see ClientMVFabric
- * @see AdminMVFabric
  */
 public interface MainMVFabric {
 
@@ -159,17 +157,18 @@ public interface MainMVFabric {
     ModelAndView getDefaultModelAndView();
 
     /**
-     * Return fabric name which working.
-     *
-     * @return The fabric class name.
-     */
-    String getFabricName();
-
-    /**
      * Adds authenticated user to the modelAndView.
      *
      * @param modelAndView a model and view to update.
      * @see User
      */
     void addAuthUser(final ModelAndView modelAndView);
+
+    /**
+     * Validates output objects.
+     *
+     * @return Returns {@code true} if need to return valid objects,
+     * {@code false} otherwise.
+     */
+    boolean isValidContent();
 }

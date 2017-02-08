@@ -37,7 +37,6 @@
             <div class="row">
                 <div class="box">
                     <c:if test="${authorized_user ne null}">
-                        <c:set var="reqmap" value="/admin"/>
                         <div class="text-center">
                             <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class=" btn btn-default">
@@ -60,11 +59,11 @@
                         </div>
                     </c:if>
                     <p class="path">
-                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="<c:url value="${reqmap}/category/all"/>"
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
+                        → <a href="<c:url value="/category/all"/>"
                              title="Перейти к всем категориям">Все категории</a>
                         →
-                        <a href="<c:url value="${reqmap}/category/${category.url}"/>">
+                        <a href="<c:url value="/category/${category.url}"/>">
                             <c:out value="${category.title}"/>
                         </a>
                     </p>
@@ -80,7 +79,7 @@
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
-                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=title&revers=${revers}"/>"
+                            <a href="<c:url value="/category/${category.url}/sort?type=title&revers=${revers}"/>"
                                title="Сортировать по названию">
                                 <c:choose>
                                     <c:when test="${revers}">
@@ -94,7 +93,7 @@
                                 </c:choose>
                             </a>
                             |
-                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=number&revers=${revers}"/>"
+                            <a href="<c:url value="/category/${category.url}/sort?type=number&revers=${revers}"/>"
                                title="Сортировать по номеру (артиклю)">
                                 <c:choose>
                                     <c:when test="${revers}">
@@ -108,7 +107,7 @@
                                 </c:choose>
                             </a>
                             |
-                            <a href="<c:url value="${reqmap}/category/${category.url}/sort?type=date&revers=${revers}"/>"
+                            <a href="<c:url value="/category/${category.url}/sort?type=date&revers=${revers}"/>"
                                title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">

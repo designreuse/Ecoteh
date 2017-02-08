@@ -15,8 +15,7 @@ import java.util.List;
  * @see Response
  * @see DataService
  */
-public interface ResponseService
-        extends DataService<Response, Long> {
+public interface ResponseService extends DataService<Response, Long> {
 
     /**
      * Initializes, saves and returns a new response.

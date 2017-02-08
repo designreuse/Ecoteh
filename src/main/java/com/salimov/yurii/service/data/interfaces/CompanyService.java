@@ -14,8 +14,7 @@ import java.util.List;
  * @see ContentService
  * @see DataService
  */
-public interface CompanyService
-        extends ContentService<Company, Long> {
+public interface CompanyService extends ContentService<Company, Long> {
 
     /**
      * Initializes, saves and returns a new company.

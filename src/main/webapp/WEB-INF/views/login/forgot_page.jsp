@@ -76,6 +76,9 @@
             </div>
         </div>
     </div>
+    <c:if test="${main_company ne null}">
+        <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    </c:if>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     </body>

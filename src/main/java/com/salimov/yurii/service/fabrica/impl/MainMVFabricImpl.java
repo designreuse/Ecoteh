@@ -3,6 +3,7 @@ package com.salimov.yurii.service.fabrica.impl;
 import com.salimov.yurii.entity.*;
 import com.salimov.yurii.service.data.interfaces.*;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,11 +16,10 @@ import java.util.List;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see MainMVFabric
- * @see ClientMVFabricImpl
- * @see AdminMVFabricImpl
  */
+@Service
 @SuppressWarnings("SpringMVCViewInspection")
-public abstract class MainMVFabricImpl implements MainMVFabric {
+public final class MainMVFabricImpl implements MainMVFabric {
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -27,7 +27,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      *
      * @see ArticleService
      */
-    private final ArticleService articleService;
+    protected final ArticleService articleService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -35,7 +35,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      *
      * @see CategoryService
      */
-    private final CategoryService categoryService;
+    protected final CategoryService categoryService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -43,7 +43,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      *
      * @see CompanyService
      */
-    private final CompanyService companyService;
+    protected final CompanyService companyService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -51,7 +51,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      *
      * @see UserService
      */
-    private final UserService userService;
+    protected final UserService userService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -59,7 +59,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      *
      * @see ResponseService
      */
-    private final ResponseService responseService;
+    protected final ResponseService responseService;
 
     /**
      * Constructor.
@@ -80,7 +80,7 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
      * @see UserService
      * @see ResponseService
      */
-    MainMVFabricImpl(
+    public MainMVFabricImpl(
             final ArticleService articleService,
             final CategoryService categoryService,
             final CompanyService companyService,
@@ -395,29 +395,25 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Validates output objects.
-     *
-     * @return Returns {@code true} if need to return valid objects,
-     * {@code false} otherwise.
-     */
-    protected abstract boolean isValidContent();
-
-    /**
-     * Return fabric name which working.
-     *
-     * @return The fabric class name.
-     */
-    @Override
-    public abstract String getFabricName();
-
-    /**
      * Adds authenticated user to the modelAndView.
      *
      * @param modelAndView a model and view to update.
      * @see User
      */
+    /**
+     * Adds authenticated user to the modelAndView.
+     *
+     * @param modelAndView a model and view to update.
+     */
     @Override
-    public abstract void addAuthUser(final ModelAndView modelAndView);
+    public void addAuthUser(final ModelAndView modelAndView) {
+        if (modelAndView != null) {
+            modelAndView.addObject(
+                    "authorized_user",
+                    this.userService.getAuthenticatedUser()
+            );
+        }
+    }
 
     /**
      * @param revers a sorting direction, {@code true} or {@code false}.
@@ -598,5 +594,15 @@ public abstract class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject("article", article);
         modelAndView.setViewName("client/article/one_page");
         return modelAndView;
+    }
+
+    /**
+     * Validates output objects.
+     *
+     * @return Returns {@code true} if need to return valid objects,
+     * {@code false} otherwise.
+     */
+    public boolean isValidContent() {
+        return this.userService.getAuthenticatedUser() == null;
     }
 }

@@ -41,7 +41,6 @@
                 <div class="box">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <c:if test="${authorized_user ne null}">
-                            <c:set var="reqmap" value="/admin"/>
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/edit/main"/>"
                                    title="Редактировать информацию о компании &quot;<c:out value="${company.title}"/>&quot;">
@@ -53,7 +52,7 @@
                             </div>
                         </c:if>
                         <p class="path">
-                            <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
+                            <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
                         </p>
                         <c:if test="${company.logoUrl ne null}">

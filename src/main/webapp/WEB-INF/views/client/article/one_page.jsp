@@ -36,7 +36,6 @@
             <div class="row">
                 <div class="box">
                     <c:if test="${authorized_user ne null}">
-                        <c:set var="reqmap" value="/admin"/>
                         <div class="text-center">
                             <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class="btn btn-default">
@@ -59,19 +58,19 @@
                         </div>
                     </c:if>
                     <p class="path">
-                        <a href="<c:url value="${reqmap}/"/>" title="Перейти на главную страницу">Главная</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         <c:choose>
                             <c:when test="${(article.category ne null) and ((article.category.validated) or (authorized_user ne null))}">
-                                → <a href="<c:url value="${reqmap}/category/all"/>"
+                                → <a href="<c:url value="/category/all"/>"
                                      title="Перейти к всем категориям">Все категории</a>
                                 →
-                                <a href="<c:url value="${reqmap}/category/${article.category.url}"/>"
+                                <a href="<c:url value="/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
                                     <c:out value="${article.category.title}"/>
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                → <a href="<c:url value="${reqmap}/article/all"/>" title="Статьи">Статьи</a>
+                                → <a href="<c:url value="/article/all"/>" title="Статьи">Статьи</a>
                             </c:otherwise>
                         </c:choose>
                         → <a href="#"><c:out value="${article.title}"/></a>
@@ -85,7 +84,7 @@
                                   title="Не отображается для клиентов"></span>&nbsp;
                         </c:if>
                         <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
-                        <a href="<c:url value="${reqmap}/article/num_${article.number}"/>">
+                        <a href="<c:url value="/article/num_${article.number}"/>">
                             <c:out value="${article.number}"/>
                         </a>
                     </p>
