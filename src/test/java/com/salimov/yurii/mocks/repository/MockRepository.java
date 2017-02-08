@@ -76,54 +76,21 @@ public class MockRepository {
                 article,
                 articles
         );
-        when(
-                articleRepository.findByTitle(TITLE)
-        ).thenReturn(
-                article
-        );
-        when(
-                articleRepository.findByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                articleRepository.findByTitle(null)
-        ).thenReturn(null);
-        when(
-                articleRepository.findByUrl(URL)
-        ).thenReturn(
-                article
-        );
-        when(
-                articleRepository.findByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                articleRepository.findByUrl(null)
-        ).thenReturn(null);
-        when(
-                articleRepository.findByNumber(NUMBER)
-        ).thenReturn(
-                article
-        );
-        when(
-                articleRepository.findByNumber(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                articleRepository.findByNumber(null)
-        ).thenReturn(null);
-        when(
-                articleRepository.findByCategoryId(ID)
-        ).thenReturn(
-                new ArrayList<>(articles)
-        );
-        when(
-                articleRepository.findByCategoryId(UNKNOWN_ID)
-        ).thenReturn(
-                new ArrayList<>()
-        );
-        when(
-                articleRepository.findByCategoryId(null)
-        ).thenReturn(
-                new ArrayList<>()
-        );
+        when(articleRepository.findByTitle(TITLE)).thenReturn(article);
+        when(articleRepository.findByTitle(ANY_STRING)).thenReturn(null);
+        when(articleRepository.findByTitle(null)).thenReturn(null);
+        when(articleRepository.findByUrl(URL)).thenReturn(article);
+        when(articleRepository.findByUrl(ANY_STRING)).thenReturn(null);
+        when(articleRepository.findByUrl(null)).thenReturn(null);
+        when(articleRepository.findByNumber(NUMBER)).thenReturn(article);
+        when(articleRepository.findByNumber(ANY_STRING)).thenReturn(null);
+        when(articleRepository.findByNumber(null)).thenReturn(null);
+        when(articleRepository.findByCategoryId(ID))
+                .thenReturn(new ArrayList<>(articles));
+        when(articleRepository.findByCategoryId(UNKNOWN_ID))
+                .thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryId(null))
+                .thenReturn(new ArrayList<>());
     }
 
     private static void initCategoryRepository() {
@@ -134,28 +101,12 @@ public class MockRepository {
                 category,
                 getCategories()
         );
-        when(
-                categoryRepository.findByTitle(TITLE)
-        ).thenReturn(
-                category
-        );
-        when(
-                categoryRepository.findByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                categoryRepository.findByTitle(null)
-        ).thenReturn(null);
-        when(
-                categoryRepository.findByUrl(URL)
-        ).thenReturn(
-                category
-        );
-        when(
-                categoryRepository.findByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                categoryRepository.findByUrl(null)
-        ).thenReturn(null);
+        when(categoryRepository.findByTitle(TITLE)).thenReturn(category);
+        when(categoryRepository.findByTitle(ANY_STRING)).thenReturn(null);
+        when(categoryRepository.findByTitle(null)).thenReturn(null);
+        when(categoryRepository.findByUrl(URL)).thenReturn(category);
+        when(categoryRepository.findByUrl(ANY_STRING)).thenReturn(null);
+        when(categoryRepository.findByUrl(null)).thenReturn(null);
     }
 
     private static void initCompanyRepository() {
@@ -166,28 +117,12 @@ public class MockRepository {
                 company,
                 getCompanies()
         );
-        when(
-                companyRepository.findByTitle(TITLE)
-        ).thenReturn(
-                company
-        );
-        when(
-                companyRepository.findByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                companyRepository.findByTitle(null)
-        ).thenReturn(null);
-        when(
-                companyRepository.findByUrl(URL)
-        ).thenReturn(
-                company
-        );
-        when(
-                companyRepository.findByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                companyRepository.findByUrl(null)
-        ).thenReturn(null);
+        when(companyRepository.findByTitle(TITLE)).thenReturn(company);
+        when(companyRepository.findByTitle(ANY_STRING)).thenReturn(null);
+        when(companyRepository.findByTitle(null)).thenReturn(null);
+        when(companyRepository.findByUrl(URL)).thenReturn(company);
+        when(companyRepository.findByUrl(ANY_STRING)).thenReturn(null);
+        when(companyRepository.findByUrl(null)).thenReturn(null);
     }
 
     private static void initFileRepository() {
@@ -198,28 +133,12 @@ public class MockRepository {
                 file,
                 getFiles()
         );
-        when(
-                fileRepository.findByTitle(TITLE)
-        ).thenReturn(
-                file
-        );
-        when(
-                fileRepository.findByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                fileRepository.findByTitle(null)
-        ).thenReturn(null);
-        when(
-                fileRepository.findByUrl(URL)
-        ).thenReturn(
-                file
-        );
-        when(
-                fileRepository.findByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                fileRepository.findByUrl(null)
-        ).thenReturn(null);
+        when(fileRepository.findByTitle(TITLE)).thenReturn(file);
+        when(fileRepository.findByTitle(ANY_STRING)).thenReturn(null);
+        when(fileRepository.findByTitle(null)).thenReturn(null);
+        when(fileRepository.findByUrl(URL)).thenReturn(file);
+        when(fileRepository.findByUrl(ANY_STRING)).thenReturn(null);
+        when(fileRepository.findByUrl(null)).thenReturn(null);
     }
 
     private static void initResponseRepository() {
@@ -239,24 +158,12 @@ public class MockRepository {
                 user,
                 getUsers()
         );
-        when(
-                userRepository.findByName(NAME)
-        ).thenReturn(user);
-        when(
-                userRepository.findByName(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userRepository.findByName(null)
-        ).thenReturn(null);
-        when(
-                userRepository.findByUrl(URL)
-        ).thenReturn(user);
-        when(
-                userRepository.findByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userRepository.findByUrl(null)
-        ).thenReturn(null);
+        when(userRepository.findByName(NAME)).thenReturn(user);
+        when(userRepository.findByName(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByName(null)).thenReturn(null);
+        when(userRepository.findByUrl(URL)).thenReturn(user);
+        when(userRepository.findByUrl(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByUrl(null)).thenReturn(null);
         when(
                 userRepository.findByEncryptedLogin(
                         new Encryption(LOGIN).encrypt()
@@ -267,27 +174,13 @@ public class MockRepository {
                         new Encryption(ANY_STRING).encrypt()
                 )
         ).thenReturn(null);
-        when(
-                userRepository.findByEncryptedLogin(null)
-        ).thenReturn(null);
-        when(
-                userRepository.findByPhone(PHONE)
-        ).thenReturn(user);
-        when(
-                userRepository.findByPhone(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userRepository.findByPhone(null)
-        ).thenReturn(null);
-        when(
-                userRepository.findByEmail(EMAIL)
-        ).thenReturn(user);
-        when(
-                userRepository.findByEmail(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userRepository.findByEmail(null)
-        ).thenReturn(null);
+        when(userRepository.findByEncryptedLogin(null)).thenReturn(null);
+        when(userRepository.findByPhone(PHONE)).thenReturn(user);
+        when(userRepository.findByPhone(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByPhone(null)).thenReturn(null);
+        when(userRepository.findByEmail(EMAIL)).thenReturn(user);
+        when(userRepository.findByEmail(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByEmail(null)).thenReturn(null);
     }
 
     private static <T extends Model<Long>, E extends DataRepository<T, Long>> void initDataRepository(
@@ -295,39 +188,17 @@ public class MockRepository {
             final T model,
             final Collection<T> models
     ) {
-        when(
-                repository.save(model)
-        ).thenReturn(model);
-        when(
-                repository.save((T) null)
-        ).thenReturn(null);
-        when(
-                repository.save(models)
-        ).thenReturn(
-                new ArrayList<>(models)
-        );
-        when(
-                repository.findOne(ID)
-        ).thenReturn(model);
-        when(
-                repository.findOne(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                repository.findOne((Long) null)
-        ).thenReturn(null);
-        when(
-                repository.findAll()
-        ).thenReturn(
-                new ArrayList<>(models)
-        );
-        when(
-                repository.exists(ID)
-        ).thenReturn(true);
-        when(
-                repository.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                repository.exists((Long) null)
-        ).thenReturn(false);
+        when(repository.save(model)).thenReturn(model);
+        when(repository.save((T) null)).thenReturn(null);
+        when(repository.save(models))
+                .thenReturn(new ArrayList<>(models));
+        when(repository.findOne(ID)).thenReturn(model);
+        when(repository.findOne(UNKNOWN_ID)).thenReturn(null);
+        when(repository.findOne((Long) null)).thenReturn(null);
+        when(repository.findAll())
+                .thenReturn(new ArrayList<>(models));
+        when(repository.exists(ID)).thenReturn(true);
+        when(repository.exists(UNKNOWN_ID)).thenReturn(false);
+        when(repository.exists((Long) null)).thenReturn(false);
     }
 }

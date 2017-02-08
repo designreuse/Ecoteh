@@ -32,10 +32,7 @@ public abstract class ModelTest<T extends Model<Long>> {
         }
         final boolean value = (model1 == model2) ||
                 (model1.getClass() == model2.getClass());
-        assertEquals(
-                model1.equals(model2),
-                value
-        );
+        assertEquals(model1.equals(model2), value);
     }
 
     @Test
@@ -146,16 +143,12 @@ public abstract class ModelTest<T extends Model<Long>> {
 
     @Test
     public void whenCreateRandomNumberWithEqualsZeroThenReturnZero() {
-        assertTrue(
-                Model.createRandomNumber(0) == 0
-        );
+        assertTrue(Model.createRandomNumber(0) == 0);
     }
 
     @Test
     public void whenCreateRandomNumberWithPositiveLengthThenReturnSomeNumber() {
-        assertTrue(
-                Model.createRandomNumber(Model.CODE_LENGTH) != 0
-        );
+        assertTrue(Model.createRandomNumber(Model.CODE_LENGTH) != 0);
     }
 
     @Test
@@ -186,13 +179,8 @@ public abstract class ModelTest<T extends Model<Long>> {
         );
         final String dateString1 = dateFormat.format(date);
         final String dateString2 = Model.getDateToString(date);
-        assertTrue(
-                isNotBlank(dateString2)
-        );
-        assertEquals(
-                dateString1,
-                dateString2
-        );
+        assertTrue(isNotBlank(dateString2));
+        assertEquals(dateString1, dateString2);
     }
 
     @Test
@@ -205,49 +193,31 @@ public abstract class ModelTest<T extends Model<Long>> {
 
     @Test
     public void validCodeLengthConstants() {
-        assertNotNull(
-                Model.CODE_LENGTH
-        );
-        assertNotNull(
-                getObject().CODE_LENGTH
-        );
+        assertNotNull(Model.CODE_LENGTH);
+        assertNotNull(getObject().CODE_LENGTH);
     }
 
     @Test
     public void validCodePatternConstants() {
-        assertNotNull(
-                Model.CODE_PATTERN
-        );
-        assertNotNull(
-                getObject().CODE_PATTERN
-        );
+        assertNotNull(Model.CODE_PATTERN);
+        assertNotNull(getObject().CODE_PATTERN);
     }
 
     @Test
     public void validDatePatternConstants() {
-        assertNotNull(
-                Model.DATE_PATTERN
-        );
-        assertNotNull(
-                getObject().DATE_PATTERN
-        );
+        assertNotNull(Model.DATE_PATTERN);
+        assertNotNull(getObject().DATE_PATTERN);
     }
 
     @Test
     public void validTimeZoneConstants() {
-        assertNotNull(
-                Model.TIME_ZONE
-        );
-        assertNotNull(
-                getObject().TIME_ZONE
-        );
+        assertNotNull(Model.TIME_ZONE);
+        assertNotNull(getObject().TIME_ZONE);
     }
 
     @Test
     public void whenGetObjectThenReturnNotNull() {
-        assertNotNull(
-                getObject()
-        );
+        assertNotNull(getObject());
     }
 
     @Ignore

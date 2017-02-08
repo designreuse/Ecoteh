@@ -172,36 +172,24 @@ public final class CacheTest {
 
     @Test
     public void whenGetByNullKeyThenReturnNull() {
-        assertNull(
-                Cache.get(null)
-        );
+        assertNull(Cache.get(null));
     }
 
     @Test
     public void whenGetByBlankKeyThenReturnNull() {
-        assertNull(
-                Cache.get("")
-        );
-        assertNull(
-                Cache.get("   ")
-        );
+        assertNull(Cache.get(""));
+        assertNull(Cache.get("   "));
     }
 
     @Test
     public void whenGetAllByNullKeyThenReturnNull() {
-        assertNull(
-                Cache.getAll(null)
-        );
+        assertNull(Cache.getAll(null));
     }
 
     @Test
     public void whenGetAllByBlankKeyThenReturnNull() {
-        assertNull(
-                Cache.getAll("")
-        );
-        assertNull(
-                Cache.getAll("   ")
-        );
+        assertNull(Cache.getAll(""));
+        assertNull(Cache.getAll("   "));
     }
 
     @Test
@@ -250,15 +238,11 @@ public final class CacheTest {
 
     @Test
     public void whenExistByNullKeyThenReturnFalse() {
-        assertFalse(
-                Cache.exist(null)
-        );
+        assertFalse(Cache.exist(null));
     }
 
     @Test
     public void whenGetSizeThenReturnCacheSize() {
-        assertNotNull(
-                Cache.getSize()
-        );
+        assertNotNull(Cache.getSize());
     }
 }

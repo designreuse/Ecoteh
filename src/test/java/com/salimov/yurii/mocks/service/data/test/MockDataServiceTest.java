@@ -17,23 +17,17 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
 
     @Test
     public void whenGetMockServiceThenReturnNotNull() {
-        assertNotNull(
-                getService()
-        );
+        assertNotNull(getService());
     }
 
     @Test
     public void whenGetObjectThenReturnSomeModel() {
-        assertNotNull(
-                getObject()
-        );
+        assertNotNull(getObject());
     }
 
     @Test
     public void whenGetObjectsThenReturnSomeModels() {
-        assertNotNull(
-                getObjects()
-        );
+        assertNotNull(getObjects());
     }
 
     @Test
@@ -48,10 +42,7 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
     @Test
     public void whenAddModelsThenReturnThisModels() {
         assertNotNull(
-                getService()
-                        .addAll(
-                                getObjects()
-                        )
+                getService().addAll(getObjects())
         );
     }
 
@@ -61,9 +52,7 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
                 getService()
                         .update(
                                 getService()
-                                        .add(
-                                                getObject()
-                                        )
+                                        .add(getObject())
                         )
         );
     }
@@ -71,78 +60,45 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
     @Test
     public void whenUpdateModelsThenReturnThisModels() {
         assertNotNull(
-                getService()
-                        .update(
-                                getObjects()
-                        )
+                getService().update(getObjects())
         );
     }
 
     @Test
     public void whenGetByValidIdThenReturnSomeModel() {
-        assertNotNull(
-                getService()
-                        .get(ID)
-        );
+        assertNotNull(getService().get(ID));
     }
 
     @Test
     public void whenGetAllThenReturnSomeModels() {
-        assertNotNull(
-                getService()
-                        .getAll()
-        );
-        assertNotNull(
-                getService()
-                        .getAll(false)
-        );
-        assertNotNull(
-                getService()
-                        .getAll(true)
-        );
+        assertNotNull(getService().getAll());
+        assertNotNull(getService().getAll(false));
+        assertNotNull(getService().getAll(true));
     }
 
     @Test
     public void whenExistsByInvalidModelThenReturnFalse() {
-        assertFalse(
-                getService()
-                        .exists((Model) null)
-        );
+        assertFalse(getService().exists((Model) null));
     }
 
     @Test
     public void whenExistsByValidModelThenReturnTrue() {
-        assertTrue(
-                getService()
-                        .exists(
-                                getObject()
-                        )
-        );
+        assertTrue(getService().exists(getObject()));
     }
 
     @Test
     public void whenExistsByInvalidIDThenReturnFalse() {
-        assertFalse(
-                getService()
-                        .exists((Long) null)
-        );
-        assertFalse(
-                getService()
-                        .exists(UNKNOWN_ID)
-        );
+        assertFalse(getService().exists((Long) null));
+        assertFalse(getService().exists(UNKNOWN_ID));
     }
 
     @Test
     public void whenExistsByValidIDThenReturnTrue() {
-        assertTrue(
-                getService()
-                        .exists(ID)
-        );
+        assertTrue(getService().exists(ID));
     }
 
     @Test
     public void whenSortingCollectionThenReturnThisSortCollection() {
-
     }
 
     @Ignore

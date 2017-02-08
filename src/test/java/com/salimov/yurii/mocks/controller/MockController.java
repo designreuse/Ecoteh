@@ -6,13 +6,12 @@ import com.salimov.yurii.controller.admin.AdminResponseController;
 import com.salimov.yurii.controller.admin.AdminUserController;
 import com.salimov.yurii.controller.advice.AdviceController;
 import com.salimov.yurii.controller.client.ClientMainController;
-import com.salimov.yurii.controller.other.WorkController;
+import com.salimov.yurii.controller.other.SpecialController;
 import com.salimov.yurii.controller.seo.SeoController;
 import org.junit.Ignore;
 
 import static com.salimov.yurii.mocks.service.data.MockServices.*;
-import static com.salimov.yurii.mocks.service.fabrica.MockMVFabric.getAdminMVFabric;
-import static com.salimov.yurii.mocks.service.fabrica.MockMVFabric.getClientMVFabric;
+import static com.salimov.yurii.mocks.service.fabrica.MockMVFabric.getMainMVFabric;
 import static com.salimov.yurii.mocks.service.message.MockSenderService.getSenderService;
 
 @Ignore
@@ -27,7 +26,7 @@ public final class MockController {
 
     private static AdviceController adviceController;
     private static SeoController seoController;
-    private static WorkController workController;
+    private static SpecialController specialController;
 
     public static ClientMainController getClientMainController() {
         if (clientMainController == null) {
@@ -78,16 +77,16 @@ public final class MockController {
         return seoController;
     }
 
-    public static WorkController getWorkController() {
-        if (workController == null) {
-            workController = initWorkController();
+    public static SpecialController getSpecialController() {
+        if (specialController == null) {
+            specialController = initWorkController();
         }
-        return workController;
+        return specialController;
     }
 
     private static ClientMainController initClientMainController() {
         return new ClientMainController(
-                getClientMVFabric(),
+                getMainMVFabric(),
                 getCompanyService(),
                 getUserService(),
                 getResponseService(),
@@ -99,7 +98,7 @@ public final class MockController {
 
     private static AdminMainController initAdminMainController() {
         return new AdminMainController(
-                getAdminMVFabric(),
+                getMainMVFabric(),
                 getCompanyService(),
                 getUserService(),
                 null,
@@ -115,7 +114,7 @@ public final class MockController {
 
     private static AdminUserController initAdminUserController() {
         return new AdminUserController(
-                getAdminMVFabric(),
+                getMainMVFabric(),
                 getUserService(),
                 getCompanyService(),
                 getSenderService()
@@ -124,23 +123,21 @@ public final class MockController {
 
     private static AdminCacheController initAdminCacheController() {
         return new AdminCacheController(
-                getAdminMVFabric()
+                getMainMVFabric()
         );
     }
 
     private static AdviceController initAdviceController() {
         return new AdviceController(
-                getClientMVFabric()
+                getMainMVFabric()
         );
     }
 
     private static SeoController initSeoController() {
-        return new SeoController(
-                null
-        );
+        return new SeoController(null);
     }
 
-    private static WorkController initWorkController() {
-        return new WorkController();
+    private static SpecialController initWorkController() {
+        return new SpecialController(null);
     }
 }

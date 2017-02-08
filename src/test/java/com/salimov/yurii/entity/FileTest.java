@@ -35,10 +35,7 @@ public final class FileTest extends ModelTest<File> {
         );
         String value = file.getClass().getSimpleName() + " " + file.getTitle()
                 + " \nURL: " + file.getUrl();
-        assertEquals(
-                file.toString(),
-                value
-        );
+        assertEquals(file.toString(), value);
     }
 
     @Test
@@ -62,10 +59,7 @@ public final class FileTest extends ModelTest<File> {
                                 ) :
                         isBlank(file2.getUrl())
         );
-        assertEquals(
-                file1.equals(file2),
-                value
-        );
+        assertEquals(file1.equals(file2), value);
     }
 
     @Test
@@ -157,15 +151,11 @@ public final class FileTest extends ModelTest<File> {
         file.setUrl(URL);
         assertNotNull(file.getUrl());
         final String url = Translator.fromCyrillicToLatin(URL);
-        assertEquals(
-                file.getUrl(), url
-        );
+        assertEquals(file.getUrl(), url);
         file.setUrl(null);
         file.translateAndSetUrl(URL);
         assertNotNull(file.getUrl());
-        assertEquals(
-                file.getUrl(), url
-        );
+        assertEquals(file.getUrl(), url);
     }
 
     @Test
@@ -198,46 +188,31 @@ public final class FileTest extends ModelTest<File> {
 
     @Test
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
-        final File file = new File(
-                TITLE, URL
-        );
+        final File file = new File(TITLE, URL);
         assertNotNull(file.getTitle());
         assertNotNull(file.getUrl());
-        assertEquals(
-                file.getTitle(), TITLE
-        );
-        assertEquals(
-                file.getUrl(), URL
-        );
+        assertEquals(file.getTitle(), TITLE);
+        assertEquals(file.getUrl(), URL);
     }
 
     @Test
     public void equalsInvalidObjects() {
         final File file1 = new File();
         final File file2 = new File();
-        assertTrue(
-                file1.equals(file2)
-        );
+        assertTrue(file1.equals(file2));
         file1.setTitle(MockConstants.TITLE);
         file2.setTitle(MockConstants.TITLE);
-        assertTrue(
-                file1.equals(file2)
-        );
+        assertTrue(file1.equals(file2));
         file1.setUrl(URL);
         file2.setUrl(URL);
-        assertTrue(
-                file1.equals(file2)
-        );
+        assertTrue(file1.equals(file2));
     }
 
     @Test
     public void hashCodeInvalidObject() {
         final File file = new File();
         int value = 0;
-        assertEquals(
-                file.hashCode(),
-                value
-        );
+        assertEquals(file.hashCode(), value);
         file.setTitle(MockConstants.TITLE);
         value += (
                 isNotBlank(file.getTitle()) ?
@@ -246,10 +221,7 @@ public final class FileTest extends ModelTest<File> {
                 isNotBlank(file.getUrl()) ?
                         file.getUrl().hashCode() : 0
         );
-        assertEquals(
-                file.hashCode(),
-                value
-        );
+        assertEquals(file.hashCode(), value);
     }
 
     @Test
@@ -258,10 +230,7 @@ public final class FileTest extends ModelTest<File> {
         file.setTitle(TITLE);
         assertNotNull(file.getTitle());
         assertNotNull(file.getUrl());
-        Assert.assertEquals(
-                file.getTitle(),
-                TITLE
-        );
+        Assert.assertEquals(file.getTitle(), TITLE);
     }
 
     @Test

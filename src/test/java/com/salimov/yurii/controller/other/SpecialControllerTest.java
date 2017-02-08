@@ -3,15 +3,15 @@ package com.salimov.yurii.controller.other;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static com.salimov.yurii.mocks.controller.MockController.getWorkController;
+import static com.salimov.yurii.mocks.controller.MockController.getSpecialController;
 
-public final class WorkControllerTest {
+public final class SpecialControllerTest {
 
-    private static WorkController controller;
+    private static SpecialController controller;
 
     @BeforeClass
     public static void setUp() {
-        controller = getWorkController();
+        controller = getSpecialController();
     }
 
     @Test(expected = IllegalAccessException.class)

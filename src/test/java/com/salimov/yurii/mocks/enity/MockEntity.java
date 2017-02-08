@@ -156,9 +156,7 @@ public final class MockEntity {
         category.setId(ID);
         category.setUrl(URL);
         category.setPhotoUrl(PHOTO_URL);
-        category.addArticle(
-                getArticle()
-        );
+        category.addArticle(getArticle());
     }
 
     private static void initCompany() {

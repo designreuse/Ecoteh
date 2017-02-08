@@ -75,16 +75,12 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
 
     @Test
     public void whenGetByValidNumberAndTrueValidThenReturnsSomeArticle() {
-        assertNotNull(
-                this.service.getByNumber(NUMBER, true)
-        );
+        assertNotNull(this.service.getByNumber(NUMBER, true));
     }
 
     @Test
     public void whenGetByValidNumberAndFalseValidThenReturnsSomeArticle() {
-        assertNotNull(
-                this.service.getByNumber(NUMBER, false)
-        );
+        assertNotNull(this.service.getByNumber(NUMBER, false));
     }
 
     @Test(expected = NullPointerException.class)
@@ -244,9 +240,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
         final Date finishDate = new Date();
         assertTrue(
                 this.service.filterByDate(
-                        null,
-                        startDate,
-                        finishDate
+                        null, startDate, finishDate
                 ).isEmpty()
         );
     }
@@ -262,9 +256,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
         final Date finishDate = new Date();
         assertTrue(
                 this.service.filterByDate(
-                        new ArrayList<>(),
-                        startDate,
-                        finishDate
+                        new ArrayList<>(), startDate, finishDate
                 ).isEmpty()
         );
     }
@@ -273,9 +265,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     public void whenFilterByDateWithNullStartDateThenReturnsEmptyList() {
         final List<Article> articles = getArticles();
         final List<Article> filterArticles = this.service.filterByDate(
-                articles,
-                null,
-                new Date()
+                articles, null, new Date()
         );
         assertFalse(filterArticles.isEmpty());
         assertEquals(
@@ -288,9 +278,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     public void whenFilterByDateWithNullEndDateThenReturnsEmptyList() {
         final List<Article> articles = getArticles();
         final List<Article> filterArticles = this.service.filterByDate(
-                articles,
-                new Date(),
-                null
+                articles, new Date(), null
         );
         assertFalse(filterArticles.isEmpty());
         assertEquals(
@@ -310,9 +298,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
         }
         final Date startDate = new Date();
         final List<Article> filterArticles = this.service.filterByDate(
-                articles,
-                startDate,
-                finishDate
+                articles, startDate, finishDate
         );
         assertFalse(filterArticles.isEmpty());
         assertEquals(

@@ -1,13 +1,12 @@
 package com.salimov.yurii.entity;
 
-import com.salimov.yurii.mocks.MockConstants;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Date;
 
-import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.MockConstants.NAME;
+import static com.salimov.yurii.mocks.MockConstants.TEXT;
 import static com.salimov.yurii.mocks.enity.MockEntity.getResponse;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -49,18 +48,12 @@ public final class ResponseTest extends ModelTest<Response> {
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
         Response response = new Response();
         assertNotNull(response.getDate());
-        response = new Response(
-                NAME, TEXT
-        );
+        response = new Response(NAME, TEXT);
         assertNotNull(response.getUsername());
         assertNotNull(response.getText());
         assertNotNull(response.getDate());
-        Assert.assertEquals(
-                response.getUsername(), NAME
-        );
-        Assert.assertEquals(
-                response.getText(), TEXT
-        );
+        assertEquals(response.getUsername(), NAME);
+        assertEquals(response.getText(), TEXT);
     }
 
     @Test
@@ -70,14 +63,10 @@ public final class ResponseTest extends ModelTest<Response> {
         assertTrue(response1.equals(response2));
         response1.setUsername(NAME);
         response2.setUsername(NAME);
-        assertTrue(
-                response1.equals(response2)
-        );
+        assertTrue(response1.equals(response2));
         response1.setText(TEXT);
         response2.setText(TEXT);
-        assertTrue(
-                response1.equals(response2)
-        );
+        assertTrue(response1.equals(response2));
     }
 
     @Test
@@ -112,7 +101,7 @@ public final class ResponseTest extends ModelTest<Response> {
         final Response response = new Response();
         int value = 0;
         assertEquals(response.hashCode(), value);
-        response.setUsername(MockConstants.NAME);
+        response.setUsername(NAME);
         value = isNotBlank(response.getUsername()) ? response.getUsername().hashCode() : 0;
         assertEquals(response.hashCode(), value);
         response.setText(TEXT);
@@ -144,10 +133,7 @@ public final class ResponseTest extends ModelTest<Response> {
         final String value = "Date: " + response.getDate()
                 + " \nUsername: " + response.getUsername()
                 + " \nText: " + response.getText();
-        assertEquals(
-                response.toString(),
-                value
-        );
+        assertEquals(response.toString(), value);
     }
 
     @Test
@@ -189,18 +175,12 @@ public final class ResponseTest extends ModelTest<Response> {
     @Test
     public void whenInitializeObjectWithValidParametersThenGetThisValue() {
         final Response response = new Response();
-        response.initialize(
-                NAME, TEXT
-        );
+        response.initialize(NAME, TEXT);
         assertNotNull(response.getUsername());
         assertNotNull(response.getText());
         assertNotNull(response.getDate());
-        assertEquals(
-                response.getUsername(), NAME
-        );
-        assertEquals(
-                response.getText(), TEXT
-        );
+        assertEquals(response.getUsername(), NAME);
+        assertEquals(response.getText(), TEXT);
     }
 
     @Test
@@ -224,12 +204,9 @@ public final class ResponseTest extends ModelTest<Response> {
     @Test
     public void whenSetValidUsernameThenGetThisUsername() {
         final Response response = getResponse();
-        response.setUsername(MockConstants.NAME);
+        response.setUsername(NAME);
         assertNotNull(response.getUsername());
-        Assert.assertEquals(
-                response.getUsername(),
-                MockConstants.NAME
-        );
+        assertEquals(response.getUsername(), NAME);
     }
 
     @Test
@@ -255,9 +232,7 @@ public final class ResponseTest extends ModelTest<Response> {
         final Response response = getResponse();
         response.setText(TEXT);
         assertNotNull(response.getText());
-        Assert.assertEquals(
-                response.getText(), TEXT
-        );
+        assertEquals(response.getText(), TEXT);
     }
 
     @Test
@@ -275,9 +250,7 @@ public final class ResponseTest extends ModelTest<Response> {
         response.setDate(date);
         assertNotNull(response.getDate());
         assertNotNull(response.getDateToString());
-        assertEquals(
-                response.getDate(), date
-        );
+        assertEquals(response.getDate(), date);
     }
 
     @Test

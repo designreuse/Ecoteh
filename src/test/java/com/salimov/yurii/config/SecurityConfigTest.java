@@ -29,8 +29,6 @@ public final class SecurityConfigTest {
 
     @Test
     public void configTest() {
-        assertNotNull(
-                new SecurityConfig()
-        );
+        assertNotNull(new SecurityConfig());
     }
 }

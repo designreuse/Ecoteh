@@ -30,86 +30,62 @@ public final class ArticleDaoImplTest
 
     @Test
     public void whenGetByNullTitleThenReturnsNull() {
-        assertNull(
-                this.dao.getByTitle(ANY_STRING)
-        );
+        assertNull(this.dao.getByTitle(ANY_STRING));
     }
 
     @Test
     public void whenGetByInvalidTitleThenReturnsNull() {
-        assertNull(
-                this.dao.getByTitle(null)
-        );
+        assertNull(this.dao.getByTitle(null));
     }
 
     @Test
     public void whenGetByValidTitleThenReturnsSomeArticle() {
-        assertNotNull(
-                this.dao.getByTitle(TITLE)
-        );
+        assertNotNull(this.dao.getByTitle(TITLE));
     }
 
     @Test
     public void whenGetByNullUrlThenReturnsNull() {
-        assertNull(
-                this.dao.getByUrl(null)
-        );
+        assertNull(this.dao.getByUrl(null));
     }
 
     @Test
     public void whenGetByInvalidUrlThenReturnsNull() {
-        assertNull(
-                this.dao.getByUrl(ANY_STRING)
-        );
+        assertNull(this.dao.getByUrl(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidUrlThenReturnsSomeArticle() {
-        assertNotNull(
-                this.dao.getByUrl(URL)
-        );
+        assertNotNull(this.dao.getByUrl(URL));
     }
 
     @Test
     public void whenGetByNullNumberThenReturnsNull() {
-        assertNull(
-                this.dao.getByNumber(null)
-        );
+        assertNull(this.dao.getByNumber(null));
     }
 
     @Test
     public void whenGetByInvalidNumberThenReturnsNull() {
-        assertNull(
-                this.dao.getByNumber(ANY_STRING)
-        );
+        assertNull(this.dao.getByNumber(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidNumberThenReturnsSomeArticle() {
-        assertNotNull(
-                this.dao.getByNumber(NUMBER)
-        );
+        assertNotNull(this.dao.getByNumber(NUMBER));
     }
 
     @Test
     public void whenGetByNullCategoryIdThenReturnsEmptyColection() {
-        assertTrue(
-                this.dao.getByCategoryId(null).isEmpty()
-        );
+        assertTrue(this.dao.getByCategoryId(null).isEmpty());
     }
 
     @Test
     public void whenGetByUnknownCategoryIdThenReturnsEmptyColection() {
-        assertTrue(
-                this.dao.getByCategoryId(UNKNOWN_ID).isEmpty()
-        );
+        assertTrue(this.dao.getByCategoryId(UNKNOWN_ID).isEmpty());
     }
 
     @Test
     public void whenGetByValidByCategoryIdThenReturnsSomeArticle() {
-        assertNotNull(
-                this.dao.getByCategoryId(ID)
-        );
+        assertNotNull(this.dao.getByCategoryId(ID));
     }
 
     @Test

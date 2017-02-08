@@ -58,48 +58,4 @@ public final class DefaultConfigTest {
                 DefaultConfig.getDefaultUser("super")
         );
     }
-
-    @Test
-    public void whenDefaultIsAdminEnabledThenReturnTrue() {
-        assertTrue(
-                DefaultConfig.isAdminEnabled()
-        );
-    }
-
-    @Test
-    public void whenDefaultIsClientEnabledThenReturnTrue() {
-        assertTrue(
-                DefaultConfig.isClientEnabled()
-        );
-    }
-
-    @Test
-    public void whenDefaultSuperOnOrOffThenToDoNothing() {
-        DefaultConfig.superOff();
-        assertTrue(
-                DefaultConfig.isAdminEnabled()
-        );
-        assertTrue(
-                DefaultConfig.isClientEnabled()
-        );
-        DefaultConfig.superOn();
-        assertTrue(
-                DefaultConfig.isAdminEnabled()
-        );
-        assertTrue(
-                DefaultConfig.isClientEnabled()
-        );
-    }
-
-    @Test
-    public void whenDefaultOnOrOffThenToDoNothing() {
-        DefaultConfig.off();
-        assertTrue(
-                DefaultConfig.isClientEnabled()
-        );
-        DefaultConfig.on();
-        assertTrue(
-                DefaultConfig.isClientEnabled()
-        );
-    }
 }

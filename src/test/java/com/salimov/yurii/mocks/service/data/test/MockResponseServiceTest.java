@@ -64,7 +64,6 @@ public final class MockResponseServiceTest
 
     @Test
     public void whenFilterResponsesByDateThenReturnFilterResponses() {
-        final Response response = getResponse();
         assertNotNull(
                 this.service.filterByDate(
                         getResponses(),

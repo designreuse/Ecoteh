@@ -25,56 +25,31 @@ public final class MockFileServiceTest
 
     @Test
     public void whenInitAndAddFileThenReturnThisFile() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE, URL,
-                        null
-                )
-        );
+        assertNotNull(this.service.initAndAdd(TITLE, null));
     }
 
     @Test
     public void whenInitAndUpdateFileThenReturnThisFile() {
         assertNotNull(
                 this.service.initAndUpdate(
-                        ID, TITLE, URL,
-                        null
+                        ID, TITLE, null
                 )
         );
     }
 
     @Test
     public void whenDeleteFileThenReturnBoolean() {
-        assertNotNull(
-                this.service.deleteFile(PATH)
-        );
-    }
-
-    @Test
-    public void whenUpdateFileThenReturnThisFile() {
-        assertNotNull(
-                this.service.updatePhoto(
-                        getFile(),
-                        null,
-                        TITLE, PATH
-                )
-        );
+        assertNotNull(this.service.deleteFile(PATH));
     }
 
     @Test
     public void whenGetByTitleThenReturnSomeContent() {
-        assertNotNull(
-                getService()
-                        .getByTitle(TITLE)
-        );
+        assertNotNull(getService().getByTitle(TITLE));
     }
 
     @Test
     public void whenGetByUrlThenReturnSomeContent() {
-        assertNotNull(
-                getService()
-                        .getByUrl(URL)
-        );
+        assertNotNull(getService().getByUrl(URL));
     }
 
     @Ignore

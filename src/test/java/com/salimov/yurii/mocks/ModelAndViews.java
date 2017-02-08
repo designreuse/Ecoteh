@@ -35,12 +35,8 @@ public final class ModelAndViews {
             final Map<String, Object> map = modelAndView.getModel();
             assertTrue(map.size() >= keys.length);
             for (String key : keys) {
-                assertTrue(
-                        map.containsKey(key)
-                );
-                assertNotNull(
-                        map.get(key)
-                );
+                assertTrue(map.containsKey(key));
+                assertNotNull(map.get(key));
             }
         }
     }

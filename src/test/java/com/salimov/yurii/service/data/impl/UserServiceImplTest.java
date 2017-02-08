@@ -79,9 +79,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenGetByNameThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByName(NAME)
-        );
+        assertNotNull(this.service.getByName(NAME));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -101,9 +99,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenGetByUrlThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByUrl(URL)
-        );
+        assertNotNull(this.service.getByUrl(URL));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -123,9 +119,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenGetByLoginThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByLogin(LOGIN)
-        );
+        assertNotNull(this.service.getByLogin(LOGIN));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -145,9 +139,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenGetByPhoneThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByPhone(PHONE)
-        );
+        assertNotNull(this.service.getByPhone(PHONE));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -167,9 +159,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenGetByEmailThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByEmail(EMAIL)
-        );
+        assertNotNull(this.service.getByEmail(EMAIL));
     }
 
     @Test

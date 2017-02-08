@@ -9,17 +9,12 @@ public final class DuplicateExceptionTest extends ExceptionTest {
 
     @Test
     public void duplicateExceptionConstructor_1() throws Exception {
-        checkException(
-                new DuplicateException(), ""
-        );
+        checkException(new DuplicateException(), "");
     }
 
     @Test
     public void duplicateExceptionConstructor_2() throws Exception {
-        checkException(
-                new DuplicateException(TEXT),
-                TEXT
-        );
+        checkException(new DuplicateException(TEXT), TEXT);
     }
 
     @Test

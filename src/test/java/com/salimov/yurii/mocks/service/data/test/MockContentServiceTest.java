@@ -15,9 +15,7 @@ public abstract class MockContentServiceTest<T extends Content<Long>> extends Mo
     public void whenGetByTitleThenReturnSomeContent() {
         assertNotNull(
                 getService()
-                        .getByTitle(
-                                TITLE, true
-                        )
+                        .getByTitle(TITLE, true)
         );
     }
 
@@ -25,9 +23,7 @@ public abstract class MockContentServiceTest<T extends Content<Long>> extends Mo
     public void whenGetByUrlThenReturnSomeContent() {
         assertNotNull(
                 getService()
-                        .getByUrl(
-                                URL, true
-                        )
+                        .getByUrl(URL, true)
         );
     }
 
@@ -66,25 +62,20 @@ public abstract class MockContentServiceTest<T extends Content<Long>> extends Mo
     @Test
     public void whenGetAndSortByTitleThenReturnSomeContents() {
         assertNotNull(
-                getService()
-                        .getAndSortByTitle(false)
+                getService().getAndSortByTitle(false)
         );
-
         assertNotNull(
-                getService()
-                        .getAndSortByTitle(true)
+                getService().getAndSortByTitle(true)
         );
     }
 
     @Test
     public void whenGetAndSortByUrlThenReturnSomeContents() {
         assertNotNull(
-                getService()
-                        .getAndSortByTitle(false)
+                getService().getAndSortByTitle(false)
         );
         assertNotNull(
-                getService()
-                        .getAndSortByTitle(true)
+                getService().getAndSortByTitle(true)
         );
     }
 

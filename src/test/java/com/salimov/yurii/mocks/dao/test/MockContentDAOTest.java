@@ -13,36 +13,24 @@ public abstract class MockContentDAOTest<T extends Content<Long>> extends MockDa
 
     @Test
     public void whenGetByInvalidTitleThenReturnNull() {
-        assertNull(
-                getDao().getByTitle(null)
-        );
-        assertNull(
-                getDao().getByTitle(ANY_STRING)
-        );
+        assertNull(getDao().getByTitle(null));
+        assertNull(getDao().getByTitle(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidTitleThenReturnSomeContent() {
-        assertNotNull(
-                getDao().getByTitle(TITLE)
-        );
+        assertNotNull(getDao().getByTitle(TITLE));
     }
 
     @Test
     public void whenGetByInvalidUrlThenReturnNull() {
-        assertNull(
-                getDao().getByUrl(null)
-        );
-        assertNull(
-                getDao().getByUrl(ANY_STRING)
-        );
+        assertNull(getDao().getByUrl(null));
+        assertNull(getDao().getByUrl(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidUrlThenReturnSomeContent() {
-        assertNotNull(
-                getDao().getByUrl(URL)
-        );
+        assertNotNull(getDao().getByUrl(URL));
     }
 
     @Ignore

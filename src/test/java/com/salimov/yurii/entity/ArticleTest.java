@@ -73,26 +73,11 @@ public final class ArticleTest extends ContentTest<Article> {
         assertNotNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
-        assertEquals(
-                article.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                article.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                article.getText(),
-                TEXT
-        );
-        assertEquals(
-                article.getKeywords(),
-                KEYWORDS
-        );
-        assertEquals(
-                article.getNumber(),
-                NUMBER
-        );
+        assertEquals(article.getTitle(), TITLE);
+        assertEquals(article.getDescription(), DESCRIPTION);
+        assertEquals(article.getText(), TEXT);
+        assertEquals(article.getKeywords(), KEYWORDS);
+        assertEquals(article.getNumber(), NUMBER);
     }
 
     @Test
@@ -287,34 +272,13 @@ public final class ArticleTest extends ContentTest<Article> {
         assertNotNull(article.getNumber());
         assertNotNull(article.getCategory());
         assertNotNull(article.getDate());
-        assertEquals(
-                article.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                article.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                article.getText(),
-                TEXT
-        );
-        assertEquals(
-                article.getKeywords(),
-                KEYWORDS
-        );
-        assertEquals(
-                article.getKeywords(),
-                KEYWORDS
-        );
-        assertEquals(
-                article.getNumber(),
-                NUMBER
-        );
-        assertEquals(
-                article.getCategory(),
-                category
-        );
+        assertEquals(article.getTitle(), TITLE);
+        assertEquals(article.getDescription(), DESCRIPTION);
+        assertEquals(article.getText(), TEXT);
+        assertEquals(article.getKeywords(), KEYWORDS);
+        assertEquals(article.getKeywords(), KEYWORDS);
+        assertEquals(article.getNumber(), NUMBER);
+        assertEquals(article.getCategory(), category);
     }
 
     @Test
@@ -340,16 +304,10 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article = getArticle();
         article.setNumber(NUMBER);
         assertNotNull(article.getNumber());
-        assertEquals(
-                article.getNumber(),
-                NUMBER
-        );
+        assertEquals(article.getNumber(), NUMBER);
         article.newNumber();
         assertNotNull(article.getNumber());
-        assertNotEquals(
-                article.getNumber(),
-                NUMBER
-        );
+        assertNotEquals(article.getNumber(), NUMBER);
     }
 
     @Test
@@ -375,10 +333,7 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article = getArticle();
         article.setText(TEXT);
         assertNotNull(article.getText());
-        assertEquals(
-                article.getText(),
-                TEXT
-        );
+        assertEquals(article.getText(), TEXT);
     }
 
     @Test
@@ -394,28 +349,21 @@ public final class ArticleTest extends ContentTest<Article> {
         final Date date = new Date();
         article.setDate(date);
         assertNotNull(article.getDate());
-        assertEquals(
-                article.getDate(),
-                date
-        );
+        assertEquals(article.getDate(), date);
     }
 
     @Test
     public void whenSetInvalidDateThenGetNewDateToString() {
         final Article article = getArticle();
         article.setDate(null);
-        assertNotNull(
-                article.getDateToString()
-        );
+        assertNotNull(article.getDateToString());
     }
 
     @Test
     public void whenSetValidDateThenGetThisDateToString() {
         final Article article = getArticle();
         article.setDate(new Date());
-        assertNotNull(
-                article.getDateToString()
-        );
+        assertNotNull(article.getDateToString());
     }
 
     @Test
@@ -433,10 +381,7 @@ public final class ArticleTest extends ContentTest<Article> {
         article.setCategory(null);
         article.setCategory(category);
         assertNotNull(article.getCategory());
-        assertEquals(
-                article.getCategory(),
-                category
-        );
+        assertEquals(article.getCategory(), category);
         assertTrue(category.containsArticle(article));
         article.setCategory(null);
         assertNull(article.getCategory());
@@ -449,23 +394,15 @@ public final class ArticleTest extends ContentTest<Article> {
         super.validObject();
         Article article = getArticle();
         assertFalse(Article.isValidated(null));
-        assertTrue(
-                Article.isValidated(article)
-        );
+        assertTrue(Article.isValidated(article));
         article.setTitle(null);
-        assertFalse(
-                Article.isValidated(article)
-        );
+        assertFalse(Article.isValidated(article));
         article = getArticle();
         article.setUrl(null);
-        assertFalse(
-                Article.isValidated(article)
-        );
+        assertFalse(Article.isValidated(article));
         article = getArticle();
         article.setText(null);
-        assertFalse(
-                Article.isValidated(article)
-        );
+        assertFalse(Article.isValidated(article));
     }
 
     @Ignore

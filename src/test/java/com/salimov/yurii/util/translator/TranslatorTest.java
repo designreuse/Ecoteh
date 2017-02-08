@@ -9,22 +9,14 @@ public final class TranslatorTest {
 
     @Test
     public void whenTranslateNullValueFromCyrillicToLatinThenReturnNotNull() {
-        assertNotNull(
-                Translator.fromCyrillicToLatin(null)
-        );
+        assertNotNull(Translator.fromCyrillicToLatin(null));
     }
 
     @Test
     public void whenTranslateInvalidValueFromCyrillicToLatinThenReturnNotNull() {
-        assertNotNull(
-                Translator.fromCyrillicToLatin("")
-        );
-        assertNotNull(
-                Translator.fromCyrillicToLatin(" ")
-        );
-        assertNotNull(
-                Translator.fromCyrillicToLatin("   ")
-        );
+        assertNotNull(Translator.fromCyrillicToLatin(""));
+        assertNotNull(Translator.fromCyrillicToLatin(" "));
+        assertNotNull(Translator.fromCyrillicToLatin("   "));
     }
 
     @Test
@@ -48,70 +40,46 @@ public final class TranslatorTest {
 
     @Test
     public void whenTranslateNullValueToAsciiThenReturnNull() {
-        assertNull(
-                Translator.toAscii(null)
-        );
+        assertNull(Translator.toAscii(null));
     }
 
     @Test
     public void whenTranslateInvalidValueToAsciiThenReturnNull() {
-        assertNull(
-                Translator.toAscii("")
-        );
-        assertNull(
-                Translator.toAscii(" ")
-        );
-        assertNull(
-                Translator.toAscii("   ")
-        );
+        assertNull(Translator.toAscii(""));
+        assertNull(Translator.toAscii(" "));
+        assertNull(Translator.toAscii("   "));
     }
 
     @Test
     public void whenTranslateValidValueToAsciiThenReturnTranslateValue() {
-        assertNotNull(
-                Translator.toAscii(INFORMATION)
-        );
+        assertNotNull(Translator.toAscii(INFORMATION));
     }
 
     @Test
     public void whenTranslateValidIntegerToAsciiThenReturnTranslateValue() {
-        assertNotNull(
-                Translator.toAscii(123)
-        );
+        assertNotNull(Translator.toAscii(123));
     }
 
     @Test
     public void whenTranslateNullValueFromAsciiThenReturnNull() {
-        assertNull(
-                Translator.fromAscii(null)
-        );
+        assertNull(Translator.fromAscii(null));
     }
 
     @Test
     public void whenTranslateInvalidValueFromAsciiThenReturnNull() {
-        assertNull(
-                Translator.fromAscii("")
-        );
-        assertNull(
-                Translator.fromAscii(" ")
-        );
-        assertNull(
-                Translator.fromAscii("   ")
-        );
+        assertNull(Translator.fromAscii(""));
+        assertNull(Translator.fromAscii(" "));
+        assertNull(Translator.fromAscii("   "));
     }
 
     @Test
     public void whenTranslateValidValueFromAsciiThenReturnTranslateValue() {
-        assertNotNull(
-                Translator.fromAscii("123")
-        );
+        assertNotNull(Translator.fromAscii("123"));
     }
 
     @Test
     public void whenTranslateValidIntegerFromAsciiThenReturnTranslateValue() {
-        assertNotNull(
-                Translator.fromAscii(123)
-        );
+        assertNotNull(Translator.fromAscii(123));
     }
 
     @Test
@@ -120,9 +88,6 @@ public final class TranslatorTest {
         assertNotNull(temp);
         final String result = Translator.fromAscii(temp);
         assertNotNull(result);
-        assertEquals(
-                INFORMATION,
-                result
-        );
+        assertEquals(INFORMATION, result);
     }
 }

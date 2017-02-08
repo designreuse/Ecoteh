@@ -29,44 +29,32 @@ public final class FileDaoImplTest
 
     @Test
     public void whenGetByNullTitleThenReturnsNull() {
-        assertNull(
-                this.dao.getByTitle(null)
-        );
+        assertNull(this.dao.getByTitle(null));
     }
 
     @Test
     public void whenGetByInvalidTitleThenReturnsNull() {
-        assertNull(
-                this.dao.getByTitle(ANY_STRING)
-        );
+        assertNull(this.dao.getByTitle(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidTitleThenReturnsSomeFile() {
-        assertNotNull(
-                this.dao.getByTitle(TITLE)
-        );
+        assertNotNull(this.dao.getByTitle(TITLE));
     }
 
     @Test
     public void whenGetByNullUrlThenReturnsNull() {
-        assertNull(
-                this.dao.getByUrl(null)
-        );
+        assertNull(this.dao.getByUrl(null));
     }
 
     @Test
     public void whenGetByInvalidUrlThenReturnsNull() {
-        assertNull(
-                this.dao.getByUrl(ANY_STRING)
-        );
+        assertNull(this.dao.getByUrl(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidUrlThenReturnsSomeFile() {
-        assertNotNull(
-                this.dao.getByUrl(URL)
-        );
+        assertNotNull(this.dao.getByUrl(URL));
     }
 
     @Test

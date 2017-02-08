@@ -30,11 +30,7 @@ public final class MessageDaoImplTest {
 
     @Test
     public void whenAddMessageThenReturnsIt() {
-        assertNotNull(
-                this.dao.add(
-                        getMessage()
-                )
-        );
+        assertNotNull(this.dao.add(getMessage()));
     }
 
     @Test
@@ -49,9 +45,7 @@ public final class MessageDaoImplTest {
     @Test
     public void whenUpdateMessageThenReturnsIt() {
         assertNotNull(
-                this.dao.update(
-                        getMessage()
-                )
+                this.dao.update(getMessage())
         );
     }
 
@@ -60,17 +54,13 @@ public final class MessageDaoImplTest {
         final Message message = getMessage();
         this.dao.add(message);
         assertNotNull(
-                this.dao.get(
-                        message.getId()
-                )
+                this.dao.get(message.getId())
         );
     }
 
     @Test
     public void whenGetAllMessageThenReturnsMessageCollection() {
-        this.dao.addAll(
-                getMessages()
-        );
+        this.dao.addAll(getMessages());
         assertFalse(
                 this.dao.getAll().isEmpty()
         );
@@ -130,9 +120,7 @@ public final class MessageDaoImplTest {
 
     @Test
     public void whenRemoveAllMesagesThenDoIt() {
-        this.dao.addAll(
-                getMessages()
-        );
+        this.dao.addAll(getMessages());
         assertFalse(
                 this.dao.getAll().isEmpty()
         );
@@ -150,9 +138,7 @@ public final class MessageDaoImplTest {
     @Test
     public void whenExistMessageByInvalidIdThenReturnFalse() {
         final Message message = getMessage();
-        this.dao.remove(
-                message.getId()
-        );
+        this.dao.remove(message.getId());
         assertFalse(
                 this.dao.exists(
                         message.getId()

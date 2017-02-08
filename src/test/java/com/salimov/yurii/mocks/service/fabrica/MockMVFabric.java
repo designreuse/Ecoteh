@@ -1,11 +1,9 @@
 package com.salimov.yurii.mocks.service.fabrica;
 
-import com.salimov.yurii.service.fabrica.impl.AdminMVFabricImpl;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.impl.ClientMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
+import com.salimov.yurii.service.fabrica.impl.MainMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
-import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.junit.Ignore;
 
 import static com.salimov.yurii.mocks.service.data.MockServices.*;
@@ -13,22 +11,14 @@ import static com.salimov.yurii.mocks.service.data.MockServices.*;
 @Ignore
 public final class MockMVFabric {
 
-    private static ClientMVFabric clientMVFabric;
-    private static AdminMVFabric adminMVFabric;
+    private static MainMVFabric clientMVFabric;
     private static CacheMVFabric cacheMVFabric;
 
-    public static ClientMVFabric getClientMVFabric() {
+    public static MainMVFabric getMainMVFabric() {
         if (clientMVFabric == null) {
             clientMVFabric = initClientMVFabric();
         }
         return clientMVFabric;
-    }
-
-    public static AdminMVFabric getAdminMVFabric() {
-        if (adminMVFabric == null) {
-            adminMVFabric = initAdminMVFabric();
-        }
-        return adminMVFabric;
     }
 
     public static CacheMVFabric getCacheMVFabric() {
@@ -38,17 +28,8 @@ public final class MockMVFabric {
         return cacheMVFabric;
     }
 
-    private static ClientMVFabric initClientMVFabric() {
-        return new ClientMVFabricImpl(
-                getArticleService(),
-                getCategoryService(),
-                getCompanyService(),
-                getUserService(),
-                getResponseService());
-    }
-
-    private static AdminMVFabric initAdminMVFabric() {
-        return new AdminMVFabricImpl(
+    private static MainMVFabric initClientMVFabric() {
+        return new MainMVFabricImpl(
                 getArticleService(),
                 getCategoryService(),
                 getCompanyService(),
@@ -59,7 +40,7 @@ public final class MockMVFabric {
 
     private static CacheMVFabric initCacheMVFabric() {
         return new CacheMVFabricImpl(
-                getAdminMVFabric()
+                getMainMVFabric()
         );
     }
 }

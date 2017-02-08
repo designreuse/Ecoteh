@@ -8,8 +8,6 @@ public final class SecurityInitializerTest {
 
     @Test
     public void ConstructorTest() throws Exception {
-        assertNotNull(
-                new SecurityInitializer()
-        );
+        assertNotNull(new SecurityInitializer());
     }
 }

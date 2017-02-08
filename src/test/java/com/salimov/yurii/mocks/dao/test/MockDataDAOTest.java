@@ -16,112 +16,74 @@ public abstract class MockDataDAOTest<T extends Model<Long>> {
 
     @Test
     public void whenGetMockDaoThenReturnNotNull() {
-        assertNotNull(
-                getDao()
-        );
+        assertNotNull(getDao());
     }
 
     @Test
     public void whenGetObjectThenReturnSomeObject() {
-        assertNotNull(
-                getObject()
-        );
+        assertNotNull(getObject());
     }
 
     @Test
     public void whenGetObjectsThenReturnSomeObjects() {
-        assertNotNull(
-                getObjects()
-        );
+        assertNotNull(getObjects());
     }
 
     @Test
     public void whenAddInvalidModelThenReturnNull() {
-        assertNull(
-                getDao().add(null)
-        );
+        assertNull(getDao().add(null));
     }
 
     @Test
     public void whenAddValidModelThenReturnThisModel() {
-        assertNotNull(
-                getDao().add(
-                        getObject()
-                )
-        );
+        assertNotNull(getDao().add(getObject()));
     }
 
     @Test
     public void whenAddAllInvalidModelThenReturnNull() {
-        assertNull(
-                getDao().addAll(null)
-        );
+        assertNull(getDao().addAll(null));
     }
 
     @Test
     public void whenAddAllValidModelThenReturnThisModels() {
-        assertNotNull(
-                getDao().addAll(
-                        getObjects()
-                )
-        );
+        assertNotNull(getDao().addAll(getObjects()));
     }
 
     @Test
     public void whenUpdateInvalidModelThenReturnNull() {
-        assertNull(
-                getDao().update(null)
-        );
+        assertNull(getDao().update(null));
     }
 
     @Test
     public void whenUpdateValidModelThenReturnThisModel() {
-        assertNotNull(
-                getDao().update(
-                        getObject()
-                )
-        );
+        assertNotNull(getDao().update(getObject()));
     }
 
     @Test
     public void whenGetByInvalidIdThenReturnNull() {
-        assertNull(
-                getDao().get(null)
-        );
-        assertNull(
-                getDao().get(UNKNOWN_ID)
-        );
+        assertNull(getDao().get(null));
+        assertNull(getDao().get(UNKNOWN_ID));
     }
 
     @Test
     public void whenGetByValidIdThenReturnSomeModel() {
-        assertNotNull(
-                getDao().get(ID)
-        );
+        assertNotNull(getDao().get(ID));
     }
 
     @Test
     public void whenGetAllModelsThenReturnThem() {
-        assertFalse(
-                getDao().getAll().isEmpty()
-        );
+        assertFalse(getDao().getAll().isEmpty());
     }
 
     @Test
     public void whenExistsByInvalidIdThenReturnFalse() {
-        assertFalse(
-                getDao().exists(null)
-        );
-        assertFalse(
-                getDao().exists(UNKNOWN_ID)
-        );
+        assertFalse(getDao().exists(null));
+        assertFalse(getDao().exists(UNKNOWN_ID));
     }
 
     @Test
     public void whenExistsByValidIdThenReturnTrue() {
-        assertTrue(
-                getDao().exists(ID)
-        );
+        assertTrue(getDao().exists(ID));
     }
 
     @Ignore

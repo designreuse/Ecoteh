@@ -73,15 +73,9 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getPhone());
         assertNotNull(user.getUrl());
         assertNotNull(user.getRole());
-        assertEquals(
-                user.getName(), NAME
-        );
-        assertEquals(
-                user.getEmail(), EMAIL
-        );
-        assertEquals(
-                user.getPhone(), PHONE
-        );
+        assertEquals(user.getName(), NAME);
+        assertEquals(user.getEmail(), EMAIL);
+        assertEquals(user.getPhone(), PHONE);
         assertEquals(
                 user.getUrl(),
                 Translator.fromCyrillicToLatin(NAME)
@@ -100,10 +94,7 @@ public final class UserTest extends ModelTest<User> {
             sb.append(" \nRole: ").append(user.getRole().name());
         }
         sb.append(" ");
-        assertEquals(
-                user.toString(),
-                sb.toString()
-        );
+        assertEquals(user.toString(), sb.toString());
     }
 
     @Test
@@ -113,19 +104,13 @@ public final class UserTest extends ModelTest<User> {
         assertTrue(user1.equals(user2));
         user1.setName(NAME);
         user2.setName(NAME);
-        assertTrue(
-                user1.equals(user2)
-        );
+        assertTrue(user1.equals(user2));
         user1.setPhone(PHONE);
         user2.setPhone(PHONE);
-        assertTrue(
-                user1.equals(user2)
-        );
+        assertTrue(user1.equals(user2));
         user1.setEmail(EMAIL);
         user2.setEmail(EMAIL);
-        assertTrue(
-                user1.equals(user2)
-        );
+        assertTrue(user1.equals(user2));
     }
 
     @Test
@@ -157,10 +142,7 @@ public final class UserTest extends ModelTest<User> {
                                 ) :
                         isBlank(user2.getEmail())
         );
-        assertEquals(
-                user1.equals(user2),
-                value
-        );
+        assertEquals(user1.equals(user2), value);
     }
 
     @Test
@@ -252,32 +234,23 @@ public final class UserTest extends ModelTest<User> {
 
     @Test
     public void whenGetUsernameThenReturnsNotNull() {
-        assertNotNull(
-                getUser().getUsername()
-        );
+        assertNotNull(getUser().getUsername());
     }
 
     @Test
     public void whenGetLoginThenReturnsNotNull() {
-        assertNotNull(
-                getUser().getLogin()
-        );
+        assertNotNull(getUser().getLogin());
     }
 
     @Test
     public void usernameMustEqualsLogin() {
         final User user = getUser();
-        assertEquals(
-                user.getUsername(),
-                user.getLogin()
-        );
+        assertEquals(user.getUsername(), user.getLogin());
     }
 
     @Test
     public void whenGetPasswordThenReturnsNotNull() {
-        assertNotNull(
-                getUser().getPassword()
-        );
+        assertNotNull(getUser().getPassword());
     }
 
     @Test
@@ -448,18 +421,10 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getEmail());
         assertNotNull(user.getPhone());
         assertNotNull(user.getDescription());
-        assertEquals(
-                user.getName(), NAME
-        );
-        assertEquals(
-                user.getEmail(), EMAIL
-        );
-        assertEquals(
-                user.getPhone(), PHONE
-        );
-        assertEquals(
-                user.getDescription(), DESCRIPTION
-        );
+        assertEquals(user.getName(), NAME);
+        assertEquals(user.getEmail(), EMAIL);
+        assertEquals(user.getPhone(), PHONE);
+        assertEquals(user.getDescription(), DESCRIPTION);
     }
 
     @Test
@@ -480,35 +445,16 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getTwitter());
         assertNotNull(user.getSkype());
         assertNotNull(user.getDescription());
-        assertEquals(user.getName(), NAME
-        );
-        assertEquals(
-                user.getLogin(), LOGIN
-        );
-        assertEquals(
-                user.getPassword(), PASSWORD
-        );
-        assertEquals(
-                user.getEmail(), EMAIL
-        );
-        assertEquals(
-                user.getPhone(), PHONE
-        );
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        assertEquals(
-                user.getSkype(), SKYPE
-        );
-        assertEquals(
-                user.getDescription(), DESCRIPTION
-        );
+        assertEquals(user.getName(), NAME);
+        assertEquals(user.getLogin(), LOGIN);
+        assertEquals(user.getPassword(), PASSWORD);
+        assertEquals(user.getEmail(), EMAIL);
+        assertEquals(user.getPhone(), PHONE);
+        assertEquals(user.getVkontakte(), VKONTAKTE);
+        assertEquals(user.getFacebook(), FACEBOOK);
+        assertEquals(user.getTwitter(), TWITTER);
+        assertEquals(user.getSkype(), SKYPE);
+        assertEquals(user.getDescription(), DESCRIPTION);
     }
 
     @Test
@@ -529,30 +475,14 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getDescription());
         assertNotNull(user.getPhotoUrl());
         assertNotNull(user.getRole());
-        assertEquals(
-                user.getName(), NAME
-        );
-        assertEquals(
-                user.getLogin(), LOGIN
-        );
-        assertEquals(
-                user.getPassword(), PASSWORD
-        );
-        assertEquals(
-                user.getEmail(), EMAIL
-        );
-        assertEquals(
-                user.getPhone(), PHONE
-        );
-        assertEquals(
-                user.getDescription(), DESCRIPTION
-        );
-        assertEquals(
-                user.getPhotoUrl(), PHOTO_URL
-        );
-        assertEquals(
-                user.getRole(), role
-        );
+        assertEquals(user.getName(), NAME);
+        assertEquals(user.getLogin(), LOGIN);
+        assertEquals(user.getPassword(), PASSWORD);
+        assertEquals(user.getEmail(), EMAIL);
+        assertEquals(user.getPhone(), PHONE);
+        assertEquals(user.getDescription(), DESCRIPTION);
+        assertEquals(user.getPhotoUrl(), PHOTO_URL);
+        assertEquals(user.getRole(), role);
     }
 
     @Test
@@ -580,9 +510,7 @@ public final class UserTest extends ModelTest<User> {
         user.setName(NAME);
         assertNotNull(user.getName());
         assertNotNull(user.getUrl());
-        assertEquals(
-                user.getName(), NAME
-        );
+        assertEquals(user.getName(), NAME);
         assertEquals(
                 user.getUrl(),
                 Translator.fromCyrillicToLatin(NAME)
@@ -628,9 +556,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setUrl(NAME);
         assertNotNull(user.getUrl());
-        assertEquals(
-                user.getUrl(), NAME
-        );
+        assertEquals(user.getUrl(), NAME);
     }
 
     @Test
@@ -665,9 +591,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = new User();
         user.setLogin(LOGIN);
         assertNotNull(user.getLogin());
-        assertEquals(
-                user.getLogin(), LOGIN
-        );
+        assertEquals(user.getLogin(), LOGIN);
     }
 
     @Test
@@ -691,9 +615,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setPassword(PASSWORD);
         assertNotNull(user.getPassword());
-        assertEquals(
-                user.getPassword(), PASSWORD
-        );
+        assertEquals(user.getPassword(), PASSWORD);
     }
 
     @Test
@@ -717,9 +639,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setEmail(EMAIL);
         assertNotNull(user.getEmail());
-        assertEquals(
-                user.getEmail(), EMAIL
-        );
+        assertEquals(user.getEmail(), EMAIL);
     }
 
     @Test
@@ -743,9 +663,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setPhone(PHONE);
         assertNotNull(user.getPhone());
-        assertEquals(
-                user.getPhone(), PHONE
-        );
+        assertEquals(user.getPhone(), PHONE);
     }
 
     @Test
@@ -771,42 +689,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setVkontakte(VKONTAKTE);
         assertNotNull(user.getVkontakte());
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("http://" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("https://" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("m.vk.com" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("vk.com" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("http://m.vk.com" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(),
-                VKONTAKTE
-        );
-        user.setVkontakte("https://m.vk.com" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("http://vk.com" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
-        user.setVkontakte("https://vk.com" + VKONTAKTE);
-        assertEquals(
-                user.getVkontakte(), VKONTAKTE
-        );
+        assertEquals(user.getVkontakte(), VKONTAKTE);
     }
 
     @Test
@@ -832,41 +715,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setFacebook(FACEBOOK);
         assertNotNull(user.getFacebook());
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("http://" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("https://" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("m.facebook.com" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("www.facebook.com" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("http://m.facebook.com" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("https://m.facebook.com" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("http://www.facebook.com" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
-        user.setFacebook("https://www.facebook.com" + FACEBOOK);
-        assertEquals(
-                user.getFacebook(), FACEBOOK
-        );
+        assertEquals(user.getFacebook(), FACEBOOK);
     }
 
     @Test
@@ -892,39 +741,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setTwitter(TWITTER);
         assertNotNull(user.getTwitter());
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("http://" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("https://" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("mobile.TWITTER.com" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("TWITTER.com" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("http://mobile.TWITTER.com" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("https://mobile.TWITTER.com" + TWITTER);
         assertEquals(user.getTwitter(), TWITTER);
-        user.setTwitter("http://TWITTER.com" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
-        user.setTwitter("https://TWITTER.com" + TWITTER);
-        assertEquals(
-                user.getTwitter(), TWITTER
-        );
     }
 
     @Test
@@ -976,9 +793,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setDescription(DESCRIPTION);
         assertNotNull(user.getDescription());
-        assertEquals(
-                user.getDescription(), DESCRIPTION
-        );
+        assertEquals(user.getDescription(), DESCRIPTION);
     }
 
     @Test
@@ -993,9 +808,7 @@ public final class UserTest extends ModelTest<User> {
         final User user = getUser();
         user.setPhotoUrl(PHOTO_URL);
         assertNotNull(user.getPhotoUrl());
-        assertEquals(
-                user.getPhotoUrl(), PHOTO_URL
-        );
+        assertEquals(user.getPhotoUrl(), PHOTO_URL);
     }
 
     @Test
@@ -1011,9 +824,7 @@ public final class UserTest extends ModelTest<User> {
         final UserRole role = UserRole.ANOTHER;
         user.setRole(role);
         assertNotNull(user.getRole());
-        assertEquals(
-                user.getRole(), role
-        );
+        assertEquals(user.getRole(), role);
     }
 
     @Test
@@ -1056,9 +867,7 @@ public final class UserTest extends ModelTest<User> {
     public void whenGetUsernameThenReturnNotNull() {
         final User user = new User();
         assertNotNull(user.getUsername());
-        assertEquals(
-                user.getUsername(), ""
-        );
+        assertEquals(user.getUsername(), "");
     }
 
     @Test
@@ -1067,7 +876,8 @@ public final class UserTest extends ModelTest<User> {
         user.setLogin(LOGIN);
         assertNotNull(user.getUsername());
         assertEquals(
-                user.getUsername(), user.getLogin()
+                user.getUsername(),
+                user.getLogin()
         );
     }
 

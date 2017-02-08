@@ -29,87 +29,57 @@ public final class UserDaoImplTest
 
     @Test
     public void whenGetByInvalidNameThenReturnsNull() {
-        assertNull(
-                this.dao.getByName(null)
-        );
-        assertNull(
-                this.dao.getByName(ANY_STRING)
-        );
+        assertNull(this.dao.getByName(null));
+        assertNull(this.dao.getByName(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidNameThenReturnsSomeUser() {
-        assertNotNull(
-                this.dao.getByName(NAME)
-        );
+        assertNotNull(this.dao.getByName(NAME));
     }
 
     @Test
     public void whenGetByInvalidUrlThenReturnsNull() {
-        assertNull(
-                this.dao.getByUrl(null)
-        );
-        assertNull(
-                this.dao.getByUrl(ANY_STRING)
-        );
+        assertNull(this.dao.getByUrl(null));
+        assertNull(this.dao.getByUrl(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidUrlThenReturnsSomeUser() {
-        assertNotNull(
-                this.dao.getByUrl(URL)
-        );
+        assertNotNull(this.dao.getByUrl(URL));
     }
 
     @Test
     public void whenGetByInvalidLoginThenReturnsNull() {
-        assertNull(
-                this.dao.getByLogin(null)
-        );
-        assertNull(
-                this.dao.getByLogin(ANY_STRING)
-        );
+        assertNull(this.dao.getByLogin(null));
+        assertNull(this.dao.getByLogin(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidLoginThenReturnsSomeUser() {
-        assertNotNull(
-                this.dao.getByLogin(LOGIN)
-        );
+        assertNotNull(this.dao.getByLogin(LOGIN));
     }
 
     @Test
     public void whenGetByInvalidPhoneThenReturnsNull() {
-        assertNull(
-                this.dao.getByPhone(null)
-        );
-        assertNull(
-                this.dao.getByPhone(ANY_STRING)
-        );
+        assertNull(this.dao.getByPhone(null));
+        assertNull(this.dao.getByPhone(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidPhoneThenReturnsSomeUser() {
-        assertNotNull(
-                this.dao.getByPhone(PHONE)
-        );
+        assertNotNull(this.dao.getByPhone(PHONE));
     }
 
     @Test
     public void whenGetByInvalidEmailThenReturnsNull() {
-        assertNull(
-                this.dao.getByEmail(null)
-        );
-        assertNull(
-                this.dao.getByEmail(ANY_STRING)
-        );
+        assertNull(this.dao.getByEmail(null));
+        assertNull(this.dao.getByEmail(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidEmailThenReturnsSomeUser() {
-        assertNotNull(
-                this.dao.getByEmail(EMAIL)
-        );
+        assertNotNull(this.dao.getByEmail(EMAIL));
     }
 
     @Test

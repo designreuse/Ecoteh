@@ -26,22 +26,15 @@ public class MockArticleDaoTest extends MockContentDAOTest<Article> {
 
     @Test
     public void whenGetByInvalidNumberThenReturnNull() {
-        assertNull(
-                this.dao.getByNumber(null)
-        );
-        assertNull(
-                this.dao.getByTitle(ANY_STRING)
-        );
+        assertNull(this.dao.getByNumber(null));
+        assertNull(this.dao.getByTitle(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidNumberThenReturnSomeContent() {
         final Article article = this.dao.getByNumber(NUMBER);
         assertNotNull(article);
-        assertEquals(
-                article.getNumber(),
-                NUMBER
-        );
+        assertEquals(article.getNumber(), NUMBER);
     }
 
     @Ignore

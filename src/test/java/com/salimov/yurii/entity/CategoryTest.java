@@ -50,18 +50,9 @@ public final class CategoryTest extends ContentTest<Category> {
         assertNotNull(category.getTitle());
         assertNotNull(category.getDescription());
         assertNotNull(category.getKeywords());
-        assertEquals(
-                category.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                category.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                category.getKeywords(),
-                KEYWORDS
-        );
+        assertEquals(category.getTitle(), TITLE);
+        assertEquals(category.getDescription(), DESCRIPTION);
+        assertEquals(category.getKeywords(), KEYWORDS);
     }
 
     @Test
@@ -73,49 +64,34 @@ public final class CategoryTest extends ContentTest<Category> {
                 + " \nKeywords: " + category.getKeywords()
                 + " \nURL: " + category.getUrl()
                 + " \nDescription: " + category.getDescription();
-        assertEquals(
-                category.toString(),
-                value
-        );
+        assertEquals(category.toString(), value);
     }
 
     @Test
     public void equalsObjects() {
         final Category category1 = new Category();
         final Category category2 = new Category();
-        assertTrue(
-                category1.equals(category2)
-        );
+        assertTrue(category1.equals(category2));
         category1.setTitle(TITLE);
         category2.setTitle(TITLE);
-        assertTrue(
-                category1.equals(category2)
-        );
+        assertTrue(category1.equals(category2));
         category1.setUrl(URL);
         category2.setUrl(URL);
-        assertTrue(
-                category1.equals(category2)
-        );
+        assertTrue(category1.equals(category2));
     }
 
     @Test
     public void hashCodeObject() {
         final Category category = new Category();
         int value = 0;
-        assertEquals(
-                category.hashCode(),
-                value
-        );
+        assertEquals(category.hashCode(), value);
         category.setTitle(TITLE);
         value += (
                 isNotBlank(category.getTitle()) ? category.getTitle().hashCode() : 0
         ) + (
                 isNotBlank(category.getUrl()) ? category.getUrl().hashCode() : 0
         );
-        assertEquals(
-                category.hashCode(),
-                value
-        );
+        assertEquals(category.hashCode(), value);
     }
 
     @Test
@@ -181,22 +157,10 @@ public final class CategoryTest extends ContentTest<Category> {
         assertNotNull(category.getDescription());
         assertNotNull(category.getKeywords());
         assertNotNull(category.getPhotoUrl());
-        assertEquals(
-                category.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                category.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                category.getKeywords(),
-                KEYWORDS
-        );
-        assertEquals(
-                category.getPhotoUrl(),
-                ANY_STRING
-        );
+        assertEquals(category.getTitle(), TITLE);
+        assertEquals(category.getDescription(), DESCRIPTION);
+        assertEquals(category.getKeywords(), KEYWORDS);
+        assertEquals(category.getPhotoUrl(), ANY_STRING);
     }
 
     @Test
@@ -211,22 +175,15 @@ public final class CategoryTest extends ContentTest<Category> {
         final Category category = new Category();
         category.setPhotoUrl(ANY_STRING);
         assertNotNull(category.getPhotoUrl());
-        assertEquals(
-                category.getPhotoUrl(),
-                ANY_STRING
-        );
+        assertEquals(category.getPhotoUrl(), ANY_STRING);
     }
 
     @Test
     public void whenArticlesAreInvalidThenNotAddThey() {
         final Category category = new Category();
         category.setArticles(null);
-        assertNotNull(
-                category.getArticles()
-        );
-        assertTrue(
-                category.getArticles().isEmpty()
-        );
+        assertNotNull(category.getArticles());
+        assertTrue(category.getArticles().isEmpty());
     }
 
     @Test
@@ -236,50 +193,32 @@ public final class CategoryTest extends ContentTest<Category> {
         final List<Article> articles = getArticles();
 
         assertNotNull(category.getArticles());
-        assertTrue(
-                category.getArticles().isEmpty()
-        );
+        assertTrue(category.getArticles().isEmpty());
         checkArticlesSize(
                 articles.size(),
                 category,
                 articles
         );
         category.removeArticle(article);
-        assertNotNull(
-                category.getArticles()
-        );
-        assertFalse(
-                category.getArticles().isEmpty()
-        );
+        assertNotNull(category.getArticles());
+        assertFalse(category.getArticles().isEmpty());
         checkArticlesSize(
                 articles.size(),
                 category,
                 articles
         );
         category.removeArticles(articles);
-        assertNotNull(
-                category.getArticles()
-        );
-        assertTrue(
-                category.getArticles().isEmpty()
-        );
+        assertNotNull(category.getArticles());
+        assertTrue(category.getArticles().isEmpty());
         category.addArticle(article);
         category.addArticles(articles);
-        assertTrue(
-                category.containsArticle(article)
-        );
-        assertTrue(
-                category.containsArticles(articles)
-        );
+        assertTrue(category.containsArticle(article));
+        assertTrue(category.containsArticles(articles));
         category.addArticle(article);
         category.addArticles(articles);
         category.clearArticles();
-        assertNotNull(
-                category.getArticles()
-        );
-        assertTrue(
-                category.getArticles().isEmpty()
-        );
+        assertNotNull(category.getArticles());
+        assertTrue(category.getArticles().isEmpty());
     }
 
     @Test
@@ -287,33 +226,19 @@ public final class CategoryTest extends ContentTest<Category> {
     public void validObject() {
         super.validObject();
         Category category = getCategory();
-        assertFalse(
-                Category.isValidated(null)
-        );
-        assertTrue(
-                Category.isValidated(category)
-        );
+        assertFalse(Category.isValidated(null));
+        assertTrue(Category.isValidated(category));
         category.setTitle(null);
-        assertFalse(
-                Category.isValidated(category)
-        );
+        assertFalse(Category.isValidated(category));
         category = getCategory();
         category.setUrl(null);
-        assertFalse(
-                Category.isValidated(category)
-        );
+        assertFalse(Category.isValidated(category));
         category = getCategory();
         category.setArticles(null);
-        assertFalse(
-                Category.isValidated(category)
-        );
+        assertFalse(Category.isValidated(category));
         category = getCategory();
-        category.setArticles(
-                getArticles()
-        );
-        assertTrue(
-                Category.isValidated(category)
-        );
+        category.setArticles(getArticles());
+        assertTrue(Category.isValidated(category));
     }
 
     @Ignore
@@ -330,13 +255,8 @@ public final class CategoryTest extends ContentTest<Category> {
     ) {
         for (int i = 0; i < 10; i++) {
             category.addArticles(articles);
-            assertFalse(
-                    category.getArticles().isEmpty()
-            );
-            assertEquals(
-                    category.getArticles().size(),
-                    size
-            );
+            assertFalse(category.getArticles().isEmpty());
+            assertEquals(category.getArticles().size(), size);
         }
     }
 }

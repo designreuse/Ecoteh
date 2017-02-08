@@ -64,58 +64,42 @@ public final class MockUserServiceTest
 
     @Test
     public void whenGetUserByUrlThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByUrl(URL)
-        );
+        assertNotNull(this.service.getByUrl(URL));
     }
 
     @Test
     public void whenGetUserByLoginThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByLogin(LOGIN)
-        );
+        assertNotNull(this.service.getByLogin(LOGIN));
     }
 
     @Test
     public void whenGetUserByEmailThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByEmail(EMAIL)
-        );
+        assertNotNull(this.service.getByEmail(EMAIL));
     }
 
     @Test
     public void whenGetUserByPhoneThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByPhone(PHONE)
-        );
+        assertNotNull(this.service.getByPhone(PHONE));
     }
 
     @Test
     public void whenGetAuthenticatedUserThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getAuthenticatedUser()
-        );
+        assertNotNull(this.service.getAuthenticatedUser());
     }
 
     @Test
     public void whenGetMainAdminThisReturnSomeUser() {
-        assertNotNull(
-                this.service.getMainAdmin()
-        );
+        assertNotNull(this.service.getMainAdmin());
     }
 
     @Test
     public void whenGetAdminsThenReturnAllAdmins() {
-        assertNotNull(
-                this.service.getAdmins()
-        );
+        assertNotNull(this.service.getAdmins());
     }
 
     @Test
     public void whenGetPersonnelThenReturnAllPersonnel() {
-        assertNotNull(
-                this.service.getPersonnel()
-        );
+        assertNotNull(this.service.getPersonnel());
     }
 
     @Test
@@ -159,22 +143,14 @@ public final class MockUserServiceTest
 
     @Test
     public void whenGetAndSortUsersByNameThenReturnSortUsers() {
-        assertNotNull(
-                this.service.getAndSortByName(true)
-        );
-        assertNotNull(
-                this.service.getAndSortByName(false)
-        );
+        assertNotNull(this.service.getAndSortByName(true));
+        assertNotNull(this.service.getAndSortByName(false));
     }
 
     @Test
     public void whenGetAndSortUsersByUrlThenReturnSortUsers() {
-        assertNotNull(
-                this.service.getAndSortByUrl(true)
-        );
-        assertNotNull(
-                this.service.getAndSortByUrl(false)
-        );
+        assertNotNull(this.service.getAndSortByUrl(true));
+        assertNotNull(this.service.getAndSortByUrl(false));
     }
 
     @Test

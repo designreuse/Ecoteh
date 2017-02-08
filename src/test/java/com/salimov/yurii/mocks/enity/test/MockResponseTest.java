@@ -15,7 +15,7 @@ public final class MockResponseTest extends MockModelTest<Response> {
     @Test
     @Override
     public void whenGetModelThenReturnValidModel() {
-        Response response = getResponse();
+        final Response response = getResponse();
         assertNotNull(response.getUsername());
         assertNotNull(response.getDate());
         assertNotNull(response.getDateToString());

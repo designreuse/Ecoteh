@@ -28,9 +28,7 @@ public class CaptchaImplTest {
 
     @Test
     public void whenIsVerifyNullHttpServletRequestThenReturnFalse() {
-        assertFalse(
-                this.captcha.isVerify(null)
-        );
+        assertFalse(this.captcha.isVerify(null));
     }
 
     @Test
@@ -44,8 +42,6 @@ public class CaptchaImplTest {
 
     @Test
     public void whenGetStatusThenReturnIt() {
-        assertNull(
-                this.captcha.getStatus()
-        );
+        assertNull(this.captcha.getStatus());
     }
 }

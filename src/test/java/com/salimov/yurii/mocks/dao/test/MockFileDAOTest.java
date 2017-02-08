@@ -27,36 +27,24 @@ public class MockFileDAOTest extends MockDataDAOTest<File> {
 
     @Test
     public void whenGetByInvalidTitleThenReturnNull() {
-        assertNull(
-                this.dao.getByTitle(null)
-        );
-        assertNull(
-                this.dao.getByTitle(ANY_STRING)
-        );
+        assertNull(this.dao.getByTitle(null));
+        assertNull(this.dao.getByTitle(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidTitleThenReturnSomeContent() {
-        assertNotNull(
-                this.dao.getByTitle(TITLE)
-        );
+        assertNotNull(this.dao.getByTitle(TITLE));
     }
 
     @Test
     public void whenGetByInvalidUrlThenReturnNull() {
-        assertNull(
-                this.dao.getByUrl(null)
-        );
-        assertNull(
-                this.dao.getByUrl(ANY_STRING)
-        );
+        assertNull(this.dao.getByUrl(null));
+        assertNull(this.dao.getByUrl(ANY_STRING));
     }
 
     @Test
     public void whenGetByValidUrlThenReturnSomeContent() {
-        assertNotNull(
-                this.dao.getByUrl(URL)
-        );
+        assertNotNull(this.dao.getByUrl(URL));
     }
 
     @Ignore

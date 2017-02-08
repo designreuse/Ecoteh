@@ -15,10 +15,7 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenAddNullThenReturnNull() {
-        assertNull(
-                getDao().add(null)
-        );
-
+        assertNull(getDao().add(null));
     }
 
     @Test
@@ -44,9 +41,7 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenUpdateNullThenRetunrsNull() {
-        assertNull(
-                getDao().update(null)
-        );
+        assertNull(getDao().update(null));
     }
 
     @Test
@@ -61,71 +56,54 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenGetByInvalidIdThenReturnNull() {
-        assertNull(
-                getDao().get(null)
-        );
+        assertNull(getDao().get(null));
     }
 
     @Test
     public void whenGetByIdThenReturnSomeModel() {
-        assertNotNull(
-                getDao().get((E) ID)
-        );
+        assertNotNull(getDao().get((E) ID));
     }
 
     @Test
     public void whenGetAllThenReturnSomeModels() {
-        assertNotNull(
-                getDao().getAll()
-        );
+        assertNotNull(getDao().getAll());
     }
 
     @Test
     public void whenExistsByInvalidIdThenReturnsFalse() {
-        assertFalse(
-                getDao().exists(null)
-        );
+        assertFalse(getDao().exists(null));
     }
 
     @Test
     public void whenExistsByUnknownIdThenReturnFalse() {
         assertFalse(
-                getDao()
-                        .exists((E) UNKNOWN_ID)
+                getDao().exists((E) UNKNOWN_ID)
         );
     }
 
     @Test
     public void whenExistsByIdThenReturnTrue() {
         assertTrue(
-                getDao()
-                        .exists((E) ID)
+                getDao().exists((E) ID)
         );
         assertFalse(
-                getDao()
-                        .exists((E) UNKNOWN_ID)
+                getDao().exists((E) UNKNOWN_ID)
         );
     }
 
     @Test
     public void whenGetDaoThenReturnNotNull() {
-        assertNotNull(
-                getDao()
-        );
+        assertNotNull(getDao());
     }
 
     @Test
     public void whenGetObjectThenReturnNotNull() {
-        assertNotNull(
-                getObject()
-        );
+        assertNotNull(getObject());
     }
 
     @Test
     public void whenGetObjectsThenReturnNotEmptyCollection() {
-        assertFalse(
-                getObjects().isEmpty()
-        );
+        assertFalse(getObjects().isEmpty());
     }
 
     @Test
@@ -135,16 +113,12 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenRemoveByModelThenDoIt() {
-        getDao().remove(
-                getObject()
-        );
+        getDao().remove(getObject());
     }
 
     @Test
     public void whneRemoveByModelsThenDoIt() {
-        getDao().remove(
-                getObjects()
-        );
+        getDao().remove(getObjects());
     }
 
     @Ignore

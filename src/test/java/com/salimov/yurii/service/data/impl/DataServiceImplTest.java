@@ -16,16 +16,12 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenAddNullThenReturnsIt() {
-        assertNull(
-                getService().add(null)
-        );
+        assertNull(getService().add(null));
     }
 
     @Test
     public void whenAddInvalidModelThenReturnsIt() {
-        assertNull(
-                getService().add(null)
-        );
+        assertNull(getService().add(null));
         assertNotNull(
                 getService().add(
                         getInvalidObject()
@@ -55,9 +51,8 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     public void whenAddAllEmptyListThenReturnsEmptyCollection() {
         assertTrue(
                 getService()
-                        .addAll(
-                                new ArrayList<>()
-                        ).isEmpty()
+                        .addAll(new ArrayList<>())
+                        .isEmpty()
         );
     }
 
@@ -343,9 +338,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenRemoveByModelThenDoIt() {
-        getService().remove(
-                getObject()
-        );
+        getService().remove(getObject());
     }
 
     @Test
@@ -355,16 +348,12 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenRemoveByEmptyModelsThenDoNothing() {
-        getService().remove(
-                new ArrayList<>()
-        );
+        getService().remove(new ArrayList<>());
     }
 
     @Test
     public void whenRemoveByModelsThenDoIt() {
-        getService().remove(
-                getObjects()
-        );
+        getService().remove(getObjects());
     }
 
     @Test
@@ -374,30 +363,22 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenGetServiceThenReturnNotNull() {
-        assertNotNull(
-                getService()
-        );
+        assertNotNull(getService());
     }
 
     @Test
     public void whenGetObjectThenReturnNotNull() {
-        assertNotNull(
-                getObject()
-        );
+        assertNotNull(getObject());
     }
 
     @Test
     public void whenGetObjectsThenReturnNotEmptyCollecton() {
-        assertFalse(
-                getObjects().isEmpty()
-        );
+        assertFalse(getObjects().isEmpty());
     }
 
     @Test
     public void whenGetInvalidObjectThenReturnNotNull() {
-        assertNotNull(
-                getInvalidObject()
-        );
+        assertNotNull(getInvalidObject());
     }
 
     @Ignore

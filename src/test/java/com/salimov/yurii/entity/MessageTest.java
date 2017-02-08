@@ -77,21 +77,11 @@ public final class MessageTest extends ModelTest<Message> {
         assertNotNull(message.getPhone());
         assertNotNull(message.getSubject());
         assertNotNull(message.getText());
-        assertEquals(
-                message.getUsername(), NAME
-        );
-        assertEquals(
-                message.getEmail(), EMAIL
-        );
-        assertEquals(
-                message.getPhone(), PHONE
-        );
-        assertEquals(
-                message.getSubject(), ANY_STRING
-        );
-        assertEquals(
-                message.getText(), TEXT
-        );
+        assertEquals(message.getUsername(), NAME);
+        assertEquals(message.getEmail(), EMAIL);
+        assertEquals(message.getPhone(), PHONE);
+        assertEquals(message.getSubject(), ANY_STRING);
+        assertEquals(message.getText(), TEXT);
     }
 
     @Test
@@ -105,18 +95,10 @@ public final class MessageTest extends ModelTest<Message> {
         assertNotNull(message.getPhone());
         assertNotNull(message.getSubject());
         assertNotNull(message.getText());
-        assertEquals(
-                message.getUsername(), NAME
-        );
-        assertEquals(
-                message.getPhone(), PHONE
-        );
-        assertEquals(
-                message.getSubject(), ANY_STRING
-        );
-        assertEquals(
-                message.getText(), TEXT
-        );
+        assertEquals(message.getUsername(), NAME);
+        assertEquals(message.getPhone(), PHONE);
+        assertEquals(message.getSubject(), ANY_STRING);
+        assertEquals(message.getText(), TEXT);
     }
 
     @Test
@@ -140,68 +122,44 @@ public final class MessageTest extends ModelTest<Message> {
     public void equalsObjects() {
         final Message message1 = new Message();
         final Message message2 = new Message();
-        assertTrue(
-                message1.equals(message2)
-        );
+        assertTrue(message1.equals(message2));
         message1.setUsername(NAME);
         message2.setUsername(NAME);
-        assertTrue(
-                message1.equals(message2)
-        );
+        assertTrue(message1.equals(message2));
         message1.setEmail(EMAIL);
         message2.setEmail(EMAIL);
-        assertTrue(
-                message1.equals(message2)
-        );
+        assertTrue(message1.equals(message2));
         message1.setPhone(PHONE);
         message2.setPhone(PHONE);
-        assertTrue(
-                message1.equals(message2)
-        );
+        assertTrue(message1.equals(message2));
         message1.setSubject(ANY_STRING);
         message2.setSubject(ANY_STRING);
-        assertTrue(
-                message1.equals(message2)
-        );
+        assertTrue(message1.equals(message2));
         message1.setText(TEXT);
         message2.setText(TEXT);
-        assertTrue(
-                message1.equals(message2)
-        );
+        assertTrue(message1.equals(message2));
     }
 
     @Test
     public void hashCodeObject() {
         final Message message = new Message();
         int value = 0;
-        assertEquals(
-                message.hashCode(), value
-        );
+        assertEquals(message.hashCode(), value);
         message.setUsername(NAME);
         value += isNotBlank(message.getUsername()) ? message.getUsername().hashCode() : 0;
-        assertEquals(
-                message.hashCode(), value
-        );
+        assertEquals(message.hashCode(), value);
         message.setEmail(EMAIL);
         value += isNotBlank(message.getEmail()) ? message.getEmail().hashCode() : 0;
-        assertEquals(
-                message.hashCode(), value
-        );
+        assertEquals(message.hashCode(), value);
         message.setPhone(PHONE);
         value += isNotBlank(message.getPhone()) ? message.getPhone().hashCode() : 0;
-        assertEquals(
-                message.hashCode(), value
-        );
+        assertEquals(message.hashCode(), value);
         message.setSubject(ANY_STRING);
         value += isNotBlank(message.getSubject()) ? message.getSubject().hashCode() : 0;
-        assertEquals(
-                message.hashCode(), value
-        );
+        assertEquals(message.hashCode(), value);
         message.setText(TEXT);
         value += isNotBlank(message.getText()) ? message.getText().hashCode() : 0;
-        assertEquals(
-                message.hashCode(), value
-        );
+        assertEquals(message.hashCode(), value);
     }
 
     @Test
@@ -265,21 +223,11 @@ public final class MessageTest extends ModelTest<Message> {
         assertNotNull(message.getSubject());
         assertNotNull(message.getText());
         assertNotNull(message.getDate());
-        assertEquals(
-                message.getUsername(), NAME
-        );
-        assertEquals(
-                message.getEmail(), EMAIL
-        );
-        assertEquals(
-                message.getPhone(), PHONE
-        );
-        assertEquals(
-                message.getSubject(), ANY_STRING
-        );
-        assertEquals(
-                message.getText(), TEXT
-        );
+        assertEquals(message.getUsername(), NAME);
+        assertEquals(message.getEmail(), EMAIL);
+        assertEquals(message.getPhone(), PHONE);
+        assertEquals(message.getSubject(), ANY_STRING);
+        assertEquals(message.getText(), TEXT);
     }
 
     @Test

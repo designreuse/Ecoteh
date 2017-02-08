@@ -83,24 +83,12 @@ public final class MockDao {
                 new Article(),
                 articles
         );
-        when(
-                articleDao.getByNumber(NUMBER)
-        ).thenReturn(article);
-        when(
-                articleDao.getByNumber(null)
-        ).thenReturn(null);
-        when(
-                articleDao.getByNumber(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                articleDao.getByCategoryId(ID)
-        ).thenReturn(articles);
-        when(
-                articleDao.getByCategoryId(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                articleDao.getByCategoryId(null)
-        ).thenReturn(null);
+        when(articleDao.getByNumber(NUMBER)).thenReturn(article);
+        when(articleDao.getByNumber(null)).thenReturn(null);
+        when(articleDao.getByNumber(ANY_STRING)).thenReturn(null);
+        when(articleDao.getByCategoryId(ID)).thenReturn(articles);
+        when(articleDao.getByCategoryId(UNKNOWN_ID)).thenReturn(null);
+        when(articleDao.getByCategoryId(null)).thenReturn(null);
     }
 
     private static void initCategoryDao() {
@@ -122,15 +110,9 @@ public final class MockDao {
                 new Company(),
                 companies
         );
-        when(
-                companyDao.getByType(CompanyType.PARTNER)
-        ).thenReturn(companies);
-        when(
-                companyDao.getByType(CompanyType.MAIN)
-        ).thenReturn(companies);
-        when(
-                companyDao.getByType(null)
-        ).thenReturn(null);
+        when(companyDao.getByType(CompanyType.PARTNER)).thenReturn(companies);
+        when(companyDao.getByType(CompanyType.MAIN)).thenReturn(companies);
+        when(companyDao.getByType(null)).thenReturn(null);
     }
 
     private static void initFileDao() {
@@ -142,27 +124,13 @@ public final class MockDao {
                 new File(),
                 getFiles()
         );
-        when(
-                fileDao.getByTitle(TITLE)
-        ).thenReturn(file);
-        when(
-                fileDao.getByTitle(TITLE)
-        ).thenReturn(file);
-        when(
-                fileDao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                fileDao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                fileDao.getByUrl(URL)
-        ).thenReturn(file);
-        when(
-                fileDao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                fileDao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
+        when(fileDao.getByTitle(TITLE)).thenReturn(file);
+        when(fileDao.getByTitle(TITLE)).thenReturn(file);
+        when(fileDao.getByTitle(null)).thenReturn(null);
+        when(fileDao.getByTitle(ANY_STRING)).thenReturn(null);
+        when(fileDao.getByUrl(URL)).thenReturn(file);
+        when(fileDao.getByUrl(null)).thenReturn(null);
+        when(fileDao.getByUrl(ANY_STRING)).thenReturn(null);
     }
 
     private static void initMessageDao() {
@@ -193,51 +161,21 @@ public final class MockDao {
                 new User(),
                 getUsers()
         );
-        when(
-                userDao.getByName(NAME)
-        ).thenReturn(user);
-        when(
-                userDao.getByName(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userDao.getByName(null)
-        ).thenReturn(null);
-        when(
-                userDao.getByUrl(URL)
-        ).thenReturn(user);
-        when(
-                userDao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userDao.getByUrl(null)
-        ).thenReturn(null);
-        when(
-                userDao.getByLogin(LOGIN)
-        ).thenReturn(user);
-        when(
-                userDao.getByLogin(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userDao.getByLogin(null)
-        ).thenReturn(null);
-        when(
-                userDao.getByPhone(PHONE)
-        ).thenReturn(user);
-        when(
-                userDao.getByPhone(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userDao.getByPhone(null)
-        ).thenReturn(null);
-        when(
-                userDao.getByEmail(EMAIL)
-        ).thenReturn(user);
-        when(
-                userDao.getByEmail(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                userDao.getByEmail(null)
-        ).thenReturn(null);
+        when(userDao.getByName(NAME)).thenReturn(user);
+        when(userDao.getByName(ANY_STRING)).thenReturn(null);
+        when(userDao.getByName(null)).thenReturn(null);
+        when(userDao.getByUrl(URL)).thenReturn(user);
+        when(userDao.getByUrl(ANY_STRING)).thenReturn(null);
+        when(userDao.getByUrl(null)).thenReturn(null);
+        when(userDao.getByLogin(LOGIN)).thenReturn(user);
+        when(userDao.getByLogin(ANY_STRING)).thenReturn(null);
+        when(userDao.getByLogin(null)).thenReturn(null);
+        when(userDao.getByPhone(PHONE)).thenReturn(user);
+        when(userDao.getByPhone(ANY_STRING)).thenReturn(null);
+        when(userDao.getByPhone(null)).thenReturn(null);
+        when(userDao.getByEmail(EMAIL)).thenReturn(user);
+        when(userDao.getByEmail(ANY_STRING)).thenReturn(null);
+        when(userDao.getByEmail(null)).thenReturn(null);
     }
 
     private static <T extends Content<Long>, E extends ContentDao<T, Long>> void contentDao(
@@ -252,24 +190,12 @@ public final class MockDao {
                 emptyContent,
                 contents
         );
-        when(
-                dao.getByTitle(TITLE)
-        ).thenReturn(content);
-        when(
-                dao.getByTitle(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByTitle(null)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(URL)
-        ).thenReturn(content);
-        when(
-                dao.getByUrl(ANY_STRING)
-        ).thenReturn(null);
-        when(
-                dao.getByUrl(null)
-        ).thenReturn(null);
+        when(dao.getByTitle(TITLE)).thenReturn(content);
+        when(dao.getByTitle(ANY_STRING)).thenReturn(null);
+        when(dao.getByTitle(null)).thenReturn(null);
+        when(dao.getByUrl(URL)).thenReturn(content);
+        when(dao.getByUrl(ANY_STRING)).thenReturn(null);
+        when(dao.getByUrl(null)).thenReturn(null);
     }
 
     private static <T extends Model<Long>, E extends DataDao<T, Long>> void dataDao(
@@ -278,50 +204,20 @@ public final class MockDao {
             final T emptyModel,
             final Collection<T> models
     ) {
-        when(
-                dao.add(model)
-        ).thenReturn(model);
-        when(
-                dao.add(emptyModel)
-        ).thenReturn(emptyModel);
-        when(
-                dao.add(null)
-        ).thenReturn(null);
-        when(
-                dao.addAll(models)
-        ).thenReturn(models);
-        when(
-                dao.addAll(null)
-        ).thenReturn(null);
-        when(
-                dao.update(model)
-        ).thenReturn(model);
-        when(
-                dao.update(emptyModel)
-        ).thenReturn(emptyModel);
-        when(
-                dao.update(null)
-        ).thenReturn(null);
-        when(
-                dao.get(ID)
-        ).thenReturn(model);
-        when(
-                dao.get(UNKNOWN_ID)
-        ).thenReturn(null);
-        when(
-                dao.get(null)
-        ).thenReturn(null);
-        when(
-                dao.getAll()
-        ).thenReturn(models);
-        when(
-                dao.exists(ID)
-        ).thenReturn(true);
-        when(
-                dao.exists(UNKNOWN_ID)
-        ).thenReturn(false);
-        when(
-                dao.exists(null)
-        ).thenReturn(false);
+        when(dao.add(model)).thenReturn(model);
+        when(dao.add(emptyModel)).thenReturn(emptyModel);
+        when(dao.add(null)).thenReturn(null);
+        when(dao.addAll(models)).thenReturn(models);
+        when(dao.addAll(null)).thenReturn(null);
+        when(dao.update(model)).thenReturn(model);
+        when(dao.update(emptyModel)).thenReturn(emptyModel);
+        when(dao.update(null)).thenReturn(null);
+        when(dao.get(ID)).thenReturn(model);
+        when(dao.get(UNKNOWN_ID)).thenReturn(null);
+        when(dao.get(null)).thenReturn(null);
+        when(dao.getAll()).thenReturn(models);
+        when(dao.exists(ID)).thenReturn(true);
+        when(dao.exists(UNKNOWN_ID)).thenReturn(false);
+        when(dao.exists(null)).thenReturn(false);
     }
 }

@@ -55,16 +55,12 @@ public final class MockCompanyServiceTest
 
     @Test
     public void whenGetMainCompanyThenReturnSomeCompany() {
-        assertNotNull(
-                this.service.getMainCompany()
-        );
+        assertNotNull(this.service.getMainCompany());
     }
 
     @Test
     public void whenGetPartnersThenReturnSomeCompanies() {
-        assertNotNull(
-                this.service.getPartners(true)
-        );
+        assertNotNull(this.service.getPartners(true));
     }
 
     @Ignore

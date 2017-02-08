@@ -73,22 +73,14 @@ public final class MockArticleServiceTest
 
     @Test
     public void whenGetAndSortedArticlesByNumberThenReturnThisSortCollection() {
-        assertNotNull(
-                this.service.getAndSortByNumber(false)
-        );
-        assertNotNull(
-                this.service.getAndSortByNumber(true)
-        );
+        assertNotNull(this.service.getAndSortByNumber(false));
+        assertNotNull(this.service.getAndSortByNumber(true));
     }
 
     @Test
     public void whenGetAndSortedArticlesByDateThenReturnThisSortCollection() {
-        assertNotNull(
-                this.service.getAndSortByDate(false)
-        );
-        assertNotNull(
-                this.service.getAndSortByDate(true)
-        );
+        assertNotNull(this.service.getAndSortByDate(false));
+        assertNotNull(this.service.getAndSortByDate(true));
     }
 
     @Test
@@ -123,9 +115,7 @@ public final class MockArticleServiceTest
 
     @Test
     public void whenGetAndFilteredArticlesByDateThenReturnThisFilterCollection() {
-        assertNotNull(
-                this.service.getAndFilterByDate(DATE, DATE)
-        );
+        assertNotNull(this.service.getAndFilterByDate(DATE, DATE));
     }
 
     @Test

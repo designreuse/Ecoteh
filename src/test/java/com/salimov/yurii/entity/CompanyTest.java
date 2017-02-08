@@ -161,82 +161,25 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getGoogleMaps());
         assertNotNull(company.getLogoUrl());
         assertNotNull(company.getFaviconUrl());
-        assertEquals(
-                company.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                company.getDomain(),
-                DOMAIN
-        );
-        assertEquals(
-                company.getTagline(),
-                TAGLINE
-        );
-        assertEquals(
-                company.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                company.getInformation(),
-                INFORMATION
-        );
-        assertEquals(
-                company.getLandlinePhone(),
-                PHONE
-        );
-        assertEquals(
-                company.getMobilePhone(),
-                PHONE
-        );
-        assertEquals(
-                company.getEmail(),
-                EMAIL
-        );
-        assertEquals(
-                company.getSenderEmail(),
-                EMAIL
-        );
-        assertEquals(
-                company.getSenderPass(),
-                PASSWORD
-        );
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        assertEquals(
-                company.getSkype(),
-                SKYPE
-        );
-        assertEquals(
-                company.getAddress(),
-                ADDRESS
-        );
-        assertEquals(
-                company.getKeywords(),
-                KEYWORDS
-        );
-        assertEquals(
-                company.getGoogleMaps(),
-                GOOGLE_MAPS
-        );
-        assertEquals(
-                company.getLogoUrl(),
-                PHOTO_URL
-        );
-        assertEquals(
-                company.getFaviconUrl(),
-                PHOTO_URL
-        );
+        assertEquals(company.getTitle(), TITLE);
+        assertEquals(company.getDomain(), DOMAIN);
+        assertEquals(company.getTagline(), TAGLINE);
+        assertEquals(company.getDescription(), DESCRIPTION);
+        assertEquals(company.getInformation(), INFORMATION);
+        assertEquals(company.getLandlinePhone(), PHONE);
+        assertEquals(company.getMobilePhone(), PHONE);
+        assertEquals(company.getEmail(), EMAIL);
+        assertEquals(company.getSenderEmail(), EMAIL);
+        assertEquals(company.getSenderPass(), PASSWORD);
+        assertEquals(company.getVkontakte(), VKONTAKTE);
+        assertEquals(company.getFacebook(), FACEBOOK);
+        assertEquals(company.getTwitter(), TWITTER);
+        assertEquals(company.getSkype(), SKYPE);
+        assertEquals(company.getAddress(), ADDRESS);
+        assertEquals(company.getKeywords(), KEYWORDS);
+        assertEquals(company.getGoogleMaps(), GOOGLE_MAPS);
+        assertEquals(company.getLogoUrl(), PHOTO_URL);
+        assertEquals(company.getFaviconUrl(), PHOTO_URL);
     }
 
     @Test
@@ -266,58 +209,36 @@ public final class CompanyTest extends ContentTest<Company> {
     public void equalsInvalidObjects() {
         final Company company1 = new Company();
         company1.setType(null);
+        assertTrue(company1.equals(company1));
+        assertFalse(company1.equals(null));
 
-        assertTrue(
-                company1.equals(company1)
-        );
-        assertFalse(
-                company1.equals(null)
-        );
-        Company company2 = new Company();
+        final Company company2 = new Company();
         company2.setType(null);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setTitle(TITLE);
         company2.setTitle(TITLE);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setUrl(URL);
         company2.setUrl(URL);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setType(CompanyType.PARTNER);
         company2.setType(CompanyType.PARTNER);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setDomain(DOMAIN);
         company2.setDomain(DOMAIN);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setTagline(TAGLINE);
         company2.setTagline(TAGLINE);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setDescription(DESCRIPTION);
         company2.setDescription(DESCRIPTION);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setInformation(INFORMATION);
         company2.setInformation(INFORMATION);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
         company1.setAddress(ADDRESS);
         company2.setAddress(ADDRESS);
-        assertTrue(
-                company1.equals(company2)
-        );
+        assertTrue(company1.equals(company2));
     }
 
     @Test
@@ -370,50 +291,29 @@ public final class CompanyTest extends ContentTest<Company> {
     public void hashCodeInvalidObject() {
         final Company company = new Company();
         int value = company.getType() != null ? company.getType().hashCode() : 0;
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
         company.setTitle(TITLE);
         value += (
                 isNotBlank(company.getTitle()) ? company.getTitle().hashCode() : 0
         ) + (
                 isNotBlank(company.getUrl()) ? company.getUrl().hashCode() : 0
         );
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
         company.setDomain(DOMAIN);
         value += isNotBlank(company.getDomain()) ? company.getDomain().hashCode() : 0;
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
         company.setTagline(TAGLINE);
         value += isNotBlank(company.getTagline()) ? company.getTagline().hashCode() : 0;
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
         company.setDescription(DESCRIPTION);
         value += isNotBlank(company.getDescription()) ? company.getDescription().hashCode() : 0;
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
         company.setInformation(INFORMATION);
         value += isNotBlank(company.getInformation()) ? company.getInformation().hashCode() : 0;
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
         company.setAddress(ADDRESS);
         value += isNotBlank(company.getAddress()) ? company.getAddress().hashCode() : 0;
-        assertEquals(
-                company.hashCode(),
-                value
-        );
+        assertEquals(company.hashCode(), value);
     }
 
     @Test
@@ -438,10 +338,7 @@ public final class CompanyTest extends ContentTest<Company> {
                 isNotBlank(company.getAddress()) ? company.getAddress().hashCode() : 0
         );
         for (int i = 0; i < 10; i++) {
-            assertEquals(
-                    company.hashCode(),
-                    value
-            );
+            assertEquals(company.hashCode(), value);
         }
     }
 
@@ -596,82 +493,25 @@ public final class CompanyTest extends ContentTest<Company> {
         assertNotNull(company.getGoogleMaps());
         assertNotNull(company.getLogoUrl());
         assertNotNull(company.getFaviconUrl());
-        assertEquals(
-                company.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                company.getDomain(),
-                DOMAIN
-        );
-        assertEquals(
-                company.getTagline(),
-                TAGLINE
-        );
-        assertEquals(
-                company.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                company.getInformation(),
-                INFORMATION
-        );
-        assertEquals(
-                company.getLandlinePhone(),
-                PHONE
-        );
-        assertEquals(
-                company.getMobilePhone(),
-                PHONE
-        );
-        assertEquals(
-                company.getEmail(),
-                EMAIL
-        );
-        assertEquals(
-                company.getSenderEmail(),
-                EMAIL
-        );
-        assertEquals(
-                company.getSenderPass(),
-                PASSWORD
-        );
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        assertEquals(
-                company.getSkype(),
-                SKYPE
-        );
-        assertEquals(
-                company.getAddress(),
-                ADDRESS
-        );
-        assertEquals(
-                company.getKeywords(),
-                KEYWORDS
-        );
-        assertEquals(
-                company.getGoogleMaps(),
-                GOOGLE_MAPS
-        );
-        assertEquals(
-                company.getLogoUrl(),
-                PHOTO_URL
-        );
-        assertEquals(
-                company.getFaviconUrl(),
-                PHOTO_URL
-        );
+        assertEquals(company.getTitle(), TITLE);
+        assertEquals(company.getDomain(), DOMAIN);
+        assertEquals(company.getTagline(), TAGLINE);
+        assertEquals(company.getDescription(), DESCRIPTION);
+        assertEquals(company.getInformation(), INFORMATION);
+        assertEquals(company.getLandlinePhone(), PHONE);
+        assertEquals(company.getMobilePhone(), PHONE);
+        assertEquals(company.getEmail(), EMAIL);
+        assertEquals(company.getSenderEmail(), EMAIL);
+        assertEquals(company.getSenderPass(), PASSWORD);
+        assertEquals(company.getVkontakte(), VKONTAKTE);
+        assertEquals(company.getFacebook(), FACEBOOK);
+        assertEquals(company.getTwitter(), TWITTER);
+        assertEquals(company.getSkype(), SKYPE);
+        assertEquals(company.getAddress(), ADDRESS);
+        assertEquals(company.getKeywords(), KEYWORDS);
+        assertEquals(company.getGoogleMaps(), GOOGLE_MAPS);
+        assertEquals(company.getLogoUrl(), PHOTO_URL);
+        assertEquals(company.getFaviconUrl(), PHOTO_URL);
     }
 
     @Test
@@ -692,22 +532,13 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setDomain(DOMAIN);
         assertNotNull(company.getDomain());
-        assertEquals(
-                company.getDomain(),
-                DOMAIN
-        );
+        assertEquals(company.getDomain(), DOMAIN);
         company.setDomain("http://" + DOMAIN);
         assertNotNull(company.getDomain());
-        assertEquals(
-                company.getDomain(),
-                DOMAIN
-        );
+        assertEquals(company.getDomain(), DOMAIN);
         company.setDomain("https://" + DOMAIN);
         assertNotNull(company.getDomain());
-        assertEquals(
-                company.getDomain(),
-                DOMAIN
-        );
+        assertEquals(company.getDomain(), DOMAIN);
     }
 
     @Test
@@ -728,10 +559,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setTagline(TAGLINE);
         assertNotNull(company.getTagline());
-        assertEquals(
-                company.getTagline(),
-                TAGLINE
-        );
+        assertEquals(company.getTagline(), TAGLINE);
     }
 
     @Test
@@ -752,10 +580,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setInformation(INFORMATION);
         assertNotNull(company.getInformation());
-        assertEquals(
-                company.getInformation(),
-                INFORMATION
-        );
+        assertEquals(company.getInformation(), INFORMATION);
     }
 
     @Test
@@ -776,10 +601,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setEmail(EMAIL);
         assertNotNull(company.getEmail());
-        assertEquals(
-                company.getEmail(),
-                EMAIL
-        );
+        assertEquals(company.getEmail(), EMAIL);
     }
 
     @Test
@@ -800,10 +622,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setSenderEmail(EMAIL);
         assertNotNull(company.getSenderEmail());
-        assertEquals(
-                company.getSenderEmail(),
-                EMAIL
-        );
+        assertEquals(company.getSenderEmail(), EMAIL);
     }
 
     @Test
@@ -824,10 +643,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setSenderPass(PASSWORD);
         assertNotNull(company.getSenderPass());
-        assertEquals(
-                company.getSenderPass(),
-                PASSWORD
-        );
+        assertEquals(company.getSenderPass(), PASSWORD);
     }
 
     @Test
@@ -848,10 +664,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setLandlinePhone(PHONE);
         assertNotNull(company.getLandlinePhone());
-        assertEquals(
-                company.getLandlinePhone(),
-                PHONE
-        );
+        assertEquals(company.getLandlinePhone(), PHONE);
     }
 
     @Test
@@ -872,10 +685,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setLandlinePhone(PHONE);
         assertNotNull(company.getLandlinePhone());
-        assertEquals(
-                company.getLandlinePhone(),
-                PHONE
-        );
+        assertEquals(company.getLandlinePhone(), PHONE);
     }
 
     @Test
@@ -896,10 +706,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setFax(PHONE);
         assertNotNull(company.getFax());
-        assertEquals(
-                company.getFax(),
-                PHONE
-        );
+        assertEquals(company.getFax(), PHONE);
     }
 
     @Test
@@ -920,50 +727,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setVkontakte(VKONTAKTE);
         assertNotNull(company.getVkontakte());
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("http://" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("https://" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("m.vk.com" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("vk.com" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("http://m.vk.com" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("https://m.vk.com" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("http://vk.com" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
-        company.setVkontakte("https://vk.com" + VKONTAKTE);
-        assertEquals(
-                company.getVkontakte(),
-                VKONTAKTE
-        );
+        assertEquals(company.getVkontakte(), VKONTAKTE);
     }
 
     @Test
@@ -984,50 +748,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setFacebook(FACEBOOK);
         assertNotNull(company.getFacebook());
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("http://" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("https://" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("m.facebook.com" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("www.facebook.com" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("http://m.facebook.com" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("https://m.facebook.com" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("http://www.facebook.com" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
-        company.setFacebook("https://www.facebook.com" + FACEBOOK);
-        assertEquals(
-                company.getFacebook(),
-                FACEBOOK
-        );
+        assertEquals(company.getFacebook(), FACEBOOK);
     }
 
     @Test
@@ -1048,50 +769,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setTwitter(TWITTER);
         assertNotNull(company.getTwitter());
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("http://" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("https://" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("mobile.TWITTER.com" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("TWITTER.com" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("http://mobile.TWITTER.com" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("https://mobile.TWITTER.com" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("http://TWITTER.com" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
-        company.setTwitter("https://TWITTER.com" + TWITTER);
-        assertEquals(
-                company.getTwitter(),
-                TWITTER
-        );
+        assertEquals(company.getTwitter(), TWITTER);
     }
 
     @Test
@@ -1112,10 +790,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setSkype(SKYPE);
         assertNotNull(company.getSkype());
-        assertEquals(
-                company.getSkype(),
-                SKYPE
-        );
+        assertEquals(company.getSkype(), SKYPE);
     }
 
     @Test
@@ -1136,10 +811,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setAddress(ADDRESS);
         assertNotNull(company.getAddress());
-        assertEquals(
-                company.getAddress(),
-                ADDRESS
-        );
+        assertEquals(company.getAddress(), ADDRESS);
     }
 
     @Test
@@ -1147,40 +819,22 @@ public final class CompanyTest extends ContentTest<Company> {
         Company company = getCompany();
         company.setWorkTimeFrom(null);
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:00");
         company.setWorkTimeFrom("");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:00");
         company.setWorkTimeFrom(" ");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:00");
         company.setWorkTimeFrom("  ");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:00");
         company.setWorkTimeFrom(ANY_STRING);
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:00");
         company.setWorkTimeFrom("-5620:0.5550");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:00");
     }
 
     @Test
@@ -1188,46 +842,25 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setWorkTimeFrom(TIME);
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                TIME
-        );
+        assertEquals(company.getWorkTimeFrom(), TIME);
         company.setWorkTimeFrom("25:30");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:30"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:30");
         company.setWorkTimeFrom("-25:30");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:30"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:30");
         company.setWorkTimeFrom("25:130");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:10"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:10");
         company.setWorkTimeFrom("-25:130");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "00:10"
-        );
+        assertEquals(company.getWorkTimeFrom(), "00:10");
         company.setWorkTimeFrom("25:-130");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "23:00"
-        );
+        assertEquals(company.getWorkTimeFrom(), "23:00");
         company.setWorkTimeFrom("14:35");
         assertNotNull(company.getWorkTimeFrom());
-        assertEquals(
-                company.getWorkTimeFrom(),
-                "14:35"
-        );
+        assertEquals(company.getWorkTimeFrom(), "14:35");
     }
 
     @Test
@@ -1235,40 +868,22 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setWorkTimeTo(null);
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:00");
         company.setWorkTimeTo("");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:00");
         company.setWorkTimeTo(" ");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:00");
         company.setWorkTimeTo("  ");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:00");
         company.setWorkTimeTo(ANY_STRING);
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:00");
         company.setWorkTimeTo("-5620:0.5550");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:00");
     }
 
     @Test
@@ -1276,46 +891,25 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setWorkTimeTo(TIME);
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                TIME
-        );
+        assertEquals(company.getWorkTimeTo(), TIME);
         company.setWorkTimeTo("25:30");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:30"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:30");
         company.setWorkTimeTo("-25:30");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:30"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:30");
         company.setWorkTimeTo("25:130");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:10"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:10");
         company.setWorkTimeTo("-25:130");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "00:10"
-        );
+        assertEquals(company.getWorkTimeTo(), "00:10");
         company.setWorkTimeTo("25:-130");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "23:00"
-        );
+        assertEquals(company.getWorkTimeTo(), "23:00");
         company.setWorkTimeTo("14:35");
         assertNotNull(company.getWorkTimeTo());
-        assertEquals(
-                company.getWorkTimeTo(),
-                "14:35"
-        );
+        assertEquals(company.getWorkTimeTo(), "14:35");
     }
 
     @Test
@@ -1336,10 +930,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setGoogleMaps(GOOGLE_MAPS);
         assertNotNull(company.getGoogleMaps());
-        assertEquals(
-                company.getGoogleMaps(),
-                GOOGLE_MAPS
-        );
+        assertEquals(company.getGoogleMaps(), GOOGLE_MAPS);
     }
 
     @Test
@@ -1356,10 +947,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setLogoUrl(PHOTO_URL);
         assertNotNull(company.getLogoUrl());
-        assertEquals(
-                company.getLogoUrl(),
-                PHOTO_URL
-        );
+        assertEquals(company.getLogoUrl(), PHOTO_URL);
     }
 
     @Test
@@ -1376,10 +964,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setFaviconUrl(PHOTO_URL);
         assertNotNull(company.getFaviconUrl());
-        assertEquals(
-                company.getFaviconUrl(),
-                PHOTO_URL
-        );
+        assertEquals(company.getFaviconUrl(), PHOTO_URL);
     }
 
     @Test
@@ -1389,28 +974,14 @@ public final class CompanyTest extends ContentTest<Company> {
         assertTrue(company.getSlides().isEmpty());
         final List<File> files = new ArrayList<>();
         addInvalidSlides(10, company, files);
-        assertTrue(
-                company.getSlides().isEmpty()
-        );
+        assertTrue(company.getSlides().isEmpty());
         company.setSlides(" ");
-        assertTrue(
-                isBlank(
-                        company.getSlides()
-                )
-        );
+        assertTrue(isBlank(company.getSlides()));
         company.getSlidesList().forEach(System.out::println);
-        assertTrue(
-                company.getSlidesList().isEmpty()
-        );
+        assertTrue(company.getSlidesList().isEmpty());
         company.addSlides(new String[]{" "});
-        assertTrue(
-                isBlank(
-                        company.getSlides()
-                )
-        );
-        assertTrue(
-                company.getSlidesList().isEmpty()
-        );
+        assertTrue(isBlank(company.getSlides()));
+        assertTrue(company.getSlidesList().isEmpty());
     }
 
     @Test
@@ -1420,45 +991,29 @@ public final class CompanyTest extends ContentTest<Company> {
         final List<String> slides = new ArrayList<>();
         slides.add(PHOTO_URL);
         company.addSlides(slides);
-        assertTrue(
-                isNotBlank(
-                        company.getSlides()
-                )
-        );
+        assertTrue(isNotBlank(company.getSlides()));
         assertEquals(
                 company.getSlidesList().size(),
                 slides.size()
         );
         company.clearSlides();
-        assertTrue(
-                company.getSlides().isEmpty()
-        );
+        assertTrue(company.getSlides().isEmpty());
         for (int i = 0; i < slides.size(); i++) {
             company.addSlides(slides);
         }
-        assertFalse(
-                company.getSlides().isEmpty()
-        );
+        assertFalse(company.getSlides().isEmpty());
         assertEquals(
                 company.getSlidesList().size(),
                 slides.size()
         );
         company.removeSlides(slides);
-        assertTrue(
-                company.getSlides().isEmpty()
-        );
+        assertTrue(company.getSlides().isEmpty());
         company.addSlides(slides);
-        assertTrue(
-                company.containsSlides(slides)
-        );
+        assertTrue(company.containsSlides(slides));
         for (String slide : slides) {
-            assertTrue(
-                    company.containsSlide(slide)
-            );
+            assertTrue(company.containsSlide(slide));
             company.removeSlide(slide);
-            assertFalse(
-                    company.containsSlide(slide)
-            );
+            assertFalse(company.containsSlide(slide));
         }
     }
 
@@ -1474,10 +1029,7 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company company = getCompany();
         company.setType(COMPANY_TYPE);
         assertNotNull(company.getType());
-        assertEquals(
-                company.getType(),
-                COMPANY_TYPE
-        );
+        assertEquals(company.getType(), COMPANY_TYPE);
     }
 
     @Test
@@ -1522,9 +1074,7 @@ public final class CompanyTest extends ContentTest<Company> {
         );
         company.setUrl(null);
         assertNotNull(company.getUrl());
-        assertEquals(
-                company.getUrl(), url
-        );
+        assertEquals(company.getUrl(), url);
     }
 
     @Test
@@ -1535,19 +1085,13 @@ public final class CompanyTest extends ContentTest<Company> {
         );
         company.setUrl("");
         assertNotNull(company.getUrl());
-        assertEquals(
-                company.getUrl(), url
-        );
+        assertEquals(company.getUrl(), url);
         company.setUrl(" ");
         assertNotNull(company.getUrl());
-        assertEquals(
-                company.getUrl(), url
-        );
+        assertEquals(company.getUrl(), url);
         company.setUrl("   ");
         assertNotNull(company.getUrl());
-        assertEquals(
-                company.getUrl(), url
-        );
+        assertEquals(company.getUrl(), url);
     }
 
     @Test

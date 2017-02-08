@@ -22,10 +22,7 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
                 + "\"\nKeywords: " + content.getKeywords()
                 + "\nURL: " + content.getUrl()
                 + "\nDescription: " + content.getDescription();
-        assertEquals(
-                content.toString(),
-                value
-        );
+        assertEquals(content.toString(), value);
     }
 
     @Test
@@ -48,10 +45,7 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
                                         content2.getUrl()
                                 ) : isBlank(content2.getUrl())
         );
-        assertEquals(
-                content1.equals(content2),
-                value
-        );
+        assertEquals(content1.equals(content2), value);
     }
 
     @Test
@@ -114,18 +108,9 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
         assertNotNull(content.getTitle());
         assertNotNull(content.getDescription());
         assertNotNull(content.getKeywords());
-        assertEquals(
-                content.getTitle(),
-                TITLE
-        );
-        assertEquals(
-                content.getDescription(),
-                DESCRIPTION
-        );
-        assertEquals(
-                content.getKeywords(),
-                KEYWORDS
-        );
+        assertEquals(content.getTitle(), TITLE);
+        assertEquals(content.getDescription(), DESCRIPTION);
+        assertEquals(content.getKeywords(), KEYWORDS);
     }
 
     @Test
@@ -165,10 +150,7 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
         content.setTitle(TITLE);
         assertNotNull(content.getTitle());
         assertNotNull(content.getUrl());
-        assertEquals(
-                content.getTitle(),
-                TITLE
-        );
+        assertEquals(content.getTitle(), TITLE);
         assertEquals(
                 content.getUrl(),
                 Translator.fromCyrillicToLatin(TITLE)
@@ -234,10 +216,7 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
         final T content = getObject();
         content.setDescription(DESCRIPTION);
         assertNotNull(content.getDescription());
-        Assert.assertEquals(
-                content.getDescription(),
-                DESCRIPTION
-        );
+        Assert.assertEquals(content.getDescription(), DESCRIPTION);
     }
 
     @Test
@@ -263,10 +242,7 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
         final T content = getObject();
         content.setKeywords(KEYWORDS);
         assertNotNull(content.getKeywords());
-        Assert.assertEquals(
-                content.getKeywords(),
-                KEYWORDS
-        );
+        Assert.assertEquals(content.getKeywords(), KEYWORDS);
     }
 
     @Test

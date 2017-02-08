@@ -9,16 +9,12 @@ public class DisableExceptionTest extends ExceptionTest {
 
     @Test
     public void disableExceptionConstructor_1() throws Exception {
-        checkException(
-                new DisableException(), ""
-        );
+        checkException(new DisableException(), "");
     }
 
     @Test
     public void disableExceptionConstructor_2() throws Exception {
-        checkException(
-                new DisableException(TEXT), TEXT
-        );
+        checkException(new DisableException(TEXT), TEXT);
     }
 
     @Test

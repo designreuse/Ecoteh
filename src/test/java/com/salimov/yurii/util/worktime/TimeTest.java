@@ -13,23 +13,15 @@ public final class TimeTest {
     @Test
     public void whenInitNotBlankTimeTimeThenGetNotBlankTime() {
         final Time time = new Time(TIME);
-        assertNotNull(
-                time.getTime()
-        );
-        assertTrue(
-                time.isNotBlankTime()
-        );
+        assertNotNull(time.getTime());
+        assertTrue(time.isNotBlankTime());
     }
 
     @Test
     public void whenInitNullTimeTimeThenGetNull() {
         final Time time = new Time(null);
-        assertNull(
-                time.getTime()
-        );
-        assertFalse(
-                time.isNotBlankTime()
-        );
+        assertNull(time.getTime());
+        assertFalse(time.isNotBlankTime());
     }
 
     @Test
@@ -54,78 +46,39 @@ public final class TimeTest {
                 new Time(TIME).getCorrectTime(),
                 TIME
         );
-        assertNotNull(
-                new Time("-12:00").getCorrectTime()
-        );
-        assertNotNull(
-                new Time("435:234").getCorrectTime()
-        );
-        assertNotNull(
-                new Time("435:-234").getCorrectTime()
-        );
-        assertNotNull(
-                new Time("8:4").getCorrectTime()
-        );
-        assertNotNull(
-                new Time("08:04").getCorrectTime()
-        );
+        assertNotNull(new Time("-12:00").getCorrectTime());
+        assertNotNull(new Time("435:234").getCorrectTime());
+        assertNotNull(new Time("435:-234").getCorrectTime());
+        assertNotNull(new Time("8:4").getCorrectTime());
+        assertNotNull(new Time("08:04").getCorrectTime());
     }
 
     @Test
     public void whenSetInvalidTimeThenGetZeroHours() {
-        assertTrue(
-                new Time(null).getHours() == 0
-        );
-        assertTrue(
-                new Time(ANY_STRING).getHours() == 0
-        );
-        assertTrue(
-                new Time("121:00").getHours() == 0
-        );
-        assertTrue(
-                new Time("-12:00").getHours() == 0
-        );
+        assertTrue(new Time(null).getHours() == 0);
+        assertTrue(new Time(ANY_STRING).getHours() == 0);
+        assertTrue(new Time("121:00").getHours() == 0);
+        assertTrue(new Time("-12:00").getHours() == 0);
     }
 
     @Test
     public void whenSetTimeThenGetHours() {
-        assertEquals(
-                new Time("12:00").getHours(),
-                12
-        );
-        assertEquals(
-                new Time("12:65").getHours(),
-                13
-        );
+        assertEquals(new Time("12:00").getHours(), 12);
+        assertEquals(new Time("12:65").getHours(), 13);
     }
 
     @Test
     public void whenSetInvalidTimeThenGetZeroMinutes() {
-        assertTrue(
-                new Time(null).getMinutes() == 0
-        );
-        assertTrue(
-                new Time(ANY_STRING).getMinutes() == 0
-        );
-        assertTrue(
-                new Time("00:-65").getMinutes() == 0
-        );
+        assertTrue(new Time(null).getMinutes() == 0);
+        assertTrue(new Time(ANY_STRING).getMinutes() == 0);
+        assertTrue(new Time("00:-65").getMinutes() == 0);
     }
 
     @Test
     public void whenSetTimeThenGetMinutes() {
-        assertEquals(
-                new Time("00:32").getMinutes(),
-                32
-        );
-        assertEquals(
-                new Time("00:-32").getMinutes(),
-                0
-        );
-        assertEquals(
-                new Time("00:65").getMinutes(),
-                5
-        );
+        assertEquals(new Time("00:32").getMinutes(), 32);
+        assertEquals(new Time("00:-32").getMinutes(), 0);
+        assertEquals(new Time("00:65").getMinutes(), 5);
     }
 
     @Test
@@ -177,16 +130,12 @@ public final class TimeTest {
 
     @Test
     public void whenCheckNullStartDateThenReturnFalse() {
-        assertFalse(
-                Time.checkDate(null, new Date())
-        );
+        assertFalse(Time.checkDate(null, new Date()));
     }
 
     @Test
     public void whenCheckNullFinishDateThenReturnFalse() {
-        assertFalse(
-                Time.checkDate(new Date(), null)
-        );
+        assertFalse(Time.checkDate(new Date(), null));
     }
 
     @Test
@@ -198,9 +147,7 @@ public final class TimeTest {
             ex.printStackTrace();
         }
         final Date startDate = new Date();
-        assertFalse(
-                Time.checkDate(startDate, finishDate)
-        );
+        assertFalse(Time.checkDate(startDate, finishDate));
     }
 
     @Test
@@ -212,43 +159,31 @@ public final class TimeTest {
             ex.printStackTrace();
         }
         final Date finishDate = new Date();
-        assertTrue(
-                Time.checkDate(startDate, finishDate)
-        );
+        assertTrue(Time.checkDate(startDate, finishDate));
     }
 
     @Test
     public void whenIsWorkTimeWithNullHoursThenReturnFalse() {
-        assertFalse(
-                Time.isWorkTime(null, null)
-        );
+        assertFalse(Time.isWorkTime(null, null));
     }
 
     @Test
     public void whenIsWorkTimeWithNullStartHourThenReturnTrue() {
-        assertTrue(
-                Time.isWorkTime(null, TIME)
-        );
+        assertTrue(Time.isWorkTime(null, TIME));
     }
 
     @Test
     public void whenIsWorkTimeWithNullFinishHourThenReturnFalse() {
-        assertFalse(
-                Time.isWorkTime(TIME, null)
-        );
+        assertFalse(Time.isWorkTime(TIME, null));
     }
 
     @Test
     public void whenIsWorkTimeWithStartHourGreatFinishHourThenReturnFalse() {
-        assertFalse(
-                Time.isWorkTime("20:00", "01:00")
-        );
+        assertFalse(Time.isWorkTime("20:00", "01:00"));
     }
 
     @Test
     public void whenIsWorkTimeThenReturnTrue() {
-        assertTrue(
-                Time.isWorkTime("01:00", "20:00")
-        );
+        assertTrue(Time.isWorkTime("01:00", "20:00"));
     }
 }
