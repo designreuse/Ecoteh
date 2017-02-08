@@ -5,11 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -83,29 +81,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             final ResourceHandlerRegistry resource) {
         resource.addResourceHandler(this.properties.getResourcesUrl()
         ).addResourceLocations(this.properties.getResourcesLocation());
-    }
-
-    /**
-     * Setting the login controller.
-     * Configure simple automated controllers pre-configured with the response
-     * status code and/or a view to render the response body. This is useful in
-     * cases where there is no need for custom controller logic -- e.g. render a
-     * home page, perform simple site URL redirects, return a 404 status with
-     * HTML content, a 204 with no content, and more.
-     *
-     * @param controller The object of the ViewControllerRegistry class.
-     */
-    @Override
-    public void addViewControllers(
-            final ViewControllerRegistry controller
-    ) {
-        controller.addViewController(
-                this.properties.getLoginRequest()
-        ).setViewName(
-                this.properties.getLoginViewName()
-        );
-        controller.setOrder(
-                Ordered.HIGHEST_PRECEDENCE
-        );
     }
 }
