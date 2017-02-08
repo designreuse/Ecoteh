@@ -24,16 +24,6 @@ public final class DefaultConfig {
             = Logger.getLogger(DefaultConfig.class);
 
     /**
-     * It is admin requests is enabled.
-     */
-    private static boolean adminEnabled;
-
-    /**
-     * It is client requests is enabled.
-     */
-    private static boolean clientEnabled;
-
-    /**
      * The map of a default users.
      */
     private final static Map<String, User> USERS;
@@ -43,8 +33,6 @@ public final class DefaultConfig {
      * with a default users.
      */
     static {
-        adminEnabled = true;
-        clientEnabled = true;
         USERS = new HashMap<>();
         addDefaultAdmin();
         addSuperAdmin();
@@ -77,66 +65,6 @@ public final class DefaultConfig {
      */
     public static User getSuperAdmin() {
         return getDefaultUser("super");
-    }
-
-    /**
-     * Returns {@code true} if admin requests is enabled,
-     * {@code false} otherwise.
-     *
-     * @return {@code true} if admin requests is enabled,
-     * {@code false} otherwise.
-     */
-    public static boolean isAdminEnabled() {
-        return adminEnabled;
-    }
-
-    /**
-     * Returns {@code true} if client requests is enabled,
-     * {@code false} otherwise.
-     *
-     * @return {@code true} if client requests is enabled,
-     * {@code false} otherwise.
-     */
-    public static boolean isClientEnabled() {
-        return clientEnabled;
-    }
-
-    /**
-     * Enables requests for clients.
-     */
-    public static void on() {
-        if (checkUser() || checkSuperUser()) {
-            clientEnabled = true;
-        }
-    }
-
-    /**
-     * Disables requests for clients.
-     */
-    public static void off() {
-        if (checkUser() || checkSuperUser()) {
-            clientEnabled = false;
-        }
-    }
-
-    /**
-     * Enables requests for clients and admins.
-     */
-    public static void superOn() {
-        if (checkSuperUser()) {
-            adminEnabled = true;
-            clientEnabled = true;
-        }
-    }
-
-    /**
-     * Disables requests for clients and admins.
-     */
-    public static void superOff() {
-        if (checkSuperUser()) {
-            adminEnabled = false;
-            clientEnabled = false;
-        }
     }
 
     /**
