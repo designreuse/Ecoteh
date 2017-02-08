@@ -2,7 +2,6 @@ package com.salimov.yurii.service.search;
 
 import com.salimov.yurii.entity.Model;
 import com.salimov.yurii.service.data.interfaces.*;
-import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see CompanyService
  * @see UserService
  * @see MainMVFabric
- * @see ClientMVFabric
+ * @see MainMVFabric
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.service")
@@ -132,7 +131,7 @@ public class SearchServiceImpl implements SearchService {
      * Initializes a implementations of the interfaces.
      *
      * @param fabric          a implementation
-     *                        of the {@link ClientMVFabric} interface.
+     *                        of the {@link MainMVFabric} interface.
      * @param categoryService a implementation
      *                        of the {@link CategoryService} interface.
      * @param articleService  a implementation
@@ -141,7 +140,7 @@ public class SearchServiceImpl implements SearchService {
      *                        of the {@link CompanyService} interface.
      * @param userService     a implementation
      *                        of the {@link UserService} interface.
-     * @see ClientMVFabric
+     * @see MainMVFabric
      * @see CategoryService
      * @see ArticleService
      * @see CompanyService
@@ -150,7 +149,7 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public SearchServiceImpl(
-            final ClientMVFabric fabric,
+            final MainMVFabric fabric,
             final CategoryService categoryService,
             final ArticleService articleService,
             final CompanyService companyService,
