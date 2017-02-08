@@ -1,7 +1,10 @@
 package com.salimov.yurii.controller.other;
 
 import com.salimov.yurii.config.DefaultConfig;
+import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,43 @@ import javax.servlet.http.HttpServletResponse;
  * @see DefaultConfig
  */
 @Controller
-public class WorkController {
+public class SpecialController {
+
+    /**
+     * The implementation of the interface provides a set of standard methods
+     * for creates and returns the main modelAndViews.
+     *
+     * @see MainMVFabric
+     */
+    private final MainMVFabric fabric;
+
+    /**
+     * Constructor.
+     *
+     * @param fabric a implementation
+     *               of the {@link MainMVFabric} interface.
+     */
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    public SpecialController(final MainMVFabric fabric) {
+        this.fabric = new CacheMVFabricImpl(fabric);
+    }
+
+    @RequestMapping(
+            value = "/login",
+            method = RequestMethod.GET
+    )
+    public ModelAndView loginPage() {
+        ModelAndView modelAndView;
+        try {
+            modelAndView = this.fabric.getDefaultModelAndView();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            modelAndView = new ModelAndView();
+        }
+        modelAndView.setViewName("login/login_page");
+        return modelAndView;
+    }
 
     /**
      * Logout user and redirects to /login?logout.
@@ -69,43 +108,6 @@ public class WorkController {
         throw new IllegalAccessException(
                 "You do not have sufficient permissions to access this page."
         );
-    }
-
-    /**
-     * Enables the site.
-     * Request mapping: /superman/on
-     * Method: GET
-     *
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/superman/on",
-            method = RequestMethod.GET
-    )
-    public ModelAndView on(final ModelAndView modelAndView) {
-        DefaultConfig.superOn();
-        modelAndView.setViewName("redirect:/");
-        return modelAndView;
-    }
-
-    /**
-     * Disables the site.
-     * Request mapping: /superman/off
-     * Method: GET
-     *
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/superman/off",
-            method = RequestMethod.GET
-    )
-    public ModelAndView off(final ModelAndView modelAndView) {
-        DefaultConfig.superOff();
-        Cache.clear();
-        modelAndView.setViewName("redirect:/");
-        return modelAndView;
     }
 
     /**
