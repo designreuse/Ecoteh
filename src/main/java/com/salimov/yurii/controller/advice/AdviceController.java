@@ -3,7 +3,6 @@ package com.salimov.yurii.controller.advice;
 import com.salimov.yurii.exception.DisableException;
 import com.salimov.yurii.exception.DuplicateException;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Class intercepts exceptions that are not specified in the controller.
@@ -38,69 +35,6 @@ public class AdviceController {
             = Logger.getLogger(AdviceController.class);
 
     /**
-     * No handler fount exception message.
-     */
-    private static final String NO_HANDLER_FOUND_MESSAGE
-            = "Ошибка 404. Не найдено!";
-
-    /**
-     * Null pointer exception message.
-     */
-    private final static String NULL_POINTER_MESSAGE
-            = "Объект не найден!";
-
-    /**
-     * Illegal argument exception message.
-     */
-    private final static String ILLEGAL_ARGUMENT_MESSAGE
-            = "Ошибка аргументов!";
-
-    /**
-     * Http request method not supported exception message.
-     */
-    private final static String HTTP_REQUEST_METHOD_NOT_SUPPORTED_MESSAGE
-            = "Ошибка в запросе!";
-
-    /**
-     * Illegal access exception message.
-     */
-    private final static String ILLEGAL_ACCESS_MESSAGE
-            = "У Вас нет прав для доступа " +
-            "к этой странице.";
-
-    /**
-     * Illegal mapping exception message.
-     */
-    private final static String ILLEGAL_MAPPING_MESSAGE
-            = "Запрещенный запрос!";
-
-    /**
-     * Duplicate exception message;
-     */
-    private final static String DUPLICATE_MESSAGE
-            = "Объект уже существует!";
-
-    /**
-     * Disable exception message.
-     */
-    private final static String DISABLE_MESSAGE
-            = "Сайт отключен " +
-            "по техническим причинам!";
-
-    /**
-     * All other exception message.
-     */
-    private final static String OTHER_MESSAGE
-            = "Временные неполадки с сервером... " +
-            "Приносим свои извинения!";
-
-    /**
-     * Unknown exception message.
-     */
-    private final static String UNKNOWN_MESSAGE
-            = "Неизвестная ошибка...";
-
-    /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
      *
@@ -112,37 +46,37 @@ public class AdviceController {
      * Constructor.
      *
      * @param fabric a implementation
-     *               of the {@link ClientMVFabric} interface.
+     *               of the {@link MainMVFabric} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdviceController(final ClientMVFabric fabric) {
+    public AdviceController(final MainMVFabric fabric) {
         this.fabric = new CacheMVFabricImpl(fabric);
     }
 
     /**
      * Intercepts and handles NoHandlerFoundException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ModelAndView Exception(
+    public ModelAndView noHandlerFoundException(
             final NoHandlerFoundException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, NO_HANDLER_FOUND_MESSAGE
+                ex, request, HttpStatus.NOT_FOUND
         );
     }
 
     /**
      * Intercepts and handles NullPointerException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(NullPointerException.class)
@@ -152,52 +86,51 @@ public class AdviceController {
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, NULL_POINTER_MESSAGE
+                ex, request, HttpStatus.BAD_REQUEST
         );
     }
 
     /**
      * Intercepts and handles IllegalArgumentException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
     public ModelAndView illegalArgumentException(
             final IllegalArgumentException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, ILLEGAL_ARGUMENT_MESSAGE
+                ex, request, HttpStatus.NOT_ACCEPTABLE
         );
     }
 
     /**
      * Intercepts and handles HttpRequestMethodNotSupportedException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public ModelAndView httpRequestMethodNotSupportedException(
             final HttpRequestMethodNotSupportedException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request,
-                HTTP_REQUEST_METHOD_NOT_SUPPORTED_MESSAGE
+                ex, request, HttpStatus.UNAUTHORIZED
         );
     }
 
     /**
      * Intercepts and handles IllegalAccessException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(IllegalAccessException.class)
@@ -207,15 +140,15 @@ public class AdviceController {
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, ILLEGAL_ACCESS_MESSAGE
+                ex, request, HttpStatus.FORBIDDEN
         );
     }
 
     /**
      * Intercepts and handles IllegalMappingException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(IllegalMappingException.class)
@@ -225,15 +158,15 @@ public class AdviceController {
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, ILLEGAL_MAPPING_MESSAGE
+                ex, request, HttpStatus.METHOD_NOT_ALLOWED
         );
     }
 
     /**
      * Intercepts and handles DuplicateException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      * @see DuplicateException
      */
@@ -244,34 +177,34 @@ public class AdviceController {
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, DUPLICATE_MESSAGE
+                ex, request, HttpStatus.CONFLICT
         );
     }
 
     /**
      * Intercepts and handles DisableException.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      * @see DisableException
      */
     @ExceptionHandler(DisableException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseStatus(value = HttpStatus.LOCKED)
     public ModelAndView disableException(
             final DisableException ex,
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, DISABLE_MESSAGE
+                ex, request, HttpStatus.LOCKED
         );
     }
 
     /**
      * Intercepts and handles all other Exception.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
      */
     @ExceptionHandler(Exception.class)
@@ -281,27 +214,27 @@ public class AdviceController {
             final HttpServletRequest request
     ) {
         return handleException(
-                ex, request, OTHER_MESSAGE
+                ex, request, HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
 
     /**
      * Handles all other Exception.
      *
-     * @param ex an intercepted exception.
-     * @param request   to provide requested information for HTTP servlets.
-     * @param text      a text of the exception.
+     * @param ex      an intercepted exception.
+     * @param request to provide requested information for HTTP servlets.
+     * @param status  a http status.
      * @return The ModelAndView object with information about exception.
      */
     private ModelAndView handleException(
             final Exception ex,
             final HttpServletRequest request,
-            final String text
+            final HttpStatus status
     ) {
         logRequest(request);
         logException(ex);
         return prepareModelAndView(
-                isNotBlank(text) ? text : UNKNOWN_MESSAGE,
+                status,
                 ex.getClass().getSimpleName() + " : " + ex.getMessage()
         );
     }
@@ -309,13 +242,13 @@ public class AdviceController {
     /**
      * Creates and return ModelAndView object.
      *
-     * @param textError    a text of the exception.
+     * @param status       a http status.
      * @param messageError a sender of the exception.
      * @return The ModelAndView object with information about exception.
      */
     @SuppressWarnings("SpringMVCViewInspection")
     private ModelAndView prepareModelAndView(
-            final String textError,
+            final HttpStatus status,
             final String messageError
     ) {
         ModelAndView modelAndView;
@@ -325,7 +258,7 @@ public class AdviceController {
             ex.printStackTrace();
             modelAndView = new ModelAndView();
         }
-        modelAndView.addObject("text", textError);
+        modelAndView.addObject("status", status.value());
         modelAndView.addObject("message", messageError);
         modelAndView.setViewName("error/error_page");
         return modelAndView;
