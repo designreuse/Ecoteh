@@ -58,6 +58,13 @@ public interface ContentProperties {
     String getResourcesLocation();
 
     /**
+     * Returns a maximum file size.
+     *
+     * @return The maximum file size.
+     */
+    long getMaxFileSize();
+
+    /**
      * Returns a login request for authorization.
      *
      * @return The login request for authorization.

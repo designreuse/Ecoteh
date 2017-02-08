@@ -1,5 +1,9 @@
 package com.salimov.yurii.util.properties;
 
+import java.io.IOException;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 /**
  * The class implements the methods for getting application properties.
  *
@@ -10,23 +14,27 @@ package com.salimov.yurii.util.properties;
 public final class ContentPropertiesImpl implements ContentProperties {
 
     /**
-     * The catalina home constant.
+     * The file path. It is path to tomcat.
      */
-    private final static String CATALINA_HOME
-            = System.getenv("CATALINA_HOME") + "/";
+    private static String filePath;
 
     /**
-     * The content type encoding.
+     * Apache Catalina home path.
+     */
+    private final String catalinaHome;
+
+    /**
+     * Content type encoding.
      */
     private final String contentType;
 
     /**
-     * The view name prefix.
+     * View name prefix.
      */
     private final String prefix;
 
     /**
-     * The view name suffix.
+     * View name suffix.
      */
     private final String suffix;
 
@@ -36,33 +44,39 @@ public final class ContentPropertiesImpl implements ContentProperties {
     private final boolean exposeContextBeansAsAttributes;
 
     /**
-     * The url of resources.
+     * URL of resources.
      */
     private final String resourcesUrl;
 
     /**
-     * The location of resources.
+     * Location of resources.
      */
     private final String resourcesLocation;
 
     /**
-     * The login request for authorization.
+     * Maximum file size (Mb).
+     */
+    private final long maxFileSize;
+
+    /**
+     * Login request for authorization.
      */
     private final String loginRequest;
 
     /**
-     * The login view name (path).
+     * Login view name (path).
      */
     private final String loginViewName;
 
     /**
-     * The project directory name.
+     * Project directory name.
      */
     private final String projectDirectory;
 
     /**
      * Constructor.
      *
+     * @param catalinaHome                   a Apache Catalina home path.
      * @param contentType                    a content type encoding.
      * @param prefix                         a view name prefix.
      * @param suffix                         a view name prefix.
@@ -74,22 +88,26 @@ public final class ContentPropertiesImpl implements ContentProperties {
      * @param projectDirectory               a project directory name.
      */
     public ContentPropertiesImpl(
+            final String catalinaHome,
             final String contentType,
             final String prefix,
             final String suffix,
             final boolean exposeContextBeansAsAttributes,
             final String resourcesUrl,
             final String resourcesLocation,
+            final long maxFileSize,
             final String loginRequest,
             final String loginViewName,
             final String projectDirectory
     ) {
+        this.catalinaHome = catalinaHome;
         this.contentType = contentType;
         this.prefix = prefix;
         this.suffix = suffix;
         this.exposeContextBeansAsAttributes = exposeContextBeansAsAttributes;
         this.resourcesUrl = resourcesUrl;
         this.resourcesLocation = resourcesLocation;
+        this.maxFileSize = maxFileSize;
         this.loginRequest = loginRequest;
         this.loginViewName = loginViewName;
         this.projectDirectory = projectDirectory;
@@ -102,7 +120,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
      */
     @Override
     public String getCatalinaHome() {
-        return CATALINA_HOME;
+        return this.catalinaHome;
     }
 
     /**
@@ -166,6 +184,16 @@ public final class ContentPropertiesImpl implements ContentProperties {
     }
 
     /**
+     * Returns a maximum file size.
+     *
+     * @return The maximum file size.
+     */
+    @Override
+    public long getMaxFileSize() {
+        return this.maxFileSize;
+    }
+
+    /**
      * Returns a login request for authorization.
      *
      * @return The login request for authorization.
@@ -203,8 +231,10 @@ public final class ContentPropertiesImpl implements ContentProperties {
      */
     @Override
     public String getProjectAbsolutePath() {
-        return CATALINA_HOME + "webapps/"
-                + this.projectDirectory;
+        if (isBlank(filePath)) {
+            createFilePath();
+        }
+        return filePath + "/webapps/" + this.projectDirectory;
     }
 
     /**
@@ -217,5 +247,20 @@ public final class ContentPropertiesImpl implements ContentProperties {
     @Override
     public String getResourcesAbsolutePath() {
         return getProjectAbsolutePath() + getResourcesLocation();
+    }
+
+    /**
+     * Creates file path.
+     * It is path to tomcat.
+     */
+    private static void createFilePath() {
+        final java.io.File file = new java.io.File("");
+        try {
+            filePath = file.getCanonicalPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            filePath = file.getAbsolutePath();
+        }
+        filePath = filePath.replace("/bin", "").replace("\\bin", "");
     }
 }
