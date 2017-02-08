@@ -26,6 +26,12 @@ public class ContentConfig {
     private static ContentProperties contentProperties;
 
     /**
+     * Apache Catalina home path.
+     */
+    @Value("${apache.catalina.home}")
+    private String catalinaHome;
+
+    /**
      * Content Type encoding.
      */
     @Value("${project.directory}")
@@ -74,6 +80,12 @@ public class ContentConfig {
     private String requestLogin;
 
     /**
+     * Maximum file size (Mb).
+     */
+    @Value("${file.max.size}")
+    private long maxFileSize;
+
+    /**
      * Login view name (path).
      */
     @Value("${login.view-url}")
@@ -98,12 +110,14 @@ public class ContentConfig {
      */
     private void initContentProperties() {
         contentProperties = new ContentPropertiesImpl(
+                this.catalinaHome,
                 this.contentType,
                 this.prefix,
                 this.suffix,
                 this.exposeContextBeansAsAttributes,
                 this.resourcesUrl,
                 this.resourcesLocation,
+                this.maxFileSize,
                 this.requestLogin,
                 this.loginViewName,
                 this.projectDirectory
