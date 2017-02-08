@@ -7,7 +7,7 @@ import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import com.salimov.yurii.util.cache.Cache;
@@ -78,7 +78,7 @@ public class AdminUserController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric         a implementation of the {@link AdminMVFabric}
+     * @param fabric         a implementation of the {@link MainMVFabric}
      *                       interface.
      * @param userService    a implementation of the {@link UserService}
      *                       interface.
@@ -86,7 +86,7 @@ public class AdminUserController {
      *                       interface.
      * @param senderService  a implementation of the {@link SenderService}
      *                       interface.
-     * @see AdminMVFabric
+     * @see MainMVFabric
      * @see UserService
      * @see FileService
      * @see CompanyService
@@ -95,7 +95,7 @@ public class AdminUserController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminUserController(
-            final AdminMVFabric fabric,
+            final MainMVFabric fabric,
             final UserService userService,
             final CompanyService companyService,
             final SenderService senderService

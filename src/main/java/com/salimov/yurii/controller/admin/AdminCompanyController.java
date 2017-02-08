@@ -5,7 +5,6 @@ import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @see Company
  * @see CompanyService
  * @see FileService
- * @see AdminMVFabric
+ * @see MainMVFabric
  */
 @Controller
 @RequestMapping(value = "/admin/company")
@@ -57,17 +56,17 @@ public class AdminCompanyController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric         a implementation of the {@link AdminMVFabric}
+     * @param fabric         a implementation of the {@link MainMVFabric}
      *                       interface.
      * @param companyService a implementation of the {@link CompanyService}
      *                       interface.
-     * @see AdminMVFabric
+     * @see MainMVFabric
      * @see CompanyService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminCompanyController(
-            final AdminMVFabric fabric,
+            final MainMVFabric fabric,
             final CompanyService companyService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);

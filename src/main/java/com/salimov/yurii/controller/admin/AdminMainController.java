@@ -1,6 +1,5 @@
 package com.salimov.yurii.controller.admin;
 
-import com.salimov.yurii.config.DefaultConfig;
 import com.salimov.yurii.controller.other.MainController;
 import com.salimov.yurii.entity.Response;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
@@ -8,9 +7,8 @@ import com.salimov.yurii.service.data.interfaces.MessageService;
 import com.salimov.yurii.service.data.interfaces.ResponseService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
-import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -26,11 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
  * Class methods create and return modelsAndView,
  * depending on the request.
  * For the work used implementation of the interface
- * {@link AdminMVFabric} interface.
+ * {@link MainMVFabric} interface.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see AdminMVFabric
+ * @see MainMVFabric
  * @see CompanyService
  * @see UserService
  * @see ResponseService
@@ -46,7 +44,7 @@ public class AdminMainController extends MainController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link AdminMVFabric}
+     * @param fabric          a implementation of the {@link MainMVFabric}
      *                        interface.
      * @param companyService  a implementation of the {@link CompanyService}
      *                        interface.
@@ -58,7 +56,7 @@ public class AdminMainController extends MainController {
      *                        interface.
      * @param responseService a implementation of the {@link ResponseService}
      *                        interface.
-     * @see AdminMVFabric
+     * @see MainMVFabric
      * @see CompanyService
      * @see UserService
      * @see SenderService
@@ -67,7 +65,7 @@ public class AdminMainController extends MainController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminMainController(
-            final AdminMVFabric fabric,
+            final MainMVFabric fabric,
             final CompanyService companyService,
             final UserService userService,
             final MessageService messageService,
@@ -95,9 +93,6 @@ public class AdminMainController extends MainController {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
                 "user", this.userService.getAuthenticatedUser()
-        );
-        modelAndView.addObject(
-                "is_enabled", DefaultConfig.isClientEnabled()
         );
         modelAndView.setViewName("admin/menu/menu_page");
         return modelAndView;
@@ -192,42 +187,5 @@ public class AdminMainController extends MainController {
         throw new IllegalMappingException(
                 "GET method in \"/admin/response/send\" is not supported!"
         );
-    }
-
-    /**
-     * Disables the site. And also clears the cache.
-     * Redirects by url /admin/menu.
-     * Request mapping: /admin/site/off
-     * Method: GET
-     *
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/site/off", method = RequestMethod.GET
-    )
-    public ModelAndView siteOff(final ModelAndView modelAndView) {
-        DefaultConfig.off();
-        Cache.clear();
-        modelAndView.setViewName("redirect:/admin/menu");
-        return modelAndView;
-    }
-
-    /**
-     * Includes the site. Redirects by url /admin/menu.
-     * Request mapping: /admin/site/on
-     * Method: GET
-     *
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/site/on",
-            method = RequestMethod.GET
-    )
-    public ModelAndView siteOn(final ModelAndView modelAndView) {
-        DefaultConfig.on();
-        modelAndView.setViewName("redirect:/admin/menu");
-        return modelAndView;
     }
 }

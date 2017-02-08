@@ -7,7 +7,6 @@ import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see ArticleService
  * @see CategoryService
  * @see FileService
- * @see AdminMVFabric
+ * @see MainMVFabric
  */
 @Controller
 @RequestMapping(value = "/admin/article")
@@ -70,20 +69,20 @@ public class AdminArticleController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link AdminMVFabric}
+     * @param fabric          a implementation of the {@link MainMVFabric}
      *                        interface.
      * @param articleService  a implementation of the {@link ArticleService}
      *                        interface.
      * @param categoryService a implementation of the {@link CategoryService}
      *                        interface.
-     * @see AdminMVFabric
+     * @see MainMVFabric
      * @see ArticleService
      * @see CategoryService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminArticleController(
-            final AdminMVFabric fabric,
+            final MainMVFabric fabric,
             final ArticleService articleService,
             final CategoryService categoryService
     ) {

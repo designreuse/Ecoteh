@@ -8,7 +8,7 @@ import com.salimov.yurii.service.data.interfaces.MessageService;
 import com.salimov.yurii.service.data.interfaces.ResponseService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see CaptchaService
- * @see ClientMVFabric
+ * @see MainMVFabric
  * @see CompanyService
  * @see UserService
  * @see ResponseService
@@ -51,7 +51,7 @@ public class ClientMainController extends MainController {
      * Initializes a implementations of the interfaces.
      *
      * @param fabric          a implementation
-     *                        of the {@link ClientMVFabric} interface.
+     *                        of the {@link MainMVFabric} interface.
      * @param companyService  a implementation
      *                        of the {@link CompanyService} interface.
      * @param userService     a implementation
@@ -64,7 +64,7 @@ public class ClientMainController extends MainController {
      *                        of the {@link SenderService} interface.
      * @param captchaService  a implementation
      *                        of the {@link CaptchaService} interface.
-     * @see ClientMVFabric
+     * @see MainMVFabric
      * @see CompanyService
      * @see UserService
      * @see ResponseService
@@ -74,7 +74,7 @@ public class ClientMainController extends MainController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ClientMainController(
-            final ClientMVFabric fabric,
+            final MainMVFabric fabric,
             final CompanyService companyService,
             final UserService userService,
             final ResponseService responseService,

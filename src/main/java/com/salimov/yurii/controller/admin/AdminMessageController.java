@@ -3,7 +3,7 @@ package com.salimov.yurii.controller.admin;
 import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.service.data.interfaces.MessageService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,12 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
  * with main ModelAndView objects and object of the {@link Message}
  * class for admins. Class methods create and return modelsAndView,
  * depending on the request. For the work used implementation
- * of the interface {@link AdminMVFabric}.
+ * of the interface {@link MainMVFabric}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Message
- * @see AdminMVFabric
+ * @see MainMVFabric
  * @see MessageService
  */
 @Controller
@@ -52,17 +52,17 @@ public class AdminMessageController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param fabric         a implementation of the {@link AdminMVFabric}
+     * @param fabric         a implementation of the {@link MainMVFabric}
      *                       interface.
      * @param messageService a implementation of the {@link MessageService}
      *                       interface.
      * @see MessageService
-     * @see AdminMVFabric
+     * @see MainMVFabric
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminMessageController(
-            final AdminMVFabric fabric,
+            final MainMVFabric fabric,
             final MessageService messageService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);

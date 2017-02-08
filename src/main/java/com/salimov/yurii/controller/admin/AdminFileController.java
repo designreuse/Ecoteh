@@ -3,7 +3,7 @@ package com.salimov.yurii.controller.admin;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -55,7 +55,7 @@ public class AdminFileController {
     /**
      * Constructor.
      *
-     * @param fabric      a implementation of the {@link CacheMVFabric}
+     * @param fabric      a implementation of the {@link MainMVFabric}
      *                    interface.
      * @param fileService a implementation of the {@link FileService}
      *                    interface.
@@ -63,7 +63,7 @@ public class AdminFileController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public AdminFileController(
-            final AdminMVFabric fabric,
+            final MainMVFabric fabric,
             final FileService fileService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);
@@ -109,7 +109,6 @@ public class AdminFileController {
      * Method: POST
      *
      * @param title         a title of the new file.
-     * @param path          a path of the new file.
      * @param multipartFile a multipart file of the new file.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -120,11 +119,10 @@ public class AdminFileController {
     )
     public ModelAndView addFile(
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "path") final String path,
             @RequestParam(value = "file") final MultipartFile multipartFile,
             final ModelAndView modelAndView
     ) {
-        this.fileService.initAndAdd(title, path, multipartFile);
+        this.fileService.initAndAdd(title, multipartFile);
         modelAndView.setViewName("redirect:/admin/file/all");
         return modelAndView;
     }
@@ -178,7 +176,6 @@ public class AdminFileController {
      *
      * @param id            a id of the file to update.
      * @param title         a new title to the file.
-     * @param path          a path title to the file.
      * @param multipartFile a multipart file of the new file.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -190,11 +187,10 @@ public class AdminFileController {
     public ModelAndView updateFile(
             @RequestParam(value = "id") final Long id,
             @RequestParam(value = "title") final String title,
-            @RequestParam(value = "path") final String path,
             @RequestParam(value = "file") final MultipartFile multipartFile,
             final ModelAndView modelAndView
     ) {
-        this.fileService.initAndUpdate(id, title, path, multipartFile);
+        this.fileService.initAndUpdate(id, title, multipartFile);
         modelAndView.setViewName("redirect:/admin/file/all");
         return modelAndView;
     }

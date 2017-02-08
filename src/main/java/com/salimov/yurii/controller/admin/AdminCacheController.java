@@ -1,7 +1,7 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
 import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
  * The class implements a set of methods for working with
  * main ModelAndView objects and object of the {@link Cache} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
- * For the work used implementation of the interface {@link AdminMVFabric}.
+ * For the work used implementation of the interface {@link MainMVFabric}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Cache
- * @see AdminMVFabric
+ * @see MainMVFabric
  */
 @Controller
 @RequestMapping(value = "/admin/cache")
@@ -41,12 +41,12 @@ public class AdminCacheController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param fabric a implementation of the {@link AdminMVFabric} interface.
-     * @see AdminMVFabric
+     * @param fabric a implementation of the {@link MainMVFabric} interface.
+     * @see MainMVFabric
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminCacheController(final AdminMVFabric fabric) {
+    public AdminCacheController(final MainMVFabric fabric) {
         this.fabric = new CacheMVFabricImpl(fabric);
     }
 
