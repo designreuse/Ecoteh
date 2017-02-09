@@ -50,7 +50,7 @@
                     <div class="box">
                         <hr>
                         <h3 class="intro-text text-center">
-                            <a href="/category/all" title="Категории товаров">Товары</a>
+                            <a href="<c:url value="/category/all"/>" title="Категории товаров">Товары</a>
                         </h3>
                         <hr>
                         <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>

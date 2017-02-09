@@ -92,20 +92,20 @@
                 <br>В социальных сетях:<br>
                 <c:if test="${company.vkontakte ne null}">
                     <a href="<c:out value="${company.vkontakte}"/>" title="Группа &quot;${company.title}&quot; в ВКонтакте"
-                       target="_blank"><span class="fa fa-vk fa-2x vk"></span></a>&nbsp;&nbsp;
+                       target="_blank"><span class="fa fa-vk fa-2x"></span></a>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${company.facebook ne null}">
                     <a href="<c:out value="${company.facebook}"/>" title="Группа &quot;${company.title}&quot; в Facebook"
-                       target="_blank"><span class="fa fa-facebook-official fa-2x fb"></span></a>&nbsp;&nbsp;
+                       target="_blank"><span class="fa fa-facebook-official fa-2x"></span></a>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${company.twitter ne null}">
                     <a href="<c:out value="${company.twitter}"/>" title="&quot;${company.title}&quot; в Twitter"
-                       target="_blank"><span class="fa fa-twitter fa-2x tw"></span></a>&nbsp;&nbsp;
+                       target="_blank"><span class="fa fa-twitter fa-2x"></span></a>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${company.skype ne null}">
                     <a href="skype:<c:out value="${company.skype}"/>?call"
                        title="Позвонить &quot;${company.title}&quot; в Skype">
-                        <span class="fa fa-skype fa-2x sk"></span>
+                        <span class="fa fa-skype fa-2x"></span>
                     </a>
                 </c:if>
                 <br>

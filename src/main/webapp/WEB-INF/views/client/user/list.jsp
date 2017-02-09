@@ -78,22 +78,22 @@
             <c:if test="${user.vkontakte ne null}">
                 <a href="https://vk.com/<c:out value="${user.vkontakte}"/>" title="Профиль в ВКонтакте"
                    target="_blank">
-                    <span class="fa fa-vk fa-2x vk"></span>
+                    <span class="fa fa-vk fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
             <c:if test="${user.facebook ne null}">
                 <a href="<c:out value="${user.facebook}"/>" title="Профиль в Facebook" target="_blank">
-                    <span class="fa fa-facebook-official fa-2x fb"></span>
+                    <span class="fa fa-facebook-official fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
             <c:if test="${user.twitter ne null}">
                 <a href="<c:out value="${user.twitter}"/>" title="Профиль в Twitter" target="_blank">
-                    <span class="fa fa-twitter fa-2x tw"></span>
+                    <span class="fa fa-twitter fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
             <c:if test="${user.skype ne null}">
                 <a href="skype:<c:out value="${user.skype}"/>?call" title="Позвонить в Skype" target="_blank">
-                    <span class="fa fa-skype fa-2x sk"></span>
+                    <span class="fa fa-skype fa-2x"></span>
                 </a>
             </c:if>
             <c:if test="${authorized_user ne null}">
