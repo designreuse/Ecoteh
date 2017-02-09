@@ -102,15 +102,16 @@ public final class UserServiceImpl
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(final String username)
             throws UsernameNotFoundException {
+        User user;
         try {
-            User user = DefaultConfig.getDefaultUser(username);
+            user = DefaultConfig.getDefaultUser(username);
             if (user == null) {
                 user = getByLogin(username);
             }
-            return user;
         } catch (NullPointerException ex) {
             throw new UsernameNotFoundException(ex.getMessage(), ex);
         }
+        return user;
     }
 
     /**

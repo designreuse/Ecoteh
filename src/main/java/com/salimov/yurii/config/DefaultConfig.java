@@ -46,7 +46,14 @@ public final class DefaultConfig {
      * {@code null} otherwise.
      */
     public static User getDefaultUser(final String username) {
-        return USERS.get(username).clone();
+        User user;
+        try {
+            user = USERS.get(username).clone();
+        } catch (NullPointerException ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            user = null;
+        }
+        return user;
     }
 
     /**
