@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/admin/response")
 @ComponentScan(basePackages = "com.salimov.yurii.service.data")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminResponseController {
+public class ResponseController {
 
     /**
      * The implementation of the interface describes a set of methods
@@ -45,7 +45,7 @@ public class AdminResponseController {
      * @see ResponseService
      */
     @Autowired
-    public AdminResponseController(final ResponseService responseService) {
+    public ResponseController(final ResponseService responseService) {
         this.responseService = responseService;
     }
 
@@ -71,7 +71,7 @@ public class AdminResponseController {
         response.reverseValidated();
         this.responseService.update(response);
         Cache.clear();
-        modelAndView.setViewName("redirect:/admin/responses");
+        modelAndView.setViewName("redirect:/responses");
         return modelAndView;
     }
 
@@ -95,7 +95,7 @@ public class AdminResponseController {
     ) {
         this.responseService.remove(id);
         Cache.clear();
-        modelAndView.setViewName("redirect:/admin/responses");
+        modelAndView.setViewName("redirect:/responses");
         return modelAndView;
     }
 
@@ -115,7 +115,7 @@ public class AdminResponseController {
     public ModelAndView deleteAllResponses(final ModelAndView modelAndView) {
         this.responseService.removeAll();
         Cache.clear();
-        modelAndView.setViewName("redirect:/admin/responses");
+        modelAndView.setViewName("redirect:/responses");
         return modelAndView;
     }
 }
