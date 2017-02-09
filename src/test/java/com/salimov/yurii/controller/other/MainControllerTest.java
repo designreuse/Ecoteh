@@ -1,5 +1,6 @@
 package com.salimov.yurii.controller.other;
 
+import com.salimov.yurii.controller.client.MainController;
 import org.junit.Ignore;
 import org.junit.Test;
 

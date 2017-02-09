@@ -1,12 +1,12 @@
 package com.salimov.yurii.mocks.controller;
 
-import com.salimov.yurii.controller.admin.AdminCacheController;
+import com.salimov.yurii.controller.superadmin.CacheController;
 import com.salimov.yurii.controller.admin.AdminMainController;
-import com.salimov.yurii.controller.admin.AdminResponseController;
-import com.salimov.yurii.controller.admin.AdminUserController;
+import com.salimov.yurii.controller.admin.ResponseController;
+import com.salimov.yurii.controller.admin.UserController;
 import com.salimov.yurii.controller.advice.AdviceController;
 import com.salimov.yurii.controller.client.ClientMainController;
-import com.salimov.yurii.controller.other.SpecialController;
+import com.salimov.yurii.controller.authorization.AuthorizationController;
 import com.salimov.yurii.controller.seo.SeoController;
 import org.junit.Ignore;
 
@@ -20,13 +20,13 @@ public final class MockController {
     private static ClientMainController clientMainController;
 
     private static AdminMainController adminMainController;
-    private static AdminResponseController adminResponseController;
-    private static AdminUserController adminUserController;
-    private static AdminCacheController adminCacheController;
+    private static ResponseController responseController;
+    private static UserController userController;
+    private static CacheController cacheController;
 
     private static AdviceController adviceController;
     private static SeoController seoController;
-    private static SpecialController specialController;
+    private static AuthorizationController authorizationController;
 
     public static ClientMainController getClientMainController() {
         if (clientMainController == null) {
@@ -42,25 +42,25 @@ public final class MockController {
         return adminMainController;
     }
 
-    public static AdminResponseController getAdminResponseController() {
-        if (adminResponseController == null) {
-            adminResponseController = initAdminResponseController();
+    public static ResponseController getResponseController() {
+        if (responseController == null) {
+            responseController = initAdminResponseController();
         }
-        return adminResponseController;
+        return responseController;
     }
 
-    public static AdminUserController getAdminUserController() {
-        if (adminUserController == null) {
-            adminUserController = initAdminUserController();
+    public static UserController getUserController() {
+        if (userController == null) {
+            userController = initAdminUserController();
         }
-        return adminUserController;
+        return userController;
     }
 
-    public static AdminCacheController getAdminCacheController() {
-        if (adminCacheController == null) {
-            adminCacheController = initAdminCacheController();
+    public static CacheController getCacheController() {
+        if (cacheController == null) {
+            cacheController = initAdminCacheController();
         }
-        return adminCacheController;
+        return cacheController;
     }
 
     public static AdviceController getAdviceController() {
@@ -77,11 +77,11 @@ public final class MockController {
         return seoController;
     }
 
-    public static SpecialController getSpecialController() {
-        if (specialController == null) {
-            specialController = initWorkController();
+    public static AuthorizationController getAuthorizationController() {
+        if (authorizationController == null) {
+            authorizationController = initWorkController();
         }
-        return specialController;
+        return authorizationController;
     }
 
     private static ClientMainController initClientMainController() {
@@ -106,14 +106,14 @@ public final class MockController {
                 getResponseService());
     }
 
-    private static AdminResponseController initAdminResponseController() {
-        return new AdminResponseController(
+    private static ResponseController initAdminResponseController() {
+        return new ResponseController(
                 getResponseService()
         );
     }
 
-    private static AdminUserController initAdminUserController() {
-        return new AdminUserController(
+    private static UserController initAdminUserController() {
+        return new UserController(
                 getMainMVFabric(),
                 getUserService(),
                 getCompanyService(),
@@ -121,8 +121,8 @@ public final class MockController {
         );
     }
 
-    private static AdminCacheController initAdminCacheController() {
-        return new AdminCacheController(
+    private static CacheController initAdminCacheController() {
+        return new CacheController(
                 getMainMVFabric()
         );
     }
@@ -137,7 +137,7 @@ public final class MockController {
         return new SeoController(null);
     }
 
-    private static SpecialController initWorkController() {
-        return new SpecialController(null);
+    private static AuthorizationController initWorkController() {
+        return new AuthorizationController(null);
     }
 }

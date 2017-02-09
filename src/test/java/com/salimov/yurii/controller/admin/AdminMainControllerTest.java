@@ -1,6 +1,6 @@
 package com.salimov.yurii.controller.admin;
 
-import com.salimov.yurii.controller.other.MainController;
+import com.salimov.yurii.controller.client.MainController;
 import com.salimov.yurii.controller.other.MainControllerTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
