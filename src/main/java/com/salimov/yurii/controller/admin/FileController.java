@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/admin/file")
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminFileController {
+public class FileController {
 
     /**
      * The implementation of the interface provides a set of standard
@@ -62,7 +62,7 @@ public class AdminFileController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminFileController(
+    public FileController(
             final MainMVFabric fabric,
             final FileService fileService
     ) {
