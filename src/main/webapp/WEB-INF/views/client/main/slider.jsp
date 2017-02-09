@@ -8,7 +8,6 @@
         <c:set var="length" value="${fn:length(company.slidesList)}"/>
         <c:choose>
             <c:when test="${length gt 0}">
-                <%-- Indicators --%>
                 <c:if test="${length gt 1}">
                     <ol class="carousel-indicators hidden-xs">
                         <c:set var="count" value="0"/>
@@ -22,7 +21,6 @@
                         </c:forEach>
                     </ol>
                 </c:if>
-                <%-- Slides --%>
                 <div class="carousel-inner">
                     <c:set var="count" value="true"/>
                     <c:forEach items="${company.slidesList}" var="slide">
@@ -30,13 +28,11 @@
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
                                 <img src="<c:url value="${slide}"/>" onerror="this.src='<c:url
-                                        value="/resources/img/static/default_slide.jpg"/>'"
-                                     class="slide" alt="${company.title}">
+                                        value="/resources/img/static/default_slide.jpg"/>'" alt="${company.title}">
                             </div>
                         </c:if>
                     </c:forEach>
                 </div>
-                <%-- Controls --%>
                 <c:if test="${length gt 1}">
                     <a href="#carousel-example-generic" class="left carousel-control"
                        data-slide="prev"><span class="icon-prev"></span></a>
