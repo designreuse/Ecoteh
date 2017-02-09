@@ -1,4 +1,4 @@
-package com.salimov.yurii.controller.other;
+package com.salimov.yurii.controller.client;
 
 import com.salimov.yurii.entity.*;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
