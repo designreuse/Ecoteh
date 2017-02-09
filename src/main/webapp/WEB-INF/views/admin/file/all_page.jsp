@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="box">
                     <div class="text-center">
-                        <a href="/admin/file/new" title="Добавить новый файл">
+                        <a href="<c:url value="/admin/file/new"/>" title="Добавить новый файл">
                             <button class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Добавить
                             </button>
@@ -43,7 +43,7 @@
                         <c:set var="length" value="${fn:length(files)}"/>
                         <c:if test="${length gt 0}">
                             &nbsp;&nbsp;
-                            <a href="/admin/file/delete/all" title="Удалить все файлы">
+                            <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
                                 <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red"
                                               aria-hidden="true"></span>&nbsp;Удалить все

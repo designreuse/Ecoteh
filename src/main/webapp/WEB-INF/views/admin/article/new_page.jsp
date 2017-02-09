@@ -70,9 +70,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
+                                    <td class="ths">Ключевые слова</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" rows="7" title="" required
+                                    <textarea class="form-control textarea" name="keywords" rows="7" title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
                                     </td>
                                 </tr>
