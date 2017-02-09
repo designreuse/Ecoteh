@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/admin/category")
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminCategoryController {
+public class CategoryController {
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -65,7 +65,7 @@ public class AdminCategoryController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminCategoryController(
+    public CategoryController(
             final MainMVFabric fabric,
             final CategoryService categoryService
     ) {
@@ -192,7 +192,7 @@ public class AdminCategoryController {
         );
         Cache.clear();
         modelAndView.setViewName(
-                "redirect:/admin/category/" + category.getUrl()
+                "redirect:/category/" + category.getUrl()
         );
         return modelAndView;
     }
@@ -231,7 +231,7 @@ public class AdminCategoryController {
     ) {
         this.categoryService.removeByUrl(url);
         Cache.clear();
-        modelAndView.setViewName("redirect:/admin/");
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
@@ -247,7 +247,7 @@ public class AdminCategoryController {
     @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
     public ModelAndView deleteAllCategories(final ModelAndView modelAndView) {
         this.categoryService.removeAll();
-        modelAndView.setViewName("redirect:/admin/");
+        modelAndView.setViewName("redirect:/");
         Cache.clear();
         return modelAndView;
     }
