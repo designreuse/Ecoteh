@@ -15,6 +15,18 @@ body {
     background: #fff url(../img/static/background.jpg) repeat
 }
 
+::-moz-selection {
+    background: #32cd32;
+    color: #fff;
+    text-shadow: none
+}
+
+::selection {
+    background: #32cd32;
+    color: #fff;
+    text-shadow: none
+}
+
 footer, header, main, menu, nav, section {
     display: block
 }
@@ -3030,19 +3042,19 @@ a.label:focus {
     font-style: italic
 }
 
-.vk {
+.fa-vk {
     color: #6896c7
 }
 
-.fb {
+.fa-facebook-official {
     color: #486093
 }
 
-.sk {
+.fa-skype {
     color: #00aff0
 }
 
-.tw {
+.fa-twitter {
     color: #28c3fe
 }
 
