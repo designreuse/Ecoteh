@@ -86,7 +86,7 @@ public final class DefaultConfig {
      * the SUPERMAN role, {@code false} otherwise.
      */
     private static boolean checkSuperUser() {
-        return check(UserRole.SUPERMAN);
+        return check(UserRole.SUPERADMIN);
     }
 
     /**
@@ -126,8 +126,8 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "some login",
-                "some password",
+                "login",
+                "password",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -139,9 +139,9 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "some login",
-                "some password",
-                UserRole.SUPERMAN
+                "login",
+                "password",
+                UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);
     }
