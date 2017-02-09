@@ -1,4 +1,4 @@
-package com.salimov.yurii.controller.admin;
+package com.salimov.yurii.controller.superadmin;
 
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
@@ -24,10 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
  * @see MainMVFabric
  */
 @Controller
-@RequestMapping(value = "/admin/cache")
+@RequestMapping(value = "/superadmin/cache")
 @ComponentScan(basePackages = "com.salimov.yurii.service.fabric")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminCacheController {
+public class CacheController {
 
     /**
      * The implementation of the interface provides a set of standard
@@ -35,7 +35,7 @@ public class AdminCacheController {
      *
      * @see CacheMVFabric
      */
-    private final CacheMVFabric fabric;
+    private final MainMVFabric fabric;
 
     /**
      * Constructor.
@@ -46,7 +46,7 @@ public class AdminCacheController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminCacheController(final MainMVFabric fabric) {
+    public CacheController(final MainMVFabric fabric) {
         this.fabric = new CacheMVFabricImpl(fabric);
     }
 
@@ -65,7 +65,7 @@ public class AdminCacheController {
     public ModelAndView getCache() {
         ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("objects", Cache.getEntriesToString());
-        modelAndView.setViewName("admin/cache/cache_page");
+        modelAndView.setViewName("superadmin/cache/cache_page");
         return modelAndView;
     }
 
@@ -84,7 +84,7 @@ public class AdminCacheController {
     )
     public ModelAndView clearCache(final ModelAndView modelAndView) {
         Cache.clear();
-        modelAndView.setViewName("redirect:/admin/cache");
+        modelAndView.setViewName("redirect:/superadmin/cache");
         return modelAndView;
     }
 
@@ -107,7 +107,7 @@ public class AdminCacheController {
             final ModelAndView modelAndView
     ) {
         Cache.remove(key);
-        modelAndView.setViewName("redirect:/admin/cache");
+        modelAndView.setViewName("redirect:/superadmin/cache");
         return modelAndView;
     }
 }
