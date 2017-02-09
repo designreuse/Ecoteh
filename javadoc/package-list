@@ -2,9 +2,10 @@ com.salimov.yurii.aspect
 com.salimov.yurii.config
 com.salimov.yurii.controller.admin
 com.salimov.yurii.controller.advice
+com.salimov.yurii.controller.authorization
 com.salimov.yurii.controller.client
-com.salimov.yurii.controller.other
 com.salimov.yurii.controller.seo
+com.salimov.yurii.controller.superadmin
 com.salimov.yurii.dao.impl
 com.salimov.yurii.dao.interfaces
 com.salimov.yurii.entity
