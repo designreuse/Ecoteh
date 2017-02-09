@@ -41,7 +41,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @RequestMapping(value = "/admin/user")
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminUserController {
+public class UserController {
 
     /**
      * The implementation of the interface provides a set of standard
@@ -94,7 +94,7 @@ public class AdminUserController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminUserController(
+    public UserController(
             final MainMVFabric fabric,
             final UserService userService,
             final CompanyService companyService,
