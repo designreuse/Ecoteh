@@ -1,6 +1,7 @@
 package com.salimov.yurii.controller.authorization;
 
 import com.salimov.yurii.config.DefaultConfig;
+import com.salimov.yurii.controller.advice.AdviceController;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.captcha.CaptchaService;
@@ -9,6 +10,7 @@ import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * The class implements a set of methods for forgot password.
@@ -33,6 +37,12 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ForgotUserInformationController {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER
+            = Logger.getLogger(AdviceController.class);
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -145,15 +155,23 @@ public class ForgotUserInformationController {
             try {
                 searchByLoginAndSend(username);
                 isForgot = true;
-            } catch (IllegalArgumentException | NullPointerException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
+                LOGGER.error(ex.getMessage(), ex);
                 try {
                     searchByEmailAndSend(username);
                     isForgot = true;
-                } catch (IllegalArgumentException | NullPointerException ex2) {
+                } catch (Exception ex2) {
                     ex2.printStackTrace();
-                    searchInMainCompanyAndSend(username);
-                    isForgot = true;
+                    LOGGER.error(ex2.getMessage(), ex2);
+                    try {
+                        searchInMainCompanyAndSend(username);
+                        isForgot = true;
+                    } catch (Exception ex3) {
+                        ex3.printStackTrace();
+                        LOGGER.error(ex3.getMessage(), ex3);
+                        isForgot = false;
+                    }
                 }
             }
         }
@@ -202,17 +220,27 @@ public class ForgotUserInformationController {
      * and sends information about him to e-mail.
      *
      * @param email a user email for whom to remind information.
+     * @throws IllegalArgumentException Throw exception when parameter login
+     *                                  is blank.
+     * @throws NullPointerException     Throws exception if user is absent.
      */
-    private void searchInMainCompanyAndSend(final String email) {
-        final String mainEmail = this.companyService
-                .getMainCompany()
-                .getEmail();
-        if (mainEmail.equalsIgnoreCase(email)) {
-            sendUserInformationToEmail(
-                    DefaultConfig.getDefaultAdmin(),
-                    mainEmail
+    private void searchInMainCompanyAndSend(final String email)
+            throws IllegalArgumentException, NullPointerException {
+        if (isBlank(email)) {
+            throw new IllegalArgumentException(
+                    "Input E-mail is blank!"
             );
         }
+        final String mainEmail = this.companyService.getMainCompany().getEmail();
+        if (!mainEmail.equalsIgnoreCase(email)) {
+            throw new NullPointerException(
+                    "Can`t find company with E-mail \"" + email + "\"!"
+            );
+        }
+        sendUserInformationToEmail(
+                DefaultConfig.getDefaultAdmin(),
+                mainEmail
+        );
     }
 
     /**
@@ -268,6 +296,7 @@ public class ForgotUserInformationController {
             final Boolean isCaptcha,
             final Boolean isForgot
     ) {
+        System.out.println("271 isForgot = " + isForgot);
         ModelAndView modelAndView;
         try {
             modelAndView = this.fabric.getDefaultModelAndView();
