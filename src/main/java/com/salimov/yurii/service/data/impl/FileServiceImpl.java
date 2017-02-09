@@ -48,7 +48,9 @@ public final class FileServiceImpl
 
     /**
      * The implementation of the interface describes
-     * the methods for getting application properties..
+     * the methods for getting application properties.
+     *
+     * @see ContentProperties
      */
     private final ContentProperties properties;
 

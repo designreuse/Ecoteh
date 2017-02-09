@@ -1,6 +1,6 @@
 package com.salimov.yurii.controller.admin;
 
-import com.salimov.yurii.controller.other.MainController;
+import com.salimov.yurii.controller.client.MainController;
 import com.salimov.yurii.entity.Response;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.MessageService;

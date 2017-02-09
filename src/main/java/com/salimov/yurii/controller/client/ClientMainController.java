@@ -1,6 +1,5 @@
 package com.salimov.yurii.controller.client;
 
-import com.salimov.yurii.controller.other.MainController;
 import com.salimov.yurii.entity.Response;
 import com.salimov.yurii.service.captcha.CaptchaService;
 import com.salimov.yurii.service.data.interfaces.CompanyService;

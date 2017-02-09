@@ -50,14 +50,14 @@ public class RootConfig {
     /**
      * The host ip where staying database.
      */
-    @Value("${jdbc.host}")
-    private String host;
+    @Value("${jdbc.host.ip}")
+    private String hostIp;
 
     /**
-     * The Java Servlet Container port.
+     * The host port where staying database.
      */
-    @Value("${jdbc.port}")
-    private String port;
+    @Value("${jdbc.host.port}")
+    private String hostPort;
 
     /**
      * The database name.
@@ -170,7 +170,7 @@ public class RootConfig {
      * that use a single JPA EntityManagerFactory for transactional data access.
      *
      * @param factory a object of class which implements
-     *                             EntityManagerFactory.
+     *                EntityManagerFactory.
      * @return Returns the transaction manager.
      */
     @Bean
@@ -213,8 +213,8 @@ public class RootConfig {
         final BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(this.driver);
         dataSource.setUrl(
-                this.urlDriver + "://" + this.host
-                        + ":" + this.port + "/" + this.database
+                this.urlDriver + "://" + this.hostIp
+                        + ":" + this.hostPort + "/" + this.database
         );
         dataSource.setConnectionProperties(
                 createDatabaseConnectionProperties()

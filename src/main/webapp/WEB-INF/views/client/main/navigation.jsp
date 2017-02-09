@@ -115,11 +115,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<c:url value="/admin/cache"/>" title="Список обьектов в памяти (кеш)">
-                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="<c:url value="/admin/messages"/>" title="Сообщения от пользователей">
                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                             </a>
@@ -154,11 +149,6 @@
                             <li>
                                 <a href="<c:url value="/admin/file/all"/>">
                                     <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Файлы
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<c:url value="/admin/cache/"/>">
-                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Кэш
                                 </a>
                             </li>
                             <li>

@@ -116,28 +116,6 @@
                 </a>
             </td>
         </tr>
-        <tr>
-            <th class="pad"></th>
-            <td class="pad"></td>
-        </tr>
-        <tr>
-            <th class="pad">
-                <a href="<c:url value="/admin/cache/"/>" title="Список обьектов в памяти">Кэш</a>
-            </th>
-            <td class="pad">
-                <a href="<c:url value="/admin/cache/"/>"
-                   title="Информация об объектах, которых хранятся в памяти в данный момент времени.">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Кэш
-                    </button>
-                </a>&nbsp;&nbsp;
-                <a href="<c:url value="/admin/cache/clear"/>" title="Удалить все объекты с памяти">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>&nbsp;Очистить
-                    </button>
-                </a>
-            </td>
-        </tr>
     </table>
 </div>
 

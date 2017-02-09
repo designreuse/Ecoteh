@@ -29,15 +29,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
-     * Request prefix for main administrators.
-     */
-    private static final String MAIN_ADMIN_REQUEST_URL = "/superman/**";
-
-    /**
      * Request prefix for administrators.
      */
     @Value("${request.admin}")
     private String requestAdmin;
+
+    /**
+     * Request prefix for super administrators.
+     */
+    @Value("${request.superadmin}")
+    private String requestSuperAdmin;
 
     /**
      * Request for authorization.
@@ -100,12 +101,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(false)
                 .and()
                 .authorizeRequests()
-                .antMatchers(MAIN_ADMIN_REQUEST_URL)
-                .hasRole(UserRole.SUPERMAN.name())
+                .antMatchers(this.requestSuperAdmin)
+                .hasRole(UserRole.SUPERADMIN.name())
                 .antMatchers(this.requestAdmin)
                 .hasAnyRole(
                         UserRole.ADMIN.name(),
-                        UserRole.SUPERMAN.name()
+                        UserRole.SUPERADMIN.name()
                 )
                 .anyRequest().permitAll()
                 .and()
