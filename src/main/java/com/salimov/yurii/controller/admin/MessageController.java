@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/admin/messages")
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminMessageController {
+public class MessageController {
 
     /**
      * The implementation of the interface provides a set of standard
@@ -61,7 +61,7 @@ public class AdminMessageController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminMessageController(
+    public MessageController(
             final MainMVFabric fabric,
             final MessageService messageService
     ) {
