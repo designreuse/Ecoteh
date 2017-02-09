@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/admin/company")
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminCompanyController {
+public class CompanyController {
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -65,7 +65,7 @@ public class AdminCompanyController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminCompanyController(
+    public CompanyController(
             final MainMVFabric fabric,
             final CompanyService companyService
     ) {
@@ -170,7 +170,7 @@ public class AdminCompanyController {
                 logoUrl, faviconUrl,
                 slides
         );
-        modelAndView.setViewName("redirect:/admin/company/main");
+        modelAndView.setViewName("redirect:/company/main");
         Cache.clear();
         return modelAndView;
     }
@@ -273,7 +273,7 @@ public class AdminCompanyController {
         );
         Cache.clear();
         modelAndView.setViewName(
-                "redirect:/admin/company/" + company.getUrl()
+                "redirect:/company/" + company.getUrl()
         );
         return modelAndView;
     }
@@ -387,7 +387,7 @@ public class AdminCompanyController {
         );
         Cache.clear();
         modelAndView.setViewName(
-                "redirect:/admin/company/" + company.getUrl()
+                "redirect:/company/" + company.getUrl()
         );
         return modelAndView;
     }
@@ -431,7 +431,7 @@ public class AdminCompanyController {
             final ModelAndView modelAndView
     ) {
         this.companyService.removeByUrl(url);
-        modelAndView.setViewName("redirect:/admin/");
+        modelAndView.setViewName("redirect:/");
         Cache.clear();
         return modelAndView;
     }
@@ -451,7 +451,7 @@ public class AdminCompanyController {
     )
     public ModelAndView deleteAllPartners(final ModelAndView modelAndView) {
         this.companyService.removeAll();
-        modelAndView.setViewName("redirect:/admin/");
+        modelAndView.setViewName("redirect:/");
         Cache.clear();
         return modelAndView;
     }
