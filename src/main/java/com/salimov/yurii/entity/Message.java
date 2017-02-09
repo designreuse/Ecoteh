@@ -108,15 +108,14 @@ public final class Message extends Model<Long> implements IMessage<Long> {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Date: ").append(this.date)
-                .append(" \n").append(this.username);
-        if (isNotBlank(this.email)) {
-            sb.append(" \n").append(this.email);
-        }
-        sb.append(" \n").append(this.phone)
-                .append(" \n").append(this.text);
-        return sb.toString();
+        return "Message{" + super.toString() +
+                ", username='" + this.username + '\'' +
+                ", email='" + this.email + '\'' +
+                ", phone='" + this.phone + '\'' +
+                ", subject='" + this.subject + '\'' +
+                ", text='" + this.text + '\'' +
+                ", date=" + this.date +
+                '}';
     }
 
     /**

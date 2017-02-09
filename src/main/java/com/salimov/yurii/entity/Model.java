@@ -82,6 +82,19 @@ public abstract class Model<E extends Number>
     }
 
     /**
+     * Returns a string representation of the object.
+     *
+     * @return A string representation of the object.
+     */
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id=" + this.id +
+                ", validated=" + this.validated +
+                '}';
+    }
+
+    /**
      * Creates and returns a copy of this object.
      *
      * @return A clone of this instance.
@@ -231,14 +244,6 @@ public abstract class Model<E extends Number>
      */
     @Override
     public abstract int hashCode();
-
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return A string representation of the object.
-     */
-    @Override
-    public abstract String toString();
 
     /**
      * Returns a model date in string format with some date format.

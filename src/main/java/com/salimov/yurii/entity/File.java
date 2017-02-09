@@ -71,6 +71,19 @@ public final class File extends Model<Long> implements IFile<Long> {
     }
 
     /**
+     * Returns a string representation of the object.
+     *
+     * @return A string representation of the object.
+     */
+    @Override
+    public String toString() {
+        return "File{" + super.toString() +
+                ", title='" + this.title + '\'' +
+                ", url='" + this.url + '\'' +
+                '}';
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.
@@ -174,17 +187,6 @@ public final class File extends Model<Long> implements IFile<Long> {
     @Override
     public void setUrl(final String url) {
         this.url = isNotBlank(url) ? url : null;
-    }
-
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return A string representation of the object.
-     */
-    @Override
-    public String toString() {
-        return getClass().getSimpleName()
-                + " " + this.title + " \nURL: " + this.url;
     }
 
     /**

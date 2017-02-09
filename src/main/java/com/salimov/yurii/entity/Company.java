@@ -244,28 +244,29 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(type.name()).append(" ").append(super.toString())
-                .append(" \nTagline: ").append(tagline)
-                .append(" \nInformation: ").append(information)
-                .append(" \nDomain: ").append(domain)
-                .append(" \nMobile Phone: ").append(mobilePhone)
-                .append(" \nLandline Phone: ").append(landlinePhone)
-                .append(" \nFax: ").append(fax)
-                .append(" \nE-mail:").append(email)
-                .append(" \nVkontakte: ").append(vkontakte)
-                .append(" \nFacebook: ").append(facebook)
-                .append(" \nTwitter: ").append(twitter)
-                .append(" \nSkype: ").append(skype);
-        if (type.equals(CompanyType.MAIN)) {
-            sb.append(" \nSenderImpl E-mail: ").append(senderEmail)
-                    .append(" \nSenderImpl Password: ").append(senderPass)
-                    .append(" \nWork Time: ").append(workTimeFrom)
-                    .append(" - ").append(workTimeTo);
-        }
-        sb.append(" \nAddress: ").append(address)
-                .append(" \nGoogle Maps: ").append(googleMaps);
-        return sb.toString();
+        return "Company{" + super.toString() +
+                ", tagline='" + this.tagline + '\'' +
+                ", information='" + this.information + '\'' +
+                ", domain='" + this.domain + '\'' +
+                ", mobilePhone='" + this.mobilePhone + '\'' +
+                ", landlinePhone='" + this.landlinePhone + '\'' +
+                ", fax='" + this.fax + '\'' +
+                ", email='" + this.email + '\'' +
+                ", senderEmail='" + this.senderEmail + '\'' +
+                ", senderPass='" + this.senderPass + '\'' +
+                ", vkontakte='" + this.vkontakte + '\'' +
+                ", facebook='" + this.facebook + '\'' +
+                ", twitter='" + this.twitter + '\'' +
+                ", skype='" + this.skype + '\'' +
+                ", address='" + this.address + '\'' +
+                ", workTimeFrom='" + this.workTimeFrom + '\'' +
+                ", workTimeTo='" + this.workTimeTo + '\'' +
+                ", googleMaps='" + this.googleMaps + '\'' +
+                ", logoUrl='" + this.logoUrl + '\'' +
+                ", faviconUrl='" + this.faviconUrl + '\'' +
+                ", slides='" + this.slides + '\'' +
+                ", type=" + this.type +
+                '}';
     }
 
     /**

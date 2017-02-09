@@ -185,14 +185,25 @@ public final class User extends Model<Long>
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(this.name)
-                .append(" \nE-mail: ").append(this.email)
-                .append(" \nPhone: ").append(this.phone);
-        if (this.role != null) {
-            sb.append(" \nRole: ").append(this.role.name());
-        }
-        return sb.append(" ").toString();
+        return "User{" + super.toString() +
+                ", name='" + this.name + '\'' +
+                ", url='" + this.url + '\'' +
+                ", encryptedLogin='" + this.encryptedLogin + '\'' +
+                ", encryptedPassword='" + this.encryptedPassword + '\'' +
+                ", Login='" + getLogin() + '\'' +
+                ", Password='" + getPassword() + '\'' +
+                ", email='" + this.email + '\'' +
+                ", phone='" + this.phone + '\'' +
+                ", vkontakte='" + this.vkontakte + '\'' +
+                ", facebook='" + this.facebook + '\'' +
+                ", twitter='" + this.twitter + '\'' +
+                ", skype='" + this.skype + '\'' +
+                ", description='" + this.description + '\'' +
+                ", photoUrl='" + this.photoUrl + '\'' +
+                ", role=" + this.role +
+                ", isMailing=" + this.isMailing +
+                ", isLocked=" + this.isLocked +
+                '}';
     }
 
     /**
