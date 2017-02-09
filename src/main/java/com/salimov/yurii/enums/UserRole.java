@@ -12,9 +12,9 @@ import java.util.Arrays;
 public enum UserRole {
 
     /**
-     * The superman role.
+     * The super admin role.
      */
-    SUPERMAN,
+    SUPERADMIN,
 
     /**
      * The admin role.
