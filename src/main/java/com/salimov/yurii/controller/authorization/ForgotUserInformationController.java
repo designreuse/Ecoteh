@@ -1,4 +1,4 @@
-package com.salimov.yurii.controller.client;
+package com.salimov.yurii.controller.authorization;
 
 import com.salimov.yurii.config.DefaultConfig;
 import com.salimov.yurii.entity.Company;
