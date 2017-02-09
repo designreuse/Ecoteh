@@ -1,7 +1,6 @@
 package com.salimov.yurii.controller.authorization;
 
 import com.salimov.yurii.config.DefaultConfig;
-import com.salimov.yurii.controller.advice.AdviceController;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.captcha.CaptchaService;
@@ -42,7 +41,7 @@ public class ForgotUserInformationController {
      * The object for logging information.
      */
     private static final Logger LOGGER
-            = Logger.getLogger(AdviceController.class);
+            = Logger.getLogger(ForgotUserInformationController.class);
 
     /**
      * The implementation of the interface provides a set of standard methods
