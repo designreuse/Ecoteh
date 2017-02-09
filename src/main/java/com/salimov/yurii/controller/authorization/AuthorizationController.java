@@ -1,4 +1,4 @@
-package com.salimov.yurii.controller.other;
+package com.salimov.yurii.controller.authorization;
 
 import com.salimov.yurii.config.DefaultConfig;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The default configuration controller.
+ * The authorization controller.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DefaultConfig
  */
 @Controller
-public class SpecialController {
+public class AuthorizationController {
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -41,7 +41,7 @@ public class SpecialController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public SpecialController(final MainMVFabric fabric) {
+    public AuthorizationController(final MainMVFabric fabric) {
         this.fabric = new CacheMVFabricImpl(fabric);
     }
 
@@ -87,45 +87,6 @@ public class SpecialController {
         );
         Cache.removeAll("Admin");
         modelAndView.setViewName("redirect:/login?logout");
-        return modelAndView;
-    }
-
-    /**
-     * The method throws an exception in the case of reference to it.
-     * The exception sender:
-     * "You do not have sufficient permissions to access this page."
-     * Request mapping: /illegal_access_exception
-     * Method: POST
-     *
-     * @throws IllegalAccessException throws when the not authorized user
-     *                                is tries to use private methods.
-     */
-    @RequestMapping(
-            value = "/illegal_access_exception",
-            method = RequestMethod.GET
-    )
-    public void getIllegalAccessException() throws IllegalAccessException {
-        throw new IllegalAccessException(
-                "You do not have sufficient permissions to access this page."
-        );
-    }
-
-    /**
-     * Clears the cache.
-     * Request mapping: /superman/clear
-     * Method: GET
-     *
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/superman/clear",
-            method = RequestMethod.GET
-    )
-    public ModelAndView clearCache(final ModelAndView modelAndView) {
-        Cache.clear();
-        System.gc();
-        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 }
