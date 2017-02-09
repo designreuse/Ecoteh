@@ -28,12 +28,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * with main ModelAndView objects and object of the {@link User}
  * class for admins. Class methods create and return modelsAndView,
  * depending on the request. For the work used implementation
- * of the interface {@link AdminMVFabric}.
+ * of the interface {@link MainMVFabric}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see User
- * @see AdminMVFabric
+ * @see MainMVFabric
  * @see UserService
  * @see FileService
  */

@@ -28,8 +28,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  * @see CacheMVFabric
  * @see MainMVFabric
- * @see com.salimov.yurii.service.fabrica.interfaces.ClientMVFabric
- * @see com.salimov.yurii.service.fabrica.interfaces.AdminMVFabric
  */
 @SuppressWarnings("SpringMVCViewInspection")
 public abstract class MainController {

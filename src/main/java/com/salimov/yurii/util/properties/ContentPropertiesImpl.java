@@ -83,6 +83,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
      * @param exposeContextBeansAsAttributes is exposed context beans as attributes.
      * @param resourcesUrl                   a url of resources.
      * @param resourcesLocation              a location of resources.
+     * @param maxFileSize                    a maximum file size.
      * @param loginRequest                   a login request for authorization.
      * @param loginViewName                  a login view name (path).
      * @param projectDirectory               a project directory name.
