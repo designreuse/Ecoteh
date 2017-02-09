@@ -44,13 +44,13 @@
                     <hr>
                     <c:if test="${length gt 10}">
                         <div class="text-center">
-                            <a href="<c:url value="/admin/cache"/>"
+                            <a href="<c:url value="/superadmin/cache"/>"
                                title="Обновить информацию об объектах, которые хранятся в памяти.">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Обновить
                                 </button>
                             </a>&nbsp;&nbsp;
-                            <a href="<c:url value="/admin/cache/clear"/>" title="Удалить все объекты с памяти">
+                            <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
                                 <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-floppy-remove red"
                                               aria-hidden="true"></span>&nbsp;Очистить
@@ -62,16 +62,16 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <table align="center">
                                 <tr>
-                                    <th class="pad">№</th>
-                                    <th class="pad">Объект</th>
-                                    <th class="pad"></th>
+                                    <th>№</th>
+                                    <th>Объект</th>
+                                    <th></th>
                                 </tr>
                                 <c:forEach items="${objects}" var="object">
                                     <tr>
-                                        <td class="pad"><c:set var="count" value="${count + 1}"/>${count}</td>
-                                        <td class="pad"><c:out value="${object.key}"/></td>
-                                        <td class="pad">
-                                            <a href="<c:url value="/admin/cache/remove/${object.key}"/>"
+                                        <td><c:set var="count" value="${count + 1}"/>${count}</td>
+                                        <td><c:out value="${object.key}"/></td>
+                                        <td>
+                                            <a href="<c:url value="/superadmin/cache/remove/${object.key}"/>"
                                                title="Удалить объект с кэша">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-remove red"
@@ -84,13 +84,13 @@
                             </table>
                             <br>
                             <div class="text-center">
-                                <a href="<c:url value="/admin/cache"/>"
+                                <a href="<c:url value="/superadmin/cache"/>"
                                    title="Обновить информацию об объектах, которые хранятся в памяти.">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Обновить
                                     </button>
                                 </a>&nbsp;&nbsp;
-                                <a href="<c:url value="/admin/cache/clear"/>" title="Удалить все объекты с памяти">
+                                <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-floppy-remove red"
                                               aria-hidden="true"></span>&nbsp;Очистить
