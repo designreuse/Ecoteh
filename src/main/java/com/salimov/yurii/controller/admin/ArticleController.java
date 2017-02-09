@@ -39,7 +39,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @RequestMapping(value = "/admin/article")
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminArticleController {
+public class ArticleController {
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -81,7 +81,7 @@ public class AdminArticleController {
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public AdminArticleController(
+    public ArticleController(
             final MainMVFabric fabric,
             final ArticleService articleService,
             final CategoryService categoryService
@@ -290,7 +290,7 @@ public class AdminArticleController {
             final ModelAndView modelAndView
     ) {
         this.articleService.removeByUrl(url);
-        modelAndView.setViewName("redirect:/admin/");
+        modelAndView.setViewName("redirect:/");
         Cache.clear();
         return modelAndView;
     }
@@ -312,7 +312,7 @@ public class AdminArticleController {
             final ModelAndView modelAndView
     ) {
         this.articleService.removeAll();
-        modelAndView.setViewName("redirect:/admin/");
+        modelAndView.setViewName("redirect:/");
         Cache.clear();
         return modelAndView;
     }
@@ -331,12 +331,12 @@ public class AdminArticleController {
     private static String getViewName(final Article article) {
         String viewName;
         if (isNotBlank(article.getText())) {
-            viewName = "redirect:/admin/article/" + article.getUrl();
+            viewName = "redirect:/article/" + article.getUrl();
         } else if ((article.getCategory() != null) && (
                 article.getCategory().isValidated())) {
-            viewName = "redirect:/admin/category/" + article.getCategory().getUrl();
+            viewName = "redirect:/category/" + article.getCategory().getUrl();
         } else {
-            viewName = "redirect:/admin/article/all";
+            viewName = "redirect:/article/all";
         }
         return viewName;
     }
