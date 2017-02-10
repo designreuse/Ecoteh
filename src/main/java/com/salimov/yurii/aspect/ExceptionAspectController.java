@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class ControllerExceptionAspect {
+public class ExceptionAspectController {
 
     /**
      * The object for logging information.
      */
     private final static Logger LOGGER = Logger.getLogger(
-            ControllerExceptionAspect.class
+            ExceptionAspectController.class
     );
 
     /**
