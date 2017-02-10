@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public final class ControllerExceptionAspectTest {
+public final class ExceptionAspectControllerTest {
 
     @Test
     public void afterThrowingAdvice() throws Exception {
-        final ControllerExceptionAspect aspect = new ControllerExceptionAspect();
+        final ExceptionAspectController aspect = new ExceptionAspectController();
         assertNotNull(aspect);
         aspect.afterThrowingAdvice(new Exception());
     }
