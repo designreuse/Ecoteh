@@ -149,8 +149,10 @@
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    <c:if test="${length gt 0}">
+        <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
+        <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    </c:if>
     </body>
     </html>
 </compress:html>
