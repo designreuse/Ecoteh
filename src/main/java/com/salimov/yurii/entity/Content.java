@@ -187,7 +187,7 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     @Override
     public void setTitle(final String title) {
         this.title = isNotBlank(title) ? title : null;
-        translateAndSetUrl(title);
+        translateAndSetUrl(this.title);
     }
 
     /**

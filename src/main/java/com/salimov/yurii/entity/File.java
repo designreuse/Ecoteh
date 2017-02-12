@@ -201,9 +201,9 @@ public final class File extends Model<Long> implements IFile<Long> {
         if (isNotBlank(url)) {
             final char oldChar = '.';
             final char newChar = '!';
-            final String temp = url.replace(oldChar, newChar);
-            newUrl = Translator.fromCyrillicToLatin(temp)
-                    .replace(newChar, oldChar);
+            newUrl = Translator.fromCyrillicToLatin(
+                    url.replace(oldChar, newChar)
+            ).replace(newChar, oldChar);
         }
         setUrl(newUrl);
     }

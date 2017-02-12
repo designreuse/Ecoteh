@@ -445,7 +445,7 @@ public final class User extends Model<Long>
     @Override
     public void setName(final String name) {
         this.name = isNotBlank(name) ? name : null;
-        translateAndSetUrl(name);
+        translateAndSetUrl(this.name);
     }
 
     /**
