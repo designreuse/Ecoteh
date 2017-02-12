@@ -75,12 +75,13 @@ public class AppInitializer
         return new Class<?>[]{
                 RootConfig.class,
                 SecurityConfig.class,
-                ContentConfig.class
+                ContentConfig.class,
+                CaptchaConfig.class
         };
     }
 
     /**
-     * Specify the servlet mapping(s) for the {@code DispatcherServlet} &mdash;
+     * Specify the servlet mapping(s) for the {@code DispatcherServlet};
      * for example {@code "/"}, {@code "/app"}, etc.
      */
     @Override
@@ -130,8 +131,8 @@ public class AppInitializer
     ) {
         final DispatcherServlet dispatcherServlet =
                 (DispatcherServlet) super.createDispatcherServlet(
-                webApplicationContext
-        );
+                        webApplicationContext
+                );
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(
                 THROW_EXCEPTION_IF_NO_HANDLER_FOUND
         );
