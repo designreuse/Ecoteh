@@ -2,7 +2,7 @@ package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IUser;
 import com.salimov.yurii.enums.UserRole;
-import com.salimov.yurii.util.encryption.Encryption;
+import com.salimov.yurii.util.encryption.Encryptor;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -456,7 +456,7 @@ public final class User extends Model<Long>
     @Override
     public void setLogin(final String login) {
         setEncryptedLogin(
-                new Encryption(login).encrypt()
+                new Encryptor(login).encrypt()
         );
     }
 
@@ -467,9 +467,7 @@ public final class User extends Model<Long>
      */
     @Override
     public String getLogin() {
-        return new Encryption(
-                getEncryptedLogin()
-        ).decrypt();
+        return new Encryptor(this.encryptedLogin).decrypt();
     }
 
     /**
@@ -502,9 +500,7 @@ public final class User extends Model<Long>
     @Transient
     @Override
     public String getPassword() {
-        return Translator.fromAscii(
-                getEncryptedPassword()
-        );
+        return new Encryptor(this.encryptedPassword).decrypt();
     }
 
     /**
@@ -516,7 +512,7 @@ public final class User extends Model<Long>
     @Override
     public void setPassword(final String password) {
         setEncryptedPassword(
-                Translator.toAscii(password)
+                new Encryptor(password).encrypt()
         );
     }
 

@@ -3,7 +3,7 @@ package com.salimov.yurii.dao.impl;
 import com.salimov.yurii.dao.interfaces.UserDao;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.repository.UserRepository;
-import com.salimov.yurii.util.encryption.Encryption;
+import com.salimov.yurii.util.encryption.Encryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
@@ -79,7 +79,7 @@ public final class UserDaoImpl
     @Override
     public User getByLogin(final String login) {
         return this.repository.findByEncryptedLogin(
-                new Encryption(login).encrypt()
+                new Encryptor(login).encrypt()
         );
     }
 
@@ -138,7 +138,7 @@ public final class UserDaoImpl
     @Override
     public void removeByLogin(final String login) {
         this.repository.deleteByEncryptedLogin(
-                new Encryption(login).encrypt()
+                new Encryptor(login).encrypt()
         );
     }
 }

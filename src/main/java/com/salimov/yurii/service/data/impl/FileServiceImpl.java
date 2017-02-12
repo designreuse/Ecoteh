@@ -5,8 +5,8 @@ import com.salimov.yurii.entity.Content;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.FileComparator;
+import com.salimov.yurii.util.loader.FileLoader;
 import com.salimov.yurii.util.properties.ContentProperties;
-import com.salimov.yurii.util.saver.SaverImpl;
 import com.salimov.yurii.util.translator.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -278,7 +278,7 @@ public final class FileServiceImpl
             final String rootPath
     ) {
         if (multipartFile != null && !multipartFile.isEmpty()) {
-            new SaverImpl(
+            new FileLoader(
                     multipartFile,
                     this.properties.getProjectAbsolutePath()
                             + (isNotBlank(rootPath) ? rootPath
@@ -314,7 +314,7 @@ public final class FileServiceImpl
     @Override
     @Transactional
     public boolean deleteFile(final String rootPath) {
-        return new SaverImpl(
+        return new FileLoader(
                 this.properties.getProjectAbsolutePath() + rootPath
         ).delete();
     }
