@@ -2,7 +2,7 @@ package com.salimov.yurii.mocks.repository;
 
 import com.salimov.yurii.entity.*;
 import com.salimov.yurii.repository.*;
-import com.salimov.yurii.util.encryption.Encryption;
+import com.salimov.yurii.util.encryption.Encryptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -166,12 +166,12 @@ public class MockRepository {
         when(userRepository.findByUrl(null)).thenReturn(null);
         when(
                 userRepository.findByEncryptedLogin(
-                        new Encryption(LOGIN).encrypt()
+                        new Encryptor(LOGIN).encrypt()
                 )
         ).thenReturn(user);
         when(
                 userRepository.findByEncryptedLogin(
-                        new Encryption(ANY_STRING).encrypt()
+                        new Encryptor(ANY_STRING).encrypt()
                 )
         ).thenReturn(null);
         when(userRepository.findByEncryptedLogin(null)).thenReturn(null);

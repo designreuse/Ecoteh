@@ -10,31 +10,31 @@ public final class EncryptionTest {
 
     @Test
     public void whenEncryptByNullValueThenReturnNull() {
-        assertNull(new Encryption(null).encrypt());
+        assertNull(new Encryptor(null).encrypt());
     }
 
     @Test
     public void whenEncryptThenReturnSomeValue() {
-        assertNotNull(new Encryption(ANY_STRING).encrypt());
+        assertNotNull(new Encryptor(ANY_STRING).encrypt());
     }
 
     @Test
     public void whenDecryptByNullValueThenReturnNull() {
-        assertNull(new Encryption(null).decrypt());
+        assertNull(new Encryptor(null).decrypt());
     }
 
     @Test
     public void whenDecryptByUnknownStringThenReturnNull() {
-        assertNull(new Encryption(ANY_STRING).decrypt());
+        assertNull(new Encryptor(ANY_STRING).decrypt());
     }
 
     @Test
     public void whenDecryptThenReturnSomeValue() {
-        assertNotNull(new Encryption("123").decrypt());
+        assertNotNull(new Encryptor("123").decrypt());
     }
 
     @Test
     public void whenGetValueThenReturnSomeValue() {
-        assertNotNull(new Encryption(ANY_STRING).getValue());
+        assertNotNull(new Encryptor(ANY_STRING).getValue());
     }
 }
