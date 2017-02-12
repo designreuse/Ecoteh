@@ -1,4 +1,4 @@
-package com.salimov.yurii.util.saver;
+package com.salimov.yurii.util.loader;
 
 /**
  * The interface describes the methods for working
@@ -7,7 +7,7 @@ package com.salimov.yurii.util.saver;
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public interface Sever {
+public interface Loader {
 
     /**
      * Saves a file in the file system.
@@ -16,8 +16,6 @@ public interface Sever {
 
     /**
      * Deletes a file with the rootPath.
-     * Deletes a file if it is exists
-     * and it is a file (not a directory)
      *
      * @return {@code true} if a file is deleted,
      * {@code false} otherwise.
