@@ -5,9 +5,9 @@ package com.salimov.yurii.util.encryption;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Encryption
+ * @see Encryptor
  */
-public interface IEncryption {
+public interface IEncryptor {
 
     /**
      * Encrypts a data.
@@ -22,4 +22,11 @@ public interface IEncryption {
      * @return The decrypted data
      */
     String decrypt();
+
+    /**
+     * Returns a value to encrypt or to decrypt.
+     *
+     * @return The value to encrypt or to decrypt.
+     */
+    String getValue();
 }
