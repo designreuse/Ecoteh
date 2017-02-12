@@ -1,4 +1,4 @@
-package com.salimov.yurii.util.saver;
+package com.salimov.yurii.util.loader;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,13 +17,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public class SaverImpl implements Sever {
+public class FileLoader implements Loader {
 
     /**
      * The object for logging information.
      */
     private final static Logger LOGGER
-            = Logger.getLogger(SaverImpl.class);
+            = Logger.getLogger(FileLoader.class);
 
     /**
      * The file to write.
@@ -42,7 +42,7 @@ public class SaverImpl implements Sever {
      *
      * @param path a root path of a file.
      */
-    public SaverImpl(final String path) {
+    public FileLoader(final String path) {
         this(null, path);
     }
 
@@ -52,7 +52,7 @@ public class SaverImpl implements Sever {
      * @param file a file to write.
      * @param path a root path of a file.
      */
-    public SaverImpl(
+    public FileLoader(
             final MultipartFile file,
             final String path
     ) {
