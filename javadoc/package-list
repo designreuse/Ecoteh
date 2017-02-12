@@ -25,8 +25,8 @@ com.salimov.yurii.util.cache
 com.salimov.yurii.util.captcha
 com.salimov.yurii.util.comparator
 com.salimov.yurii.util.encryption
+com.salimov.yurii.util.loader
 com.salimov.yurii.util.properties
-com.salimov.yurii.util.saver
 com.salimov.yurii.util.sender
 com.salimov.yurii.util.translator
 com.salimov.yurii.util.worktime
