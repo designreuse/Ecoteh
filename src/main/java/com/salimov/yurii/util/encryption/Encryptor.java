@@ -1,6 +1,8 @@
 package com.salimov.yurii.util.encryption;
 
+import com.salimov.yurii.entity.Model;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -18,6 +20,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see IEncryptor
  */
 public final class Encryptor implements IEncryptor {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(Model.class);
 
     /**
      * Default primary encoding format.
@@ -140,7 +147,7 @@ public final class Encryptor implements IEncryptor {
                 this.charsetName = Encryptor.staticCharsetName;
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
@@ -156,7 +163,7 @@ public final class Encryptor implements IEncryptor {
         try {
             result = getEncryptedString();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
             result = null;
         }
         return result;
