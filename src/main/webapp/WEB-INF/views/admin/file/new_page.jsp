@@ -3,6 +3,15 @@
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
 <compress:html removeIntertagSpaces="true">
+    <%!
+        private final static int MAX_FIlE_SIZE = Integer.parseInt(
+                java.util.ResourceBundle
+                        .getBundle("content")
+                        .getString("file.max.size")
+        ) / 1048576;
+    %>
+    <c:set var="maxFileSize" value="<%= MAX_FIlE_SIZE %>"/>
+
     <!DOCTYPE HTML>
     <html lang="ru">
     <head>
@@ -71,7 +80,10 @@
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения.</p>
+                            <p>
+                                <span class="red">*</span>&nbsp;Поля обязательные для заполнения.
+                                (Максимальный размер файла ${maxFileSize} Мб)
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>
