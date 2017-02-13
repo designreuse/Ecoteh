@@ -1,9 +1,12 @@
-package com.salimov.yurii.util.worktime;
+package com.salimov.yurii.util.time;
 
 import org.apache.log4j.Logger;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -22,6 +25,17 @@ public class Time implements ITime {
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(Time.class);
+
+    /**
+     * It is s an object for date/time formatting subclasses which formats
+     * and parses dates or time in a language-independent manner.
+     */
+    public static final String DATE_PATTERN = "d MMM yyyy, HH:mm";
+
+    /**
+     * Represents a timezone offset, and also figures out daylight savings.
+     */
+    public static final String TIME_ZONE = "GMT+3";
 
     /**
      * The input time;
@@ -255,6 +269,42 @@ public class Time implements ITime {
             result = false;
         }
         return result;
+    }
+
+    /**
+     * Returns a model date in string format.
+     *
+     * @param date a date to translate in string.
+     * @return The model string-date.
+     */
+    public static String getDateToString(final Date date) {
+        return getDateToStringWithFormat(
+                date,
+                new SimpleDateFormat(DATE_PATTERN),
+                TimeZone.getTimeZone(TIME_ZONE)
+        );
+    }
+
+    /**
+     * Returns a model date in string format with some date format.
+     *
+     * @param date       a date to translate in string.
+     * @param dateFormat is an object for date/time formatting subclasses
+     *                   which formats and parses dates or time in
+     *                   a language-independent manner.
+     * @param timeZone   represents a timezone offset,
+     *                   and also figures out daylight savings.
+     * @return The model string-date.
+     */
+    private static String getDateToStringWithFormat(
+            final Date date,
+            final DateFormat dateFormat,
+            final TimeZone timeZone
+    ) {
+        dateFormat.setTimeZone(timeZone);
+        return dateFormat.format(
+                date != null ? date : new Date()
+        );
     }
 
     /**

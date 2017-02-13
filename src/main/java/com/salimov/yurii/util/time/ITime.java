@@ -1,4 +1,4 @@
-package com.salimov.yurii.util.worktime;
+package com.salimov.yurii.util.time;
 
 /**
  * The interface describes a set of methods
