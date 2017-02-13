@@ -4,6 +4,7 @@ import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.UserService;
+import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class SearchController {
             final MainMVFabric fabric,
             final SearchService searchService
     ) {
-        this.fabric = fabric;
+        this.fabric = new CacheMVFabricImpl(fabric);
         this.searchService = searchService;
     }
 
@@ -105,6 +106,7 @@ public class SearchController {
             @RequestParam(value = "content") final String content,
             @RequestParam(value = "how_search") final boolean howSearch
     ) {
+
         return this.searchService.search(keywords, content, howSearch);
     }
 

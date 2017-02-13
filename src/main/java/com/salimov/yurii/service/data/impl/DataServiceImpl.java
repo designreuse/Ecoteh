@@ -401,7 +401,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
                     models.stream()
                             .filter(
                                     model -> (model != null)
-                                            && (model.isValidated())
+                                            && model.isValidated()
                             ).collect(Collectors.toList())
             );
         }

@@ -7,6 +7,7 @@ import com.salimov.yurii.entity.Model;
 import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
+import com.salimov.yurii.util.compressor.HtmlPress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -127,7 +128,9 @@ public final class CompanyServiceImpl
         final Company company = new Company();
         company.initialize(
                 title, domain,
-                tagline, description, information,
+                tagline,
+                new HtmlPress().compress(description),
+                new HtmlPress().compress(information),
                 mobilePhone, landlinePhone, fax, email,
                 null, null,
                 vkontakte, facebook, twitter, skype,
@@ -192,7 +195,9 @@ public final class CompanyServiceImpl
         final Company company = getByUrl(url, false);
         company.initialize(
                 title, domain,
-                tagline, description, information,
+                tagline,
+                new HtmlPress().compress(description),
+                new HtmlPress().compress(information),
                 mobilePhone, landlinePhone, fax, email,
                 null, null,
                 vkontakte, facebook, twitter, skype,
@@ -261,7 +266,9 @@ public final class CompanyServiceImpl
         final Company mainCompany = getMainCompany();
         mainCompany.initialize(
                 title, domain,
-                tagline, description, information,
+                tagline,
+                new HtmlPress().compress(description),
+                new HtmlPress().compress(information),
                 mobilePhone, landlinePhone, fax, email,
                 senderEmail, senderPass,
                 vkontakte, facebook, twitter, skype,

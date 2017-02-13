@@ -1,6 +1,8 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IArticle;
+import com.salimov.yurii.util.generator.StringGenerator;
+import com.salimov.yurii.util.time.Time;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -215,12 +217,10 @@ public final class Article extends Content<Long> implements IArticle<Long> {
 
     /**
      * Generates new number to the article.
-     * To generate used a pattern {@link Model#CODE_PATTERN}
-     * and length {@link Model#CODE_LENGTH}.
      */
     @Override
     public void newNumber() {
-        this.number = createRandomString(CODE_PATTERN, CODE_LENGTH);
+        this.number = new StringGenerator().generate();
     }
 
     /**
@@ -272,7 +272,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public String getDateToString() {
-        return getDateToString(getDate());
+        return Time.getDateToString(this.date);
     }
 
     /**

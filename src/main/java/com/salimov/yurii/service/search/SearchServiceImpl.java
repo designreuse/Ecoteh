@@ -187,6 +187,7 @@ public class SearchServiceImpl implements SearchService {
             modelAndView = prepareDefaultSearchPage(keywords);
         }
         addKeys(_content, howSearch, modelAndView);
+        modelAndView.addObject("", this.userService.getAuthenticatedUser());
         return modelAndView;
     }
 

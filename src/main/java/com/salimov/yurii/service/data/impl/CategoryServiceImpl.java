@@ -6,6 +6,7 @@ import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
+import com.salimov.yurii.util.compressor.HtmlPress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -93,7 +94,11 @@ public final class CategoryServiceImpl
             final boolean isValid
     ) {
         final Category category = new Category();
-        category.initialize(title, description, keywords, photoUrl);
+        category.initialize(
+                title,
+                new HtmlPress().compress(description),
+                keywords, photoUrl
+        );
         category.setValidated(isValid);
         return add(category);
     }
@@ -122,7 +127,10 @@ public final class CategoryServiceImpl
             final boolean isValid
     ) {
         final Category category = getByUrl(url, false);
-        category.initialize(title, description, keywords, photoUrl);
+        category.initialize(
+                title,
+                new HtmlPress().compress(description),
+                keywords, photoUrl);
         category.setValidated(isValid);
         return update(category);
     }

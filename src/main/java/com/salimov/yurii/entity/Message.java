@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IMessage;
+import com.salimov.yurii.util.time.Time;
 
 import java.util.Date;
 
@@ -338,7 +339,7 @@ public final class Message extends Model<Long> implements IMessage<Long> {
      */
     @Override
     public String getDateToString() {
-        return getDateToString(this.date);
+        return Time.getDateToString(this.date);
     }
 
     /**

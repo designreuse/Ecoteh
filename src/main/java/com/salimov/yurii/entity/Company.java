@@ -2,7 +2,7 @@ package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.ICompany;
 import com.salimov.yurii.enums.CompanyType;
-import com.salimov.yurii.util.worktime.Time;
+import com.salimov.yurii.util.time.Time;
 
 import javax.persistence.*;
 import java.util.ArrayList;

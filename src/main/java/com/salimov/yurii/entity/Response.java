@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IResponse;
+import com.salimov.yurii.util.time.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -127,9 +128,9 @@ public final class Response extends Model<Long> implements IResponse<Long> {
     @Override
     public String toString() {
         return "Response{" + super.toString() +
-                ", username='" + username + '\'' +
-                ", text='" + text + '\'' +
-                ", date=" + date +
+                ", username='" + this.username + '\'' +
+                ", text='" + this.text + '\'' +
+                ", date=" + this.date +
                 '}';
     }
 
@@ -230,7 +231,7 @@ public final class Response extends Model<Long> implements IResponse<Long> {
      */
     @Override
     public String getDateToString() {
-        return getDateToString(getDate());
+        return Time.getDateToString(this.date);
     }
 
     /**

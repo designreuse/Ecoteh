@@ -61,8 +61,8 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * @return The content with parameter title or {@code null}.
      * @throws IllegalArgumentException Throw exception when object
      *                                  parameter title is blank.
-     * @throws NullPointerException Throw exception when object
-     *                              with parameter title is not exist.
+     * @throws NullPointerException     Throw exception when object
+     *                                  with parameter title is not exist.
      * @see Content
      */
     @Override

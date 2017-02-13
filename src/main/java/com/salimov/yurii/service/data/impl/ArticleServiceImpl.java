@@ -6,7 +6,8 @@ import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
-import com.salimov.yurii.util.worktime.Time;
+import com.salimov.yurii.util.compressor.HtmlPress;
+import com.salimov.yurii.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -95,7 +96,9 @@ public final class ArticleServiceImpl
     ) {
         final Article article = new Article();
         article.initialize(
-                title, description, text,
+                title,
+                new HtmlPress().compress(description),
+                new HtmlPress().compress(text),
                 keywords, number, category
         );
         article.setValidated(isValid);
@@ -133,7 +136,9 @@ public final class ArticleServiceImpl
     ) {
         final Article article = getByUrl(url, false);
         article.initialize(
-                title, description, text,
+                title,
+                new HtmlPress().compress(description),
+                new HtmlPress().compress(text),
                 keywords, number, category
         );
         article.setValidated(isValid);
