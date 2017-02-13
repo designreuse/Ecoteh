@@ -132,10 +132,10 @@ public final class CompanyServiceImpl
                 new HtmlPress().compress(description),
                 new HtmlPress().compress(information),
                 mobilePhone, landlinePhone, fax, email,
-                null, null,
+                "", "",
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
-                logoUrl, null
+                logoUrl, ""
         );
         company.setType(CompanyType.PARTNER);
         company.setValidated(isValid);
@@ -199,10 +199,10 @@ public final class CompanyServiceImpl
                 new HtmlPress().compress(description),
                 new HtmlPress().compress(information),
                 mobilePhone, landlinePhone, fax, email,
-                null, null,
+                "", "",
                 vkontakte, facebook, twitter, skype,
                 address, keywords, googleMaps,
-                logoUrl, null
+                logoUrl, ""
         );
         company.setValidated(isValid);
         return update(company);
