@@ -130,10 +130,16 @@ public final class ResponseTest extends ModelTest<Response> {
     @Test
     public void toStringTest() {
         final Response response = getResponse();
-        final String value = "Date: " + response.getDate()
-                + " \nUsername: " + response.getUsername()
-                + " \nText: " + response.getText();
-        assertEquals(response.toString(), value);
+        final String responseToString = "Response{" +
+                "Model{" +
+                "id=" + response.getId() +
+                ", validated=" + response.isValidated() +
+                '}' +
+                ", username='" + response.getUsername() + '\'' +
+                ", text='" + response.getText() + '\'' +
+                ", date=" + response.getDate() +
+                '}';
+        assertEquals(response.toString(), responseToString);
     }
 
     @Test

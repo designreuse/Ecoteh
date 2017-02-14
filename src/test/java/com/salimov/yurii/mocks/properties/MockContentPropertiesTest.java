@@ -1,30 +1,24 @@
-package com.salimov.yurii.util.properties;
+package com.salimov.yurii.mocks.properties;
 
+import com.salimov.yurii.util.properties.ContentProperties;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.salimov.yurii.mocks.properties.MockContentProperties.getContentProperties;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public final class ContentPropertiesImplTest {
+/**
+ * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
+ * @version 1.0
+ */
+public class MockContentPropertiesTest {
 
     private ContentProperties contentProperties;
 
     @Before
-    public void beforeTest() {
-        this.contentProperties = new ContentPropertiesImpl(
-                "catalinaHome",
-                "contentType",
-                "prefix",
-                "suffix",
-                true,
-                "resourcesUrl",
-                "resourcesLocation",
-                50000L,
-                "loginRequest",
-                "loginViewName",
-                "projectDirectory"
-        );
+    public void beforeTests() {
+        contentProperties = getContentProperties();
     }
 
     @Test

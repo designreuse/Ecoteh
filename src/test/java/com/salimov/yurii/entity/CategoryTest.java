@@ -59,12 +59,21 @@ public final class CategoryTest extends ContentTest<Category> {
     @Override
     public void toStringTest() {
         final Category category = getCategory();
-        final String value = category.getClass().getSimpleName() +
-                " " + category.getTitle()
-                + " \nKeywords: " + category.getKeywords()
-                + " \nURL: " + category.getUrl()
-                + " \nDescription: " + category.getDescription();
-        assertEquals(category.toString(), value);
+        assertNotNull(category.toString());
+        final String categoryToString = "Category{" +
+                "Content{" +
+                "Model{" +
+                "id=" + category.getId() +
+                ", validated=" + category.isValidated() +
+                '}' +
+                ", title='" + category.getTitle() + '\'' +
+                ", url='" + category.getUrl() + '\'' +
+                ", description='" + category.getDescription() + '\'' +
+                ", keywords='" + category.getKeywords() + '\'' +
+                '}' +
+                ", photoUrl='" + category.getPhotoUrl() + '\'' +
+                '}';
+        assertEquals(category.toString(), categoryToString);
     }
 
     @Test

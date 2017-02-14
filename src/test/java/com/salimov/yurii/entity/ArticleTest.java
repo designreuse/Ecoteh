@@ -84,18 +84,24 @@ public final class ArticleTest extends ContentTest<Article> {
     @Override
     public void toStringTest() {
         final Article article = getArticle();
-        final String value = article.getClass().getSimpleName() +
-                " " + article.getTitle()
-                + " \nKeywords: " + article.getKeywords()
-                + " \nURL: " + article.getUrl()
-                + " \nDescription: " + article.getDescription()
-                + " \nText: " + article.getText()
-                + " \nDate: " + article.getDate()
-                + " \nNumber: " + article.getNumber();
-        assertEquals(
-                article.toString(),
-                value
-        );
+        assertNotNull(article.toString());
+        final String articleToString = "Article{" +
+                "Content{" +
+                "Model{" +
+                "id=" + article.getId() +
+                ", validated=" + article.isValidated() +
+                '}' +
+                ", title='" + article.getTitle() + '\'' +
+                ", url='" + article.getUrl() + '\'' +
+                ", description='" + article.getDescription() + '\'' +
+                ", keywords='" + article.getKeywords() + '\'' +
+                '}' +
+                ", number='" + article.getNumber() + '\'' +
+                ", text='" + article.getText() + '\'' +
+                ", date=" + article.getDate() +
+                ", category=" + article.getCategory() +
+                '}';
+        assertEquals(article.toString(), articleToString);
     }
 
     @Test

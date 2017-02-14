@@ -86,15 +86,30 @@ public final class UserTest extends ModelTest<User> {
     public void toStringTest() {
         final User user = getUser();
         assertNotNull(user.toString());
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(user.getName())
-                .append(" \nE-mail: ").append(user.getEmail())
-                .append(" \nPhone: ").append(user.getPhone());
-        if (user.getRole() != null) {
-            sb.append(" \nRole: ").append(user.getRole().name());
-        }
-        sb.append(" ");
-        assertEquals(user.toString(), sb.toString());
+        final String userToString = "User{" +
+                "Model{" +
+                "id=" + user.getId() +
+                ", validated=" + user.isValidated() +
+                '}' +
+                ", name='" + user.getName() + '\'' +
+                ", url='" + user.getUrl() + '\'' +
+                ", encryptedLogin='" + user.getEncryptedLogin() + '\'' +
+                ", encryptedPassword='" + user.getEncryptedPassword() + '\'' +
+                ", Login='" + user.getLogin() + '\'' +
+                ", Password='" + user.getPassword() + '\'' +
+                ", email='" + user.getEmail() + '\'' +
+                ", phone='" + user.getPhone() + '\'' +
+                ", vkontakte='" + user.getVkontakte() + '\'' +
+                ", facebook='" + user.getFacebook() + '\'' +
+                ", twitter='" + user.getTwitter() + '\'' +
+                ", skype='" + user.getSkype() + '\'' +
+                ", description='" + user.getDescription() + '\'' +
+                ", photoUrl='" + user.getPhotoUrl() + '\'' +
+                ", role=" + user.getRole() +
+                ", isMailing=" + user.isMailing() +
+                ", isLocked=" + user.isLocked() +
+                '}';
+        assertEquals(user.toString(), userToString);
     }
 
     @Test
@@ -297,6 +312,7 @@ public final class UserTest extends ModelTest<User> {
     public void whenInitializeObjectWithNullParametersThenGetNull_2() {
         final User user = new User();
         user.initialize(null, null, null, null, null, null, null, null, null, null);
+        System.out.println("user.getFacebook() = " + user.getFacebook());
         assertNull(user.getName());
         assertNull(user.getLogin());
         assertNull(user.getPassword());

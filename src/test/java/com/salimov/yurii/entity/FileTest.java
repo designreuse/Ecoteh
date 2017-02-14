@@ -28,14 +28,16 @@ public final class FileTest extends ModelTest<File> {
     @Test
     public void toStringTest() {
         final File file = getObject();
-        assertTrue(
-                isNotBlank(
-                        file.toString()
-                )
-        );
-        String value = file.getClass().getSimpleName() + " " + file.getTitle()
-                + " \nURL: " + file.getUrl();
-        assertEquals(file.toString(), value);
+        assertNotNull(file.toString());
+        final String fileToString = "File{" +
+                "Model{" +
+                "id=" + file.getId() +
+                ", validated=" + file.isValidated() +
+                '}' +
+                ", title='" + file.getTitle() + '\'' +
+                ", url='" + file.getUrl() + '\'' +
+                '}';
+        assertEquals(file.toString(), fileToString);
     }
 
     @Test
@@ -263,7 +265,7 @@ public final class FileTest extends ModelTest<File> {
         );
         assertEquals(
                 file.getUrl(),
-                isNotBlank(url) ?  url.replace("!", ".") : url
+                isNotBlank(url) ? url.replace("!", ".") : url
         );
     }
 

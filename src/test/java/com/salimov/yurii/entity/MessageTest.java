@@ -104,18 +104,20 @@ public final class MessageTest extends ModelTest<Message> {
     @Test
     public void toStringTest() {
         final Message message = getMessage();
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Date: ").append(message.getDate())
-                .append(" \n").append(message.getUsername());
-        if (isNotBlank(message.getEmail())) {
-            sb.append(" \n").append(message.getEmail());
-        }
-        sb.append(" \n").append(message.getPhone())
-                .append(" \n").append(message.getText());
-        assertEquals(
-                message.toString(),
-                sb.toString()
-        );
+        final String messageToString = "Message{" +
+                "Model{" +
+                "id=" + message.getId() +
+                ", validated=" + message.isValidated() +
+                '}' +
+                ", username='" + message.getUsername() + '\'' +
+                ", email='" + message.getEmail() + '\'' +
+                ", phone='" + message.getPhone() + '\'' +
+                ", subject='" + message.getSubject() + '\'' +
+                ", text='" + message.getText() + '\'' +
+                ", date=" + message.getDate() +
+                '}';
+        System.out.println(message.getId());
+        assertEquals(message.toString(), messageToString);
     }
 
     @Test

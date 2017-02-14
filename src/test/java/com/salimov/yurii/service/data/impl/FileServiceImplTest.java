@@ -10,9 +10,8 @@ import java.util.Collection;
 import static com.salimov.yurii.mocks.dao.MockDao.getFileDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFiles;
+import static com.salimov.yurii.mocks.properties.MockContentProperties.getContentProperties;
 
-// TODO: Ignored test class
-@Ignore
 public final class FileServiceImplTest extends DataServiceImplTest<File, Long> {
 
     private FileService service;
@@ -20,7 +19,7 @@ public final class FileServiceImplTest extends DataServiceImplTest<File, Long> {
     @Before
     public void beforeTest() {
         this.service = new FileServiceImpl(
-                getFileDao(), null
+                getFileDao(), getContentProperties()
         );
     }
 

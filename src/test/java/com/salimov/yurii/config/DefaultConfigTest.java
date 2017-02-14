@@ -55,7 +55,7 @@ public final class DefaultConfigTest {
     @Test
     public void whenGetSuperAdminUserThenReturnSomeUser() {
         assertNotNull(
-                DefaultConfig.getDefaultUser("super")
+                DefaultConfig.getDefaultUser("superadmin")
         );
     }
 }

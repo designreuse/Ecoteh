@@ -168,8 +168,8 @@ public final class TimeTest {
     }
 
     @Test
-    public void whenIsWorkTimeWithNullStartHourThenReturnTrue() {
-        assertTrue(Time.isWorkTime(null, TIME));
+    public void whenIsWorkTimeWithNullStartHourThenReturnFalse() {
+        assertFalse(Time.isWorkTime(null, TIME));
     }
 
     @Test

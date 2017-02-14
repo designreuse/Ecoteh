@@ -1,7 +1,6 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.enums.CompanyType;
-import com.salimov.yurii.util.translator.Translator;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -1067,34 +1066,6 @@ public final class CompanyTest extends ContentTest<Company> {
     }
 
     @Test
-    public void whenSetNullUrlThenGetNotNull() {
-        final Company company = new Company();
-        final String url = Translator.fromCyrillicToLatin(
-                company.getDomain()
-        );
-        company.setUrl(null);
-        assertNotNull(company.getUrl());
-        assertEquals(company.getUrl(), url);
-    }
-
-    @Test
-    public void whenSetBlankUrlThenGetNotNull() {
-        final Company company = new Company();
-        final String url = Translator.fromCyrillicToLatin(
-                company.getDomain()
-        );
-        company.setUrl("");
-        assertNotNull(company.getUrl());
-        assertEquals(company.getUrl(), url);
-        company.setUrl(" ");
-        assertNotNull(company.getUrl());
-        assertEquals(company.getUrl(), url);
-        company.setUrl("   ");
-        assertNotNull(company.getUrl());
-        assertEquals(company.getUrl(), url);
-    }
-
-    @Test
     public void companyTypeValueOf() {
         for (CompanyType temp : CompanyType.values()) {
             CompanyType type = CompanyType.valueOf(
@@ -1105,14 +1076,40 @@ public final class CompanyTest extends ContentTest<Company> {
         }
     }
 
-    @Ignore
-    @Override
-    public void whenSetBlankUrlThenGetNull() {
+    @Test
+    public void whenSetNullUrlThenGetDomain() {
+        final Company company = getCompany();
+        if (isBlank(company.getDomain())) {
+            company.setDomain(URL);
+        }
+        company.setUrl(null);
+        assertNotNull(company.getUrl());
+        assertEquals(company.getUrl(), company.getDomain());
+    }
+
+    @Test
+    public void whenSetBlankUrlThenGetDomain() {
+        final Company company = getCompany();
+        if (isBlank(company.getDomain())) {
+            company.setDomain(URL);
+        }
+        company.setUrl("");
+        assertNotNull(company.getUrl());
+        company.setUrl(" ");
+        assertNotNull(company.getUrl());
+        company.setUrl("  ");
+        assertNotNull(company.getUrl());
+        assertEquals(company.getUrl(), company.getDomain());
     }
 
     @Ignore
     @Override
     public void whenSetNullUrlThenGetNull() {
+    }
+
+    @Ignore
+    @Override
+    public void whenSetBlankUrlThenGetNull() {
     }
 
     @Ignore
@@ -1139,33 +1136,39 @@ public final class CompanyTest extends ContentTest<Company> {
 
     @Ignore
     private String companyToString(final Company company) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(company.getType().name()).append(" ")
-                .append(company.getClass().getSimpleName()).append(" ")
-                .append(company.getTitle())
-                .append(" \nKeywords: ").append(company.getKeywords())
-                .append(" \nURL: ").append(company.getUrl())
-                .append(" \nDescription: ").append(company.getDescription())
-                .append(" \nTagline: ").append(company.getTagline())
-                .append(" \nInformation: ").append(company.getInformation())
-                .append(" \nDomain: ").append(company.getDomain())
-                .append(" \nMobile Phone: ").append(company.getMobilePhone())
-                .append(" \nLandline Phone: ").append(company.getLandlinePhone())
-                .append(" \nFax: ").append(company.getFax())
-                .append(" \nE-mail:").append(company.getEmail())
-                .append(" \nVkontakte: ").append(company.getVkontakte())
-                .append(" \nFacebook: ").append(company.getFacebook())
-                .append(" \nTwitter: ").append(company.getTwitter())
-                .append(" \nSkype: ").append(company.getSkype());
-        if (company.getType().equals(CompanyType.MAIN)) {
-            sb.append(" \nSenderImpl E-mail: ").append(company.getSenderEmail())
-                    .append(" \nSenderImpl Password: ").append(company.getSenderPass())
-                    .append(" \nWork Time: ").append(company.getWorkTimeFrom())
-                    .append(" - ").append(company.getWorkTimeTo());
-        }
-        sb.append(" \nAddress: ").append(company.getAddress())
-                .append(" \nGoogle Maps: ").append(company.getGoogleMaps());
-        return sb.toString();
+        return "Company{" +
+                "Content{" +
+                "Model{" +
+                "id=" + company.getId() +
+                ", validated=" + company.isValidated() +
+                '}' +
+                ", title='" + company.getTitle() + '\'' +
+                ", url='" + company.getUrl() + '\'' +
+                ", description='" + company.getDescription() + '\'' +
+                ", keywords='" + company.getKeywords() + '\'' +
+                '}' +
+                ", tagline='" + company.getTagline() + '\'' +
+                ", information='" + company.getInformation() + '\'' +
+                ", domain='" + company.getDomain() + '\'' +
+                ", mobilePhone='" + company.getMobilePhone() + '\'' +
+                ", landlinePhone='" + company.getLandlinePhone() + '\'' +
+                ", fax='" + company.getFax() + '\'' +
+                ", email='" + company.getEmail() + '\'' +
+                ", senderEmail='" + company.getSenderEmail() + '\'' +
+                ", senderPass='" + company.getSenderPass() + '\'' +
+                ", vkontakte='" + company.getVkontakte() + '\'' +
+                ", facebook='" + company.getFacebook() + '\'' +
+                ", twitter='" + company.getTwitter() + '\'' +
+                ", skype='" + company.getSkype() + '\'' +
+                ", address='" + company.getAddress() + '\'' +
+                ", workTimeFrom='" + company.getWorkTimeFrom() + '\'' +
+                ", workTimeTo='" + company.getWorkTimeTo() + '\'' +
+                ", googleMaps='" + company.getGoogleMaps() + '\'' +
+                ", logoUrl='" + company.getLogoUrl() + '\'' +
+                ", faviconUrl='" + company.getFaviconUrl() + '\'' +
+                ", slides='" + company.getSlides() + '\'' +
+                ", type=" + company.getType() +
+                '}';
     }
 
     @Ignore
