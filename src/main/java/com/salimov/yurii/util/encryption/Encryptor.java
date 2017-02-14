@@ -71,7 +71,7 @@ public final class Encryptor implements IEncryptor {
      */
     static {
         DEFAULT_KEY = new DESSecretKey(
-                ("6Lex4goUACmMLbkjLR2GQvVceS61rF4G").getBytes()
+                ("SoMeSeCrEtKeY").getBytes()
         );
         DEFAULT_CHARSET_NAME = "UTF8";
         staticSecretKey = DEFAULT_KEY;
@@ -180,7 +180,7 @@ public final class Encryptor implements IEncryptor {
         try {
             result = getDecryptedString();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
             result = null;
         }
         return result;
@@ -215,7 +215,7 @@ public final class Encryptor implements IEncryptor {
      * @param secretKey a primary encoding format.
      */
     public static void setSecretKey(final byte[] secretKey) {
-        if (secretKey != null) {
+        if ((secretKey != null) && (secretKey.length > 0)) {
             Encryptor.staticSecretKey = new DESSecretKey(secretKey);
         } else {
             Encryptor.staticSecretKey = DEFAULT_KEY;
