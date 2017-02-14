@@ -107,10 +107,10 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     @Override
     public String toString() {
         return "Article{" + super.toString() +
-                ", number='" + this.number + '\'' +
-                ", text='" + this.text + '\'' +
-                ", date=" + this.date +
-                ", category=" + this.category +
+                ", number='" + getNumber() + '\'' +
+                ", text='" + getText() + '\'' +
+                ", date=" + getDate() +
+                ", category=" + getCategory() +
                 '}';
     }
 

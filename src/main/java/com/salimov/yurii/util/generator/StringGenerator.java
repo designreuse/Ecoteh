@@ -8,7 +8,7 @@ import java.util.Random;
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public class StringGenerator implements Generator<String> {
+public final class StringGenerator implements Generator<String> {
 
     /**
      * An instance of Random class is used to generate

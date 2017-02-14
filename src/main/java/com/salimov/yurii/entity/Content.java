@@ -94,10 +94,10 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     @Override
     public String toString() {
         return "Content{" + super.toString() +
-                ", title='" + this.title + '\'' +
-                ", url='" + this.url + '\'' +
-                ", description='" + this.description + '\'' +
-                ", keywords='" + this.keywords + '\'' +
+                ", title='" + getTitle() + '\'' +
+                ", url='" + getUrl() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", keywords='" + getKeywords() + '\'' +
                 '}';
     }
 

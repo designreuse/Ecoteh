@@ -78,8 +78,8 @@ public final class File extends Model<Long> implements IFile<Long> {
     @Override
     public String toString() {
         return "File{" + super.toString() +
-                ", title='" + this.title + '\'' +
-                ", url='" + this.url + '\'' +
+                ", title='" + getTitle() + '\'' +
+                ", url='" + getUrl() + '\'' +
                 '}';
     }
 

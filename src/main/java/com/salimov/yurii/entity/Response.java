@@ -128,9 +128,9 @@ public final class Response extends Model<Long> implements IResponse<Long> {
     @Override
     public String toString() {
         return "Response{" + super.toString() +
-                ", username='" + this.username + '\'' +
-                ", text='" + this.text + '\'' +
-                ", date=" + this.date +
+                ", username='" + getUsername() + '\'' +
+                ", text='" + getText() + '\'' +
+                ", date=" + getDate() +
                 '}';
     }
 

@@ -74,7 +74,7 @@ public final class Category extends Content<Long> implements ICategory<Long> {
     @Override
     public String toString() {
         return "Category{" + super.toString() +
-                ", photoUrl='" + this.photoUrl + '\'' +
+                ", photoUrl='" + getPhotoUrl() + '\'' +
                 '}';
     }
 

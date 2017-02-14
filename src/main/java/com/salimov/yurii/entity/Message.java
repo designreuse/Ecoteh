@@ -110,12 +110,12 @@ public final class Message extends Model<Long> implements IMessage<Long> {
     @Override
     public String toString() {
         return "Message{" + super.toString() +
-                ", username='" + this.username + '\'' +
-                ", email='" + this.email + '\'' +
-                ", phone='" + this.phone + '\'' +
-                ", subject='" + this.subject + '\'' +
-                ", text='" + this.text + '\'' +
-                ", date=" + this.date +
+                ", username='" + getUsername() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", subject='" + getSubject() + '\'' +
+                ", text='" + getText() + '\'' +
+                ", date=" + getDate() +
                 '}';
     }
 

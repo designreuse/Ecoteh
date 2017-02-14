@@ -186,23 +186,23 @@ public final class User extends Model<Long>
     @Override
     public String toString() {
         return "User{" + super.toString() +
-                ", name='" + this.name + '\'' +
-                ", url='" + this.url + '\'' +
-                ", encryptedLogin='" + this.encryptedLogin + '\'' +
-                ", encryptedPassword='" + this.encryptedPassword + '\'' +
+                ", name='" + getName() + '\'' +
+                ", url='" + getUrl() + '\'' +
+                ", encryptedLogin='" + getEncryptedLogin() + '\'' +
+                ", encryptedPassword='" + getEncryptedPassword() + '\'' +
                 ", Login='" + getLogin() + '\'' +
                 ", Password='" + getPassword() + '\'' +
-                ", email='" + this.email + '\'' +
-                ", phone='" + this.phone + '\'' +
-                ", vkontakte='" + this.vkontakte + '\'' +
-                ", facebook='" + this.facebook + '\'' +
-                ", twitter='" + this.twitter + '\'' +
-                ", skype='" + this.skype + '\'' +
-                ", description='" + this.description + '\'' +
-                ", photoUrl='" + this.photoUrl + '\'' +
-                ", role=" + this.role +
-                ", isMailing=" + this.isMailing +
-                ", isLocked=" + this.isLocked +
+                ", email='" + getEmail() + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", vkontakte='" + getVkontakte() + '\'' +
+                ", facebook='" + getFacebook() + '\'' +
+                ", twitter='" + getTwitter() + '\'' +
+                ", skype='" + getSkype() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", photoUrl='" + getPhotoUrl() + '\'' +
+                ", role=" + getRole() +
+                ", isMailing=" + isMailing() +
+                ", isLocked=" + isLocked() +
                 '}';
     }
 
@@ -455,9 +455,9 @@ public final class User extends Model<Long>
      */
     @Override
     public void setLogin(final String login) {
-        setEncryptedLogin(
-                new Encryptor(login).encrypt()
-        );
+        final String encryptedLogin = isNotBlank(login) ?
+                new Encryptor(login).encrypt() : null;
+        setEncryptedLogin(encryptedLogin);
     }
 
     /**
@@ -467,7 +467,8 @@ public final class User extends Model<Long>
      */
     @Override
     public String getLogin() {
-        return new Encryptor(this.encryptedLogin).decrypt();
+        return isNotBlank(this.encryptedLogin) ?
+                new Encryptor(this.encryptedLogin).decrypt() : null;
     }
 
     /**
@@ -500,7 +501,8 @@ public final class User extends Model<Long>
     @Transient
     @Override
     public String getPassword() {
-        return new Encryptor(this.encryptedPassword).decrypt();
+        return isNotBlank(this.encryptedPassword) ?
+                new Encryptor(this.encryptedPassword).decrypt() : null;
     }
 
     /**
@@ -511,9 +513,9 @@ public final class User extends Model<Long>
     @Transient
     @Override
     public void setPassword(final String password) {
-        setEncryptedPassword(
-                new Encryptor(password).encrypt()
-        );
+        final String encryptedPassword = isNotBlank(password) ?
+                new Encryptor(password).encrypt() : null;
+        setEncryptedPassword(encryptedPassword);
     }
 
     /**

@@ -245,27 +245,27 @@ public final class Company extends Content<Long> implements ICompany<Long> {
     @Override
     public String toString() {
         return "Company{" + super.toString() +
-                ", tagline='" + this.tagline + '\'' +
-                ", information='" + this.information + '\'' +
-                ", domain='" + this.domain + '\'' +
-                ", mobilePhone='" + this.mobilePhone + '\'' +
-                ", landlinePhone='" + this.landlinePhone + '\'' +
-                ", fax='" + this.fax + '\'' +
-                ", email='" + this.email + '\'' +
-                ", senderEmail='" + this.senderEmail + '\'' +
-                ", senderPass='" + this.senderPass + '\'' +
-                ", vkontakte='" + this.vkontakte + '\'' +
-                ", facebook='" + this.facebook + '\'' +
-                ", twitter='" + this.twitter + '\'' +
-                ", skype='" + this.skype + '\'' +
-                ", address='" + this.address + '\'' +
-                ", workTimeFrom='" + this.workTimeFrom + '\'' +
-                ", workTimeTo='" + this.workTimeTo + '\'' +
-                ", googleMaps='" + this.googleMaps + '\'' +
-                ", logoUrl='" + this.logoUrl + '\'' +
-                ", faviconUrl='" + this.faviconUrl + '\'' +
-                ", slides='" + this.slides + '\'' +
-                ", type=" + this.type +
+                ", tagline='" + getTagline() + '\'' +
+                ", information='" + getInformation() + '\'' +
+                ", domain='" + getDomain() + '\'' +
+                ", mobilePhone='" + getMobilePhone() + '\'' +
+                ", landlinePhone='" + getLandlinePhone() + '\'' +
+                ", fax='" + getFax() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", senderEmail='" + getSenderEmail() + '\'' +
+                ", senderPass='" + getSenderPass() + '\'' +
+                ", vkontakte='" + getVkontakte() + '\'' +
+                ", facebook='" + getFacebook() + '\'' +
+                ", twitter='" + getTwitter() + '\'' +
+                ", skype='" + getSkype() + '\'' +
+                ", address='" + getAddress() + '\'' +
+                ", workTimeFrom='" + getWorkTimeFrom() + '\'' +
+                ", workTimeTo='" + getWorkTimeTo() + '\'' +
+                ", googleMaps='" + getGoogleMaps() + '\'' +
+                ", logoUrl='" + getLogoUrl() + '\'' +
+                ", faviconUrl='" + getFaviconUrl() + '\'' +
+                ", slides='" + getSlides() + '\'' +
+                ", type=" + getType() +
                 '}';
     }
 

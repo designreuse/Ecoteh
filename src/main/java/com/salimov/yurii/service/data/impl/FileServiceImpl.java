@@ -1,7 +1,6 @@
 package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.FileDao;
-import com.salimov.yurii.entity.Content;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.FileComparator;
@@ -360,7 +359,7 @@ public final class FileServiceImpl
      * @param files  the files to sort.
      * @param revers is sort in descending or ascending.
      * @return The sorted list of files.
-     * @see Content
+     * @see File
      */
     @Override
     @Transactional(readOnly = true)
@@ -429,4 +428,3 @@ public final class FileServiceImpl
         return type;
     }
 }
-

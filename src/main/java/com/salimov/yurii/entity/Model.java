@@ -68,8 +68,8 @@ public abstract class Model<E extends Number>
     @Override
     public String toString() {
         return "Model{" +
-                "id=" + this.id +
-                ", validated=" + this.validated +
+                "id=" + getId() +
+                ", validated=" + isValidated() +
                 '}';
     }
 
