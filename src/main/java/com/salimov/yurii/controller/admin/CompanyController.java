@@ -201,7 +201,7 @@ public class CompanyController {
             value = "/new",
             method = RequestMethod.GET
     )
-    public ModelAndView newPartner() {
+    public ModelAndView newPartnerPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("admin/company/new_page");
         return modelAndView;
@@ -306,7 +306,7 @@ public class CompanyController {
             value = "/edit/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView editPartner(@PathVariable("url") final String url) {
+    public ModelAndView editPartnerByUrl(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getByUrl(url, false));
         modelAndView.addObject("main", false);
@@ -417,7 +417,7 @@ public class CompanyController {
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deletePartner(
+    public ModelAndView deletePartnerByUrl(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
     ) {

@@ -316,8 +316,7 @@ public class ArticleController {
         String viewName;
         if (isNotBlank(article.getText())) {
             viewName = "redirect:/article/" + article.getUrl();
-        } else if ((article.getCategory() != null) &&
-                (article.getCategory().isValidated())) {
+        } else if ((article.getCategory() != null) && (article.getCategory().isValidated())) {
             viewName = "redirect:/category/" + article.getCategory().getUrl();
         } else {
             viewName = "redirect:/article/all";

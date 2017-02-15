@@ -62,7 +62,7 @@ public class CacheController {
             value = {"", "/"},
             method = RequestMethod.GET
     )
-    public ModelAndView getCache() {
+    public ModelAndView getCachePage() {
         ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("objects", Cache.getEntriesToString());
         modelAndView.setViewName("superadmin/cache/cache_page");

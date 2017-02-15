@@ -82,7 +82,7 @@ public class FileController {
             value = {"", "/", "/all"},
             method = RequestMethod.GET
     )
-    public ModelAndView getAllFile() {
+    public ModelAndView getAllFilePage() {
         return getAllFileSortByTitle(false);
     }
 
@@ -159,9 +159,7 @@ public class FileController {
             value = "/edit/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView editFilePage(
-            @PathVariable("id") final Long id
-    ) {
+    public ModelAndView editFilePage(@PathVariable("id") final Long id) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("file", this.fileService.get(id));
         modelAndView.setViewName("admin/file/edit_page");
@@ -209,7 +207,7 @@ public class FileController {
             value = "/update",
             method = RequestMethod.GET
     )
-    public void updateArticle() throws IllegalMappingException {
+    public void updateFile() throws IllegalMappingException {
         throw new IllegalMappingException(
                 "GET method in \"/admin/file/update\" is not supported!"
         );

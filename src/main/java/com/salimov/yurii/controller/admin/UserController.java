@@ -114,7 +114,7 @@ public class UserController {
             value = "/all",
             method = RequestMethod.GET
     )
-    public ModelAndView getAllUsers() {
+    public ModelAndView getAllUsersPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("users_list", this.userService.getAll(false));
         modelAndView.addObject("is_captcha", null);
@@ -134,7 +134,7 @@ public class UserController {
             value = "/new",
             method = RequestMethod.GET
     )
-    public ModelAndView newUser() {
+    public ModelAndView newUserPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("admin/user/new_page");
         return modelAndView;
@@ -228,7 +228,7 @@ public class UserController {
             value = "/edit/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView editUser(@PathVariable("url") final String url) {
+    public ModelAndView editUserByUrl(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("user", this.userService.getByUrl(url));
         modelAndView.setViewName("admin/user/edit_page");
@@ -329,7 +329,7 @@ public class UserController {
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteUser(
+    public ModelAndView deleteUserByUrl(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
     ) {
@@ -400,7 +400,7 @@ public class UserController {
                     mainCompany.getSenderEmail(), mainCompany.getSenderPass()
             );
         }).start();
-        final ModelAndView modelAndView = getAllUsers();
+        final ModelAndView modelAndView = getAllUsersPage();
         modelAndView.addObject("is_captcha", true);
         return modelAndView;
     }

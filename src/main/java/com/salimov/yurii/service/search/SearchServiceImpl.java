@@ -157,6 +157,7 @@ public class SearchServiceImpl implements SearchService {
      * @param howSearch a search mode.
      * @return The ready object of class ModelAndView.
      */
+    @Override
     public ModelAndView search(
             final String keywords,
             final String content,

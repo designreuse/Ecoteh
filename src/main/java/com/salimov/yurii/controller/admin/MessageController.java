@@ -79,7 +79,7 @@ public class MessageController {
             value = {"", "/"},
             method = RequestMethod.GET
     )
-    public ModelAndView getMessages() {
+    public ModelAndView getMessagesPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("messages", this.messageService.getAll(false));
         modelAndView.setViewName("admin/message/all_page");
@@ -100,7 +100,7 @@ public class MessageController {
             value = "/delete/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteMessage(
+    public ModelAndView deleteMessageById(
             @PathVariable("id") final Long id,
             final ModelAndView modelAndView
     ) {

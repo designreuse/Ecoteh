@@ -80,7 +80,7 @@ public class CategoryController {
      * @see Category
      */
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public ModelAndView newCategory() {
+    public ModelAndView getNewCategoryPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.setViewName("admin/category/new_page");
         return modelAndView;
@@ -114,7 +114,7 @@ public class CategoryController {
                 title, description, keywords, photoUrl, isValid
         );
         Cache.clear();
-        modelAndView.setViewName( "redirect:/admin/category/" + category.getUrl());
+        modelAndView.setViewName("redirect:/category/" + category.getUrl());
         return modelAndView;
     }
 
@@ -215,7 +215,7 @@ public class CategoryController {
      * @see Category
      */
     @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
-    public ModelAndView deleteCategory(
+    public ModelAndView deleteCategoryByUrl(
             @PathVariable("url") final String url,
             final ModelAndView modelAndView
     ) {

@@ -88,7 +88,7 @@ public class ResponseController {
             value = "/delete/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteResponse(
+    public ModelAndView deleteResponseById(
             @PathVariable("id") final long id,
             final ModelAndView modelAndView
     ) {

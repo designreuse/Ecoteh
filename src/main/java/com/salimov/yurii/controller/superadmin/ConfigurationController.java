@@ -2,7 +2,6 @@ package com.salimov.yurii.controller.superadmin;
 
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
-import com.salimov.yurii.util.cache.Cache;
 import com.salimov.yurii.util.properties.ContentProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,7 +60,7 @@ public class ConfigurationController {
             value = {"", "/", "/config", "/configuration"},
             method = RequestMethod.GET
     )
-    public ModelAndView getProperties() {
+    public ModelAndView getPropertiesPage() {
         ModelAndView modelAndView;
         try {
             modelAndView = this.fabric.getDefaultModelAndView();
@@ -71,25 +70,6 @@ public class ConfigurationController {
             modelAndView = new ModelAndView();
         }
         modelAndView.setViewName("superadmin/configuration/configuration_page");
-        return modelAndView;
-    }
-
-    /**
-     * Clears the cache.
-     * Request mapping: /superman/clear
-     * Method: GET
-     *
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/clear",
-            method = RequestMethod.GET
-    )
-    public ModelAndView clearCache(final ModelAndView modelAndView) {
-        Cache.clear();
-        System.gc();
-        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 }
