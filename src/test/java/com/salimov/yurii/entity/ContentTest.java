@@ -244,20 +244,4 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
         assertNotNull(content.getKeywords());
         Assert.assertEquals(content.getKeywords(), KEYWORDS);
     }
-
-    @Test
-    @Override
-    public void validObject() {
-        final T content = getObject();
-        assertEquals(
-                Content.isValidated(content),
-                (
-                        content != null
-                ) && (
-                        isNotBlank(content.getTitle())
-                ) && (
-                        isNotBlank(content.getUrl())
-                )
-        );
-    }
 }

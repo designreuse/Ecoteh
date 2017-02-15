@@ -844,26 +844,6 @@ public final class UserTest extends ModelTest<User> {
     }
 
     @Test
-    @Override
-    public void validObject() {
-        super.validObject();
-        final User user = getUser();
-        assertTrue(User.isValidated(user));
-        assertTrue(user.isValidated());
-        assertFalse(User.isValidated(null));
-        final String name = user.getName();
-        user.setName(null);
-        assertFalse(User.isValidated(user));
-        user.setName(name);
-        final String phone = user.getPhone();
-        user.setPhone(null);
-        assertFalse(User.isValidated(user));
-        user.setPhone(phone);
-        user.setEmail(null);
-        assertFalse(User.isValidated(user));
-    }
-
-    @Test
     public void getRoleEnums() {
         final UserRole[] roles = UserRole.getEnumConstants();
         assertNotNull(roles);

@@ -16,16 +16,6 @@ import static org.junit.Assert.*;
 public final class FileTest extends ModelTest<File> {
 
     @Test
-    @Override
-    public void validObject() {
-        final File file = getObject();
-        assertEquals(
-                file.isValidated(file),
-                file != null && isNotBlank(file.getUrl())
-        );
-    }
-
-    @Test
     public void toStringTest() {
         final File file = getObject();
         assertNotNull(file.toString());

@@ -18,9 +18,7 @@ public final class FileServiceImplTest extends DataServiceImplTest<File, Long> {
 
     @Before
     public void beforeTest() {
-        this.service = new FileServiceImpl(
-                getFileDao(), getContentProperties()
-        );
+        this.service = new FileServiceImpl(getFileDao(), getContentProperties());
     }
 
     @Ignore

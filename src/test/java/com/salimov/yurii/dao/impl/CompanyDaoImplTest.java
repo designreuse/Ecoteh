@@ -25,9 +25,7 @@ public final class CompanyDaoImplTest
 
     @Before
     public void beforeTest() {
-        this.dao = new CompanyDaoImpl(
-                getCompanyRepository()
-        );
+        this.dao = new CompanyDaoImpl(getCompanyRepository());
     }
 
     @Test

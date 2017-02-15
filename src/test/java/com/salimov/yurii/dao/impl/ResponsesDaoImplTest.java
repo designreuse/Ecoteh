@@ -17,9 +17,7 @@ public final class ResponsesDaoImplTest
     @Ignore
     @Override
     protected ResponseDao getDao() {
-        return new ResponseDaoImpl(
-                getResponseRepository()
-        );
+        return new ResponseDaoImpl(getResponseRepository());
     }
 
     @Ignore

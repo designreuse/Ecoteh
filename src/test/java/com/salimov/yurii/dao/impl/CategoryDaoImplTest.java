@@ -24,9 +24,7 @@ public final class CategoryDaoImplTest
 
     @Before
     public void beforeTest() {
-        this.dao = new CategoryDaoImpl(
-                getCategoryRepository()
-        );
+        this.dao = new CategoryDaoImpl(getCategoryRepository());
     }
 
     @Test

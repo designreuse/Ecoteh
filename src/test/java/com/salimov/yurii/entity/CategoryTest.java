@@ -230,26 +230,6 @@ public final class CategoryTest extends ContentTest<Category> {
         assertTrue(category.getArticles().isEmpty());
     }
 
-    @Test
-    @Override
-    public void validObject() {
-        super.validObject();
-        Category category = getCategory();
-        assertFalse(Category.isValidated(null));
-        assertTrue(Category.isValidated(category));
-        category.setTitle(null);
-        assertFalse(Category.isValidated(category));
-        category = getCategory();
-        category.setUrl(null);
-        assertFalse(Category.isValidated(category));
-        category = getCategory();
-        category.setArticles(null);
-        assertFalse(Category.isValidated(category));
-        category = getCategory();
-        category.setArticles(getArticles());
-        assertTrue(Category.isValidated(category));
-    }
-
     @Ignore
     @Override
     protected Category getObject() {

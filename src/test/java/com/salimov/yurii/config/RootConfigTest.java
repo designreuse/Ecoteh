@@ -75,16 +75,12 @@ public final class RootConfigTest {
 
     @Test
     public void dataSourceTest() throws Exception {
-        assertNotNull(
-                new RootConfig().dataSource()
-        );
+        assertNotNull(new RootConfig().dataSource());
     }
 
     @Test
     public void jpaVendorAdapterTest() throws Exception {
-        assertNotNull(
-                new RootConfig().hibernateJpaVendorAdapter()
-        );
+        assertNotNull(new RootConfig().hibernateJpaVendorAdapter());
     }
 
     @Test
@@ -108,22 +104,16 @@ public final class RootConfigTest {
 
     @Test
     public void persistenceTranslationTest() {
-        assertNotNull(
-                new RootConfig().persistenceTranslation()
-        );
+        assertNotNull(new RootConfig().persistenceTranslation());
     }
 
     @Test
     public void multipartResolverTest() {
-        assertNotNull(
-                new RootConfig().multipartResolver()
-        );
+        assertNotNull(new RootConfig().multipartResolver());
     }
 
     @Test
     public void propertyConfigInDev() {
-        assertNotNull(
-                RootConfig.propertyConfigInDev()
-        );
+        assertNotNull(RootConfig.propertyConfigInDev());
     }
 }

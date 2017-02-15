@@ -18,9 +18,7 @@ public class MessageServiceImplTest
 
     @Before
     public void beforeTest() {
-        this.service = new MessageServiceImpl(
-                getMessageDao()
-        );
+        this.service = new MessageServiceImpl(getMessageDao());
     }
 
     @Ignore

@@ -122,35 +122,23 @@ public final class CacheTest {
     public void whenGetEntriesToString() {
         Cache.clear();
         Cache.put(KEY + 1, OBJECT);
-        assertNotNull(
-                Cache.getEntriesToString()
-        );
+        assertNotNull(Cache.getEntriesToString());
         Cache.put(KEY + 2, OBJECT);
-        assertNotNull(
-                Cache.getEntriesToString()
-        );
+        assertNotNull(Cache.getEntriesToString());
     }
 
     @Test
     public void getEntriesToString() {
         Cache.clear();
-        assertNotNull(
-                Cache.getEntriesToString()
-        );
-        assertEquals(
-                Cache.getEntriesToString().size(), 1
-        );
+        assertNotNull(Cache.getEntriesToString());
+        assertEquals(Cache.getEntriesToString().size(), 1);
 
         final String key = "key";
         final Map<String, Object> map = new HashMap<>();
 
         Cache.putAll(map);
-        assertNotNull(
-                Cache.getEntriesToString()
-        );
-        assertEquals(
-                Cache.getEntriesToString().size(), 1
-        );
+        assertNotNull(Cache.getEntriesToString());
+        assertEquals(Cache.getEntriesToString().size(), 1);
 
         for (int i = 0; i < 10; i++) {
             map.put(key + i, new Object());
@@ -158,12 +146,8 @@ public final class CacheTest {
         }
 
         Cache.putAll(map);
-        assertNotNull(
-                Cache.getEntriesToString()
-        );
-        assertTrue(
-                !Cache.getEntriesToString().isEmpty()
-        );
+        assertNotNull(Cache.getEntriesToString());
+        assertTrue(!Cache.getEntriesToString().isEmpty());
 
         for (int i = 0; i < 10; i++) {
             assertNotNull(Cache.get(key + i));

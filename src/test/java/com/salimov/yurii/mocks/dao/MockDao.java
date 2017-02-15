@@ -77,12 +77,7 @@ public final class MockDao {
         final Article article = getArticle();
         final List<Article> articles = getArticles();
         articleDao = mock(ArticleDao.class);
-        contentDao(
-                articleDao,
-                article,
-                new Article(),
-                articles
-        );
+        contentDao(articleDao, article, new Article(), articles);
         when(articleDao.getByNumber(NUMBER)).thenReturn(article);
         when(articleDao.getByNumber(null)).thenReturn(null);
         when(articleDao.getByNumber(ANY_STRING)).thenReturn(null);
@@ -93,23 +88,13 @@ public final class MockDao {
 
     private static void initCategoryDao() {
         categoryDao = mock(CategoryDao.class);
-        contentDao(
-                categoryDao,
-                getCategory(),
-                new Category(),
-                getCategories()
-        );
+        contentDao(categoryDao, getCategory(), new Category(), getCategories());
     }
 
     private static void initCompanyDao() {
         final List<Company> companies = getCompanies();
         companyDao = mock(CompanyDao.class);
-        contentDao(
-                companyDao,
-                getCompany(),
-                new Company(),
-                companies
-        );
+        contentDao(companyDao, getCompany(), new Company(), companies);
         when(companyDao.getByType(CompanyType.PARTNER)).thenReturn(companies);
         when(companyDao.getByType(CompanyType.MAIN)).thenReturn(companies);
         when(companyDao.getByType(null)).thenReturn(null);
@@ -118,12 +103,7 @@ public final class MockDao {
     private static void initFileDao() {
         final File file = getFile();
         fileDao = mock(FileDao.class);
-        dataDao(
-                fileDao,
-                file,
-                new File(),
-                getFiles()
-        );
+        dataDao(fileDao, file, new File(), getFiles());
         when(fileDao.getByTitle(TITLE)).thenReturn(file);
         when(fileDao.getByTitle(TITLE)).thenReturn(file);
         when(fileDao.getByTitle(null)).thenReturn(null);
@@ -135,32 +115,18 @@ public final class MockDao {
 
     private static void initMessageDao() {
         messageDao = mock(MessageDao.class);
-        dataDao(
-                messageDao,
-                getMessage(),
-                new Message(),
-                getMessages()
-        );
+        dataDao(messageDao, getMessage(), new Message(), getMessages());
     }
 
     private static void initResponseDao() {
         responseDao = mock(ResponseDao.class);
-        dataDao(
-                responseDao,
-                getResponse(),
-                new Response(),
-                getResponses()
-        );
+        dataDao(responseDao, getResponse(), new Response(), getResponses());
     }
 
     private static void initUserDao() {
         final User user = getUser();
         userDao = mock(UserDao.class);
-        dataDao(
-                userDao, user,
-                new User(),
-                getUsers()
-        );
+        dataDao(userDao, user, new User(), getUsers());
         when(userDao.getByName(NAME)).thenReturn(user);
         when(userDao.getByName(ANY_STRING)).thenReturn(null);
         when(userDao.getByName(null)).thenReturn(null);
@@ -184,12 +150,7 @@ public final class MockDao {
             final T emptyContent,
             final Collection<T> contents
     ) {
-        dataDao(
-                dao,
-                content,
-                emptyContent,
-                contents
-        );
+        dataDao(dao, content, emptyContent, contents);
         when(dao.getByTitle(TITLE)).thenReturn(content);
         when(dao.getByTitle(ANY_STRING)).thenReturn(null);
         when(dao.getByTitle(null)).thenReturn(null);

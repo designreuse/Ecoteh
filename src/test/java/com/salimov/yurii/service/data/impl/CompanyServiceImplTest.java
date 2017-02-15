@@ -23,9 +23,7 @@ public final class CompanyServiceImplTest
 
     @Before
     public void beforeTest() {
-        this.service = new CompanyServiceImpl(
-                getCompanyDao()
-        );
+        this.service = new CompanyServiceImpl(getCompanyDao());
     }
 
     @Test
@@ -76,23 +74,17 @@ public final class CompanyServiceImplTest
 
     @Test
     public void whenGetMainCompanyThenReturnMainCompany() {
-        assertNotNull(
-                this.service.getMainCompany()
-        );
+        assertNotNull(this.service.getMainCompany());
     }
 
     @Test
     public void whenGetValidPartnersThenReturnNotEmptyList() {
-        assertFalse(
-                this.service.getPartners(true).isEmpty()
-        );
+        assertFalse(this.service.getPartners(true).isEmpty());
     }
 
     @Test
     public void whenGetInvalidPartnersThenReturnNotEmptyList() {
-        assertFalse(
-                this.service.getPartners(false).isEmpty()
-        );
+        assertFalse(this.service.getPartners(false).isEmpty());
     }
 
     @Test

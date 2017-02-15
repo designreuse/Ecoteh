@@ -53,26 +53,20 @@ public final class MessageDaoImplTest {
     public void whenGetMessageByIdThenReturnsSomeMessage() {
         final Message message = getMessage();
         this.dao.add(message);
-        assertNotNull(
-                this.dao.get(message.getId())
-        );
+        assertNotNull(this.dao.get(message.getId()));
     }
 
     @Test
     public void whenGetAllMessageThenReturnsMessageCollection() {
         this.dao.addAll(getMessages());
-        assertFalse(
-                this.dao.getAll().isEmpty()
-        );
+        assertFalse(this.dao.getAll().isEmpty());
     }
 
     @Test
     public void whenRemoveByIdThenDoIt() {
         final Message message = getMessage();
         this.dao.add(message);
-        this.dao.remove(
-                message.getId()
-        );
+        this.dao.remove(message.getId());
         assertNull(
                 this.dao.get(
                         message.getId()
@@ -121,18 +115,14 @@ public final class MessageDaoImplTest {
     @Test
     public void whenRemoveAllMesagesThenDoIt() {
         this.dao.addAll(getMessages());
-        assertFalse(
-                this.dao.getAll().isEmpty()
-        );
+        assertFalse(this.dao.getAll().isEmpty());
         this.dao.removeAll();
         try{
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        assertTrue(
-                this.dao.getAll().isEmpty()
-        );
+        assertTrue(this.dao.getAll().isEmpty());
     }
 
     @Test

@@ -23,9 +23,7 @@ public final class ArticleDaoImplTest
 
     @Before
     public void beforeTest() {
-        this.dao = new ArticleDaoImpl(
-                getArticleRepository()
-        );
+        this.dao = new ArticleDaoImpl(getArticleRepository());
     }
 
     @Test
@@ -74,12 +72,12 @@ public final class ArticleDaoImplTest
     }
 
     @Test
-    public void whenGetByNullCategoryIdThenReturnsEmptyColection() {
+    public void whenGetByNullCategoryIdThenReturnsEmptyCollection() {
         assertTrue(this.dao.getByCategoryId(null).isEmpty());
     }
 
     @Test
-    public void whenGetByUnknownCategoryIdThenReturnsEmptyColection() {
+    public void whenGetByUnknownCategoryIdThenReturnsEmptyCollection() {
         assertTrue(this.dao.getByCategoryId(UNKNOWN_ID).isEmpty());
     }
 

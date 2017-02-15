@@ -1,16 +1,15 @@
 package com.salimov.yurii.mocks.enity.test;
 
+import com.salimov.yurii.entity.Article;
 import org.junit.Ignore;
 import org.junit.Test;
-import com.salimov.yurii.entity.Article;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static com.salimov.yurii.mocks.enity.MockEntity.getArticle;
 import static com.salimov.yurii.mocks.enity.MockEntity.getArticles;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public final class MockArticleTest extends MockModelTest<Article> {
 
@@ -18,7 +17,6 @@ public final class MockArticleTest extends MockModelTest<Article> {
     @Override
     public void whenGetModelThenReturnValidModel() {
         final Article article = getArticle();
-        assertTrue(Article.isValidated(article));
         assertNotNull(article.getTitle());
         assertNotNull(article.getDescription());
         assertNotNull(article.getText());

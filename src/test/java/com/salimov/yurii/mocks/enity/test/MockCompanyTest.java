@@ -5,10 +5,9 @@ import org.junit.Ignore;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static com.salimov.yurii.mocks.enity.MockEntity.getCompanies;
 import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
+import static org.junit.Assert.assertNotNull;
 
 public final class MockCompanyTest extends MockModelTest<Company> {
 
@@ -16,7 +15,6 @@ public final class MockCompanyTest extends MockModelTest<Company> {
     @Override
     public void whenGetModelThenReturnValidModel() {
         final Company company = getCompany();
-        assertTrue(Company.isValidated(company));
         assertNotNull(company.getTitle());
         assertNotNull(company.getUrl());
         assertNotNull(company.getDomain());

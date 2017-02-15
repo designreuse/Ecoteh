@@ -1,6 +1,5 @@
 package com.salimov.yurii.controller.client;
 
-import com.salimov.yurii.controller.other.MainControllerTest;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -8,7 +7,7 @@ import org.springframework.data.mapping.model.IllegalMappingException;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.ModelAndViews.checkModelAndView;
-import static com.salimov.yurii.mocks.controller.MockController.getClientMainController;
+import static com.salimov.yurii.mocks.controller.MockClientController.getClientMainController;
 
 public class ClientMainControllerTest extends MainControllerTest {
 

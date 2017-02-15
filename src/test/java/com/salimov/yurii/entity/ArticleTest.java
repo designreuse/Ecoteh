@@ -394,23 +394,6 @@ public final class ArticleTest extends ContentTest<Article> {
         assertFalse(category.containsArticle(article));
     }
 
-    @Test
-    @Override
-    public void validObject() {
-        super.validObject();
-        Article article = getArticle();
-        assertFalse(Article.isValidated(null));
-        assertTrue(Article.isValidated(article));
-        article.setTitle(null);
-        assertFalse(Article.isValidated(article));
-        article = getArticle();
-        article.setUrl(null);
-        assertFalse(Article.isValidated(article));
-        article = getArticle();
-        article.setText(null);
-        assertFalse(Article.isValidated(article));
-    }
-
     @Ignore
     @Override
     protected Article getObject() {

@@ -1,10 +1,14 @@
 package com.salimov.yurii.mocks.service.data;
 
-import com.salimov.yurii.entity.*;
+import com.salimov.yurii.entity.Content;
+import com.salimov.yurii.entity.Model;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.*;
+import com.salimov.yurii.service.search.SearchService;
+import com.salimov.yurii.service.seo.SeoService;
 import com.salimov.yurii.util.comparator.ContentComparator;
 import org.junit.Ignore;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +29,8 @@ public final class MockServices {
     private static MessageService messageService;
     private static ResponseService responseService;
     private static UserService userService;
+    private static SearchService searchService;
+    private static SeoService seoService;
 
     public static ArticleService getArticleService() {
         if (articleService == null) {
@@ -75,13 +81,23 @@ public final class MockServices {
         return userService;
     }
 
+    public static SearchService getSearchService() {
+        if (searchService == null) {
+            initSearchService();
+        }
+        return searchService;
+    }
+
+    public static SeoService getSeoService() {
+        if (seoService == null) {
+            initSeoService();
+        }
+        return seoService;
+    }
+
     private static void initArticleService() {
         articleService = mock(ArticleService.class);
-        contentService(
-                articleService,
-                getArticle(),
-                getArticles()
-        );
+        contentService(articleService, getArticle(), getArticles());
         when(
                 articleService.initAndAdd(
                         TITLE,
@@ -90,99 +106,36 @@ public final class MockServices {
                         getCategory(),
                         true
                 )
-        ).thenReturn(
-                getArticle()
-        );
+        ).thenReturn(getArticle());
         when(
                 articleService.initAndUpdate(
                         URL, TITLE,
                         DESCRIPTION, TEXT,
                         KEYWORDS, NUMBER,
-                        null, true
+                        getCategory(), true
                 )
-        ).thenReturn(
-                getArticle()
-        );
-        when(articleService.getByNumber(NUMBER, true))
-                .thenReturn(getArticle());
-        when(articleService.getByNumber(NUMBER, false))
-                .thenReturn(getArticle());
-        when(
-                articleService.sortByNumber(
-                        getArticles(), true
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.sortByNumber(
-                        getArticles(), false
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.sortByDate(
-                        getArticles(), true
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.sortByDate(
-                        getArticles(), false
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndSortByNumber(true)
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndSortByNumber(false)
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndSortByDate(true)
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndSortByDate(false)
-        ).thenReturn(getArticles());
-        when(
-                articleService.filterByDate(
-                        getArticles(),
-                        DATE,
-                        DATE
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.filterByCategory(
-                        getArticles(),
-                        getCategory()
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.filterByCategories(
-                        getArticles(),
-                        getCategories()
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndFilterByDate(
-                        DATE,
-                        DATE
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndFilterByCategory(
-                        getCategory()
-                )
-        ).thenReturn(getArticles());
-        when(
-                articleService.getAndFilterByCategories(
-                        getCategories()
-                )
-        ).thenReturn(getArticles());
+        ).thenReturn(getArticle());
+        when(articleService.getByNumber(NUMBER, true)).thenReturn(getArticle());
+        when(articleService.getByNumber(NUMBER, false)).thenReturn(getArticle());
+        when(articleService.sortByNumber(getArticles(), true)).thenReturn(getArticles());
+        when(articleService.sortByNumber(getArticles(), false)).thenReturn(getArticles());
+        when(articleService.sortByDate(getArticles(), true)).thenReturn(getArticles());
+        when(articleService.sortByDate(getArticles(), false)).thenReturn(getArticles());
+        when(articleService.getAndSortByNumber(true)).thenReturn(getArticles());
+        when(articleService.getAndSortByNumber(false)).thenReturn(getArticles());
+        when(articleService.getAndSortByDate(true)).thenReturn(getArticles());
+        when(articleService.getAndSortByDate(false)).thenReturn(getArticles());
+        when(articleService.filterByDate(getArticles(), DATE, DATE)).thenReturn(getArticles());
+        when(articleService.filterByCategory(getArticles(), getCategory())).thenReturn(getArticles());
+        when(articleService.filterByCategories(getArticles(), getCategories())).thenReturn(getArticles());
+        when(articleService.getAndFilterByDate(DATE, DATE)).thenReturn(getArticles());
+        when(articleService.getAndFilterByCategory(getCategory())).thenReturn(getArticles());
+        when(articleService.getAndFilterByCategories(getCategories())).thenReturn(getArticles());
     }
 
     private static void initCategoryService() {
         categoryService = mock(CategoryService.class);
-        contentService(
-                categoryService,
-                getCategory(),
-                getCategories()
-        );
+        contentService(categoryService, getCategory(), getCategories());
         when(
                 categoryService.initAndAdd(
                         TITLE,
@@ -203,11 +156,7 @@ public final class MockServices {
 
     private static void initCompanyService() {
         companyService = mock(CompanyService.class);
-        contentService(
-                companyService,
-                getCompany(),
-                getCompanies()
-        );
+        contentService(companyService, getCompany(), getCompanies());
         when(
                 companyService.initAndAdd(
                         TITLE, DOMAIN,
@@ -230,86 +179,41 @@ public final class MockServices {
                         true
                 )
         ).thenReturn(getCompany());
-        when(
-                companyService.getMainCompany()
-        ).thenReturn(getCompany());
-        when(
-                companyService.getPartners(true)
-        ).thenReturn(getCompanies());
+        when(companyService.getMainCompany()).thenReturn(getCompany());
+        when(companyService.getPartners(true)).thenReturn(getCompanies());
     }
 
     private static void initFileService() {
         fileService = mock(FileService.class);
         dateService(fileService, getFile(), getFiles());
-        when(fileService.getByTitle(TITLE))
-                .thenReturn(getFile());
-        when(fileService.getByUrl(URL))
-                .thenReturn(getFile());
-        when(fileService.initAndAdd(TITLE, null))
-                .thenReturn(getFile());
-        when(fileService.initAndUpdate(ID, TITLE, null))
-                .thenReturn(getFile());
-        when(fileService.deleteFile(PATH))
-                .thenReturn(true);
+        when(fileService.getByTitle(TITLE)).thenReturn(getFile());
+        when(fileService.getByUrl(URL)).thenReturn(getFile());
+        when(fileService.initAndAdd(TITLE, null)).thenReturn(getFile());
+        when(fileService.initAndUpdate(ID, TITLE, null)).thenReturn(getFile());
+        when(fileService.deleteFile(PATH)).thenReturn(true);
     }
 
     private static void initMessageService() {
         messageService = mock(MessageService.class);
-        dateService(
-                messageService,
-                getMessage(),
-                getMessages()
-        );
+        dateService(messageService, getMessage(), getMessages());
     }
 
     private static void initResponseService() {
         responseService = mock(ResponseService.class);
-        dateService(
-                responseService,
-                getResponse(),
-                getResponses()
-        );
-        when(
-                responseService.initAndAdd(NAME, TEXT)
-        ).thenReturn(getResponse());
-        when(
-                responseService.initAndUpdate(
-                        ID, NAME, TEXT
-                )
-        ).thenReturn(getResponse());
-        when(
-                responseService.sortByDate(
-                        getResponses(), true
-                )
-        ).thenReturn(getResponses());
-        when(
-                responseService.sortByDate(
-                        getResponses(), false
-                )
-        ).thenReturn(getResponses());
-        when(
-                responseService.getAndSortByDate(true)
-        ).thenReturn(getResponses());
-        when(
-                responseService.getAndSortByDate(false)
-        ).thenReturn(getResponses());
-        when(
-                responseService.filterByDate(
-                        getResponses(), DATE, DATE
-                )
-        ).thenReturn(getResponses());
-        when(
-                responseService.getAndFilterByDate(DATE, DATE)
-        ).thenReturn(getResponses());
+        dateService(responseService, getResponse(), getResponses());
+        when(responseService.initAndAdd(NAME, TEXT)).thenReturn(getResponse());
+        when(responseService.initAndUpdate(ID, NAME, TEXT)).thenReturn(getResponse());
+        when(responseService.sortByDate(getResponses(), true)).thenReturn(getResponses());
+        when(responseService.sortByDate(getResponses(), false)).thenReturn(getResponses());
+        when(responseService.getAndSortByDate(true)).thenReturn(getResponses());
+        when(responseService.getAndSortByDate(false)).thenReturn(getResponses());
+        when(responseService.filterByDate(getResponses(), DATE, DATE)).thenReturn(getResponses());
+        when(responseService.getAndFilterByDate(DATE, DATE)).thenReturn(getResponses());
     }
 
     private static void initUserService() {
         userService = mock(UserService.class);
-        dateService(
-                userService,
-                getUser(),
-                getUsers()
-        );
+        dateService(userService, getUser(), getUsers());
         when(
                 userService.initAndAdd(
                         NAME, LOGIN, PASSWORD,
@@ -339,76 +243,24 @@ public final class MockServices {
         when(userService.getMainAdmin()).thenReturn(getUser());
         when(userService.getAdmins()).thenReturn(getUsers());
         when(userService.getPersonnel()).thenReturn(getUsers());
-        when(
-                userService.sortByName(
-                        getUsers(), true
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.sortByName(
-                        getUsers(), false
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.sortByUrl(
-                        getUsers(), true
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.sortByUrl(
-                        getUsers(), false
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.sortByRole(
-                        getUsers(), USER_ROLE, true
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.sortByRole(
-                        getUsers(), USER_ROLE, false
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndSortByName(true)
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndSortByName(false)
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndSortByUrl(true)
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndSortByUrl(false)
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndSortByRole(
-                        USER_ROLE, true
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndSortByRole(
-                        USER_ROLE, false
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.filterByRole(
-                        getUsers(), USER_ROLE
-                )
-        ).thenReturn(getUsers());
+        when(userService.sortByName(getUsers(), true)).thenReturn(getUsers());
+        when(userService.sortByName(getUsers(), false)).thenReturn(getUsers());
+        when(userService.sortByUrl(getUsers(), true)).thenReturn(getUsers());
+        when(userService.sortByUrl(getUsers(), false)).thenReturn(getUsers());
+        when(userService.sortByRole(getUsers(), USER_ROLE, true)).thenReturn(getUsers());
+        when(userService.sortByRole(getUsers(), USER_ROLE, false)).thenReturn(getUsers());
+        when(userService.getAndSortByName(true)).thenReturn(getUsers());
+        when(userService.getAndSortByName(false)).thenReturn(getUsers());
+        when(userService.getAndSortByUrl(true)).thenReturn(getUsers());
+        when(userService.getAndSortByUrl(false)).thenReturn(getUsers());
+        when(userService.getAndSortByRole(USER_ROLE, true)).thenReturn(getUsers());
+        when(userService.getAndSortByRole(USER_ROLE, false)).thenReturn(getUsers());
+        when(userService.filterByRole(getUsers(), USER_ROLE)).thenReturn(getUsers());
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        when(
-                userService.filterByRoles(
-                        getUsers(), roles
-                )
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndFilterByRole(USER_ROLE)
-        ).thenReturn(getUsers());
-        when(
-                userService.getAndFilterByRoles(roles)
-        ).thenReturn(getUsers());
+        when(userService.filterByRoles(getUsers(), roles)).thenReturn(getUsers());
+        when(userService.getAndFilterByRole(USER_ROLE)).thenReturn(getUsers());
+        when(userService.getAndFilterByRoles(roles)).thenReturn(getUsers());
     }
 
     private static <T extends Content<Long>, E extends ContentService<T, Long>> void contentService(
@@ -417,117 +269,38 @@ public final class MockServices {
             final Collection<T> contents
     ) {
         dateService(service, content, contents);
-        when(
-                service.getByTitle(TITLE, true)
-        ).thenReturn(content);
-        when(
-                service.getByTitle(TITLE, false)
-        ).thenReturn(content);
-        when(service.getByTitle(ANY_STRING, true))
-                .thenThrow(NullPointerException.class);
-        when(service.getByTitle(ANY_STRING, false))
-                .thenThrow(NullPointerException.class);
-        when(service.getByTitle(null, true))
-                .thenThrow(IllegalArgumentException.class);
-        when(service.getByTitle(null, false))
-                .thenThrow(IllegalArgumentException.class);
+        when(service.getByTitle(TITLE, true)).thenReturn(content);
+        when(service.getByTitle(TITLE, false)).thenReturn(content);
+        when(service.getByTitle(ANY_STRING, true)).thenThrow(NullPointerException.class);
+        when(service.getByTitle(ANY_STRING, false)).thenThrow(NullPointerException.class);
+        when(service.getByTitle(null, true)).thenThrow(IllegalArgumentException.class);
+        when(service.getByTitle(null, false)).thenThrow(IllegalArgumentException.class);
         when(service.getByUrl(URL, true)).thenReturn(content);
         when(service.getByUrl(URL, false)).thenReturn(content);
-        when(service.getByUrl(ANY_STRING, true))
-                .thenThrow(NullPointerException.class);
-        when(service.getByUrl(ANY_STRING, false))
-                .thenThrow(NullPointerException.class);
-        when(service.getByUrl(null, true))
-                .thenThrow(IllegalArgumentException.class);
-        when(service.getByUrl(null, false))
-                .thenThrow(IllegalArgumentException.class);
-        when(
-                service.sortByTitle(
-                        contents, true
-                )
-        ).thenReturn(new ArrayList<>(contents));
-        when(
-                service.sortByTitle(
-                        contents, false
-                )
-        ).thenReturn(new ArrayList<>(contents));
-        when(
-                service.sortByTitle(
-                        new ArrayList<>(), true
-                )
+        when(service.getByUrl(ANY_STRING, true)).thenThrow(NullPointerException.class);
+        when(service.getByUrl(ANY_STRING, false)).thenThrow(NullPointerException.class);
+        when(service.getByUrl(null, true)).thenThrow(IllegalArgumentException.class);
+        when(service.getByUrl(null, false)).thenThrow(IllegalArgumentException.class);
+        when(service.sortByTitle(contents, true)).thenReturn(new ArrayList<>(contents));
+        when(service.sortByTitle(contents, false)).thenReturn(new ArrayList<>(contents));
+        when(service.sortByTitle(new ArrayList<>(), true)).thenReturn(new ArrayList<>());
+        when(service.sortByTitle(new ArrayList<>(), false)
         ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByTitle(
-                        new ArrayList<>(), false
-                )
-        ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByTitle(
-                        null, true
-                )
-        ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByTitle(
-                        null, false
-                )
-        ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByUrl(
-                        contents, true
-                )
-        ).thenReturn(new ArrayList<>(contents));
-        when(
-                service.sortByUrl(
-                        contents, false
-                )
-        ).thenReturn(new ArrayList<>(contents));
-        when(
-                service.sortByUrl(
-                        new ArrayList<>(), true
-                )
-        ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByUrl(
-                        new ArrayList<>(), false
-                )
-        ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByUrl(
-                        null, true
-                )
-        ).thenReturn(new ArrayList<>());
-        when(
-                service.sortByUrl(
-                        null, false
-                )
-        ).thenReturn(new ArrayList<>());
-        when(service.getAndSortByTitle(true))
-                .thenReturn(new ArrayList<>(contents));
-        when(service.getAndSortByTitle(false))
-                .thenReturn(new ArrayList<>(contents));
-        when(service.getAndSortByUrl(true))
-                .thenReturn(new ArrayList<>(contents));
-        when(service.getAndSortByUrl(false))
-                .thenReturn(new ArrayList<>(contents));
-        when(
-                service.sort(
-                        contents,
-                        new ContentComparator.ByTitle<>(),
-                        true
-                )
-        ).thenReturn(new ArrayList<>(contents));
-        when(
-                service.sort(
-                        contents,
-                        new ContentComparator.ByTitle<>(), false
-                )
-        ).thenReturn(new ArrayList<>(contents));
-        when(
-                service.sort(
-                        contents,
-                        new ContentComparator.ByTitle<>()
-                )
-        ).thenReturn(new ArrayList<>(contents));
+        when(service.sortByTitle(null, true)).thenReturn(new ArrayList<>());
+        when(service.sortByTitle(null, false)).thenReturn(new ArrayList<>());
+        when(service.sortByUrl(contents, true)).thenReturn(new ArrayList<>(contents));
+        when(service.sortByUrl(contents, false)).thenReturn(new ArrayList<>(contents));
+        when(service.sortByUrl(new ArrayList<>(), true)).thenReturn(new ArrayList<>());
+        when(service.sortByUrl(new ArrayList<>(), false)).thenReturn(new ArrayList<>());
+        when(service.sortByUrl(null, true)).thenReturn(new ArrayList<>());
+        when(service.sortByUrl(null, false)).thenReturn(new ArrayList<>());
+        when(service.getAndSortByTitle(true)).thenReturn(new ArrayList<>(contents));
+        when(service.getAndSortByTitle(false)).thenReturn(new ArrayList<>(contents));
+        when(service.getAndSortByUrl(true)).thenReturn(new ArrayList<>(contents));
+        when(service.getAndSortByUrl(false)).thenReturn(new ArrayList<>(contents));
+        when(service.sort(contents, new ContentComparator.ByTitle<>(), true)).thenReturn(new ArrayList<>(contents));
+        when(service.sort(contents, new ContentComparator.ByTitle<>(), false)).thenReturn(new ArrayList<>(contents));
+        when(service.sort(contents, new ContentComparator.ByTitle<>())).thenReturn(new ArrayList<>(contents));
     }
 
     private static <T extends Model<Long>, E extends DataService<T, Long>> void dateService(
@@ -540,17 +313,9 @@ public final class MockServices {
         when(service.update(model)).thenReturn(model);
         when(service.update(models)).thenReturn(models);
         when(service.get(ID)).thenReturn(model);
-        when(service.get(null))
-                .thenThrow(
-                new IllegalArgumentException(
-                        "Model id is null!"
-                )
-        );
-        when(service.get(UNKNOWN_ID))
-                .thenThrow(
-                new NullPointerException(
-                        "Can`t find Model by id " + UNKNOWN_ID + "!"
-                )
+        when(service.get(null)).thenThrow(new IllegalArgumentException("Model id is null!"));
+        when(service.get(UNKNOWN_ID)).thenThrow(
+                new NullPointerException("Can`t find Model by id " + UNKNOWN_ID + "!")
         );
         when(service.getAll()).thenReturn(models);
         when(service.getAll(true)).thenReturn(models);
@@ -565,20 +330,31 @@ public final class MockServices {
         temp.setId(null);
         when(service.exists(temp)).thenReturn(false);
         when(service.exists(model)).thenReturn(true);
-        when(
-                service.subList(
-                        models,
-                        INDEX,
-                        INDEX
-                )
-        ).thenReturn(new ArrayList<T>(models));
-        when(
-                service.getAndSubList(
-                        INDEX,
-                        INDEX
-                )
-        ).thenReturn(new ArrayList<T>(models));
-        when(service.filteredByValid(models))
-                .thenReturn(new ArrayList<T>(models));
+        when(service.subList(models, INDEX, INDEX)).thenReturn(new ArrayList<T>(models));
+        when(service.getAndSubList(INDEX, INDEX)).thenReturn(new ArrayList<T>(models));
+        when(service.filteredByValid(models)).thenReturn(new ArrayList<T>(models));
+    }
+
+    private static void initSearchService() {
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("all", true);
+        modelAndView.setViewName("client/search/result_page");
+        searchService = mock(SearchService.class);
+        when(searchService.search(KEYWORDS, "all", false)).thenReturn(modelAndView);
+    }
+
+    private static void initSeoService() {
+        final ModelAndView robotsModelAndView = new ModelAndView();
+        robotsModelAndView.addObject("domain", DOMAIN);
+        robotsModelAndView.setViewName("seo/robots");
+        final ModelAndView siteMapModelAndView = new ModelAndView();
+        siteMapModelAndView.addObject("domain", DOMAIN);
+        siteMapModelAndView.addObject("categories", getCategories());
+        siteMapModelAndView.addObject("articles", getArticles());
+        siteMapModelAndView.addObject("companies", getCompanies());
+        siteMapModelAndView.setViewName("seo/sitemap");
+        seoService = mock(SeoService.class);
+        when(seoService.getRobotsTxt()).thenReturn(robotsModelAndView);
+        when(seoService.getSiteMapXml()).thenReturn(siteMapModelAndView);
     }
 }

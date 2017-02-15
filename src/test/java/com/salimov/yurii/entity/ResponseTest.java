@@ -260,36 +260,6 @@ public final class ResponseTest extends ModelTest<Response> {
     }
 
     @Test
-    public void whenCallStaticResponseIsValidatedToNullThenReturnsFalse() {
-        assertFalse(Response.isValidated(null));
-    }
-
-    @Test
-    @Override
-    public void validObject() {
-        super.validObject();
-        final Response response = getResponse();
-        assertTrue(Response.isValidated(response));
-        assertTrue(response.isValidated());
-    }
-
-    @Test
-    public void whenSetNullUsernameThenSetNotResponseStaticValidated() {
-        final Response response = getResponse();
-        response.setUsername(null);
-        assertFalse(Response.isValidated(response));
-        assertTrue(response.isValidated());
-    }
-
-    @Test
-    public void whenSetNullTextThenSetNotResponseStaticValidated() {
-        final Response response = getResponse();
-        response.setText(null);
-        assertFalse(Response.isValidated(response));
-        assertTrue(response.isValidated());
-    }
-
-    @Test
     public void whenSetTrueValidatedThenGetTrue() {
         final Response response = getResponse();
         response.setValidated(true);

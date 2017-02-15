@@ -10,23 +10,17 @@ public final class AppInitializerTest {
 
     @Test
     public void getServletConfigClassesTest() {
-        assertNotNull(
-                new AppInitializer().getServletConfigClasses()
-        );
+        assertNotNull(new AppInitializer().getServletConfigClasses());
     }
 
     @Test
     public void getRootConfigClassesTest() {
-        assertNotNull(
-                new AppInitializer().getRootConfigClasses()
-        );
+        assertNotNull(new AppInitializer().getRootConfigClasses());
     }
 
     @Test
     public void getServletMappingsTest() {
-        assertNotNull(
-                new AppInitializer().getServletMappings()
-        );
+        assertNotNull(new AppInitializer().getServletMappings());
     }
 
     @Test

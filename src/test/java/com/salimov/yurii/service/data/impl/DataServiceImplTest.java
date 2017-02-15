@@ -22,38 +22,22 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     @Test
     public void whenAddInvalidModelThenReturnsIt() {
         assertNull(getService().add(null));
-        assertNotNull(
-                getService().add(
-                        getInvalidObject()
-                )
-        );
+        assertNotNull(getService().add(getInvalidObject()));
     }
 
     @Test
     public void whenAddValidModelThenReturnsIt() {
-        assertNotNull(
-                getService().add(
-                        getObject()
-                )
-        );
+        assertNotNull(getService().add(getObject()));
     }
 
     @Test
     public void whenAddAllNullThenReturnsEmptyCollection() {
-        assertTrue(
-                getService()
-                        .addAll(null)
-                        .isEmpty()
-        );
+        assertTrue(getService().addAll(null).isEmpty());
     }
 
     @Test
     public void whenAddAllEmptyListThenReturnsEmptyCollection() {
-        assertTrue(
-                getService()
-                        .addAll(new ArrayList<>())
-                        .isEmpty()
-        );
+        assertTrue(getService().addAll(new ArrayList<>()).isEmpty());
     }
 
     @Test
@@ -68,10 +52,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenUpdateNullThenReturnsIt() {
-        assertNull(
-                getService()
-                        .update((T) null)
-        );
+        assertNull(getService().update((T) null));
     }
 
     @Test
@@ -79,8 +60,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
         final T invalidModel = getInvalidObject();
         assertEquals(
                 invalidModel,
-                getService()
-                        .update(invalidModel)
+                getService().update(invalidModel)
         );
     }
 
@@ -95,9 +75,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenUpdateAllNullThenReturnEmptyCollection() {
-        assertTrue(getService().update(
-                (Collection<T>) null
-        ).isEmpty());
+        assertTrue(getService().update((Collection<T>) null).isEmpty());
     }
 
     @Test
@@ -123,67 +101,44 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenGetAllThenReturnSomeModels() {
-        assertFalse(
-                getService()
-                        .getAll()
-                        .isEmpty()
-        );
+        assertFalse(getService().getAll().isEmpty());
     }
 
     @Test
     public void whenGetAllWithFalseValidThenReturnSomeModels() {
-        assertFalse(
-                getService()
-                        .getAll(false)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAll(false).isEmpty());
     }
 
     @Test
     public void whenGetAllWithTrueValidThenReturnSomeModels() {
-        assertFalse(
-                getService()
-                        .getAll(true)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAll(true).isEmpty());
     }
 
     @Test
     public void whenExistsByNullIdThenReturnFalse() {
-        assertFalse(
-                getService().exists((E) null)
-        );
+        assertFalse(getService().exists((E) null));
     }
 
     @Test
     public void whenExistsByUnknownIdThenReturnFalse() {
-        assertFalse(
-                getService().exists((E) UNKNOWN_ID)
-        );
+        assertFalse(getService().exists((E) UNKNOWN_ID));
     }
 
     @Test
     public void whenExistsByIdThenReturnTrue() {
-        assertNotNull(
-                getService().exists((E) ID)
-        );
+        assertNotNull(getService().exists((E) ID));
     }
 
     @Test
     public void whenExistsByNullModelThenReturnsFalse() {
-        assertFalse(
-                getService()
-                        .exists((T) null)
-        );
+        assertFalse(getService().exists((T) null));
     }
 
     @Test
     public void whenExistsByModelWithIdThenReturnsFalse() {
         final T model = getObject();
         model.setId(null);
-        assertFalse(
-                getService().exists(model)
-        );
+        assertFalse(getService().exists(model));
     }
 
     @Test

@@ -27,27 +27,17 @@ public final class ResponseServiceImplTest
 
     @Before
     public void beforeTest() {
-        this.service = new ResponseServiceImpl(
-                getResponseDao()
-        );
+        this.service = new ResponseServiceImpl(getResponseDao());
     }
 
     @Test
     public void whenInitAndAddTheReturnSomeResponse() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        NAME, TEXT
-                )
-        );
+        assertNotNull(this.service.initAndAdd(NAME, TEXT));
     }
 
     @Test
     public void whenInitAndUpdateTheReturnSomeResponse() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        ID, NAME, TEXT
-                )
-        );
+        assertNotNull(this.service.initAndUpdate(ID, NAME, TEXT));
     }
 
     @Test
@@ -59,9 +49,7 @@ public final class ResponseServiceImplTest
 
     @Test
     public void whenSortByDateWithNullCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByDate(null, false).isEmpty()
-        );
+        assertTrue(this.service.sortByDate(null, false).isEmpty());
     }
 
     @Test
@@ -227,9 +215,7 @@ public final class ResponseServiceImplTest
 
     @Test
     public void whenFilteredByValidWithNullCollectionThenReturnEmptyList() {
-        assertTrue(
-                this.service.filteredByValid(null).isEmpty()
-        );
+        assertTrue(this.service.filteredByValid(null).isEmpty());
     }
 
     @Test

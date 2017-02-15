@@ -16,7 +16,6 @@ public final class MockCategoryTest extends MockModelTest<Category> {
     @Override
     public void whenGetModelThenReturnValidModel() {
         final Category category = getCategory();
-        assertFalse(Category.isValidated(category));
         assertNotNull(category.getTitle());
         assertNotNull(category.getDescription());
         assertNotNull(category.getKeywords());

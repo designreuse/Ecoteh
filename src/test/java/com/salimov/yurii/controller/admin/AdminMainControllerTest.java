@@ -1,14 +1,14 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.controller.client.MainController;
-import com.salimov.yurii.controller.other.MainControllerTest;
+import com.salimov.yurii.controller.client.MainControllerTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.ModelAndViews.checkModelAndView;
-import static com.salimov.yurii.mocks.controller.MockController.getAdminMainController;
+import static com.salimov.yurii.mocks.controller.MockAdminController.getAdminMainController;
 
 public class AdminMainControllerTest extends MainControllerTest {
 
@@ -32,9 +32,7 @@ public class AdminMainControllerTest extends MainControllerTest {
     public void whenSendMessageWithNullUrlThenRedirectToHomePage() {
         checkModelAndView(
                 controller.sendMessage(
-                        URL, NAME,
-                        PHONE, EMAIL,
-                        ANY_STRING
+                        URL, NAME, PHONE, EMAIL, ANY_STRING
                 ),
                 "redirect:" + URL,
                 null

@@ -416,19 +416,6 @@ public final class MessageTest extends ModelTest<Message> {
         assertEquals(message.getDate(), date);
     }
 
-    @Test
-    public void whenValidateMessageThenReturnSomeResult() {
-        assertFalse(Message.isValidated(null));
-        final Message message = new Message();
-        assertFalse(Message.isValidated(message));
-        message.setUsername(NAME);
-        assertFalse(Message.isValidated(message));
-        message.setPhone(PHONE);
-        assertFalse(Message.isValidated(message));
-        message.setText(TEXT);
-        assertTrue(Message.isValidated(message));
-    }
-
     @Ignore
     @Override
     public void whenSetInvalidIdThenGetNull() {

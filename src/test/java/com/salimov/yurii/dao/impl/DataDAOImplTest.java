@@ -20,9 +20,7 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenAddValidModelThenReturnThisModel() {
-        assertNotNull(
-                getDao().add(getObject())
-        );
+        assertNotNull(getDao().add(getObject()));
     }
 
     @Test
@@ -46,12 +44,7 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenUpdateModelThenReturnThisModel() {
-        assertNotNull(
-                getDao()
-                        .update(
-                                getObject()
-                        )
-        );
+        assertNotNull(getDao().update(getObject()));
     }
 
     @Test
@@ -76,19 +69,13 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenExistsByUnknownIdThenReturnFalse() {
-        assertFalse(
-                getDao().exists((E) UNKNOWN_ID)
-        );
+        assertFalse(getDao().exists((E) UNKNOWN_ID));
     }
 
     @Test
     public void whenExistsByIdThenReturnTrue() {
-        assertTrue(
-                getDao().exists((E) ID)
-        );
-        assertFalse(
-                getDao().exists((E) UNKNOWN_ID)
-        );
+        assertTrue(getDao().exists((E) ID));
+        assertFalse(getDao().exists((E) UNKNOWN_ID));
     }
 
     @Test

@@ -24,10 +24,7 @@ public final class CategoryServiceImplTest extends ContentServiceImplTest<Catego
 
     @Before
     public void beforeTest() {
-        this.service = new CategoryServiceImpl(
-                getCategoryDao(),
-                getArticleService()
-        );
+        this.service = new CategoryServiceImpl(getCategoryDao(), getArticleService());
     }
 
     @Test
@@ -54,27 +51,17 @@ public final class CategoryServiceImplTest extends ContentServiceImplTest<Catego
 
     @Test
     public void whenFilteredByValidWithNullCollectionThenReturnEmptyList() {
-        assertTrue(
-                this.service.filteredByValid(null).isEmpty()
-        );
+        assertTrue(this.service.filteredByValid(null).isEmpty());
     }
 
     @Test
     public void whenFilteredByValidWithEmptyCollectionThenReturnEmptyList() {
-        assertTrue(
-                this.service.filteredByValid(
-                        new ArrayList<>()
-                ).isEmpty()
-        );
+        assertTrue(this.service.filteredByValid(new ArrayList<>()).isEmpty());
     }
 
     @Test
     public void whenFilteredByValidThenReturnSomeList() {
-        assertFalse(
-                this.service.filteredByValid(
-                        getCategories()
-                ).isEmpty()
-        );
+        assertFalse(this.service.filteredByValid(getCategories()).isEmpty());
     }
 
     @Ignore

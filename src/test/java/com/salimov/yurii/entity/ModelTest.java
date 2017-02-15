@@ -56,16 +56,6 @@ public abstract class ModelTest<T extends Model<Long>> {
     }
 
     @Test
-    public void validObject() {
-        assertFalse(Model.isValidated(null));
-        final T model = getObject();
-        assertEquals(
-                Model.isValidated(model),
-                model != null
-        );
-    }
-
-    @Test
     public void cloneTest() {
         final T model = getObject();
         final T clone;

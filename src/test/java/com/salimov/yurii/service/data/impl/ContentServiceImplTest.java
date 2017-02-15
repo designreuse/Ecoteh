@@ -49,16 +49,12 @@ public abstract class ContentServiceImplTest<T extends Content<E>, E extends Num
 
     @Test
     public void whenGetByTitleWithTrueValidThenReturnsSomeContent() {
-        assertNotNull(
-                getService().getByTitle(TITLE, true)
-        );
+        assertNotNull(getService().getByTitle(TITLE, true));
     }
 
     @Test
     public void whenGetByTitleWithFalseValidThenReturnsSomeContent() {
-        assertNotNull(
-                getService().getByTitle(TITLE, false)
-        );
+        assertNotNull(getService().getByTitle(TITLE, false));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -93,168 +89,92 @@ public abstract class ContentServiceImplTest<T extends Content<E>, E extends Num
 
     @Test
     public void whenGetByUrlWithTrueValidThenReturnsSomeContent() {
-        assertNotNull(
-                getService().getByUrl(URL, false)
-        );
+        assertNotNull(getService().getByUrl(URL, false));
     }
 
     @Test
     public void whenGetByUrlWithFalseValidThenReturnsSomeContent() {
-        assertNotNull(
-                getService().getByUrl(URL, false)
-        );
+        assertNotNull(getService().getByUrl(URL, false));
     }
 
     @Test
     public void whenSortByTitleWithNullCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByTitle(null, true)
-                        .isEmpty()
-        );
+        assertTrue(getService().sortByTitle(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByTitleWithNullCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByTitle(null, false)
-                        .isEmpty()
-        );
+        assertTrue(getService().sortByTitle(null, false).isEmpty());
     }
 
     @Test
     public void whenSortByTitleWithEmptyCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByTitle(
-                                new ArrayList<>(), true
-                        ).isEmpty()
-        );
+        assertTrue(getService().sortByTitle(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByTitleWithEmptyCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByTitle(
-                                new ArrayList<>(), false
-                        ).isEmpty()
-        );
+        assertTrue(getService().sortByTitle(new ArrayList<>(), false).isEmpty());
     }
 
     @Test
     public void whenSortByTitleWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                getService()
-                        .sortByTitle(
-                                getObjects(), true
-                        ).isEmpty()
-        );
+        assertFalse(getService().sortByTitle(getObjects(), true).isEmpty());
     }
 
     @Test
     public void whenSortByTitleWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                getService()
-                        .sortByTitle(
-                                getObjects(), false
-                        ).isEmpty()
-        );
+        assertFalse(getService().sortByTitle(getObjects(), false).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithNullCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByUrl(null, true)
-                        .isEmpty()
-        );
+        assertTrue(getService().sortByUrl(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithNullCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByUrl(null, false)
-                        .isEmpty()
-        );
+        assertTrue(getService().sortByUrl(null, false).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithEmptyCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByUrl(
-                                new ArrayList<>(), true
-                        ).isEmpty()
-        );
+        assertTrue(getService().sortByUrl(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithEmptyCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                getService()
-                        .sortByUrl(
-                                new ArrayList<>(), false
-                        ).isEmpty()
-        );
+        assertTrue(getService().sortByUrl(new ArrayList<>(), false).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                getService()
-                        .sortByUrl(
-                                getObjects(), true
-                        ).isEmpty()
-        );
+        assertFalse(getService().sortByUrl(getObjects(), true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                getService()
-                        .sortByUrl(
-                                getObjects(), false
-                        ).isEmpty()
-        );
+        assertFalse(getService().sortByUrl(getObjects(), false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByTitleWithTrueReversThenReturnSomeCollection() {
-        assertFalse(
-                getService()
-                        .getAndSortByTitle(true)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAndSortByTitle(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByTitleWithFalseReversThenReturnSomeCollection() {
-        assertFalse(
-                getService()
-                        .getAndSortByTitle(false)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAndSortByTitle(false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByUrlWithTrueReversThenReturnSomeCollection() {
-        assertFalse(
-                getService()
-                        .getAndSortByUrl(true)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAndSortByUrl(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByUrlWithFalseReversThenReturnSomeCollection() {
-        assertFalse(
-                getService()
-                        .getAndSortByUrl(false)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAndSortByUrl(false).isEmpty());
     }
 
     @Test
