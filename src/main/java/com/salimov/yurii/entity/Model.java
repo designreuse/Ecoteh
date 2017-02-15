@@ -23,8 +23,7 @@ import java.io.Serializable;
  * @see Message
  */
 @MappedSuperclass
-public abstract class Model<E extends Number>
-        implements IModel<E>, Serializable, Cloneable {
+public abstract class Model<E extends Number> implements IModel<E>, Serializable, Cloneable {
 
     /**
      * It is used during deserialization to verify that
@@ -144,18 +143,6 @@ public abstract class Model<E extends Number>
     @Override
     public boolean isValidated() {
         return this.validated;
-    }
-
-    /**
-     * Statically validates the model.
-     * Model is valid if it is not {@code null}.
-     *
-     * @param model a model to validate.
-     * @return {@code true} if the model is valid,
-     * {@code false} otherwise.
-     */
-    public static boolean isValidated(final Model model) {
-        return model != null;
     }
 
     /**

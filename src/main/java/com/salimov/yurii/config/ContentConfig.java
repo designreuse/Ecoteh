@@ -19,9 +19,8 @@ import org.springframework.context.annotation.PropertySource;
 public class ContentConfig {
 
     /**
-     * The implementation of the interface
-     * describes the methods for getting
-     * application properties.
+     * The implementation of the interface describes the methods
+     * for getting application properties.
      */
     private static ContentProperties contentProperties;
 
@@ -103,7 +102,6 @@ public class ContentConfig {
         }
         return contentProperties;
     }
-
 
     /**
      * Initializes the content properties object.

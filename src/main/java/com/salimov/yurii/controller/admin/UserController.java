@@ -78,14 +78,10 @@ public class UserController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric}
-     *                       interface.
-     * @param userService    a implementation of the {@link UserService}
-     *                       interface.
-     * @param companyService a implementation of the {@link CompanyService}
-     *                       interface.
-     * @param senderService  a implementation of the {@link SenderService}
-     *                       interface.
+     * @param fabric         a implementation of the {@link MainMVFabric} interface.
+     * @param userService    a implementation of the {@link UserService} interface.
+     * @param companyService a implementation of the {@link CompanyService} interface.
+     * @param senderService  a implementation of the {@link SenderService} interface.
      * @see MainMVFabric
      * @see UserService
      * @see FileService
@@ -120,9 +116,7 @@ public class UserController {
     )
     public ModelAndView getAllUsers() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "users_list", this.userService.getAll(false)
-        );
+        modelAndView.addObject("users_list", this.userService.getAll(false));
         modelAndView.addObject("is_captcha", null);
         modelAndView.setViewName("admin/user/all_page");
         return modelAndView;
@@ -236,9 +230,7 @@ public class UserController {
     )
     public ModelAndView editUser(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "user", this.userService.getByUrl(url)
-        );
+        modelAndView.addObject("user", this.userService.getByUrl(url));
         modelAndView.setViewName("admin/user/edit_page");
         return modelAndView;
     }

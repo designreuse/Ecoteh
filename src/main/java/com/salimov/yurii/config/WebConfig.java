@@ -40,8 +40,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     /**
      * Constructor.
      *
-     * @param properties implementation of the {@link ContentProperties}
-     *                   interface.
+     * @param properties implementation of the {@link ContentProperties}  interface.
      */
     @Autowired
     public WebConfig(final ContentProperties properties) {
@@ -57,8 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Bean
     public ViewResolver viewResolver() {
-        final InternalResourceViewResolver viewResolver
-                = new InternalResourceViewResolver();
+        final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setContentType(this.properties.getContentType());
         viewResolver.setPrefix(this.properties.getPrefix());
@@ -77,8 +75,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * @param resource The object of the ResourceHandlerRegistry class.
      */
     @Override
-    public void addResourceHandlers(
-            final ResourceHandlerRegistry resource) {
+    public void addResourceHandlers(final ResourceHandlerRegistry resource) {
         resource.addResourceHandler(this.properties.getResourcesUrl()
         ).addResourceLocations(this.properties.getResourcesLocation());
     }

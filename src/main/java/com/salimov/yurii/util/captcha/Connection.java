@@ -80,12 +80,8 @@ final class Connection {
     private void createConnection() throws IOException {
         this.connection = (HttpsURLConnection) this.url.openConnection();
         this.connection.setRequestMethod("POST");
-        this.connection.setRequestProperty(
-                "User-Agent", this.userAgent
-        );
-        this.connection.setRequestProperty(
-                "Accept-Language", this.acceptLanguage
-        );
+        this.connection.setRequestProperty("User-Agent", this.userAgent);
+        this.connection.setRequestProperty("Accept-Language", this.acceptLanguage);
         this.connection.setDoOutput(this.doOutput);
     }
 }

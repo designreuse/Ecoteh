@@ -93,9 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception Exception maybe throws HttpSecurity class methods.
      */
     @Override
-    protected void configure(
-            final HttpSecurity httpSecurity
-    ) throws Exception {
+    protected void configure(final HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .logout()
                 .invalidateHttpSession(false)
@@ -133,9 +131,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * class methods.
      */
     @Override
-    protected void configure(
-            final AuthenticationManagerBuilder builder
-    ) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(this.userDetailsService);
     }
 }

@@ -32,9 +32,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class FileServiceImpl
-        extends DataServiceImpl<File, Long>
-        implements FileService {
+public final class FileServiceImpl extends DataServiceImpl<File, Long> implements FileService {
 
     /**
      * The interface provides a set of standard methods
@@ -57,10 +55,8 @@ public final class FileServiceImpl
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao        a implementation of the
-     *                   {@link FileDao} interface.
-     * @param properties a implementation of the
-     *                   {@link ContentProperties} interface.
+     * @param dao        a implementation of the {@link FileDao} interface.
+     * @param properties a implementation of the {@link ContentProperties} interface.
      * @see FileDao
      */
     @Autowired
@@ -115,9 +111,7 @@ public final class FileServiceImpl
     ) throws IllegalArgumentException {
         final File file = get(id);
         if (!file.isValidated()) {
-            throw new IllegalArgumentException(
-                    "Static files forbidden to edit!"
-            );
+            throw new IllegalArgumentException("Static files forbidden to edit!");
         }
         file.setTitle(title);
         if (multipartFile != null && !multipartFile.isEmpty()) {
@@ -135,10 +129,8 @@ public final class FileServiceImpl
      *
      * @param title a title of the file to return.
      * @return The file with parameter title or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter title
-     *                                  is blank.
-     * @throws NullPointerException     Throw exception when object
-     *                                  with parameter title is not exist.
+     * @throws IllegalArgumentException Throw exception when parameter title is blank.
+     * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      * @see File
      */
     @Override
@@ -165,8 +157,7 @@ public final class FileServiceImpl
      *
      * @param url a url of the file to return.
      * @return The file with parameter url or {@code null}.
-     * @throws NullPointerException Throw exception when object
-     *                              with parameter url is not exist.
+     * @throws NullPointerException Throw exception when object with parameter url is not exist.
      * @see File
      */
     @Override
@@ -280,8 +271,8 @@ public final class FileServiceImpl
             new FileLoader(
                     multipartFile,
                     this.properties.getProjectAbsolutePath()
-                            + (isNotBlank(rootPath) ? rootPath
-                            : multipartFile.getOriginalFilename())
+                            + (isNotBlank(rootPath) ?
+                            rootPath : multipartFile.getOriginalFilename())
             ).write();
         }
     }
@@ -295,9 +286,7 @@ public final class FileServiceImpl
      */
     @Override
     @Transactional
-    public void saveFile(
-            final MultipartFile multipartFile
-    ) {
+    public void saveFile(final MultipartFile multipartFile) {
         saveFile(multipartFile, multipartFile.getOriginalFilename());
     }
 
@@ -322,7 +311,6 @@ public final class FileServiceImpl
      * Validates input file object.
      *
      * @param file               the file to valid.
-     * @param requiredParameters is validate by required parameters.
      * @param exist              is validate by exists.
      * @param duplicate          is validate by duplicate.
      * @return {@code true} if file is valid, {@code false} otherwise.
@@ -331,14 +319,10 @@ public final class FileServiceImpl
     @Override
     protected boolean validated(
             final File file,
-            final boolean requiredParameters,
             final boolean exist,
             final boolean duplicate
     ) {
         if (file == null) {
-            return false;
-        }
-        if (requiredParameters && !File.isValidated(file)) {
             return false;
         }
         if (exist && !exists(file)) {
@@ -415,9 +399,7 @@ public final class FileServiceImpl
      * @param multipartFile a multipart file.
      * @return The multipart file type.
      */
-    private static String getMultipartFileType(
-            final MultipartFile multipartFile
-    ) {
+    private static String getMultipartFileType(final MultipartFile multipartFile) {
         String type;
         final String name = multipartFile.getOriginalFilename();
         if (name.contains(".")) {

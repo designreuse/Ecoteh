@@ -53,10 +53,8 @@ public class SearchController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric        a implementation of the {@link MainMVFabric}
-     *                      interface.
-     * @param searchService a implementation of the {@link SearchService}
-     *                      interface.
+     * @param fabric        a implementation of the {@link MainMVFabric} interface.
+     * @param searchService a implementation of the {@link SearchService} interface.
      * @see MainMVFabric
      * @see SearchService
      */

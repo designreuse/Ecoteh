@@ -23,8 +23,7 @@ import java.util.List;
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
-public final class CompanyDaoImpl
-        extends DataDaoImpl<Company, Long> implements CompanyDao {
+public final class CompanyDaoImpl extends DataDaoImpl<Company, Long> implements CompanyDao {
 
     /**
      * The interface provides a set of JPA methods
@@ -37,9 +36,8 @@ public final class CompanyDaoImpl
     /**
      * Constructor.
      *
-     * @param repository a implementation of the interface provides
-     *                   a set of JPA methods for working {@link Company}
-     *                   objects with a database.
+     * @param repository a implementation of the interface provides a set of JPA methods
+     *                   for working {@link Company} objects with a database.
      * @see CompanyRepository
      */
     @Autowired

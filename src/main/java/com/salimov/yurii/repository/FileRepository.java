@@ -11,8 +11,7 @@ import com.salimov.yurii.entity.File;
  * @see DataRepository
  * @see File
  */
-public interface FileRepository
-        extends DataRepository<File, Long> {
+public interface FileRepository extends DataRepository<File, Long> {
 
     /**
      * Returns photo from a database,

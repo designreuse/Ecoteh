@@ -18,9 +18,7 @@ public class ExceptionAspectController {
     /**
      * The object for logging information.
      */
-    private final static Logger LOGGER = Logger.getLogger(
-            ExceptionAspectController.class
-    );
+    private final static Logger LOGGER = Logger.getLogger(ExceptionAspectController.class);
 
     /**
      * The method will be called in the event of exceptional situations,

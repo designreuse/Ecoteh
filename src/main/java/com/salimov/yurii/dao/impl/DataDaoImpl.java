@@ -25,8 +25,7 @@ import java.util.Collection;
  * @see MessageDaoImpl
  * @see Model
  */
-public abstract class DataDaoImpl<T extends Model<E>, E extends Number>
-        implements DataDao<T, E> {
+public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implements DataDao<T, E> {
 
     /**
      * The interface provides a set of JPA methods
@@ -39,9 +38,8 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number>
     /**
      * Constructor.
      *
-     * @param repository a implementation of the interface provides
-     *                   a set of JPA methods for working objects
-     *                   with a database.
+     * @param repository a implementation of the interface provides a set of JPA methods
+     *                   for working objects with a database.
      * @see DataRepository
      */
     DataDaoImpl(final DataRepository<T, E> repository) {

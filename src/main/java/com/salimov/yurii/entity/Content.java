@@ -262,21 +262,4 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     public void setKeywords(final String keywords) {
         this.keywords = isNotBlank(keywords) ? keywords : null;
     }
-
-    /**
-     * Statically validates the content.
-     * Content is valid if it is a valid model object
-     * and it has name, phone and email.
-     *
-     * @param content a content to validate.
-     * @param <ID>    a content id type, extends Number.
-     * @return {@code true} if the content is valid, {@code false} otherwise.
-     */
-    public static <ID extends Number> boolean isValidated(
-            final Content<ID> content
-    ) {
-        return Model.isValidated(content)
-                && isNotBlank(content.getTitle())
-                && isNotBlank(content.getUrl());
-    }
 }

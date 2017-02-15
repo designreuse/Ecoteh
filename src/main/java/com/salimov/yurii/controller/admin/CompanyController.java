@@ -56,10 +56,8 @@ public class CompanyController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric}
-     *                       interface.
-     * @param companyService a implementation of the {@link CompanyService}
-     *                       interface.
+     * @param fabric         a implementation of the {@link MainMVFabric} interface.
+     * @param companyService a implementation of the {@link CompanyService} interface.
      * @see MainMVFabric
      * @see CompanyService
      */
@@ -167,8 +165,7 @@ public class CompanyController {
                 senderEmail, senderPass,
                 vkontakte, facebook, twitter,
                 skype, address, googleMaps,
-                logoUrl, faviconUrl,
-                slides
+                logoUrl, faviconUrl, slides
         );
         modelAndView.setViewName("redirect:/company/main");
         Cache.clear();
@@ -272,9 +269,7 @@ public class CompanyController {
                 logoUrl, isValid
         );
         Cache.clear();
-        modelAndView.setViewName(
-                "redirect:/company/" + company.getUrl()
-        );
+        modelAndView.setViewName("redirect:/company/" + company.getUrl());
         return modelAndView;
     }
 
@@ -313,9 +308,7 @@ public class CompanyController {
     )
     public ModelAndView editPartner(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "company", this.companyService.getByUrl(url, false)
-        );
+        modelAndView.addObject("company", this.companyService.getByUrl(url, false));
         modelAndView.addObject("main", false);
         modelAndView.setViewName("admin/company/edit_page");
         return modelAndView;
@@ -386,9 +379,7 @@ public class CompanyController {
                 logoUrl, isValid
         );
         Cache.clear();
-        modelAndView.setViewName(
-                "redirect:/company/" + company.getUrl()
-        );
+        modelAndView.setViewName("redirect:/company/" + company.getUrl());
         return modelAndView;
     }
 

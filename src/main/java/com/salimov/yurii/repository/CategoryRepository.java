@@ -11,8 +11,7 @@ import com.salimov.yurii.entity.Category;
  * @see DataRepository
  * @see Category
  */
-public interface CategoryRepository
-        extends DataRepository<Category, Long> {
+public interface CategoryRepository extends DataRepository<Category, Long> {
 
     /**
      * Returns category from a database,

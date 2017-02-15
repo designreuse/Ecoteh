@@ -174,9 +174,7 @@ public class RootConfig {
      * @return Returns the transaction manager.
      */
     @Bean
-    public JpaTransactionManager transactionManager(
-            final EntityManagerFactory factory
-    ) {
+    public JpaTransactionManager transactionManager(final EntityManagerFactory factory) {
         return new JpaTransactionManager(factory);
     }
 
@@ -184,8 +182,7 @@ public class RootConfig {
      * Create the entity manager factory.
      *
      * @param dataSource a object of the DataSource class with
-     *                   configurations for to connection
-     *                   to the database.
+     *                   configurations for to connection to the database.
      * @param adapter    Adapter to connect to the database.
      * @return The object of the LocalContainerEntityManagerFactoryBean class.
      */
@@ -213,8 +210,8 @@ public class RootConfig {
         final BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(this.driver);
         dataSource.setUrl(
-                this.urlDriver + "://" + this.hostIp
-                        + ":" + this.hostPort + "/" + this.database
+                this.urlDriver + "://" + this.hostIp +
+                        ":" + this.hostPort + "/" + this.database
         );
         dataSource.setConnectionProperties(
                 createDatabaseConnectionProperties()
@@ -235,8 +232,7 @@ public class RootConfig {
      */
     @Bean
     public HibernateJpaVendorAdapter hibernateJpaVendorAdapter() {
-        final HibernateJpaVendorAdapter adapter
-                = new HibernateJpaVendorAdapter();
+        final HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(this.isShowSql);
         adapter.setGenerateDdl(this.isGenerateDdl);
         adapter.setDatabasePlatform(this.dialect);

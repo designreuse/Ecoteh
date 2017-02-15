@@ -20,8 +20,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
-public final class CategoryDaoImpl
-        extends DataDaoImpl<Category, Long> implements CategoryDao {
+public final class CategoryDaoImpl extends DataDaoImpl<Category, Long> implements CategoryDao {
 
     /**
      * The interface provides a set of JPA methods
@@ -34,9 +33,8 @@ public final class CategoryDaoImpl
     /**
      * Constructor.
      *
-     * @param repository a implementation of the interface provides
-     *                   a set of JPA methods for working {@link Category}
-     *                   objects with a database.
+     * @param repository a implementation of the interface provides a set of JPA methods
+     *                   for working {@link Category} objects with a database.
      * @see CategoryRepository
      */
     @Autowired

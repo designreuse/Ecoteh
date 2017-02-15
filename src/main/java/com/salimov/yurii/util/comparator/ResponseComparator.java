@@ -45,8 +45,7 @@ public final class ResponseComparator {
             } else if (response2 == null) {
                 result = 1;
             } else {
-                result = response1.getDate()
-                        .compareTo(response2.getDate());
+                result = response1.getDate().compareTo(response2.getDate());
             }
             return result;
         }

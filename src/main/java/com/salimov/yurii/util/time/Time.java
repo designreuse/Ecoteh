@@ -157,8 +157,7 @@ public class Time implements ITime {
         if (isNotBlankTime()) {
             try {
                 final String[] times = this.time.split(":");
-                final int hours = Integer.parseInt(times[0])
-                        + Integer.parseInt(times[1]) / 60;
+                final int hours = Integer.parseInt(times[0]) + Integer.parseInt(times[1]) / 60;
                 this.hours = (hours >= 24 || hours <= 0) ? 0 : hours;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                 LOGGER.error(ex.getMessage(), ex);
@@ -188,8 +187,7 @@ public class Time implements ITime {
     private String createTime() {
         final int hours = getHours();
         final int minutes = getMinutes();
-        return (hours < 10 ? "0" + hours : hours) +
-                ":" + (minutes < 10 ? "0" + minutes : minutes);
+        return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
     }
 
     /**
@@ -225,8 +223,7 @@ public class Time implements ITime {
         boolean result = false;
         if (currentTime != null && startDate != null && finishDate != null) {
             final long time = currentTime.getTime();
-            result = (time >= startDate.getTime())
-                    && (time <= finishDate.getTime());
+            result = (time >= startDate.getTime()) && (time <= finishDate.getTime());
         }
         return result;
     }
@@ -242,8 +239,7 @@ public class Time implements ITime {
             final Date startDate,
             final Date finishDate
     ) {
-        return (startDate != null) && (finishDate != null)
-                && (startDate.getTime() <= finishDate.getTime());
+        return (startDate != null) && (finishDate != null) && (startDate.getTime() <= finishDate.getTime());
     }
 
     /**
@@ -302,9 +298,7 @@ public class Time implements ITime {
             final TimeZone timeZone
     ) {
         dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(
-                date != null ? date : new Date()
-        );
+        return dateFormat.format(date != null ? date : new Date());
     }
 
     /**
@@ -329,9 +323,7 @@ public class Time implements ITime {
      * @return the value of a hour of day.
      */
     private static int getHourOfDay() {
-        return getFromCalendar(
-                Calendar.HOUR_OF_DAY
-        );
+        return getFromCalendar(Calendar.HOUR_OF_DAY);
     }
 
     /**
@@ -340,9 +332,7 @@ public class Time implements ITime {
      * @return the value of a day of week.
      */
     private static int getDayOfWeek() {
-        return getFromCalendar(
-                Calendar.DAY_OF_WEEK
-        );
+        return getFromCalendar(Calendar.DAY_OF_WEEK);
     }
 
     /**

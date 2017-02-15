@@ -40,8 +40,7 @@ public class ForgotUserInformationController {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER
-            = Logger.getLogger(ForgotUserInformationController.class);
+    private static final Logger LOGGER = Logger.getLogger(ForgotUserInformationController.class);
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -83,16 +82,11 @@ public class ForgotUserInformationController {
     /**
      * Constructor.
      *
-     * @param fabric         a implementation
-     *                       of the {@link MainMVFabric} interface.
-     * @param userService    a implementation
-     *                       of the {@link UserService} interface.
-     * @param companyService a implementation
-     *                       of the {@link CompanyService} interface.
-     * @param senderService  a implementation
-     *                       of the {@link SenderService} interface.
-     * @param captchaService a implementation
-     *                       of the {@link CaptchaService} interface.
+     * @param fabric         a implementation of the {@link MainMVFabric} interface.
+     * @param userService    a implementation of the {@link UserService} interface.
+     * @param companyService a implementation of the {@link CompanyService} interface.
+     * @param senderService  a implementation of the {@link SenderService} interface.
+     * @param captchaService a implementation of the {@link CaptchaService} interface.
      * @see CompanyService
      * @see UserService
      * @see SenderService
@@ -193,8 +187,7 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by username
-     * and sends information about him to e-mail.
+     * Seeking a user by username and sends information about him to e-mail.
      *
      * @param username a user name for whom to remind information.
      */
@@ -204,8 +197,7 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by email
-     * and sends information about him to e-mail.
+     * Seeking a user by email and sends information about him to e-mail.
      *
      * @param email a user email for whom to remind information.
      */
@@ -219,16 +211,13 @@ public class ForgotUserInformationController {
      * and sends information about him to e-mail.
      *
      * @param email a user email for whom to remind information.
-     * @throws IllegalArgumentException Throw exception when parameter login
-     *                                  is blank.
+     * @throws IllegalArgumentException Throw exception when parameter login is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
     private void searchInMainCompanyAndSend(final String email)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(email)) {
-            throw new IllegalArgumentException(
-                    "Input E-mail is blank!"
-            );
+            throw new IllegalArgumentException("Input E-mail is blank!");
         }
         final String mainEmail = this.companyService.getMainCompany().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
@@ -237,8 +226,7 @@ public class ForgotUserInformationController {
             );
         }
         sendUserInformationToEmail(
-                DefaultConfig.getDefaultAdmin(),
-                mainEmail
+                DefaultConfig.getDefaultAdmin(), mainEmail
         );
     }
 

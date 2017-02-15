@@ -207,15 +207,4 @@ public final class File extends Model<Long> implements IFile<Long> {
         }
         setUrl(newUrl);
     }
-
-    /**
-     * Statically validates the file.
-     * File is valid if it is a valid model object and it has url.
-     *
-     * @param file a content to validate.
-     * @return {@code true} if the media is valid, {@code false} otherwise.
-     */
-    public static boolean isValidated(final File file) {
-        return Model.isValidated(file) && file.isValidated();
-    }
 }

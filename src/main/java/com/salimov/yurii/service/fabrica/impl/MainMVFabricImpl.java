@@ -64,16 +64,11 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Constructor.
      *
-     * @param articleService  a implementation
-     *                        of the {@link ArticleService} interface.
-     * @param categoryService a implementation
-     *                        of the {@link CategoryService} interface.
-     * @param companyService  a implementation
-     *                        of the {@link CompanyService} interface.
-     * @param userService     a implementation
-     *                        of the {@link UserService} interface.
-     * @param responseService a implementation
-     *                        of the {@link ResponseService} interface.
+     * @param articleService  a implementation  of the {@link ArticleService} interface.
+     * @param categoryService a implementation of the {@link CategoryService} interface.
+     * @param companyService  a implementation of the {@link CompanyService} interface.
+     * @param userService     a implementation of the {@link UserService} interface.
+     * @param responseService a implementation of the {@link ResponseService} interface.
      * @see ArticleService
      * @see CategoryService
      * @see CompanyService
@@ -104,19 +99,10 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Transactional(readOnly = true)
     public ModelAndView homePage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject(
-                "company", this.companyService.getMainCompany()
-        );
-        modelAndView.addObject(
-                "partners",
-                this.companyService.getPartners(
-                        isValidContent()
-                )
-        );
+        modelAndView.addObject("company", this.companyService.getMainCompany());
+        modelAndView.addObject("partners", this.companyService.getPartners(isValidContent()));
         modelAndView.addObject("print_partners", 6);
-        modelAndView.addObject(
-                "responses", this.responseService.getAndSortByDate(true)
-        );
+        modelAndView.addObject("responses", this.responseService.getAndSortByDate(true));
         modelAndView.addObject("print_responses", 3);
         modelAndView.setViewName("client/main/index_page");
         return modelAndView;
@@ -187,11 +173,12 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView aboutCompanyPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
+        modelAndView.addObject("company", this.companyService.getMainCompany());
         modelAndView.addObject(
-                "company", this.companyService.getMainCompany()
-        );
-        modelAndView.addObject(
-                "users_list", this.userService.getAll(isValidContent())
+                "users_list",
+                this.userService.getAll(
+                        isValidContent()
+                )
         );
         modelAndView.setViewName("client/company/main_page");
         return modelAndView;
@@ -385,12 +372,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView getDefaultModelAndView() {
         final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(
-                "main_company", this.companyService.getMainCompany()
-        );
-        modelAndView.addObject(
-                "categories", this.categoryService.getAll(isValidContent())
-        );
+        modelAndView.addObject("main_company", this.companyService.getMainCompany());
+        modelAndView.addObject("categories", this.categoryService.getAll(isValidContent()));
         return modelAndView;
     }
 
@@ -408,10 +391,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public void addAuthUser(final ModelAndView modelAndView) {
         if (modelAndView != null) {
-            modelAndView.addObject(
-                    "authorized_user",
-                    this.userService.getAuthenticatedUser()
-            );
+            modelAndView.addObject("authorized_user", this.userService.getAuthenticatedUser());
         }
     }
 

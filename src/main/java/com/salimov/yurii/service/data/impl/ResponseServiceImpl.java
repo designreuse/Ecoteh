@@ -25,9 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class ResponseServiceImpl
-        extends DataServiceImpl<Response, Long>
-        implements ResponseService {
+public final class ResponseServiceImpl extends DataServiceImpl<Response, Long> implements ResponseService {
 
     /**
      * Constructor.
@@ -137,14 +135,10 @@ public final class ResponseServiceImpl
                 result.addAll(
                         responses.stream()
                                 .filter(
-                                        response -> (response.getDate()
-                                                .compareTo(startDate) == 1)
-                                                && (response.getDate()
-                                                .compareTo(finishDate) == -1)
-                                )
-                                .collect(Collectors.toList())
+                                        response -> (response.getDate().compareTo(startDate) == 1)
+                                                && (response.getDate().compareTo(finishDate) == -1)
+                                ).collect(Collectors.toList())
                 );
-
             } else {
                 result.addAll(responses);
             }
@@ -207,8 +201,6 @@ public final class ResponseServiceImpl
      * Validates input response.
      *
      * @param response           the response to valid.
-     * @param requiredParameters is validate input object
-     *                           by required parameters.
      * @param exist              is validate input object by exists.
      * @param duplicate          is validate input object by duplicate.
      * @return Returns {@code true} if response is valid,
@@ -218,16 +210,12 @@ public final class ResponseServiceImpl
     @Override
     protected boolean validated(
             Response response,
-            boolean requiredParameters,
             boolean exist,
             boolean duplicate
     ) {
         boolean result = true;
         if (response == null) {
             result = false;
-        }
-        if (result && requiredParameters) {
-            result = Response.isValidated(response);
         }
         if (result && exist) {
             result = exists(response);

@@ -41,8 +41,7 @@ public final class ArticleComparator {
             } else if (article2 == null) {
                 result = 1;
             } else {
-                result = article1.getNumber()
-                        .compareTo(article2.getNumber());
+                result = article1.getNumber().compareTo(article2.getNumber());
             }
             return result;
         }
@@ -76,8 +75,7 @@ public final class ArticleComparator {
             } else if (article2 == null) {
                 result = 1;
             } else {
-                result = article1.getDate()
-                        .compareTo(article2.getDate());
+                result = article1.getDate().compareTo(article2.getDate());
             }
             return result;
         }

@@ -27,8 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "users")
-public final class User extends Model<Long>
-        implements IUser<Long>, UserDetails {
+public final class User extends Model<Long> implements IUser<Long>, UserDetails {
 
     /**
      * It is used during deserialization to verify that
@@ -806,20 +805,5 @@ public final class User extends Model<Long>
             setValidated(false);
             this.isMailing = false;
         }
-    }
-
-    /**
-     * Statically validates the user.
-     * User is valid if it is a valid model object
-     * and it has name, phone and email.
-     *
-     * @param user an user to validate.
-     * @return {@code true} if the user is valid, {@code false} otherwise.
-     */
-    public static boolean isValidated(final User user) {
-        return Model.isValidated(user)
-                && isNotBlank(user.getName())
-                && isNotBlank(user.getPhone())
-                && isNotBlank(user.getEmail());
     }
 }

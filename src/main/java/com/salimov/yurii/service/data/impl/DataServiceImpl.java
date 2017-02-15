@@ -27,8 +27,7 @@ import java.util.stream.Collectors;
  * @see com.salimov.yurii.service.data.impl.UserServiceImpl
  * @see DataDao
  */
-public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
-        implements DataService<T, E> {
+public abstract class DataServiceImpl<T extends Model<E>, E extends Number> implements DataService<T, E> {
 
     /**
      * The object provides a set of standard JPA methods
@@ -62,7 +61,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     @Transactional
     public T add(final T model) {
         T result = model;
-        if (validated(model, true, false, true)) {
+        if (validated(model, false, true)) {
             result = this.dao.add(model);
         }
         return result;
@@ -78,9 +77,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      */
     @Override
     @Transactional
-    public Collection<T> addAll(
-            final Collection<T> models
-    ) {
+    public Collection<T> addAll(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
         if (models != null && !models.isEmpty()) {
             result.addAll(
@@ -104,7 +101,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
     @Transactional
     public T update(final T model) {
         T result = null;
-        if (validated(model, true, true, false)) {
+        if (validated(model, true, false)) {
             result = this.dao.update(model);
         }
         return result != null ? result : model;
@@ -138,10 +135,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      *
      * @param id is id of object to return.
      * @return The model with parameter id.
-     * @throws IllegalArgumentException Throw exception when object
-     *                                  parameter id is {@code null}.
-     * @throws NullPointerException     Throw exception when object with
-     *                                  parameter id is not exist.
+     * @throws IllegalArgumentException Throw exception when object parameter id is {@code null}.
+     * @throws NullPointerException     Throw exception when object with parameter id is not exist.
      * @see Model
      */
     @Override
@@ -155,8 +150,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
         final T model = this.dao.get(id);
         if (model == null) {
             throw new NullPointerException(
-                    "Can`t find " + getClassSimpleName()
-                            + " by id " + id + "!"
+                    "Can`t find " + getClassSimpleName() + " by id " + id + "!"
             );
         }
         return model;
@@ -248,12 +242,10 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
 
     /**
      * Checks whether the object of {@link Model} class or subclasses
-     * with parameter id is exists. If id is {@code null} then
-     * return {@code false}.
+     * with parameter id is exists. If id is {@code null} then return {@code false}.
      *
      * @param id a id of the model to exists.
-     * @return Returns {@code true} if the model is exists,
-     * otherwise returns {@code false}.
+     * @return Returns {@code true} if the model is exists, otherwise returns {@code false}.
      * @see Model
      */
     @Override
@@ -264,12 +256,10 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
 
     /**
      * Checks whether the object of {@link Model} class or subclasses is exists.
-     * If model is {@code null} or model id is {@code null} then
-     * return {@code false}.
+     * If model is {@code null} or model id is {@code null} then return {@code false}.
      *
      * @param model the models to exists.
-     * @return Returns {@code true} if the model is exists,
-     * otherwise returns {@code false}.
+     * @return Returns {@code true} if the model is exists, otherwise returns {@code false}.
      * @see Model
      */
     @Override
@@ -305,8 +295,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             if (comparator != null) {
                 Collections.sort(
                         result,
-                        revers ? Collections.reverseOrder(comparator) :
-                                comparator
+                        revers ? Collections.reverseOrder(comparator) : comparator
                 );
             }
         }
@@ -355,8 +344,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             if ((fromIndex < toIndex)
                     && (fromIndex < models.size())
                     && (toIndex < models.size())) {
-                result = new ArrayList<>(models)
-                        .subList(fromIndex, toIndex);
+                result = new ArrayList<>(models).subList(fromIndex, toIndex);
             } else {
                 result = new ArrayList<>(models);
             }
@@ -400,8 +388,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
             result.addAll(
                     models.stream()
                             .filter(
-                                    model -> (model != null)
-                                            && model.isValidated()
+                                    model -> (model != null) && model.isValidated()
                             ).collect(Collectors.toList())
             );
         }
@@ -440,7 +427,6 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      * Validates input object of class {@link Model} or subclasses.
      *
      * @param model              the model to valid.
-     * @param requiredParameters is validate input model by required parameters.
      * @param exist              is validate input model by exists.
      * @param duplicate          is validate input model by duplicate.
      * @return Returns {@code true} if the model is valid,
@@ -449,7 +435,6 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number>
      */
     protected abstract boolean validated(
             final T model,
-            final boolean requiredParameters,
             final boolean exist,
             final boolean duplicate
     );

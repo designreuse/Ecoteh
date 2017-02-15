@@ -21,6 +21,11 @@ final class JsonParser {
      */
     private final String response;
 
+    /**
+     * Constructor.
+     *
+     * @param response a JsonParser response.
+     */
     JsonParser(final String response) {
         this.response = response;
     }
@@ -32,12 +37,8 @@ final class JsonParser {
      */
     boolean parse() {
         boolean result = false;
-        if (isNotBlank(response)) {
-            try (
-                    final JsonReader jsonReader = Json.createReader(
-                            new StringReader(response)
-                    )
-            ) {
+        if (isNotBlank(this.response)) {
+            try (final JsonReader jsonReader = Json.createReader(new StringReader(this.response))) {
                 result = jsonReader.readObject().getBoolean("success");
             }
         }

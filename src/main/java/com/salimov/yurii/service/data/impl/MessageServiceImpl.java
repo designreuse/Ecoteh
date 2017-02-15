@@ -20,9 +20,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class MessageServiceImpl
-        extends DataServiceImpl<Message, Long>
-        implements MessageService {
+public final class MessageServiceImpl extends DataServiceImpl<Message, Long> implements MessageService {
 
     /**
      * Constructor.
@@ -53,7 +51,6 @@ public final class MessageServiceImpl
      * Validates input object of class {@link Message} or subclasses.
      *
      * @param message            the model to valid.
-     * @param requiredParameters is validate input model by required parameters.
      * @param exist              is validate input model by exists.
      * @param duplicate          is validate input model by duplicate.
      * @return Returns {@code true} if the model is valid,
@@ -63,16 +60,12 @@ public final class MessageServiceImpl
     @Override
     protected boolean validated(
             final Message message,
-            final boolean requiredParameters,
             final boolean exist,
             final boolean duplicate
     ) {
         boolean result = true;
         if (message == null) {
             result = false;
-        }
-        if (result && requiredParameters) {
-            result = Message.isValidated(message);
         }
         if (result && exist) {
             result = exists(message);

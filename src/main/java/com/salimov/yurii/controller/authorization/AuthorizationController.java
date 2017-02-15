@@ -36,8 +36,7 @@ public class AuthorizationController {
     /**
      * Constructor.
      *
-     * @param fabric a implementation
-     *               of the {@link MainMVFabric} interface.
+     * @param fabric a implementation of the {@link MainMVFabric} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -82,8 +81,7 @@ public class AuthorizationController {
     ) {
         new SecurityContextLogoutHandler().logout(
                 request, response,
-                SecurityContextHolder.getContext()
-                        .getAuthentication()
+                SecurityContextHolder.getContext().getAuthentication()
         );
         Cache.removeAll("Admin");
         modelAndView.setViewName("redirect:/login?logout");

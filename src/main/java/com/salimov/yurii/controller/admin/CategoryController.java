@@ -56,10 +56,8 @@ public class CategoryController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric}
-     *                        interface.
-     * @param categoryService a implementation of the {@link CategoryService}
-     *                        interface.
+     * @param fabric          a implementation of the {@link MainMVFabric} interface.
+     * @param categoryService a implementation of the {@link CategoryService} interface.
      * @see MainMVFabric
      * @see CategoryService
      */
@@ -113,14 +111,10 @@ public class CategoryController {
             final ModelAndView modelAndView
     ) {
         final Category category = this.categoryService.initAndAdd(
-                title, description, keywords,
-                photoUrl,
-                isValid
+                title, description, keywords, photoUrl, isValid
         );
         Cache.clear();
-        modelAndView.setViewName(
-                "redirect:/admin/category/" + category.getUrl()
-        );
+        modelAndView.setViewName( "redirect:/admin/category/" + category.getUrl());
         return modelAndView;
     }
 
@@ -153,9 +147,7 @@ public class CategoryController {
     @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
     public ModelAndView editCategory(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "category", this.categoryService.getByUrl(url, false)
-        );
+        modelAndView.addObject("category", this.categoryService.getByUrl(url, false));
         modelAndView.setViewName("admin/category/edit_page");
         return modelAndView;
     }
@@ -191,9 +183,7 @@ public class CategoryController {
                 url, title, description, keywords, photoUrl, isValid
         );
         Cache.clear();
-        modelAndView.setViewName(
-                "redirect:/category/" + category.getUrl()
-        );
+        modelAndView.setViewName("redirect:/category/" + category.getUrl());
         return modelAndView;
     }
 

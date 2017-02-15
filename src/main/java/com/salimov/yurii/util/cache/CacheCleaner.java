@@ -107,10 +107,7 @@ final class CacheCleaner implements Runnable {
             final List<Key> keys = new ArrayList<>(
                     this.cache.keySet()
             );
-            Collections.sort(
-                    keys,
-                    new KeyComparator()
-            );
+            Collections.sort(keys, new KeyComparator());
             cleanToNormalSize(keys);
         }
     }

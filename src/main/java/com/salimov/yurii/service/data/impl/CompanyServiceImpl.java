@@ -36,9 +36,7 @@ import java.util.stream.Collectors;
                 "com.salimov.yurii.service.data"
         }
 )
-public final class CompanyServiceImpl
-        extends ContentServiceImpl<Company, Long>
-        implements CompanyService {
+public final class CompanyServiceImpl extends ContentServiceImpl<Company, Long> implements CompanyService {
 
     /**
      * The interface provides a set of standard methods for working
@@ -53,8 +51,7 @@ public final class CompanyServiceImpl
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao a implementation
-     *            of the {@link CompanyDao} interface.
+     * @param dao a implementation of the {@link CompanyDao} interface.
      * @see CompanyDao
      */
     @Autowired
@@ -265,8 +262,7 @@ public final class CompanyServiceImpl
     ) {
         final Company mainCompany = getMainCompany();
         mainCompany.initialize(
-                title, domain,
-                tagline,
+                title, domain, tagline,
                 new HtmlPress().compress(description),
                 new HtmlPress().compress(information),
                 mobilePhone, landlinePhone, fax, email,
@@ -292,15 +288,7 @@ public final class CompanyServiceImpl
     @Transactional(readOnly = true)
     public Company getMainCompany() throws NullPointerException {
         try {
-            final Company mainCompany = this.dao.getByType(
-                    CompanyType.MAIN
-            ).get(0);
-            if (!Company.isValidated(mainCompany)) {
-                throw new NullPointerException(
-                        "Information about main company is absent!"
-                );
-            }
-            return mainCompany;
+            return this.dao.getByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
             throw new NullPointerException(
@@ -319,9 +307,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Company> getPartners(final boolean isValid) {
-        List<Company> companies = this.dao.getByType(
-                CompanyType.PARTNER
-        );
+        List<Company> companies = this.dao.getByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
                     .filter(IModel::isValidated)
@@ -332,8 +318,7 @@ public final class CompanyServiceImpl
 
     /**
      * Removes company.
-     * Removes company if it not {@code null}
-     * and has not type {@code MAIN}.
+     * Removes company if it not {@code null} and has not type {@code MAIN}.
      *
      * @param company the company to remove.
      * @see Company
@@ -341,8 +326,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional
     public void remove(final Company company) {
-        if ((company != null)
-                && !company.getType().equals(CompanyType.MAIN)) {
+        if ((company != null) && !company.getType().equals(CompanyType.MAIN)) {
             super.remove(company);
         }
     }

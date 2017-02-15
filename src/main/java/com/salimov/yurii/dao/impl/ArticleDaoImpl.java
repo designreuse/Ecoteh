@@ -23,8 +23,7 @@ import java.util.List;
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
-public final class ArticleDaoImpl
-        extends DataDaoImpl<Article, Long> implements ArticleDao {
+public final class ArticleDaoImpl extends DataDaoImpl<Article, Long> implements ArticleDao {
 
     /**
      * The interface provides a set of JPA methods
@@ -37,9 +36,8 @@ public final class ArticleDaoImpl
     /**
      * Constructor.
      *
-     * @param repository a implementation of the interface provides
-     *                   a set of JPA methods for working {@link Article}
-     *                   objects with a database.
+     * @param repository a implementation of the interface provides a set of JPA methods
+     *                   for working {@link Article} objects with a database.
      * @see ArticleRepository
      */
     @Autowired

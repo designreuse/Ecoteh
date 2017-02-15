@@ -19,8 +19,7 @@ import javax.servlet.ServletException;
  * @see RootConfig
  * @see SecurityConfig
  */
-public class AppInitializer
-        extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     /**
      * Encoding parameter for the FilterRegistration.Dynamic.
      */
@@ -95,8 +94,7 @@ public class AppInitializer
      * for initializing this web application.
      *
      * @param servletContext the ServletContext to initialize
-     * @throws ServletException if any call against the given ServletContext
-     *                          throws a ServletException.
+     * @throws ServletException if any call against the given ServletContext throws a ServletException.
      */
     @Override
     public void onStartup(final ServletContext servletContext)
@@ -104,8 +102,7 @@ public class AppInitializer
         super.onStartup(servletContext);
         final FilterRegistration.Dynamic filter =
                 servletContext.addFilter(
-                        "encodingFilter",
-                        new CharacterEncodingFilter()
+                        "encodingFilter", new CharacterEncodingFilter()
                 );
         filter.setInitParameter("encoding", ENCODING);
         filter.setInitParameter(

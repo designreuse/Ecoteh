@@ -49,20 +49,13 @@ public class ClientMainController extends MainController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation
-     *                        of the {@link MainMVFabric} interface.
-     * @param companyService  a implementation
-     *                        of the {@link CompanyService} interface.
-     * @param userService     a implementation
-     *                        of the {@link UserService} interface.
-     * @param responseService a implementation
-     *                        of the {@link ResponseService} interface.
-     * @param messageService  a implementation
-     *                        of the {@link MessageService} interface.
-     * @param senderService   a implementation
-     *                        of the {@link SenderService} interface.
-     * @param captchaService  a implementation
-     *                        of the {@link CaptchaService} interface.
+     * @param fabric          a implementation of the {@link MainMVFabric} interface.
+     * @param companyService  a implementation of the {@link CompanyService} interface.
+     * @param userService     a implementation of the {@link UserService} interface.
+     * @param responseService a implementation of the {@link ResponseService} interface.
+     * @param messageService  a implementation of the {@link MessageService} interface.
+     * @param senderService   a implementation of the {@link SenderService} interface.
+     * @param captchaService  a implementation of the {@link CaptchaService} interface.
      * @see MainMVFabric
      * @see CompanyService
      * @see UserService

@@ -40,8 +40,7 @@ public class ResponseController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param responseService a implementation of the {@link ResponseService}
-     *                        interface.
+     * @param responseService a implementation of the {@link ResponseService} interface.
      * @see ResponseService
      */
     @Autowired

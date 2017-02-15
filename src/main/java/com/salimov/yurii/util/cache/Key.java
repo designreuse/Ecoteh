@@ -100,9 +100,7 @@ final class Key<T> implements Comparable {
                 result = true;
             } else if (this.getClass() == object.getClass()) {
                 final Key other = (Key) object;
-                result = this.key != null
-                        ? this.key.equals(other.key)
-                        : other.key == null;
+                result = this.key != null ? this.key.equals(other.key) : other.key == null;
             }
         }
         return result;

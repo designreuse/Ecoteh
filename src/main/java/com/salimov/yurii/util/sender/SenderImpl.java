@@ -23,8 +23,7 @@ public final class SenderImpl implements Sender {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER
-            = Logger.getLogger(SenderImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(SenderImpl.class);
 
     /**
      * The sender charset.
@@ -121,11 +120,9 @@ public final class SenderImpl implements Sender {
     public void run() {
         try {
             prepareAndSend(
-                    this.subject,
-                    this.text,
+                    this.subject, this.text,
                     this.recipientEmail,
-                    this.senderEmail,
-                    this.senderEmailPass
+                    this.senderEmail, this.senderEmailPass
             );
         } catch (UnsupportedEncodingException | MessagingException ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -141,11 +138,9 @@ public final class SenderImpl implements Sender {
      * {@code false} otherwise.
      */
     private boolean validate() {
-        return !(isBlank(this.subject)
-                || isBlank(this.text)
+        return !(isBlank(this.subject) || isBlank(this.text)
                 || isBlank(this.recipientEmail)
-                || isBlank(this.senderEmail)
-                || isBlank(this.senderEmailPass));
+                || isBlank(this.senderEmail) || isBlank(this.senderEmailPass));
     }
 
     /**
@@ -330,18 +325,10 @@ public final class SenderImpl implements Sender {
      */
     private void initTlsProperties() {
         this.tlsProperties = new Properties();
-        this.tlsProperties.put(
-                "mail.smtp.auth", "true"
-        );
-        this.tlsProperties.put(
-                "mail.smtp.starttls.enable", "true"
-        );
-        this.tlsProperties.put(
-                "mail.smtp.host", "smtp.gmail.com"
-        );
-        this.tlsProperties.put(
-                "mail.smtp.port", "587"
-        );
+        this.tlsProperties.put("mail.smtp.auth", "true");
+        this.tlsProperties.put("mail.smtp.starttls.enable", "true");
+        this.tlsProperties.put("mail.smtp.host", "smtp.gmail.com");
+        this.tlsProperties.put("mail.smtp.port", "587");
     }
 
     /**
@@ -349,22 +336,11 @@ public final class SenderImpl implements Sender {
      */
     private void initSslProperties() {
         this.sslProperties = new Properties();
-        this.sslProperties.put(
-                "mail.smtp.host", "smtp.gmail.com"
-        );
-        this.sslProperties.put(
-                "mail.smtp.socketFactory.port", "465"
-        );
-        this.sslProperties.put(
-                "mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory"
-        );
-        this.sslProperties.put(
-                "mail.smtp.auth", "true"
-        );
-        this.sslProperties.put(
-                "mail.smtp.port", "465"
-        );
+        this.sslProperties.put("mail.smtp.host", "smtp.gmail.com");
+        this.sslProperties.put("mail.smtp.socketFactory.port", "465");
+        this.sslProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        this.sslProperties.put("mail.smtp.auth", "true");
+        this.sslProperties.put("mail.smtp.port", "465");
     }
 
     /**

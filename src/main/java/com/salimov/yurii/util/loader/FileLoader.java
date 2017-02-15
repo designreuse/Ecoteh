@@ -22,8 +22,7 @@ public class FileLoader implements Loader {
     /**
      * The object for logging information.
      */
-    private final static Logger LOGGER
-            = Logger.getLogger(FileLoader.class);
+    private final static Logger LOGGER = Logger.getLogger(FileLoader.class);
 
     /**
      * The file to write.
@@ -102,9 +101,7 @@ public class FileLoader implements Loader {
      * @return The path to file.
      */
     private String getPathToFile() {
-        return isNotBlank(this.path)
-                ? this.path
-                : this.file.getOriginalFilename();
+        return isNotBlank(this.path) ? this.path : this.file.getOriginalFilename();
     }
 
     /**

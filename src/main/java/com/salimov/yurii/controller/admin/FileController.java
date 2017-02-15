@@ -295,8 +295,7 @@ public class FileController {
         modelAndView.addObject(
                 "files",
                 this.fileService.sortByTitle(
-                        this.fileService.getAll(false),
-                        revers
+                        this.fileService.getAll(false), revers
                 )
         );
         modelAndView.addObject("revers", !revers);

@@ -34,53 +34,45 @@ public class SearchServiceImpl implements SearchService {
     /**
      * The keywords of home page.
      */
-    private final static String HOME_KEYWORDS
-            = "домой, главная, index, home";
+    private final static String HOME_KEYWORDS = "домой, главная, index, home";
 
     /**
      * The keywords of page with all categories.
      */
-    private final static String ALL_CATEGORIES_KEYWORDS
-            = "все категории, all categories";
+    private final static String ALL_CATEGORIES_KEYWORDS = "все категории, all categories";
 
     /**
      * The keywords of page with all articles.
      */
-    private final static String ALL_ARTICLES_KEYWORDS
-            = "все статьи, all articles";
+    private final static String ALL_ARTICLES_KEYWORDS = "все статьи, all articles";
 
     /**
      * The keywords of page with information about main company.
      */
-    private final static String ABOUT_COMPANY_KEYWORDS =
-            "о компании, описание, main company, " +
+    private final static String ABOUT_COMPANY_KEYWORDS = "о компании, описание, main company, " +
                     "about company, about main company";
 
     /**
      * The keywords of page with contacts of main company.
      */
-    private final static String CONTACTS_KEYWORDS =
-            "контакты, позвонить, номер телефона, адресс, " +
+    private final static String CONTACTS_KEYWORDS = "контакты, позвонить, номер телефона, адресс, " +
             "как доехать, почта, электронная почта, e-mail, contacts, address";
 
     /**
      * The keywords of page with all companies.
      */
-    private final static String COMPANY_KEYWORDS
-            = "все партнеры, все компании, " +
+    private final static String COMPANY_KEYWORDS = "все партнеры, все компании, " +
             "all company, all partners";
 
     /**
      * The keywords of page with all responses.
      */
-    private final static String RESPONSES_KEYWORDS
-            = "все отзывы, all responses";
+    private final static String RESPONSES_KEYWORDS = "все отзывы, all responses";
 
     /**
      * The keywords of page with personnel.
      */
-    private final static String USER_KEYWORDS
-            = "персонал, работники";
+    private final static String USER_KEYWORDS = "персонал, работники";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -130,16 +122,11 @@ public class SearchServiceImpl implements SearchService {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation
-     *                        of the {@link MainMVFabric} interface.
-     * @param categoryService a implementation
-     *                        of the {@link CategoryService} interface.
-     * @param articleService  a implementation
-     *                        of the {@link ArticleService} interface.
-     * @param companyService  a implementation
-     *                        of the {@link CompanyService} interface.
-     * @param userService     a implementation
-     *                        of the {@link UserService} interface.
+     * @param fabric          a implementation of the {@link MainMVFabric} interface.
+     * @param categoryService a implementation of the {@link CategoryService} interface.
+     * @param articleService  a implementation of the {@link ArticleService} interface.
+     * @param companyService  a implementation of the {@link CompanyService} interface.
+     * @param userService     a implementation of the {@link UserService} interface.
      * @see MainMVFabric
      * @see CategoryService
      * @see ArticleService
@@ -418,15 +405,9 @@ public class SearchServiceImpl implements SearchService {
             final boolean howSearch,
             final ModelAndView modelAndView
     ) {
-        modelAndView.addObject(
-                "in_categories", content.contains("in_categories")
-        );
-        modelAndView.addObject(
-                "in_articles", content.contains("in_articles")
-        );
-        modelAndView.addObject(
-                "in_companies", content.contains("in_companies")
-        );
+        modelAndView.addObject("in_categories", content.contains("in_categories"));
+        modelAndView.addObject("in_articles", content.contains("in_articles"));
+        modelAndView.addObject("in_companies", content.contains("in_companies"));
         modelAndView.addObject("all", content.contains("all"));
         modelAndView.addObject("is_search", true);
         modelAndView.addObject("how_search", howSearch);

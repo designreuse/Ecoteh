@@ -252,26 +252,4 @@ public final class Category extends Content<Long> implements ICategory<Long> {
         removeArticles(new ArrayList<>(this.articles));
         this.articles = new HashSet<>();
     }
-
-    /**
-     * Statically validates the category.
-     * Category is valid if it is a valid content object
-     * and if it has at least one article.
-     *
-     * @param category a category to validate.
-     * @return {@code true} if the article is valid,
-     * {@code false} otherwise.
-     */
-    public static boolean isValidated(final Category category) {
-        boolean result = false;
-        if (Content.isValidated(category)) {
-            for (Article article : category.getArticles()) {
-                if (Article.isValidated(article)) {
-                    result = true;
-                    break;
-                }
-            }
-        }
-        return result;
-    }
 }

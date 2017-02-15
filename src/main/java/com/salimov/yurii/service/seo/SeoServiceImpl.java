@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.service")
-public class SeoServiceImpl implements SeoService {
+public final class SeoServiceImpl implements SeoService {
 
     /**
      * The default lifetime of objects (milliseconds).
@@ -68,12 +68,9 @@ public class SeoServiceImpl implements SeoService {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param companyService  a implementation
-     *                        of the {@link CompanyService} interface.
-     * @param categoryService a implementation
-     *                        of the {@link CategoryService} interface.
-     * @param articleService  a implementation
-     *                        of the {@link ArticleService} interface.
+     * @param companyService  a implementation of the {@link CompanyService} interface.
+     * @param categoryService a implementation of the {@link CategoryService} interface.
+     * @param articleService  a implementation of the {@link ArticleService} interface.
      * @see CompanyService
      * @see CategoryService
      * @see ArticleService
@@ -94,6 +91,7 @@ public class SeoServiceImpl implements SeoService {
      *
      * @return Information about the site for the search engines.
      */
+    @Override
     public ModelAndView getRobotsTxt() {
         ModelAndView robotsTxt = (ModelAndView) Cache.get(ROBOTS_KEY);
         if (robotsTxt == null) {
@@ -109,6 +107,7 @@ public class SeoServiceImpl implements SeoService {
      *
      * @return Information about links on the site to search engines.
      */
+    @Override
     public ModelAndView getSiteMapXml() {
         ModelAndView sitemap = (ModelAndView) Cache.get(SITEMAP_KEY);
         if (sitemap == null) {
@@ -150,15 +149,9 @@ public class SeoServiceImpl implements SeoService {
                         .replace("http://", "")
                         .replace("https://", "")
         );
-        modelAndView.addObject(
-                "categories", this.categoryService.getAll()
-        );
-        modelAndView.addObject(
-                "articles", this.articleService.getAll()
-        );
-        modelAndView.addObject(
-                "companies", this.companyService.getPartners(true)
-        );
+        modelAndView.addObject("categories", this.categoryService.getAll());
+        modelAndView.addObject("articles", this.articleService.getAll());
+        modelAndView.addObject("companies", this.companyService.getPartners(true));
         modelAndView.setViewName("seo/sitemap");
         return modelAndView;
     }

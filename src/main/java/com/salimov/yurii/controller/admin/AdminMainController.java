@@ -44,18 +44,12 @@ public class AdminMainController extends MainController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric}
-     *                        interface.
-     * @param companyService  a implementation of the {@link CompanyService}
-     *                        interface.
-     * @param userService     a implementation of the {@link UserService}
-     *                        interface.
-     * @param messageService  a implementation of the {@link MessageService}
-     *                        interface.
-     * @param senderService   a implementation of the {@link SenderService}
-     *                        interface.
-     * @param responseService a implementation of the {@link ResponseService}
-     *                        interface.
+     * @param fabric          a implementation of the {@link MainMVFabric} interface.
+     * @param companyService  a implementation of the {@link CompanyService} interface.
+     * @param userService     a implementation of the {@link UserService} interface.
+     * @param messageService  a implementation of the {@link MessageService} interface.
+     * @param senderService   a implementation of the {@link SenderService} interface.
+     * @param responseService a implementation of the {@link ResponseService} interface.
      * @see MainMVFabric
      * @see CompanyService
      * @see UserService
@@ -72,9 +66,8 @@ public class AdminMainController extends MainController {
             final SenderService senderService,
             final ResponseService responseService) {
         super(
-                new CacheMVFabricImpl(fabric),
-                companyService, userService, responseService,
-                messageService, senderService
+                new CacheMVFabricImpl(fabric), companyService, userService,
+                responseService, messageService, senderService
         );
     }
 

@@ -42,8 +42,7 @@ public final class ContentComparator {
             } else if (content2 == null) {
                 result = 1;
             } else {
-                result = content1.getTitle()
-                        .compareToIgnoreCase(content2.getTitle());
+                result = content1.getTitle().compareToIgnoreCase(content2.getTitle());
             }
             return result;
         }
@@ -77,8 +76,7 @@ public final class ContentComparator {
             } else if (content2 == null) {
                 result = 1;
             } else {
-                result = content1.getUrl()
-                        .compareToIgnoreCase(content2.getUrl());
+                result = content1.getUrl().compareToIgnoreCase(content2.getUrl());
             }
             return result;
         }

@@ -351,19 +351,4 @@ public final class Message extends Model<Long> implements IMessage<Long> {
     public Long getId() {
         return (long) Math.abs(hashCode());
     }
-
-    /**
-     * Statically validates the message.
-     * User is valid if it is a valid model object
-     * and it has username, phone and text.
-     *
-     * @param message an message to validate.
-     * @return {@code true} if the user is valid, {@code false} otherwise.
-     */
-    public static boolean isValidated(final Message message) {
-        return Model.isValidated(message)
-                && isNotBlank(message.getUsername())
-                && isNotBlank(message.getPhone())
-                && isNotBlank(message.getText());
-    }
 }

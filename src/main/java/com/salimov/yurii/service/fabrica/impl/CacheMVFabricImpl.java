@@ -183,9 +183,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
                 + ", " + sortType + ", " + revers;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
-            modelAndView = this.fabric.allSortArticlesPage(
-                    sortType, revers
-            );
+            modelAndView = this.fabric.allSortArticlesPage(sortType, revers);
             put(modelAndView, key);
         }
         addAuthUser(modelAndView);
@@ -301,9 +299,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
                 + ", " + url + ", " + sortType + ", " + revers;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
-            modelAndView = this.fabric.categoryWithSortArticlesPage(
-                    url, sortType, revers
-            );
+            modelAndView = this.fabric.categoryWithSortArticlesPage(url, sortType, revers);
             put(modelAndView, key);
         }
         addAuthUser(modelAndView);

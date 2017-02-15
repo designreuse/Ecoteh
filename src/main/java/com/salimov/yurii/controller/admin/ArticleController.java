@@ -69,12 +69,9 @@ public class ArticleController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric}
-     *                        interface.
-     * @param articleService  a implementation of the {@link ArticleService}
-     *                        interface.
-     * @param categoryService a implementation of the {@link CategoryService}
-     *                        interface.
+     * @param fabric          a implementation of the {@link MainMVFabric} interface.
+     * @param articleService  a implementation of the {@link ArticleService} interface.
+     * @param categoryService a implementation of the {@link CategoryService} interface.
      * @see MainMVFabric
      * @see ArticleService
      * @see CategoryService
@@ -104,11 +101,8 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public ModelAndView getNewArticlePage() {
-        final ModelAndView modelAndView
-                = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "categories", this.categoryService.getAll(false)
-        );
+        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        modelAndView.addObject("categories", this.categoryService.getAll(false));
         modelAndView.setViewName("admin/article/new_page");
         return modelAndView;
     }
@@ -152,9 +146,7 @@ public class ArticleController {
                 number, category, isValid
         );
         Cache.clear();
-        modelAndView.setViewName(
-                getViewName(article)
-        );
+        modelAndView.setViewName(getViewName(article));
         return modelAndView;
     }
 
@@ -193,12 +185,8 @@ public class ArticleController {
     )
     public ModelAndView editArticle(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "article", this.articleService.getByUrl(url, false)
-        );
-        modelAndView.addObject(
-                "categories", this.categoryService.getAll(false)
-        );
+        modelAndView.addObject("article", this.articleService.getByUrl(url, false));
+        modelAndView.addObject("categories", this.categoryService.getAll(false));
         modelAndView.setViewName("admin/article/edit_page");
         return modelAndView;
     }
@@ -244,9 +232,7 @@ public class ArticleController {
                 url, title, description, text, keywords,
                 number, category, isValid
         );
-        modelAndView.setViewName(
-                getViewName(article)
-        );
+        modelAndView.setViewName(getViewName(article));
         Cache.clear();
         return modelAndView;
     }
@@ -308,9 +294,7 @@ public class ArticleController {
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllArticles(
-            final ModelAndView modelAndView
-    ) {
+    public ModelAndView deleteAllArticles(final ModelAndView modelAndView) {
         this.articleService.removeAll();
         modelAndView.setViewName("redirect:/");
         Cache.clear();
@@ -332,8 +316,8 @@ public class ArticleController {
         String viewName;
         if (isNotBlank(article.getText())) {
             viewName = "redirect:/article/" + article.getUrl();
-        } else if ((article.getCategory() != null) && (
-                article.getCategory().isValidated())) {
+        } else if ((article.getCategory() != null) &&
+                (article.getCategory().isValidated())) {
             viewName = "redirect:/category/" + article.getCategory().getUrl();
         } else {
             viewName = "redirect:/article/all";

@@ -410,12 +410,8 @@ public final class Cache {
         Map<String, String> result = new HashMap<>();
         for (Map.Entry<Key, Object> entry : cache.entrySet()) {
             result.put(
-                    entry.getKey()
-                            .getKey()
-                            .toString(),
-                    entry.getValue()
-                            .getClass()
-                            .getName()
+                    entry.getKey().getKey().toString(),
+                    entry.getValue().getClass().getName()
             );
         }
         result.put(key, Map.class.getName());

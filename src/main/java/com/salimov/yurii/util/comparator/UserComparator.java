@@ -43,8 +43,7 @@ public final class UserComparator {
             } else if (user2 == null) {
                 result = 1;
             } else {
-                result = user1.getName()
-                        .compareToIgnoreCase(user2.getName());
+                result = user1.getName().compareToIgnoreCase(user2.getName());
             }
             return result;
         }
@@ -78,8 +77,7 @@ public final class UserComparator {
             } else if (user2 == null) {
                 result = 1;
             } else {
-                result = user1.getUrl()
-                        .compareToIgnoreCase(user2.getUrl());
+                result = user1.getUrl().compareToIgnoreCase(user2.getUrl());
             }
             return result;
         }

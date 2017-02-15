@@ -34,9 +34,7 @@ public final class AsciiImpl implements Ascii {
      * @param value a string to translate.
      */
     public AsciiImpl(final int value) {
-        this(
-                Integer.toString(value)
-        );
+        this(Integer.toString(value));
     }
 
     /**

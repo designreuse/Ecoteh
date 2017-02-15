@@ -241,18 +241,4 @@ public final class Response extends Model<Long> implements IResponse<Long> {
     public void reverseValidated() {
         setValidated(!isValidated());
     }
-
-    /**
-     * Statically validates the response.
-     * Response is valid if it is a valid model object
-     * and it has username and text.
-     *
-     * @param response a response to validate.
-     * @return {@code true} if the response is valid, {@code false} otherwise.
-     */
-    public static boolean isValidated(final Response response) {
-        return Model.isValidated(response)
-                && isNotBlank(response.getUsername())
-                && isNotBlank(response.getText());
-    }
 }

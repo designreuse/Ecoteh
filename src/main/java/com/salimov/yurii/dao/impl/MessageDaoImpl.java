@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
  */
 @Repository
 public final class MessageDaoImpl implements MessageDao {
+
     /**
      * The key of objects in the cache.
      */
@@ -56,14 +57,9 @@ public final class MessageDaoImpl implements MessageDao {
     @Override
     public Message add(final Message message) {
         return (Message) Cache.put(
-                getKey(
-                        message.getId()
-                ),
+                getKey(message.getId()),
                 message,
-                HOURS,
-                MINUTES,
-                SECONDS,
-                MILLISECONDS
+                HOURS, MINUTES, SECONDS, MILLISECONDS
         );
     }
 
@@ -78,9 +74,7 @@ public final class MessageDaoImpl implements MessageDao {
     public Collection<Message> addAll(final Collection<Message> messages) {
         return messages.stream()
                 .map(this::add)
-                .collect(
-                        Collectors.toCollection(ArrayList::new)
-                );
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -105,9 +99,7 @@ public final class MessageDaoImpl implements MessageDao {
      */
     @Override
     public Message get(final Long id) {
-        return (Message) Cache.get(
-                getKey(id)
-        );
+        return (Message) Cache.get(getKey(id));
     }
 
     /**
@@ -120,15 +112,9 @@ public final class MessageDaoImpl implements MessageDao {
     public Collection<Message> getAll() {
         return Cache.getAll(KEY)
                 .stream()
-                .filter(
-                        object -> object instanceof Message
-                )
-                .map(
-                        object -> (Message) object
-                )
-                .collect(
-                        Collectors.toList()
-                );
+                .filter(object -> object instanceof Message)
+                .map(object -> (Message) object)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -139,9 +125,7 @@ public final class MessageDaoImpl implements MessageDao {
      */
     @Override
     public void remove(final Long id) {
-        Cache.remove(
-                getKey(id)
-        );
+        Cache.remove(getKey(id));
     }
 
     /**
@@ -152,9 +136,7 @@ public final class MessageDaoImpl implements MessageDao {
      */
     @Override
     public void remove(final Message message) {
-        remove(
-                message.getId()
-        );
+        remove(message.getId());
     }
 
     /**
@@ -189,9 +171,7 @@ public final class MessageDaoImpl implements MessageDao {
      */
     @Override
     public boolean exists(final Long id) {
-        return Cache.exist(
-                getKey(id)
-        );
+        return Cache.exist(getKey(id));
     }
 
     /**

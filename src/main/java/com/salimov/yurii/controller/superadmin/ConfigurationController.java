@@ -39,10 +39,8 @@ public class ConfigurationController {
     /**
      * Constructor.
      *
-     * @param fabric            a implementation
-     *                          of the {@link MainMVFabric} interface.
-     * @param contentProperties a implementation of the
-     *                          {@link ContentProperties} interface.
+     * @param fabric            a implementation of the {@link MainMVFabric} interface.
+     * @param contentProperties a implementation of the {@link ContentProperties} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

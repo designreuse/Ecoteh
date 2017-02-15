@@ -308,18 +308,4 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     public Category getCategory() {
         return this.category;
     }
-
-    /**
-     * Statically validates the article.
-     * Article is valid if it is a valid content object
-     * and it has text (text is not blank).
-     *
-     * @param article an article to validate.
-     * @return {@code true} if the article is valid,
-     * {@code false} otherwise.
-     */
-    public static boolean isValidated(final Article article) {
-        return Content.isValidated(article)
-                && isNotBlank(article.getText());
-    }
 }

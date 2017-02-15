@@ -38,13 +38,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class UserServiceImpl
-        extends DataServiceImpl<User, Long>
-        implements UserService, UserDetailsService {
+public final class UserServiceImpl extends DataServiceImpl<User, Long> implements UserService, UserDetailsService {
 
-    private final static Logger LOGGER = Logger.getLogger(
-            UserServiceImpl.class
-    );
+    /**
+     * The object for logging information.
+     */
+    private final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
     /**
      * The interface provides a set of standard methods for working
@@ -58,8 +57,7 @@ public final class UserServiceImpl
     /**
      * Constructor.
      *
-     * @param dao a implementation of the {@link UserDao}
-     *            interface.
+     * @param dao a implementation of the {@link UserDao} interface.
      * @see UserDao
      */
     @Autowired
@@ -100,8 +98,7 @@ public final class UserServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(final String username)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         User user;
         try {
             user = DefaultConfig.getDefaultUser(username);
@@ -156,8 +153,7 @@ public final class UserServiceImpl
     ) {
         final User user = new User();
         user.initialize(
-                name, login, password,
-                email, phone,
+                name, login, password, email, phone,
                 vkontakte, facebook, twitter, skype,
                 description
         );
@@ -213,8 +209,7 @@ public final class UserServiceImpl
     ) {
         final User user = getByUrl(url);
         user.initialize(
-                name, login, password,
-                email, phone,
+                name, login, password, email, phone,
                 vkontakte, facebook, twitter, skype,
                 description
         );
@@ -231,25 +226,19 @@ public final class UserServiceImpl
      *
      * @param name a name of the user to return.
      * @return The user with the parameter name or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter name
-     *                                  is blank.
+     * @throws IllegalArgumentException Throw exception when parameter name is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      * @see User
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByName(final String name)
-            throws IllegalArgumentException, NullPointerException {
+    public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
         if (isBlank(name)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " name is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " name is blank!");
         }
         final User user = this.dao.getByName(name);
         if (user == null) {
-            throw new NullPointerException(
-                    "Can`t find user by name \"" + name + "\"!"
-            );
+            throw new NullPointerException("Can`t find user by name \"" + name + "\"!");
         }
         return user;
     }
@@ -260,8 +249,7 @@ public final class UserServiceImpl
      *
      * @param url a url of the user to return.
      * @return The user with the parameter url or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter url
-     *                                  is blank.
+     * @throws IllegalArgumentException Throw exception when parameter url is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      * @see User
      */
@@ -270,15 +258,11 @@ public final class UserServiceImpl
     public User getByUrl(final String url)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " url is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
         }
         final User user = this.dao.getByUrl(url);
         if (user == null) {
-            throw new NullPointerException(
-                    "Can`t find user by URL \"" + url + "\"!"
-            );
+            throw new NullPointerException("Can`t find user by URL \"" + url + "\"!");
         }
         return user;
     }
@@ -289,8 +273,7 @@ public final class UserServiceImpl
      *
      * @param login a login of the user to return.
      * @return The user with the parameter login or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter login
-     *                                  is blank.
+     * @throws IllegalArgumentException Throw exception when parameter login is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      * @see User
      */
@@ -299,15 +282,11 @@ public final class UserServiceImpl
     public User getByLogin(final String login)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(login)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " login is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " login is blank!");
         }
         final User user = this.dao.getByLogin(login);
         if (user == null) {
-            throw new NullPointerException(
-                    "Can`t find user by login \"" + login + "\"!"
-            );
+            throw new NullPointerException("Can`t find user by login \"" + login + "\"!");
         }
         return user;
     }
@@ -318,8 +297,7 @@ public final class UserServiceImpl
      *
      * @param phone a phone of the user to return.
      * @return The user with the parameter phone or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter phone
-     *                                  is blank.
+     * @throws IllegalArgumentException Throw exception when parameter phone is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      * @see User
      */
@@ -327,15 +305,11 @@ public final class UserServiceImpl
     @Transactional(readOnly = true)
     public User getByPhone(final String phone) throws NullPointerException {
         if (isBlank(phone)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " phone is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " phone is blank!");
         }
         final User user = this.dao.getByPhone(phone);
         if (user == null) {
-            throw new NullPointerException(
-                    "Can`t find user by phone \"" + phone + "\"!"
-            );
+            throw new NullPointerException("Can`t find user by phone \"" + phone + "\"!");
         }
         return user;
     }
@@ -346,8 +320,7 @@ public final class UserServiceImpl
      *
      * @param email a e-mail of the user to return.
      * @return The user with the parameter e-mail or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter email
-     *                                  is blank.
+     * @throws IllegalArgumentException Throw exception when parameter email is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      * @see User
      */
@@ -355,15 +328,11 @@ public final class UserServiceImpl
     @Transactional(readOnly = true)
     public User getByEmail(final String email) throws NullPointerException {
         if (isBlank(email)) {
-            throw new IllegalArgumentException(
-                    "Input E-mail is blank!"
-            );
+            throw new IllegalArgumentException("Input E-mail is blank!");
         }
         final User user = this.dao.getByEmail(email);
         if (user == null) {
-            throw new NullPointerException(
-                    "Can`t find user by email \"" + email + "\"!"
-            );
+            throw new NullPointerException("Can`t find user by email \"" + email + "\"!");
         }
         return user;
     }
@@ -593,8 +562,7 @@ public final class UserServiceImpl
                     result.addAll(
                             roles.stream()
                                     .filter(
-                                            role -> user.getRole()
-                                                    .equals(role)
+                                            role -> user.getRole().equals(role)
                                     ).map(role -> user)
                                     .collect(Collectors.toList())
                     );
@@ -649,8 +617,7 @@ public final class UserServiceImpl
             result.addAll(
                     users.stream()
                             .filter(
-                                    user -> (user != null)
-                                            && (user.isValidated())
+                                    user -> (user != null) && (user.isValidated())
                             ).collect(Collectors.toList())
             );
         }
@@ -670,11 +637,9 @@ public final class UserServiceImpl
     /**
      * Validates input user.
      *
-     * @param user               the user to valid.
-     * @param requiredParameters is validate input object
-     *                           by required parameters.
-     * @param exist              is validate input object by exists.
-     * @param duplicate          is validate input object by duplicate.
+     * @param user      the user to valid.
+     * @param exist     is validate input object by exists.
+     * @param duplicate is validate input object by duplicate.
      * @return Returns {@code true} if user is valid,
      * {@code false} otherwise.
      * @see User
@@ -682,14 +647,10 @@ public final class UserServiceImpl
     @Override
     protected boolean validated(
             final User user,
-            final boolean requiredParameters,
             final boolean exist,
             final boolean duplicate
     ) {
         if (user == null) {
-            return false;
-        }
-        if (requiredParameters && !User.isValidated(user)) {
             return false;
         }
         if (exist && !exists(user)) {

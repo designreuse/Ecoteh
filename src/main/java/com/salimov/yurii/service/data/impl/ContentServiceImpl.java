@@ -29,8 +29,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see ContentDao
  */
 public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
-        extends DataServiceImpl<T, E>
-        implements ContentService<T, E> {
+        extends DataServiceImpl<T, E> implements ContentService<T, E> {
 
     /**
      * The object provides a set of standard JPA methods
@@ -59,10 +58,8 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * @param title   a title of the content to return.
      * @param isValid is get valid content or not.
      * @return The content with parameter title or {@code null}.
-     * @throws IllegalArgumentException Throw exception when object
-     *                                  parameter title is blank.
-     * @throws NullPointerException     Throw exception when object
-     *                                  with parameter title is not exist.
+     * @throws IllegalArgumentException Throw exception when object  parameter title is blank.
+     * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      * @see Content
      */
     @Override
@@ -79,8 +76,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
         final T content = this.dao.getByTitle(title);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
-                    "Can`t find object of " + getClassSimpleName()
-                            + " by title \"" + title + "\"!"
+                    "Can`t find object of " + getClassSimpleName() + " by title \"" + title + "\"!"
             );
         }
         return content;
@@ -92,10 +88,8 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * @param url     a url of the content to return.
      * @param isValid is get valid content or not.
      * @return the content with parameter url or {@code null}.
-     * @throws IllegalArgumentException Throw exception when object
-     *                                  parameter url is blank.
-     * @throws NullPointerException     Throw exception when object
-     *                                  with parameter url is not exist.
+     * @throws IllegalArgumentException Throw exception when object parameter url is blank.
+     * @throws NullPointerException     Throw exception when object with parameter url is not exist.
      * @see Content
      */
     @Override
@@ -112,16 +106,14 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
         final T content = this.dao.getByUrl(url);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
-                    "Can`t find object of " + getClassSimpleName()
-                            + " by URL \"" + url + "\"!"
+                    "Can`t find object of " + getClassSimpleName() + " by URL \"" + url + "\"!"
             );
         }
         return content;
     }
 
     /**
-     * Removes object of {@link Content} or subclasses
-     * with the parameter title.
+     * Removes object of {@link Content} or subclasses with the parameter title.
      * Removes content if title is not blank.
      *
      * @param title a title of the content to remove.
@@ -136,8 +128,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     }
 
     /**
-     * Removes object of {@link Content} or subclasses
-     * with the parameter url.
+     * Removes object of {@link Content} or subclasses with the parameter url.
      *
      * @param url a url of the content to remove.
      * @see Content
@@ -151,8 +142,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class
-     * or subclasses by title.
+     * Sorts and returns objects of {@link Content} class or subclasses by title.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
@@ -169,8 +159,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class
-     * or subclasses by url.
+     * Sorts and returns objects of {@link Content} class or subclasses by url.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
@@ -187,8 +176,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class
-     * or subclasses by title.
+     * Sorts and returns objects of {@link Content} class or subclasses by title.
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
@@ -201,8 +189,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class
-     * or subclasses by url.
+     * Sorts and returns objects of {@link Content} class or subclasses by url.
      *
      * @param revers Sort in descending or ascending.
      * @return The sorted list of contents.
@@ -218,25 +205,18 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * Validates input object of {@link Content} class or subclasses.
      *
      * @param content            the contents to valid.
-     * @param requiredParameters is validate input object
-     *                           by required parameters.
      * @param exist              is validate input object by exists.
      * @param duplicate          is validate input object by duplicate.
-     * @return Returns {@code true} if object is valid,
-     * otherwise returns {@code false}.
+     * @return Returns {@code true} if object is valid, otherwise returns {@code false}.
      * @see Content
      */
     @Override
     protected boolean validated(
             final T content,
-            final boolean requiredParameters,
             final boolean exist,
             final boolean duplicate
     ) {
         if (content == null) {
-            return false;
-        }
-        if (requiredParameters && !Content.isValidated(content)) {
             return false;
         }
         if (exist && !exists(content)) {

@@ -23,11 +23,7 @@ final class Stream {
             final String value,
             final OutputStream outputStream
     ) throws IOException {
-        try (
-                final DataOutputStream stream = new DataOutputStream(
-                        outputStream
-                )
-        ) {
+        try (final DataOutputStream stream = new DataOutputStream(outputStream)) {
             stream.writeBytes(value);
             stream.flush();
         }
@@ -43,11 +39,7 @@ final class Stream {
     static String read(final InputStream inputStream)
             throws IOException {
         final StringBuilder response = new StringBuilder();
-        try (
-                final BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(inputStream)
-                )
-        ) {
+        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String inputLine;
             while ((inputLine = reader.readLine()) != null) {
                 response.append(inputLine);

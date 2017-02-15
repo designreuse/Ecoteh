@@ -31,8 +31,7 @@ public class AdviceController {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER
-            = Logger.getLogger(AdviceController.class);
+    private static final Logger LOGGER = Logger.getLogger(AdviceController.class);
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -45,8 +44,7 @@ public class AdviceController {
     /**
      * Constructor.
      *
-     * @param fabric a implementation
-     *               of the {@link MainMVFabric} interface.
+     * @param fabric a implementation of the {@link MainMVFabric} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -67,9 +65,7 @@ public class AdviceController {
             final NoHandlerFoundException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.NOT_FOUND
-        );
+        return handleException(ex, request, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -85,9 +81,7 @@ public class AdviceController {
             final NullPointerException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.BAD_REQUEST
-        );
+        return handleException(ex, request, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -103,9 +97,7 @@ public class AdviceController {
             final IllegalArgumentException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.NOT_ACCEPTABLE
-        );
+        return handleException(ex, request, HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -121,9 +113,7 @@ public class AdviceController {
             final HttpRequestMethodNotSupportedException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.UNAUTHORIZED
-        );
+        return handleException(ex, request, HttpStatus.UNAUTHORIZED);
     }
 
     /**
@@ -139,9 +129,7 @@ public class AdviceController {
             final IllegalAccessException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.FORBIDDEN
-        );
+        return handleException(ex, request, HttpStatus.FORBIDDEN);
     }
 
     /**
@@ -157,9 +145,7 @@ public class AdviceController {
             final IllegalMappingException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.METHOD_NOT_ALLOWED
-        );
+        return handleException(ex, request, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -176,9 +162,7 @@ public class AdviceController {
             final DuplicateException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.CONFLICT
-        );
+        return handleException(ex, request, HttpStatus.CONFLICT);
     }
 
     /**
@@ -195,9 +179,7 @@ public class AdviceController {
             final DisableException ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.LOCKED
-        );
+        return handleException(ex, request, HttpStatus.LOCKED);
     }
 
     /**
@@ -213,9 +195,7 @@ public class AdviceController {
             final Exception ex,
             final HttpServletRequest request
     ) {
-        return handleException(
-                ex, request, HttpStatus.INTERNAL_SERVER_ERROR
-        );
+        return handleException(ex, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**

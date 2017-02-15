@@ -38,9 +38,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
                 "com.salimov.yurii.service.data"
         }
 )
-public final class CategoryServiceImpl
-        extends ContentServiceImpl<Category, Long>
-        implements CategoryService {
+public final class CategoryServiceImpl extends ContentServiceImpl<Category, Long> implements CategoryService {
 
     /**
      * The interface of the service layer,
@@ -55,10 +53,8 @@ public final class CategoryServiceImpl
     /**
      * Constructor.
      *
-     * @param dao            a implementation
-     *                       of the {@link CategoryDao} interface.
-     * @param articleService a implementation
-     *                       of the {@link ArticleService} interface.
+     * @param dao            a implementation  of the {@link CategoryDao} interface.
+     * @param articleService a implementation of the {@link ArticleService} interface.
      * @see CategoryDao
      * @see ArticleService
      */
@@ -223,9 +219,7 @@ public final class CategoryServiceImpl
      */
     @Override
     @Transactional
-    public List<Category> filteredByValid(
-            final Collection<Category> categories
-    ) {
+    public List<Category> filteredByValid(final Collection<Category> categories) {
         final List<Category> result = new ArrayList<>();
         if (categories != null && !categories.isEmpty()) {
             result.addAll(

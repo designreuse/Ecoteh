@@ -47,11 +47,7 @@ public final class StringGenerator implements Generator<String> {
      */
     static {
         RANDOM = new Random();
-        DEFAULT_PATTERN = (
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                        "abcdefghijklmnopqrstuvwxyz" +
-                        "0123456789"
-        ).toCharArray();
+        DEFAULT_PATTERN = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789").toCharArray();
         DEFAULT_LENGTH = 6;
     }
 

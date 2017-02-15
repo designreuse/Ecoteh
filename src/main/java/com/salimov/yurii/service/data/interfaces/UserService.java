@@ -16,8 +16,7 @@ import java.util.List;
  * @see User
  * @see DataService
  */
-public interface UserService
-        extends DataService<User, Long>, UserDetailsService {
+public interface UserService extends DataService<User, Long>, UserDetailsService {
 
     /**
      * Initializes, saves and returns a new user.

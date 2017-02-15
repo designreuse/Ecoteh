@@ -84,18 +84,12 @@ public abstract class MainController {
      * Constructor.
      * Initializes a implementation of the service layer interface.
      *
-     * @param fabric          a implementation
-     *                        of the {@link MainMVFabric} interface.
-     * @param companyService  a implementation
-     *                        of the {@link CompanyService} interface.
-     * @param userService     a implementation
-     *                        of the {@link UserService} interface.
-     * @param responseService a implementation
-     *                        of the {@link ResponseService} interface.
-     * @param messageService  a implementation
-     *                        of the {@link MessageService} interface.
-     * @param senderService   a implementation
-     *                        of the {@link SenderService} interface.
+     * @param fabric          a implementation of the {@link MainMVFabric} interface.
+     * @param companyService  a implementation of the {@link CompanyService} interface.
+     * @param userService     a implementation of the {@link UserService} interface.
+     * @param responseService a implementation of the {@link ResponseService} interface.
+     * @param messageService  a implementation of the {@link MessageService} interface.
+     * @param senderService   a implementation of the {@link SenderService} interface.
      * @see CompanyService
      * @see UserService
      * @see ResponseService

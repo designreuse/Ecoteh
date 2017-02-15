@@ -145,9 +145,7 @@ public interface MainMVFabric {
      * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
-    ModelAndView allSortResponsesByDatePage(
-            final boolean revers
-    );
+    ModelAndView allSortResponsesByDatePage(final boolean revers);
 
     /**
      * Creates and returns default modelAndView.

@@ -19,8 +19,7 @@ import java.util.List;
  * @see CategoryService
  * @see CompanyService
  */
-public interface ContentService<T extends Content, E extends Number>
-        extends DataService<T, E> {
+public interface ContentService<T extends Content, E extends Number> extends DataService<T, E> {
 
     /**
      * Returns content object of the {@link Content} class or subclasses

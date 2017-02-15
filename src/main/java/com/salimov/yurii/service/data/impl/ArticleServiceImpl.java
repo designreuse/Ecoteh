@@ -41,9 +41,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
                 "com.salimov.yurii.service.data"
         }
 )
-public final class ArticleServiceImpl
-        extends ContentServiceImpl<Article, Long>
-        implements ArticleService {
+public final class ArticleServiceImpl extends ContentServiceImpl<Article, Long> implements ArticleService {
 
     /**
      * The interface provides a set of standard methods
@@ -57,8 +55,7 @@ public final class ArticleServiceImpl
     /**
      * Constructor.
      *
-     * @param dao a implementation of
-     *            the {@link ArticleDao} interface.
+     * @param dao a implementation of the {@link ArticleDao} interface.
      * @see ArticleDao
      */
     @Autowired
@@ -151,10 +148,8 @@ public final class ArticleServiceImpl
      * @param number  a title of the article to return.
      * @param isValid is get valid article or not.
      * @return The article with the parameter number.
-     * @throws IllegalArgumentException Throw exception when parameter number
-     *                                  is blank.
-     * @throws NullPointerException     Throw exception when article
-     *                                  with parameter id is not exist.
+     * @throws IllegalArgumentException Throw exception when parameter number is blank.
+     * @throws NullPointerException     Throw exception when article with parameter id is not exist.
      * @see Article
      */
     @Override
@@ -264,8 +259,7 @@ public final class ArticleServiceImpl
                                 .filter(
                                         article -> Time.checkTime(
                                                 article.getDate(),
-                                                startDate,
-                                                finishDate
+                                                startDate, finishDate
                                         )
                                 ).collect(Collectors.toList())
                 );
@@ -320,8 +314,7 @@ public final class ArticleServiceImpl
                     result.addAll(
                             categories.stream()
                                     .filter(
-                                            category -> article.getCategory()
-                                                    .equals(category)
+                                            category -> article.getCategory().equals(category)
                                     ).map(category -> article)
                                     .collect(Collectors.toList())
                     );
@@ -398,8 +391,7 @@ public final class ArticleServiceImpl
             result.addAll(
                     articles.stream()
                             .filter(
-                                    article -> (article != null)
-                                            && article.isValidated()
+                                    article -> (article != null) && article.isValidated()
                             ).collect(Collectors.toList())
             );
         }

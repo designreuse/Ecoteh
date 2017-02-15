@@ -19,9 +19,8 @@ import org.springframework.context.annotation.PropertySource;
 public class CaptchaConfig {
 
     /**
-     * The implementation of the interface
-     * describes a set of methods for working
-     * with google reCAPTCHA.
+     * The implementation of the interface describes a set of methods
+     * for working with google reCAPTCHA.
      */
     private static Captcha captcha;
 

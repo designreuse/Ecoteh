@@ -58,10 +58,7 @@ public final class SenderServiceImpl implements SenderService {
     ) {
         if (recipientEmails != null) {
             for (String email : recipientEmails) {
-                send(
-                        subject, text, email,
-                        senderEmail, senderEmailPass
-                );
+                send(subject, text, email, senderEmail, senderEmailPass);
             }
         }
     }
@@ -131,10 +128,7 @@ public final class SenderServiceImpl implements SenderService {
             final User sender
     ) {
         if ((recipient != null) && recipient.isMailing()) {
-            send(
-                    subject, text,
-                    recipient.getEmail(), sender
-            );
+            send(subject, text, recipient.getEmail(), sender);
         }
     }
 
@@ -156,10 +150,7 @@ public final class SenderServiceImpl implements SenderService {
     ) {
         if ((recipients != null) && !recipients.isEmpty()) {
             for (User recipient : recipients) {
-                send(
-                        subject, text,
-                        recipient, sender
-                );
+                send(subject, text, recipient, sender);
             }
         }
     }

@@ -52,10 +52,8 @@ public class MessageController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric}
-     *                       interface.
-     * @param messageService a implementation of the {@link MessageService}
-     *                       interface.
+     * @param fabric         a implementation of the {@link MainMVFabric} interface.
+     * @param messageService a implementation of the {@link MessageService} interface.
      * @see MessageService
      * @see MainMVFabric
      */
@@ -83,9 +81,7 @@ public class MessageController {
     )
     public ModelAndView getMessages() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "messages", this.messageService.getAll(false)
-        );
+        modelAndView.addObject("messages", this.messageService.getAll(false));
         modelAndView.setViewName("admin/message/all_page");
         return modelAndView;
     }
