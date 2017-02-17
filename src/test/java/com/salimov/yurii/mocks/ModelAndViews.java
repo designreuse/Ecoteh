@@ -24,12 +24,8 @@ public final class ModelAndViews {
             final String[] keys
     ) {
         assertNotNull(modelAndView);
-        assertNotNull(modelAndView.getViewName());
         if (isNotBlank(view)) {
-            assertEquals(
-                    modelAndView.getViewName(),
-                    view
-            );
+            assertEquals(modelAndView.getViewName(), view);
         }
         if (keys != null && keys.length > 0) {
             final Map<String, Object> map = modelAndView.getModel();

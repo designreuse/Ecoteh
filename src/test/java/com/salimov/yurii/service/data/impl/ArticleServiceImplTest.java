@@ -236,19 +236,74 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
 
     @Test
     public void whenRemoveByNullNumberThenDoNothing() {
-        getService().removeByNumber(null);
+        this.service.removeByNumber(null);
     }
 
     @Test
     public void whenRemoveByBlankNumberThenDoNothing() {
-        getService().removeByNumber("");
-        getService().removeByNumber(" ");
-        getService().removeByNumber("  ");
+        this.service.removeByNumber("");
+        this.service.removeByNumber(" ");
+        this.service.removeByNumber("  ");
     }
 
     @Test
     public void whenRemoveByNumberThenDoIt() {
-        getService().removeByNumber(NUMBER);
+        this.service.removeByNumber(NUMBER);
+    }
+
+    @Test
+    public void whenFilterByCategoryWithNullArticlesThenReturnSomeList() {
+        assertNotNull(this.service.filterByCategory(null, getCategory()));
+    }
+
+    @Test
+    public void whenFilterByCategoryWithEmptyArticlesThenReturnSomeList() {
+        assertNotNull(this.service.filterByCategory(new ArrayList<>(), getCategory()));
+    }
+
+    @Test
+    public void whenFilterByCategoriesWithNullArticlesThenReturnSomeList() {
+        assertNotNull(this.service.filterByCategories(null, getCategories()));
+    }
+
+    @Test
+    public void whenFilterByCategoriesWithEmptyArticlesThenReturnSomeList() {
+        assertNotNull(this.service.filterByCategories(new ArrayList<>(), getCategories()));
+    }
+
+    @Test
+    public void whenFilterByCategoriesWithNullCategoriesThenReturnSomeList() {
+        assertNotNull(this.service.filterByCategories(getArticles(), null));
+    }
+
+    @Test
+    public void whenFilterByCategoriesWithEmptyCategoriesThenReturnSomeList() {
+        assertNotNull(this.service.filterByCategories(getArticles(), new ArrayList<>()));
+    }
+
+    @Test
+    public void whenFilterByDateThenReturnsSomeList() {
+        assertNotNull(this.service.getAndFilterByDate(new Date(), new Date()));
+    }
+
+    @Test
+    public void whenFilterByDateWithNullStartDateThenReturnsSomeList() {
+        assertNotNull(this.service.getAndFilterByDate(null, new Date()));
+    }
+
+    @Test
+    public void whenFilterByDateWithNullFinishDateThenReturnsSomeList() {
+        assertNotNull(this.service.getAndFilterByDate(new Date(), null));
+    }
+
+    @Test
+    public void whenGetAndFilterByCategoriesWithNullCategoryThenReturnSomeList() {
+        assertNotNull(this.service.getAndFilterByCategories(null));
+    }
+
+    @Test
+    public void whenGetAndFilterByCategoriesWithEmptyCategoryThenReturnSomeList() {
+        assertNotNull(this.service.getAndFilterByCategories(new ArrayList<>()));
     }
 
     @Ignore

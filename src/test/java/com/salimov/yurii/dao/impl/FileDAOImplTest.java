@@ -22,9 +22,7 @@ public final class FileDaoImplTest
 
     @Before
     public void beforeTest() {
-        this.dao = new FileDaoImpl(
-                getFileRepository()
-        );
+        this.dao = new FileDaoImpl(getFileRepository());
     }
 
     @Test

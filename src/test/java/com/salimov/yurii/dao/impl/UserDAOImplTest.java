@@ -22,9 +22,7 @@ public final class UserDaoImplTest
 
     @Before
     public void beforeTest() {
-        this.dao = new UserDaoImpl(
-                getUserRepository()
-        );
+        this.dao = new UserDaoImpl(getUserRepository());
     }
 
     @Test
