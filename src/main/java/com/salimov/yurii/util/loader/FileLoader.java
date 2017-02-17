@@ -63,7 +63,7 @@ public class FileLoader implements Loader {
      * Saves a file in the file system.
      */
     @Override
-    public void write()  {
+    public void write() {
         if (this.file != null) {
             final String path = getPathToFile();
             checkPath(path);
@@ -119,5 +119,23 @@ public class FileLoader implements Loader {
             isExists = directory.mkdirs();
         }
         return isExists;
+    }
+
+    /**
+     * Returns a multipart file.
+     *
+     * @return The multipart file or (@code null) if file not initialized.
+     */
+    public MultipartFile getFile() {
+        return this.file;
+    }
+
+    /**
+     * Returns root path of a file.
+     *
+     * @return The root path of a file.
+     */
+    public String getPath() {
+        return this.path;
     }
 }

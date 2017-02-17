@@ -1,5 +1,7 @@
 package com.salimov.yurii.util.loader;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * The interface describes the methods for working
  * with files on the file system.
@@ -21,4 +23,18 @@ public interface Loader {
      * {@code false} otherwise.
      */
     boolean delete();
+
+    /**
+     * Returns a multipart file.
+     *
+     * @return The multipart file.
+     */
+    MultipartFile getFile();
+
+    /**
+     * Returns root path of a file.
+     *
+     * @return The root path of a file.
+     */
+    String getPath();
 }
