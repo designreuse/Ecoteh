@@ -62,42 +62,6 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     private String encryptedPassword;
 
     /**
-     * The e-mail of a user.
-     */
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    /**
-     * The phone of a user.
-     */
-    @Column(name = "phone", nullable = false)
-    private String phone;
-
-    /**
-     * The vkontakte url of a user.
-     */
-    @Column(name = "vkontakte")
-    private String vkontakte;
-
-    /**
-     * The facebook url of a user.
-     */
-    @Column(name = "facebook")
-    private String facebook;
-
-    /**
-     * The twitter url of a user.
-     */
-    @Column(name = "twitter")
-    private String twitter;
-
-    /**
-     * The skype username of a user.
-     */
-    @Column(name = "skype")
-    private String skype;
-
-    /**
      * The tagline of a user.
      */
     @Column(name = "description")
@@ -108,6 +72,21 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Column(name = "photo")
     private String photoUrl;
+
+    /**
+     * The user contacts.
+     *
+     * @see Category
+     */
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "id_contacts",
+            referencedColumnName = "id"
+    )
+    private Contacts contacts;
 
     /**
      * The role of a user.
@@ -142,19 +121,32 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     /**
      * Constructor.
      *
-     * @param name  a name of the new user.
-     * @param email a email of the new user.
-     * @param phone a phone of the new user.
+     * @param name        a name of the new user.
+     * @param description a description of the new user.
      */
     public User(
             final String name,
-            final String email,
-            final String phone
+            final String description
     ) {
         this();
         setName(name);
-        setEmail(email);
-        setPhone(phone);
+        setDescription(description);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param name        a name of the new user.
+     * @param description a description of the new user.
+     * @param contacts
+     */
+    public User(
+            final String name,
+            final String description,
+            final Contacts contacts
+    ) {
+        this(name, description);
+        setContacts(contacts);
     }
 
     /**
@@ -171,13 +163,8 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
                 ", encryptedPassword='" + getEncryptedPassword() + '\'' +
                 ", Login='" + getLogin() + '\'' +
                 ", Password='" + getPassword() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", phone='" + getPhone() + '\'' +
-                ", vkontakte='" + getVkontakte() + '\'' +
-                ", facebook='" + getFacebook() + '\'' +
-                ", twitter='" + getTwitter() + '\'' +
-                ", skype='" + getSkype() + '\'' +
                 ", description='" + getDescription() + '\'' +
+                getContacts() +
                 ", photoUrl='" + getPhotoUrl() + '\'' +
                 ", role=" + getRole() +
                 ", isMailing=" + isMailing() +
@@ -197,19 +184,9 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
         boolean result = false;
         if (super.equals(object)) {
             final User other = (User) object;
-            result = (
-                    isNotBlank(this.name) ?
-                            this.name.equalsIgnoreCase(other.name) :
-                            isBlank(other.name)
-            ) && (
-                    isNotBlank(this.phone) ?
-                            this.phone.equals(other.phone) :
-                            isBlank(other.phone)
-            ) && (
-                    isNotBlank(this.email) ?
-                            this.email.equalsIgnoreCase(other.email) :
-                            isBlank(other.email)
-            );
+            result = (isNotBlank(this.name) ? this.name.equalsIgnoreCase(other.name) : isBlank(other.name)) &&
+                    (isNotBlank(this.description) ? this.description.equalsIgnoreCase(other.description) :
+                            isBlank(other.description));
         }
         return result;
     }
@@ -224,8 +201,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Override
     public int hashCode() {
         return (isNotBlank(this.name) ? this.name.hashCode() : 0)
-                + (isNotBlank(this.phone) ? this.phone.hashCode() : 0)
-                + (isNotBlank(this.email) ? this.email.hashCode() : 0);
+                + (isNotBlank(this.description) ? this.description.hashCode() : 0);
     }
 
     /**
@@ -309,95 +285,6 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     public String getUsername() {
         final String username = getLogin();
         return isNotBlank(username) ? username : "";
-    }
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param name        a new name of the user.
-     * @param email       a new email of the user.
-     * @param phone       a new phone of the user.
-     * @param description a new description of the user.
-     */
-    @Override
-    public void initialize(
-            final String name,
-            final String email,
-            final String phone,
-            final String description
-    ) {
-        setName(name);
-        setEmail(email);
-        setPhone(phone);
-        setDescription(description);
-    }
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param name        a new name of the user.
-     * @param login       a new login of the user.
-     * @param password    a new password of the user.
-     * @param email       a new e-mail of the user.
-     * @param phone       a new phone of the user.
-     * @param vkontakte   a new vkontakte url of the user.
-     * @param facebook    a new facebook url of the user.
-     * @param twitter     a new twitter url of the user.
-     * @param skype       a new skype username of the user.
-     * @param description a new description of the user.
-     */
-    @Override
-    public void initialize(
-            final String name,
-            final String login,
-            final String password,
-            final String email,
-            final String phone,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype,
-            final String description
-    ) {
-        initialize(name, email, phone, description);
-        setLogin(login);
-        setPassword(password);
-        setVkontakte(vkontakte);
-        setFacebook(facebook);
-        setTwitter(twitter);
-        setSkype(skype);
-    }
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param name        a new name of the user.
-     * @param login       a new login of the user.
-     * @param password    a new password of the user.
-     * @param email       a new e-mail of the user.
-     * @param phone       a new phone of the user.
-     * @param description a new description of the user.
-     * @param photoUrl    a new photo URL of the user.
-     * @param role        a new role of the user.
-     * @see File
-     * @see UserRole
-     */
-    @Override
-    public void initialize(
-            final String name,
-            final String login,
-            final String password,
-            final String email,
-            final String phone,
-            final String description,
-            final String photoUrl,
-            final UserRole role
-    ) {
-        initialize(name, email, phone, description);
-        setLogin(login);
-        setPassword(password);
-        setPhotoUrl(photoUrl);
-        setRole(role);
     }
 
     /**
@@ -549,132 +436,6 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     }
 
     /**
-     * Returns a e-mail of the user.
-     *
-     * @return The user e-mail.
-     */
-    @Override
-    public String getEmail() {
-        return this.email;
-    }
-
-    /**
-     * Sets a new e-mail to the user.
-     * If parameter e-mail is blank, then sets {@code null}.
-     *
-     * @param email a new e-mail to the user.
-     */
-    @Override
-    public void setEmail(final String email) {
-        this.email = isNotBlank(email) ? email : null;
-    }
-
-    /**
-     * Returns a phone of the user.
-     *
-     * @return The user phone.
-     */
-    @Override
-    public String getPhone() {
-        return this.phone;
-    }
-
-    /**
-     * Sets a new phone to the user.
-     * If parameter phone is blank, then sets {@code null}.
-     *
-     * @param phone a new phone to the user.
-     */
-    @Override
-    public void setPhone(final String phone) {
-        this.phone = isNotBlank(phone) ? phone : null;
-    }
-
-    /**
-     * Returns a vkontakte url of the user.
-     *
-     * @return The user vkontakte url.
-     */
-    @Override
-    public String getVkontakte() {
-        return this.vkontakte;
-    }
-
-    /**
-     * Sets a new vkontakte url to the user.
-     * If parameter vkontakte url is blank, then sets {@code null}.
-     *
-     * @param vkontakte a new vkontakte url to the user.
-     */
-    @Override
-    public void setVkontakte(final String vkontakte) {
-        this.vkontakte = isNotBlank(vkontakte) ? vkontakte : null;
-    }
-
-    /**
-     * Returns a facebook url of the user.
-     *
-     * @return The user facebook url.
-     */
-    @Override
-    public String getFacebook() {
-        return this.facebook;
-    }
-
-    /**
-     * Sets a new facebook url to the user.
-     * If parameter facebook url is blank, then sets {@code null}.
-     *
-     * @param facebook a new facebook url to the user.
-     */
-    @Override
-    public void setFacebook(final String facebook) {
-        this.facebook = isNotBlank(facebook) ? facebook : null;
-    }
-
-    /**
-     * Returns a twitter url of the user.
-     *
-     * @return The user twitter url.
-     */
-    @Override
-    public String getTwitter() {
-        return this.twitter;
-    }
-
-    /**
-     * Sets a new twitter url to the user.
-     * If parameter twitter url is blank, then sets {@code null}.
-     *
-     * @param twitter a new twitter url to the user.
-     */
-    @Override
-    public void setTwitter(final String twitter) {
-        this.twitter = isNotBlank(twitter) ? twitter : null;
-    }
-
-    /**
-     * Returns a skype username of the user.
-     *
-     * @return The user skype username.
-     */
-    @Override
-    public String getSkype() {
-        return this.skype;
-    }
-
-    /**
-     * Sets a new skype username to the user.
-     * If parameter skype username is blank, then sets {@code null}.
-     *
-     * @param skype a new skype username to the user.
-     */
-    @Override
-    public void setSkype(final String skype) {
-        this.skype = isNotBlank(skype) ? skype : null;
-    }
-
-    /**
      * Returns a description of the user.
      *
      * @return The user description.
@@ -714,6 +475,22 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Override
     public void setPhotoUrl(final String photoUrl) {
         this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Contacts getContacts() {
+        return this.contacts;
+    }
+
+    /**
+     * @param contacts
+     */
+    @Override
+    public void setContacts(final Contacts contacts) {
+        this.contacts = contacts;
     }
 
     /**
@@ -781,5 +558,32 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
             setValidated(false);
             this.isMailing = false;
         }
+    }
+
+    /**
+     * @param user
+     * @return
+     */
+    public User initialize(final User user) {
+        if (user != null) {
+            this.setName(user.getName());
+            this.setUrl(user.getUrl());
+            this.setEncryptedLogin(user.getEncryptedLogin());
+            this.setEncryptedPassword(user.getEncryptedPassword());
+            this.setDescription(user.getDescription());
+            this.setPhotoUrl(user.getPhotoUrl());
+            this.setRole(user.getRole());
+            this.setMailing(user.isMailing());
+            this.setLocked(user.isLocked());
+            this.setValidated(user.isValidated());
+            if (user.getContacts() != null) {
+                if (this.getContacts() != null) {
+                    this.getContacts().initialize(user.getContacts());
+                } else {
+                    this.setContacts(user.getContacts());
+                }
+            }
+        }
+        return this;
     }
 }
