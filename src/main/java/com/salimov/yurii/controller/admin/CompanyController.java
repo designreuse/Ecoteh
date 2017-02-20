@@ -1,6 +1,8 @@
 package com.salimov.yurii.controller.admin;
 
+import com.salimov.yurii.entity.Address;
 import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.entity.Contacts;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
@@ -157,16 +159,30 @@ public class CompanyController {
             @RequestParam(value = "slides") final String slides,
             final ModelAndView modelAndView
     ) {
-        this.companyService.initAndEditMainCompany(
-                title, domain,
-                tagline, description, information, keywords,
-                workTimeFrom, workTimeTo,
-                mobilePhone, landlinePhone, fax, email,
-                senderEmail, senderPass,
-                vkontakte, facebook, twitter,
-                skype, address, googleMaps,
-                logoUrl, faviconUrl, slides
+        final Company company = new Company();
+        company.setTitle(title);
+        company.setDescription(description);
+        company.setInformation(information);
+        company.setKeywords(keywords);
+        company.setDomain(domain);
+        company.setTagline(tagline);
+        company.setSenderEmail(senderEmail);
+        company.setSenderPass(senderPass);
+        company.setWorkTimeFrom(workTimeFrom);
+        company.setWorkTimeTo(workTimeTo);
+        company.setLogoUrl(logoUrl);
+        company.setFaviconUrl(faviconUrl);
+        company.setSlides(slides);
+        company.setContacts(
+                new Contacts(
+                        email, mobilePhone, landlinePhone, fax,
+                        vkontakte, facebook, twitter, skype
+                )
         );
+        company.setAddress(
+                new Address(address, googleMaps)
+        );
+        this.companyService.initAndEditMainCompany(company);
         modelAndView.setViewName("redirect:/company/main");
         Cache.clear();
         return modelAndView;
@@ -260,14 +276,24 @@ public class CompanyController {
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Company company = this.companyService.initAndAdd(
-                title, domain,
-                tagline, description, information, keywords,
-                mobilePhone, landlinePhone, fax, email,
-                vkontakte, facebook, twitter, skype,
-                address, googleMaps,
-                logoUrl, isValid
+        final Company company = new Company();
+        company.setTitle(title);
+        company.setDescription(description);
+        company.setInformation(information);
+        company.setKeywords(keywords);
+        company.setDomain(domain);
+        company.setTagline(tagline);
+        company.setLogoUrl(logoUrl);
+        company.setContacts(
+                new Contacts(
+                        email, mobilePhone, landlinePhone, fax,
+                        vkontakte, facebook, twitter, skype
+                )
         );
+        company.setAddress(
+                new Address(address, googleMaps)
+        );
+        this.companyService.initAndAdd(company);
         Cache.clear();
         modelAndView.setViewName("redirect:/company/" + company.getUrl());
         return modelAndView;
@@ -370,14 +396,24 @@ public class CompanyController {
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Company company = this.companyService.initAndUpdate(
-                url, title, domain,
-                tagline, description, information, keywords,
-                mobilePhone, landlinePhone, fax, email,
-                vkontakte, facebook, twitter, skype,
-                address, googleMaps,
-                logoUrl, isValid
+        final Company company = new Company();
+        company.setTitle(title);
+        company.setDescription(description);
+        company.setInformation(information);
+        company.setKeywords(keywords);
+        company.setDomain(domain);
+        company.setTagline(tagline);
+        company.setLogoUrl(logoUrl);
+        company.setContacts(
+                new Contacts(
+                        email, mobilePhone, landlinePhone, fax,
+                        vkontakte, facebook, twitter, skype
+                )
         );
+        company.setAddress(
+                new Address(address, googleMaps)
+        );
+        this.companyService.initAndUpdate(url, company);
         Cache.clear();
         modelAndView.setViewName("redirect:/company/" + company.getUrl());
         return modelAndView;

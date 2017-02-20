@@ -193,7 +193,7 @@ public class ForgotUserInformationController {
      */
     private void searchByLoginAndSend(final String username) {
         final User user = this.userService.getByLogin(username);
-        sendUserInformationToEmail(user, user.getEmail());
+        sendUserInformationToEmail(user, user.getContacts().getEmail());
     }
 
     /**
@@ -203,7 +203,7 @@ public class ForgotUserInformationController {
      */
     private void searchByEmailAndSend(final String email) {
         final User user = this.userService.getByEmail(email);
-        sendUserInformationToEmail(user, user.getEmail());
+        sendUserInformationToEmail(user, user.getContacts().getEmail());
     }
 
     /**
@@ -219,7 +219,7 @@ public class ForgotUserInformationController {
         if (isBlank(email)) {
             throw new IllegalArgumentException("Input E-mail is blank!");
         }
-        final String mainEmail = this.companyService.getMainCompany().getEmail();
+        final String mainEmail = this.companyService.getMainCompany().getContacts().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
             throw new NullPointerException(
                     "Can`t find company with E-mail \"" + email + "\"!"

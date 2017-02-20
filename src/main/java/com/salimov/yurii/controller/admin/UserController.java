@@ -1,6 +1,7 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.entity.Contacts;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
@@ -145,21 +146,23 @@ public class UserController {
      * Request mapping: /admin/user/add
      * Method: POST
      *
-     * @param name         a name of the new user.
-     * @param login        a login of the new user.
-     * @param password     a password of the new user.
-     * @param description  a description of the new user.
-     * @param phone        a phone of the new user.
-     * @param email        a e-mail of the new user.
-     * @param vkontakte    a vkontakte url of the new user.
-     * @param facebook     a facebook url of the new user.
-     * @param twitter      a twitter url of the new user.
-     * @param skype        a skype username of the new user.
-     * @param photoUrl     a photo URL to the new user.
-     * @param isValid      a validated of the new user.
-     * @param isMailing    a permit to send a letters on the user email.
-     * @param isLocked     locked the user or not.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param name          a name of the new user.
+     * @param login         a login of the new user.
+     * @param password      a password of the new user.
+     * @param description   a description of the new user.
+     * @param mobilePhone   a mobile phone of the new user.
+     * @param landlinePhone a landline phone of the new user.
+     * @param fax           a fax of the new user.
+     * @param email         a e-mail of the new user.
+     * @param vkontakte     a vkontakte url of the new user.
+     * @param facebook      a facebook url of the new user.
+     * @param twitter       a twitter url of the new user.
+     * @param skype         a skype username of the new user.
+     * @param photoUrl      a photo URL to the new user.
+     * @param isValid       a validated of the new user.
+     * @param isMailing     a permit to send a letters on the user email.
+     * @param isLocked      locked the user or not.
+     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
      */
@@ -172,7 +175,9 @@ public class UserController {
             @RequestParam(value = "login") final String login,
             @RequestParam(value = "password") final String password,
             @RequestParam(value = "description") final String description,
-            @RequestParam(value = "phone") final String phone,
+            @RequestParam(value = "mobile_phone") final String mobilePhone,
+            @RequestParam(value = "landline_phone") final String landlinePhone,
+            @RequestParam(value = "fax") final String fax,
             @RequestParam(value = "email") final String email,
             @RequestParam(value = "vkontakte") final String vkontakte,
             @RequestParam(value = "facebook") final String facebook,
@@ -184,12 +189,20 @@ public class UserController {
             @RequestParam(value = "is_locked") final boolean isLocked,
             final ModelAndView modelAndView
     ) {
-        this.userService.initAndAdd(
-                name, login, password, description,
-                phone, email, vkontakte, facebook,
-                twitter, skype, photoUrl, isValid,
-                isMailing, isLocked
+        final User user = new User(
+                name, description,
+                new Contacts(
+                        email, mobilePhone, landlinePhone, fax,
+                        vkontakte, facebook, twitter, skype
+                )
         );
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setPhotoUrl(photoUrl);
+        user.setValidated(isValid);
+        user.setMailing(isMailing);
+        user.setLocked(isLocked);
+        this.userService.initAndAdd(user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");
         return modelAndView;
@@ -241,22 +254,24 @@ public class UserController {
      * Request mapping: /admin/user/update
      * Method: POST
      *
-     * @param url          a url of the user to update.
-     * @param name         a new name to the user.
-     * @param login        a new login to the user.
-     * @param password     a new password to the user.
-     * @param description  a new description to the user.
-     * @param phone        a new phone to the user.
-     * @param email        a new e-mail to the user.
-     * @param vkontakte    a new vkontakte url to the user.
-     * @param facebook     a new facebook url to the user.
-     * @param twitter      a new twitter url to the user.
-     * @param skype        a new skype username to the user.
-     * @param photoUrl     a photo URL to the user.
-     * @param isValid      a validated of the user.
-     * @param isMailing    a permit to send a letters on the user email.
-     * @param isLocked     locked the user or not.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param url           a url of the user to update.
+     * @param name          a new name to the user.
+     * @param login         a new login to the user.
+     * @param password      a new password to the user.
+     * @param description   a new description to the user.
+     * @param mobilePhone   a new mobile phone to the user.
+     * @param landlinePhone a new landline phone to the user.
+     * @param fax           a new fax to the user.
+     * @param email         a new e-mail to the user.
+     * @param vkontakte     a new vkontakte url to the user.
+     * @param facebook      a new facebook url to the user.
+     * @param twitter       a new twitter url to the user.
+     * @param skype         a new skype username to the user.
+     * @param photoUrl      a photo URL to the user.
+     * @param isValid       a validated of the user.
+     * @param isMailing     a permit to send a letters on the user email.
+     * @param isLocked      locked the user or not.
+     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
      * @see File
@@ -271,7 +286,9 @@ public class UserController {
             @RequestParam(value = "login") final String login,
             @RequestParam(value = "password") final String password,
             @RequestParam(value = "description") final String description,
-            @RequestParam(value = "phone") final String phone,
+            @RequestParam(value = "mobile_phone") final String mobilePhone,
+            @RequestParam(value = "landline_phone") final String landlinePhone,
+            @RequestParam(value = "fax") final String fax,
             @RequestParam(value = "email") final String email,
             @RequestParam(value = "vkontakte") final String vkontakte,
             @RequestParam(value = "facebook") final String facebook,
@@ -283,13 +300,20 @@ public class UserController {
             @RequestParam(value = "is_locked") final boolean isLocked,
             final ModelAndView modelAndView
     ) {
-        this.userService.initAndUpdate(
-                url, name, login, password,
-                description, phone, email,
-                vkontakte, facebook, twitter,
-                skype, photoUrl,
-                isValid, isMailing, isLocked
+        final User user = new User(
+                name, description,
+                new Contacts(
+                        email, mobilePhone, landlinePhone, fax,
+                        vkontakte, facebook, twitter, skype
+                )
         );
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setPhotoUrl(photoUrl);
+        user.setValidated(isValid);
+        user.setMailing(isMailing);
+        user.setLocked(isLocked);
+        this.userService.initAndUpdate(url, user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");
         return modelAndView;
@@ -386,11 +410,16 @@ public class UserController {
                     _subject += " - " + user.getName();
                     message += "\n\n" + user.getName();
                 }
-                if (isNotBlank(user.getPhone())) {
-                    message += "\nPhone: " + user.getPhone();
-                }
-                if (isNotBlank(user.getEmail())) {
-                    message += "\nE-mail: " + user.getEmail();
+                if (user.getContacts() != null) {
+                    if (isNotBlank(user.getContacts().getMobilePhone())) {
+                        message += "\nMobile Phone: " + user.getContacts().getMobilePhone();
+                    }
+                    if (isNotBlank(user.getContacts().getLandlinePhone())) {
+                        message += "\nLandline Phone: " + user.getContacts().getLandlinePhone();
+                    }
+                    if (isNotBlank(user.getContacts().getEmail())) {
+                        message += "\nE-mail: " + user.getContacts().getEmail();
+                    }
                 }
             }
             final Company mainCompany = this.companyService.getMainCompany();

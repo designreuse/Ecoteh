@@ -83,30 +83,6 @@ public final class UserDaoImpl extends DataDaoImpl<User, Long> implements UserDa
     }
 
     /**
-     * Returns user with the parameter phone from a database.
-     *
-     * @param phone a phone of the user to return.
-     * @return The user with parameter phone.
-     * @see User
-     */
-    @Override
-    public User getByPhone(final String phone) {
-        return this.repository.findByPhone(phone);
-    }
-
-    /**
-     * Returns user with the parameter email from a database.
-     *
-     * @param email a email of the user to return.
-     * @return The user with parameter email.
-     * @see User
-     */
-    @Override
-    public User getByEmail(final String email) {
-        return this.repository.findByEmail(email);
-    }
-
-    /**
      * Removes user with the parameter name from a database.
      *
      * @param name a name of the user to remove.
@@ -126,18 +102,5 @@ public final class UserDaoImpl extends DataDaoImpl<User, Long> implements UserDa
     @Override
     public void removeByUrl(final String url) {
         this.repository.deleteByUrl(url);
-    }
-
-    /**
-     * Removes user with the parameter login from a database.
-     *
-     * @param login a login of the user to remove.
-     * @see User
-     */
-    @Override
-    public void removeByLogin(final String login) {
-        this.repository.deleteByEncryptedLogin(
-                new Encryptor(login).encrypt()
-        );
     }
 }

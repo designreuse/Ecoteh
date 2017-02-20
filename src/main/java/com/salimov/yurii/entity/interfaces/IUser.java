@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
-import com.salimov.yurii.entity.File;
+import com.salimov.yurii.entity.Contacts;
+import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.util.translator.Translator;
 
@@ -15,73 +16,6 @@ import com.salimov.yurii.util.translator.Translator;
  * @see IModel
  */
 public interface IUser<T extends Number> extends IModel<T> {
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param name        a new name of the user.
-     * @param email       a new email of the user.
-     * @param phone       a new phone of the user.
-     * @param description a new description of the user.
-     */
-    void initialize(
-            final String name,
-            final String email,
-            final String phone,
-            final String description
-    );
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param name        a new name of the user.
-     * @param login       a new login of the user.
-     * @param password    a new password of the user.
-     * @param email       a new e-mail of the user.
-     * @param phone       a new phone of the user.
-     * @param vkontakte   a new vkontakte url of the user.
-     * @param facebook    a new facebook url of the user.
-     * @param twitter     a new twitter url of the user.
-     * @param skype       a new skype username of the user.
-     * @param description a new description of the user.
-     */
-    void initialize(
-            final String name,
-            final String login,
-            final String password,
-            final String email,
-            final String phone,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype,
-            final String description
-    );
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param name        a new name of the user.
-     * @param login       a new login of the user.
-     * @param password    a new password of the user.
-     * @param email       a new e-mail of the user.
-     * @param phone       a new phone of the user.
-     * @param description a new description of the user.
-     * @param photoUrl    a new photo URL of the user.
-     * @param role        a new role of the user.
-     * @see File
-     * @see UserRole
-     */
-    void initialize(
-            final String name,
-            final String login,
-            final String password,
-            final String email,
-            final String phone,
-            final String description,
-            final String photoUrl,
-            final UserRole role
-    );
 
     /**
      * Returns a name of the user.
@@ -176,90 +110,6 @@ public interface IUser<T extends Number> extends IModel<T> {
     void setUrl(final String url);
 
     /**
-     * Returns a e-mail of the user.
-     *
-     * @return The user e-mail.
-     */
-    String getEmail();
-
-    /**
-     * Sets a new e-mail to the user.
-     *
-     * @param email a new e-mail to the user.
-     */
-    void setEmail(final String email);
-
-    /**
-     * Returns a phone of the user.
-     *
-     * @return The user phone.
-     */
-    String getPhone();
-
-    /**
-     * Sets a new phone to the user.
-     *
-     * @param phone a new phone to the user.
-     */
-    void setPhone(final String phone);
-
-    /**
-     * Returns a vkontakte url of the user.
-     *
-     * @return The user vkontakte url.
-     */
-    String getVkontakte();
-
-    /**
-     * Sets a new vkontakte url to the user.
-     *
-     * @param vkontakte a new vkontakte url to the user.
-     */
-    void setVkontakte(final String vkontakte);
-
-    /**
-     * Returns a facebook url of the user.
-     *
-     * @return The user facebook url.
-     */
-    String getFacebook();
-
-    /**
-     * Sets a new facebook url to the user.
-     *
-     * @param facebook a new facebook url to the user.
-     */
-    void setFacebook(final String facebook);
-
-    /**
-     * Returns a twitter url of the user.
-     *
-     * @return The user twitter url.
-     */
-    String getTwitter();
-
-    /**
-     * Sets a new twitter url to the user.
-     *
-     * @param twitter a new twitter url to the user.
-     */
-    void setTwitter(final String twitter);
-
-    /**
-     * Returns a skype username of the user.
-     *
-     * @return The user skype username.
-     */
-    String getSkype();
-
-    /**
-     * Sets a new skype username to the user.
-     *
-     * @param skype a new skype username to the user.
-     */
-    void setSkype(final String skype);
-
-    /**
      * Returns a description of the user.
      *
      * @return The user description.
@@ -287,6 +137,16 @@ public interface IUser<T extends Number> extends IModel<T> {
      * @param photoUrl a new photo URL to the user.
      */
     void setPhotoUrl(final String photoUrl);
+
+    /**
+     * @return
+     */
+    Contacts getContacts();
+
+    /**
+     * @param contacts
+     */
+    void setContacts(final Contacts contacts);
 
     /**
      * Returns a role of the user.
@@ -331,4 +191,10 @@ public interface IUser<T extends Number> extends IModel<T> {
      * @param locked a value of locked the user or not.
      */
     void setLocked(final boolean locked);
+
+    /**
+     * @param user
+     * @return
+     */
+    User initialize(final User user);
 }

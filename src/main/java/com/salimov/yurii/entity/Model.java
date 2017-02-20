@@ -146,6 +146,18 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
     }
 
     /**
+     *
+     * @param model
+     * @return
+     */
+    public Model<E> initialize(final Model<E> model) {
+        if (model != null) {
+            this.setValidated(model.isValidated());
+        }
+        return this;
+    }
+
+    /**
      * Returns a hash code value for the object.
      * This method is supported for the benefit
      * of hash tables such as those provided by HashMap.

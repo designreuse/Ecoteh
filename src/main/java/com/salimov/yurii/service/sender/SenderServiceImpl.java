@@ -79,10 +79,11 @@ public final class SenderServiceImpl implements SenderService {
             final String recipientEmail,
             final User sender
     ) {
-        if (sender != null) {
+        if ((sender != null) && (sender.getContacts() != null)) {
             send(
                     subject, text, recipientEmail,
-                    sender.getEmail(), sender.getPassword()
+                    sender.getContacts().getEmail(),
+                    sender.getPassword()
             );
         }
     }
@@ -103,10 +104,11 @@ public final class SenderServiceImpl implements SenderService {
             final String[] recipientEmails,
             final User sender
     ) {
-        if (sender != null) {
+        if ((sender != null) && (sender.getContacts() != null)) {
             send(
                     subject, text, recipientEmails,
-                    sender.getEmail(), sender.getPassword()
+                    sender.getContacts().getEmail(),
+                    sender.getPassword()
             );
         }
     }
@@ -127,8 +129,8 @@ public final class SenderServiceImpl implements SenderService {
             final User recipient,
             final User sender
     ) {
-        if ((recipient != null) && recipient.isMailing()) {
-            send(subject, text, recipient.getEmail(), sender);
+        if ((recipient != null) && recipient.isMailing() && (recipient.getContacts() != null)) {
+            send(subject, text, recipient.getContacts().getEmail(), sender);
         }
     }
 
@@ -175,10 +177,15 @@ public final class SenderServiceImpl implements SenderService {
     ) {
         if ((recipients != null) && !recipients.isEmpty()) {
             recipients.stream()
-                    .filter(User::isMailing)
+                    .filter(
+                            recipient -> (recipient != null) &&
+                                    recipient.isMailing() &&
+                                    (recipient.getContacts() != null)
+                    )
                     .forEach(
                             recipient -> send(
-                                    subject, text, recipient.getEmail(),
+                                    subject, text,
+                                    recipient.getContacts().getEmail(),
                                     senderEmail, senderEmailPass
                             )
                     );

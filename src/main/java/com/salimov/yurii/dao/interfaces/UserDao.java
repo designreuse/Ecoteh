@@ -42,24 +42,6 @@ public interface UserDao extends DataDao<User, Long> {
     User getByLogin(final String login);
 
     /**
-     * Returns user with the parameter phone from a database.
-     *
-     * @param phone a phone of the user to return.
-     * @return The user with parameter phone.
-     * @see User
-     */
-    User getByPhone(final String phone);
-
-    /**
-     * Returns user with the parameter email from a database.
-     *
-     * @param email a email of the user to return.
-     * @return The user with parameter email.
-     * @see User
-     */
-    User getByEmail(final String email);
-
-    /**
      * Removes user with the parameter name from a database.
      *
      * @param name a name of the user to remove.
@@ -74,12 +56,4 @@ public interface UserDao extends DataDao<User, Long> {
      * @see User
      */
     void removeByUrl(final String url);
-
-    /**
-     * Removes user with the parameter login from a database.
-     *
-     * @param login a login of the user to remove.
-     * @see User
-     */
-    void removeByLogin(final String login);
 }

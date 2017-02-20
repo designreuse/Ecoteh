@@ -189,7 +189,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company mainCompany = this.companyService.getMainCompany();
         modelAndView.addObject("company", mainCompany);
-        modelAndView.addObject("map", mainCompany.getGoogleMaps());
+        /*if (mainCompany.getAddress() != null) {
+            modelAndView.addObject("map", mainCompany.getAddress().getGoogleMaps());
+        }*/
         modelAndView.setViewName("client/company/contacts_page");
         return modelAndView;
     }
@@ -313,7 +315,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company company = this.companyService.getByUrl(url, isValidContent());
         modelAndView.addObject("company", company);
-        modelAndView.addObject("map", company.getGoogleMaps());
+        /*if (company.getAddress() != null) {
+            modelAndView.addObject("map", company.getAddress().getGoogleMaps());
+        }*/
         modelAndView.setViewName("client/company/one_page");
         return modelAndView;
     }

@@ -114,20 +114,7 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
     /**
      * Initializes, saves and returns a new user.
      *
-     * @param name        a name of the new user.
-     * @param login       a login of the new user.
-     * @param password    a password of the new user.
-     * @param description a description of the new user.
-     * @param phone       a phone of the new user.
-     * @param email       a e-mail of the new user.
-     * @param vkontakte   a vkontakte url of the new user.
-     * @param facebook    a facebook url of the new user.
-     * @param twitter     a twitter url of the new user.
-     * @param skype       a skype username of the new user.
-     * @param photoUrl    a photo Url to the new user.
-     * @param isValid     a validated of the new user.
-     * @param isMailing   a permit to send a letters on the user email.
-     * @param isLocked    locked the user or not.
+     * @param user
      * @return The new saving user.
      * @see User
      * @see File
@@ -135,33 +122,10 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
      */
     @Override
     @Transactional
-    public User initAndAdd(
-            final String name,
-            final String login,
-            final String password,
-            final String description,
-            final String phone,
-            final String email,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype,
-            final String photoUrl,
-            final boolean isValid,
-            final boolean isMailing,
-            final boolean isLocked
-    ) {
-        final User user = new User();
-        user.initialize(
-                name, login, password, email, phone,
-                vkontakte, facebook, twitter, skype,
-                description
-        );
-        user.setPhotoUrl(photoUrl);
-        user.setRole(UserRole.ADMIN);
-        user.setValidated(isValid);
-        user.setMailing(isMailing);
-        user.setLocked(isLocked);
+    public User initAndAdd(final User user) {
+        if (user != null) {
+            user.setRole(UserRole.ADMIN);
+        }
         return add(user);
     }
 
@@ -169,21 +133,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
      * Initializes, updates and returns user with parameter id.
      * Return {@code null} if id is {@code null}.
      *
-     * @param url         a url of the user to update.
-     * @param name        a new name to the user.
-     * @param login       a new login to the user.
-     * @param password    a new password to the user.
-     * @param description a new description to the user.
-     * @param phone       a new phone to the user.
-     * @param email       a new e-mail to the user.
-     * @param vkontakte   a new vkontakte url to the user.
-     * @param facebook    a new facebook url to the user.
-     * @param twitter     a new twitter url to the user.
-     * @param skype       a new skype username to the user.
-     * @param photoUrl    a new photo URL to the user.
-     * @param isValid     a validated of the user.
-     * @param isMailing   a permit to send a letters on the user email.
-     * @param isLocked    locked the user or not.
+     * @param url  a url of the user to update.
+     * @param user
      * @return The updating user with parameter id or {@code null}.
      * @see User
      * @see UserRole
@@ -192,32 +143,12 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
     @Transactional
     public User initAndUpdate(
             final String url,
-            final String name,
-            final String login,
-            final String password,
-            final String description,
-            final String phone,
-            final String email,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype,
-            final String photoUrl,
-            final boolean isValid,
-            final boolean isMailing,
-            final boolean isLocked
+            final User user
     ) {
-        final User user = getByUrl(url);
-        user.initialize(
-                name, login, password, email, phone,
-                vkontakte, facebook, twitter, skype,
-                description
+        return update(
+                getByUrl(url)
+                        .initialize(user)
         );
-        user.setPhotoUrl(photoUrl);
-        user.setValidated(isValid);
-        user.setMailing(isMailing);
-        user.setLocked(isLocked);
-        return update(user);
     }
 
     /**
@@ -292,29 +223,6 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
     }
 
     /**
-     * Returns user with the parameter phone.
-     * Returns {@code null} in phone is blank.
-     *
-     * @param phone a phone of the user to return.
-     * @return The user with the parameter phone or {@code null}.
-     * @throws IllegalArgumentException Throw exception when parameter phone is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
-     * @see User
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public User getByPhone(final String phone) throws NullPointerException {
-        if (isBlank(phone)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " phone is blank!");
-        }
-        final User user = this.dao.getByPhone(phone);
-        if (user == null) {
-            throw new NullPointerException("Can`t find user by phone \"" + phone + "\"!");
-        }
-        return user;
-    }
-
-    /**
      * Returns user with the parameter e-mail.
      * Returns {@code null} in e-mail is blank.
      *
@@ -330,11 +238,15 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
         if (isBlank(email)) {
             throw new IllegalArgumentException("Input E-mail is blank!");
         }
-        final User user = this.dao.getByEmail(email);
-        if (user == null) {
-            throw new NullPointerException("Can`t find user by email \"" + email + "\"!");
+        User userWithEmail = null;
+        for (User user : getAll()) {
+            if ((user.getContacts() != null) && (user.getContacts().getEmail() != null)) {
+                if (user.getContacts().getEmail().equalsIgnoreCase(email)) {
+                    userWithEmail = user;
+                }
+            }
         }
-        return user;
+        return userWithEmail;
     }
 
     /**
@@ -399,21 +311,6 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
     public void removeByUrl(final String url) {
         if (isNotBlank(url)) {
             this.dao.removeByUrl(url);
-        }
-    }
-
-    /**
-     * Removes user with the parameter login.
-     * Removes user if login is not blank.
-     *
-     * @param login a login of the user to remove.
-     * @see User
-     */
-    @Override
-    @Transactional
-    public void removeByLogin(final String login) {
-        if (isNotBlank(login)) {
-            this.dao.removeByLogin(login);
         }
     }
 

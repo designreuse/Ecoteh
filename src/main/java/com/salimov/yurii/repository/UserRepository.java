@@ -44,26 +44,6 @@ public interface UserRepository extends DataRepository<User, Long> {
     User findByUrl(final String url);
 
     /**
-     * Returns user from a database,
-     * which matches the parameter phone.
-     *
-     * @param phone a phone of the user to return.
-     * @return The object of class {@link User}.
-     * @see User
-     */
-    User findByPhone(final String phone);
-
-    /**
-     * Returns user from a database,
-     * which matches the parameter email.
-     *
-     * @param email a email of the user to return.
-     * @return The object of class {@link User}.
-     * @see User
-     */
-    User findByEmail(final String email);
-
-    /**
      * Removes user from a database,
      * which matches the parameter name.
      *
@@ -71,15 +51,6 @@ public interface UserRepository extends DataRepository<User, Long> {
      * @see User
      */
     void deleteByName(final String name);
-
-    /**
-     * Removes user from a database,
-     * which matches the parameter login.
-     *
-     * @param login a login of the user to remove.
-     * @see User
-     */
-    void deleteByEncryptedLogin(final String login);
 
     /**
      * Removes user from a database,

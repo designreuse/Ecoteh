@@ -1,5 +1,8 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.Address;
+import com.salimov.yurii.entity.Company;
+import com.salimov.yurii.entity.Contacts;
 import com.salimov.yurii.enums.CompanyType;
 
 import java.util.Collection;
@@ -16,96 +19,6 @@ import java.util.List;
  * @see com.salimov.yurii.entity.Company
  */
 public interface ICompany<T extends Number> extends IContent<T> {
-
-    /**
-     * Initializes some parameter of the company.
-     *
-     * @param title         a new title to the company.
-     * @param domain        a new domain to the company.
-     * @param tagline       a new tagline to the company.
-     * @param description   a new description to the company.
-     * @param information   a new information to the company.
-     * @param mobilePhone   a new mobile phone to the company.
-     * @param landlinePhone a new landline phone to the company.
-     * @param fax           a new fax to the company.
-     * @param email         a new e-mail to the company.
-     * @param senderEmail   a new sender e-mail to the company.
-     * @param senderPass    a new sender pass  to the company.
-     * @param vkontakte     a new vkontakte url to the company.
-     * @param facebook      a new facebook url to the company.
-     * @param twitter       a new twitter url to the company.
-     * @param skype         a new skype username to the company.
-     * @param address       a new address to the company.
-     * @param keywords      a new keywords to the company.
-     * @param googleMaps    a new google maps url to the company.
-     * @param logoUrl       a new logo URL to the company.
-     * @param faviconUrl    a new favicon URL to the company.
-     */
-    void initialize(
-            final String title,
-            final String domain,
-            final String tagline,
-            final String description,
-            final String information,
-            final String mobilePhone,
-            final String landlinePhone,
-            final String fax,
-            final String email,
-            final String senderEmail,
-            final String senderPass,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype,
-            final String address,
-            final String keywords,
-            final String googleMaps,
-            final String logoUrl,
-            final String faviconUrl
-    );
-
-    /**
-     * Initializes some parameter of the company.
-     *
-     * @param title         a new title to the company.
-     * @param domain        a new domain to the company.
-     * @param tagline       a new tagline to the company.
-     * @param description   a new description to the company.
-     * @param information   a new information to the company.
-     * @param mobilePhone   a new mobile phone to the company.
-     * @param landlinePhone a new landline phone to the company.
-     * @param fax           a new fax to the company.
-     * @param email         a new e-mail to the company.
-     * @param senderEmail   a new sender e-mail to the company.
-     * @param senderPass    a new sender pass  to the company.
-     * @param vkontakte     a new vkontakte url to the company.
-     * @param facebook      a new facebook url to the company.
-     * @param twitter       a new twitter url to the company.
-     * @param skype         a new skype username to the company.
-     * @param address       a new address to the company.
-     * @param keywords      a new keywords to the company.
-     * @param googleMaps    a new google maps url to the company.
-     */
-    void initialize(
-            final String title,
-            final String domain,
-            final String tagline,
-            final String description,
-            final String information,
-            final String mobilePhone,
-            final String landlinePhone,
-            final String fax,
-            final String email,
-            final String senderEmail,
-            final String senderPass,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype,
-            final String address,
-            final String keywords,
-            final String googleMaps
-    );
 
     /**
      * Returns a domain of the company.
@@ -150,20 +63,6 @@ public interface ICompany<T extends Number> extends IContent<T> {
     void setInformation(final String information);
 
     /**
-     * Returns a e-mail of the company.
-     *
-     * @return The company e-mail.
-     */
-    String getEmail();
-
-    /**
-     * Sets a new e-mail to the company.
-     *
-     * @param email a new e-mail to the company.
-     */
-    void setEmail(final String email);
-
-    /**
      * Returns a sender e-mail of the company.
      *
      * @return The company sender e-mail.
@@ -190,118 +89,6 @@ public interface ICompany<T extends Number> extends IContent<T> {
      * @param senderPass a new sender password to the company.
      */
     void setSenderPass(final String senderPass);
-
-    /**
-     * Returns a mobile phone of the company.
-     *
-     * @return The company mobile phone.
-     */
-    String getMobilePhone();
-
-    /**
-     * Sets a new mobile phone to the company.
-     *
-     * @param mobilePhone a new mobile phone to the company.
-     */
-    void setMobilePhone(final String mobilePhone);
-
-    /**
-     * Returns a landline phone of the company.
-     *
-     * @return The company landline phone.
-     */
-    String getLandlinePhone();
-
-    /**
-     * Sets a new landline phone to the company.
-     *
-     * @param landlinePhone a new landline phone to the company.
-     */
-    void setLandlinePhone(final String landlinePhone);
-
-    /**
-     * Returns a fax of the company.
-     *
-     * @return The company fax.
-     */
-    String getFax();
-
-    /**
-     * Sets a new fax to the company.
-     *
-     * @param fax a new fax to the company.
-     */
-    void setFax(final String fax);
-
-    /**
-     * Returns a vkontakte url of the company.
-     *
-     * @return The company vkontakte url.
-     */
-    String getVkontakte();
-
-    /**
-     * Sets a new vkontakte url to the company.
-     *
-     * @param vkontakte a new vkontakte url to the company.
-     */
-    void setVkontakte(final String vkontakte);
-
-    /**
-     * Returns a facebook url of the company.
-     *
-     * @return The company facebook url.
-     */
-    String getFacebook();
-
-    /**
-     * Sets a new facebook url to the company.
-     *
-     * @param facebook a new facebook url to the company.
-     */
-    void setFacebook(final String facebook);
-
-    /**
-     * Returns a twitter url of the company.
-     *
-     * @return The company twitter url.
-     */
-    String getTwitter();
-
-    /**
-     * Sets a new twitter url to the company.
-     *
-     * @param twitter a new twitter url to the company.
-     */
-    void setTwitter(final String twitter);
-
-    /**
-     * Returns a skype username of the company.
-     *
-     * @return The company skype username.
-     */
-    String getSkype();
-
-    /**
-     * Sets a new skype username to the company.
-     *
-     * @param skype a new skype username to the company.
-     */
-    void setSkype(final String skype);
-
-    /**
-     * Returns a address of the company.
-     *
-     * @return The company address.
-     */
-    String getAddress();
-
-    /**
-     * Sets a new address to the company.
-     *
-     * @param address a new address to the company.
-     */
-    void setAddress(final String address);
 
     /**
      * Returns a start work time of the company.
@@ -332,18 +119,24 @@ public interface ICompany<T extends Number> extends IContent<T> {
     void setWorkTimeTo(final String workTimeTo);
 
     /**
-     * Returns a google maps url of the company.
-     *
-     * @return The company google maps url.
+     * @return
      */
-    String getGoogleMaps();
+    Contacts getContacts();
 
     /**
-     * Sets a new google maps url to the company.
-     *
-     * @param googleMaps a new google maps url to the company.
+     * @param contacts
      */
-    void setGoogleMaps(final String googleMaps);
+    void setContacts(final Contacts contacts);
+
+    /**
+     * @return
+     */
+    Address getAddress();
+
+    /**
+     * @param address
+     */
+    void setAddress(final Address address);
 
     /**
      * Returns a logo URL of the company.
@@ -414,7 +207,6 @@ public interface ICompany<T extends Number> extends IContent<T> {
 
     /**
      * Clears the list of slides.
-     *
      */
     void clearSlides();
 
@@ -480,4 +272,10 @@ public interface ICompany<T extends Number> extends IContent<T> {
      * otherwise returns {@code false}.
      */
     boolean isOpen();
+
+    /**
+     * @param company
+     * @return
+     */
+    Company initialize(final Company company);
 }

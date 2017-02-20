@@ -255,4 +255,19 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     public void setKeywords(final String keywords) {
         this.keywords = isNotBlank(keywords) ? keywords : null;
     }
+
+    /**
+     *
+     * @param content
+     * @return
+     */
+    public Content<E> initialize(final Content<E> content) {
+        if (content != null) {
+            super.initialize(content);
+            this.setTitle(content.getTitle());
+            this.setUrl(content.getUrl());
+            this.setDescription(content.getDescription());
+        }
+        return this;
+    }
 }
