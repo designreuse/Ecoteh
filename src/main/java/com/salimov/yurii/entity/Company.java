@@ -42,10 +42,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
     /**
      * The information of a company.
      */
-    @Column(
-            name = "information",
-            nullable = false
-    )
+    @Column(name = "information", nullable = false)
     private String information;
 
     /**

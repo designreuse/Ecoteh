@@ -34,20 +34,13 @@ public final class File extends Model<Long> implements IFile<Long> {
     /**
      * The title of the media.
      */
-    @Column(
-            name = "title",
-            nullable = false
-    )
+    @Column(name = "title", nullable = false)
     private String title;
 
     /**
      * The url of the media.
      */
-    @Column(
-            name = "url",
-            nullable = false,
-            unique = true
-    )
+    @Column(name = "url", nullable = false, unique = true)
     private String url;
 
     /**

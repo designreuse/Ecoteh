@@ -35,28 +35,19 @@ public final class Response extends Model<Long> implements IResponse<Long> {
     /**
      * The username of a response.
      */
-    @Column(
-            name = "username",
-            nullable = false
-    )
+    @Column(name = "username", nullable = false)
     private String username;
 
     /**
      * The username of a response.
      */
-    @Column(
-            name = "text",
-            nullable = false
-    )
+    @Column(name = "text", nullable = false)
     private String text;
 
     /**
      * The date of a response.
      */
-    @Column(
-            name = "date",
-            nullable = false
-    )
+    @Column(name = "date", nullable = false)
     private Date date;
 
     /**

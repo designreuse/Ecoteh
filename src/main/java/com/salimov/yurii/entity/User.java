@@ -40,57 +40,37 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     /**
      * The name of a user.
      */
-    @Column(
-            name = "name",
-            nullable = false,
-            unique = true
-    )
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     /**
      * The url of a user.
      */
-    @Column(
-            name = "url",
-            nullable = false,
-            unique = true
-    )
+    @Column(name = "url", nullable = false, unique = true)
     private String url;
 
     /**
      * The login of a user.
      */
-    @Column(
-            name = "login",
-            unique = true
-    )
+    @Column(name = "login", unique = true)
     private String encryptedLogin;
 
     /**
      * The password of a user.
      */
-    @Column(
-            name = "password",
-            unique = true
-    )
+    @Column(name = "password", unique = true)
     private String encryptedPassword;
 
     /**
      * The e-mail of a user.
      */
-    @Column(
-            name = "email",
-            nullable = false
-    )
+    @Column(name = "email", nullable = false)
     private String email;
 
     /**
      * The phone of a user.
      */
-    @Column(
-            name = "phone",
-            nullable = false
-    )
+    @Column(name = "phone", nullable = false)
     private String phone;
 
     /**
@@ -314,11 +294,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final List<GrantedAuthority> roles = new ArrayList<>(1);
-        roles.add(
-                new SimpleGrantedAuthority(
-                        "ROLE_" + this.role.name()
-                )
-        );
+        roles.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
         return roles;
     }
 
@@ -454,9 +430,9 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setLogin(final String login) {
-        final String encryptedLogin = isNotBlank(login) ?
-                new Encryptor(login).encrypt() : null;
-        setEncryptedLogin(encryptedLogin);
+        setEncryptedLogin(
+                isNotBlank(login) ? new Encryptor(login).encrypt() : null
+        );
     }
 
     /**

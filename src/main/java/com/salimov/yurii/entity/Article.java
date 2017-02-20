@@ -34,11 +34,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     /**
      * The number of an article.
      */
-    @Column(
-            name = "number",
-            nullable = false,
-            unique = true
-    )
+    @Column(name = "number", nullable = false, unique = true)
     private String number;
 
     /**
@@ -50,10 +46,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     /**
      * The date of an article.
      */
-    @Column(
-            name = "date",
-            nullable = false
-    )
+    @Column(name = "date", nullable = false)
     private Date date;
 
     /**
@@ -126,15 +119,8 @@ public final class Article extends Content<Long> implements IArticle<Long> {
         boolean result = super.equals(object);
         if (result) {
             final Article other = (Article) object;
-            result = (
-                    isNotBlank(this.number) ?
-                            this.number.equalsIgnoreCase(other.number) :
-                            isBlank(other.number)
-            ) && (
-                    isNotBlank(this.text) ?
-                            this.text.equalsIgnoreCase(other.text) :
-                            isBlank(other.text)
-            );
+            result = (isNotBlank(this.number) ? this.number.equalsIgnoreCase(other.number) : isBlank(other.number))
+                    && (isNotBlank(this.text) ? this.text.equalsIgnoreCase(other.text) : isBlank(other.text));
         }
         return result;
     }
@@ -148,9 +134,9 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public int hashCode() {
-        return super.hashCode()
-                + (isNotBlank(this.number) ? this.number.hashCode() : 0)
-                + (isNotBlank(this.text) ? this.text.hashCode() : 0);
+        return super.hashCode() +
+                (isNotBlank(this.number) ? this.number.hashCode() : 0) +
+                (isNotBlank(this.text) ? this.text.hashCode() : 0);
     }
 
     /**
