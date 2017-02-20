@@ -85,122 +85,239 @@
                                               rows="3"><c:out value="${user.description}"/></textarea>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <span class="red">*</span>
-                                        <c:choose>
-                                            <c:when test="${user.phone ne null}">
-                                                <a href="tel:<c:out value="${user.phone}"/>"
-                                                   title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
-                                                    Телефон
-                                                </a>
-                                            </c:when>
-                                            <c:otherwise>Телефон</c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="text" class="phone form-control" name="phone" required
-                                               maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${user.phone}"/>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <span class="red">*</span>
-                                        <c:choose>
-                                            <c:when test="${user.email ne null}">
-                                                <a href="mailto:<c:out value="${user.email}"/>" target="_blank"
-                                                   title="Написать письмо для &quot;<c:out value="${user.name}"/>&quot;">
-                                                    Электронная почта
-                                                </a>
-                                            </c:when>
-                                            <c:otherwise>Электронная почта</c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="email" class="form-control" name="email" maxlength="100" required
-                                               placeholder="name@mail.com" value="<c:out value="${user.email}"/>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <c:choose>
-                                            <c:when test="${user.vkontakte ne null}">
-                                                <a href="<c:out value="${user.vkontakte}"/>"
-                                                   title="Профиль &quot;<c:out value="${user.name}"/>&quot; в ВКонтакте"
-                                                   target="_blank">Vkontakte</a>
-                                            </c:when>
-                                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${user.contacts ne null}">
+                                        <tr>
+                                            <td class="ths">
+                                                <span class="red">*</span>
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.mobilePhone ne null}">
+                                                        <a href="tel:<c:out value="${user.contacts.mobilePhone}"/>"
+                                                           title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
+                                                            Мобильный телефон
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>Мобильный телефон</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="phone form-control" name="mobile_phone"
+                                                       required
+                                                       maxlength="20" placeholder="+38 (000) 00-00-000"
+                                                       value="<c:out value="${user.contacts.mobilePhone}"/>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.landlinePhone ne null}">
+                                                        <a href="tel:<c:out value="${user.contacts.landlinePhone}"/>"
+                                                           title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
+                                                            Домашний телефон
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>Домашний телефон</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="phone form-control" name="landline_phone"
+                                                       maxlength="20" placeholder="+38 (000) 00-00-000"
+                                                       value="<c:out value="${user.contacts.landlinePhone}"/>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.fax ne null}">
+                                                        <a href="tel:<c:out value="${user.contacts.fax}"/>"
+                                                           title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
+                                                            Факс
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>Факс</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="phone form-control" name="fax"
+                                                       maxlength="20" placeholder="+38 (000) 00-00-000"
+                                                       value="<c:out value="${user.contacts.fax}"/>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <span class="red">*</span>
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.email ne null}">
+                                                        <a href="mailto:<c:out value="${user.contacts.email}"/>"
+                                                           target="_blank"
+                                                           title="Написать письмо для &quot;<c:out value="${user.name}"/>&quot;">
+                                                            Электронная почта
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>Электронная почта</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="email" class="form-control" name="email" maxlength="100"
+                                                       required placeholder="name@mail.com"
+                                                       value="<c:out value="${user.contacts.email}"/>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.vkontakte ne null}">
+                                                        <a href="<c:out value="${user.contacts.vkontakte}"/>"
+                                                           title="Профиль &quot;<c:out value="${user.name}"/>&quot; в ВКонтакте"
+                                                           target="_blank">Vkontakte</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="https://vk.com" target="_blank"
+                                                           title="Социальная сеть Vkontakte">Vkontakte</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="vkontakte" minlength="5"
+                                                       maxlength="200"
+                                                       value="<c:out value="${user.contacts.vkontakte}"/>"
+                                                       placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.facebook ne null}">
+                                                        <a href="<c:out value="${user.contacts.facebook}"/>"
+                                                           title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Facebook"
+                                                           target="_blank">Facebook</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="https://www.facebook.com" target="_blank"
+                                                           title="Социальная сеть Facebook">Facebook</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="facebook"
+                                                       minlength="5" maxlength="200"
+                                                       placeholder="Ссылка на групу или профиль в социальной сети Facebook"
+                                                       value="<c:out value="${user.contacts.facebook}"/>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.twitter ne null}">
+                                                        <a href="<c:out value="${user.contacts.twitter}"/>"
+                                                           title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Twitter"
+                                                           target="_blank">Twitter</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="https://twitter.com" target="_blank"
+                                                           title="Социальная сеть Twitter">Twitter</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="twitter" minlength="5"
+                                                       maxlength="200" placeholder="Ссылка в социальной сети Twitter"
+                                                       value="<c:out value="${user.contacts.twitter}"/>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <c:choose>
+                                                    <c:when test="${user.contacts.skype ne null}">
+                                                        <a href="skype:<c:out value="${user.contacts.skype}"/>?call"
+                                                           title="Позвонить &quot;<c:out value="${user.name}"/>&quot; в Skype">
+                                                            Skype
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>Skype</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="skype" minlength="5"
+                                                       maxlength="100" placeholder="Имя в месенджере Skype"
+                                                       value="<c:out value="${user.contacts.skype}"/>">
+                                            </td>
+                                        </tr>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr>
+                                            <td class="ths">
+                                                <span class="red">*</span>&nbsp;Мобильный телефон
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="phone form-control" name="mobile_phone"
+                                                       required maxlength="20" placeholder="+38 (000) 00-00-000">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">Домашний телефон</td>
+                                            <td class="tds">
+                                                <input type="text" class="phone form-control" name="landline_phone"
+                                                       maxlength="20" placeholder="+38 (000) 00-00-000">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">Факс</td>
+                                            <td class="tds">
+                                                <input type="text" class="phone form-control" name="fax"
+                                                       maxlength="20" placeholder="+38 (000) 00-00-000">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
+                                                <span class="red">*</span>&nbsp;Электронная почта
+                                            </td>
+                                            <td class="tds">
+                                                <input type="email" class="form-control" name="email" maxlength="100"
+                                                       required placeholder="name@mail.com">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
                                                 <a href="https://vk.com" target="_blank"
                                                    title="Социальная сеть Vkontakte">Vkontakte</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="text" class="form-control" name="vkontakte" minlength="5"
-                                               maxlength="200" value="<c:out value="${user.vkontakte}"/>"
-                                               placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <c:choose>
-                                            <c:when test="${user.facebook ne null}">
-                                                <a href="<c:out value="${user.facebook}"/>"
-                                                   title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Facebook"
-                                                   target="_blank">Facebook</a>
-                                            </c:when>
-                                            <c:otherwise>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="vkontakte" minlength="5"
+                                                       maxlength="200"
+                                                       placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
                                                 <a href="https://www.facebook.com" target="_blank"
                                                    title="Социальная сеть Facebook">Facebook</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="text" class="form-control" name="facebook"
-                                               minlength="5" maxlength="200"
-                                               placeholder="Ссылка на групу или профиль в социальной сети Facebook"
-                                               value="<c:out value="${user.facebook}"/>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <c:choose>
-                                            <c:when test="${user.twitter ne null}">
-                                                <a href="<c:out value="${user.twitter}"/>"
-                                                   title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Twitter"
-                                                   target="_blank">Twitter</a>
-                                            </c:when>
-                                            <c:otherwise>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="facebook"
+                                                       minlength="5" maxlength="200"
+                                                       placeholder="Ссылка на групу или профиль в социальной сети Facebook">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">
                                                 <a href="https://twitter.com" target="_blank"
                                                    title="Социальная сеть Twitter">Twitter</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="text" class="form-control" name="twitter" minlength="5"
-                                               maxlength="200" placeholder="Ссылка в социальной сети Twitter"
-                                               value="<c:out value="${user.twitter}"/>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">
-                                        <c:choose>
-                                            <c:when test="${user.skype ne null}">
-                                                <a href="skype:<c:out value="${user.skype}"/>?call"
-                                                   title="Позвонить &quot;<c:out value="${user.name}"/>&quot; в Skype">
-                                                    Skype
-                                                </a>
-                                            </c:when>
-                                            <c:otherwise>Skype</c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="tds">
-                                        <input type="text" class="form-control" name="skype" minlength="5"
-                                               maxlength="100" placeholder="Имя в месенджере Skype"
-                                               value="<c:out value="${user.skype}"/>">
-                                    </td>
-                                </tr>
+                                            </td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="twitter" minlength="5"
+                                                       maxlength="200" placeholder="Ссылка в социальной сети Twitter">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ths">Skype</td>
+                                            <td class="tds">
+                                                <input type="text" class="form-control" name="skype" minlength="5"
+                                                       maxlength="100" placeholder="Имя в месенджере Skype">
+                                            </td>
+                                        </tr>
+                                    </c:otherwise>
+                                </c:choose>
                                 <tr>
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">

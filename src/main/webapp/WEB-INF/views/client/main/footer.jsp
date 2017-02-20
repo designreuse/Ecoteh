@@ -16,59 +16,64 @@
                 <%-- Left --%>
                 <div class="hidden-xs col-sm-6 col-md-4 col-lg-4">
                     <div class="text-left">
-                        <p>
-                            <c:if test="${main_company.mobilePhone ne null}">
-                                <a href="tel:<c:out value="${main_company.mobilePhone}"/>" title="Мобильный телефон">
-                                    <span class="glyphicon glyphicon-phone"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.mobilePhone}"/>
-                                </a><br>
-                            </c:if>
-                            <c:if test="${main_company.fax ne null}">
-                                <a href="tel:<c:out value="${main_company.fax}"/>" title="Телефон / Факс">
-                                    <span class="glyphicon glyphicon-print"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.fax}"/>
-                                </a><br>
-                            </c:if>
-                            <c:if test="${main_company.email ne null}">
-                                <a href="mailto:<c:out value="${main_company.email}"/>"
-                                   title="Написать письмо" target="_blank">
-                                    <span class="glyphicon glyphicon-envelope"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.email}"/>
-                                </a>
-                            </c:if>
-                        </p>
+                        <c:if test="${main_company.contacts ne null}">
+                            <p>
+                                <c:if test="${main_company.contacts.mobilePhone ne null}">
+                                    <a href="tel:<c:out value="${main_company.contacts.mobilePhone}"/>"
+                                       title="Мобильный телефон">
+                                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                                        &nbsp;<c:out value="${main_company.contacts.mobilePhone}"/>
+                                    </a><br>
+                                </c:if>
+                                <c:if test="${main_company.contacts.fax ne null}">
+                                    <a href="tel:<c:out value="${main_company.contacts.fax}"/>" title="Телефон / Факс">
+                                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                                        &nbsp;<c:out value="${main_company.contacts.fax}"/>
+                                    </a><br>
+                                </c:if>
+                                <c:if test="${main_company.contacts.email ne null}">
+                                    <a href="mailto:<c:out value="${main_company.contacts.email}"/>"
+                                       title="Написать письмо" target="_blank">
+                                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                        &nbsp;<c:out value="${main_company.contacts.email}"/>
+                                    </a>
+                                </c:if>
+                            </p>
+                        </c:if>
                     </div>
                 </div>
                 <%-- Center --%>
                 <div class="hidden-xs hidden-sm col-md-4 col-lg-4">
                     <div class="text-center">
                         <div style="margin-top: 20px">
-                            <p>
-                                <c:if test="${main_company.vkontakte ne null}">
-                                    <a href="https://vk.com/<c:out value="${main_company.vkontakte}"/>"
-                                       title="Группа в ВКонтакте" target="_blank">
-                                        <span class="fa fa-vk fa-2x vk"></span>
-                                    </a>&nbsp;&nbsp;
-                                </c:if>
-                                <c:if test="${main_company.facebook ne null}">
-                                    <a href="https://www.facebook.com/<c:out value="${main_company.facebook}"/>"
-                                       title="Группа в Facebook" target="_blank">
-                                        <span class="fa fa-facebook-official fa-2x fb"></span>
-                                    </a>&nbsp;&nbsp;
-                                </c:if>
-                                <c:if test="${main_company.twitter ne null}">
-                                    <a href="https://twitter.com/<c:out value="${main_company.twitter}"/>"
-                                       title="Мы в Twitter" target="_blank">
-                                        <span class="fa fa-twitter fa-2x tw"></span>
-                                    </a>&nbsp;&nbsp;
-                                </c:if>
-                                <c:if test="${main_company.skype ne null}">
-                                    <a href="skype:<c:out value="${main_company.skype}"/>?call"
-                                       title="Позвонить в Skype">
-                                        <span class="fa fa-skype fa-2x sk"></span>
-                                    </a>
-                                </c:if>
-                            </p>
+                            <c:if test="${main_company.contacts ne null}">
+                                <p>
+                                    <c:if test="${main_company.contacts.vkontakte ne null}">
+                                        <a href="https://vk.com/<c:out value="${main_company.contacts.vkontakte}"/>"
+                                           title="Группа в ВКонтакте" target="_blank">
+                                            <span class="fa fa-vk fa-2x vk"></span>
+                                        </a>&nbsp;&nbsp;
+                                    </c:if>
+                                    <c:if test="${main_company.contacts.facebook ne null}">
+                                        <a href="https://www.facebook.com/<c:out value="${main_company.contacts.facebook}"/>"
+                                           title="Группа в Facebook" target="_blank">
+                                            <span class="fa fa-facebook-official fa-2x fb"></span>
+                                        </a>&nbsp;&nbsp;
+                                    </c:if>
+                                    <c:if test="${main_company.contacts.twitter ne null}">
+                                        <a href="https://twitter.com/<c:out value="${main_company.contacts.twitter}"/>"
+                                           title="Мы в Twitter" target="_blank">
+                                            <span class="fa fa-twitter fa-2x tw"></span>
+                                        </a>&nbsp;&nbsp;
+                                    </c:if>
+                                    <c:if test="${main_company.contacts.skype ne null}">
+                                        <a href="skype:<c:out value="${main_company.contacts.skype}"/>?call"
+                                           title="Позвонить в Skype">
+                                            <span class="fa fa-skype fa-2x sk"></span>
+                                        </a>
+                                    </c:if>
+                                </p>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -105,24 +110,27 @@
                     <div class="text-center">
                         <p class="copyright">
                             <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
-                            <c:if test="${main_company.mobilePhone ne null}">
-                                <a href="tel:<c:out value="${main_company.mobilePhone}"/>" title="Мобильный телефон">
-                                    <span class="glyphicon glyphicon-phone"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.mobilePhone}"/>
-                                </a><br>
-                            </c:if>
-                            <c:if test="${main_company.fax ne null}">
-                                <a href="tel:<c:out value="${main_company.fax}"/>" title="Телефон / Факс">
-                                    <span class="glyphicon glyphicon-print"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.fax}"/>
-                                </a><br>
-                            </c:if>
-                            <c:if test="${main_company.email ne null}">
-                                <a href="mailto:<c:out value="${main_company.email}"/>"
-                                   title="Написать письмо" target="_blank">
-                                    <span class="glyphicon glyphicon-envelope"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${main_company.email}"/>
-                                </a><br>
+                            <c:if test="${main_company.contacts ne null}">
+                                <c:if test="${main_company.contacts.mobilePhone ne null}">
+                                    <a href="tel:<c:out value="${main_company.contacts.mobilePhone}"/>"
+                                       title="Мобильный телефон">
+                                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                                        &nbsp;<c:out value="${main_company.contacts.mobilePhone}"/>
+                                    </a><br>
+                                </c:if>
+                                <c:if test="${main_company.contacts.fax ne null}">
+                                    <a href="tel:<c:out value="${main_company.contacts.fax}"/>" title="Телефон / Факс">
+                                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                                        &nbsp;<c:out value="${main_company.contacts.fax}"/>
+                                    </a><br>
+                                </c:if>
+                                <c:if test="${main_company.contacts.email ne null}">
+                                    <a href="mailto:<c:out value="${main_company.contacts.email}"/>"
+                                       title="Написать письмо" target="_blank">
+                                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                        &nbsp;<c:out value="${main_company.contacts.email}"/>
+                                    </a><br>
+                                </c:if>
                             </c:if>
                             <c:if test="${main_company.domain ne null}">
                                 <a href="http://<c:out value="${main_company.domain}"/>"

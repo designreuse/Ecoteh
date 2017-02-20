@@ -75,9 +75,25 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Телефон</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Мобильный телефон
+                                    </td>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="phone" required
+                                        <input type="text" class="phone form-control" name="mobile_phone"
+                                               required maxlength="20" placeholder="+38 (000) 00-00-000">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Домашний телефон</td>
+                                    <td class="tds">
+                                        <input type="text" class="phone form-control" name="landline_phone"
+                                               maxlength="20" placeholder="+38 (000) 00-00-000">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Факс</td>
+                                    <td class="tds">
+                                        <input type="text" class="phone form-control" name="fax"
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>

@@ -40,42 +40,63 @@
             <c:when test="${authorized_user.role ne null}"><c:out value="${authorized_user.role}"/></c:when>
         </c:choose>
     </h4>
-    <c:if test="${authorized_user.phone ne null}">
-        <h4>
-            <a href="tel:<c:out value="${authorized_user.phone}"/>" title="Позвонить на телефон">
-                <span class="glyphicon glyphicon-phone"
-                      aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.phone}"/>
+    <c:if test="${authorized_user.contacts ne null}">
+        <c:if test="${authorized_user.contacts.mobilePhone ne null}">
+            <h4>
+                <a href="tel:<c:out value="${authorized_user.contacts.mobilePhone}"/>"
+                   title="Позвонить на мобильный телефон">
+                    <span class="glyphicon glyphicon-phone"
+                          aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.contacts.mobilePhone}"/>
+                </a>
+            </h4>
+        </c:if>
+        <c:if test="${authorized_user.contacts.landlinePhone ne null}">
+            <h4>
+                <a href="tel:<c:out value="${authorized_user.contacts.landlinePhone}"/>"
+                   title="Позвонить на стационарный телефон">
+                    <span class="glyphicon glyphicon-phone-alt"
+                          aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.contacts.landlinePhone}"/>
+                </a>
+            </h4>
+        </c:if>
+        <c:if test="${authorized_user.contacts.fax ne null}">
+            <h4>
+                <a href="tel:<c:out value="${authorized_user.contacts.fax}"/>" title="Факс">
+                    <span class="glyphicon glyphicon-print"
+                          aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.contacts.fax}"/>
+                </a>
+            </h4>
+        </c:if>
+        <c:if test="${authorized_user.contacts.email ne null}">
+            <h4>
+                <a href="mailto:<c:out value="${authorized_user.contacts.email}"/>" target="_blank"
+                   title="Написать письмо для &quot;<c:out value="${authorized_user.name}"/>&quot;">
+                    <span class="glyphicon glyphicon-envelope"
+                          aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.contacts.email}"/>
+                </a>
+            </h4>
+        </c:if>
+        <c:if test="${authorized_user.contacts.vkontakte ne null}">
+            <a href="<c:out value="${authorized_user.contacts.vkontakte}"/>" title="Профиль в ВКонтакте"
+               target="_blank">
+                <span class="fa fa-vk fa-2x"></span>
+            </a>&nbsp;&nbsp;
+        </c:if>
+        <c:if test="${authorized_user.contacts.facebook ne null}">
+            <a href="<c:out value="${authorized_user.contacts.facebook}"/>" title="Профиль в Facebook" target="_blank">
+                <span class="fa fa-facebook-official fa-2x"></span>
+            </a>&nbsp;&nbsp;
+        </c:if>
+        <c:if test="${authorized_user.contacts.twitter ne null}">
+            <a href="<c:out value="${authorized_user.contacts.twitter}"/>" title="Профиль в Twitter" target="_blank">
+                <span class="fa fa-twitter fa-2x"></span>
+            </a>&nbsp;&nbsp;
+        </c:if>
+        <c:if test="${authorized_user.contacts.skype ne null}">
+            <a href="skype:<c:out value="${authorized_user.contacts.skype}"/>?call" title="Позвонить в Skype">
+                <span class="fa fa-skype fa-2x"></span>
             </a>
-        </h4>
-    </c:if>
-    <c:if test="${authorized_user.email ne null}">
-        <h4>
-            <a href="mailto:<c:out value="${authorized_user.email}"/>" target="_blank"
-               title="Написать письмо для &quot;<c:out value="${authorized_user.name}"/>&quot;">
-                <span class="glyphicon glyphicon-envelope"
-                      aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.email}"/>
-            </a>
-        </h4>
-    </c:if>
-    <c:if test="${authorized_user.vkontakte ne null}">
-        <a href="<c:out value="${authorized_user.vkontakte}"/>" title="Профиль в ВКонтакте" target="_blank">
-            <span class="fa fa-vk fa-2x"></span>
-        </a>&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${authorized_user.facebook ne null}">
-        <a href="<c:out value="${authorized_user.facebook}"/>" title="Профиль в Facebook" target="_blank">
-            <span class="fa fa-facebook-official fa-2x"></span>
-        </a>&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${authorized_user.twitter ne null}">
-        <a href="<c:out value="${authorized_user.twitter}"/>" title="Профиль в Twitter" target="_blank">
-            <span class="fa fa-twitter fa-2x"></span>
-        </a>&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${authorized_user.skype ne null}">
-        <a href="skype:<c:out value="${authorized_user.skype}"/>?call" title="Позвонить в Skype">
-            <span class="fa fa-skype fa-2x"></span>
-        </a>
+        </c:if>
     </c:if>
     <c:if test="${authorized_user.id ne null}">
         <div class="pad">

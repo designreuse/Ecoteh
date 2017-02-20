@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-xs-12 col-sm-12 <c:choose>
-            <c:when test="${company.googleMaps ne null}">col-md-4 col-lg-4</c:when>
+            <c:when test="${(company.address ne null) and (company.address.googleMaps ne null)}">col-md-4 col-lg-4</c:when>
             <c:otherwise>col-md-12 col-lg-12</c:otherwise>
         </c:choose>">
     <div class="text-contact">
@@ -46,70 +46,76 @@
         </div>
         <c:if test="${company.address ne null}">
             <div class="text-center">
-                <br><span class="glyphicon glyphicon-map-marker"
-                          aria-hidden="true"></span>&nbsp;&nbsp;<c:out value="${company.address}"/><br><br>
+                <br><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                &nbsp;<c:out value="${company.address.address}"/><br><br>
             </div>
         </c:if>
-        <c:if test="${company.mobilePhone ne null}">
-            <div class="text-center">
-                <a href="tel:<c:out value="${company.landlinePhone}"/>"
-                   title="Позвонить на мобильный телефон &quot;${company.title}&quot;">
+        <c:if test="${company.contacts ne null}">
+            <c:if test="${company.contacts.mobilePhone ne null}">
+                <div class="text-center">
+                    <a href="tel:<c:out value="${company.contacts.mobilePhone}"/>"
+                       title="Позвонить на мобильный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone"
-                          aria-hidden="true"></span>&nbsp;&nbsp;<b><c:out value="${company.mobilePhone}"/></b>
-                </a><br>
-            </div>
-        </c:if>
-        <c:if test="${company.landlinePhone ne null}">
-            <div class="text-center">
-                <a href="tel:<c:out value="${company.landlinePhone}"/>"
-                   title="Позвонить на стационарный телефон &quot;${company.title}&quot;">
+                          aria-hidden="true"></span>&nbsp;&nbsp;<b><c:out value="${company.contacts.mobilePhone}"/></b>
+                    </a><br>
+                </div>
+            </c:if>
+            <c:if test="${company.contacts.landlinePhone ne null}">
+                <div class="text-center">
+                    <a href="tel:<c:out value="${company.contacts.landlinePhone}"/>"
+                       title="Позвонить на стационарный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone-alt"
-                          aria-hidden="true"></span>&nbsp;&nbsp;<c:out value="${company.landlinePhone}"/>
-                </a><br>
-            </div>
-        </c:if>
-        <c:if test="${company.fax ne null}">
-            <div class="text-center">
-                <a href="tel:<c:out value="${company.fax}"/>" title="Факс &quot;${company.title}&quot;">
+                          aria-hidden="true"></span>&nbsp;&nbsp;<c:out value="${company.contacts.landlinePhone}"/>
+                    </a><br>
+                </div>
+            </c:if>
+            <c:if test="${company.contacts.fax ne null}">
+                <div class="text-center">
+                    <a href="tel:<c:out value="${company.contacts.fax}"/>" title="Факс &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-print"
-                          aria-hidden="true"></span>&nbsp;&nbsp;<c:out value="${company.fax}"/>
-                </a><br>
-            </div>
-        </c:if>
-        <c:if test="${company.email ne null}">
-            <div class="text-center">
-                <br>
-                <a href="mailto:<c:out value="${company.email}"/>" title="Написать письмо &quot;${company.title}&quot;"
-                   target="_blank">
-                    <span class="glyphicon glyphicon-envelope"
-                          aria-hidden="true"></span>&nbsp;&nbsp;<c:out value="${company.email}"/>
-                </a><br>
-            </div>
-        </c:if>
-        <c:if test="${(company.vkontakte ne null) or (company.facebook ne null) or
-                             (company.twitter ne null) or (company.skype ne null)}">
-            <div class="text-center">
-                <br>В социальных сетях:<br>
-                <c:if test="${company.vkontakte ne null}">
-                    <a href="<c:out value="${company.vkontakte}"/>" title="Группа &quot;${company.title}&quot; в ВКонтакте"
-                       target="_blank"><span class="fa fa-vk fa-2x"></span></a>&nbsp;&nbsp;
-                </c:if>
-                <c:if test="${company.facebook ne null}">
-                    <a href="<c:out value="${company.facebook}"/>" title="Группа &quot;${company.title}&quot; в Facebook"
-                       target="_blank"><span class="fa fa-facebook-official fa-2x"></span></a>&nbsp;&nbsp;
-                </c:if>
-                <c:if test="${company.twitter ne null}">
-                    <a href="<c:out value="${company.twitter}"/>" title="&quot;${company.title}&quot; в Twitter"
-                       target="_blank"><span class="fa fa-twitter fa-2x"></span></a>&nbsp;&nbsp;
-                </c:if>
-                <c:if test="${company.skype ne null}">
-                    <a href="skype:<c:out value="${company.skype}"/>?call"
-                       title="Позвонить &quot;${company.title}&quot; в Skype">
-                        <span class="fa fa-skype fa-2x"></span>
-                    </a>
-                </c:if>
-                <br>
-            </div>
+                          aria-hidden="true"></span>&nbsp;&nbsp;<c:out value="${company.contacts.fax}"/>
+                    </a><br>
+                </div>
+            </c:if>
+            <c:if test="${company.contacts.email ne null}">
+                <div class="text-center">
+                    <br>
+                    <a href="mailto:<c:out value="${company.contacts.email}"/>"
+                       title="Написать письмо &quot;${company.title}&quot;" target="_blank">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        &nbsp;<c:out value="${company.contacts.email}"/>
+                    </a><br>
+                </div>
+            </c:if>
+            <c:if test="${(company.contacts.vkontakte ne null) or (company.contacts.facebook ne null) or
+                             (company.contacts.twitter ne null) or (company.contacts.skype ne null)}">
+                <div class="text-center">
+                    <br>В социальных сетях:<br>
+                    <c:if test="${company.contacts.vkontakte ne null}">
+                        <a href="<c:out value="${company.contacts.vkontakte}"/>"
+                           title="Группа &quot;${company.title}&quot; в ВКонтакте"
+                           target="_blank"><span class="fa fa-vk fa-2x"></span></a>&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${company.contacts.facebook ne null}">
+                        <a href="<c:out value="${company.contacts.facebook}"/>"
+                           title="Группа &quot;${company.title}&quot; в Facebook"
+                           target="_blank"><span class="fa fa-facebook-official fa-2x"></span></a>&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${company.contacts.twitter ne null}">
+                        <a href="<c:out value="${company.contacts.twitter}"/>"
+                           title="&quot;${company.title}&quot; в Twitter" target="_blank">
+                            <span class="fa fa-twitter fa-2x"></span>
+                        </a>&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${company.contacts.skype ne null}">
+                        <a href="skype:<c:out value="${company.contacts.skype}"/>?call"
+                           title="Позвонить &quot;${company.title}&quot; в Skype">
+                            <span class="fa fa-skype fa-2x"></span>
+                        </a>
+                    </c:if>
+                    <br>
+                </div>
+            </c:if>
         </c:if>
         <br>
     </div>
