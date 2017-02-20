@@ -9,7 +9,7 @@ package com.salimov.yurii.entity.interfaces;
  * @version 1.0
  * @see com.salimov.yurii.entity.File
  */
-public interface IFile<E extends Number> extends IModel<E> {
+public interface IFile<T extends Number> extends IModel<T> {
 
     /**
      * Initializes some parameter of the media.

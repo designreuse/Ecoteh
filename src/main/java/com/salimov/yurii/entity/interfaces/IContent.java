@@ -10,7 +10,7 @@ package com.salimov.yurii.entity.interfaces;
  * @see IModel
  * @see com.salimov.yurii.entity.Content
  */
-public interface IContent<E extends Number> extends IModel<E> {
+public interface IContent<T extends Number> extends IModel<T> {
 
     /**
      * Initializes some parameter of the content.

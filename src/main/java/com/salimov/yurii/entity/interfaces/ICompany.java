@@ -15,7 +15,7 @@ import java.util.List;
  * @see IContent
  * @see com.salimov.yurii.entity.Company
  */
-public interface ICompany<E extends Number> extends IContent<E> {
+public interface ICompany<T extends Number> extends IContent<T> {
 
     /**
      * Initializes some parameter of the company.

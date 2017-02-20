@@ -14,7 +14,7 @@ import java.util.Date;
  * @see IContent
  * @see Article
  */
-public interface IArticle<E extends Number> extends IContent<E> {
+public interface IArticle<T extends Number> extends IContent<T> {
 
     /**
      * Initializes some parameter of the article.

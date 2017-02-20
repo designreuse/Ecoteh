@@ -12,7 +12,7 @@ import java.util.Date;
  * @see com.salimov.yurii.entity.Message
  * @see IModel
  */
-public interface IMessage<E extends Number> extends IModel<E> {
+public interface IMessage<T extends Number> extends IModel<T> {
 
     /**
      * Initializes some parameter of the article.

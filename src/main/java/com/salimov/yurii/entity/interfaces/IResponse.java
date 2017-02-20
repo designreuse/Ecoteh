@@ -12,7 +12,7 @@ import java.util.Date;
  * @see com.salimov.yurii.entity.Response
  * @see IModel
  */
-public interface IResponse<E extends Number> extends IModel<E> {
+public interface IResponse<T extends Number> extends IModel<T> {
 
     /**
      * Initializes some parameter of the response.
