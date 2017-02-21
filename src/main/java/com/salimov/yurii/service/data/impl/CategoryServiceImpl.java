@@ -71,7 +71,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * Initializes, updates and returns category with parameter url.
      *
      * @param url      a url of the category to update.
-     * @param category
+     * @param category a category to update.
      * @return The updating category with parameter id.
      * @see Category
      * @see File

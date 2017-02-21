@@ -376,7 +376,9 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * @return
+     * Returns a company contacts.
+     *
+     * @return The company contacts.
      */
     @Override
     public Contacts getContacts() {
@@ -384,15 +386,19 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * @param contacts
+     * Sets a new contacts to the company.
+     *
+     * @param contacts a new contacts to the company.
      */
     @Override
     public void setContacts(final Contacts contacts) {
-        this.contacts = contacts;
+        this.contacts.initialize(contacts);
     }
 
     /**
-     * @return
+     * Returns a company address.
+     *
+     * @return The company address.
      */
     @Override
     public Address getAddress() {
@@ -400,7 +406,9 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * @param address
+     * Sets a new address to the company.
+     *
+     * @param address a new address to the company.
      */
     @Override
     public void setAddress(final Address address) {
@@ -640,8 +648,10 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * @param company
-     * @return
+     * Initializes the company.
+     *
+     * @param company a company to copy.
+     * @return The this company with new fields.
      */
     @Override
     public Company initialize(final Company company) {
@@ -657,7 +667,7 @@ public final class Company extends Content implements ICompany {
             this.setFaviconUrl(company.getFaviconUrl());
             this.setSlides(company.getSlides());
             this.setType(company.getType());
-            this.getContacts().initialize(company.getContacts());
+            this.setContacts(company.getContacts());
             this.setAddress(company.getAddress());
         }
         return this;

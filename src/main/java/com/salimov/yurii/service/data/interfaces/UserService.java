@@ -21,8 +21,8 @@ public interface UserService extends DataService<User>, UserDetailsService {
     /**
      * Initializes, updates and returns user with parameter id.
      *
-     * @param url         a url of the user to update.
-     * @param user
+     * @param url  a url of the user to update.
+     * @param user a user to update.
      * @return The updating user with parameter id.
      * @see User
      */

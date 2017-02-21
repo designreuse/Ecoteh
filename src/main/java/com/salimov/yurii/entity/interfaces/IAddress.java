@@ -3,8 +3,13 @@ package com.salimov.yurii.entity.interfaces;
 import com.salimov.yurii.entity.Address;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of the {@link Address} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see IModel
+ * @see Address
  */
 public interface IAddress extends IModel {
 
@@ -37,8 +42,10 @@ public interface IAddress extends IModel {
     void setGoogleMaps(final String googleMaps);
 
     /**
-     * @param address
-     * @return
+     * Initializes the article.
+     *
+     * @param address a address to copy.
+     * @return The this address with new fields.
      */
     Address initialize(final Address address);
 }

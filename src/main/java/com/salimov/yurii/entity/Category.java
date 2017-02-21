@@ -236,8 +236,10 @@ public final class Category extends Content implements ICategory {
     }
 
     /**
-     * @param category
-     * @return
+     * Initializes the category.
+     *
+     * @param category a category to copy.
+     * @return The this category with new fields.
      */
     @Override
     public Category initialize(final Category category) {

@@ -18,16 +18,16 @@ import java.util.Date;
 public interface IMessage extends IModel {
 
     /**
+     * Returns a user of the message.
      *
-     *
-     * @return
+     * @return The user of the message.
      */
     User getUser();
 
     /**
+     * Sets a user of the message.
      *
-     *
-     * @param user
+     * @param user a user of the message.
      */
     void setUser(final User user);
 
@@ -81,8 +81,10 @@ public interface IMessage extends IModel {
     String getDateToString();
 
     /**
-     * @param message
-     * @return
+     * Initializes the message.
+     *
+     * @param message a message to copy.
+     * @return The this message with new fields.
      */
     Message initialize(final Message message);
 }

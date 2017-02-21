@@ -87,9 +87,10 @@ public interface IArticle extends IContent {
     Category getCategory();
 
     /**
+     * Initializes the article.
      *
-     * @param article
-     * @return
+     * @param article a article to copy.
+     * @return The this article with new fields.
      */
     Article initialize(final Article article);
 }

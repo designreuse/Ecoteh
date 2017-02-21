@@ -110,9 +110,10 @@ public interface ICategory extends IContent {
     void clearArticles();
 
     /**
+     * Initializes the category.
      *
-     * @param category
-     * @return
+     * @param category a category to copy.
+     * @return The this category with new fields.
      */
     Category initialize(final Category category);
 }

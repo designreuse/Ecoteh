@@ -33,9 +33,9 @@ public interface FileService extends DataService<File> {
     /**
      * Initializes, updates and returns photo with parameter id.
      *
-     * @param id        a id of the photo to update.
-     * @param file
-     * @param multipartFile
+     * @param id            a id of the photo to update.
+     * @param title         a new title to the file.
+     * @param multipartFile a new multipart file to the file.
      * @return The updating photo with parameter id.
      * @see File
      */
@@ -95,8 +95,8 @@ public interface FileService extends DataService<File> {
     /**
      * Save the multipart file in the file system in the directory rootPath.
      *
-     * @param multipartFile    a file to save.
-     * @param rootPath a directory path.
+     * @param multipartFile a file to save.
+     * @param rootPath      a directory path.
      * @see File
      */
     void saveFile(

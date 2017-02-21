@@ -145,7 +145,7 @@ public final class User extends Model implements IUser, UserDetails {
      *
      * @param name        a name of the new user.
      * @param description a description of the new user.
-     * @param contacts
+     * @param contacts    a contacts to the new user.
      */
     public User(
             final String name,
@@ -486,7 +486,9 @@ public final class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * @return
+     * Returns a user contacts.
+     *
+     * @return The user contacts.
      */
     @Override
     public Contacts getContacts() {
@@ -494,7 +496,9 @@ public final class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * @param contacts
+     * Sets a new contacts to the user.
+     *
+     * @param contacts a new contacts to the user.
      */
     @Override
     public void setContacts(final Contacts contacts) {
@@ -569,8 +573,10 @@ public final class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * @param user
-     * @return
+     * Initializes the user.
+     *
+     * @param user a user to copy.
+     * @return The this user with new fields.
      */
     public User initialize(final User user) {
         if (user != null) {

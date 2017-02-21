@@ -114,7 +114,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     /**
      * Initializes, saves and returns a new user.
      *
-     * @param user
+     * @param user a user to save.
      * @return The new saving user.
      * @see User
      * @see File
@@ -134,7 +134,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Return {@code null} if id is {@code null}.
      *
      * @param url  a url of the user to update.
-     * @param user
+     * @param user a user to update.
      * @return The updating user with parameter id or {@code null}.
      * @see User
      * @see UserRole

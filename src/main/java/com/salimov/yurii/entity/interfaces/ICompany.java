@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * The interface describes a set of methods
  * for working with objects of
- * the {@link com.salimov.yurii.entity.Company} class.
+ * the {@link Company} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see IContent
- * @see com.salimov.yurii.entity.Company
+ * @see Company
  */
 public interface ICompany extends IContent {
 
@@ -119,22 +119,30 @@ public interface ICompany extends IContent {
     void setWorkTimeTo(final String workTimeTo);
 
     /**
-     * @return
+     * Returns a company contacts.
+     *
+     * @return The company contacts.
      */
     Contacts getContacts();
 
     /**
-     * @param contacts
+     * Sets a new contacts to the company.
+     *
+     * @param contacts a new contacts to the company.
      */
     void setContacts(final Contacts contacts);
 
     /**
-     * @return
+     * Returns a company address.
+     *
+     * @return The company address.
      */
     Address getAddress();
 
     /**
-     * @param address
+     * Sets a new address to the company.
+     *
+     * @param address a new address to the company.
      */
     void setAddress(final Address address);
 
@@ -274,8 +282,10 @@ public interface ICompany extends IContent {
     boolean isOpen();
 
     /**
-     * @param company
-     * @return
+     * Initializes the company.
+     *
+     * @param company a company to copy.
+     * @return The this company with new fields.
      */
     Company initialize(final Company company);
 }

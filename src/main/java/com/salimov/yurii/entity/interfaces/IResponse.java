@@ -71,9 +71,10 @@ public interface IResponse extends IModel {
     void reverseValidated();
 
     /**
+     * Initializes the response.
      *
-     * @param response
-     * @return
+     * @param response a response to copy.
+     * @return The this response with new fields.
      */
     Response initialize(final Response response);
 }

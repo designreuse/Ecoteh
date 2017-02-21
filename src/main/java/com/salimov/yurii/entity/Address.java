@@ -9,21 +9,26 @@ import javax.persistence.Table;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
+ * The class implements a set of standard methods for working
+ * with entity of the {@link Address} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see Model
+ * @see IAddress
  */
 @Entity
 @Table(name = "addresses")
 public final class Address extends Model implements IAddress {
 
     /**
-     * The address of a company.
+     * The address.
      */
     @Column(name = "address", nullable = false)
     private String address;
 
     /**
-     * The google maps url of a company.
+     * The google maps url.
      */
     @Column(name = "google_maps", nullable = false)
     private String googleMaps;
@@ -36,11 +41,22 @@ public final class Address extends Model implements IAddress {
         this.googleMaps = "";
     }
 
+    /**
+     * Constructor.
+     *
+     * @param address a address.
+     */
     public Address(final String address) {
         this();
         setAddress(address);
     }
 
+    /**
+     * Constructor.
+     *
+     * @param address    a address
+     * @param googleMaps a google maps url.
+     */
     public Address(final String address, final String googleMaps) {
         this(address);
         setGoogleMaps(googleMaps);
@@ -132,8 +148,10 @@ public final class Address extends Model implements IAddress {
     }
 
     /**
-     * @param address
-     * @return
+     * Initializes the article.
+     *
+     * @param address a address to copy.
+     * @return The this address with new fields.
      */
     @Override
     public Address initialize(final Address address) {

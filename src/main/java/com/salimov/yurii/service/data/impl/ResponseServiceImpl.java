@@ -46,7 +46,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Returns {@code null} if id is {@code null}.
      *
      * @param id       a id of the response to update.
-     * @param response
+     * @param response a response to update.
      * @return The updating response with parameter id {@code null}.
      * @see Response
      */

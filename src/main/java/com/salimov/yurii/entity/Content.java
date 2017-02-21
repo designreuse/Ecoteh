@@ -239,9 +239,12 @@ public abstract class Content extends Model implements IContent {
     }
 
     /**
-     * @param content
-     * @return
+     * Initializes the content.
+     *
+     * @param content a content to copy.
+     * @return The this content with new fields.
      */
+    @Override
     public Content initialize(final Content content) {
         if (content != null) {
             super.initialize(content);

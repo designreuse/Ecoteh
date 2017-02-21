@@ -143,9 +143,10 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     }
 
     /**
+     * Initializes the model.
      *
-     * @param model
-     * @return
+     * @param model a model to copy.
+     * @return The this model with new fields.
      */
     public Model initialize(final Model model) {
         if (model != null) {

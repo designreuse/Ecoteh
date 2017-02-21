@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.Content;
+
 /**
  * The interface describes a set of methods
  * for working with objects of
@@ -74,4 +76,12 @@ public interface IContent extends IModel {
      * @param keywords a new keywords to the content.
      */
     void setKeywords(final String keywords);
+
+    /**
+     * Initializes the content.
+     *
+     * @param content a content to copy.
+     * @return The this content with new fields.
+     */
+    Content initialize(final Content content);
 }

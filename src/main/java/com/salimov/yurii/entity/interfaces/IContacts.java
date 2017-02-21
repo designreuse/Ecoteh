@@ -3,126 +3,133 @@ package com.salimov.yurii.entity.interfaces;
 import com.salimov.yurii.entity.Contacts;
 
 /**
+ * The interface describes a set of methods
+ * for working with objects of the {@link Contacts} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see IModel
+ * @see Contacts
  */
 public interface IContacts extends IModel {
 
     /**
-     * Returns a e-mail of the user.
+     * Returns a E-mail.
      *
-     * @return The user e-mail.
+     * @return The E-mail.
      */
     String getEmail();
 
     /**
-     * Sets a new e-mail to the user.
+     * Sets a new E-mail .
      *
-     * @param email a new e-mail to the user.
+     * @param email a new E-mail.
      */
     void setEmail(final String email);
 
     /**
-     * Returns a mobile phone of the company.
+     * Returns a mobile phone number.
      *
-     * @return The company mobile phone.
+     * @return The mobile phone number.
      */
     String getMobilePhone();
 
     /**
-     * Sets a new mobile phone to the company.
+     * Sets a new mobile phone number.
      *
-     * @param mobilePhone a new mobile phone to the company.
+     * @param mobilePhone a new mobile phone number.
      */
     void setMobilePhone(final String mobilePhone);
 
     /**
-     * Returns a landline phone of the company.
+     * Returns a landline phone number.
      *
-     * @return The company landline phone.
+     * @return The landline phone number.
      */
     String getLandlinePhone();
 
     /**
-     * Sets a new landline phone to the company.
+     * Sets a new landline phone number.
      *
-     * @param landlinePhone a new landline phone to the company.
+     * @param landlinePhone a new landline phone number.
      */
     void setLandlinePhone(final String landlinePhone);
 
     /**
-     * Returns a fax of the company.
+     * Returns a fax number.
      *
-     * @return The company fax.
+     * @return The fax number.
      */
     String getFax();
 
     /**
-     * Sets a new fax to the company.
+     * Sets a new fax number.
      *
-     * @param fax a new fax to the company.
+     * @param fax a new fax number.
      */
     void setFax(final String fax);
 
     /**
-     * Returns a vkontakte url of the user.
+     * Returns a Vkontakte URL.
      *
-     * @return The user vkontakte url.
+     * @return The Vkontakte url.
      */
     String getVkontakte();
 
     /**
-     * Sets a new vkontakte url to the user.
+     * Sets a new Vkontakte URL.
      *
-     * @param vkontakte a new vkontakte url to the user.
+     * @param vkontakte a new Vkontakte URL.
      */
     void setVkontakte(final String vkontakte);
 
     /**
-     * Returns a facebook url of the user.
+     * Returns a Facebook URL.
      *
-     * @return The user facebook url.
+     * @return The Facebook URL.
      */
     String getFacebook();
 
     /**
-     * Sets a new facebook url to the user.
+     * Sets a new Facebook URL.
      *
-     * @param facebook a new facebook url to the user.
+     * @param facebook a new Facebook URL.
      */
     void setFacebook(final String facebook);
 
     /**
-     * Returns a twitter url of the user.
+     * Returns a Twitter URL.
      *
-     * @return The user twitter url.
+     * @return The Twitter URL.
      */
     String getTwitter();
 
     /**
-     * Sets a new twitter url to the user.
+     * Sets a new Twitter URL.
      *
-     * @param twitter a new twitter url to the user.
+     * @param twitter a new Twitter url URL.
      */
     void setTwitter(final String twitter);
 
     /**
-     * Returns a skype username of the user.
+     * Returns a skype username.
      *
      * @return The user skype username.
      */
     String getSkype();
 
     /**
-     * Sets a new skype username to the user.
+     * Sets a new skype username.
      *
-     * @param skype a new skype username to the user.
+     * @param skype a new skype username.
      */
     void setSkype(final String skype);
 
     /**
-     * @param contacts
-     * @return
+     * Initializes the contacts.
+     *
+     * @param contacts a contacts to copy.
+     * @return The this contacts with new fields.
      */
     Contacts initialize(final Contacts contacts);
 }

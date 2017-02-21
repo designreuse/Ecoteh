@@ -210,8 +210,10 @@ public final class Response extends Model implements IResponse {
     }
 
     /**
-     * @param response
-     * @return
+     * Initializes the response.
+     *
+     * @param response a response to copy.
+     * @return The this response with new fields.
      */
     @Override
     public Response initialize(final Response response) {

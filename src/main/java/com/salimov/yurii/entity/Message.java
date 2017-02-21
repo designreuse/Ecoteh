@@ -30,7 +30,7 @@ public final class Message extends Model implements IMessage {
     private static final long serialVersionUID = 1L;
 
     /**
-     *
+     * The message user.
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -71,7 +71,7 @@ public final class Message extends Model implements IMessage {
     /**
      * Constructor.
      *
-     * @param user
+     * @param user    a message user.
      * @param subject a subject of the new message.
      * @param text    a text of the new message.
      */
@@ -143,7 +143,9 @@ public final class Message extends Model implements IMessage {
     }
 
     /**
-     * @return
+     * Returns a user of the message.
+     *
+     * @return The user of the message.
      */
     @Override
     public User getUser() {
@@ -151,13 +153,13 @@ public final class Message extends Model implements IMessage {
     }
 
     /**
-     * @param user
+     * Sets a user of the message.
+     *
+     * @param user a user of the message.
      */
     @Override
     public void setUser(final User user) {
-        if (user != null) {
-            this.user.initialize(user);
-        }
+        this.user.initialize(user);
     }
 
     /**
@@ -244,8 +246,10 @@ public final class Message extends Model implements IMessage {
     }
 
     /**
-     * @param message
-     * @return
+     * Initializes the message.
+     *
+     * @param message a message to copy.
+     * @return The this message with new fields.
      */
     @Override
     public Message initialize(final Message message) {

@@ -69,7 +69,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * Returns {@code null} if id is {@code null}.
      *
      * @param url     a url of the article to update.
-     * @param article
+     * @param article a article to update.
      * @return The updating article with parameter id.
      * @see Article
      * @see Category

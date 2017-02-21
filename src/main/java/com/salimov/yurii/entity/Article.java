@@ -62,7 +62,6 @@ public final class Article extends Content implements IArticle {
 
     /**
      * Default constructor.
-     * Initializes date and number.
      */
     public Article() {
         this.text = "";
@@ -267,8 +266,10 @@ public final class Article extends Content implements IArticle {
     }
 
     /**
-     * @param article
-     * @return
+     * Initializes the article.
+     *
+     * @param article a article to copy.
+     * @return The this article with new fields.
      */
     @Override
     public Article initialize(final Article article) {

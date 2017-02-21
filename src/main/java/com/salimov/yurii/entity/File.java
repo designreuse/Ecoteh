@@ -186,8 +186,10 @@ public final class File extends Model implements IFile {
     }
 
     /**
-     * @param file
-     * @return
+     * Initializes the file.
+     *
+     * @param file a file to copy.
+     * @return The this file with new fields.
      */
     @Override
     public File initialize(final File file) {

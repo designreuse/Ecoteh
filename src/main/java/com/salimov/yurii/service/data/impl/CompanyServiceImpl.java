@@ -77,7 +77,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     /**
      * Initializes, saves and returns a new company.
      *
-     * @param company
+     * @param company a company to add.
      * @return The new saving company.
      * @see Company
      * @see File
@@ -96,7 +96,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * Returns {@code null} if id is {@code null}.
      *
      * @param url     a url of the company to update.
-     * @param company
+     * @param company a company to update.
      * @return The updating company with parameter id.
      * @see Company
      * @see File
@@ -116,7 +116,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     /**
      * Updates the main company.
      *
-     * @param company
+     * @param company a main company to update.
      * @return The updating main company.
      */
     @Override

@@ -9,8 +9,13 @@ import javax.persistence.Table;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
+ * The class implements a set of standard methods for working
+ * with entity of the {@link Contacts} class.
+ *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
+ * @see IContacts
+ * @see Model
  */
 @Entity
 @Table(name = "contacts")
@@ -25,55 +30,55 @@ public final class Contacts extends Model implements IContacts {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The e-mail of a user.
+     * The E-mail.
      */
     @Column(name = "email", nullable = false)
     private String email;
 
     /**
-     * The mobile phone of a company.
+     * The mobile phone number.
      */
     @Column(name = "mobile_phone", nullable = false)
     private String mobilePhone;
 
     /**
-     * The landline phone of a company.
+     * The landline phone number.
      */
     @Column(name = "landline_phone", nullable = false)
     private String landlinePhone;
 
     /**
-     * The fax of a company.
+     * The fax number.
      */
     @Column(name = "fax", nullable = false)
     private String fax;
 
     /**
-     * The vkontakte url of a user.
+     * The Vkontakte URL.
      */
     @Column(name = "vkontakte", nullable = false)
     private String vkontakte;
 
     /**
-     * The facebook url of a user.
+     * The Facebook URL.
      */
     @Column(name = "facebook", nullable = false)
     private String facebook;
 
     /**
-     * The twitter url of a user.
+     * The Twitter URL.
      */
     @Column(name = "twitter", nullable = false)
     private String twitter;
 
     /**
-     * The skype username of a user.
+     * The skype username.
      */
     @Column(name = "skype", nullable = false)
     private String skype;
 
     /**
-     *
+     * Default constructor.
      */
     public Contacts() {
         this.email = "";
@@ -87,14 +92,16 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * @param email
-     * @param mobilePhone
-     * @param landlinePhone
-     * @param fax
-     * @param vkontakte
-     * @param facebook
-     * @param twitter
-     * @param skype
+     * Constructor.
+     *
+     * @param email         a E-mail.
+     * @param mobilePhone   a mobile phone number.
+     * @param landlinePhone a landline phone number.
+     * @param fax           a fax number.
+     * @param vkontakte     a Vkontakte URL
+     * @param facebook      a Facebook URL.
+     * @param twitter       a Twitter URL.
+     * @param skype         a Skype username.
      */
     public Contacts(
             final String email,
@@ -180,9 +187,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a e-mail of the user.
+     * Returns a E-mail.
      *
-     * @return The user e-mail.
+     * @return The E-mail.
      */
     @Override
     public String getEmail() {
@@ -190,10 +197,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new e-mail to the user.
-     * If parameter e-mail is blank, then sets {@code null}.
+     * Sets a new E-mail.
+     * If parameter E-mail is blank, then sets empty string.
      *
-     * @param email a new e-mail to the user.
+     * @param email a new E-mail.
      */
     @Override
     public void setEmail(final String email) {
@@ -201,9 +208,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a mobile phone of the company.
+     * Returns a mobile phone number.
      *
-     * @return The company mobile phone.
+     * @return The mobile phone number.
      */
     @Override
     public String getMobilePhone() {
@@ -211,10 +218,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new mobile phone to the company.
-     * If parameter mobile phone is blank, then sets {@code null}.
+     * Sets a new mobile phone number.
+     * If parameter mobile phone is blank, then sets empty string.
      *
-     * @param mobilePhone a new mobile phone to the company.
+     * @param mobilePhone a new mobile phone number.
      */
     @Override
     public void setMobilePhone(final String mobilePhone) {
@@ -222,9 +229,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a landline phone of the company.
+     * Returns a landline phone number.
      *
-     * @return The company landline phone.
+     * @return The landline phone number.
      */
     @Override
     public String getLandlinePhone() {
@@ -232,10 +239,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new landline phone to the company.
-     * If parameter landline phone is blank, then sets {@code null}.
+     * Sets a new landline phone number.
+     * If parameter landline phone is blank, then sets empty string.
      *
-     * @param landlinePhone a new landline phone to the company.
+     * @param landlinePhone a new landline phone number.
      */
     @Override
     public void setLandlinePhone(final String landlinePhone) {
@@ -243,9 +250,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a fax of the company.
+     * Returns a fax number.
      *
-     * @return The company fax.
+     * @return The fax number.
      */
     @Override
     public String getFax() {
@@ -253,10 +260,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new fax to the company.
-     * If parameter fax is blank, then sets {@code null}.
+     * Sets a new fax number.
+     * If parameter fax is blank, then sets empty string.
      *
-     * @param fax a new fax to the company.
+     * @param fax a new fax number.
      */
     @Override
     public void setFax(final String fax) {
@@ -264,9 +271,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a vkontakte url of the user.
+     * Returns a Vkontakte URL.
      *
-     * @return The user vkontakte url.
+     * @return The Vkontakte URL.
      */
     @Override
     public String getVkontakte() {
@@ -274,10 +281,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new vkontakte url to the user.
-     * If parameter vkontakte url is blank, then sets {@code null}.
+     * Sets a new Vkontakte URL.
+     * If parameter Vkontakte URL is blank, then sets empty string.
      *
-     * @param vkontakte a new vkontakte url to the user.
+     * @param vkontakte a new Vkontakte URL.
      */
     @Override
     public void setVkontakte(final String vkontakte) {
@@ -285,9 +292,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a facebook url of the user.
+     * Returns a Facebook URL.
      *
-     * @return The user facebook url.
+     * @return The Facebook URL.
      */
     @Override
     public String getFacebook() {
@@ -295,10 +302,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new facebook url to the user.
-     * If parameter facebook url is blank, then sets {@code null}.
+     * Sets a new Facebook URL.
+     * If parameter Facebook URL is blank, then sets empty string.
      *
-     * @param facebook a new facebook url to the user.
+     * @param facebook a new Facebook URL.
      */
     @Override
     public void setFacebook(final String facebook) {
@@ -306,9 +313,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a twitter url of the user.
+     * Returns a Twitter URL.
      *
-     * @return The user twitter url.
+     * @return The Twitter URL.
      */
     @Override
     public String getTwitter() {
@@ -316,10 +323,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new twitter url to the user.
-     * If parameter twitter url is blank, then sets {@code null}.
+     * Sets a new Twitter URL.
+     * If parameter Twitter URL is blank, then sets empty string.
      *
-     * @param twitter a new twitter url to the user.
+     * @param twitter a new Twitter url to the user.
      */
     @Override
     public void setTwitter(final String twitter) {
@@ -327,9 +334,9 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a skype username of the user.
+     * Returns a Skype username.
      *
-     * @return The user skype username.
+     * @return The Skype username.
      */
     @Override
     public String getSkype() {
@@ -337,8 +344,8 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new skype username to the user.
-     * If parameter skype username is blank, then sets {@code null}.
+     * Sets a new Skype username.
+     * If parameter Skype username is blank, then sets empty string.
      *
      * @param skype a new skype username to the user.
      */
@@ -348,8 +355,10 @@ public final class Contacts extends Model implements IContacts {
     }
 
     /**
-     * @param contacts
-     * @return
+     * Initializes the contacts.
+     *
+     * @param contacts a contacts to copy.
+     * @return The this contacts with new fields.
      */
     @Override
     public Contacts initialize(final Contacts contacts) {

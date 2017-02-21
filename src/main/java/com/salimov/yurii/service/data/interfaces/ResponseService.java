@@ -21,7 +21,7 @@ public interface ResponseService extends DataService<Response> {
      * Initializes, updates and returns response with parameter id.
      *
      * @param id       a id of the response to update.
-     * @param response
+     * @param response a response to update.
      * @return The updating response with parameter id.
      * @see Response
      */

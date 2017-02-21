@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.Model;
+
 import java.io.Serializable;
 
 /**
@@ -19,6 +21,7 @@ public interface IModel extends Serializable, Cloneable {
      * @return A clone of this instance.
      */
     IModel clone();
+
     /**
      * Indicates whether some other object is "equal to" this one.
      *
@@ -28,6 +31,7 @@ public interface IModel extends Serializable, Cloneable {
      */
     @Override
     boolean equals(final Object object);
+
     /**
      * Returns a hash code value for the object.
      * This method is supported for the benefit
@@ -37,6 +41,7 @@ public interface IModel extends Serializable, Cloneable {
      */
     @Override
     int hashCode();
+
     /**
      * Returns a string representation of the object.
      *
@@ -44,12 +49,14 @@ public interface IModel extends Serializable, Cloneable {
      */
     @Override
     String toString();
+
     /**
      * Returns a unique identifier of the model.
      *
      * @return The unique identifier.
      */
     long getId();
+
     /**
      * Sets new identifier to the model.
      *
@@ -71,4 +78,12 @@ public interface IModel extends Serializable, Cloneable {
      * {@code false} otherwise.
      */
     boolean isValidated();
+
+    /**
+     * Initializes the model.
+     *
+     * @param model a model to copy.
+     * @return The this model with new fields.
+     */
+    Model initialize(final Model model);
 }

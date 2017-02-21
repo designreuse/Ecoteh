@@ -49,8 +49,10 @@ public interface IFile extends IModel {
     void translateAndSetUrl(final String value);
 
     /**
-     * @param file
-     * @return
+     * Initializes the file.
+     *
+     * @param file a file to copy.
+     * @return The this file with new fields.
      */
     File initialize(final File file);
 }

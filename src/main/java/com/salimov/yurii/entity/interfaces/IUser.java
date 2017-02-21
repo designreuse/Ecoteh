@@ -139,12 +139,16 @@ public interface IUser extends IModel {
     void setPhotoUrl(final String photoUrl);
 
     /**
-     * @return
+     * Returns a user contacts.
+     *
+     * @return The user contacts.
      */
     Contacts getContacts();
 
     /**
-     * @param contacts
+     * Sets a new contacts to the user.
+     *
+     * @param contacts a new contacts to the user.
      */
     void setContacts(final Contacts contacts);
 
@@ -193,8 +197,10 @@ public interface IUser extends IModel {
     void setLocked(final boolean locked);
 
     /**
-     * @param user
-     * @return
+     * Initializes the user.
+     *
+     * @param user a user to copy.
+     * @return The this user with new fields.
      */
     User initialize(final User user);
 }
