@@ -3,9 +3,9 @@ package com.salimov.yurii.entity;
 import com.salimov.yurii.entity.interfaces.IMessage;
 import com.salimov.yurii.util.time.Time;
 
+import javax.persistence.*;
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -17,7 +17,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see Model
  * @see IMessage
  */
-public final class Message extends Model<Long> implements IMessage<Long> {
+@Entity
+@Table(name = "messages")
+public final class Message extends Model implements IMessage {
 
     /**
      * It is used during deserialization to verify that
@@ -28,78 +30,60 @@ public final class Message extends Model<Long> implements IMessage<Long> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The client name.
+     *
      */
-    private String username;
-
-    /**
-     * The client email.
-     */
-    private String email;
-
-    /**
-     * The client phone.
-     */
-    private String phone;
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "id_user",
+            referencedColumnName = "id"
+    )
+    private User user;
 
     /**
      * The subject of message.
      */
+    @Column(name = "subject", nullable = false)
     private String subject;
 
     /**
      * The text of message.
      */
+    @Column(name = "text", nullable = false)
     private String text;
 
     /**
      * The date of created message.
      */
+    @Column(name = "date", nullable = false)
     private Date date;
 
     /**
      * Default constructor.
      */
     public Message() {
-        setDate(new Date());
+        this.user = new User();
+        this.date = new Date();
     }
 
     /**
      * Constructor.
      *
-     * @param username a name of the client.
-     * @param email    a name of the email.
-     * @param phone    a name of the phone.
-     * @param subject  a subject of the new message.
-     * @param text     a text of the new message.
+     * @param user
+     * @param subject a subject of the new message.
+     * @param text    a text of the new message.
      */
     public Message(
-            final String username,
-            final String email,
-            final String phone,
+            final User user,
             final String subject,
             final String text
     ) {
         this();
-        initialize(username, email, phone, subject, text);
-    }
-
-    /**
-     * Constructor.
-     * Initializes a main user parameters.
-     *
-     * @param username a name of the client.
-     * @param phone    a name of the phone.
-     * @param subject  a subject of the new message.
-     * @param text     a text of the new message.
-     */
-    public Message(
-            final String username,
-            final String phone,
-            final String subject,
-            final String text
-    ) {
-        this(username, null, phone, subject, text);
+        setUser(user);
+        setSubject(subject);
+        setText(text);
     }
 
     /**
@@ -110,9 +94,7 @@ public final class Message extends Model<Long> implements IMessage<Long> {
     @Override
     public String toString() {
         return "Message{" + super.toString() +
-                ", username='" + getUsername() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", phone='" + getPhone() + '\'' +
+                getUser() +
                 ", subject='" + getSubject() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
@@ -131,27 +113,9 @@ public final class Message extends Model<Long> implements IMessage<Long> {
         boolean result = super.equals(object);
         if (result) {
             final Message other = (Message) object;
-            result = (
-                    isNotBlank(this.username) ?
-                            this.username.equalsIgnoreCase(other.username) :
-                            isBlank(other.username)
-            ) && (
-                    isNotBlank(this.email) ?
-                            this.email.equalsIgnoreCase(other.email) :
-                            isBlank(other.email)
-            ) && (
-                    isNotBlank(this.phone) ?
-                            this.phone.equalsIgnoreCase(other.phone) :
-                            isBlank(other.phone)
-            ) && (
-                    isNotBlank(this.subject) ?
-                            this.subject.equalsIgnoreCase(other.subject) :
-                            isBlank(other.subject)
-            ) && (
-                    isNotBlank(this.text) ?
-                            this.text.equalsIgnoreCase(other.text) :
-                            isBlank(other.text)
-            );
+            result = this.user.equals(other.user) &&
+                    this.subject.equalsIgnoreCase(other.subject) &&
+                    this.text.equalsIgnoreCase(other.text);
         }
         return result;
     }
@@ -165,11 +129,7 @@ public final class Message extends Model<Long> implements IMessage<Long> {
      */
     @Override
     public int hashCode() {
-        return (isNotBlank(this.username) ? this.username.hashCode() : 0)
-                + (isNotBlank(this.email) ? this.email.hashCode() : 0)
-                + (isNotBlank(this.phone) ? this.phone.hashCode() : 0)
-                + (isNotBlank(this.subject) ? this.subject.hashCode() : 0)
-                + (isNotBlank(this.text) ? this.text.hashCode() : 0);
+        return this.user.hashCode() + this.subject.hashCode() + this.text.hashCode();
     }
 
     /**
@@ -183,90 +143,21 @@ public final class Message extends Model<Long> implements IMessage<Long> {
     }
 
     /**
-     * Initializes some parameter of the article.
-     *
-     * @param username a name of the client.
-     * @param email    a name of the email.
-     * @param phone    a name of the phone.
-     * @param subject  a subject of the new message.
-     * @param text     a text of the new message.
+     * @return
      */
     @Override
-    public void initialize(
-            final String username,
-            final String email,
-            final String phone,
-            final String subject,
-            final String text
-    ) {
-        setUsername(username);
-        setEmail(email);
-        setPhone(phone);
-        setSubject(subject);
-        setText(text);
+    public User getUser() {
+        return this.user;
     }
 
     /**
-     * Returns a name of the client.
-     *
-     * @return The client name.
+     * @param user
      */
     @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    /**
-     * Sets a new name to the client.
-     * If parameter name is blank, then sets {@code null}.
-     *
-     * @param username a new name to the client.
-     */
-    @Override
-    public void setUsername(final String username) {
-        this.username = isNotBlank(username) ? username : null;
-    }
-
-    /**
-     * Returns a email of the client.
-     *
-     * @return The client name.
-     */
-    @Override
-    public String getEmail() {
-        return this.email;
-    }
-
-    /**
-     * Sets a new email to the client.
-     * If parameter email is blank, then sets {@code null}.
-     *
-     * @param email a new email to the client.
-     */
-    @Override
-    public void setEmail(final String email) {
-        this.email = isNotBlank(email) ? email : null;
-    }
-
-    /**
-     * Returns a phone of the client.
-     *
-     * @return The client name.
-     */
-    @Override
-    public String getPhone() {
-        return this.phone;
-    }
-
-    /**
-     * Sets a new phone to the client.
-     * If parameter phone is blank, then sets {@code null}.
-     *
-     * @param phone a new phone to the client.
-     */
-    @Override
-    public void setPhone(final String phone) {
-        this.phone = isNotBlank(phone) ? phone : null;
+    public void setUser(final User user) {
+        if (user != null) {
+            this.user.initialize(user);
+        }
     }
 
     /**
@@ -287,7 +178,7 @@ public final class Message extends Model<Long> implements IMessage<Long> {
      */
     @Override
     public void setSubject(final String subject) {
-        this.subject = isNotBlank(subject) ? subject : null;
+        this.subject = isNotBlank(subject) ? subject : "";
     }
 
     /**
@@ -308,7 +199,7 @@ public final class Message extends Model<Long> implements IMessage<Long> {
      */
     @Override
     public void setText(final String text) {
-        this.text = isNotBlank(text) ? text : null;
+        this.text = isNotBlank(text) ? text : "";
     }
 
     /**
@@ -348,7 +239,23 @@ public final class Message extends Model<Long> implements IMessage<Long> {
      * @return The unique identifier.
      */
     @Override
-    public Long getId() {
+    public long getId() {
         return (long) Math.abs(hashCode());
+    }
+
+    /**
+     * @param message
+     * @return
+     */
+    @Override
+    public Message initialize(final Message message) {
+        if (message != null) {
+            super.initialize(message);
+            this.setUser(message.getUser());
+            this.setSubject(message.getSubject());
+            this.setText(message.getText());
+            this.setDate(message.getDate());
+        }
+        return this;
     }
 }

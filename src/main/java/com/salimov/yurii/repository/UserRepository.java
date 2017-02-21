@@ -11,7 +11,7 @@ import com.salimov.yurii.entity.User;
  * @see DataRepository
  * @see User
  */
-public interface UserRepository extends DataRepository<User, Long> {
+public interface UserRepository extends DataRepository<User> {
 
     /**
      * Returns user from a database,

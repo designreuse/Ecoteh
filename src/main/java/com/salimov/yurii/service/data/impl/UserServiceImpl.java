@@ -38,7 +38,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class UserServiceImpl extends DataServiceImpl<User, Long> implements UserService, UserDetailsService {
+public final class UserServiceImpl extends DataServiceImpl<User> implements UserService, UserDetailsService {
 
     /**
      * The object for logging information.
@@ -122,11 +122,11 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
      */
     @Override
     @Transactional
-    public User initAndAdd(final User user) {
+    public User add(final User user) {
         if (user != null) {
             user.setRole(UserRole.ADMIN);
         }
-        return add(user);
+        return super.add(user);
     }
 
     /**
@@ -141,13 +141,12 @@ public final class UserServiceImpl extends DataServiceImpl<User, Long> implement
      */
     @Override
     @Transactional
-    public User initAndUpdate(
+    public User update(
             final String url,
             final User user
     ) {
         return update(
-                getByUrl(url)
-                        .initialize(user)
+                getByUrl(url).initialize(user)
         );
     }
 

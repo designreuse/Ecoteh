@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.File;
+
 /**
  * The interface describes a set of methods
  * for working with objects of
@@ -9,18 +11,7 @@ package com.salimov.yurii.entity.interfaces;
  * @version 1.0
  * @see com.salimov.yurii.entity.File
  */
-public interface IFile<T extends Number> extends IModel<T> {
-
-    /**
-     * Initializes some parameter of the media.
-     *
-     * @param title a new title to the media.
-     * @param url   a new url to the media.
-     */
-    void initialize(
-            final String title,
-            final String url
-    );
+public interface IFile extends IModel {
 
     /**
      * Returns a title of the media.
@@ -56,4 +47,10 @@ public interface IFile<T extends Number> extends IModel<T> {
      * @param value a value to translate.
      */
     void translateAndSetUrl(final String value);
+
+    /**
+     * @param file
+     * @return
+     */
+    File initialize(final File file);
 }

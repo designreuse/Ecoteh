@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -32,7 +33,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class FileServiceImpl extends DataServiceImpl<File, Long> implements FileService {
+public final class FileServiceImpl extends DataServiceImpl<File> implements FileService {
 
     /**
      * The interface provides a set of standard methods
@@ -80,7 +81,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
      */
     @Override
     @Transactional
-    public File initAndAdd(
+    public File add(
             final String title,
             final MultipartFile multipartFile
     ) {
@@ -104,7 +105,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
      */
     @Override
     @Transactional
-    public File initAndUpdate(
+    public File update(
             final Long id,
             final String title,
             final MultipartFile multipartFile
@@ -135,18 +136,13 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
      */
     @Override
     @Transactional(readOnly = true)
-    public File getByTitle(final String title)
-            throws IllegalArgumentException, NullPointerException {
+    public File getByTitle(final String title) throws IllegalArgumentException, NullPointerException {
         if (isBlank(title)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " title is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
         }
         final File media = this.dao.getByTitle(title);
         if (media == null) {
-            throw new NullPointerException(
-                    "Can`t find file object by title \"" + title + "\"!"
-            );
+            throw new NullPointerException("Can`t find file object by title \"" + title + "\"!");
         }
         return media;
     }
@@ -162,18 +158,13 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
      */
     @Override
     @Transactional(readOnly = true)
-    public File getByUrl(final String url)
-            throws IllegalArgumentException, NullPointerException {
+    public File getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " url is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
         }
         final File file = this.dao.getByUrl(url);
         if (file == null) {
-            throw new NullPointerException(
-                    "Can`t find file object by URL \"" + url + "\"!"
-            );
+            throw new NullPointerException("Can`t find file object by URL \"" + url + "\"!");
         }
         return file;
     }
@@ -214,13 +205,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
      */
     @Override
     @Transactional
-    public void remove(final File file)
-            throws IllegalArgumentException {
+    public void remove(final File file) throws IllegalArgumentException {
         if (file != null) {
             if (!file.isValidated()) {
-                throw new IllegalArgumentException(
-                        "Static files forbidden to remove!"
-                );
+                throw new IllegalArgumentException("Static files forbidden to remove!");
             }
             deleteFile(file.getUrl());
             super.remove(file);
@@ -271,8 +259,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
             new FileLoader(
                     multipartFile,
                     this.properties.getProjectAbsolutePath()
-                            + (isNotBlank(rootPath) ?
-                            rootPath : multipartFile.getOriginalFilename())
+                            + (isNotBlank(rootPath) ? rootPath : multipartFile.getOriginalFilename())
             ).write();
         }
     }
@@ -310,9 +297,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
     /**
      * Validates input file object.
      *
-     * @param file               the file to valid.
-     * @param exist              is validate by exists.
-     * @param duplicate          is validate by duplicate.
+     * @param file      the file to valid.
+     * @param exist     is validate by exists.
+     * @param duplicate is validate by duplicate.
      * @return {@code true} if file is valid, {@code false} otherwise.
      * @see File
      */
@@ -388,9 +375,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, Long> implement
             final String title,
             final MultipartFile multipartFile
     ) {
-        return this.properties.getResourcesLocation()
-                + Translator.fromCyrillicToLatin(title)
-                + getMultipartFileType(multipartFile);
+        return this.properties.getResourcesLocation() + Translator.fromCyrillicToLatin(title)
+                + new Random().nextInt() + getMultipartFileType(multipartFile);
     }
 
     /**

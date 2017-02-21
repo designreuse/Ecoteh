@@ -9,7 +9,6 @@ import java.util.Collection;
  * of the {@link Model} class or subclasses with the database.
  *
  * @param <T>  Entity type, extends {@link Model}.
- * @param <E> Entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ArticleDao
@@ -21,7 +20,7 @@ import java.util.Collection;
  * @see MessageDao
  * @see Model
  */
-public interface DataDao<T extends Model<E>, E extends Number> {
+public interface DataDao<T extends Model> {
 
     /**
      * Saves in the database and returns model object
@@ -61,7 +60,7 @@ public interface DataDao<T extends Model<E>, E extends Number> {
      * @return The model object with parameter id.
      * @see Model
      */
-    T get(final E id);
+    T get(final long id);
 
     /**
      * Returns all model objects of the {@link Model} class
@@ -79,7 +78,7 @@ public interface DataDao<T extends Model<E>, E extends Number> {
      * @param id a id model object to remove.
      * @see Model
      */
-    void remove(final E id);
+    void remove(final long id);
 
     /**
      * Removes model object of the {@link Model} class
@@ -115,5 +114,5 @@ public interface DataDao<T extends Model<E>, E extends Number> {
      * @return {@code true} if model object is exists, {@code false} otherwise.
      * @see Model
      */
-    boolean exists(final E id);
+    boolean exists(final long id);
 }

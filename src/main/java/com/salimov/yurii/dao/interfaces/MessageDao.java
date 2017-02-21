@@ -13,5 +13,5 @@ import com.salimov.yurii.util.cache.Cache;
  * @see DataDao
  * @see Message
  */
-public interface MessageDao extends DataDao<Message, Long> {
+public interface MessageDao extends DataDao<Message> {
 }

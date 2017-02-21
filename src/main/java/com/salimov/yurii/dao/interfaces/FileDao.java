@@ -11,7 +11,7 @@ import com.salimov.yurii.entity.File;
  * @see com.salimov.yurii.dao.impl.FileDaoImpl
  * @see DataDao
  */
-public interface FileDao extends DataDao<File, Long> {
+public interface FileDao extends DataDao<File> {
 
     /**
      * Returns media object of the {@link File} class

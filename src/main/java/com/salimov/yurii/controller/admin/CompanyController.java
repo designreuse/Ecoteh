@@ -182,7 +182,7 @@ public class CompanyController {
         company.setAddress(
                 new Address(address, googleMaps)
         );
-        this.companyService.initAndEditMainCompany(company);
+        this.companyService.updateMainCompany(company);
         modelAndView.setViewName("redirect:/company/main");
         Cache.clear();
         return modelAndView;
@@ -284,6 +284,7 @@ public class CompanyController {
         company.setDomain(domain);
         company.setTagline(tagline);
         company.setLogoUrl(logoUrl);
+        company.setValidated(isValid);
         company.setContacts(
                 new Contacts(
                         email, mobilePhone, landlinePhone, fax,
@@ -293,7 +294,7 @@ public class CompanyController {
         company.setAddress(
                 new Address(address, googleMaps)
         );
-        this.companyService.initAndAdd(company);
+        this.companyService.add(company);
         Cache.clear();
         modelAndView.setViewName("redirect:/company/" + company.getUrl());
         return modelAndView;
@@ -404,6 +405,7 @@ public class CompanyController {
         company.setDomain(domain);
         company.setTagline(tagline);
         company.setLogoUrl(logoUrl);
+        company.setValidated(isValid);
         company.setContacts(
                 new Contacts(
                         email, mobilePhone, landlinePhone, fax,
@@ -413,7 +415,7 @@ public class CompanyController {
         company.setAddress(
                 new Address(address, googleMaps)
         );
-        this.companyService.initAndUpdate(url, company);
+        this.companyService.update(url, company);
         Cache.clear();
         modelAndView.setViewName("redirect:/company/" + company.getUrl());
         return modelAndView;

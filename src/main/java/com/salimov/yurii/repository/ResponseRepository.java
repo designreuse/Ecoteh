@@ -11,5 +11,5 @@ import com.salimov.yurii.entity.Response;
  * @see DataRepository
  * @see Response
  */
-public interface ResponseRepository extends DataRepository<Response, Long> {
+public interface ResponseRepository extends DataRepository<Response> {
 }

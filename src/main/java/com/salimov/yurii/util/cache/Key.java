@@ -113,8 +113,10 @@ final class Key<T> implements Comparable {
      */
     @Override
     public String toString() {
-        return this.key.toString()
-                + "\nTimeout = " + this.timeout;
+        return "Key{" +
+                "key=" + key +
+                ", timeout=" + timeout +
+                '}';
     }
 
     /**
@@ -124,7 +126,7 @@ final class Key<T> implements Comparable {
      */
     @Override
     public int hashCode() {
-        return this.key != null ? this.key.hashCode() : 0;
+        return this.key.hashCode();
     }
 
     /**

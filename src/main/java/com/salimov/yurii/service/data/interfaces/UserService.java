@@ -16,16 +16,7 @@ import java.util.List;
  * @see User
  * @see DataService
  */
-public interface UserService extends DataService<User, Long>, UserDetailsService {
-
-    /**
-     * Initializes, saves and returns a new user.
-     *
-     * @param user
-     * @return The new saving user.
-     * @see User
-     */
-    User initAndAdd(final User user);
+public interface UserService extends DataService<User>, UserDetailsService {
 
     /**
      * Initializes, updates and returns user with parameter id.
@@ -35,7 +26,7 @@ public interface UserService extends DataService<User, Long>, UserDetailsService
      * @return The updating user with parameter id.
      * @see User
      */
-    User initAndUpdate(
+    User update(
             final String url,
             final User user
     );

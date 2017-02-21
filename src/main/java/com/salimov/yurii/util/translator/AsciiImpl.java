@@ -45,14 +45,13 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String to() {
-        String result = null;
+        String result = "";
         if (isNotBlank(this.value)) {
             final StringBuilder sb = new StringBuilder();
             for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
             }
-            result = sb.toString();
-            result = result.substring(0, result.length() - 1);
+            result = sb.toString().substring(0, result.length() - 1);
         }
         return result;
     }
@@ -65,7 +64,7 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String from() {
-        String result = null;
+        String result = "";
         if (isNotBlank(this.value)) {
             try {
                 final StringBuilder sb = new StringBuilder();

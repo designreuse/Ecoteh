@@ -6,7 +6,7 @@ import com.salimov.yurii.entity.Contacts;
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public interface IContacts<E extends Number> extends IModel<E> {
+public interface IContacts extends IModel {
 
     /**
      * Returns a e-mail of the user.

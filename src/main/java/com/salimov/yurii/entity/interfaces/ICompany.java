@@ -18,7 +18,7 @@ import java.util.List;
  * @see IContent
  * @see com.salimov.yurii.entity.Company
  */
-public interface ICompany<T extends Number> extends IContent<T> {
+public interface ICompany extends IContent {
 
     /**
      * Returns a domain of the company.

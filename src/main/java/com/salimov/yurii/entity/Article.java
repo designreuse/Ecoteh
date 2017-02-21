@@ -7,7 +7,6 @@ import com.salimov.yurii.util.time.Time;
 import javax.persistence.*;
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -21,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "articles")
-public final class Article extends Content<Long> implements IArticle<Long> {
+public final class Article extends Content implements IArticle {
 
     /**
      * It is used during deserialization to verify that
@@ -40,7 +39,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     /**
      * The text of an article.
      */
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String text;
 
     /**
@@ -66,7 +65,8 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      * Initializes date and number.
      */
     public Article() {
-        setDate(new Date());
+        this.text = "";
+        this.date = new Date();
         newNumber();
     }
 
@@ -119,8 +119,8 @@ public final class Article extends Content<Long> implements IArticle<Long> {
         boolean result = super.equals(object);
         if (result) {
             final Article other = (Article) object;
-            result = (isNotBlank(this.number) ? this.number.equalsIgnoreCase(other.number) : isBlank(other.number))
-                    && (isNotBlank(this.text) ? this.text.equalsIgnoreCase(other.text) : isBlank(other.text));
+            result = this.number.equalsIgnoreCase(other.number)
+                    && this.text.equalsIgnoreCase(other.text);
         }
         return result;
     }
@@ -134,9 +134,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() +
-                (isNotBlank(this.number) ? this.number.hashCode() : 0) +
-                (isNotBlank(this.text) ? this.text.hashCode() : 0);
+        return super.hashCode() + this.number.hashCode() + this.text.hashCode();
     }
 
     /**
@@ -147,33 +145,6 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     @Override
     public Article clone() {
         return (Article) super.clone();
-    }
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @see Category
-     */
-    @Override
-    public void initialize(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category
-    ) {
-        super.initialize(title, description, keywords);
-        setText(text);
-        setNumber(number);
-        setCategory(category);
-        setDate(new Date());
     }
 
     /**
@@ -227,7 +198,7 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public void setText(final String text) {
-        this.text = isNotBlank(text) ? text : null;
+        this.text = isNotBlank(text) ? text : "";
     }
 
     /**
@@ -272,10 +243,10 @@ public final class Article extends Content<Long> implements IArticle<Long> {
      */
     @Override
     public void setCategory(final Category category) {
-        if ((this.category == null) || !this.category.equals(category)) {
+        if (this.category != null && !this.category.equals(category)) {
             final Category temp = this.category;
             this.category = category;
-            if ((this.category != null) && !this.category.containsArticle(this)) {
+            if (!this.category.containsArticle(this)) {
                 this.category.addArticle(this);
             }
             if (temp != null) {
@@ -293,5 +264,23 @@ public final class Article extends Content<Long> implements IArticle<Long> {
     @Override
     public Category getCategory() {
         return this.category;
+    }
+
+    /**
+     * @param article
+     * @return
+     */
+    @Override
+    public Article initialize(final Article article) {
+        if (article != null) {
+            super.initialize(article);
+            this.setNumber(article.getNumber());
+            this.setText(article.getText());
+            this.setDate(article.getDate());
+            if (article.getCategory() != null) {
+                this.setCategory(article.getCategory());
+            }
+        }
+        return this;
     }
 }

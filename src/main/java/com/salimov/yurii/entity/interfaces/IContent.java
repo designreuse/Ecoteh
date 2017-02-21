@@ -10,20 +10,7 @@ package com.salimov.yurii.entity.interfaces;
  * @see IModel
  * @see com.salimov.yurii.entity.Content
  */
-public interface IContent<T extends Number> extends IModel<T> {
-
-    /**
-     * Initializes some parameter of the content.
-     *
-     * @param title       a new title to the content.
-     * @param description a new description to the content.
-     * @param keywords    a new keywords to the content.
-     */
-    void initialize(
-            final String title,
-            final String description,
-            final String keywords
-    );
+public interface IContent extends IModel {
 
     /**
      * Returns a title of the content.

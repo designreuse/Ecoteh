@@ -110,9 +110,10 @@ public class CategoryController {
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Category category = this.categoryService.initAndAdd(
-                title, description, keywords, photoUrl, isValid
-        );
+        final Category category = new Category(title, description, keywords);
+        category.setPhotoUrl(photoUrl);
+        category.setValidated(isValid);
+        this.categoryService.add(category);
         Cache.clear();
         modelAndView.setViewName("redirect:/category/" + category.getUrl());
         return modelAndView;
@@ -162,7 +163,7 @@ public class CategoryController {
      * @param title        a new title to the category.
      * @param description  a new description to the category.
      * @param keywords     a new description to the category.
-     * @param photoUrl    a file of photo to the new category.
+     * @param photoUrl     a file of photo to the new category.
      * @param isValid      a validated of the category.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -179,9 +180,10 @@ public class CategoryController {
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Category category = this.categoryService.initAndUpdate(
-                url, title, description, keywords, photoUrl, isValid
-        );
+        final Category category = new Category(title, description, keywords);
+        category.setPhotoUrl(photoUrl);
+        category.setValidated(isValid);
+        this.categoryService.update(url, category);
         Cache.clear();
         modelAndView.setViewName("redirect:/category/" + category.getUrl());
         return modelAndView;

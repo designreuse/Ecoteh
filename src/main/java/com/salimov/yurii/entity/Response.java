@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -22,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "responses")
-public final class Response extends Model<Long> implements IResponse<Long> {
+public final class Response extends Model implements IResponse {
 
     /**
      * It is used during deserialization to verify that
@@ -54,7 +53,9 @@ public final class Response extends Model<Long> implements IResponse<Long> {
      * Default constructor.
      */
     public Response() {
-        setDate(new Date());
+        this.username = "";
+        this.text = "";
+        this.date = new Date();
         setValidated(false);
     }
 
@@ -68,7 +69,7 @@ public final class Response extends Model<Long> implements IResponse<Long> {
             final String username,
             final String text
     ) {
-        this();
+        super();
         setUsername(username);
         setText(text);
     }
@@ -85,15 +86,8 @@ public final class Response extends Model<Long> implements IResponse<Long> {
         boolean result = false;
         if (super.equals(object)) {
             final Response other = (Response) object;
-            result = (
-                    isNotBlank(this.username) ?
-                            this.username.equals(other.username) :
-                            isBlank(other.username)
-            ) && (
-                    isNotBlank(this.text) ?
-                            this.text.equals(other.text) :
-                            isBlank(other.text)
-            );
+            result = this.username.equals(other.username) &&
+                    this.text.equals(other.text);
         }
         return result;
     }
@@ -107,8 +101,7 @@ public final class Response extends Model<Long> implements IResponse<Long> {
      */
     @Override
     public int hashCode() {
-        return (isNotBlank(this.username) ? this.username.hashCode() : 0)
-                + (isNotBlank(this.text) ? this.text.hashCode() : 0);
+        return this.username.hashCode() + this.text.hashCode();
     }
 
     /**
@@ -136,23 +129,6 @@ public final class Response extends Model<Long> implements IResponse<Long> {
     }
 
     /**
-     * Initializes some parameter of the response.
-     * Also adds new date.
-     *
-     * @param username a new username to the response.
-     * @param text     a new text to the response.
-     */
-    @Override
-    public void initialize(
-            final String username,
-            final String text
-    ) {
-        setUsername(username);
-        setText(text);
-        setDate(new Date());
-    }
-
-    /**
      * Returns a username of the response.
      *
      * @return The response username.
@@ -170,7 +146,7 @@ public final class Response extends Model<Long> implements IResponse<Long> {
      */
     @Override
     public void setUsername(final String username) {
-        this.username = isNotBlank(username) ? username : null;
+        this.username = isNotBlank(username) ? username : "";
     }
 
     /**
@@ -191,7 +167,7 @@ public final class Response extends Model<Long> implements IResponse<Long> {
      */
     @Override
     public void setText(final String text) {
-        this.text = isNotBlank(text) ? text : null;
+        this.text = isNotBlank(text) ? text : "";
     }
 
     /**
@@ -231,5 +207,20 @@ public final class Response extends Model<Long> implements IResponse<Long> {
     @Override
     public void reverseValidated() {
         setValidated(!isValidated());
+    }
+
+    /**
+     * @param response
+     * @return
+     */
+    @Override
+    public Response initialize(final Response response) {
+        if (response != null) {
+            super.initialize(response);
+            this.setUsername(response.getUsername());
+            this.setText(response.getText());
+            this.setDate(response.getDate());
+        }
+        return this;
     }
 }

@@ -27,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "users")
-public final class User extends Model<Long> implements IUser<Long>, UserDetails {
+public final class User extends Model implements IUser, UserDetails {
 
     /**
      * It is used during deserialization to verify that
@@ -52,25 +52,25 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     /**
      * The login of a user.
      */
-    @Column(name = "login", unique = true)
+    @Column(name = "login", nullable = false, unique = true)
     private String encryptedLogin;
 
     /**
      * The password of a user.
      */
-    @Column(name = "password", unique = true)
+    @Column(name = "password", nullable = false, unique = true)
     private String encryptedPassword;
 
     /**
      * The tagline of a user.
      */
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     /**
      * The photo URL of a user.
      */
-    @Column(name = "photo")
+    @Column(name = "photo", nullable = false)
     private String photoUrl;
 
     /**
@@ -115,7 +115,14 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      * @see UserRole
      */
     public User() {
-        setRole(UserRole.ANOTHER);
+        this.name = "";
+        this.url = "";
+        this.encryptedLogin = "";
+        this.encryptedPassword = "";
+        this.description = "";
+        this.photoUrl = "";
+        this.contacts = new Contacts();
+        this.role = UserRole.ANOTHER;
     }
 
     /**
@@ -184,9 +191,9 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
         boolean result = false;
         if (super.equals(object)) {
             final User other = (User) object;
-            result = (isNotBlank(this.name) ? this.name.equalsIgnoreCase(other.name) : isBlank(other.name)) &&
-                    (isNotBlank(this.description) ? this.description.equalsIgnoreCase(other.description) :
-                            isBlank(other.description));
+            result = this.name.equalsIgnoreCase(other.name) &&
+                    this.description.equalsIgnoreCase(other.description) &&
+                    this.role.equals(other.role);
         }
         return result;
     }
@@ -200,8 +207,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public int hashCode() {
-        return (isNotBlank(this.name) ? this.name.hashCode() : 0)
-                + (isNotBlank(this.description) ? this.description.hashCode() : 0);
+        return this.name.hashCode() + this.description.hashCode() + this.role.hashCode();
     }
 
     /**
@@ -306,8 +312,10 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setName(final String name) {
-        this.name = isNotBlank(name) ? name : null;
-        translateAndSetUrl(this.name);
+        this.name = isNotBlank(name) ? name : "";
+        if (isBlank(this.url)) {
+            translateAndSetUrl(this.name);
+        }
     }
 
     /**
@@ -318,7 +326,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Override
     public void setLogin(final String login) {
         setEncryptedLogin(
-                isNotBlank(login) ? new Encryptor(login).encrypt() : null
+                isNotBlank(login) ? new Encryptor(login).encrypt() : ""
         );
     }
 
@@ -330,7 +338,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Override
     public String getLogin() {
         return isNotBlank(this.encryptedLogin) ?
-                new Encryptor(this.encryptedLogin).decrypt() : null;
+                new Encryptor(this.encryptedLogin).decrypt() : "";
     }
 
     /**
@@ -352,7 +360,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setEncryptedLogin(final String login) {
-        this.encryptedLogin = isNotBlank(login) ? login : null;
+        this.encryptedLogin = isNotBlank(login) ? login : "";
     }
 
     /**
@@ -364,7 +372,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Override
     public String getPassword() {
         return isNotBlank(this.encryptedPassword) ?
-                new Encryptor(this.encryptedPassword).decrypt() : null;
+                new Encryptor(this.encryptedPassword).decrypt() : "";
     }
 
     /**
@@ -375,9 +383,9 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
     @Transient
     @Override
     public void setPassword(final String password) {
-        final String encryptedPassword = isNotBlank(password) ?
-                new Encryptor(password).encrypt() : null;
-        setEncryptedPassword(encryptedPassword);
+        setEncryptedPassword(
+                isNotBlank(password) ? new Encryptor(password).encrypt() : ""
+        );
     }
 
     /**
@@ -399,7 +407,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setEncryptedPassword(final String password) {
-        this.encryptedPassword = isNotBlank(password) ? password : password;
+        this.encryptedPassword = isNotBlank(password) ? password : "";
     }
 
     /**
@@ -432,7 +440,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setUrl(final String url) {
-        this.url = isNotBlank(url) ? url : null;
+        this.url = isNotBlank(url) ? url : "";
     }
 
     /**
@@ -453,7 +461,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setDescription(final String description) {
-        this.description = isNotBlank(description) ? description : null;
+        this.description = isNotBlank(description) ? description : "";
     }
 
     /**
@@ -474,7 +482,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setPhotoUrl(final String photoUrl) {
-        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
+        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : "";
     }
 
     /**
@@ -490,7 +498,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setContacts(final Contacts contacts) {
-        this.contacts = contacts;
+        this.contacts.initialize(contacts);
     }
 
     /**
@@ -513,7 +521,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
      */
     @Override
     public void setRole(final UserRole role) {
-        this.role = role;
+        this.role = role != null ? role : UserRole.ANOTHER;
     }
 
     /**
@@ -576,13 +584,7 @@ public final class User extends Model<Long> implements IUser<Long>, UserDetails 
             this.setMailing(user.isMailing());
             this.setLocked(user.isLocked());
             this.setValidated(user.isValidated());
-            if (user.getContacts() != null) {
-                if (this.getContacts() != null) {
-                    this.getContacts().initialize(user.getContacts());
-                } else {
-                    this.setContacts(user.getContacts());
-                }
-            }
+            this.setContacts(user.getContacts());
         }
         return this;
     }

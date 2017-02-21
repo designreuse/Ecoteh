@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
                 "com.salimov.yurii.service.data"
         }
 )
-public final class CompanyServiceImpl extends ContentServiceImpl<Company, Long> implements CompanyService {
+public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
 
     /**
      * The interface provides a set of standard methods for working
@@ -84,11 +84,11 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Long> 
      */
     @Override
     @Transactional
-    public Company initAndAdd(final Company company) {
+    public Company add(final Company company) {
         if (company != null) {
             company.setType(CompanyType.PARTNER);
         }
-        return add(company);
+        return super.add(company);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Long> 
      */
     @Override
     @Transactional
-    public Company initAndUpdate(
+    public Company update(
             final String url,
             final Company company
     ) {
@@ -121,7 +121,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Long> 
      */
     @Override
     @Transactional
-    public Company initAndEditMainCompany(final Company company) {
+    public Company updateMainCompany(final Company company) {
         final Company mainCompany = getMainCompany();
         mainCompany.initialize(company);
         mainCompany.setType(CompanyType.MAIN);
@@ -142,9 +142,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Long> 
             return this.dao.getByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
-            throw new NullPointerException(
-                    "Information about main company is absent!"
-            );
+            throw new NullPointerException("Information about main company is absent!");
         }
     }
 

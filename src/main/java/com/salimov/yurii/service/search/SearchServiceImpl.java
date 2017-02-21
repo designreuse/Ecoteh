@@ -339,7 +339,7 @@ public class SearchServiceImpl implements SearchService {
     private static <T extends Model> void searchFromModelAndAdd(
             final String[] keywordArray,
             final boolean howSearch,
-            final DataService<T, Long> dataService,
+            final DataService<T> dataService,
             final String name,
             final ModelAndView modelAndView
     ) {
@@ -364,7 +364,7 @@ public class SearchServiceImpl implements SearchService {
     private static <T extends Model> List<T> searchFromModel(
             final String[] keywordArray,
             final boolean howSearch,
-            final DataService<T, Long> dataService
+            final DataService<T> dataService
     ) {
         final List<T> models = new ArrayList<>();
         for (T model : dataService.getAll()) {

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class ResponseServiceImpl extends DataServiceImpl<Response, Long> implements ResponseService {
+public final class ResponseServiceImpl extends DataServiceImpl<Response> implements ResponseService {
 
     /**
      * Constructor.
@@ -42,42 +42,23 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Long> i
     }
 
     /**
-     * Initializes, saves and returns a new response.
-     *
-     * @param username a username of the new response.
-     * @param text     a text of the new response.
-     * @return The new saving response.
-     * @see Response
-     */
-    @Override
-    @Transactional
-    public Response initAndAdd(
-            final String username,
-            final String text
-    ) {
-        return add(new Response(username, text));
-    }
-
-    /**
      * Initializes, updates and returns response with parameter id.
      * Returns {@code null} if id is {@code null}.
      *
      * @param id       a id of the response to update.
-     * @param username a new username to the response.
-     * @param text     a new text to the response.
+     * @param response
      * @return The updating response with parameter id {@code null}.
      * @see Response
      */
     @Override
     @Transactional
-    public Response initAndUpdate(
-            final Long id,
-            final String username,
-            final String text
+    public Response update(
+            final long id,
+            final Response response
     ) {
-        final Response response = get(id);
-        response.initialize(username, text);
-        return update(response);
+        return update(
+                get(id).initialize(response)
+        );
     }
 
     /**
@@ -178,9 +159,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Long> i
             result.addAll(
                     responses.stream()
                             .filter(
-                                    response -> (response != null)
-                                            && (response.isValidated()
-                                    )
+                                    response -> (response != null) && (response.isValidated())
                             ).collect(Collectors.toList())
             );
         }
@@ -200,9 +179,9 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Long> i
     /**
      * Validates input response.
      *
-     * @param response           the response to valid.
-     * @param exist              is validate input object by exists.
-     * @param duplicate          is validate input object by duplicate.
+     * @param response  the response to valid.
+     * @param exist     is validate input object by exists.
+     * @param duplicate is validate input object by duplicate.
      * @return Returns {@code true} if response is valid,
      * otherwise returns {@code false}.
      * @see Response

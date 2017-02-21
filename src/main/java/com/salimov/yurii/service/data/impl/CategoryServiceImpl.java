@@ -6,7 +6,6 @@ import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
-import com.salimov.yurii.util.compressor.HtmlPress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
                 "com.salimov.yurii.service.data"
         }
 )
-public final class CategoryServiceImpl extends ContentServiceImpl<Category, Long> implements CategoryService {
+public final class CategoryServiceImpl extends ContentServiceImpl<Category> implements CategoryService {
 
     /**
      * The interface of the service layer,
@@ -69,66 +68,23 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category, Long
     }
 
     /**
-     * Initializes, saves and returns a new category.
-     *
-     * @param title       a title of the new category.
-     * @param description a description of the new category.
-     * @param keywords    a keywords of the new category.
-     * @param photoUrl    a main photo URL of the new category.
-     * @param isValid     validated of the new category.
-     * @return The new saving category.
-     * @see Category
-     * @see File
-     */
-    @Override
-    @Transactional
-    public Category initAndAdd(
-            final String title,
-            final String description,
-            final String keywords,
-            final String photoUrl,
-            final boolean isValid
-    ) {
-        final Category category = new Category();
-        category.initialize(
-                title,
-                new HtmlPress().compress(description),
-                keywords, photoUrl
-        );
-        category.setValidated(isValid);
-        return add(category);
-    }
-
-    /**
      * Initializes, updates and returns category with parameter url.
      *
-     * @param url         a url of the category to update.
-     * @param title       a new title to the category.
-     * @param description a new description to the category.
-     * @param keywords    a new keywords to the category.
-     * @param photoUrl    a new main photo URL to the category.
-     * @param isValid     a validated of the category.
+     * @param url      a url of the category to update.
+     * @param category
      * @return The updating category with parameter id.
      * @see Category
      * @see File
      */
     @Override
     @Transactional
-    public Category initAndUpdate(
+    public Category update(
             final String url,
-            final String title,
-            final String description,
-            final String keywords,
-            final String photoUrl,
-            final boolean isValid
+            final Category category
     ) {
-        final Category category = getByUrl(url, false);
-        category.initialize(
-                title,
-                new HtmlPress().compress(description),
-                keywords, photoUrl);
-        category.setValidated(isValid);
-        return update(category);
+        return update(
+                getByUrl(url, false).initialize(category)
+        );
     }
 
     /**
@@ -158,10 +114,8 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category, Long
      */
     @Override
     @Transactional
-    public void remove(final Long id) {
-        if (id != null) {
-            remove(get(id));
-        }
+    public void remove(final long id) {
+        remove(get(id));
     }
 
     /**
@@ -225,8 +179,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category, Long
             result.addAll(
                     categories.stream()
                             .filter(
-                                    category -> (category != null)
-                                            && (category.isValidated())
+                                    category -> (category != null) && (category.isValidated())
                             ).collect(Collectors.toList())
             );
         }

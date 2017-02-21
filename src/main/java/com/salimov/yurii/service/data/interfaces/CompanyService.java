@@ -14,16 +14,7 @@ import java.util.List;
  * @see ContentService
  * @see DataService
  */
-public interface CompanyService extends ContentService<Company, Long> {
-
-    /**
-     * Initializes, saves and returns a new company.
-     *
-     * @param company
-     * @return The new saving company.
-     * @see Company
-     */
-    Company initAndAdd(final Company company);
+public interface CompanyService extends ContentService<Company> {
 
     /**
      * Initializes, updates and returns object of class {@link Company}.
@@ -34,7 +25,7 @@ public interface CompanyService extends ContentService<Company, Long> {
      * @return The updating company with parameter id.
      * @see Company
      */
-    Company initAndUpdate(
+    Company update(
             final String url,
             final Company company
     );
@@ -44,7 +35,7 @@ public interface CompanyService extends ContentService<Company, Long> {
      *
      * @return The updating main company.
      */
-    Company initAndEditMainCompany(final Company company);
+    Company updateMainCompany(final Company company);
 
     /**
      * Returns main company.

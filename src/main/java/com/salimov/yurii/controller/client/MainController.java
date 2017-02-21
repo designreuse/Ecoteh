@@ -1,6 +1,7 @@
 package com.salimov.yurii.controller.client;
 
 import com.salimov.yurii.entity.*;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.MessageService;
 import com.salimov.yurii.service.data.interfaces.ResponseService;
@@ -496,9 +497,14 @@ public abstract class MainController {
             final String text,
             final String subject
     ) {
-        this.messageService.add(
-                new Message(name, email, phone, subject, text)
-        );
+        final Contacts contacts = new Contacts();
+        contacts.setMobilePhone(phone);
+        contacts.setEmail(email);
+        final User user = new User();
+        user.setName(name);
+        user.setContacts(contacts);
+        user.setRole(UserRole.CLIENT);
+        this.messageService.add(new Message(user, subject, text));
     }
 
     /**

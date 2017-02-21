@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -15,25 +14,26 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "addresses")
-public class Address extends Model<Long> implements IAddress<Long> {
+public final class Address extends Model implements IAddress {
 
     /**
      * The address of a company.
      */
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     /**
      * The google maps url of a company.
      */
-    @Column(name = "google_maps")
+    @Column(name = "google_maps", nullable = false)
     private String googleMaps;
 
     /**
      * Default constructor.
      */
     public Address() {
-
+        this.address = "";
+        this.googleMaps = "";
     }
 
     public Address(final String address) {
@@ -71,10 +71,8 @@ public class Address extends Model<Long> implements IAddress<Long> {
         boolean result = super.equals(object);
         if (result) {
             final Address other = (Address) object;
-            result = (isNotBlank(this.address) ? this.address.equalsIgnoreCase(other.address) :
-                    isBlank(other.address)) &&
-                    (isNotBlank(this.googleMaps) ? this.googleMaps.equalsIgnoreCase(other.googleMaps) :
-                            isBlank(other.googleMaps));
+            result = this.address.equalsIgnoreCase(other.address) &&
+                    this.googleMaps.equalsIgnoreCase(other.googleMaps);
         }
         return result;
     }
@@ -88,8 +86,7 @@ public class Address extends Model<Long> implements IAddress<Long> {
      */
     @Override
     public int hashCode() {
-        return (this.address != null ? this.address.hashCode() : 0)
-                + (this.googleMaps != null ? this.googleMaps.hashCode() : 0);
+        return this.address.hashCode() + this.googleMaps.hashCode();
     }
 
     /**
@@ -110,7 +107,7 @@ public class Address extends Model<Long> implements IAddress<Long> {
      */
     @Override
     public void setAddress(final String address) {
-        this.address = isNotBlank(address) ? address : null;
+        this.address = isNotBlank(address) ? address : "";
     }
 
     /**
@@ -131,7 +128,7 @@ public class Address extends Model<Long> implements IAddress<Long> {
      */
     @Override
     public void setGoogleMaps(final String googleMaps) {
-        this.googleMaps = isNotBlank(googleMaps) ? googleMaps : null;
+        this.googleMaps = isNotBlank(googleMaps) ? googleMaps : "";
     }
 
     /**

@@ -14,7 +14,7 @@ import java.util.List;
  * @see DataRepository
  * @see Article
  */
-public interface ArticleRepository extends DataRepository<Article, Long> {
+public interface ArticleRepository extends DataRepository<Article> {
 
     /**
      * Returns article from a database,

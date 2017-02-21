@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "files")
-public final class File extends Model<Long> implements IFile<Long> {
+public final class File extends Model implements IFile {
 
     /**
      * It is used during deserialization to verify that
@@ -47,6 +47,9 @@ public final class File extends Model<Long> implements IFile<Long> {
      * Default constructor.
      */
     public File() {
+        this.title = "";
+        this.url = "";
+        setValidated(true);
     }
 
     /**
@@ -60,7 +63,8 @@ public final class File extends Model<Long> implements IFile<Long> {
             final String url
     ) {
         this();
-        initialize(title, url);
+        setTitle(title);
+        setUrl(url);
     }
 
     /**
@@ -88,15 +92,8 @@ public final class File extends Model<Long> implements IFile<Long> {
         boolean result = super.equals(object);
         if (result) {
             final File other = (File) object;
-            result = (
-                    isNotBlank(this.title) ?
-                            this.title.equalsIgnoreCase(other.title) :
-                            isBlank(other.title)
-            ) && (
-                    isNotBlank(this.url) ?
-                            this.url.equalsIgnoreCase(other.url) :
-                            isBlank(other.url)
-            );
+            result = this.title.equalsIgnoreCase(other.title) &&
+                    this.url.equalsIgnoreCase(other.url);
         }
         return result;
     }
@@ -110,8 +107,7 @@ public final class File extends Model<Long> implements IFile<Long> {
      */
     @Override
     public int hashCode() {
-        return (isNotBlank(this.title) ? this.title.hashCode() : 0)
-                + (isNotBlank(this.url) ? this.url.hashCode() : 0);
+        return this.title.hashCode() + this.url.hashCode();
     }
 
     /**
@@ -122,21 +118,6 @@ public final class File extends Model<Long> implements IFile<Long> {
     @Override
     public File clone() {
         return (File) super.clone();
-    }
-
-    /**
-     * Initializes some parameter of the media.
-     *
-     * @param title a new title to the media.
-     * @param url   a new url to the media.
-     */
-    @Override
-    public void initialize(
-            final String title,
-            final String url
-    ) {
-        setTitle(title);
-        setUrl(url);
     }
 
     /**
@@ -158,7 +139,10 @@ public final class File extends Model<Long> implements IFile<Long> {
      */
     @Override
     public void setTitle(final String title) {
-        this.title = isNotBlank(title) ? title : null;
+        this.title = isNotBlank(title) ? title : "";
+        if (isBlank(this.url)) {
+            translateAndSetUrl(this.title);
+        }
     }
 
     /**
@@ -179,7 +163,7 @@ public final class File extends Model<Long> implements IFile<Long> {
      */
     @Override
     public void setUrl(final String url) {
-        this.url = isNotBlank(url) ? url : null;
+        this.url = isNotBlank(url) ? url : "";
     }
 
     /**
@@ -199,5 +183,19 @@ public final class File extends Model<Long> implements IFile<Long> {
             ).replace(newChar, oldChar);
         }
         setUrl(newUrl);
+    }
+
+    /**
+     * @param file
+     * @return
+     */
+    @Override
+    public File initialize(final File file) {
+        if (file != null) {
+            super.initialize(file);
+            this.setTitle(file.getTitle());
+            this.setUrl(file.getUrl());
+        }
+        return this;
     }
 }

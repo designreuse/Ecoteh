@@ -15,34 +15,19 @@ import java.util.List;
  * @see Response
  * @see DataService
  */
-public interface ResponseService extends DataService<Response, Long> {
-
-    /**
-     * Initializes, saves and returns a new response.
-     *
-     * @param username a username of the new response.
-     * @param text     a text of the new response.
-     * @return The new saving response.
-     * @see Response
-     */
-    Response initAndAdd(
-            final String username,
-            final String text
-    );
+public interface ResponseService extends DataService<Response> {
 
     /**
      * Initializes, updates and returns response with parameter id.
      *
      * @param id       a id of the response to update.
-     * @param username a new username of the response.
-     * @param text     a new text of the response.
+     * @param response
      * @return The updating response with parameter id.
      * @see Response
      */
-    Response initAndUpdate(
-            final Long id,
-            final String username,
-            final String text
+    Response update(
+            final long id,
+            final Response response
     );
 
     /**

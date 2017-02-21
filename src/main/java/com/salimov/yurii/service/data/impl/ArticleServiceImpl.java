@@ -6,7 +6,6 @@ import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
-import com.salimov.yurii.util.compressor.HtmlPress;
 import com.salimov.yurii.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,7 +40,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
                 "com.salimov.yurii.service.data"
         }
 )
-public final class ArticleServiceImpl extends ContentServiceImpl<Article, Long> implements ArticleService {
+public final class ArticleServiceImpl extends ContentServiceImpl<Article> implements ArticleService {
 
     /**
      * The interface provides a set of standard methods
@@ -66,54 +65,11 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Long> 
     }
 
     /**
-     * Initializes, saves and returns a new article.
-     *
-     * @param title       a title of the new article.
-     * @param description a description of the new article.
-     * @param text        a text of the new article.
-     * @param keywords    a keywords of the new article.
-     * @param number      a number of the new article.
-     * @param category    a category of the new article.
-     * @param isValid     a value of validations of the model.
-     * @return The new saving article.
-     * @see Article
-     * @see Category
-     * @see File
-     */
-    @Override
-    @Transactional
-    public Article initAndAdd(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final boolean isValid
-    ) {
-        final Article article = new Article();
-        article.initialize(
-                title,
-                new HtmlPress().compress(description),
-                new HtmlPress().compress(text),
-                keywords, number, category
-        );
-        article.setValidated(isValid);
-        return add(article);
-    }
-
-    /**
      * Initializes, updates and returns article with parameter id.
      * Returns {@code null} if id is {@code null}.
      *
-     * @param url         a url of the article to update.
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @param isValid     a validated of the article.
+     * @param url     a url of the article to update.
+     * @param article
      * @return The updating article with parameter id.
      * @see Article
      * @see Category
@@ -121,25 +77,14 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Long> 
      */
     @Override
     @Transactional
-    public Article initAndUpdate(
+    public Article update(
             final String url,
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final boolean isValid
+            final Article article
     ) {
-        final Article article = getByUrl(url, false);
-        article.initialize(
-                title,
-                new HtmlPress().compress(description),
-                new HtmlPress().compress(text),
-                keywords, number, category
+
+        return update(
+                getByUrl(url, false).initialize(article)
         );
-        article.setValidated(isValid);
-        return update(article);
     }
 
     /**
@@ -159,15 +104,11 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Long> 
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(number)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " number is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " number is blank!");
         }
         final Article article = this.dao.getByNumber(number);
         if ((article == null) || (isValid && !article.isValidated())) {
-            throw new NullPointerException(
-                    "Can`t find article by number \"" + number + "\"!"
-            );
+            throw new NullPointerException("Can`t find article by number \"" + number + "\"!");
         }
         return article;
     }
@@ -406,10 +347,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Long> 
      */
     @Override
     @Transactional
-    public void remove(final Long id) {
-        if (id != null) {
-            remove(get(id));
-        }
+    public void remove(final long id) {
+        remove(get(id));
     }
 
     /**

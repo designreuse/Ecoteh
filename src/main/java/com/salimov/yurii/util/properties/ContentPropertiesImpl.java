@@ -3,6 +3,7 @@ package com.salimov.yurii.util.properties;
 import java.io.IOException;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class implements the methods for getting application properties.
@@ -101,17 +102,17 @@ public final class ContentPropertiesImpl implements ContentProperties {
             final String loginViewName,
             final String projectDirectory
     ) {
-        this.catalinaHome = catalinaHome;
-        this.contentType = contentType;
-        this.prefix = prefix;
-        this.suffix = suffix;
+        this.catalinaHome = isNotBlank(catalinaHome) ? catalinaHome : "";
+        this.contentType = isNotBlank(contentType) ? contentType : "";
+        this.prefix = isNotBlank(prefix) ? prefix : "";
+        this.suffix = isNotBlank(suffix) ? suffix : "";
         this.exposeContextBeansAsAttributes = exposeContextBeansAsAttributes;
-        this.resourcesUrl = resourcesUrl;
-        this.resourcesLocation = resourcesLocation;
+        this.resourcesUrl = isNotBlank(resourcesUrl) ? resourcesUrl : "";
+        this.resourcesLocation = isNotBlank(resourcesLocation) ? resourcesLocation : "";
         this.maxFileSize = maxFileSize;
-        this.loginRequest = loginRequest;
-        this.loginViewName = loginViewName;
-        this.projectDirectory = projectDirectory;
+        this.loginRequest = isNotBlank(loginRequest) ? loginRequest : "";
+        this.loginViewName = isNotBlank(loginViewName) ? loginViewName : "";
+        this.projectDirectory = isNotBlank(projectDirectory) ? projectDirectory : "";
     }
 
     /**

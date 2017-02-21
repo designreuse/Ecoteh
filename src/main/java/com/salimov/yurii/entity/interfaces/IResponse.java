@@ -1,5 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.Response;
+
 import java.util.Date;
 
 /**
@@ -12,16 +14,7 @@ import java.util.Date;
  * @see com.salimov.yurii.entity.Response
  * @see IModel
  */
-public interface IResponse<T extends Number> extends IModel<T> {
-
-    /**
-     * Initializes some parameter of the response.
-     * Also adds new date.
-     *
-     * @param username a new username to the response.
-     * @param text     a new text to the response.
-     */
-    void initialize(final String username, final String text);
+public interface IResponse extends IModel {
 
     /**
      * Returns a username of the response.
@@ -76,4 +69,11 @@ public interface IResponse<T extends Number> extends IModel<T> {
      * Changes response validation.
      */
     void reverseValidated();
+
+    /**
+     *
+     * @param response
+     * @return
+     */
+    Response initialize(final Response response);
 }

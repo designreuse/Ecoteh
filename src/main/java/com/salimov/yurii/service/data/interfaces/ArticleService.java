@@ -18,58 +18,21 @@ import java.util.List;
  * @see ContentService
  * @see DataService
  */
-public interface ArticleService extends ContentService<Article, Long> {
-
-    /**
-     * Initializes, saves and returns a new article.
-     *
-     * @param title       a title of the new article.
-     * @param description a description of the new article.
-     * @param text        a text of the new article.
-     * @param keywords    a keywords of the new article.
-     * @param number      a number of the new article.
-     * @param category    a category of the new article.
-     * @param isValid     a value of validations of the model.
-     * @return The new saving article.
-     * @see Article
-     * @see Category
-     * @see File
-     */
-    Article initAndAdd(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final boolean isValid
-    );
+public interface ArticleService extends ContentService<Article> {
 
     /**
      * Initializes, updates and returns article with parameter id.
      *
      * @param url         a url of the article to update.
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @param isValid     a validated of the article.
+     * @param article
      * @return The updating article with parameter id.
      * @see Article
      * @see Category
      * @see File
      */
-    Article initAndUpdate(
+    Article update(
             final String url,
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category,
-            final boolean isValid
+            final Article article
     );
 
     /**

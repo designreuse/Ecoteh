@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @version 1.0
  * @see com.salimov.yurii.entity.Model
  */
-public interface IModel<T extends Number> extends Serializable, Cloneable {
+public interface IModel extends Serializable, Cloneable {
 
     /**
      * Creates and returns a copy of this object.
@@ -49,13 +49,13 @@ public interface IModel<T extends Number> extends Serializable, Cloneable {
      *
      * @return The unique identifier.
      */
-    T getId();
+    long getId();
     /**
      * Sets new identifier to the model.
      *
      * @param id a new identifier to the model.
      */
-    void setId(final T id);
+    void setId(final long id);
 
     /**
      * Sets validations of the model.

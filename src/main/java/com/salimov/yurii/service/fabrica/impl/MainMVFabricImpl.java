@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -174,7 +175,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView aboutCompanyPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getMainCompany());
-        modelAndView.addObject("users_list", this.userService.getAll(isValidContent()));
+        final Collection<User> personnel;
+        if (isValidContent()) {
+            personnel = this.userService.filteredByValid(
+                    this.userService.getPersonnel()
+            );
+        } else {
+            personnel = this.userService.getPersonnel();
+        }
+        modelAndView.addObject("users_list", personnel);
         modelAndView.setViewName("client/company/main_page");
         return modelAndView;
     }
@@ -189,9 +198,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company mainCompany = this.companyService.getMainCompany();
         modelAndView.addObject("company", mainCompany);
-        /*if (mainCompany.getAddress() != null) {
-            modelAndView.addObject("map", mainCompany.getAddress().getGoogleMaps());
-        }*/
         modelAndView.setViewName("client/company/contacts_page");
         return modelAndView;
     }
@@ -315,9 +321,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company company = this.companyService.getByUrl(url, isValidContent());
         modelAndView.addObject("company", company);
-        /*if (company.getAddress() != null) {
-            modelAndView.addObject("map", company.getAddress().getGoogleMaps());
-        }*/
         modelAndView.setViewName("client/company/one_page");
         return modelAndView;
     }

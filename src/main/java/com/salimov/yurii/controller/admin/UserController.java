@@ -4,6 +4,7 @@ import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.Contacts;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
@@ -117,7 +118,7 @@ public class UserController {
     )
     public ModelAndView getAllUsersPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("users_list", this.userService.getAll(false));
+        modelAndView.addObject("users_list", this.userService.getPersonnel());
         modelAndView.addObject("is_captcha", null);
         modelAndView.setViewName("admin/user/all_page");
         return modelAndView;
@@ -202,7 +203,8 @@ public class UserController {
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
-        this.userService.initAndAdd(user);
+        user.setRole(UserRole.ADMIN);
+        this.userService.add(user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");
         return modelAndView;
@@ -313,7 +315,8 @@ public class UserController {
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
-        this.userService.initAndUpdate(url, user);
+        user.setRole(UserRole.ADMIN);
+        this.userService.update(url, user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");
         return modelAndView;

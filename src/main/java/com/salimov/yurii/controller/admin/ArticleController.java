@@ -141,10 +141,11 @@ public class ArticleController {
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-        final Article article = this.articleService.initAndAdd(
-                title, description, text, keywords,
-                number, category, isValid
-        );
+
+        final Article article = new Article(title, description, text, keywords, number);
+        article.setValidated(isValid);
+        article.setCategory(category);
+        this.articleService.add(article);
         Cache.clear();
         modelAndView.setViewName(getViewName(article));
         return modelAndView;
@@ -228,10 +229,10 @@ public class ArticleController {
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-        final Article article = this.articleService.initAndUpdate(
-                url, title, description, text, keywords,
-                number, category, isValid
-        );
+        final Article article = new Article(title, description, text, keywords, number);
+        article.setValidated(isValid);
+        article.setCategory(category);
+        this.articleService.update(url, article);
         modelAndView.setViewName(getViewName(article));
         Cache.clear();
         return modelAndView;

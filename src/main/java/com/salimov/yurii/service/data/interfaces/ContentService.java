@@ -10,7 +10,6 @@ import java.util.List;
  * for working with objects of {@link Content} class or subclass.
  *
  * @param <T>  entity type, extends {@link Content}.
- * @param <E> entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
@@ -19,7 +18,7 @@ import java.util.List;
  * @see CategoryService
  * @see CompanyService
  */
-public interface ContentService<T extends Content, E extends Number> extends DataService<T, E> {
+public interface ContentService<T extends Content> extends DataService<T> {
 
     /**
      * Returns content object of the {@link Content} class or subclasses

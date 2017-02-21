@@ -17,7 +17,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * for working with objects of {@link Content} class or subclass.
  *
  * @param <T> entity type, extends {@link Content}.
- * @param <E> entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
@@ -28,8 +27,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
  * @see ContentDao
  */
-public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
-        extends DataServiceImpl<T, E> implements ContentService<T, E> {
+public abstract class ContentServiceImpl<T extends Content>
+        extends DataServiceImpl<T> implements ContentService<T> {
 
     /**
      * The object provides a set of standard JPA methods
@@ -38,7 +37,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * @see ContentDao
      * @see Content
      */
-    private final ContentDao<T, E> dao;
+    private final ContentDao<T> dao;
 
     /**
      * Constructor.
@@ -47,7 +46,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
      * @param dao a implementation of the {@link ContentDao} interface.
      * @see ContentDao
      */
-    ContentServiceImpl(final ContentDao<T, E> dao) {
+    ContentServiceImpl(final ContentDao<T> dao) {
         super(dao);
         this.dao = dao;
     }
@@ -69,9 +68,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(title)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " title is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
         }
         final T content = this.dao.getByTitle(title);
         if ((content == null) || (isValid && !content.isValidated())) {
@@ -99,9 +96,7 @@ public abstract class ContentServiceImpl<T extends Content<E>, E extends Number>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " url is blank!"
-            );
+            throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
         }
         final T content = this.dao.getByUrl(url);
         if ((content == null) || (isValid && !content.isValidated())) {

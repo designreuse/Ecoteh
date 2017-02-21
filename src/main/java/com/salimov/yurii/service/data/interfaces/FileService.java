@@ -15,34 +15,34 @@ import java.util.List;
  * @see File
  * @see DataService
  */
-public interface FileService extends DataService<File, Long> {
+public interface FileService extends DataService<File> {
 
     /**
-     * Initializes, saves and returns a new photo.
+     * Initializes, saves and returns a new file.
      *
-     * @param title     a title of the new photo.
-     * @param photoFile a photo file (image) of the new photo.
-     * @return The new saving photo.
+     * @param title         a title of the new file.
+     * @param multipartFile a multipart file of the new file.
+     * @return The new saving file.
      * @see File
      */
-    File initAndAdd(
+    File add(
             final String title,
-            final MultipartFile photoFile
+            final MultipartFile multipartFile
     );
 
     /**
      * Initializes, updates and returns photo with parameter id.
      *
      * @param id        a id of the photo to update.
-     * @param title     a new title of the photo.
-     * @param photoFile a new photo file (image) of the photo.
+     * @param file
+     * @param multipartFile
      * @return The updating photo with parameter id.
      * @see File
      */
-    File initAndUpdate(
+    File update(
             final Long id,
             final String title,
-            final MultipartFile photoFile
+            final MultipartFile multipartFile
     );
 
     /**

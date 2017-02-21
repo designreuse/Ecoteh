@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * for working objects which extends {@link Model} with a database.
  *
  * @param <T>  Entity type, extends {@link Model}.
- * @param <E> Entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see ArticleRepository
@@ -19,5 +18,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @see UserRepository
  * @see Model
  */
-public interface DataRepository<T extends Model<E>, E extends Number> extends JpaRepository<T, E> {
+public interface DataRepository<T extends Model> extends JpaRepository<T, Long> {
 }

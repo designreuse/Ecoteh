@@ -14,27 +14,7 @@ import java.util.Date;
  * @see IContent
  * @see Article
  */
-public interface IArticle<T extends Number> extends IContent<T> {
-
-    /**
-     * Initializes some parameter of the article.
-     *
-     * @param title       a new title to the article.
-     * @param description a new description to the article.
-     * @param text        a new text to the article.
-     * @param keywords    a new keywords to the article.
-     * @param number      a new number to the article.
-     * @param category    a new category to the article.
-     * @see Category
-     */
-    void initialize(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final Category category
-    );
+public interface IArticle extends IContent {
 
     /**
      * Returns a number of the article.
@@ -105,4 +85,11 @@ public interface IArticle<T extends Number> extends IContent<T> {
      * @see Category
      */
     Category getCategory();
+
+    /**
+     *
+     * @param article
+     * @return
+     */
+    Article initialize(final Article article);
 }

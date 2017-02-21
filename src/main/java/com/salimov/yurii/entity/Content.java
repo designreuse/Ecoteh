@@ -13,7 +13,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * The abstract superclass class implements a set of standard methods
  * for working with entity of the {@link Content} class or subclasses.
  *
- * @param <E> Content id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
@@ -23,7 +22,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @see IContent
  */
 @MappedSuperclass
-public abstract class Content<E extends Number> extends Model<E> implements IContent<E> {
+public abstract class Content extends Model implements IContent {
 
     /**
      * It is used during deserialization to verify that
@@ -48,19 +47,23 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     /**
      * The description of a content.
      */
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     /**
      * The keywords of a content.
      */
-    @Column(name = "keywords")
+    @Column(name = "keywords", nullable = false)
     private String keywords;
 
     /**
      * Default constructor.
      */
     public Content() {
+        this.title = "";
+        this.url = "";
+        this.description = "";
+        this.keywords = "";
     }
 
     /**
@@ -75,8 +78,10 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
             final String description,
             final String keywords
     ) {
-        this();
-        initialize(title, description, keywords);
+        super();
+        setTitle(title);
+        setDescription(description);
+        setKeywords(keywords);
     }
 
     /**
@@ -106,15 +111,9 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
         boolean result = super.equals(object);
         if (result) {
             final Content other = (Content) object;
-            result = (
-                    isNotBlank(this.title) ?
-                            this.title.equalsIgnoreCase(other.title) :
-                            isBlank(other.title)
-            ) && (
-                    isNotBlank(this.url) ?
-                            this.url.equalsIgnoreCase(other.url) :
-                            isBlank(other.url)
-            );
+            result = this.title.equalsIgnoreCase(other.title) &&
+                    this.url.equalsIgnoreCase(other.url) &&
+                    this.description.equalsIgnoreCase(other.description);
         }
         return result;
     }
@@ -128,8 +127,7 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
      */
     @Override
     public int hashCode() {
-        return (isNotBlank(this.title) ? this.title.hashCode() : 0)
-                + (isNotBlank(this.url) ? this.url.hashCode() : 0);
+        return this.title.hashCode() + this.url.hashCode() + this.description.hashCode();
     }
 
     /**
@@ -140,24 +138,6 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     @Override
     public Content clone() {
         return (Content) super.clone();
-    }
-
-    /**
-     * Initializes some parameter of the content.
-     *
-     * @param title       a new title to the content.
-     * @param description a new description to the content.
-     * @param keywords    a new keywords to the content.
-     */
-    @Override
-    public void initialize(
-            final String title,
-            final String description,
-            final String keywords
-    ) {
-        setTitle(title);
-        setDescription(description);
-        setKeywords(keywords);
     }
 
     /**
@@ -180,7 +160,9 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
     @Override
     public void setTitle(final String title) {
         this.title = isNotBlank(title) ? title : null;
-        translateAndSetUrl(this.title);
+        if (isBlank(this.url)) {
+            translateAndSetUrl(this.title);
+        }
     }
 
     /**
@@ -201,7 +183,7 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
      */
     @Override
     public void setUrl(final String url) {
-        this.url = isNotBlank(url) ? url : null;
+        this.url = isNotBlank(url) ? url : "";
     }
 
     /**
@@ -232,7 +214,7 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
      */
     @Override
     public void setDescription(final String description) {
-        this.description = isNotBlank(description) ? description : null;
+        this.description = isNotBlank(description) ? description : "";
     }
 
     /**
@@ -253,15 +235,14 @@ public abstract class Content<E extends Number> extends Model<E> implements ICon
      */
     @Override
     public void setKeywords(final String keywords) {
-        this.keywords = isNotBlank(keywords) ? keywords : null;
+        this.keywords = isNotBlank(keywords) ? keywords : "";
     }
 
     /**
-     *
      * @param content
      * @return
      */
-    public Content<E> initialize(final Content<E> content) {
+    public Content initialize(final Content content) {
         if (content != null) {
             super.initialize(content);
             this.setTitle(content.getTitle());

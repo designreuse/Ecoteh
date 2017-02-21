@@ -113,8 +113,8 @@ public class AdminMainController extends MainController {
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "phone") final String phone,
-            @RequestParam(value = "email") final String email,
-            @RequestParam(value = "message") final String userMessage
+            @RequestParam(value = "email", required = false) final String email,
+            @RequestParam(value = "message", required = false) final String userMessage
     ) {
         sendMess(name, phone, email, userMessage);
         return getMessageMV(url, true);

@@ -14,7 +14,7 @@ import java.util.List;
  * @see DataRepository
  * @see Company
  */
-public interface CompanyRepository extends DataRepository<Company, Long> {
+public interface CompanyRepository extends DataRepository<Company> {
 
     /**
      * Returns company from a database,

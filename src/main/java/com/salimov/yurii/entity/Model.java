@@ -10,7 +10,6 @@ import java.io.Serializable;
  * The abstract superclass class implements a set of standard methods
  * for working with entity of the {@link Model} class or subclasses.
  *
- * @param <E> Model id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
@@ -23,7 +22,7 @@ import java.io.Serializable;
  * @see Message
  */
 @MappedSuperclass
-public abstract class Model<E extends Number> implements IModel<E>, Serializable, Cloneable {
+public abstract class Model implements IModel, Serializable, Cloneable {
 
     /**
      * It is used during deserialization to verify that
@@ -43,8 +42,8 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private E id;
+    @Column(name = "id")
+    private long id;
 
     /**
      * The value of validations of the model.
@@ -56,7 +55,7 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
      * Default constructor.
      */
     public Model() {
-        this.validated = true;
+        this.validated = false;
     }
 
     /**
@@ -97,9 +96,7 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
      */
     @Override
     public boolean equals(final Object object) {
-        return (object != null)
-                && (super.equals(object)
-                || (getClass() == object.getClass()));
+        return (object != null) && (super.equals(object) || (getClass() == object.getClass()));
     }
 
     /**
@@ -108,7 +105,7 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
      * @return The unique identifier.
      */
     @Override
-    public E getId() {
+    public long getId() {
         return this.id;
     }
 
@@ -118,7 +115,7 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
      * @param id a new identifier to the model.
      */
     @Override
-    public void setId(final E id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -150,7 +147,7 @@ public abstract class Model<E extends Number> implements IModel<E>, Serializable
      * @param model
      * @return
      */
-    public Model<E> initialize(final Model<E> model) {
+    public Model initialize(final Model model) {
         if (model != null) {
             this.setValidated(model.isValidated());
         }

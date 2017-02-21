@@ -1,5 +1,8 @@
 package com.salimov.yurii.entity.interfaces;
 
+import com.salimov.yurii.entity.Message;
+import com.salimov.yurii.entity.User;
+
 import java.util.Date;
 
 /**
@@ -12,66 +15,21 @@ import java.util.Date;
  * @see com.salimov.yurii.entity.Message
  * @see IModel
  */
-public interface IMessage<T extends Number> extends IModel<T> {
+public interface IMessage extends IModel {
 
     /**
-     * Initializes some parameter of the article.
      *
-     * @param username a name of the client.
-     * @param email    a name of the email.
-     * @param phone    a name of the phone.
-     * @param subject  a subject of the new message.
-     * @param text     a text of the new message.
+     *
+     * @return
      */
-    void initialize(
-            final String username,
-            final String email,
-            final String phone,
-            final String subject,
-            final String text
-    );
+    User getUser();
 
     /**
-     * Returns a name of the client.
      *
-     * @return The client name.
-     */
-    String getUsername();
-
-    /**
-     * Sets a new name to the client.
      *
-     * @param username a new name to the client.
+     * @param user
      */
-    void setUsername(final String username);
-
-    /**
-     * Returns a email of the client.
-     *
-     * @return The client name.
-     */
-    String getEmail();
-
-    /**
-     * Sets a new email to the client.
-     *
-     * @param email a new email to the client.
-     */
-    void setEmail(final String email);
-
-    /**
-     * Returns a phone of the client.
-     *
-     * @return The client name.
-     */
-    String getPhone();
-
-    /**
-     * Sets a new phone to the client.
-     *
-     * @param phone a new phone to the client.
-     */
-    void setPhone(final String phone);
+    void setUser(final User user);
 
     /**
      * Returns a subject of the message.
@@ -121,4 +79,10 @@ public interface IMessage<T extends Number> extends IModel<T> {
      * @return The message string-date.
      */
     String getDateToString();
+
+    /**
+     * @param message
+     * @return
+     */
+    Message initialize(final Message message);
 }

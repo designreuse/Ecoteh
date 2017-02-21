@@ -7,13 +7,12 @@ import com.salimov.yurii.entity.Content;
  * of the {@link Content} class or subclasses with a database.
  *
  * @param <T>  Entity type, extends {@link Content}.
- * @param <E> Entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DataDao
  * @see Content
  */
-public interface ContentDao<T extends Content<E>, E extends Number> extends DataDao<T, E> {
+public interface ContentDao<T extends Content> extends DataDao<T> {
 
     /**
      * Returns content object of the {@link Content} class or subclasses

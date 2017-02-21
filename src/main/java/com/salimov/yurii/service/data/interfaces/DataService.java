@@ -11,7 +11,6 @@ import java.util.List;
  * for working with objects of {@link Model} class or subclasses.
  *
  * @param <T> Entity type, extends {@link Model}.
- * @param <E> Entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
@@ -22,7 +21,7 @@ import java.util.List;
  * @see ResponseService
  * @see UserService
  */
-public interface DataService<T extends Model, E extends Number> {
+public interface DataService<T extends Model> {
 
     /**
      * Saves and returns model object of {@link Model} class or subclasses.
@@ -69,7 +68,7 @@ public interface DataService<T extends Model, E extends Number> {
      * @return The object models with parameter id.
      * @see Model
      */
-    T get(final E id);
+    T get(final long id);
 
     /**
      * Returns all valid objects of {@link Model} class or subclasses.
@@ -95,7 +94,7 @@ public interface DataService<T extends Model, E extends Number> {
      * @param id a id of the model to remove.
      * @see Model
      */
-    void remove(final E id);
+    void remove(final long id);
 
     /**
      * Removes object of {@link Model} class or subclasses.
@@ -128,7 +127,7 @@ public interface DataService<T extends Model, E extends Number> {
      * @return Returns true if model is exists, otherwise returns false.
      * @see Model
      */
-    boolean exists(final E id);
+    boolean exists(final long id);
 
     /**
      * Checks whether the object of {@link Model} class or subclasses is exists.

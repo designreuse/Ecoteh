@@ -10,8 +10,7 @@ import java.util.Collection;
  * The class implements a set of standard methods for working models objects
  * of the {@link Model} class or subclasses with the database.
  *
- * @param <T>  Entity type, extends {@link Model}.
- * @param <E> Entity id type, extends Number.
+ * @param <T> Entity type, extends {@link Model}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see DataDao
@@ -25,7 +24,7 @@ import java.util.Collection;
  * @see MessageDaoImpl
  * @see Model
  */
-public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implements DataDao<T, E> {
+public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
 
     /**
      * The interface provides a set of JPA methods
@@ -33,7 +32,7 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implemen
      *
      * @see DataRepository
      */
-    private final DataRepository<T, E> repository;
+    private final DataRepository<T> repository;
 
     /**
      * Constructor.
@@ -42,7 +41,7 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implemen
      *                   for working objects with a database.
      * @see DataRepository
      */
-    DataDaoImpl(final DataRepository<T, E> repository) {
+    DataDaoImpl(final DataRepository<T> repository) {
         this.repository = repository;
     }
 
@@ -94,7 +93,7 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implemen
      * @see Model
      */
     @Override
-    public T get(final E id) {
+    public T get(final long id) {
         return this.repository.findOne(id);
     }
 
@@ -118,7 +117,7 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implemen
      * @see Model
      */
     @Override
-    public void remove(final E id) {
+    public void remove(final long id) {
         this.repository.delete(id);
     }
 
@@ -166,7 +165,7 @@ public abstract class DataDaoImpl<T extends Model<E>, E extends Number> implemen
      * @see Model
      */
     @Override
-    public boolean exists(final E id) {
+    public boolean exists(final long id) {
         return this.repository.exists(id);
     }
 }

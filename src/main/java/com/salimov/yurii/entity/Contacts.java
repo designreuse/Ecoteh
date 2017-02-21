@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -15,7 +14,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "contacts")
-public final class Contacts extends Model<Long> implements IContacts<Long> {
+public final class Contacts extends Model implements IContacts {
 
     /**
      * It is used during deserialization to verify that
@@ -28,56 +27,63 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
     /**
      * The e-mail of a user.
      */
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     /**
      * The mobile phone of a company.
      */
-    @Column(name = "mobile_phone")
+    @Column(name = "mobile_phone", nullable = false)
     private String mobilePhone;
 
     /**
      * The landline phone of a company.
      */
-    @Column(name = "landline_phone")
+    @Column(name = "landline_phone", nullable = false)
     private String landlinePhone;
 
     /**
      * The fax of a company.
      */
-    @Column(name = "fax")
+    @Column(name = "fax", nullable = false)
     private String fax;
 
     /**
      * The vkontakte url of a user.
      */
-    @Column(name = "vkontakte")
+    @Column(name = "vkontakte", nullable = false)
     private String vkontakte;
 
     /**
      * The facebook url of a user.
      */
-    @Column(name = "facebook")
+    @Column(name = "facebook", nullable = false)
     private String facebook;
 
     /**
      * The twitter url of a user.
      */
-    @Column(name = "twitter")
+    @Column(name = "twitter", nullable = false)
     private String twitter;
 
     /**
      * The skype username of a user.
      */
-    @Column(name = "skype")
+    @Column(name = "skype", nullable = false)
     private String skype;
 
     /**
      *
      */
     public Contacts() {
-
+        this.email = "";
+        this.mobilePhone = "";
+        this.landlinePhone = "";
+        this.fax = "";
+        this.vkontakte = "";
+        this.facebook = "";
+        this.twitter = "";
+        this.skype = "";
     }
 
     /**
@@ -100,6 +106,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
             final String twitter,
             final String skype
     ) {
+        super();
         setEmail(email);
         setMobilePhone(mobilePhone);
         setLandlinePhone(landlinePhone);
@@ -109,6 +116,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
         setTwitter(twitter);
         setSkype(skype);
     }
+
     /**
      * Returns a string representation of the object.
      *
@@ -127,6 +135,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
                 ", skype='" + getSkype() + '\'' +
                 '}';
     }
+
     /**
      * Indicates whether some other object is "equal to" this one.
      *
@@ -139,22 +148,18 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
         boolean result = super.equals(object);
         if (result) {
             final Contacts other = (Contacts) object;
-            result = (isNotBlank(this.email) ? this.email.equalsIgnoreCase(other.email) : isBlank(other.email)) &&
-                    (isNotBlank(this.mobilePhone) ? this.mobilePhone.equalsIgnoreCase(other.mobilePhone) :
-                            isBlank(other.mobilePhone)) &&
-                    (isNotBlank(this.landlinePhone) ? this.landlinePhone.equalsIgnoreCase(other.landlinePhone) :
-                            isBlank(other.landlinePhone)) &&
-                    (isNotBlank(this.fax) ? this.fax.equalsIgnoreCase(other.fax) : isBlank(other.fax)) &&
-                    (isNotBlank(this.vkontakte) ? this.vkontakte.equalsIgnoreCase(other.vkontakte) :
-                            isBlank(other.vkontakte)) &&
-                    (isNotBlank(this.facebook) ? this.facebook.equalsIgnoreCase(other.facebook) :
-                            isBlank(other.facebook)) &&
-                    (isNotBlank(this.twitter) ? this.twitter.equalsIgnoreCase(other.twitter) :
-                            isBlank(other.twitter)) &&
-                    (isNotBlank(this.skype) ? this.skype.equalsIgnoreCase(other.skype) : isBlank(other.skype));
+            result = this.email.equalsIgnoreCase(other.email) &&
+                    this.mobilePhone.equalsIgnoreCase(other.mobilePhone) &&
+                    this.landlinePhone.equalsIgnoreCase(other.landlinePhone) &&
+                    this.fax.equalsIgnoreCase(other.fax) &&
+                    this.vkontakte.equalsIgnoreCase(other.vkontakte) &&
+                    this.facebook.equalsIgnoreCase(other.facebook) &&
+                    this.twitter.equalsIgnoreCase(other.twitter) &&
+                    this.skype.equalsIgnoreCase(other.skype);
         }
         return result;
     }
+
     /**
      * Returns a hash code value for the object.
      * This method is supported for the benefit
@@ -164,14 +169,14 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public int hashCode() {
-        return (isNotBlank(this.email) ? this.email.hashCode() : 0) +
-                (isNotBlank(this.mobilePhone) ? this.mobilePhone.hashCode() : 0) +
-                (isNotBlank(this.landlinePhone) ? this.landlinePhone.hashCode() : 0) +
-                (isNotBlank(this.fax) ? this.fax.hashCode() : 0) +
-                (isNotBlank(this.vkontakte) ? this.vkontakte.hashCode() : 0) +
-                (isNotBlank(this.facebook) ? this.facebook.hashCode() : 0) +
-                (isNotBlank(this.twitter) ? this.twitter.hashCode() : 0) +
-                (isNotBlank(this.skype) ? this.skype.hashCode() : 0);
+        return this.email.hashCode() +
+                this.mobilePhone.hashCode() +
+                this.landlinePhone.hashCode() +
+                this.fax.hashCode() +
+                this.vkontakte.hashCode() +
+                this.facebook.hashCode() +
+                this.twitter.hashCode() +
+                this.skype.hashCode();
     }
 
     /**
@@ -192,7 +197,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setEmail(final String email) {
-        this.email = isNotBlank(email) ? email : null;
+        this.email = isNotBlank(email) ? email : "";
     }
 
     /**
@@ -213,7 +218,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setMobilePhone(final String mobilePhone) {
-        this.mobilePhone = isNotBlank(mobilePhone) ? mobilePhone : null;
+        this.mobilePhone = isNotBlank(mobilePhone) ? mobilePhone : "";
     }
 
     /**
@@ -234,7 +239,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setLandlinePhone(final String landlinePhone) {
-        this.landlinePhone = isNotBlank(landlinePhone) ? landlinePhone : null;
+        this.landlinePhone = isNotBlank(landlinePhone) ? landlinePhone : "";
     }
 
     /**
@@ -255,7 +260,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setFax(final String fax) {
-        this.fax = isNotBlank(fax) ? fax : null;
+        this.fax = isNotBlank(fax) ? fax : "";
     }
 
     /**
@@ -276,7 +281,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setVkontakte(final String vkontakte) {
-        this.vkontakte = isNotBlank(vkontakte) ? vkontakte : null;
+        this.vkontakte = isNotBlank(vkontakte) ? vkontakte : "";
     }
 
     /**
@@ -297,7 +302,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setFacebook(final String facebook) {
-        this.facebook = isNotBlank(facebook) ? facebook : null;
+        this.facebook = isNotBlank(facebook) ? facebook : "";
     }
 
     /**
@@ -318,7 +323,7 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setTwitter(final String twitter) {
-        this.twitter = isNotBlank(twitter) ? twitter : null;
+        this.twitter = isNotBlank(twitter) ? twitter : "";
     }
 
     /**
@@ -339,11 +344,10 @@ public final class Contacts extends Model<Long> implements IContacts<Long> {
      */
     @Override
     public void setSkype(final String skype) {
-        this.skype = isNotBlank(skype) ? skype : null;
+        this.skype = isNotBlank(skype) ? skype : "";
     }
 
     /**
-     *
      * @param contacts
      * @return
      */

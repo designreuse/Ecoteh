@@ -15,7 +15,7 @@ import com.salimov.yurii.util.translator.Translator;
  * @see com.salimov.yurii.entity.User
  * @see IModel
  */
-public interface IUser<T extends Number> extends IModel<T> {
+public interface IUser extends IModel {
 
     /**
      * Returns a name of the user.

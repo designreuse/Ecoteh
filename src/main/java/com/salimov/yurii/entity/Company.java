@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -23,7 +22,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "companies")
-public final class Company extends Content<Long> implements ICompany<Long> {
+public final class Company extends Content implements ICompany {
 
     /**
      * It is used during deserialization to verify that
@@ -36,7 +35,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
     /**
      * The tagline of a company.
      */
-    @Column(name = "tagline")
+    @Column(name = "tagline", nullable = false)
     private String tagline;
 
     /**
@@ -48,43 +47,43 @@ public final class Company extends Content<Long> implements ICompany<Long> {
     /**
      * The domain of a company.
      */
-    @Column(name = "domain")
+    @Column(name = "domain", nullable = false)
     private String domain;
 
     /**
      * The sender e-mail of a company.
      */
-    @Column(name = "sender_email")
+    @Column(name = "sender_email", nullable = false)
     private String senderEmail;
 
     /**
      * The sender password of a company.
      */
-    @Column(name = "sender_pass")
+    @Column(name = "sender_pass", nullable = false)
     private String senderPass;
 
     /**
      * The start work time of a company.
      */
-    @Column(name = "work_time_from")
+    @Column(name = "work_time_from", nullable = false)
     private String workTimeFrom;
 
     /**
      * The finish work time of a company.
      */
-    @Column(name = "work_time_to")
+    @Column(name = "work_time_to", nullable = false)
     private String workTimeTo;
 
     /**
      * The logo URL of a company.
      */
-    @Column(name = "logo")
+    @Column(name = "logo", nullable = false)
     private String logoUrl;
 
     /**
      * The favicon URL of a company.
      */
-    @Column(name = "favicon")
+    @Column(name = "favicon", nullable = false)
     private String faviconUrl;
 
     /**
@@ -92,8 +91,8 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      *
      * @see File
      */
-    @Column(name = "slides")
-    private String slides = "";
+    @Column(name = "slides", nullable = false)
+    private String slides;
 
     /**
      * The company contacts.
@@ -142,7 +141,19 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      * Sets default company type {@link CompanyType#PARTNER}.
      */
     public Company() {
-        setType(CompanyType.PARTNER);
+        this.tagline = "";
+        this.information = "";
+        this.domain = "";
+        this.senderEmail = "";
+        this.senderPass = "";
+        this.workTimeFrom = "";
+        this.workTimeTo = "";
+        this.logoUrl = "";
+        this.faviconUrl = "";
+        this.slides = "";
+        this.type = CompanyType.PARTNER;
+        this.contacts = new Contacts();
+        this.address = new Address();
     }
 
     /**
@@ -181,29 +192,11 @@ public final class Company extends Content<Long> implements ICompany<Long> {
         boolean result = super.equals(object);
         if (result) {
             final Company other = (Company) object;
-            result = (
-                    this.type != null ?
-                            this.type.equals(other.type) :
-                            other.type == null
-            ) && (
-                    isNotBlank(this.domain) ?
-                            this.domain.equalsIgnoreCase(other.domain) :
-                            isBlank(other.domain)
-            ) && (
-                    isNotBlank(this.tagline) ?
-                            this.tagline.equals(other.tagline) :
-                            isBlank(other.tagline)
-            ) && (
-                    isNotBlank(this.getDescription()) ?
-                            this.getDescription().equalsIgnoreCase(
-                                    other.getDescription()
-                            ) :
-                            isBlank(other.getDescription())
-            ) && (
-                    isNotBlank(this.information) ?
-                            this.information.equals(other.information) :
-                            isBlank(other.information)
-            );
+            result = (this.type.equals(other.type)) &&
+                    this.domain.equalsIgnoreCase(other.domain) &&
+                    this.tagline.equals(other.tagline) &&
+                    this.getDescription().equalsIgnoreCase(other.getDescription()) &&
+                    this.information.equals(other.information);
         }
         return result;
     }
@@ -217,12 +210,9 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public int hashCode() {
-        return super.hashCode()
-                + (this.type != null ? this.type.hashCode() : 0)
-                + (isNotBlank(this.domain) ? this.domain.hashCode() : 0)
-                + (isNotBlank(this.tagline) ? this.tagline.hashCode() : 0)
-                + (isNotBlank(getDescription()) ? getDescription().hashCode() : 0)
-                + (isNotBlank(this.information) ? this.information.hashCode() : 0);
+        return super.hashCode() + this.type.hashCode() + this.domain.hashCode()
+                + this.tagline.hashCode() + getDescription().hashCode()
+                + this.information.hashCode();
     }
 
     /**
@@ -256,7 +246,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
         if (isNotBlank(domain)) {
             final String temp = domain.replace("http://", "")
                     .replace("https://", "");
-            this.domain = isNotBlank(temp) ? temp : null;
+            this.domain = isNotBlank(temp) ? temp : "";
         } else {
             this.domain = null;
         }
@@ -280,7 +270,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public void setTagline(final String tagline) {
-        this.tagline = isNotBlank(tagline) ? tagline : null;
+        this.tagline = isNotBlank(tagline) ? tagline : "";
     }
 
     /**
@@ -301,7 +291,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public void setInformation(final String information) {
-        this.information = isNotBlank(information) ? information : null;
+        this.information = isNotBlank(information) ? information : "";
     }
 
     /**
@@ -322,7 +312,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public void setSenderEmail(final String senderEmail) {
-        this.senderEmail = isNotBlank(senderEmail) ? senderEmail : null;
+        this.senderEmail = isNotBlank(senderEmail) ? senderEmail : "";
     }
 
     /**
@@ -342,7 +332,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      * @param senderPass a new sender password to the company.
      */
     public void setSenderPass(final String senderPass) {
-        this.senderPass = isNotBlank(senderPass) ? senderPass : null;
+        this.senderPass = isNotBlank(senderPass) ? senderPass : "";
     }
 
     /**
@@ -437,7 +427,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public void setLogoUrl(final String logoUrl) {
-        this.logoUrl = isNotBlank(logoUrl) ? logoUrl : null;
+        this.logoUrl = isNotBlank(logoUrl) ? logoUrl : "";
     }
 
     /**
@@ -459,7 +449,7 @@ public final class Company extends Content<Long> implements ICompany<Long> {
      */
     @Override
     public void setFaviconUrl(final String faviconUrl) {
-        this.faviconUrl = isNotBlank(faviconUrl) ? faviconUrl : null;
+        this.faviconUrl = isNotBlank(faviconUrl) ? faviconUrl : "";
     }
 
     /**
@@ -667,20 +657,8 @@ public final class Company extends Content<Long> implements ICompany<Long> {
             this.setFaviconUrl(company.getFaviconUrl());
             this.setSlides(company.getSlides());
             this.setType(company.getType());
-            if (company.getContacts() != null) {
-                if (this.getContacts() != null) {
-                    this.getContacts().initialize(company.getContacts());
-                } else {
-                    this.setContacts(company.getContacts());
-                }
-            }
-            if (company.getAddress() != null) {
-                if (this.getAddress() != null) {
-                    this.getAddress().initialize(company.getAddress());
-                } else {
-                    this.setAddress(company.getAddress());
-                }
-            }
+            this.getContacts().initialize(company.getContacts());
+            this.setAddress(company.getAddress());
         }
         return this;
     }

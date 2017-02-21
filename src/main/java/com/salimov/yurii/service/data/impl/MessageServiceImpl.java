@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
-public final class MessageServiceImpl extends DataServiceImpl<Message, Long> implements MessageService {
+public final class MessageServiceImpl extends DataServiceImpl<Message> implements MessageService {
 
     /**
      * Constructor.

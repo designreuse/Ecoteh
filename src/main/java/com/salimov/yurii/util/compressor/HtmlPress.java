@@ -26,7 +26,7 @@ public final class HtmlPress implements Compressor {
      */
     @Override
     public String compress(final String source) {
-        String result = null;
+        String result = "";
         if (isNotBlank(source)) {
             if (compressor == null) {
                 initCompress();

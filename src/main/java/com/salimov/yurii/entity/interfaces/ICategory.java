@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
 import com.salimov.yurii.entity.Article;
+import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 
 import java.util.Collection;
@@ -15,23 +16,7 @@ import java.util.Collection;
  * @see IContent
  * @see com.salimov.yurii.entity.Category
  */
-public interface ICategory<T extends Number> extends IContent<T> {
-
-    /**
-     * Initializes some parameter of the category.
-     *
-     * @param title       a new title of the category.
-     * @param description a new description of the category.
-     * @param keywords    a new keywords of the category.
-     * @param photoUrl    a new main photo URL of the category.
-     * @see File
-     */
-    void initialize(
-            final String title,
-            final String description,
-            final String keywords,
-            final String photoUrl
-    );
+public interface ICategory extends IContent {
 
     /**
      * Returns a file of the category.
@@ -123,4 +108,11 @@ public interface ICategory<T extends Number> extends IContent<T> {
      * @see Article
      */
     void clearArticles();
+
+    /**
+     *
+     * @param category
+     * @return
+     */
+    Category initialize(final Category category);
 }

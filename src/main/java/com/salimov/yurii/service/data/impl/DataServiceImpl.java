@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
  * for working with objects of {@link Model} class or subclasses.
  *
  * @param <T> entity type, extends {@link Model}.
- * @param <E> entity id type, extends Number.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Model
@@ -27,7 +26,7 @@ import java.util.stream.Collectors;
  * @see com.salimov.yurii.service.data.impl.UserServiceImpl
  * @see DataDao
  */
-public abstract class DataServiceImpl<T extends Model<E>, E extends Number> implements DataService<T, E> {
+public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
 
     /**
      * The object provides a set of standard JPA methods
@@ -36,7 +35,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
      * @see DataDao
      * @see Model
      */
-    private final DataDao<T, E> dao;
+    private final DataDao<T> dao;
 
     /**
      * Constructor.
@@ -45,7 +44,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
      * @param dao a implementation of the {@link DataDao} interface.
      * @see DataDao
      */
-    DataServiceImpl(final DataDao<T, E> dao) {
+    DataServiceImpl(final DataDao<T> dao) {
         this.dao = dao;
     }
 
@@ -135,23 +134,15 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
      *
      * @param id is id of object to return.
      * @return The model with parameter id.
-     * @throws IllegalArgumentException Throw exception when object parameter id is {@code null}.
-     * @throws NullPointerException     Throw exception when object with parameter id is not exist.
+     * @throws NullPointerException Throw exception when object with parameter id is not exist.
      * @see Model
      */
     @Override
     @Transactional(readOnly = true)
-    public T get(E id) throws IllegalArgumentException, NullPointerException {
-        if (id == null) {
-            throw new IllegalArgumentException(
-                    getClassSimpleName() + " id is null!"
-            );
-        }
+    public T get(final long id) throws NullPointerException {
         final T model = this.dao.get(id);
         if (model == null) {
-            throw new NullPointerException(
-                    "Can`t find " + getClassSimpleName() + " by id " + id + "!"
-            );
+            throw new NullPointerException("Can`t find " + getClassSimpleName() + " by id " + id + "!");
         }
         return model;
 
@@ -193,10 +184,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
      */
     @Override
     @Transactional
-    public void remove(final E id) {
-        if (id != null) {
-            this.dao.remove(id);
-        }
+    public void remove(final long id) {
+        this.dao.remove(id);
     }
 
     /**
@@ -242,7 +231,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
 
     /**
      * Checks whether the object of {@link Model} class or subclasses
-     * with parameter id is exists. If id is {@code null} then return {@code false}.
+     * with parameter id is exists.
      *
      * @param id a id of the model to exists.
      * @return Returns {@code true} if the model is exists, otherwise returns {@code false}.
@@ -250,8 +239,8 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
      */
     @Override
     @Transactional(readOnly = true)
-    public boolean exists(final E id) {
-        return (id != null) && (this.dao.exists(id));
+    public boolean exists(final long id) {
+        return (this.dao.exists(id));
     }
 
     /**
@@ -266,7 +255,7 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
     @Transactional(readOnly = true)
     public boolean exists(final T model) {
         boolean result = false;
-        if ((model != null) && (model.getId() != null)) {
+        if ((model != null)) {
             result = exists(model.getId());
         }
         return result;
@@ -426,9 +415,9 @@ public abstract class DataServiceImpl<T extends Model<E>, E extends Number> impl
     /**
      * Validates input object of class {@link Model} or subclasses.
      *
-     * @param model              the model to valid.
-     * @param exist              is validate input model by exists.
-     * @param duplicate          is validate input model by duplicate.
+     * @param model     the model to valid.
+     * @param exist     is validate input model by exists.
+     * @param duplicate is validate input model by duplicate.
      * @return Returns {@code true} if the model is valid,
      * otherwise returns {@code false}.
      * @see Model

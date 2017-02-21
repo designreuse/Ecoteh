@@ -6,7 +6,7 @@ import com.salimov.yurii.entity.Address;
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public interface IAddress<E extends Number> extends IModel<E> {
+public interface IAddress extends IModel {
 
     /**
      * Returns a address of the company.

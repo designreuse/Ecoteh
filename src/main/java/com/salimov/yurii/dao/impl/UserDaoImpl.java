@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
-public final class UserDaoImpl extends DataDaoImpl<User, Long> implements UserDao {
+public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
 
     /**
      * The interface provides a set of JPA methods

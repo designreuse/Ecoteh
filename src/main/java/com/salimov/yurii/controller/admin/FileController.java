@@ -122,7 +122,7 @@ public class FileController {
             @RequestParam(value = "file") final MultipartFile multipartFile,
             final ModelAndView modelAndView
     ) {
-        this.fileService.initAndAdd(title, multipartFile);
+        this.fileService.add(title, multipartFile);
         modelAndView.setViewName("redirect:/admin/file/all");
         return modelAndView;
     }
@@ -188,7 +188,7 @@ public class FileController {
             @RequestParam(value = "file") final MultipartFile multipartFile,
             final ModelAndView modelAndView
     ) {
-        this.fileService.initAndUpdate(id, title, multipartFile);
+        this.fileService.update(id, title, multipartFile);
         modelAndView.setViewName("redirect:/admin/file/all");
         return modelAndView;
     }

@@ -18,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "categories")
-public final class Category extends Content<Long> implements ICategory<Long> {
+public final class Category extends Content implements ICategory {
 
     /**
      * It is used during deserialization to verify that
@@ -31,7 +31,7 @@ public final class Category extends Content<Long> implements ICategory<Long> {
     /**
      * The main photo URL.
      */
-    @Column(name = "photo")
+    @Column(name = "photo", nullable = false)
     private String photoUrl;
 
     /**
@@ -54,6 +54,7 @@ public final class Category extends Content<Long> implements ICategory<Long> {
      * Default constructor.
      */
     public Category() {
+        this.photoUrl = "";
     }
 
     /**
@@ -69,6 +70,7 @@ public final class Category extends Content<Long> implements ICategory<Long> {
             final String keywords
     ) {
         super(title, description, keywords);
+        this.photoUrl = "";
     }
 
     @Override
@@ -86,26 +88,6 @@ public final class Category extends Content<Long> implements ICategory<Long> {
     @Override
     public Category clone() {
         return (Category) super.clone();
-    }
-
-    /**
-     * Initializes some parameter of the category.
-     *
-     * @param title       a new title of the category.
-     * @param description a new description of the category.
-     * @param keywords    a new keywords of the category.
-     * @param photoUrl    a new file of the category.
-     * @see File
-     */
-    @Override
-    public void initialize(
-            final String title,
-            final String description,
-            final String keywords,
-            final String photoUrl
-    ) {
-        super.initialize(title, description, keywords);
-        setPhotoUrl(photoUrl);
     }
 
     /**
@@ -251,5 +233,18 @@ public final class Category extends Content<Long> implements ICategory<Long> {
     public void clearArticles() {
         removeArticles(new ArrayList<>(this.articles));
         this.articles = new HashSet<>();
+    }
+
+    /**
+     * @param category
+     * @return
+     */
+    @Override
+    public Category initialize(final Category category) {
+        if (category != null) {
+            super.initialize(category);
+            this.setPhotoUrl(category.getPhotoUrl());
+        }
+        return this;
     }
 }
