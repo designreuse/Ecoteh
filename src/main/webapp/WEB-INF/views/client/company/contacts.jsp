@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-xs-12 col-sm-12 <c:choose>
-            <c:when test="${(company.address ne null) and (company.address.googleMaps ne null)}">col-md-4 col-lg-4</c:when>
+            <c:when test="${(company.address.googleMaps ne '')}">col-md-4 col-lg-4</c:when>
             <c:otherwise>col-md-12 col-lg-12</c:otherwise>
         </c:choose>">
     <div class="text-contact">
@@ -10,12 +10,12 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.logoUrl ne null}">
+                    <c:when test="${company.logoUrl ne ''}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
                              src="<c:url value="${company.logoUrl}"/>"
                              onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
-                    <c:when test="${company.faviconUrl ne null}">
+                    <c:when test="${company.faviconUrl ne ''}">
                         <br><img class="icon-size" alt="<c:out value="${company.title}"/>"
                                  src="<c:url value="/${company.faviconUrl}"/>"
                                  onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
@@ -33,7 +33,7 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.faviconUrl ne null}">
+                    <c:when test="${company.faviconUrl ne ''}">
                         <img class="icon-size" alt="<c:out value="${company.title}"/>"
                              src="<c:url value="/${company.faviconUrl}"/>"
                              onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
@@ -44,14 +44,13 @@
             </a>
             <br>
         </div>
-        <c:if test="${company.address ne null}">
+        <c:if test="${company.address ne ''}">
             <div class="text-center">
                 <br><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                 &nbsp;<c:out value="${company.address.address}"/><br><br>
             </div>
         </c:if>
-        <c:if test="${company.contacts ne null}">
-            <c:if test="${company.contacts.mobilePhone ne null}">
+            <c:if test="${company.contacts.mobilePhone ne ''}">
                 <div class="text-center">
                     <a href="tel:<c:out value="${company.contacts.mobilePhone}"/>"
                        title="Позвонить на мобильный телефон &quot;${company.title}&quot;">
@@ -60,7 +59,7 @@
                     </a><br>
                 </div>
             </c:if>
-            <c:if test="${company.contacts.landlinePhone ne null}">
+            <c:if test="${company.contacts.landlinePhone ne ''}">
                 <div class="text-center">
                     <a href="tel:<c:out value="${company.contacts.landlinePhone}"/>"
                        title="Позвонить на стационарный телефон &quot;${company.title}&quot;">
@@ -69,7 +68,7 @@
                     </a><br>
                 </div>
             </c:if>
-            <c:if test="${company.contacts.fax ne null}">
+            <c:if test="${company.contacts.fax ne ''}">
                 <div class="text-center">
                     <a href="tel:<c:out value="${company.contacts.fax}"/>" title="Факс &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-print"
@@ -77,7 +76,7 @@
                     </a><br>
                 </div>
             </c:if>
-            <c:if test="${company.contacts.email ne null}">
+            <c:if test="${company.contacts.email ne ''}">
                 <div class="text-center">
                     <br>
                     <a href="mailto:<c:out value="${company.contacts.email}"/>"
@@ -87,27 +86,27 @@
                     </a><br>
                 </div>
             </c:if>
-            <c:if test="${(company.contacts.vkontakte ne null) or (company.contacts.facebook ne null) or
-                             (company.contacts.twitter ne null) or (company.contacts.skype ne null)}">
+            <c:if test="${(company.contacts.vkontakte ne '') or (company.contacts.facebook ne '') or
+                             (company.contacts.twitter ne '') or (company.contacts.skype ne '')}">
                 <div class="text-center">
                     <br>В социальных сетях:<br>
-                    <c:if test="${company.contacts.vkontakte ne null}">
+                    <c:if test="${company.contacts.vkontakte ne ''}">
                         <a href="<c:out value="${company.contacts.vkontakte}"/>"
                            title="Группа &quot;${company.title}&quot; в ВКонтакте"
                            target="_blank"><span class="fa fa-vk fa-2x"></span></a>&nbsp;&nbsp;
                     </c:if>
-                    <c:if test="${company.contacts.facebook ne null}">
+                    <c:if test="${company.contacts.facebook ne ''}">
                         <a href="<c:out value="${company.contacts.facebook}"/>"
                            title="Группа &quot;${company.title}&quot; в Facebook"
                            target="_blank"><span class="fa fa-facebook-official fa-2x"></span></a>&nbsp;&nbsp;
                     </c:if>
-                    <c:if test="${company.contacts.twitter ne null}">
+                    <c:if test="${company.contacts.twitter ne ''}">
                         <a href="<c:out value="${company.contacts.twitter}"/>"
                            title="&quot;${company.title}&quot; в Twitter" target="_blank">
                             <span class="fa fa-twitter fa-2x"></span>
                         </a>&nbsp;&nbsp;
                     </c:if>
-                    <c:if test="${company.contacts.skype ne null}">
+                    <c:if test="${company.contacts.skype ne ''}">
                         <a href="skype:<c:out value="${company.contacts.skype}"/>?call"
                            title="Позвонить &quot;${company.title}&quot; в Skype">
                             <span class="fa fa-skype fa-2x"></span>
@@ -116,7 +115,6 @@
                     <br>
                 </div>
             </c:if>
-        </c:if>
         <br>
     </div>
 </div>

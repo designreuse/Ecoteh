@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${(company.address ne null) and (company.address.googleMaps ne null)}">
+<c:if test="${company.address.googleMaps ne ''}">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <iframe src="${company.address.googleMaps}" allowfullscreen
                 width="100%" height="400px" frameborder="0" style="border:0"></iframe>

@@ -16,7 +16,7 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Форма для добавления новой компании-партнера.">
         <meta name="keywords" content="Партнер, новый партнер, добавление партнера"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>

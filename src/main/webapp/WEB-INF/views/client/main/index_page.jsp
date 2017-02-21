@@ -17,7 +17,7 @@
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <meta name="robots" content="index,follow">
         <jsp:include page="/WEB-INF/views/client/main/verification.jsp"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>

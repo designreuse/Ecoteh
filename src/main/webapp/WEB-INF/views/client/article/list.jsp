@@ -8,10 +8,9 @@
             <div class="box">
                 <c:forEach items="${articles_list}" var="article">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <c:set var="textNotNull" value="${article.text ne null}"/>
                         <h3 class="text-center">
                             <c:choose>
-                                <c:when test="${textNotNull}">
+                                <c:when test="${article.text ne ''}">
                                     <a href="<c:url value="/article/${article.url}"/>">
                                         <c:out value="${article.title}"/>
                                     </a>
@@ -48,10 +47,10 @@
                             </a>
                         </span>
                         <c:choose>
-                            <c:when test="${article.description ne null}"><p>${article.description}</p></c:when>
-                            <c:when test="${textNotNull}">${article.text}</c:when>
+                            <c:when test="${article.description ne ''}"><p>${article.description}</p></c:when>
+                            <c:when test="${article.text ne ''}">${article.text}</c:when>
                         </c:choose>
-                        <c:if test="${textNotNull}">
+                        <c:if test="${article.text ne ''}">
                             <p class="text-right">
                                 <a href="<c:url value="/article/${article.url}"/>"
                                    title="Подробнее о &quot;<c:out value="${article.title}"/>&quot;">

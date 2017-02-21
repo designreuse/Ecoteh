@@ -38,7 +38,7 @@
                                     </c:choose>">
                         <div class="text-center">
                             <c:choose>
-                                <c:when test="${partner.logoUrl ne null}">
+                                <c:when test="${partner.logoUrl ne ''}">
                                     <a href="<c:url value="/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <img class="img-logo" alt="<c:out value="${partner.title}"/>"
@@ -47,7 +47,7 @@
                                                      value="/resources/img/static/default_file.gif"/>'">
                                     </a>
                                 </c:when>
-                                <c:when test="${partner.title ne null}">
+                                <c:when test="${partner.title ne ''}">
                                     <a href="<c:url value="/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <h3 class="text-center"><c:out value="${partner.title}"/></h3>

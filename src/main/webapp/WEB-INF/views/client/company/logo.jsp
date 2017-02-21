@@ -3,7 +3,7 @@
 
 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
     <c:choose>
-        <c:when test="${company.logoUrl ne null}">
+        <c:when test="${company.logoUrl ne ''}">
             <div class="brand">
                 <a href="http://<c:out value="${company.domain}"/>">
                     <img src="<c:url value="${company.logoUrl}"/>"
@@ -13,7 +13,7 @@
                 </a>
             </div>
         </c:when>
-        <c:when test="${company.title ne null}">
+        <c:when test="${company.title ne ''}">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <hr>
                 <a href="http://<c:out value="${company.domain}"/>">
@@ -23,7 +23,7 @@
             </div>
         </c:when>
     </c:choose>
-    <c:if test="${company.tagline ne null}">
+    <c:if test="${company.tagline ne ''}">
         <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
             <div class="address-bar">
                 <c:out value="${company.tagline}"/>

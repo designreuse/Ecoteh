@@ -16,7 +16,7 @@
         <meta name="description" content="Контакты и адрес нашей компании.">
         <meta name="keywords"
               content="Контакты, адрес, как проехать, карта, google maps, телефон, e-mail, социальные сети"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>

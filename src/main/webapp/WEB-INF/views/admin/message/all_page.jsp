@@ -17,7 +17,7 @@
         <meta name="description"
               content="Сообщения от пользователей &quot;<c:out value="${main_company.title}"/>&quot;.">
         <meta name="keywords" content="Сообщения от пользователей, <c:out value="${main_company.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
@@ -83,13 +83,13 @@
                                     </p>
                                     <p class="response"><c:out value="${message.text}"/></p>
                                     <p class="response">
-                                        <c:out value="${message.username}"/>,&nbsp;
-                                        <a href="tel:<c:out value="${message.phone}"/>">
-                                            <c:out value="${message.phone}"/></a>
-                                        <c:if test="${message.email ne null}">
+                                        <c:out value="${message.user.name}"/>,&nbsp;
+                                        <a href="tel:<c:out value="${message.user.contacts.mobilePhone}"/>">
+                                            <c:out value="${message.user.contacts.mobilePhone}"/></a>
+                                        <c:if test="${message.user.contacts.email ne ''}">
                                             ,&nbsp;
-                                            <a href="mailto:<c:out value="${message.email}"/>">
-                                                <c:out value="${message.email}"/>
+                                            <a href="mailto:<c:out value="${message.user.contacts.email}"/>">
+                                                <c:out value="${message.user.contacts.email}"/>
                                             </a>
                                         </c:if>
                                     </p>

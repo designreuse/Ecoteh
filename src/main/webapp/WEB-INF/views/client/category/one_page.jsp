@@ -17,7 +17,7 @@
         <meta name="description" content="<c:out value="${category.title} - ${category.description}"/>">
         <meta name="keywords"
               content="Категория<c:out value=", ${category.title}, ${category.keywords}"/><c:forEach items="${articles_list}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
@@ -29,7 +29,7 @@
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
         <c:set var="length" value="${fn:length(articles_list)}"/>
-        <c:if test="${(length gt 0) or (category.description ne null)}">
+        <c:if test="${(length gt 0) or (category.description ne '')}">
             <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
         </c:if>
     </head>
@@ -134,7 +134,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <c:if test="${(length gt 0) or (category.description ne null)}">
+    <c:if test="${(length gt 0) or (category.description ne '')}">
         <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
         <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>

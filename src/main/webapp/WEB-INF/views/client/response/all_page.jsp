@@ -16,7 +16,7 @@
         <meta name="robots" content="index,follow">
         <meta name="description" content="Отзывы о компании &quot;<c:out value="${main_company.title}"/>&quot;.">
         <meta name="keywords" content="Отзывы о компании, <c:out value="${main_company.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>

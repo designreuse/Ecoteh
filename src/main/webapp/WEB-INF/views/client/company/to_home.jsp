@@ -7,7 +7,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <c:set var="desc_length" value="650"/>
                 <c:choose>
-                    <c:when test="${company.description ne null}">
+                    <c:when test="${company.description ne ''}">
                         <hr>
                         <h3 class="intro-text text-center">
                             <a href="<c:url value="/company/main"/>" title="Описание нашей компании">О нас</a>
@@ -15,7 +15,7 @@
                         <hr>
                         <p>${company.description}</p>
                     </c:when>
-                    <c:when test="${company.information ne null}">
+                    <c:when test="${company.information ne ''}">
                         <hr>
                         <h3 class="intro-text text-center">О нас</h3>
                         <hr>

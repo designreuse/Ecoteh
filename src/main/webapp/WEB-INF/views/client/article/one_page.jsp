@@ -16,7 +16,7 @@
         <meta name="robots" content="index,follow">
         <meta name="description" content="<c:out value="${article.title} - ${article.description}"/>">
         <meta name="keywords" content="Статья<c:out value=", ${article.title}, ${article.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
@@ -60,7 +60,8 @@
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         <c:choose>
-                            <c:when test="${(article.category ne null) and ((article.category.validated) or (authorized_user ne null))}">
+                            <c:when test="${(article.category ne null)
+                            and (article.category.validated or (authorized_user ne null))}">
                                 → <a href="<c:url value="/category/all"/>"
                                      title="Перейти к всем категориям">Все категории</a>
                                 →
@@ -90,7 +91,7 @@
                     </p>
                     <p>
                         <c:choose>
-                            <c:when test="${article.text ne null}">${article.text}</c:when>
+                            <c:when test="${article.text ne ''}">${article.text}</c:when>
                             <c:otherwise>${article.description}</c:otherwise>
                         </c:choose>
                     </p>
@@ -102,7 +103,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <c:if test="${article.text ne null}">
+    <c:if test="${article.text ne ''}">
         <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
         <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>

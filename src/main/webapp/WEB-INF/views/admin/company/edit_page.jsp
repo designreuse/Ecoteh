@@ -19,7 +19,7 @@
         <meta name="description"
               content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
         <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
@@ -133,7 +133,7 @@
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="mobile_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${company.mobilePhone}"/>">
+                                               value="<c:out value="${company.contacts.mobilePhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -141,7 +141,7 @@
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="landline_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${company.landlinePhone}"/>">
+                                               value="<c:out value="${company.contacts.landlinePhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -149,7 +149,7 @@
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="fax" maxlength="20"
                                                placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${company.fax}"/>">
+                                               value="<c:out value="${company.contacts.fax}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -157,7 +157,7 @@
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100"
                                                minlength="3" placeholder="name@mail.com"
-                                               value="<c:out value="${company.email}"/>">
+                                               value="<c:out value="${company.contacts.email}"/>">
                                     </td>
                                 </tr>
                                 <c:if test="${main}">
@@ -186,9 +186,9 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${company.vkontakte ne null}">
-                                                <a href="<c:out value="${company.vkontakte}"/>"
-                                                   title="Профиль &quot;<c:out value="${company.title}"/>&quot; в ВКонтакте"
+                                            <c:when test="${company.contacts.vkontakte ne ''}">
+                                                <a href="<c:out value="${company.contacts.vkontakte}"/>"
+                                                   title="Профиль &quot;<c:out value="${company.contacts.title}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
                                             </c:when>
                                             <c:otherwise>
@@ -199,15 +199,15 @@
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
-                                               maxlength="200" value="<c:out value="${company.vkontakte}"/>"
+                                               maxlength="200" value="<c:out value="${company.contacts.vkontakte}"/>"
                                                placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${company.facebook ne null}">
-                                                <a href="<c:out value="${company.facebook}"/>"
+                                            <c:when test="${company.contacts.facebook ne ''}">
+                                                <a href="<c:out value="${company.contacts.facebook}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Facebook"
                                                    target="_blank">Facebook</a>
                                             </c:when>
@@ -219,15 +219,15 @@
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook" minlength="5"
-                                               maxlength="200" value="<c:out value="${company.facebook}"/>"
+                                               maxlength="200" value="<c:out value="${company.contacts.facebook}"/>"
                                                placeholder="Ссылка на групу или профиль в социальной сети Facebook">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${company.twitter ne null}">
-                                                <a href="<c:out value="${company.twitter}"/>"
+                                            <c:when test="${company.contacts.twitter ne ''}">
+                                                <a href="<c:out value="${company.contacts.twitter}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Twitter"
                                                    target="_blank">Twitter</a>
                                             </c:when>
@@ -240,7 +240,7 @@
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка в социальной сети Twitter"
-                                               value="<c:out value="${company.twitter}"/>">
+                                               value="<c:out value="${company.contacts.twitter}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -248,7 +248,7 @@
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype"
-                                               value="<c:out value="${company.skype}"/>">
+                                               value="<c:out value="${company.contacts.skype}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -256,7 +256,7 @@
                                     <td class="tds">
                                         <input type="text" class="form-control" name="address" maxlength="300"
                                                placeholder="Адрес главного офиса компании."
-                                               value="<c:out value="${company.address}"/>">
+                                               value="<c:out value="${company.address.address}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -280,7 +280,7 @@
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="google_maps" title=""
                                               placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
-                                              rows="5"><c:out value="${company.googleMaps}"/></textarea>
+                                              rows="5"><c:out value="${company.address.googleMaps}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -292,7 +292,7 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                        <c:if test="${company.logoUrl ne null}">
+                                        <c:if test="${company.logoUrl ne ''}">
                                             <a href="<c:url value="/${company.logoUrl}"/>"
                                                title="<c:out value="${company.title}"/>" rel="lightgallery">
                                                 <img src="<c:url value="${company.logoUrl}"/>"
@@ -340,7 +340,7 @@
                                             <td class="tds">
                                                 <c:if test="${fn:length(company.slidesList) gt 0}">
                                                     <c:forEach items="${company.slidesList}" var="slide">
-                                                        <c:if test="${slide ne null}">
+                                                        <c:if test="${slide ne ''}">
                                                             <a href="<c:url value="${slide}"/>"
                                                                rel="lightgallery[slides]"
                                                                title="<c:out value="${company.title}"/>">

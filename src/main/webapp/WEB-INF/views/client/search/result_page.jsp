@@ -23,7 +23,7 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>

@@ -14,7 +14,7 @@
         <meta name="title" content="Меню | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Возможности администратора этого прекрасного сайта.">
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>

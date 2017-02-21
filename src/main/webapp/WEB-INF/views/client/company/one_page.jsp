@@ -17,7 +17,7 @@
         <meta name="description"
               content="Описание компании &quot;<c:out value="${company.title}"/>&quot;: <c:out value="${company.description}"/>.">
         <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne null}">
+        <c:if test="${main_company.faviconUrl ne ''}">
             <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
             <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
         </c:if>
@@ -62,7 +62,7 @@
                             → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
                             → <a href="#"><c:out value="${company.title}"/></a>
                         </p>
-                        <c:if test="${company.logoUrl ne null}">
+                        <c:if test="${company.logoUrl ne ''}">
                             <hr>
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <c:choose>
-                            <c:when test="${company.information ne null}"><p>${company.information}</p></c:when>
+                            <c:when test="${company.information ne ''}"><p>${company.information}</p></c:when>
                             <c:otherwise><p>${company.description}</p></c:otherwise>
                         </c:choose>
                     </div>

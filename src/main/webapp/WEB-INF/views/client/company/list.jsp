@@ -20,8 +20,8 @@
                             </p>
                         </c:if>
                         <c:choose>
-                            <c:when test="${partner.description ne null}"><p>${partner.description}</p></c:when>
-                            <c:when test="${partner.information ne null}"><p>${partner.information}</p></c:when>
+                            <c:when test="${partner.description ne ''}"><p>${partner.description}</p></c:when>
+                            <c:when test="${partner.information ne ''}"><p>${partner.information}</p></c:when>
                             <c:otherwise><p>${partner.tagline}</p></c:otherwise>
                         </c:choose>
                         <p class="text-right">
