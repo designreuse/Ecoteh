@@ -1,17 +1,8 @@
 package com.salimov.yurii.mocks.enity.test;
 
-import com.salimov.yurii.entity.Company;
-import org.junit.Ignore;
+public final class MockCompanyTest /*extends MockModelTest<Company>*/ {
 
-import java.util.Collection;
-
-import static com.salimov.yurii.mocks.enity.MockEntity.getCompanies;
-import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
-import static org.junit.Assert.assertNotNull;
-
-public final class MockCompanyTest extends MockModelTest<Company> {
-
-
+/*
     @Override
     public void whenGetModelThenReturnValidModel() {
         final Company company = getCompany();
@@ -50,5 +41,5 @@ public final class MockCompanyTest extends MockModelTest<Company> {
     @Override
     protected Collection<Company> getObjects() {
         return getCompanies();
-    }
+    }*/
 }

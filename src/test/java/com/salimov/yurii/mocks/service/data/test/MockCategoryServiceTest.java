@@ -11,10 +11,10 @@ import org.junit.Test;
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getCategory;
 import static org.junit.Assert.assertNotNull;
 
-public final class MockCategoryServiceTest
-        extends MockContentServiceTest<Category> {
+public final class MockCategoryServiceTest extends MockContentServiceTest<Category> {
 
     private CategoryService service;
 
@@ -24,27 +24,8 @@ public final class MockCategoryServiceTest
     }
 
     @Test
-    public void whenInitAndAddCategoryThenReturnThisCategory() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE,
-                        DESCRIPTION, KEYWORDS,
-                        PHOTO_URL,
-                        true
-                )
-        );
-    }
-
-    @Test
     public void whenInitAndUpdateCategoryThenReturnThisCategory() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, TITLE,
-                        DESCRIPTION, KEYWORDS,
-                        PHOTO_URL,
-                        true
-                )
-        );
+        assertNotNull(this.service.update(URL, getCategory()));
     }
 
     @Ignore
@@ -56,7 +37,7 @@ public final class MockCategoryServiceTest
     @Ignore
     @Override
     protected Category getObject() {
-        return MockEntity.getCategory();
+        return getCategory();
     }
 
     @Ignore

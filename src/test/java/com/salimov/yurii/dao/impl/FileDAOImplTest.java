@@ -15,8 +15,7 @@ import static com.salimov.yurii.mocks.repository.MockRepository.getFileRepositor
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public final class FileDaoImplTest
-        extends DataDAOImplTest<File, Long> {
+public final class FileDaoImplTest extends DataDAOImplTest<File> {
 
     private FileDao dao;
 

@@ -11,17 +11,12 @@ import java.util.Collection;
 import java.util.Date;
 
 import static com.salimov.yurii.mocks.MockConstants.ID;
-import static com.salimov.yurii.mocks.MockConstants.NAME;
-import static com.salimov.yurii.mocks.MockConstants.TEXT;
 import static com.salimov.yurii.mocks.dao.MockDao.getResponseDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.getResponse;
 import static com.salimov.yurii.mocks.enity.MockEntity.getResponses;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public final class ResponseServiceImplTest
-        extends DataServiceImplTest<Response, Long> {
+public final class ResponseServiceImplTest extends DataServiceImplTest<Response> {
 
     private ResponseService service;
 
@@ -31,20 +26,18 @@ public final class ResponseServiceImplTest
     }
 
     @Test
-    public void whenInitAndAddTheReturnSomeResponse() {
-        assertNotNull(this.service.initAndAdd(NAME, TEXT));
+    public void whenAddTheReturnSomeResponse() {
+        assertNotNull(this.service.add(getResponse()));
     }
 
     @Test
-    public void whenInitAndUpdateTheReturnSomeResponse() {
-        assertNotNull(this.service.initAndUpdate(ID, NAME, TEXT));
+    public void whenUpdateTheReturnSomeResponse() {
+        assertNotNull(this.service.update(ID, getResponse()));
     }
 
     @Test
     public void whenSortByDateWithNullCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByDate(null, true).isEmpty()
-        );
+        assertTrue(this.service.sortByDate(null, true).isEmpty());
     }
 
     @Test
@@ -72,16 +65,12 @@ public final class ResponseServiceImplTest
 
     @Test
     public void whenGetAndSortByDateWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndSortByDate(true).isEmpty()
-        );
+        assertFalse(this.service.getAndSortByDate(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByDateWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndSortByDate(false).isEmpty()
-        );
+        assertFalse(this.service.getAndSortByDate(false).isEmpty());
     }
 
     @Test

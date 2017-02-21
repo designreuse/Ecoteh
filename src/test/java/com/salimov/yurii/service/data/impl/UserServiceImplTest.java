@@ -18,7 +18,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
 import static com.salimov.yurii.mocks.enity.MockEntity.getUsers;
 import static org.junit.Assert.*;
 
-public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
+public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     private UserService service;
 
@@ -33,31 +33,13 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
     }
 
     @Test
-    public void whenInitAndAddThenReturnSomeUser() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        NAME, LOGIN, PASSWORD,
-                        DESCRIPTION,
-                        PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL,
-                        true, true, true
-                )
-        );
+    public void whenAddThenReturnSomeUser() {
+        assertNotNull(this.service.add(getUser()));
     }
 
     @Test
-    public void whenInitAndUpdateThenReturnSomeUser() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, NAME, LOGIN, PASSWORD,
-                        DESCRIPTION,
-                        PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL,
-                        true, true, true
-                )
-        );
+    public void whenUpdateThenReturnSomeUser() {
+        assertNotNull(this.service.update(URL, getUser()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -121,26 +103,6 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenGetByNullPhoneThenThrowsIllegalArgumentException() {
-        this.service.getByPhone(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenGetByBlankPhoneThenThrowsIllegalArgumentException() {
-        this.service.getByPhone("");
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void whenGetByUnknownPhoneThenThrowsNullPointerException() {
-        this.service.getByPhone(ANY_STRING);
-    }
-
-    @Test
-    public void whenGetByPhoneThenReturnSomeUser() {
-        assertNotNull(this.service.getByPhone(PHONE));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void whenGetByNullEmailThenThrowsIllegalArgumentException() {
         this.service.getByEmail(null);
     }
@@ -179,138 +141,78 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenSortByNameWithNullCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByName(
-                        null, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByName(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByNameWithNullCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByName(
-                        null, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByName(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByNameWithEmptyCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByName(
-                        new ArrayList<>(), true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByName(new ArrayList<>(), true).isEmpty()
+       );
     }
 
     @Test
     public void whenSortByNameWithEmptyCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByName(
-                        new ArrayList<>(), true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByName(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByNameWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                this.service.sortByName(
-                        getUsers(), true
-                ).isEmpty()
-        );
+        assertFalse(this.service.sortByName(getUsers(), true).isEmpty());
     }
 
     @Test
     public void whenSortByNameWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                this.service.sortByName(
-                        getUsers(), false
-                ).isEmpty()
-        );
+        assertFalse(this.service.sortByName(getUsers(), false).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithNullCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByUrl(
-                        null, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByUrl(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithNullCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByUrl(
-                        null, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByUrl(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithEmptyCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByUrl(
-                        new ArrayList<>(), true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByUrl(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithEmptyCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByUrl(
-                        new ArrayList<>(), true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByUrl(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                this.service.sortByUrl(
-                        getUsers(), true
-                ).isEmpty()
-        );
+        assertFalse(this.service.sortByUrl(getUsers(), true).isEmpty());
     }
 
     @Test
     public void whenSortByUrlWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                this.service.sortByUrl(
-                        getUsers(), false
-                ).isEmpty()
-        );
+        assertFalse(this.service.sortByUrl(getUsers(), false).isEmpty());
     }
 
     @Test
     public void whenSortByRoleWithNullCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByRole(
-                        null, USER_ROLE, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByRole(null, USER_ROLE, true).isEmpty());
     }
 
     @Test
     public void whenSortByRoleWithNullCollectionAndFalseReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByRole(
-                        null, USER_ROLE, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByRole(null, USER_ROLE, true).isEmpty());
     }
 
     @Test
     public void whenSortByRoleWithEmptyCollectionAndTrueReversThenReturnEmptyList() {
-        assertTrue(
-                this.service.sortByRole(
-                        new ArrayList<>(),
-                        USER_ROLE, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.sortByRole(new ArrayList<>(), USER_ROLE, true).isEmpty());
     }
 
     @Test
@@ -355,16 +257,12 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenGetAndSortByUrlWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndSortByUrl(true).isEmpty()
-        );
+        assertFalse(this.service.getAndSortByUrl(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByUrlWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndSortByUrl(false).isEmpty()
-        );
+        assertFalse(this.service.getAndSortByUrl(false).isEmpty());
     }
 
     @Test
@@ -505,20 +403,12 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
 
     @Test
     public void whenFilteredByValidWithEmptyCollectionThenReturnEmptyList() {
-        assertTrue(
-                this.service.filteredByValid(
-                        new ArrayList<>()
-                ).isEmpty()
-        );
+        assertTrue(this.service.filteredByValid(new ArrayList<>()).isEmpty());
     }
 
     @Test
     public void whenFilteredByValidThenReturnSomeList() {
-        assertFalse(
-                this.service.filteredByValid(
-                        getUsers()
-                ).isEmpty()
-        );
+        assertFalse(this.service.filteredByValid(getUsers()).isEmpty());
     }
 
     @Test
@@ -553,23 +443,6 @@ public final class UserServiceImplTest extends DataServiceImplTest<User, Long> {
     @Test
     public void whenRemoveByUrlThenDoIt() {
         this.service.removeByUrl(URL);
-    }
-
-    @Test
-    public void whenRemoveByNullLoginThenDoNothing() {
-        this.service.removeByLogin(null);
-    }
-
-    @Test
-    public void whenRemoveByBlankLoginThenDoNothing() {
-        this.service.removeByLogin("");
-        this.service.removeByLogin(" ");
-        this.service.removeByLogin("  ");
-    }
-
-    @Test
-    public void whenRemoveByLoginThenDoIt() {
-        this.service.removeByLogin(LOGIN);
     }
 
     @Ignore

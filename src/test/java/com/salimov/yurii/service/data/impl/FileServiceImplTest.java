@@ -12,7 +12,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getFile;
 import static com.salimov.yurii.mocks.enity.MockEntity.getFiles;
 import static com.salimov.yurii.mocks.properties.MockContentProperties.getContentProperties;
 
-public final class FileServiceImplTest extends DataServiceImplTest<File, Long> {
+public final class FileServiceImplTest extends DataServiceImplTest<File> {
 
     private FileService service;
 

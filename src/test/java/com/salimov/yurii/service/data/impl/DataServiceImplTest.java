@@ -12,7 +12,7 @@ import static com.salimov.yurii.mocks.MockConstants.ID;
 import static com.salimov.yurii.mocks.MockConstants.UNKNOWN_ID;
 import static org.junit.Assert.*;
 
-public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> {
+public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenAddNullThenReturnsIt() {
@@ -42,12 +42,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenAddAllValidModelsThenReturnsIt() {
-        assertFalse(
-                getService()
-                        .addAll(
-                                getObjects()
-                        ).isEmpty()
-        );
+        assertFalse(getService().addAll(getObjects()).isEmpty());
     }
 
     @Test
@@ -58,19 +53,12 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     @Test
     public void whenUpdateInvalidModelThenReturnsIt() {
         final T invalidModel = getInvalidObject();
-        assertEquals(
-                invalidModel,
-                getService().update(invalidModel)
-        );
+        assertEquals(invalidModel, getService().update(invalidModel));
     }
 
     @Test
     public void whenUpdateValidModelThenReturnsUpdatingModel() {
-        assertNotNull(
-                getService().update(
-                        getObject()
-                )
-        );
+        assertNotNull(getService().update(getObject()));
     }
 
     @Test
@@ -79,24 +67,14 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     }
 
     @Test
-    public void whenUpdateAllInvalidModelThenReturnEmptyCollection() {
-        assertTrue(
-                getService().update(
-                        new ArrayList<>()
-                ).isEmpty()
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenGetModelByNullIdThenThrowIllegalArgumentException()
-            throws IllegalAccessException {
-        getService().get(null);
+    public void whenUpdateAllInvalidModelThenReturnEmptyCollection() {assertTrue(
+                getService().update(new ArrayList<>()).isEmpty());
     }
 
     @Test(expected = NullPointerException.class)
     public void whenGetModelByUnknownIdThenThrowNullPointerException()
             throws NullPointerException {
-        getService().get((E) UNKNOWN_ID);
+        getService().get(UNKNOWN_ID);
     }
 
     @Test
@@ -115,30 +93,18 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     }
 
     @Test
-    public void whenExistsByNullIdThenReturnFalse() {
-        assertFalse(getService().exists((E) null));
-    }
-
-    @Test
     public void whenExistsByUnknownIdThenReturnFalse() {
-        assertFalse(getService().exists((E) UNKNOWN_ID));
+        assertFalse(getService().exists(UNKNOWN_ID));
     }
 
     @Test
     public void whenExistsByIdThenReturnTrue() {
-        assertNotNull(getService().exists((E) ID));
+        assertNotNull(getService().exists(ID));
     }
 
     @Test
     public void whenExistsByNullModelThenReturnsFalse() {
-        assertFalse(getService().exists((T) null));
-    }
-
-    @Test
-    public void whenExistsByModelWithIdThenReturnsFalse() {
-        final T model = getObject();
-        model.setId(null);
-        assertFalse(getService().exists(model));
+        assertFalse(getService().exists(null));
     }
 
     @Test
@@ -152,29 +118,17 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenSubListForNullThenReturnsEmptyList() {
-        assertTrue(
-                getService()
-                        .subList(null, 1, 1)
-                        .isEmpty()
-        );
+        assertTrue(getService().subList(null, 1, 1).isEmpty());
     }
 
     @Test
     public void whenSubListForEmptyCollectionsThenReturnsEmptyList() {
-        assertTrue(
-                getService().subList(
-                        new ArrayList<>(), 1, 1
-                ).isEmpty()
-        );
+        assertTrue(getService().subList(new ArrayList<>(), 1, 1).isEmpty());
     }
 
     @Test
     public void whenSubListWithFromIndexGreatToIndexThenReturnEmptyList() {
-        assertFalse(
-                getService().subList(
-                        getObjects(), 2, 1
-                ).isEmpty()
-        );
+        assertFalse(getService().subList(getObjects(), 2, 1).isEmpty());
     }
 
     @Test
@@ -212,11 +166,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenGetAndSubListWithFromIndexGreatToIndexThenReturnEmptyList() {
-        assertFalse(
-                getService()
-                        .getAndSubList(2, 1)
-                        .isEmpty()
-        );
+        assertFalse(getService().getAndSubList(2, 1).isEmpty());
     }
 
     @Test
@@ -240,11 +190,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
 
     @Test
     public void whenFilteredByValidForNullThenReturnsEmptyList() {
-        assertTrue(
-                getService()
-                        .filteredByValid(null)
-                        .isEmpty()
-        );
+        assertTrue(getService().filteredByValid(null).isEmpty());
     }
 
     @Test
@@ -277,13 +223,8 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     }
 
     @Test
-    public void whenRemoveByNullIdThenDoNothing() {
-        getService().remove((E) null);
-    }
-
-    @Test
     public void whenRemoveByIdThenDoIt() {
-        getService().remove((E) ID);
+        getService().remove(ID);
     }
 
     @Test
@@ -337,7 +278,7 @@ public abstract class DataServiceImplTest<T extends Model<E>, E extends Number> 
     }
 
     @Ignore
-    protected abstract DataService<T, E> getService();
+    protected abstract DataService<T> getService();
 
     @Ignore
     protected abstract T getObject();

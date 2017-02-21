@@ -1,23 +1,7 @@
 package com.salimov.yurii.dao.impl;
 
-import com.salimov.yurii.dao.interfaces.UserDao;
-import com.salimov.yurii.entity.User;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.util.Collection;
-
-import static com.salimov.yurii.mocks.MockConstants.*;
-import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
-import static com.salimov.yurii.mocks.enity.MockEntity.getUsers;
-import static com.salimov.yurii.mocks.repository.MockRepository.getUserRepository;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-public final class UserDaoImplTest
-        extends DataDAOImplTest<User, Long> {
-
+public final class UserDaoImplTest /*extends DataDAOImplTest<User>*/{
+/*
     private UserDao dao;
 
     @Before
@@ -111,5 +95,5 @@ public final class UserDaoImplTest
     @Override
     protected Collection<User> getObjects() {
         return getUsers();
-    }
+    }*/
 }

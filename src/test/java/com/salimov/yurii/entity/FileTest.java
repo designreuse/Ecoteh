@@ -70,38 +70,6 @@ public final class FileTest extends ModelTest<File> {
     }
 
     @Test
-    public void whenInitializeObjectWithNullParametersThenGetNull() {
-        final File file = getObject();
-        file.initialize(null, null);
-        assertNull(file.getTitle());
-        assertNull(file.getUrl());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull() {
-        final File file = getObject();
-        file.initialize("", "");
-        assertNull(file.getTitle());
-        assertNull(file.getUrl());
-        file.initialize(" ", " ");
-        assertNull(file.getTitle());
-        assertNull(file.getUrl());
-        file.initialize("   ", "   ");
-        assertNull(file.getTitle());
-        assertNull(file.getUrl());
-    }
-
-    @Test
-    public void whenInitializeObjectWithValidParametersThenGetThisValue() {
-        final File file = getObject();
-        file.initialize(TITLE, URL);
-        assertNotNull(file.getTitle());
-        assertNotNull(file.getUrl());
-        assertEquals(file.getTitle(), TITLE);
-        assertEquals(file.getUrl(), URL);
-    }
-
-    @Test
     public void whenSetNullTitleThenGetNull() {
         final File file = getObject();
         file.setTitle(null);

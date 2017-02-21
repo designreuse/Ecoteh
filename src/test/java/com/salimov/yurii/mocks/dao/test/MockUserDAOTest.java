@@ -57,28 +57,6 @@ public class MockUserDAOTest extends MockDataDAOTest<User> {
         assertNotNull(this.dao.getByLogin(LOGIN));
     }
 
-    @Test
-    public void whenGetByInvalidPhoneThenReturnNull() {
-        assertNull(this.dao.getByPhone(null));
-        assertNull(this.dao.getByPhone(ANY_STRING));
-    }
-
-    @Test
-    public void whenGetValidPhoneThenReturnSomeUser() {
-        assertNotNull(this.dao.getByPhone(PHONE));
-    }
-
-    @Test
-    public void whenGetByInvalidEmailThenReturnNull() {
-        assertNull(this.dao.getByEmail(null));
-        assertNull(this.dao.getByEmail(ANY_STRING));
-    }
-
-    @Test
-    public void whenGetValidEmailThenReturnSomeUser() {
-        assertNotNull(this.dao.getByEmail(EMAIL));
-    }
-
     @Ignore
     @Override
     protected UserDao getDao() {

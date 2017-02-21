@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
 
-public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> {
+public abstract class ContentTest<T extends Content> extends ModelTest<T> {
 
     @Test
     public void toStringTest() {
@@ -61,56 +61,6 @@ public abstract class ContentTest<T extends Content<Long>> extends ModelTest<T> 
         for (int i = 0; i < 10; i++) {
             assertEquals(content.hashCode(), value);
         }
-    }
-
-    @Test
-    public void whenInitializeObjectWithNullParametersThenGetNull() {
-        final T content = getObject();
-        content.initialize(null, null, null);
-        assertNull(content.getTitle());
-        assertNull(content.getDescription());
-        assertNull(content.getKeywords());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
-        final T content = getObject();
-        content.initialize("", "", "");
-        assertNull(content.getTitle());
-        assertNull(content.getDescription());
-        assertNull(content.getKeywords());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
-        final T content = getObject();
-        content.initialize(" ", " ", " ");
-        assertNull(content.getTitle());
-        assertNull(content.getDescription());
-        assertNull(content.getKeywords());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
-        final T content = getObject();
-        content.initialize("  ", "  ", "  ");
-        assertNull(content.getTitle());
-        assertNull(content.getDescription());
-        assertNull(content.getKeywords());
-    }
-
-    @Test
-    public void whenInitializeObjectWithValidParametersThenGetThisValue() {
-        final T content = getObject();
-        content.initialize(
-                TITLE, DESCRIPTION, KEYWORDS
-        );
-        assertNotNull(content.getTitle());
-        assertNotNull(content.getDescription());
-        assertNotNull(content.getKeywords());
-        assertEquals(content.getTitle(), TITLE);
-        assertEquals(content.getDescription(), DESCRIPTION);
-        assertEquals(content.getKeywords(), KEYWORDS);
     }
 
     @Test

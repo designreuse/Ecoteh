@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static com.salimov.yurii.mocks.MockConstants.ID;
 import static com.salimov.yurii.mocks.MockConstants.UNKNOWN_ID;
 
-public abstract class MockDataServiceTest<T extends Model<Long>> {
+public abstract class MockDataServiceTest<T extends Model> {
 
     @Test
     public void whenGetMockServiceThenReturnNotNull() {
@@ -32,11 +32,7 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
 
     @Test
     public void whenAddModelThenReturnThisModel() {
-        assertNotNull(
-                getService().add(
-                        getObject()
-                )
-        );
+        assertNotNull(getService().add(getObject()));
     }
 
     @Test
@@ -48,20 +44,12 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
 
     @Test
     public void whenUpdateModelThenReturnThisModel() {
-        assertNotNull(
-                getService()
-                        .update(
-                                getService()
-                                        .add(getObject())
-                        )
-        );
+        assertNotNull(getService().update(getService().add(getObject())));
     }
 
     @Test
     public void whenUpdateModelsThenReturnThisModels() {
-        assertNotNull(
-                getService().update(getObjects())
-        );
+        assertNotNull(getService().update(getObjects()));
     }
 
     @Test
@@ -78,7 +66,7 @@ public abstract class MockDataServiceTest<T extends Model<Long>> {
 
     @Test
     public void whenExistsByInvalidModelThenReturnFalse() {
-        assertFalse(getService().exists((Model) null));
+        assertFalse(getService().exists(null));
     }
 
     @Test

@@ -17,8 +17,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getUsers;
 import static com.salimov.yurii.mocks.service.data.MockServices.getUserService;
 import static org.junit.Assert.assertNotNull;
 
-public final class MockUserServiceTest
-        extends MockDataServiceTest<User> {
+public final class MockUserServiceTest extends MockDataServiceTest<User> {
 
     private UserService service;
 
@@ -28,38 +27,18 @@ public final class MockUserServiceTest
     }
 
     @Test
-    public void whenInitAndAddUserThenReturnThisUser() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        NAME, LOGIN, PASSWORD,
-                        DESCRIPTION,
-                        PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL,
-                        true, true, true
-                )
-        );
+    public void whenAddUserThenReturnThisUser() {
+        assertNotNull(this.service.add(getUser()));
     }
 
     @Test
-    public void whenInitAndUpdateUserThenReturnThisUser() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, NAME, LOGIN, PASSWORD,
-                        DESCRIPTION,
-                        PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL,
-                        true, true, true
-                )
-        );
+    public void whenUpdateUserThenReturnThisUser() {
+        assertNotNull(this.service.update(URL, getUser()));
     }
 
     @Test
     public void whenGetUserByNameThenReturnSomeUser() {
-        assertNotNull(
-                this.service.getByName(NAME)
-        );
+        assertNotNull(this.service.getByName(NAME));
     }
 
     @Test
@@ -75,11 +54,6 @@ public final class MockUserServiceTest
     @Test
     public void whenGetUserByEmailThenReturnSomeUser() {
         assertNotNull(this.service.getByEmail(EMAIL));
-    }
-
-    @Test
-    public void whenGetUserByPhoneThenReturnSomeUser() {
-        assertNotNull(this.service.getByPhone(PHONE));
     }
 
     @Test
@@ -105,40 +79,20 @@ public final class MockUserServiceTest
     @Test
     public void whenSortUsersByNameThenReturnSortUsers() {
         final List<User> users = getUsers();
-        assertNotNull(
-                this.service.sortByName(users, true)
-        );
-        assertNotNull(
-                this.service.sortByName(users, false)
-        );
+        assertNotNull(this.service.sortByName(users, true));
+        assertNotNull(this.service.sortByName(users, false));
     }
 
     @Test
     public void whenSortUsersByUrlThenReturnSortUsers() {
-        assertNotNull(
-                this.service.sortByUrl(
-                        getUsers(), true
-                )
-        );
-        assertNotNull(
-                this.service.sortByUrl(
-                        getUsers(), false
-                )
-        );
+        assertNotNull(this.service.sortByUrl(getUsers(), true));
+        assertNotNull(this.service.sortByUrl(getUsers(), false));
     }
 
     @Test
     public void whenSortUsersByRoleThenReturnSortUsers() {
-        assertNotNull(
-                this.service.sortByRole(
-                        getUsers(), USER_ROLE, true
-                )
-        );
-        assertNotNull(
-                this.service.sortByRole(
-                        getUsers(), USER_ROLE, false
-                )
-        );
+        assertNotNull(this.service.sortByRole(getUsers(), USER_ROLE, true));
+        assertNotNull(this.service.sortByRole(getUsers(), USER_ROLE, false));
     }
 
     @Test
@@ -155,54 +109,32 @@ public final class MockUserServiceTest
 
     @Test
     public void whenGetAndSortUsersByRoleThenReturnSortUsers() {
-        assertNotNull(
-                this.service.getAndSortByRole(
-                        USER_ROLE, true
-                )
-        );
-        assertNotNull(
-                this.service.getAndSortByRole(
-                        USER_ROLE, false
-                )
-        );
+        assertNotNull(this.service.getAndSortByRole(USER_ROLE, true));
+        assertNotNull(this.service.getAndSortByRole(USER_ROLE, false));
     }
 
     @Test
     public void whenFilterUsersByRoleThenReturnReturnFilterUsers() {
-        assertNotNull(
-                this.service.filterByRole(
-                        getUsers(),
-                        USER_ROLE
-                )
-        );
+        assertNotNull(this.service.filterByRole(getUsers(), USER_ROLE));
     }
 
     @Test
     public void whenFilterUsersByRolesThenReturnReturnFilterUsers() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertNotNull(
-                this.service.filterByRoles(
-                        getUsers(),
-                        roles
-                )
-        );
+        assertNotNull(this.service.filterByRoles(getUsers(), roles));
     }
 
     @Test
     public void whenGetAndFilterUsersByRoleThenReturnReturnFilterUsers() {
-        assertNotNull(
-                this.service.getAndFilterByRole(USER_ROLE)
-        );
+        assertNotNull(this.service.getAndFilterByRole(USER_ROLE));
     }
 
     @Test
     public void whenGetAndFilterUsersByRolesThenReturnReturnFilterUsers() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertNotNull(
-                this.service.getAndFilterByRoles(roles)
-        );
+        assertNotNull(this.service.getAndFilterByRoles(roles));
     }
 
     @Ignore

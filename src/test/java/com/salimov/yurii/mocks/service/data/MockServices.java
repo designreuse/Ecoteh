@@ -1,7 +1,6 @@
 package com.salimov.yurii.mocks.service.data;
 
-import com.salimov.yurii.entity.Content;
-import com.salimov.yurii.entity.Model;
+import com.salimov.yurii.entity.*;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.*;
 import com.salimov.yurii.service.search.SearchService;
@@ -98,23 +97,7 @@ public final class MockServices {
     private static void initArticleService() {
         articleService = mock(ArticleService.class);
         contentService(articleService, getArticle(), getArticles());
-        when(
-                articleService.initAndAdd(
-                        TITLE,
-                        DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER,
-                        getCategory(),
-                        true
-                )
-        ).thenReturn(getArticle());
-        when(
-                articleService.initAndUpdate(
-                        URL, TITLE,
-                        DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER,
-                        getCategory(), true
-                )
-        ).thenReturn(getArticle());
+        when(articleService.update(URL, getArticle())).thenReturn(getArticle());
         when(articleService.getByNumber(NUMBER, true)).thenReturn(getArticle());
         when(articleService.getByNumber(NUMBER, false)).thenReturn(getArticle());
         when(articleService.sortByNumber(getArticles(), true)).thenReturn(getArticles());
@@ -136,49 +119,14 @@ public final class MockServices {
     private static void initCategoryService() {
         categoryService = mock(CategoryService.class);
         contentService(categoryService, getCategory(), getCategories());
-        when(
-                categoryService.initAndAdd(
-                        TITLE,
-                        DESCRIPTION, KEYWORDS,
-                        PHOTO_URL,
-                        true
-                )
-        ).thenReturn(getCategory());
-        when(
-                categoryService.initAndUpdate(
-                        URL, TITLE,
-                        DESCRIPTION, KEYWORDS,
-                        PHOTO_URL,
-                        true
-                )
-        ).thenReturn(getCategory());
+        when(categoryService.update(URL, getCategory())).thenReturn(getCategory());
     }
 
     private static void initCompanyService() {
         companyService = mock(CompanyService.class);
         contentService(companyService, getCompany(), getCompanies());
-        when(
-                companyService.initAndAdd(
-                        TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL,
-                        true
-                )
-        ).thenReturn(getCompany());
-        when(
-                companyService.initAndUpdate(
-                        URL, TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL,
-                        true
-                )
-        ).thenReturn(getCompany());
+        when(companyService.add(getCompany())).thenReturn(getCompany());
+        when(companyService.update(URL, getCompany())).thenReturn(getCompany());
         when(companyService.getMainCompany()).thenReturn(getCompany());
         when(companyService.getPartners(true)).thenReturn(getCompanies());
     }
@@ -188,8 +136,8 @@ public final class MockServices {
         dateService(fileService, getFile(), getFiles());
         when(fileService.getByTitle(TITLE)).thenReturn(getFile());
         when(fileService.getByUrl(URL)).thenReturn(getFile());
-        when(fileService.initAndAdd(TITLE, null)).thenReturn(getFile());
-        when(fileService.initAndUpdate(ID, TITLE, null)).thenReturn(getFile());
+        when(fileService.add(TITLE, null)).thenReturn(getFile());
+        when(fileService.update(ID, TITLE, null)).thenReturn(getFile());
         when(fileService.deleteFile(PATH)).thenReturn(true);
     }
 
@@ -201,8 +149,8 @@ public final class MockServices {
     private static void initResponseService() {
         responseService = mock(ResponseService.class);
         dateService(responseService, getResponse(), getResponses());
-        when(responseService.initAndAdd(NAME, TEXT)).thenReturn(getResponse());
-        when(responseService.initAndUpdate(ID, NAME, TEXT)).thenReturn(getResponse());
+        when(responseService.add(getResponse())).thenReturn(getResponse());
+        when(responseService.update(ID, getResponse())).thenReturn(getResponse());
         when(responseService.sortByDate(getResponses(), true)).thenReturn(getResponses());
         when(responseService.sortByDate(getResponses(), false)).thenReturn(getResponses());
         when(responseService.getAndSortByDate(true)).thenReturn(getResponses());
@@ -214,31 +162,12 @@ public final class MockServices {
     private static void initUserService() {
         userService = mock(UserService.class);
         dateService(userService, getUser(), getUsers());
-        when(
-                userService.initAndAdd(
-                        NAME, LOGIN, PASSWORD,
-                        DESCRIPTION,
-                        PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL,
-                        true, true, true)
-        ).thenReturn(getUser());
-        when(
-                userService.initAndUpdate(
-                        URL, NAME,
-                        LOGIN, PASSWORD,
-                        DESCRIPTION,
-                        PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL,
-                        true, true, true
-                )
-        ).thenReturn(getUser());
+        when(userService.add(getUser())).thenReturn(getUser());
+        when(userService.update(URL, getUser())).thenReturn(getUser());
         when(userService.getByName(NAME)).thenReturn(getUser());
         when(userService.getByUrl(URL)).thenReturn(getUser());
         when(userService.getByLogin(LOGIN)).thenReturn(getUser());
         when(userService.getByEmail(EMAIL)).thenReturn(getUser());
-        when(userService.getByPhone(PHONE)).thenReturn(getUser());
         when(userService.getAuthenticatedUser()).thenReturn(getUser());
         when(userService.getMainAdmin()).thenReturn(getUser());
         when(userService.getAdmins()).thenReturn(getUsers());
@@ -263,7 +192,7 @@ public final class MockServices {
         when(userService.getAndFilterByRoles(roles)).thenReturn(getUsers());
     }
 
-    private static <T extends Content<Long>, E extends ContentService<T, Long>> void contentService(
+    private static <T extends Content, E extends ContentService<T>> void contentService(
             final E service,
             final T content,
             final Collection<T> contents
@@ -303,7 +232,7 @@ public final class MockServices {
         when(service.sort(contents, new ContentComparator.ByTitle<>())).thenReturn(new ArrayList<>(contents));
     }
 
-    private static <T extends Model<Long>, E extends DataService<T, Long>> void dateService(
+    private static <T extends Model, E extends DataService<T>> void dateService(
             final E service,
             final T model,
             final Collection<T> models
@@ -313,7 +242,6 @@ public final class MockServices {
         when(service.update(model)).thenReturn(model);
         when(service.update(models)).thenReturn(models);
         when(service.get(ID)).thenReturn(model);
-        when(service.get(null)).thenThrow(new IllegalArgumentException("Model id is null!"));
         when(service.get(UNKNOWN_ID)).thenThrow(
                 new NullPointerException("Can`t find Model by id " + UNKNOWN_ID + "!")
         );
@@ -327,7 +255,6 @@ public final class MockServices {
         when(service.exists(UNKNOWN_ID)).thenReturn(false);
         when(service.exists((T) null)).thenReturn(false);
         final T temp = (T) model.clone();
-        temp.setId(null);
         when(service.exists(temp)).thenReturn(false);
         when(service.exists(model)).thenReturn(true);
         when(service.subList(models, INDEX, INDEX)).thenReturn(new ArrayList<T>(models));

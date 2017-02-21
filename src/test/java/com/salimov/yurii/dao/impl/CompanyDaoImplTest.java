@@ -18,8 +18,7 @@ import static com.salimov.yurii.mocks.repository.MockRepository.getCompanyReposi
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public final class CompanyDaoImplTest
-        extends DataDAOImplTest<Company, Long> {
+public final class CompanyDaoImplTest extends DataDAOImplTest<Company> {
 
     private CompanyDao dao;
 
@@ -70,7 +69,7 @@ public final class CompanyDaoImplTest
 
     @Ignore
     @Override
-    protected DataDao<Company, Long> getDao() {
+    protected DataDao<Company> getDao() {
         return this.dao;
     }
 

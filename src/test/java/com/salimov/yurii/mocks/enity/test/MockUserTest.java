@@ -20,12 +20,6 @@ public final class MockUserTest extends MockModelTest<User> {
         assertNotNull(user.getName());
         assertNotNull(user.getLogin());
         assertNotNull(user.getPassword());
-        assertNotNull(user.getEmail());
-        assertNotNull(user.getPhone());
-        assertNotNull(user.getVkontakte());
-        assertNotNull(user.getFacebook());
-        assertNotNull(user.getTwitter());
-        assertNotNull(user.getSkype());
         assertNotNull(user.getDescription());
         assertNull(user.getPhotoUrl());
     }

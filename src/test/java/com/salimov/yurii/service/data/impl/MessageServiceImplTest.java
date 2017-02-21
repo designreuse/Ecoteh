@@ -11,8 +11,7 @@ import static com.salimov.yurii.mocks.dao.MockDao.getMessageDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.getMessage;
 import static com.salimov.yurii.mocks.enity.MockEntity.getMessages;
 
-public class MessageServiceImplTest
-        extends DataServiceImplTest<Message, Long> {
+public class MessageServiceImplTest extends DataServiceImplTest<Message> {
 
     private MessageService service;
 

@@ -10,11 +10,11 @@ import org.junit.Test;
 import java.util.Collection;
 
 import static com.salimov.yurii.mocks.MockConstants.*;
+import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
 import static com.salimov.yurii.mocks.service.data.MockServices.getCompanyService;
 import static org.junit.Assert.assertNotNull;
 
-public final class MockCompanyServiceTest
-        extends MockContentServiceTest<Company> {
+public final class MockCompanyServiceTest extends MockContentServiceTest<Company> {
 
     private CompanyService service;
 
@@ -24,33 +24,13 @@ public final class MockCompanyServiceTest
     }
 
     @Test
-    public void whenInitAndAddCompanyThenReturnThisCompany() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL,
-                        true
-                )
-        );
+    public void whenAddCompanyThenReturnThisCompany() {
+        assertNotNull(this.service.add(getCompany()));
     }
 
     @Test
-    public void whenInitAndUpdateCompanyThenReturnCompany() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL,
-                        true
-                )
-        );
+    public void whenUpdateCompanyThenReturnCompany() {
+        assertNotNull(this.service.update(URL, getCompany()));
     }
 
     @Test
@@ -72,7 +52,7 @@ public final class MockCompanyServiceTest
     @Ignore
     @Override
     protected Company getObject() {
-        return MockEntity.getCompany();
+        return getCompany();
     }
 
     @Ignore

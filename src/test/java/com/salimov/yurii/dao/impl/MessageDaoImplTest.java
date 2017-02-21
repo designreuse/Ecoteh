@@ -11,6 +11,7 @@ import java.util.Collection;
 
 import static com.salimov.yurii.mocks.enity.MockEntity.getMessage;
 import static com.salimov.yurii.mocks.enity.MockEntity.getMessages;
+import static com.salimov.yurii.mocks.repository.MockRepository.getMessageRepository;
 import static org.junit.Assert.*;
 
 public final class MessageDaoImplTest {
@@ -19,7 +20,7 @@ public final class MessageDaoImplTest {
 
     @Before
     public void beforeTest() {
-        this.dao = new MessageDaoImpl();
+        this.dao = new MessageDaoImpl(getMessageRepository());
         Cache.clear();
     }
 

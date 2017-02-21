@@ -14,8 +14,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getResponses;
 import static com.salimov.yurii.mocks.service.data.MockServices.getResponseService;
 import static org.junit.Assert.assertNotNull;
 
-public final class MockResponseServiceTest
-        extends MockDataServiceTest<Response> {
+public final class MockResponseServiceTest extends MockDataServiceTest<Response> {
 
     private ResponseService service;
 
@@ -25,60 +24,35 @@ public final class MockResponseServiceTest
     }
 
     @Test
-    public void whenInitAndAddResponseThenRetutnThisResponse() {
-        assertNotNull(
-                this.service.initAndAdd(NAME, TEXT)
-        );
+    public void whenAddResponseThenRetutnThisResponse() {
+        assertNotNull(this.service.add(getResponse()));
     }
 
     @Test
-    public void whenInitAndUpdateResponseThenReturnThisResponse() {
-        assertNotNull(
-                this.service.initAndUpdate(ID, NAME, TEXT)
-        );
+    public void whenUpdateResponseThenReturnThisResponse() {
+        assertNotNull(this.service.update(ID, getResponse()));
     }
 
     @Test
     public void whenSortRensonsesByDateThenReturnSortResponses() {
-        assertNotNull(
-                this.service.sortByDate(
-                        getResponses(), true
-                )
-        );
-        assertNotNull(
-                this.service.sortByDate(
-                        getResponses(), false
-                )
-        );
+        assertNotNull(this.service.sortByDate(getResponses(), true));
+        assertNotNull(this.service.sortByDate(getResponses(), false));
     }
 
     @Test
     public void whenGetAndSortRensonsesByDateThenReturnSortResponses() {
-        assertNotNull(
-                this.service.getAndSortByDate(true)
-        );
-        assertNotNull(
-                this.service.getAndSortByDate(false)
-        );
+        assertNotNull(this.service.getAndSortByDate(true));
+        assertNotNull(this.service.getAndSortByDate(false));
     }
 
     @Test
     public void whenFilterResponsesByDateThenReturnFilterResponses() {
-        assertNotNull(
-                this.service.filterByDate(
-                        getResponses(),
-                        DATE, DATE
-                )
-        );
+        assertNotNull(this.service.filterByDate(getResponses(), DATE, DATE));
     }
 
     @Test
     public void whenGetAndFilterResponsesByDateThenReturnFilterResponses() {
-        assertNotNull(
-                this.service.getAndFilterByDate(
-                        DATE, DATE
-                )
-        );
+        assertNotNull(this.service.getAndFilterByDate(DATE, DATE));
     }
 
     @Ignore

@@ -17,8 +17,7 @@ import static com.salimov.yurii.mocks.repository.MockRepository.getCategoryRepos
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public final class CategoryDaoImplTest
-        extends DataDAOImplTest<Category, Long> {
+public final class CategoryDaoImplTest extends DataDAOImplTest<Category> {
 
     private CategoryDao dao;
 

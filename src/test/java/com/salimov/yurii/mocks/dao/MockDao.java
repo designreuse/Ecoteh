@@ -136,15 +136,9 @@ public final class MockDao {
         when(userDao.getByLogin(LOGIN)).thenReturn(user);
         when(userDao.getByLogin(ANY_STRING)).thenReturn(null);
         when(userDao.getByLogin(null)).thenReturn(null);
-        when(userDao.getByPhone(PHONE)).thenReturn(user);
-        when(userDao.getByPhone(ANY_STRING)).thenReturn(null);
-        when(userDao.getByPhone(null)).thenReturn(null);
-        when(userDao.getByEmail(EMAIL)).thenReturn(user);
-        when(userDao.getByEmail(ANY_STRING)).thenReturn(null);
-        when(userDao.getByEmail(null)).thenReturn(null);
     }
 
-    private static <T extends Content<Long>, E extends ContentDao<T, Long>> void contentDao(
+    private static <T extends Content, E extends ContentDao<T>> void contentDao(
             final E dao,
             final T content,
             final T emptyContent,
@@ -159,7 +153,7 @@ public final class MockDao {
         when(dao.getByUrl(null)).thenReturn(null);
     }
 
-    private static <T extends Model<Long>, E extends DataDao<T, Long>> void dataDao(
+    private static <T extends Model, E extends DataDao<T>> void dataDao(
             final E dao,
             final T model,
             final T emptyModel,
@@ -175,10 +169,8 @@ public final class MockDao {
         when(dao.update(null)).thenReturn(null);
         when(dao.get(ID)).thenReturn(model);
         when(dao.get(UNKNOWN_ID)).thenReturn(null);
-        when(dao.get(null)).thenReturn(null);
         when(dao.getAll()).thenReturn(models);
         when(dao.exists(ID)).thenReturn(true);
         when(dao.exists(UNKNOWN_ID)).thenReturn(false);
-        when(dao.exists(null)).thenReturn(false);
     }
 }

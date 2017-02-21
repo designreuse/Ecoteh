@@ -12,7 +12,7 @@ import static com.salimov.yurii.mocks.MockConstants.ID;
 import static com.salimov.yurii.mocks.MockConstants.UNKNOWN_ID;
 import static org.junit.Assert.*;
 
-public abstract class MockDataDAOTest<T extends Model<Long>> {
+public abstract class MockDataDAOTest<T extends Model> {
 
     @Test
     public void whenGetMockDaoThenReturnNotNull() {
@@ -60,12 +60,6 @@ public abstract class MockDataDAOTest<T extends Model<Long>> {
     }
 
     @Test
-    public void whenGetByInvalidIdThenReturnNull() {
-        assertNull(getDao().get(null));
-        assertNull(getDao().get(UNKNOWN_ID));
-    }
-
-    @Test
     public void whenGetByValidIdThenReturnSomeModel() {
         assertNotNull(getDao().get(ID));
     }
@@ -77,7 +71,6 @@ public abstract class MockDataDAOTest<T extends Model<Long>> {
 
     @Test
     public void whenExistsByInvalidIdThenReturnFalse() {
-        assertFalse(getDao().exists(null));
         assertFalse(getDao().exists(UNKNOWN_ID));
     }
 

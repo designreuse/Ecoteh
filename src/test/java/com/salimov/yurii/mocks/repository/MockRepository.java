@@ -22,6 +22,7 @@ public class MockRepository {
     private static CategoryRepository categoryRepository;
     private static CompanyRepository companyRepository;
     private static FileRepository fileRepository;
+    private static MessageRepository messageRepository;
     private static ResponseRepository responseRepository;
     private static UserRepository userRepository;
 
@@ -51,6 +52,13 @@ public class MockRepository {
             initFileRepository();
         }
         return fileRepository;
+    }
+
+    public static MessageRepository getMessageRepository() {
+        if (messageRepository == null) {
+            initMessageRepository();
+        }
+        return messageRepository;
     }
 
     public static ResponseRepository getResponseRepository() {
@@ -141,6 +149,15 @@ public class MockRepository {
         when(fileRepository.findByUrl(null)).thenReturn(null);
     }
 
+    private static void initMessageRepository() {
+        messageRepository = mock(MessageRepository.class);
+        initDataRepository(
+                messageRepository,
+                getMessage(),
+                getMessages()
+        );
+    }
+
     private static void initResponseRepository() {
         responseRepository = mock(ResponseRepository.class);
         initDataRepository(
@@ -175,15 +192,9 @@ public class MockRepository {
                 )
         ).thenReturn(null);
         when(userRepository.findByEncryptedLogin(null)).thenReturn(null);
-        when(userRepository.findByPhone(PHONE)).thenReturn(user);
-        when(userRepository.findByPhone(ANY_STRING)).thenReturn(null);
-        when(userRepository.findByPhone(null)).thenReturn(null);
-        when(userRepository.findByEmail(EMAIL)).thenReturn(user);
-        when(userRepository.findByEmail(ANY_STRING)).thenReturn(null);
-        when(userRepository.findByEmail(null)).thenReturn(null);
     }
 
-    private static <T extends Model<Long>, E extends DataRepository<T, Long>> void initDataRepository(
+    private static <T extends Model, E extends DataRepository<T>> void initDataRepository(
             final E repository,
             final T model,
             final Collection<T> models

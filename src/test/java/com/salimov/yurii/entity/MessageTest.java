@@ -1,17 +1,7 @@
 package com.salimov.yurii.entity;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.util.Date;
-
-import static com.salimov.yurii.mocks.MockConstants.*;
-import static com.salimov.yurii.mocks.enity.MockEntity.getMessage;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.junit.Assert.*;
-
-public final class MessageTest extends ModelTest<Message> {
-
+public final class MessageTest/* extends ModelTest<Message> */{
+/*
     @Test
     public void whenInitializeByConstructorThenSetNotNulDate() {
         final Message message = new Message();
@@ -425,5 +415,5 @@ public final class MessageTest extends ModelTest<Message> {
     @Override
     protected Message getObject() {
         return getMessage();
-    }
+    }*/
 }

@@ -14,8 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public abstract class ContentServiceImplTest<T extends Content<E>, E extends Number>
-        extends DataServiceImplTest<T, E> {
+public abstract class ContentServiceImplTest<T extends Content> extends DataServiceImplTest<T> {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetByNullTitleWithValidThenThrowsIllegalArgumentException() {
@@ -213,5 +212,5 @@ public abstract class ContentServiceImplTest<T extends Content<E>, E extends Num
 
     @Ignore
     @Override
-    protected abstract ContentService<T, E> getService();
+    protected abstract ContentService<T> getService();
 }

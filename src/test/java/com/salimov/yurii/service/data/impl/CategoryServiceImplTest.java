@@ -18,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public final class CategoryServiceImplTest extends ContentServiceImplTest<Category, Long> {
+public final class CategoryServiceImplTest extends ContentServiceImplTest<Category> {
 
     private CategoryService service;
 
@@ -28,25 +28,8 @@ public final class CategoryServiceImplTest extends ContentServiceImplTest<Catego
     }
 
     @Test
-    public void whenInitAndAddThenReturnsSomeCategory() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE,
-                        DESCRIPTION, KEYWORDS,
-                        PHOTO_URL, true
-                )
-        );
-    }
-
-    @Test
-    public void whenInitAndUpdateThenReturnsSomeCategory() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, TITLE,
-                        DESCRIPTION, KEYWORDS,
-                        PHOTO_URL, true
-                )
-        );
+    public void whenUpdateThenReturnsSomeCategory() {
+        assertNotNull(this.service.update(URL, getCategory()));
     }
 
     @Test

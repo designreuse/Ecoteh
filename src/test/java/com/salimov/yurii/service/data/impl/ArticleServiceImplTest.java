@@ -16,7 +16,7 @@ import static com.salimov.yurii.mocks.dao.MockDao.getArticleDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static org.junit.Assert.*;
 
-public final class ArticleServiceImplTest extends ContentServiceImplTest<Article, Long> {
+public final class ArticleServiceImplTest extends ContentServiceImplTest<Article> {
 
     private ArticleService service;
 
@@ -26,29 +26,8 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenInitAndAddThenReturnSomeArticle() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE,
-                        DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER,
-                        getCategory(),
-                        true
-                )
-        );
-    }
-
-    @Test
-    public void whenInitAndUpdateThenReturnSomeArticle() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, TITLE,
-                        DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER,
-                        getCategory(),
-                        true
-                )
-        );
+    public void whenUpdateThenReturnSomeArticle() {
+        assertNotNull(this.service.update(URL, getArticle()));
     }
 
     @Test(expected = IllegalArgumentException.class)

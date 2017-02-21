@@ -161,28 +161,31 @@ public final class MockEntity {
 
     private static void initCompany() {
         company = new Company();
-        company.initialize(
-                TITLE, DOMAIN,
-                TAGLINE, DESCRIPTION, INFORMATION,
-                PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
-                VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                ADDRESS,
-                KEYWORDS,
-                GOOGLE_MAPS,
-                PHOTO_URL, PHOTO_URL
-        );
+        company.setTitle(TITLE);
+        company.setDescription(DESCRIPTION);
+        company.setInformation(INFORMATION);
+        company.setKeywords(KEYWORDS);
+        company.setDomain(DOMAIN);
+        company.setTagline(TAGLINE);
+        company.setLogoUrl(PHOTO_URL);
         company.setId(ID);
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
         company.setWorkTimeTo(TIME);
         company.addSlide(PHOTO_URL);
+        company.setContacts(
+                new Contacts(
+                        EMAIL, PHONE, PHONE, PHONE,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE
+                )
+        );
+        company.setAddress(
+                new Address(ADDRESS, GOOGLE_MAPS)
+        );
     }
 
     private static void initMessage() {
-        message = new Message(
-                NAME, EMAIL, PHONE,
-                ANY_STRING, TEXT
-        );
+        message = new Message(getUser(), ANY_STRING, TEXT);
         message.setId(ID);
     }
 
@@ -198,14 +201,16 @@ public final class MockEntity {
     }
 
     private static void initUser() {
-        user = new User();
-        user.setId(ID);
-        user.initialize(
-                NAME, LOGIN, PASSWORD,
-                EMAIL, PHONE,
-                VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                DESCRIPTION
+        user = new User(
+                NAME, DESCRIPTION,
+                new Contacts(
+                        EMAIL, PHONE, PHONE, PHONE,
+                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE
+                )
         );
+        user.setId(ID);
+        user.setLogin(LOGIN);
+        user.setPassword(PASSWORD);
         user.setRole(USER_ROLE);
     }
 

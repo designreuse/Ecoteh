@@ -16,8 +16,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
-public final class CompanyServiceImplTest
-        extends ContentServiceImplTest<Company, Long> {
+public final class CompanyServiceImplTest extends ContentServiceImplTest<Company> {
 
     private CompanyService service;
 
@@ -27,49 +26,18 @@ public final class CompanyServiceImplTest
     }
 
     @Test
-    public void whenInitAndAddThenReturnSomeCompany() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION,
-                        KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        URL, true
-                )
-        );
+    public void whenAddThenReturnSomeCompany() {
+        assertNotNull(this.service.add(getCompany()));
     }
 
     @Test
     public void whenInitAndUpdateThenReturnSomeCompany() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        URL, TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION,
-                        KEYWORDS,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        URL, true
-                )
-        );
+        assertNotNull(this.service.update(URL, getCompany()));
     }
 
     @Test
-    public void whenInitAndEditMainCompanyThenReturnSomeCompany() {
-        assertNotNull(
-                this.service.initAndEditMainCompany(
-                        TITLE, DOMAIN,
-                        TAGLINE, DESCRIPTION, INFORMATION,
-                        KEYWORDS, TIME, TIME,
-                        PHONE, PHONE, PHONE, EMAIL,
-                        EMAIL, PASSWORD,
-                        VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL, PHOTO_URL, PHOTO_URL
-                )
-        );
+    public void whenUpdateMainCompanyThenReturnSomeCompany() {
+        assertNotNull(this.service.updateMainCompany(getCompany()));
     }
 
     @Test

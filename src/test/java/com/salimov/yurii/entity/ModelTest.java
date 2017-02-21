@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public abstract class ModelTest<T extends Model<Long>> {
+public abstract class ModelTest<T extends Model> {
 
     @Test
     public void equalsValidObjects() {
@@ -37,22 +37,6 @@ public abstract class ModelTest<T extends Model<Long>> {
             assertEquals(hash1, hash2);
             hash1 = hash2;
         }
-    }
-
-    @Test
-    public void whenSetInvalidIdThenGetNull() {
-        final T model = getObject();
-        model.setId(null);
-        assertNull(model.getId());
-    }
-
-    @Test
-    public void whenSetValidIdThenGetThisId() {
-        final T model = getObject();
-        final Long id = 1234L;
-        model.setId(id);
-        assertNotNull(model.getId());
-        assertEquals(model.getId(), id);
     }
 
     @Test

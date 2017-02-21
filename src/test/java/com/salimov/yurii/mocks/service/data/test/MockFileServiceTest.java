@@ -13,8 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 
-public final class MockFileServiceTest
-        extends MockDataServiceTest<File> {
+public final class MockFileServiceTest extends MockDataServiceTest<File> {
 
     private FileService service;
 
@@ -24,17 +23,13 @@ public final class MockFileServiceTest
     }
 
     @Test
-    public void whenInitAndAddFileThenReturnThisFile() {
-        assertNotNull(this.service.initAndAdd(TITLE, null));
+    public void whenAddFileThenReturnThisFile() {
+        assertNotNull(this.service.add(TITLE, null));
     }
 
     @Test
-    public void whenInitAndUpdateFileThenReturnThisFile() {
-        assertNotNull(
-                this.service.initAndUpdate(
-                        ID, TITLE, null
-                )
-        );
+    public void whenUpdateFileThenReturnThisFile() {
+        assertNotNull(this.service.update(ID, TITLE, null));
     }
 
     @Test

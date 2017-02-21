@@ -11,7 +11,7 @@ import static com.salimov.yurii.mocks.MockConstants.ID;
 import static com.salimov.yurii.mocks.MockConstants.UNKNOWN_ID;
 import static org.junit.Assert.*;
 
-public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
+public abstract class DataDAOImplTest<T extends Model> {
 
     @Test
     public void whenAddNullThenReturnNull() {
@@ -48,13 +48,8 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    public void whenGetByInvalidIdThenReturnNull() {
-        assertNull(getDao().get(null));
-    }
-
-    @Test
     public void whenGetByIdThenReturnSomeModel() {
-        assertNotNull(getDao().get((E) ID));
+        assertNotNull(getDao().get(ID));
     }
 
     @Test
@@ -63,19 +58,14 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Test
-    public void whenExistsByInvalidIdThenReturnsFalse() {
-        assertFalse(getDao().exists(null));
-    }
-
-    @Test
     public void whenExistsByUnknownIdThenReturnFalse() {
-        assertFalse(getDao().exists((E) UNKNOWN_ID));
+        assertFalse(getDao().exists(UNKNOWN_ID));
     }
 
     @Test
     public void whenExistsByIdThenReturnTrue() {
-        assertTrue(getDao().exists((E) ID));
-        assertFalse(getDao().exists((E) UNKNOWN_ID));
+        assertTrue(getDao().exists(ID));
+        assertFalse(getDao().exists(UNKNOWN_ID));
     }
 
     @Test
@@ -95,7 +85,7 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
 
     @Test
     public void whenRemoveByIdThenDoIt() {
-        getDao().remove((E) ID);
+        getDao().remove(ID);
     }
 
     @Test
@@ -109,7 +99,7 @@ public abstract class DataDAOImplTest<T extends Model<E>, E extends Number> {
     }
 
     @Ignore
-    protected abstract DataDao<T, E> getDao();
+    protected abstract DataDao<T> getDao();
 
     @Ignore
     protected abstract T getObject();

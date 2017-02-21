@@ -9,7 +9,7 @@ import static com.salimov.yurii.mocks.MockConstants.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public abstract class MockContentDAOTest<T extends Content<Long>> extends MockDataDAOTest<T> {
+public abstract class MockContentDAOTest<T extends Content> extends MockDataDAOTest<T> {
 
     @Test
     public void whenGetByInvalidTitleThenReturnNull() {

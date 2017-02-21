@@ -11,8 +11,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getResponses;
 import static com.salimov.yurii.mocks.repository.MockRepository.getResponseRepository;
 
 
-public final class ResponsesDaoImplTest
-        extends DataDAOImplTest<Response, Long> {
+public final class ResponsesDaoImplTest extends DataDAOImplTest<Response> {
 
     @Ignore
     @Override

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static com.salimov.yurii.mocks.MockConstants.DEFAULT_SIZE;
 
-public abstract class MockModelTest<T extends Model<Long>> {
+public abstract class MockModelTest<T extends Model> {
 
     @Test
     public void whenGetObjectThenReturnSomeModel() {

@@ -16,8 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-public final class ArticleDaoImplTest
-        extends DataDAOImplTest<Article, Long> {
+public final class ArticleDaoImplTest extends DataDAOImplTest<Article> {
 
     private ArticleDao dao;
 

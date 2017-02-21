@@ -41,7 +41,7 @@ public class UserControllerTest {
         checkModelAndView(
                 controller.addUser(
                         NAME, LOGIN, PASSWORD,
-                        DESCRIPTION, PHONE, EMAIL,
+                        DESCRIPTION, PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                         PHOTO_URL, true, true, false,
                         new ModelAndView()
@@ -70,7 +70,7 @@ public class UserControllerTest {
         checkModelAndView(
                 controller.updateUser(
                         URL, NAME, LOGIN, PASSWORD,
-                        DESCRIPTION, PHONE, EMAIL,
+                        DESCRIPTION, PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
                         PHOTO_URL, true, true, false,
                         new ModelAndView()

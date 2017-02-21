@@ -13,8 +13,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.*;
 import static com.salimov.yurii.mocks.service.data.MockServices.getArticleService;
 import static org.junit.Assert.assertNotNull;
 
-public final class MockArticleServiceTest
-        extends MockContentServiceTest<Article> {
+public final class MockArticleServiceTest extends MockContentServiceTest<Article> {
 
     private ArticleService service;
 
@@ -24,51 +23,20 @@ public final class MockArticleServiceTest
     }
 
     @Test
-    public void whenInitAndAddArticleThenReturnThisArticle() {
-        assertNotNull(
-                this.service.initAndAdd(
-                        TITLE,
-                        DESCRIPTION, TEXT, KEYWORDS,
-                        NUMBER,
-                        getCategory(),
-                        true
-                )
-        );
-    }
-
-    @Test
     public void whenGetByValidNumberThenReturnSomeArticle() {
-        assertNotNull(
-                this.service.getByNumber(NUMBER, true)
-        );
+        assertNotNull(this.service.getByNumber(NUMBER, true));
     }
 
     @Test
     public void whenSortedArticlesByNumberThenReturnThisSortCollection() {
-        assertNotNull(
-                this.service.sortByNumber(
-                        getArticles(), false
-                )
-        );
-        assertNotNull(
-                this.service.sortByNumber(
-                        getArticles(), true
-                )
-        );
+        assertNotNull(this.service.sortByNumber(getArticles(), false));
+        assertNotNull(this.service.sortByNumber(getArticles(), true));
     }
 
     @Test
     public void whenSortedArticlesByDateThenReturnThisSortCollection() {
-        assertNotNull(
-                this.service.sortByDate(
-                        getArticles(), false
-                )
-        );
-        assertNotNull(
-                this.service.sortByDate(
-                        getArticles(), true
-                )
-        );
+        assertNotNull(this.service.sortByDate(getArticles(), false));
+        assertNotNull(this.service.sortByDate(getArticles(), true));
     }
 
     @Test
@@ -85,32 +53,17 @@ public final class MockArticleServiceTest
 
     @Test
     public void whenFilteredArticlesByDateThenReturnThisFilterCollection() {
-        assertNotNull(
-                this.service.filterByDate(
-                        getArticles(),
-                        DATE, DATE
-                )
-        );
+        assertNotNull(this.service.filterByDate(getArticles(), DATE, DATE));
     }
 
     @Test
     public void whenFilteredArticlesByCategoryThenReturnThisFilterCollection() {
-        assertNotNull(
-                this.service.filterByCategory(
-                        getArticles(),
-                        getCategory()
-                )
-        );
+        assertNotNull(this.service.filterByCategory(getArticles(), getCategory()));
     }
 
     @Test
     public void whenFilteredArticlesByCategoriesThenReturnThisFilterCollection() {
-        assertNotNull(
-                this.service.filterByCategories(
-                        getArticles(),
-                        getCategories()
-                )
-        );
+        assertNotNull(this.service.filterByCategories(getArticles(), getCategories()));
     }
 
     @Test
@@ -120,20 +73,12 @@ public final class MockArticleServiceTest
 
     @Test
     public void whenGetAndFilteredArticlesByCategoryThenReturnThisFilterCollection() {
-        assertNotNull(
-                this.service.getAndFilterByCategory(
-                        getCategory()
-                )
-        );
+        assertNotNull(this.service.getAndFilterByCategory(getCategory()));
     }
 
     @Test
     public void whenGetAndFilteredArticlesByCategoriesThenReturnThisFilterCollection() {
-        assertNotNull(
-                this.service.getAndFilterByCategories(
-                        getCategories()
-                )
-        );
+        assertNotNull(this.service.getAndFilterByCategories(getCategories()));
     }
 
     @Ignore

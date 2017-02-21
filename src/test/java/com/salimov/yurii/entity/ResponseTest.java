@@ -143,53 +143,6 @@ public final class ResponseTest extends ModelTest<Response> {
     }
 
     @Test
-    public void whenInitializeObjectWithNullParametersThenGetNull() {
-        final Response response = new Response();
-        response.initialize(null, null);
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull_1() {
-        final Response response = new Response();
-        response.initialize("", "");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull_2() {
-        final Response response = new Response();
-        response.initialize(" ", " ");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-    }
-
-    @Test
-    public void whenInitializeObjectWithBlankParametersThenGetNull_3() {
-        final Response response = new Response();
-        response.initialize("   ", "   ");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
-        assertNotNull(response.getDate());
-    }
-
-    @Test
-    public void whenInitializeObjectWithValidParametersThenGetThisValue() {
-        final Response response = new Response();
-        response.initialize(NAME, TEXT);
-        assertNotNull(response.getUsername());
-        assertNotNull(response.getText());
-        assertNotNull(response.getDate());
-        assertEquals(response.getUsername(), NAME);
-        assertEquals(response.getText(), TEXT);
-    }
-
-    @Test
     public void whenSetNullUsernameThenGetNull() {
         final Response response = getResponse();
         response.setUsername(null);

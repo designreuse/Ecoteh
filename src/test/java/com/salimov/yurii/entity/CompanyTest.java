@@ -1,21 +1,7 @@
 package com.salimov.yurii.entity;
 
-import com.salimov.yurii.enums.CompanyType;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import static com.salimov.yurii.mocks.MockConstants.*;
-import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.junit.Assert.*;
-
-public final class CompanyTest extends ContentTest<Company> {
-
+public final class CompanyTest /*extends ContentTest<Company>*/ {
+/*
     @Test
     public void whenInitializeByConstructorThenSetNotNulDateAndNumber() {
         final Company company = new Company(
@@ -1206,5 +1192,5 @@ public final class CompanyTest extends ContentTest<Company> {
                         time.substring(time.indexOf(':') + 1)
                 ) > 30 ? 1 : 0
         );
-    }
+    }*/
 }
