@@ -59,6 +59,7 @@ public final class MockClientController {
                 getMainMVFabric(),
                 getUserService(),
                 getCompanyService(),
+                getFileService(),
                 getSenderService()
         );
     }

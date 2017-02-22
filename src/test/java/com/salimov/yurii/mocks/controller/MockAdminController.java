@@ -134,6 +134,7 @@ public class MockAdminController {
                 getMainMVFabric(),
                 getUserService(),
                 getCompanyService(),
+                getFileService(),
                 getSenderService()
         );
     }

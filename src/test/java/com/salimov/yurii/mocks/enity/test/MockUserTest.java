@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.Collection;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 public final class MockUserTest extends MockModelTest<User> {
 
@@ -21,7 +20,6 @@ public final class MockUserTest extends MockModelTest<User> {
         assertNotNull(user.getLogin());
         assertNotNull(user.getPassword());
         assertNotNull(user.getDescription());
-        assertNull(user.getPhotoUrl());
     }
 
     @Ignore

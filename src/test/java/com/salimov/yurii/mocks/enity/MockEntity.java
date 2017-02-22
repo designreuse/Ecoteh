@@ -172,7 +172,6 @@ public final class MockEntity {
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);
         company.setWorkTimeTo(TIME);
-        company.addSlide(PHOTO_URL);
         company.setContacts(
                 new Contacts(
                         EMAIL, PHONE, PHONE, PHONE,

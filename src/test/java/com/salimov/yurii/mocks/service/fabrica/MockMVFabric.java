@@ -33,8 +33,9 @@ public final class MockMVFabric {
                 getArticleService(),
                 getCategoryService(),
                 getCompanyService(),
-                getUserService(),
-                getResponseService()
+                getFileService(),
+                getResponseService(),
+                getUserService()
         );
     }
 

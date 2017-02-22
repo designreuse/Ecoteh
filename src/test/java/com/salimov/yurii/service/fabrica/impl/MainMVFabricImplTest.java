@@ -25,8 +25,9 @@ public class MainMVFabricImplTest {
                 getArticleService(),
                 getCategoryService(),
                 getCompanyService(),
-                getUserService(),
-                getResponseService()
+                getFileService(),
+                getResponseService(),
+                getUserService()
         );
     }
 

@@ -43,7 +43,7 @@ public class UserControllerTest {
                         NAME, LOGIN, PASSWORD,
                         DESCRIPTION, PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL, true, true, false,
+                        null, true, true, false,
                         new ModelAndView()
                 ),
                 "redirect:/admin/user/all",
@@ -72,7 +72,7 @@ public class UserControllerTest {
                         URL, NAME, LOGIN, PASSWORD,
                         DESCRIPTION, PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        PHOTO_URL, true, true, false,
+                        null, true, true, false,
                         new ModelAndView()
                 ),
                 "redirect:/admin/user/all",

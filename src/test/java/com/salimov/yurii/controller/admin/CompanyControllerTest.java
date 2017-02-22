@@ -34,7 +34,7 @@ public class CompanyControllerTest {
                         TITLE, DOMAIN, TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
                         TIME, TIME, PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE, ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL, PHOTO_URL, PHOTO_URL,
+                        PHOTO_URL, PHOTO_URL,
                         new ModelAndView()
                 ),
                 "redirect:/company/main",
