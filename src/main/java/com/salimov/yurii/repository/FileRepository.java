@@ -1,6 +1,9 @@
 package com.salimov.yurii.repository;
 
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
+
+import java.util.List;
 
 /**
  * The interface provides a set of JPA methods
@@ -50,4 +53,13 @@ public interface FileRepository extends DataRepository<File> {
      * @see File
      */
     void deleteByUrl(final String url);
+
+    /**
+     * Returns files with the type.
+     *
+     * @param type a type of files to return.
+     * @return The files with the type.
+     * @see FileType
+     */
+    List<File> findAllByType(final FileType type);
 }

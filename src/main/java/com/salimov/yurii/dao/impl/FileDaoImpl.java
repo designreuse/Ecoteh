@@ -2,10 +2,13 @@ package com.salimov.yurii.dao.impl;
 
 import com.salimov.yurii.dao.interfaces.FileDao;
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
 import com.salimov.yurii.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * The class implements a set of standard methods
@@ -87,5 +90,17 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
     @Override
     public void removeByUrl(final String url) {
         this.repository.deleteByUrl(url);
+    }
+
+    /**
+     * Returns files with the type.
+     *
+     * @param type a type of files to return.
+     * @return The files with the type.
+     * @see FileType
+     */
+    @Override
+    public List<File> getByFileType(final FileType type) {
+        return this.repository.findAllByType(type);
     }
 }

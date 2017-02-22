@@ -1,6 +1,9 @@
 package com.salimov.yurii.dao.interfaces;
 
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
+
+import java.util.List;
 
 /**
  * The interface provides a set of standard methods
@@ -50,4 +53,13 @@ public interface FileDao extends DataDao<File> {
      * @see File
      */
     void removeByUrl(final String url);
+
+    /**
+     * Returns files with the type.
+     *
+     * @param type a type of files to return.
+     * @return The files with the type.
+     * @see FileType
+     */
+    List<File> getByFileType(final FileType type);
 }

@@ -1,6 +1,7 @@
 package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
@@ -120,4 +121,13 @@ public interface FileService extends DataService<File> {
      * @see File
      */
     boolean deleteFile(final String rootPath);
+
+    /**
+     * Returns files with the type.
+     *
+     * @param type a type of files to return.
+     * @return The files with the type.
+     * @see FileType
+     */
+   List<File> getByType(final FileType type);
 }

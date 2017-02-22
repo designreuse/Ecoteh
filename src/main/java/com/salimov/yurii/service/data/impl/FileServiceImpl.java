@@ -2,6 +2,7 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.FileDao;
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.FileComparator;
 import com.salimov.yurii.util.loader.FileLoader;
@@ -339,6 +340,31 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final boolean revers
     ) {
         return sort(files, new FileComparator.ByTitle<>(), revers);
+    }
+
+    /**
+     * Returns files with the type.
+     *
+     * @param type a type of files to return.
+     * @return The files with the type.
+     * @throws IllegalArgumentException Throw exception when parameter type is {@code null}.
+     * @throws NullPointerException     Throw exception when object with parameter type is not exist.
+     * @see FileType
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<File> getByType(final FileType type)
+            throws IllegalArgumentException, NullPointerException {
+        if (type == null) {
+            throw new IllegalArgumentException("File type is null");
+        }
+        final List<File> files = this.dao.getByFileType(type);
+        if (files == null || files.isEmpty()) {
+            throw new NullPointerException(
+                    "Can't finds files with type " + type + "!"
+            );
+        }
+        return files;
     }
 
     /**

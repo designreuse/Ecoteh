@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
 
 /**
  * The interface describes a set of methods
@@ -40,6 +41,21 @@ public interface IFile extends IModel {
      * @param url a new url to the media.
      */
     void setUrl(final String url);
+
+    /**
+     * Returns a file type.
+     *
+     * @return The file type.
+     */
+    FileType getType();
+
+    /**
+     * Sets a new type to the file.
+     * If parameter url is {@code null}, then sets {@code FileType.OTHER}.
+     *
+     * @param type a new file type.
+     */
+    void setType(final FileType type);
 
     /**
      * Translates value and sets to url.

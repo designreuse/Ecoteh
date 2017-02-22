@@ -1,11 +1,10 @@
 package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IFile;
+import com.salimov.yurii.enums.FileType;
 import com.salimov.yurii.util.translator.Translator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -43,20 +42,37 @@ public final class File extends Model implements IFile {
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private FileType type;
+
     /**
      * Default constructor.
      */
     public File() {
         this.title = "";
         this.url = "";
+        this.type = FileType.OTHER;
         setValidated(true);
     }
 
     /**
      * Constructor.
      *
-     * @param title a title of the new photo.
-     * @param url   a url of the new photo.
+     * @param title a title of the new file.
+     */
+    public File(
+            final String title
+    ) {
+        this();
+        setTitle(title);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param title a title of the new file.
+     * @param url   a url of the new file.
      */
     public File(
             final String title,
@@ -65,6 +81,22 @@ public final class File extends Model implements IFile {
         this();
         setTitle(title);
         setUrl(url);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param title a title of the new file.
+     * @param url   a url of the new file.
+     * @param type  a type of the new file.
+     */
+    public File(
+            final String title,
+            final String url,
+            final FileType type
+    ) {
+        this(title, url);
+        setType(type);
     }
 
     /**
@@ -167,7 +199,28 @@ public final class File extends Model implements IFile {
     }
 
     /**
-     * Translates and sets a new url to the photo.
+     * Returns a file type.
+     *
+     * @return The file type.
+     */
+    @Override
+    public FileType getType() {
+        return this.type;
+    }
+
+    /**
+     * Sets a new type to the file.
+     * If parameter url is {@code null}, then sets {@code FileType.OTHER}.
+     *
+     * @param type a new file type.
+     */
+    @Override
+    public void setType(final FileType type) {
+        this.type = type != null ? type : FileType.OTHER;
+    }
+
+    /**
+     * Translates and sets a new url to the file.
      * If parameter url is blank, then sets {@code null}.
      *
      * @param url a url to translate and set.
@@ -197,6 +250,7 @@ public final class File extends Model implements IFile {
             super.initialize(file);
             this.setTitle(file.getTitle());
             this.setUrl(file.getUrl());
+            this.setType(file.getType());
         }
         return this;
     }
