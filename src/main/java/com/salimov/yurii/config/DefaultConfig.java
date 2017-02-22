@@ -20,8 +20,7 @@ public final class DefaultConfig {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER
-            = Logger.getLogger(DefaultConfig.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultConfig.class);
 
     /**
      * The map of a default users.
@@ -49,7 +48,7 @@ public final class DefaultConfig {
         User user;
         try {
             user = USERS.get(username).clone();
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
             user = null;
         }
@@ -71,7 +70,7 @@ public final class DefaultConfig {
      * @return The default super admin.
      */
     public static User getSuperAdmin() {
-        return getDefaultUser("super");
+        return getDefaultUser("superadmin");
     }
 
     /**
@@ -105,8 +104,7 @@ public final class DefaultConfig {
      */
     private static boolean check(final UserRole role) {
         final User user = getAuthenticatedUser();
-        return (user != null)
-                && (user.getRole().equals(role));
+        return (user != null) && (user.getRole().equals(role));
     }
 
     /**
@@ -133,8 +131,7 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "login",
-                "password",
+                "admin", "ecopass",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -146,8 +143,7 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "login",
-                "password",
+                "superadmin", "superecopass",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -171,8 +167,8 @@ public final class DefaultConfig {
     ) {
         final User user = new User();
         user.setName(name);
-        user.setEncryptedLogin(login);
-        user.setEncryptedPassword(password);
+        user.setLogin(login);
+        user.setPassword(password);
         user.setRole(role);
         return user;
     }

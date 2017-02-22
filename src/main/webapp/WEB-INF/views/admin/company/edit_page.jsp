@@ -329,34 +329,6 @@
                                                        value="<c:out value="${company.faviconUrl}"/>">
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="ths">
-                                                <a href="<c:url value="/resources/img/static/where_slides.jpg"/>"
-                                                   rel="lightgallery" title="Слайды, это где?">
-                                                    Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                      aria-hidden="true"></span>
-                                                </a>
-                                            </td>
-                                            <td class="tds">
-                                                <c:if test="${fn:length(company.slidesList) gt 0}">
-                                                    <c:forEach items="${company.slidesList}" var="slide">
-                                                        <c:if test="${slide ne ''}">
-                                                            <a href="<c:url value="${slide}"/>"
-                                                               rel="lightgallery[slides]"
-                                                               title="<c:out value="${company.title}"/>">
-                                                                <img src="<c:url value="${slide}"/>" class="main-logo"
-                                                                     onerror="this.src='<c:url
-                                                                             value="/resources/img/static/default_file.gif"/>'"
-                                                                     alt="<c:out value="${company.title}"/>"/>
-                                                            </a>&nbsp;
-                                                        </c:if>
-                                                    </c:forEach><br><br>
-                                                </c:if>
-                                                <textarea class="form-control textarea" name="slides" title=""
-                                                          placeholder="URL слайдов, которые будут отображатся на главной страницы сайта. Вводите значение через запятую (,)ю"
-                                                          rows="5"><c:out value="${company.slides}"/></textarea>
-                                            </td>
-                                        </tr>
                                     </c:when>
                                     <c:otherwise>
                                         <tr>

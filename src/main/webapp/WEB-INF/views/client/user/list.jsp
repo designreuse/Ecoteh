@@ -23,11 +23,13 @@
         </c:choose>">
         <div class="text-center">
             <c:choose>
-                <c:when test="${user.photoUrl ne ''}">
-                    <a href="<c:url value="${user.photoUrl}"/>" rel="lightgallery"
+                <c:when test="${user.photo.url ne ''}">
+                    <a href="<c:url value="${user.photo.url}"/>" rel="lightgallery"
                        title="<c:out value="${user.name}"/>">
                         <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
-                             src="<c:url value="${user.photoUrl}"/>">
+                             src="<c:url value="${user.photo.url}"/>"
+                             onerror="this.src='<c:url
+                                     value="/resources/img/static/default_user.png"/>'">
                     </a>
                 </c:when>
                 <c:otherwise>

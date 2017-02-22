@@ -51,7 +51,7 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/user/update"/>" method="post">
+                        <form action="<c:url value="/admin/user/update"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Имя</td>
@@ -245,12 +245,14 @@
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">
                                         <c:choose>
-                                            <c:when test="${user.photoUrl ne ''}">
-                                                <a href="<c:url value="${user.photoUrl}"/>" rel="lightgallery"
+                                            <c:when test="${user.photo.url ne ''}">
+                                                <a href="<c:url value="${user.photo.url}"/>" rel="lightgallery"
                                                    title="<c:out value="${user.name}"/>">
                                                     <img class="img-responsive img-in-list"
                                                          alt="<c:out value="${user.name}"/>"
-                                                         src="<c:url value="${user.photoUrl}"/>">
+                                                         src="<c:url value="${user.photo.url}"/>"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_user.png"/>'">
                                                 </a>
                                             </c:when>
                                             <c:otherwise>
@@ -259,9 +261,7 @@
                                                      src="<c:url value="/resources/img/static/default_user.png"/>">
                                             </c:otherwise>
                                         </c:choose><br>
-                                        <input type="text" class="form-control" name="photo" minlength="2"
-                                               maxlength="100" placeholder="Ссылка на главное фото пользователя"
-                                               value="${user.photoUrl}">
+                                        <input type="file" name="photo" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>

@@ -1,6 +1,7 @@
 package com.salimov.yurii.service.fabrica.impl;
 
 import com.salimov.yurii.entity.*;
+import com.salimov.yurii.enums.FileType;
 import com.salimov.yurii.service.data.interfaces.*;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      *
      * @see ArticleService
      */
-    protected final ArticleService articleService;
+    private final ArticleService articleService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -36,7 +37,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      *
      * @see CategoryService
      */
-    protected final CategoryService categoryService;
+    private final CategoryService categoryService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -44,15 +45,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
      *
      * @see CompanyService
      */
-    protected final CompanyService companyService;
+    private final CompanyService companyService;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link User}.
+     * for working with objects of the class {@link File}.
      *
-     * @see UserService
+     * @see FileService
      */
-    protected final UserService userService;
+    private final FileService fileService;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -60,7 +61,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
      *
      * @see ResponseService
      */
-    protected final ResponseService responseService;
+    private final ResponseService responseService;
+
+    /**
+     * The interface of the service layer, describes a set of methods
+     * for working with objects of the class {@link User}.
+     *
+     * @see UserService
+     */
+    private final UserService userService;
 
     /**
      * Constructor.
@@ -68,8 +77,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * @param articleService  a implementation  of the {@link ArticleService} interface.
      * @param categoryService a implementation of the {@link CategoryService} interface.
      * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param userService     a implementation of the {@link UserService} interface.
+     * @param fileService     a implementation of the {@link FileService} interface.
      * @param responseService a implementation of the {@link ResponseService} interface.
+     * @param userService     a implementation of the {@link UserService} interface.
      * @see ArticleService
      * @see CategoryService
      * @see CompanyService
@@ -80,15 +90,17 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final ArticleService articleService,
             final CategoryService categoryService,
             final CompanyService companyService,
-            final UserService userService,
-            final ResponseService responseService
+            final FileService fileService,
+            final ResponseService responseService,
+            final UserService userService
     ) {
         super();
         this.articleService = articleService;
         this.categoryService = categoryService;
         this.companyService = companyService;
-        this.userService = userService;
+        this.fileService = fileService;
         this.responseService = responseService;
+        this.userService = userService;
     }
 
     /**
@@ -101,6 +113,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView homePage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getMainCompany());
+        modelAndView.addObject("slides", this.fileService.getByType(FileType.SLIDE));
         modelAndView.addObject("partners", this.companyService.getPartners(isValidContent()));
         modelAndView.addObject("print_partners", 6);
         modelAndView.addObject("responses", this.responseService.getAndSortByDate(true));

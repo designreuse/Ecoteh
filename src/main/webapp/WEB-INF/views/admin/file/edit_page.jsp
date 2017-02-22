@@ -84,6 +84,18 @@
                                                title="Статические файлы редактировать запрещено"</c:if>>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="ths">
+                                        <a href="<c:url value="/resources/img/static/where_slides.jpg"/>"
+                                           rel="lightgallery" title="Слайды, это где?">
+                                            Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                    <td class="tds">
+
+                                    </td>
+                                </tr>
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Добавить файл"

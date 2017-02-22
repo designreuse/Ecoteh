@@ -44,7 +44,7 @@
                     <h3 class="text-center" title="Добавление нового пользователя">Новый пользователь</h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/user/add"/>" method="post">
+                        <form action="<c:url value="/admin/user/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Имя</td>
@@ -144,8 +144,7 @@
                                 <tr>
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="photo" minlength="2"
-                                               maxlength="100" placeholder="Ссылка на главное фото пользователя">
+                                        <input type="file" name="photo" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>

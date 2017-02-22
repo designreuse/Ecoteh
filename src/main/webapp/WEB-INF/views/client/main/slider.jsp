@@ -5,13 +5,13 @@
 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
     <br>
     <div id="carousel-example-generic" class="carousel slide">
-        <c:set var="length" value="${fn:length(company.slidesList)}"/>
+        <c:set var="length" value="${fn:length(slides)}"/>
         <c:choose>
             <c:when test="${length gt 0}">
                 <c:if test="${length gt 1}">
                     <ol class="carousel-indicators hidden-xs">
                         <c:set var="count" value="0"/>
-                        <c:forEach items="${company.slidesList}" var="slide">
+                        <c:forEach items="${slides}" var="slide">
                             <c:if test="${slide ne null}">
                                 <li data-target="#carousel-example-generic" data-slide-to="${count}"
                                     <c:if test="${count eq 0}">class="active"</c:if>>
@@ -23,11 +23,11 @@
                 </c:if>
                 <div class="carousel-inner">
                     <c:set var="count" value="true"/>
-                    <c:forEach items="${company.slidesList}" var="slide">
+                    <c:forEach items="${slides}" var="slide">
                         <c:if test="${slide ne null}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
-                                <img src="<c:url value="${slide}"/>" onerror="this.src='<c:url
+                                <img src="<c:url value="${slide.url}"/>" onerror="this.src='<c:url
                                         value="/resources/img/static/default_slide.jpg"/>'" alt="${company.title}">
                             </div>
                         </c:if>

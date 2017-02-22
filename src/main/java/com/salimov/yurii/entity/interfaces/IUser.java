@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
 import com.salimov.yurii.entity.Contacts;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.util.translator.Translator;
@@ -128,15 +129,14 @@ public interface IUser extends IModel {
      *
      * @return The user photo URL.
      */
-    String getPhotoUrl();
+    File getPhoto();
 
     /**
      * Sets a new photo to the user.
-     * If photo URL is blank, then sets {@code null}.
      *
      * @param photoUrl a new photo URL to the user.
      */
-    void setPhotoUrl(final String photoUrl);
+    void setPhoto(final File photoUrl);
 
     /**
      * Returns a user contacts.

@@ -87,9 +87,7 @@ public class CompanyController {
     )
     public ModelAndView editMainCompany() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        final Company company = this.companyService.getMainCompany();
-        modelAndView.addObject("company", company);
-        modelAndView.addObject("slides", company.getSlides());
+        modelAndView.addObject("company",  this.companyService.getMainCompany());
         modelAndView.addObject("main", true);
         modelAndView.setViewName("admin/company/edit_page");
         return modelAndView;
@@ -123,7 +121,6 @@ public class CompanyController {
      * @param googleMaps    a new google maps url to the main company.
      * @param logoUrl       a new logo Url to the main company.
      * @param faviconUrl    a new favicon Url to the main company.
-     * @param slides        a files of slides to the main company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
@@ -156,7 +153,6 @@ public class CompanyController {
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final String logoUrl,
             @RequestParam(value = "favicon") final String faviconUrl,
-            @RequestParam(value = "slides") final String slides,
             final ModelAndView modelAndView
     ) {
         final Company company = new Company();
@@ -172,7 +168,6 @@ public class CompanyController {
         company.setWorkTimeTo(workTimeTo);
         company.setLogoUrl(logoUrl);
         company.setFaviconUrl(faviconUrl);
-        company.setSlides(slides);
         company.setContacts(
                 new Contacts(
                         email, mobilePhone, landlinePhone, fax,

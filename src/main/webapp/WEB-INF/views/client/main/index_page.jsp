@@ -66,7 +66,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <c:if test="${fn:length(company.slidesList) gt 0}">
+    <c:if test="${fn:length(slides) gt 0}">
         <script src="<c:url value="/resources/js/carousel.min.js"/>" type="text/javascript"></script>
     </c:if>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
