@@ -5,9 +5,6 @@ import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.util.time.Time;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -87,14 +84,6 @@ public final class Company extends Content implements ICompany {
     private String faviconUrl;
 
     /**
-     * The set of slides.
-     *
-     * @see File
-     */
-    @Column(name = "slides", nullable = false)
-    private String slides;
-
-    /**
      * The company contacts.
      *
      * @see Category
@@ -150,7 +139,6 @@ public final class Company extends Content implements ICompany {
         this.workTimeTo = "";
         this.logoUrl = "";
         this.faviconUrl = "";
-        this.slides = "";
         this.type = CompanyType.PARTNER;
         this.contacts = new Contacts();
         this.address = new Address();
@@ -175,7 +163,6 @@ public final class Company extends Content implements ICompany {
                 ", workTimeTo='" + getWorkTimeTo() + '\'' +
                 ", logoUrl='" + getLogoUrl() + '\'' +
                 ", faviconUrl='" + getFaviconUrl() + '\'' +
-                ", slides='" + getSlides() + '\'' +
                 ", type=" + getType() +
                 '}';
     }
@@ -461,146 +448,6 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * Adds new photo to the list of slides.
-     * Adds a new photo, if it is valid.
-     *
-     * @param slide a photo to add.
-     * @see File
-     */
-    @Override
-    public void addSlide(final String slide) {
-        if (isNotBlank(slide)) {
-            this.slides += (isNotBlank(this.slides) ? ", " : "")
-                    + slide.replace(" ", "");
-        }
-    }
-
-    /**
-     * Adds new photos to the list of slides.
-     * Adds a new photos, if they are valid.
-     *
-     * @param slides a photos to add.
-     * @see File
-     */
-    @Override
-    public void addSlides(final Collection<String> slides) {
-        if ((slides != null) && !slides.isEmpty()) {
-            slides.forEach(this::addSlide);
-        }
-    }
-
-    /**
-     * Adds new photos to the list of slides.
-     *
-     * @param slides a photos to add.
-     */
-    @Override
-    public void addSlides(final String[] slides) {
-        for (String slide : slides) {
-            addSlide(slide);
-        }
-    }
-
-    /**
-     * Removes photo from the list of slides.
-     *
-     * @param slide a photo to remove.
-     * @see File
-     */
-    @Override
-    public void removeSlide(final String slide) {
-        if (isNotBlank(slide)) {
-            this.slides = this.slides.replace(", " + slide, "")
-                    .replace(slide, "");
-        }
-    }
-
-    /**
-     * Removes photos from the list of slides.
-     *
-     * @param slides a photos to remove.
-     * @see File
-     */
-    @Override
-    public void removeSlides(final Collection<String> slides) {
-        slides.forEach(this::removeSlide);
-    }
-
-    /**
-     * Clears the list of slides.
-     *
-     * @see File
-     */
-    @Override
-    public void clearSlides() {
-        this.slides = "";
-    }
-
-    /**
-     * Returns a copy list of slides.
-     *
-     * @return The list of slides.
-     * @see File
-     */
-    @Override
-    public List<String> getSlidesList() {
-        final List<String> result = new ArrayList<>();
-        for (String slide : this.slides.replace(" ", "").split(",")) {
-            if (isNotBlank(slide)) {
-                result.add(slide);
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public String getSlides() {
-        return this.slides;
-    }
-
-    /**
-     * Sets a new slides to the article.
-     * Clears the list of slides and adds new slides.
-     *
-     * @param slides a slides to add.
-     */
-    @Override
-    public void setSlides(final String slides) {
-        this.slides = isNotBlank(slides) ? slides.replace("  ", " ") : "";
-    }
-
-    /**
-     * Contains slide in the list of slides.
-     *
-     * @param slide a photo to contain.
-     * @return Returns {@code true} if photo is contains,
-     * otherwise returns {@code false}.
-     */
-    @Override
-    public boolean containsSlide(final String slide) {
-        return this.slides.contains(slide);
-    }
-
-    /**
-     * Contains slides in the list of slides.
-     *
-     * @param slides a photos to contain.
-     * @return Returns {@code true} if photos are contains,
-     * otherwise returns {@code false}.
-     */
-    @Override
-    public boolean containsSlides(final Collection<String> slides) {
-        boolean result = true;
-        for (String slide : slides) {
-            if (!this.slides.contains(slide)) {
-                result = false;
-                break;
-            }
-        }
-        return result;
-    }
-
-    /**
      * Returns a domain of the company.
      *
      * @return The company domain.
@@ -665,7 +512,6 @@ public final class Company extends Content implements ICompany {
             this.setWorkTimeTo(company.getWorkTimeTo());
             this.setLogoUrl(company.getLogoUrl());
             this.setFaviconUrl(company.getFaviconUrl());
-            this.setSlides(company.getSlides());
             this.setType(company.getType());
             this.setContacts(company.getContacts());
             this.setAddress(company.getAddress());
