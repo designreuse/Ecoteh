@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -70,6 +71,14 @@ public class UserController {
 
     /**
      * The implementation of the interface describes a set of methods
+     * for working with objects of the {@link File} class.
+     *
+     * @see FileService
+     */
+    private final FileService fileService;
+
+    /**
+     * The implementation of the interface describes a set of methods
      * for working with E-mail.
      *
      * @see SenderService
@@ -83,6 +92,7 @@ public class UserController {
      * @param fabric         a implementation of the {@link MainMVFabric} interface.
      * @param userService    a implementation of the {@link UserService} interface.
      * @param companyService a implementation of the {@link CompanyService} interface.
+     * @param fileService    a implementation of the {@link FileService} interface.
      * @param senderService  a implementation of the {@link SenderService} interface.
      * @see MainMVFabric
      * @see UserService
@@ -96,11 +106,13 @@ public class UserController {
             final MainMVFabric fabric,
             final UserService userService,
             final CompanyService companyService,
+            final FileService fileService,
             final SenderService senderService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);
         this.userService = userService;
         this.companyService = companyService;
+        this.fileService = fileService;
         this.senderService = senderService;
     }
 
@@ -159,7 +171,7 @@ public class UserController {
      * @param facebook      a facebook url of the new user.
      * @param twitter       a twitter url of the new user.
      * @param skype         a skype username of the new user.
-     * @param photoUrl      a photo URL to the new user.
+     * @param multipartFile a photo to the new user.
      * @param isValid       a validated of the new user.
      * @param isMailing     a permit to send a letters on the user email.
      * @param isLocked      locked the user or not.
@@ -184,7 +196,7 @@ public class UserController {
             @RequestParam(value = "facebook") final String facebook,
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final String photoUrl,
+            @RequestParam(value = "photo") final MultipartFile multipartFile,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
@@ -199,11 +211,11 @@ public class UserController {
         );
         user.setLogin(login);
         user.setPassword(password);
-        user.setPhotoUrl(photoUrl);
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
         user.setRole(UserRole.ADMIN);
+        user.setPhoto(this.fileService.add(user.getName(), multipartFile));
         this.userService.add(user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");
@@ -269,7 +281,7 @@ public class UserController {
      * @param facebook      a new facebook url to the user.
      * @param twitter       a new twitter url to the user.
      * @param skype         a new skype username to the user.
-     * @param photoUrl      a photo URL to the user.
+     * @param multipartFile a photo to the user.
      * @param isValid       a validated of the user.
      * @param isMailing     a permit to send a letters on the user email.
      * @param isLocked      locked the user or not.
@@ -296,7 +308,7 @@ public class UserController {
             @RequestParam(value = "facebook") final String facebook,
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final String photoUrl,
+            @RequestParam(value = "photo") final MultipartFile multipartFile,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
@@ -311,11 +323,11 @@ public class UserController {
         );
         user.setLogin(login);
         user.setPassword(password);
-        user.setPhotoUrl(photoUrl);
         user.setValidated(isValid);
         user.setMailing(isMailing);
         user.setLocked(isLocked);
         user.setRole(UserRole.ADMIN);
+        user.setPhoto(this.fileService.add(user.getName(), multipartFile));
         this.userService.update(url, user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");

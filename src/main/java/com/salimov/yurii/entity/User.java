@@ -68,12 +68,6 @@ public final class User extends Model implements IUser, UserDetails {
     private String description;
 
     /**
-     * The photo URL of a user.
-     */
-    @Column(name = "photo", nullable = false)
-    private String photoUrl;
-
-    /**
      * The user contacts.
      *
      * @see Category
@@ -87,6 +81,21 @@ public final class User extends Model implements IUser, UserDetails {
             referencedColumnName = "id"
     )
     private Contacts contacts;
+
+    /**
+     * The user contacts.
+     *
+     * @see Category
+     */
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "id_photo",
+            referencedColumnName = "id"
+    )
+    private File photo;
 
     /**
      * The role of a user.
@@ -120,7 +129,7 @@ public final class User extends Model implements IUser, UserDetails {
         this.encryptedLogin = "";
         this.encryptedPassword = "";
         this.description = "";
-        this.photoUrl = "";
+        this.photo = new File();
         this.contacts = new Contacts();
         this.role = UserRole.ANOTHER;
     }
@@ -172,7 +181,7 @@ public final class User extends Model implements IUser, UserDetails {
                 ", Password='" + getPassword() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 getContacts() +
-                ", photoUrl='" + getPhotoUrl() + '\'' +
+                getPhoto() +
                 ", role=" + getRole() +
                 ", isMailing=" + isMailing() +
                 ", isLocked=" + isLocked() +
@@ -470,19 +479,18 @@ public final class User extends Model implements IUser, UserDetails {
      * @return The user photo URL.
      */
     @Override
-    public String getPhotoUrl() {
-        return this.photoUrl;
+    public File getPhoto() {
+        return this.photo;
     }
 
     /**
      * Sets a new photo to the user.
-     * If photo URL is blank, then sets {@code null}.
      *
-     * @param photoUrl a new photo URL to the user.
+     * @param photo a new photo URL to the user.
      */
     @Override
-    public void setPhotoUrl(final String photoUrl) {
-        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : "";
+    public void setPhoto(final File photo) {
+        this.photo.initialize(photo);
     }
 
     /**
@@ -585,7 +593,7 @@ public final class User extends Model implements IUser, UserDetails {
             this.setEncryptedLogin(user.getEncryptedLogin());
             this.setEncryptedPassword(user.getEncryptedPassword());
             this.setDescription(user.getDescription());
-            this.setPhotoUrl(user.getPhotoUrl());
+            this.setPhoto(user.getPhoto());
             this.setRole(user.getRole());
             this.setMailing(user.isMailing());
             this.setLocked(user.isLocked());
