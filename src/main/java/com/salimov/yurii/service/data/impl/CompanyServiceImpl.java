@@ -7,6 +7,7 @@ import com.salimov.yurii.entity.Model;
 import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -46,6 +49,8 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     private final CompanyDao dao;
 
+    private final FileService fileService;
+
     /**
      * Constructor.
      * Initializes a implementations of the interfaces.
@@ -55,9 +60,13 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public CompanyServiceImpl(final CompanyDao dao) {
+    public CompanyServiceImpl(
+            final CompanyDao dao,
+            final FileService fileService
+    ) {
         super(dao);
         this.dao = dao;
+        this.fileService = fileService;
     }
 
     /**
@@ -107,10 +116,14 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
             final String url,
             final Company company
     ) {
-        return update(
-                getByUrl(url, false)
-                        .initialize(company)
-        );
+        final Company companyToUpdate = getByUrl(url, false);
+        final File newLogo = company.getLogo();
+        final File oldLogo = companyToUpdate.getLogo();
+        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
+            this.fileService.deleteFile(oldLogo.getUrl());
+        }
+        companyToUpdate.initialize(company);
+        return update(companyToUpdate);
     }
 
     /**

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -53,11 +54,20 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     /**
+     * The implementation of the interface describes a set of methods
+     * for working with objects of the {@link File} class.
+     *
+     * @see FileService
+     */
+    private final FileService fileService;
+
+    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
      * @param fabric          a implementation of the {@link MainMVFabric} interface.
      * @param categoryService a implementation of the {@link CategoryService} interface.
+     * @param fileService     a implementation of the {@link CategoryService} interface.
      * @see MainMVFabric
      * @see CategoryService
      */
@@ -65,10 +75,12 @@ public class CategoryController {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CategoryController(
             final MainMVFabric fabric,
-            final CategoryService categoryService
+            final CategoryService categoryService,
+            final FileService fileService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);
         this.categoryService = categoryService;
+        this.fileService = fileService;
     }
 
     /**
@@ -91,12 +103,12 @@ public class CategoryController {
      * Request mapping: /admin/category/add
      * Method: POST
      *
-     * @param title        a title of the new category.
-     * @param description  a title of the new category.
-     * @param keywords     a title of the new category.
-     * @param photoUrl     a file of photo to the new category.
-     * @param isValid      a validated of the new category.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param title         a title of the new category.
+     * @param description   a title of the new category.
+     * @param keywords      a title of the new category.
+     * @param multipartLogo a file of photo to the new category.
+     * @param isValid       a validated of the new category.
+     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Category
      * @see File
@@ -106,13 +118,15 @@ public class CategoryController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "photo") final String photoUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = new Category(title, description, keywords);
-        category.setPhotoUrl(photoUrl);
         category.setValidated(isValid);
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
+        }
         this.categoryService.add(category);
         Cache.clear();
         modelAndView.setViewName("redirect:/category/" + category.getUrl());
@@ -159,13 +173,13 @@ public class CategoryController {
      * Request mapping: /admin/category/update
      * Method: POST
      *
-     * @param url          a url of the category to update.
-     * @param title        a new title to the category.
-     * @param description  a new description to the category.
-     * @param keywords     a new description to the category.
-     * @param photoUrl     a file of photo to the new category.
-     * @param isValid      a validated of the category.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param url           a url of the category to update.
+     * @param title         a new title to the category.
+     * @param description   a new description to the category.
+     * @param keywords      a new description to the category.
+     * @param multipartLogo a file of photo to the new category.
+     * @param isValid       a validated of the category.
+     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Category
      * @see File
@@ -176,13 +190,15 @@ public class CategoryController {
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "photo") final String photoUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = new Category(title, description, keywords);
-        category.setPhotoUrl(photoUrl);
         category.setValidated(isValid);
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
+        }
         this.categoryService.update(url, category);
         Cache.clear();
         modelAndView.setViewName("redirect:/category/" + category.getUrl());

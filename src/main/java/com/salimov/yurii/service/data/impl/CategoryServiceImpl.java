@@ -6,6 +6,7 @@ import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
 import com.salimov.yurii.service.data.interfaces.CategoryService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -50,10 +51,21 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     private final ArticleService articleService;
 
     /**
+     * The interface of the service layer,
+     * describes a set of methods for working
+     * with objects of the class {@link File}.
+     *
+     * @see FileService
+     * @see File
+     */
+    private final FileService fileService;
+
+    /**
      * Constructor.
      *
      * @param dao            a implementation  of the {@link CategoryDao} interface.
      * @param articleService a implementation of the {@link ArticleService} interface.
+     * @param fileService    a implementation of the {@link FileService} interface.
      * @see CategoryDao
      * @see ArticleService
      */
@@ -61,10 +73,12 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CategoryServiceImpl(
             final CategoryDao dao,
-            final ArticleService articleService
+            final ArticleService articleService,
+            final FileService fileService
     ) {
         super(dao);
         this.articleService = articleService;
+        this.fileService = fileService;
     }
 
     /**
@@ -82,9 +96,14 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
             final String url,
             final Category category
     ) {
-        return update(
-                getByUrl(url, false).initialize(category)
-        );
+        final Category categoryToUpdate = getByUrl(url, false);
+        final File newLogo = category.getLogo();
+        final File oldLogo = categoryToUpdate.getLogo();
+        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
+            this.fileService.deleteFile(oldLogo.getUrl());
+        }
+        categoryToUpdate.initialize(category);
+        return update(categoryToUpdate);
     }
 
     /**

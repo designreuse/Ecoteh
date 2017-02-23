@@ -72,21 +72,24 @@ public final class Company extends Content implements ICompany {
     private String workTimeTo;
 
     /**
-     * The logo URL of a company.
+     * The company logo.
+     *
+     * @see File
      */
-    @Column(name = "logo", nullable = false)
-    private String logoUrl;
-
-    /**
-     * The favicon URL of a company.
-     */
-    @Column(name = "favicon", nullable = false)
-    private String faviconUrl;
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "id_logo",
+            referencedColumnName = "id"
+    )
+    private File logo;
 
     /**
      * The company contacts.
      *
-     * @see Category
+     * @see Contacts
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -101,7 +104,7 @@ public final class Company extends Content implements ICompany {
     /**
      * The company address.
      *
-     * @see Category
+     * @see Address
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -137,8 +140,7 @@ public final class Company extends Content implements ICompany {
         this.senderPass = "";
         this.workTimeFrom = "";
         this.workTimeTo = "";
-        this.logoUrl = "";
-        this.faviconUrl = "";
+        this.logo = new File();
         this.type = CompanyType.PARTNER;
         this.contacts = new Contacts();
         this.address = new Address();
@@ -161,8 +163,7 @@ public final class Company extends Content implements ICompany {
                 ", senderPass='" + getSenderPass() + '\'' +
                 ", workTimeFrom='" + getWorkTimeFrom() + '\'' +
                 ", workTimeTo='" + getWorkTimeTo() + '\'' +
-                ", logoUrl='" + getLogoUrl() + '\'' +
-                ", faviconUrl='" + getFaviconUrl() + '\'' +
+                getLogo() +
                 ", type=" + getType() +
                 '}';
     }
@@ -403,48 +404,24 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * Returns a logo URL of the company.
+     * Returns a logo of the company.
      *
      * @return The company logo URL.
      */
     @Override
-    public String getLogoUrl() {
-        return this.logoUrl;
+    public File getLogo() {
+        return this.logo;
     }
 
     /**
-     * Sets a new logo URL to the article.
-     * If parameter logo URL is invalid
-     * then sets {@code null}.
+     * Sets a new logo to the company.
      *
-     * @param logoUrl a new logo to the article.
+     * @param logo a new logo to the company.
      * @see File
      */
     @Override
-    public void setLogoUrl(final String logoUrl) {
-        this.logoUrl = isNotBlank(logoUrl) ? logoUrl : "";
-    }
-
-    /**
-     * Returns a favicon URL of the company.
-     *
-     * @return The company favicon URL.
-     */
-    @Override
-    public String getFaviconUrl() {
-        return this.faviconUrl;
-    }
-
-    /**
-     * Sets a new favicon URL to the article.
-     * If parameter favicon URL is invalid
-     * then sets {@code null}.
-     *
-     * @param faviconUrl a new favicon to the article.
-     */
-    @Override
-    public void setFaviconUrl(final String faviconUrl) {
-        this.faviconUrl = isNotBlank(faviconUrl) ? faviconUrl : "";
+    public void setLogo(final File logo) {
+        this.logo.initialize(logo);
     }
 
     /**
@@ -510,8 +487,7 @@ public final class Company extends Content implements ICompany {
             this.setSenderPass(company.getSenderPass());
             this.setWorkTimeFrom(company.getWorkTimeFrom());
             this.setWorkTimeTo(company.getWorkTimeTo());
-            this.setLogoUrl(company.getLogoUrl());
-            this.setFaviconUrl(company.getFaviconUrl());
+            this.setLogo(company.getLogo());;
             this.setType(company.getType());
             this.setContacts(company.getContacts());
             this.setAddress(company.getAddress());

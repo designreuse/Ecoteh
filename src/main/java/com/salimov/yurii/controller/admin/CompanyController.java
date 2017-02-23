@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -55,22 +56,34 @@ public class CompanyController {
     private final CompanyService companyService;
 
     /**
+     * The implementation of the interface describes a set of methods
+     * for working with objects of the {@link File} class.
+     *
+     * @see FileService
+     */
+    private final FileService fileService;
+
+    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
      * @param fabric         a implementation of the {@link MainMVFabric} interface.
      * @param companyService a implementation of the {@link CompanyService} interface.
+     * @param fileService    a implementation of the {@link FileService} interface.
      * @see MainMVFabric
      * @see CompanyService
+     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CompanyController(
             final MainMVFabric fabric,
-            final CompanyService companyService
+            final CompanyService companyService,
+            final FileService fileService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);
         this.companyService = companyService;
+        this.fileService = fileService;
     }
 
     /**
@@ -87,7 +100,7 @@ public class CompanyController {
     )
     public ModelAndView editMainCompany() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("company",  this.companyService.getMainCompany());
+        modelAndView.addObject("company", this.companyService.getMainCompany());
         modelAndView.addObject("main", true);
         modelAndView.setViewName("admin/company/edit_page");
         return modelAndView;
@@ -119,8 +132,7 @@ public class CompanyController {
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps url to the main company.
-     * @param logoUrl       a new logo Url to the main company.
-     * @param faviconUrl    a new favicon Url to the main company.
+     * @param multipartLogo a new logo Url to the main company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Company
@@ -151,8 +163,7 @@ public class CompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo") final String logoUrl,
-            @RequestParam(value = "favicon") final String faviconUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             final ModelAndView modelAndView
     ) {
         final Company company = new Company();
@@ -166,17 +177,16 @@ public class CompanyController {
         company.setSenderPass(senderPass);
         company.setWorkTimeFrom(workTimeFrom);
         company.setWorkTimeTo(workTimeTo);
-        company.setLogoUrl(logoUrl);
-        company.setFaviconUrl(faviconUrl);
         company.setContacts(
                 new Contacts(
                         email, mobilePhone, landlinePhone, fax,
                         vkontakte, facebook, twitter, skype
                 )
         );
-        company.setAddress(
-                new Address(address, googleMaps)
-        );
+        company.setAddress(new Address(address, googleMaps));
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
+        }
         this.companyService.updateMainCompany(company);
         modelAndView.setViewName("redirect:/company/main");
         Cache.clear();
@@ -239,7 +249,7 @@ public class CompanyController {
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
      * @param googleMaps    a google maps url of the new company.
-     * @param logoUrl       a  logo Url to the new company.
+     * @param multipartLogo a  logo to the new company.
      * @param isValid       a validated of the new company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -267,7 +277,7 @@ public class CompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo") final String logoUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -278,7 +288,6 @@ public class CompanyController {
         company.setKeywords(keywords);
         company.setDomain(domain);
         company.setTagline(tagline);
-        company.setLogoUrl(logoUrl);
         company.setValidated(isValid);
         company.setContacts(
                 new Contacts(
@@ -286,9 +295,10 @@ public class CompanyController {
                         vkontakte, facebook, twitter, skype
                 )
         );
-        company.setAddress(
-                new Address(address, googleMaps)
-        );
+        company.setAddress(new Address(address, googleMaps));
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
+        }
         this.companyService.add(company);
         Cache.clear();
         modelAndView.setViewName("redirect:/company/" + company.getUrl());
@@ -359,7 +369,7 @@ public class CompanyController {
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
      * @param googleMaps    a new google maps url to the company.
-     * @param logoUrl       a new logo Url to the company.
+     * @param multipartLogo a new logo Url to the company.
      * @param isValid       a validated of the article.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -388,7 +398,7 @@ public class CompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo") final String logoUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -399,7 +409,6 @@ public class CompanyController {
         company.setKeywords(keywords);
         company.setDomain(domain);
         company.setTagline(tagline);
-        company.setLogoUrl(logoUrl);
         company.setValidated(isValid);
         company.setContacts(
                 new Contacts(
@@ -407,9 +416,10 @@ public class CompanyController {
                         vkontakte, facebook, twitter, skype
                 )
         );
-        company.setAddress(
-                new Address(address, googleMaps)
-        );
+        company.setAddress(new Address(address, googleMaps));
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
+        }
         this.companyService.update(url, company);
         Cache.clear();
         modelAndView.setViewName("redirect:/company/" + company.getUrl());

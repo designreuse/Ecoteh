@@ -248,9 +248,15 @@ public final class File extends Model implements IFile {
     public File initialize(final File file) {
         if (file != null) {
             super.initialize(file);
-            this.setTitle(file.getTitle());
-            this.setUrl(file.getUrl());
-            this.setType(file.getType());
+            if (isNotBlank(file.getTitle())) {
+                this.setTitle(file.getTitle());
+            }
+            if (isNotBlank(file.getUrl())) {
+                this.setUrl(file.getUrl());
+            }
+            if (file.getType() != null) {
+                this.setType(file.getType());
+            }
         }
         return this;
     }

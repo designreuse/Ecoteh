@@ -5,6 +5,7 @@ import com.salimov.yurii.dao.interfaces.UserDao;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.User;
 import com.salimov.yurii.enums.UserRole;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.util.comparator.UserComparator;
 import org.apache.log4j.Logger;
@@ -54,6 +55,8 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      */
     private final UserDao dao;
 
+    private final FileService fileService;
+
     /**
      * Constructor.
      *
@@ -62,9 +65,13 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public UserServiceImpl(final UserDao dao) {
+    public UserServiceImpl(
+            final UserDao dao,
+            final FileService fileService
+    ) {
         super(dao);
         this.dao = dao;
+        this.fileService = fileService;
     }
 
     /**
@@ -145,9 +152,14 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
             final String url,
             final User user
     ) {
-        return update(
-                getByUrl(url).initialize(user)
-        );
+        final User userToUpdate = getByUrl(url);
+        final File newPhoto = user.getPhoto();
+        final File oldPhoto = userToUpdate.getPhoto();
+        if (!newPhoto.equals(oldPhoto) && isNotBlank(newPhoto.getUrl())) {
+            this.fileService.deleteFile(oldPhoto.getUrl());
+        }
+        userToUpdate.initialize(user);
+        return update(userToUpdate);
     }
 
     /**

@@ -129,5 +129,14 @@ public interface FileService extends DataService<File> {
      * @return The files with the type.
      * @see FileType
      */
-   List<File> getByType(final FileType type);
+    List<File> getByType(final FileType type);
+
+    /**
+     * Returns last file with the type.
+     *
+     * @param type a type of file to return.
+     * @return The last file with the type.
+     * @see FileType
+     */
+    File getLastByType(final FileType type);
 }

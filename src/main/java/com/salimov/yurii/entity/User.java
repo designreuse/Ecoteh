@@ -70,7 +70,7 @@ public final class User extends Model implements IUser, UserDetails {
     /**
      * The user contacts.
      *
-     * @see Category
+     * @see Contacts
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -85,7 +85,7 @@ public final class User extends Model implements IUser, UserDetails {
     /**
      * The user contacts.
      *
-     * @see Category
+     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -586,6 +586,7 @@ public final class User extends Model implements IUser, UserDetails {
      * @param user a user to copy.
      * @return The this user with new fields.
      */
+    @Override
     public User initialize(final User user) {
         if (user != null) {
             this.setName(user.getName());

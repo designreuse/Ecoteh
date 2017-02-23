@@ -29,10 +29,19 @@ public final class Category extends Content implements ICategory {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The main photo URL.
+     * The category logo.
+     *
+     * @see File
      */
-    @Column(name = "photo", nullable = false)
-    private String photoUrl;
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "id_logo",
+            referencedColumnName = "id"
+    )
+    private File logo;
 
     /**
      * The set of a articles.
@@ -54,7 +63,7 @@ public final class Category extends Content implements ICategory {
      * Default constructor.
      */
     public Category() {
-        this.photoUrl = "";
+        this.logo = new File();
     }
 
     /**
@@ -70,13 +79,13 @@ public final class Category extends Content implements ICategory {
             final String keywords
     ) {
         super(title, description, keywords);
-        this.photoUrl = "";
+        this.logo = new File();
     }
 
     @Override
     public String toString() {
         return "Category{" + super.toString() +
-                ", photoUrl='" + getPhotoUrl() + '\'' +
+                getLogo() +
                 '}';
     }
 
@@ -91,25 +100,24 @@ public final class Category extends Content implements ICategory {
     }
 
     /**
-     * Returns a main photo URL of the category.
+     * Returns a logo of the category.
      *
-     * @return The main photo URL.
+     * @return The company logo URL.
      */
     @Override
-    public String getPhotoUrl() {
-        return this.photoUrl;
+    public File getLogo() {
+        return this.logo;
     }
 
     /**
-     * Sets a new file to the category.
-     * If parameter file is blank, then sets {@code null}.
+     * Sets a new logo to the category.
      *
-     * @param photoUrl a new main photo URL to the category.
+     * @param logo a new logo to the category.
      * @see File
      */
     @Override
-    public void setPhotoUrl(final String photoUrl) {
-        this.photoUrl = isNotBlank(photoUrl) ? photoUrl : null;
+    public void setLogo(final File logo) {
+        this.logo.initialize(logo);
     }
 
     /**
@@ -245,7 +253,7 @@ public final class Category extends Content implements ICategory {
     public Category initialize(final Category category) {
         if (category != null) {
             super.initialize(category);
-            this.setPhotoUrl(category.getPhotoUrl());
+            this.setLogo(category.getLogo());
         }
         return this;
     }

@@ -86,12 +86,16 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final String title,
             final MultipartFile multipartFile
     ) {
-        checkMultipartFile(multipartFile);
-        final File file = new File(
-                title, createRelativePath(title, multipartFile)
-        );
-        saveFile(multipartFile, file.getUrl());
-        return add(file);
+        File file;
+        if ((multipartFile != null) && !multipartFile.isEmpty()) {
+            checkMultipartFile(multipartFile);
+            file = new File(title, createRelativePath(title, multipartFile));
+            saveFile(multipartFile, file.getUrl());
+            file = add(file);
+        } else {
+            file = new File();
+        }
+        return file;
     }
 
     /**
@@ -353,8 +357,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      */
     @Override
     @Transactional(readOnly = true)
-    public List<File> getByType(final FileType type)
-            throws IllegalArgumentException, NullPointerException {
+    public List<File> getByType(final FileType type) throws IllegalArgumentException, NullPointerException {
         if (type == null) {
             throw new IllegalArgumentException("File type is null");
         }
@@ -365,6 +368,26 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             );
         }
         return files;
+    }
+
+    /**
+     * Returns last file with the type.
+     *
+     * @param type a type of file to return.
+     * @return The last file with the type.
+     * @see FileType
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public File getLastByType(final FileType type) {
+        final List<File> files = getByType(type);
+        File file;
+        if (!files.isEmpty()) {
+            file = files.get(files.size() - 1);
+        } else {
+            file = new File();
+        }
+        return file;
     }
 
     /**
@@ -379,7 +402,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     private void checkMultipartFile(final MultipartFile multipartFile)
             throws NullPointerException, IllegalArgumentException {
-        if (multipartFile == null || multipartFile.isEmpty()) {
+        if ((multipartFile == null) || multipartFile.isEmpty()) {
             throw new NullPointerException("Can`t find multipart file!");
         }
         if (multipartFile.getSize() > this.properties.getMaxFileSize()) {
@@ -401,8 +424,10 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final String title,
             final MultipartFile multipartFile
     ) {
-        return this.properties.getResourcesLocation() + Translator.fromCyrillicToLatin(title)
-                + new Random().nextInt() + getMultipartFileType(multipartFile);
+        return this.properties.getResourcesLocation() +
+                Translator.fromCyrillicToLatin(title) +
+                new Random().nextInt() +
+                getMultipartFileType(multipartFile);
     }
 
     /**

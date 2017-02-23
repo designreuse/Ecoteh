@@ -159,23 +159,23 @@ public class UserController {
      * Request mapping: /admin/user/add
      * Method: POST
      *
-     * @param name          a name of the new user.
-     * @param login         a login of the new user.
-     * @param password      a password of the new user.
-     * @param description   a description of the new user.
-     * @param mobilePhone   a mobile phone of the new user.
-     * @param landlinePhone a landline phone of the new user.
-     * @param fax           a fax of the new user.
-     * @param email         a e-mail of the new user.
-     * @param vkontakte     a vkontakte url of the new user.
-     * @param facebook      a facebook url of the new user.
-     * @param twitter       a twitter url of the new user.
-     * @param skype         a skype username of the new user.
-     * @param multipartFile a photo to the new user.
-     * @param isValid       a validated of the new user.
-     * @param isMailing     a permit to send a letters on the user email.
-     * @param isLocked      locked the user or not.
-     * @param modelAndView  a object of class ModelAndView for to update.
+     * @param name           a name of the new user.
+     * @param login          a login of the new user.
+     * @param password       a password of the new user.
+     * @param description    a description of the new user.
+     * @param mobilePhone    a mobile phone of the new user.
+     * @param landlinePhone  a landline phone of the new user.
+     * @param fax            a fax of the new user.
+     * @param email          a e-mail of the new user.
+     * @param vkontakte      a vkontakte url of the new user.
+     * @param facebook       a facebook url of the new user.
+     * @param twitter        a twitter url of the new user.
+     * @param skype          a skype username of the new user.
+     * @param multipartPhoto a photo to the new user.
+     * @param isValid        a validated of the new user.
+     * @param isMailing      a permit to send a letters on the user email.
+     * @param isLocked       locked the user or not.
+     * @param modelAndView   a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
      */
@@ -196,7 +196,7 @@ public class UserController {
             @RequestParam(value = "facebook") final String facebook,
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final MultipartFile multipartFile,
+            @RequestParam(value = "photo") final MultipartFile multipartPhoto,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
@@ -215,7 +215,9 @@ public class UserController {
         user.setMailing(isMailing);
         user.setLocked(isLocked);
         user.setRole(UserRole.ADMIN);
-        user.setPhoto(this.fileService.add(user.getName(), multipartFile));
+        if (multipartPhoto != null) {
+            user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
+        }
         this.userService.add(user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");
@@ -268,24 +270,24 @@ public class UserController {
      * Request mapping: /admin/user/update
      * Method: POST
      *
-     * @param url           a url of the user to update.
-     * @param name          a new name to the user.
-     * @param login         a new login to the user.
-     * @param password      a new password to the user.
-     * @param description   a new description to the user.
-     * @param mobilePhone   a new mobile phone to the user.
-     * @param landlinePhone a new landline phone to the user.
-     * @param fax           a new fax to the user.
-     * @param email         a new e-mail to the user.
-     * @param vkontakte     a new vkontakte url to the user.
-     * @param facebook      a new facebook url to the user.
-     * @param twitter       a new twitter url to the user.
-     * @param skype         a new skype username to the user.
-     * @param multipartFile a photo to the user.
-     * @param isValid       a validated of the user.
-     * @param isMailing     a permit to send a letters on the user email.
-     * @param isLocked      locked the user or not.
-     * @param modelAndView  a object of class ModelAndView for to update.
+     * @param url            a url of the user to update.
+     * @param name           a new name to the user.
+     * @param login          a new login to the user.
+     * @param password       a new password to the user.
+     * @param description    a new description to the user.
+     * @param mobilePhone    a new mobile phone to the user.
+     * @param landlinePhone  a new landline phone to the user.
+     * @param fax            a new fax to the user.
+     * @param email          a new e-mail to the user.
+     * @param vkontakte      a new vkontakte url to the user.
+     * @param facebook       a new facebook url to the user.
+     * @param twitter        a new twitter url to the user.
+     * @param skype          a new skype username to the user.
+     * @param multipartPhoto a photo to the user.
+     * @param isValid        a validated of the user.
+     * @param isMailing      a permit to send a letters on the user email.
+     * @param isLocked       locked the user or not.
+     * @param modelAndView   a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see User
      * @see File
@@ -308,7 +310,7 @@ public class UserController {
             @RequestParam(value = "facebook") final String facebook,
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final MultipartFile multipartFile,
+            @RequestParam(value = "photo") final MultipartFile multipartPhoto,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean isLocked,
@@ -327,7 +329,9 @@ public class UserController {
         user.setMailing(isMailing);
         user.setLocked(isLocked);
         user.setRole(UserRole.ADMIN);
-        user.setPhoto(this.fileService.add(user.getName(), multipartFile));
+        if ((multipartPhoto != null) && (!multipartPhoto.isEmpty())) {
+            user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
+        }
         this.userService.update(url, user);
         Cache.removeAll("Main Company");
         modelAndView.setViewName("redirect:/admin/user/all");

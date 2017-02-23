@@ -19,20 +19,19 @@ import java.util.Collection;
 public interface ICategory extends IContent {
 
     /**
-     * Returns a file of the category.
+     * Returns a logo of the category.
      *
-     * @return The category file.
-     * @see File
+     * @return The company logo URL.
      */
-    String getPhotoUrl();
+    File getLogo();
 
     /**
-     * Sets a new file to the category.
+     * Sets a new logo to the category.
      *
-     * @param photoUrl a new main file to the category.
+     * @param logo a new logo to the category.
      * @see File
      */
-    void setPhotoUrl(final String photoUrl);
+    void setLogo(final File logo);
 
     /**
      * Adds new article to the list of articles.

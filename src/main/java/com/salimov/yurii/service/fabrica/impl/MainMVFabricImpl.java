@@ -380,6 +380,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("main_company", this.companyService.getMainCompany());
         modelAndView.addObject("categories", this.categoryService.getAll(isValidContent()));
+        modelAndView.addObject("favicon", this.fileService.getLastByType(FileType.FAVICON));
         return modelAndView;
     }
 

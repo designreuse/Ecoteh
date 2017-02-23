@@ -3,10 +3,8 @@ package com.salimov.yurii.entity.interfaces;
 import com.salimov.yurii.entity.Address;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.Contacts;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.enums.CompanyType;
-
-import java.util.Collection;
-import java.util.List;
 
 /**
  * The interface describes a set of methods
@@ -147,36 +145,20 @@ public interface ICompany extends IContent {
     void setAddress(final Address address);
 
     /**
-     * Returns a logo URL of the company.
+     * Returns a logo of the company.
      *
-     * @return The company logo URL.
+     * @return The company logo.
+     * @see File
      */
-    String getLogoUrl();
+    File getLogo();
 
     /**
-     * Sets a new logo URL to the article.
-     * If parameter logo URL is invalid
-     * then sets {@code null}.
+     * Sets a new logo to the company.
      *
-     * @param logoUrl a new logo to the article.
+     * @param logo a new logo to the company.
+     * @see File
      */
-    void setLogoUrl(final String logoUrl);
-
-    /**
-     * Returns a favicon URL of the company.
-     *
-     * @return The company favicon URL.
-     */
-    String getFaviconUrl();
-
-    /**
-     * Sets a new favicon URL to the article.
-     * If parameter favicon URL is invalid
-     * then sets {@code null}.
-     *
-     * @param faviconUrl a new favicon to the article.
-     */
-    void setFaviconUrl(final String faviconUrl);
+    void setLogo(final File logo);
 
     /**
      * Returns a domain of the company.
