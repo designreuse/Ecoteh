@@ -131,7 +131,7 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "admin", "ecopass",
+                "admin", "somepass",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -143,7 +143,7 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "superadmin", "superecopass",
+                "superadmin", "somepass",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);
