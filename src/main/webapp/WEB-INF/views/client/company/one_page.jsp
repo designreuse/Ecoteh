@@ -17,10 +17,8 @@
         <meta name="description"
               content="Описание компании &quot;<c:out value="${company.title}"/>&quot;: <c:out value="${company.description}"/>.">
         <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne ''}">
-            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-        </c:if>
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -62,7 +60,7 @@
                             → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
                             → <a href="#"><c:out value="${company.title}"/></a>
                         </p>
-                        <c:if test="${company.logoUrl ne ''}">
+                        <c:if test="${company.logo.url ne ''}">
                             <hr>
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>

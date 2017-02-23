@@ -20,10 +20,8 @@
               content="Форма для редактирования категории &quot;<c:out value="${category.title}"/>&quot;.">
         <meta name="keywords"
               content="Редактирование категории, <c:out value="${category.title}"/>, <c:out value="${category.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne ''}">
-            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-        </c:if>
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -52,7 +50,8 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/category/update"/>" method="post">
+                        <form action="<c:url value="/admin/category/update"/>" method="post"
+                              enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
@@ -79,24 +78,26 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_category_photo.jpg"/>"
-                                           rel="lightgallery" title="Главное фото категории. Где это?">
-                                            Фото&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                            aria-hidden="true"></span>
-                                        </a>
-                                    </td>
+                                    <td class="ths">Логотип</td>
                                     <td class="tds">
-                                        <a href="<c:url value="${category.photoUrl}"/>"
-                                           title="${category.title}" rel="lightgallery">
-                                            <img src="<c:url value="${category.photoUrl}"/>" class="file"
-                                                 onerror="this.src='<c:url
-                                                         value="/resources/img/static/default_file.gif"/>'"
-                                                 alt="" title="Увеличить">
-                                        </a><br><br>
-                                        <input type="text" class="form-control" name="photo" minlength="2"
-                                               maxlength="100" placeholder="Ссылка на главное фото для категории"
-                                               value="${category.photoUrl}">
+                                        <c:choose>
+                                            <c:when test="${category.logo.url ne ''}">
+                                                <a href="<c:url value="${category.logo.url}"/>" rel="lightgallery"
+                                                   title="<c:out value="${category.title}"/>">
+                                                    <img class="img-responsive img-in-list"
+                                                         alt="<c:out value="${category.title}"/>"
+                                                         src="<c:url value="${category.logo.url}"/>"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_file.gif"/>'">
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="img-responsive img-in-list"
+                                                     alt="<c:out value="${category.name}"/>"
+                                                     src="<c:url value="/resources/img/static/default_file.gif"/>">
+                                            </c:otherwise>
+                                        </c:choose><br>
+                                        <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>

@@ -19,10 +19,8 @@
         <meta name="description"
               content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
         <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
-        <c:if test="${main_company.faviconUrl ne ''}">
-            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-        </c:if>
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -64,7 +62,8 @@
                             <c:when test="${main}"><c:set var="action" value="/main"/></c:when>
                             <c:otherwise><c:set var="action" value=""/></c:otherwise>
                         </c:choose>
-                        <form action="<c:url value="/admin/company/update/${action}"/>" method="post">
+                        <form action="<c:url value="/admin/company/update/${action}"/>" method="post"
+                              enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
@@ -284,26 +283,26 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
-                                           rel="lightgallery" title="Логотип, это где?">
-                                            Логотип&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                               aria-hidden="true"></span>
-                                        </a>
-                                    </td>
+                                    <td class="ths">Логотип</td>
                                     <td class="tds">
-                                        <c:if test="${company.logoUrl ne ''}">
-                                            <a href="<c:url value="/${company.logoUrl}"/>"
-                                               title="<c:out value="${company.title}"/>" rel="lightgallery">
-                                                <img src="<c:url value="${company.logoUrl}"/>"
-                                                     class="main-logo" alt="" title="Увеличить"
-                                                     onerror="this.src='<c:url
-                                                             value="/resources/img/static/default_file.gif"/>'">
-                                            </a><br><br>
-                                        </c:if>
-                                        <input type="text" class="form-control" name="logo" minlength="2"
-                                               maxlength="100" placeholder="Ссылка на логотип компании"
-                                               value="<c:out value="${company.logoUrl}"/>">
+                                        <c:choose>
+                                            <c:when test="${company.logo.url ne ''}">
+                                                <a href="<c:url value="${company.logo.url}"/>" rel="lightgallery"
+                                                   title="<c:out value="${company.title}"/>">
+                                                    <img class="img-responsive img-in-list"
+                                                         alt="<c:out value="${company.title}"/>"
+                                                         src="<c:url value="${company.logo.url}"/>"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_file.gif"/>'">
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="img-responsive img-in-list"
+                                                     alt="<c:out value="${company.name}"/>"
+                                                     src="<c:url value="/resources/img/static/default_file.gif"/>">
+                                            </c:otherwise>
+                                        </c:choose><br>
+                                        <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
                                 <c:choose>

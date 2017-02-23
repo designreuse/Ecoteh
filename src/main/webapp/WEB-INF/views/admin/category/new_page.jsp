@@ -16,10 +16,8 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Форма для добавления новой категории.">
         <meta name="keywords" content="Новая категория, добавление категории"/>
-        <c:if test="${main_company.faviconUrl ne ''}">
-            <link rel="shortcut icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-            <link rel="icon" href="<c:url value="${main_company.faviconUrl}"/>" type="image/x-icon">
-        </c:if>
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -70,16 +68,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_category_photo.jpg"/>"
-                                           rel="lightgallery" title="Главное фото категории. Где это?">
-                                            Фото&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                            aria-hidden="true"></span>
-                                        </a>
-                                    </td>
+                                    <td class="ths">Логотип</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="photo" minlength="2"
-                                               maxlength="100" placeholder="Ссылка на главное фото для категории">
+                                        <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>

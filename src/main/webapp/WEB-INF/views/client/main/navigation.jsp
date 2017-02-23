@@ -28,8 +28,8 @@
                     <li>
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">
                             <c:choose>
-                                <c:when test="${main_company.faviconUrl ne ''}">
-                                    <img src="<c:url value="${main_company.faviconUrl}"/>"
+                                <c:when test="${favicon.url ne ''}">
+                                    <img src="<c:url value="${favicon.url}"/>"
                                          class="icon-size" alt="" title="<c:out value="${main_company.title}"/>"
                                          onerror="this.src='<c:url
                                                  value="/resources/img/static/default_file.gif"/>'"/>

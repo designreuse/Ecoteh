@@ -23,9 +23,9 @@
                                     </c:choose>">
         <a href="<c:url value="/category/${category.url}"/>"
            title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
-            <c:if test="${category.photoUrl ne ''}">
+            <c:if test="${category.logo.url ne ''}">
                 <img class="img-responsive img-in-list" alt="<c:out value="${category.title}"/>"
-                     src="<c:url value="${category.photoUrl}"/>" onerror="this.src='<c:url
+                     src="<c:url value="${category.logo.url}"/>" onerror="this.src='<c:url
                         value="/resources/img/static/default_file.gif"/>'">
             </c:if>
             <h3 class="text-center"><c:out value="${category.title}"/></h3>

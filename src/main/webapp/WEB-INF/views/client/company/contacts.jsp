@@ -10,16 +10,10 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.logoUrl ne ''}">
+                    <c:when test="${company.logo.url ne ''}">
                         <img class="img-logo" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="${company.logoUrl}"/>"
+                             src="<c:url value="${company.logo.url}"/>"
                              onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
-                    </c:when>
-                    <c:when test="${company.faviconUrl ne ''}">
-                        <br><img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="/${company.faviconUrl}"/>"
-                                 onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
-                        &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b><br>
                     </c:when>
                     <c:otherwise>
                         <br><span class="glyphicon glyphicon-globe"
@@ -33,9 +27,9 @@
             <a href="http://<c:out value="${company.domain}"/>" title="Сайт компании &quot;${company.title}&quot;"
                target="_blank">
                 <c:choose>
-                    <c:when test="${company.faviconUrl ne ''}">
+                    <c:when test="${company.logo.url ne ''}">
                         <img class="icon-size" alt="<c:out value="${company.title}"/>"
-                             src="<c:url value="/${company.faviconUrl}"/>"
+                             src="<c:url value="/${company.logo.url}"/>"
                              onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </c:when>
                     <c:otherwise><span class="glyphicon glyphicon-link" aria-hidden="true"></span></c:otherwise>

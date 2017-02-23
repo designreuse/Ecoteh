@@ -38,11 +38,11 @@
                                     </c:choose>">
                         <div class="text-center">
                             <c:choose>
-                                <c:when test="${partner.logoUrl ne ''}">
+                                <c:when test="${partner.logo.url ne ''}">
                                     <a href="<c:url value="/company/${partner.url}"/>"
                                        title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
                                         <img class="img-logo" alt="<c:out value="${partner.title}"/>"
-                                             src="<c:url value="${partner.logoUrl}"/>"
+                                             src="<c:url value="${partner.logo.url}"/>"
                                              onerror="this.src='<c:url
                                                      value="/resources/img/static/default_file.gif"/>'">
                                     </a>
