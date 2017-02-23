@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE `addresses` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `address`     VARCHAR(300)     NOT NULL DEFAULT '',
-  `google_maps` TEXT             NOT NULL,
+  `google_maps` TEXT             NOT NULL DEFAULT '',
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`)
 )
@@ -48,9 +48,9 @@ CREATE TABLE `articles` (
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
   `number`      VARCHAR(100)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL,
-  `text`        TEXT             NOT NULL,
-  `keywords`    TEXT             NOT NULL,
+  `description` TEXT             NOT NULL DEFAULT '',
+  `text`        TEXT             NOT NULL DEFAULT '',
+  `keywords`    TEXT             NOT NULL DEFAULT '',
   `date`        VARCHAR(30)      NOT NULL DEFAULT '',
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
@@ -71,11 +71,11 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_logo`     INT(10) UNSIGNED          DEFAULT NULL,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL,
-  `keywords`    TEXT             NOT NULL,
-  `photo`       VARCHAR(200)     NOT NULL DEFAULT '',
+  `description` TEXT             NOT NULL DEFAULT '',
+  `keywords`    TEXT             NOT NULL DEFAULT '',
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`),
@@ -94,26 +94,26 @@ DROP TABLE IF EXISTS `companies`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `companies` (
   `id`             INT(10) UNSIGNED         NOT NULL AUTO_INCREMENT,
+  `id_logo`        INT(10) UNSIGNED                  DEFAULT NULL,
   `id_contacts`    INT(10) UNSIGNED                  DEFAULT NULL,
   `id_address`     INT(10) UNSIGNED                  DEFAULT NULL,
   `type`           ENUM ('MAIN', 'PARTNER') NOT NULL DEFAULT 'PARTNER',
   `title`          VARCHAR(100)             NOT NULL DEFAULT '',
   `domain`         VARCHAR(200)             NOT NULL DEFAULT '',
   `url`            VARCHAR(200)             NOT NULL DEFAULT '',
-  `tagline`        TEXT                     NOT NULL,
-  `description`    TEXT                     NOT NULL,
-  `information`    TEXT                     NOT NULL,
-  `keywords`       TEXT                     NOT NULL,
+  `tagline`        TEXT                     NOT NULL DEFAULT '',
+  `description`    TEXT                     NOT NULL DEFAULT '',
+  `information`    TEXT                     NOT NULL DEFAULT '',
+  `keywords`       TEXT                     NOT NULL DEFAULT '',
   `sender_email`   VARCHAR(200)             NOT NULL DEFAULT '',
   `sender_pass`    VARCHAR(100)             NOT NULL DEFAULT '',
   `work_time_from` VARCHAR(10)              NOT NULL DEFAULT '',
   `work_time_to`   VARCHAR(10)              NOT NULL DEFAULT '',
-  `logo`           VARCHAR(200)             NOT NULL DEFAULT '',
-  `favicon`        VARCHAR(200)             NOT NULL DEFAULT '',
   `validated`      BIT(1)                   NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`),
   UNIQUE KEY `url` (`url`),
+  FOREIGN KEY (`id_logo`) REFERENCES `contacts` (`id`),
   FOREIGN KEY (`id_contacts`) REFERENCES `contacts` (`id`),
   FOREIGN KEY (`id_address`) REFERENCES `addresses` (`id`)
 )
@@ -153,11 +153,11 @@ DROP TABLE IF EXISTS `files`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `files` (
-  `id`        INT(10) UNSIGNED                  NOT NULL AUTO_INCREMENT,
-  `title`     VARCHAR(100)                      NOT NULL DEFAULT '',
-  `type`      ENUM ('STATIC', 'SLIDE', 'OTHER') NOT NULL DEFAULT 'OTHER',
-  `url`       VARCHAR(200)                      NOT NULL DEFAULT '',
-  `validated` BIT(1)                            NOT NULL DEFAULT b'1',
+  `id`        INT(10) UNSIGNED                             NOT NULL AUTO_INCREMENT,
+  `title`     VARCHAR(100)                                 NOT NULL DEFAULT '',
+  `type`      ENUM ('FAVICON', 'STATIC', 'SLIDE', 'OTHER') NOT NULL DEFAULT 'OTHER',
+  `url`       VARCHAR(200)                                 NOT NULL DEFAULT '',
+  `validated` BIT(1)                                       NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -175,7 +175,7 @@ CREATE TABLE `messages` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_user`   INT(10) UNSIGNED NOT NULL,
   `subject`   VARCHAR(100)     NOT NULL DEFAULT '',
-  `text`      TEXT             NOT NULL,
+  `text`      TEXT             NOT NULL DEFAULT '',
   `date`      VARCHAR(30)      NOT NULL DEFAULT '',
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
@@ -195,7 +195,7 @@ DROP TABLE IF EXISTS `responses`;
 CREATE TABLE `responses` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(100)     NOT NULL DEFAULT '',
-  `text`      TEXT             NOT NULL,
+  `text`      TEXT             NOT NULL DEFAULT '',
   `date`      VARCHAR(30)      NOT NULL DEFAULT '',
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`)
