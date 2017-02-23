@@ -148,6 +148,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
      * @param model a model to copy.
      * @return The this model with new fields.
      */
+    @Override
     public Model initialize(final Model model) {
         if (model != null) {
             this.setValidated(model.isValidated());
