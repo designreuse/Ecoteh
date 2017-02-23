@@ -71,7 +71,7 @@ public final class CategoryTest extends ContentTest<Category> {
                 ", description='" + category.getDescription() + '\'' +
                 ", keywords='" + category.getKeywords() + '\'' +
                 '}' +
-                ", photoUrl='" + category.getPhotoUrl() + '\'' +
+                category.getLogo() +
                 '}';
         assertEquals(category.toString(), categoryToString);
     }
@@ -104,18 +104,18 @@ public final class CategoryTest extends ContentTest<Category> {
     }
 
     @Test
-    public void whenSetInvalidPhotoThenGetNull() {
+    public void whenSetInvalidPhotoThenGetNotNull() {
         final Category category = new Category();
-        category.setPhotoUrl(null);
-        assertNull(category.getPhotoUrl());
+        category.setLogo(null);
+        assertNull(category.getLogo());
     }
 
     @Test
     public void whenSetValidPhotoThenGetThisPhoto() {
         final Category category = new Category();
-        category.setPhotoUrl(ANY_STRING);
-        assertNotNull(category.getPhotoUrl());
-        assertEquals(category.getPhotoUrl(), ANY_STRING);
+        category.setLogo(getFile());
+        assertNotNull(category.getLogo());
+        assertEquals(category.getLogo(), getFile());
     }
 
     @Test

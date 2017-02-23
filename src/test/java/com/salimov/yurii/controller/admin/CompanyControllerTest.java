@@ -34,8 +34,7 @@ public class CompanyControllerTest {
                         TITLE, DOMAIN, TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
                         TIME, TIME, PHONE, PHONE, PHONE, EMAIL, EMAIL, PASSWORD,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE, ADDRESS, GOOGLE_MAPS,
-                        PHOTO_URL, PHOTO_URL,
-                        new ModelAndView()
+                        null, new ModelAndView()
                 ),
                 "redirect:/company/main",
                 null
@@ -63,7 +62,7 @@ public class CompanyControllerTest {
                         TITLE, DOMAIN, TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
                         PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS, PHOTO_URL, true,
+                        ADDRESS, GOOGLE_MAPS, null, true,
                         new ModelAndView()
                 ),
                 "redirect:/company/" + URL,
@@ -92,7 +91,7 @@ public class CompanyControllerTest {
                         URL, TITLE, DOMAIN, TAGLINE, DESCRIPTION, INFORMATION, KEYWORDS,
                         PHONE, PHONE, PHONE, EMAIL,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE,
-                        ADDRESS, GOOGLE_MAPS, PHOTO_URL, true,
+                        ADDRESS, GOOGLE_MAPS, null, true,
                         new ModelAndView()
                 ),
                 "redirect:/company/" + URL,

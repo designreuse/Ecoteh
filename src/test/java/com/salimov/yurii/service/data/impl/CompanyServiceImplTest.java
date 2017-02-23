@@ -13,6 +13,7 @@ import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.dao.MockDao.getCompanyDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.getCompanies;
 import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
+import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
@@ -22,7 +23,10 @@ public final class CompanyServiceImplTest extends ContentServiceImplTest<Company
 
     @Before
     public void beforeTest() {
-        this.service = new CompanyServiceImpl(getCompanyDao());
+        this.service = new CompanyServiceImpl(
+                getCompanyDao(),
+                getFileService()
+        );
     }
 
     @Test

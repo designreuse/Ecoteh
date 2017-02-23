@@ -98,14 +98,16 @@ public class MockAdminController {
     private static void initCategoryController() {
         categoryController = new CategoryController(
                 getMainMVFabric(),
-                getCategoryService()
+                getCategoryService(),
+                getFileService()
         );
     }
 
     private static void initCompanyController() {
         companyController = new CompanyController(
                 getMainMVFabric(),
-                getCompanyService()
+                getCompanyService(),
+                getFileService()
         );
     }
 

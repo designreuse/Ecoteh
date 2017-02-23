@@ -21,7 +21,7 @@ public final class MockCategoryTest extends MockModelTest<Category> {
         assertNotNull(category.getKeywords());
         assertNotNull(category.getId());
         assertNotNull(category.getUrl());
-        assertNotNull(category.getPhotoUrl());
+        assertNotNull(category.getLogo());
     }
 
     @Ignore

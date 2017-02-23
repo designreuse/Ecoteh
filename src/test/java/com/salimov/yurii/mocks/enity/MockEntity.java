@@ -155,7 +155,7 @@ public final class MockEntity {
         );
         category.setId(ID);
         category.setUrl(URL);
-        category.setPhotoUrl(PHOTO_URL);
+        category.setLogo(getFile());
         category.addArticle(getArticle());
     }
 
@@ -167,7 +167,7 @@ public final class MockEntity {
         company.setKeywords(KEYWORDS);
         company.setDomain(DOMAIN);
         company.setTagline(TAGLINE);
-        company.setLogoUrl(PHOTO_URL);
+        company.setLogo(getFile());
         company.setId(ID);
         company.setUrl(URL);
         company.setWorkTimeFrom(TIME);

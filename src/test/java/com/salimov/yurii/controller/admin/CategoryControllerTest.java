@@ -32,7 +32,7 @@ public class CategoryControllerTest {
         checkModelAndView(
                 controller.addCategory(
                         TITLE, DESCRIPTION,
-                        KEYWORDS, PHOTO_URL, true,
+                        KEYWORDS, null, true,
                         new ModelAndView()
                 ),
                 "redirect:/category/" + URL,
@@ -59,7 +59,7 @@ public class CategoryControllerTest {
         checkModelAndView(
                 controller.updateCategory(
                         URL, TITLE, DESCRIPTION, KEYWORDS,
-                        PHOTO_URL, true,
+                        null, true,
                         new ModelAndView()
                 ),
                 "redirect:/category/" + URL,

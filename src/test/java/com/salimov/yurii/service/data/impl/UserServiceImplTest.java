@@ -16,6 +16,7 @@ import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.dao.MockDao.getUserDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.getUser;
 import static com.salimov.yurii.mocks.enity.MockEntity.getUsers;
+import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 import static org.junit.Assert.*;
 
 public final class UserServiceImplTest extends DataServiceImplTest<User> {
@@ -24,7 +25,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Before
     public void beforeTest() {
-        this.service = new UserServiceImpl(getUserDao());
+        this.service = new UserServiceImpl(getUserDao(), getFileService());
     }
 
     @Test(expected = UsernameNotFoundException.class)
