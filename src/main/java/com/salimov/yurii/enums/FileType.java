@@ -10,6 +10,11 @@ package com.salimov.yurii.enums;
 public enum FileType {
 
     /**
+     * Type of favicon files.
+     */
+    FAVICON,
+
+    /**
      * Type of static files.
      */
     STATIC,
