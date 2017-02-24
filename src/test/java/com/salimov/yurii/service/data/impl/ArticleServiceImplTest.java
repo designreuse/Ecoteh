@@ -14,6 +14,7 @@ import java.util.List;
 import static com.salimov.yurii.mocks.MockConstants.*;
 import static com.salimov.yurii.mocks.dao.MockDao.getArticleDao;
 import static com.salimov.yurii.mocks.enity.MockEntity.*;
+import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 import static org.junit.Assert.*;
 
 public final class ArticleServiceImplTest extends ContentServiceImplTest<Article> {
@@ -22,7 +23,10 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
 
     @Before
     public void beforeTest() {
-        this.service = new ArticleServiceImpl(getArticleDao());
+        this.service = new ArticleServiceImpl(
+                getArticleDao(),
+                getFileService()
+        );
     }
 
     @Test
