@@ -29,21 +29,6 @@ public final class Category extends Content implements ICategory {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The category logo.
-     *
-     * @see File
-     */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "id_logo",
-            referencedColumnName = "id"
-    )
-    private File logo;
-
-    /**
      * The set of a articles.
      *
      * @see Article
@@ -63,7 +48,7 @@ public final class Category extends Content implements ICategory {
      * Default constructor.
      */
     public Category() {
-        this.logo = new File();
+
     }
 
     /**
@@ -79,7 +64,6 @@ public final class Category extends Content implements ICategory {
             final String keywords
     ) {
         super(title, description, keywords);
-        this.logo = new File();
     }
 
     @Override
@@ -97,27 +81,6 @@ public final class Category extends Content implements ICategory {
     @Override
     public Category clone() {
         return (Category) super.clone();
-    }
-
-    /**
-     * Returns a logo of the category.
-     *
-     * @return The company logo URL.
-     */
-    @Override
-    public File getLogo() {
-        return this.logo;
-    }
-
-    /**
-     * Sets a new logo to the category.
-     *
-     * @param logo a new logo to the category.
-     * @see File
-     */
-    @Override
-    public void setLogo(final File logo) {
-        this.logo.initialize(logo);
     }
 
     /**
@@ -253,7 +216,6 @@ public final class Category extends Content implements ICategory {
     public Category initialize(final Category category) {
         if (category != null) {
             super.initialize(category);
-            this.setLogo(category.getLogo());
         }
         return this;
     }

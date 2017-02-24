@@ -19,21 +19,6 @@ import java.util.Collection;
 public interface ICategory extends IContent {
 
     /**
-     * Returns a logo of the category.
-     *
-     * @return The company logo URL.
-     */
-    File getLogo();
-
-    /**
-     * Sets a new logo to the category.
-     *
-     * @param logo a new logo to the category.
-     * @see File
-     */
-    void setLogo(final File logo);
-
-    /**
      * Adds new article to the list of articles.
      *
      * @param article an article to add.
