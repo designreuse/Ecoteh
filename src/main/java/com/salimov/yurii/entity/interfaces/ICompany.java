@@ -145,22 +145,6 @@ public interface ICompany extends IContent {
     void setAddress(final Address address);
 
     /**
-     * Returns a logo of the company.
-     *
-     * @return The company logo.
-     * @see File
-     */
-    File getLogo();
-
-    /**
-     * Sets a new logo to the company.
-     *
-     * @param logo a new logo to the company.
-     * @see File
-     */
-    void setLogo(final File logo);
-
-    /**
      * Returns a domain of the company.
      *
      * @return The company domain.

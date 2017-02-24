@@ -83,15 +83,23 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_slides.jpg"/>"
-                                           rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span>
-                                        </a>
-                                    </td>
+                                    <td class="ths">Роль</td>
                                     <td class="tds">
-
+                                        <label>
+                                            <input type="radio" name="type" value="FAVICON"
+                                                   <c:if test="${file.type eq 'FAVICON'}">checked</c:if>
+                                            />&nbsp;Значок сайта
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <input type="radio" name="type" value="SLIDE"
+                                                   <c:if test="${file.type eq 'SLIDE'}">checked</c:if>
+                                            />&nbsp;Слайд
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <input type="radio" name="type" value="OTHER"
+                                                   <c:if test="${file.type eq 'OTHER'}">checked</c:if>
+                                            />&nbsp;Другое
+                                        </label>&nbsp;&nbsp;
                                     </td>
                                 </tr>
                             </table>

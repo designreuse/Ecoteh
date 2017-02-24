@@ -86,7 +86,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final String url,
             final Article article
     ) {
-
         return update(
                 getByUrl(url, false).initialize(article)
         );

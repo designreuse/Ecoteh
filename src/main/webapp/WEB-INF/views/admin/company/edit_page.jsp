@@ -298,60 +298,35 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <img class="img-responsive img-in-list"
-                                                     alt="<c:out value="${company.name}"/>"
+                                                     alt="<c:out value="${company.title}"/>"
                                                      src="<c:url value="/resources/img/static/default_file.gif"/>">
                                             </c:otherwise>
                                         </c:choose><br>
                                         <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
-                                <c:choose>
-                                    <c:when test="${main}">
-                                        <tr>
-                                            <td class="ths">
-                                                <a href="<c:url value="/resources/img/static/where_icon.jpg"/>"
-                                                   rel="lightgallery" title="Значок, это где?">
-                                                    Значок&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                      aria-hidden="true"></span>
-                                                </a>
-                                            </td>
-                                            <td class="tds">
-                                                <a href="<c:url value="/${company.faviconUrl}"/>"
-                                                   title="<c:out value="${company.title}"/>" rel="lightgallery">
-                                                    <img src="<c:url value="${company.faviconUrl}"/>"
-                                                         class="main-logo" alt="" title="Увеличить"
-                                                         onerror="this.src='<c:url
-                                                                 value="/resources/img/static/default_file.gif"/>'">
-                                                </a><br><br>
-                                                <input type="text" class="form-control" name="favicon" minlength="2"
-                                                       maxlength="100" placeholder="Ссылка на фавикон сайта"
-                                                       value="<c:out value="${company.faviconUrl}"/>">
-                                            </td>
-                                        </tr>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <tr>
-                                            <td class="ths">
-                                                <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                                    Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                           aria-hidden="true"></span>
-                                                </label>
-                                            </td>
-                                            <td class="tds">
-                                                <label title="Компанию смогут увидеть все пользователей">
-                                                    <input type="radio" name="is_valid" value="true"
-                                                           <c:if test="${company.validated}">checked</c:if>
-                                                           required/>&nbsp;Отображать
-                                                </label>&nbsp;&nbsp;
-                                                <label title="Компанию смогут увидеть только администраторы">
-                                                    <input type="radio" name="is_valid" value="false"
-                                                           <c:if test="${!company.validated}">checked</c:if>
-                                                           required/>&nbsp;Не отображать
-                                                </label>
-                                            </td>
-                                        </tr>
-                                    </c:otherwise>
-                                </c:choose>
+                                <c:if test="${main eq false}">
+                                    <tr>
+                                        <td class="ths">
+                                            <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
+                                                Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                       aria-hidden="true"></span>
+                                            </label>
+                                        </td>
+                                        <td class="tds">
+                                            <label title="Компанию смогут увидеть все пользователей">
+                                                <input type="radio" name="is_valid" value="true"
+                                                       <c:if test="${company.validated}">checked</c:if>
+                                                       required/>&nbsp;Отображать
+                                            </label>&nbsp;&nbsp;
+                                            <label title="Компанию смогут увидеть только администраторы">
+                                                <input type="radio" name="is_valid" value="false"
+                                                       <c:if test="${!company.validated}">checked</c:if>
+                                                       required/>&nbsp;Не отображать
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </c:if>
                             </table>
                             <input type="hidden" name="url" value="<c:out value="${company.url}"/>">
                             <div style="margin: 10px">

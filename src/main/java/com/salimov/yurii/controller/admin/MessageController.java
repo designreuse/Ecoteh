@@ -76,7 +76,7 @@ public class MessageController {
      * @see Message
      */
     @RequestMapping(
-            value = {"", "/"},
+            value = {"", "/", "/all"},
             method = RequestMethod.GET
     )
     public ModelAndView getMessagesPage() {

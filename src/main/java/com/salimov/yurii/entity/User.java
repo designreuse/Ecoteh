@@ -180,8 +180,8 @@ public final class User extends Model implements IUser, UserDetails {
                 ", Login='" + getLogin() + '\'' +
                 ", Password='" + getPassword() + '\'' +
                 ", description='" + getDescription() + '\'' +
-                getContacts() +
-                getPhoto() +
+                ", " + getContacts() +
+                ", " + getPhoto() +
                 ", role=" + getRole() +
                 ", isMailing=" + isMailing() +
                 ", isLocked=" + isLocked() +

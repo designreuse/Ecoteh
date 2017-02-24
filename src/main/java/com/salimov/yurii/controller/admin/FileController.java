@@ -1,10 +1,13 @@
 package com.salimov.yurii.controller.admin;
 
+import com.salimov.yurii.controller.advice.AdviceController;
 import com.salimov.yurii.entity.File;
+import com.salimov.yurii.enums.FileType;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -35,6 +38,11 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class FileController {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(FileController.class);
 
     /**
      * The implementation of the interface provides a set of standard
@@ -109,6 +117,7 @@ public class FileController {
      * Method: POST
      *
      * @param title         a title of the new file.
+     * @param type          a type of the new file.
      * @param multipartFile a multipart file of the new file.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -119,10 +128,11 @@ public class FileController {
     )
     public ModelAndView addFile(
             @RequestParam(value = "title") final String title,
+            @RequestParam(value = "type") final String type,
             @RequestParam(value = "file") final MultipartFile multipartFile,
             final ModelAndView modelAndView
     ) {
-        this.fileService.add(title, multipartFile);
+        this.fileService.add(title, getType(type), multipartFile);
         modelAndView.setViewName("redirect:/admin/file/all");
         return modelAndView;
     }
@@ -174,6 +184,7 @@ public class FileController {
      *
      * @param id            a id of the file to update.
      * @param title         a new title to the file.
+     * @param type          a type of the new file.
      * @param multipartFile a multipart file of the new file.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
@@ -185,10 +196,11 @@ public class FileController {
     public ModelAndView updateFile(
             @RequestParam(value = "id") final Long id,
             @RequestParam(value = "title") final String title,
+            @RequestParam(value = "type") final String type,
             @RequestParam(value = "file") final MultipartFile multipartFile,
             final ModelAndView modelAndView
     ) {
-        this.fileService.update(id, title, multipartFile);
+        this.fileService.update(id, title, getType(type), multipartFile);
         modelAndView.setViewName("redirect:/admin/file/all");
         return modelAndView;
     }
@@ -299,5 +311,22 @@ public class FileController {
         modelAndView.addObject("revers", !revers);
         modelAndView.setViewName("admin/file/all_page");
         return modelAndView;
+    }
+
+    /**
+     * Returns a file type by name.
+     *
+     * @param name a type of the new file.
+     * @return The file type.
+     */
+    private static FileType getType(final String name) {
+        FileType fileType;
+        try {
+            fileType = FileType.valueOf(name);
+        } catch (IllegalArgumentException ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            fileType = FileType.OTHER;
+        }
+        return fileType;
     }
 }

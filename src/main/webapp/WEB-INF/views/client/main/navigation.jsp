@@ -115,14 +115,23 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<c:url value="/admin/messages"/>" title="Сообщения от пользователей">
+                            <a href="<c:url value="/admin/messages/"/>" title="Сообщения от пользователей">
                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                             </a>
                         </li>
                         <li>
                             <a href="<c:url value="/admin/menu"/>"
                                title="Mеню | <c:out value="${authorized_user.name}"/>">
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <c:choose>
+                                    <c:when test="${authorized_user.photo.url ne ''}">
+                                        <img src="<c:url value="${authorized_user.photo.url}"/>" class="auth-logo"
+                                             onerror="this.src='<c:url
+                                                     value="/resources/img/static/default_user.png"/>'">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    </c:otherwise>
+                                </c:choose>
                             </a>
                         </li>
                     </ul>
@@ -157,15 +166,24 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<c:url value="/search"/>">
+                                <a href="<c:url value="/search/"/>">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Поиск
                                 </a>
                             </li>
                             <li>
                                 <a href="<c:url value="/admin/menu"/>"
                                    title="Mеню | <c:out value="${authorized_user.name}"/>">
-                                    <span class="glyphicon glyphicon-user"
-                                          aria-hidden="true"></span>&nbsp;<c:out value="${authorized_user.name}"/>
+                                    <c:choose>
+                                        <c:when test="${authorized_user.photo.url ne ''}">
+                                            <img src="<c:url value="${authorized_user.photo.url}"/>" class="auth-logo"
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_user.png"/>'">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    &nbsp;<c:out value="${authorized_user.name}"/>
                                 </a>
                             </li>
                             <li>
@@ -176,7 +194,7 @@
                         </c:when>
                         <c:otherwise>
                             <li>
-                                <a href="<c:url value="/search"/>">
+                                <a href="<c:url value="/search/"/>">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Поиск
                                 </a>
                             </li>

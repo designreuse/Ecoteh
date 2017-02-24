@@ -102,7 +102,7 @@ public final class Article extends Content implements IArticle {
                 ", number='" + getNumber() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
-                ", category=" + getCategory() +
+                ", " + getCategory() +
                 '}';
     }
 
@@ -242,7 +242,9 @@ public final class Article extends Content implements IArticle {
      */
     @Override
     public void setCategory(final Category category) {
-        if (this.category != null && !this.category.equals(category)) {
+        if (this.category == null) {
+            this.category = category;
+        } else if (!this.category.equals(category)) {
             final Category temp = this.category;
             this.category = category;
             if (!this.category.containsArticle(this)) {

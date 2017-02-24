@@ -68,9 +68,7 @@ public final class Category extends Content implements ICategory {
 
     @Override
     public String toString() {
-        return "Category{" + super.toString() +
-                getLogo() +
-                '}';
+        return "Category{" + super.toString() + '}';
     }
 
     /**

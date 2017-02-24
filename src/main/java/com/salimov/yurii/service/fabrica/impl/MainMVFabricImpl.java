@@ -571,7 +571,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     private ModelAndView articlePage(final Article article) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("article", article);
-        if (isNotBlank(article.getCategory().getUrl())) {
+        if ((article.getCategory() != null) && isNotBlank(article.getCategory().getUrl())) {
             final Category category = this.categoryService.getByUrl(
                     article.getCategory().getUrl(), isValidContent()
             );

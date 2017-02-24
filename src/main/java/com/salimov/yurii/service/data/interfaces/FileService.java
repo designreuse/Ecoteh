@@ -2,6 +2,7 @@ package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.enums.FileType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
@@ -22,12 +23,46 @@ public interface FileService extends DataService<File> {
      * Initializes, saves and returns a new file.
      *
      * @param title         a title of the new file.
+     * @param type          a type of the new file.
+     * @param multipartFile a multipart file of the new file.
+     * @return The new saving file.
+     * @see File
+     * @see FileType
+     */
+    File add(
+            final String title,
+            final FileType type,
+            final MultipartFile multipartFile
+    );
+
+    /**
+     * Initializes, saves and returns a new file.
+     *
+     * @param title         a title of the new file.
      * @param multipartFile a multipart file of the new file.
      * @return The new saving file.
      * @see File
      */
     File add(
             final String title,
+            final MultipartFile multipartFile
+    );
+
+    /**
+     * Initializes, updates and returns photo with parameter id.
+     *
+     * @param id            a id of the photo to update.
+     * @param title         a new title to the file.
+     * @param type          a type of the new file.
+     * @param multipartFile a new multipart file to the file.
+     * @return The updating photo with parameter id.
+     * @see File
+     * @see FileType
+     */
+    File update(
+            final Long id,
+            final String title,
+            final FileType type,
             final MultipartFile multipartFile
     );
 

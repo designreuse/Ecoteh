@@ -94,7 +94,7 @@ public final class Message extends Model implements IMessage {
     @Override
     public String toString() {
         return "Message{" + super.toString() +
-                getUser() +
+                ", " + getUser() +
                 ", subject='" + getSubject() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +

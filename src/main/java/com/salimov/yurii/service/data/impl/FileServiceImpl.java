@@ -76,6 +76,36 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Initializes, saves and returns a new file.
      *
      * @param title         a title of the new file.
+     * @param type          a type of the new file.
+     * @param multipartFile a multipart file of the new file.
+     * @return The new saving file.
+     * @see File
+     * @see FileType
+     */
+    @Override
+    @Transactional
+    public File add(
+            final String title,
+            final FileType type,
+            final MultipartFile multipartFile
+    ) {
+        File file;
+        if ((multipartFile != null) && !multipartFile.isEmpty()) {
+            checkMultipartFile(multipartFile);
+            file = new File(title, createRelativePath(title, multipartFile));
+            file.setType(type);
+            saveFile(multipartFile, file.getUrl());
+            file = add(file);
+        } else {
+            file = new File();
+        }
+        return file;
+    }
+
+    /**
+     * Initializes, saves and returns a new file.
+     *
+     * @param title         a title of the new file.
      * @param multipartFile a multipart file of the new file.
      * @return The new saving file.
      * @see File
@@ -86,16 +116,42 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final String title,
             final MultipartFile multipartFile
     ) {
-        File file;
-        if ((multipartFile != null) && !multipartFile.isEmpty()) {
-            checkMultipartFile(multipartFile);
-            file = new File(title, createRelativePath(title, multipartFile));
-            saveFile(multipartFile, file.getUrl());
-            file = add(file);
-        } else {
-            file = new File();
+        return add(title, FileType.OTHER, multipartFile);
+    }
+
+    /**
+     * Initializes, updates and returns photo with parameter id.
+     *
+     * @param id            a id of the photo to update.
+     * @param title         a new title to the file.
+     * @param type          a type of the new file.
+     * @param multipartFile a new multipart file to the file.
+     * @return The updating photo with parameter id.
+     * @throws IllegalArgumentException Throw exception when file is static.
+     * @see File
+     * @see FileType
+     */
+    @Override
+    @Transactional
+    public File update(
+            final Long id,
+            final String title,
+            final FileType type,
+            final MultipartFile multipartFile
+    ) {
+        final File file = get(id);
+        if (file.getType().equals(FileType.STATIC)) {
+            throw new IllegalArgumentException("Static files forbidden to edit!");
         }
-        return file;
+        file.setTitle(title);
+        file.setType(type);
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            checkMultipartFile(multipartFile);
+            deleteFile(file.getUrl());
+            file.setUrl(createRelativePath(title, multipartFile));
+            saveFile(multipartFile, file.getUrl());
+        }
+        return update(file);
     }
 
     /**
@@ -114,19 +170,8 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final Long id,
             final String title,
             final MultipartFile multipartFile
-    ) throws IllegalArgumentException {
-        final File file = get(id);
-        if (!file.isValidated()) {
-            throw new IllegalArgumentException("Static files forbidden to edit!");
-        }
-        file.setTitle(title);
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            checkMultipartFile(multipartFile);
-            deleteFile(file.getUrl());
-            file.setUrl(createRelativePath(title, multipartFile));
-            saveFile(multipartFile, file.getUrl());
-        }
-        return update(file);
+    ) {
+        return update(id, title, FileType.OTHER, multipartFile);
     }
 
     /**

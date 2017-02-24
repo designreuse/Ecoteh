@@ -66,15 +66,17 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <a href="<c:url value="/resources/img/static/where_slides.jpg"/>"
-                                           rel="lightgallery" title="Слайды, это где?">
-                                            Слайды&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span>
-                                        </a>
-                                    </td>
+                                    <td class="ths">Роль</td>
                                     <td class="tds">
-
+                                        <label>
+                                            <input type="radio" name="type" value="FAVICON"/>&nbsp;Значок сайта
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <input type="radio" name="type" value="SLIDE"/>&nbsp;Слайд
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <input type="radio" name="type" value="OTHER" checked/>&nbsp;Другое
+                                        </label>&nbsp;&nbsp;
                                     </td>
                                 </tr>
                             </table>

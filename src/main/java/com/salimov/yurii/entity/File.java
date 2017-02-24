@@ -108,6 +108,7 @@ public final class File extends Model implements IFile {
     public String toString() {
         return "File{" + super.toString() +
                 ", title='" + getTitle() + '\'' +
+                ", type='" + getType() + '\'' +
                 ", url='" + getUrl() + '\'' +
                 '}';
     }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -66,6 +67,14 @@ public class ArticleController {
     private final CategoryService categoryService;
 
     /**
+     * The implementation of the interface describes a set of methods
+     * for working with objects of the {@link File} class.
+     *
+     * @see FileService
+     */
+    private final FileService fileService;
+
+    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
@@ -81,11 +90,13 @@ public class ArticleController {
     public ArticleController(
             final MainMVFabric fabric,
             final ArticleService articleService,
-            final CategoryService categoryService
+            final CategoryService categoryService,
+            final FileService fileService
     ) {
         this.fabric = new CacheMVFabricImpl(fabric);
         this.articleService = articleService;
         this.categoryService = categoryService;
+        this.fileService = fileService;
     }
 
     /**
@@ -112,14 +123,15 @@ public class ArticleController {
      * Request mapping: /admin/article/add
      * Method: POST
      *
-     * @param title        a title of the new article.
-     * @param description  a description of the new article.
-     * @param text         a text of the new article.
-     * @param keywords     a keywords of the new article.
-     * @param number       a number of the new article.
-     * @param categoryUrl  a category url of the new article.
-     * @param isValid      a validated of the new article.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param title         a title of the new article.
+     * @param description   a description of the new article.
+     * @param text          a text of the new article.
+     * @param keywords      a keywords of the new article.
+     * @param number        a number of the new article.
+     * @param categoryUrl   a category url of the new article.
+     * @param multipartLogo a file of photo to the new category.
+     * @param isValid       a validated of the new article.
+     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Article
      * @see Category
@@ -136,15 +148,18 @@ public class ArticleController {
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-
         final Article article = new Article(title, description, text, keywords, number);
         article.setValidated(isValid);
         article.setCategory(category);
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
+        }
         this.articleService.add(article);
         Cache.clear();
         modelAndView.setViewName(getViewName(article));
@@ -198,15 +213,16 @@ public class ArticleController {
      * Request mapping: /admin/article/update
      * Method: POST
      *
-     * @param url          a url of the article to update.
-     * @param title        a new title to the article.
-     * @param description  a new description to the article.
-     * @param text         a new text to the article.
-     * @param keywords     a new keywords to the article.
-     * @param number       a new number to the article.
-     * @param categoryUrl  a category url of the article.
-     * @param isValid      a validated of the article.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param url           a url of the article to update.
+     * @param title         a new title to the article.
+     * @param description   a new description to the article.
+     * @param text          a new text to the article.
+     * @param keywords      a new keywords to the article.
+     * @param number        a new number to the article.
+     * @param categoryUrl   a category url of the article.
+     * @param multipartLogo a file of photo to the new category.
+     * @param isValid       a validated of the article.
+     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      * @see Article
      * @see Category
@@ -224,6 +240,7 @@ public class ArticleController {
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
             @RequestParam(value = "category_url") final String categoryUrl,
+            @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
@@ -232,6 +249,9 @@ public class ArticleController {
         final Article article = new Article(title, description, text, keywords, number);
         article.setValidated(isValid);
         article.setCategory(category);
+        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+            article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
+        }
         this.articleService.update(url, article);
         modelAndView.setViewName(getViewName(article));
         Cache.clear();

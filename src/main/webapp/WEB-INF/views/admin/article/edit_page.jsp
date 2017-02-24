@@ -64,7 +64,8 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/article/update"/>" method="post">
+                        <form action="<c:url value="/admin/article/update"/>" method="post"
+                              enctype="multipart/form-data">
                             <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
@@ -130,6 +131,29 @@
                                                 <option value="">Нет</option>
                                             </c:if>
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Логотип</td>
+                                    <td class="tds">
+                                        <c:choose>
+                                            <c:when test="${article.logo.url ne ''}">
+                                                <a href="<c:url value="${article.logo.url}"/>" rel="lightgallery"
+                                                   title="<c:out value="${article.title}"/>">
+                                                    <img class="img-responsive img-in-list"
+                                                         alt="<c:out value="${article.title}"/>"
+                                                         src="<c:url value="${article.logo.url}"/>"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_file.gif"/>'">
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="img-responsive img-in-list"
+                                                     alt="<c:out value="${article.name}"/>"
+                                                     src="<c:url value="/resources/img/static/default_file.gif"/>">
+                                            </c:otherwise>
+                                        </c:choose><br>
+                                        <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>

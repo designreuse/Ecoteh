@@ -72,21 +72,6 @@ public final class Company extends Content implements ICompany {
     private String workTimeTo;
 
     /**
-     * The company logo.
-     *
-     * @see File
-     */
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "id_logo",
-            referencedColumnName = "id"
-    )
-    private File logo;
-
-    /**
      * The company contacts.
      *
      * @see Contacts
@@ -140,7 +125,6 @@ public final class Company extends Content implements ICompany {
         this.senderPass = "";
         this.workTimeFrom = "";
         this.workTimeTo = "";
-        this.logo = new File();
         this.type = CompanyType.PARTNER;
         this.contacts = new Contacts();
         this.address = new Address();
@@ -154,8 +138,8 @@ public final class Company extends Content implements ICompany {
     @Override
     public String toString() {
         return "Company{" + super.toString() +
-                getContacts() +
-                getAddress() +
+                ", " + getContacts() +
+                ", " + getAddress() +
                 ", tagline='" + getTagline() + '\'' +
                 ", information='" + getInformation() + '\'' +
                 ", domain='" + getDomain() + '\'' +
@@ -163,7 +147,6 @@ public final class Company extends Content implements ICompany {
                 ", senderPass='" + getSenderPass() + '\'' +
                 ", workTimeFrom='" + getWorkTimeFrom() + '\'' +
                 ", workTimeTo='" + getWorkTimeTo() + '\'' +
-                getLogo() +
                 ", type=" + getType() +
                 '}';
     }
@@ -404,27 +387,6 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
-     * Returns a logo of the company.
-     *
-     * @return The company logo URL.
-     */
-    @Override
-    public File getLogo() {
-        return this.logo;
-    }
-
-    /**
-     * Sets a new logo to the company.
-     *
-     * @param logo a new logo to the company.
-     * @see File
-     */
-    @Override
-    public void setLogo(final File logo) {
-        this.logo.initialize(logo);
-    }
-
-    /**
      * Returns a domain of the company.
      *
      * @return The company domain.
@@ -438,7 +400,7 @@ public final class Company extends Content implements ICompany {
     /**
      * Sets a new type to the company.
      *
-     * @param type a new logo to the company.
+     * @param type a new type to the company.
      * @see CompanyType
      */
     @Override
@@ -487,7 +449,6 @@ public final class Company extends Content implements ICompany {
             this.setSenderPass(company.getSenderPass());
             this.setWorkTimeFrom(company.getWorkTimeFrom());
             this.setWorkTimeTo(company.getWorkTimeTo());
-            this.setLogo(company.getLogo());;
             this.setType(company.getType());
             this.setContacts(company.getContacts());
             this.setAddress(company.getAddress());

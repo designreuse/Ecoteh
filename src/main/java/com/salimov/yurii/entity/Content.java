@@ -111,6 +111,7 @@ public abstract class Content extends Model implements IContent {
                 ", url='" + getUrl() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", keywords='" + getKeywords() + '\'' +
+                ", " + getLogo() +
                 '}';
     }
 

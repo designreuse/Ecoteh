@@ -35,8 +35,8 @@
             <div class="row">
                 <div class="box">
                     <p class="path">
-                        <a href="<c:url value="//"/>" title="Перейти на главную странцу">Главная</a>
-                        → <a href="<c:url value="/menu"/>" title="Меню администратора">Меню</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/article/all"/>">Все статьи</a>
                         → <a href="#">Новая статья</a>
                     </p>
@@ -44,7 +44,7 @@
                     <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/article/add"/>" method="post">
+                        <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
@@ -91,6 +91,12 @@
                                                         value="${category.title}"/></option>
                                             </c:forEach>
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Логотип</td>
+                                    <td class="tds">
+                                        <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
