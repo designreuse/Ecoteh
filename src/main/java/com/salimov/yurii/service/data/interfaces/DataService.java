@@ -203,4 +203,6 @@ public interface DataService<T extends Model> {
      * @see Model
      */
     List<T> filteredByValid(final Collection<T> models);
+
+    List<T> shuffle(final Collection<T> models);
 }

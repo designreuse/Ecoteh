@@ -370,7 +370,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @see Model
      */
     @Override
-    @Transactional
     public List<T> filteredByValid(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
         if (models != null && !models.isEmpty()) {
@@ -382,6 +381,19 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             );
         }
         return result;
+    }
+
+    /**
+     *
+     * @param models
+     * @param size
+     * @return
+     */
+    @Override
+    public List<T> shuffle(final Collection<T> models) {
+        final List<T> list = new ArrayList<>(models);
+        Collections.shuffle(list);
+        return list;
     }
 
     /**
