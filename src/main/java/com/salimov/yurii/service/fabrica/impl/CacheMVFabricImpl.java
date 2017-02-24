@@ -458,7 +458,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @return The key to cache.
      */
     private String getKey(final String key) {
-        return key + (isValidContent() ? " for admin" : " for client");
+        return key + (isValidContent() ? " for client" : " for admin");
     }
 
     /**
