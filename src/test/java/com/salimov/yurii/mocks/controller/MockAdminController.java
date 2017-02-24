@@ -82,7 +82,7 @@ public class MockAdminController {
                 getMainMVFabric(),
                 getCompanyService(),
                 getUserService(),
-                null,
+                getMessageService(),
                 getSenderService(),
                 getResponseService());
     }
@@ -91,7 +91,8 @@ public class MockAdminController {
         articleController = new ArticleController(
                 getMainMVFabric(),
                 getArticleService(),
-                getCategoryService()
+                getCategoryService(),
+                getFileService()
         );
     }
 

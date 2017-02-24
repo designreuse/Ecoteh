@@ -35,7 +35,7 @@ public interface MockConstants {
     String GOOGLE_MAPS = "google maps";
     String ANY_STRING = "Some unknown text.";
     String PATH = "c:/some_dir/file.txt";
-    String PHOTO_URL = "resources/img/some_photo.jpg";
+    String FILE_TYPE = "OTHER";
     Date DATE = new Date();
     CompanyType COMPANY_TYPE = CompanyType.PARTNER;
     UserRole USER_ROLE = UserRole.ADMIN;

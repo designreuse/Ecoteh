@@ -1,10 +1,12 @@
 package com.salimov.yurii.controller.admin;
 
+import com.salimov.yurii.enums.FileType;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.salimov.yurii.mocks.MockConstants.FILE_TYPE;
 import static com.salimov.yurii.mocks.MockConstants.ID;
 import static com.salimov.yurii.mocks.MockConstants.TITLE;
 import static com.salimov.yurii.mocks.ModelAndViews.checkModelAndView;
@@ -41,7 +43,7 @@ public class FileControllerTest {
     @Test
     public void whenAddFileByPostMethodThenReturnSomeModelAndView() {
         checkModelAndView(
-                controller.addFile(TITLE, null, new ModelAndView()),
+                controller.addFile(TITLE, FILE_TYPE, null, new ModelAndView()),
                 "redirect:/admin/file/all",
                 null
         );
@@ -64,7 +66,7 @@ public class FileControllerTest {
     @Test
     public void whenUpdateFileByPostMethodThenReturnSomeModelAndView() {
         checkModelAndView(
-                controller.updateFile(ID, TITLE, null, new ModelAndView()),
+                controller.updateFile(ID, TITLE, FILE_TYPE, null, new ModelAndView()),
                 "redirect:/admin/file/all",
                 null
         );

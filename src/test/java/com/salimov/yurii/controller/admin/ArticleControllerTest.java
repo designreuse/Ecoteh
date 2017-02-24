@@ -32,7 +32,7 @@ public class ArticleControllerTest {
         checkModelAndView(
                 controller.addArticle(
                         TITLE, DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER, URL, true,
+                        KEYWORDS, NUMBER, URL, null, true,
                         new ModelAndView()
                 ),
                 "redirect:/article/" + URL,
@@ -61,7 +61,7 @@ public class ArticleControllerTest {
                         URL, TITLE,
                         DESCRIPTION, TEXT,
                         KEYWORDS, NUMBER,
-                        URL, true,
+                        URL, null, true,
                         new ModelAndView()
                 ),
                 "redirect:/article/" + URL,
