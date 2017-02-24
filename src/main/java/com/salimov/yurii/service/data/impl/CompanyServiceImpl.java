@@ -49,13 +49,22 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     private final CompanyDao dao;
 
+    /**
+     * The interface of the service layer,
+     * describes a set of methods for working
+     * with objects of the class {@link File}.
+     *
+     * @see FileService
+     * @see File
+     */
     private final FileService fileService;
 
     /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao a implementation of the {@link CompanyDao} interface.
+     * @param dao         a implementation of the {@link CompanyDao} interface.
+     * @param fileService a implementation of the {@link FileService} interface.
      * @see CompanyDao
      */
     @Autowired
@@ -64,7 +73,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
             final CompanyDao dao,
             final FileService fileService
     ) {
-        super(dao);
+        super(dao, fileService);
         this.dao = dao;
         this.fileService = fileService;
     }
@@ -101,32 +110,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     }
 
     /**
-     * Initializes, updates and returns object of class {@link Company}.
-     * Returns {@code null} if id is {@code null}.
-     *
-     * @param url     a url of the company to update.
-     * @param company a company to update.
-     * @return The updating company with parameter id.
-     * @see Company
-     * @see File
-     */
-    @Override
-    @Transactional
-    public Company update(
-            final String url,
-            final Company company
-    ) {
-        final Company companyToUpdate = getByUrl(url, false);
-        final File newLogo = company.getLogo();
-        final File oldLogo = companyToUpdate.getLogo();
-        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
-            this.fileService.deleteFile(oldLogo.getUrl());
-        }
-        companyToUpdate.initialize(company);
-        return update(companyToUpdate);
-    }
-
-    /**
      * Updates the main company.
      *
      * @param company a main company to update.
@@ -136,8 +119,12 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Transactional
     public Company updateMainCompany(final Company company) {
         final Company mainCompany = getMainCompany();
+        final File newLogo = company.getLogo();
+        final File oldLogo = mainCompany.getLogo();
+        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
+            this.fileService.deleteFile(oldLogo.getUrl());
+        }
         mainCompany.initialize(company);
-        mainCompany.setType(CompanyType.MAIN);
         return update(mainCompany);
     }
 

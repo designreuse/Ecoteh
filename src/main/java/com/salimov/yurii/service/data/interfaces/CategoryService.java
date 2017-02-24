@@ -25,8 +25,8 @@ public interface CategoryService extends ContentService<Category> {
      * @see Category
      * @see File
      */
-    Category update(
+    /*Category update(
             final String url,
             final Category category
-    );
+    );*/
 }

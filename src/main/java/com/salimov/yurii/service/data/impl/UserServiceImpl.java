@@ -60,7 +60,8 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     /**
      * Constructor.
      *
-     * @param dao a implementation of the {@link UserDao} interface.
+     * @param dao         a implementation of the {@link UserDao} interface.
+     * @param fileService a implementation of the {@link FileService} interface.
      * @see UserDao
      */
     @Autowired

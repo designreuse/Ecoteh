@@ -1,6 +1,8 @@
 package com.salimov.yurii.service.data.interfaces;
 
 import com.salimov.yurii.entity.Content;
+import com.salimov.yurii.entity.File;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  * The interface of the service layer, describes a set of methods
  * for working with objects of {@link Content} class or subclass.
  *
- * @param <T>  entity type, extends {@link Content}.
+ * @param <T> entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  * @see Content
@@ -19,6 +21,20 @@ import java.util.List;
  * @see CompanyService
  */
 public interface ContentService<T extends Content> extends DataService<T> {
+
+    /**
+     * Initializes, updates and returns content with parameter url.
+     *
+     * @param url     a url of the content to update.
+     * @param content a content to update.
+     * @return The updating content with parameter id.
+     * @see Content
+     * @see File
+     */
+    Content update(
+            final String url,
+            final T content
+    );
 
     /**
      * Returns content object of the {@link Content} class or subclasses

@@ -51,16 +51,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     private final ArticleService articleService;
 
     /**
-     * The interface of the service layer,
-     * describes a set of methods for working
-     * with objects of the class {@link File}.
-     *
-     * @see FileService
-     * @see File
-     */
-    private final FileService fileService;
-
-    /**
      * Constructor.
      *
      * @param dao            a implementation  of the {@link CategoryDao} interface.
@@ -76,9 +66,8 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
             final ArticleService articleService,
             final FileService fileService
     ) {
-        super(dao);
+        super(dao, fileService);
         this.articleService = articleService;
-        this.fileService = fileService;
     }
 
     /**
@@ -90,7 +79,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * @see Category
      * @see File
      */
-    @Override
+    /*@Override
     @Transactional
     public Category update(
             final String url,

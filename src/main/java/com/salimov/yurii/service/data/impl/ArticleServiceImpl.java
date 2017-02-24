@@ -5,6 +5,7 @@ import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ArticleService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.ArticleComparator;
 import com.salimov.yurii.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,13 +55,17 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     /**
      * Constructor.
      *
-     * @param dao a implementation of the {@link ArticleDao} interface.
+     * @param dao         a implementation of the {@link ArticleDao} interface.
+     * @param fileService a implementation of the {@link FileService} interface.
      * @see ArticleDao
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public ArticleServiceImpl(final ArticleDao dao) {
-        super(dao);
+    public ArticleServiceImpl(
+            final ArticleDao dao,
+            final FileService fileService
+    ) {
+        super(dao, fileService);
         this.dao = dao;
     }
 
@@ -110,6 +115,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
         if ((article == null) || (isValid && !article.isValidated())) {
             throw new NullPointerException("Can`t find article by number \"" + number + "\"!");
         }
+        article.getCategory().getArticles();
         return article;
     }
 

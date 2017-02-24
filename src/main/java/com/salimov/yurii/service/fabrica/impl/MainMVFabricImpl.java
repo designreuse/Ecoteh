@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 /**
  * The abstract class implements a set of standard methods for creates
  * and returns the main modelAndViews.
@@ -569,6 +571,14 @@ public final class MainMVFabricImpl implements MainMVFabric {
     private ModelAndView articlePage(final Article article) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("article", article);
+        if (isNotBlank(article.getCategory().getUrl())) {
+            final Category category = this.categoryService.getByUrl(
+                    article.getCategory().getUrl(), isValidContent()
+            );
+            final List<Article> articles = this.articleService.shuffle(category.getArticles());
+            articles.remove(article);
+            modelAndView.addObject("articles", articles);
+        }
         modelAndView.setViewName("client/article/one_page");
         return modelAndView;
     }

@@ -2,7 +2,9 @@ package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.dao.interfaces.ContentDao;
 import com.salimov.yurii.entity.Content;
+import com.salimov.yurii.entity.File;
 import com.salimov.yurii.service.data.interfaces.ContentService;
+import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.util.comparator.ContentComparator;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,15 +42,55 @@ public abstract class ContentServiceImpl<T extends Content>
     private final ContentDao<T> dao;
 
     /**
+     * The interface of the service layer,
+     * describes a set of methods for working
+     * with objects of the class {@link File}.
+     *
+     * @see FileService
+     * @see File
+     */
+    private final FileService fileService;
+
+    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao a implementation of the {@link ContentDao} interface.
+     * @param dao         a implementation of the {@link ContentDao} interface.
+     * @param fileService a implementation of the {@link FileService} interface.
      * @see ContentDao
      */
-    ContentServiceImpl(final ContentDao<T> dao) {
+    ContentServiceImpl(
+            final ContentDao<T> dao,
+            final FileService fileService
+    ) {
         super(dao);
         this.dao = dao;
+        this.fileService = fileService;
+    }
+
+    /**
+     * Initializes, updates and returns content with parameter url.
+     *
+     * @param url     a url of the content to update.
+     * @param content a content to update.
+     * @return The updating content with parameter id.
+     * @see Content
+     * @see File
+     */
+    @Override
+    @Transactional
+    public Content update(
+            final String url,
+            final T content
+    ) {
+        final T contentToUpdate = getByUrl(url, false);
+        final File newLogo = content.getLogo();
+        final File oldLogo = contentToUpdate.getLogo();
+        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
+            this.fileService.deleteFile(oldLogo.getUrl());
+        }
+        contentToUpdate.initialize(content);
+        return update(contentToUpdate);
     }
 
     /**
@@ -199,9 +241,9 @@ public abstract class ContentServiceImpl<T extends Content>
     /**
      * Validates input object of {@link Content} class or subclasses.
      *
-     * @param content            the contents to valid.
-     * @param exist              is validate input object by exists.
-     * @param duplicate          is validate input object by duplicate.
+     * @param content   the contents to valid.
+     * @param exist     is validate input object by exists.
+     * @param duplicate is validate input object by duplicate.
      * @return Returns {@code true} if object is valid, otherwise returns {@code false}.
      * @see Content
      */

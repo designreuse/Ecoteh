@@ -17,20 +17,6 @@ import java.util.List;
 public interface CompanyService extends ContentService<Company> {
 
     /**
-     * Initializes, updates and returns object of class {@link Company}.
-     * Returns {@code null} if id is {@code null}.
-     *
-     * @param url     a url of the company to update.
-     * @param company a company to update.
-     * @return The updating company with parameter id.
-     * @see Company
-     */
-    Company update(
-            final String url,
-            final Company company
-    );
-
-    /**
      * Updates the main company.
      *
      * @param company a main company to update.
