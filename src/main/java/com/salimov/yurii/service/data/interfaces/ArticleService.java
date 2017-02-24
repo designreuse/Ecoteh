@@ -21,21 +21,6 @@ import java.util.List;
 public interface ArticleService extends ContentService<Article> {
 
     /**
-     * Initializes, updates and returns article with parameter id.
-     *
-     * @param url     a url of the article to update.
-     * @param article a article to update.
-     * @return The updating article with parameter id.
-     * @see Article
-     * @see Category
-     * @see File
-     */
-    Article update(
-            final String url,
-            final Article article
-    );
-
-    /**
      * Returns article with the parameter number.
      *
      * @param number  a title of the article to return.

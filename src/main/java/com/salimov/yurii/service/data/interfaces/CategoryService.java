@@ -14,19 +14,4 @@ import com.salimov.yurii.entity.File;
  * @see DataService
  */
 public interface CategoryService extends ContentService<Category> {
-
-
-    /**
-     * Initializes, updates and returns category with parameter url.
-     *
-     * @param url      a url of the category to update.
-     * @param category a category to update.
-     * @return The updating category with parameter id.
-     * @see Category
-     * @see File
-     */
-    /*Category update(
-            final String url,
-            final Category category
-    );*/
 }

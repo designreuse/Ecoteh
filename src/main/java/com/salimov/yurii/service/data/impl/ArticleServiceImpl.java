@@ -70,28 +70,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
-     * Initializes, updates and returns article with parameter id.
-     * Returns {@code null} if id is {@code null}.
-     *
-     * @param url     a url of the article to update.
-     * @param article a article to update.
-     * @return The updating article with parameter id.
-     * @see Article
-     * @see Category
-     * @see File
-     */
-    @Override
-    @Transactional
-    public Article update(
-            final String url,
-            final Article article
-    ) {
-        return update(
-                getByUrl(url, false).initialize(article)
-        );
-    }
-
-    /**
      * Returns article with the parameter number.
      *
      * @param number  a title of the article to return.
