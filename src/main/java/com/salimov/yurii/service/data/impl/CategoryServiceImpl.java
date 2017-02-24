@@ -71,31 +71,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Initializes, updates and returns category with parameter url.
-     *
-     * @param url      a url of the category to update.
-     * @param category a category to update.
-     * @return The updating category with parameter id.
-     * @see Category
-     * @see File
-     */
-    /*@Override
-    @Transactional
-    public Category update(
-            final String url,
-            final Category category
-    ) {
-        final Category categoryToUpdate = getByUrl(url, false);
-        final File newLogo = category.getLogo();
-        final File oldLogo = categoryToUpdate.getLogo();
-        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
-            this.fileService.deleteFile(oldLogo.getUrl());
-        }
-        categoryToUpdate.initialize(category);
-        return update(categoryToUpdate);
-    }
-
-    /**
      * Returns category with the parameter url.
      *
      * @param url     a url of the category to return.

@@ -384,10 +384,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
+     * Shuffles the models and returns it.
      *
-     * @param models
-     * @param size
-     * @return
+     * @param models a models to shuffle.
+     * @return The shuffling models.
      */
     @Override
     public List<T> shuffle(final Collection<T> models) {
