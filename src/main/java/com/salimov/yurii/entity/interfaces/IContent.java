@@ -1,6 +1,7 @@
 package com.salimov.yurii.entity.interfaces;
 
 import com.salimov.yurii.entity.Content;
+import com.salimov.yurii.entity.File;
 
 /**
  * The interface describes a set of methods
@@ -76,6 +77,21 @@ public interface IContent extends IModel {
      * @param keywords a new keywords to the content.
      */
     void setKeywords(final String keywords);
+
+    /**
+     * Returns a logo of the content.
+     *
+     * @return The content logo URL.
+     */
+    File getLogo();
+
+    /**
+     * Sets a new logo to the content.
+     *
+     * @param logo a new logo to the content.
+     * @see File
+     */
+    void setLogo(final File logo);
 
     /**
      * Initializes the content.

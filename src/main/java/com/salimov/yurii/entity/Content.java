@@ -3,8 +3,7 @@ package com.salimov.yurii.entity;
 import com.salimov.yurii.entity.interfaces.IContent;
 import com.salimov.yurii.util.translator.Translator;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -57,6 +56,21 @@ public abstract class Content extends Model implements IContent {
     private String keywords;
 
     /**
+     * The category logo.
+     *
+     * @see File
+     */
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "id_logo",
+            referencedColumnName = "id"
+    )
+    private File logo;
+
+    /**
      * Default constructor.
      */
     public Content() {
@@ -64,6 +78,7 @@ public abstract class Content extends Model implements IContent {
         this.url = "";
         this.description = "";
         this.keywords = "";
+        this.logo = new File();
     }
 
     /**
@@ -78,7 +93,7 @@ public abstract class Content extends Model implements IContent {
             final String description,
             final String keywords
     ) {
-        super();
+        this();
         setTitle(title);
         setDescription(description);
         setKeywords(keywords);
@@ -239,6 +254,27 @@ public abstract class Content extends Model implements IContent {
     }
 
     /**
+     * Returns a logo of the content.
+     *
+     * @return The content logo URL.
+     */
+    @Override
+    public File getLogo() {
+        return this.logo;
+    }
+
+    /**
+     * Sets a new logo to the content.
+     *
+     * @param logo a new logo to the content.
+     * @see File
+     */
+    @Override
+    public void setLogo(final File logo) {
+        this.logo.initialize(logo);
+    }
+
+    /**
      * Initializes the content.
      *
      * @param content a content to copy.
@@ -251,6 +287,7 @@ public abstract class Content extends Model implements IContent {
             this.setTitle(content.getTitle());
             this.setUrl(content.getUrl());
             this.setDescription(content.getDescription());
+            this.setLogo(content.getLogo());
         }
         return this;
     }
