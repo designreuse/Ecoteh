@@ -49,6 +49,16 @@
                         <c:choose>
                             <c:when test="${article.description ne ''}"><p>${article.description}</p></c:when>
                             <c:when test="${article.text ne ''}">${article.text}</c:when>
+                            <c:otherwise>
+                                <a href="<c:url value="/article/${article.logo.url}"/>"
+                                   title="Перейти к &quot;<c:out value="${article.title}"/>&quot;">
+                                    <c:if test="${article.logo.url ne ''}">
+                                        <img class="img-responsive img-in-list" alt="<c:out value="${article.title}"/>"
+                                             src="<c:url value="${article.logo.url}"/>" onerror="this.src='<c:url
+                                                value="/resources/img/static/default_file.gif"/>'">
+                                    </c:if>
+                                </a>
+                            </c:otherwise>
                         </c:choose>
                         <c:if test="${article.text ne ''}">
                             <p class="text-right">
