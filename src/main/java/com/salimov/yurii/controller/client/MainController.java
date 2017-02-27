@@ -10,12 +10,17 @@ import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import com.salimov.yurii.util.cache.Cache;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -369,14 +374,9 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getAllResponsesPage() {
-        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "responses_list",
-                this.responseService.sortByDate(
-                        this.responseService.getAll(), false
-                )
-        );
+        final ModelAndView modelAndView = this.fabric.allResponsesPage();
         modelAndView.addObject("is_captcha", null);
+        modelAndView.setViewName("client/response/all_page");
         return modelAndView;
     }
 
@@ -396,13 +396,8 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getAllSortResponsesByDatePage(final HttpServletRequest request) {
-        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "responses_list",
-                this.responseService.sortByDate(
-                        this.responseService.getAll(),
-                        Boolean.parseBoolean(request.getParameter("revers"))
-                )
+        final ModelAndView modelAndView = this.fabric.allSortResponsesByDatePage(
+                Boolean.parseBoolean(request.getParameter("revers"))
         );
         modelAndView.addObject("is_captcha", null);
         return modelAndView;
@@ -464,8 +459,8 @@ public abstract class MainController {
                     (isNotBlank(user.getContacts().getEmail()) ? "E-mail: " + user.getContacts().getEmail() : "") +
                     (isNotBlank(message.getText()) ? "\nText: \n: " + message.getText() : "");
             sendToEmail(message.getSubject(), text);
-            this.messageService.add(message);
         }).start();
+        this.messageService.add(message);
     }
 
     /**
@@ -481,8 +476,9 @@ public abstract class MainController {
                     "User name: " + response.getUsername()
                             + "\n\nText: \n" + response.getText()
             );
-            this.responseService.add(response);
         }).start();
+        this.responseService.add(response);
+        Cache.removeAll("Response");
     }
 
     /**

@@ -83,7 +83,8 @@
                                     <p class="response">
                                         <c:out value="${message.user.name}"/>,&nbsp;
                                         <a href="tel:<c:out value="${message.user.contacts.mobilePhone}"/>">
-                                            <c:out value="${message.user.contacts.mobilePhone}"/></a>
+                                            <c:out value="${message.user.contacts.mobilePhone}"/>
+                                        </a>
                                         <c:if test="${message.user.contacts.email ne ''}">
                                             ,&nbsp;
                                             <a href="mailto:<c:out value="${message.user.contacts.email}"/>">

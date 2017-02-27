@@ -4,6 +4,7 @@ import com.salimov.yurii.entity.Contacts;
 import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.entity.Response;
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.captcha.CaptchaService;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.MessageService;
@@ -116,12 +117,9 @@ public class ClientMainController extends MainController {
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            sendMess(
-                    new Message(
-                            new User(name, new Contacts(phone, email)),
-                            "New Message", userMessage
-                    )
-            );
+            final User user = new User(name, new Contacts(email, phone));
+            user.setRole(UserRole.CLIENT);
+            sendMess(new Message(user, "New Message", userMessage));
         }
         return getMessageMV(url, isCaptcha);
     }

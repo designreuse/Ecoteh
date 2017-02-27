@@ -5,6 +5,7 @@ import com.salimov.yurii.entity.Contacts;
 import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.entity.Response;
 import com.salimov.yurii.entity.User;
+import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.MessageService;
 import com.salimov.yurii.service.data.interfaces.ResponseService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * The class implements a set of methods for working
@@ -120,12 +122,9 @@ public class AdminMainController extends MainController {
             @RequestParam(value = "email", required = false) final String email,
             @RequestParam(value = "message", required = false) final String userMessage
     ) {
-        sendMess(
-                new Message(
-                        new User(name, new Contacts(phone, email)),
-                        "New Message", userMessage
-                )
-        );
+        final User user = new User(name, new Contacts(email, phone));
+        user.setRole(UserRole.CLIENT);
+        sendMess(new Message(user, "New Message", userMessage));
         return getMessageMV(url, true);
     }
 

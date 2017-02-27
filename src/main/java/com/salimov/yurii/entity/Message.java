@@ -238,16 +238,6 @@ public final class Message extends Model implements IMessage {
     }
 
     /**
-     * Returns a unique identifier of the message.
-     *
-     * @return The unique identifier.
-     */
-    @Override
-    public long getId() {
-        return (long) Math.abs(hashCode());
-    }
-
-    /**
      * Initializes the message.
      *
      * @param message a message to copy.

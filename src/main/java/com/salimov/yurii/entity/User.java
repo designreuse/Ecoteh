@@ -40,25 +40,25 @@ public final class User extends Model implements IUser, UserDetails {
     /**
      * The name of a user.
      */
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The url of a user.
      */
-    @Column(name = "url", nullable = false, unique = true)
+    @Column(name = "url", nullable = false)
     private String url;
 
     /**
      * The login of a user.
      */
-    @Column(name = "login", nullable = false, unique = true)
+    @Column(name = "login", nullable = false)
     private String encryptedLogin;
 
     /**
      * The password of a user.
      */
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(name = "password", nullable = false)
     private String encryptedPassword;
 
     /**
