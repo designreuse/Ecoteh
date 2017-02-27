@@ -104,9 +104,7 @@ final class CacheCleaner implements Runnable {
      */
     private void cleanCache() {
         if (this.cache.size() > getMaxSize()) {
-            final List<Key> keys = new ArrayList<>(
-                    this.cache.keySet()
-            );
+            final List<Key> keys = new ArrayList<>(this.cache.keySet());
             Collections.sort(keys, new KeyComparator());
             cleanToNormalSize(keys);
         }

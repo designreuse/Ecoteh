@@ -35,9 +35,8 @@ final class Key<T> implements Comparable {
      */
     Key(final T key, final long milliseconds) {
         this.key = key;
-        this.timeout = System.currentTimeMillis() + (
-                milliseconds > 0 ? milliseconds : DEFAULT_TIMEOUT
-        );
+        this.timeout = System.currentTimeMillis() +
+                (milliseconds > 0 ? milliseconds : DEFAULT_TIMEOUT);
     }
 
     /**
@@ -100,7 +99,11 @@ final class Key<T> implements Comparable {
                 result = true;
             } else if (this.getClass() == object.getClass()) {
                 final Key other = (Key) object;
-                result = this.key != null ? this.key.equals(other.key) : other.key == null;
+                if (this.key != null) {
+                    result = this.key.equals(other.key);
+                } else {
+                    result = other.key == null;
+                }
             }
         }
         return result;

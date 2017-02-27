@@ -36,8 +36,7 @@ final class Stream {
      * @return The response to string.
      * @throws IOException If an I/O error occurs.
      */
-    static String read(final InputStream inputStream)
-            throws IOException {
+    static String read(final InputStream inputStream) throws IOException {
         final StringBuilder response = new StringBuilder();
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String inputLine;

@@ -138,9 +138,9 @@ public final class SenderImpl implements Sender {
      * {@code false} otherwise.
      */
     private boolean validate() {
-        return !(isBlank(this.subject) || isBlank(this.text)
-                || isBlank(this.recipientEmail)
-                || isBlank(this.senderEmail) || isBlank(this.senderEmailPass));
+        return !(isBlank(this.subject) || isBlank(this.text) ||
+                isBlank(this.recipientEmail) ||
+                isBlank(this.senderEmail) || isBlank(this.senderEmailPass));
     }
 
     /**
@@ -249,9 +249,7 @@ public final class SenderImpl implements Sender {
             final String senderEmail
     ) throws MessagingException, UnsupportedEncodingException {
         final Message message = new MimeMessage(session);
-        message.setFrom(
-                new InternetAddress(senderEmail)
-        );
+        message.setFrom(new InternetAddress(senderEmail));
         message.setRecipients(
                 Message.RecipientType.TO,
                 InternetAddress.parse(recipientEmail)
@@ -261,9 +259,7 @@ public final class SenderImpl implements Sender {
                         subject, CHARSET, ENCODING
                 )
         );
-        message.setContent(
-                text, "text/plain;charset=" + CHARSET
-        );
+        message.setContent(text, "text/plain;charset=" + CHARSET);
         message.setSentDate(new Date());
         return message;
     }

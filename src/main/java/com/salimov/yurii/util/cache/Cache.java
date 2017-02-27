@@ -279,10 +279,8 @@ public final class Cache {
         if (isNotBlank(subKey)) {
             objects = cache.keySet()
                     .stream()
-                    .filter(
-                            key -> key.getKey().toString()
-                                    .contains(subKey)
-                    ).map(key -> cache.get(key))
+                    .filter(key -> key.getKey().toString().contains(subKey))
+                    .map(key -> cache.get(key))
                     .collect(Collectors.toList());
         }
         return objects;
@@ -316,11 +314,8 @@ public final class Cache {
                 for (String _key : keys) {
                     if (isNotBlank(_key)) {
                         cacheKeys.stream()
-                                .filter(
-                                        key -> key.getKey()
-                                                .toString()
-                                                .contains(_key)
-                                ).forEach(key -> cache.remove(key));
+                                .filter(key -> key.getKey().toString().contains(_key))
+                                .forEach(key -> cache.remove(key));
                     }
                 }
             }).start();
@@ -358,16 +353,8 @@ public final class Cache {
         if (object != null) {
             cache.entrySet()
                     .stream()
-                    .filter(
-                            entry -> entry.getValue()
-                                    .getClass()
-                                    .equals(object)
-                    )
-                    .forEach(
-                            entry -> cache.remove(
-                                    entry.getKey()
-                            )
-                    );
+                    .filter(entry -> entry.getValue().getClass().equals(object))
+                    .forEach(entry -> cache.remove(entry.getKey()));
         }
     }
 
