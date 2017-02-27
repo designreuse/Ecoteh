@@ -383,7 +383,7 @@ public final class Company extends Content implements ICompany {
      */
     @Override
     public void setAddress(final Address address) {
-        this.address = address;
+        this.address.initialize(address);
     }
 
     /**
