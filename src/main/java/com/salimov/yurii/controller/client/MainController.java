@@ -47,7 +47,7 @@ public abstract class MainController {
      *
      * @see MainMVFabric
      */
-    private final MainMVFabric fabric;
+    protected final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
@@ -55,7 +55,7 @@ public abstract class MainController {
      *
      * @see CompanyService
      */
-    private final CompanyService companyService;
+    protected final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
@@ -63,7 +63,7 @@ public abstract class MainController {
      *
      * @see ResponseService
      */
-    private final ResponseService responseService;
+    protected final ResponseService responseService;
 
     /**
      * The implementation of the interface describes a set of methods
@@ -71,7 +71,7 @@ public abstract class MainController {
      *
      * @see MessageService
      */
-    private final MessageService messageService;
+    protected final MessageService messageService;
 
     /**
      * The implementation of the interface describes a set of methods
@@ -79,7 +79,7 @@ public abstract class MainController {
      *
      * @see SenderService
      */
-    private final SenderService senderService;
+    protected final SenderService senderService;
 
     /**
      * Constructor.
@@ -160,9 +160,7 @@ public abstract class MainController {
             value = "/category/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getCategoryPage(
-            @PathVariable("url") final String url
-    ) {
+    public ModelAndView getCategoryPage(@PathVariable("url") final String url) {
         return this.fabric.categoryPage(url);
     }
 
@@ -206,9 +204,7 @@ public abstract class MainController {
             value = "/article/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getArticlePage(
-            @PathVariable("url") final String url
-    ) {
+    public ModelAndView getArticlePage(@PathVariable("url") final String url) {
         return this.fabric.articleByUrlPage(url);
     }
 
@@ -225,9 +221,7 @@ public abstract class MainController {
             value = "/article/num_{number}",
             method = RequestMethod.GET
     )
-    public ModelAndView getArticleByNumberPage(
-            @PathVariable("number") final String number
-    ) {
+    public ModelAndView getArticleByNumberPage(@PathVariable("number") final String number) {
         return this.fabric.articleByNumberPage(number);
     }
 
@@ -262,9 +256,7 @@ public abstract class MainController {
             value = "/article/all/sort",
             method = RequestMethod.GET
     )
-    public ModelAndView getAllSortArticlesPage(
-            final HttpServletRequest request
-    ) {
+    public ModelAndView getAllSortArticlesPage(final HttpServletRequest request) {
         return this.fabric.allSortArticlesPage(
                 request.getParameter("type"),
                 Boolean.parseBoolean(
@@ -339,9 +331,7 @@ public abstract class MainController {
             value = "/company/all/sort",
             method = RequestMethod.GET
     )
-    public ModelAndView getAllSortPartnersPage(
-            final HttpServletRequest request
-    ) {
+    public ModelAndView getAllSortPartnersPage(final HttpServletRequest request) {
         return this.fabric.allSortPartnersByTitlePage(
                 Boolean.parseBoolean(
                         request.getParameter("revers")
@@ -362,9 +352,7 @@ public abstract class MainController {
             value = "/company/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView getPartnerPage(
-            @PathVariable("url") String url
-    ) {
+    public ModelAndView getPartnerPage(@PathVariable("url") String url) {
         return this.fabric.partnerPage(url);
     }
 
@@ -381,7 +369,13 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getAllResponsesPage() {
-        final ModelAndView modelAndView = this.fabric.allResponsesPage();
+        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        modelAndView.addObject(
+                "responses_list",
+                this.responseService.sortByDate(
+                        this.responseService.getAll(), false
+                )
+        );
         modelAndView.addObject("is_captcha", null);
         return modelAndView;
     }
@@ -401,14 +395,17 @@ public abstract class MainController {
             value = "/responses/sort",
             method = RequestMethod.GET
     )
-    public ModelAndView getAllSortResponsesByDatePage(
-            final HttpServletRequest request
-    ) {
-        return this.fabric.allSortResponsesByDatePage(
-                Boolean.parseBoolean(
-                        request.getParameter("revers")
+    public ModelAndView getAllSortResponsesByDatePage(final HttpServletRequest request) {
+        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        modelAndView.addObject(
+                "responses_list",
+                this.responseService.sortByDate(
+                        this.responseService.getAll(),
+                        Boolean.parseBoolean(request.getParameter("revers"))
                 )
         );
+        modelAndView.addObject("is_captcha", null);
+        return modelAndView;
     }
 
     /**
@@ -457,93 +454,35 @@ public abstract class MainController {
     /**
      * Sends client message to email and saves it.
      *
-     * @param name        a client name.
-     * @param phone       a phone name.
-     * @param email       a email name.
-     * @param userMessage a client message.
+     * @param message a message to send.
      */
-    protected void sendMess(
-            final String name,
-            final String phone,
-            final String email,
-            final String userMessage
-    ) {
+    protected void sendMess(final Message message) {
         new Thread(() -> {
-            final String _text = "User name: " + name
-                    + "\nPhone: " + phone
-                    + (isNotBlank(email) ? "E-mail: " + email : "")
-                    + (isNotBlank(userMessage) ? "\nText: \n: " + userMessage : "");
-            final String subject = "New Message";
-            sendToEmail(subject, _text);
-            saveMess(name, phone, email, userMessage, subject);
+            final User user = message.getUser();
+            final String text = "User name: " + user.getName() +
+                    "\nPhone: " + user.getContacts().getMobilePhone() +
+                    (isNotBlank(user.getContacts().getEmail()) ? "E-mail: " + user.getContacts().getEmail() : "") +
+                    (isNotBlank(message.getText()) ? "\nText: \n: " + message.getText() : "");
+            sendToEmail(message.getSubject(), text);
+            this.messageService.add(message);
         }).start();
-    }
-
-    /**
-     * Saves new message.
-     *
-     * @param name    a client name.
-     * @param phone   a phone name.
-     * @param email   a email name.
-     * @param text    a client message.
-     * @param subject a subject of the message.
-     * @see MessageService
-     * @see Message
-     */
-    private void saveMess(
-            final String name,
-            final String phone,
-            final String email,
-            final String text,
-            final String subject
-    ) {
-        final Contacts contacts = new Contacts();
-        contacts.setMobilePhone(phone);
-        contacts.setEmail(email);
-        final User user = new User();
-        user.setName(name);
-        user.setContacts(contacts);
-        user.setRole(UserRole.CLIENT);
-        this.messageService.add(new Message(user, subject, text));
     }
 
     /**
      * Sends client response to email and saves it.
      *
-     * @param name a client name.
-     * @param text a text of response.
+     * @param response a response.
      * @see Response
      */
-    protected void sendResp(
-            final String name,
-            final String text
-    ) {
+    protected void sendResp(final Response response) {
         new Thread(() -> {
             sendToEmail(
                     "New Response",
-                    "User name: " + name
-                            + "\n\nText: \n" + text
+                    "User name: " + response.getUsername()
+                            + "\n\nText: \n" + response.getText()
             );
-            saveResp(name, text);
+            this.responseService.add(response);
         }).start();
-    }
-
-    /**
-     * Saves new response.
-     *
-     * @param name a client name.
-     * @param text a text of response.
-     * @see ResponseService
-     * @see Response
-     */
-    private void saveResp(
-            final String name,
-            final String text
-    ) {
-        this.responseService.add(
-                new Response(name, text)
-        );
-        Cache.removeAll("Response");
     }
 
     /**

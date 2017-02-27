@@ -192,12 +192,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
             boolean exist,
             boolean duplicate
     ) {
-        boolean result = true;
-        if (response == null) {
-            result = false;
-        }
-        if (result && exist) {
-            result = exists(response);
+        boolean result = false;
+        if (response != null) {
+            result = true;
+            if (exist) {
+                result = exists(response);
+            }
         }
         return result;
     }

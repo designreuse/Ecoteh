@@ -69,7 +69,7 @@ public final class Response extends Model implements IResponse {
             final String username,
             final String text
     ) {
-        super();
+        this();
         setUsername(username);
         setText(text);
     }

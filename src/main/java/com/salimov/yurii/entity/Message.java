@@ -37,7 +37,7 @@ public final class Message extends Model implements IMessage {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_user",
+            name = "id_user", nullable = false,
             referencedColumnName = "id"
     )
     private User user;
@@ -65,6 +65,8 @@ public final class Message extends Model implements IMessage {
      */
     public Message() {
         this.user = new User();
+        this.subject = "";
+        this.text = "";
         this.date = new Date();
     }
 

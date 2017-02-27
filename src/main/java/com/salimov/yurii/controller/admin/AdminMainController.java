@@ -1,7 +1,10 @@
 package com.salimov.yurii.controller.admin;
 
 import com.salimov.yurii.controller.client.MainController;
+import com.salimov.yurii.entity.Contacts;
+import com.salimov.yurii.entity.Message;
 import com.salimov.yurii.entity.Response;
+import com.salimov.yurii.entity.User;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.MessageService;
 import com.salimov.yurii.service.data.interfaces.ResponseService;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * The class implements a set of methods for working
@@ -64,7 +69,8 @@ public class AdminMainController extends MainController {
             final UserService userService,
             final MessageService messageService,
             final SenderService senderService,
-            final ResponseService responseService) {
+            final ResponseService responseService
+    ) {
         super(
                 new CacheMVFabricImpl(fabric), companyService, userService,
                 responseService, messageService, senderService
@@ -84,9 +90,7 @@ public class AdminMainController extends MainController {
     )
     public ModelAndView getAdminMenu() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject(
-                "user", this.userService.getAuthenticatedUser()
-        );
+        modelAndView.addObject("user", this.userService.getAuthenticatedUser());
         modelAndView.setViewName("admin/menu/menu_page");
         return modelAndView;
     }
@@ -116,7 +120,12 @@ public class AdminMainController extends MainController {
             @RequestParam(value = "email", required = false) final String email,
             @RequestParam(value = "message", required = false) final String userMessage
     ) {
-        sendMess(name, phone, email, userMessage);
+        sendMess(
+                new Message(
+                        new User(name, new Contacts(phone, email)),
+                        "New Message", userMessage
+                )
+        );
         return getMessageMV(url, true);
     }
 
@@ -158,7 +167,7 @@ public class AdminMainController extends MainController {
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "response") final String text
     ) {
-        sendResp(name, text);
+        sendResp(new Response(name, text));
         return getResponsesMV(true);
     }
 
