@@ -94,6 +94,21 @@ public final class Contacts extends Model implements IContacts {
     /**
      * Constructor.
      *
+     * @param email       a E-mail.
+     * @param mobilePhone a mobile phone number.
+     */
+    public Contacts(
+            final String email,
+            final String mobilePhone
+    ) {
+        this();
+        setEmail(email);
+        setMobilePhone(mobilePhone);
+    }
+
+    /**
+     * Constructor.
+     *
      * @param email         a E-mail.
      * @param mobilePhone   a mobile phone number.
      * @param landlinePhone a landline phone number.
@@ -113,9 +128,7 @@ public final class Contacts extends Model implements IContacts {
             final String twitter,
             final String skype
     ) {
-        super();
-        setEmail(email);
-        setMobilePhone(mobilePhone);
+        this(email, mobilePhone);
         setLandlinePhone(landlinePhone);
         setFax(fax);
         setVkontakte(vkontakte);
