@@ -166,6 +166,21 @@ public final class User extends Model implements IUser, UserDetails {
     }
 
     /**
+     * Constructor.
+     *
+     * @param name        a name of the new user.
+     * @param contacts    a contacts to the new user.
+     */
+    public User(
+            final String name,
+            final Contacts contacts
+    ) {
+        this();
+        setName(name);
+        setContacts(contacts);
+    }
+
+    /**
      * Returns a string representation of the object.
      *
      * @return A string representation of the object.
