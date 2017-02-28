@@ -140,15 +140,13 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final MultipartFile multipartFile
     ) {
         final File file = get(id);
-        if (file.getType().equals(FileType.STATIC)) {
-            throw new IllegalArgumentException("Static files forbidden to edit!");
-        }
         file.setTitle(title);
-        file.setType(type);
+        if (!file.getType().equals(FileType.STATIC)) {
+            file.setType(type);
+        }
         if (multipartFile != null && !multipartFile.isEmpty()) {
             checkMultipartFile(multipartFile);
             deleteFile(file.getUrl());
-            file.setUrl(createRelativePath(title, multipartFile));
             saveFile(multipartFile, file.getUrl());
         }
         return update(file);
