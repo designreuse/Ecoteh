@@ -35,6 +35,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -54,67 +55,65 @@
                     </h3>
                     <hr>
                     <div class="text-center">
-                        <form action="<c:url value="/admin/file/update"/>" method="post" enctype="multipart/form-data"
-                              <c:if test="${file.validated eq false}">disabled</c:if>>
+                        <form action="<c:url value="/admin/file/update"/>" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<c:out value="${file.id}"/>">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths"><span class="red">*</span>&nbsp;Название</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" maxlength="100" required
-                                               placeholder="Название файла" value="<c:out value="${file.title}"/>"
-                                        <c:if test="${file.validated eq false}"> disabled
-                                               title="Статические файлы редактировать запрещено"</c:if>>
+                                               placeholder="Название файла" value="<c:out value="${file.title}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Файл</td>
                                     <td class="tds">
-                                        <a href="<c:url value="${file.url}"/>"
-                                           rel="lightgallery[slides]">
+                                        <a href="<c:url value="${file.url}"/>" rel="lightgallery"
+                                           title="<c:out value="${file.title}"/>">
                                             <img class="img-logo" alt="<c:out value="${file.title}"/>"
                                                  src="<c:url value="${file.url}"/>"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_file.gif"/>'">
                                         </a><br>
-                                        <input type="file" name="file" class="form-control"
-                                        <c:if test="${file.validated eq false}"> disabled
-                                               title="Статические файлы редактировать запрещено"</c:if>>
+                                        <input type="file" name="file" class="form-control">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="ths">Роль</td>
-                                    <td class="tds">
-                                        <label>
-                                            <input type="radio" name="type" value="FAVICON"
-                                                   <c:if test="${file.type eq 'FAVICON'}">checked</c:if>
-                                            />&nbsp;Значок сайта
-                                        </label>&nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="type" value="SLIDE"
-                                                   <c:if test="${file.type eq 'SLIDE'}">checked</c:if>
-                                            />&nbsp;Слайд
-                                        </label>&nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="type" value="OTHER"
-                                                   <c:if test="${file.type eq 'OTHER'}">checked</c:if>
-                                            />&nbsp;Другое
-                                        </label>&nbsp;&nbsp;
-                                    </td>
-                                </tr>
+                                <c:choose>
+                                    <c:when test="${file.validated}">
+                                        <tr>
+                                            <td class="ths">Роль</td>
+                                            <td class="tds">
+                                                <label>
+                                                    <input type="radio" name="type" value="FAVICON"
+                                                           <c:if test="${file.type eq 'FAVICON'}">checked</c:if>
+                                                    />&nbsp;Значок сайта
+                                                </label>&nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="type" value="SLIDE"
+                                                           <c:if test="${file.type eq 'SLIDE'}">checked</c:if>
+                                                    />&nbsp;Слайд
+                                                </label>&nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="type" value="OTHER"
+                                                           <c:if test="${file.type eq 'OTHER'}">checked</c:if>
+                                                    />&nbsp;Другое
+                                                </label>&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="hidden" name="type" value="${file.type}"/>
+                                    </c:otherwise>
+                                </c:choose>
                             </table>
                             <div style="margin: 10px">
-                                <button type="submit" class="btn btn-default" title="Добавить файл"
-                                        <c:if test="${file.validated eq false}"> disabled
-                                            title="Статические файлы редактировать запрещено"</c:if>>
+                                <button type="submit" class="btn btn-default" title="Добавить файл">
                                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
-                                <button type="reset" class="btn btn-default" title="Сбросить информацию"
-                                        <c:if test="${file.validated eq false}"> disabled
-                                            title="Статические файлы редактировать запрещено"</c:if>>
-                                    <span class="glyphicon glyphicon-retweet yellow"
-                                          aria-hidden="true"></span>&nbsp;Сброс
+                                <button type="reset" class="btn btn-default" title="Сбросить информацию">
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
@@ -133,6 +132,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     </body>
     </html>
 </compress:html>

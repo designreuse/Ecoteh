@@ -87,15 +87,16 @@
                                                 data-clipboard-text="<c:url value="${file.url}"/>">
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                                         </button>
-                                        <c:if test="${file.validated}">
-                                            &nbsp;
-                                            <a href="<c:url value="/admin/file/edit/${file.id}"/>"
-                                               title="Редактировать файл &quot;${file.title}&quot;">
-                                                <button class="btn btn-default">
+                                        &nbsp;
+                                        <a href="<c:url value="/admin/file/edit/${file.id}"/>"
+                                           title="Редактировать файл &quot;${file.title}&quot;">
+                                            <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-edit yellow"
                                                           aria-hidden="true"></span>
-                                                </button>
-                                            </a>&nbsp;
+                                            </button>
+                                        </a>
+                                        <c:if test="${file.validated}">
+                                            &nbsp;
                                             <a href="<c:url value="/admin/file/delete/${file.id}"/>"
                                                title="Удалить файл &quot;${file.title}&quot;">
                                                 <button class="btn btn-default">
