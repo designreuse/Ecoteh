@@ -115,7 +115,6 @@ public final class Company extends Content implements ICompany {
 
     /**
      * Default constructor.
-     * Sets default company type {@link CompanyType#PARTNER}.
      */
     public Company() {
         this.tagline = "";
