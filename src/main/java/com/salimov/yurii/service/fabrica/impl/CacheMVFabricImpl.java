@@ -248,6 +248,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
+    @Override
     public ModelAndView allSortPartnersByTitlePage(
             final boolean revers
     ) {
