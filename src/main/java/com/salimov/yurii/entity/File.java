@@ -252,7 +252,7 @@ public final class File extends Model implements IFile {
             if (isNotBlank(file.getTitle())) {
                 this.setTitle(file.getTitle());
             }
-            if (isNotBlank(file.getUrl())) {
+            if (!this.getType().equals(FileType.STATIC) && isNotBlank(file.getUrl())) {
                 this.setUrl(file.getUrl());
             }
             if (file.getType() != null) {
