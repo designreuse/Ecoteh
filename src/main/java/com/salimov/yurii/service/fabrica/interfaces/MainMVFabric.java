@@ -76,9 +76,7 @@ public interface MainMVFabric {
      * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
-    ModelAndView allSortPartnersByTitlePage(
-            final boolean revers
-    );
+    ModelAndView allSortPartnersByTitlePage(final boolean revers);
 
     /**
      * Creates and returns page with one category with parameter url.

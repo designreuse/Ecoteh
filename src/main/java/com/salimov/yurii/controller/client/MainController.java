@@ -190,9 +190,7 @@ public abstract class MainController {
     ) {
         return this.fabric.categoryWithSortArticlesPage(
                 url, request.getParameter("type"),
-                Boolean.parseBoolean(
-                        request.getParameter("revers")
-                )
+                Boolean.parseBoolean(request.getParameter("revers"))
         );
     }
 
@@ -264,9 +262,7 @@ public abstract class MainController {
     public ModelAndView getAllSortArticlesPage(final HttpServletRequest request) {
         return this.fabric.allSortArticlesPage(
                 request.getParameter("type"),
-                Boolean.parseBoolean(
-                        request.getParameter("revers")
-                )
+                Boolean.parseBoolean(request.getParameter("revers"))
         );
     }
 
@@ -338,9 +334,7 @@ public abstract class MainController {
     )
     public ModelAndView getAllSortPartnersPage(final HttpServletRequest request) {
         return this.fabric.allSortPartnersByTitlePage(
-                Boolean.parseBoolean(
-                        request.getParameter("revers")
-                )
+                Boolean.parseBoolean(request.getParameter("revers"))
         );
     }
 
