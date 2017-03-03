@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `ecoteh`;
 CREATE DATABASE IF NOT EXISTS `ecoteh` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ecoteh`;
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
@@ -44,7 +45,8 @@ DROP TABLE IF EXISTS `articles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `articles` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_category` INT(10) UNSIGNED          DEFAULT NULL,
+  `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
+  `category_id` INT(10) UNSIGNED          DEFAULT NULL,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
   `number`      VARCHAR(100)     NOT NULL DEFAULT '',
@@ -54,9 +56,10 @@ CREATE TABLE `articles` (
   `date`        VARCHAR(30)      NOT NULL DEFAULT '',
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `number` (`number`),
-  UNIQUE KEY `url` (`url`),
-  FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`)
+  UNIQUE (`number`, `url`),
+  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
+  FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -71,15 +74,15 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_logo`     INT(10) UNSIGNED          DEFAULT NULL,
+  `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
   `description` TEXT             NOT NULL DEFAULT '',
   `keywords`    TEXT             NOT NULL DEFAULT '',
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`),
-  UNIQUE KEY `url` (`url`)
+  UNIQUE (`title`, `url`),
+  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -94,9 +97,9 @@ DROP TABLE IF EXISTS `companies`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `companies` (
   `id`             INT(10) UNSIGNED         NOT NULL AUTO_INCREMENT,
-  `id_logo`        INT(10) UNSIGNED                  DEFAULT NULL,
-  `id_contacts`    INT(10) UNSIGNED                  DEFAULT NULL,
-  `id_address`     INT(10) UNSIGNED                  DEFAULT NULL,
+  `logo_id`        INT(10) UNSIGNED                  DEFAULT NULL,
+  `contacts_id`    INT(10) UNSIGNED                  DEFAULT NULL,
+  `address_id`     INT(10) UNSIGNED                  DEFAULT NULL,
   `type`           ENUM ('MAIN', 'PARTNER') NOT NULL DEFAULT 'PARTNER',
   `title`          VARCHAR(100)             NOT NULL DEFAULT '',
   `domain`         VARCHAR(200)             NOT NULL DEFAULT '',
@@ -111,11 +114,10 @@ CREATE TABLE `companies` (
   `work_time_to`   VARCHAR(10)              NOT NULL DEFAULT '',
   `validated`      BIT(1)                   NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`),
-  UNIQUE KEY `url` (`url`),
-  FOREIGN KEY (`id_logo`) REFERENCES `contacts` (`id`),
-  FOREIGN KEY (`id_contacts`) REFERENCES `contacts` (`id`),
-  FOREIGN KEY (`id_address`) REFERENCES `addresses` (`id`)
+  UNIQUE (`title`, `url`),
+  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
+  FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`),
+  FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -173,13 +175,13 @@ DROP TABLE IF EXISTS `messages`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `messages` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_user`   INT(10) UNSIGNED NOT NULL,
+  `user_id`   INT(10) UNSIGNED NOT NULL,
   `subject`   VARCHAR(100)     NOT NULL DEFAULT '',
   `text`      TEXT             NOT NULL DEFAULT '',
   `date`      VARCHAR(30)      NOT NULL DEFAULT '',
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -212,24 +214,21 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_contacts` INT(10) UNSIGNED          DEFAULT NULL,
-  `id_photo`    INT(10) UNSIGNED          DEFAULT NULL,
-  `role`        VARCHAR(100)     NOT NULL DEFAULT '',
-  `name`        VARCHAR(100)     NOT NULL DEFAULT '',
-  `url`         VARCHAR(100)     NOT NULL DEFAULT '',
-  `login`       VARCHAR(300)     NOT NULL DEFAULT '',
-  `password`    VARCHAR(300)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL,
-  `validated`   BIT(1)           NOT NULL DEFAULT b'1',
-  `mailing`     BIT(1)           NOT NULL DEFAULT b'1',
-  `locked`      BIT(1)           NOT NULL DEFAULT b'0',
+  `id`          INT(10) UNSIGNED                    NOT NULL AUTO_INCREMENT,
+  `photo_id`    INT(10) UNSIGNED                             DEFAULT NULL,
+  `contacts_id` INT(10) UNSIGNED                             DEFAULT NULL,
+  `role`        ENUM ('ADMIN', 'CLIENT', 'ANOTHER') NOT NULL DEFAULT 'ANOTHER',
+  `name`        VARCHAR(100)                        NOT NULL DEFAULT '',
+  `url`         VARCHAR(100)                        NOT NULL DEFAULT '',
+  `login`       VARCHAR(300)                        NOT NULL DEFAULT '',
+  `password`    VARCHAR(300)                        NOT NULL DEFAULT '',
+  `description` TEXT                                NOT NULL,
+  `validated`   BIT(1)                              NOT NULL DEFAULT b'1',
+  `mailing`     BIT(1)                              NOT NULL DEFAULT b'1',
+  `locked`      BIT(1)                              NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `url` (`url`),
-  UNIQUE KEY `login` (`login`),
-  UNIQUE KEY `password` (`password`),
-  FOREIGN KEY (`id_contacts`) REFERENCES `contacts` (`id`),
-  FOREIGN KEY (`id_photo`) REFERENCES `files` (`id`)
+  FOREIGN KEY (`photo_id`) REFERENCES `files` (`id`),
+  FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
