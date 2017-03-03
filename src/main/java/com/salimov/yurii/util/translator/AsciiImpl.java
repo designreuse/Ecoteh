@@ -51,7 +51,8 @@ public final class AsciiImpl implements Ascii {
             for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
             }
-            result = sb.toString().substring(0, result.length() - 1);
+            result = sb.toString();
+            result = result.substring(0, result.length() - 1);
         }
         return result;
     }

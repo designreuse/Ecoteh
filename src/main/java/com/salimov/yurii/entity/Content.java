@@ -175,7 +175,7 @@ public abstract class Content extends Model implements IContent {
      */
     @Override
     public void setTitle(final String title) {
-        this.title = isNotBlank(title) ? title : null;
+        this.title = isNotBlank(title) ? title : "";
         if (isBlank(this.url)) {
             translateAndSetUrl(this.title);
         }

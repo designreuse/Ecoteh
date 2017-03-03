@@ -127,6 +127,63 @@ public final class Company extends Content implements ICompany {
     }
 
     /**
+     * Constrictor.
+     *
+     * @param title       a title of the new company.
+     * @param description a description of the new company.
+     * @param keywords    a keywords of the new company.
+     */
+    public Company(
+            final String title,
+            final String description,
+            final String keywords
+    ) {
+        this();
+        setTitle(title);
+        setDescription(description);
+        setKeywords(keywords);
+    }
+
+    /**
+     * Constrictor.
+     *
+     * @param title       a title of the new company.
+     * @param description a description of the new company.
+     * @param keywords    a keywords of the new company.
+     * @param address     a address of the new company.
+     * @param contacts    a contacts of the new company.
+     */
+    public Company(
+            final String title,
+            final String description,
+            final String keywords,
+            final Address address,
+            final Contacts contacts
+    ) {
+        this(title, description, keywords);
+        setAddress(address);
+        setContacts(contacts);
+    }
+
+    /**
+     * Constrictor.
+     *
+     * @param title       a title of the new company.
+     * @param description a description of the new company.
+     * @param information a information of the new company.
+     * @param keywords    a keywords of the new company.
+     */
+    public Company(
+            final String title,
+            final String description,
+            final String information,
+            final String keywords
+    ) {
+        this(title, description, keywords);
+        setInformation(information);
+    }
+
+    /**
      * Returns a string representation of the object.
      *
      * @return A string representation of the object.

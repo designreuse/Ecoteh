@@ -247,7 +247,7 @@ public final class Article extends Content implements IArticle {
         } else if (!this.category.equals(category)) {
             final Category temp = this.category;
             this.category = category;
-            if (!this.category.containsArticle(this)) {
+            if ((this.category != null) && !this.category.containsArticle(this)) {
                 this.category.addArticle(this);
             }
             if (temp != null) {

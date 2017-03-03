@@ -240,7 +240,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public boolean exists(final long id) {
-        return (this.dao.exists(id));
+        return this.dao.exists(id);
     }
 
     /**

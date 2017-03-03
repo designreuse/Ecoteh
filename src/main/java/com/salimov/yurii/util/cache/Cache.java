@@ -367,7 +367,7 @@ public final class Cache {
      * {@code false} otherwise.
      */
     public static <T> boolean exist(final T key) {
-        return cache.containsKey(new Key<>(key));
+        return (key != null) && cache.containsKey(new Key<>(key));
     }
 
     /**
