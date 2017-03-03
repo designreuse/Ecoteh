@@ -22,6 +22,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public final class Address extends Model implements IAddress {
 
     /**
+     * It is used during deserialization to verify that
+     * the sender and receiver of a serialized object have
+     * loaded classes for that object that are compatible
+     * with respect to serialization.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * The address.
      */
     @Column(name = "address", nullable = false)
