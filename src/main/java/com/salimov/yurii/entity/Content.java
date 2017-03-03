@@ -65,7 +65,7 @@ public abstract class Content extends Model implements IContent {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_logo",
+            name = "logo_id",
             referencedColumnName = "id"
     )
     private File logo;

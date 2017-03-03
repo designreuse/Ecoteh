@@ -81,7 +81,7 @@ public final class Company extends Content implements ICompany {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_contacts",
+            name = "contacts_id",
             referencedColumnName = "id"
     )
     private Contacts contacts;
@@ -96,7 +96,7 @@ public final class Company extends Content implements ICompany {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_address",
+            name = "address_id",
             referencedColumnName = "id"
     )
     private Address address;

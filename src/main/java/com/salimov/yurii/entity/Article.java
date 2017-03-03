@@ -55,7 +55,7 @@ public final class Article extends Content implements IArticle {
      */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
-            name = "id_category",
+            name = "category_id",
             referencedColumnName = "id"
     )
     private Category category;

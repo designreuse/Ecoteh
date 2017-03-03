@@ -77,7 +77,7 @@ public final class User extends Model implements IUser, UserDetails {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_contacts",
+            name = "contacts_id",
             referencedColumnName = "id"
     )
     private Contacts contacts;
@@ -92,7 +92,7 @@ public final class User extends Model implements IUser, UserDetails {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_photo",
+            name = "photo_id",
             referencedColumnName = "id"
     )
     private File photo;

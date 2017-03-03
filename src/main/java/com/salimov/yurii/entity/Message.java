@@ -37,7 +37,7 @@ public final class Message extends Model implements IMessage {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
-            name = "id_user", nullable = false,
+            name = "user_id", nullable = false,
             referencedColumnName = "id"
     )
     private User user;
