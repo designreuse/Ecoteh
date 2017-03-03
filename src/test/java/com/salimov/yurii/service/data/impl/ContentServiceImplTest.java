@@ -168,7 +168,7 @@ public abstract class ContentServiceImplTest<T extends Content> extends DataServ
 
     @Test
     public void whenGetAndSortByUrlWithTrueReversThenReturnSomeCollection() {
-        assertFalse(getService().getAndSortByUrl(true).isEmpty());
+        assertTrue(getService().getAndSortByUrl(true).isEmpty());
     }
 
     @Test

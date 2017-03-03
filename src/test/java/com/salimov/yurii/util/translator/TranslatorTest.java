@@ -39,15 +39,15 @@ public final class TranslatorTest {
     }
 
     @Test
-    public void whenTranslateNullValueToAsciiThenReturnNull() {
-        assertNull(Translator.toAscii(null));
+    public void whenTranslateNullValueToAsciiThenReturnEmptyString() {
+        assertNotNull(Translator.toAscii(null));
     }
 
     @Test
-    public void whenTranslateInvalidValueToAsciiThenReturnNull() {
-        assertNull(Translator.toAscii(""));
-        assertNull(Translator.toAscii(" "));
-        assertNull(Translator.toAscii("   "));
+    public void whenTranslateInvalidValueToAsciiThenReturnEmptyString() {
+        assertNotNull(Translator.toAscii(""));
+        assertNotNull(Translator.toAscii(" "));
+        assertNotNull(Translator.toAscii("   "));
     }
 
     @Test
@@ -61,15 +61,15 @@ public final class TranslatorTest {
     }
 
     @Test
-    public void whenTranslateNullValueFromAsciiThenReturnNull() {
-        assertNull(Translator.fromAscii(null));
+    public void whenTranslateNullValueFromAsciiThenReturnEmptyString() {
+        assertNotNull(Translator.fromAscii(null));
     }
 
     @Test
-    public void whenTranslateInvalidValueFromAsciiThenReturnNull() {
-        assertNull(Translator.fromAscii(""));
-        assertNull(Translator.fromAscii(" "));
-        assertNull(Translator.fromAscii("   "));
+    public void whenTranslateInvalidValueFromAsciiThenReturnEmptyString() {
+        assertNotNull(Translator.fromAscii(""));
+        assertNotNull(Translator.fromAscii(" "));
+        assertNotNull(Translator.fromAscii("   "));
     }
 
     @Test

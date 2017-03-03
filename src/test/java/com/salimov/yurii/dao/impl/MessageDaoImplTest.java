@@ -79,17 +79,9 @@ public final class MessageDaoImplTest {
     public void whenRemoveMessageThenDoIt() {
         final Message message = getMessage();
         this.dao.add(message);
-        assertNotNull(
-                this.dao.get(
-                        message.getId()
-                )
-        );
+        assertNotNull(this.dao.get(message.getId()));
         this.dao.remove(message);
-        assertNull(
-                this.dao.get(
-                        message.getId()
-                )
-        );
+        assertNull(this.dao.get(message.getId()));
     }
 
     @Test

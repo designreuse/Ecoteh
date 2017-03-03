@@ -251,7 +251,6 @@ public final class MockServices {
         when(service.exists(model)).thenReturn(true);
         when(service.exists((T) null)).thenReturn(false);
         when(service.exists(ID)).thenReturn(true);
-        when(service.exists((Long) null)).thenReturn(false);
         when(service.exists(UNKNOWN_ID)).thenReturn(false);
         when(service.exists((T) null)).thenReturn(false);
         final T temp = (T) model.clone();

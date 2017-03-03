@@ -32,19 +32,9 @@ public abstract class ContentTest<T extends Content> extends ModelTest<T> {
         final T content1 = getObject();
         final T content2 = (T) content1.clone();
         assertEquals(content1, content2);
-        final boolean value = (
-                isNotBlank(content1.getTitle()) ?
-                        content1.getTitle()
-                                .equalsIgnoreCase(
-                                        content2.getTitle()
-                                ) : isBlank(content2.getTitle())
-        ) && (
-                isNotBlank(content1.getUrl()) ?
-                        content1.getUrl()
-                                .equalsIgnoreCase(
-                                        content2.getUrl()
-                                ) : isBlank(content2.getUrl())
-        );
+        final boolean value =
+                content1.getTitle().equalsIgnoreCase(content2.getTitle())
+                        && content1.getUrl().equalsIgnoreCase(content2.getUrl());
         assertEquals(content1.equals(content2), value);
     }
 
@@ -53,45 +43,43 @@ public abstract class ContentTest<T extends Content> extends ModelTest<T> {
     public void hashCodeValidObject() {
         super.hashCodeValidObject();
         final T content = getObject();
-        final int value = (
-                isNotBlank(content.getTitle()) ? content.getTitle().hashCode() : 0
-        ) + (
-                isNotBlank(content.getUrl()) ? content.getUrl().hashCode() : 0
-        );
+        final int value = content.getTitle().hashCode() + content.getUrl().hashCode();
         for (int i = 0; i < 10; i++) {
             assertEquals(content.hashCode(), value);
         }
     }
 
     @Test
-    public void whenSetNullTitleThenGetNull() {
+    public void whenSetNullTitleThenGetEmptyString() {
         final T content = getObject();
         content.setTitle(null);
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
         content.setTitle("");
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
         content.setTitle(" ");
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
         content.setTitle("    ");
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
+        assertTrue(content.getTitle().isEmpty());
     }
 
     @Test
-    public void whenSetBlankTitleThenGetNull() {
+    public void whenSetBlankTitleThenGetEmptyString() {
         final T content = getObject();
         content.setTitle("");
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
         content.setTitle(" ");
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
         content.setTitle("    ");
-        assertNull(content.getTitle());
-        assertNull(content.getUrl());
+        assertNotNull(content.getTitle());
+        assertNotNull(content.getUrl());
+        assertTrue(content.getTitle().isEmpty());
     }
 
     @Test
@@ -101,28 +89,26 @@ public abstract class ContentTest<T extends Content> extends ModelTest<T> {
         assertNotNull(content.getTitle());
         assertNotNull(content.getUrl());
         assertEquals(content.getTitle(), TITLE);
-        assertEquals(
-                content.getUrl(),
-                Translator.fromCyrillicToLatin(TITLE)
-        );
     }
 
     @Test
-    public void whenSetNullUrlThenGetNull() {
+    public void whenSetNullUrlThenGetEmptyString() {
         final T content = getObject();
         content.setUrl(null);
-        assertNull(content.getUrl());
+        assertNotNull(content.getUrl());
+        assertTrue(content.getUrl().isEmpty());
     }
 
     @Test
-    public void whenSetBlankUrlThenGetNull() {
+    public void whenSetBlankUrlThenGetEmptyString() {
         final T content = getObject();
         content.setUrl("");
-        assertNull(content.getUrl());
+        assertNotNull(content.getUrl());
         content.setUrl(" ");
-        assertNull(content.getUrl());
+        assertNotNull(content.getUrl());
         content.setUrl("   ");
-        assertNull(content.getUrl());
+        assertNotNull(content.getUrl());
+        assertTrue(content.getUrl().isEmpty());
     }
 
     @Test
@@ -144,21 +130,23 @@ public abstract class ContentTest<T extends Content> extends ModelTest<T> {
     }
 
     @Test
-    public void whenSetNullDescriptionThenReturnNull() {
+    public void whenSetNullDescriptionThenReturnEmptyString() {
         final T content = getObject();
         content.setDescription(null);
-        assertNull(content.getDescription());
+        assertNotNull(content.getDescription());
+        assertTrue(content.getDescription().isEmpty());
     }
 
     @Test
-    public void whenSetBlankDescriptionThenReturnNull() {
+    public void whenSetBlankDescriptionThenReturnEmptyString() {
         final T content = getObject();
         content.setDescription("");
-        assertNull(content.getDescription());
+        assertNotNull(content.getDescription());
         content.setDescription(" ");
-        assertNull(content.getDescription());
+        assertNotNull(content.getDescription());
         content.setDescription("   ");
-        assertNull(content.getDescription());
+        assertNotNull(content.getDescription());
+        assertTrue(content.getDescription().isEmpty());
     }
 
     @Test
@@ -170,21 +158,23 @@ public abstract class ContentTest<T extends Content> extends ModelTest<T> {
     }
 
     @Test
-    public void whenSetNullKeywordsThenReturnNull() {
+    public void whenSetNullKeywordsThenReturnEmptyString() {
         final T content = getObject();
         content.setKeywords(null);
-        assertNull(content.getKeywords());
+        assertNotNull(content.getKeywords());
+        assertTrue(content.getKeywords().isEmpty());
     }
 
     @Test
-    public void whenSetBlankKeywordsThenReturnNull() {
+    public void whenSetBlankKeywordsThenReturnEmptyString() {
         final T content = getObject();
         content.setKeywords("");
-        assertNull(content.getKeywords());
+        assertNotNull(content.getKeywords());
         content.setKeywords(" ");
-        assertNull(content.getKeywords());
+        assertNotNull(content.getKeywords());
         content.setKeywords("   ");
-        assertNull(content.getKeywords());
+        assertNotNull(content.getKeywords());
+        assertTrue(content.getKeywords().isEmpty());
     }
 
     @Test

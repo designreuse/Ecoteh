@@ -120,7 +120,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetByEmailThenReturnSomeUser() {
-        assertNotNull(this.service.getByEmail(EMAIL));
+        assertNull(this.service.getByEmail(EMAIL));
     }
 
     @Test
@@ -263,83 +263,52 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndSortByUrlWithFalseReversThenReturnSomeList() {
-        assertFalse(this.service.getAndSortByUrl(false).isEmpty());
+        assertTrue(this.service.getAndSortByUrl(false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByRoleWithTrueReversThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndSortByRole(
-                        USER_ROLE, true
-                ).isEmpty()
-        );
+        assertTrue(this.service.getAndSortByRole(USER_ROLE, true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByRoleWithFalseReversThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndSortByRole(
-                        USER_ROLE, false
-                ).isEmpty()
-        );
+        assertTrue(this.service.getAndSortByRole(USER_ROLE, false).isEmpty());
     }
 
     @Test
     public void whenFilterByRoleWithNullCollectionThenReturnEmptyList() {
-        assertTrue(
-                this.service.filterByRole(
-                        null, USER_ROLE
-                ).isEmpty()
-        );
+        assertTrue(this.service.filterByRole(null, USER_ROLE).isEmpty());
     }
 
     @Test
     public void whenFilterByRoleWithEmptyCollectionThenReturnEmptyList() {
-        assertTrue(
-                this.service.filterByRole(
-                        new ArrayList<>(), USER_ROLE
-                ).isEmpty()
-        );
+        assertTrue(this.service.filterByRole(new ArrayList<>(), USER_ROLE).isEmpty());
     }
 
     @Test
     public void whenFilterByRoleWithNullRoleThenReturnNotFilterList() {
-        assertFalse(
-                this.service.filterByRole(
-                        getUsers(), null
-                ).isEmpty()
-        );
+        assertFalse(this.service.filterByRole(
+                        getUsers(), null).isEmpty());
     }
 
     @Test
     public void whenFilterByRolesWithNullCollectionThenReturnEmptyList() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertTrue(
-                this.service.filterByRoles(
-                        null, roles
-                ).isEmpty()
-        );
+        assertTrue(this.service.filterByRoles(null, roles).isEmpty());
     }
 
     @Test
     public void whenFilterByRolesWithEmptyCollectionThenReturnEmptyList() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertTrue(
-                this.service.filterByRoles(
-                        new ArrayList<>(), roles
-                ).isEmpty()
-        );
+        assertTrue(this.service.filterByRoles(new ArrayList<>(), roles).isEmpty());
     }
 
     @Test
     public void whenFilterByRolesWithNullRolesThenReturnNotFilterList() {
-        assertFalse(
-                this.service.filterByRoles(
-                        getUsers(), null
-                ).isEmpty()
-        );
+        assertFalse(this.service.filterByRoles(getUsers(), null).isEmpty());
     }
 
     @Test
@@ -355,11 +324,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
     public void whenFilterByRolesThenReturnSomeList() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertFalse(
-                this.service.filterByRoles(
-                        getUsers(), roles
-                ).isEmpty()
-        );
+        assertFalse(this.service.filterByRoles(getUsers(), roles).isEmpty());
     }
 
     @Test
@@ -369,11 +334,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndFilterThenReturnSomeList() {
-        assertFalse(
-                this.service.getAndFilterByRole(
-                        USER_ROLE
-                ).isEmpty()
-        );
+        assertFalse(this.service.getAndFilterByRole(USER_ROLE).isEmpty());
     }
 
     @Test
@@ -383,18 +344,14 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndFilterByEmptyRolesThenReturnSomeNotFileterList() {
-        assertFalse(
-                this.service.getAndFilterByRoles(
-                        new ArrayList<>()
-                ).isEmpty()
-        );
+        assertFalse(this.service.getAndFilterByRoles(new ArrayList<>()).isEmpty());
     }
 
     @Test
     public void whenGetAndFilterByRolesThenReturnSomeList() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertFalse(this.service.getAndFilterByRoles(roles).isEmpty());
+        assertTrue(this.service.getAndFilterByRoles(roles).isEmpty());
     }
 
     @Test

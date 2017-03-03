@@ -76,7 +76,6 @@ public abstract class MockDataServiceTest<T extends Model> {
 
     @Test
     public void whenExistsByInvalidIDThenReturnFalse() {
-        assertFalse(getService().exists((Long) null));
         assertFalse(getService().exists(UNKNOWN_ID));
     }
 

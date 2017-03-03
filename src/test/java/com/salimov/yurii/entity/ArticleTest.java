@@ -22,52 +22,48 @@ public final class ArticleTest extends ContentTest<Article> {
     }
 
     @Test
-    public void whenPassNullParametersInConstructorThenSaveNull() {
+    public void whenPassNullParametersInConstructorThenSaveEmptyString() {
         final Article article = new Article(null, null, null, null, null);
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
+        assertNotNull(article.getTitle());
+        assertNotNull(article.getDescription());
+        assertNotNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_1() {
         final Article article = new Article("", "", "", "", "");
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
+        assertNotNull(article.getTitle());
+        assertNotNull(article.getDescription());
+        assertNotNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_2() {
         final Article article = new Article(" ", " ", " ", " ", " ");
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
+        assertNotNull(article.getTitle());
+        assertNotNull(article.getDescription());
+        assertNotNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_3() {
         final Article article = new Article("   ", "   ", "   ", "   ", "   ");
-        assertNull(article.getTitle());
-        assertNull(article.getDescription());
-        assertNull(article.getText());
+        assertNotNull(article.getTitle());
+        assertNotNull(article.getDescription());
+        assertNotNull(article.getText());
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
     }
 
     @Test
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
-        final Article article = new Article(
-                TITLE,
-                DESCRIPTION, TEXT,
-                KEYWORDS, NUMBER
-        );
+        final Article article = new Article(TITLE, DESCRIPTION, TEXT, KEYWORDS, NUMBER);
         assertNotNull(article.getTitle());
         assertNotNull(article.getDescription());
         assertNotNull(article.getText());
@@ -95,11 +91,12 @@ public final class ArticleTest extends ContentTest<Article> {
                 ", url='" + article.getUrl() + '\'' +
                 ", description='" + article.getDescription() + '\'' +
                 ", keywords='" + article.getKeywords() + '\'' +
+                ", " + article.getLogo() +
                 '}' +
                 ", number='" + article.getNumber() + '\'' +
                 ", text='" + article.getText() + '\'' +
                 ", date=" + article.getDate() +
-                ", category=" + article.getCategory() +
+                ", " + article.getCategory() +
                 '}';
         assertEquals(article.toString(), articleToString);
     }
@@ -110,28 +107,19 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article2 = new Article();
         assertEquals(
                 article1.equals(article2),
-                article1.getNumber()
-                        .equals(
-                                article2.getNumber()
-                        )
+                article1.getNumber().equals(article2.getNumber())
         );
         article1.setTitle(TITLE);
         article2.setTitle(TITLE);
         assertEquals(
                 article1.equals(article2),
-                article1.getNumber()
-                        .equals(
-                                article2.getNumber()
-                        )
+                article1.getNumber().equals(article2.getNumber())
         );
         article1.setText(TEXT);
         article2.setText(TEXT);
         assertEquals(
                 article1.equals(article2),
-                article1.getNumber()
-                        .equals(
-                                article2.getNumber()
-                        )
+                article1.getNumber().equals(article2.getNumber())
         );
     }
 
@@ -142,71 +130,47 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article1 = getArticle();
         final Article article2 = article1.clone();
         assertEquals(article1, article2);
-        final boolean value = (
-                isNotBlank(article1.getTitle())
-                        ? article1.getTitle().equalsIgnoreCase(article2.getTitle()) :
-                        isBlank(article2.getTitle())
-        ) && (
-                isNotBlank(article1.getUrl()) ?
-                        article1.getUrl().equalsIgnoreCase(article2.getUrl()) :
-                        isBlank(article2.getUrl())
-        );
-        assertEquals(
-                article1.equals(article2),
-                value
-        );
+        final boolean value = article1.getTitle().equalsIgnoreCase(article2.getTitle()) &&
+                        article1.getUrl().equalsIgnoreCase(article2.getUrl());
+        assertEquals(article1.equals(article2), value);
     }
 
     @Test
     public void hashCodeInvalidObject() {
         final Article article = new Article();
-        int value = isNotBlank(article.getNumber()) ? article.getNumber().hashCode() : 0;
-        assertEquals(
-                article.hashCode(),
-                value
-        );
+        int value = article.getNumber().hashCode();
+        assertEquals(article.hashCode(), value);
         article.setTitle(TITLE);
-        value += (isNotBlank(article.getTitle()) ? article.getTitle().hashCode() : 0)
-                + (isNotBlank(article.getUrl()) ? article.getUrl().hashCode() : 0);
-        assertEquals(
-                article.hashCode(),
-                value
-        );
+        value += article.getTitle().hashCode() + article.getUrl().hashCode();
+        assertEquals(article.hashCode(), value);
         article.setText(TEXT);
-        value += isNotBlank(article.getText()) ? article.getText().hashCode() : 0;
-        assertEquals(
-                article.hashCode(),
-                value
-        );
+        value += article.getText().hashCode();
+        assertEquals(article.hashCode(), value);
     }
 
     @Test
     @Override
     public void hashCodeValidObject() {
         final Article article = getArticle();
-        final int value = (
-                isNotBlank(article.getTitle()) ? article.getTitle().hashCode() : 0
-        ) + (
-                isNotBlank(article.getUrl()) ? article.getUrl().hashCode() : 0
-        ) + (
-                isNotBlank(article.getNumber()) ? article.getNumber().hashCode() : 0
-        ) + (
-                isNotBlank(article.getText()) ? article.getText().hashCode() : 0
-        );
+        final int value = article.getTitle().hashCode() +
+                article.getUrl().hashCode() +
+                article.getDescription().hashCode() +
+                article.getNumber().hashCode() +
+                article.getText().hashCode();
         for (int i = 0; i < 10; i++) {
             assertEquals(article.hashCode(), value);
         }
     }
 
     @Test
-    public void whenSetNullNumberThenGetNull() {
+    public void whenSetNullNumberThenGetNotNull() {
         final Article article = getArticle();
         article.setNumber(null);
         assertNotNull(article.getNumber());
     }
 
     @Test
-    public void whenSetBlankNumberThenGetNull() {
+    public void whenSetBlankNumberThenGetNotNull() {
         final Article article = getArticle();
         article.setNumber("");
         assertNotNull(article.getNumber());
@@ -228,21 +192,23 @@ public final class ArticleTest extends ContentTest<Article> {
     }
 
     @Test
-    public void whenSetNullTextThenGetNull() {
+    public void whenSetNullTextThenGetEmptyString() {
         final Article article = getArticle();
         article.setText(null);
-        assertNull(article.getText());
+        assertNotNull(article.getText());
+        assertTrue(article.getText().isEmpty());
     }
 
     @Test
-    public void whenSetBlankTextThenGetNull() {
+    public void whenSetBlankTextThenGetEmptyString() {
         final Article article = getArticle();
         article.setText("");
-        assertNull(article.getText());
+        assertNotNull(article.getText());
         article.setText(" ");
-        assertNull(article.getText());
+        assertNotNull(article.getText());
         article.setText("        ");
-        assertNull(article.getText());
+        assertNotNull(article.getText());
+        assertTrue(article.getText().isEmpty());
     }
 
     @Test
@@ -299,7 +265,7 @@ public final class ArticleTest extends ContentTest<Article> {
         article.setCategory(category);
         assertNotNull(article.getCategory());
         assertEquals(article.getCategory(), category);
-        assertTrue(category.containsArticle(article));
+        assertFalse(category.containsArticle(article));
         article.setCategory(null);
         assertNull(article.getCategory());
         assertFalse(category.containsArticle(article));

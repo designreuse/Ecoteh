@@ -21,26 +21,26 @@ public final class ResponseTest extends ModelTest<Response> {
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+    public void whenPassBlankParametersInConstructorThenEmptyString_1() {
         final Response response = new Response("", "");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
+        assertNotNull(response.getUsername());
+        assertNotNull(response.getText());
         assertNotNull(response.getDate());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_2() {
         final Response response = new Response(" ", " ");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
+        assertNotNull(response.getUsername());
+        assertNotNull(response.getText());
         assertNotNull(response.getDate());
     }
 
     @Test
-    public void whenPassInvalidParametersInConstructorThenSaveNull() {
+    public void whenPassInvalidParametersInConstructorThenSaveEmptyString() {
         final Response response = new Response("   ", "   ");
-        assertNull(response.getUsername());
-        assertNull(response.getText());
+        assertNotNull(response.getUsername());
+        assertNotNull(response.getText());
         assertNotNull(response.getDate());
     }
 
@@ -78,21 +78,8 @@ public final class ResponseTest extends ModelTest<Response> {
         assertEquals(response1, response2);
         assertEquals(
                 response1.equals(response2),
-                (
-                        isNotBlank(response1.getUsername()) ?
-                                response1.getUsername()
-                                        .equals(
-                                                response2.getUsername()
-                                        ) :
-                                isBlank(response2.getUsername())
-                ) && (
-                        isNotBlank(response1.getText()) ?
-                                response1.getText()
-                                        .equals(
-                                                response2.getText()
-                                        ) :
-                                isBlank(response2.getText())
-                )
+                response1.getUsername().equals(response2.getUsername()) &&
+                        response1.getText().equals(response2.getText())
         );
     }
 
@@ -116,13 +103,7 @@ public final class ResponseTest extends ModelTest<Response> {
         for (int i = 0; i < 10; i++) {
             assertEquals(
                     response.hashCode(),
-                    (
-                            isNotBlank(response.getUsername()) ?
-                                    response.getUsername().hashCode() : 0
-                    ) + (
-                            isNotBlank(response.getText()) ?
-                                    response.getText().hashCode() : 0
-                    )
+                    response.getUsername().hashCode() + response.getText().hashCode()
             );
         }
     }
@@ -143,21 +124,23 @@ public final class ResponseTest extends ModelTest<Response> {
     }
 
     @Test
-    public void whenSetNullUsernameThenGetNull() {
+    public void whenSetNullUsernameThenGetEmptyString() {
         final Response response = getResponse();
         response.setUsername(null);
-        assertNull(response.getUsername());
+        assertNotNull(response.getUsername());
+        assertEquals(response.getUsername(), "");
     }
 
     @Test
-    public void whenSetBlankUsernameThenGetNull() {
+    public void whenSetBlankUsernameThenGetEmptyString() {
         final Response response = getResponse();
         response.setUsername("");
-        assertNull(response.getUsername());
+        assertNotNull(response.getUsername());
         response.setUsername(" ");
-        assertNull(response.getUsername());
+        assertNotNull(response.getUsername());
         response.setUsername("   ");
-        assertNull(response.getUsername());
+        assertNotNull(response.getUsername());
+        assertEquals(response.getUsername(), "");
     }
 
     @Test
@@ -169,21 +152,23 @@ public final class ResponseTest extends ModelTest<Response> {
     }
 
     @Test
-    public void whenSetNullTextThenGetNull() {
+    public void whenSetNullTextThenGetEmptyString() {
         final Response response = getResponse();
         response.setText(null);
-        assertNull(response.getText());
+        assertNotNull(response.getText());
+        assertEquals(response.getText(), "");
     }
 
     @Test
-    public void whenSetBlankTextThenGetNull() {
+    public void whenSetBlankTextThenGetEmptyString() {
         final Response response = getResponse();
         response.setText("");
-        assertNull(response.getText());
+        assertNotNull(response.getText());
         response.setText(" ");
-        assertNull(response.getText());
+        assertNotNull(response.getText());
         response.setText("   ");
-        assertNull(response.getText());
+        assertNotNull(response.getText());
+        assertEquals(response.getText(), "");
     }
 
     @Test

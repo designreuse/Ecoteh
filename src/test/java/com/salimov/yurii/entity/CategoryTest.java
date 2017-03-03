@@ -13,35 +13,35 @@ import static org.junit.Assert.*;
 public final class CategoryTest extends ContentTest<Category> {
 
     @Test
-    public void whenPassNullParametersInConstructorThenSaveNull() {
+    public void whenPassNullParametersInConstructorThenSaveEmptyString() {
         final Category category = new Category(null, null, null);
-        assertNull(category.getTitle());
-        assertNull(category.getDescription());
-        assertNull(category.getKeywords());
+        assertNotNull(category.getTitle());
+        assertNotNull(category.getDescription());
+        assertNotNull(category.getKeywords());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_1() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_1() {
         final Category category = new Category("", "", "");
-        assertNull(category.getTitle());
-        assertNull(category.getDescription());
-        assertNull(category.getKeywords());
+        assertNotNull(category.getTitle());
+        assertNotNull(category.getDescription());
+        assertNotNull(category.getKeywords());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_2() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_2() {
         final Category category = new Category(" ", " ", " ");
-        assertNull(category.getTitle());
-        assertNull(category.getDescription());
-        assertNull(category.getKeywords());
+        assertNotNull(category.getTitle());
+        assertNotNull(category.getDescription());
+        assertNotNull(category.getKeywords());
     }
 
     @Test
-    public void whenPassBlankParametersInConstructorThenSaveNull_3() {
+    public void whenPassBlankParametersInConstructorThenSaveEmptyString_3() {
         final Category category = new Category("   ", "   ", "   ");
-        assertNull(category.getTitle());
-        assertNull(category.getDescription());
-        assertNull(category.getKeywords());
+        assertNotNull(category.getTitle());
+        assertNotNull(category.getDescription());
+        assertNotNull(category.getKeywords());
     }
 
     @Test
@@ -70,8 +70,8 @@ public final class CategoryTest extends ContentTest<Category> {
                 ", url='" + category.getUrl() + '\'' +
                 ", description='" + category.getDescription() + '\'' +
                 ", keywords='" + category.getKeywords() + '\'' +
+                ", " + category.getLogo() +
                 '}' +
-                category.getLogo() +
                 '}';
         assertEquals(category.toString(), categoryToString);
     }
@@ -90,16 +90,12 @@ public final class CategoryTest extends ContentTest<Category> {
     }
 
     @Test
-    public void hashCodeObject() {
+    public void hashCodeValidObject() {
         final Category category = new Category();
         int value = 0;
         assertEquals(category.hashCode(), value);
         category.setTitle(TITLE);
-        value += (
-                isNotBlank(category.getTitle()) ? category.getTitle().hashCode() : 0
-        ) + (
-                isNotBlank(category.getUrl()) ? category.getUrl().hashCode() : 0
-        );
+        value += category.getTitle().hashCode() + category.getUrl().hashCode();
         assertEquals(category.hashCode(), value);
     }
 
@@ -107,7 +103,7 @@ public final class CategoryTest extends ContentTest<Category> {
     public void whenSetInvalidPhotoThenGetNotNull() {
         final Category category = new Category();
         category.setLogo(null);
-        assertNull(category.getLogo());
+        assertNotNull(category.getLogo());
     }
 
     @Test
@@ -131,22 +127,13 @@ public final class CategoryTest extends ContentTest<Category> {
         final Category category = new Category();
         final Article article = getArticle();
         final List<Article> articles = getArticles();
-
         assertNotNull(category.getArticles());
         assertTrue(category.getArticles().isEmpty());
-        checkArticlesSize(
-                articles.size(),
-                category,
-                articles
-        );
+        checkArticlesSize(articles.size(), category, articles);
         category.removeArticle(article);
         assertNotNull(category.getArticles());
         assertFalse(category.getArticles().isEmpty());
-        checkArticlesSize(
-                articles.size(),
-                category,
-                articles
-        );
+        checkArticlesSize(articles.size(), category, articles);
         category.removeArticles(articles);
         assertNotNull(category.getArticles());
         assertTrue(category.getArticles().isEmpty());

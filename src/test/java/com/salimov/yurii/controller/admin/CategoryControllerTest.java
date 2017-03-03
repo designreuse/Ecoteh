@@ -1,5 +1,6 @@
 package com.salimov.yurii.controller.admin;
 
+import com.salimov.yurii.util.translator.Translator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -35,7 +36,7 @@ public class CategoryControllerTest {
                         KEYWORDS, null, true,
                         new ModelAndView()
                 ),
-                "redirect:/category/" + URL,
+                "redirect:/category/" + Translator.fromCyrillicToLatin(TITLE),
                 null
         );
     }
@@ -62,7 +63,7 @@ public class CategoryControllerTest {
                         null, true,
                         new ModelAndView()
                 ),
-                "redirect:/category/" + URL,
+                "redirect:/category/" + Translator.fromCyrillicToLatin(TITLE),
                 null
         );
     }

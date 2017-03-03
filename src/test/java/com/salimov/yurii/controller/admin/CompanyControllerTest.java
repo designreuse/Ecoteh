@@ -1,5 +1,6 @@
 package com.salimov.yurii.controller.admin;
 
+import com.salimov.yurii.util.translator.Translator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -23,7 +24,7 @@ public class CompanyControllerTest {
         checkModelAndView(
                 controller.editMainCompany(),
                 "admin/company/edit_page",
-                new String[]{"main_company", "categories", "company", "slides", "main"}
+                new String[]{"main_company", "categories", "company", "favicon", "main"}
         );
     }
 
@@ -65,7 +66,7 @@ public class CompanyControllerTest {
                         ADDRESS, GOOGLE_MAPS, null, true,
                         new ModelAndView()
                 ),
-                "redirect:/company/" + URL,
+                "redirect:/company/" + Translator.fromCyrillicToLatin(TITLE),
                 null
         );
     }
@@ -94,7 +95,7 @@ public class CompanyControllerTest {
                         ADDRESS, GOOGLE_MAPS, null, true,
                         new ModelAndView()
                 ),
-                "redirect:/company/" + URL,
+                "redirect:/company/" + Translator.fromCyrillicToLatin(TITLE),
                 null
         );
     }

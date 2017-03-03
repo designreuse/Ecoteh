@@ -114,15 +114,9 @@ public abstract class MainControllerTest {
     @Test
     public void whenGetContactsPageThenReturnSomeModelAndViewWithTheContacts() {
         checkModelAndView(
-                getController()
-                        .getContactsPage(),
+                getController().getContactsPage(),
                 "client/company/contacts_page",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "company",
-                        "map"
-                }
+                new String[]{"is_captcha", "company", "main_company", "categories", "favicon"}
         );
     }
 
@@ -132,24 +126,19 @@ public abstract class MainControllerTest {
                 getController()
                         .getPartnersPage(),
                 "client/company/all_page",
-                new String[]{
-                        "main_company",
-                        "categories"
-                }
+                new String[]{"main_company", "categories"}
         );
     }
 
     @Test
     public void whenGetPartnerPageThenReturnSomeModelAndViewWithThePartner() {
         checkModelAndView(
-                getController()
-                        .getPartnerPage(URL),
+                getController().getPartnerPage(URL),
                 "client/company/one_page",
                 new String[]{
                         "main_company",
                         "categories",
-                        "company",
-                        "map"
+                        "company"
                 }
         );
     }

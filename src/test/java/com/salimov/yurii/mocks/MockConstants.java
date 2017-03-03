@@ -10,8 +10,8 @@ import java.util.Date;
 public interface MockConstants {
     int DEFAULT_SIZE = 10;
     int INDEX = 1;
-    Long ID = 1L;
-    Long UNKNOWN_ID = -1L;
+    long ID = 1L;
+    long UNKNOWN_ID = -1L;
     String TITLE = "It`s a title of some content.";
     String URL = "url";
     String DESCRIPTION = "description";

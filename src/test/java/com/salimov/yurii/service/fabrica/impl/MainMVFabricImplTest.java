@@ -93,7 +93,7 @@ public class MainMVFabricImplTest {
         checkModelAndView(
                 this.fabric.contactsPage(),
                 "client/company/contacts_page",
-                new String[]{"main_company", "categories", "company", "map"}
+                new String[]{"main_company", "categories", "company", "favicon"}
         );
     }
 

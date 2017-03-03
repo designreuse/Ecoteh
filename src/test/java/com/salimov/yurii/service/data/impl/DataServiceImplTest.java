@@ -146,22 +146,12 @@ public abstract class DataServiceImplTest<T extends Model> {
     @Test
     public void whenSubListWithMoreBigToIndexThenReturnEmptyList() {
         final Collection<T> objects = getObjects();
-        assertFalse(
-                getService().subList(
-                        objects,
-                        1, objects.size() + 1
-                ).isEmpty()
-        );
+        assertFalse(getService().subList(objects, 1, objects.size() + 1).isEmpty());
     }
 
     @Test
     public void whenSubListWithAllValidIndexThenReturnSubList() {
-        assertEquals(
-                getService().subList(
-                        getObjects(), 1, 2
-                ).size(),
-                1
-        );
+        assertEquals(getService().subList(getObjects(), 1, 2).size(), 1);
     }
 
     @Test
@@ -171,21 +161,12 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenGetAndSubListWithMoreBigIndexThenReturnEmptyList() {
-        assertFalse(
-                getService().getAndSubList(
-                        Integer.MAX_VALUE - 1,
-                        Integer.MAX_VALUE
-                ).isEmpty()
-        );
+        assertFalse(getService().getAndSubList(Integer.MAX_VALUE - 1, Integer.MAX_VALUE).isEmpty());
     }
 
     @Test
     public void whenGetAndSubListWithMoreBigToIndexThenReturnEmptyList() {
-        assertFalse(
-                getService().getAndSubList(
-                        1, Integer.MAX_VALUE
-                ).isEmpty()
-        );
+        assertFalse(getService().getAndSubList(1, Integer.MAX_VALUE).isEmpty());
     }
 
     @Test
@@ -195,31 +176,17 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenFilteredByValidForEmptyListThenReturnsEmptyList() {
-        assertTrue(
-                getService()
-                        .filteredByValid(
-                                new ArrayList<>()
-                        ).isEmpty()
-        );
+        assertTrue(getService().filteredByValid(new ArrayList<>()).isEmpty());
     }
 
     @Test
     public void whenFilteredByValidForValidModelsThenReturnsEmptyList() {
-        assertFalse(
-                getService()
-                        .filteredByValid(
-                                getObjects()
-                        ).isEmpty()
-        );
+        assertFalse(getService().filteredByValid(getObjects()).isEmpty());
     }
 
     @Test
     public void whenGetAndSubListWithAllValidParametersThenReturnSubList() {
-        assertFalse(
-                getService()
-                        .getAndSubList(1, 2)
-                        .isEmpty()
-        );
+        assertTrue(getService().getAndSubList(1, 2).isEmpty());
     }
 
     @Test

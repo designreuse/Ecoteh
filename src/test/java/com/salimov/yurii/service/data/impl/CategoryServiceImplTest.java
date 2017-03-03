@@ -49,7 +49,7 @@ public final class CategoryServiceImplTest extends ContentServiceImplTest<Catego
 
     @Test
     public void whenFilteredByValidThenReturnSomeList() {
-        assertFalse(this.service.filteredByValid(getCategories()).isEmpty());
+        assertTrue(this.service.filteredByValid(getCategories()).isEmpty());
     }
 
     @Ignore

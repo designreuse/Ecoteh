@@ -184,6 +184,6 @@ public final class TimeTest {
 
     @Test
     public void whenIsWorkTimeThenReturnTrue() {
-        assertTrue(Time.isWorkTime("01:00", "20:00"));
+        assertTrue(Time.isWorkTime("00:00", "23:59"));
     }
 }
