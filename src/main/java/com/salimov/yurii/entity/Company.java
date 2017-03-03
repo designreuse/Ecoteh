@@ -106,10 +106,7 @@ public final class Company extends Content implements ICompany {
      *
      * @see CompanyType
      */
-    @Column(
-            name = "type",
-            nullable = false
-    )
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private CompanyType type;
 
