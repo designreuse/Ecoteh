@@ -4,6 +4,8 @@ import com.salimov.yurii.entity.interfaces.IUser;
 import com.salimov.yurii.enums.UserRole;
 import com.salimov.yurii.util.encryption.Encryptor;
 import com.salimov.yurii.util.translator.Translator;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -80,6 +82,7 @@ public final class User extends Model implements IUser, UserDetails {
             name = "contacts_id",
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private Contacts contacts;
 
     /**
@@ -95,6 +98,7 @@ public final class User extends Model implements IUser, UserDetails {
             name = "photo_id",
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private File photo;
 
     /**
@@ -168,8 +172,8 @@ public final class User extends Model implements IUser, UserDetails {
     /**
      * Constructor.
      *
-     * @param name        a name of the new user.
-     * @param contacts    a contacts to the new user.
+     * @param name     a name of the new user.
+     * @param contacts a contacts to the new user.
      */
     public User(
             final String name,

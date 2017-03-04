@@ -3,6 +3,8 @@ package com.salimov.yurii.entity;
 import com.salimov.yurii.entity.interfaces.ICompany;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.util.time.Time;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -84,6 +86,7 @@ public final class Company extends Content implements ICompany {
             name = "contacts_id",
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private Contacts contacts;
 
     /**
@@ -99,6 +102,7 @@ public final class Company extends Content implements ICompany {
             name = "address_id",
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private Address address;
 
     /**

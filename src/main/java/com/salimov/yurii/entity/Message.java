@@ -2,6 +2,8 @@ package com.salimov.yurii.entity;
 
 import com.salimov.yurii.entity.interfaces.IMessage;
 import com.salimov.yurii.util.time.Time;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,6 +42,7 @@ public final class Message extends Model implements IMessage {
             name = "user_id", nullable = false,
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private User user;
 
     /**

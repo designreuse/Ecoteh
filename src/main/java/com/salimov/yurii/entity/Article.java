@@ -3,6 +3,8 @@ package com.salimov.yurii.entity;
 import com.salimov.yurii.entity.interfaces.IArticle;
 import com.salimov.yurii.util.generator.StringGenerator;
 import com.salimov.yurii.util.time.Time;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -58,6 +60,7 @@ public final class Article extends Content implements IArticle {
             name = "category_id",
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private Category category;
 
     /**
