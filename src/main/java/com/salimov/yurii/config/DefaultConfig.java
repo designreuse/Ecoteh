@@ -129,7 +129,7 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "admin", "eco20pass17",
+                "login", "password",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
