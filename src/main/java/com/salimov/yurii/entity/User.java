@@ -333,7 +333,7 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new name to the user.
-     * If parameter name is blank, then sets {@code null}.
+     * If parameter name is blank, then sets empty string.
      * Also name translates and sets to url.
      *
      * @param name a new name to the user.
@@ -381,8 +381,7 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new encrypted login to the user.
-     * If parameter login is blank
-     * then sets {@code null}.
+     * If parameter login is blank then sets empty string.
      *
      * @param login a new encrypted login to the user.
      */
@@ -428,8 +427,7 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new encrypted password to the user.
-     * If parameter password is blank
-     * then sets {@code null}.
+     * If parameter password is blank then sets empty string.
      *
      * @param password a new encrypted password to the user.
      */
@@ -462,7 +460,7 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new url to the user.
-     * If parameter url is blank, then sets {@code null}.
+     * If parameter url is blank, then sets empty string.
      *
      * @param url a new url to the user.
      */
@@ -483,7 +481,7 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new description to the user.
-     * If parameter description is blank, then sets {@code null}.
+     * If parameter description is blank, then sets empty string.
      *
      * @param description a new description to the user.
      */
@@ -545,7 +543,7 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new role to the user.
-     * If parameter role is blank, then sets {@code null}.
+     * If parameter role is blank, then sets empty string.
      *
      * @param role a new role to the user.
      * @see UserRole

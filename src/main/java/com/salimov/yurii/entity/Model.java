@@ -12,14 +12,6 @@ import java.io.Serializable;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
- * @see Article
- * @see Category
- * @see Company
- * @see File
- * @see Response
- * @see User
- * @see Message
  */
 @MappedSuperclass
 public abstract class Model implements IModel, Serializable, Cloneable {

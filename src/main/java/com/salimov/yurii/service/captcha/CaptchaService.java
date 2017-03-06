@@ -8,8 +8,6 @@ import com.salimov.yurii.util.captcha.Captcha;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CaptchaServiceImpl
- * @see Captcha
  */
 public interface CaptchaService extends Captcha {
 }

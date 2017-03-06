@@ -33,12 +33,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CaptchaService
- * @see MainMVFabric
- * @see CompanyService
- * @see UserService
- * @see ResponseService
- * @see SenderService
  */
 @Controller
 @ComponentScan(basePackages = "com.salimov.yurii.service")
@@ -60,12 +54,6 @@ public class ClientMainController extends MainController {
      * @param messageService  a implementation of the {@link MessageService} interface.
      * @param senderService   a implementation of the {@link SenderService} interface.
      * @param captchaService  a implementation of the {@link CaptchaService} interface.
-     * @see MainMVFabric
-     * @see CompanyService
-     * @see UserService
-     * @see ResponseService
-     * @see MessageService
-     * @see SenderService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -79,21 +67,19 @@ public class ClientMainController extends MainController {
             final CaptchaService captchaService
     ) {
         super(
-                new CacheMVFabricImpl(fabric),
-                companyService, userService,
-                responseService, messageService,
-                senderService
+                new CacheMVFabricImpl(fabric), companyService, userService,
+                responseService, messageService, senderService
         );
         this.captchaService = captchaService;
     }
 
     /**
-     * Send client message and redirect by url
-     * if it is not blank, otherwise by url /.
+     * Send client message and redirect by URL
+     * if it is not blank, otherwise by URL /.
      * Request mapping: /send_message
      * Method: POST
      *
-     * @param url         a url of the page which must be to redirect.
+     * @param url         a URL of the page which must be to redirect.
      * @param name        a client name.
      * @param phone       a phone name.
      * @param email       a email name.
@@ -101,7 +87,6 @@ public class ClientMainController extends MainController {
      * @param request     a implementation of the interface to provide
      *                    request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
-     * @see SenderService
      */
     @RequestMapping(
             value = "/send_message",
@@ -126,7 +111,7 @@ public class ClientMainController extends MainController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/send_message" is not supported!"
      * Request mapping: /send_message
      * Method: POST
@@ -139,13 +124,11 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/send_message\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/send_message\" is not supported!");
     }
 
     /**
-     * Sends response and redirects by url /responses.
+     * Sends response and redirects by URL /responses.
      * Request mapping: /send_response
      * Method: POST
      *
@@ -154,7 +137,6 @@ public class ClientMainController extends MainController {
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/response/send",
@@ -174,9 +156,7 @@ public class ClientMainController extends MainController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
-     * "GET method in "/response/send"
-     * is not supported!"
+     * The exception message: "GET method in "/response/send" is not supported!"
      * Request mapping: /send_response
      * Method: POST
      *
@@ -188,8 +168,6 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/response/send\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/response/send\" is not supported!");
     }
 }

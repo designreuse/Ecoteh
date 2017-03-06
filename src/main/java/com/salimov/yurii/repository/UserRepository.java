@@ -8,8 +8,6 @@ import com.salimov.yurii.entity.User;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DataRepository
- * @see User
  */
 public interface UserRepository extends DataRepository<User> {
 
@@ -19,7 +17,6 @@ public interface UserRepository extends DataRepository<User> {
      *
      * @param name a name of the user to return.
      * @return The object of class {@link User}.
-     * @see User
      */
     User findByName(final String name);
 
@@ -29,7 +26,6 @@ public interface UserRepository extends DataRepository<User> {
      *
      * @param login a login of the user to return.
      * @return The object of class {@link User}.
-     * @see User
      */
     User findByEncryptedLogin(final String login);
 
@@ -37,9 +33,8 @@ public interface UserRepository extends DataRepository<User> {
      * Returns user from a database,
      * which matches the parameter url.
      *
-     * @param url a url of the user to return.
+     * @param url a URL of the user to return.
      * @return The object of class {@link User}.
-     * @see User
      */
     User findByUrl(final String url);
 
@@ -48,7 +43,6 @@ public interface UserRepository extends DataRepository<User> {
      * which matches the parameter name.
      *
      * @param name a name of the user to remove.
-     * @see User
      */
     void deleteByName(final String name);
 
@@ -56,8 +50,7 @@ public interface UserRepository extends DataRepository<User> {
      * Removes user from a database,
      * which matches the parameter url.
      *
-     * @param url a url of the user to remove.
-     * @see User
+     * @param url a URL of the user to remove.
      */
     void deleteByUrl(final String url);
 }

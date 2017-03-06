@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DefaultConfig
  */
 @Controller
 public class AuthorizationController {
@@ -28,8 +27,6 @@ public class AuthorizationController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
@@ -56,7 +53,7 @@ public class AuthorizationController {
             ex.printStackTrace();
             modelAndView = new ModelAndView();
         }
-        modelAndView.setViewName("login/login_page");
+        modelAndView.setViewName("login/login");
         return modelAndView;
     }
 

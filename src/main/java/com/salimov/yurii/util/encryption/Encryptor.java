@@ -17,7 +17,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see IEncryptor
  */
 public final class Encryptor implements IEncryptor {
 
@@ -296,9 +295,7 @@ public final class Encryptor implements IEncryptor {
     private String getDecryptedString() throws BadPaddingException,
             IllegalBlockSizeException, UnsupportedEncodingException {
         return new String(
-                this.decryptCipher.doFinal(
-                        Base64.decodeBase64(this.value)
-                ),
+                this.decryptCipher.doFinal(Base64.decodeBase64(this.value)),
                 this.charsetName
         ).replace("=", "");
     }

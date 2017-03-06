@@ -27,10 +27,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CaptchaService
- * @see CompanyService
- * @see UserService
- * @see SenderService
  */
 @Controller
 @ComponentScan(basePackages = "com.salimov.yurii.service")
@@ -45,32 +41,24 @@ public class ForgotUserInformationController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link User} class.
-     *
-     * @see UserService
      */
     private final UserService userService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Company} class.
-     *
-     * @see CompanyService
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes
      * a set of methods for working with E-mail.
-     *
-     * @see SenderService
      */
     private final SenderService senderService;
 
@@ -87,10 +75,6 @@ public class ForgotUserInformationController {
      * @param companyService a implementation of the {@link CompanyService} interface.
      * @param senderService  a implementation of the {@link SenderService} interface.
      * @param captchaService a implementation of the {@link CaptchaService} interface.
-     * @see CompanyService
-     * @see UserService
-     * @see SenderService
-     * @see CaptchaService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -221,13 +205,9 @@ public class ForgotUserInformationController {
         }
         final String mainEmail = this.companyService.getMainCompany().getContacts().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
-            throw new NullPointerException(
-                    "Can`t find company with E-mail \"" + email + "\"!"
-            );
+            throw new NullPointerException("Can`t find company with E-mail \"" + email + "\"!");
         }
-        sendUserInformationToEmail(
-                DefaultConfig.getDefaultAdmin(), mainEmail
-        );
+        sendUserInformationToEmail(DefaultConfig.getDefaultAdmin(), mainEmail);
     }
 
     /**
@@ -283,7 +263,6 @@ public class ForgotUserInformationController {
             final Boolean isCaptcha,
             final Boolean isForgot
     ) {
-        System.out.println("271 isForgot = " + isForgot);
         ModelAndView modelAndView;
         try {
             modelAndView = this.fabric.getDefaultModelAndView();
@@ -294,7 +273,7 @@ public class ForgotUserInformationController {
         modelAndView.addObject("username", username);
         modelAndView.addObject("is_captcha", isCaptcha);
         modelAndView.addObject("is_forgot", isForgot);
-        modelAndView.setViewName("login/forgot_page");
+        modelAndView.setViewName("login/forgot_form");
         return modelAndView;
     }
 }

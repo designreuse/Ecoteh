@@ -15,25 +15,12 @@ import java.util.stream.Collectors;
  * @param <T> entity type, extends {@link Model}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Model
- * @see DataService
- * @see ContentServiceImpl
- * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
- * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
- * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
- * @see com.salimov.yurii.service.data.impl.FileServiceImpl
- * @see com.salimov.yurii.service.data.impl.ResponseServiceImpl
- * @see com.salimov.yurii.service.data.impl.UserServiceImpl
- * @see DataDao
  */
 public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
 
     /**
      * The object provides a set of standard JPA methods
      * for working {@link Model} objects with the database.
-     *
-     * @see DataDao
-     * @see Model
      */
     private final DataDao<T> dao;
 
@@ -42,7 +29,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Initializes a implementations of the interfaces.
      *
      * @param dao a implementation of the {@link DataDao} interface.
-     * @see DataDao
      */
     DataServiceImpl(final DataDao<T> dao) {
         this.dao = dao;
@@ -54,7 +40,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param model the model to add.
      * @return The saving model or input object.
-     * @see Model
      */
     @Override
     @Transactional
@@ -72,7 +57,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param models the models to add.
      * @return The saving models or empty collection.
-     * @see Model
      */
     @Override
     @Transactional
@@ -94,7 +78,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param model the model to update.
      * @return The updating models or {@code null}.
-     * @see Model
      */
     @Override
     @Transactional
@@ -112,7 +95,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param models the models to update.
      * @return The updating models or empty collection if models is empty.
-     * @see Model
      */
     @Override
     @Transactional
@@ -135,7 +117,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param id is id of object to return.
      * @return The model with parameter id.
      * @throws NullPointerException Throw exception when object with parameter id is not exist.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -152,7 +133,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Returns all valid objects of {@link Model} class or subclasses.
      *
      * @return The all models.
-     * @see Model
      */
     @Override
     @Transactional
@@ -166,7 +146,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param valid is returns all or valid models.
      * @return The all models.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -180,7 +159,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * with parameter id.
      *
      * @param id a id of model to remove.
-     * @see Model
      */
     @Override
     @Transactional
@@ -193,7 +171,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Removes model if it is not {@code null}.
      *
      * @param model the model to remove.
-     * @see Model
      */
     @Override
     @Transactional
@@ -208,7 +185,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Removes models if are not {@code null}.
      *
      * @param models the models to remove.
-     * @see Model
      */
     @Override
     @Transactional
@@ -220,8 +196,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Removes all objects of {@link Model} class or subclasses.
-     *
-     * @see Model
      */
     @Override
     @Transactional
@@ -234,8 +208,8 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * with parameter id is exists.
      *
      * @param id a id of the model to exists.
-     * @return Returns {@code true} if the model is exists, otherwise returns {@code false}.
-     * @see Model
+     * @return Returns {@code true} if the model is exists,
+     * otherwise returns {@code false}.
      */
     @Override
     @Transactional(readOnly = true)
@@ -248,8 +222,8 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * If model is {@code null} or model id is {@code null} then return {@code false}.
      *
      * @param model the models to exists.
-     * @return Returns {@code true} if the model is exists, otherwise returns {@code false}.
-     * @see Model
+     * @return Returns {@code true} if the model is exists,
+     * otherwise returns {@code false}.
      */
     @Override
     @Transactional(readOnly = true)
@@ -269,7 +243,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param comparator a comparator to sort models.
      * @param revers     is sort in descending or ascending.
      * @return The sorted list of models.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -298,7 +271,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param models     the models to sort.
      * @param comparator a comparator to sort models.
      * @return The sorted list of models.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -317,7 +289,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param fromIndex a initial index.
      * @param toIndex   a final index.
      * @return The substring list of models.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -347,7 +318,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param fromIndex a initial index.
      * @param toIndex   a final index.
      * @return The substring list of models.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -367,7 +337,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param models the models to filter.
      * @return The filter list of models.
-     * @see Model
      */
     @Override
     public List<T> filteredByValid(final Collection<T> models) {
@@ -400,7 +369,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Return name of {@link Model} class or subclasses.
      *
      * @return The name of {@link Model} class or subclasses.
-     * @see Model
      */
     protected String getClassName() {
         return getModelClass().getName();
@@ -410,7 +378,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Return simple name of {@link Model} class or subclasses.
      *
      * @return The simple name of {@link Model} class or subclasses.
-     * @see Model
      */
     String getClassSimpleName() {
         return getModelClass().getSimpleName();
@@ -420,7 +387,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Return Class object of {@link Model} or subclasses.
      *
      * @return The Class object of {@link Model} or subclasses.
-     * @see Model
      */
     protected abstract Class<T> getModelClass();
 
@@ -432,7 +398,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param duplicate is validate input model by duplicate.
      * @return Returns {@code true} if the model is valid,
      * otherwise returns {@code false}.
-     * @see Model
      */
     protected abstract boolean validated(
             final T model,

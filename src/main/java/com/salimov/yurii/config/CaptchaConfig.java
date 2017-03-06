@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Captcha
  */
 @Configuration
 @PropertySource("classpath:captcha.properties")

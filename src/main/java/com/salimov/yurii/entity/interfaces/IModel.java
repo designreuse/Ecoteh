@@ -11,7 +11,6 @@ import java.io.Serializable;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.entity.Model
  */
 public interface IModel extends Serializable, Cloneable {
 

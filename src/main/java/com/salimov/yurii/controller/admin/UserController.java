@@ -35,13 +35,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see User
- * @see MainMVFabric
- * @see UserService
- * @see FileService
  */
 @Controller
-@RequestMapping(value = "/admin/user")
+@RequestMapping(
+        value = {
+                "/admin/user",
+                "/admin/users"
+        }
+)
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class UserController {
@@ -49,39 +50,29 @@ public class UserController {
     /**
      * The implementation of the interface provides a set of standard
      * methods for creates and returns the main modelAndViews for admins.
-     *
-     * @see CacheMVFabric
      */
     private final CacheMVFabric fabric;
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link User} class.
-     *
-     * @see UserService
      */
     private final UserService userService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Company} class.
-     *
-     * @see CompanyService
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link File} class.
-     *
-     * @see FileService
      */
     private final FileService fileService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with E-mail.
-     *
-     * @see SenderService
      */
     private final SenderService senderService;
 
@@ -94,11 +85,6 @@ public class UserController {
      * @param companyService a implementation of the {@link CompanyService} interface.
      * @param fileService    a implementation of the {@link FileService} interface.
      * @param senderService  a implementation of the {@link SenderService} interface.
-     * @see MainMVFabric
-     * @see UserService
-     * @see FileService
-     * @see CompanyService
-     * @see SenderService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -122,17 +108,16 @@ public class UserController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see User
      */
     @RequestMapping(
-            value = "/all",
+            value = {"", "/all"},
             method = RequestMethod.GET
     )
     public ModelAndView getAllUsersPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("users_list", this.userService.getPersonnel());
         modelAndView.addObject("is_captcha", null);
-        modelAndView.setViewName("admin/user/all_page");
+        modelAndView.setViewName("admin/user/all");
         return modelAndView;
     }
 
@@ -142,7 +127,6 @@ public class UserController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see User
      */
     @RequestMapping(
             value = "/new",
@@ -150,12 +134,12 @@ public class UserController {
     )
     public ModelAndView newUserPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/user/new_page");
+        modelAndView.setViewName("admin/user/add");
         return modelAndView;
     }
 
     /**
-     * Adds new user and redirects by url /admin/user/{url}.
+     * Adds new user and redirects by URL /admin/user/{url}.
      * Request mapping: /admin/user/add
      * Method: POST
      *
@@ -167,9 +151,9 @@ public class UserController {
      * @param landlinePhone  a landline phone of the new user.
      * @param fax            a fax of the new user.
      * @param email          a e-mail of the new user.
-     * @param vkontakte      a vkontakte url of the new user.
-     * @param facebook       a facebook url of the new user.
-     * @param twitter        a twitter url of the new user.
+     * @param vkontakte      a vkontakte URL of the new user.
+     * @param facebook       a facebook URL of the new user.
+     * @param twitter        a twitter URL of the new user.
      * @param skype          a skype username of the new user.
      * @param multipartPhoto a photo to the new user.
      * @param isValid        a validated of the new user.
@@ -177,7 +161,6 @@ public class UserController {
      * @param isLocked       locked the user or not.
      * @param modelAndView   a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see User
      */
     @RequestMapping(
             value = "/add",
@@ -239,19 +222,16 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void addUser() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/user/add\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/user/add\" is not supported!");
     }
 
     /**
-     * Returns the page to edit the user with url.
+     * Returns the page to edit the user with URL.
      * Request mapping: /admin/user/edit/{url}
      * Method: GET
      *
-     * @param url a url of the article to edit.
+     * @param url a URL of the article to edit.
      * @return The ready object of class ModelAndView.
-     * @see User
      */
     @RequestMapping(
             value = "/edit/{url}",
@@ -260,17 +240,17 @@ public class UserController {
     public ModelAndView editUserByUrl(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("user", this.userService.getByUrl(url));
-        modelAndView.setViewName("admin/user/edit_page");
+        modelAndView.setViewName("admin/user/edit");
         return modelAndView;
     }
 
     /**
      * Updates and save the user with url and redirects
-     * by url /admin/user/{url}.
+     * by URL /admin/user/{url}.
      * Request mapping: /admin/user/update
      * Method: POST
      *
-     * @param url            a url of the user to update.
+     * @param url            a URL of the user to update.
      * @param name           a new name to the user.
      * @param login          a new login to the user.
      * @param password       a new password to the user.
@@ -279,9 +259,9 @@ public class UserController {
      * @param landlinePhone  a new landline phone to the user.
      * @param fax            a new fax to the user.
      * @param email          a new e-mail to the user.
-     * @param vkontakte      a new vkontakte url to the user.
-     * @param facebook       a new facebook url to the user.
-     * @param twitter        a new twitter url to the user.
+     * @param vkontakte      a new vkontakte URL to the user.
+     * @param facebook       a new facebook URL to the user.
+     * @param twitter        a new twitter URL to the user.
      * @param skype          a new skype username to the user.
      * @param multipartPhoto a photo to the user.
      * @param isValid        a validated of the user.
@@ -289,8 +269,6 @@ public class UserController {
      * @param isLocked       locked the user or not.
      * @param modelAndView   a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see User
-     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -353,20 +331,17 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void updateUser() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/user/update\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/user/update\" is not supported!");
     }
 
     /**
-     * Removes user with url and redirects by url /admin/user/all.
+     * Removes user with url and redirects by URL /admin/user/all.
      * Request mapping: /admin/user/delete/{url}
      * Method: GET
      *
-     * @param url          a url of the user to remove.
+     * @param url          a URL of the user to remove.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see User
      */
     @RequestMapping(
             value = "/delete/{url}",
@@ -383,13 +358,12 @@ public class UserController {
     }
 
     /**
-     * Removes all users and redirects by url /admin/user/all.
+     * Removes all users and redirects by URL /admin/user/all.
      * Request mapping: /admin/user/delete/all
      * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see User
      */
     @RequestMapping(
             value = "/delete/all",
@@ -403,14 +377,13 @@ public class UserController {
     }
 
     /**
-     * Sends sender to personnel and redirects by url /admin/user/all.
+     * Sends sender to personnel and redirects by URL /admin/user/all.
      * Request mapping: /admin//user/send_message
      * Method: POST
      *
      * @param subject a subject of the sender.
      * @param text    a text of the sender.
      * @return The ready object of class ModelAndView.
-     * @see SenderService
      */
     @RequestMapping(
             value = "/send_message",
@@ -468,8 +441,6 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void sendMessageForPersonnel() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/user/send_message\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/user/send_message\" is not supported!");
     }
 }

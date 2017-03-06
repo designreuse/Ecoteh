@@ -13,24 +13,12 @@ import java.util.Collection;
  * @param <T> Entity type, extends {@link Model}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DataDao
- * @see DataRepository
- * @see ArticleDaoImpl
- * @see CategoryDaoImpl
- * @see CategoryDaoImpl
- * @see FileDaoImpl
- * @see ResponseDaoImpl
- * @see UserDaoImpl
- * @see MessageDaoImpl
- * @see Model
  */
 public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
 
     /**
      * The interface provides a set of JPA methods
      * for working {@link Model} objects with a database.
-     *
-     * @see DataRepository
      */
     private final DataRepository<T> repository;
 
@@ -39,7 +27,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      *
      * @param repository a implementation of the interface provides a set of JPA methods
      *                   for working objects with a database.
-     * @see DataRepository
      */
     DataDaoImpl(final DataRepository<T> repository) {
         this.repository = repository;
@@ -51,7 +38,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      *
      * @param model a model to add.
      * @return The saving model.
-     * @see Model
      */
     @Override
     public T add(final T model) {
@@ -64,7 +50,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      *
      * @param models a model objects to add.
      * @return The saving model objects.
-     * @see Model
      */
     @Override
     public Collection<T> addAll(final Collection<T> models) {
@@ -77,7 +62,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      *
      * @param model a model object to update.
      * @return The updating model.
-     * @see Model
      */
     @Override
     public T update(final T model) {
@@ -90,7 +74,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      *
      * @param id a id of the model object to return.
      * @return The model object with parameter id.
-     * @see Model
      */
     @Override
     public T get(final long id) {
@@ -102,7 +85,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      * or subclasses from a database.
      *
      * @return The all model objects.
-     * @see Model
      */
     @Override
     public Collection<T> getAll() {
@@ -114,7 +96,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      * or subclasses with parameter id from a database.
      *
      * @param id a id model object to remove.
-     * @see Model
      */
     @Override
     public void remove(final long id) {
@@ -126,7 +107,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      * or subclasses from a database.
      *
      * @param model The model object to remove.
-     * @see Model
      */
     @Override
     public void remove(final T model) {
@@ -138,7 +118,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      * or subclasses from a database.
      *
      * @param models The model objects to remove.
-     * @see Model
      */
     @Override
     public void remove(final Collection<T> models) {
@@ -148,8 +127,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
     /**
      * Removes all model objects of the {@link Model} class
      * or subclasses from a database.
-     *
-     * @see Model
      */
     @Override
     public void removeAll() {
@@ -162,7 +139,6 @@ public abstract class DataDaoImpl<T extends Model> implements DataDao<T> {
      *
      * @param id a id of model object to exists.
      * @return {@code true} if model object is exists, {@code false} otherwise.
-     * @see Model
      */
     @Override
     public boolean exists(final long id) {

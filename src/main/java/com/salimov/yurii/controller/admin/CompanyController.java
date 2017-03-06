@@ -1,5 +1,6 @@
 package com.salimov.yurii.controller.admin;
 
+import com.googlecode.htmlcompressor.compressor.Compressor;
 import com.salimov.yurii.entity.Address;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.Contacts;
@@ -9,6 +10,7 @@ import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
+import com.salimov.yurii.util.compressor.HtmlPress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -21,20 +23,20 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * The class implements a set of methods for working
- * with main ModelAndView objects and object of {@link Company}
- * class or subclasses for admins. Class methods create
- * and return modelsAndView, depending on the request.
+ * The class implements a set of methods for working with
+ * objects of {@link Company} class or subclasses for admins.
+ * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Company
- * @see CompanyService
- * @see FileService
- * @see MainMVFabric
  */
 @Controller
-@RequestMapping(value = "/admin/company")
+@RequestMapping(
+        value = {
+                "/admin/company",
+                "/admin/companies"
+        }
+)
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class CompanyController {
@@ -42,24 +44,18 @@ public class CompanyController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Company} class.
-     *
-     * @see CompanyService
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link File} class.
-     *
-     * @see FileService
      */
     private final FileService fileService;
 
@@ -70,9 +66,6 @@ public class CompanyController {
      * @param fabric         a implementation of the {@link MainMVFabric} interface.
      * @param companyService a implementation of the {@link CompanyService} interface.
      * @param fileService    a implementation of the {@link FileService} interface.
-     * @see MainMVFabric
-     * @see CompanyService
-     * @see FileService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -92,7 +85,6 @@ public class CompanyController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/edit/main",
@@ -102,13 +94,13 @@ public class CompanyController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getMainCompany());
         modelAndView.addObject("main", true);
-        modelAndView.setViewName("admin/company/edit_page");
+        modelAndView.setViewName("admin/company/edit");
         return modelAndView;
     }
 
     /**
      * Updates and save the main company and redirects
-     * by url /admin/company/main.
+     * by URL /admin/company/main.
      * Request mapping: /admin/article/update/main
      * Method: POST
      *
@@ -126,17 +118,15 @@ public class CompanyController {
      * @param email         a new e-mail to the main company.
      * @param senderEmail   a new sender e-mail to the main company.
      * @param senderPass    a new sender password to the main company.
-     * @param vkontakte     a new vkontakte url to the main company.
-     * @param facebook      a new facebook url to the main company.
-     * @param twitter       a new twitter url to the main company.
+     * @param vkontakte     a new vkontakte URL to the main company.
+     * @param facebook      a new facebook URL to the main company.
+     * @param twitter       a new twitter URL to the main company.
      * @param skype         a new skype username to the main company.
      * @param address       a new address to the main company.
-     * @param googleMaps    a new google maps url to the main company.
-     * @param multipartLogo a new logo Url to the main company.
+     * @param googleMaps    a new google maps URL to the main company.
+     * @param multipartLogo a new logo to the main company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Company
-     * @see File
      */
     @RequestMapping(
             value = "/update/main",
@@ -166,11 +156,9 @@ public class CompanyController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             final ModelAndView modelAndView
     ) {
-        final Company company = new Company();
-        company.setTitle(title);
-        company.setDescription(description);
-        company.setInformation(information);
-        company.setKeywords(keywords);
+        final Compressor compressor = new HtmlPress();
+        final Company company = new Company(title, compressor.compress(description), keywords);
+        company.setInformation(compressor.compress(information));
         company.setDomain(domain);
         company.setTagline(tagline);
         company.setSenderEmail(senderEmail);
@@ -195,7 +183,7 @@ public class CompanyController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/company/update/main" is not supported!"
      * Request mapping: /admin/company/update/main
      * Method: POST
@@ -205,9 +193,7 @@ public class CompanyController {
      */
     @RequestMapping(value = "/update/main", method = RequestMethod.GET)
     public void updateMainCompany() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/company/update/main\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/company/update/main\" is not supported!");
     }
 
     /**
@@ -216,7 +202,6 @@ public class CompanyController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/new",
@@ -224,12 +209,12 @@ public class CompanyController {
     )
     public ModelAndView newPartnerPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/company/new_page");
+        modelAndView.setViewName("admin/company/add");
         return modelAndView;
     }
 
     /**
-     * Adds new company and redirects by url /admin/company/{url}.
+     * Adds new company and redirects by URL /admin/company/{url}.
      * Request mapping: /admin/company/add
      * Method: POST
      *
@@ -243,18 +228,16 @@ public class CompanyController {
      * @param landlinePhone a landline phone of the new company.
      * @param fax           a fax of the new company.
      * @param email         a e-mail of the new company.
-     * @param vkontakte     a vkontakte url of the new company.
-     * @param facebook      a facebook url of the new company.
-     * @param twitter       a twitter url of the new company.
+     * @param vkontakte     a vkontakte URL of the new company.
+     * @param facebook      a facebook URL of the new company.
+     * @param twitter       a twitter URL of the new company.
      * @param skype         a skype username of the new company.
      * @param address       a address of the new company.
-     * @param googleMaps    a google maps url of the new company.
-     * @param multipartLogo a  logo to the new company.
+     * @param googleMaps    a google maps URL of the new company.
+     * @param multipartLogo a logo to the new company.
      * @param isValid       a validated of the new company.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Company
-     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -307,7 +290,7 @@ public class CompanyController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/company/add" is not supported!"
      * Request mapping: /admin/company/add
      * Method: POST
@@ -320,19 +303,16 @@ public class CompanyController {
             method = RequestMethod.GET
     )
     public void addPartner() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/company/add\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/company/add\" is not supported!");
     }
 
     /**
-     * Returns the page to edit the company with url.
+     * Returns the page to edit the company with URL.
      * Request mapping: /admin/company/edit/{url}
      * Method: GET
      *
-     * @param url a url of the company to edit.
+     * @param url a URL of the company to edit.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/edit/{url}",
@@ -342,17 +322,17 @@ public class CompanyController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getByUrl(url, false));
         modelAndView.addObject("main", false);
-        modelAndView.setViewName("admin/company/edit_page");
+        modelAndView.setViewName("admin/company/edit");
         return modelAndView;
     }
 
     /**
      * Updates and save the company with url and redirects
-     * by url /admin/company/{url}.
+     * by URL /admin/company/{url}.
      * Request mapping: /admin/company/update
      * Method: POST
      *
-     * @param url           a url of the company to update.
+     * @param url           a URL of the company to update.
      * @param title         a new title to the company.
      * @param domain        a new domain to the company.
      * @param tagline       a new tagline to the company.
@@ -363,18 +343,16 @@ public class CompanyController {
      * @param landlinePhone a new landline phone to the company.
      * @param fax           a new fax to the company.
      * @param email         a new e-mail to the company.
-     * @param vkontakte     a new vkontakte url to the company.
-     * @param facebook      a new facebook url to the company.
-     * @param twitter       a new twitter url to the company.
+     * @param vkontakte     a new vkontakte URL to the company.
+     * @param facebook      a new facebook URL to the company.
+     * @param twitter       a new twitter URL to the company.
      * @param skype         a new skype username to the company.
      * @param address       a new address to the company.
-     * @param googleMaps    a new google maps url to the company.
-     * @param multipartLogo a new logo Url to the company.
+     * @param googleMaps    a new google maps URL to the company.
+     * @param multipartLogo a new logo to the company.
      * @param isValid       a validated of the article.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Company
-     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -428,7 +406,7 @@ public class CompanyController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/company/update" is not supported!"
      * Request mapping: /admin/company/update
      * Method: POST
@@ -441,20 +419,17 @@ public class CompanyController {
             method = RequestMethod.GET
     )
     public void updatePartnerCompany() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/company/update\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/company/update\" is not supported!");
     }
 
     /**
-     * Removes company with url and redirects by url /admin/.
+     * Removes company with url and redirects by URL /admin/.
      * Request mapping: /admin/company/delete/{url}
      * Method: GET
      *
-     * @param url          a url of the company to remove.
+     * @param url          a URL of the company to remove.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/delete/{url}",
@@ -471,13 +446,12 @@ public class CompanyController {
     }
 
     /**
-     * Removes all companies and redirects by url /admin/.
+     * Removes all companies and redirects by URL /admin/.
      * Request mapping: /admin/company/delete/all
      * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/delete/all",

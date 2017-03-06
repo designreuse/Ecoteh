@@ -7,7 +7,6 @@ import java.util.Arrays;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.entity.User
  */
 public enum UserRole {
 

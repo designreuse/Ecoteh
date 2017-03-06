@@ -10,9 +10,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Company
- * @see ContentService
- * @see DataService
  */
 public interface CompanyService extends ContentService<Company> {
 
@@ -28,14 +25,11 @@ public interface CompanyService extends ContentService<Company> {
      * Returns main company.
      *
      * @return The main company.
-     * @see Company
      */
     Company getMainCompany();
 
     /**
      * Removes main company.
-     *
-     * @see Company
      */
     void removeMain();
 
@@ -44,7 +38,6 @@ public interface CompanyService extends ContentService<Company> {
      *
      * @param isValid is get valid company or not.
      * @return The partners companies.
-     * @see Company
      */
     List<Company> getPartners(final boolean isValid);
 }

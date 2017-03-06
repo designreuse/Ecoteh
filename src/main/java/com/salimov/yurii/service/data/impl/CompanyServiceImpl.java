@@ -25,11 +25,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Company
- * @see CompanyService
- * @see ContentServiceImpl
- * @see DataServiceImpl
- * @see CompanyDao
  */
 @Service
 @ComponentScan(
@@ -43,9 +38,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     /**
      * The interface provides a set of standard methods for working
      * {@link Company} objects with the database.
-     *
-     * @see CompanyDao
-     * @see Company
      */
     private final CompanyDao dao;
 
@@ -53,9 +45,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * The interface of the service layer,
      * describes a set of methods for working
      * with objects of the class {@link File}.
-     *
-     * @see FileService
-     * @see File
      */
     private final FileService fileService;
 
@@ -65,7 +54,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      *
      * @param dao         a implementation of the {@link CompanyDao} interface.
      * @param fileService a implementation of the {@link FileService} interface.
-     * @see CompanyDao
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -84,7 +72,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      *
      * @param valid is returns all or valid companies.
      * @return The all models.
-     * @see Model
      */
     @Override
     @Transactional(readOnly = true)
@@ -97,8 +84,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      *
      * @param company a company to add.
      * @return The new saving company.
-     * @see Company
-     * @see File
      */
     @Override
     @Transactional
@@ -133,7 +118,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      *
      * @return The main company.
      * @throws NullPointerException Throws exception if main company is absent.
-     * @see Company
      */
     @Override
     @Transactional(readOnly = true)
@@ -151,7 +135,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      *
      * @param isValid is get valid company or not.
      * @return The partners companies.
-     * @see Company
      */
     @Override
     @Transactional(readOnly = true)
@@ -167,10 +150,9 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Removes company.
-     * Removes company if it not {@code null} and has not type {@code MAIN}.
+     * Removes company if it not {@code null} and has not type {@code CompanyType.MAIN}.
      *
      * @param company the company to remove.
-     * @see Company
      */
     @Override
     @Transactional
@@ -182,8 +164,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Removes main company.
-     *
-     * @see Company
      */
     @Override
     @Transactional
@@ -193,8 +173,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Removes all partners companies.
-     *
-     * @see Company
      */
     @Override
     @Transactional

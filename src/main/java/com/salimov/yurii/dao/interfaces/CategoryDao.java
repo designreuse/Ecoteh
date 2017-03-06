@@ -8,9 +8,6 @@ import com.salimov.yurii.entity.Category;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.dao.impl.CategoryDaoImpl
- * @see ContentDao
- * @see Category
  */
 public interface CategoryDao extends ContentDao<Category> {
 }

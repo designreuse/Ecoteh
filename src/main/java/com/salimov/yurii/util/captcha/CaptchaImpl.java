@@ -13,7 +13,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Captcha
  */
 public final class CaptchaImpl implements Captcha {
     /**
@@ -62,7 +61,7 @@ public final class CaptchaImpl implements Captcha {
      * @param userAgent      a captcha user agent.
      * @param acceptLanguage a captcha accept language.
      * @param doOutput       a do output.
-     * @param url            a captcha url.
+     * @param url            a captcha URL.
      * @param serverKey      a captcha server key.
      * @param parameter      a captcha request param.
      * @param header         a captcha header param.

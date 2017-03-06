@@ -28,8 +28,6 @@ public class IllegalAccessController {
             method = RequestMethod.GET
     )
     public void getIllegalAccessException() throws IllegalAccessException {
-        throw new IllegalAccessException(
-                "You do not have sufficient permissions to access this page."
-        );
+        throw new IllegalAccessException("You do not have sufficient permissions to access this page.");
     }
 }

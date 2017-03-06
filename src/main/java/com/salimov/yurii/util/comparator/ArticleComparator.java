@@ -10,15 +10,12 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Article
  */
 public final class ArticleComparator {
 
     /**
      * The class implements a method for working with comparator
      * for {@link Article} by number.
-     *
-     * @see Article
      */
     public final static class ByNumber implements Comparator<Article> {
         /**
@@ -29,7 +26,6 @@ public final class ArticleComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Article
          */
         @Override
         public int compare(final Article article1, final Article article2) {
@@ -50,8 +46,6 @@ public final class ArticleComparator {
     /**
      * The class implements a method for working with comparator
      * for {@link Article} by date.
-     *
-     * @see Article
      */
     public final static class ByDate implements Comparator<Article> {
 
@@ -63,7 +57,6 @@ public final class ArticleComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Article
          */
         @Override
         public int compare(final Article article1, final Article article2) {

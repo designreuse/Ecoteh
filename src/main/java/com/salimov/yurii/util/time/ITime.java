@@ -5,7 +5,6 @@ package com.salimov.yurii.util.time;
  * for working with time string.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @see Time
  */
 public interface ITime {
 

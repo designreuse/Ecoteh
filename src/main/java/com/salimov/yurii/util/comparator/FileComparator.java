@@ -10,15 +10,12 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see File
  */
 public final class FileComparator {
 
     /**
      * The class implements a method for working 
      * with comparator for {@link File} by title.
-     *
-     * @see File
      */
     public final static class ByTitle<T extends File> implements Comparator<T> {
 
@@ -30,7 +27,6 @@ public final class FileComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see File
          */
         @Override
         public int compare(final T file1, final T file2) {
@@ -50,9 +46,7 @@ public final class FileComparator {
 
     /**
      * The class implements a method for working
-     * with comparator for {@link File} by url.
-     *
-     * @see File
+     * with comparator for {@link File} by URL.
      */
     public final static class ByUrl<T extends File> implements Comparator<T> {
 
@@ -64,7 +58,6 @@ public final class FileComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see File
          */
         @Override
         public int compare(final T file1, final T file2) {

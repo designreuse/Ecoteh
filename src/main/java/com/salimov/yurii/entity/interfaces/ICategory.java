@@ -13,8 +13,6 @@ import java.util.Collection;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see IContent
- * @see com.salimov.yurii.entity.Category
  */
 public interface ICategory extends IContent {
 
@@ -22,7 +20,6 @@ public interface ICategory extends IContent {
      * Adds new article to the list of articles.
      *
      * @param article an article to add.
-     * @see Article
      */
     void addArticle(final Article article);
 
@@ -30,7 +27,6 @@ public interface ICategory extends IContent {
      * Adds new articles to the list of articles.
      *
      * @param articles an articles to add.
-     * @see Article
      */
     void addArticles(final Collection<Article> articles);
 
@@ -38,7 +34,6 @@ public interface ICategory extends IContent {
      * Removes article from the list of articles.
      *
      * @param article an article to remove.
-     * @see Article
      */
     void removeArticle(final Article article);
 
@@ -46,7 +41,6 @@ public interface ICategory extends IContent {
      * Removes articles from the list of articles.
      *
      * @param articles an articles to remove.
-     * @see Article
      */
     void removeArticles(final Collection<Article> articles);
 
@@ -54,7 +48,6 @@ public interface ICategory extends IContent {
      * Returns an list of articles.
      *
      * @return The list of articles.
-     * @see Article
      */
     Collection<Article> getArticles();
 
@@ -62,7 +55,6 @@ public interface ICategory extends IContent {
      * Sets a new articles to list of articles.
      *
      * @param articles an articles to add.
-     * @see Article
      */
     void setArticles(final Collection<Article> articles);
 
@@ -72,7 +64,6 @@ public interface ICategory extends IContent {
      * @param article an article to contain.
      * @return {@code true} if article is contains,
      * {@code false} otherwise.
-     * @see Article
      */
     boolean containsArticle(final Article article);
 
@@ -82,14 +73,11 @@ public interface ICategory extends IContent {
      * @param articles an articles to contain.
      * @return {@code true} if articles are contains,
      * {@code false} otherwise.
-     * @see Article
      */
     boolean containsArticles(final Collection<Article> articles);
 
     /**
      * Clears the list of articles.
-     *
-     * @see Article
      */
     void clearArticles();
 

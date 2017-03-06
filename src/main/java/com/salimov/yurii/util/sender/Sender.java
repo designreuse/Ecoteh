@@ -9,7 +9,7 @@ package com.salimov.yurii.util.sender;
 public interface Sender extends Runnable {
 
     /**
-     * Sends a message to an e-mail in new thread.
+     * Sends a message to an E-mail in new thread.
      */
     void send();
 }

@@ -140,7 +140,7 @@ public final class Response extends Model implements IResponse {
 
     /**
      * Sets a new username to the response.
-     * If parameter username is blank, then sets {@code null}.
+     * If parameter username is blank, then sets empty string.
      *
      * @param username a new text to the response.
      */
@@ -161,7 +161,7 @@ public final class Response extends Model implements IResponse {
 
     /**
      * Sets a new text to the response.
-     * If parameter text is blank, then sets {@code null}.
+     * If parameter text is blank, then sets empty string.
      *
      * @param text a new text to the response.
      */

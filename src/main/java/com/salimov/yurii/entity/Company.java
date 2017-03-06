@@ -265,7 +265,7 @@ public final class Company extends Content implements ICompany {
 
     /**
      * Sets a new domain to the company.
-     * If parameter domain is blank, then sets {@code null}.
+     * If parameter domain is blank, then sets empty string.
      *
      * @param domain a new domain to the company.
      */
@@ -292,7 +292,7 @@ public final class Company extends Content implements ICompany {
 
     /**
      * Sets a new tagline to the company.
-     * If parameter tagline is blank, then sets {@code null}.
+     * If parameter tagline is blank, then sets empty string.
      *
      * @param tagline a new domain to the company.
      */
@@ -313,7 +313,7 @@ public final class Company extends Content implements ICompany {
 
     /**
      * Sets a new information to the company.
-     * If parameter information is blank, then sets {@code null}.
+     * If parameter information is blank, then sets empty string.
      *
      * @param information a new information to the company.
      */
@@ -334,7 +334,7 @@ public final class Company extends Content implements ICompany {
 
     /**
      * Sets a new sender e-mail to the company.
-     * If parameter sender e-mail is blank, then sets {@code null}.
+     * If parameter sender e-mail is blank, then sets empty string.
      *
      * @param senderEmail a new sender e-mail to the company.
      */
@@ -355,7 +355,7 @@ public final class Company extends Content implements ICompany {
 
     /**
      * Sets a new sender password to the company.
-     * If parameter sender password is blank, then sets {@code null}.
+     * If parameter sender password is blank, then sets empty string.
      *
      * @param senderPass a new sender password to the company.
      */

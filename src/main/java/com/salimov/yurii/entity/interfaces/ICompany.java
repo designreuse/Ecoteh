@@ -13,8 +13,6 @@ import com.salimov.yurii.enums.CompanyType;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see IContent
- * @see Company
  */
 public interface ICompany extends IContent {
 
@@ -148,7 +146,6 @@ public interface ICompany extends IContent {
      * Returns a domain of the company.
      *
      * @return The company domain.
-     * @see CompanyType
      */
     CompanyType getType();
 
@@ -156,7 +153,6 @@ public interface ICompany extends IContent {
      * Sets a new type to the company.
      *
      * @param type a new logo to the company.
-     * @see CompanyType
      */
     void setType(final CompanyType type);
 

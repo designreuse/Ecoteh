@@ -13,13 +13,6 @@ import java.util.List;
  * @param <T> Entity type, extends {@link Model}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Model
- * @see ArticleService
- * @see CategoryService
- * @see ContentService
- * @see FileService
- * @see ResponseService
- * @see UserService
  */
 public interface DataService<T extends Model> {
 
@@ -28,7 +21,6 @@ public interface DataService<T extends Model> {
      *
      * @param model the model to add.
      * @return The saving model.
-     * @see Model
      */
     T add(final T model);
 
@@ -37,18 +29,14 @@ public interface DataService<T extends Model> {
      *
      * @param models the models to add.
      * @return The saving models.
-     * @see Model
      */
-    Collection<T> addAll(
-            final Collection<T> models
-    );
+    Collection<T> addAll(final Collection<T> models);
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.
      *
      * @param model a model to update.
      * @return The updating models.
-     * @see Model
      */
     T update(final T model);
 
@@ -57,7 +45,6 @@ public interface DataService<T extends Model> {
      *
      * @param models the models to update.
      * @return The updating models.
-     * @see Model
      */
     Collection<T> update(final Collection<T> models);
 
@@ -66,7 +53,6 @@ public interface DataService<T extends Model> {
      *
      * @param id is id of object to return.
      * @return The object models with parameter id.
-     * @see Model
      */
     T get(final long id);
 
@@ -74,7 +60,6 @@ public interface DataService<T extends Model> {
      * Returns all valid objects of {@link Model} class or subclasses.
      *
      * @return The all valid models.
-     * @see Model
      */
     Collection<T> getAll();
 
@@ -84,7 +69,6 @@ public interface DataService<T extends Model> {
      *
      * @param valid It is returns all or valid objects.
      * @return The all models.
-     * @see Model
      */
     Collection<T> getAll(final boolean valid);
 
@@ -92,7 +76,6 @@ public interface DataService<T extends Model> {
      * Removes object of {@link Model} class or subclasses with parameter id.
      *
      * @param id a id of the model to remove.
-     * @see Model
      */
     void remove(final long id);
 
@@ -100,7 +83,6 @@ public interface DataService<T extends Model> {
      * Removes object of {@link Model} class or subclasses.
      *
      * @param model the model to remove.
-     * @see Model
      */
     void remove(final T model);
 
@@ -108,14 +90,11 @@ public interface DataService<T extends Model> {
      * Removes objects of {@link Model} class or subclasses.
      *
      * @param models the models to remove.
-     * @see Model
      */
     void remove(final Collection<T> models);
 
     /**
      * Removes all objects of {@link Model} class or subclasses.
-     *
-     * @see Model
      */
     void removeAll();
 
@@ -124,18 +103,18 @@ public interface DataService<T extends Model> {
      * is exists with parameter id.
      *
      * @param id a id of the model to exist.
-     * @return Returns true if model is exists, otherwise returns false.
-     * @see Model
+     * @return Returns {@code true} if model is exists,
+     * otherwise returns {@code false}.
      */
     boolean exists(final long id);
 
     /**
-     * Checks whether the object of {@link Model} class or subclasses is exists.
+     * Checks whether the object of {@link Model} class
+     * or subclasses is exists.
      *
      * @param model the model to exists.
-     * @return Returns <code>true</code> if model is exists,
-     * otherwise returns <code>false</code>.
-     * @see Model
+     * @return Returns {@code true} if model is exists,
+     * otherwise returns {@code false}.
      */
     boolean exists(final T model);
 
@@ -147,7 +126,6 @@ public interface DataService<T extends Model> {
      * @param comparator a comparator to sort models.
      * @param revers     Sort in descending or ascending.
      * @return The sorted list of models.
-     * @see Model
      */
     List<T> sort(
             final Collection<T> models,
@@ -162,7 +140,6 @@ public interface DataService<T extends Model> {
      * @param models     the objects to sort.
      * @param comparator a comparator to sort models.
      * @return The sorted list of models.
-     * @see Model
      */
     List<T> sort(
             final Collection<T> models,
@@ -177,7 +154,6 @@ public interface DataService<T extends Model> {
      * @param fromIndex a initial index.
      * @param toIndex   a final index.
      * @return The models from initial index to final index.
-     * @see Model
      */
     List<T> subList(
             final Collection<T> models,
@@ -191,7 +167,6 @@ public interface DataService<T extends Model> {
      * @param fromIndex a initial index.
      * @param toIndex   a final index.
      * @return The models from initial index to final index.
-     * @see Model
      */
     List<T> getAndSubList(final int fromIndex, final int toIndex);
 
@@ -200,9 +175,14 @@ public interface DataService<T extends Model> {
      *
      * @param models the models to filter.
      * @return The filtered models.
-     * @see Model
      */
     List<T> filteredByValid(final Collection<T> models);
 
+    /**
+     * Shuffles the models and returns it.
+     *
+     * @param models a models to shuffle.
+     * @return The shuffling models.
+     */
     List<T> shuffle(final Collection<T> models);
 }

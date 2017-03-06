@@ -16,10 +16,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see FileDao
- * @see File
- * @see FileRepository
- * @see DataDaoImpl
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
@@ -28,8 +24,6 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
     /**
      * The interface provides a set of JPA methods
      * for working {@link File} objects with a database.
-     *
-     * @see FileRepository
      */
     private final FileRepository repository;
 
@@ -38,7 +32,6 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
      *
      * @param repository a implementation of the interface provides a set of JPA methods
      *                   for working {@link File} objects with a database.
-     * @see FileRepository
      */
     @Autowired
     public FileDaoImpl(final FileRepository repository) {
@@ -51,7 +44,6 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
      *
      * @param title a title of photo to return.
      * @return The photo with the parameter title.
-     * @see File
      */
     @Override
     public File getByTitle(final String title) {
@@ -61,9 +53,8 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
     /**
      * Returns photo with the parameter url from a database.
      *
-     * @param url a url of photo to return.
+     * @param url a URL of photo to return.
      * @return The photo with the parameter url.
-     * @see File
      */
     @Override
     public File getByUrl(final String url) {
@@ -74,7 +65,6 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
      * Removes photo with the parameter title from a database.
      *
      * @param title a title of the photo to remove.
-     * @see File
      */
     @Override
     public void removeByTitle(final String title) {
@@ -84,8 +74,7 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
     /**
      * Removes photo with the parameter url from a database.
      *
-     * @param url a url of the photo to remove.
-     * @see File
+     * @param url a URL of the photo to remove.
      */
     @Override
     public void removeByUrl(final String url) {
@@ -97,7 +86,6 @@ public final class FileDaoImpl extends DataDaoImpl<File> implements FileDao {
      *
      * @param type a type of files to return.
      * @return The files with the type.
-     * @see FileType
      */
     @Override
     public List<File> getByFileType(final FileType type) {

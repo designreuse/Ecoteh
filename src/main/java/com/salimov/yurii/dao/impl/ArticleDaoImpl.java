@@ -16,10 +16,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see ArticleDao
- * @see Article
- * @see ArticleRepository
- * @see DataDaoImpl
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
@@ -28,8 +24,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
     /**
      * The interface provides a set of JPA methods
      * for working {@link Article} objects with a database.
-     *
-     * @see ArticleRepository
      */
     private final ArticleRepository repository;
 
@@ -38,7 +32,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
      *
      * @param repository a implementation of the interface provides a set of JPA methods
      *                   for working {@link Article} objects with a database.
-     * @see ArticleRepository
      */
     @Autowired
     public ArticleDaoImpl(final ArticleRepository repository) {
@@ -51,7 +44,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
      *
      * @param title a title of the article to return.
      * @return The article with the parameter title.
-     * @see Article
      */
     @Override
     public Article getByTitle(final String title) {
@@ -61,9 +53,8 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
     /**
      * Returns article with the parameter url from a database.
      *
-     * @param url a url of the article to return.
+     * @param url a URL of the article to return.
      * @return The article with the parameter url.
-     * @see Article
      */
     @Override
     public Article getByUrl(final String url) {
@@ -75,7 +66,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
      *
      * @param number a title of the article to return.
      * @return The article with parameter title.
-     * @see Article
      */
     @Override
     public Article getByNumber(final String number) {
@@ -87,8 +77,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
      *
      * @param id a category id of the article to return.
      * @return The article with parameter category id.
-     * @see Article
-     * @see Category
      */
     @Override
     public List<Article> getByCategoryId(final Long id) {
@@ -99,7 +87,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
      * Removes article with the parameter title from a database.
      *
      * @param title a title of the article to remove.
-     * @see Article
      */
     @Override
     public void removeByTitle(final String title) {
@@ -109,8 +96,7 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
     /**
      * Removes article with the parameter url from a database.
      *
-     * @param url a url of the article to remove.
-     * @see Article
+     * @param url a URL of the article to remove.
      */
     @Override
     public void removeByUrl(final String url) {
@@ -121,7 +107,6 @@ public final class ArticleDaoImpl extends DataDaoImpl<Article> implements Articl
      * Removes article with the parameter number from a database.
      *
      * @param number a number of the article to remove.
-     * @see Article
      */
     @Override
     public void removeByNumber(final String number) {

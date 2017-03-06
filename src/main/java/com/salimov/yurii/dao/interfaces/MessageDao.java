@@ -9,9 +9,6 @@ import com.salimov.yurii.util.cache.Cache;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.dao.impl.MessageDaoImpl
- * @see DataDao
- * @see Message
  */
 public interface MessageDao extends DataDao<Message> {
 }

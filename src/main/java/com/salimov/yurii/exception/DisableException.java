@@ -46,7 +46,7 @@ public final class DisableException extends RuntimeException {
 
     /**
      * Constructs a new runtime exception with the specified cause
-     * and a detail message of (cause==null ? null : cause.toString())
+     * and a detail message of ({@code cause==null ? null : cause.toString()})
      * (which typically contains the class and detail message of cause).
      *
      * @param cause the cause (which is saved for later retrieval

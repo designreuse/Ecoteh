@@ -15,9 +15,6 @@ import javax.servlet.ServletException;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see WebConfig
- * @see RootConfig
- * @see SecurityConfig
  */
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     /**

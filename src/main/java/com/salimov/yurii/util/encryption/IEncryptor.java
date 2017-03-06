@@ -5,7 +5,6 @@ package com.salimov.yurii.util.encryption;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Encryptor
  */
 public interface IEncryptor {
 

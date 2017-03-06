@@ -62,17 +62,17 @@ public final class SenderImpl implements Sender {
     private final String text;
 
     /**
-     * The recipient e-mail.
+     * The recipient E-mail.
      */
     private final String recipientEmail;
 
     /**
-     * The sender e-mail.
+     * The sender E-mail.
      */
     private final String senderEmail;
 
     /**
-     * The sender e-mail password.
+     * The sender E-mail password.
      */
     private final String senderEmailPass;
 
@@ -81,9 +81,9 @@ public final class SenderImpl implements Sender {
      *
      * @param subject         a sender subject.
      * @param text            a sender text.
-     * @param recipientEmail  a recipient e-mail.
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
+     * @param recipientEmail  a recipient E-mail.
+     * @param senderEmail     a sender E-mail.
+     * @param senderEmailPass a sender E-mail password.
      */
     public SenderImpl(
             final String subject,
@@ -100,7 +100,7 @@ public final class SenderImpl implements Sender {
     }
 
     /**
-     * Sends a message to an e-mail in new thread.
+     * Sends a message to an E-mail in new thread.
      */
     @Override
     public void send() {
@@ -131,8 +131,8 @@ public final class SenderImpl implements Sender {
     }
 
     /**
-     * Validates parameters to create sender: subject, text, recipient e-mail,
-     * sender e-mail, sender e-mail password.
+     * Validates parameters to create sender: subject, text, recipient E-mail,
+     * sender E-mail, sender E-mail password.
      *
      * @return {@code true} if all parameters are valid to create sender,
      * {@code false} otherwise.
@@ -149,8 +149,8 @@ public final class SenderImpl implements Sender {
      * @param subject         a sender subject.
      * @param text            a sender text.
      * @param recipientEmail  a recipient e-mail.
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
+     * @param senderEmail     a sender E-mail.
+     * @param senderEmailPass a sender E-mail password.
      * @throws MessagingException           If the parse failed
      *                                      in InternetAddress.
      * @throws UnsupportedEncodingException If the encoding fails
@@ -189,9 +189,9 @@ public final class SenderImpl implements Sender {
      *                        a persistent set of TLS or SSL properties.
      * @param subject         a sender subject.
      * @param text            a sender text.
-     * @param recipientEmail  a recipient e-mail.
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
+     * @param recipientEmail  a recipient E-mail.
+     * @param senderEmail     a sender E-mail.
+     * @param senderEmailPass a sender E-mail password.
      * @throws MessagingException           If the parse failed
      *                                      in InternetAddress.
      * @throws UnsupportedEncodingException If the encoding fails
@@ -233,8 +233,8 @@ public final class SenderImpl implements Sender {
      * @param session        a Session object represents a mail session.
      * @param subject        a sender subject.
      * @param text           a sender text.
-     * @param recipientEmail a recipient e-mail.
-     * @param senderEmail    a sender e-mail.
+     * @param recipientEmail a recipient E-mail.
+     * @param senderEmail    a sender E-mail.
      * @return The Message object.
      * @throws MessagingException           If the parse failed
      *                                      in InternetAddress.
@@ -269,8 +269,8 @@ public final class SenderImpl implements Sender {
      *
      * @param properties      a Properties object represents
      *                        a persistent set of TLS or SSL properties
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
+     * @param senderEmail     a sender E-mail.
+     * @param senderEmailPass a sender E-mail password.
      * @return The Session object.
      */
     private Session getSession(
@@ -284,9 +284,7 @@ public final class SenderImpl implements Sender {
                     @Override
                     protected PasswordAuthentication
                     getPasswordAuthentication() {
-                        return new PasswordAuthentication(
-                                senderEmail, senderEmailPass
-                        );
+                        return new PasswordAuthentication(senderEmail, senderEmailPass);
                     }
                 });
         return this.session;

@@ -78,7 +78,7 @@
             <div class="container">
                 <div class="row">
                     <div class="box">
-                        <jsp:include page="/WEB-INF/views/admin/user/message.jsp"/>
+                        <jsp:include page="/WEB-INF/views/admin/message/to_user.jsp"/>
                         <div class="clearfix"></div>
                     </div>
                 </div>

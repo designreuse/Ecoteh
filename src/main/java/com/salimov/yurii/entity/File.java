@@ -37,7 +37,7 @@ public final class File extends Model implements IFile {
     private String title;
 
     /**
-     * The url of the media.
+     * The URL of the media.
      */
     @Column(name = "url", nullable = false, unique = true)
     private String url;
@@ -72,7 +72,7 @@ public final class File extends Model implements IFile {
      * Constructor.
      *
      * @param title a title of the new file.
-     * @param url   a url of the new file.
+     * @param url   a URL of the new file.
      */
     public File(
             final String title,
@@ -87,7 +87,7 @@ public final class File extends Model implements IFile {
      * Constructor.
      *
      * @param title a title of the new file.
-     * @param url   a url of the new file.
+     * @param url   a URL of the new file.
      * @param type  a type of the new file.
      */
     public File(
@@ -165,8 +165,8 @@ public final class File extends Model implements IFile {
 
     /**
      * Sets a new title to the media.
-     * If parameter title is blank, then sets {@code null}.
-     * Also title translates and sets to url.
+     * If parameter title is blank, then sets empty string.
+     * Also title translates and sets to URL.
      *
      * @param title a new title to the media.
      */
@@ -179,9 +179,9 @@ public final class File extends Model implements IFile {
     }
 
     /**
-     * Returns a url of the media.
+     * Returns a URL of the file.
      *
-     * @return The media url.
+     * @return The file URL.
      */
     @Override
     public String getUrl() {
@@ -189,10 +189,10 @@ public final class File extends Model implements IFile {
     }
 
     /**
-     * Sets a new url to the media.
-     * If parameter url is blank, then sets {@code null}.
+     * Sets a new URL to the media.
+     * If parameter URL is blank, then sets empty string.
      *
-     * @param url a new url to the media.
+     * @param url a new URL to the media.
      */
     @Override
     public void setUrl(final String url) {
@@ -211,7 +211,7 @@ public final class File extends Model implements IFile {
 
     /**
      * Sets a new type to the file.
-     * If parameter url is {@code null}, then sets {@code FileType.OTHER}.
+     * If parameter URL is empty string, then sets {@code FileType.OTHER}.
      *
      * @param type a new file type.
      */
@@ -221,8 +221,8 @@ public final class File extends Model implements IFile {
     }
 
     /**
-     * Translates and sets a new url to the file.
-     * If parameter url is blank, then sets {@code null}.
+     * Translates and sets a new URL to the file.
+     * If parameter URL is blank, then sets empty string.
      *
      * @param url a url to translate and set.
      */

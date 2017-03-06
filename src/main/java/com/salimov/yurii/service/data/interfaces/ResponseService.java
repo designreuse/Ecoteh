@@ -12,8 +12,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Response
- * @see DataService
  */
 public interface ResponseService extends DataService<Response> {
 
@@ -23,7 +21,6 @@ public interface ResponseService extends DataService<Response> {
      * @param id       a id of the response to update.
      * @param response a response to update.
      * @return The updating response with parameter id.
-     * @see Response
      */
     Response update(
             final long id,
@@ -36,7 +33,6 @@ public interface ResponseService extends DataService<Response> {
      * @param responses the responses to sort.
      * @param revers    Sort in descending or ascending.
      * @return The sorted list of responses.
-     * @see Response
      */
     List<Response> sortByDate(
             final Collection<Response> responses,
@@ -48,7 +44,6 @@ public interface ResponseService extends DataService<Response> {
      *
      * @param revers Sort in descending or ascending.
      * @return The sorted list of responses.
-     * @see Response
      */
     List<Response> getAndSortByDate(final boolean revers);
 
@@ -59,7 +54,6 @@ public interface ResponseService extends DataService<Response> {
      * @param startDate  a initial date.
      * @param finishDate a final date.
      * @return The filtered list of responses.
-     * @see Response
      */
     List<Response> filterByDate(
             final Collection<Response> responses,
@@ -73,7 +67,6 @@ public interface ResponseService extends DataService<Response> {
      * @param startDate  a initial date.
      * @param finishDate a final date.
      * @return The filtered list of responses.
-     * @see Response
      */
     List<Response> getAndFilterByDate(
             final Date startDate,

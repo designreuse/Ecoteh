@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CaptchaImpl
  */
 public interface Captcha {
 

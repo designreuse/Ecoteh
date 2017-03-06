@@ -13,10 +13,6 @@ import org.springframework.stereotype.Service;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Message
- * @see MessageService
- * @see DataServiceImpl
- * @see MessageDao
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
@@ -27,8 +23,6 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
      * Initializes a implementations of the interfaces.
      *
      * @param dao a implementation of the {@link MessageDao} interface.
-     * @see MessageDao
-     * @see Message
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -40,7 +34,6 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
      * Return Class object of {@link Message} or subclasses.
      *
      * @return The Class object of {@link Message} or subclasses.
-     * @see Message
      */
     @Override
     protected Class<Message> getModelClass() {
@@ -55,7 +48,6 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
      * @param duplicate          is validate input model by duplicate.
      * @return Returns {@code true} if the model is valid,
      * otherwise returns {@code false}.
-     * @see Message
      */
     @Override
     protected boolean validated(

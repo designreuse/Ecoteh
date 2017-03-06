@@ -11,8 +11,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DataRepository
- * @see File
  */
 public interface FileRepository extends DataRepository<File> {
 
@@ -22,7 +20,6 @@ public interface FileRepository extends DataRepository<File> {
      *
      * @param title a title of the photo to return.
      * @return The object of class {@link File}.
-     * @see File
      */
     File findByTitle(final String title);
 
@@ -30,9 +27,8 @@ public interface FileRepository extends DataRepository<File> {
      * Returns photo from a database,
      * which matches the parameter url.
      *
-     * @param url a url of the photo to return.
+     * @param url a URL of the photo to return.
      * @return The object of class {@link File}.
-     * @see File
      */
     File findByUrl(final String url);
 
@@ -41,7 +37,6 @@ public interface FileRepository extends DataRepository<File> {
      * which matches the parameter title.
      *
      * @param title a title of the photo to remove.
-     * @see File
      */
     void deleteByTitle(final String title);
 
@@ -49,8 +44,7 @@ public interface FileRepository extends DataRepository<File> {
      * Removes photo from a database,
      * which matches the parameter url.
      *
-     * @param url a url of the photo to remove.
-     * @see File
+     * @param url a URL of the photo to remove.
      */
     void deleteByUrl(final String url);
 
@@ -59,7 +53,6 @@ public interface FileRepository extends DataRepository<File> {
      *
      * @param type a type of files to return.
      * @return The files with the type.
-     * @see FileType
      */
     List<File> findAllByType(final FileType type);
 }

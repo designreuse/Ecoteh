@@ -10,15 +10,12 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
  */
 public final class ContentComparator {
 
     /**
      * The class implements a method for working
      * with comparator for {@link Content} by title.
-     *
-     * @see Content
      */
     public final static class ByTitle<T extends Content> implements Comparator<T> {
 
@@ -30,7 +27,6 @@ public final class ContentComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Content
          */
         @Override
         public int compare(final T content1, final T content2) {
@@ -50,9 +46,7 @@ public final class ContentComparator {
 
     /**
      * The class implements a method for working
-     * with comparator for {@link Content} by url.
-     *
-     * @see Content
+     * with comparator for {@link Content} by URL.
      */
     public final static class ByUrl<T extends Content> implements Comparator<T> {
 
@@ -64,7 +58,6 @@ public final class ContentComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Content
          */
         @Override
         public int compare(final T content1, final T content2) {

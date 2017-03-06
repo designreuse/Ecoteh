@@ -19,12 +19,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CategoryService
- * @see ArticleService
- * @see CompanyService
- * @see UserService
- * @see MainMVFabric
- * @see MainMVFabric
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.service")
@@ -77,8 +71,6 @@ public class SearchServiceImpl implements SearchService {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
@@ -86,8 +78,6 @@ public class SearchServiceImpl implements SearchService {
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link com.salimov.yurii.entity.Category}
      * class.
-     *
-     * @see CategoryService
      */
     private final CategoryService categoryService;
 
@@ -95,8 +85,6 @@ public class SearchServiceImpl implements SearchService {
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link com.salimov.yurii.entity.Article}
      * class.
-     *
-     * @see ArticleService
      */
     private final ArticleService articleService;
 
@@ -104,8 +92,6 @@ public class SearchServiceImpl implements SearchService {
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link com.salimov.yurii.entity.Company}
      * class.
-     *
-     * @see CompanyService
      */
     private final CompanyService companyService;
 
@@ -113,8 +99,6 @@ public class SearchServiceImpl implements SearchService {
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link com.salimov.yurii.entity.User}
      * class.
-     *
-     * @see UserService
      */
     private final UserService userService;
 
@@ -127,11 +111,6 @@ public class SearchServiceImpl implements SearchService {
      * @param articleService  a implementation of the {@link ArticleService} interface.
      * @param companyService  a implementation of the {@link CompanyService} interface.
      * @param userService     a implementation of the {@link UserService} interface.
-     * @see MainMVFabric
-     * @see CategoryService
-     * @see ArticleService
-     * @see CompanyService
-     * @see UserService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -390,7 +369,7 @@ public class SearchServiceImpl implements SearchService {
     private ModelAndView prepareDefaultSearchPage(final String keywords) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("keywords", keywords);
-        modelAndView.setViewName("client/search/result_page");
+        modelAndView.setViewName("client/search/result");
         return modelAndView;
     }
 

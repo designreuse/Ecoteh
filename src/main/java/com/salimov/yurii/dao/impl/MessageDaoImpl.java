@@ -13,8 +13,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see MessageDao
- * @see Message
  */
 @Repository
 public final class MessageDaoImpl extends DataDaoImpl<Message> implements MessageDao {
@@ -25,7 +23,6 @@ public final class MessageDaoImpl extends DataDaoImpl<Message> implements Messag
      * @param repository a implementation of the interface provides
      *                   a set of JPA methods for working {@link Message}
      *                   objects with the database.
-     * @see MessageRepository
      */
     @Autowired
     public MessageDaoImpl(final MessageRepository repository) {

@@ -11,7 +11,6 @@ import java.util.Collection;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see SenderService
  */
 @Service
 public final class SenderServiceImpl implements SenderService {
@@ -70,7 +69,6 @@ public final class SenderServiceImpl implements SenderService {
      * @param text           a sender text.
      * @param recipientEmail a recipient e-mail.
      * @param sender         a sender user.
-     * @see User
      */
     @Override
     public void send(
@@ -95,7 +93,6 @@ public final class SenderServiceImpl implements SenderService {
      * @param text            a sender text.
      * @param recipientEmails a recipients e-mails.
      * @param sender          a sender user.
-     * @see User
      */
     @Override
     public void send(
@@ -120,7 +117,6 @@ public final class SenderServiceImpl implements SenderService {
      * @param text      a sender text.
      * @param recipient a recipient user.
      * @param sender    a sender user.
-     * @see User
      */
     @Override
     public void send(
@@ -141,7 +137,6 @@ public final class SenderServiceImpl implements SenderService {
      * @param text       a sender text.
      * @param recipients a recipients users.
      * @param sender     a sender user.
-     * @see User
      */
     @Override
     public void send(
@@ -163,9 +158,8 @@ public final class SenderServiceImpl implements SenderService {
      * @param subject         a sender subject.
      * @param text            a sender text.
      * @param recipients      a recipients users.
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
-     * @see User
+     * @param senderEmail     a sender E-mail.
+     * @param senderEmailPass a sender E-mail password.
      */
     @Override
     public void send(

@@ -8,8 +8,6 @@ import com.salimov.yurii.entity.Message;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Message
- * @see DataService
  */
 public interface MessageService extends DataService<Message> {
 }

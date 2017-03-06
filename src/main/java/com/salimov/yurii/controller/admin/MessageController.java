@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * The class implements a set of methods for working
- * with main ModelAndView objects and object of the {@link Message}
- * class for admins. Class methods create and return modelsAndView,
- * depending on the request. For the work used implementation
- * of the interface {@link MainMVFabric}.
+ * The class implements a set of methods for working with
+ * objects of the {@link Message} class for admins.
+ * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Message
- * @see MainMVFabric
- * @see MessageService
  */
 @Controller
-@RequestMapping(value = "/admin/messages")
+@RequestMapping(
+        value = {
+                "/admin/message",
+                "/admin/messages"
+        }
+)
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class MessageController {
@@ -35,16 +35,12 @@ public class MessageController {
     /**
      * The implementation of the interface provides a set of standard
      * methods for creates and returns the main modelAndViews for admins.
-     *
-     * @see CacheMVFabric
      */
     private final CacheMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Message} class.
-     *
-     * @see MessageService
      */
     private final MessageService messageService;
 
@@ -54,8 +50,6 @@ public class MessageController {
      *
      * @param fabric         a implementation of the {@link MainMVFabric} interface.
      * @param messageService a implementation of the {@link MessageService} interface.
-     * @see MessageService
-     * @see MainMVFabric
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -73,7 +67,6 @@ public class MessageController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Message
      */
     @RequestMapping(
             value = {"", "/", "/all"},
@@ -82,19 +75,18 @@ public class MessageController {
     public ModelAndView getMessagesPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("messages", this.messageService.getAll(false));
-        modelAndView.setViewName("admin/message/all_page");
+        modelAndView.setViewName("admin/message/all");
         return modelAndView;
     }
 
     /**
-     * Removes message with url and redirects by id /admin/messages.
+     * Removes message with id and redirects by URL /admin/messages.
      * Request mapping: /admin/message/delete/{id}
      * Method: GET
      *
      * @param id           a id of the message to remove.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Message
      */
     @RequestMapping(
             value = "/delete/{id}",
@@ -110,13 +102,12 @@ public class MessageController {
     }
 
     /**
-     * Removes all messages and redirects by url /admin/messages.
+     * Removes all messages and redirects by URL /admin/messages.
      * Request mapping: /admin/message/delete/all
      * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Message
      */
     @RequestMapping(
             value = "/delete/all",

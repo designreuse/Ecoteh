@@ -28,11 +28,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Article
- * @see ArticleService
- * @see ContentServiceImpl
- * @see DataServiceImpl
- * @see ArticleDao
  */
 @Service
 @ComponentScan(
@@ -46,9 +41,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     /**
      * The interface provides a set of standard methods
      * for working {@link Article} objects a the database.
-     *
-     * @see ArticleDao
-     * @see Article
      */
     private final ArticleDao dao;
 
@@ -57,7 +49,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param dao         a implementation of the {@link ArticleDao} interface.
      * @param fileService a implementation of the {@link FileService} interface.
-     * @see ArticleDao
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -77,7 +68,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @return The article with the parameter number.
      * @throws IllegalArgumentException Throw exception when parameter number is blank.
      * @throws NullPointerException     Throw exception when article with parameter id is not exist.
-     * @see Article
      */
     @Override
     @Transactional(readOnly = true)
@@ -102,7 +92,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param articles the articles to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     @Override
     @Transactional(readOnly = true)
@@ -119,7 +108,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param articles the articles to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     @Override
     @Transactional(readOnly = true)
@@ -135,7 +123,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     @Override
     @Transactional(readOnly = true)
@@ -148,7 +135,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     @Override
     @Transactional(readOnly = true)
@@ -166,7 +152,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param startDate  a initial date.
      * @param finishDate a final date.
      * @return The filtered list of articles.
-     * @see Article
      */
     @Override
     @Transactional
@@ -200,8 +185,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param articles the articles to filter.
      * @param category a category filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     @Override
     @Transactional
@@ -222,8 +205,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param articles   the articles to filter.
      * @param categories a categories filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     @Override
     @Transactional
@@ -256,7 +237,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param startDate  a initial date.
      * @param finishDate a final date.
      * @return The filtered list of articles.
-     * @see Article
      */
     @Override
     @Transactional
@@ -272,8 +252,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param category a category filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     @Override
     @Transactional
@@ -286,8 +264,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param categories a categories filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     @Override
     @Transactional
@@ -303,7 +279,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param articles the articles to filter.
      * @return The list of articles.
-     * @see Article
      */
     @Override
     @Transactional
@@ -326,7 +301,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * Removes article with parameter id.
      *
      * @param id a id of article to remove.
-     * @see Article
      */
     @Override
     @Transactional
@@ -339,7 +313,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * Removes content if title is not blank.
      *
      * @param title a title of the article to remove.
-     * @see Article
      */
     @Override
     @Transactional
@@ -352,8 +325,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     /**
      * Removes article with the parameter url.
      *
-     * @param url a url of the article to remove.
-     * @see Article
+     * @param url a URL of the article to remove.
      */
     @Override
     @Transactional
@@ -368,7 +340,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * Removes article if number is not blank.
      *
      * @param number a number of the article to remove.
-     * @see Article
      */
     @Override
     @Transactional
@@ -383,7 +354,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * Removes article if it is not {@code null}.
      *
      * @param article the article to remove.
-     * @see Article
      */
     @Override
     @Transactional
@@ -396,8 +366,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
 
     /**
      * Removes all articles.
-     *
-     * @see Article
      */
     @Override
     @Transactional

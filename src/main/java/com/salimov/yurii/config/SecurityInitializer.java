@@ -9,9 +9,6 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see SecurityConfig
- * @see RootConfig
- * @see WebConfig
  */
 public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer {
 }

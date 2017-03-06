@@ -78,7 +78,7 @@ public class StyleController {
     public ModelAndView getStylesToEdit() {
         ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("styles", this.styleService.get());
-        modelAndView.setViewName("admin/file/edit_style");
+        modelAndView.setViewName("admin/style/edit");
         return modelAndView;
     }
 

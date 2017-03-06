@@ -19,7 +19,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see MainMVFabric
  */
 @Service
 @SuppressWarnings("SpringMVCViewInspection")
@@ -28,48 +27,36 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link Article}.
-     *
-     * @see ArticleService
      */
     private final ArticleService articleService;
 
     /**
      * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link Category}.
-     *
-     * @see CategoryService
      */
     private final CategoryService categoryService;
 
     /**
      * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link Company}.
-     *
-     * @see CompanyService
      */
     private final CompanyService companyService;
 
     /**
      * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link File}.
-     *
-     * @see FileService
      */
     private final FileService fileService;
 
     /**
      * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link Response}.
-     *
-     * @see ResponseService
      */
     private final ResponseService responseService;
 
     /**
      * The interface of the service layer, describes a set of methods
      * for working with objects of the class {@link User}.
-     *
-     * @see UserService
      */
     private final UserService userService;
 
@@ -82,11 +69,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * @param fileService     a implementation of the {@link FileService} interface.
      * @param responseService a implementation of the {@link ResponseService} interface.
      * @param userService     a implementation of the {@link UserService} interface.
-     * @see ArticleService
-     * @see CategoryService
-     * @see CompanyService
-     * @see UserService
-     * @see ResponseService
      */
     public MainMVFabricImpl(
             final ArticleService articleService,
@@ -120,7 +102,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject("print_partners", 6);
         modelAndView.addObject("responses", this.responseService.getAndSortByDate(true));
         modelAndView.addObject("print_responses", 3);
-        modelAndView.setViewName("client/main/index_page");
+        modelAndView.setViewName("client/main/index");
         return modelAndView;
     }
 
@@ -128,12 +110,11 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with all categories.
      *
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @Override
     public ModelAndView allCategoriesPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.setViewName("client/category/all_page");
+        modelAndView.setViewName("client/category/all");
         return modelAndView;
     }
 
@@ -141,12 +122,11 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with all articles sorted by date.
      *
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @Override
     public ModelAndView allArticlesPage() {
         final ModelAndView modelAndView = allSortByTitleArticlesPage(false);
-        modelAndView.setViewName("client/article/all_page");
+        modelAndView.setViewName("client/article/all");
         return modelAndView;
     }
 
@@ -176,7 +156,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
             default:
                 modelAndView = allArticlesPage();
         }
-        modelAndView.setViewName("client/article/all_page");
+        modelAndView.setViewName("client/article/all");
         return modelAndView;
     }
 
@@ -184,7 +164,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with information about main company.
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @Override
     public ModelAndView aboutCompanyPage() {
@@ -199,7 +178,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
             personnel = this.userService.getPersonnel();
         }
         modelAndView.addObject("users_list", personnel);
-        modelAndView.setViewName("client/company/main_page");
+        modelAndView.setViewName("client/company/main");
         return modelAndView;
     }
 
@@ -213,7 +192,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company mainCompany = this.companyService.getMainCompany();
         modelAndView.addObject("company", mainCompany);
-        modelAndView.setViewName("client/company/contacts_page");
+        modelAndView.setViewName("client/company/main_contacts");
         return modelAndView;
     }
 
@@ -221,7 +200,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with all partners.
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @Override
     public ModelAndView allPartnersPage() {
@@ -245,21 +223,20 @@ public final class MainMVFabricImpl implements MainMVFabric {
                 )
         );
         modelAndView.addObject("revers", !revers);
-        modelAndView.setViewName("client/company/all_page");
+        modelAndView.setViewName("client/company/all");
         return modelAndView;
     }
 
     /**
      * Creates and returns page with one category with parameter url.
      *
-     * @param url a url of the category to return.
+     * @param url a URL of the category to return.
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @Override
     public ModelAndView categoryPage(final String url) {
         final ModelAndView modelAndView = categoryWithSortByTitleArticlesPage(url, false);
-        modelAndView.setViewName("client/category/one_page");
+        modelAndView.setViewName("client/category/one");
         return modelAndView;
     }
 
@@ -292,16 +269,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
             default:
                 modelAndView = categoryPage(url);
         }
-        modelAndView.setViewName("client/category/one_page");
+        modelAndView.setViewName("client/category/one");
         return modelAndView;
     }
 
     /**
      * Creates and returns page with one article with parameter url.
      *
-     * @param url a url of the article to return.
+     * @param url a URL of the article to return.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @Override
     public ModelAndView articleByUrlPage(final String url) {
@@ -315,7 +291,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
      *
      * @param number a number of the article to return.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @Override
     public ModelAndView articleByNumberPage(final String number) {
@@ -327,16 +302,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with one partner with parameter url.
      *
-     * @param url a url of the partner to return.
+     * @param url a URL of the partner to return.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @Override
     public ModelAndView partnerPage(final String url) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company company = this.companyService.getByUrl(url, isValidContent());
         modelAndView.addObject("company", company);
-        modelAndView.setViewName("client/company/one_page");
+        modelAndView.setViewName("client/company/one");
         return modelAndView;
     }
 
@@ -344,7 +318,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with all responses.
      *
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @Override
     public ModelAndView allResponsesPage() {
@@ -368,7 +341,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
                 )
         );
         modelAndView.addObject("revers", !revers);
-        modelAndView.setViewName("client/response/all_page");
+        modelAndView.setViewName("client/response/all");
         return modelAndView;
     }
 
@@ -386,12 +359,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
         return modelAndView;
     }
 
-    /**
-     * Adds authenticated user to the modelAndView.
-     *
-     * @param modelAndView a model and view to update.
-     * @see User
-     */
     /**
      * Adds authenticated user to the modelAndView.
      *
@@ -414,9 +381,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         return sortArticlesPage(
                 "title", revers,
                 this.articleService.sortByTitle(
-                        this.articleService.getAll(
-                                isValidContent()
-                        ),
+                        this.articleService.getAll(isValidContent()),
                         revers
                 )
         );
@@ -434,9 +399,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         return sortArticlesPage(
                 "date", revers,
                 this.articleService.sortByDate(
-                        this.articleService.getAll(
-                                isValidContent()
-                        ),
+                        this.articleService.getAll(isValidContent()),
                         revers
                 )
         );
@@ -579,7 +542,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
             articles.remove(article);
             modelAndView.addObject("articles", articles);
         }
-        modelAndView.setViewName("client/article/one_page");
+        modelAndView.setViewName("client/article/one");
         return modelAndView;
     }
 

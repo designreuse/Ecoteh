@@ -7,7 +7,6 @@ import java.util.concurrent.ThreadFactory;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Cache
  */
 final class ThreadDaemonFactory implements ThreadFactory {
 

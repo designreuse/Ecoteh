@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see ContentProperties
  */
 @Configuration
 @PropertySource("classpath:content.properties")

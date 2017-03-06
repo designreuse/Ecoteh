@@ -9,9 +9,6 @@ import com.salimov.yurii.entity.File;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Category
- * @see ContentService
- * @see DataService
  */
 public interface CategoryService extends ContentService<Category> {
 }

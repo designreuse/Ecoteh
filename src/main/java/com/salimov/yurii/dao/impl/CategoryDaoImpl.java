@@ -13,10 +13,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CategoryDao
- * @see Category
- * @see CategoryRepository
- * @see DataDaoImpl
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
@@ -25,8 +21,6 @@ public final class CategoryDaoImpl extends DataDaoImpl<Category> implements Cate
     /**
      * The interface provides a set of JPA methods
      * for working {@link Category} objects with a database.
-     *
-     * @see CategoryRepository
      */
     private final CategoryRepository repository;
 
@@ -35,7 +29,6 @@ public final class CategoryDaoImpl extends DataDaoImpl<Category> implements Cate
      *
      * @param repository a implementation of the interface provides a set of JPA methods
      *                   for working {@link Category} objects with a database.
-     * @see CategoryRepository
      */
     @Autowired
     public CategoryDaoImpl(final CategoryRepository repository) {
@@ -48,7 +41,6 @@ public final class CategoryDaoImpl extends DataDaoImpl<Category> implements Cate
      *
      * @param title a title of the category to return.
      * @return The category with the parameter title.
-     * @see Category
      */
     @Override
     public Category getByTitle(final String title) {
@@ -58,9 +50,8 @@ public final class CategoryDaoImpl extends DataDaoImpl<Category> implements Cate
     /**
      * Returns category with the parameter url from a database.
      *
-     * @param url a url of the category to return.
+     * @param url a URL of the category to return.
      * @return The category with the parameter url.
-     * @see Category
      */
     @Override
     public Category getByUrl(final String url) {
@@ -71,7 +62,6 @@ public final class CategoryDaoImpl extends DataDaoImpl<Category> implements Cate
      * Removes category with the parameter title from a database.
      *
      * @param title a title of the category to remove.
-     * @see Category
      */
     @Override
     public void removeByTitle(final String title) {
@@ -81,8 +71,7 @@ public final class CategoryDaoImpl extends DataDaoImpl<Category> implements Cate
     /**
      * Removes category with the parameter url from a database.
      *
-     * @param url a url of the category to remove.
-     * @see Category
+     * @param url a URL of the category to remove.
      */
     @Override
     public void removeByUrl(final String url) {

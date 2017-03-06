@@ -10,8 +10,6 @@ import com.salimov.yurii.entity.File;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see IModel
- * @see com.salimov.yurii.entity.Content
  */
 public interface IContent extends IModel {
 
@@ -30,16 +28,16 @@ public interface IContent extends IModel {
     void setTitle(final String title);
 
     /**
-     * Returns a url of the content.
+     * Returns a URL of the content.
      *
-     * @return The content url.
+     * @return The content URL.
      */
     String getUrl();
 
     /**
-     * Sets a new url to the content.
+     * Sets a new URL to the content.
      *
-     * @param url a new url to the content.
+     * @param url a new URL to the content.
      */
     void setUrl(final String url);
 
@@ -89,7 +87,6 @@ public interface IContent extends IModel {
      * Sets a new logo to the content.
      *
      * @param logo a new logo to the content.
-     * @see File
      */
     void setLogo(final File logo);
 

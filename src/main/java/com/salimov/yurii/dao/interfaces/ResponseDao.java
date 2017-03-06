@@ -8,9 +8,6 @@ import com.salimov.yurii.entity.Response;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.dao.impl.ResponseDaoImpl
- * @see DataDao
- * @see Response
  */
 public interface ResponseDao extends DataDao<Response> {
 }

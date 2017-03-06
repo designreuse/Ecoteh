@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DisableException
- * @see DuplicateException
  */
 @ControllerAdvice
 public class AdviceController {
@@ -36,8 +34,6 @@ public class AdviceController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
@@ -154,7 +150,6 @@ public class AdviceController {
      * @param ex      an intercepted exception.
      * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
-     * @see DuplicateException
      */
     @ExceptionHandler(DuplicateException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
@@ -171,7 +166,6 @@ public class AdviceController {
      * @param ex      an intercepted exception.
      * @param request to provide requested information for HTTP servlets.
      * @return The ModelAndView object with information about exception.
-     * @see DisableException
      */
     @ExceptionHandler(DisableException.class)
     @ResponseStatus(value = HttpStatus.LOCKED)
@@ -240,7 +234,7 @@ public class AdviceController {
         }
         modelAndView.addObject("status", status.value());
         modelAndView.addObject("message", messageError);
-        modelAndView.setViewName("error/error_page");
+        modelAndView.setViewName("error/error");
         return modelAndView;
     }
 
@@ -251,10 +245,7 @@ public class AdviceController {
      */
     private static void logRequest(final HttpServletRequest request) {
         if (request != null) {
-            LOGGER.error(
-                    request.getRemoteAddr()
-                            + " : " + request.getRequestURL()
-            );
+            LOGGER.error(request.getRemoteAddr() + " : " + request.getRequestURL());
         }
     }
 

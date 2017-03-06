@@ -1,5 +1,6 @@
 package com.salimov.yurii.controller.admin;
 
+import com.googlecode.htmlcompressor.compressor.Compressor;
 import com.salimov.yurii.entity.Article;
 import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.entity.File;
@@ -9,6 +10,7 @@ import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
+import com.salimov.yurii.util.compressor.HtmlPress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -23,21 +25,20 @@ import org.springframework.web.servlet.ModelAndView;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * The class implements a set of methods for working
- * with main ModelAndView objects and object of {@link Article} class
- * or subclasses for admins. Class methods create and return modelsAndView,
- * depending on the request.
+ * The class implements a set of methods for working with
+ * objects of {@link Article} class or subclasses for admins.
+ * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Article
- * @see ArticleService
- * @see CategoryService
- * @see FileService
- * @see MainMVFabric
  */
 @Controller
-@RequestMapping(value = "/admin/article")
+@RequestMapping(
+        value = {
+                "/admin/article",
+                "/admin/articles"
+        }
+)
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ArticleController {
@@ -45,32 +46,24 @@ public class ArticleController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Article} class.
-     *
-     * @see ArticleService
      */
     private final ArticleService articleService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Category} class.
-     *
-     * @see CategoryService
      */
     private final CategoryService categoryService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link File} class.
-     *
-     * @see FileService
      */
     private final FileService fileService;
 
@@ -81,9 +74,7 @@ public class ArticleController {
      * @param fabric          a implementation of the {@link MainMVFabric} interface.
      * @param articleService  a implementation of the {@link ArticleService} interface.
      * @param categoryService a implementation of the {@link CategoryService} interface.
-     * @see MainMVFabric
-     * @see ArticleService
-     * @see CategoryService
+     * @param fileService     a implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -105,7 +96,6 @@ public class ArticleController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/new",
@@ -114,12 +104,12 @@ public class ArticleController {
     public ModelAndView getNewArticlePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("categories", this.categoryService.getAll(false));
-        modelAndView.setViewName("admin/article/new_page");
+        modelAndView.setViewName("admin/article/add");
         return modelAndView;
     }
 
     /**
-     * Adds new article and redirects by url /admin/article/{url}.
+     * Adds new article and redirects by URL /admin/article/{url}.
      * Request mapping: /admin/article/add
      * Method: POST
      *
@@ -133,9 +123,6 @@ public class ArticleController {
      * @param isValid       a validated of the new article.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Article
-     * @see Category
-     * @see File
      */
     @RequestMapping(
             value = "/add",
@@ -154,7 +141,13 @@ public class ArticleController {
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-        final Article article = new Article(title, description, text, keywords, number);
+        final Compressor compressor = new HtmlPress();
+        final Article article = new Article(
+                title,
+                compressor.compress(description),
+                compressor.compress(text),
+                keywords, number
+        );
         article.setValidated(isValid);
         article.setCategory(category);
         if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
@@ -168,7 +161,7 @@ public class ArticleController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/article/add" is not supported!"
      * Request mapping: /admin/article/add
      * Method: GET
@@ -181,9 +174,7 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public void addArticle() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/article/add\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/article/add\" is not supported!");
     }
 
     /**
@@ -193,7 +184,6 @@ public class ArticleController {
      *
      * @param url a url of the article to edit.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/edit/{url}",
@@ -203,30 +193,27 @@ public class ArticleController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("article", this.articleService.getByUrl(url, false));
         modelAndView.addObject("categories", this.categoryService.getAll(false));
-        modelAndView.setViewName("admin/article/edit_page");
+        modelAndView.setViewName("admin/article/edit");
         return modelAndView;
     }
 
     /**
      * Updates and save the article with url
-     * and redirects by url /admin/article/{url}.
+     * and redirects by URL /admin/article/{url}.
      * Request mapping: /admin/article/update
      * Method: POST
      *
-     * @param url           a url of the article to update.
+     * @param url           a URL of the article to update.
      * @param title         a new title to the article.
      * @param description   a new description to the article.
      * @param text          a new text to the article.
      * @param keywords      a new keywords to the article.
      * @param number        a new number to the article.
-     * @param categoryUrl   a category url of the article.
+     * @param categoryUrl   a category URL of the article.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the article.
      * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Article
-     * @see Category
-     * @see File
      */
     @RequestMapping(
             value = "/update",
@@ -246,7 +233,13 @@ public class ArticleController {
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-        final Article article = new Article(title, description, text, keywords, number);
+        final Compressor compressor = new HtmlPress();
+        final Article article = new Article(
+                title,
+                compressor.compress(description),
+                compressor.compress(text),
+                keywords, number
+        );
         article.setValidated(isValid);
         article.setCategory(category);
         if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
@@ -260,7 +253,7 @@ public class ArticleController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/article/update" is not supported!"
      * Request mapping: /admin/article/update
      * Method: GET
@@ -273,20 +266,17 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public void updateArticle() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/article/update\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/article/update\" is not supported!");
     }
 
     /**
-     * Removes article with url and redirects by url /admin/.
+     * Removes article with url and redirects by URL /admin/.
      * Request mapping: /admin/article/delete/{url}
      * Method: GET
      *
-     * @param url          a url of the article to remove.
+     * @param url          a URL of the article to remove.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/delete/{url}",
@@ -303,13 +293,12 @@ public class ArticleController {
     }
 
     /**
-     * Removes all articles and redirects by url /admin/.
+     * Removes all articles and redirects by URL /admin/.
      * Request mapping: /admin/article/delete/all
      * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/delete/all",

@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see SeoService
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.service")
@@ -43,24 +42,18 @@ public final class SeoServiceImpl implements SeoService {
     /**
      * The describes a set of methods for working
      * with objects of the {@link Company} class.
-     *
-     * @see CompanyService
      */
     private final CompanyService companyService;
 
     /**
      * The describes a set of methods for working
      * with objects of the {@link Category} class.
-     *
-     * @see CategoryService
      */
     private final CategoryService categoryService;
 
     /**
      * The describes a set of methods for working
      * with objects of the {@link Article} class.
-     *
-     * @see ArticleService
      */
     private final ArticleService articleService;
 
@@ -71,9 +64,6 @@ public final class SeoServiceImpl implements SeoService {
      * @param companyService  a implementation of the {@link CompanyService} interface.
      * @param categoryService a implementation of the {@link CategoryService} interface.
      * @param articleService  a implementation of the {@link ArticleService} interface.
-     * @see CompanyService
-     * @see CategoryService
-     * @see ArticleService
      */
     @Autowired
     public SeoServiceImpl(

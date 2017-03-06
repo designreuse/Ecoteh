@@ -11,9 +11,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.dao.impl.ArticleDaoImpl
- * @see ContentDao
- * @see Article
  */
 public interface ArticleDao extends ContentDao<Article> {
 
@@ -22,7 +19,6 @@ public interface ArticleDao extends ContentDao<Article> {
      *
      * @param number a title of the article to return.
      * @return The article with parameter title.
-     * @see Article
      */
     Article getByNumber(final String number);
 
@@ -31,8 +27,6 @@ public interface ArticleDao extends ContentDao<Article> {
      *
      * @param id a category id of the article to return.
      * @return The article with parameter category id.
-     * @see Article
-     * @see Category
      */
     List<Article> getByCategoryId(final Long id);
 
@@ -40,7 +34,6 @@ public interface ArticleDao extends ContentDao<Article> {
      * Removes article with the parameter number from a database.
      *
      * @param number a number of the article to remove.
-     * @see Article
      */
     void removeByNumber(final String number);
 }

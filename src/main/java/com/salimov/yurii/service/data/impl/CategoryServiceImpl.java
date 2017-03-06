@@ -25,11 +25,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Category
- * @see CategoryService
- * @see ContentServiceImpl
- * @see DataServiceImpl
- * @see CategoryDao
  */
 @Service
 @ComponentScan(
@@ -44,9 +39,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * The interface of the service layer,
      * describes a set of methods for working
      * with objects of the class {@link Article}.
-     *
-     * @see ArticleService
-     * @see Article
      */
     private final ArticleService articleService;
 
@@ -56,8 +48,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * @param dao            a implementation  of the {@link CategoryDao} interface.
      * @param articleService a implementation of the {@link ArticleService} interface.
      * @param fileService    a implementation of the {@link FileService} interface.
-     * @see CategoryDao
-     * @see ArticleService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -73,10 +63,9 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     /**
      * Returns category with the parameter url.
      *
-     * @param url     a url of the category to return.
+     * @param url     a URL of the category to return.
      * @param isValid is get valid category or not.
      * @return The category with the parameter url.
-     * @see Category
      */
     @Override
     @Transactional(readOnly = true)
@@ -93,7 +82,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * Removes category with parameter id.
      *
      * @param id a id of category to remove.
-     * @see Article
      */
     @Override
     @Transactional
@@ -106,7 +94,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * Removes content if title is not blank.
      *
      * @param title a title of the category to remove.
-     * @see Category
      */
     @Override
     @Transactional
@@ -119,8 +106,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     /**
      * Removes category with the parameter url.
      *
-     * @param url a url of the category to remove.
-     * @see Category
+     * @param url a URL of the category to remove.
      */
     @Override
     @Transactional
@@ -135,7 +121,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * Also deletes file file if category file is not {@code null}
      *
      * @param category the category to remove.
-     * @see Category
      */
     @Override
     @Transactional
@@ -152,7 +137,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      *
      * @param categories a categories to filter.
      * @return The list of categories.
-     * @see Category
      */
     @Override
     @Transactional

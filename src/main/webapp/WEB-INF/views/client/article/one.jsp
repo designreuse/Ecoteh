@@ -44,14 +44,15 @@
                             <a href="<c:url value="/admin/article/edit/${article.url}"/>"
                                title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-edit yellow"
-                                          aria-hidden="true"></span>&nbsp;Редактировать
+                                    <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                                    &nbsp;Редактировать
                                 </button>
                             </a>&nbsp;&nbsp;
                             <a href="<c:url value="/admin/article/delete/${article.url}"/>"
                                title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
+                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                    &nbsp;Удалить
                                 </button>
                             </a>
                         </div>
@@ -98,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="/WEB-INF/views/client/article/article_slider.jsp"/>
+        <jsp:include page="/WEB-INF/views/client/article/slider.jsp"/>
     </div>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>

@@ -8,8 +8,6 @@ import com.salimov.yurii.entity.Response;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DataRepository
- * @see Response
  */
 public interface ResponseRepository extends DataRepository<Response> {
 }

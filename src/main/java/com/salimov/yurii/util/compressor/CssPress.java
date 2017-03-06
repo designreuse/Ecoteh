@@ -13,6 +13,8 @@ public final class CssPress extends Press implements Compressor {
 
     /**
      * Initializes the Compressor object.
+     *
+     * @return The CSS compressor instance.
      */
     @Override
     protected Compressor initCompress() {

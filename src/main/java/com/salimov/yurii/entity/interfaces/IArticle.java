@@ -11,8 +11,6 @@ import java.util.Date;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see IContent
- * @see Article
  */
 public interface IArticle extends IContent {
 
@@ -74,7 +72,6 @@ public interface IArticle extends IContent {
      * Sets a new category to the article.
      *
      * @param category a new category to the article.
-     * @see Category
      */
     void setCategory(final Category category);
 
@@ -82,7 +79,6 @@ public interface IArticle extends IContent {
      * Returns a category of the article.
      *
      * @return The article category.
-     * @see Category
      */
     Category getCategory();
 

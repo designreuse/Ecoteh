@@ -38,7 +38,7 @@ public abstract class Content extends Model implements IContent {
     private String title;
 
     /**
-     * The url of a content.
+     * The URL of a content.
      */
     @Column(name = "url", nullable = false, unique = true)
     private String url;
@@ -168,8 +168,8 @@ public abstract class Content extends Model implements IContent {
 
     /**
      * Sets a new title to the content.
-     * If parameter title is blank, then sets {@code null}.
-     * Also title translates and sets to url.
+     * If parameter title is blank, then sets empty string.
+     * Also title translates and sets to URL.
      *
      * @param title a new title to the content.
      */
@@ -182,9 +182,9 @@ public abstract class Content extends Model implements IContent {
     }
 
     /**
-     * Returns a url of the content.
+     * Returns a URL of the content.
      *
-     * @return The content url.
+     * @return The content URL.
      */
     @Override
     public String getUrl() {
@@ -192,10 +192,10 @@ public abstract class Content extends Model implements IContent {
     }
 
     /**
-     * Sets a new url to the content.
-     * If parameter url is blank, then sets {@code null}.
+     * Sets a new URL to the content.
+     * If parameter URL is blank, then sets empty string.
      *
-     * @param url a new url to the content.
+     * @param url a new URL to the content.
      */
     @Override
     public void setUrl(final String url) {
@@ -203,7 +203,7 @@ public abstract class Content extends Model implements IContent {
     }
 
     /**
-     * Translates value and sets to url.
+     * Translates value and sets to URL.
      *
      * @param value a value to translate.
      */
@@ -224,7 +224,7 @@ public abstract class Content extends Model implements IContent {
 
     /**
      * Sets a new description to the content.
-     * If parameter description is blank, then sets {@code null}.
+     * If parameter description is blank, then sets empty string.
      *
      * @param description a new description to the content.
      */
@@ -245,7 +245,7 @@ public abstract class Content extends Model implements IContent {
 
     /**
      * Sets a new keywords to the content.
-     * If parameter keywords is blank, then sets {@code null}.
+     * If parameter keywords is blank, then sets empty string.
      *
      * @param keywords a new keywords to the content.
      */
@@ -257,7 +257,7 @@ public abstract class Content extends Model implements IContent {
     /**
      * Returns a logo of the content.
      *
-     * @return The content logo URL.
+     * @return The content logo.
      */
     @Override
     public File getLogo() {

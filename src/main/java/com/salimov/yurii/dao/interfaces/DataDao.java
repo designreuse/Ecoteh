@@ -8,17 +8,9 @@ import java.util.Collection;
  * The interface provides a set of standard methods for working models objects
  * of the {@link Model} class or subclasses with the database.
  *
- * @param <T>  Entity type, extends {@link Model}.
+ * @param <T> Entity type, extends {@link Model}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see ArticleDao
- * @see CategoryDao
- * @see CompanyDao
- * @see FileDao
- * @see ResponseDao
- * @see UserDao
- * @see MessageDao
- * @see Model
  */
 public interface DataDao<T extends Model> {
 
@@ -28,7 +20,6 @@ public interface DataDao<T extends Model> {
      *
      * @param model a model to add.
      * @return The saving model.
-     * @see Model
      */
     T add(final T model);
 
@@ -38,7 +29,6 @@ public interface DataDao<T extends Model> {
      *
      * @param models a model objects to add.
      * @return The saving model objects.
-     * @see Model
      */
     Collection<T> addAll(final Collection<T> models);
 
@@ -48,7 +38,6 @@ public interface DataDao<T extends Model> {
      *
      * @param model a model object to update.
      * @return The updating model.
-     * @see Model
      */
     T update(final T model);
 
@@ -58,7 +47,6 @@ public interface DataDao<T extends Model> {
      *
      * @param id a id of the model object to return.
      * @return The model object with parameter id.
-     * @see Model
      */
     T get(final long id);
 
@@ -67,7 +55,6 @@ public interface DataDao<T extends Model> {
      * or subclasses from the database.
      *
      * @return The all model objects.
-     * @see Model
      */
     Collection<T> getAll();
 
@@ -76,7 +63,6 @@ public interface DataDao<T extends Model> {
      * or subclasses with parameter id in the database.
      *
      * @param id a id model object to remove.
-     * @see Model
      */
     void remove(final long id);
 
@@ -85,7 +71,6 @@ public interface DataDao<T extends Model> {
      * or subclasses in the database.
      *
      * @param model The model object to remove.
-     * @see Model
      */
     void remove(final T model);
 
@@ -94,15 +79,12 @@ public interface DataDao<T extends Model> {
      * or subclasses in the database.
      *
      * @param models The model objects to remove.
-     * @see Model
      */
     void remove(final Collection<T> models);
 
     /**
      * Removes all model objects of the {@link Model} class
      * or subclasses in the database.
-     *
-     * @see Model
      */
     void removeAll();
 
@@ -112,7 +94,6 @@ public interface DataDao<T extends Model> {
      *
      * @param id a id model object to exists.
      * @return {@code true} if model object is exists, {@code false} otherwise.
-     * @see Model
      */
     boolean exists(final long id);
 }

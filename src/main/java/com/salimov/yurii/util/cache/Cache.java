@@ -11,9 +11,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CacheCleaner
- * @see ThreadDaemonFactory
- * @see Key
  */
 public final class Cache {
 
@@ -40,8 +37,6 @@ public final class Cache {
     /**
      * Static constructor.
      * Creates and starts ScheduledExecutorService.
-     * @see CacheCleaner
-     * @see ThreadDaemonFactory
      */
     static {
         cache = new ConcurrentHashMap<>();

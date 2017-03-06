@@ -8,8 +8,6 @@ import com.salimov.yurii.entity.Category;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DataRepository
- * @see Category
  */
 public interface CategoryRepository extends DataRepository<Category> {
 
@@ -19,7 +17,6 @@ public interface CategoryRepository extends DataRepository<Category> {
      *
      * @param title a title of the category to return.
      * @return The object of class {@link Category}.
-     * @see Category
      */
     Category findByTitle(final String title);
 
@@ -27,9 +24,8 @@ public interface CategoryRepository extends DataRepository<Category> {
      * Returns category from a database,
      * which matches the parameter url.
      *
-     * @param url a url of the category to return.
+     * @param url a URL of the category to return.
      * @return The object of class {@link Category}.
-     * @see Category
      */
     Category findByUrl(final String url);
 
@@ -39,7 +35,6 @@ public interface CategoryRepository extends DataRepository<Category> {
      * which matches the parameter title.
      *
      * @param title a title of the category to remove.
-     * @see Category
      */
     void deleteByTitle(final String title);
 
@@ -47,8 +42,7 @@ public interface CategoryRepository extends DataRepository<Category> {
      * Removes category from a database,
      * which matches the parameter url.
      *
-     * @param url a url of the category to remove.
-     * @see Category
+     * @param url a URL of the category to remove.
      */
     void deleteByUrl(final String url);
 }

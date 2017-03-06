@@ -194,7 +194,7 @@ public final class Article extends Content implements IArticle {
 
     /**
      * Sets a new text to the article.
-     * If parameter text is blank, then sets {@code null}.
+     * If parameter text is blank, then sets empty string.
      *
      * @param text a new text to the article.
      */

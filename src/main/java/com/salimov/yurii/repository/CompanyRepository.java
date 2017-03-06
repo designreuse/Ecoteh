@@ -11,8 +11,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see DataRepository
- * @see Company
  */
 public interface CompanyRepository extends DataRepository<Company> {
 
@@ -22,7 +20,6 @@ public interface CompanyRepository extends DataRepository<Company> {
      *
      * @param title a title of the company to return.
      * @return The object of class {@link Company}.
-     * @see Company
      */
     Company findByTitle(final String title);
 
@@ -30,9 +27,8 @@ public interface CompanyRepository extends DataRepository<Company> {
      * Returns company from a database,
      * which matches the parameter url.
      *
-     * @param url a title of the company to return.
+     * @param url a URL of the company to return.
      * @return The object of class {@link Company}.
-     * @see Company
      */
     Company findByUrl(final String url);
 
@@ -42,8 +38,6 @@ public interface CompanyRepository extends DataRepository<Company> {
      *
      * @param type a type of the company to return.
      * @return The object of class {@link Company}.
-     * @see Company
-     * @see CompanyType
      */
     List<Company> findByType(final CompanyType type);
 
@@ -52,7 +46,6 @@ public interface CompanyRepository extends DataRepository<Company> {
      * which matches the parameter title.
      *
      * @param title a title of the company to remove.
-     * @see Company
      */
     void deleteByTitle(final String title);
 
@@ -60,8 +53,7 @@ public interface CompanyRepository extends DataRepository<Company> {
      * Removes company from a database,
      * which matches the parameter title.
      *
-     * @param url a title of the company to remove.
-     * @see Company
+     * @param url a URL of the company to remove.
      */
     void deleteByUrl(final String url);
 }

@@ -14,10 +14,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see UserDao
- * @see User
- * @see UserRepository
- * @see DataDaoImpl
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
@@ -26,8 +22,6 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
     /**
      * The interface provides a set of JPA methods
      * for working {@link User} objects with a database.
-     *
-     * @see UserRepository
      */
     private final UserRepository repository;
 
@@ -36,7 +30,6 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
      *
      * @param repository The interface provides a set of JPA methods
      *                   for working {@link User} objects with a database.
-     * @see UserRepository
      */
     @Autowired
     public UserDaoImpl(final UserRepository repository) {
@@ -49,7 +42,6 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
      *
      * @param name a name of the user to return.
      * @return The user with parameter name.
-     * @see User
      */
     @Override
     public User getByName(final String name) {
@@ -59,9 +51,8 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
     /**
      * Returns user with the parameter url from a database.
      *
-     * @param url a url of the user to return.
-     * @return The user with parameter url.
-     * @see User
+     * @param url a URL of the user to return.
+     * @return The user with parameter URL.
      */
     @Override
     public User getByUrl(final String url) {
@@ -73,7 +64,6 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
      *
      * @param login a login of the user to return.
      * @return The user with parameter login.
-     * @see User
      */
     @Override
     public User getByLogin(final String login) {
@@ -86,7 +76,6 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
      * Removes user with the parameter name from a database.
      *
      * @param name a name of the user to remove.
-     * @see User
      */
     @Override
     public void removeByName(final String name) {
@@ -96,8 +85,7 @@ public final class UserDaoImpl extends DataDaoImpl<User> implements UserDao {
     /**
      * Removes user with the parameter url from a database.
      *
-     * @param url a url of the user to remove.
-     * @see User
+     * @param url a URL of the user to remove.
      */
     @Override
     public void removeByUrl(final String url) {

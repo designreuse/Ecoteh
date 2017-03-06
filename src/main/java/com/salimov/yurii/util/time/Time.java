@@ -17,7 +17,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see ITime
  */
 public class Time implements ITime {
 
@@ -30,12 +29,12 @@ public class Time implements ITime {
      * It is s an object for date/time formatting subclasses which formats
      * and parses dates or time in a language-independent manner.
      */
-    public static final String DATE_PATTERN = "d MMM yyyy, HH:mm";
+    private static final String DATE_PATTERN = "d MMM yyyy, HH:mm";
 
     /**
      * Represents a timezone offset, and also figures out daylight savings.
      */
-    public static final String TIME_ZONE = "GMT+3";
+    private static final String TIME_ZONE = "GMT+3";
 
     /**
      * The input time;
@@ -243,6 +242,20 @@ public class Time implements ITime {
     }
 
     /**
+     * Returns a model date in string format.
+     *
+     * @param date a date to translate in string.
+     * @return The model string-date.
+     */
+    public static String getDateToString(final Date date) {
+        return getDateToStringWithFormat(
+                date,
+                new SimpleDateFormat(DATE_PATTERN),
+                TimeZone.getTimeZone(TIME_ZONE)
+        );
+    }
+
+    /**
      * Checks whether a now time belongs at a given time interval.
      *
      * @param start  a start work time of a company.
@@ -265,20 +278,6 @@ public class Time implements ITime {
             result = false;
         }
         return result;
-    }
-
-    /**
-     * Returns a model date in string format.
-     *
-     * @param date a date to translate in string.
-     * @return The model string-date.
-     */
-    public static String getDateToString(final Date date) {
-        return getDateToStringWithFormat(
-                date,
-                new SimpleDateFormat(DATE_PATTERN),
-                TimeZone.getTimeZone(TIME_ZONE)
-        );
     }
 
     /**

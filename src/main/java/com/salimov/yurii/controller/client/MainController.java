@@ -32,8 +32,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CacheMVFabric
- * @see MainMVFabric
  */
 @SuppressWarnings("SpringMVCViewInspection")
 public abstract class MainController {
@@ -41,48 +39,36 @@ public abstract class MainController {
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link User} class.
-     *
-     * @see UserService
      */
     protected final UserService userService;
 
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     protected final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Company} class.
-     *
-     * @see CompanyService
      */
     protected final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Response} class.
-     *
-     * @see ResponseService
      */
     protected final ResponseService responseService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Message} class.
-     *
-     * @see MessageService
      */
     protected final MessageService messageService;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with E-mail.
-     *
-     * @see SenderService
      */
     protected final SenderService senderService;
 
@@ -96,12 +82,6 @@ public abstract class MainController {
      * @param responseService a implementation of the {@link ResponseService} interface.
      * @param messageService  a implementation of the {@link MessageService} interface.
      * @param senderService   a implementation of the {@link SenderService} interface.
-     * @see CompanyService
-     * @see UserService
-     * @see ResponseService
-     * @see MessageService
-     * @see SenderService
-     * @see MainMVFabric
      */
     protected MainController(
             final MainMVFabric fabric,
@@ -142,7 +122,6 @@ public abstract class MainController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @RequestMapping(
             value = "/category/all",
@@ -157,9 +136,8 @@ public abstract class MainController {
      * Request mapping: /category/{url}
      * Method: GET
      *
-     * @param url a url of the category to return.
+     * @param url a URL of the category to return.
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @RequestMapping(
             value = "/category/{url}",
@@ -174,11 +152,10 @@ public abstract class MainController {
      * Request mapping: /category/{url}
      * Method: GET
      *
-     * @param url     a url of the category to return.
+     * @param url     a URL of the category to return.
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @RequestMapping(
             value = "/category/{url}/sort",
@@ -199,9 +176,8 @@ public abstract class MainController {
      * Request mapping: /article/{url}
      * Method: GET
      *
-     * @param url a url of the article to return.
+     * @param url a URL of the article to return.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/article/{url}",
@@ -218,7 +194,6 @@ public abstract class MainController {
      *
      * @param number a number of the article to return.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/article/num_{number}",
@@ -234,7 +209,6 @@ public abstract class MainController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/article/all",
@@ -253,7 +227,6 @@ public abstract class MainController {
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @RequestMapping(
             value = "/article/all/sort",
@@ -272,7 +245,6 @@ public abstract class MainController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/company/main",
@@ -307,7 +279,6 @@ public abstract class MainController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/company/all",
@@ -326,7 +297,6 @@ public abstract class MainController {
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/company/all/sort",
@@ -343,9 +313,8 @@ public abstract class MainController {
      * Request mapping: /company/{url}
      * Method: GET
      *
-     * @param url a url of the company to return.
+     * @param url a URL of the company to return.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @RequestMapping(
             value = "/company/{url}",
@@ -361,7 +330,6 @@ public abstract class MainController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/responses",
@@ -370,7 +338,7 @@ public abstract class MainController {
     public ModelAndView getAllResponsesPage() {
         final ModelAndView modelAndView = this.fabric.allResponsesPage();
         modelAndView.addObject("is_captcha", null);
-        modelAndView.setViewName("client/response/all_page");
+        modelAndView.setViewName("client/response/all");
         return modelAndView;
     }
 
@@ -383,7 +351,6 @@ public abstract class MainController {
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/responses/sort",
@@ -409,7 +376,7 @@ public abstract class MainController {
     /**
      * Returns page by parameter url.
      *
-     * @param url       url of request.
+     * @param url       a URL of request.
      * @param isCaptcha a result of google-captcha verification.
      * @return The ready object of class ModelAndView.
      */
@@ -461,7 +428,6 @@ public abstract class MainController {
      * Sends client response to email and saves it.
      *
      * @param response a response.
-     * @see Response
      */
     protected void sendResp(final Response response) {
         new Thread(() -> {
@@ -498,7 +464,6 @@ public abstract class MainController {
      *
      * @param isCaptcha a result of google-captcha verification.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     protected ModelAndView getResponsesMV(final boolean isCaptcha) {
         final ModelAndView modelAndView = getAllResponsesPage();

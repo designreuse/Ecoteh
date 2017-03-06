@@ -13,8 +13,6 @@ import com.salimov.yurii.util.translator.Translator;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.entity.User
- * @see IModel
  */
 public interface IUser extends IModel {
 
@@ -92,7 +90,6 @@ public interface IUser extends IModel {
      * Translates value and sets to url.
      *
      * @param value a value to translate.
-     * @see Translator
      */
     void translateAndSetUrl(final String value);
 
@@ -156,7 +153,6 @@ public interface IUser extends IModel {
      * Returns a role of the user.
      *
      * @return The user role.
-     * @see UserRole
      */
     UserRole getRole();
 
@@ -164,7 +160,6 @@ public interface IUser extends IModel {
      * Sets a new role to the user.
      *
      * @param role a new role to the user.
-     * @see UserRole
      */
     void setRole(final UserRole role);
 

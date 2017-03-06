@@ -14,14 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The class implements a set of methods for working with
- * main ModelAndView objects and object of the {@link Cache} class for admins.
+ * object of the {@link Cache} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
  * For the work used implementation of the interface {@link MainMVFabric}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Cache
- * @see MainMVFabric
  */
 @Controller
 @RequestMapping(value = "/superadmin/cache")
@@ -32,8 +30,6 @@ public class CacheController {
     /**
      * The implementation of the interface provides a set of standard
      * methods for creates and returns the main modelAndViews for admins.
-     *
-     * @see CacheMVFabric
      */
     private final MainMVFabric fabric;
 
@@ -42,7 +38,6 @@ public class CacheController {
      * Initializes a implementation of the interface.
      *
      * @param fabric a implementation of the {@link MainMVFabric} interface.
-     * @see MainMVFabric
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -56,27 +51,25 @@ public class CacheController {
      * Method: GET
      *
      * @return The ready object of class ModelAndView.
-     * @see Cache
      */
     @RequestMapping(
             value = {"", "/"},
             method = RequestMethod.GET
     )
     public ModelAndView getCachePage() {
-        ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("objects", Cache.getEntriesToString());
-        modelAndView.setViewName("superadmin/cache/cache_page");
+        modelAndView.setViewName("superadmin/cache/cache");
         return modelAndView;
     }
 
     /**
-     * Cleans cache and redirect by url /admin/cache.
+     * Cleans cache and redirect by URL /admin/cache.
      * Request mapping: /admin/cache/clear
      * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Cache
      */
     @RequestMapping(
             value = "/clear",
@@ -89,14 +82,13 @@ public class CacheController {
     }
 
     /**
-     * Removes object from cache with key and redirect by url /admin/cache.
+     * Removes object from cache with key and redirect by URL /admin/cache.
      * Request mapping: /admin/cache/remove/{key}
      * Method: GET
      *
      * @param key          a object key in the cache.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Cache
      */
     @RequestMapping(
             value = "/remove/{key}",

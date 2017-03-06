@@ -8,15 +8,12 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Key
  */
 final class KeyComparator implements Comparator<Key> {
 
     /**
      * The class implements a method for working with comparator
      * for {@link Key} by timeout.
-     *
-     * @see Key
      */
     @Override
     public int compare(Key key1, Key key2) {

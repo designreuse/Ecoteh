@@ -18,10 +18,6 @@ import java.util.stream.Collectors;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Response
- * @see ResponseService
- * @see DataServiceImpl
- * @see ResponseDao
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
@@ -32,8 +28,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Initializes a implementation of the interface.
      *
      * @param dao a implementation of the {@link ResponseDao} interface.
-     * @see ResponseDao
-     * @see Response
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -48,7 +42,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param id       a id of the response to update.
      * @param response a response to update.
      * @return The updating response with parameter id {@code null}.
-     * @see Response
      */
     @Override
     @Transactional
@@ -56,9 +49,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
             final long id,
             final Response response
     ) {
-        return update(
-                get(id).initialize(response)
-        );
+        return update(get(id).initialize(response));
     }
 
     /**
@@ -67,7 +58,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param responses the responses to sort.
      * @param revers    is sort in descending or ascending.
      * @return The sorted list of responses.
-     * @see Response
      */
     @Override
     @Transactional(readOnly = true)
@@ -83,7 +73,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of responses.
-     * @see Response
      */
     @Override
     @Transactional(readOnly = true)
@@ -101,7 +90,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param startDate  a initial date.
      * @param finishDate a final date.
      * @return The filtered list of responses.
-     * @see Response
      */
     @Override
     @Transactional(readOnly = true)
@@ -133,7 +121,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param startDate  a initial date.
      * @param finishDate a final date.
      * @return The filtered list of responses.
-     * @see Response
      */
     @Override
     @Transactional(readOnly = true)
@@ -150,7 +137,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      *
      * @param responses the responses to filter.
      * @return The list of responses.
-     * @see Response
      */
     @Override
     public List<Response> filteredByValid(Collection<Response> responses) {
@@ -184,7 +170,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param duplicate is validate input object by duplicate.
      * @return Returns {@code true} if response is valid,
      * otherwise returns {@code false}.
-     * @see Response
      */
     @Override
     protected boolean validated(

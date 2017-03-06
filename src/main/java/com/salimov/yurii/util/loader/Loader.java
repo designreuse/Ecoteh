@@ -4,12 +4,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * The interface describes the methods for working
- * with files on the file system.
+ * with files in file system.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
 public interface Loader {
+
+    /**
+     * Reads a file in the file system.
+     *
+     * @return a information from a file.
+     */
+    String read();
 
     /**
      * Saves a file in the file system.
@@ -23,13 +30,6 @@ public interface Loader {
      * {@code false} otherwise.
      */
     boolean delete();
-
-    /**
-     * Returns a multipart file.
-     *
-     * @return The multipart file.
-     */
-    MultipartFile getFile();
 
     /**
      * Returns root path of a file.

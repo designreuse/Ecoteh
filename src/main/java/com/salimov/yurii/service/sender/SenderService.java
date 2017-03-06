@@ -9,7 +9,6 @@ import java.util.Collection;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see SenderServiceImpl
  */
 public interface SenderService {
 
@@ -37,7 +36,6 @@ public interface SenderService {
      * @param text           a sender text.
      * @param recipientEmail a recipient e-mail.
      * @param sender         a sender user.
-     * @see User
      */
     void send(
             final String subject,
@@ -53,7 +51,6 @@ public interface SenderService {
      * @param text      a sender text.
      * @param recipient a recipient user.
      * @param sender    a sender user.
-     * @see User
      */
     void send(
             final String subject,
@@ -86,7 +83,6 @@ public interface SenderService {
      * @param text            a sender text.
      * @param recipientEmails a recipients e-mails.
      * @param sender          a sender user.
-     * @see User
      */
     void send(
             final String subject,
@@ -102,7 +98,6 @@ public interface SenderService {
      * @param text       a sender text.
      * @param recipients a recipients users.
      * @param sender     a sender user.
-     * @see User
      */
     void send(
             final String subject,
@@ -119,7 +114,6 @@ public interface SenderService {
      * @param recipients      a recipients users.
      * @param senderEmail     a sender e-mail.
      * @param senderEmailPass a sender e-mail password.
-     * @see User
      */
     void send(
             final String subject,

@@ -11,15 +11,12 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see User
  */
 public final class UserComparator {
 
     /**
      * The class implements a method
      * for working with comparator for {@link User} by name.
-     *
-     * @see User
      */
     public final static class ByName implements Comparator<User> {
 
@@ -31,7 +28,6 @@ public final class UserComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see User
          */
         @Override
         public int compare(final User user1, final User user2) {
@@ -51,9 +47,7 @@ public final class UserComparator {
 
     /**
      * The class implements a method for working
-     * with comparator for {@link User} by url.
-     *
-     * @see User
+     * with comparator for {@link User} by URL.
      */
     public final static class ByUrl implements Comparator<User> {
 
@@ -65,7 +59,6 @@ public final class UserComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see User
          */
         @Override
         public int compare(final User user1, final User user2) {
@@ -86,8 +79,6 @@ public final class UserComparator {
     /**
      * The class implements a method for working
      * with comparator for {@link User} by role.
-     *
-     * @see User
      */
     public final static class ByRole implements Comparator<User> {
 
@@ -113,7 +104,6 @@ public final class UserComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see User
          */
         @Override
         public int compare(final User user1, final User user2) {

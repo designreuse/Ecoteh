@@ -22,19 +22,20 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The class implements a set of methods for working
- * with main ModelAndView objects and object of {@link File} class
- * for admins. Class methods create and return modelsAndView,
- * depending on the request.
+ * The class implements a set of methods for working with
+ * objects of {@link File} class for admins.
+ * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see File
- * @see FileService
- * @see CacheMVFabric
  */
 @Controller
-@RequestMapping(value = "/admin/file")
+@RequestMapping(
+        value = {
+                "/admin/file",
+                "/admin/files"
+        }
+)
 @ComponentScan(basePackages = "com.salimov.yurii.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class FileController {
@@ -47,16 +48,12 @@ public class FileController {
     /**
      * The implementation of the interface provides a set of standard
      * methods for creates and returns the main modelAndViews for admins.
-     *
-     * @see CacheMVFabric
      */
     private final CacheMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link File} class.
-     *
-     * @see FileService
      */
     private final FileService fileService;
 
@@ -107,12 +104,12 @@ public class FileController {
     )
     public ModelAndView getNewFilePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/file/new_page");
+        modelAndView.setViewName("admin/file/add");
         return modelAndView;
     }
 
     /**
-     * Adds new file and redirects by url /admin/file/all.
+     * Adds new file and redirects by URL /admin/file/all.
      * Request mapping: /admin/file/add
      * Method: POST
      *
@@ -139,7 +136,7 @@ public class FileController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/file/add" is not supported!"
      * Request mapping: /admin/file/add
      * Method: POST
@@ -152,9 +149,7 @@ public class FileController {
             method = RequestMethod.GET
     )
     public void addFile() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/file/add\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/file/add\" is not supported!");
     }
 
     /**
@@ -172,13 +167,13 @@ public class FileController {
     public ModelAndView editFilePage(@PathVariable("id") final Long id) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("file", this.fileService.get(id));
-        modelAndView.setViewName("admin/file/edit_page");
+        modelAndView.setViewName("admin/file/edit");
         return modelAndView;
     }
 
     /**
      * Updates and save the file with id
-     * and redirects by url "/admin/file/all".
+     * and redirects by URL "/admin/file/all".
      * Request mapping: /admin/file/update
      * Method: POST
      *
@@ -207,7 +202,7 @@ public class FileController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/file/update" is not supported!"
      * Request mapping: /admin/file/update
      * Method: GET
@@ -220,14 +215,11 @@ public class FileController {
             method = RequestMethod.GET
     )
     public void updateFile() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/file/update\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/file/update\" is not supported!");
     }
 
     /**
-     * Removes file with url and redirects
-     * by url "/admin/file/all".
+     * Removes file with url and redirects by URL "/admin/file/all".
      * Request mapping: /admin/file/delete/{id}
      * Method: GET
      *
@@ -249,8 +241,7 @@ public class FileController {
     }
 
     /**
-     * Removes all files and redirects
-     * by url "/admin/file/all".
+     * Removes all files and redirects by URL "/admin/file/all".
      * Request mapping: /admin/file/delete/all
      * Method: GET
      *
@@ -309,7 +300,7 @@ public class FileController {
                 )
         );
         modelAndView.addObject("revers", !revers);
-        modelAndView.setViewName("admin/file/all_page");
+        modelAndView.setViewName("admin/file/all");
         return modelAndView;
     }
 

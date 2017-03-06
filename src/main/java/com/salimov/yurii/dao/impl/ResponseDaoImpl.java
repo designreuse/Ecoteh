@@ -13,10 +13,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see ResponseDao
- * @see Response
- * @see ResponseRepository
- * @see DataDaoImpl
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
@@ -28,7 +24,6 @@ public final class ResponseDaoImpl extends DataDaoImpl<Response> implements Resp
      * @param repository a implementation of the interface provides
      *                   a set of JPA methods for working {@link Response}
      *                   objects with the database.
-     * @see ResponseRepository
      */
     @Autowired
     public ResponseDaoImpl(final ResponseRepository repository) {

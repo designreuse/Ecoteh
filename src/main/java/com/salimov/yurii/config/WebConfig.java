@@ -18,8 +18,6 @@ import org.springframework.web.servlet.view.JstlView;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see AppInitializer
- * @see RootConfig
  */
 @Configuration
 @EnableWebMvc

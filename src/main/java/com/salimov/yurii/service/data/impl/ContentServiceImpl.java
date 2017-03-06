@@ -21,13 +21,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @param <T> entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
- * @see DataServiceImpl
- * @see ContentService
- * @see com.salimov.yurii.service.data.impl.ArticleServiceImpl
- * @see com.salimov.yurii.service.data.impl.CategoryServiceImpl
- * @see com.salimov.yurii.service.data.impl.CompanyServiceImpl
- * @see ContentDao
  */
 public abstract class ContentServiceImpl<T extends Content>
         extends DataServiceImpl<T> implements ContentService<T> {
@@ -35,9 +28,6 @@ public abstract class ContentServiceImpl<T extends Content>
     /**
      * The object provides a set of standard JPA methods
      * for working {@link Content} objects with the database.
-     *
-     * @see ContentDao
-     * @see Content
      */
     private final ContentDao<T> dao;
 
@@ -45,9 +35,6 @@ public abstract class ContentServiceImpl<T extends Content>
      * The interface of the service layer,
      * describes a set of methods for working
      * with objects of the class {@link File}.
-     *
-     * @see FileService
-     * @see File
      */
     private final FileService fileService;
 
@@ -57,7 +44,6 @@ public abstract class ContentServiceImpl<T extends Content>
      *
      * @param dao         a implementation of the {@link ContentDao} interface.
      * @param fileService a implementation of the {@link FileService} interface.
-     * @see ContentDao
      */
     ContentServiceImpl(
             final ContentDao<T> dao,
@@ -71,11 +57,9 @@ public abstract class ContentServiceImpl<T extends Content>
     /**
      * Initializes, updates and returns content with parameter url.
      *
-     * @param url     a url of the content to update.
+     * @param url     a URL of the content to update.
      * @param content a content to update.
      * @return The updating content with parameter id.
-     * @see Content
-     * @see File
      */
     @Override
     @Transactional
@@ -101,7 +85,6 @@ public abstract class ContentServiceImpl<T extends Content>
      * @return The content with parameter title or {@code null}.
      * @throws IllegalArgumentException Throw exception when object  parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
-     * @see Content
      */
     @Override
     @Transactional(readOnly = true)
@@ -124,12 +107,11 @@ public abstract class ContentServiceImpl<T extends Content>
     /**
      * Returns object of {@link Content} or subclasses with the parameter url.
      *
-     * @param url     a url of the content to return.
+     * @param url     a URL of the content to return.
      * @param isValid is get valid content or not.
      * @return the content with parameter url or {@code null}.
      * @throws IllegalArgumentException Throw exception when object parameter url is blank.
      * @throws NullPointerException     Throw exception when object with parameter url is not exist.
-     * @see Content
      */
     @Override
     @Transactional(readOnly = true)
@@ -154,7 +136,6 @@ public abstract class ContentServiceImpl<T extends Content>
      * Removes content if title is not blank.
      *
      * @param title a title of the content to remove.
-     * @see Content
      */
     @Override
     @Transactional
@@ -167,8 +148,7 @@ public abstract class ContentServiceImpl<T extends Content>
     /**
      * Removes object of {@link Content} or subclasses with the parameter url.
      *
-     * @param url a url of the content to remove.
-     * @see Content
+     * @param url a URL of the content to remove.
      */
     @Override
     @Transactional
@@ -184,7 +164,6 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     @Override
     @Transactional(readOnly = true)
@@ -196,12 +175,11 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by url.
+     * Sorts and returns objects of {@link Content} class or subclasses by URL.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     @Override
     @Transactional(readOnly = true)
@@ -217,7 +195,6 @@ public abstract class ContentServiceImpl<T extends Content>
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     @Override
     @Transactional(readOnly = true)
@@ -226,11 +203,10 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by url.
+     * Sorts and returns objects of {@link Content} class or subclasses by URL.
      *
      * @param revers Sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     @Override
     @Transactional(readOnly = true)
@@ -245,7 +221,6 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param exist     is validate input object by exists.
      * @param duplicate is validate input object by duplicate.
      * @return Returns {@code true} if object is valid, otherwise returns {@code false}.
-     * @see Content
      */
     @Override
     protected boolean validated(

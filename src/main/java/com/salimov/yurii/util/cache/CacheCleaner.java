@@ -10,8 +10,6 @@ import java.util.Map;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Cache
- * @see Key
  */
 final class CacheCleaner implements Runnable {
 

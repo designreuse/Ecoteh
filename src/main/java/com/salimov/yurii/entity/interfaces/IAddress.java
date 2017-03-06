@@ -8,8 +8,6 @@ import com.salimov.yurii.entity.Address;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see IModel
- * @see Address
  */
 public interface IAddress extends IModel {
 

@@ -125,7 +125,7 @@ public final class Address extends Model implements IAddress {
 
     /**
      * Sets a new address to the company.
-     * If parameter address is blank, then sets {@code null}.
+     * If parameter address is blank, then sets empty string..
      *
      * @param address a new address to the company.
      */
@@ -146,7 +146,7 @@ public final class Address extends Model implements IAddress {
 
     /**
      * Sets a new google maps url to the company.
-     * If parameter google maps url is blank, then sets {@code null}.
+     * If parameter google maps url is blank, then sets empty string..
      *
      * @param googleMaps a new google maps url to the company.
      */

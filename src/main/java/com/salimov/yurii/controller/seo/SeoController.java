@@ -28,7 +28,6 @@ public class SeoController {
      * Initializes a implementation of the interface.
      *
      * @param seoService a implementation of the {@link SeoService} interface.
-     * @see SeoService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

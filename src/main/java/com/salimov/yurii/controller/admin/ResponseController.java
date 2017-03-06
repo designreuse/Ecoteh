@@ -12,18 +12,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * The class implements a set of methods for working
- * with main ModelAndView objects and object of the {@link Response}
- * class for admins. Class methods create and return modelsAndView,
- * depending on the request.
+ * The class implements a set of methods for working with
+ * objects of the {@link Response} class for admins.
+ * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Response
- * @see ResponseService
  */
 @Controller
-@RequestMapping(value = "/admin/response")
+@RequestMapping(
+        value = {
+                "/admin/response",
+                "/admin/responses"
+        }
+)
 @ComponentScan(basePackages = "com.salimov.yurii.service.data")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ResponseController {
@@ -31,8 +33,6 @@ public class ResponseController {
     /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Response} class.
-     *
-     * @see ResponseService
      */
     private final ResponseService responseService;
 
@@ -41,7 +41,6 @@ public class ResponseController {
      * Initializes a implementation of the interface.
      *
      * @param responseService a implementation of the {@link ResponseService} interface.
-     * @see ResponseService
      */
     @Autowired
     public ResponseController(final ResponseService responseService) {
@@ -49,14 +48,13 @@ public class ResponseController {
     }
 
     /**
-     * Changes response validation and redirects by url /admin/responses.
+     * Changes response validation and redirects by URL /admin/responses.
      * Request mapping: /admin/response/valid/{id}
      * Method: GET
      *
      * @param id           a id of the response to update.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/valid/{id}",
@@ -75,14 +73,13 @@ public class ResponseController {
     }
 
     /**
-     * Removes response with url and redirects by url /admin/responses.
+     * Removes response with id and redirects by URL /admin/responses.
      * Request mapping: /admin/response/delete/{id}
      * Method: GET
      *
      * @param id           a id of the response to remove.
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/delete/{id}",
@@ -99,13 +96,12 @@ public class ResponseController {
     }
 
     /**
-     * Removes all responses and redirects by url /admin/responses.
+     * Removes all responses and redirects by URL /admin/responses.
      * Request mapping: /admin/response/delete/all
      * Method: GET
      *
      * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/delete/all",

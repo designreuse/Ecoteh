@@ -20,12 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CategoryService
- * @see ArticleService
- * @see CompanyService
- * @see UserService
- * @see MainMVFabric
- * @see MainMVFabric
  */
 @Controller
 @RequestMapping(value = "/search")
@@ -36,16 +30,12 @@ public class SearchController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes a set of methods
      * for search for content on the site.
-     *
-     * @see SearchService
      */
     private final SearchService searchService;
 
@@ -55,8 +45,6 @@ public class SearchController {
      *
      * @param fabric        a implementation of the {@link MainMVFabric} interface.
      * @param searchService a implementation of the {@link SearchService} interface.
-     * @see MainMVFabric
-     * @see SearchService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -76,12 +64,12 @@ public class SearchController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {"", "/"},
+            value = {"", "/", "/result"},
             method = RequestMethod.GET
     )
     public ModelAndView search() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("client/search/result_page");
+        modelAndView.setViewName("client/search/result");
         return modelAndView;
     }
 
@@ -104,22 +92,6 @@ public class SearchController {
             @RequestParam(value = "content") final String content,
             @RequestParam(value = "how_search") final boolean howSearch
     ) {
-
         return this.searchService.search(keywords, content, howSearch);
-    }
-
-    /**
-     * Redirects to "/search/".
-     * Request mapping: /result
-     * Method: GET
-     *
-     * @return The ready object of class ModelAndView.
-     */
-    @RequestMapping(
-            value = "/result",
-            method = RequestMethod.GET
-    )
-    public ModelAndView searchResult() {
-        return search();
     }
 }

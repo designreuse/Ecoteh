@@ -14,11 +14,6 @@ import java.util.List;
  * @param <T> entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
- * @see DataService
- * @see ArticleService
- * @see CategoryService
- * @see CompanyService
  */
 public interface ContentService<T extends Content> extends DataService<T> {
 
@@ -28,8 +23,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param url     a url of the content to update.
      * @param content a content to update.
      * @return The updating content with parameter id.
-     * @see Content
-     * @see File
      */
     Content update(
             final String url,
@@ -43,7 +36,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param title   a title of the content to return.
      * @param isValid is get valid content or not.
      * @return The object of class {@link Content}.
-     * @see Content
      */
     T getByTitle(
             final String title,
@@ -54,10 +46,9 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * Returns content object of the {@link Content} class or subclasses
      * with the parameter url.
      *
-     * @param url     a url of the content to return.
+     * @param url     a URL of the content to return.
      * @param isValid is get valid content or not.
-     * @return The content with the parameter url .
-     * @see Content
+     * @return The content with the parameter url
      */
     T getByUrl(
             final String url,
@@ -69,7 +60,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * with the parameter title.
      *
      * @param title a title of the content to remove.
-     * @see Content
      */
     void removeByTitle(final String title);
 
@@ -77,8 +67,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * Removes content object of the {@link Content} class or subclasses
      * with the parameter url.
      *
-     * @param url a url of the content to remove.
-     * @see Content
+     * @param url a URL of the content to remove.
      */
     void removeByUrl(final String url);
 
@@ -89,7 +78,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     List<T> sortByTitle(
             final Collection<T> contents,
@@ -102,7 +90,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param contents the objects to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     List<T> sortByUrl(
             final Collection<T> contents,
@@ -115,7 +102,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     List<T> getAndSortByTitle(final boolean revers);
 
@@ -124,7 +110,6 @@ public interface ContentService<T extends Content> extends DataService<T> {
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
-     * @see Content
      */
     List<T> getAndSortByUrl(final boolean revers);
 }

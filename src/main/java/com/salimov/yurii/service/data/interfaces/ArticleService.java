@@ -14,9 +14,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Article
- * @see ContentService
- * @see DataService
  */
 public interface ArticleService extends ContentService<Article> {
 
@@ -26,7 +23,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param number  a title of the article to return.
      * @param isValid is get valid article or not.
      * @return The object of class {@link Article}.
-     * @see Article
      */
     Article getByNumber(
             final String number,
@@ -37,7 +33,6 @@ public interface ArticleService extends ContentService<Article> {
      * Removes article the parameter number.
      *
      * @param number The number of the article to remove.
-     * @see Article
      */
     void removeByNumber(final String number);
 
@@ -47,7 +42,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param articles the articles to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     List<Article> sortByNumber(
             final Collection<Article> articles,
@@ -60,7 +54,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param articles the articles to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     List<Article> sortByDate(
             final Collection<Article> articles,
@@ -72,7 +65,6 @@ public interface ArticleService extends ContentService<Article> {
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     List<Article> getAndSortByNumber(final boolean revers);
 
@@ -81,7 +73,6 @@ public interface ArticleService extends ContentService<Article> {
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
-     * @see Article
      */
     List<Article> getAndSortByDate(final boolean revers);
 
@@ -92,7 +83,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param startDate a initial date.
      * @param endDate   a final date.
      * @return The filtered list of articles.
-     * @see Article
      */
     List<Article> filterByDate(
             final Collection<Article> articles,
@@ -106,8 +96,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param articles the articles to filter.
      * @param category a category filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     List<Article> filterByCategory(
             final Collection<Article> articles,
@@ -120,8 +108,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param articles   the articles to filter.
      * @param categories a categories filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     List<Article> filterByCategories(
             final Collection<Article> articles,
@@ -134,7 +120,6 @@ public interface ArticleService extends ContentService<Article> {
      * @param startDate a initial date.
      * @param endDate   a final date.
      * @return The filtered list of articles.
-     * @see Article
      */
     List<Article> getAndFilterByDate(
             final Date startDate,
@@ -146,8 +131,6 @@ public interface ArticleService extends ContentService<Article> {
      *
      * @param category a category filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
     List<Article> getAndFilterByCategory(final Category category);
 
@@ -156,10 +139,6 @@ public interface ArticleService extends ContentService<Article> {
      *
      * @param categories a categories filtering.
      * @return The filtered list of articles.
-     * @see Article
-     * @see Category
      */
-    List<Article> getAndFilterByCategories(
-            final Collection<Category> categories
-    );
+    List<Article> getAndFilterByCategories(final Collection<Category> categories);
 }

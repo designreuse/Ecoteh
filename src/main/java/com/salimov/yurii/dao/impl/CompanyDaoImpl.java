@@ -16,10 +16,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CompanyDao
- * @see Company
- * @see CompanyRepository
- * @see DataDaoImpl
  */
 @Repository
 @ComponentScan(basePackages = "com.salimov.yurii.repository")
@@ -28,8 +24,6 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
     /**
      * The interface provides a set of JPA methods
      * for working {@link Company} objects with a database.
-     *
-     * @see CompanyRepository
      */
     private final CompanyRepository repository;
 
@@ -38,7 +32,6 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
      *
      * @param repository a implementation of the interface provides a set of JPA methods
      *                   for working {@link Company} objects with a database.
-     * @see CompanyRepository
      */
     @Autowired
     public CompanyDaoImpl(final CompanyRepository repository) {
@@ -51,7 +44,6 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
      *
      * @param title a title of the company to return.
      * @return The company with the parameter title.
-     * @see Company
      */
     @Override
     public Company getByTitle(final String title) {
@@ -61,9 +53,8 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
     /**
      * Returns company with the parameter url from a database.
      *
-     * @param url a url of the company to return.
+     * @param url a URL of the company to return.
      * @return The company with the parameter url.
-     * @see Company
      */
     @Override
     public Company getByUrl(final String url) {
@@ -74,7 +65,6 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
      * Removes company with the parameter title from a database.
      *
      * @param title a title of the company to remove.
-     * @see Company
      */
     @Override
     public void removeByTitle(final String title) {
@@ -84,8 +74,7 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
     /**
      * Removes company with the parameter url from a database.
      *
-     * @param url a url of the company to remove.
-     * @see Company
+     * @param url a URL of the company to remove.
      */
     @Override
     public void removeByUrl(final String url) {
@@ -97,8 +86,6 @@ public final class CompanyDaoImpl extends DataDaoImpl<Company> implements Compan
      *
      * @param type a type of the company to return.
      * @return The companies with parameter type.
-     * @see Company
-     * @see CompanyType
      */
     @Override
     public List<Company> getByType(final CompanyType type) {

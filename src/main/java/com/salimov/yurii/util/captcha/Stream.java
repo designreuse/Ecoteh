@@ -8,7 +8,6 @@ import java.io.*;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CaptchaImpl
  */
 final class Stream {
 

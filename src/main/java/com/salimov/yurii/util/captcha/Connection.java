@@ -10,12 +10,11 @@ import java.net.URL;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see CaptchaImpl
  */
 final class Connection {
 
     /**
-     * The request url.
+     * The request URL.
      */
     private final URL url;
 
@@ -35,14 +34,14 @@ final class Connection {
     private final boolean doOutput;
 
     /**
-     * The https url connection.
+     * The https URL connection.
      */
     private HttpsURLConnection connection;
 
     /**
      * Constructor.
      *
-     * @param url            a request url.
+     * @param url            a request URL.
      * @param userAgent      a user agent.
      * @param acceptLanguage a accept language.
      * @param doOutput       a do output.
@@ -60,9 +59,9 @@ final class Connection {
     }
 
     /**
-     * Creates and returns https url connection.
+     * Creates and returns https URL connection.
      *
-     * @return The https url connection.
+     * @return The https URL connection.
      * @throws IOException If an I/O error occurs.
      */
     HttpsURLConnection getHttpsURLConnection() throws IOException {

@@ -22,16 +22,12 @@ public class ConfigurationController {
     /**
      * The implementation of the interface provides a set of standard methods
      * for creates and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
     /**
      * The implementation of the interface describes
      * the methods for getting application properties.
-     *
-     * @see ContentProperties
      */
     private final ContentProperties contentProperties;
 
@@ -69,7 +65,7 @@ public class ConfigurationController {
             ex.printStackTrace();
             modelAndView = new ModelAndView();
         }
-        modelAndView.setViewName("superadmin/configuration/configuration_page");
+        modelAndView.setViewName("superadmin/configuration/configuration");
         return modelAndView;
     }
 }

@@ -32,10 +32,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see User
- * @see UserService
- * @see DataServiceImpl
- * @see UserDao
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.dao")
@@ -49,9 +45,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     /**
      * The interface provides a set of standard methods for working
      * {@link User} objects with the database.
-     *
-     * @see UserDao
-     * @see User
      */
     private final UserDao dao;
 
@@ -62,7 +55,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param dao         a implementation of the {@link UserDao} interface.
      * @param fileService a implementation of the {@link FileService} interface.
-     * @see UserDao
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -79,7 +71,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns authenticated user.
      *
      * @return The authenticated user.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -101,8 +92,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param username The username identifying the user whose data is required.
      * @return A fully populated user record (never {@code null}).
      * @throws UsernameNotFoundException if the user could not be found
-     *                                   or the user has no GrantedAuthority
-     * @see User
+     *                                   or the user has no GrantedAuthority.
      */
     @Override
     @Transactional(readOnly = true)
@@ -124,9 +114,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param user a user to save.
      * @return The new saving user.
-     * @see User
-     * @see File
-     * @see UserRole
      */
     @Override
     @Transactional
@@ -144,8 +131,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param url  a url of the user to update.
      * @param user a user to update.
      * @return The updating user with parameter id or {@code null}.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional
@@ -171,7 +156,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @return The user with the parameter name or {@code null}.
      * @throws IllegalArgumentException Throw exception when parameter name is blank.
      * @throws NullPointerException     Throws exception if user is absent.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -194,7 +178,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @return The user with the parameter url or {@code null}.
      * @throws IllegalArgumentException Throw exception when parameter url is blank.
      * @throws NullPointerException     Throws exception if user is absent.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -218,7 +201,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @return The user with the parameter login or {@code null}.
      * @throws IllegalArgumentException Throw exception when parameter login is blank.
      * @throws NullPointerException     Throws exception if user is absent.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -242,7 +224,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @return The user with the parameter e-mail or {@code null}.
      * @throws IllegalArgumentException Throw exception when parameter email is blank.
      * @throws NullPointerException     Throws exception if user is absent.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -276,7 +257,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns users with role {@code ADMIN}.
      *
      * @return The users with role {@code ADMIN}.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -288,7 +268,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns personnel.
      *
      * @return The all personnel.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -301,7 +280,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Removes user if name is not blank.
      *
      * @param name a name of the user to remove.
-     * @see User
      */
     @Override
     @Transactional
@@ -316,7 +294,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Removes user if url is not blank.
      *
      * @param url a url of the user to remove.
-     * @see User
      */
     @Override
     @Transactional
@@ -332,7 +309,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param users  the users to sort.
      * @param revers Sort in descending or ascending.
      * @return The sorted list of users.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -349,7 +325,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param users  the users to sort.
      * @param revers is sort in descending or ascending.
      * @return The sorted list of users.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -367,8 +342,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param role   a role filtering.
      * @param revers is ort in descending or ascending.
      * @return The sorted list of users.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
@@ -385,7 +358,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param revers is ort in descending or ascending.
      * @return The sorted list of articles.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -398,7 +370,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param revers is ort in descending or ascending.
      * @return The sorted list of users.
-     * @see User
      */
     @Override
     @Transactional(readOnly = true)
@@ -412,8 +383,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param role   a role filtering.
      * @param revers is ort in descending or ascending.
      * @return The sorted list of users.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
@@ -430,8 +399,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param users the users to filter.
      * @param role  a role filtering.
      * @return The filtered list of users.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
@@ -455,8 +422,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param users the users to filter.
      * @param roles a roles filtering.
      * @return The filtered list of users.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
@@ -488,8 +453,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param role a role filtering.
      * @return The filtered list of users.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
@@ -502,8 +465,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param roles a roles filtering.
      * @return The filtered list of users.
-     * @see User
-     * @see UserRole
      */
     @Override
     @Transactional(readOnly = true)
@@ -516,7 +477,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param users the users to filter.
      * @return The list of valid users.
-     * @see User
      */
     @Override
     @Transactional
@@ -551,7 +511,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param duplicate is validate input object by duplicate.
      * @return Returns {@code true} if user is valid,
      * {@code false} otherwise.
-     * @see User
      */
     @Override
     protected boolean validated(

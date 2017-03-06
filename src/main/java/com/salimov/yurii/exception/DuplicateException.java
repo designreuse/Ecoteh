@@ -8,8 +8,8 @@ package com.salimov.yurii.exception;
  */
 public final class DuplicateException extends RuntimeException {
 
-    /** Constructs a new duplicate exception with {@code null} as its
-     * detail sender.
+    /** Constructs a new duplicate exception
+     * with {@code null} as its detail sender.
      */
     public DuplicateException() {
     }
@@ -43,7 +43,7 @@ public final class DuplicateException extends RuntimeException {
 
     /**
      * Constructs a new runtime exception with the specified cause
-     * and a detail message of (cause==null ? null : cause.toString())
+     * and a detail message of ({@code cause==null ? null : cause.toString()})
      * (which typically contains the class and detail message of cause).
      *
      * @param cause the cause (which is saved for later retrieval

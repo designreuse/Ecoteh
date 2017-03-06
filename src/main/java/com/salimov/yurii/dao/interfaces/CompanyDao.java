@@ -11,9 +11,6 @@ import java.util.List;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.dao.impl.CompanyDaoImpl
- * @see ContentDao
- * @see Company
  */
 public interface CompanyDao extends ContentDao<Company> {
 
@@ -22,8 +19,6 @@ public interface CompanyDao extends ContentDao<Company> {
      *
      * @param type a type of the company to return.
      * @return The companies with parameter type.
-     * @see Company
-     * @see CompanyType
      */
     List<Company> getByType(final CompanyType type);
 }

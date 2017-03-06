@@ -179,7 +179,7 @@ public final class Message extends Model implements IMessage {
 
     /**
      * Sets a new subject to the message.
-     * If parameter subject is blank, then sets {@code null}.
+     * If parameter subject is blank, then sets empty string.
      *
      * @param subject a new subject to the message.
      */
@@ -200,7 +200,7 @@ public final class Message extends Model implements IMessage {
 
     /**
      * Sets a new text to the message.
-     * If parameter text is blank, then sets {@code null}.
+     * If parameter text is blank, then sets empty string.
      *
      * @param text a new text to the message.
      */
@@ -221,7 +221,7 @@ public final class Message extends Model implements IMessage {
 
     /**
      * Sets a new date to the message.
-     * If parameter date is {@code null}, then sets {@code new Date()}.
+     * If parameter date is empty string, then sets {@code new Date()}.
      *
      * @param date a new text to the message.
      */

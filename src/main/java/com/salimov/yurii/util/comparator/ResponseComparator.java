@@ -10,15 +10,12 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Response
  */
 public final class ResponseComparator {
 
     /**
      * The class implements a method
      * for working with comparator for {@link Response} by date.
-     *
-     * @see Response
      */
     public final static class ByDate implements Comparator<Response> {
 
@@ -30,7 +27,6 @@ public final class ResponseComparator {
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
-         * @see Response
          */
         @Override
         public int compare(

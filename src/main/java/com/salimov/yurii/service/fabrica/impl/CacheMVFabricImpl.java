@@ -12,9 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see MainMVFabric
- * @see CacheMVFabric
- * @see Cache
  */
 public final class CacheMVFabricImpl implements CacheMVFabric {
 
@@ -59,19 +56,19 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     private final static String ALL_SORT_PARTNERS_KEY = "All Sort Partners";
 
     /**
-     * The category by url page key.
+     * The category by URL page key.
      */
-    private final static String CATEGORY_BY_URL_KEY = "Category By Url ";
+    private final static String CATEGORY_BY_URL_KEY = "Category By URL ";
 
     /**
-     * The category by url with sort articles page key.
+     * The category by RUL with sort articles page key.
      */
-    private final static String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "Category By Url with sort articles";
+    private final static String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "Category By URL with sort articles";
 
     /**
-     * The article by url page key.
+     * The article by URL page key.
      */
-    private final static String ARTICLE_BY_URL_KEY = "Article By Url";
+    private final static String ARTICLE_BY_URL_KEY = "Article By URL";
 
     /**
      * The article by number page key.
@@ -79,9 +76,9 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number";
 
     /**
-     * The company by url page key.
+     * The company by URL page key.
      */
-    private final static String COMPANY_BY_URL_KEY = "Company by url";
+    private final static String COMPANY_BY_URL_KEY = "Company by URL";
 
     /**
      * The all responses page key.
@@ -101,8 +98,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * The interface provides a set of standard methods for creates
      * and returns the main modelAndViews.
-     *
-     * @see MainMVFabric
      */
     private final MainMVFabric fabric;
 
@@ -111,7 +106,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Initializes a implementation of the interface.
      *
      * @param fabric a implementation of the {@link MainMVFabric} interface.
-     * @see MainMVFabric
      */
     public CacheMVFabricImpl(final MainMVFabric fabric) {
         this.fabric = fabric;
@@ -137,7 +131,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all categories.
      *
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @Override
     public ModelAndView allCategoriesPage() {
@@ -154,7 +147,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all articles.
      *
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @Override
     public ModelAndView allArticlesPage() {
@@ -179,8 +171,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
             final String sortType,
             final boolean revers
     ) {
-        final String key = ALL_SORT_ARTICLES_KEY
-                + ", " + sortType + ", " + revers;
+        final String key = ALL_SORT_ARTICLES_KEY + ", " + sortType + ", " + revers;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
             modelAndView = this.fabric.allSortArticlesPage(sortType, revers);
@@ -196,7 +187,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with information about main company.
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @Override
     public ModelAndView aboutCompanyPage() {
@@ -229,7 +219,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all partners.
      *
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @Override
     public ModelAndView allPartnersPage() {
@@ -249,9 +238,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @return The ready object of class ModelAndView.
      */
     @Override
-    public ModelAndView allSortPartnersByTitlePage(
-            final boolean revers
-    ) {
+    public ModelAndView allSortPartnersByTitlePage(final boolean revers) {
         final String key = ALL_SORT_PARTNERS_KEY + ", " + revers;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
@@ -266,9 +253,8 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with one category with parameter url.
      *
-     * @param url a url of the category to return.
+     * @param url a URL of the category to return.
      * @return The ready object of class ModelAndView.
-     * @see Category
      */
     @Override
     public ModelAndView categoryPage(final String url) {
@@ -311,9 +297,8 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with one article with parameter url.
      *
-     * @param url a url of the article to return.
+     * @param url a URL of the article to return.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @Override
     public ModelAndView articleByUrlPage(final String url) {
@@ -332,7 +317,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      *
      * @param number a number of the article to return.
      * @return The ready object of class ModelAndView.
-     * @see Article
      */
     @Override
     public ModelAndView articleByNumberPage(final String number) {
@@ -349,9 +333,8 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with one partner with parameter url.
      *
-     * @param url a url of the partner to return.
+     * @param url a URL of the partner to return.
      * @return The ready object of class ModelAndView.
-     * @see Company
      */
     @Override
     public ModelAndView partnerPage(final String url) {
@@ -369,7 +352,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all responses.
      *
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @Override
     public ModelAndView allResponsesPage() {
@@ -388,9 +370,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
-    public ModelAndView allSortResponsesByDatePage(
-            final boolean revers
-    ) {
+    public ModelAndView allSortResponsesByDatePage(final boolean revers) {
         final String key = ALL_SORT_RESPONSES_KEY + ", " + revers;
         ModelAndView modelAndView = get(key);
         if (modelAndView == null) {
@@ -422,7 +402,6 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Adds authenticated user to the modelAndView.
      *
      * @param modelAndView a model and view to update.
-     * @see User
      */
     @Override
     public void addAuthUser(final ModelAndView modelAndView) {

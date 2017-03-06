@@ -28,18 +28,10 @@ import java.util.List;
 /**
  * The class implements a set of methods for working
  * with main ModelAndView objects for admins.
- * Class methods create and return modelsAndView,
- * depending on the request.
- * For the work used implementation of the interface
- * {@link MainMVFabric} interface.
+ * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see MainMVFabric
- * @see CompanyService
- * @see UserService
- * @see ResponseService
- * @see SenderService
  */
 @Controller
 @RequestMapping(value = "/admin")
@@ -57,11 +49,6 @@ public class AdminMainController extends MainController {
      * @param messageService  a implementation of the {@link MessageService} interface.
      * @param senderService   a implementation of the {@link SenderService} interface.
      * @param responseService a implementation of the {@link ResponseService} interface.
-     * @see MainMVFabric
-     * @see CompanyService
-     * @see UserService
-     * @see SenderService
-     * @see ResponseService
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -93,23 +80,21 @@ public class AdminMainController extends MainController {
     public ModelAndView getAdminMenu() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("user", this.userService.getAuthenticatedUser());
-        modelAndView.setViewName("admin/menu/menu_page");
+        modelAndView.setViewName("admin/menu/menu");
         return modelAndView;
     }
 
     /**
-     * Sends sender and redirects by url if it is not blank,
-     * otherwise by url /.
+     * Sends message.
      * Request mapping: /admin/send_message
      * Method: POST
      *
-     * @param url         a url of the page which must be to redirect.
+     * @param url         a URL of the page which must be to redirect.
      * @param name        a sender name.
      * @param phone       a phone name.
      * @param email       a email name.
      * @param userMessage a sender sender.
      * @return The ready object of class ModelAndView.
-     * @see SenderService
      */
     @RequestMapping(
             value = "/send_message",
@@ -130,7 +115,7 @@ public class AdminMainController extends MainController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/send_message" is not supported!"
      * Request mapping: /admin/send_message
      * Method: POST
@@ -143,20 +128,17 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/send_message\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/send_message\" is not supported!");
     }
 
     /**
-     * Sends response and redirects by url /responses.
+     * Sends response and redirects by URL /responses.
      * Request mapping: /admin/response/send
      * Method: POST
      *
      * @param name a sender name.
      * @param text a sender text.
      * @return The ready object of class ModelAndView.
-     * @see Response
      */
     @RequestMapping(
             value = "/response/send",
@@ -172,7 +154,7 @@ public class AdminMainController extends MainController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception sender:
+     * The exception message:
      * "GET method in "/admin/response/send" is not supported!"
      * Request mapping: /admin/send_response
      * Method: POST
@@ -185,8 +167,6 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                "GET method in \"/admin/response/send\" is not supported!"
-        );
+        throw new IllegalMappingException("GET method in \"/admin/response/send\" is not supported!");
     }
 }

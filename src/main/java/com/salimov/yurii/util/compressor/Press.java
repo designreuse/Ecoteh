@@ -38,6 +38,8 @@ public abstract class Press implements Compressor {
 
     /**
      * Initializes the Compressor object.
+     *
+     * @return The compressor instance.
      */
     protected abstract Compressor initCompress();
 }

@@ -12,17 +12,17 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class implements the methods for working
- * with files on the file system.
+ * with multipart files in file system.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public class FileLoader implements Loader {
+public final class MultipartFileLoader extends AbstractLoader implements Loader {
 
     /**
      * The object for logging information.
      */
-    private final static Logger LOGGER = Logger.getLogger(FileLoader.class);
+    private final static Logger LOGGER = Logger.getLogger(MultipartFileLoader.class);
 
     /**
      * The file to write.
@@ -32,16 +32,11 @@ public class FileLoader implements Loader {
     private final MultipartFile file;
 
     /**
-     * The root path of a file.
-     */
-    private final String path;
-
-    /**
      * Constructor.
      *
      * @param path a root path of a file.
      */
-    public FileLoader(final String path) {
+    public MultipartFileLoader(final String path) {
         this(null, path);
     }
 
@@ -51,12 +46,12 @@ public class FileLoader implements Loader {
      * @param file a file to write.
      * @param path a root path of a file.
      */
-    public FileLoader(
+    public MultipartFileLoader(
             final MultipartFile file,
             final String path
     ) {
+        super(path);
         this.file = file;
-        this.path = path;
     }
 
     /**
@@ -76,49 +71,15 @@ public class FileLoader implements Loader {
     }
 
     /**
-     * Deletes a file with the rootPath.
-     * Deletes a file if it is exists
-     * and it is a file (not a directory)
+     * MultipartFileLoader does NOT support this method.
      *
-     * @return {@code true} if a file is deleted,
-     * {@code false} otherwise.
+     * @return Throws UnsupportedOperationException.
+     * @throws UnsupportedOperationException MultipartFileLoader does not support
+     *                                       the read feature.
      */
     @Override
-    public boolean delete() {
-        boolean result = false;
-        if (isNotBlank(this.path)) {
-            final File file = new File(this.path);
-            if (file.exists() && file.isFile()) {
-                result = file.delete();
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Returns a path to file.
-     *
-     * @return The path to file.
-     */
-    private String getPathToFile() {
-        return isNotBlank(this.path) ? this.path : this.file.getOriginalFilename();
-    }
-
-    /**
-     * Checks a path to file.
-     * Creates directories if it is not exist.
-     *
-     * @param path a path to file.
-     * @return {@code true} if directories to file is exist,
-     * {@code false} otherwise.
-     */
-    private static boolean checkPath(final String path) {
-        final File directory = new File(path).getParentFile();
-        boolean isExists = directory.exists();
-        if (!isExists) {
-            isExists = directory.mkdirs();
-        }
-        return isExists;
+    public String read() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Not supported by MultipartFileLoader");
     }
 
     /**
@@ -131,11 +92,11 @@ public class FileLoader implements Loader {
     }
 
     /**
-     * Returns root path of a file.
+     * Returns a path to file.
      *
-     * @return The root path of a file.
+     * @return The path to file.
      */
-    public String getPath() {
-        return this.path;
+    private String getPathToFile() {
+        return isNotBlank(getPath()) ? getPath() : this.file.getOriginalFilename();
     }
 }

@@ -7,7 +7,6 @@ package com.salimov.yurii.util.cache;
  * @param <T> a type of key.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Cache
  */
 final class Key<T> implements Comparable {
 

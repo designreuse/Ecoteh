@@ -10,7 +10,6 @@ import com.salimov.yurii.enums.FileType;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see com.salimov.yurii.entity.File
  */
 public interface IFile extends IModel {
 
@@ -29,16 +28,16 @@ public interface IFile extends IModel {
     void setTitle(final String title);
 
     /**
-     * Returns a url of the media.
+     * Returns a URL of the media.
      *
-     * @return The media url.
+     * @return The media URL.
      */
     String getUrl();
 
     /**
-     * Sets a new url to the media.
+     * Sets a new URL to the media.
      *
-     * @param url a new url to the media.
+     * @param url a new URL to the media.
      */
     void setUrl(final String url);
 
@@ -51,7 +50,6 @@ public interface IFile extends IModel {
 
     /**
      * Sets a new type to the file.
-     * If parameter url is {@code null}, then sets {@code FileType.OTHER}.
      *
      * @param type a new file type.
      */
