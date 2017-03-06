@@ -13,7 +13,6 @@ import java.util.Map;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see User
  */
 public final class DefaultConfig {
 
@@ -111,7 +110,6 @@ public final class DefaultConfig {
      * Returns authenticated user.
      *
      * @return The authenticated user.
-     * @see User
      */
     private static User getAuthenticatedUser() {
         User user;
@@ -131,7 +129,7 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "admin", "somepass",
+                "admin", "eco20pass17",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -143,7 +141,7 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "superadmin", "somepass",
+                "login", "password",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -157,7 +155,6 @@ public final class DefaultConfig {
      * @param password a password of the new user.
      * @param role     a role of the new user.
      * @return The new user.
-     * @see User
      */
     private static User createUser(
             final String name,
