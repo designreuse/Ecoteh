@@ -500,6 +500,7 @@ public final class Company extends Content implements ICompany {
     public Company initialize(final Company company) {
         if (company != null) {
             super.initialize(company);
+            this.setInformation(company.getInformation());
             this.setDomain(company.getDomain());
             this.setTagline(company.getTagline());
             this.setSenderEmail(company.getSenderEmail());

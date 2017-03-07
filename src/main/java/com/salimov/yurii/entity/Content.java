@@ -288,6 +288,7 @@ public abstract class Content extends Model implements IContent {
             this.setTitle(content.getTitle());
             this.setUrl(content.getUrl());
             this.setDescription(content.getDescription());
+            this.setKeywords(content.getKeywords());
             this.setLogo(content.getLogo());
         }
         return this;

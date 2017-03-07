@@ -227,7 +227,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByEmail(final String email) throws NullPointerException {
+    public User getByEmail(final String email) throws IllegalArgumentException {
         if (isBlank(email)) {
             throw new IllegalArgumentException("Input E-mail is blank!");
         }

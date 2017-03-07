@@ -77,8 +77,8 @@ public final class Address extends Model implements IAddress {
      */
     @Override
     public String toString() {
-        return "Address{" +
-                "address='" + getAddress() + '\'' +
+        return "Address{" + super.toString() +
+                ", address='" + getAddress() + '\'' +
                 ", googleMaps='" + getGoogleMaps() + '\'' +
                 '}';
     }
@@ -111,6 +111,16 @@ public final class Address extends Model implements IAddress {
     @Override
     public int hashCode() {
         return this.address.hashCode() + this.googleMaps.hashCode();
+    }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Address clone() {
+        return (Address) super.clone();
     }
 
     /**
