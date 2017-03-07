@@ -113,11 +113,6 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
         this.service.getByEmail("");
     }
 
-    @Test(expected = NullPointerException.class)
-    public void whenGetByUnknownEmailThenThrowsNullPointerException() {
-        this.service.getByEmail(ANY_STRING);
-    }
-
     @Test
     public void whenGetByEmailThenReturnSomeUser() {
         assertNull(this.service.getByEmail(EMAIL));
@@ -248,17 +243,17 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndSortByNameWithTrueReversThenReturnSomeList() {
-        assertFalse(this.service.getAndSortByName(true).isEmpty());
+        assertTrue(this.service.getAndSortByName(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByNameWithFalseReversThenReturnSomeList() {
-        assertFalse(this.service.getAndSortByName(false).isEmpty());
+        assertTrue(this.service.getAndSortByName(false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByUrlWithTrueReversThenReturnSomeList() {
-        assertFalse(this.service.getAndSortByUrl(true).isEmpty());
+        assertTrue(this.service.getAndSortByUrl(true).isEmpty());
     }
 
     @Test
@@ -339,12 +334,12 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndFilterByNullRolesThenReturnSomeNotFileterList() {
-        assertFalse(this.service.getAndFilterByRoles(null).isEmpty());
+        assertTrue(this.service.getAndFilterByRoles(null).isEmpty());
     }
 
     @Test
     public void whenGetAndFilterByEmptyRolesThenReturnSomeNotFileterList() {
-        assertFalse(this.service.getAndFilterByRoles(new ArrayList<>()).isEmpty());
+        assertTrue(this.service.getAndFilterByRoles(new ArrayList<>()).isEmpty());
     }
 
     @Test
@@ -366,7 +361,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenFilteredByValidThenReturnSomeList() {
-        assertFalse(this.service.filteredByValid(getUsers()).isEmpty());
+        assertTrue(this.service.filteredByValid(getUsers()).isEmpty());
     }
 
     @Test

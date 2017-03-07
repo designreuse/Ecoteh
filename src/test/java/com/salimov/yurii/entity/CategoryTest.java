@@ -148,10 +148,30 @@ public final class CategoryTest extends ContentTest<Category> {
         assertTrue(category.getArticles().isEmpty());
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final Category model1 = getInstance();
+        final Category model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final Category model1 = getInstance();
+        final Category model2 = getObject();
+        model1.initialize(model2);
+        assertEquals(model1, model2);
+    }
+
     @Ignore
     @Override
     protected Category getObject() {
         return getCategory();
+    }
+
+    @Override
+    protected Category getInstance() {
+        return new Category();
     }
 
     @Ignore

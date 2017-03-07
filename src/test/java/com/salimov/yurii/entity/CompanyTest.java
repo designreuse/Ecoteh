@@ -122,10 +122,32 @@ public final class CompanyTest extends ContentTest<Company> {
         }
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final Company model1 = getInstance();
+        final Company model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final Company model1 = getInstance();
+        final Company model2 = getObject();
+        model1.initialize(model2);
+        System.out.println(model1);
+        System.out.println(model2);
+        assertTrue(model1.equals(model2));
+    }
+
     @Ignore
     @Override
     protected Company getObject() {
         return getCompany();
+    }
+
+    @Override
+    protected Company getInstance() {
+        return new Company();
     }
 
     @Ignore

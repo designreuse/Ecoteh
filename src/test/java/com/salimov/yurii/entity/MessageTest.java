@@ -133,9 +133,29 @@ public final class MessageTest extends ModelTest<Message> {
         assertEquals(message.getDate(), date);
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final Message model1 = getInstance();
+        final Message model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final Message model1 = getInstance();
+        final Message model2 = getObject();
+        model1.initialize(model2);
+        assertEquals(model1, model2);
+    }
+
     @Ignore
     @Override
     protected Message getObject() {
         return getMessage();
+    }
+
+    @Override
+    protected Message getInstance() {
+        return new Message();
     }
 }

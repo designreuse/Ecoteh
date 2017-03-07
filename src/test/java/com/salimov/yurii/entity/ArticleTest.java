@@ -271,9 +271,29 @@ public final class ArticleTest extends ContentTest<Article> {
         assertFalse(category.containsArticle(article));
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final Article model1 = getInstance();
+        final Article model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final Article model1 = getInstance();
+        final Article model2 = getObject();
+        model1.initialize(model2);
+        assertEquals(model1, model2);
+    }
+
     @Ignore
     @Override
     protected Article getObject() {
         return getArticle();
+    }
+
+    @Override
+    protected Article getInstance() {
+        return new Article();
     }
 }

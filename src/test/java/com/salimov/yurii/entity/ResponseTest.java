@@ -213,9 +213,29 @@ public final class ResponseTest extends ModelTest<Response> {
         assertTrue(response.isValidated());
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final Response model1 = getInstance();
+        final Response model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final Response model1 = getInstance();
+        final Response model2 = getObject();
+        model1.initialize(model2);
+        assertEquals(model1, model2);
+    }
+
     @Ignore
     @Override
     protected Response getObject() {
         return getResponse();
+    }
+
+    @Override
+    protected Response getInstance() {
+        return new Response();
     }
 }

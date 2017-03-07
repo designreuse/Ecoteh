@@ -221,9 +221,29 @@ public final class FileTest extends ModelTest<File> {
         );
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final File model1 = getInstance();
+        final File model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final File model1 = getInstance();
+        final File model2 = getObject();
+        model1.initialize(model2);
+        assertEquals(model1, model2);
+    }
+
     @Ignore
     @Override
     protected File getObject() {
         return getFile();
+    }
+
+    @Override
+    protected File getInstance() {
+        return new File();
     }
 }

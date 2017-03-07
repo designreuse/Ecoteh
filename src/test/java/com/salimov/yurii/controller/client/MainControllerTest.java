@@ -15,7 +15,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getHomePage(),
-                "client/main/index_page",
+                "client/main/index",
                 new String[]{
                         "main_company",
                         "categories",
@@ -31,7 +31,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getAllCategoriesPage(),
-                "client/category/all_page",
+                "client/category/all",
                 new String[]{
                         "main_company",
                         "categories"
@@ -44,7 +44,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getCategoryPage(URL),
-                "client/category/one_page",
+                "client/category/one",
                 new String[]{
                         "main_company",
                         "categories",
@@ -59,7 +59,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getArticlePage(URL),
-                "client/article/one_page",
+                "client/article/one",
                 new String[]{
                         "main_company",
                         "categories",
@@ -73,7 +73,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getArticleByNumberPage(NUMBER),
-                "client/article/one_page",
+                "client/article/one",
                 new String[]{
                         "main_company",
                         "categories",
@@ -87,7 +87,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getAllArticlesPage(),
-                "client/article/all_page",
+                "client/article/all",
                 new String[]{
                         "articles_list",
                         "main_company",
@@ -101,7 +101,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getAboutCompanyPage(),
-                "client/company/main_page",
+                "client/company/main",
                 new String[]{
                         "main_company",
                         "categories",
@@ -115,7 +115,7 @@ public abstract class MainControllerTest {
     public void whenGetContactsPageThenReturnSomeModelAndViewWithTheContacts() {
         checkModelAndView(
                 getController().getContactsPage(),
-                "client/company/contacts_page",
+                "client/company/main_contacts",
                 new String[]{"is_captcha", "company", "main_company", "categories", "favicon"}
         );
     }
@@ -125,7 +125,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getPartnersPage(),
-                "client/company/all_page",
+                "client/company/all",
                 new String[]{"main_company", "categories"}
         );
     }
@@ -134,7 +134,7 @@ public abstract class MainControllerTest {
     public void whenGetPartnerPageThenReturnSomeModelAndViewWithThePartner() {
         checkModelAndView(
                 getController().getPartnerPage(URL),
-                "client/company/one_page",
+                "client/company/one",
                 new String[]{
                         "main_company",
                         "categories",
@@ -148,7 +148,7 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getAllResponsesPage(),
-                "client/response/all_page",
+                "client/response/all",
                 new String[]{
                         "responses_list",
                         "main_company",

@@ -30,7 +30,7 @@ public class AdviceControllerTest {
                         new NullPointerException(),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -42,7 +42,7 @@ public class AdviceControllerTest {
                         new IllegalArgumentException(),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -54,7 +54,7 @@ public class AdviceControllerTest {
                         new HttpRequestMethodNotSupportedException(ANY_STRING),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -66,7 +66,7 @@ public class AdviceControllerTest {
                         new IllegalAccessException(),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -78,7 +78,7 @@ public class AdviceControllerTest {
                         new IllegalMappingException(ANY_STRING),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -90,7 +90,7 @@ public class AdviceControllerTest {
                         new DuplicateException(),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -102,7 +102,7 @@ public class AdviceControllerTest {
                         new DisableException(),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }
@@ -114,7 +114,7 @@ public class AdviceControllerTest {
                         new Exception(),
                         mock(HttpServletRequest.class)
                 ),
-                "error/error_page",
+                "error/error",
                 new String[]{"main_company", "categories", "status", "message"}
         );
     }

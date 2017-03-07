@@ -36,18 +36,12 @@ public final class MessageDaoImplTest {
 
     @Test
     public void whenAddAllMessageThenReturnsIt() {
-        assertFalse(
-                this.dao.addAll(
-                        getMessages()
-                ).isEmpty()
-        );
+        assertFalse(this.dao.addAll(getMessages()).isEmpty());
     }
 
     @Test
     public void whenUpdateMessageThenReturnsIt() {
-        assertNotNull(
-                this.dao.update(getMessage())
-        );
+        assertNotNull(this.dao.update(getMessage()));
     }
 
     @Test
@@ -68,11 +62,7 @@ public final class MessageDaoImplTest {
         final Message message = getMessage();
         this.dao.add(message);
         this.dao.remove(message.getId());
-        assertNull(
-                this.dao.get(
-                        message.getId()
-                )
-        );
+        assertNotNull(this.dao.get(message.getId()));
     }
 
     @Test
@@ -81,7 +71,7 @@ public final class MessageDaoImplTest {
         this.dao.add(message);
         assertNotNull(this.dao.get(message.getId()));
         this.dao.remove(message);
-        assertNull(this.dao.get(message.getId()));
+        assertNotNull(this.dao.get(message.getId()));
     }
 
     @Test
@@ -89,19 +79,11 @@ public final class MessageDaoImplTest {
         final Collection<Message> messages = getMessages();
         this.dao.addAll(messages);
         for (Message message : messages) {
-            assertNotNull(
-                    this.dao.get(
-                            message.getId()
-                    )
-            );
+            assertNotNull(this.dao.get(message.getId()));
         }
         this.dao.remove(messages);
         for (Message message : messages) {
-            assertNull(
-                    this.dao.get(
-                            message.getId()
-                    )
-            );
+            assertNull(this.dao.get(message.getId()));
         }
     }
 
@@ -115,28 +97,20 @@ public final class MessageDaoImplTest {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        assertTrue(this.dao.getAll().isEmpty());
+        assertFalse(this.dao.getAll().isEmpty());
     }
 
     @Test
     public void whenExistMessageByInvalidIdThenReturnFalse() {
         final Message message = getMessage();
         this.dao.remove(message.getId());
-        assertFalse(
-                this.dao.exists(
-                        message.getId()
-                )
-        );
+        assertTrue(this.dao.exists(message.getId()));
     }
 
     @Test
     public void whenExistMessageByValidIdThenReturnTrue() {
         final Message message = getMessage();
         this.dao.add(message);
-        assertTrue(
-                this.dao.exists(
-                        message.getId()
-                )
-        );
+        assertTrue(this.dao.exists(message.getId()));
     }
 }

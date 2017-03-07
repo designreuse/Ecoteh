@@ -23,7 +23,7 @@ public class ArticleControllerTest {
     public void whenGetNewArticlePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getNewArticlePage(),
-                "admin/article/new_page",
+                "admin/article/add",
                 new String[]{"main_company", "categories"}
         );
     }
@@ -50,7 +50,7 @@ public class ArticleControllerTest {
     public void whenGetEditArticlePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editArticle(URL),
-                "admin/article/edit_page",
+                "admin/article/edit",
                 new String[]{"main_company", "categories", "article"}
         );
     }

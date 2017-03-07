@@ -23,7 +23,7 @@ public class AdminMainControllerTest extends MainControllerTest {
     public void whenGetAdminMenuThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getAdminMenu(),
-                "admin/menu/menu_page",
+                "admin/menu/menu",
                 new String[]{"user", "main_company", "categories"}
         );
     }
@@ -48,7 +48,7 @@ public class AdminMainControllerTest extends MainControllerTest {
     public void whenSendResponseThenRedirectPageWithAllResponses() {
         checkModelAndView(
                 controller.sendResponse(NAME, ANY_STRING),
-                "client/response/all_page", null
+                "client/response/all", null
         );
     }
 

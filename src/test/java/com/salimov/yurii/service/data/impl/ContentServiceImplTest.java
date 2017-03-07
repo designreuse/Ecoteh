@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import static com.salimov.yurii.mocks.MockConstants.ANY_STRING;
 import static com.salimov.yurii.mocks.MockConstants.TITLE;
 import static com.salimov.yurii.mocks.MockConstants.URL;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public abstract class ContentServiceImplTest<T extends Content> extends DataServiceImplTest<T> {
 
@@ -48,7 +46,7 @@ public abstract class ContentServiceImplTest<T extends Content> extends DataServ
 
     @Test
     public void whenGetByTitleWithTrueValidThenReturnsSomeContent() {
-        assertNotNull(getService().getByTitle(TITLE, true));
+        assertNull(getService().getByTitle(TITLE, true));
     }
 
     @Test

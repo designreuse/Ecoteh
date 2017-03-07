@@ -31,12 +31,12 @@ public class SearchServiceImplTest {
     public void whenSearchWithNullKeywordsAndContent() {
         checkModelAndView(
                 this.searchService.search(null, null, true),
-                "client/search/result_page",
+                "client/search/result",
                 KEYWORDS
         );
         checkModelAndView(
                 this.searchService.search(null, null, false),
-                "client/search/result_page",
+                "client/search/result",
                 KEYWORDS
         );
     }
@@ -45,12 +45,12 @@ public class SearchServiceImplTest {
     public void whenSearchWithEmptyKeywordsAndContent() {
         checkModelAndView(
                 this.searchService.search("", "", true),
-                "client/search/result_page",
+                "client/search/result",
                 KEYWORDS
         );
         checkModelAndView(
                 this.searchService.search("", "", false),
-                "client/search/result_page",
+                "client/search/result",
                 KEYWORDS
         );
     }

@@ -55,4 +55,7 @@ public abstract class ModelTest<T extends Model> {
 
     @Ignore
     protected abstract T getObject();
+
+    @Ignore
+    protected abstract T getInstance();
 }

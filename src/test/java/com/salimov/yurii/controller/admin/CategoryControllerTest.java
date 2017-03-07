@@ -23,7 +23,7 @@ public class CategoryControllerTest {
     public void whenGetNewCategoryPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getNewCategoryPage(),
-                "admin/category/new_page",
+                "admin/category/add",
                 new String[]{"main_company", "categories"}
         );
     }
@@ -50,7 +50,7 @@ public class CategoryControllerTest {
     public void whenGetEditCategoryPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editCategory(URL),
-                "admin/category/edit_page",
+                "admin/category/edit",
                 new String[]{"main_company", "categories", "category"}
         );
     }

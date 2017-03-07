@@ -23,7 +23,7 @@ public class ConfigurationControllerTest {
     public void whenGetPropertiesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getPropertiesPage(),
-                "superadmin/configuration/configuration_page",
+                "superadmin/configuration/configuration",
                 new String[]{"main_company", "categories", "properties"}
         );
     }

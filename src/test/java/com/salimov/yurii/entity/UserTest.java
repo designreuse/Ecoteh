@@ -19,6 +19,9 @@ public final class UserTest extends ModelTest<User> {
     public void whenInitializeByConstructorThenSetNotNullRole() {
         final User user = new User();
         assertNotNull(user.getRole());
+        assertNotNull(user.getRole());
+        assertNotNull(user.getName());
+        assertNotNull(user.getUrl());
     }
 
     @Test
@@ -27,7 +30,6 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getRole());
         assertNotNull(user.getName());
         assertNotNull(user.getUrl());
-        assertNotNull(user.getRole());
     }
 
     @Test
@@ -47,7 +49,6 @@ public final class UserTest extends ModelTest<User> {
         assertNotNull(user.getName());
         assertNotNull(user.getContacts());
         assertNotNull(user.getUrl());
-        assertNotNull(user.getRole());
     }
 
     @Test
@@ -63,7 +64,6 @@ public final class UserTest extends ModelTest<User> {
     @Test
     public void whenPassValidParametersInConstructorThenSaveThisValues() {
         final User user = new User(NAME, EMAIL, null);
-        assertNotNull(user.getRole());
         assertNotNull(user.getName());
         assertNotNull(user.getContacts());
         assertNotNull(user.getUrl());
@@ -136,12 +136,10 @@ public final class UserTest extends ModelTest<User> {
     public void hashCodeValidObject() {
         super.hashCodeValidObject();
         final User user = getUser();
-        assertEquals(
-                user.hashCode(),
-                user.getName().hashCode() +
-                        user.getDescription().hashCode() +
-                        user.getRole().hashCode()
-        );
+        int value = user.getName().hashCode() +
+                user.getDescription().hashCode() +
+                user.getRole().hashCode();
+        assertEquals(user.hashCode(), value);
     }
 
     @Test
@@ -533,9 +531,29 @@ public final class UserTest extends ModelTest<User> {
         assertFalse(user.isMailing());
     }
 
+    @Test
+    public void whenInitializeByNullThenDoNothing() {
+        final User model1 = getInstance();
+        final User model2 = model1.initialize(null);
+        assertEquals(model1, model2);
+    }
+
+    @Test
+    public void whenInitializeByValidObjectThenCopyIt() {
+        final User model1 = getInstance();
+        final User model2 = getObject();
+        model1.initialize(model2);
+        assertEquals(model1, model2);
+    }
+
     @Ignore
     @Override
     protected User getObject() {
         return getUser();
+    }
+
+    @Override
+    protected User getInstance() {
+        return new User();
     }
 }

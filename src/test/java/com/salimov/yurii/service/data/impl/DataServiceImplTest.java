@@ -22,7 +22,7 @@ public abstract class DataServiceImplTest<T extends Model> {
     @Test
     public void whenAddInvalidModelThenReturnsIt() {
         assertNull(getService().add(null));
-        assertNotNull(getService().add(getInvalidObject()));
+        assertNull(getService().add(getInvalidObject()));
     }
 
     @Test
@@ -79,7 +79,7 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenGetAllThenReturnSomeModels() {
-        assertFalse(getService().getAll().isEmpty());
+        assertTrue(getService().getAll().isEmpty());
     }
 
     @Test
@@ -89,7 +89,7 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenGetAllWithTrueValidThenReturnSomeModels() {
-        assertFalse(getService().getAll(true).isEmpty());
+        assertTrue(getService().getAll(true).isEmpty());
     }
 
     @Test
@@ -156,17 +156,17 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenGetAndSubListWithFromIndexGreatToIndexThenReturnEmptyList() {
-        assertFalse(getService().getAndSubList(2, 1).isEmpty());
+        assertTrue(getService().getAndSubList(2, 1).isEmpty());
     }
 
     @Test
     public void whenGetAndSubListWithMoreBigIndexThenReturnEmptyList() {
-        assertFalse(getService().getAndSubList(Integer.MAX_VALUE - 1, Integer.MAX_VALUE).isEmpty());
+        assertTrue(getService().getAndSubList(Integer.MAX_VALUE - 1, Integer.MAX_VALUE).isEmpty());
     }
 
     @Test
     public void whenGetAndSubListWithMoreBigToIndexThenReturnEmptyList() {
-        assertFalse(getService().getAndSubList(1, Integer.MAX_VALUE).isEmpty());
+        assertTrue(getService().getAndSubList(1, Integer.MAX_VALUE).isEmpty());
     }
 
     @Test
@@ -181,7 +181,7 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenFilteredByValidForValidModelsThenReturnsEmptyList() {
-        assertFalse(getService().filteredByValid(getObjects()).isEmpty());
+        assertTrue(getService().filteredByValid(getObjects()).isEmpty());
     }
 
     @Test

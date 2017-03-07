@@ -24,7 +24,7 @@ public class SearchControllerTest {
     public void whenSearchThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.search(),
-                "client/search/result_page",
+                "client/search/result",
                 null
         );
     }

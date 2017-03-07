@@ -22,7 +22,7 @@ public class UserControllerTest {
     public void whenGetAllUsersPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getAllUsersPage(),
-                "admin/user/all_page",
+                "admin/user/all",
                 new String[]{"main_company", "categories", "users_list"}
         );
     }
@@ -31,7 +31,7 @@ public class UserControllerTest {
     public void whenNewUserPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.newUserPage(),
-                "admin/user/new_page",
+                "admin/user/add",
                 new String[]{"main_company", "categories"}
         );
     }
@@ -60,7 +60,7 @@ public class UserControllerTest {
     public void whenEditUserByUrlThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editUserByUrl(URL),
-                "admin/user/edit_page",
+                "admin/user/edit",
                 new String[]{"main_company", "categories", "user"}
         );
     }

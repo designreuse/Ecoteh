@@ -25,7 +25,7 @@ public class CacheControllerTest {
     public void whenGetCachePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getCachePage(),
-                "superadmin/cache/cache_page",
+                "superadmin/cache/cache",
                 new String[]{"main_company", "categories", "objects"}
         );
     }

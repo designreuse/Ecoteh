@@ -23,7 +23,7 @@ public class CompanyControllerTest {
     public void whenEditMainCompanyThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editMainCompany(),
-                "admin/company/edit_page",
+                "admin/company/edit",
                 new String[]{"main_company", "categories", "company", "favicon", "main"}
         );
     }
@@ -51,7 +51,7 @@ public class CompanyControllerTest {
     public void whenNewPartnerPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.newPartnerPage(),
-                "admin/company/new_page",
+                "admin/company/add",
                 new String[]{"main_company", "categories"}
         );
     }
@@ -80,7 +80,7 @@ public class CompanyControllerTest {
     public void whenEditPartnerByUrlThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editPartnerByUrl(URL),
-                "admin/company/edit_page",
+                "admin/company/edit",
                 new String[]{"main_company", "categories", "company", "main"}
         );
     }

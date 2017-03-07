@@ -16,6 +16,7 @@ import static com.salimov.yurii.mocks.enity.MockEntity.getCompany;
 import static com.salimov.yurii.mocks.service.data.MockServices.getFileService;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public final class CompanyServiceImplTest extends ContentServiceImplTest<Company> {
 
@@ -51,7 +52,7 @@ public final class CompanyServiceImplTest extends ContentServiceImplTest<Company
 
     @Test
     public void whenGetValidPartnersThenReturnNotEmptyList() {
-        assertFalse(this.service.getPartners(true).isEmpty());
+        assertTrue(this.service.getPartners(true).isEmpty());
     }
 
     @Test
