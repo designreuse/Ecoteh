@@ -37,9 +37,17 @@
                         → <a href="#">Стиля</a>
                     </p>
                     <hr>
-                    <h3 class="text-center">Стиля</h3>
+                    <h3 class="text-center">Стиля CSS</h3>
                     <hr>
                     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 text-center">
+                        <div align="left" class="little">
+                            <p>
+                                CSS стиля - описывают внешний вид сайта. Если не уверены, не изменяйте тут ничего.
+                                В любое время Вы можете
+                                <a href="<c:url value="/admin/styles/rollback"/>"
+                                   title="Возобновить сейчас по-умолчанию">востановить стиля по-умолчанию</a>.
+                            </p>
+                        </div>
                         <form action="<c:url value="/admin/style/update"/>" method="post">
                             <textarea class="form-control textarea" name="styles" rows="25" title=""
                                       placeholder="Стиля сайта (CSS)"><c:out value="${styles}"/></textarea>

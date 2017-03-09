@@ -10,7 +10,7 @@ import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
-import com.salimov.yurii.util.compressor.HtmlPress;
+import com.salimov.yurii.util.compressor.HtmlCompressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -156,7 +156,7 @@ public class CompanyController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             final ModelAndView modelAndView
     ) {
-        final Compressor compressor = new HtmlPress();
+        final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
         company.setInformation(compressor.compress(information));
         company.setDomain(domain);
@@ -264,10 +264,10 @@ public class CompanyController {
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Company company = new Company();
+        final Compressor compressor = new HtmlCompressor();
+        final Company company = new Company(title, compressor.compress(description), keywords);
+        company.setInformation(compressor.compress(information));
         company.setTitle(title);
-        company.setDescription(description);
-        company.setInformation(information);
         company.setKeywords(keywords);
         company.setDomain(domain);
         company.setTagline(tagline);
@@ -380,10 +380,10 @@ public class CompanyController {
             @RequestParam(value = "is_valid") final boolean isValid,
             final ModelAndView modelAndView
     ) {
-        final Company company = new Company();
+        final Compressor compressor = new HtmlCompressor();
+        final Company company = new Company(title, compressor.compress(description), keywords);
+        company.setInformation(compressor.compress(information));
         company.setTitle(title);
-        company.setDescription(description);
-        company.setInformation(information);
         company.setKeywords(keywords);
         company.setDomain(domain);
         company.setTagline(tagline);

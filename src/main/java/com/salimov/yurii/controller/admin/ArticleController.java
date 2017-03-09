@@ -10,7 +10,7 @@ import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
-import com.salimov.yurii.util.compressor.HtmlPress;
+import com.salimov.yurii.util.compressor.HtmlCompressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -141,7 +141,7 @@ public class ArticleController {
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-        final Compressor compressor = new HtmlPress();
+        final Compressor compressor = new HtmlCompressor();
         final Article article = new Article(
                 title,
                 compressor.compress(description),
@@ -233,7 +233,7 @@ public class ArticleController {
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
-        final Compressor compressor = new HtmlPress();
+        final Compressor compressor = new HtmlCompressor();
         final Article article = new Article(
                 title,
                 compressor.compress(description),

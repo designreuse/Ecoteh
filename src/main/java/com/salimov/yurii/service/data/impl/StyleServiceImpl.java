@@ -1,7 +1,7 @@
 package com.salimov.yurii.service.data.impl;
 
 import com.salimov.yurii.service.data.interfaces.StyleService;
-import com.salimov.yurii.util.compressor.CssPress;
+import com.salimov.yurii.util.compressor.CssCompressor;
 import com.salimov.yurii.util.loader.FileContentsLoader;
 import com.salimov.yurii.util.properties.ContentProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +68,12 @@ public class StyleServiceImpl implements StyleService {
      * @param styles a new CSS styles to save.
      */
     @Override
-    public void save(String styles) {
+    public void save(final String styles) {
         if (isNotBlank(styles)) {
             new FileContentsLoader(getAbsolutePath(STYLES_PATH), styles).write();
             new FileContentsLoader(
                     getAbsolutePath(MIN_STYLES_PATH),
-                    new CssPress().compress(styles)
+                    new CssCompressor().compress(styles)
             ).write();
         }
     }
