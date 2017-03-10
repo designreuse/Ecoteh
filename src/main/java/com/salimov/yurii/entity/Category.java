@@ -13,8 +13,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
- * @see ICategory
  */
 @Entity
 @Table(name = "categories")
@@ -30,8 +28,6 @@ public final class Category extends Content implements ICategory {
 
     /**
      * The set of a articles.
-     *
-     * @see Article
      */
     @OneToMany(
             mappedBy = "category",
@@ -86,7 +82,6 @@ public final class Category extends Content implements ICategory {
      * Adds a new article, if it is valid.
      *
      * @param article an article to add.
-     * @see Article
      */
     @Override
     public void addArticle(final Article article) {
@@ -104,7 +99,6 @@ public final class Category extends Content implements ICategory {
      * Adds a new articles, if they are valid.
      *
      * @param articles an articles to add.
-     * @see Article
      */
     @Override
     public void addArticles(final Collection<Article> articles) {
@@ -117,7 +111,6 @@ public final class Category extends Content implements ICategory {
      * Removes article from the list of articles.
      *
      * @param article an article to remove.
-     * @see Article
      */
     @Override
     public void removeArticle(final Article article) {
@@ -134,7 +127,6 @@ public final class Category extends Content implements ICategory {
      * Removes articles from the list of articles.
      *
      * @param articles an articles to remove.
-     * @see Article
      */
     @Override
     public void removeArticles(final Collection<Article> articles) {
@@ -147,7 +139,6 @@ public final class Category extends Content implements ICategory {
      * Returns an list of articles.
      *
      * @return The list of articles.
-     * @see Article
      */
     @Override
     public Collection<Article> getArticles() {
@@ -159,7 +150,6 @@ public final class Category extends Content implements ICategory {
      * Clears the list of articles and adds new articles.
      *
      * @param articles an articles to add.
-     * @see Article
      */
     @Override
     public void setArticles(final Collection<Article> articles) {
@@ -173,7 +163,6 @@ public final class Category extends Content implements ICategory {
      * @param article an article to contain.
      * @return {@code true} if article is contains,
      * {@code false} otherwise.
-     * @see Article
      */
     @Override
     public boolean containsArticle(final Article article) {
@@ -186,7 +175,6 @@ public final class Category extends Content implements ICategory {
      * @param articles an articles to contain.
      * @return {@code true} if articles are contains,
      * {@code false} otherwise.
-     * @see Article
      */
     @Override
     public boolean containsArticles(final Collection<Article> articles) {
@@ -195,8 +183,6 @@ public final class Category extends Content implements ICategory {
 
     /**
      * Clears the list of articles.
-     *
-     * @see Article
      */
     @Override
     public void clearArticles() {

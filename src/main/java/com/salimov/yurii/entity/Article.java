@@ -17,8 +17,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
- * @see IArticle
  */
 @Entity
 @Table(name = "articles")
@@ -52,8 +50,6 @@ public final class Article extends Content implements IArticle {
 
     /**
      * The category of an article.
-     *
-     * @see Category
      */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
@@ -241,7 +237,6 @@ public final class Article extends Content implements IArticle {
      * Also the article deletes from old category and adds to new category.
      *
      * @param category a new category to the article.
-     * @see Category
      */
     @Override
     public void setCategory(final Category category) {
@@ -263,7 +258,6 @@ public final class Article extends Content implements IArticle {
      * Returns a category of the article.
      *
      * @return The article category.
-     * @see Category
      */
     @Override
     public Category getCategory() {

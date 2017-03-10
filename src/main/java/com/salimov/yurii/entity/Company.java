@@ -16,8 +16,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Content
- * @see ICompany
  */
 @Entity
 @Table(name = "companies")
@@ -75,8 +73,6 @@ public final class Company extends Content implements ICompany {
 
     /**
      * The company contacts.
-     *
-     * @see Contacts
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -91,8 +87,6 @@ public final class Company extends Content implements ICompany {
 
     /**
      * The company address.
-     *
-     * @see Address
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -107,8 +101,6 @@ public final class Company extends Content implements ICompany {
 
     /**
      * The type of a company.
-     *
-     * @see CompanyType
      */
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -447,7 +439,6 @@ public final class Company extends Content implements ICompany {
      * Returns a domain of the company.
      *
      * @return The company domain.
-     * @see CompanyType
      */
     @Override
     public CompanyType getType() {
@@ -458,7 +449,6 @@ public final class Company extends Content implements ICompany {
      * Sets a new type to the company.
      *
      * @param type a new type to the company.
-     * @see CompanyType
      */
     @Override
     public void setType(final CompanyType type) {

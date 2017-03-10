@@ -14,11 +14,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Model
- * @see Article
- * @see Category
- * @see Company
- * @see IContent
  */
 @MappedSuperclass
 public abstract class Content extends Model implements IContent {
@@ -57,8 +52,6 @@ public abstract class Content extends Model implements IContent {
 
     /**
      * The category logo.
-     *
-     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -268,7 +261,6 @@ public abstract class Content extends Model implements IContent {
      * Sets a new logo to the content.
      *
      * @param logo a new logo to the content.
-     * @see File
      */
     @Override
     public void setLogo(final File logo) {

@@ -24,8 +24,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Model
- * @see IUser
  */
 @Entity
 @Table(name = "users")
@@ -71,8 +69,6 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * The user contacts.
-     *
-     * @see Contacts
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -87,8 +83,6 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * The user contacts.
-     *
-     * @see File
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -103,8 +97,6 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * The role of a user.
-     *
-     * @see UserRole
      */
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -124,8 +116,6 @@ public final class User extends Model implements IUser, UserDetails {
 
     /**
      * Default constructor.
-     *
-     * @see UserRole
      */
     public User() {
         this.name = "";
@@ -441,7 +431,6 @@ public final class User extends Model implements IUser, UserDetails {
      * For translate used {@link Translator} method "fromCyrillicToLatin".
      *
      * @param value a value to translate.
-     * @see Translator
      */
     @Override
     public void translateAndSetUrl(final String value) {
@@ -534,7 +523,6 @@ public final class User extends Model implements IUser, UserDetails {
      * Returns a role of the user.
      *
      * @return The user role.
-     * @see UserRole
      */
     @Override
     public UserRole getRole() {
@@ -546,7 +534,6 @@ public final class User extends Model implements IUser, UserDetails {
      * If parameter role is blank, then sets empty string.
      *
      * @param role a new role to the user.
-     * @see UserRole
      */
     @Override
     public void setRole(final UserRole role) {

@@ -14,8 +14,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
- * @see Model
- * @see IAddress
  */
 @Entity
 @Table(name = "addresses")
