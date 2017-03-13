@@ -172,15 +172,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      */
     @Override
     @Transactional(readOnly = true)
-    public File getByTitle(final String title) throws IllegalArgumentException, NullPointerException {
+    public File getByTitle(final String title) throws IllegalArgumentException {
         if (isBlank(title)) {
             throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
         }
-        final File media = this.dao.getByTitle(title);
-        if (media == null) {
-            throw new NullPointerException("Can`t find file object by title \"" + title + "\"!");
-        }
-        return media;
+        return this.dao.getByTitle(title);
     }
 
     /**
@@ -189,19 +185,15 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      *
      * @param url a url of the file to return.
      * @return The file with parameter url or {@code null}.
-     * @throws NullPointerException Throw exception when object with parameter url is not exist.
+     * @throws IllegalArgumentException Throw exception when parameter url is blank.
      */
     @Override
     @Transactional(readOnly = true)
-    public File getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
+    public File getByUrl(final String url) throws IllegalArgumentException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
+            throw new IllegalArgumentException(getClassSimpleName() + " URL is blank!");
         }
-        final File file = this.dao.getByUrl(url);
-        if (file == null) {
-            throw new NullPointerException("Can`t find file object by URL \"" + url + "\"!");
-        }
-        return file;
+        return this.dao.getByUrl(url);
     }
 
     /**
@@ -369,21 +361,14 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * @param type a type of files to return.
      * @return The files with the type.
      * @throws IllegalArgumentException Throw exception when parameter type is {@code null}.
-     * @throws NullPointerException     Throw exception when object with parameter type is not exist.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<File> getByType(final FileType type) throws IllegalArgumentException, NullPointerException {
+    public List<File> getByType(final FileType type) throws IllegalArgumentException {
         if (type == null) {
             throw new IllegalArgumentException("File type is null");
         }
-        final List<File> files = this.dao.getByFileType(type);
-        if (files == null || files.isEmpty()) {
-            throw new NullPointerException(
-                    "Can't finds files with type " + type + "!"
-            );
-        }
-        return files;
+        return this.dao.getByFileType(type);
     }
 
     /**
