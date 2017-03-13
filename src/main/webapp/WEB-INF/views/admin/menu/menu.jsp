@@ -193,27 +193,51 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th class="pad">
-                                        <a href="<c:url value="/admin/styles/"/>" title="CSS">Стиля</a>
-                                    </th>
-                                    <td class="pad">
-                                        <a href="<c:url value="/admin/styles/edit"/>"
-                                           title="Изменить стиля сайта (CSS)">
-                                            <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
-                                                &nbsp;Изменить
-                                            </button>
-                                        </a>&nbsp;&nbsp;
-                                        <a href="<c:url value="/admin/styles/rollback"/>"
-                                           title="Возобновить по-умолчанию">
-                                            <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                                                &nbsp;Возобновить
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <c:if test="${authorized_user.role eq 'SUPERADMIN'}">
+                                    <tr>
+                                        <th class="pad">
+                                            <a href="/admin/cache/" title="Список обьектов в памяти">Кэш</a>
+                                        </th>
+                                        <td class="pad">
+                                            <a href="/superadmin/cache/"
+                                               title="Информация об объектах, которых хранятся в памяти в данный момент времени.">
+                                                <button class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-floppy-disk"
+                                                          aria-hidden="true"></span>&nbsp;Кэш
+                                                </button>
+                                            </a>&nbsp;&nbsp;
+                                            <a href="/superadmin/cache/clear" title="Удалить все объекты с памяти">
+                                                <button class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-floppy-remove red"
+                                                          aria-hidden="true"></span>&nbsp;Очистить
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="pad">
+                                            <a href="<c:url value="/admin/styles/"/>" title="CSS">Стиля</a>
+                                        </th>
+                                        <td class="pad">
+                                            <a href="<c:url value="/admin/styles/edit"/>"
+                                               title="Изменить стиля сайта (CSS)">
+                                                <button class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-edit yellow"
+                                                          aria-hidden="true"></span>
+                                                    &nbsp;Изменить
+                                                </button>
+                                            </a>&nbsp;&nbsp;
+                                            <a href="<c:url value="/admin/styles/rollback"/>"
+                                               title="Возобновить по-умолчанию">
+                                                <button class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-share-alt"
+                                                          aria-hidden="true"></span>
+                                                    &nbsp;Возобновить
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:if>
                             </table>
                         </div>
                     </div>

@@ -189,7 +189,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
      */
     List<User> filterByRoles(
             final Collection<User> users,
-            final List<UserRole> roles
+            final Collection<UserRole> roles
     );
 
     /**
@@ -206,5 +206,5 @@ public interface UserService extends DataService<User>, UserDetailsService {
      * @param roles a roles filtering.
      * @return The filtered list of users.
      */
-    List<User> getAndFilterByRoles(final List<UserRole> roles);
+    List<User> getAndFilterByRoles(final Collection<UserRole> roles);
 }

@@ -70,7 +70,7 @@
                                 <tr>
                                     <td class="ths">Пароль</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="password" minlength="5"
+                                        <input type="password" class="form-control" name="password" minlength="5"
                                                maxlength="100" placeholder="Пароль для входа на сайт."
                                                value="<c:out value="${user.password}"/>">
                                     </td>
@@ -265,8 +265,8 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если пользователь позначен для отображения, он будет доступна любому пользователю, иначе еге сможет увидеть только адмиистратор.">
-                                            Отображение&nbsp;<span aria-hidden="true"
-                                                                   class="glyphicon glyphicon-info-sign"></span>
+                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                   aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">

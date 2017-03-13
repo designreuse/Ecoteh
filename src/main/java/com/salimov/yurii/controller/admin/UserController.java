@@ -9,8 +9,8 @@ import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
 import com.salimov.yurii.service.data.interfaces.UserService;
 import com.salimov.yurii.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
+import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.service.sender.SenderService;
 import com.salimov.yurii.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -258,11 +258,11 @@ public class UserController {
      * @param mobilePhone    a new mobile phone to the user.
      * @param landlinePhone  a new landline phone to the user.
      * @param fax            a new fax to the user.
-     * @param email          a new e-mail to the user.
-     * @param vkontakte      a new vkontakte URL to the user.
-     * @param facebook       a new facebook URL to the user.
-     * @param twitter        a new twitter URL to the user.
-     * @param skype          a new skype username to the user.
+     * @param email          a new E-mail to the user.
+     * @param vkontakte      a new Vkontakte URL to the user.
+     * @param facebook       a new Facebook URL to the user.
+     * @param twitter        a new Twitter URL to the user.
+     * @param skype          a new Skype username to the user.
      * @param multipartPhoto a photo to the user.
      * @param isValid        a validated of the user.
      * @param isMailing      a permit to send a letters on the user email.

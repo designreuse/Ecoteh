@@ -427,7 +427,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     @Transactional(readOnly = true)
     public List<User> filterByRoles(
             final Collection<User> users,
-            final List<UserRole> roles
+            final Collection<UserRole> roles
     ) {
         final List<User> result = new ArrayList<>();
         if ((users != null) && !users.isEmpty()) {
@@ -468,7 +468,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRoles(final List<UserRole> roles) {
+    public List<User> getAndFilterByRoles(final Collection<UserRole> roles) {
         return filterByRoles(getAll(), roles);
     }
 
