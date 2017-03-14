@@ -217,7 +217,7 @@ public final class Article extends Content implements IArticle {
      */
     @Override
     public void setDate(final Date date) {
-        this.date = date != null ? date : new Date();
+        this.date = (date != null) ? date : new Date();
     }
 
     /**
