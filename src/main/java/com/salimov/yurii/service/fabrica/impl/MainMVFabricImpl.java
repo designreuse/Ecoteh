@@ -372,6 +372,17 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
+     * Validates output objects.
+     *
+     * @return Returns {@code true} if need to return valid objects,
+     * {@code false} otherwise.
+     */
+    @Override
+    public boolean isValidContent() {
+        return this.userService.getAuthenticatedUser() == null;
+    }
+
+    /**
      * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
@@ -544,15 +555,5 @@ public final class MainMVFabricImpl implements MainMVFabric {
         }
         modelAndView.setViewName("client/article/one");
         return modelAndView;
-    }
-
-    /**
-     * Validates output objects.
-     *
-     * @return Returns {@code true} if need to return valid objects,
-     * {@code false} otherwise.
-     */
-    public boolean isValidContent() {
-        return this.userService.getAuthenticatedUser() == null;
     }
 }

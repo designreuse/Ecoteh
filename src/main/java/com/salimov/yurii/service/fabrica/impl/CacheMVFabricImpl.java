@@ -1,6 +1,5 @@
 package com.salimov.yurii.service.fabrica.impl;
 
-import com.salimov.yurii.entity.*;
 import com.salimov.yurii.service.fabrica.interfaces.CacheMVFabric;
 import com.salimov.yurii.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.yurii.util.cache.Cache;
@@ -277,6 +276,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param revers   a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
+    @Override
     public ModelAndView categoryWithSortArticlesPage(
             final String url,
             final String sortType,
@@ -370,6 +370,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param revers a sorting direction, {@code true} or {@code false}.
      * @return The ready object of class ModelAndView.
      */
+    @Override
     public ModelAndView allSortResponsesByDatePage(final boolean revers) {
         final String key = ALL_SORT_RESPONSES_KEY + ", " + revers;
         ModelAndView modelAndView = get(key);
@@ -409,6 +410,17 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
+     * Validates output objects.
+     *
+     * @return Returns {@code true} if need to return valid objects,
+     * {@code false} otherwise.
+     */
+    @Override
+    public boolean isValidContent() {
+        return this.fabric.isValidContent();
+    }
+
+    /**
      * Returns model and view from cache with key.
      *
      * @param key a model and view key in the cache.
@@ -439,15 +451,5 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     private String getKey(final String key) {
         return key + (isValidContent() ? " for client" : " for admin");
-    }
-
-    /**
-     * Validates output objects.
-     *
-     * @return Returns {@code true} if need to return valid objects,
-     * {@code false} otherwise.
-     */
-    public boolean isValidContent() {
-        return this.fabric.isValidContent();
     }
 }
