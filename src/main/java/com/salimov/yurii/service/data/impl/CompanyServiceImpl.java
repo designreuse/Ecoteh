@@ -4,7 +4,6 @@ import com.salimov.yurii.dao.interfaces.CompanyDao;
 import com.salimov.yurii.entity.Company;
 import com.salimov.yurii.entity.File;
 import com.salimov.yurii.entity.Model;
-import com.salimov.yurii.entity.interfaces.IModel;
 import com.salimov.yurii.enums.CompanyType;
 import com.salimov.yurii.service.data.interfaces.CompanyService;
 import com.salimov.yurii.service.data.interfaces.FileService;
@@ -142,7 +141,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
         List<Company> companies = this.dao.getByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
-                    .filter(IModel::isValidated)
+                    .filter(Model::isValidated)
                     .collect(Collectors.toList());
         }
         return companies;
