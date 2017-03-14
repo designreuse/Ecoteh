@@ -12,7 +12,7 @@ Administrator can navigate on all the pages of the site, in particular through t
 
 **Technologies**: Java EE, Maven, Servlets, Spring Framework (IoC, MVC, Data, Security), JPA / Hibernate, MySQL, JSP / JSTL, CSS, JS, Junit, Mockito, Jacoco.
 
-([**SCREENSHOTS**](/screanshots/))
+([**SCREENSHOTS**](https://github.com/YuriiSalimov/Ecoteh/tree/master/screenshots))
 
 ([**EXAMPLE**](http://alexcoffee.com.ua/ecoteh/))
 
