@@ -34,7 +34,7 @@ public final class Address extends Model implements IAddress {
     private String address;
 
     /**
-     * The google maps url.
+     * The google maps URL.
      */
     @Column(name = "google_maps", nullable = false)
     private String googleMaps;
@@ -61,7 +61,7 @@ public final class Address extends Model implements IAddress {
      * Constructor.
      *
      * @param address    a address
-     * @param googleMaps a google maps url.
+     * @param googleMaps a google maps URL.
      */
     public Address(final String address, final String googleMaps) {
         this(address);
@@ -143,9 +143,9 @@ public final class Address extends Model implements IAddress {
     }
 
     /**
-     * Returns a google maps url of the company.
+     * Returns a google maps URL of the company.
      *
-     * @return The company google maps url.
+     * @return The company google maps URL.
      */
     @Override
     public String getGoogleMaps() {
@@ -153,10 +153,10 @@ public final class Address extends Model implements IAddress {
     }
 
     /**
-     * Sets a new google maps url to the company.
-     * If parameter google maps url is blank, then sets empty string..
+     * Sets a new google maps URL to the company.
+     * If parameter google maps URL is blank, then sets empty string..
      *
-     * @param googleMaps a new google maps url to the company.
+     * @param googleMaps a new google maps URL to the company.
      */
     @Override
     public void setGoogleMaps(final String googleMaps) {
