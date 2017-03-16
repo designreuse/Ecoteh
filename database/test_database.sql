@@ -222,7 +222,7 @@ CREATE TABLE `users` (
   `url`         VARCHAR(100)                        NOT NULL DEFAULT '',
   `login`       VARCHAR(300)                        NOT NULL DEFAULT '',
   `password`    VARCHAR(300)                        NOT NULL DEFAULT '',
-  `description` TEXT                                NOT NULL,
+  `description` TEXT                                NOT NULL DEFAULT '',
   `validated`   BIT(1)                              NOT NULL DEFAULT b'1',
   `mailing`     BIT(1)                              NOT NULL DEFAULT b'1',
   `locked`      BIT(1)                              NOT NULL DEFAULT b'0',
