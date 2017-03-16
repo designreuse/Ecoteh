@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Service
 @ComponentScan(basePackages = "com.salimov.yurii.util.properties")
-public class StyleServiceImpl implements StyleService {
+public final class StyleServiceImpl implements StyleService {
 
     /**
      * The relative path to file with default CSS styles.
