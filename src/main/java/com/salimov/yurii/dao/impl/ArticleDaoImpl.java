@@ -2,7 +2,6 @@ package com.salimov.yurii.dao.impl;
 
 import com.salimov.yurii.dao.interfaces.ArticleDao;
 import com.salimov.yurii.entity.Article;
-import com.salimov.yurii.entity.Category;
 import com.salimov.yurii.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
