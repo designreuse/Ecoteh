@@ -196,10 +196,10 @@
                                 <c:if test="${authorized_user.role eq 'SUPERADMIN'}">
                                     <tr>
                                         <th class="pad">
-                                            <a href="/admin/cache/" title="Список обьектов в памяти">Кэш</a>
+                                            <a href="<c:url value="/superadmin/cache/"/>" title="Список обьектов в памяти">Кэш</a>
                                         </th>
                                         <td class="pad">
-                                            <a href="/superadmin/cache/"
+                                            <a href="<c:url value="/superadmin/cache/"/>"
                                                title="Информация об объектах, которых хранятся в памяти в данный момент времени.">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-floppy-disk"
