@@ -94,17 +94,12 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
      * @throws ServletException if any call against the given ServletContext throws a ServletException.
      */
     @Override
-    public void onStartup(final ServletContext servletContext)
-            throws ServletException {
+    public void onStartup(final ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         final FilterRegistration.Dynamic filter =
-                servletContext.addFilter(
-                        "encodingFilter", new CharacterEncodingFilter()
-                );
+                servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
         filter.setInitParameter("encoding", ENCODING);
-        filter.setInitParameter(
-                "forceEncoding", Boolean.toString(FORCE_ENCODING)
-        );
+        filter.setInitParameter("forceEncoding", Boolean.toString(FORCE_ENCODING));
         filter.addMappingForUrlPatterns(
                 null,
                 MAPPING_FOR_URL_IS_MATH_AFTER,
@@ -127,9 +122,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
                 (DispatcherServlet) super.createDispatcherServlet(
                         webApplicationContext
                 );
-        dispatcherServlet.setThrowExceptionIfNoHandlerFound(
-                THROW_EXCEPTION_IF_NO_HANDLER_FOUND
-        );
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(THROW_EXCEPTION_IF_NO_HANDLER_FOUND);
         return dispatcherServlet;
     }
 }
