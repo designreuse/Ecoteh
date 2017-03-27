@@ -48,6 +48,10 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      */
     private final UserDao dao;
 
+    /**
+     * The interface of the service layer, describes a set of methods
+     * for working with objects of the {@link File} class.
+     */
     private final FileService fileService;
 
     /**
@@ -125,10 +129,9 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     }
 
     /**
-     * Initializes, updates and returns user with parameter id.
-     * Return {@code null} if id is {@code null}.
+     * Initializes, updates and returns user with parameter url.
      *
-     * @param url  a url of the user to update.
+     * @param url  a URL of the user to update.
      * @param user a user to update.
      * @return The updating user with parameter id or {@code null}.
      */
@@ -150,7 +153,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
 
     /**
      * Returns user with the parameter name.
-     * Returns {@code null} in name is blank.
      *
      * @param name a name of the user to return.
      * @return The user with the parameter name or {@code null}.
@@ -161,7 +163,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     @Transactional(readOnly = true)
     public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
         if (isBlank(name)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " name is blank!");
+            throw new IllegalArgumentException("Input name is blank!");
         }
         final User user = this.dao.getByName(name);
         if (user == null) {
@@ -172,9 +174,8 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
 
     /**
      * Returns user with the parameter url.
-     * Returns {@code null} in url is blank.
      *
-     * @param url a url of the user to return.
+     * @param url a URL of the user to return.
      * @return The user with the parameter url or {@code null}.
      * @throws IllegalArgumentException Throw exception when parameter url is blank.
      * @throws NullPointerException     Throws exception if user is absent.
@@ -184,7 +185,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     public User getByUrl(final String url)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
+            throw new IllegalArgumentException("Input URL is blank!");
         }
         final User user = this.dao.getByUrl(url);
         if (user == null) {
@@ -195,7 +196,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
 
     /**
      * Returns user with the parameter login.
-     * Returns {@code null} in login is blank.
      *
      * @param login a login of the user to return.
      * @return The user with the parameter login or {@code null}.
@@ -207,7 +207,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     public User getByLogin(final String login)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(login)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " login is blank!");
+            throw new IllegalArgumentException("Input login is blank!");
         }
         final User user = this.dao.getByLogin(login);
         if (user == null) {
@@ -218,7 +218,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
 
     /**
      * Returns user with the parameter e-mail.
-     * Returns {@code null} in e-mail is blank.
      *
      * @param email a e-mail of the user to return.
      * @return The user with the parameter e-mail or {@code null}.

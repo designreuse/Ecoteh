@@ -74,7 +74,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry resource) {
-        resource.addResourceHandler(this.properties.getResourcesUrl()
-        ).addResourceLocations(this.properties.getResourcesLocation());
+        resource.addResourceHandler(this.properties.getResourcesUrl())
+                .addResourceLocations(this.properties.getResourcesLocation());
     }
 }

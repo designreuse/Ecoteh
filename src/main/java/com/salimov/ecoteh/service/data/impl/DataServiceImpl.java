@@ -86,7 +86,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         if (validated(model, true, false)) {
             result = this.dao.update(model);
         }
-        return result != null ? result : model;
+        return (result != null) ? result : model;
     }
 
     /**
@@ -329,7 +329,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Returns a list valid objects of {@link Model} class or subclasses.
-     * Return {@code null} if models is empty.
      *
      * @param models the models to filter.
      * @return The filter list of models.

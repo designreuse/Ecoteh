@@ -75,7 +75,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(number)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " number is blank!");
+            throw new IllegalArgumentException("Article number is blank!");
         }
         final Article article = this.dao.getByNumber(number);
         if ((article == null) || (isValid && !article.isValidated())) {

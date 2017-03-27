@@ -82,7 +82,7 @@ public abstract class ContentServiceImpl<T extends Content>
      *
      * @param title   a title of the content to return.
      * @param isValid is get valid content or not.
-     * @return The content with parameter title or {@code null}.
+     * @return The content with parameter title.
      * @throws IllegalArgumentException Throw exception when object  parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
@@ -98,7 +98,8 @@ public abstract class ContentServiceImpl<T extends Content>
         final T content = this.dao.getByTitle(title);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
-                    "Can`t find object of " + getClassSimpleName() + " by title \"" + title + "\"!"
+                    "Can`t find object of " + getClassSimpleName() +
+                            " by title \"" + title + "\"!"
             );
         }
         return content;
@@ -109,7 +110,7 @@ public abstract class ContentServiceImpl<T extends Content>
      *
      * @param url     a URL of the content to return.
      * @param isValid is get valid content or not.
-     * @return the content with parameter url or {@code null}.
+     * @return the content with parameter url.
      * @throws IllegalArgumentException Throw exception when object parameter url is blank.
      * @throws NullPointerException     Throw exception when object with parameter url is not exist.
      */
@@ -125,7 +126,8 @@ public abstract class ContentServiceImpl<T extends Content>
         final T content = this.dao.getByUrl(url);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
-                    "Can`t find object of " + getClassSimpleName() + " by URL \"" + url + "\"!"
+                    "Can`t find object of " + getClassSimpleName() +
+                            " by URL \"" + url + "\"!"
             );
         }
         return content;
