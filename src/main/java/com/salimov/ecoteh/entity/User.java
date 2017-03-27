@@ -307,8 +307,7 @@ public final class User extends Model implements IUser, UserDetails {
      */
     @Override
     public String getUsername() {
-        final String username = getLogin();
-        return isNotBlank(username) ? username : "";
+        return getLogin();
     }
 
     /**
