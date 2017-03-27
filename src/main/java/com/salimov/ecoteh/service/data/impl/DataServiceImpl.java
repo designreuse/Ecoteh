@@ -228,11 +228,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public boolean exists(final T model) {
-        boolean result = false;
-        if ((model != null)) {
-            result = exists(model.getId());
-        }
-        return result;
+        return (model != null) && exists(model.getId());
     }
 
     /**
