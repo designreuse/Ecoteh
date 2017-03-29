@@ -182,7 +182,7 @@ public class ArticleController {
      * Request mapping: /admin/article/edit/{url}
      * Method: GET
      *
-     * @param url a url of the article to edit.
+     * @param url a URL of the article to edit.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(

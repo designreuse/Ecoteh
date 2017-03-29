@@ -216,14 +216,14 @@ public class AdviceController {
     /**
      * Creates and return ModelAndView object.
      *
-     * @param status       a http status.
-     * @param messageError a sender of the exception.
+     * @param status  a http status.
+     * @param message a message of the exception.
      * @return The ModelAndView object with information about exception.
      */
     @SuppressWarnings("SpringMVCViewInspection")
     private ModelAndView prepareModelAndView(
             final HttpStatus status,
-            final String messageError
+            final String message
     ) {
         ModelAndView modelAndView;
         try {
@@ -233,7 +233,7 @@ public class AdviceController {
             modelAndView = new ModelAndView();
         }
         modelAndView.addObject("status", status.value());
-        modelAndView.addObject("message", messageError);
+        modelAndView.addObject("message", message);
         modelAndView.setViewName("error/error");
         return modelAndView;
     }

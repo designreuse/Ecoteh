@@ -40,6 +40,11 @@ public class AuthorizationController {
         this.fabric = new CacheMVFabricImpl(fabric);
     }
 
+    /**
+     * Login user.
+     *
+     * @return The ready object of class ModelAndView.
+     */
     @RequestMapping(
             value = "/login",
             method = RequestMethod.GET
