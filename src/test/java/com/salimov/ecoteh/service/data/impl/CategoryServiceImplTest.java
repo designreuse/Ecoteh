@@ -9,13 +9,12 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static com.salimov.ecoteh.mocks.MockConstants.*;
-import static com.salimov.ecoteh.mocks.dao.MockDao.getCategoryDao;
+import static com.salimov.ecoteh.mocks.MockConstants.URL;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getCategories;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getCategory;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getCategoryRepository;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getArticleService;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getFileService;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +25,7 @@ public final class CategoryServiceImplTest extends ContentServiceImplTest<Catego
     @Before
     public void beforeTest() {
         this.service = new CategoryServiceImpl(
-                getCategoryDao(),
+                getCategoryRepository(),
                 getArticleService(),
                 getFileService()
         );

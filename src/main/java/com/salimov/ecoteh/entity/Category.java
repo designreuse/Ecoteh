@@ -14,7 +14,7 @@ import java.util.*;
  */
 @Entity
 @Table(name = "categories")
-public final class Category extends Content implements ICategory {
+public class Category extends Content implements ICategory {
 
     /**
      * It is used during deserialization to verify that

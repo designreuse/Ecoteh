@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "responses")
-public final class Response extends Model implements IResponse {
+public class Response extends Model implements IResponse {
 
     /**
      * It is used during deserialization to verify that

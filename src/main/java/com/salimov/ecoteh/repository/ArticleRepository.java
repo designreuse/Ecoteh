@@ -11,25 +11,7 @@ import java.util.List;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public interface ArticleRepository extends DataRepository<Article> {
-
-    /**
-     * Returns article from a database,
-     * which matches the parameter title.
-     *
-     * @param title a title of the article to return.
-     * @return The object of class {@link Article}.
-     */
-    Article findByTitle(final String title);
-
-    /**
-     * Returns article from a database,
-     * which matches the parameter url.
-     *
-     * @param url a URL of the article to return.
-     * @return The object of class {@link Article}.
-     */
-    Article findByUrl(final String url);
+public interface ArticleRepository extends ContentRepository<Article> {
 
     /**
      * Returns article from a database,
@@ -48,22 +30,6 @@ public interface ArticleRepository extends DataRepository<Article> {
      * @return The object of class {@link Article}.
      */
     List<Article> findByCategoryId(final Long id);
-
-    /**
-     * Removes article from a database,
-     * which matches the parameter title.
-     *
-     * @param title a title of the article to remove.
-     */
-    void deleteByTitle(final String title);
-
-    /**
-     * Removes article from a database,
-     * which matches the parameter url.
-     *
-     * @param url a URL of the article to remove.
-     */
-    void deleteByUrl(final String url);
 
     /**
      * Removes article from a database,

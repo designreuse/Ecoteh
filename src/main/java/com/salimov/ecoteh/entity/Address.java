@@ -17,7 +17,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "addresses")
-public final class Address extends Model implements IAddress {
+public class Address extends Model implements IAddress {
 
     /**
      * It is used during deserialization to verify that

@@ -11,9 +11,9 @@ import java.util.Collection;
 import java.util.Date;
 
 import static com.salimov.ecoteh.mocks.MockConstants.ID;
-import static com.salimov.ecoteh.mocks.dao.MockDao.getResponseDao;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getResponse;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getResponses;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getResponseRepository;
 import static org.junit.Assert.*;
 
 public final class ResponseServiceImplTest extends DataServiceImplTest<Response> {
@@ -22,7 +22,7 @@ public final class ResponseServiceImplTest extends DataServiceImplTest<Response>
 
     @Before
     public void beforeTest() {
-        this.service = new ResponseServiceImpl(getResponseDao());
+        this.service = new ResponseServiceImpl(getResponseRepository());
     }
 
     @Test

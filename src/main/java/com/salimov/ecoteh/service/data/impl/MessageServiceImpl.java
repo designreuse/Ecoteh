@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.MessageDao;
 import com.salimov.ecoteh.entity.Message;
+import com.salimov.ecoteh.repository.MessageRepository;
 import com.salimov.ecoteh.service.data.interfaces.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,12 +22,12 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao a implementation of the {@link MessageDao} interface.
+     * @param repository a implementation of the {@link MessageRepository} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public MessageServiceImpl(final MessageDao dao) {
-        super(dao);
+    public MessageServiceImpl(final MessageRepository repository) {
+        super(repository);
     }
 
     /**
@@ -43,9 +43,9 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
     /**
      * Validates input object of class {@link Message} or subclasses.
      *
-     * @param message            the model to valid.
-     * @param exist              is validate input model by exists.
-     * @param duplicate          is validate input model by duplicate.
+     * @param message   the model to valid.
+     * @param exist     is validate input model by exists.
+     * @param duplicate is validate input model by duplicate.
      * @return Returns {@code true} if the model is valid,
      * otherwise returns {@code false}.
      */

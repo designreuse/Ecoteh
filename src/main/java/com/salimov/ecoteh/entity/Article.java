@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "articles")
-public final class Article extends Content implements IArticle {
+public class Article extends Content implements IArticle {
 
     /**
      * It is used during deserialization to verify that

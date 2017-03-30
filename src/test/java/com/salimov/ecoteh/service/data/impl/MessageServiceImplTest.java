@@ -7,9 +7,9 @@ import org.junit.Ignore;
 
 import java.util.Collection;
 
-import static com.salimov.ecoteh.mocks.dao.MockDao.getMessageDao;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getMessage;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getMessages;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getMessageRepository;
 
 public class MessageServiceImplTest extends DataServiceImplTest<Message> {
 
@@ -17,7 +17,7 @@ public class MessageServiceImplTest extends DataServiceImplTest<Message> {
 
     @Before
     public void beforeTest() {
-        this.service = new MessageServiceImpl(getMessageDao());
+        this.service = new MessageServiceImpl(getMessageRepository());
     }
 
     @Ignore

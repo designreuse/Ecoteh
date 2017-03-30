@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.ResponseDao;
 import com.salimov.ecoteh.entity.Response;
+import com.salimov.ecoteh.repository.ResponseRepository;
 import com.salimov.ecoteh.service.data.interfaces.ResponseService;
 import com.salimov.ecoteh.util.comparator.ResponseComparator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -27,12 +30,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param dao a implementation of the {@link ResponseDao} interface.
+     * @param repository a implementation of the {@link ResponseRepository} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    public ResponseServiceImpl(final ResponseDao dao) {
-        super(dao);
+    public ResponseServiceImpl(final ResponseRepository repository) {
+        super(repository);
     }
 
     /**
@@ -104,8 +107,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
                 result.addAll(
                         responses.stream()
                                 .filter(
-                                        response -> (response.getDate().compareTo(startDate) == 1)
-                                                && (response.getDate().compareTo(finishDate) == -1)
+                                        response -> compareToDate(response, startDate, finishDate)
                                 ).collect(Collectors.toList())
                 );
             } else {
@@ -204,5 +206,20 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
         return (startDate != null) && (finishDate != null)
                 && !startDate.equals(finishDate)
                 && (startDate.getTime() <= finishDate.getTime());
+    }
+
+    /**
+     * @param response   the response to compare.
+     * @param startDate  a initial date.
+     * @param finishDate a final date.
+     * @return
+     */
+    private static boolean compareToDate(
+            final Response response,
+            final Date startDate,
+            final Date finishDate
+    ) {
+        return (response.getDate().compareTo(startDate) == 1) &&
+                (response.getDate().compareTo(finishDate) == -1);
     }
 }

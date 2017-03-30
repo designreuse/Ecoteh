@@ -12,8 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 import static com.salimov.ecoteh.mocks.MockConstants.*;
-import static com.salimov.ecoteh.mocks.dao.MockDao.getArticleDao;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.*;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getArticleRepository;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getFileService;
 import static org.junit.Assert.*;
 
@@ -24,7 +24,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     @Before
     public void beforeTest() {
         this.service = new ArticleServiceImpl(
-                getArticleDao(),
+                getArticleRepository(),
                 getFileService()
         );
     }

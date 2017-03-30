@@ -1,8 +1,8 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.FileDao;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.enums.FileType;
+import com.salimov.ecoteh.repository.FileRepository;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.util.comparator.FileComparator;
 import com.salimov.ecoteh.util.loader.MultipartFileLoader;
@@ -41,7 +41,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * The interface provides a set of standard methods
      * for working {@link File} objects a the database.
      */
-    private final FileDao dao;
+    private final FileRepository repository;
 
     /**
      * The implementation of the interface describes
@@ -53,17 +53,17 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao        a implementation of the {@link FileDao} interface.
+     * @param repository a implementation of the {@link FileRepository} interface.
      * @param properties a implementation of the {@link ContentProperties} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public FileServiceImpl(
-            final FileDao dao,
+            final FileRepository repository,
             final ContentProperties properties
     ) {
-        super(dao);
-        this.dao = dao;
+        super(repository);
+        this.repository = repository;
         this.properties = properties;
     }
 
@@ -176,7 +176,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         if (isBlank(title)) {
             throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
         }
-        return this.dao.getByTitle(title);
+        return this.repository.findByTitle(title);
     }
 
     /**
@@ -193,7 +193,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         if (isBlank(url)) {
             throw new IllegalArgumentException(getClassSimpleName() + " URL is blank!");
         }
-        return this.dao.getByUrl(url);
+        return this.repository.findByUrl(url);
     }
 
     /**
@@ -206,7 +206,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional
     public void removeByTitle(final String title) {
         if (isNotBlank(title)) {
-            this.dao.removeByTitle(title);
+            this.repository.deleteByTitle(title);
         }
     }
 
@@ -331,8 +331,8 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             return false;
         }
         if (duplicate) {
-            if ((this.dao.getByTitle(file.getTitle()) != null)
-                    || (this.dao.getByUrl(file.getUrl()) != null)) {
+            if ((this.repository.findByTitle(file.getTitle()) != null)
+                    || (this.repository.findByUrl(file.getUrl()) != null)) {
                 return false;
             }
         }
@@ -368,7 +368,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         if (type == null) {
             throw new IllegalArgumentException("File type is null");
         }
-        return this.dao.getByFileType(type);
+        return this.repository.findAllByType(type);
     }
 
     /**

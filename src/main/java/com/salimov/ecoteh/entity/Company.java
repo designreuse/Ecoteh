@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "companies")
-public final class Company extends Content implements ICompany {
+public class Company extends Content implements ICompany {
 
     /**
      * It is used during deserialization to verify that
