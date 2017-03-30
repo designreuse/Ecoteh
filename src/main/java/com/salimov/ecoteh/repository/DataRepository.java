@@ -2,6 +2,7 @@ package com.salimov.ecoteh.repository;
 
 import com.salimov.ecoteh.entity.Model;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * The interface provides a set of standard JPA methods
@@ -11,5 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
+@NoRepositoryBean
 public interface DataRepository<T extends Model> extends JpaRepository<T, Long> {
 }

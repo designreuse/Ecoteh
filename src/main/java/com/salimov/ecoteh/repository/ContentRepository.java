@@ -1,6 +1,7 @@
 package com.salimov.ecoteh.repository;
 
 import com.salimov.ecoteh.entity.Content;
+import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * The interface provides a set of standard JPA methods
@@ -10,6 +11,7 @@ import com.salimov.ecoteh.entity.Content;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
+@NoRepositoryBean
 public interface ContentRepository<T extends Content> extends DataRepository<T> {
 
     /**
