@@ -209,10 +209,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
     }
 
     /**
+     * Compares response object date to input dates.
+     *
      * @param response   the response to compare.
      * @param startDate  a initial date.
      * @param finishDate a final date.
-     * @return
+     * @return {@code true} or {@code false}.
      */
     private static boolean compareToDate(
             final Response response,

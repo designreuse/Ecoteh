@@ -380,11 +380,12 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
+     * Filters article object date with input dates.
      *
-     * @param article
+     * @param article    a article to filter.
      * @param startDate  a initial date.
      * @param finishDate a final date.
-     * @return
+     * @return {@code true} or {@code false}.
      */
     private static boolean timeFilter(
             final Article article,
@@ -395,10 +396,11 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
+     * Filters article object category with input category.
      *
-     * @param article
+     * @param article  a article to filter.
      * @param category a category filtering.
-     * @return
+     * @return {@code true} or {@code false}.
      */
     private static boolean categoryFilter(
             final Article article,
@@ -408,9 +410,10 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
+     * Filters article by validation.
      *
-     * @param article
-     * @return
+     * @param article a article to filter.
+     * @return {@code true} or {@code false}.
      */
     private static boolean validFilter(final Article article) {
         return (article != null) && article.isValidated();
