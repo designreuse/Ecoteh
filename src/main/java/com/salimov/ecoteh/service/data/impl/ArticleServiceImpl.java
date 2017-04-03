@@ -380,6 +380,17 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    @Override
+    protected void copy(final Article from, final Article to) {
+        to.initialize(from);
+    }
+
+    /**
      * Filters article object date with input dates.
      *
      * @param article    a article to filter.

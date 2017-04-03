@@ -93,7 +93,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <img class="img-responsive img-in-list"
-                                                     alt="<c:out value="${category.name}"/>"
+                                                     alt="<c:out value="${category.title}"/>"
                                                      src="<c:url value="/resources/img/static/default_file.gif"/>">
                                             </c:otherwise>
                                         </c:choose><br>

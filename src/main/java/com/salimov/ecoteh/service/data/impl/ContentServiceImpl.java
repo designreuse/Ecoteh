@@ -58,22 +58,26 @@ public abstract class ContentServiceImpl<T extends Content>
      * Initializes, updates and returns content with parameter url.
      *
      * @param url     a URL of the content to update.
-     * @param content a content to update.
+     * @param content a content object to update.
      * @return The updating content with parameter id.
+     * @throws IllegalArgumentException Throw exception when input content is null.
      */
     @Override
     @Transactional
     public T update(
             final String url,
             final T content
-    ) {
+    ) throws IllegalArgumentException {
+        if (content == null) {
+            throw new IllegalArgumentException("Input " + getClassSimpleName() + "pbject is null!");
+        }
         final T contentToUpdate = getByUrl(url, false);
         final File newLogo = content.getLogo();
         final File oldLogo = contentToUpdate.getLogo();
         if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        contentToUpdate.initialize(content);
+        copy(content, contentToUpdate);
         return update(contentToUpdate);
     }
 
@@ -83,7 +87,7 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param title   a title of the content to return.
      * @param isValid is get valid content or not.
      * @return The content with parameter title.
-     * @throws IllegalArgumentException Throw exception when object  parameter title is blank.
+     * @throws IllegalArgumentException Throw exception when object parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
     @Override
@@ -244,4 +248,12 @@ public abstract class ContentServiceImpl<T extends Content>
         }
         return true;
     }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    protected abstract void copy(T from, T to);
 }

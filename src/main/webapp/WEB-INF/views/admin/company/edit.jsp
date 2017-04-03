@@ -187,7 +187,7 @@
                                         <c:choose>
                                             <c:when test="${company.contacts.vkontakte ne ''}">
                                                 <a href="<c:out value="${company.contacts.vkontakte}"/>"
-                                                   title="Профиль &quot;<c:out value="${company.contacts.title}"/>&quot; в ВКонтакте"
+                                                   title="Профиль &quot;<c:out value="${company.title}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
                                             </c:when>
                                             <c:otherwise>

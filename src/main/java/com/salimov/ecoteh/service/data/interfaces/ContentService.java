@@ -22,7 +22,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param content a content to update.
      * @return The updating content with parameter id.
      */
-    Content update(
+    T update(
             final String url,
             final T content
     );

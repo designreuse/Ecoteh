@@ -166,6 +166,17 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    @Override
+    protected void copy(final Category from, final Category to) {
+        to.initialize(from);
+    }
+
+    /**
      * Remove articles in selected category.
      *
      * @param category a selected category.

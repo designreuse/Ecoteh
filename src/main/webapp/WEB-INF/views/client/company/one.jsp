@@ -34,6 +34,16 @@
             <div class="row">
                 <div class="box">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="path">
+                            <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
+                            → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
+                            → <a href="#"><c:out value="${company.title}"/></a>
+                        </p>
+                        <c:if test="${company.logo.url ne ''}">
+                            <hr>
+                            <h3 class="text-center"><c:out value="${company.title}"/></h3>
+                            <hr>
+                        </c:if>
                         <c:if test="${authorized_user ne null}">
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
@@ -54,16 +64,6 @@
                                     </button>
                                 </a>
                             </div>
-                        </c:if>
-                        <p class="path">
-                            <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                            → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
-                            → <a href="#"><c:out value="${company.title}"/></a>
-                        </p>
-                        <c:if test="${company.logo.url ne ''}">
-                            <hr>
-                            <h3 class="text-center"><c:out value="${company.title}"/></h3>
-                            <hr>
                         </c:if>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <c:if test="${!company.validated}">

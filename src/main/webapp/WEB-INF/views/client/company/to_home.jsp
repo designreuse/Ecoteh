@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${(company.description ne '') or (company.information ne '')}">
 <div class="container">
     <div class="row">
         <div class="box">
@@ -15,17 +16,11 @@
                         <hr>
                         <p>${company.description}</p>
                     </c:when>
-                    <c:when test="${company.information ne ''}">
-                        <hr>
-                        <h3 class="intro-text text-center">О нас</h3>
-                        <hr>
-                        <p><${company.information}</p>
-                    </c:when>
                     <c:otherwise>
                         <hr>
                         <h3 class="intro-text text-center">О нас</h3>
                         <hr>
-                        <p>${company.tagline}</p>
+                        <p><${company.information}</p>
                     </c:otherwise>
                 </c:choose>
                 <hr>
@@ -40,5 +35,6 @@
         </div>
     </div>
 </div>
+</c:if>
 
 <%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

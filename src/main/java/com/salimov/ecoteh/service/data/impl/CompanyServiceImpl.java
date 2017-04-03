@@ -121,12 +121,15 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     @Transactional(readOnly = true)
     public Company getMainCompany() throws NullPointerException {
+        Company mainCompany;
         try {
-            return this.repository.findByType(CompanyType.MAIN).get(0);
+            mainCompany = this.repository.findByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
-            throw new NullPointerException("Information about main company is absent!");
+            //throw new NullPointerException("Information about main company is absent!");
+            mainCompany = new Company();
         }
+        return mainCompany;
     }
 
     /**
@@ -187,5 +190,16 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     protected Class<Company> getModelClass() {
         return Company.class;
+    }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    @Override
+    protected void copy(final Company from, final Company to) {
+        to.initialize(from);
     }
 }

@@ -82,6 +82,13 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="ths">Цена</td>
+                                    <td class="tds">
+                                        <input type="text" class="form-control" name="price" minlength="1"
+                                               maxlength="100" placeholder="Цена">
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">

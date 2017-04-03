@@ -148,7 +148,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
         if (!newPhoto.equals(oldPhoto) && isNotBlank(newPhoto.getUrl())) {
             this.fileService.deleteFile(oldPhoto.getUrl());
         }
-        userToUpdate.initialize(user);
+        copy(user, userToUpdate);
         return update(userToUpdate);
     }
 
@@ -533,5 +533,15 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
             }
         }
         return true;
+    }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    protected void copy(final User from, final User to) {
+        to.initialize(from);
     }
 }
