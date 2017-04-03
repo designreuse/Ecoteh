@@ -33,7 +33,7 @@ public class ArticleControllerTest {
         checkModelAndView(
                 controller.addArticle(
                         TITLE, DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER, URL, null, true,
+                        KEYWORDS, NUMBER, PRICE, URL, null, true,
                         new ModelAndView()
                 ),
                 "redirect:/article/" + Translator.fromCyrillicToLatin(TITLE),
@@ -61,7 +61,7 @@ public class ArticleControllerTest {
                 controller.updateArticle(
                         URL, TITLE,
                         DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER,
+                        KEYWORDS, NUMBER, PRICE,
                         URL, null, true,
                         new ModelAndView()
                 ),
