@@ -9,13 +9,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
-public class CaptchaImplTest {
+public class ReCaptchaTest {
 
     private Captcha captcha;
 
     @Before
     public void beforeTests() {
-        this.captcha = new CaptchaImpl(
+        this.captcha = new ReCaptcha(
                 "userAgent",
                 "acceptLanguage",
                 true,

@@ -77,11 +77,10 @@ public final class SenderServiceImpl implements SenderService {
             final String recipientEmail,
             final User sender
     ) {
-        if ((sender != null) && (sender.getContacts() != null)) {
+        if (sender != null) {
             send(
                     subject, text, recipientEmail,
-                    sender.getContacts().getEmail(),
-                    sender.getPassword()
+                    sender.getContacts().getEmail(), sender.getPassword()
             );
         }
     }
@@ -101,11 +100,10 @@ public final class SenderServiceImpl implements SenderService {
             final String[] recipientEmails,
             final User sender
     ) {
-        if ((sender != null) && (sender.getContacts() != null)) {
+        if (sender != null) {
             send(
                     subject, text, recipientEmails,
-                    sender.getContacts().getEmail(),
-                    sender.getPassword()
+                    sender.getContacts().getEmail(), sender.getPassword()
             );
         }
     }
@@ -125,7 +123,7 @@ public final class SenderServiceImpl implements SenderService {
             final User recipient,
             final User sender
     ) {
-        if ((recipient != null) && recipient.isMailing() && (recipient.getContacts() != null)) {
+        if (validRecipient(recipient)) {
             send(subject, text, recipient.getContacts().getEmail(), sender);
         }
     }
@@ -145,7 +143,7 @@ public final class SenderServiceImpl implements SenderService {
             final Collection<User> recipients,
             final User sender
     ) {
-        if ((recipients != null) && !recipients.isEmpty()) {
+        if (validRecipients(recipients)) {
             for (User recipient : recipients) {
                 send(subject, text, recipient, sender);
             }
@@ -169,20 +167,35 @@ public final class SenderServiceImpl implements SenderService {
             final String senderEmail,
             final String senderEmailPass
     ) {
-        if ((recipients != null) && !recipients.isEmpty()) {
+        if (validRecipients(recipients)) {
             recipients.stream()
-                    .filter(
-                            recipient -> (recipient != null) &&
-                                    recipient.isMailing() &&
-                                    (recipient.getContacts() != null)
-                    )
+                    .filter(SenderServiceImpl::validRecipient)
                     .forEach(
                             recipient -> send(
-                                    subject, text,
-                                    recipient.getContacts().getEmail(),
+                                    subject, text, recipient.getContacts().getEmail(),
                                     senderEmail, senderEmailPass
                             )
                     );
         }
+    }
+
+    /**
+     * Validated a recipient.
+     *
+     * @param recipient a recipient to validate.
+     * @return {@code true} if recipient is valid, {@code false} otherwise.
+     */
+    private static boolean validRecipient(final User recipient) {
+        return (recipient != null) && recipient.isMailing();
+    }
+
+    /**
+     * Validated a recipients.
+     *
+     * @param recipients a recipients to validate.
+     * @return {@code true} if recipients is valid, {@code false} otherwise.
+     */
+    private static boolean validRecipients(final Collection<User> recipients) {
+        return (recipients != null) && !recipients.isEmpty();
     }
 }
