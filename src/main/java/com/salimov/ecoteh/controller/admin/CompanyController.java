@@ -5,6 +5,7 @@ import com.salimov.ecoteh.entity.Address;
 import com.salimov.ecoteh.entity.Company;
 import com.salimov.ecoteh.entity.Contacts;
 import com.salimov.ecoteh.entity.File;
+import com.salimov.ecoteh.enums.CompanyType;
 import com.salimov.ecoteh.service.data.interfaces.CompanyService;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
@@ -175,6 +176,7 @@ public class CompanyController {
         if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
             company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
         }
+        company.setType(CompanyType.MAIN);
         this.companyService.updateMainCompany(company);
         modelAndView.setViewName("redirect:/company/main");
         Cache.clear();

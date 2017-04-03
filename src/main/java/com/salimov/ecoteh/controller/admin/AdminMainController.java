@@ -13,6 +13,7 @@ import com.salimov.ecoteh.service.data.interfaces.UserService;
 import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.ecoteh.service.sender.SenderService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -35,6 +36,11 @@ import org.springframework.web.servlet.ModelAndView;
 @ComponentScan(basePackages = "com.salimov.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class AdminMainController extends MainController {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(AdminMainController.class);
 
     /**
      * Constructor.
@@ -75,8 +81,15 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getAdminMenu() {
-        final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject("user", this.userService.getAuthenticatedUser());
+        ModelAndView modelAndView;
+        try {
+            modelAndView = getDefaultModelAndView();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            ex.printStackTrace();
+            modelAndView = new ModelAndView();
+        }
+        modelAndView.addObject("authorized_user", this.userService.getAuthenticatedUser());
         modelAndView.setViewName("admin/menu/menu");
         return modelAndView;
     }
