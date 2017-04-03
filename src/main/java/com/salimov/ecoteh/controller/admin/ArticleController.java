@@ -118,6 +118,7 @@ public class ArticleController {
      * @param text          a text of the new article.
      * @param keywords      a keywords of the new article.
      * @param number        a number of the new article.
+     * @param price         a new price to the article.
      * @param categoryUrl   a category url of the new article.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the new article.
@@ -134,6 +135,7 @@ public class ArticleController {
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
+            @RequestParam(value = "price", defaultValue = "0") final String price,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
@@ -146,7 +148,7 @@ public class ArticleController {
                 title,
                 compressor.compress(description),
                 compressor.compress(text),
-                keywords, number
+                keywords, number, price
         );
         article.setValidated(isValid);
         article.setCategory(category);
@@ -209,6 +211,7 @@ public class ArticleController {
      * @param text          a new text to the article.
      * @param keywords      a new keywords to the article.
      * @param number        a new number to the article.
+     * @param price         a new price to the article.
      * @param categoryUrl   a category URL of the article.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the article.
@@ -226,6 +229,7 @@ public class ArticleController {
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
+            @RequestParam(value = "price") final String price,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid,
@@ -238,7 +242,7 @@ public class ArticleController {
                 title,
                 compressor.compress(description),
                 compressor.compress(text),
-                keywords, number
+                keywords, number, price
         );
         article.setValidated(isValid);
         article.setCategory(category);
