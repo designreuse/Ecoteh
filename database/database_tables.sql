@@ -29,7 +29,7 @@ CREATE TABLE `addresses` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `address`     VARCHAR(300)     NOT NULL DEFAULT '',
   `google_maps` TEXT             NOT NULL,
-  `validated`   BIT(1)           NOT NULL DEFAULT b'1',
+  `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -47,14 +47,14 @@ CREATE TABLE `articles` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `category_id` INT(10) UNSIGNED          DEFAULT NULL,
-  `price`       VARCHAR(100)              DEFAULT '',
+  `price`       VARCHAR(100)     NOT NULL DEFAULT '',
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
   `number`      VARCHAR(100)     NOT NULL DEFAULT '',
   `description` TEXT             NOT NULL,
   `text`        TEXT             NOT NULL,
   `keywords`    TEXT             NOT NULL,
-  `date`        VARCHAR(30)      NOT NULL DEFAULT '',
+  `date`        TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`, `url`),
@@ -178,7 +178,7 @@ CREATE TABLE `messages` (
   `user_id`   INT(10) UNSIGNED NOT NULL,
   `subject`   VARCHAR(100)     NOT NULL DEFAULT '',
   `text`      TEXT             NOT NULL,
-  `date`      VARCHAR(30)      NOT NULL DEFAULT '',
+  `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -198,7 +198,7 @@ CREATE TABLE `responses` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(100)     NOT NULL DEFAULT '',
   `text`      TEXT             NOT NULL,
-  `date`      VARCHAR(30)      NOT NULL DEFAULT '',
+  `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`)
 )
@@ -244,4 +244,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-31 16:37:35
+-- Dump completed on 2017-04-04 15:09:41
