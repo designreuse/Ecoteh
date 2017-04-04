@@ -70,11 +70,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * files from specific locations under web application root, the classpath,
      * and others.
      *
-     * @param resource The object of the ResourceHandlerRegistry class.
+     * @param registry The object of the ResourceHandlerRegistry class.
      */
     @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry resource) {
-        resource.addResourceHandler(this.properties.getResourcesUrl())
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(this.properties.getResourcesUrl())
                 .addResourceLocations(this.properties.getResourcesLocation());
     }
 }

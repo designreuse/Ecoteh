@@ -46,7 +46,9 @@
                         <form action="<c:url value="/admin/company/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название компании" required>
@@ -63,8 +65,8 @@
                                     <td class="ths">Слоган</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="tagline" rows="3" maxlength="200"
-                                                  title=""
-                                                  placeholder="Короткий и броский рекламный призыв или девиз."></textarea>
+                                                  placeholder="Короткий и броский рекламный призыв или девиз."
+                                                  title=""></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,8 +86,9 @@
                                 <tr>
                                     <td class="ths">Ключевые слова</td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="keywords" rows="7" title=""
-                                                  placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
+                                        <textarea class="form-control textarea" name="keywords" rows="7"
+                                                  placeholder="Ключевые слова, которые описывают компанию, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
+                                                  title=""></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -140,7 +143,8 @@
                                 </tr>
                                 <tr>
                                     <td class="ths">
-                                        <a href="https://twitter.com" target="_blank" title="Социальная сеть Twitter">Twitter</a>
+                                        <a href="https://twitter.com" target="_blank"
+                                           title="Социальная сеть Twitter">Twitter</a>
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
@@ -165,8 +169,8 @@
                                     <td class="ths">
                                         <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps. Где это взять?">
-                                            Google Maps&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Google Maps&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_2.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
@@ -194,35 +198,40 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Отображение&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Компанию смогут увидеть все пользователей">
-                                            <input type="radio" name="is_valid" value="true" checked
-                                                   required/>&nbsp;Отображать
+                                            <input type="radio" name="is_valid" value="true" checked required/>
+                                            &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Компанию смогут увидеть только администраторы">
-                                            <input type="radio" name="is_valid" value="false"
-                                                   required/>&nbsp;Не отображать
+                                            <input type="radio" name="is_valid" value="false" required/>
+                                            &nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Добавить партнера">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить информацию">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения. Хорошим тоном
-                                является заполнения всех полей объекта.</p>
+                            <p>
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

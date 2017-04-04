@@ -38,20 +38,23 @@
                     </p>
                     <c:set var="length" value="${fn:length(objects)}"/>
                     <hr>
-                    <h3 class="text-center">Кэш<c:if test="${length le 0}"> пустой!</c:if></h3>
+                    <h3 class="text-center">
+                        Кэш<c:if test="${length le 0}"> пустой!</c:if>
+                    </h3>
                     <hr>
                     <c:if test="${length gt 10}">
                         <div class="text-center">
                             <a href="<c:url value="/superadmin/cache"/>"
                                title="Обновить информацию об объектах, которые хранятся в памяти.">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Обновить
+                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                    &nbsp;Обновить
                                 </button>
                             </a>&nbsp;&nbsp;
                             <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
                                 <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-floppy-remove red"
-                                              aria-hidden="true"></span>&nbsp;Очистить
+                                    <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
+                                    &nbsp;Очистить
                                 </button>
                             </a>
                         </div>
@@ -85,13 +88,14 @@
                                 <a href="<c:url value="/superadmin/cache"/>"
                                    title="Обновить информацию об объектах, которые хранятся в памяти.">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Обновить
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        &nbsp;Обновить
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-floppy-remove red"
-                                              aria-hidden="true"></span>&nbsp;Очистить
+                                        <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
+                                        &nbsp;Очистить
                                     </button>
                                 </a>
                             </div>

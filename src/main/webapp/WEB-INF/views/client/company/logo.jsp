@@ -8,8 +8,7 @@
                 <a href="http://<c:out value="${company.domain}"/>">
                     <img src="<c:url value="${company.logo.url}"/>"
                          class="main-logo" alt="<c:out value="${company.title}"/>"
-                         onerror="this.src='<c:url
-                                 value="/resources/img/static/default_file.gif"/>'">
+                         onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                 </a>
             </div>
         </c:when>
@@ -17,7 +16,9 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <hr>
                 <a href="http://<c:out value="${company.domain}"/>">
-                    <h1 class="text-center"><b><c:out value="${company.title}"/></b></h1>
+                    <h1 class="text-center">
+                        <b><c:out value="${company.title}"/></b>
+                    </h1>
                 </a>
                 <hr>
             </div>

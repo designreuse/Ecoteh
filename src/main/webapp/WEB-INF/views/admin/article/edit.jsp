@@ -11,8 +11,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
-        <title>Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out
-                value="${main_company.title}"/></title>
+        <title>
+            Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; |
+            <c:out value="${main_company.title}"/>
+        </title>
         <meta name="title"
               content="Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
@@ -69,7 +71,9 @@
                             <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название статьи" required
@@ -77,7 +81,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Описание
+                                    </td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="desc" title="" required
                                               placeholder="Краткое описание статьи (анонс)."
@@ -93,7 +99,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Ключевые слова
+                                    </td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" required title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
@@ -125,14 +133,16 @@
                                                     <option value="">Нет</option>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <option value="<c:out value="${article.category.url}"/>"><c:out
-                                                            value="${article.category.title}"/></option>
+                                                    <option value="<c:out value="${article.category.url}"/>">
+                                                        <c:out value="${article.category.title}"/>
+                                                    </option>
                                                 </c:otherwise>
                                             </c:choose>
                                             <c:forEach items="${categories}" var="category">
                                                 <c:if test="${category.id ne article.category.id}">
-                                                    <option value="<c:out value="${category.url}"/>"><c:out
-                                                            value="${category.title}"/></option>
+                                                    <option value="<c:out value="${category.url}"/>">
+                                                        <c:out value="${category.title}"/>
+                                                    </option>
                                                 </c:if>
                                             </c:forEach>
                                             <c:if test="${article.category ne null}">
@@ -167,38 +177,41 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Отображение&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <input type="radio" name="is_valid" value="true"
-                                                   <c:if test="${article.validated}">checked</c:if>
-                                                   required/>&nbsp;Отображать
+                                            <input type="radio" name="is_valid" value="true" required
+                                                   <c:if test="${article.validated}">checked</c:if>/>
+                                            &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <input type="radio" name="is_valid" value="false"
-                                                   <c:if test="${!article.validated}">checked</c:if>
-                                                   required/>&nbsp;Не отображать
+                                            <input type="radio" name="is_valid" value="false" required
+                                                   <c:if test="${!article.validated}">checked</c:if>/>
+                                            &nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить изменения">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить изменения">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
                             <p>
                                 <span class="red">*</span>&nbsp;
-                                Поля обязательные для заполнения. Хорошим тоном является заполнения всех полей объекта.
+                                Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
                             </p>
                         </div>
                     </div>

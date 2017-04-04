@@ -49,15 +49,16 @@
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новый
                                     </button>
                                 </a>
                                 <c:if test="${length gt 0}">
                                     &nbsp;&nbsp;
                                     <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров">
                                         <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red"
-                                              aria-hidden="true"></span>&nbsp;Удалить всех
+                                            <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                            &nbsp;Удалить всех
                                         </button>
                                     </a>
                                 </c:if>
@@ -96,7 +97,9 @@
                             <img src="<c:url value="/resources/img/static/ukraine.gif"/>" class="map"
                                  alt="" title="Карта Украины">
                         </a>
-                        <h4 class="text-center">Наши партнеры на карте Украины</h4>
+                        <h4 class="text-center">
+                            Наши партнеры на карте Украины
+                        </h4>
                     </div>
                     <div class="clearfix"></div>
                 </div>

@@ -35,7 +35,8 @@
                     <div class="text-center">
                         <a href="<c:url value="/admin/file/new"/>" title="Добавить новый файл">
                             <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Добавить
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                &nbsp;Добавить
                             </button>
                         </a>
                         <c:set var="length" value="${fn:length(files)}"/>
@@ -43,8 +44,8 @@
                             &nbsp;&nbsp;
                             <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
                                 <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red"
-                                              aria-hidden="true"></span>&nbsp;Удалить все
+                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                    &nbsp;Удалить все
                                 </button>
                             </a>
                         </c:if>
@@ -56,7 +57,9 @@
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
-                        <h3 class="text-center">Файлы<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <h3 class="text-center">
+                            Файлы<c:if test="${length le 0}"> - список пуст!</c:if>
+                        </h3>
                         <hr>
                     </div>
                     <c:if test="${length gt 0}">
@@ -101,8 +104,8 @@
                                                 <a href="<c:url value="/admin/file/delete/${file.id}"/>"
                                                    title="Удалить файл &quot;${file.title}&quot;">
                                                     <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-remove red"
-                                                      aria-hidden="true"></span>
+                                                        <span class="glyphicon glyphicon-remove red"
+                                                              aria-hidden="true"></span>
                                                     </button>
                                                 </a>
                                             </c:if>

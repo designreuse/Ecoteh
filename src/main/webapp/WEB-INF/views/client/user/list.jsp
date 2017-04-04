@@ -4,9 +4,15 @@
 
 <c:set var="length" value="${fn:length(users_list)}"/>
 <c:choose>
-    <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}"><c:set var="in_line" value="3"/></c:when>
-    <c:when test="${(length % 2 eq 0) or (length % 2 eq 1)}"><c:set var="in_line" value="2"/></c:when>
-    <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
+    <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}">
+        <c:set var="in_line" value="3"/>
+    </c:when>
+    <c:when test="${(length % 2 eq 0) or (length % 2 eq 1)}">
+        <c:set var="in_line" value="2"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="in_line" value="1"/>
+    </c:otherwise>
 </c:choose>
 <c:set var="last_line" value="${length - length % in_line}"/>
 <c:set var="printed_in_line" value="0"/>
@@ -56,8 +62,12 @@
             </c:if>
             <h4>
                 <c:choose>
-                    <c:when test="${user.description ne ''}"><c:out value="${user.description}"/></c:when>
-                    <c:when test="${user.role ne ''}"><c:out value="${user.role}"/></c:when>
+                    <c:when test="${user.description ne ''}">
+                        <c:out value="${user.description}"/>
+                    </c:when>
+                    <c:when test="${user.role ne ''}">
+                        <c:out value="${user.role}"/>
+                    </c:when>
                 </c:choose>
             </h4>
             <c:if test="${user.contacts.mobilePhone ne ''}">
@@ -96,8 +106,7 @@
                 </h4>
             </c:if>
             <c:if test="${user.contacts.vkontakte ne ''}">
-                <a href="<c:out value="${user.contacts.vkontakte}"/>" title="Профиль в ВКонтакте"
-                   target="_blank">
+                <a href="<c:out value="${user.contacts.vkontakte}"/>" title="Профиль в ВКонтакте" target="_blank">
                     <span class="fa fa-vk fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
@@ -121,13 +130,15 @@
                     <a href="<c:url value="/admin/user/edit/${user.url}"/>"
                        title="Редактировать информацию о &quot;<c:out value="${user.name}"/>&quot;">
                         <button class="btn btn-default">
-                            <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
+                            <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                            &nbsp;Редактировать
                         </button>
                     </a>&nbsp;&nbsp;
                     <a href="<c:url value="/admin/user/delete/${user.url}"/>"
                        title="Удалить &quot;<c:out value="${user.name}"/>&quot;">
                         <button class="btn btn-default">
-                            <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
+                            <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                            &nbsp;Удалить
                         </button>
                     </a>
                 </div>

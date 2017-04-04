@@ -22,7 +22,9 @@
                                 <span class="response green"><c:out value="${response.username}"/></span>&nbsp;
                                 <span class="little">(<c:out value="${response.dateToString}"/>)</span>
                             </p>
-                            <p class="response"><c:out value="${response.text}"/></p><br>
+                            <p class="response">
+                                <c:out value="${response.text}"/>
+                            </p><br>
                         </div>
                     </c:forEach>
                     <c:if test="${length gt print_responses}">
@@ -31,8 +33,8 @@
                             <p class="text-right">
                                 <a href="<c:url value="/responses"/>"
                                    title="Перейти ко всем отзывам о нашей компании">
-                                    <span class="glyphicon glyphicon-share-alt"
-                                          aria-hidden="true"></span>&nbsp;Все отзывы...
+                                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                                    &nbsp;Все отзывы...
                                 </a>
                             </p>
                         </div>

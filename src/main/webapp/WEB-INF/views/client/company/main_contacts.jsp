@@ -37,7 +37,8 @@
                             <a href="<c:url value="/admin/company/edit/main"/>"
                                title="Редактировать информацию о компании &quot;<c:out value="${company.title}"/>&quot;">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Редактировать
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    &nbsp;Редактировать
                                 </button>
                             </a>
                         </div>

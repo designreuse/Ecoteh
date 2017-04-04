@@ -4,18 +4,35 @@
 
 <compress:html removeIntertagSpaces="true">
     <c:choose>
-        <c:when test="${status eq 400}"><c:set var="text" value="Ошибка 400. Объект не найден!"/></c:when>
-        <c:when test="${status eq 401}"><c:set var="text" value="Ошибка 401. Ошибка в запросе!"/></c:when>
-        <c:when test="${status eq 403}"><c:set var="text" value="Ошибка 403. Нет прав доступа!"/></c:when>
-        <c:when test="${status eq 404}"><c:set var="text" value="Ошибка 404. Не найдено!"/></c:when>
-        <c:when test="${status eq 405}"><c:set var="text" value="Ошибка 405. Запрещенный запрос!"/></c:when>
-        <c:when test="${status eq 406}"><c:set var="text" value="Ошибка 406. Ошибка аргументов!"/></c:when>
-        <c:when test="${status eq 409}"><c:set var="text" value="Ошибка 409. Объект уже существует!"/></c:when>
+        <c:when test="${status eq 400}">
+            <c:set var="text" value="Ошибка 400. Объект не найден!"/>
+        </c:when>
+        <c:when test="${status eq 401}">
+            <c:set var="text" value="Ошибка 401. Ошибка в запросе!"/>
+        </c:when>
+        <c:when test="${status eq 403}">
+            <c:set var="text" value="Ошибка 403. Нет прав доступа!"/>
+        </c:when>
+        <c:when test="${status eq 404}">
+            <c:set var="text" value="Ошибка 404. Не найдено!"/>
+        </c:when>
+        <c:when test="${status eq 405}">
+            <c:set var="text" value="Ошибка 405. Запрещенный запрос!"/>
+        </c:when>
+        <c:when test="${status eq 406}">
+            <c:set var="text" value="Ошибка 406. Ошибка аргументов!"/>
+        </c:when>
+        <c:when test="${status eq 409}">
+            <c:set var="text" value="Ошибка 409. Объект уже существует!"/>
+        </c:when>
         <c:when test="${status eq 500}">
             <c:set var="text" value="Временные неполадки с сервером... Приносим свои извинения!"/>
         </c:when>
-        <c:otherwise><c:set var="text" value="Неизвестная ошибка..."/></c:otherwise>
+        <c:otherwise>
+            <c:set var="text" value="Неизвестная ошибка..."/>
+        </c:otherwise>
     </c:choose>
+
     <!DOCTYPE HTML>
     <html lang="ru">
     <head>
@@ -54,9 +71,13 @@
                             <h2 class="intro-text">Упс... Ошибочка!</h2>
                             <hr>
                             <br><br>
-                            <div class="error-text"><b><c:out value="${text}"/></b></div>
+                            <div class="error-text">
+                                <b><c:out value="${text}"/></b>
+                            </div>
                             <br><br>
-                            <div class="error-message"><c:out value="${message}"/></div>
+                            <div class="error-message">
+                                <c:out value="${message}"/>
+                            </div>
                         </div>
                         <br><br><br><br>
                     </div>

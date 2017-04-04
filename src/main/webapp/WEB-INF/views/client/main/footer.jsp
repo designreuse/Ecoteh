@@ -6,8 +6,12 @@
 <c:set var="start" value="2016"/>
 <c:set var="now" value="<%= now %>"/>
 <c:choose>
-    <c:when test="${now ne start}"><c:set var="years" value="${start}-${now}"/></c:when>
-    <c:otherwise><c:set var="years" value="${start}"/></c:otherwise>
+    <c:when test="${now ne start}">
+        <c:set var="years" value="${start}-${now}"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="years" value="${start}"/>
+    </c:otherwise>
 </c:choose>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <footer>
@@ -83,8 +87,7 @@
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${favicon.url ne ''}">
-                                            <img src="<c:url value="${favicon.url}"/>"
-                                                 class="icon-size" alt="">
+                                            <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -131,8 +134,7 @@
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${favicon.url ne ''}">
-                                            <img src="<c:url value="${favicon.url}"/>"
-                                                 class="icon-size" alt="">
+                                            <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt="">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>

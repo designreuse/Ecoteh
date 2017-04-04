@@ -38,20 +38,20 @@
         <div class="container">
             <div class="row">
                 <div class="box">
-
                     <c:if test="${authorized_user ne null}">
                         <div class="text-center">
                             <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    &nbsp;Новая
                                 </button>
                             </a>
                             <c:if test="${length gt 0}">
                                 &nbsp;&nbsp;
                                 <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red"
-                                              aria-hidden="true"></span>&nbsp;Удалить все
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить все
                                     </button>
                                 </a>
                             </c:if>
@@ -63,7 +63,9 @@
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
-                        <h3 class="text-center">Все товары<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <h3 class="text-center">
+                            Все товары<c:if test="${length le 0}"> - список пуст!</c:if>
+                        </h3>
                         <hr>
                     </div>
                     <c:if test="${length gt 1}">
@@ -74,7 +76,7 @@
                                 <c:choose>
                                     <c:when test="${revers}">
                                         По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
-                                        aria-hidden="true"></span>
+                                              aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
                                         По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"

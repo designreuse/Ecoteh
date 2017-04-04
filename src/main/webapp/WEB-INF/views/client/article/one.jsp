@@ -61,7 +61,8 @@
                             <div class="text-center">
                                 <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новая
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/article/edit/${article.url}"/>"
@@ -92,8 +93,8 @@
                         </c:if>
                         <span class="little">
                             <c:if test="${!article.validated}">
-                            <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
-                                  title="Не отображается для клиентов"></span>&nbsp;
+                                <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
+                                      title="Не отображается для клиентов"></span>&nbsp;
                             </c:if>
                             <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
                             <a href="<c:url value="/article/num_${article.number}"/>">
@@ -102,8 +103,12 @@
                         </span>
                         <p>
                             <c:choose>
-                                <c:when test="${article.text ne ''}">${article.text}</c:when>
-                                <c:otherwise>${article.description}</c:otherwise>
+                                <c:when test="${article.text ne ''}">
+                                    ${article.text}
+                                </c:when>
+                                <c:otherwise>
+                                    ${article.description}
+                                </c:otherwise>
                             </c:choose>
                         </p>
                     </div>

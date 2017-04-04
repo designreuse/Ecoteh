@@ -48,19 +48,22 @@
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новый
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/company/edit/${company.url}"/>"
                                    title="Редактировать партнера &quot;<c:out value="${company.title}"/>&quot;">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
+                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                                        &nbsp;Редактировать
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/company/delete/${company.url}"/>"
                                    title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить
                                     </button>
                                 </a>
                             </div>
@@ -74,10 +77,16 @@
                         </c:if>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <c:choose>
-                            <c:when test="${company.information ne ''}"><p>${company.information}</p></c:when>
-                            <c:otherwise><p>${company.description}</p></c:otherwise>
-                        </c:choose>
+                        <p>
+                            <c:choose>
+                                <c:when test="${company.information ne ''}">
+                                    ${company.information}
+                                </c:when>
+                                <c:otherwise>
+                                    ${company.description}
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

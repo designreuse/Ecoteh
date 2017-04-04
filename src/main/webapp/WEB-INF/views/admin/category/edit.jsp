@@ -11,8 +11,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
-        <title>Редактирование категории &quot;<c:out value="${category.title}"/>&quot; | <c:out
-                value="${main_company.title}"/></title>
+        <title>
+            Редактирование категории &quot;<c:out value="${category.title}"/>&quot; |
+            <c:out value="${main_company.title}"/>
+        </title>
         <meta name="title"
               content="Редактирование категории &quot;<c:out value="${category.title}"/>&quot; | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
@@ -45,8 +47,9 @@
                     </p>
                     <hr>
                     <h3 class="text-center">
-                        Редактирование категории &quot;<a href="<c:url value="/admin/category/${category.url}"/>"><c:out
-                            value="${category.title}"/></a>&quot;
+                        Редактирование категории
+                        &quot;<a href="<c:url value="/admin/category/${category.url}"/>"
+                                 title=""><c:out value="${category.title}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
@@ -54,7 +57,9 @@
                               enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название категории" required
@@ -65,16 +70,18 @@
                                     <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="text" rows="6"
-                                              placeholder="Краткое описание категории" title=""><c:out
-                                            value="${category.description}"/></textarea>
+                                              placeholder="Краткое описание категории"
+                                              title=""><c:out value="${category.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Ключевые слова</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Ключевые слова
+                                    </td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" required title=""
+                                    <textarea class="form-control textarea" name="keywords" required rows="7"
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="7"><c:out value="${category.keywords}"/></textarea>
+                                              title=""><c:out value="${category.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -103,20 +110,20 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если категория позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Отображение&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Категорию смогут увидеть все пользователей">
-                                            <input type="radio" name="is_valid" value="true"
-                                                   <c:if test="${category.validated}">checked</c:if>
-                                                   required/>&nbsp;Отображать
+                                            <input type="radio" name="is_valid" value="true" required
+                                                   <c:if test="${category.validated}">checked</c:if>/>
+                                            &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Категорию смогут увидеть только администраторы">
-                                            <input type="radio" name="is_valid" value="false"
-                                                   <c:if test="${!category.validated}">checked</c:if>
-                                                   required/>&nbsp;Не отображать
+                                            <input type="radio" name="is_valid" value="false" required
+                                                   <c:if test="${!category.validated}">checked</c:if>/>
+                                            &nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
@@ -124,17 +131,22 @@
                             <input type="hidden" name="url" value="<c:out value="${category.url}"/>">
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить изменения">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить изменения">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения. Хорошим тоном
-                                является заполнения всех полей объекта.</p>
+                            <p>
+                                <span class="red">*</span>
+                                &nbsp;Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

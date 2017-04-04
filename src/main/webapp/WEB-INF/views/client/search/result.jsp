@@ -55,9 +55,11 @@
                     <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <label title="Введите ключевые слова для поиска. Если ключевых слов несколько, их стоит вводить через запятую &quot;,&quot;.">
-                                <b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                <b>
+                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                                     <c:if test="${is_search and !result}">Может попробуем еще?</c:if>
-                                    Что будем искать?</b>
+                                    Что будем искать?
+                                </b>
                             </label>
                         </div>
                         <form action="<c:url value="/search/result"/>" method="post">
@@ -70,8 +72,10 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label>
-                                    <b><span class="glyphicon glyphicon-question-sign"
-                                             aria-hidden="true"></span>&nbsp;Где искать?</b>
+                                    <b>
+                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                        &nbsp;Где искать?
+                                    </b>
                                 </label>&nbsp;&nbsp;&nbsp;
                                 <label title="Искать среди категорий">
                                     <input type="checkbox" name="content" title="" value="in_categories"
@@ -93,8 +97,10 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label>
-                                    <b><span class="glyphicon glyphicon-question-sign"
-                                             aria-hidden="true"></span>&nbsp;Как искать?</b>
+                                    <b>
+                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                        &nbsp;Как искать?
+                                    </b>
                                 </label>&nbsp;&nbsp;&nbsp;
                                 <label title="Искать по точному совпадению слов">
                                     <input type="radio" name="how_search" title="" value="true" required
@@ -157,7 +163,9 @@
                 </div>
             </c:if>
         </c:when>
-        <c:otherwise><br><br><br></c:otherwise>
+        <c:otherwise>
+            <br><br><br>
+        </c:otherwise>
     </c:choose>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>

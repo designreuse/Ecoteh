@@ -26,8 +26,8 @@
                 <hr>
                 <p class="text-right">
                     <a href="<c:url value="/company/main"/>" title="Описание нашей компании">
-                        <span class="glyphicon glyphicon-share-alt"
-                              aria-hidden="true"></span>&nbsp;Подробнее о нас...
+                        <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                        &nbsp;Подробнее о нас...
                     </a>
                 </p>
             </div>

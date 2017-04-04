@@ -6,7 +6,9 @@
         <div class="row">
             <div class="box">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h3 class="text-center"><c:out value="${category.title}"/></h3>
+                    <h3 class="text-center">
+                        <c:out value="${category.title}"/>
+                    </h3>
                     <c:if test="${!category.validated}">
                         <p class="little">
                             <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"

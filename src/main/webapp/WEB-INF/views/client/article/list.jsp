@@ -15,7 +15,9 @@
                                         <c:out value="${article.title}"/>
                                     </a>
                                 </c:when>
-                                <c:otherwise><c:out value="${article.title}"/></c:otherwise>
+                                <c:otherwise>
+                                    <c:out value="${article.title}"/>
+                                </c:otherwise>
                             </c:choose>
                         </h3>
                         <c:if test="${authorized_user ne null}">
@@ -23,14 +25,15 @@
                                 <a href="<c:url value="/admin/article/edit/${article.url}"/>"
                                    title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
                                     <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-edit yellow"
-                                                      aria-hidden="true"></span>&nbsp;Редактировать
+                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                                        &nbsp;Редактировать
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/article/delete/${article.url}"/>"
                                    title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить
                                     </button>
                                 </a>
                             </h3>
@@ -56,8 +59,12 @@
                             </a>
                         </span>
                         <c:choose>
-                            <c:when test="${article.description ne ''}"><p>${article.description}</p></c:when>
-                            <c:when test="${article.text ne ''}">${article.text}</c:when>
+                            <c:when test="${article.description ne ''}">
+                                <p>${article.description}</p>
+                            </c:when>
+                            <c:when test="${article.text ne ''}">
+                                ${article.text}
+                            </c:when>
                             <c:otherwise>
                                 <a href="<c:url value="/article/${article.logo.url}"/>"
                                    title="Перейти к &quot;<c:out value="${article.title}"/>&quot;">
@@ -73,8 +80,8 @@
                             <p class="text-right">
                                 <a href="<c:url value="/article/${article.url}"/>"
                                    title="Подробнее о &quot;<c:out value="${article.title}"/>&quot;">
-                                <span class="glyphicon glyphicon-share-alt"
-                                      aria-hidden="true"></span>&nbsp;Подробнее...
+                                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                                    &nbsp;Подробнее...
                                 </a>
                             </p>
                         </c:if>

@@ -196,7 +196,8 @@
                                 <c:if test="${authorized_user.role eq 'SUPERADMIN'}">
                                     <tr>
                                         <th class="pad">
-                                            <a href="<c:url value="/superadmin/cache/"/>" title="Список обьектов в памяти">Кэш</a>
+                                            <a href="<c:url value="/superadmin/cache/"/>"
+                                               title="Список обьектов в памяти">Кэш</a>
                                         </th>
                                         <td class="pad">
                                             <a href="<c:url value="/superadmin/cache/"/>"
@@ -223,16 +224,14 @@
                                                title="Изменить стиля сайта (CSS)">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-edit yellow"
-                                                          aria-hidden="true"></span>
-                                                    &nbsp;Изменить
+                                                          aria-hidden="true"></span>&nbsp;Изменить
                                                 </button>
                                             </a>&nbsp;&nbsp;
                                             <a href="<c:url value="/admin/styles/rollback"/>"
                                                title="Возобновить по-умолчанию">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-share-alt"
-                                                          aria-hidden="true"></span>
-                                                    &nbsp;Возобновить
+                                                          aria-hidden="true"></span>&nbsp;Возобновить
                                                 </button>
                                             </a>
                                         </td>
