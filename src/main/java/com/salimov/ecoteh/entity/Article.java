@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "articles")
-public final class Article extends Content implements IArticle {
+public class Article extends Content implements IArticle {
 
     /**
      * It is used during deserialization to verify that
@@ -47,6 +47,12 @@ public final class Article extends Content implements IArticle {
      */
     @Column(name = "date", nullable = false)
     private Date date;
+
+    /**
+     * The price of an article.
+     */
+    @Column(name = "price")
+    private String price;
 
     /**
      * The category of an article.
@@ -91,6 +97,28 @@ public final class Article extends Content implements IArticle {
     }
 
     /**
+     * Constructor.
+     *
+     * @param title       a title of the new article.
+     * @param description a description of the new article.
+     * @param text        a text of the new article.
+     * @param keywords    a keywords of the new article.
+     * @param number      a number of the new article.
+     * @param price       a price of the new article.
+     */
+    public Article(
+            final String title,
+            final String description,
+            final String text,
+            final String keywords,
+            final String number,
+            final String price
+    ) {
+        this(title, description, text, keywords, number);
+        setPrice(price);
+    }
+
+    /**
      * Returns a string representation of the object.
      *
      * @return A string representation of the object.
@@ -101,6 +129,7 @@ public final class Article extends Content implements IArticle {
                 ", number='" + getNumber() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
+                ", price=" + getPrice() +
                 ", " + getCategory() +
                 '}';
     }
@@ -210,14 +239,35 @@ public final class Article extends Content implements IArticle {
     }
 
     /**
-     * Sets a new text to the article.
-     * If parameter text is blank, then sets {@code new Date()}.
+     * Sets a new date to the article.
+     * If parameter date is {@code null}, then sets {@code new Date()}.
      *
      * @param date a new date to the article.
      */
     @Override
     public void setDate(final Date date) {
         this.date = (date != null) ? date : new Date();
+    }
+
+    /**
+     * Returns a price of the article.
+     *
+     * @return The article price.
+     */
+    @Override
+    public String getPrice() {
+        return this.price;
+    }
+
+    /**
+     * Sets a new price to the article.
+     * If parameter text is blank, then sets {@code new Date()}.
+     *
+     * @param price a new price to the article.
+     */
+    @Override
+    public void setPrice(final String price) {
+        this.price = isNotBlank(price) ? price : "0";
     }
 
     /**
@@ -277,6 +327,7 @@ public final class Article extends Content implements IArticle {
             this.setNumber(article.getNumber());
             this.setText(article.getText());
             this.setDate(article.getDate());
+            this.setPrice(article.getPrice());
             if (article.getCategory() != null) {
                 this.setCategory(article.getCategory());
             }

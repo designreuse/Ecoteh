@@ -66,7 +66,7 @@ final class Connection {
      */
     HttpsURLConnection getHttpsURLConnection() throws IOException {
         if (this.connection == null) {
-            createConnection();
+            prepareHttpsURLConnection();
         }
         return this.connection;
     }
@@ -76,7 +76,7 @@ final class Connection {
      *
      * @throws IOException If an I/O error occurs.
      */
-    private void createConnection() throws IOException {
+    private void prepareHttpsURLConnection() throws IOException {
         this.connection = (HttpsURLConnection) this.url.openConnection();
         this.connection.setRequestMethod("POST");
         this.connection.setRequestProperty("User-Agent", this.userAgent);

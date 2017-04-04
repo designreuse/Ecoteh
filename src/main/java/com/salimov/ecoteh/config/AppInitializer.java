@@ -119,9 +119,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
             final WebApplicationContext webApplicationContext
     ) {
         final DispatcherServlet dispatcherServlet =
-                (DispatcherServlet) super.createDispatcherServlet(
-                        webApplicationContext
-                );
+                (DispatcherServlet) super.createDispatcherServlet(webApplicationContext);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(THROW_EXCEPTION_IF_NO_HANDLER_FOUND);
         return dispatcherServlet;
     }

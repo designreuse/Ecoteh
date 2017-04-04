@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "messages")
-public final class Message extends Model implements IMessage {
+public class Message extends Model implements IMessage {
 
     /**
      * It is used during deserialization to verify that

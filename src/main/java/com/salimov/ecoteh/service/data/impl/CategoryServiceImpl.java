@@ -1,8 +1,8 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.CategoryDao;
 import com.salimov.ecoteh.entity.Article;
 import com.salimov.ecoteh.entity.Category;
+import com.salimov.ecoteh.repository.CategoryRepository;
 import com.salimov.ecoteh.service.data.interfaces.ArticleService;
 import com.salimov.ecoteh.service.data.interfaces.CategoryService;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
@@ -41,21 +41,24 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      */
     private final ArticleService articleService;
 
+    private final CategoryRepository repository;
+
     /**
      * Constructor.
      *
-     * @param dao            a implementation  of the {@link CategoryDao} interface.
+     * @param repository     a implementation  of the {@link CategoryRepository} interface.
      * @param articleService a implementation of the {@link ArticleService} interface.
      * @param fileService    a implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CategoryServiceImpl(
-            final CategoryDao dao,
+            final CategoryRepository repository,
             final ArticleService articleService,
             final FileService fileService
     ) {
-        super(dao, fileService);
+        super(repository, fileService);
+        this.repository = repository;
         this.articleService = articleService;
     }
 
@@ -160,6 +163,17 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @Override
     protected Class<Category> getModelClass() {
         return Category.class;
+    }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    @Override
+    protected void copy(final Category from, final Category to) {
+        to.initialize(from);
     }
 
     /**

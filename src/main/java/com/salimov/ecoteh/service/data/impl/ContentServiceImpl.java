@@ -1,8 +1,8 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.ContentDao;
 import com.salimov.ecoteh.entity.Content;
 import com.salimov.ecoteh.entity.File;
+import com.salimov.ecoteh.repository.ContentRepository;
 import com.salimov.ecoteh.service.data.interfaces.ContentService;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.util.comparator.ContentComparator;
@@ -29,7 +29,7 @@ public abstract class ContentServiceImpl<T extends Content>
      * The object provides a set of standard JPA methods
      * for working {@link Content} objects with the database.
      */
-    private final ContentDao<T> dao;
+    private final ContentRepository<T> repository;
 
     /**
      * The interface of the service layer,
@@ -42,15 +42,15 @@ public abstract class ContentServiceImpl<T extends Content>
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao         a implementation of the {@link ContentDao} interface.
+     * @param repository  a implementation of the {@link ContentRepository} interface.
      * @param fileService a implementation of the {@link FileService} interface.
      */
     ContentServiceImpl(
-            final ContentDao<T> dao,
+            final ContentRepository<T> repository,
             final FileService fileService
     ) {
-        super(dao);
-        this.dao = dao;
+        super(repository);
+        this.repository = repository;
         this.fileService = fileService;
     }
 
@@ -58,22 +58,26 @@ public abstract class ContentServiceImpl<T extends Content>
      * Initializes, updates and returns content with parameter url.
      *
      * @param url     a URL of the content to update.
-     * @param content a content to update.
+     * @param content a content object to update.
      * @return The updating content with parameter id.
+     * @throws IllegalArgumentException Throw exception when input content is null.
      */
     @Override
     @Transactional
-    public Content update(
+    public T update(
             final String url,
             final T content
-    ) {
+    ) throws IllegalArgumentException {
+        if (content == null) {
+            throw new IllegalArgumentException("Input " + getClassSimpleName() + "pbject is null!");
+        }
         final T contentToUpdate = getByUrl(url, false);
         final File newLogo = content.getLogo();
         final File oldLogo = contentToUpdate.getLogo();
         if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        contentToUpdate.initialize(content);
+        copy(content, contentToUpdate);
         return update(contentToUpdate);
     }
 
@@ -83,7 +87,7 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param title   a title of the content to return.
      * @param isValid is get valid content or not.
      * @return The content with parameter title.
-     * @throws IllegalArgumentException Throw exception when object  parameter title is blank.
+     * @throws IllegalArgumentException Throw exception when object parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
     @Override
@@ -95,7 +99,7 @@ public abstract class ContentServiceImpl<T extends Content>
         if (isBlank(title)) {
             throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
         }
-        final T content = this.dao.getByTitle(title);
+        final T content = this.repository.findByTitle(title);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName() +
@@ -123,7 +127,7 @@ public abstract class ContentServiceImpl<T extends Content>
         if (isBlank(url)) {
             throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
         }
-        final T content = this.dao.getByUrl(url);
+        final T content = this.repository.findByUrl(url);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
                     "Can`t find object of " + getClassSimpleName() +
@@ -143,7 +147,7 @@ public abstract class ContentServiceImpl<T extends Content>
     @Transactional
     public void removeByTitle(final String title) {
         if (isNotBlank(title)) {
-            this.dao.removeByTitle(title);
+            this.repository.deleteByTitle(title);
         }
     }
 
@@ -156,7 +160,7 @@ public abstract class ContentServiceImpl<T extends Content>
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotBlank(url)) {
-            this.dao.removeByUrl(url);
+            this.repository.deleteByUrl(url);
         }
     }
 
@@ -237,11 +241,19 @@ public abstract class ContentServiceImpl<T extends Content>
             return false;
         }
         if (duplicate) {
-            if ((this.dao.getByTitle(content.getTitle()) != null)
-                    || (this.dao.getByUrl(content.getUrl()) != null)) {
+            if ((this.repository.findByTitle(content.getTitle()) != null)
+                    || (this.repository.findByUrl(content.getUrl()) != null)) {
                 return false;
             }
         }
         return true;
     }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    protected abstract void copy(T from, T to);
 }

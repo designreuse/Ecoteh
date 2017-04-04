@@ -41,10 +41,14 @@
                                     </div>
                                 </c:when>
                                 <c:when test="${is_forgot eq false}">
-                                    <div class="alert red" role="alert"><b>Пользователь не найден</b><br></div>
+                                    <div class="alert red" role="alert">
+                                        <b>Пользователь не найден</b><br>
+                                    </div>
                                 </c:when>
                                 <c:when test="${(is_forgot eq true) and (is_captcha eq true)}">
-                                    <div class="alert green" role="alert"><b>Сообщение отправлено на почту</b></div>
+                                    <div class="alert green" role="alert">
+                                        <b>Сообщение отправлено на почту</b>
+                                    </div>
                                 </c:when>
                             </c:choose>
                             <hr>
@@ -52,8 +56,10 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <label>
-                                            <b><span class="glyphicon glyphicon-user"
-                                                     aria-hidden="true"></span>&nbsp;Логин или e-mail:</b>
+                                            <b>
+                                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                &nbsp;Логин или e-mail:
+                                            </b>
                                         </label>
                                         <input class="form-control" type="text" name="username" required
                                                minlength="3" maxlength="100" autofocus value="${username}"
@@ -63,8 +69,8 @@
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <button type="submit" class="btn btn-default"
                                                 title="Отправить пароль на e-mail">
-                                            <span class="glyphicon glyphicon-send"
-                                                  aria-hidden="true"></span>&nbsp;Отправить
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            &nbsp;Отправить
                                         </button>
                                     </div>
                                 </div>

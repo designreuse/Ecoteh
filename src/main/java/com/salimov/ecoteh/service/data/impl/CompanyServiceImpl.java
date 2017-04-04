@@ -1,10 +1,10 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.CompanyDao;
 import com.salimov.ecoteh.entity.Company;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.entity.Model;
 import com.salimov.ecoteh.enums.CompanyType;
+import com.salimov.ecoteh.repository.CompanyRepository;
 import com.salimov.ecoteh.service.data.interfaces.CompanyService;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * The interface provides a set of standard methods for working
      * {@link Company} objects with the database.
      */
-    private final CompanyDao dao;
+    private final CompanyRepository repository;
 
     /**
      * The interface of the service layer,
@@ -51,17 +51,17 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao         a implementation of the {@link CompanyDao} interface.
+     * @param repository  a implementation of the {@link CompanyRepository} interface.
      * @param fileService a implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CompanyServiceImpl(
-            final CompanyDao dao,
+            final CompanyRepository repository,
             final FileService fileService
     ) {
-        super(dao, fileService);
-        this.dao = dao;
+        super(repository, fileService);
+        this.repository = repository;
         this.fileService = fileService;
     }
 
@@ -121,12 +121,15 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     @Transactional(readOnly = true)
     public Company getMainCompany() throws NullPointerException {
+        Company mainCompany;
         try {
-            return this.dao.getByType(CompanyType.MAIN).get(0);
+            mainCompany = this.repository.findByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
-            throw new NullPointerException("Information about main company is absent!");
+            //throw new NullPointerException("Information about main company is absent!");
+            mainCompany = new Company();
         }
+        return mainCompany;
     }
 
     /**
@@ -138,7 +141,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     @Transactional(readOnly = true)
     public List<Company> getPartners(final boolean isValid) {
-        List<Company> companies = this.dao.getByType(CompanyType.PARTNER);
+        List<Company> companies = this.repository.findByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
                     .filter(Model::isValidated)
@@ -187,5 +190,16 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     protected Class<Company> getModelClass() {
         return Company.class;
+    }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    @Override
+    protected void copy(final Company from, final Company to) {
+        to.initialize(from);
     }
 }

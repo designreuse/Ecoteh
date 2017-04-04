@@ -1,16 +1,18 @@
-package com.salimov.ecoteh.dao.interfaces;
+package com.salimov.ecoteh.repository;
 
 import com.salimov.ecoteh.entity.Content;
+import org.springframework.data.repository.NoRepositoryBean;
 
 /**
- * The interface provides a set of standard methods for working objects
- * of the {@link Content} class or subclasses with a database.
+ * The interface provides a set of standard JPA methods
+ * for working objects which extends {@link Content} with a database.
  *
  * @param <T> Entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public interface ContentDao<T extends Content> extends DataDao<T> {
+@NoRepositoryBean
+public interface ContentRepository<T extends Content> extends DataRepository<T> {
 
     /**
      * Returns content object of the {@link Content} class or subclasses
@@ -19,7 +21,7 @@ public interface ContentDao<T extends Content> extends DataDao<T> {
      * @param title a title of the content object to return.
      * @return The content object with parameter title.
      */
-    T getByTitle(final String title);
+    T findByTitle(final String title);
 
     /**
      * Returns content object of the {@link Content} class or subclasses
@@ -28,7 +30,7 @@ public interface ContentDao<T extends Content> extends DataDao<T> {
      * @param url a URL of the content object to return.
      * @return The content object with parameter url.
      */
-    T getByUrl(final String url);
+    T findByUrl(final String url);
 
     /**
      * Removes content object of the {@link Content} class or subclasses
@@ -36,12 +38,12 @@ public interface ContentDao<T extends Content> extends DataDao<T> {
      *
      * @param title a title of the content object to remove.
      */
-    void removeByTitle(final String title);
+    void deleteByTitle(final String title);
 
     /**
      * Removes content object with the parameter url from a database.
      *
      * @param url a URL of the content object to remove.
      */
-    void removeByUrl(final String url);
+    void deleteByUrl(final String url);
 }

@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.DataDao;
 import com.salimov.ecoteh.entity.Model;
+import com.salimov.ecoteh.repository.DataRepository;
 import com.salimov.ecoteh.service.data.interfaces.DataService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,16 +22,16 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * The object provides a set of standard JPA methods
      * for working {@link Model} objects with the database.
      */
-    private final DataDao<T> dao;
+    private final DataRepository<T> repository;
 
     /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param dao a implementation of the {@link DataDao} interface.
+     * @param repository a implementation of the {@link DataRepository} interface.
      */
-    DataServiceImpl(final DataDao<T> dao) {
-        this.dao = dao;
+    DataServiceImpl(final DataRepository<T> repository) {
+        this.repository = repository;
     }
 
     /**
@@ -46,7 +46,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     public T add(final T model) {
         T result = model;
         if (validated(model, false, true)) {
-            result = this.dao.add(model);
+            result = this.repository.save(model);
         }
         return result;
     }
@@ -82,11 +82,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional
     public T update(final T model) {
-        T result = null;
+        T result = model;
         if (validated(model, true, false)) {
-            result = this.dao.update(model);
+            result = this.repository.save(model);
         }
-        return (result != null) ? result : model;
+        return result;
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public T get(final long id) throws NullPointerException {
-        final T model = this.dao.get(id);
+        final T model = this.repository.findOne(id);
         if (model == null) {
             throw new NullPointerException("Can`t find " + getClassSimpleName() + " by id " + id + "!");
         }
@@ -150,7 +150,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public Collection<T> getAll(final boolean valid) {
-        final Collection<T> models = this.dao.getAll();
+        final Collection<T> models = this.repository.findAll();
         return valid ? filteredByValid(models) : models;
     }
 
@@ -163,7 +163,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional
     public void remove(final long id) {
-        this.dao.remove(id);
+        this.repository.delete(id);
     }
 
     /**
@@ -176,7 +176,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Transactional
     public void remove(final T model) {
         if (model != null) {
-            this.dao.remove(model);
+            this.repository.delete(model);
         }
     }
 
@@ -200,7 +200,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional
     public void removeAll() {
-        this.dao.removeAll();
+        this.repository.deleteAll();
     }
 
     /**
@@ -214,7 +214,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public boolean exists(final long id) {
-        return this.dao.exists(id);
+        return this.repository.exists(id);
     }
 
     /**

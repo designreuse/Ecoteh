@@ -42,32 +42,32 @@
                         <tr>
                             <td>
                                 <label title="Host ip where staying database">
-                                    JDBS Host IP
+                                    Database Host IP
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.host.ip">
-                                    <%= RESOURCE.getString("jdbc.host.ip") %>
+                                <label title="database.host.ip">
+                                    <%= RESOURCE.getString("database.host.ip") %>
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label title="Host ip where staying database">
-                                    JDBS Host Port
+                                    Database Host Port
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.host.port">
-                                    <%= RESOURCE.getString("jdbc.host.port") %>
+                                <label title="database.host.port">
+                                    <%= RESOURCE.getString("database.host.port") %>
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>Database Name</td>
                             <td class="text-center">
-                                <label title="jdbc.database">
-                                    <%= RESOURCE.getString("jdbc.database") %>
+                                <label title="database.database">
+                                    <%= RESOURCE.getString("database.name") %>
                                 </label>
                             </td>
                         </tr>
@@ -78,8 +78,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.username">
-                                    <%= RESOURCE.getString("jdbc.username") %>
+                                <label title="database.username">
+                                    <%= RESOURCE.getString("database.username") %>
                                 </label>
                             </td>
                         </tr>
@@ -90,8 +90,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.password">
-                                    <%= RESOURCE.getString("jdbc.password") %>
+                                <label title="database.password">
+                                    <%= RESOURCE.getString("database.password") %>
                                 </label>
                             </td>
                         </tr>
@@ -102,8 +102,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.initial-size">
-                                    <%= RESOURCE.getString("jdbc.initial-size") %>
+                                <label title="database.initial-size">
+                                    <%= RESOURCE.getString("database.initial-size") %>
                                 </label>
                             </td>
                         </tr>
@@ -114,8 +114,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.max-active">
-                                    <%= RESOURCE.getString("jdbc.max-active") %>
+                                <label title="database.max-active">
+                                    <%= RESOURCE.getString("database.max-active") %>
                                 </label>
                             </td>
                         </tr>
@@ -126,8 +126,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.test-on-borrow">
-                                    <%= RESOURCE.getString("jdbc.test-on-borrow") %>
+                                <label title="database.test-on-borrow">
+                                    <%= RESOURCE.getString("database.test-on-borrow") %>
                                 </label>
                             </td>
                         </tr>
@@ -138,8 +138,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.validation-query">
-                                    <%= RESOURCE.getString("jdbc.validation-query") %>
+                                <label title="database.validation-query">
+                                    <%= RESOURCE.getString("database.validation-query") %>
                                 </label>
                             </td>
                         </tr>
@@ -150,8 +150,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.use-ssl">
-                                    <%= RESOURCE.getString("jdbc.use-ssl") %>
+                                <label title="database.use-ssl">
+                                    <%= RESOURCE.getString("database.use-ssl") %>
                                 </label>
                             </td>
                         </tr>
@@ -162,16 +162,16 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.use-unicode">
-                                    <%= RESOURCE.getString("jdbc.use-unicode") %>
+                                <label title="database.use-unicode">
+                                    <%= RESOURCE.getString("database.use-unicode") %>
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>Character Encoding</td>
                             <td class="text-center">
-                                <label title="jdbc.character-encoding">
-                                    <%= RESOURCE.getString("jdbc.character-encoding") %>
+                                <label title="database.character-encoding">
+                                    <%= RESOURCE.getString("database.character-encoding") %>
                                 </label>
                             </td>
                         </tr>
@@ -182,8 +182,8 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.use-jdbc-compliant-timezone-shift">
-                                    <%= RESOURCE.getString("jdbc.use-jdbc-compliant-timezone-shift") %>
+                                <label title="database.use-jdbc-compliant-timezone-shift">
+                                    <%= RESOURCE.getString("database.use-jdbc-compliant-timezone-shift") %>
                                 </label>
                             </td>
                         </tr>
@@ -194,16 +194,16 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <label title="jdbc.use-legacy-datetime-code">
-                                    <%= RESOURCE.getString("jdbc.use-legacy-datetime-code") %>
+                                <label title="v.use-legacy-datetime-code">
+                                    <%= RESOURCE.getString("database.use-legacy-datetime-code") %>
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>Server timezone</td>
                             <td class="text-center">
-                                <label title="jdbc.server-timezone">
-                                    <%= RESOURCE.getString("jdbc.server-timezone") %>
+                                <label title="database.server-timezone">
+                                    <%= RESOURCE.getString("database.server-timezone") %>
                                 </label>
                             </td>
                         </tr>

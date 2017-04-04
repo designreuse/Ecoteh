@@ -26,7 +26,6 @@
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
         <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
-
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
@@ -47,14 +46,18 @@
                         <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название статьи" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Описание</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Описание
+                                    </td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="desc" rows="10" title="" required
                                                   placeholder="Краткое описание статьи (анонс)."></textarea>
@@ -82,6 +85,13 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="ths">Цена</td>
+                                    <td class="tds">
+                                        <input type="text" class="form-control" name="price" minlength="1"
+                                               maxlength="100" placeholder="Цена">
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
@@ -102,35 +112,40 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Отображение&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <input type="radio" name="is_valid" value="true" checked
-                                                   required/>&nbsp;Отображать
+                                            <input type="radio" name="is_valid" value="true" checked required/>
+                                            &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <input type="radio" name="is_valid" value="false"
-                                                   required/>&nbsp;Не отображать
+                                            <input type="radio" name="is_valid" value="false" required/>
+                                            &nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить информацию">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить информацию">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения. Хорошим тоном
-                                является заполнения всех полей объекта.</p>
+                            <p>
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

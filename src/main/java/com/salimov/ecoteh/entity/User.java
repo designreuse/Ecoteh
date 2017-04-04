@@ -27,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "users")
-public final class User extends Model implements IUser, UserDetails {
+public class User extends Model implements IUser, UserDetails {
 
     /**
      * It is used during deserialization to verify that

@@ -59,7 +59,9 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public String get() {
-        return new FileContentsLoader(getAbsolutePath(STYLES_PATH)).read();
+        return new FileContentsLoader(
+                getAbsolutePath(STYLES_PATH)
+        ).read();
     }
 
     /**
@@ -70,7 +72,10 @@ public final class StyleServiceImpl implements StyleService {
     @Override
     public void save(final String styles) {
         if (isNotBlank(styles)) {
-            new FileContentsLoader(getAbsolutePath(STYLES_PATH), styles).write();
+            new FileContentsLoader(
+                    getAbsolutePath(STYLES_PATH),
+                    styles
+            ).write();
             new FileContentsLoader(
                     getAbsolutePath(MIN_STYLES_PATH),
                     new CssCompressor().compress(styles)
@@ -83,8 +88,11 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public void rollback() {
-        final String styles = new FileContentsLoader(getAbsolutePath(DEFAULT_STYLES_PATH)).read();
-        save(styles);
+        save(
+                new FileContentsLoader(
+                        getAbsolutePath(DEFAULT_STYLES_PATH)
+                ).read()
+        );
     }
 
     /**

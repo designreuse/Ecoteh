@@ -45,7 +45,9 @@
                         <form action="<c:url value="/admin/user/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Имя</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Имя
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="name" minlength="2"
                                                maxlength="100" placeholder="Имя пользователя" required>
@@ -96,7 +98,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Электронная почта</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Электронная почта
+                                    </td>
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100" required
                                                placeholder="name@mail.com">
@@ -148,71 +152,94 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если пользователь позначен для отображения, он будет доступна любому пользователю, иначе еге сможет увидеть только адмиистратор.">
-                                            <b>Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                      aria-hidden="true"></span></b>
+                                            <b>
+                                                Отображение&nbsp;
+                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                            </b>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Отображать пользователя">
-                                            <b><input type="radio" name="is_valid" value="true" checked
-                                                      required/>&nbsp;Отображать</b>
+                                            <b>
+                                                <input type="radio" name="is_valid" value="true" checked required/>
+                                                &nbsp;Отображать
+                                            </b>
                                         </label>&nbsp;&nbsp;
                                         <label title="Не отображать пользователя">
-                                            <b><input type="radio" name="is_valid" value="false"
-                                                      required/>&nbsp;Не отображать</b>
+                                            <b>
+                                                <input type="radio" name="is_valid" value="false" required/>
+                                                &nbsp;Не отображать
+                                            </b>
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <label title="Включить или отключить автоматическую рассылку писем от пользователей.">
-                                            <b>Рассылка&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span></b>
+                                            <b>
+                                                Рассылка&nbsp;
+                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                            </b>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Пользователю будут приходить письма от клиентов.">
-                                            <b><input type="radio" name="is_mailing" value="true" checked
-                                                      required/>&nbsp;Включить</b>
+                                            <b>
+                                                <input type="radio" name="is_mailing" value="true" checked required/>
+                                                &nbsp;Включить
+                                            </b>
                                         </label>&nbsp;&nbsp;
                                         <label title="Не беспокоить пользователя.">
-                                            <b><input type="radio" name="is_mailing" value="false"
-                                                      required/>&nbsp;Отключить</b>
+                                            <b>
+                                                <input type="radio" name="is_mailing" value="false" required/>
+                                                &nbsp;Отключить
+                                            </b>
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <label title="Если пользователь включен, он сможет авторизироваться на сайте, иначе доступ для него будет запрещен.">
-                                            <b>Активность&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                     aria-hidden="true"></span></b>
+                                            <b>
+                                                Активность&nbsp;
+                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                            </b>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Разблокировать пользователя">
-                                            <b><input type="radio" name="is_locked" value="false"
-                                                      required checked/>&nbsp;Разблокировать</b>
+                                            <b>
+                                                <input type="radio" name="is_locked" value="false" required checked/>
+                                                &nbsp;Разблокировать
+                                            </b>
                                         </label>&nbsp;&nbsp;
                                         <label title="Заблокировать пользователя">
-                                            <b><input type="radio" name="is_locked" value="true"
-                                                      required/>&nbsp;Заблокировать</b>
+                                            <b>
+                                                <input type="radio" name="is_locked" value="true" required/>
+                                                &nbsp;Заблокировать
+                                            </b>
                                         </label>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Добавить пользователя">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить информацию">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения. Хорошим тоном
-                                является заполнения всех полей объекта.</p>
+                            <p>
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

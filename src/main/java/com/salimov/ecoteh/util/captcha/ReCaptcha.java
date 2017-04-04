@@ -14,7 +14,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class CaptchaImpl implements Captcha {
+public final class ReCaptcha implements Captcha {
+
     /**
      * The reCAPTCHA user agent.
      */
@@ -66,7 +67,7 @@ public final class CaptchaImpl implements Captcha {
      * @param parameter      a captcha request param.
      * @param header         a captcha header param.
      */
-    public CaptchaImpl(
+    public ReCaptcha(
             final String userAgent,
             final String acceptLanguage,
             final boolean doOutput,

@@ -1,13 +1,14 @@
 package com.salimov.ecoteh.service.data.impl;
 
 import com.salimov.ecoteh.config.DefaultConfig;
-import com.salimov.ecoteh.dao.interfaces.UserDao;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.enums.UserRole;
+import com.salimov.ecoteh.repository.UserRepository;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.service.data.interfaces.UserService;
 import com.salimov.ecoteh.util.comparator.UserComparator;
+import com.salimov.ecoteh.util.encryption.Encryptor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -46,7 +47,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * The interface provides a set of standard methods for working
      * {@link User} objects with the database.
      */
-    private final UserDao dao;
+    private final UserRepository repository;
 
     /**
      * The interface of the service layer, describes a set of methods
@@ -57,17 +58,17 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     /**
      * Constructor.
      *
-     * @param dao         a implementation of the {@link UserDao} interface.
+     * @param repository  a implementation of the {@link UserRepository} interface.
      * @param fileService a implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public UserServiceImpl(
-            final UserDao dao,
+            final UserRepository repository,
             final FileService fileService
     ) {
-        super(dao);
-        this.dao = dao;
+        super(repository);
+        this.repository = repository;
         this.fileService = fileService;
     }
 
@@ -147,7 +148,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
         if (!newPhoto.equals(oldPhoto) && isNotBlank(newPhoto.getUrl())) {
             this.fileService.deleteFile(oldPhoto.getUrl());
         }
-        userToUpdate.initialize(user);
+        copy(user, userToUpdate);
         return update(userToUpdate);
     }
 
@@ -165,7 +166,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
         if (isBlank(name)) {
             throw new IllegalArgumentException("Input name is blank!");
         }
-        final User user = this.dao.getByName(name);
+        final User user = this.repository.findByName(name);
         if (user == null) {
             throw new NullPointerException("Can`t find user by name \"" + name + "\"!");
         }
@@ -187,7 +188,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
         if (isBlank(url)) {
             throw new IllegalArgumentException("Input URL is blank!");
         }
-        final User user = this.dao.getByUrl(url);
+        final User user = this.repository.findByUrl(url);
         if (user == null) {
             throw new NullPointerException("Can`t find user by URL \"" + url + "\"!");
         }
@@ -209,7 +210,9 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
         if (isBlank(login)) {
             throw new IllegalArgumentException("Input login is blank!");
         }
-        final User user = this.dao.getByLogin(login);
+        final User user = this.repository.findByEncryptedLogin(
+                new Encryptor(login).encrypt()
+        );
         if (user == null) {
             throw new NullPointerException("Can`t find user by login \"" + login + "\"!");
         }
@@ -284,7 +287,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     @Transactional
     public void removeByName(final String name) {
         if (isNotBlank(name)) {
-            this.dao.removeByName(name);
+            this.repository.deleteByName(name);
         }
     }
 
@@ -298,7 +301,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotBlank(url)) {
-            this.dao.removeByUrl(url);
+            this.repository.deleteByUrl(url);
         }
     }
 
@@ -524,11 +527,21 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
             return false;
         }
         if (duplicate) {
-            if ((this.dao.getByName(user.getName()) != null)
-                    || (this.dao.getByUrl(user.getUrl()) != null)) {
+            if ((this.repository.findByName(user.getName()) != null)
+                    || (this.repository.findByUrl(user.getUrl()) != null)) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    protected void copy(final User from, final User to) {
+        to.initialize(from);
     }
 }

@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.config;
 
 import com.salimov.ecoteh.util.captcha.Captcha;
-import com.salimov.ecoteh.util.captcha.CaptchaImpl;
+import com.salimov.ecoteh.util.captcha.ReCaptcha;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -82,7 +82,7 @@ public class CaptchaConfig {
      * Initializes the captcha object.
      */
     private void initCaptcha() {
-        captcha = new CaptchaImpl(
+        captcha = new ReCaptcha(
                 this.userAgent,
                 this.acceptLanguage,
                 this.doOutput,

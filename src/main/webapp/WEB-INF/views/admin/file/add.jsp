@@ -53,14 +53,18 @@
                         <form action="<c:url value="/admin/file/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title"
                                                maxlength="100" placeholder="Название файла" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Файл</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Файл
+                                    </td>
                                     <td class="tds">
                                         <input type="file" name="file" class="form-control" required>
                                     </td>
@@ -82,18 +86,20 @@
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Добавить файл">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить информацию">
-                                    <span class="glyphicon glyphicon-retweet yellow"
-                                          aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
                             <p>
-                                <span class="red">*</span>&nbsp;Поля обязательные для заполнения.
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
                                 (Максимальный размер файла ${maxFileSize} Мб)
                             </p>
                         </div>

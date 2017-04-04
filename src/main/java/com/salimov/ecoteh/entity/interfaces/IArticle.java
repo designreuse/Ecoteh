@@ -69,6 +69,21 @@ public interface IArticle extends IContent {
     String getDateToString();
 
     /**
+     * Returns a price of the article.
+     *
+     * @return The article price.
+     */
+    String getPrice();
+
+    /**
+     * Sets a new price to the article.
+     * If parameter text is blank, then sets {@code new Date()}.
+     *
+     * @param price a new price to the article.
+     */
+    void setPrice(final String price);
+
+    /**
      * Sets a new category to the article.
      *
      * @param category a new category to the article.

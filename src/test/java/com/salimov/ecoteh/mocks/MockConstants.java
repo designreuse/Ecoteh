@@ -36,6 +36,7 @@ public interface MockConstants {
     String ANY_STRING = "Some unknown text.";
     String PATH = "c:/some_dir/file.txt";
     String FILE_TYPE = "OTHER";
+    String PRICE = "500 $";
     Date DATE = new Date();
     CompanyType COMPANY_TYPE = CompanyType.PARTNER;
     UserRole USER_ROLE = UserRole.ADMIN;

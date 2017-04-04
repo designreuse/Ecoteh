@@ -303,13 +303,13 @@ public final class Cache {
      * @param keys a key string.
      */
     public static void removeAll(final String... keys) {
-        if (keys != null && keys.length > 0) {
+        if ((keys != null) && keys.length > 0) {
             new Thread(() -> {
                 final Collection<Key> cacheKeys = new ArrayList<>(cache.keySet());
-                for (String _key : keys) {
-                    if (isNotBlank(_key)) {
+                for (String sKey : keys) {
+                    if (isNotBlank(sKey)) {
                         cacheKeys.stream()
-                                .filter(key -> key.getKey().toString().contains(_key))
+                                .filter(key -> key.getKey().toString().contains(sKey))
                                 .forEach(key -> cache.remove(key));
                     }
                 }
@@ -325,7 +325,7 @@ public final class Cache {
      */
     public static <T> void setAll(final Map<T, Object> map) {
         cache = new ConcurrentHashMap<>();
-        if (map != null) {
+        if ((map != null) && !map.isEmpty()) {
             for (Map.Entry<T, Object> entry : map.entrySet()) {
                 put(entry.getKey(), entry.getValue());
             }

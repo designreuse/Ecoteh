@@ -3,6 +3,7 @@ package com.salimov.ecoteh.controller.authorization;
 import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
 import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.ecoteh.util.cache.Cache;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -22,6 +23,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class AuthorizationController {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(AuthorizationController.class);
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -54,6 +60,7 @@ public class AuthorizationController {
         try {
             modelAndView = this.fabric.getDefaultModelAndView();
         } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
             ex.printStackTrace();
             modelAndView = new ModelAndView();
         }

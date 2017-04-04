@@ -11,8 +11,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
-        <title>Редактирование &quot;<c:out value="${user.name}"/>&quot; | <c:out
-                value="${main_company.title}"/></title>
+        <title>
+            Редактирование &quot;<c:out value="${user.name}"/>&quot; |
+            <c:out value="${main_company.title}"/>
+        </title>
         <meta name="title"
               content="Редактирование &quot;<c:out value="${user.name}"/>&quot; | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
@@ -44,15 +46,18 @@
                     </p>
                     <hr>
                     <h3 class="text-center">
-                        Редактировать &quot;<a href="<c:url value="/admin/user/${user.url}"/>"><c:out
-                            value="${user.name}"/></a>&quot;
+                        Редактировать
+                        &quot;<a href="<c:url value="/admin/user/${user.url}"/>"
+                                 title=""><c:out value="${user.name}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
                         <form action="<c:url value="/admin/user/update"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Имя</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Имя
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="name" minlength="2"
                                                maxlength="100" placeholder="Имя пользователя" required
@@ -97,8 +102,7 @@
                                         </c:choose>
                                     </td>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="mobile_phone"
-                                               required
+                                        <input type="text" class="phone form-control" name="mobile_phone" required
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
                                                value="<c:out value="${user.contacts.mobilePhone}"/>">
                                     </td>
@@ -144,8 +148,7 @@
                                         <span class="red">*</span>
                                         <c:choose>
                                             <c:when test="${user.contacts.email ne ''}">
-                                                <a href="mailto:<c:out value="${user.contacts.email}"/>"
-                                                   target="_blank"
+                                                <a href="mailto:<c:out value="${user.contacts.email}"/>" target="_blank"
                                                    title="Написать письмо для &quot;<c:out value="${user.name}"/>&quot;">
                                                     Электронная почта
                                                 </a>
@@ -175,8 +178,7 @@
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
-                                               maxlength="200"
-                                               value="<c:out value="${user.contacts.vkontakte}"/>"
+                                               maxlength="200" value="<c:out value="${user.contacts.vkontakte}"/>"
                                                placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
                                     </td>
                                 </tr>
@@ -265,58 +267,60 @@
                                 <tr>
                                     <td class="ths">
                                         <label title="Если пользователь позначен для отображения, он будет доступна любому пользователю, иначе еге сможет увидеть только адмиистратор.">
-                                            Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Отображение&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Отображать пользователя">
-                                            <input type="radio" name="is_valid" value="true"
-                                                   <c:if test="${user.validated}">checked</c:if>
-                                                   required/>&nbsp;Отображать
+                                            <input type="radio" name="is_valid" value="true" required
+                                                   <c:if test="${user.validated}">checked</c:if>/>
+                                            &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Не отображать пользователя">
-                                            <input type="radio" name="is_valid" value="false"
-                                                   <c:if test="${!user.validated}">checked</c:if>
-                                                   required/>&nbsp;Не отображать
+                                            <input type="radio" name="is_valid" value="false" required
+                                                   <c:if test="${!user.validated}">checked</c:if>/>
+                                            &nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <label title="Включить или отключить автоматическую рассылку писем от пользователей.">
-                                            Рассылка&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                aria-hidden="true"></span>
+                                            Рассылка&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Пользователю будут приходить письма от клиентов.">
-                                            <input type="radio" name="is_mailing" value="true"
-                                                   <c:if test="${user.mailing}">checked</c:if> required/>&nbsp;Включить
+                                            <input type="radio" name="is_mailing" value="true" required
+                                                   <c:if test="${user.mailing}">checked</c:if>/>
+                                            &nbsp;Включить
                                         </label>&nbsp;&nbsp;
                                         <label title="Не беспокоить пользователя.">
                                             <input type="radio" name="is_mailing" value="false" required
-                                                   <c:if test="${!user.mailing}">checked</c:if>/>&nbsp;Отключить
+                                                   <c:if test="${!user.mailing}">checked</c:if>/>
+                                            &nbsp;Отключить
                                         </label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <label title="Если пользователь включен, он сможет авторизироваться на сайте, иначе доступ для него будет запрещен.">
-                                            Активность&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                  aria-hidden="true"></span>
+                                            Активность&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </label>
                                     </td>
                                     <td class="tds">
                                         <label title="Разблокировать пользователя">
-                                            <input type="radio" name="is_locked" value="false"
-                                                   <c:if test="${!user.locked}">checked</c:if>
-                                                   required/>&nbsp;Разблокировать
+                                            <input type="radio" name="is_locked" value="false" required
+                                                   <c:if test="${!user.locked}">checked</c:if>/>
+                                            &nbsp;Разблокировать
                                         </label>&nbsp;&nbsp;
                                         <label title="Заблокировать пользователя">
-                                            <input type="radio" name="is_locked" value="true"
-                                                   <c:if test="${user.locked}">checked</c:if>
-                                                   required/>&nbsp;Заблокировать
+                                            <input type="radio" name="is_locked" value="true" required
+                                                   <c:if test="${user.locked}">checked</c:if>/>
+                                            &nbsp;Заблокировать
                                         </label>
                                     </td>
                                 </tr>
@@ -324,17 +328,22 @@
                             <input type="hidden" name="url" value="<c:out value="${user.url}"/>">
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить изменения">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить изменения">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения. Хорошим тоном
-                                является заполнения всех полей объекта.</p>
+                            <p>
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

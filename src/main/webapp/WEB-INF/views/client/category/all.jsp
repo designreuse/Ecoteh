@@ -39,15 +39,16 @@
                         <div class="text-center">
                             <a href="<c:url value="/admin/category/new"/>" title="Добавить новую категория">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    &nbsp;Новая
                                 </button>
                             </a>
                             <c:if test="${length gt 0}">
                                 &nbsp;&nbsp;
                                 <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории">
                                     <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red"
-                                              aria-hidden="true"></span>&nbsp;Удалить все
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить все
                                     </button>
                                 </a>
                             </c:if>
@@ -59,7 +60,9 @@
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
-                        <h3 class="text-center">Наша продукция<c:if test="${length le 0}"> - список пуст!</c:if></h3>
+                        <h3 class="text-center">
+                            Наша продукция<c:if test="${length le 0}"> - список пуст!</c:if>
+                        </h3>
                         <hr>
                     </div>
                     <div class="clearfix"></div>

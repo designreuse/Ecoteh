@@ -39,8 +39,8 @@
                             <a href="<c:url value="/admin/messages/delete/all"/>"
                                title="Удалить все сообщения от клиентов">
                                 <button class=" btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red"
-                                          aria-hidden="true"></span>&nbsp;Удалить все
+                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                    &nbsp;Удалить все
                                 </button>
                             </a>
                         </div>
@@ -74,12 +74,14 @@
                                         <a href="<c:url value="/admin/messages/delete/${message.id}"/>"
                                            title="Удалить сообщение">
                                             <button class="btn btn-default">
-                                            <span class="glyphicon glyphicon-minus red"
-                                                  aria-hidden="true"></span>&nbsp;Удалить
+                                                <span class="glyphicon glyphicon-minus red" aria-hidden="true"></span>
+                                                &nbsp;Удалить
                                             </button>
                                         </a>
                                     </p>
-                                    <p class="response"><c:out value="${message.text}"/></p>
+                                    <p class="response">
+                                        <c:out value="${message.text}"/>
+                                    </p>
                                     <p class="response">
                                         <c:out value="${message.user.name}"/>,&nbsp;
                                         <a href="tel:<c:out value="${message.user.contacts.mobilePhone}"/>">

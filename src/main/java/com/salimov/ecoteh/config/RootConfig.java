@@ -39,112 +39,112 @@ public class RootConfig {
      * The driver for connection to the database.
      */
     @Value("${jdbc.driver}")
-    private String driver;
+    private String jdbcDriver;
 
     /**
-     * The url of driver for connection to the database.
+     * The URL of driver for connection to the database.
      */
     @Value("${jdbc.driver.url}")
-    private String urlDriver;
+    private String jdbcDriverUrl;
 
     /**
      * The host ip where staying database.
      */
-    @Value("${jdbc.host.ip}")
+    @Value("${database.host.ip}")
     private String hostIp;
 
     /**
      * The host port where staying database.
      */
-    @Value("${jdbc.host.port}")
+    @Value("${database.host.port}")
     private String hostPort;
 
     /**
      * The database name.
      */
-    @Value("${jdbc.database}")
-    private String database;
+    @Value("${database.name}")
+    private String databaseName;
 
     /**
      * The user name which will be work with database.
      */
-    @Value("${jdbc.username}")
-    private String username;
+    @Value("${database.username}")
+    private String databaseUsername;
 
     /**
      * The user password which will be work with database.
      */
-    @Value("${jdbc.password}")
-    private String password;
+    @Value("${database.password}")
+    private String databasePassword;
 
     /**
      * It is use SSL.
      */
-    @Value("${jdbc.use-ssl}")
-    private boolean useSSL;
+    @Value("${database.use-ssl}")
+    private boolean useSsl;
 
     /**
      * It is use Unicode.
      */
-    @Value("${jdbc.use-unicode}")
+    @Value("${database.use-unicode}")
     private boolean useUnicode;
 
     /**
      * The character encoding.
      */
-    @Value("${jdbc.character-encoding}")
+    @Value("${database.character-encoding}")
     private String characterEncoding;
 
     /**
      * It is use JDBC compliant timezone shift.
      */
-    @Value("${jdbc.use-jdbc-compliant-timezone-shift}")
-    private boolean useJDBCCompliantTimezoneShift;
+    @Value("${database.use-jdbc-compliant-timezone-shift}")
+    private boolean useJdbcCompliantTimezoneShift;
 
     /**
      * It is use legacy datetime code.
      */
-    @Value("${jdbc.use-legacy-datetime-code}")
+    @Value("${database.use-legacy-datetime-code}")
     private boolean useLegacyDatetimeCode;
 
     /**
      * The server timezone value.
      */
-    @Value("${jdbc.server-timezone}")
+    @Value("${database.server-timezone}")
     private String serverTimezone;
 
     /**
      * The initial size of the connection pool.
      */
-    @Value("${jdbc.initial-size}")
+    @Value("${database.initial-size}")
     private int initialSize;
 
     /**
      * The maximum number of active connections that can be allocated
      * at the same time.
      */
-    @Value("${jdbc.max-active}")
+    @Value("${database.max-active}")
     private int maxActive;
 
     /**
      * This property determines whether or not the pool will validate
      * objects before they are borrowed from the pool.
      */
-    @Value("${jdbc.test-on-borrow}")
+    @Value("${database.test-on-borrow}")
     private boolean testOnBorrow;
 
     /**
      * The SQL query that will be used to validate connections from
      * this pool before returning them to the caller.
      */
-    @Value("${jdbc.validation-query}")
+    @Value("${database.validation-query}")
     private String validationQuery;
 
     /**
      * An Hibernate SQL dialect for database.
      */
     @Value("${hibernate.dialect}")
-    private String dialect;
+    private String hibernateDialect;
 
     /**
      * It is to show SQL in the log (or in the console).
@@ -208,16 +208,11 @@ public class RootConfig {
     @Bean
     public DataSource dataSource() {
         final BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(this.driver);
-        dataSource.setUrl(
-                this.urlDriver + "://" + this.hostIp +
-                        ":" + this.hostPort + "/" + this.database
-        );
-        dataSource.setConnectionProperties(
-                createDatabaseConnectionProperties()
-        );
-        dataSource.setUsername(this.username);
-        dataSource.setPassword(this.password);
+        dataSource.setDriverClassName(this.jdbcDriver);
+        dataSource.setUrl(getDataSourceUrl());
+        dataSource.setConnectionProperties(createDatabaseConnectionProperties());
+        dataSource.setUsername(this.databaseUsername);
+        dataSource.setPassword(this.databasePassword);
         dataSource.setInitialSize(this.initialSize);
         dataSource.setMaxActive(this.maxActive);
         dataSource.setTestOnBorrow(this.testOnBorrow);
@@ -235,7 +230,7 @@ public class RootConfig {
         final HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(this.isShowSql);
         adapter.setGenerateDdl(this.isGenerateDdl);
-        adapter.setDatabasePlatform(this.dialect);
+        adapter.setDatabasePlatform(this.hibernateDialect);
         return adapter;
     }
 
@@ -272,17 +267,26 @@ public class RootConfig {
     }
 
     /**
+     * Creates datasource URL.
+     *
+     * @return The datasource URL.
+     */
+    private String getDataSourceUrl() {
+        return this.jdbcDriverUrl + "://" + this.hostIp +
+                ":" + this.hostPort + "/" + this.databaseName;
+    }
+
+    /**
      * Creates database connection properties.
      *
      * @return The object of String class with properties.
      */
     private String createDatabaseConnectionProperties() {
-        return "useSSL=" + this.useSSL
-                + ";useUnicode=" + this.useUnicode
-                + ";characterEncoding=" + this.characterEncoding
-                + ";useJDBCCompliantTimezoneShift="
-                + this.useJDBCCompliantTimezoneShift
-                + ";useLegacyDatetimeCode=" + this.useLegacyDatetimeCode
-                + ";serverTimezone=" + this.serverTimezone;
+        return "useSSL=" + this.useSsl +
+                ";useUnicode=" + this.useUnicode +
+                ";characterEncoding=" + this.characterEncoding +
+                ";useJDBCCompliantTimezoneShift=" + this.useJdbcCompliantTimezoneShift +
+                ";useLegacyDatetimeCode=" + this.useLegacyDatetimeCode +
+                ";serverTimezone=" + this.serverTimezone;
     }
 }

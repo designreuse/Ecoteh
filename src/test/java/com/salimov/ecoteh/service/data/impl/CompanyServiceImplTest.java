@@ -9,14 +9,12 @@ import org.junit.Test;
 
 import java.util.Collection;
 
-import static com.salimov.ecoteh.mocks.MockConstants.*;
-import static com.salimov.ecoteh.mocks.dao.MockDao.getCompanyDao;
+import static com.salimov.ecoteh.mocks.MockConstants.URL;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getCompanies;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getCompany;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getCompanyRepository;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getFileService;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public final class CompanyServiceImplTest extends ContentServiceImplTest<Company> {
 
@@ -25,7 +23,7 @@ public final class CompanyServiceImplTest extends ContentServiceImplTest<Company
     @Before
     public void beforeTest() {
         this.service = new CompanyServiceImpl(
-                getCompanyDao(),
+                getCompanyRepository(),
                 getFileService()
         );
     }

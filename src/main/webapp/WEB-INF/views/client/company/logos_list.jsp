@@ -9,12 +9,17 @@
     </c:if>
     <c:choose>
         <c:when test="${(print_partners % 4 eq 0) or (print_partners % 4 eq 3)}">
-            <c:set var="in_line" value="4"/></c:when>
+            <c:set var="in_line" value="4"/>
+        </c:when>
         <c:when test="${(print_partners % 3 eq 0) or (print_partners % 3 eq 2)}">
-            <c:set var="in_line" value="3"/></c:when>
+            <c:set var="in_line" value="3"/>
+        </c:when>
         <c:when test="${(print_partners % 2 eq 0) or (print_partners % 2 eq 1)}">
-            <c:set var="in_line" value="2"/></c:when>
-        <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
+            <c:set var="in_line" value="2"/>
+        </c:when>
+        <c:otherwise>
+            <c:set var="in_line" value="1"/>
+        </c:otherwise>
     </c:choose>
     <c:set var="last_line" value="${print_partners - print_partners % in_line}"/>
     <c:set var="printed_in_line" value="0"/>
@@ -48,10 +53,12 @@
                                     </a>
                                 </c:when>
                                 <c:when test="${partner.title ne ''}">
-                                    <a href="<c:url value="/company/${partner.url}"/>"
-                                       title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
-                                        <h3 class="text-center"><c:out value="${partner.title}"/></h3>
-                                    </a>
+                                    <h3 class="text-center">
+                                        <a href="<c:url value="/company/${partner.url}"/>"
+                                           title="Партнер &quot;<c:out value="${partner.title}"/>&quot;">
+                                            <c:out value="${partner.title}"/>
+                                        </a>
+                                    </h3>
                                 </c:when>
                             </c:choose>
                         </div>

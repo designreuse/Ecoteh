@@ -37,8 +37,8 @@
                         <div class="text-center">
                             <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании">
                                 <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red"
-                                          aria-hidden="true"></span>&nbsp;Удалить все
+                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                    &nbsp;Удалить все
                                 </button>
                             </a>
                         </div>
@@ -56,8 +56,7 @@
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
-                            <a href="<c:url value="/responses/sort?revers=${revers}"/>"
-                               title="Сортировать по дате">
+                            <a href="<c:url value="/responses/sort?revers=${revers}"/>" title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">
                                         По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"

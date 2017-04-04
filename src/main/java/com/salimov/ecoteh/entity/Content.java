@@ -16,7 +16,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 @MappedSuperclass
-public abstract class Content extends Model implements IContent {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Content <T extends Content> extends Model implements IContent {
 
     /**
      * It is used during deserialization to verify that

@@ -7,10 +7,10 @@ import org.junit.Ignore;
 
 import java.util.Collection;
 
-import static com.salimov.ecoteh.mocks.dao.MockDao.getFileDao;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getFile;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getFiles;
 import static com.salimov.ecoteh.mocks.properties.MockContentProperties.getContentProperties;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getFileRepository;
 
 public final class FileServiceImplTest extends DataServiceImplTest<File> {
 
@@ -18,7 +18,10 @@ public final class FileServiceImplTest extends DataServiceImplTest<File> {
 
     @Before
     public void beforeTest() {
-        this.service = new FileServiceImpl(getFileDao(), getContentProperties());
+        this.service = new FileServiceImpl(
+                getFileRepository(),
+                getContentProperties()
+        );
     }
 
     @Ignore

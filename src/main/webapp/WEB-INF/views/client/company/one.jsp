@@ -34,27 +34,6 @@
             <div class="row">
                 <div class="box">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <c:if test="${authorized_user ne null}">
-                            <div class="text-center">
-                                <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
-                                    </button>
-                                </a>&nbsp;&nbsp;
-                                <a href="<c:url value="/admin/company/edit/${company.url}"/>"
-                                   title="Редактировать партнера &quot;<c:out value="${company.title}"/>&quot;">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>&nbsp;Редактировать
-                                    </button>
-                                </a>&nbsp;&nbsp;
-                                <a href="<c:url value="/admin/company/delete/${company.url}"/>"
-                                   title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>&nbsp;Удалить
-                                    </button>
-                                </a>
-                            </div>
-                        </c:if>
                         <p class="path">
                             <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
@@ -65,6 +44,30 @@
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>
                         </c:if>
+                        <c:if test="${authorized_user ne null}">
+                            <div class="text-center">
+                                <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новый
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="<c:url value="/admin/company/edit/${company.url}"/>"
+                                   title="Редактировать партнера &quot;<c:out value="${company.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                                        &nbsp;Редактировать
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="<c:url value="/admin/company/delete/${company.url}"/>"
+                                   title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить
+                                    </button>
+                                </a>
+                            </div>
+                        </c:if>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <c:if test="${!company.validated}">
                             <p class="no-valid" title="Не отображается для клиентов">
@@ -74,10 +77,16 @@
                         </c:if>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <c:choose>
-                            <c:when test="${company.information ne ''}"><p>${company.information}</p></c:when>
-                            <c:otherwise><p>${company.description}</p></c:otherwise>
-                        </c:choose>
+                        <p>
+                            <c:choose>
+                                <c:when test="${company.information ne ''}">
+                                    ${company.information}
+                                </c:when>
+                                <c:otherwise>
+                                    ${company.description}
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

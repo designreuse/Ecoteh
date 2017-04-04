@@ -37,24 +37,6 @@
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <c:if test="${authorized_user ne null}">
-                        <div class="text-center">
-                            <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
-                                </button>
-                            </a>
-                            <c:if test="${length gt 0}">
-                                &nbsp;&nbsp;
-                                <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red"
-                                              aria-hidden="true"></span>&nbsp;Удалить всех
-                                    </button>
-                                </a>
-                            </c:if>
-                        </div>
-                    </c:if>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/company/all"/>">Партнеры</a>
@@ -63,6 +45,25 @@
                         <hr>
                         <h3 class="text-center">Наши партнеры</h3>
                         <hr>
+                        <c:if test="${authorized_user ne null}">
+                            <div class="text-center">
+                                <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новый
+                                    </button>
+                                </a>
+                                <c:if test="${length gt 0}">
+                                    &nbsp;&nbsp;
+                                    <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров">
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                            &nbsp;Удалить всех
+                                        </button>
+                                    </a>
+                                </c:if>
+                            </div>
+                        </c:if>
                     </div>
                     <c:if test="${length gt 1}">
                         <p class="path">
@@ -96,7 +97,9 @@
                             <img src="<c:url value="/resources/img/static/ukraine.gif"/>" class="map"
                                  alt="" title="Карта Украины">
                         </a>
-                        <h4 class="text-center">Наши партнеры на карте Украины</h4>
+                        <h4 class="text-center">
+                            Наши партнеры на карте Украины
+                        </h4>
                     </div>
                     <div class="clearfix"></div>
                 </div>

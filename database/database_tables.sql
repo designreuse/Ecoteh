@@ -1,11 +1,11 @@
 DROP DATABASE IF EXISTS `ecoteh`;
 CREATE DATABASE IF NOT EXISTS `ecoteh` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ecoteh`;
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ecoteh
 -- ------------------------------------------------------
--- Server version	5.7.12-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
@@ -28,8 +28,8 @@ DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE `addresses` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `address`     VARCHAR(300)     NOT NULL DEFAULT '',
-  `google_maps` TEXT             NOT NULL DEFAULT '',
-  `validated`   BIT(1)           NOT NULL DEFAULT b'1',
+  `google_maps` TEXT             NOT NULL,
+  `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -47,19 +47,19 @@ CREATE TABLE `articles` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `category_id` INT(10) UNSIGNED          DEFAULT NULL,
+  `price`       VARCHAR(100)     NOT NULL DEFAULT '',
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
   `number`      VARCHAR(100)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL DEFAULT '',
-  `text`        TEXT             NOT NULL DEFAULT '',
-  `keywords`    TEXT             NOT NULL DEFAULT '',
-  `date`        VARCHAR(30)      NOT NULL DEFAULT '',
+  `description` TEXT             NOT NULL,
+  `text`        TEXT             NOT NULL,
+  `keywords`    TEXT             NOT NULL,
+  `date`        TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE (`number`, `url`),
+  UNIQUE KEY `number` (`number`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
   FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -77,11 +77,11 @@ CREATE TABLE `categories` (
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL DEFAULT '',
-  `keywords`    TEXT             NOT NULL DEFAULT '',
+  `description` TEXT             NOT NULL,
+  `keywords`    TEXT             NOT NULL,
   `validated`   BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE (`title`, `url`),
+  UNIQUE KEY `title` (`title`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`)
 )
   ENGINE = InnoDB
@@ -104,17 +104,17 @@ CREATE TABLE `companies` (
   `title`          VARCHAR(100)             NOT NULL DEFAULT '',
   `domain`         VARCHAR(200)             NOT NULL DEFAULT '',
   `url`            VARCHAR(200)             NOT NULL DEFAULT '',
-  `tagline`        TEXT                     NOT NULL DEFAULT '',
-  `description`    TEXT                     NOT NULL DEFAULT '',
-  `information`    TEXT                     NOT NULL DEFAULT '',
-  `keywords`       TEXT                     NOT NULL DEFAULT '',
+  `tagline`        TEXT                     NOT NULL,
+  `description`    TEXT                     NOT NULL,
+  `information`    TEXT                     NOT NULL,
+  `keywords`       TEXT                     NOT NULL,
   `sender_email`   VARCHAR(200)             NOT NULL DEFAULT '',
   `sender_pass`    VARCHAR(100)             NOT NULL DEFAULT '',
   `work_time_from` VARCHAR(10)              NOT NULL DEFAULT '',
   `work_time_to`   VARCHAR(10)              NOT NULL DEFAULT '',
   `validated`      BIT(1)                   NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE (`title`, `url`),
+  UNIQUE KEY `title` (`title`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
   FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`),
   FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`)
@@ -177,8 +177,8 @@ CREATE TABLE `messages` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id`   INT(10) UNSIGNED NOT NULL,
   `subject`   VARCHAR(100)     NOT NULL DEFAULT '',
-  `text`      TEXT             NOT NULL DEFAULT '',
-  `date`      VARCHAR(30)      NOT NULL DEFAULT '',
+  `text`      TEXT             NOT NULL,
+  `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -197,8 +197,8 @@ DROP TABLE IF EXISTS `responses`;
 CREATE TABLE `responses` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(100)     NOT NULL DEFAULT '',
-  `text`      TEXT             NOT NULL DEFAULT '',
-  `date`      VARCHAR(30)      NOT NULL DEFAULT '',
+  `text`      TEXT             NOT NULL,
+  `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated` BIT(1)           NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`)
 )
@@ -222,7 +222,7 @@ CREATE TABLE `users` (
   `url`         VARCHAR(100)                        NOT NULL DEFAULT '',
   `login`       VARCHAR(300)                        NOT NULL DEFAULT '',
   `password`    VARCHAR(300)                        NOT NULL DEFAULT '',
-  `description` TEXT                                NOT NULL DEFAULT '',
+  `description` TEXT                                NOT NULL,
   `validated`   BIT(1)                              NOT NULL DEFAULT b'1',
   `mailing`     BIT(1)                              NOT NULL DEFAULT b'1',
   `locked`      BIT(1)                              NOT NULL DEFAULT b'0',
@@ -244,4 +244,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-09 12:26:02
+-- Dump completed on 2017-04-04 15:09:41

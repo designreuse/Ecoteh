@@ -1,8 +1,8 @@
 package com.salimov.ecoteh.service.data.impl;
 
-import com.salimov.ecoteh.dao.interfaces.ArticleDao;
 import com.salimov.ecoteh.entity.Article;
 import com.salimov.ecoteh.entity.Category;
+import com.salimov.ecoteh.repository.ArticleRepository;
 import com.salimov.ecoteh.service.data.interfaces.ArticleService;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.util.comparator.ArticleComparator;
@@ -41,22 +41,22 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * The interface provides a set of standard methods
      * for working {@link Article} objects a the database.
      */
-    private final ArticleDao dao;
+    private final ArticleRepository repository;
 
     /**
      * Constructor.
      *
-     * @param dao         a implementation of the {@link ArticleDao} interface.
+     * @param repository  a implementation of the {@link ArticleRepository} interface.
      * @param fileService a implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ArticleServiceImpl(
-            final ArticleDao dao,
+            final ArticleRepository repository,
             final FileService fileService
     ) {
-        super(dao, fileService);
-        this.dao = dao;
+        super(repository, fileService);
+        this.repository = repository;
     }
 
     /**
@@ -77,7 +77,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
         if (isBlank(number)) {
             throw new IllegalArgumentException("Article number is blank!");
         }
-        final Article article = this.dao.getByNumber(number);
+        final Article article = this.repository.findByNumber(number);
         if ((article == null) || (isValid && !article.isValidated())) {
             throw new NullPointerException("Can`t find article by number \"" + number + "\"!");
         }
@@ -165,10 +165,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
                 result.addAll(
                         articles.stream()
                                 .filter(
-                                        article -> Time.checkTime(
-                                                article.getDate(),
-                                                startDate, finishDate
-                                        )
+                                        article -> timeFilter(article, startDate, finishDate)
                                 ).collect(Collectors.toList())
                 );
             } else {
@@ -218,7 +215,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
                     result.addAll(
                             categories.stream()
                                     .filter(
-                                            category -> article.getCategory().equals(category)
+                                            category -> categoryFilter(article, category)
                                     ).map(category -> article)
                                     .collect(Collectors.toList())
                     );
@@ -289,7 +286,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             result.addAll(
                     articles.stream()
                             .filter(
-                                    article -> (article != null) && article.isValidated()
+                                    ArticleServiceImpl::validFilter
                             ).collect(Collectors.toList())
             );
         }
@@ -380,5 +377,56 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Override
     protected Class<Article> getModelClass() {
         return Article.class;
+    }
+
+    /**
+     * Copies the object "from" to object "to".
+     *
+     * @param from a copied object
+     * @param to   a object to copy
+     */
+    @Override
+    protected void copy(final Article from, final Article to) {
+        to.initialize(from);
+    }
+
+    /**
+     * Filters article object date with input dates.
+     *
+     * @param article    a article to filter.
+     * @param startDate  a initial date.
+     * @param finishDate a final date.
+     * @return {@code true} or {@code false}.
+     */
+    private static boolean timeFilter(
+            final Article article,
+            final Date startDate,
+            final Date finishDate
+    ) {
+        return Time.checkTime(article.getDate(), startDate, finishDate);
+    }
+
+    /**
+     * Filters article object category with input category.
+     *
+     * @param article  a article to filter.
+     * @param category a category filtering.
+     * @return {@code true} or {@code false}.
+     */
+    private static boolean categoryFilter(
+            final Article article,
+            final Category category
+    ) {
+        return article.getCategory().equals(category);
+    }
+
+    /**
+     * Filters article by validation.
+     *
+     * @param article a article to filter.
+     * @return {@code true} or {@code false}.
+     */
+    private static boolean validFilter(final Article article) {
+        return (article != null) && article.isValidated();
     }
 }

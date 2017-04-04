@@ -34,10 +34,12 @@
                     </c:forEach>
                 </div>
                 <c:if test="${length gt 1}">
-                    <a href="#carousel-example-generic" class="left carousel-control"
-                       data-slide="prev"><span class="icon-prev"></span></a>
-                    <a href="#carousel-example-generic" class="right carousel-control"
-                       data-slide="next"><span class="icon-next"></span></a>
+                    <a href="#carousel-example-generic" class="left carousel-control" data-slide="prev">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a href="#carousel-example-generic" class="right carousel-control" data-slide="next">
+                        <span class="icon-next"></span>
+                    </a>
                 </c:if>
             </c:when>
             <c:otherwise>

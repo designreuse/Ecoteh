@@ -11,8 +11,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
-        <title>Редактирование &quot;<c:out value="${company.title}"/>&quot; | <c:out
-                value="${main_company.title}"/></title>
+        <title>
+            Редактирование &quot;<c:out value="${company.title}"/>&quot; |
+            <c:out value="${main_company.title}"/>
+        </title>
         <meta name="title"
               content="Редактирование &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
@@ -50,23 +52,35 @@
                     <hr>
                     <h3 class="text-center">
                         <c:choose>
-                            <c:when test="${main}"><c:set var="com" value="main"/></c:when>
-                            <c:otherwise><c:set var="com" value="${company.url}"/></c:otherwise>
+                            <c:when test="${main}">
+                                <c:set var="com" value="main"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="com" value="${company.url}"/>
+                            </c:otherwise>
                         </c:choose>
-                        Редактировать&nbsp;&quot;<a href="<c:url value="/company/${com}"/>"><c:out
-                            value="${company.title}"/></a>&quot;
+                        Редактировать&nbsp;
+                        &quot;<a href="<c:url value="/company/${com}"/>"
+                                 title=""><c:out value="${company.title}"/></a>&quot;
                     </h3>
                     <hr>
                     <div class="text-center">
                         <c:choose>
-                            <c:when test="${main}"><c:set var="action" value="/main"/></c:when>
-                            <c:otherwise><c:set var="action" value=""/></c:otherwise>
+                            <c:when test="${main}">
+                                <c:set var="action" value="/main"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="action" value=""/>
+                            </c:otherwise>
                         </c:choose>
                         <form action="<c:url value="/admin/company/update/${action}"/>" method="post"
                               enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>
+                                        &nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
                                                maxlength="100" placeholder="Название компании" required
@@ -163,8 +177,8 @@
                                     <tr>
                                         <td class="ths">
                                             <label title="Эта почта будет привязана к форме обратной связи.">
-                                                Электронная почта (бот)&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                                   aria-hidden="true"></span>
+                                                Электронная почта (бот)&nbsp;
+                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                             </label>
                                         </td>
                                         <td class="tds">
@@ -187,7 +201,7 @@
                                         <c:choose>
                                             <c:when test="${company.contacts.vkontakte ne ''}">
                                                 <a href="<c:out value="${company.contacts.vkontakte}"/>"
-                                                   title="Профиль &quot;<c:out value="${company.contacts.title}"/>&quot; в ВКонтакте"
+                                                   title="Профиль &quot;<c:out value="${company.title}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
                                             </c:when>
                                             <c:otherwise>
@@ -262,8 +276,8 @@
                                     <td class="ths">
                                         <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps. Где это взять?">
-                                            Google Maps&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                   aria-hidden="true"></span>
+                                            Google Maps&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </a>&nbsp;
                                         <a href="<c:url value="/resources/img/static/google_maps_2.jpg"/>"
                                            rel="lightgallery[maps]" title="Офис на карте Google Maps."></a>
@@ -277,9 +291,9 @@
                                         </a>
                                     </td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="google_maps" title=""
-                                              placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
-                                              rows="5"><c:out value="${company.address.googleMaps}"/></textarea>
+                                        <textarea class="form-control textarea" name="google_maps" title=""
+                                                  placeholder="URL миникарты Google Maps. Желательно чтобы на карте отображался офис, адрес которого указан выше."
+                                                  rows="5"><c:out value="${company.address.googleMaps}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -309,20 +323,20 @@
                                     <tr>
                                         <td class="ths">
                                             <label title="Если компания позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
-                                                Отображение&nbsp;<span class="glyphicon glyphicon-info-sign"
-                                                                       aria-hidden="true"></span>
+                                                Отображение&nbsp;
+                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                             </label>
                                         </td>
                                         <td class="tds">
                                             <label title="Компанию смогут увидеть все пользователей">
-                                                <input type="radio" name="is_valid" value="true"
-                                                       <c:if test="${company.validated}">checked</c:if>
-                                                       required/>&nbsp;Отображать
+                                                <input type="radio" name="is_valid" value="true" required
+                                                       <c:if test="${company.validated}">checked</c:if>/>
+                                                &nbsp;Отображать
                                             </label>&nbsp;&nbsp;
                                             <label title="Компанию смогут увидеть только администраторы">
-                                                <input type="radio" name="is_valid" value="false"
-                                                       <c:if test="${!company.validated}">checked</c:if>
-                                                       required/>&nbsp;Не отображать
+                                                <input type="radio" name="is_valid" value="false" required
+                                                       <c:if test="${!company.validated}">checked</c:if>/>
+                                                &nbsp;Не отображать
                                             </label>
                                         </td>
                                     </tr>
@@ -331,17 +345,22 @@
                             <input type="hidden" name="url" value="<c:out value="${company.url}"/>">
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Сохранить изменения">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить изменения">
-                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>&nbsp;Сброс
+                                    <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
+                                    &nbsp;Сброс
                                 </button>
                             </div>
                         </form>
                         <div align="left" class="little">
-                            <p><span class="red">*</span>&nbsp;Поля обязательные для заполнения. Хорошим тоном
-                                является заполнения всех полей объекта.</p>
+                            <p>
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
+                                Хорошим тоном является заполнения всех полей объекта.
+                            </p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

@@ -4,9 +4,15 @@
 
 <c:set var="length" value="${fn:length(categories)}"/>
 <c:choose>
-    <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}"><c:set var="in_line" value="3"/></c:when>
-    <c:when test="${(length % 2 eq 0) or (length % 2 eq 1)}"><c:set var="in_line" value="2"/></c:when>
-    <c:otherwise><c:set var="in_line" value="1"/></c:otherwise>
+    <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}">
+        <c:set var="in_line" value="3"/>
+    </c:when>
+    <c:when test="${(length % 2 eq 0) or (length % 2 eq 1)}">
+        <c:set var="in_line" value="2"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="in_line" value="1"/>
+    </c:otherwise>
 </c:choose>
 <c:set var="last_line" value="${length - length % in_line}"/>
 <c:set var="printed_in_line" value="0"/>
@@ -28,7 +34,9 @@
                      src="<c:url value="${category.logo.url}"/>" onerror="this.src='<c:url
                         value="/resources/img/static/default_file.gif"/>'">
             </c:if>
-            <h3 class="text-center"><c:out value="${category.title}"/></h3>
+            <h3 class="text-center">
+                <c:out value="${category.title}"/>
+            </h3>
         </a>
         <c:if test="${!category.validated}">
             <p class="little">

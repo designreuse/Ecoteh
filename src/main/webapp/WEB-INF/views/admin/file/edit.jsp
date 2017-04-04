@@ -19,8 +19,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
-        <title>Редактирование файла &quot;<c:out value="${file.title}"/>&quot; | <c:out
-                value="${main_company.title}"/></title>
+        <title>
+            Редактирование файла &quot;<c:out value="${file.title}"/>&quot; |
+            <c:out value="${main_company.title}"/>
+        </title>
         <meta name="title"
               content="Редактирование файла &quot;<c:out value="${file.title}"/>&quot; | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
@@ -59,7 +61,9 @@
                             <input type="hidden" name="id" value="<c:out value="${file.id}"/>">
                             <table align="center" class="table-size">
                                 <tr>
-                                    <td class="ths"><span class="red">*</span>&nbsp;Название</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Название
+                                    </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" maxlength="100" required
                                                placeholder="Название файла" value="<c:out value="${file.title}"/>">
@@ -85,18 +89,18 @@
                                             <td class="tds">
                                                 <label>
                                                     <input type="radio" name="type" value="FAVICON"
-                                                           <c:if test="${file.type eq 'FAVICON'}">checked</c:if>
-                                                    />&nbsp;Значок сайта
+                                                           <c:if test="${file.type eq 'FAVICON'}">checked</c:if>/>
+                                                    &nbsp;Значок сайта
                                                 </label>&nbsp;&nbsp;
                                                 <label>
                                                     <input type="radio" name="type" value="SLIDE"
-                                                           <c:if test="${file.type eq 'SLIDE'}">checked</c:if>
-                                                    />&nbsp;Слайд
+                                                           <c:if test="${file.type eq 'SLIDE'}">checked</c:if>/>
+                                                    &nbsp;Слайд
                                                 </label>&nbsp;&nbsp;
                                                 <label>
                                                     <input type="radio" name="type" value="OTHER"
-                                                           <c:if test="${file.type eq 'OTHER'}">checked</c:if>
-                                                    />&nbsp;Другое
+                                                           <c:if test="${file.type eq 'OTHER'}">checked</c:if>/>
+                                                    &nbsp;Другое
                                                 </label>&nbsp;&nbsp;
                                             </td>
                                         </tr>
@@ -108,7 +112,8 @@
                             </table>
                             <div style="margin: 10px">
                                 <button type="submit" class="btn btn-default" title="Добавить файл">
-                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Сохранить
+                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
                                 <button type="reset" class="btn btn-default" title="Сбросить информацию">
@@ -119,7 +124,8 @@
                         </form>
                         <div align="left" class="little">
                             <p>
-                                <span class="red">*</span>&nbsp;Поля обязательные для заполнения.
+                                <span class="red">*</span>&nbsp;
+                                Поля обязательные для заполнения.
                                 (Максимальный размер файла ${maxFileSize} Мб)
                             </p>
                         </div>

@@ -13,9 +13,9 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.salimov.ecoteh.mocks.MockConstants.*;
-import static com.salimov.ecoteh.mocks.dao.MockDao.getUserDao;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getUser;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.getUsers;
+import static com.salimov.ecoteh.mocks.repository.MockRepository.getUserRepository;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getFileService;
 import static org.junit.Assert.*;
 
@@ -25,7 +25,10 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Before
     public void beforeTest() {
-        this.service = new UserServiceImpl(getUserDao(), getFileService());
+        this.service = new UserServiceImpl(
+                getUserRepository(),
+                getFileService()
+        );
     }
 
     @Test(expected = UsernameNotFoundException.class)

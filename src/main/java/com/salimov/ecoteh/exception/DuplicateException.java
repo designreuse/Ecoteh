@@ -8,7 +8,8 @@ package com.salimov.ecoteh.exception;
  */
 public final class DuplicateException extends RuntimeException {
 
-    /** Constructs a new duplicate exception
+    /**
+     * Constructs a new duplicate exception
      * with {@code null} as its detail sender.
      */
     public DuplicateException() {
@@ -18,7 +19,7 @@ public final class DuplicateException extends RuntimeException {
      * Constructs a new duplicate exception with the specified detail sender.
      *
      * @param message the detail sender. The detail sender is saved for
-     *          later retrieval by the getMessage() method.
+     *                later retrieval by the getMessage() method.
      */
     public DuplicateException(final String message) {
         super(message);

@@ -18,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 @Entity
 @Table(name = "files")
-public final class File extends Model implements IFile {
+public class File extends Model implements IFile {
 
     /**
      * It is used during deserialization to verify that

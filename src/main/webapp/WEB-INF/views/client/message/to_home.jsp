@@ -36,7 +36,8 @@
             </c:if>
             <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <button type="submit" class="btn btn-default">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Перезвоните
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    &nbsp;Перезвоните
                 </button>
             </div>
         </div>
@@ -44,11 +45,7 @@
         <input type="hidden" name="message" value="Перезвоните мне, пожалуйста!">
     </form>
     <div class="message-text">
-        Оставьте нам свое сообщение, и мы перезвоним Вам
-        <c:choose>
-            <c:when test="${main_company.open}">в течении часа.</c:when>
-            <c:otherwise>в рабочие дни с 9:00 до 17:00.</c:otherwise>
-        </c:choose>
+        <jsp:include page="/WEB-INF/views/client/message/call_back_message.jsp"/>
     </div>
     <hr>
 </div>

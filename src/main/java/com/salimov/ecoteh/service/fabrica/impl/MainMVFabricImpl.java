@@ -552,6 +552,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final List<Article> articles = this.articleService.shuffle(category.getArticles());
             articles.remove(article);
             modelAndView.addObject("articles", articles);
+            modelAndView.addObject("category", category);
         }
         modelAndView.setViewName("client/article/one");
         return modelAndView;

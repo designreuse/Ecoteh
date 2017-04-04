@@ -34,29 +34,6 @@
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <c:if test="${authorized_user ne null}">
-                        <div class="text-center">
-                            <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новая
-                                </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="<c:url value="/admin/article/edit/${article.url}"/>"
-                               title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
-                                    &nbsp;Редактировать
-                                </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="<c:url value="/admin/article/delete/${article.url}"/>"
-                               title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                    &nbsp;Удалить
-                                </button>
-                            </a>
-                        </div>
-                    </c:if>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         <c:choose>
@@ -76,25 +53,65 @@
                         </c:choose>
                         → <a href="#"><c:out value="${article.title}"/></a>
                     </p>
-                    <hr>
-                    <h3 class="text-center"><c:out value="${article.title}"/></h3>
-                    <hr>
-                    <p class="little">
-                        <c:if test="${!article.validated}">
-                            <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
-                                  title="Не отображается для клиентов"></span>&nbsp;
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <hr>
+                        <h3 class="text-center"><c:out value="${article.title}"/></h3>
+                        <hr>
+                        <c:if test="${authorized_user ne null}">
+                            <div class="text-center">
+                                <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новая
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="<c:url value="/admin/article/edit/${article.url}"/>"
+                                   title="Редактировать статью &quot;<c:out value="${article.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                                        &nbsp;Редактировать
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="<c:url value="/admin/article/delete/${article.url}"/>"
+                                   title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить
+                                    </button>
+                                </a>
+                            </div>
                         </c:if>
-                        <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
-                        <a href="<c:url value="/article/num_${article.number}"/>">
-                            <c:out value="${article.number}"/>
-                        </a>
-                    </p>
-                    <p>
-                        <c:choose>
-                            <c:when test="${article.text ne ''}">${article.text}</c:when>
-                            <c:otherwise>${article.description}</c:otherwise>
-                        </c:choose>
-                    </p>
+                        <c:if test="${article.price ne ''}">
+                            <h4 class="green">
+                                <c:choose>
+                                    <c:when test="${article.price ne '0'}">
+                                        Цена: <c:out value="${article.price}"/>
+                                    </c:when>
+                                    <c:otherwise>Цену уточняйте</c:otherwise>
+                                </c:choose>
+                            </h4>
+                        </c:if>
+                        <span class="little">
+                            <c:if test="${!article.validated}">
+                                <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
+                                      title="Не отображается для клиентов"></span>&nbsp;
+                            </c:if>
+                            <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
+                            <a href="<c:url value="/article/num_${article.number}"/>">
+                                <c:out value="${article.number}"/>
+                            </a>
+                        </span>
+                        <p>
+                            <c:choose>
+                                <c:when test="${article.text ne ''}">
+                                    ${article.text}
+                                </c:when>
+                                <c:otherwise>
+                                    ${article.description}
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>

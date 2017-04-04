@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @version 1.0
  */
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Model implements IModel, Serializable, Cloneable {
 
     /**
