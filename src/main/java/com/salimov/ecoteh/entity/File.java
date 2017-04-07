@@ -40,6 +40,9 @@ public class File extends Model implements IFile {
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
+    /**
+     * The type of a file.
+     */
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private FileType type;
