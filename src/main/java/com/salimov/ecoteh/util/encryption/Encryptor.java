@@ -163,7 +163,7 @@ public final class Encryptor implements IEncryptor {
             result = getEncryptedString();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
-            result = null;
+            result = "";
         }
         return result;
     }
@@ -180,7 +180,7 @@ public final class Encryptor implements IEncryptor {
             result = getDecryptedString();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
-            result = null;
+            result = "";
         }
         return result;
     }
@@ -215,9 +215,9 @@ public final class Encryptor implements IEncryptor {
      */
     public static void setSecretKey(final byte[] secretKey) {
         if ((secretKey != null) && (secretKey.length > 0)) {
-            Encryptor.staticSecretKey = new DESSecretKey(secretKey);
+            setSecretKey(new DESSecretKey(secretKey));
         } else {
-            Encryptor.staticSecretKey = DEFAULT_KEY;
+            setSecretKey(DEFAULT_KEY);
         }
     }
 
