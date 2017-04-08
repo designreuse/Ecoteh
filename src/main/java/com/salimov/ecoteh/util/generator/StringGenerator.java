@@ -83,12 +83,12 @@ public final class StringGenerator implements Generator<String> {
      * @param length  a length to generate string.
      */
     public StringGenerator(final char[] pattern, final long length) {
-        if ((pattern != null) && (pattern.length > 0)) {
+        if (isNotEmptyPattern(pattern)) {
             this.pattern = pattern;
         } else {
             this.pattern = DEFAULT_PATTERN;
         }
-        this.length = length > 0 ? length : DEFAULT_LENGTH;
+        this.length = (length > 0) ? length : DEFAULT_LENGTH;
     }
 
     /**
@@ -126,6 +126,26 @@ public final class StringGenerator implements Generator<String> {
      * @return The random char.
      */
     private char getRandomChar() {
-        return this.pattern[RANDOM.nextInt(this.pattern.length)];
+        return this.pattern[getRandomInt()];
+    }
+
+    /**
+     * Returns random integer.
+     *
+     * @return The random integer.
+     */
+    private int getRandomInt() {
+        return RANDOM.nextInt(this.pattern.length);
+    }
+
+    /**
+     * Checks if pattern is not empty.
+     *
+     * @param pattern a pattern to generated new string.
+     * @return {@code true} if pattern is not empty,
+     * {@code false} otherwise.
+     */
+    private static boolean isNotEmptyPattern(final char[] pattern) {
+        return (pattern != null) && (pattern.length > 0);
     }
 }

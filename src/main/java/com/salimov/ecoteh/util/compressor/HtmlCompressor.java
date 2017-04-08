@@ -11,27 +11,15 @@ import com.googlecode.htmlcompressor.compressor.Compressor;
 public final class HtmlCompressor extends AbstractCompressor implements Compressor {
 
     /**
-     * Instance describes compressor methods.
-     */
-    private Compressor compressor;
-
-    /**
-     * Constructor.
-     */
-    public HtmlCompressor() {
-        final com.googlecode.htmlcompressor.compressor.HtmlCompressor compressor =
-                new com.googlecode.htmlcompressor.compressor.HtmlCompressor();
-        compressor.setRemoveIntertagSpaces(true);
-        this.compressor = compressor;
-    }
-
-    /**
      * Returns Compressor object.
      *
      * @return The HTML compressor instance.
      */
     @Override
     protected Compressor getCompressor() {
-        return this.compressor;
+        final com.googlecode.htmlcompressor.compressor.HtmlCompressor compressor =
+                new com.googlecode.htmlcompressor.compressor.HtmlCompressor();
+        compressor.setRemoveIntertagSpaces(true);
+        return compressor;
     }
 }

@@ -208,9 +208,7 @@ public final class ReCaptcha implements Captcha {
      * @return The https URL connection.
      * @throws IOException If an I/O error occurs.
      */
-    private HttpsURLConnection getConnection(
-            final URL url
-    ) throws IOException {
+    private HttpsURLConnection getConnection(final URL url) throws IOException {
         return new Connection(
                 url, this.userAgent,
                 this.acceptLanguage, this.doOutput

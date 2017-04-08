@@ -259,9 +259,18 @@ public final class SenderImpl implements Sender {
                         subject, CHARSET, ENCODING
                 )
         );
-        message.setContent(text, "text/plain;charset=" + CHARSET);
+        message.setContent(text, getContent());
         message.setSentDate(new Date());
         return message;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    private String getContent() {
+        return "text/plain;charset=" + CHARSET;
     }
 
     /**

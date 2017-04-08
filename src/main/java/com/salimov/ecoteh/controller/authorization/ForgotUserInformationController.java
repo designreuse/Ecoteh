@@ -108,12 +108,12 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by username
+     * Seeking a user by user name or E-mail or phone.
      * and sends information about him to e-mail.
      * Request mapping: /forgot
      * Method: POST
      *
-     * @param username a user name for whom to remind information.
+     * @param username a user name or E-mail or phone for whom to remind information.
      * @param request  a implementation of the interface to provide
      *                 request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
@@ -142,12 +142,18 @@ public class ForgotUserInformationController {
                     ex2.printStackTrace();
                     LOGGER.error(ex2.getMessage(), ex2);
                     try {
-                        searchInMainCompanyAndSend(username);
-                        isForgot = true;
+                        searchByPhoneAndSend(username);
                     } catch (Exception ex3) {
                         ex3.printStackTrace();
                         LOGGER.error(ex3.getMessage(), ex3);
-                        isForgot = false;
+                        try {
+                            searchInMainCompanyAndSend(username);
+                            isForgot = true;
+                        } catch (Exception ex4) {
+                            ex4.printStackTrace();
+                            LOGGER.error(ex4.getMessage(), ex4);
+                            isForgot = false;
+                        }
                     }
                 }
             }
@@ -181,12 +187,22 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by email and sends information about him to e-mail.
+     * Seeking a user by E-mail and sends information about him to e-mail.
      *
-     * @param email a user email for whom to remind information.
+     * @param email a user E-mail for whom to remind information.
      */
     private void searchByEmailAndSend(final String email) {
         final User user = this.userService.getByEmail(email);
+        sendUserInformationToEmail(user, user.getContacts().getEmail());
+    }
+
+    /**
+     * Seeking a user by email and sends information about him to e-mail.
+     *
+     * @param phone a user phone for whom to remind information.
+     */
+    private void searchByPhoneAndSend(final String phone) {
+        final User user = this.userService.getByPhone(phone);
         sendUserInformationToEmail(user, user.getContacts().getEmail());
     }
 

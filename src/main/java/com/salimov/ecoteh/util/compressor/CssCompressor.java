@@ -12,24 +12,12 @@ import com.googlecode.htmlcompressor.compressor.YuiCssCompressor;
 public final class CssCompressor extends AbstractCompressor implements Compressor {
 
     /**
-     * Instance describes compressor methods.
-     */
-    private Compressor compressor;
-
-    /**
-     * Constructor.
-     */
-    public CssCompressor() {
-        this.compressor = new YuiCssCompressor();
-    }
-
-    /**
      * Returns Compressor object.
      *
-     * @return The HTML compressor instance.
+     * @return The CSS compressor instance.
      */
     @Override
     protected Compressor getCompressor() {
-        return this.compressor;
+        return new YuiCssCompressor();
     }
 }

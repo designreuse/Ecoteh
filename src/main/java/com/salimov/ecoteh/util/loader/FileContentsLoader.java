@@ -46,7 +46,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
             final String text
     ) {
         super(path);
-        this.text = isNotBlank(text) ? text : "";
+        setText(text);
     }
 
     /**
@@ -59,10 +59,10 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
         try (final RandomAccessFile in = new RandomAccessFile(getPath(), "r")) {
             byte[] buf = new byte[(int) in.length()];
             in.read(buf);
-            this.text = new String(buf);
+            setText(new String(buf));
         } catch (IOException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            this.text = "";
+            setText("");
         }
         return this.text;
     }
@@ -80,5 +80,13 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
         } catch (IOException ex) {
             LOGGER.error(ex.getMessage(), ex);
         }
+    }
+
+    /**
+     *
+     * @param text
+     */
+    private void setText(final String text) {
+        this.text = isNotBlank(text) ? text : "";
     }
 }
