@@ -84,7 +84,7 @@ final class CacheCleaner implements Runnable {
      *                can be stored in the cache.
      */
     void setMaxSize(final int maxSize) {
-        this.maxSize = maxSize > 0 ? maxSize : DEFAULT_MAX_SIZE;
+        this.maxSize = (maxSize > 0) ? maxSize : DEFAULT_MAX_SIZE;
     }
 
     /**
@@ -101,7 +101,7 @@ final class CacheCleaner implements Runnable {
      * Cleans cache when cache.size() great maxSize.
      */
     private void cleanCache() {
-        if (this.cache.size() > getMaxSize()) {
+        if (checkCacheMaxSize()) {
             final List<Key> keys = new ArrayList<>(this.cache.keySet());
             Collections.sort(keys, new KeyComparator());
             cleanToNormalSize(keys);
@@ -114,12 +114,31 @@ final class CacheCleaner implements Runnable {
      * @param keys a keys list.
      */
     private void cleanToNormalSize(final List<Key> keys) {
-        final int normalSize = getMaxSize() / 2;
         for (Key key : keys) {
             this.cache.remove(key);
-            if (this.cache.size() <= normalSize) {
+            if (checkCacheNormalSize()) {
                 break;
             }
         }
+    }
+
+    /**
+     * Checks if cache.size() great maxSize.
+     *
+     * @return {@code true} if cache.size() great maxSize,
+     * {@code false} otherwise.
+     */
+    private boolean checkCacheMaxSize() {
+        return (this.cache.size() > getMaxSize());
+    }
+
+    /**
+     * Checks if cache.size() great normalSize is maxSize / 2.
+     *
+     * @return {@code true} if cache.size() great normalSize,
+     * {@code false} otherwise.
+     */
+    private boolean checkCacheNormalSize() {
+        return (this.cache.size() <= getMaxSize() / 2);
     }
 }

@@ -116,8 +116,8 @@ final class Key<T> implements Comparable {
     @Override
     public String toString() {
         return "Key{" +
-                "key=" + key +
-                ", timeout=" + timeout +
+                "key=" + this.key +
+                ", timeout=" + this.timeout +
                 '}';
     }
 

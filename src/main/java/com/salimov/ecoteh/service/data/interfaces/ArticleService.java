@@ -29,6 +29,22 @@ public interface ArticleService extends ContentService<Article> {
     );
 
     /**
+     * Returns article with the category id.
+     *
+     * @param id a category id of the article to return.
+     * @return The object of class {@link Article}.
+     */
+    List<Article> getByCategoryId(final long id);
+
+    /**
+     * Returns article with the category title.
+     *
+     * @param categoryTitle a category title of the articles to return.
+     * @return The object of class {@link Article}.
+     */
+    List<Article> getByCategoryTitle(final String categoryTitle);
+
+    /**
      * Removes article the parameter number.
      *
      * @param number The number of the article to remove.

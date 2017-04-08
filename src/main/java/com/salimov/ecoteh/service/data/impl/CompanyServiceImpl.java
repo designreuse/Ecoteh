@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -148,6 +149,28 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
                     .collect(Collectors.toList());
         }
         return companies;
+    }
+
+    /**
+     * Returns article with the category domain.
+     *
+     * @param domain a domain of the company to return.
+     * @return The object of class {@link Company}.
+     * @throws IllegalArgumentException Throw exception when parameter domain is blank.
+     * @throws NullPointerException     Throw exception when company with parameter domain
+     *                                  is not exist.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Company getByDomain(final String domain) throws IllegalArgumentException {
+        if (isBlank(domain)) {
+            throw new IllegalArgumentException("Company domain is blank!");
+        }
+        Company company = this.repository.findByDomain(domain);
+        if (company == null) {
+            throw new NullPointerException("Can`t find company by domain \"" + domain + "\"!");
+        }
+        return company;
     }
 
     /**

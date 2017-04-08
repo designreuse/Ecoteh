@@ -40,7 +40,7 @@ public abstract class AbstractLoader implements Loader {
         boolean result = false;
         if (isNotBlank(this.path)) {
             final File file = new File(this.path);
-            if (file.exists() && file.isFile()) {
+            if (isFile(file)) {
                 result = file.delete();
             }
         }
@@ -72,5 +72,16 @@ public abstract class AbstractLoader implements Loader {
             isExists = directory.mkdirs();
         }
         return isExists;
+    }
+
+    /**
+     * Checks input file.
+     *
+     * @param file a file to chek.
+     * @return {@code true} if a file is file,
+     * {@code false} otherwise.
+     */
+    private static boolean isFile(final File file) {
+        return file.exists() && file.isFile();
     }
 }

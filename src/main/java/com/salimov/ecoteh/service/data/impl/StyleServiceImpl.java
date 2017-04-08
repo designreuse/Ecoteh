@@ -59,9 +59,7 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public String get() {
-        return new FileContentsLoader(
-                getAbsolutePath(STYLES_PATH)
-        ).read();
+        return new FileContentsLoader(getAbsolutePath(STYLES_PATH)).read();
     }
 
     /**

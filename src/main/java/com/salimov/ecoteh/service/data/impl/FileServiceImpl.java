@@ -83,7 +83,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final MultipartFile multipartFile
     ) {
         File file;
-        if ((multipartFile != null) && !multipartFile.isEmpty()) {
+        if (isNotEmptyFile(multipartFile)) {
             checkMultipartFile(multipartFile);
             file = new File(title, createRelativePath(title, multipartFile));
             file.setType(type);
@@ -134,7 +134,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         if (!file.getType().equals(FileType.STATIC)) {
             file.setType(type);
         }
-        if (multipartFile != null && !multipartFile.isEmpty()) {
+        if (isNotEmptyFile(multipartFile)) {
             checkMultipartFile(multipartFile);
             deleteFile(file.getUrl());
             saveFile(multipartFile, file.getUrl());
@@ -273,7 +273,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final MultipartFile multipartFile,
             final String rootPath
     ) {
-        if (multipartFile != null && !multipartFile.isEmpty()) {
+        if (isNotEmptyFile(multipartFile)) {
             new MultipartFileLoader(
                     multipartFile,
                     this.properties.getProjectAbsolutePath()
@@ -445,5 +445,27 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             type = "";
         }
         return type;
+    }
+
+    /**
+     * Checks if file is empty.
+     *
+     * @param multipartFile a multipart file.
+     * @return {@code true} if file is {@code null} or empty,
+     * {@code false} otherwise.
+     */
+    private static boolean isEmptyFile(final MultipartFile multipartFile) {
+        return !isNotEmptyFile(multipartFile);
+    }
+
+    /**
+     * Checks if file is not empty.
+     *
+     * @param multipartFile a multipart file.
+     * @return {@code true} if file is not {@code null} or empty,
+     * {@code false} otherwise.
+     */
+    private static boolean isNotEmptyFile(final MultipartFile multipartFile) {
+        return (multipartFile != null) && !multipartFile.isEmpty();
     }
 }

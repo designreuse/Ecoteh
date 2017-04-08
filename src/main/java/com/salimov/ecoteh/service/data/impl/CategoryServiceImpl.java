@@ -148,7 +148,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
             result.addAll(
                     categories.stream()
                             .filter(
-                                    category -> (category != null) && (category.isValidated())
+                                    CategoryServiceImpl::validFilter
                             ).collect(Collectors.toList())
             );
         }
@@ -185,5 +185,15 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
         final Collection<Article> articles = category.getArticles();
         category.clearArticles();
         this.articleService.update(articles);
+    }
+
+    /**
+     * Filters category by validation.
+     *
+     * @param category a category to filter.
+     * @return {@code true} or {@code false}.
+     */
+    private static boolean validFilter(final Category category) {
+        return (category != null) && (category.isValidated());
     }
 }

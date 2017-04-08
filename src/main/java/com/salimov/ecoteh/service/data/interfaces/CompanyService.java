@@ -40,4 +40,12 @@ public interface CompanyService extends ContentService<Company> {
      * @return The partners companies.
      */
     List<Company> getPartners(final boolean isValid);
+
+    /**
+     * Returns company with the category domain.
+     *
+     * @param domain a domain of the company to return.
+     * @return The object of class {@link Company}.
+     */
+    Company getByDomain(final String domain);
 }

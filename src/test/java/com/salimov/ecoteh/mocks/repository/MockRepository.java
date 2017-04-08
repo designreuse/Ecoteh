@@ -97,8 +97,6 @@ public class MockRepository {
                 .thenReturn(new ArrayList<>(articles));
         when(articleRepository.findByCategoryId(UNKNOWN_ID))
                 .thenReturn(new ArrayList<>());
-        when(articleRepository.findByCategoryId(null))
-                .thenReturn(new ArrayList<>());
     }
 
     private static void initCategoryRepository() {

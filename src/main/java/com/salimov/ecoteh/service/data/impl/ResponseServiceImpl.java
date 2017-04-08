@@ -147,7 +147,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
             result.addAll(
                     responses.stream()
                             .filter(
-                                    response -> (response != null) && (response.isValidated())
+                                    ResponseServiceImpl::validFilter
                             ).collect(Collectors.toList())
             );
         }
@@ -223,5 +223,15 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
     ) {
         return (response.getDate().compareTo(startDate) == 1) &&
                 (response.getDate().compareTo(finishDate) == -1);
+    }
+
+    /**
+     * Filters response by validation.
+     *
+     * @param response a response to filter.
+     * @return {@code true} or {@code false}.
+     */
+    private static boolean validFilter(final Response response) {
+        return (response != null) && response.isValidated();
     }
 }

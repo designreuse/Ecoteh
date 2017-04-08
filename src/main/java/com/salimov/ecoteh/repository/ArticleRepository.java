@@ -29,7 +29,16 @@ public interface ArticleRepository extends ContentRepository<Article> {
      * @param id a category id of the article to return.
      * @return The object of class {@link Article}.
      */
-    List<Article> findByCategoryId(final Long id);
+    List<Article> findByCategoryId(final long id);
+
+    /**
+     * Returns articles from a database,
+     * which matches the parameter category title.
+     *
+     * @param categoryTitle a category title of the articles to return.
+     * @return The object of class {@link Article}.
+     */
+    List<Article> findByCategoryTitle(final String categoryTitle);
 
     /**
      * Removes article from a database,

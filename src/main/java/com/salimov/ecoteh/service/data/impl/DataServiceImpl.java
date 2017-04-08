@@ -253,7 +253,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             if (comparator != null) {
                 Collections.sort(
                         result,
-                        revers ? Collections.reverseOrder(comparator) : comparator
+                        getReversComparator(comparator, revers)
                 );
             }
         }
@@ -296,14 +296,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         List<T> result;
         if (models == null || models.isEmpty()) {
             result = new ArrayList<>();
+        } else if ((fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < models.size())) {
+            result = new ArrayList<>(models).subList(fromIndex, toIndex);
         } else {
-            if ((fromIndex < toIndex)
-                    && (fromIndex < models.size())
-                    && (toIndex < models.size())) {
-                result = new ArrayList<>(models).subList(fromIndex, toIndex);
-            } else {
-                result = new ArrayList<>(models);
-            }
+            result = new ArrayList<>(models);
         }
         return result;
     }
@@ -321,10 +317,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             final int fromIndex,
             final int toIndex
     ) {
-        return subList(
-                new ArrayList<>(getAll()),
-                fromIndex, toIndex
-        );
+        return subList(getAll(), fromIndex, toIndex);
     }
 
     /**
@@ -340,7 +333,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             result.addAll(
                     models.stream()
                             .filter(
-                                    model -> (model != null) && model.isValidated()
+                                    DataServiceImpl::validFilter
                             ).collect(Collectors.toList())
             );
         }
@@ -376,6 +369,30 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      */
     String getClassSimpleName() {
         return getModelClass().getSimpleName();
+    }
+
+    /**
+     * Gets revers input comparator if revers is {@code true}.
+     *
+     * @param comparator a comparator to sort models.
+     * @param revers     is sort in descending or ascending.
+     * @return The comparator to sort models.
+     */
+    private Comparator<T> getReversComparator(
+            final Comparator<T> comparator,
+            final boolean revers
+    ) {
+        return revers ? Collections.reverseOrder(comparator) : comparator;
+    }
+
+    /**
+     * Filters model by validation.
+     *
+     * @param model a model to filter.
+     * @return {@code true} or {@code false}.
+     */
+    private static boolean validFilter(final Model model) {
+        return (model != null) && model.isValidated();
     }
 
     /**

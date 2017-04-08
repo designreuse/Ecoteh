@@ -86,6 +86,35 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
+     * Returns article with the category id.
+     *
+     * @param id a category id of the article to return.
+     * @return The object of class {@link Article}.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Article> getByCategoryId(final long id) {
+        return this.repository.findByCategoryId(id);
+    }
+
+    /**
+     * Returns article with the category title.
+     *
+     * @param categoryTitle a category title of the articles to return.
+     * @return The object of class {@link Article}.
+     * @throws IllegalArgumentException Throw exception when parameter categoryTitle is blank.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Article> getByCategoryTitle(final String categoryTitle)
+            throws IllegalArgumentException {
+        if (isBlank(categoryTitle)) {
+            throw new IllegalArgumentException("Article category title is blank!");
+        }
+        return this.repository.findByCategoryTitle(categoryTitle);
+    }
+
+    /**
      * Sorts and returns articles by number.
      *
      * @param articles the articles to sort.
