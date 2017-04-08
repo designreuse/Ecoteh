@@ -130,7 +130,7 @@ public class Article extends Content implements IArticle {
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
                 ", price=" + getPrice() +
-                ", " + getCategory() +
+                ", category=" + getCategory() +
                 '}';
     }
 

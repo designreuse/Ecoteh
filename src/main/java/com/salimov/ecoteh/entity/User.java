@@ -118,6 +118,7 @@ public class User extends Model implements IUser, UserDetails {
      * Default constructor.
      */
     public User() {
+        System.out.println("USER Default constructor.");
         this.name = "";
         this.url = "";
         this.encryptedLogin = "";
@@ -189,8 +190,8 @@ public class User extends Model implements IUser, UserDetails {
                 ", Login='" + getLogin() + '\'' +
                 ", Password='" + getPassword() + '\'' +
                 ", description='" + getDescription() + '\'' +
-                ", " + getContacts() +
-                ", " + getPhoto() +
+                ", contacts=" + getContacts() +
+                ", photo=" + getPhoto() +
                 ", role=" + getRole() +
                 ", isMailing=" + isMailing() +
                 ", isLocked=" + isLocked() +
@@ -495,6 +496,9 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setPhoto(final File photo) {
+        if (this.photo == null) {
+            this.photo = new File();
+        }
         this.photo.initialize(photo);
     }
 
@@ -515,6 +519,9 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setContacts(final Contacts contacts) {
+        if (this.contacts == null) {
+            this.contacts = new Contacts();
+        }
         this.contacts.initialize(contacts);
     }
 

@@ -218,7 +218,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public void setType(final FileType type) {
-        this.type = type != null ? type : FileType.OTHER;
+        this.type = (type != null) ? type : FileType.OTHER;
     }
 
     /**

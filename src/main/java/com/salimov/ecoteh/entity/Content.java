@@ -105,7 +105,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
                 ", url='" + getUrl() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", keywords='" + getKeywords() + '\'' +
-                ", " + getLogo() +
+                ", logo=" + getLogo() +
                 '}';
     }
 
@@ -265,6 +265,9 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public void setLogo(final File logo) {
+        if (this.logo == null) {
+            this.logo = new File();
+        }
         this.logo.initialize(logo);
     }
 

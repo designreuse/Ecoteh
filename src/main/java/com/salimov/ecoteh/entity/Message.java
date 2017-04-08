@@ -97,7 +97,7 @@ public class Message extends Model implements IMessage {
     @Override
     public String toString() {
         return "Message{" + super.toString() +
-                ", " + getUser() +
+                ", user=" + getUser() +
                 ", subject='" + getSubject() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
@@ -162,6 +162,9 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public void setUser(final User user) {
+        if (this.user == null) {
+            this.user = new User();
+        }
         this.user.initialize(user);
     }
 

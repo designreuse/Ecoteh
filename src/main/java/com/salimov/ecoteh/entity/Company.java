@@ -187,8 +187,8 @@ public class Company extends Content implements ICompany {
     @Override
     public String toString() {
         return "Company{" + super.toString() +
-                ", " + getContacts() +
-                ", " + getAddress() +
+                ", contacts=" + getContacts() +
+                ", address=" + getAddress() +
                 ", tagline='" + getTagline() + '\'' +
                 ", information='" + getInformation() + '\'' +
                 ", domain='" + getDomain() + '\'' +
@@ -412,6 +412,9 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setContacts(final Contacts contacts) {
+        if (this.contacts == null) {
+            this.contacts = new Contacts();
+        }
         this.contacts.initialize(contacts);
     }
 
@@ -432,6 +435,9 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setAddress(final Address address) {
+        if (this.address == null) {
+            this.address = new Address();
+        }
         this.address.initialize(address);
     }
 
@@ -452,7 +458,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setType(final CompanyType type) {
-        this.type = type;
+        this.type = (type != null) ? type : CompanyType.PARTNER;
     }
 
     /**
