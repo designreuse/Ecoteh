@@ -53,4 +53,31 @@ public interface UserRepository extends DataRepository<User> {
      * @param url a URL of the user to remove.
      */
     void deleteByUrl(final String url);
+
+    /**
+     * Returns user from a database,
+     * which matches the parameter email.
+     *
+     * @param email a E-mail of the user to return.
+     * @return The object of class {@link User}.
+     */
+    User findByContactsEmail(final String email);
+
+    /**
+     * Returns user from a database,
+     * which matches the parameter mobilePhone.
+     *
+     * @param mobilePhone a mobile phone of the user to return.
+     * @return The object of class {@link User}.
+     */
+    User findByContactsMobilePhone(final String mobilePhone);
+
+    /**
+     * Returns user from a database,
+     * which matches the parameter landlinePhone.
+     *
+     * @param landlinePhone a landline phone of the user to return.
+     * @return The object of class {@link User}.
+     */
+    User findByContactsLandlinePhone(final String landlinePhone);
 }
