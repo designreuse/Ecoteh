@@ -229,19 +229,41 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByEmail(final String email) throws IllegalArgumentException {
+    public User getByEmail(final String email)
+            throws IllegalArgumentException, NullPointerException {
         if (isBlank(email)) {
             throw new IllegalArgumentException("Input E-mail is blank!");
         }
-        User userWithEmail = null;
-        for (User user : getAll()) {
-            if ((user.getContacts() != null) && (user.getContacts().getEmail() != null)) {
-                if (user.getContacts().getEmail().equalsIgnoreCase(email)) {
-                    userWithEmail = user;
-                }
-            }
+        User user = this.repository.findByContactsEmail(email);
+        if (user == null) {
+            throw new NullPointerException("Can`t find user by E-mail \"" + email + "\"!");
         }
-        return userWithEmail;
+        return user;
+    }
+
+    /**
+     * Returns user which the parameter phone.
+     *
+     * @param phone a phone of the user to return.
+     * @return The user which the parameter phone.
+     * @throws IllegalArgumentException Throw exception when parameter phone is blank.
+     * @throws NullPointerException     Throws exception if user is absent.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public User getByPhone(final String phone)
+            throws IllegalArgumentException, NullPointerException {
+        if (isBlank(phone)) {
+            throw new IllegalArgumentException("Input phone is blank!");
+        }
+        User user = this.repository.findByContactsMobilePhone(phone);
+        if (user == null) {
+            user = this.repository.findByContactsLandlinePhone(phone);
+        }
+        if (user == null) {
+            throw new NullPointerException("Can`t find user by phone \"" + phone + "\"!");
+        }
+        return user;
     }
 
     /**

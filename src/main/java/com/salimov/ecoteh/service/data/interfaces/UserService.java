@@ -61,6 +61,14 @@ public interface UserService extends DataService<User>, UserDetailsService {
     User getByEmail(final String email);
 
     /**
+     * Returns user which the parameter phone.
+     *
+     * @param phone a phone of the user to return.
+     * @return The user which the parameter phone.
+     */
+    User getByPhone(final String phone);
+
+    /**
      * Returns authenticated user.
      *
      * @return The authenticated user.
