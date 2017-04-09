@@ -81,7 +81,7 @@
                                 </a>
                             </div>
                         </c:if>
-                        <c:if test="${article.price ne ''}">
+                        <c:if test="${not empty article.price}">
                             <h4 class="green">
                                 <c:choose>
                                     <c:when test="${article.price ne '0'}">
@@ -103,7 +103,7 @@
                         </span>
                         <p>
                             <c:choose>
-                                <c:when test="${article.text ne ''}">
+                                <c:when test="${not empty article.text}">
                                     ${article.text}
                                 </c:when>
                                 <c:otherwise>
@@ -121,7 +121,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <c:if test="${article.text ne ''}">
+    <c:if test="${not empty article.text}">
         <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
         <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>

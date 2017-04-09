@@ -217,17 +217,17 @@
                                     </tr>
                                     <tr>
                                         <th class="pad">
-                                            <a href="<c:url value="/admin/styles/"/>" title="CSS">Стиля</a>
+                                            <a href="<c:url value="/superadmin/styles"/>" title="CSS">Стиля</a>
                                         </th>
                                         <td class="pad">
-                                            <a href="<c:url value="/admin/styles/edit"/>"
+                                            <a href="<c:url value="/superadmin/styles/edit"/>"
                                                title="Изменить стиля сайта (CSS)">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-edit yellow"
                                                           aria-hidden="true"></span>&nbsp;Изменить
                                                 </button>
                                             </a>&nbsp;&nbsp;
-                                            <a href="<c:url value="/admin/styles/rollback"/>"
+                                            <a href="<c:url value="/superadmin/styles/rollback"/>"
                                                title="Возобновить по-умолчанию">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-share-alt"
@@ -235,6 +235,12 @@
                                                 </button>
                                             </a>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="pad">
+                                            <a href="<c:url value="/superadmin/config"/>">Конфигурация</a>
+                                        </th>
+                                        <td class="pad"></td>
                                     </tr>
                                 </c:if>
                             </table>
@@ -248,6 +254,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>

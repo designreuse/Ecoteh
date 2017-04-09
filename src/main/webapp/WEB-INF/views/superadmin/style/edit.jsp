@@ -44,11 +44,11 @@
                             <p>
                                 CSS стиля - описывают внешний вид сайта. Если не уверены, не изменяйте тут ничего.
                                 В любое время Вы можете
-                                <a href="<c:url value="/admin/styles/rollback"/>"
+                                <a href="<c:url value="/superadmin/styles/rollback"/>"
                                    title="Возобновить сейчас по-умолчанию">востановить стиля по-умолчанию</a>.
                             </p>
                         </div>
-                        <form action="<c:url value="/admin/style/update"/>" method="post">
+                        <form action="<c:url value="/superadmin/style/update"/>" method="post">
                             <textarea class="form-control textarea" name="styles" rows="25" title=""
                                       placeholder="Стиля сайта (CSS)"><c:out value="${styles}"/></textarea>
                             <div style="margin: 10px">

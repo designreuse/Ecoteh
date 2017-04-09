@@ -92,7 +92,7 @@
                                     <td class="ths">
                                         <span class="red">*</span>
                                         <c:choose>
-                                            <c:when test="${user.contacts.mobilePhone ne ''}">
+                                            <c:when test="${not empty user.contacts.mobilePhone}">
                                                 <a href="tel:<c:out value="${user.contacts.mobilePhone}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
                                                     Мобильный телефон
@@ -110,7 +110,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${user.contacts.landlinePhone ne ''}">
+                                            <c:when test="${not empty user.contacts.landlinePhone}">
                                                 <a href="tel:<c:out value="${user.contacts.landlinePhone}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
                                                     Домашний телефон
@@ -128,7 +128,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${user.contacts.fax ne ''}">
+                                            <c:when test="${not empty user.contacts.fax}">
                                                 <a href="tel:<c:out value="${user.contacts.fax}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
                                                     Факс
@@ -147,7 +147,7 @@
                                     <td class="ths">
                                         <span class="red">*</span>
                                         <c:choose>
-                                            <c:when test="${user.contacts.email ne ''}">
+                                            <c:when test="${not empty user.contacts.email}">
                                                 <a href="mailto:<c:out value="${user.contacts.email}"/>" target="_blank"
                                                    title="Написать письмо для &quot;<c:out value="${user.name}"/>&quot;">
                                                     Электронная почта
@@ -165,7 +165,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${user.contacts.vkontakte ne ''}">
+                                            <c:when test="${not empty user.contacts.vkontakte}">
                                                 <a href="<c:out value="${user.contacts.vkontakte}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
@@ -185,7 +185,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${user.contacts.facebook ne ''}">
+                                            <c:when test="${not empty user.contacts.facebook}">
                                                 <a href="<c:out value="${user.contacts.facebook}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Facebook"
                                                    target="_blank">Facebook</a>
@@ -206,7 +206,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${user.contacts.twitter ne ''}">
+                                            <c:when test="${not empty user.contacts.twitter}">
                                                 <a href="<c:out value="${user.contacts.twitter}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Twitter"
                                                    target="_blank">Twitter</a>
@@ -226,7 +226,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${user.contacts.skype ne ''}">
+                                            <c:when test="${not empty user.contacts.skype}">
                                                 <a href="skype:<c:out value="${user.contacts.skype}"/>?call"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; в Skype">
                                                     Skype
@@ -245,7 +245,7 @@
                                     <td class="ths">Фото профиля</td>
                                     <td class="tds">
                                         <c:choose>
-                                            <c:when test="${user.photo.url ne ''}">
+                                            <c:when test="${not empty user.photo.url}">
                                                 <a href="<c:url value="${user.photo.url}"/>" rel="lightgallery"
                                                    title="<c:out value="${user.name}"/>">
                                                     <img class="img-responsive img-in-list"

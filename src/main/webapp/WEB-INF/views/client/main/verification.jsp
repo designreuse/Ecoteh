@@ -1,13 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%!
-    private final static java.util.ResourceBundle RESOURCE =
-            java.util.ResourceBundle.getBundle("verification");
-    private final static String GOOGLE = RESOURCE.getString("google.verification");
-    private final static String YANDEX = RESOURCE.getString("yandex.verification");
-%>
+<fmt:setBundle basename="verification" var="verification" scope="application"/>
+<fmt:message var="google" bundle="${verification}" key="google.verification" scope="application"/>
+<fmt:message var="yandex" bundle="${verification}" key="yandex.verification" scope="application"/>
 
-<meta name="google-site-verification" content="<%= GOOGLE %>"/>
-<meta name="yandex-verification" content="<%= YANDEX %>"/>
+<meta name="google-site-verification" content="<c:out value="${google}"/>"/>
+<meta name="yandex-verification" content="<c:out value="${yandex}"/>"/>
 
 <%-- Yuriy Salimov (yuriy.alex.salimov@gmail.com) --%>

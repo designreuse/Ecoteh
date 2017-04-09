@@ -1,16 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
 <compress:html removeIntertagSpaces="true">
-    <%!
-        private final static int MAX_FIlE_SIZE = Integer.parseInt(
-                java.util.ResourceBundle
-                        .getBundle("content")
-                        .getString("file.max.size")
-        ) / 1048576;
-    %>
-    <c:set var="maxFileSize" value="<%= MAX_FIlE_SIZE %>"/>
+    <fmt:setBundle basename="content" var="content"/>
+    <fmt:message var="size" bundle="${content}" key="file.max.size"/>
+    <c:set var="maxFileSize" value="${size}"/>
 
     <!DOCTYPE HTML>
     <html lang="ru">
@@ -126,7 +122,9 @@
                             <p>
                                 <span class="red">*</span>&nbsp;
                                 Поля обязательные для заполнения.
-                                (Максимальный размер файла ${maxFileSize} Мб)
+                                (Максимальный размер файла
+                                <fmt:formatNumber type="number" maxFractionDigits="3" value="${maxFileSize / 1048576}"/>
+                                Мб)
                             </p>
                         </div>
                     </div>

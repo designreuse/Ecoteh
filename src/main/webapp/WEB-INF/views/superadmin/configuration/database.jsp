@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%! private final static java.util.ResourceBundle RESOURCE = java.util.ResourceBundle.getBundle("database"); %>
+<fmt:setBundle basename="database" var="database"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="container">
@@ -23,7 +24,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="jdbc.driver">
-                                    <%= RESOURCE.getString("jdbc.driver") %>
+                                    <fmt:message bundle="${database}" key="jdbc.driver"/>
                                 </label>
                             </td>
                         </tr>
@@ -35,7 +36,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="jdbc.driver.url">
-                                    <%= RESOURCE.getString("jdbc.driver.url") %>
+                                    <fmt:message bundle="${database}" key="jdbc.driver.url"/>
                                 </label>
                             </td>
                         </tr>
@@ -47,7 +48,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.host.ip">
-                                    <%= RESOURCE.getString("database.host.ip") %>
+                                    <fmt:message bundle="${database}" key="database.host.ip"/>
                                 </label>
                             </td>
                         </tr>
@@ -59,7 +60,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.host.port">
-                                    <%= RESOURCE.getString("database.host.port") %>
+                                    <fmt:message bundle="${database}" key="database.host.port"/>
                                 </label>
                             </td>
                         </tr>
@@ -67,7 +68,7 @@
                             <td>Database Name</td>
                             <td class="text-center">
                                 <label title="database.database">
-                                    <%= RESOURCE.getString("database.name") %>
+                                    <fmt:message bundle="${database}" key="database.name"/>
                                 </label>
                             </td>
                         </tr>
@@ -79,7 +80,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.username">
-                                    <%= RESOURCE.getString("database.username") %>
+                                    <fmt:message bundle="${database}" key="database.username"/>
                                 </label>
                             </td>
                         </tr>
@@ -91,7 +92,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.password">
-                                    <%= RESOURCE.getString("database.password") %>
+                                    <fmt:message bundle="${database}" key="database.password"/>
                                 </label>
                             </td>
                         </tr>
@@ -103,7 +104,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.initial-size">
-                                    <%= RESOURCE.getString("database.initial-size") %>
+                                    <fmt:message bundle="${database}" key="database.initial-size"/>
                                 </label>
                             </td>
                         </tr>
@@ -115,7 +116,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.max-active">
-                                    <%= RESOURCE.getString("database.max-active") %>
+                                    <fmt:message bundle="${database}" key="database.max-active"/>
                                 </label>
                             </td>
                         </tr>
@@ -127,7 +128,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.test-on-borrow">
-                                    <%= RESOURCE.getString("database.test-on-borrow") %>
+                                    <fmt:message bundle="${database}" key="database.test-on-borrow"/>
                                 </label>
                             </td>
                         </tr>
@@ -139,7 +140,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.validation-query">
-                                    <%= RESOURCE.getString("database.validation-query") %>
+                                    <fmt:message bundle="${database}" key="database.validation-query"/>
                                 </label>
                             </td>
                         </tr>
@@ -151,7 +152,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.use-ssl">
-                                    <%= RESOURCE.getString("database.use-ssl") %>
+                                    <fmt:message bundle="${database}" key="database.use-ssl"/>
                                 </label>
                             </td>
                         </tr>
@@ -163,7 +164,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.use-unicode">
-                                    <%= RESOURCE.getString("database.use-unicode") %>
+                                    <fmt:message bundle="${database}" key="database.use-unicode"/>
                                 </label>
                             </td>
                         </tr>
@@ -171,7 +172,7 @@
                             <td>Character Encoding</td>
                             <td class="text-center">
                                 <label title="database.character-encoding">
-                                    <%= RESOURCE.getString("database.character-encoding") %>
+                                    <fmt:message bundle="${database}" key="database.character-encoding"/>
                                 </label>
                             </td>
                         </tr>
@@ -183,7 +184,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="database.use-jdbc-compliant-timezone-shift">
-                                    <%= RESOURCE.getString("database.use-jdbc-compliant-timezone-shift") %>
+                                    <fmt:message bundle="${database}" key="database.use-jdbc-compliant-timezone-shift"/>
                                 </label>
                             </td>
                         </tr>
@@ -195,7 +196,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="v.use-legacy-datetime-code">
-                                    <%= RESOURCE.getString("database.use-legacy-datetime-code") %>
+                                    <fmt:message bundle="${database}" key="database.use-legacy-datetime-code"/>
                                 </label>
                             </td>
                         </tr>
@@ -203,7 +204,7 @@
                             <td>Server timezone</td>
                             <td class="text-center">
                                 <label title="database.server-timezone">
-                                    <%= RESOURCE.getString("database.server-timezone") %>
+                                    <fmt:message bundle="${database}" key="database.server-timezone"/>
                                 </label>
                             </td>
                         </tr>
@@ -215,7 +216,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="hibernate.dialect">
-                                    <%= RESOURCE.getString("hibernate.dialect") %>
+                                    <fmt:message bundle="${database}" key="hibernate.dialect"/>
                                 </label>
                             </td>
                         </tr>
@@ -227,7 +228,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="hibernate.show-sql">
-                                    <%= RESOURCE.getString("hibernate.show-sql") %>
+                                    <fmt:message bundle="${database}" key="hibernate.show-sql"/>
                                 </label>
                             </td>
                         </tr>
@@ -239,7 +240,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="hibernate.generate-ddl">
-                                    <%= RESOURCE.getString("hibernate.generate-ddl") %>
+                                    <fmt:message bundle="${database}" key="hibernate.generate-ddl"/>
                                 </label>
                             </td>
                         </tr>
@@ -251,7 +252,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="hibernate.entity-packages">
-                                    <%= RESOURCE.getString("hibernate.entity-packages") %>
+                                    <fmt:message bundle="${database}" key="hibernate.entity-packages"/>
                                 </label>
                             </td>
                         </tr>

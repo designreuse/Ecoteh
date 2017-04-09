@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%! private final static java.util.ResourceBundle RESOURCE = java.util.ResourceBundle.getBundle("captcha"); %>
+<fmt:setBundle basename="captcha" var="captcha"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="container">
@@ -19,7 +20,7 @@
                             <td>User-agent</td>
                             <td class="text-center">
                                 <label title="captcha.user-agent">
-                                    <%= RESOURCE.getString("captcha.user-agent") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.user-agent"/>
                                 </label>
                             </td>
                         </tr>
@@ -27,7 +28,7 @@
                             <td>Accept language</td>
                             <td class="text-center">
                                 <label title="captcha.accept-language">
-                                    <%= RESOURCE.getString("captcha.accept-language") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.accept-language"/>
                                 </label>
                             </td>
                         </tr>
@@ -35,7 +36,7 @@
                             <td>Do output</td>
                             <td class="text-center">
                                 <label title="captcha.do-output">
-                                    <%= RESOURCE.getString("captcha.do-output") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.do-output"/>
                                 </label>
                             </td>
                         </tr>
@@ -43,7 +44,7 @@
                             <td>URL</td>
                             <td class="text-center">
                                 <label title="captcha.url">
-                                    <%= RESOURCE.getString("captcha.url") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.url"/>
                                 </label>
                             </td>
                         </tr>
@@ -51,7 +52,7 @@
                             <td>Server key</td>
                             <td class="text-center">
                                 <label title="captcha.server-key">
-                                    <%= RESOURCE.getString("captcha.server-key") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.server-key"/>
                                 </label>
                             </td>
                         </tr>
@@ -59,7 +60,7 @@
                             <td>Client key</td>
                             <td class="text-center">
                                 <label title="captcha.client-key">
-                                    <%= RESOURCE.getString("captcha.client-key") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.client-key"/>
                                 </label>
                             </td>
                         </tr>
@@ -67,7 +68,7 @@
                             <td>Request parameter</td>
                             <td class="text-center">
                                 <label title="captcha.parameter">
-                                    <%= RESOURCE.getString("captcha.parameter") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.parameter"/>
                                 </label>
                             </td>
                         </tr>
@@ -75,7 +76,7 @@
                             <td>Header parameter</td>
                             <td class="text-center">
                                 <label title="captcha.header">
-                                    <%= RESOURCE.getString("captcha.header") %>
+                                    <fmt:message bundle="${captcha}" key="captcha.header"/>
                                 </label>
                             </td>
                         </tr>

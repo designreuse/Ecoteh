@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%! private final static java.util.ResourceBundle RESOURCE = java.util.ResourceBundle.getBundle("content"); %>
+<fmt:setBundle basename="content" var="content"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="container">
@@ -19,7 +20,7 @@
                             <td>The Apache Catalina home path</td>
                             <td class="text-center">
                                 <label title="apache.catalina.home">
-                                    <%= RESOURCE.getString("apache.catalina.home") %>
+                                    <fmt:message bundle="${content}" key="apache.catalina.home"/>
                                 </label>
                             </td>
                         </tr>
@@ -27,7 +28,7 @@
                             <td>Tomcat server port</td>
                             <td class="text-center">
                                 <label title="tomcat.server.port">
-                                    <%= RESOURCE.getString("tomcat.server.port") %>
+                                    <fmt:message bundle="${content}" key="tomcat.server.port"/>
                                 </label>
                             </td>
                         </tr>
@@ -35,7 +36,7 @@
                             <td>Project directory name</td>
                             <td class="text-center">
                                 <label title="project.directory">
-                                    <%= RESOURCE.getString("project.directory") %>
+                                    <fmt:message bundle="${content}" key="project.directory"/>
                                 </label>
                             </td>
                         </tr>
@@ -43,7 +44,7 @@
                             <td>Content Type encoding</td>
                             <td class="text-center">
                                 <label title="view.type">
-                                    <%= RESOURCE.getString("view.type") %>
+                                    <fmt:message bundle="${content}" key="view.type"/>
                                 </label>
                             </td>
                         </tr>
@@ -55,7 +56,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="view.name-prefix">
-                                    <%= RESOURCE.getString("view.name-prefix") %>
+                                    <fmt:message bundle="${content}" key="view.name-prefix"/>
                                 </label>
                             </td>
                         </tr>
@@ -63,7 +64,7 @@
                             <td>View name suffix</td>
                             <td class="text-center">
                                 <label title="view.name-suffix">
-                                    <%= RESOURCE.getString("view.name-suffix") %>
+                                    <fmt:message bundle="${content}" key="view.name-suffix"/>
                                 </label>
                             </td>
                         </tr>
@@ -71,7 +72,7 @@
                             <td>Context beans as attributes</td>
                             <td class="text-center">
                                 <label title="view.expose_beans_as_attributes">
-                                    <%= RESOURCE.getString("view.expose_beans_as_attributes") %>
+                                    <fmt:message bundle="${content}" key="view.expose_beans_as_attributes"/>
                                 </label>
                             </td>
                         </tr>
@@ -83,7 +84,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="resources.url">
-                                    <%= RESOURCE.getString("resources.url") %>
+                                    <fmt:message bundle="${content}" key="resources.url"/>
                                 </label>
                             </td>
                         </tr>
@@ -95,7 +96,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="resources.location">
-                                    <%= RESOURCE.getString("resources.location") %>
+                                    <fmt:message bundle="${content}" key="resources.location"/>
                                 </label>
                             </td>
                         </tr>
@@ -103,7 +104,7 @@
                             <td>Maximum file size (bytes)</td>
                             <td class="text-center">
                                 <label title="file.max.size">
-                                    <%= RESOURCE.getString("file.max.size") %>
+                                    <fmt:message bundle="${content}" key="file.max.size"/>
                                 </label>
                             </td>
                         </tr>
@@ -111,7 +112,7 @@
                             <td>Request for authorization</td>
                             <td class="text-center">
                                 <label title="login.request">
-                                    <%= RESOURCE.getString("login.request") %>
+                                    <fmt:message bundle="${content}" key="login.request"/>
                                 </label>
                             </td>
                         </tr>
@@ -123,7 +124,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="login.view-url">
-                                    <%= RESOURCE.getString("login.view-url") %>
+                                    <fmt:message bundle="${content}" key="login.view-url"/>
                                 </label>
                             </td>
                         </tr>

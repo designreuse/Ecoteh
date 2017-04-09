@@ -12,7 +12,7 @@
                     <ol class="carousel-indicators hidden-xs">
                         <c:set var="count" value="0"/>
                         <c:forEach items="${slides}" var="slide">
-                            <c:if test="${slide.url ne ''}">
+                            <c:if test="${not empty slide.url}">
                                 <li data-target="#carousel-example-generic" data-slide-to="${count}"
                                     <c:if test="${count eq 0}">class="active"</c:if>>
                                 </li>
@@ -24,7 +24,7 @@
                 <div class="carousel-inner">
                     <c:set var="count" value="true"/>
                     <c:forEach items="${slides}" var="slide">
-                        <c:if test="${slide.url ne ''}">
+                        <c:if test="${not empty slide.url}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
                                 <img src="<c:url value="${slide.url}"/>" onerror="this.src='<c:url

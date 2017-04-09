@@ -199,7 +199,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${company.contacts.vkontakte ne ''}">
+                                            <c:when test="${not empty company.contacts.vkontakte}">
                                                 <a href="<c:out value="${company.contacts.vkontakte}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
@@ -219,7 +219,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${company.contacts.facebook ne ''}">
+                                            <c:when test="${not empty company.contacts.facebook}">
                                                 <a href="<c:out value="${company.contacts.facebook}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Facebook"
                                                    target="_blank">Facebook</a>
@@ -239,7 +239,7 @@
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${company.contacts.twitter ne ''}">
+                                            <c:when test="${not empty company.contacts.twitter}">
                                                 <a href="<c:out value="${company.contacts.twitter}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Twitter"
                                                    target="_blank">Twitter</a>
@@ -300,7 +300,7 @@
                                     <td class="ths">Логотип</td>
                                     <td class="tds">
                                         <c:choose>
-                                            <c:when test="${company.logo.url ne ''}">
+                                            <c:when test="${not empty company.logo.url}">
                                                 <a href="<c:url value="${company.logo.url}"/>" rel="lightgallery"
                                                    title="<c:out value="${company.title}"/>">
                                                     <img class="img-responsive img-in-list"

@@ -53,7 +53,7 @@
                             <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
                         </p>
-                        <c:if test="${company.logo.url ne ''}">
+                        <c:if test="${not empty company.logo.url}">
                             <hr>
                             <h3 class="text-center">О нашей компании</h3>
                             <hr>

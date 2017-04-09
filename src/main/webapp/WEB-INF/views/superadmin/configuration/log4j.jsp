@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%! private final static java.util.ResourceBundle RESOURCE = java.util.ResourceBundle.getBundle("log4j"); %>
+<fmt:setBundle basename="log4j" var="log4j"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="container">
@@ -19,7 +20,7 @@
                             <td>Root Logger</td>
                             <td class="text-center">
                                 <label title="log4j.rootLogger">
-                                    <%= RESOURCE.getString("log4j.rootLogger") %>
+                                    <fmt:message bundle="${log4j}" key="log4j.rootLogger"/>
                                 </label>
                             </td>
                         </tr>
@@ -27,7 +28,7 @@
                             <td>Appender File</td>
                             <td class="text-center">
                                 <label title="log4j.appender.file">
-                                    <%= RESOURCE.getString("log4j.appender.file") %>
+                                    <fmt:message bundle="${log4j}" key="log4j.appender.file"/>
                                 </label>
                             </td>
                         </tr>
@@ -35,7 +36,7 @@
                             <td>Appender File File</td>
                             <td class="text-center">
                                 <label title="log4j.appender.file.Filet">
-                                    <%= RESOURCE.getString("log4j.appender.file.File") %>
+                                    <fmt:message bundle="${log4j}" key="log4j.appender.file.File"/>
                                 </label>
                             </td>
                         </tr>
@@ -43,7 +44,7 @@
                             <td>Appender File Max Size</td>
                             <td class="text-center">
                                 <label title="log4j.appender.file.MaxFileSize">
-                                    <%= RESOURCE.getString("log4j.appender.file.MaxFileSize") %>
+                                    <fmt:message bundle="${log4j}" key="log4j.appender.file.MaxFileSize"/>
                                 </label>
                             </td>
                         </tr>
@@ -51,7 +52,7 @@
                             <td>Appender File Layout</td>
                             <td class="text-center">
                                 <label title="log4j.appender.file.layout">
-                                    <%= RESOURCE.getString("log4j.appender.file.layout") %>
+                                    <fmt:message bundle="${log4j}" key="log4j.appender.file.layout"/>
                                 </label>
                             </td>
                         </tr>
@@ -59,7 +60,7 @@
                             <td>Layout Conversion Pattern</td>
                             <td class="text-center">
                                 <label title="log4j.appender.file.layout.ConversionPattern">
-                                    <%= RESOURCE.getString("log4j.appender.file.layout.ConversionPattern") %>
+                                    <fmt:message bundle="${log4j}" key="log4j.appender.file.layout.ConversionPattern"/>
                                 </label>
                             </td>
                         </tr>

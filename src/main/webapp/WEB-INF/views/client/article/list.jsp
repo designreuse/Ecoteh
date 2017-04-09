@@ -10,7 +10,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h3 class="text-center">
                             <c:choose>
-                                <c:when test="${article.text ne ''}">
+                                <c:when test="${not empty article.text}">
                                     <a href="<c:url value="/article/${article.url}"/>">
                                         <c:out value="${article.title}"/>
                                     </a>
@@ -38,7 +38,7 @@
                                 </a>
                             </h3>
                         </c:if>
-                        <c:if test="${article.price ne ''}">
+                        <c:if test="${not empty article.price}">
                             <h4 class="green">
                                 <c:choose>
                                     <c:when test="${article.price ne '0'}">
@@ -59,16 +59,16 @@
                             </a>
                         </span>
                         <c:choose>
-                            <c:when test="${article.description ne ''}">
+                            <c:when test="${not empty article.description}">
                                 <p>${article.description}</p>
                             </c:when>
-                            <c:when test="${article.text ne ''}">
+                            <c:when test="${not empty article.text}">
                                 ${article.text}
                             </c:when>
                             <c:otherwise>
                                 <a href="<c:url value="/article/${article.logo.url}"/>"
                                    title="Перейти к &quot;<c:out value="${article.title}"/>&quot;">
-                                    <c:if test="${article.logo.url ne ''}">
+                                    <c:if test="${not empty article.logo.url}">
                                         <img class="img-responsive img-in-list" alt="<c:out value="${article.title}"/>"
                                              src="<c:url value="${article.logo.url}"/>" onerror="this.src='<c:url
                                                 value="/resources/img/static/default_file.gif"/>'">
@@ -76,7 +76,7 @@
                                 </a>
                             </c:otherwise>
                         </c:choose>
-                        <c:if test="${article.text ne ''}">
+                        <c:if test="${not empty article.text}">
                             <p class="text-right">
                                 <a href="<c:url value="/article/${article.url}"/>"
                                    title="Подробнее о &quot;<c:out value="${article.title}"/>&quot;">

@@ -39,7 +39,7 @@
                             → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
                             → <a href="#"><c:out value="${company.title}"/></a>
                         </p>
-                        <c:if test="${company.logo.url ne ''}">
+                        <c:if test="${not empty company.logo.url}">
                             <hr>
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>
@@ -79,7 +79,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p>
                             <c:choose>
-                                <c:when test="${company.information ne ''}">
+                                <c:when test="${not empty company.information}">
                                     ${company.information}
                                 </c:when>
                                 <c:otherwise>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%! private final static java.util.ResourceBundle RESOURCE = java.util.ResourceBundle.getBundle("security"); %>
+<fmt:setBundle basename="security" var="security"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="container">
@@ -23,7 +24,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="request.admin">
-                                    <%= RESOURCE.getString("request.admin") %>
+                                    <fmt:message bundle="${security}" key="request.admin"/>
                                 </label>
                             </td>
                         </tr>
@@ -35,7 +36,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="request.superadmin">
-                                    <%= RESOURCE.getString("request.superadmin") %>
+                                    <fmt:message bundle="${security}" key="request.superadmin"/>
                                 </label>
                             </td>
                         </tr>
@@ -47,7 +48,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="request.login">
-                                    <%= RESOURCE.getString("request.login") %>
+                                    <fmt:message bundle="${security}" key="request.login"/>
                                 </label>
                             </td>
                         </tr>
@@ -55,7 +56,7 @@
                             <td>Denied Access Request</td>
                             <td class="text-center">
                                 <label title="request.access-denied-page">
-                                    <%= RESOURCE.getString("request.access-denied-page") %>
+                                    <fmt:message bundle="${security}" key="request.access-denied-page"/>
                                 </label>
                             </td>
                         </tr>
@@ -63,7 +64,7 @@
                             <td>Default success request</td>
                             <td class="text-center">
                                 <label title="request.default-success">
-                                    <%= RESOURCE.getString("request.default-success") %>
+                                    <fmt:message bundle="${security}" key="request.default-success"/>
                                 </label>
                             </td>
                         </tr>
@@ -75,7 +76,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="request.default-success.always">
-                                    <%= RESOURCE.getString("request.default-success.always") %>
+                                    <fmt:message bundle="${security}" key="request.default-success.always"/>
                                 </label>
                             </td>
                         </tr>
@@ -87,7 +88,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="parameter.username">
-                                    <%= RESOURCE.getString("parameter.username") %>
+                                    <fmt:message bundle="${security}" key="parameter.username"/>
                                 </label>
                             </td>
                         </tr>
@@ -99,7 +100,7 @@
                             </td>
                             <td class="text-center">
                                 <label title="parameter.password">
-                                    <%= RESOURCE.getString("parameter.password") %>
+                                    <fmt:message bundle="${security}" key="parameter.password"/>
                                 </label>
                             </td>
                         </tr>

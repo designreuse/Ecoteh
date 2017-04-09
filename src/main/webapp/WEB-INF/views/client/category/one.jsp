@@ -27,7 +27,7 @@
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
         <c:set var="length" value="${fn:length(articles_list)}"/>
-        <c:if test="${(length gt 0) or (category.description ne '')}">
+        <c:if test="${(length gt 0) or (not empty category.description)}">
             <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
         </c:if>
     </head>
@@ -133,7 +133,7 @@
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <c:if test="${(length gt 0) or (category.description ne '')}">
+    <c:if test="${(length gt 0) or (not empty category.description)}">
         <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
         <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>

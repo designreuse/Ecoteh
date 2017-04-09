@@ -29,7 +29,7 @@
         </c:choose>">
         <div class="text-center">
             <c:choose>
-                <c:when test="${user.photo.url ne ''}">
+                <c:when test="${not empty user.photo.url}">
                     <a href="<c:url value="${user.photo.url}"/>" rel="lightgallery"
                        title="<c:out value="${user.name}"/>">
                         <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
@@ -62,15 +62,15 @@
             </c:if>
             <h4>
                 <c:choose>
-                    <c:when test="${user.description ne ''}">
+                    <c:when test="${not empty user.description}">
                         <c:out value="${user.description}"/>
                     </c:when>
-                    <c:when test="${user.role ne ''}">
+                    <c:when test="${not empty user.role}">
                         <c:out value="${user.role}"/>
                     </c:when>
                 </c:choose>
             </h4>
-            <c:if test="${user.contacts.mobilePhone ne ''}">
+            <c:if test="${not empty user.contacts.mobilePhone}">
                 <h4>
                     <a href="tel:<c:out value="${user.contacts.mobilePhone}"/>"
                        title="Позвонить на мобильный телефон">
@@ -79,7 +79,7 @@
                     </a>
                 </h4>
             </c:if>
-            <c:if test="${user.contacts.landlinePhone ne ''}">
+            <c:if test="${not empty user.contacts.landlinePhone}">
                 <h4>
                     <a href="tel:<c:out value="${user.contacts.landlinePhone}"/>"
                        title="Позвонить на стационарный телефон">
@@ -88,7 +88,7 @@
                     </a>
                 </h4>
             </c:if>
-            <c:if test="${user.contacts.fax ne ''}">
+            <c:if test="${not empty user.contacts.fax}">
                 <h4>
                     <a href="tel:<c:out value="${user.contacts.fax}"/>" title="Факс">
                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
@@ -96,7 +96,7 @@
                     </a>
                 </h4>
             </c:if>
-            <c:if test="${user.contacts.email ne ''}">
+            <c:if test="${not empty user.contacts.email}">
                 <h4>
                     <a href="mailto:<c:out value="${user.contacts.email}"/>" target="_blank"
                        title="Написать письмо для &quot;<c:out value="${user.name}"/>&quot;">
@@ -105,22 +105,22 @@
                     </a>
                 </h4>
             </c:if>
-            <c:if test="${user.contacts.vkontakte ne ''}">
+            <c:if test="${not empty user.contacts.vkontakte}">
                 <a href="<c:out value="${user.contacts.vkontakte}"/>" title="Профиль в ВКонтакте" target="_blank">
                     <span class="fa fa-vk fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
-            <c:if test="${user.contacts.facebook ne ''}">
+            <c:if test="${not empty user.contacts.facebook}">
                 <a href="<c:out value="${user.contacts.facebook}"/>" title="Профиль в Facebook" target="_blank">
                     <span class="fa fa-facebook-official fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
-            <c:if test="${user.contacts.twitter ne ''}">
+            <c:if test="${not empty user.contacts.twitter}">
                 <a href="<c:out value="${user.contacts.twitter}"/>" title="Профиль в Twitter" target="_blank">
                     <span class="fa fa-twitter fa-2x"></span>
                 </a>&nbsp;&nbsp;
             </c:if>
-            <c:if test="${user.contacts.skype ne ''}">
+            <c:if test="${not empty user.contacts.skype}">
                 <a href="skype:<c:out value="${user.contacts.skype}"/>?call" title="Позвонить в Skype">
                     <span class="fa fa-skype fa-2x"></span>
                 </a>

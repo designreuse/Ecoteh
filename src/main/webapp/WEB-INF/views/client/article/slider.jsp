@@ -17,14 +17,14 @@
                         <div class="text-center">
                             <a href="<c:url value="/article/${article_s.url}"/>"
                                title="&quot;<c:out value="${article_s.title}"/>&quot;">
-                                <c:if test="${article_s.logo.url ne ''}">
+                                <c:if test="${not empty article_s.logo.url}">
                                     <img class="img-logo" alt="<c:out value="${article_s.title}"/>"
                                          src="<c:url value="${article_s.logo.url}"/>"
                                          onerror="this.src='<c:url
                                                  value="/resources/img/static/default_file.gif"/>'">
                                 </c:if>
                                 <h5><c:out value="${article_s.title}"/></h5>
-                                <c:if test="${(article_s.price ne '') and (article_s.price ne '0')}">
+                                <c:if test="${(not empty article_s.price) and (article_s.price ne '0')}">
                                     <h5 class="green">Цена: <c:out value="${article_s.price}"/></h5>
                                 </c:if>
                             </a>

@@ -155,7 +155,7 @@
                                     <td class="ths">Логотип</td>
                                     <td class="tds">
                                         <c:choose>
-                                            <c:when test="${article.logo.url ne ''}">
+                                            <c:when test="${not empty article.logo.url}">
                                                 <a href="<c:url value="${article.logo.url}"/>" rel="lightgallery"
                                                    title="<c:out value="${article.title}"/>">
                                                     <img class="img-responsive img-in-list"

@@ -42,26 +42,26 @@
                         Кэш<c:if test="${length le 0}"> пустой!</c:if>
                     </h3>
                     <hr>
-                    <c:if test="${length gt 10}">
-                        <div class="text-center">
-                            <a href="<c:url value="/superadmin/cache"/>"
-                               title="Обновить информацию об объектах, которые хранятся в памяти.">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                    &nbsp;Обновить
-                                </button>
-                            </a>&nbsp;&nbsp;
-                            <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
-                                    &nbsp;Очистить
-                                </button>
-                            </a>
-                        </div>
-                    </c:if>
                     <c:if test="${length gt 0}">
+                        <c:if test="${length gt 10}">
+                            <div class="text-center">
+                                <a href="<c:url value="/superadmin/cache"/>"
+                                   title="Обновить информацию об объектах, которые хранятся в памяти.">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        &nbsp;Обновить
+                                    </button>
+                                </a>&nbsp;&nbsp;
+                                <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
+                                        &nbsp;Очистить
+                                    </button>
+                                </a>
+                            </div>
+                        </c:if>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <table align="center">
+                            <table align="center" border="1" cellpadding="3" cellspacing="0">
                                 <tr>
                                     <th>№</th>
                                     <th>Объект</th>

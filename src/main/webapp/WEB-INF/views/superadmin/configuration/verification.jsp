@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%! private final static java.util.ResourceBundle RESOURCE = java.util.ResourceBundle.getBundle("verification"); %>
+<fmt:setBundle basename="verification" var="verification"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="container">
@@ -19,7 +20,7 @@
                             <td>Google Verification</td>
                             <td class="text-center">
                                 <label title="google.verification">
-                                    <%= RESOURCE.getString("google.verification") %>
+                                    <fmt:message bundle="${verification}" key="google.verification"/>
                                 </label>
                             </td>
                         </tr>
@@ -27,7 +28,7 @@
                             <td>Yandex Verification</td>
                             <td class="text-center">
                                 <label title="yandex.verification">
-                                    <%= RESOURCE.getString("yandex.verification") %>
+                                    <fmt:message bundle="${verification}" key="yandex.verification"/>
                                 </label>
                             </td>
                         </tr>

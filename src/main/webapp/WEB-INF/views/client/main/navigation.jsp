@@ -30,7 +30,7 @@
                     <li>
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">
                             <c:choose>
-                                <c:when test="${favicon.url ne ''}">
+                                <c:when test="${not empty favicon.url}">
                                     <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt=""
                                          title="<c:out value="${main_company.title}"/>"
                                          onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'"/>
@@ -126,7 +126,7 @@
                             <a href="<c:url value="/admin/menu"/>"
                                title="Mеню | <c:out value="${authorized_user.name}"/>">
                                 <c:choose>
-                                    <c:when test="${authorized_user.photo.url ne ''}">
+                                    <c:when test="${not empty authorized_user.photo.url}">
                                         <img src="<c:url value="${authorized_user.photo.url}"/>" class="auth-logo"
                                              onerror="this.src='<c:url
                                                      value="/resources/img/static/default_user.png"/>'">
@@ -192,7 +192,7 @@
                                 <a href="<c:url value="/admin/menu"/>"
                                    title="Mеню | <c:out value="${authorized_user.name}"/>">
                                     <c:choose>
-                                        <c:when test="${authorized_user.photo.url ne ''}">
+                                        <c:when test="${not empty authorized_user.photo.url}">
                                             <img src="<c:url value="${authorized_user.photo.url}"/>" class="auth-logo"
                                                  onerror="this.src='<c:url
                                                          value="/resources/img/static/default_user.png"/>'">

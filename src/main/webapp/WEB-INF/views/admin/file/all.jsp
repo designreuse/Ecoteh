@@ -72,7 +72,7 @@
                         </c:if>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <c:forEach items="${files}" var="file">
-                                <c:if test="${file.url ne ''}">
+                                <c:if test="${not empty file.url}">
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                         <div class="text-center">
                                             <a href="<c:url value="${file.url}"/>" title="${file.title}"
