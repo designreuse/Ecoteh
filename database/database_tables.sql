@@ -29,7 +29,7 @@ CREATE TABLE `addresses` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `address`     VARCHAR(300)     NOT NULL DEFAULT '',
   `google_maps` TEXT             NOT NULL,
-  `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
+  `validated`   BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -55,7 +55,7 @@ CREATE TABLE `articles` (
   `text`        TEXT             NOT NULL,
   `keywords`    TEXT             NOT NULL,
   `date`        TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `validated`   BIT(1)           NOT NULL DEFAULT b'1',
+  `validated`   BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
@@ -79,7 +79,7 @@ CREATE TABLE `categories` (
   `url`         VARCHAR(200)     NOT NULL DEFAULT '',
   `description` TEXT             NOT NULL,
   `keywords`    TEXT             NOT NULL,
-  `validated`   BIT(1)           NOT NULL DEFAULT b'1',
+  `validated`   BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`)
@@ -112,7 +112,7 @@ CREATE TABLE `companies` (
   `sender_pass`    VARCHAR(100)             NOT NULL DEFAULT '',
   `work_time_from` VARCHAR(10)              NOT NULL DEFAULT '',
   `work_time_to`   VARCHAR(10)              NOT NULL DEFAULT '',
-  `validated`      BIT(1)                   NOT NULL DEFAULT b'1',
+  `validated`      BOOLEAN                  NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
@@ -140,7 +140,7 @@ CREATE TABLE `contacts` (
   `facebook`       VARCHAR(200)     NOT NULL DEFAULT '',
   `twitter`        VARCHAR(200)     NOT NULL DEFAULT '',
   `skype`          VARCHAR(100)     NOT NULL DEFAULT '',
-  `validated`      BIT(1)           NOT NULL DEFAULT b'1',
+  `validated`      BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -159,7 +159,7 @@ CREATE TABLE `files` (
   `title`     VARCHAR(100)                                 NOT NULL DEFAULT '',
   `type`      ENUM ('FAVICON', 'STATIC', 'SLIDE', 'OTHER') NOT NULL DEFAULT 'OTHER',
   `url`       VARCHAR(200)                                 NOT NULL DEFAULT '',
-  `validated` BIT(1)                                       NOT NULL DEFAULT b'1',
+  `validated` BOOLEAN                                      NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -179,7 +179,7 @@ CREATE TABLE `messages` (
   `subject`   VARCHAR(100)     NOT NULL DEFAULT '',
   `text`      TEXT             NOT NULL,
   `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `validated` BIT(1)           NOT NULL DEFAULT b'1',
+  `validated` BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 )
@@ -199,7 +199,7 @@ CREATE TABLE `responses` (
   `username`  VARCHAR(100)     NOT NULL DEFAULT '',
   `text`      TEXT             NOT NULL,
   `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `validated` BIT(1)           NOT NULL DEFAULT b'1',
+  `validated` BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -223,9 +223,9 @@ CREATE TABLE `users` (
   `login`       VARCHAR(300)                        NOT NULL DEFAULT '',
   `password`    VARCHAR(300)                        NOT NULL DEFAULT '',
   `description` TEXT                                NOT NULL,
-  `validated`   BIT(1)                              NOT NULL DEFAULT b'1',
-  `mailing`     BIT(1)                              NOT NULL DEFAULT b'1',
-  `locked`      BIT(1)                              NOT NULL DEFAULT b'0',
+  `validated`   BOOLEAN                             NOT NULL DEFAULT TRUE,
+  `mailing`     BOOLEAN                             NOT NULL DEFAULT TRUE,
+  `locked`      BOOLEAN                             NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`photo_id`) REFERENCES `files` (`id`),
   FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`)
@@ -244,4 +244,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-04 15:09:41
+-- Dump completed on 2017-04-03 15:09:41
