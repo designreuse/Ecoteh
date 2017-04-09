@@ -173,7 +173,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     /**
      * Filters and returns articles by the date.
      * Return empty list if responses is empty.
-     * Return back responses list if dates are {@code null}
+     * Return back responses list if dates are null
      * or start date is equals to end finish date.
      *
      * @param articles   the articles to filter.
@@ -376,7 +376,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
 
     /**
      * Removes article.
-     * Removes article if it is not {@code null}.
+     * Removes article if it is not null.
      *
      * @param article the article to remove.
      */
@@ -425,7 +425,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param article    a article to filter.
      * @param startDate  a initial date.
      * @param finishDate a final date.
-     * @return {@code true} or {@code false}.
+     * @return true if time is correct, false otherwise.
      */
     private static boolean timeFilter(
             final Article article,
@@ -440,7 +440,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      * @param article  a article to filter.
      * @param category a category filtering.
-     * @return {@code true} or {@code false}.
+     * @return true if article category equals to input category,
+     * false otherwise.
      */
     private static boolean categoryFilter(
             final Article article,
@@ -453,7 +454,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * Filters article by validation.
      *
      * @param article a article to filter.
-     * @return {@code true} or {@code false}.
+     * @return true if article is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Article article) {
         return (article != null) && article.isValidated();

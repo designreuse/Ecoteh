@@ -27,7 +27,7 @@ public final class ToLatinImpl implements ToLatin {
     /**
      * Translates value from cyrillic to latin.
      *
-     * @return The translated string (newer {@code null})..
+     * @return The translated string (newer null).
      */
     @Override
     public String fromCyrillic() {

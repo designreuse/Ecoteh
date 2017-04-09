@@ -131,8 +131,7 @@ public class Time implements ITime {
     /**
      * Returns the value of input time is not blank.
      *
-     * @return {@code true} if the input time is not blank,
-     * {@code false} otherwise.
+     * @return true if the input time is not blank, false otherwise.
      */
     public boolean isNotBlankTime() {
         return this.isNotBlankTime;
@@ -190,12 +189,11 @@ public class Time implements ITime {
     }
 
     /**
-     * Returns {@code true} if now time is the working time.
+     * Returns true if now time is the working time.
      *
      * @param startHour  a start work time of a company.
      * @param finishHour a finish work time of a company.
-     * @return {@code true} if now time is the working time,
-     * {@code false} otherwise.
+     * @return true if now time is the working time, false otherwise.
      */
     public static boolean isWorkTime(
             final String startHour,
@@ -211,8 +209,7 @@ public class Time implements ITime {
      * @param currentTime a time to checks.
      * @param startDate   a initial date.
      * @param finishDate  a final date.
-     * @return {@code true} if time is correct,
-     * {@code false} otherwise.
+     * @return true if time is correct, false otherwise.
      */
     public static boolean checkTime(
             final Date currentTime,
@@ -232,7 +229,7 @@ public class Time implements ITime {
      *
      * @param startDate  a initial date.
      * @param finishDate a final date.
-     * @return {@code true} if dates are correct, {@code false} otherwise.
+     * @return true if dates are correct, false otherwise.
      */
     public static boolean checkDate(
             final Date startDate,
@@ -260,8 +257,8 @@ public class Time implements ITime {
      *
      * @param start  a start work time of a company.
      * @param finish a finish work time of a company.
-     * @return Returns {@code true} if a now time belongs at a given
-     * time interval, {@code false} otherwise.
+     * @return Returns true if a now time belongs at a given
+     * time interval, false otherwise.
      */
     private static boolean isWorkHour(
             final String start,
@@ -301,10 +298,9 @@ public class Time implements ITime {
     }
 
     /**
-     * Returns {@code true} if today is the working day.
+     * Returns true if today is the working day.
      *
-     * @return {@code true} if today is the working day,
-     * {@code false} otherwise.
+     * @return true if today is the working day, false otherwise.
      */
     private static boolean isWorkDay() {
         boolean result = true;

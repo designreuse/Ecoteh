@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The class implements a set of methods for sending letters by e-mail.
@@ -134,13 +134,15 @@ public final class SenderImpl implements Sender {
      * Validates parameters to create sender: subject, text, recipient E-mail,
      * sender E-mail, sender E-mail password.
      *
-     * @return {@code true} if all parameters are valid to create sender,
-     * {@code false} otherwise.
+     * @return true if all parameters are valid to create sender,
+     * false otherwise.
      */
     private boolean validate() {
-        return !(isBlank(this.subject) || isBlank(this.text) ||
-                isBlank(this.recipientEmail) ||
-                isBlank(this.senderEmail) || isBlank(this.senderEmailPass));
+        return isNotBlank(this.subject) &&
+                isNotBlank(this.text) &&
+                isNotBlank(this.recipientEmail) &&
+                isNotBlank(this.senderEmail) &&
+                isNotBlank(this.senderEmailPass);
     }
 
     /**
@@ -264,10 +266,10 @@ public final class SenderImpl implements Sender {
         return message;
     }
 
-
     /**
+     * Returns a content.
      *
-     * @return
+     * @return The content.
      */
     private String getContent() {
         return "text/plain;charset=" + CHARSET;

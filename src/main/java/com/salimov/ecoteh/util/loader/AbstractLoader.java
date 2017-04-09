@@ -32,8 +32,7 @@ public abstract class AbstractLoader implements Loader {
      * Deletes a file if it is exists
      * and it is a file (not a directory)
      *
-     * @return {@code true} if a file is deleted,
-     * {@code false} otherwise.
+     * @return true if a file is deleted, false otherwise.
      */
     @Override
     public boolean delete() {
@@ -62,8 +61,7 @@ public abstract class AbstractLoader implements Loader {
      * Creates directories if it is not exist.
      *
      * @param path a path to file.
-     * @return {@code true} if directories to file is exist,
-     * {@code false} otherwise.
+     * @return true if directories to file is exist, false otherwise.
      */
     static boolean checkPath(final String path) {
         final File directory = new File(path).getParentFile();
@@ -77,9 +75,8 @@ public abstract class AbstractLoader implements Loader {
     /**
      * Checks input file.
      *
-     * @param file a file to chek.
-     * @return {@code true} if a file is file,
-     * {@code false} otherwise.
+     * @param file a file to check.
+     * @return true if a file is file, false otherwise.
      */
     private static boolean isFile(final File file) {
         return file.exists() && file.isFile();

@@ -95,7 +95,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Locates the user based on the username.
      *
      * @param username The username identifying the user whose data is required.
-     * @return A fully populated user record (never {@code null}).
+     * @return A fully populated user record (never null).
      * @throws UsernameNotFoundException if the user could not be found
      *                                   or the user has no GrantedAuthority.
      */
@@ -134,7 +134,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      *
      * @param url  a URL of the user to update.
      * @param user a user to update.
-     * @return The updating user with parameter id or {@code null}.
+     * @return The updating user with parameter id.
      */
     @Override
     @Transactional
@@ -156,7 +156,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns user with the parameter name.
      *
      * @param name a name of the user to return.
-     * @return The user with the parameter name or {@code null}.
+     * @return The user with the parameter name .
      * @throws IllegalArgumentException Throw exception when parameter name is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -177,7 +177,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns user with the parameter url.
      *
      * @param url a URL of the user to return.
-     * @return The user with the parameter url or {@code null}.
+     * @return The user with the parameter url.
      * @throws IllegalArgumentException Throw exception when parameter url is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -199,7 +199,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns user with the parameter login.
      *
      * @param login a login of the user to return.
-     * @return The user with the parameter login or {@code null}.
+     * @return The user with the parameter login.
      * @throws IllegalArgumentException Throw exception when parameter login is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -223,7 +223,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * Returns user with the parameter e-mail.
      *
      * @param email a e-mail of the user to return.
-     * @return The user with the parameter e-mail or {@code null}.
+     * @return The user with the parameter e-mail.
      * @throws IllegalArgumentException Throw exception when parameter email is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -278,9 +278,9 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
     }
 
     /**
-     * Returns users with role {@code ADMIN}.
+     * Returns users with role UserRole.ADMIN.
      *
-     * @return The users with role {@code ADMIN}.
+     * @return The users with role UserRole.ADMIN.
      */
     @Override
     @Transactional(readOnly = true)
@@ -533,8 +533,7 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param user      the user to valid.
      * @param exist     is validate input object by exists.
      * @param duplicate is validate input object by duplicate.
-     * @return Returns {@code true} if user is valid,
-     * {@code false} otherwise.
+     * @return Returns true if user is valid, false otherwise.
      */
     @Override
     protected boolean validated(

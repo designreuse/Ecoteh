@@ -125,8 +125,7 @@ final class CacheCleaner implements Runnable {
     /**
      * Checks if cache.size() great maxSize.
      *
-     * @return {@code true} if cache.size() great maxSize,
-     * {@code false} otherwise.
+     * @return true if cache.size() great maxSize, false otherwise.
      */
     private boolean checkCacheMaxSize() {
         return (this.cache.size() > getMaxSize());
@@ -135,8 +134,7 @@ final class CacheCleaner implements Runnable {
     /**
      * Checks if cache.size() great normalSize is maxSize / 2.
      *
-     * @return {@code true} if cache.size() great normalSize,
-     * {@code false} otherwise.
+     * @return true if cache.size() great normalSize, false otherwise.
      */
     private boolean checkCacheNormalSize() {
         return (this.cache.size() <= getMaxSize() / 2);

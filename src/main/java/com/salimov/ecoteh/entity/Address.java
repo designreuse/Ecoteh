@@ -85,8 +85,8 @@ public class Address extends Model implements IAddress {
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.
-     * @return {@code true} if this object is the same as the object
-     * argument, {@code false} otherwise otherwise.
+     * @return true if this object is the same as the object
+     * argument, false otherwise otherwise.
      */
     @Override
     public boolean equals(Object object) {

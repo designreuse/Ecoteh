@@ -61,8 +61,7 @@ public interface ICategory extends IContent {
      * Contains article in the list of articles.
      *
      * @param article an article to contain.
-     * @return {@code true} if article is contains,
-     * {@code false} otherwise.
+     * @return true if article is contains, false otherwise.
      */
     boolean containsArticle(final Article article);
 
@@ -70,8 +69,7 @@ public interface ICategory extends IContent {
      * Contains articles in the list of articles.
      *
      * @param articles an articles to contain.
-     * @return {@code true} if articles are contains,
-     * {@code false} otherwise.
+     * @return true if articles are contains, false otherwise.
      */
     boolean containsArticles(final Collection<Article> articles);
 

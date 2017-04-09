@@ -10,9 +10,9 @@ public interface ToLatin {
 
     /**
      * Translates value from cyrillic to latin.
-     * If value is blank then returns {@code null}.
+     * If value is blank then returns null.
      *
-     * @return The translated string or {@code null}.
+     * @return The translated string or null.
      */
     String fromCyrillic();
 

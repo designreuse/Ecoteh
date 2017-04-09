@@ -22,7 +22,6 @@ public interface ITime {
      */
     String getCorrectTime();
 
-
     /**
      * Returns a correct hours of the time.
      *
@@ -40,8 +39,8 @@ public interface ITime {
     /**
      * Returns the value of input time is not blank.
      *
-     * @return {@code true} if the input time is not blank,
-     * {@code false} otherwise.
+     * @return true if the input time is not blank,
+     * false otherwise.
      */
     boolean isNotBlankTime();
 }

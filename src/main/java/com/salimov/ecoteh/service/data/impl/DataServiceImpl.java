@@ -40,13 +40,17 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param model the model to add.
      * @return The saving model or input object.
+     * @throws NullPointerException Throw exception when saving model is null.
      */
     @Override
     @Transactional
-    public T add(final T model) {
+    public T add(final T model) throws NullPointerException {
         T result = model;
         if (validated(model, false, true)) {
             result = this.repository.save(model);
+        }
+        if (model == null) {
+            throw new NullPointerException("Saving model is null!");
         }
         return result;
     }
@@ -74,17 +78,21 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.
-     * Return {@code null} if model is not valid.
+     * Return null if model is not valid.
      *
      * @param model the model to update.
-     * @return The updating models or {@code null}.
+     * @return The updating models or null.
+     * @throws NullPointerException Throw exception when saving model is null.
      */
     @Override
     @Transactional
-    public T update(final T model) {
+    public T update(final T model) throws NullPointerException {
         T result = model;
         if (validated(model, true, false)) {
             result = this.repository.save(model);
+        }
+        if (result == null) {
+            throw new NullPointerException("Saving model is null!");
         }
         return result;
     }
@@ -112,7 +120,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Returns object of class {@link Model} or subclasses with parameter id.
-     * If id is {@code null} then throws IllegalArgumentException.
      *
      * @param id is id of object to return.
      * @return The model with parameter id.
@@ -168,7 +175,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Removes object of {@link Model} class or subclasses.
-     * Removes model if it is not {@code null}.
+     * Removes model if it is not null.
      *
      * @param model the model to remove.
      */
@@ -182,7 +189,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Removes objects of {@link Model} class or subclasses.
-     * Removes models if are not {@code null}.
+     * Removes models if are not null.
      *
      * @param models the models to remove.
      */
@@ -208,8 +215,8 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * with parameter id is exists.
      *
      * @param id a id of the model to exists.
-     * @return Returns {@code true} if the model is exists,
-     * otherwise returns {@code false}.
+     * @return Returns true if the model is exists,
+     * otherwise returns false.
      */
     @Override
     @Transactional(readOnly = true)
@@ -218,12 +225,12 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Checks whether the object of {@link Model} class or subclasses is exists.
-     * If model is {@code null} or model id is {@code null} then return {@code false}.
+     * Checks whether the object of {@link Model} class
+     * or subclasses is exists. If model is null then return false.
      *
      * @param model the models to exists.
-     * @return Returns {@code true} if the model is exists,
-     * otherwise returns {@code false}.
+     * @return Returns true if the model is exists,
+     * otherwise returns false.
      */
     @Override
     @Transactional(readOnly = true)
@@ -372,7 +379,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Gets revers input comparator if revers is {@code true}.
+     * Gets revers input comparator if revers is true.
      *
      * @param comparator a comparator to sort models.
      * @param revers     is sort in descending or ascending.
@@ -389,7 +396,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Filters model by validation.
      *
      * @param model a model to filter.
-     * @return {@code true} or {@code false}.
+     * @return true if model is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Model model) {
         return (model != null) && model.isValidated();
@@ -408,8 +415,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param model     the model to valid.
      * @param exist     is validate input model by exists.
      * @param duplicate is validate input model by duplicate.
-     * @return Returns {@code true} if the model is valid,
-     * otherwise returns {@code false}.
+     * @return Returns true if the model is valid, otherwise returns false.
      */
     protected abstract boolean validated(
             final T model,

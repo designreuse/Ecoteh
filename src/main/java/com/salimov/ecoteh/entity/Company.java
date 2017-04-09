@@ -478,8 +478,8 @@ public class Company extends Content implements ICompany {
     /**
      * Checks whether the company is opened now.
      *
-     * @return Returns {@code true} if the company is opened now,
-     * otherwise returns {@code false}.
+     * @return Returns true if the company is opened now,
+     * otherwise returns false.
      */
     @Override
     public boolean isOpen() {

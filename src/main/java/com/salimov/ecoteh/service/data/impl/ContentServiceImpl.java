@@ -226,7 +226,7 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param content   the contents to valid.
      * @param exist     is validate input object by exists.
      * @param duplicate is validate input object by duplicate.
-     * @return Returns {@code true} if object is valid, otherwise returns {@code false}.
+     * @return Returns true if object is valid, otherwise returns false.
      */
     @Override
     protected boolean validated(

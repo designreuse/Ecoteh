@@ -41,7 +41,7 @@ public final class DefaultConfig {
      *
      * @param username a name of user to return.
      * @return The user if it exist,
-     * {@code null} otherwise.
+     * null otherwise.
      */
     public static User getDefaultUser(final String username) {
         User user;
@@ -76,8 +76,8 @@ public final class DefaultConfig {
      * Checks a role of an authorized user.
      * Authorized user must have the ADMIN role.
      *
-     * @return {@code true} if an authorized user has
-     * the ADMIN role, {@code false} otherwise.
+     * @return true if an authorized user has
+     * the ADMIN role, false otherwise.
      */
     private static boolean checkUser() {
         return check(UserRole.ADMIN);
@@ -87,8 +87,8 @@ public final class DefaultConfig {
      * Checks a role of an authorized user.
      * Authorized user must have the SUPERMAN role.
      *
-     * @return {@code true} if an authorized user has
-     * the SUPERMAN role, {@code false} otherwise.
+     * @return true if an authorized user has
+     * the SUPERMAN role, false otherwise.
      */
     private static boolean checkSuperUser() {
         return check(UserRole.SUPERADMIN);
@@ -98,8 +98,8 @@ public final class DefaultConfig {
      * Checks a role of an authorized user.
      *
      * @param role a role to check.
-     * @return {@code true} if an authorized user has the role,
-     * {@code false} otherwise.
+     * @return true if an authorized user has the role,
+     * false otherwise.
      */
     private static boolean check(final UserRole role) {
         final User user = getAuthenticatedUser();
@@ -129,7 +129,7 @@ public final class DefaultConfig {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "login", "password",
+                "login", "admin",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -141,7 +141,7 @@ public final class DefaultConfig {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "login", "password",
+                "login", "admin",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);

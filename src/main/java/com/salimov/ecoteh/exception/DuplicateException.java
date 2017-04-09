@@ -9,8 +9,7 @@ package com.salimov.ecoteh.exception;
 public final class DuplicateException extends RuntimeException {
 
     /**
-     * Constructs a new duplicate exception
-     * with {@code null} as its detail sender.
+     * Constructs a new duplicate exception with null as its detail sender.
      */
     public DuplicateException() {
     }

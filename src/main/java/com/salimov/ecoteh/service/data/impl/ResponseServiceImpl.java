@@ -40,11 +40,10 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Initializes, updates and returns response with parameter id.
-     * Returns {@code null} if id is {@code null}.
      *
      * @param id       a id of the response to update.
      * @param response a response to update.
-     * @return The updating response with parameter id {@code null}.
+     * @return The updating response with parameter id.
      */
     @Override
     @Transactional
@@ -86,7 +85,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
     /**
      * Filters and returns responses by the date.
      * Return empty list if responses is empty.
-     * Return back responses list if dates are {@code null}
+     * Return back responses list if dates are null
      * or start date is equals end to finish date.
      *
      * @param responses  the responses to filter.
@@ -170,8 +169,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param response  the response to valid.
      * @param exist     is validate input object by exists.
      * @param duplicate is validate input object by duplicate.
-     * @return Returns {@code true} if response is valid,
-     * otherwise returns {@code false}.
+     * @return Returns true if response is valid, otherwise returns false.
      */
     @Override
     protected boolean validated(
@@ -191,13 +189,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Checks a dates to correction.
-     * Dates must be not {@code null}
+     * Dates must be not null
      * and not equals between themselves.
      *
      * @param startDate  a initial date.
      * @param finishDate a final date.
-     * @return {@code true} if dates are correct,
-     * {@code false} otherwise.
+     * @return true if dates are correct, false otherwise.
      */
     private static boolean checkDate(
             final Date startDate,
@@ -214,7 +211,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param response   the response to compare.
      * @param startDate  a initial date.
      * @param finishDate a final date.
-     * @return {@code true} or {@code false}.
+     * @return true or false.
      */
     private static boolean compareToDate(
             final Response response,
@@ -229,7 +226,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Filters response by validation.
      *
      * @param response a response to filter.
-     * @return {@code true} or {@code false}.
+     * @return true if response is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Response response) {
         return (response != null) && response.isValidated();

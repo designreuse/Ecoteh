@@ -114,8 +114,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
 
     /**
      * Sets validations of the model.
-     * Sets {@code true} if the model is valid,
-     * {@code false} is invalid.
+     * Sets true if the model is valid, false is invalid.
      *
      * @param validated a validations of the model.
      */
@@ -127,8 +126,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     /**
      * Validates the model.
      *
-     * @return {@code true} if the model is valid,
-     * {@code false} otherwise.
+     * @return true if the model is valid, false otherwise.
      */
     @Override
     public boolean isValidated() {

@@ -138,8 +138,8 @@ public class Article extends Content implements IArticle {
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.
-     * @return {@code true} if this object is the same as the object
-     * argument, {@code false} otherwise otherwise.
+     * @return true if this object is the same as the object
+     * argument, false otherwise otherwise.
      */
     @Override
     public boolean equals(final Object object) {
@@ -261,7 +261,7 @@ public class Article extends Content implements IArticle {
 
     /**
      * Sets a new price to the article.
-     * If parameter text is blank, then sets {@code new Date()}.
+     * If parameter text is blank, then sets new Date().
      *
      * @param price a new price to the article.
      */

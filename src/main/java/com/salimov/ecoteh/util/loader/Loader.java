@@ -24,8 +24,7 @@ public interface Loader {
     /**
      * Deletes a file with the rootPath.
      *
-     * @return {@code true} if a file is deleted,
-     * {@code false} otherwise.
+     * @return true if a file is deleted, false otherwise.
      */
     boolean delete();
 

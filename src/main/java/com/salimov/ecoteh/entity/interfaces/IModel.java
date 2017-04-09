@@ -73,8 +73,7 @@ public interface IModel extends Serializable, Cloneable {
     /**
      * Validates the model.
      *
-     * @return {@code true} if the model is valid,
-     * {@code false} otherwise.
+     * @return true if the model is valid, false otherwise.
      */
     boolean isValidated();
 

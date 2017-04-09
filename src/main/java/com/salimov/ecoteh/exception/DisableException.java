@@ -9,8 +9,7 @@ package com.salimov.ecoteh.exception;
 public final class DisableException extends RuntimeException {
 
     /**
-     * Constructs a new disable exception
-     * with {@code null} as its detail sender.
+     * Constructs a new disable exception with null as its detail sender.
      */
     public DisableException() {
     }

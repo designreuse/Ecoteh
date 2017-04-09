@@ -162,7 +162,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all articles sorted by sortType.
      *
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @param revers   a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -233,7 +233,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with all sorted partners.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -273,7 +273,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      *
      * @param url      a category URL.
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @param revers   a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -367,7 +367,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with all sorted responses.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -412,8 +412,8 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Validates output objects.
      *
-     * @return Returns {@code true} if need to return valid objects,
-     * {@code false} otherwise.
+     * @return Returns true if need to return valid objects,
+     * false otherwise.
      */
     @Override
     public boolean isValidContent() {

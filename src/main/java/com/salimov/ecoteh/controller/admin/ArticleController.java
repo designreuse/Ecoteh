@@ -319,7 +319,7 @@ public class ArticleController {
      * Returns a view name for the article.
      * If the article text is not blank then
      * returns "redirect:/admin/article/{article_url}",
-     * else if the article category is not {@code null}
+     * else if the article category is not null
      * then returns "redirect:/admin/category/{category_url}",
      * else returns "redirect:/admin/article/all";
      *

@@ -134,7 +134,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with all articles sorted by sortType.
      *
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @param revers   a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -209,7 +209,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all sorted partners.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -246,7 +246,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      *
      * @param url      a category URL.
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @param revers   a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -327,7 +327,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all sorted responses.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -374,8 +374,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Validates output objects.
      *
-     * @return Returns {@code true} if need to return valid objects,
-     * {@code false} otherwise.
+     * @return Returns true if need to return valid objects, false otherwise.
      */
     @Override
     public boolean isValidContent() {
@@ -383,7 +382,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView allSortByTitleArticlesPage(
@@ -401,7 +400,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all articles sorted by date.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView allSortByDateArticlesPage(
@@ -419,7 +418,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all articles sorted by number.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView allSortByNumberArticlesPage(
@@ -438,7 +437,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Prepared and returns already page with the sorted articles.
      *
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @param revers   a sorting direction, true or false.
      * @param articles a sorted articles.
      * @return The ready object of class ModelAndView.
      */
@@ -459,7 +458,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * with all articles sorted by title.
      *
      * @param url    a category URL.
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView categoryWithSortByTitleArticlesPage(
@@ -485,7 +484,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * with all articles sorted by date.
      *
      * @param url    a category URL.
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView categoryWithSortByDateArticlesPage(
@@ -513,7 +512,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * with all articles sorted by number.
      *
      * @param url    a category URL.
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView categoryWithSortByNumberArticlesPage(

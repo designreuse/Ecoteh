@@ -55,7 +55,7 @@ public final class SenderServiceImpl implements SenderService {
             final String senderEmail,
             final String senderEmailPass
     ) {
-        if (recipientEmails != null) {
+        if (isNotNull(recipientEmails)) {
             for (String email : recipientEmails) {
                 send(subject, text, email, senderEmail, senderEmailPass);
             }
@@ -77,7 +77,7 @@ public final class SenderServiceImpl implements SenderService {
             final String recipientEmail,
             final User sender
     ) {
-        if (sender != null) {
+        if (isNotNull(sender)) {
             send(
                     subject, text, recipientEmail,
                     sender.getContacts().getEmail(), sender.getPassword()
@@ -100,7 +100,7 @@ public final class SenderServiceImpl implements SenderService {
             final String[] recipientEmails,
             final User sender
     ) {
-        if (sender != null) {
+        if (isNotNull(sender)) {
             send(
                     subject, text, recipientEmails,
                     sender.getContacts().getEmail(), sender.getPassword()
@@ -183,19 +183,29 @@ public final class SenderServiceImpl implements SenderService {
      * Validated a recipient.
      *
      * @param recipient a recipient to validate.
-     * @return {@code true} if recipient is valid, {@code false} otherwise.
+     * @return tru if recipient is valid, false otherwise.
      */
     private static boolean validRecipient(final User recipient) {
-        return (recipient != null) && recipient.isMailing();
+        return isNotNull(recipient) && recipient.isMailing();
     }
 
     /**
      * Validated a recipients.
      *
      * @param recipients a recipients to validate.
-     * @return {@code true} if recipients is valid, {@code false} otherwise.
+     * @return true if recipients is valid, false otherwise.
      */
     private static boolean validRecipients(final Collection<User> recipients) {
-        return (recipients != null) && !recipients.isEmpty();
+        return isNotNull(recipients) && !recipients.isEmpty();
+    }
+
+    /**
+     * Checks if input object is not null.
+     *
+     * @param object a object to check.
+     * @return true if object is null, false otherwise.
+     */
+    private static boolean isNotNull(final Object object) {
+        return (object != null);
     }
 }

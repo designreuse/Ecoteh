@@ -48,7 +48,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
      * application context.
      *
      * @return the configuration classes for the dispatcher servlet
-     * application context or {@code null} if all configuration
+     * application context or null if all configuration
      * is specified through root config classes.
      */
     @Override
@@ -63,7 +63,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
      * to the createRootApplicationContext() root application context.
      *
      * @return the configuration classes for the root application context,
-     * or {@code null} if creation and registration of a root context
+     * or null if creation and registration of a root context
      * is not desired.
      */
     @Override
@@ -77,8 +77,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     }
 
     /**
-     * Specify the servlet mapping(s) for the {@code DispatcherServlet};
-     * for example {@code "/"}, {@code "/app"}, etc.
+     * Specify the servlet mapping(s) for the DispatcherServlet;
+     * for example "/", "/app", etc.
      */
     @Override
     protected String[] getServletMappings() {

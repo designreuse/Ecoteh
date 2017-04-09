@@ -77,7 +77,7 @@ public interface IArticle extends IContent {
 
     /**
      * Sets a new price to the article.
-     * If parameter text is blank, then sets {@code new Date()}.
+     * If parameter text is blank, then sets new Date().
      *
      * @param price a new price to the article.
      */

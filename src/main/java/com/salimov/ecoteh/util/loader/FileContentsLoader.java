@@ -83,8 +83,10 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
     }
 
     /**
+     * Sets a new text to the article.
+     * If parameter text is blank, then sets empty string.
      *
-     * @param text
+     * @param text a new text to the article.
      */
     private void setText(final String text) {
         this.text = isNotBlank(text) ? text : "";

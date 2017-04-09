@@ -159,8 +159,7 @@ public class Category extends Content implements ICategory {
      * Contains article in the list of articles.
      *
      * @param article an article to contain.
-     * @return {@code true} if article is contains,
-     * {@code false} otherwise.
+     * @return true if article is contains, false otherwise.
      */
     @Override
     public boolean containsArticle(final Article article) {
@@ -171,8 +170,7 @@ public class Category extends Content implements ICategory {
      * Contains articles in the list of articles.
      *
      * @param articles an articles to contain.
-     * @return {@code true} if articles are contains,
-     * {@code false} otherwise.
+     * @return true if articles are contains, false otherwise.
      */
     @Override
     public boolean containsArticles(final Collection<Article> articles) {

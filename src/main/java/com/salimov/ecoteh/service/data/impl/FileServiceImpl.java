@@ -144,12 +144,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Initializes, updates and returns file with parameter id.
-     * Returns {@code null} if id is {@code null}.
      *
      * @param id            a id of the file to update.
      * @param title         a new title to the file.
      * @param multipartFile a new multipart file to the file.
-     * @return The updating file with parameter id or {@code null}.
+     * @return The updating file with parameter id or null.
      */
     @Override
     @Transactional
@@ -163,10 +162,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Returns file object with the parameter title.
-     * If title is blank then return {@code null}.
      *
      * @param title a title of the file to return.
-     * @return The file with parameter title or {@code null}.
+     * @return The file with parameter title.
      * @throws IllegalArgumentException Throw exception when parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
@@ -181,10 +179,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Returns file object with the parameter url.
-     * If url is blank then return {@code null}.
      *
      * @param url a url of the file to return.
-     * @return The file with parameter url or {@code null}.
+     * @return The file with parameter url.
      * @throws IllegalArgumentException Throw exception when parameter url is blank.
      */
     @Override
@@ -222,7 +219,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Removes file if it is not {@code null}.
+     * Removes file if it is not null.
      *
      * @param file the file to remove.
      */
@@ -262,7 +259,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Saves the multipart file in the file system in the directory rootPath.
-     * Saves file if it is not {@code null} and not empty.
+     * Saves file if it is not null and is not empty.
      *
      * @param multipartFile the multipart file to save.
      * @param rootPath      a directory path.
@@ -284,7 +281,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Saves the multipart file in the file system.
-     * Saves file if it is not {@code null}.
+     * Saves file if it is not null.
      *
      * @param multipartFile the multipart file to save.
      */
@@ -299,8 +296,8 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Deletes file if path is not blank.
      *
      * @param rootPath the file path.
-     * @return Returns {@code true} if able to delete the file,
-     * otherwise return {@code false}.
+     * @return Returns true if able to delete the file,
+     * otherwise return false.
      */
     @Override
     @Transactional
@@ -316,7 +313,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * @param file      the file to valid.
      * @param exist     is validate by exists.
      * @param duplicate is validate by duplicate.
-     * @return {@code true} if file is valid, {@code false} otherwise.
+     * @return true if file is valid, false otherwise.
      */
     @Override
     protected boolean validated(
@@ -360,7 +357,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      *
      * @param type a type of files to return.
      * @return The files with the type.
-     * @throws IllegalArgumentException Throw exception when parameter type is {@code null}.
+     * @throws IllegalArgumentException Throw exception when parameter type is null.
      */
     @Override
     @Transactional(readOnly = true)
@@ -451,8 +448,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Checks if file is empty.
      *
      * @param multipartFile a multipart file.
-     * @return {@code true} if file is {@code null} or empty,
-     * {@code false} otherwise.
+     * @return true if file is null or empty, false otherwise.
      */
     private static boolean isEmptyFile(final MultipartFile multipartFile) {
         return !isNotEmptyFile(multipartFile);
@@ -462,8 +458,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Checks if file is not empty.
      *
      * @param multipartFile a multipart file.
-     * @return {@code true} if file is not {@code null} or empty,
-     * {@code false} otherwise.
+     * @return true if file is not null or empty, false otherwise.
      */
     private static boolean isNotEmptyFile(final MultipartFile multipartFile) {
         return (multipartFile != null) && !multipartFile.isEmpty();

@@ -136,7 +136,7 @@ public interface FileService extends DataService<File> {
      * Deletes file in the file system.
      *
      * @param rootPath a file path.
-     * @return {@code true} if able to delete the file, {@code false} otherwise.
+     * @return true if able to delete the file, false otherwise.
      */
     boolean deleteFile(final String rootPath);
 

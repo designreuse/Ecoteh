@@ -76,8 +76,8 @@ public class Response extends Model implements IResponse {
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.
-     * @return {@code true} if this object is the same as the obj
-     * argument, {@code false} otherwise.
+     * @return true if this object is the same as the obj argument,
+     * false otherwise.
      */
     @Override
     public boolean equals(final Object object) {

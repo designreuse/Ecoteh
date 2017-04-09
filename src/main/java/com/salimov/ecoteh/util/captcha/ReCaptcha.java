@@ -89,7 +89,7 @@ public final class ReCaptcha implements Captcha {
      * Verifies captcha from request.
      *
      * @param request a request from client.
-     * @return {@code true} if captcha is verify, {@code false} otherwise.
+     * @return true if captcha is verify, false otherwise.
      */
     @Override
     public boolean isVerify(final HttpServletRequest request) {
@@ -109,7 +109,7 @@ public final class ReCaptcha implements Captcha {
      *
      * @param captcha   a StaticCaptcha for check.
      * @param ipAddress a request ip address.
-     * @return {@code true} if captcha is verify, {@code false} otherwise.
+     * @return true if captcha is verify, false otherwise.
      */
     @Override
     public boolean isVerify(

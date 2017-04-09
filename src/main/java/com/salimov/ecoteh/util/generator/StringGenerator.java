@@ -2,6 +2,8 @@ package com.salimov.ecoteh.util.generator;
 
 import java.util.Random;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 /**
  * The class implements a set of methods for generating random string.
  *
@@ -114,7 +116,7 @@ public final class StringGenerator implements Generator<String> {
      */
     @Override
     public String get() {
-        if (this.string == null) {
+        if (isBlank(this.string)) {
             generate();
         }
         return this.string;
@@ -142,8 +144,7 @@ public final class StringGenerator implements Generator<String> {
      * Checks if pattern is not empty.
      *
      * @param pattern a pattern to generated new string.
-     * @return {@code true} if pattern is not empty,
-     * {@code false} otherwise.
+     * @return true if pattern is not empty, false otherwise.
      */
     private static boolean isNotEmptyPattern(final char[] pattern) {
         return (pattern != null) && (pattern.length > 0);

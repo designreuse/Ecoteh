@@ -175,7 +175,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Removes company.
-     * Removes company if it not {@code null} and has not type {@code CompanyType.MAIN}.
+     * Removes company if it not null and has not type CompanyType.MAIN.
      *
      * @param company the company to remove.
      */

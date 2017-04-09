@@ -16,7 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
  * @version 1.0
  */
 @Controller
-@RequestMapping(value = "/superadmin")
+@RequestMapping(
+        value = {
+                "/superadmin/config",
+                "/superadmin/configuration"
+        }
+)
 public class ConfigurationController {
 
     /**
@@ -53,7 +58,7 @@ public class ConfigurationController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {"", "/", "/config", "/configuration"},
+            value = {"", "/"},
             method = RequestMethod.GET
     )
     public ModelAndView getPropertiesPage() {

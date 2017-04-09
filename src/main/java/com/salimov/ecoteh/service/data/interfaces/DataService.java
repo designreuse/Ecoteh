@@ -103,8 +103,7 @@ public interface DataService<T extends Model> {
      * is exists with parameter id.
      *
      * @param id a id of the model to exist.
-     * @return Returns {@code true} if model is exists,
-     * otherwise returns {@code false}.
+     * @return Returns true if model is exists, otherwise returns false.
      */
     boolean exists(final long id);
 
@@ -113,8 +112,7 @@ public interface DataService<T extends Model> {
      * or subclasses is exists.
      *
      * @param model the model to exists.
-     * @return Returns {@code true} if model is exists,
-     * otherwise returns {@code false}.
+     * @return Returns true if model is exists, otherwise returns false.
      */
     boolean exists(final T model);
 

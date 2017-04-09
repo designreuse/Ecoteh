@@ -260,11 +260,11 @@ public final class Cache {
 
     /**
      * Returns object from cache with key.
-     * Returns {@code null} if key is {@code null}.
+     * Returns null if key is null.
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
-     * @return The object with key or {@code null}.
+     * @return The object with key or null.
      */
     public static <T> Object get(final T key) {
         Object object = null;
@@ -294,7 +294,7 @@ public final class Cache {
 
     /**
      * Removes object from cache with key.
-     * Removes object if key is not {@code null}.
+     * Removes object if key is not null.
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
@@ -369,8 +369,7 @@ public final class Cache {
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
-     * @return {@code true} if object is exist,
-     * {@code false} otherwise.
+     * @return true if object is exist, false otherwise.
      */
     public static <T> boolean exist(final T key) {
         return isNotNull(key) && exist(new Key<>(key));
@@ -407,8 +406,7 @@ public final class Cache {
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
-     * @return {@code true} if object is exist,
-     * {@code false} otherwise.
+     * @return true if object is exist, false otherwise.
      */
     private static <T> boolean exist(final Key<T> key) {
         return isNotNull(key) && cache.containsKey(key);
@@ -416,11 +414,11 @@ public final class Cache {
 
     /**
      * Returns object from cache with key.
-     * Returns {@code null} if key is {@code null}.
+     * Returns null if key is null.
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
-     * @return The object with key or {@code null}.
+     * @return The object with key or null.
      */
     private static <T> Object get(final Key<T> key) {
         Object object = null;
@@ -432,7 +430,7 @@ public final class Cache {
 
     /**
      * Removes object from cache with key.
-     * Removes object if key is not {@code null}.
+     * Removes object if key is not null.
      *
      * @param <T> a type of key.
      * @param key a object key in the cache.
@@ -447,10 +445,10 @@ public final class Cache {
      * Checks the map with entries in the cache.
      *
      * @param result a maps with entries.
-     * @return {@code true} if maps is valid, {@code false} otherwise.
+     * @return true if maps is valid, false otherwise.
      */
     private static boolean checkResultMap(final Map<String, String> result) {
-        return isNotNull(result) || (result.size() != cache.size());
+        return !isNotNull(result) || (result.size() != cache.size());
     }
 
     /**
@@ -476,18 +474,19 @@ public final class Cache {
      *
      * @param key    a object key in the cache.
      * @param subKey a object key in the cache.
-     * @return {@code true} if key contains subKey,
-     * {@code false} otherwise.
+     * @return true if key contains subKey, false otherwise.
      */
     private static boolean containsKey(final Key key, final String subKey) {
         return key.getKey().toString().contains(subKey);
     }
 
     /**
-     * @param entry
-     * @param object
+     * Filters entry object class with input class.
+     *
+     * @param entry  a entry to filter.
+     * @param object a class to equals.
      * @param <T>    a type of key.
-     * @return
+     * @return true if entry class equals to oblect class, false otherwise.
      */
     private static <T> boolean filterByClass(
             final Map.Entry<T, Object> entry,
@@ -497,16 +496,20 @@ public final class Cache {
     }
 
     /**
-     * @param object
-     * @return
+     * Checks if input object is not null.
+     *
+     * @param object a object to check.
+     * @return true if object is null, false otherwise.
      */
     private static boolean isNotNull(final Object object) {
         return (object != null);
     }
 
     /**
-     * @param map
-     * @return
+     * Checks if input map is not empty.
+     *
+     * @param map a map to check.
+     * @return true if map is not empty, false otherwise.
      */
     private static boolean isNotEmptyMap(final Map map) {
         return isNotNull(map) && !map.isEmpty();

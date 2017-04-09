@@ -212,7 +212,7 @@ public class File extends Model implements IFile {
 
     /**
      * Sets a new type to the file.
-     * If parameter URL is empty string, then sets {@code FileType.OTHER}.
+     * If parameter URL is empty string, then sets FileType.OTHER.
      *
      * @param type a new file type.
      */

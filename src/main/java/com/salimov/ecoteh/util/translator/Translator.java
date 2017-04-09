@@ -13,7 +13,7 @@ public final class Translator {
      * Translates value from cyrillic to latin.
      *
      * @param value a string to translate.
-     * @return The translated string (newer {@code null}).
+     * @return The translated string (newer null).
      */
     public static String fromCyrillicToLatin(final String value) {
         return new ToLatinImpl(value).fromCyrillic();
@@ -23,7 +23,7 @@ public final class Translator {
      * Translates value to ASCII.
      *
      * @param value a string to translate.
-     * @return The translated string (newer {@code null}).
+     * @return The translated string (newer null).
      */
     public static String toAscii(final String value) {
         return new AsciiImpl(value).to();
@@ -33,7 +33,7 @@ public final class Translator {
      * Translates value from ASCII.
      *
      * @param value a string to translate.
-     * @return The translated string (newer {@code null}).
+     * @return The translated string (newer null).
      */
     public static String fromAscii(final String value) {
         return new AsciiImpl(value).from();
@@ -43,7 +43,7 @@ public final class Translator {
      * Translates value to ASCII.
      *
      * @param value a string to translate.
-     * @return The translated string (newer {@code null}).
+     * @return The translated string (newer null).
      */
     public static String toAscii(final int value) {
         return new AsciiImpl(value).to();
@@ -53,7 +53,7 @@ public final class Translator {
      * Translates value from ASCII.
      *
      * @param value a string to translate.
-     * @return The translated string (newer {@code null}).
+     * @return The translated string (newer null).
      */
     public static String fromAscii(final int value) {
         return new AsciiImpl(value).from();

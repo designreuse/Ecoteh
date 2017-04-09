@@ -158,8 +158,8 @@ public interface ICompany extends IContent {
     /**
      * Checks whether the company is opened now.
      *
-     * @return Returns {@code true} if the company is opened now,
-     * otherwise returns {@code false}.
+     * @return Returns true if the company is opened now,
+     * otherwise returns false.
      */
     boolean isOpen();
 

@@ -163,7 +163,7 @@ public class SearchServiceImpl implements SearchService {
      *
      * @param keywords     a keywords for content search.
      * @param modelAndView a object of class ModelAndView for to update.
-     * @return {@code true} if page is exist, {@code false} otherwise.
+     * @return true if page is exist, false otherwise.
      */
     private static boolean getPageBySearch(
             final String keywords,

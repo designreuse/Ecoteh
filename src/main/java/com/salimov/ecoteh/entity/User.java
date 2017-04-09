@@ -118,7 +118,6 @@ public class User extends Model implements IUser, UserDetails {
      * Default constructor.
      */
     public User() {
-        System.out.println("USER Default constructor.");
         this.name = "";
         this.url = "";
         this.encryptedLogin = "";
@@ -202,8 +201,8 @@ public class User extends Model implements IUser, UserDetails {
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.
-     * @return {@code true} if this object is the same as the obj
-     * argument, {@code false} otherwise.
+     * @return true if this object is the same as the obj
+     * argument, false otherwise.
      */
     @Override
     public boolean equals(final Object object) {
@@ -243,8 +242,8 @@ public class User extends Model implements IUser, UserDetails {
      * Indicates whether the user's account has expired.
      * An expired account cannot be authenticated.
      *
-     * @return {@code true} if the user's account is valid (ie non-expired),
-     * {@code false} if no longer valid (ie expired)
+     * @return true if the user's account is valid (ie non-expired),
+     * false if no longer valid (ie expired)
      */
     @Override
     public boolean isAccountNonExpired() {
@@ -255,7 +254,7 @@ public class User extends Model implements IUser, UserDetails {
      * Indicates whether the user is locked or unlocked.
      * A locked user cannot be authenticated.
      *
-     * @return {@code true} if the user is not locked, {@code false} otherwise.
+     * @return true if the user is not locked, false otherwise.
      */
     @Override
     public boolean isAccountNonLocked() {
@@ -266,8 +265,8 @@ public class User extends Model implements IUser, UserDetails {
      * Indicates whether the user's credentials (password) has expired.
      * Expired credentials prevent authentication.
      *
-     * @return {@code true} if the user's credentials are valid
-     * (ie non-expired), {@code false} if no longer valid (ie expired)
+     * @return true if the user's credentials are valid
+     * (ie non-expired), false if no longer valid (ie expired)
      */
     @Override
     public boolean isCredentialsNonExpired() {
@@ -278,8 +277,8 @@ public class User extends Model implements IUser, UserDetails {
      * Indicates whether the user is enabled or disabled.
      * A disabled user cannot be authenticated.
      *
-     * @return {@code true} if the user's credentials are valid
-     * (ie non-expired), {@code false} if no longer valid (ie expired)
+     * @return true if the user's credentials are valid
+     * (ie non-expired), false if no longer valid (ie expired)
      */
     @Override
     public boolean isEnabled() {
@@ -288,9 +287,9 @@ public class User extends Model implements IUser, UserDetails {
 
     /**
      * Returns the authorities granted to the user.
-     * Cannot return {@code null}.
+     * Cannot return null.
      *
-     * @return the authorities, sorted by natural key (never {@code null})
+     * @return the authorities, sorted by natural key (never null)
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -301,10 +300,10 @@ public class User extends Model implements IUser, UserDetails {
 
     /**
      * Returns the username used to authenticate the user.
-     * Cannot return {@code null}. Return the empty string
-     * if username is {@code null}.
+     * Cannot return null. Return the empty string
+     * if username is null.
      *
-     * @return the username or the empty string (never {@code null}).
+     * @return the username or the empty string (never null).
      */
     @Override
     public String getUsername() {

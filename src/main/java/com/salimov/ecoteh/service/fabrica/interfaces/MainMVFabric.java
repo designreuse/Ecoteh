@@ -36,7 +36,7 @@ public interface MainMVFabric {
      * Creates and returns page with all articles sorted by sortType.
      *
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} / {@code false}.
+     * @param revers   a sorting direction, true / false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortArticlesPage(
@@ -68,7 +68,7 @@ public interface MainMVFabric {
     /**
      * Creates and returns page with all sorted partners.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortPartnersByTitlePage(final boolean revers);
@@ -87,7 +87,7 @@ public interface MainMVFabric {
      *
      * @param url      a category URL.
      * @param sortType a sort type.
-     * @param revers   a sorting direction, {@code true} or {@code false}.
+     * @param revers   a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView categoryWithSortArticlesPage(
@@ -130,7 +130,7 @@ public interface MainMVFabric {
     /**
      * Creates and returns page with all sorted responses.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortResponsesByDatePage(final boolean revers);
@@ -152,8 +152,8 @@ public interface MainMVFabric {
     /**
      * Validates output objects.
      *
-     * @return Returns {@code true} if need to return valid objects,
-     * {@code false} otherwise.
+     * @return Returns true if need to return valid objects,
+     * false otherwise.
      */
     boolean isValidContent();
 }

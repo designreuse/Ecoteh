@@ -46,8 +46,7 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
      * @param message   the model to valid.
      * @param exist     is validate input model by exists.
      * @param duplicate is validate input model by duplicate.
-     * @return Returns {@code true} if the model is valid,
-     * otherwise returns {@code false}.
+     * @return Returns true if the model is valid, otherwise returns false.
      */
     @Override
     protected boolean validated(

@@ -41,8 +41,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      */
     private final ArticleService articleService;
 
-    private final CategoryRepository repository;
-
     /**
      * Constructor.
      *
@@ -58,7 +56,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
             final FileService fileService
     ) {
         super(repository, fileService);
-        this.repository = repository;
         this.articleService = articleService;
     }
 
@@ -119,8 +116,8 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes the category. Removes category if it is not {@code null}.
-     * Also deletes file file if category file is not {@code null}
+     * Removes the category. Removes category if it is not null.
+     * Also deletes file file if category file is not null
      *
      * @param category the category to remove.
      */
@@ -191,7 +188,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * Filters category by validation.
      *
      * @param category a category to filter.
-     * @return {@code true} or {@code false}.
+     * @return true if article is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Category category) {
         return (category != null) && (category.isValidated());

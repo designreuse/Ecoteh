@@ -287,7 +287,7 @@ public class FileController {
      * Returns modelAndView with information about page
      * with all files sorting by title.
      *
-     * @param revers a sorting direction, {@code true} or {@code false}.
+     * @param revers a sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView getAllFileSortByTitle(final boolean revers) {
