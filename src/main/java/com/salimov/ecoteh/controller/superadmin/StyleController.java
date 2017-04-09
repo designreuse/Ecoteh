@@ -1,4 +1,4 @@
-package com.salimov.ecoteh.controller.admin;
+package com.salimov.ecoteh.controller.superadmin;
 
 import com.salimov.ecoteh.service.data.interfaces.StyleService;
 import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(
         value = {
-                "/admin/style",
-                "/admin/styles"
+                "/superadmin/style",
+                "/superadmin/styles"
         }
 )
 @ComponentScan(
@@ -77,7 +77,7 @@ public class StyleController {
     public ModelAndView getStylesToEdit() {
         ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("styles", this.styleService.get());
-        modelAndView.setViewName("admin/style/edit");
+        modelAndView.setViewName("superadmin/style/edit");
         return modelAndView;
     }
 
@@ -99,7 +99,7 @@ public class StyleController {
             final ModelAndView modelAndView
     ) {
         this.styleService.save(styles);
-        modelAndView.setViewName("redirect:/admin/style");
+        modelAndView.setViewName("redirect:/superadmin/style");
         return modelAndView;
     }
 
@@ -117,7 +117,7 @@ public class StyleController {
             method = RequestMethod.GET
     )
     public void updateStyles() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/style/update\" is not supported!");
+        throw new IllegalMappingException("GET method in \"/superadmin/style/update\" is not supported!");
     }
 
     /**
@@ -134,7 +134,7 @@ public class StyleController {
     )
     public ModelAndView rollbackStyles(final ModelAndView modelAndView) {
         this.styleService.rollback();
-        modelAndView.setViewName("redirect:/admin/style");
+        modelAndView.setViewName("redirect:/superadmin/style");
         return modelAndView;
     }
 }
