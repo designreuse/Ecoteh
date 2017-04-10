@@ -488,6 +488,14 @@ a .glyphicon:hover {
     content: "\e107";
 }
 
+.glyphicon-cog:before {
+    content: "\e019";
+}
+
+.glyphicon-registration-mark:before {
+    content: "\e195";
+}
+
 .inner-addon {
     position: relative
 }
