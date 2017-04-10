@@ -1,3 +1,10 @@
+<%--
+Footer of the site, it contains the contact
+details of the main company.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,6 +21,7 @@
         <c:set var="years" value="${start}" scope="session"/>
     </c:otherwise>
 </c:choose>
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <footer>
         <div class="container">
@@ -162,5 +170,3 @@
         </div>
     </footer>
 </div>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

@@ -1,3 +1,9 @@
+<%--
+Page with all project configurations.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
@@ -16,6 +22,7 @@
         <meta name="robots" content="noindex,nofollow">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -25,17 +32,48 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/content.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/content_properties.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/database.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/security.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/log4j.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/captcha.jsp"/>
-    <jsp:include page="/WEB-INF/views/superadmin/configuration/verification.jsp"/>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                        <%-- Site page path --%>
+                    <p class="path">
+                        <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
+                        → <a href="<c:url value="#"/>">Конфигурация</a>
+                    </p>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <hr>
+                        <h3 class="text-center">
+                            Конфигурация проекта
+                        </h3>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <%-- Content Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/content.jsp" %>
+        <%-- Content Properties Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/content_properties.jsp" %>
+        <%-- Database Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/database.jsp" %>
+        <%-- Securiyt Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/security.jsp" %>
+        <%-- Log4j Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/log4j.jsp" %>
+        <%-- Google reCaptcha Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/captcha.jsp" %>
+        <%-- Site Verification Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/verification.jsp" %>
     <c:if test="${main_company ne null}">
+        <%-- Footer --%>
         <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
     </c:if>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
@@ -43,5 +81,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

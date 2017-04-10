@@ -1,3 +1,9 @@
+<%--
+Page of the one incoming company.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
@@ -19,6 +25,7 @@
         <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -28,12 +35,14 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <%-- Site page path --%>
                         <p class="path">
                             <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
@@ -44,6 +53,7 @@
                             <h3 class="text-center"><c:out value="${company.title}"/></h3>
                             <hr>
                         </c:if>
+                            <%-- Administrator actions --%>
                         <c:if test="${authorized_user ne null}">
                             <div class="text-center">
                                 <a href="<c:url value="/admin/company/new"/>" title="Добавить нового партнера">
@@ -68,6 +78,7 @@
                                 </a>
                             </div>
                         </c:if>
+                            <%-- Company logo --%>
                         <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
                         <c:if test="${!company.validated}">
                             <p class="no-valid" title="Не отображается для клиентов">
@@ -96,12 +107,15 @@
                     <hr>
                     <h3 class="intro-text text-center">Контакты</h3>
                     <hr>
+                        <%-- Contact information of the incoming company --%>
                     <jsp:include page="/WEB-INF/views/client/company/contacts.jsp"/>
                 </div>
             </div>
         </div>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
@@ -109,5 +123,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

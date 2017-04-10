@@ -17,6 +17,7 @@
         <meta name="description" content="Сохраненный файлы на сервере.">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -27,29 +28,13 @@
         <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <div class="text-center">
-                        <a href="<c:url value="/admin/file/new"/>" title="Добавить новый файл">
-                            <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                &nbsp;Добавить
-                            </button>
-                        </a>
-                        <c:set var="length" value="${fn:length(files)}"/>
-                        <c:if test="${length gt 0}">
-                            &nbsp;&nbsp;
-                            <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                    &nbsp;Удалить все
-                                </button>
-                            </a>
-                        </c:if>
-                    </div>
+                        <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
@@ -61,6 +46,24 @@
                             Файлы<c:if test="${length le 0}"> - список пуст!</c:if>
                         </h3>
                         <hr>
+                        <div class="text-center">
+                            <a href="<c:url value="/admin/file/new"/>" title="Добавить новый файл">
+                                <button class="btn btn-default">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    &nbsp;Добавить
+                                </button>
+                            </a>
+                            <c:set var="length" value="${fn:length(files)}"/>
+                            <c:if test="${length gt 0}">
+                                &nbsp;&nbsp;
+                                <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить все
+                                    </button>
+                                </a>
+                            </c:if>
+                        </div>
                     </div>
                     <c:if test="${length gt 0}">
                         <c:if test="${length gt 1}">
@@ -71,48 +74,7 @@
                             </p><br>
                         </c:if>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <c:forEach items="${files}" var="file">
-                                <c:if test="${not empty file.url}">
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                        <div class="text-center">
-                                            <a href="<c:url value="${file.url}"/>" title="${file.title}"
-                                               rel="lightgallery[files]">
-                                                <img src="<c:url value="${file.url}"/>" class="file"
-                                                     onerror="this.src='<c:url
-                                                             value="/resources/img/static/default_file.gif"/>'"
-                                                     alt="" title="Увеличить">
-                                            </a><br>
-                                            <a href="<c:url value="${file.url}"/>" target="_blank"
-                                               title="Открыть в новом окне">
-                                                <c:out value="${file.title}"/>
-                                            </a><br>
-                                            <button class="btn-clipboard btn btn-default"
-                                                    title="Скорировать ссылку файла &quot;${file.title}&quot;"
-                                                    data-clipboard-text="<c:url value="${file.url}"/>">
-                                                <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-                                            </button>
-                                            &nbsp;
-                                            <a href="<c:url value="/admin/file/edit/${file.id}"/>"
-                                               title="Редактировать файл &quot;${file.title}&quot;">
-                                                <button class="btn btn-default">
-                                                    <span class="glyphicon glyphicon-edit yellow"
-                                                          aria-hidden="true"></span>
-                                                </button>
-                                            </a>
-                                            <c:if test="${file.validated}">
-                                                &nbsp;
-                                                <a href="<c:url value="/admin/file/delete/${file.id}"/>"
-                                                   title="Удалить файл &quot;${file.title}&quot;">
-                                                    <button class="btn btn-default">
-                                                        <span class="glyphicon glyphicon-remove red"
-                                                              aria-hidden="true"></span>
-                                                    </button>
-                                                </a>
-                                            </c:if>
-                                        </div>
-                                    </div>
-                                </c:if>
-                            </c:forEach>
+                            <%@include file="/WEB-INF/views/admin/file/list.jsp" %>
                         </div>
                     </c:if>
                     <div class="clearfix"></div>
@@ -120,7 +82,9 @@
             </div>
         </div>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
@@ -131,5 +95,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

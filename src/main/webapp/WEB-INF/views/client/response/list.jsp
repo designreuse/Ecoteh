@@ -1,3 +1,9 @@
+<%--
+Responses list.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -7,6 +13,7 @@
     <c:if test="${(print_responses eq null) or (print_responses gt length) or (print_responses le 0)}">
         <c:set var="print_responses" value="${length}"/>
     </c:if>
+
     <div class="container">
         <div class="row">
             <div class="box">
@@ -45,5 +52,3 @@
         </div>
     </div>
 </c:if>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

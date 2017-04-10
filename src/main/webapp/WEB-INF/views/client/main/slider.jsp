@@ -1,3 +1,10 @@
+<%--
+Main company sliders.
+Several slides greetings to the company.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -8,6 +15,7 @@
         <c:set var="length" value="${fn:length(slides)}"/>
         <c:choose>
             <c:when test="${length gt 0}">
+                <%-- Slide indicators --%>
                 <c:if test="${length gt 1}">
                     <ol class="carousel-indicators hidden-xs">
                         <c:set var="count" value="0"/>
@@ -21,6 +29,7 @@
                         </c:forEach>
                     </ol>
                 </c:if>
+                <%-- Slides --%>
                 <div class="carousel-inner">
                     <c:set var="count" value="true"/>
                     <c:forEach items="${slides}" var="slide">
@@ -33,6 +42,7 @@
                         </c:if>
                     </c:forEach>
                 </div>
+                <%-- Slide carousel controls --%>
                 <c:if test="${length gt 1}">
                     <a href="#carousel-example-generic" class="left carousel-control" data-slide="prev">
                         <span class="icon-prev"></span>
@@ -43,6 +53,7 @@
                 </c:if>
             </c:when>
             <c:otherwise>
+                <%-- Default slide (if slides list is empty) --%>
                 <div class="carousel-inner">
                     <div class="text-center item active">
                         <img src="<c:url value="/resources/img/static/default_slide.jpg"/>" class="slide" alt="">
@@ -52,5 +63,3 @@
         </c:choose>
     </div>
 </div>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

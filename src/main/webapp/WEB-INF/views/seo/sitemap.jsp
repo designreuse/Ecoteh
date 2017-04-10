@@ -1,7 +1,20 @@
+<%--
+Sitemap is a list of all pages on the site,
+which consists of the links to these pages.
+
+Yuriy Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="application/xml;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
+
+<c:set var="changefreq" value="weekly"/>
+<c:set var="main_priority" value="1.0"/>
+<c:set var="category_priority" value="0.5"/>
+<c:set var="article_priority" value="0.5"/>
+<c:set var="company_priority" value="0.5"/>
 
 <compress:xml removeIntertagSpaces="true">
     <?xml version="1.0" encoding="UTF-8"?>
@@ -9,84 +22,112 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+            <%-- Main URLs --%>
         <url>
-            <loc>http://${domain}/</loc>
-            <changefreq>weekly</changefreq>
-            <priority>1.0</priority>
+            <loc>
+                http://<c:out value="${domain}"/>/
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${main_priority}</priority>
         </url>
         <url>
-            <loc>http://${domain}/index</loc>
-            <changefreq>weekly</changefreq>
-            <priority>1.0</priority>
+            <loc>
+                http://<c:out value="${domain}"/>/index
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${main_priority}</priority>
         </url>
         <url>
-            <loc>http://${domain}/home</loc>
-            <changefreq>weekly</changefreq>
-            <priority>1.0</priority>
+            <loc>
+                http://<c:out value="${domain}"/>/home
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${main_priority}</priority>
         </url>
         <url>
-            <loc>http://${domain}/company/main</loc>
-            <changefreq>weekly</changefreq>
-            <priority>0.9</priority>
+            <loc>
+                http://<c:out value="${domain}"/>/company/main
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${main_priority}</priority>
         </url>
         <url>
-            <loc>http://${domain}/contacts</loc>
-            <changefreq>weekly</changefreq>
-            <priority>0.9</priority>
+            <loc>
+                http://<c:out value="${domain}"/>/contacts
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${main_priority}</priority>
         </url>
         <url>
-            <loc>http://${domain}/address</loc>
-            <changefreq>weekly</changefreq>
+            <loc>
+                http://<c:out value="${domain}"/>/address
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${main_priority}</priority>
+        </url>
+        <url>
+            <loc>
+                http://<c:out value="${domain}"/>/responses
+            </loc>
+            <changefreq>${changefreq}</changefreq>
             <priority>0.5</priority>
         </url>
-        <url>
-            <loc>http://${domain}/responses</loc>
-            <changefreq>weekly</changefreq>
-            <priority>0.5</priority>
-        </url>
+            <%-- Categories URLs --%>
         <c:if test="${fn:length(categories) gt 0}">
             <url>
-                <loc>http://${domain}/category/all</loc>
-                <changefreq>weekly</changefreq>
-                <priority>0.8</priority>
+                <loc>
+                    http://<c:out value="${domain}"/>/category/all
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${category_priority}</priority>
             </url>
             <c:forEach items="${categories}" var="cactegory">
                 <url>
-                    <loc>http://${domain}/category/${category.url}</loc>
-                    <changefreq>weekly</changefreq>
-                    <priority>0.6</priority>
+                    <loc>
+                        http://<c:out value="${domain}"/>/category/c
+                    </loc>
+                    <changefreq>${changefreq}</changefreq>
+                    <priority>${category_priority}</priority>
                 </url>
             </c:forEach>
         </c:if>
+            <%-- Articles URLs --%>
         <c:if test="${fn:length(articles) gt 0}">
             <url>
-                <loc>http://${domain}/article/all</loc>
-                <changefreq>weekly</changefreq>
-                <priority>0.8</priority>
+                <loc>
+                    http://<c:out value="${domain}"/>/article/all
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${article_priority}</priority>
             </url>
             <c:forEach items="${articles}" var="article">
                 <url>
-                    <loc>http://${domain}/article/${article.url}</loc>
-                    <changefreq>weekly</changefreq>
-                    <priority>0.5</priority>
+                    <loc>
+                        http://<c:out value="${domain}"/>/article/<c:out value="${article.url}"/>
+                    </loc>
+                    <changefreq>${changefreq}</changefreq>
+                    <priority>${article_priority}</priority>
                 </url>
             </c:forEach>
         </c:if>
+            <%-- Companies URLs --%>
         <c:if test="${fn:length(companies) gt 0}">
             <url>
-                <loc>http://${domain}/company/all</loc>
-                <changefreq>weekly</changefreq>
-                <priority>0.5</priority>
+                <loc>
+                    http://<c:out value="${domain}"/>/company/all
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${company_priority}</priority>
             </url>
             <c:forEach items="${companies}" var="company">
                 <url>
-                    <loc>http://${domain}/company/${company.url}</loc>
-                    <changefreq>weekly</changefreq>
-                    <priority>0.5</priority>
+                    <loc>
+                        http://<c:out value="${domain}"/>/company/<c:out value="${company.url}"/>
+                    </loc>
+                    <changefreq>${changefreq}</changefreq>
+                    <priority>${company_priority}</priority>
                 </url>
             </c:forEach>
         </c:if>
     </urlset>
 </compress:xml>
-
-<%-- Yuriy Salimov (yuriy.alex.salimov@gmail.com) --%>

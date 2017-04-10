@@ -1,3 +1,11 @@
+<%--
+Site's home page.
+Displays product categories, main company description,
+partner-companies logos and client responses.
+
+Yurii Salimov (yurii.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -16,9 +24,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <meta name="robots" content="index,follow">
-        <jsp:include page="/WEB-INF/views/client/main/verification.jsp"/>
+            <%-- Site verification --%>
+        <%@include file="/WEB-INF/views/client/main/verification.jsp" %>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -29,20 +39,25 @@
         <link href="<c:url value="/resources/css/carousel.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Main company logo --%>
     <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <jsp:include page="/WEB-INF/views/client/main/slider.jsp"/>
-                    <jsp:include page="/WEB-INF/views/client/message/to_home.jsp"/>
+                        <%-- Main company sliders --%>
+                    <%@include file="/WEB-INF/views/client/main/slider.jsp" %>
+                        <%-- Quick message from client --%>
+                    <%@include file="/WEB-INF/views/client/message/to_home.jsp" %>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%-- Categories list --%>
         <c:if test="${fn:length(categories) gt 0}">
             <div class="container">
                 <div class="row">
@@ -52,17 +67,23 @@
                             <a href="<c:url value="/category/all"/>" title="Категории товаров">Товары</a>
                         </h3>
                         <hr>
+                            <%-- Product categories --%>
                         <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
         </c:if>
-        <jsp:include page="/WEB-INF/views/client/company/to_home.jsp"/>
-        <jsp:include page="/WEB-INF/views/client/company/logos_list.jsp"/>
+            <%-- Main company description --%>
+        <%@include file="/WEB-INF/views/client/company/to_home.jsp" %>
+            <%-- Partner-companies logo list  --%>
+        <%@include file="/WEB-INF/views/client/company/logos_list.jsp" %>
+            <%-- Client responses--%>
         <jsp:include page="/WEB-INF/views/client/response/list.jsp"/>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${fn:length(slides) gt 0}">
@@ -74,5 +95,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yurii.alex.salimov@gmail.com) --%>

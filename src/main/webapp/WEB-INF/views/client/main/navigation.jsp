@@ -1,3 +1,11 @@
+<%--
+Navigation bar on the site.
+Displayed are main menu items for PCs and mobile.
+Displayed are contacts for PCs and mobile.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -5,6 +13,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <nav class="navbar navbar-default">
         <div class="container">
+            <%-- Collapsed navbar for mobile devices --%>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1">
@@ -107,6 +116,7 @@
                         </c:otherwise>
                     </c:choose>
                 </ul>
+                <%-- Administrator actions --%>
                 <c:if test="${authorized_user ne null}">
                     <ul class="hidden-xs dropdown nav navbar-nav">
                         <li>
@@ -160,11 +170,10 @@
                             <a href="<c:url value="/responses"/>">Отзывы</a>
                         </li>
                     </c:if>
-                    <c:if test="${fn:length(partners) gt 0}">
-                        <li>
-                            <a href="<c:url value="/company/all"/>">Партнеры</a>
-                        </li>
-                    </c:if>
+                    <li>
+                        <a href="<c:url value="/company/all"/>">Партнеры</a>
+                    </li>
+                    <%-- Administrator actions --%>
                     <c:choose>
                         <c:when test="${authorized_user ne null}">
                             <li>
@@ -231,5 +240,3 @@
         </div>
     </nav>
 </div>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

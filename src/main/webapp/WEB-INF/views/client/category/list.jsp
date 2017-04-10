@@ -1,3 +1,9 @@
+<%--
+Categories list.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -17,6 +23,7 @@
 <c:set var="last_line" value="${length - length % in_line}"/>
 <c:set var="printed_in_line" value="0"/>
 <c:set var="printed" value="0"/>
+
 <c:forEach items="${categories}" var="category">
     <c:if test="${(last_line ne length ) and (printed eq last_line)}">
         <c:set var="in_line" value="${length - last_line}"/>
@@ -62,5 +69,3 @@
         </a>
     </p>
 </div>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

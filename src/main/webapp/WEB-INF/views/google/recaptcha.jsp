@@ -1,3 +1,11 @@
+<%--
+Google reCaptcha.
+Captcha keys are stored in the captcha.properties
+configuration file.
+
+Yuriy Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -11,5 +19,3 @@
     </div>
     <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
 </c:if>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

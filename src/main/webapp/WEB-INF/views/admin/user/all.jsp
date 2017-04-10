@@ -1,3 +1,9 @@
+<%--
+Page with all users.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -19,6 +25,7 @@
               content="<c:out value="${main_company.title}"/><c:forEach items="${users}" var="user">, <c:out value="${user.name}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -32,27 +39,13 @@
         </c:if>
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <div class="text-center">
-                        <a href="<c:url value="/admin/user/new"/>" title="Добавить нового пользователя">
-                            <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
-                            </button>
-                        </a>
-                        <c:if test="${length gt 0}">
-                            &nbsp;&nbsp;
-                            <a href="<c:url value="/admin/user/delete/all"/>" title="Удалить всех пользователей">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                    &nbsp;Удалить всех
-                                </button>
-                            </a>
-                        </c:if>
-                    </div>
+                        <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a> → Персонал
@@ -63,6 +56,23 @@
                             Персонал<c:if test="${length le 0}"> - список пуст!</c:if>
                         </h3>
                         <hr>
+                            <%-- User action --%>
+                        <div class="text-center">
+                            <a href="<c:url value="/admin/user/new"/>" title="Добавить нового пользователя">
+                                <button class="btn btn-default">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Новый
+                                </button>
+                            </a>
+                            <c:if test="${length gt 0}">
+                                &nbsp;&nbsp;
+                                <a href="<c:url value="/admin/user/delete/all"/>" title="Удалить всех пользователей">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить всех
+                                    </button>
+                                </a>
+                            </c:if>
+                        </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -72,6 +82,7 @@
             <div class="container">
                 <div class="row">
                     <div class="box">
+                            <%-- Users list --%>
                         <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
@@ -80,14 +91,17 @@
             <div class="container">
                 <div class="row">
                     <div class="box">
-                        <jsp:include page="/WEB-INF/views/admin/message/to_user.jsp"/>
+                            <%-- Form for sending a message to users --%>
+                        <%@include file="/WEB-INF/views/admin/message/to_user.jsp" %>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
         </c:if>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">
@@ -98,5 +112,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

@@ -1,3 +1,9 @@
+<%--
+Page with all products of the company.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -20,6 +26,7 @@
               content="<c:out value="${main_company.title}"/><c:forEach items="${articles_list}" var="article">, <c:out value="${article.title}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -33,30 +40,13 @@
         </c:if>
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <c:if test="${authorized_user ne null}">
-                        <div class="text-center">
-                            <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                    &nbsp;Новая
-                                </button>
-                            </a>
-                            <c:if test="${length gt 0}">
-                                &nbsp;&nbsp;
-                                <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                        &nbsp;Удалить все
-                                    </button>
-                                </a>
-                            </c:if>
-                        </div>
-                    </c:if>
+                        <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/article/all"/>">Все товары</a>
@@ -67,7 +57,28 @@
                             Все товары<c:if test="${length le 0}"> - список пуст!</c:if>
                         </h3>
                         <hr>
+                            <%-- Administrator actions --%>
+                        <c:if test="${authorized_user ne null}">
+                            <div class="text-center">
+                                <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        &nbsp;Новая
+                                    </button>
+                                </a>
+                                <c:if test="${length gt 0}">
+                                    &nbsp;&nbsp;
+                                    <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                            &nbsp;Удалить все
+                                        </button>
+                                    </a>
+                                </c:if>
+                            </div>
+                        </c:if>
                     </div>
+                        <%-- Articles sorting --%>
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
@@ -76,7 +87,7 @@
                                 <c:choose>
                                     <c:when test="${revers}">
                                         По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
-                                              aria-hidden="true"></span>
+                                        aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
                                         По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
@@ -118,9 +129,12 @@
                 </div>
             </div>
         </div>
+            <%-- Article list --%>
         <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">
@@ -131,5 +145,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

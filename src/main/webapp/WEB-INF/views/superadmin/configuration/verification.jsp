@@ -1,3 +1,9 @@
+<%--
+Site Verification Configuration.
+
+Yuriy Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -39,5 +45,3 @@
         </div>
     </div>
 </div>
-
-<%-- Yuriy Salimov (yuriy.alex.salimov@gmail.com) --%>

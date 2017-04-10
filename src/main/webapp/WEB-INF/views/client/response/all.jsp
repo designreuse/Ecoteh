@@ -1,3 +1,9 @@
+<%--
+Page with all responses of the company.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -18,6 +24,7 @@
         <meta name="keywords" content="Отзывы о компании, <c:out value="${main_company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -27,22 +34,14 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <c:set var="length" value="${fn:length(responses_list)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <c:if test="${(authorized_user ne null) and (length gt 0)}">
-                        <div class="text-center">
-                            <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании">
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                    &nbsp;Удалить все
-                                </button>
-                            </a>
-                        </div>
-                    </c:if>
+                        <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>"
                            title="Перейти на главную страницу">Главная</a>
@@ -50,21 +49,38 @@
                              title="Описание нашей компании">Описание компании</a>
                         → <a href="<c:url value="/responses"/>">Отзывы о компании</a>
                     </p>
-                    <hr>
-                    <h3 class="text-center">Отзывы о компании</h3>
-                    <hr>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <hr>
+                        <h3 class="text-center">Отзывы о компании</h3>
+                        <hr>
+                            <%-- Administrator actions --%>
+                        <c:if test="${(authorized_user ne null) and (length gt 0)}">
+                            <div class="text-center">
+                                <a href="<c:url value="/admin/response/delete/all"/>"
+                                   title="Удалить все отзывы о компании">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить все
+                                    </button>
+                                </a>
+                            </div>
+                        </c:if>
+                    </div>
+                        <%-- Responses sorting --%>
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
                             <a href="<c:url value="/responses/sort?revers=${revers}"/>" title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
-                                        aria-hidden="true"></span>
+                                        По дате&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                              aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
-                                        aria-hidden="true"></span>
+                                        По дате&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-attributes"
+                                              aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
                             </a>
@@ -92,7 +108,10 @@
                                         <span class="response green"><c:out value="${response.username}"/></span>&nbsp;
                                         <span class="little">(<c:out value="${response.dateToString}"/>)</span>
                                     </p>
-                                    <p class="response"><c:out value="${response.text}"/></p>
+                                    <p class="response">
+                                        <c:out value="${response.text}"/>
+                                    </p>
+                                        <%-- Administrator actions --%>
                                     <c:if test="${authorized_user ne null}">
                                         <p class="response">
                                             <c:choose>
@@ -101,7 +120,8 @@
                                                        title="Не отображать отзыв, его не смогут увидеть клиенты.">
                                                         <button class="btn btn-default">
                                                             <span class="glyphicon glyphicon-eye-close yellow"
-                                                                  aria-hidden="true"></span>&nbsp;Не отображать
+                                                                  aria-hidden="true"></span>
+                                                            &nbsp;Не отображать
                                                         </button>
                                                     </a>&nbsp;
                                                 </c:when>
@@ -110,7 +130,8 @@
                                                        title="Одобрить отзыв, его смогут увидеть клиенты.">
                                                         <button class="btn btn-default">
                                                             <span class="glyphicon glyphicon-eye-open"
-                                                                  aria-hidden="true"></span>&nbsp;Отображать
+                                                                  aria-hidden="true"></span>
+                                                            &nbsp;Отображать
                                                         </button>
                                                     </a>&nbsp;
                                                 </c:when>
@@ -119,7 +140,8 @@
                                                title="Удалить отзыв">
                                                 <button class="btn btn-default">
                                                     <span class="glyphicon glyphicon-minus red"
-                                                          aria-hidden="true"></span>&nbsp;Удалить
+                                                          aria-hidden="true"></span>
+                                                    &nbsp;Удалить
                                                 </button>
                                             </a>
                                         </p>
@@ -136,13 +158,16 @@
         <div class="container">
             <div class="row">
                 <div class="box">
-                    <jsp:include page="/WEB-INF/views/client/message/to_responses.jsp"/>
+                        <%-- Form for sending a response --%>
+                    <%@include file="/WEB-INF/views/client/message/to_responses.jsp" %>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>

@@ -1,3 +1,9 @@
+<%--
+Page with information about objects that are stored in cache.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -17,6 +23,7 @@
         <meta name="description" content="Информация об объектах, которых хранятся в памяти в данный момент времени.">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -26,23 +33,26 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
+                        <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="#">Кэш сервера</a>
                     </p>
-                    <c:set var="length" value="${fn:length(objects)}"/>
-                    <hr>
-                    <h3 class="text-center">
-                        Кэш<c:if test="${length le 0}"> пустой!</c:if>
-                    </h3>
-                    <hr>
-                    <c:if test="${length gt 0}">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <c:set var="length" value="${fn:length(objects)}"/>
+                        <hr>
+                        <h3 class="text-center">
+                            Кэш<c:if test="${length le 0}"> пустой!</c:if>
+                        </h3>
+                        <hr>
+                            <%-- Cache actions --%>
                         <c:if test="${length gt 10}">
                             <div class="text-center">
                                 <a href="<c:url value="/superadmin/cache"/>"
@@ -60,30 +70,13 @@
                                 </a>
                             </div>
                         </c:if>
+                    </div>
+                    <c:if test="${length gt 0}">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <table align="center" border="1" cellpadding="3" cellspacing="0">
-                                <tr>
-                                    <th>№</th>
-                                    <th>Объект</th>
-                                    <th></th>
-                                </tr>
-                                <c:forEach items="${objects}" var="object">
-                                    <tr>
-                                        <td><c:set var="count" value="${count + 1}"/>${count}</td>
-                                        <td><c:out value="${object.key}"/></td>
-                                        <td>
-                                            <a href="<c:url value="/superadmin/cache/remove/${object.key}"/>"
-                                               title="Удалить объект с кэша">
-                                                <button class="btn btn-default">
-                                                    <span class="glyphicon glyphicon-remove red"
-                                                          aria-hidden="true"></span>
-                                                </button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
+                                <%-- Table with information about objects --%>
+                            <%@include file="/WEB-INF/views/superadmin/cache/table.jsp" %>
                             <br>
+                                <%-- Cache actions --%>
                             <div class="text-center">
                                 <a href="<c:url value="/superadmin/cache"/>"
                                    title="Обновить информацию об объектах, которые хранятся в памяти.">
@@ -106,7 +99,9 @@
             </div>
         </div>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">
@@ -116,5 +111,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

@@ -1,3 +1,9 @@
+<%--
+Partner-companies logo list.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -24,6 +30,7 @@
     <c:set var="last_line" value="${print_partners - print_partners % in_line}"/>
     <c:set var="printed_in_line" value="0"/>
     <c:set var="printed" value="0"/>
+
     <div class="container">
         <div class="row">
             <div class="box">
@@ -87,5 +94,3 @@
         </div>
     </div>
 </c:if>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

@@ -1,3 +1,9 @@
+<%--
+Users list.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -17,6 +23,7 @@
 <c:set var="last_line" value="${length - length % in_line}"/>
 <c:set var="printed_in_line" value="0"/>
 <c:set var="printed" value="0"/>
+
 <c:forEach items="${users_list}" var="user">
     <c:if test="${(last_line ne length) and (printed eq last_line)}">
         <c:set var="in_line" value="${length - last_line}"/>
@@ -34,8 +41,7 @@
                        title="<c:out value="${user.name}"/>">
                         <img class="img-responsive img-in-list" alt="<c:out value="${user.name}"/>"
                              src="<c:url value="${user.photo.url}"/>"
-                             onerror="this.src='<c:url
-                                     value="/resources/img/static/default_user.png"/>'">
+                             onerror="this.src='<c:url value="/resources/img/static/default_user.png"/>'">
                     </a>
                 </c:when>
                 <c:otherwise>
@@ -125,6 +131,7 @@
                     <span class="fa fa-skype fa-2x"></span>
                 </a>
             </c:if>
+                <%-- Administrator actions --%>
             <c:if test="${authorized_user ne null}">
                 <div class="pad">
                     <a href="<c:url value="/admin/user/edit/${user.url}"/>"
@@ -146,6 +153,7 @@
             </c:if>
         </div>
     </div>
+
     <c:set var="printed" value="${printed + 1}"/>
     <c:set var="printed_in_line" value="${printed_in_line + 1}"/>
     <c:if test="${printed_in_line eq in_line}">

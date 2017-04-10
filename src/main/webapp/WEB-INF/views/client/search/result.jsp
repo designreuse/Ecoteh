@@ -1,3 +1,11 @@
+<%--
+Page for searching objects on the site.
+Also on this page is the result of the search.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -25,6 +33,7 @@
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -37,21 +46,25 @@
         </c:if>
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
+                        <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="#">Поиск</a>
                     </p>
-                    <hr>
-                    <h3 class="text-center">Поиск</h3>
-                    <c:if test="${is_search and !result}">
-                        <h4 class="text-center red"><b>Поиск не дал результатов</b></h4>
-                    </c:if>
-                    <hr>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <hr>
+                        <h3 class="text-center">Поиск</h3>
+                        <c:if test="${is_search and !result}">
+                            <h4 class="text-center red"><b>Поиск не дал результатов</b></h4>
+                        </c:if>
+                        <hr>
+                    </div>
                     <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <label title="Введите ключевые слова для поиска. Если ключевых слов несколько, их стоит вводить через запятую &quot;,&quot;.">
@@ -62,6 +75,7 @@
                                 </b>
                             </label>
                         </div>
+                            <%-- Form to search --%>
                         <form action="<c:url value="/search/result"/>" method="post">
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div class="inner-addon left-addon">
@@ -123,8 +137,10 @@
             </div>
         </div>
     </div>
+        <%-- Search result --%>
     <c:choose>
         <c:when test="${result}">
+            <%-- Categories list --%>
             <c:if test="${categories_length gt 0}">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <c:if test="${fn:length(categories_list) gt 0}">
@@ -140,16 +156,19 @@
                     </c:if>
                 </div>
             </c:if>
+            <%-- Articles list --%>
             <c:if test="${articles_length gt 0}">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
                 </div>
             </c:if>
+            <%-- Partners list --%>
             <c:if test="${partners_length gt 0}">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
                 </div>
             </c:if>
+            <%-- Users list --%>
             <c:if test="${users_length gt 0}">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="container">
@@ -167,7 +186,9 @@
             <br><br><br>
         </c:otherwise>
     </c:choose>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${result}">
@@ -178,5 +199,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

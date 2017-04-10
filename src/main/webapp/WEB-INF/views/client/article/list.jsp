@@ -1,3 +1,9 @@
+<%--
+Articles list.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -20,6 +26,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </h3>
+                            <%-- Administrator actions --%>
                         <c:if test="${authorized_user ne null}">
                             <h3 class="text-center">
                                 <a href="<c:url value="/admin/article/edit/${article.url}"/>"
@@ -95,5 +102,3 @@
         </div>
     </div>
 </c:if>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

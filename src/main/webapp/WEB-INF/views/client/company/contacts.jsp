@@ -1,3 +1,9 @@
+<%--
+Contact information of the incoming company.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -126,7 +132,6 @@
         <br>
     </div>
 </div>
+<%-- Google map with address of the incoming company. --%>
 <jsp:include page="/WEB-INF/views/google/map.jsp"/>
 <div class="clearfix"></div>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>

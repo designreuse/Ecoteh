@@ -1,3 +1,9 @@
+<%--
+Page with all messages.
+
+Yurii Salimov (yuriy.alex.salimov@gmail.com)
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -19,6 +25,7 @@
         <meta name="keywords" content="Сообщения от пользователей, <c:out value="${main_company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+            <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
@@ -28,12 +35,25 @@
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
     <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
+                        <%-- Site page path --%>
+                    <p class="path">
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
+                        → <a href=" <c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
+                        → <a href="#">Сообщения</a>
+                    </p>
+                    <hr>
                     <c:set var="length" value="${fn:length(messages)}"/>
+                    <h3 class="text-center" title="Сообщения, которые прислали клиенты">
+                        Сообщения<c:if test="${length eq 0}"> - список пуст!</c:if>
+                    </h3>
+                    <hr>
+                        <%-- Message action --%>
                     <c:if test="${length gt 0}">
                         <div class="text-center">
                             <a href="<c:url value="/admin/messages/delete/all"/>"
@@ -45,16 +65,6 @@
                             </a>
                         </div>
                     </c:if>
-                    <p class="path">
-                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href=" <c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="#">Сообщения</a>
-                    </p>
-                    <hr>
-                    <h3 class="text-center" title="Сообщения, которые прислали клиенты">
-                        Сообщения<c:if test="${length eq 0}"> - список пуст!</c:if>
-                    </h3>
-                    <hr>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -69,6 +79,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <c:forEach items="${messages}" var="message" end="${print_messages - 1}">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <%-- Message action --%>
                                     <p class="response green">
                                         <c:out value="${message.dateToString}"/>&nbsp;&nbsp;&nbsp;
                                         <a href="<c:url value="/admin/messages/delete/${message.id}"/>"
@@ -103,7 +114,9 @@
             </div>
         </c:if>
     </div>
+        <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <c:if test="${length gt 0}">
@@ -113,5 +126,3 @@
     </body>
     </html>
 </compress:html>
-
-<%-- Yurii Salimov (yuriy.alex.salimov@gmail.com) --%>
