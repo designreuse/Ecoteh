@@ -18,6 +18,6 @@ Administrator can navigate on all the pages of the site, in particular through t
 
 ([**SCREENSHOTS**](https://github.com/YuriiSalimov/Ecoteh/tree/master/screenshots))
 
-([**EXAMPLE**](http://alexcoffee.com.ua/ecoteh/))
+([**EXAMPLE**](http://ecoteh.com.ua))
 
 [_**Yurii Salimov**_](https://www.linkedin.com/in/yurii-salimov)
