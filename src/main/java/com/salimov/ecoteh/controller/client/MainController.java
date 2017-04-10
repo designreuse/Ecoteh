@@ -411,8 +411,8 @@ public abstract class MainController {
             final User user = message.getUser();
             final String text = "User name: " + user.getName() +
                     "\nPhone: " + user.getContacts().getMobilePhone() +
-                    (isNotBlank(user.getContacts().getEmail()) ? "E-mail: " + user.getContacts().getEmail() : "") +
-                    (isNotBlank(message.getText()) ? "\nText: \n: " + message.getText() : "");
+                    (isNotBlank(user.getContacts().getEmail()) ? "\nE-mail: " + user.getContacts().getEmail() : "") +
+                    (isNotBlank(message.getText()) ? "\nText: " + message.getText() : "");
             sendToEmail(message.getSubject(), text);
         }).start();
         this.messageService.add(message);
@@ -427,8 +427,8 @@ public abstract class MainController {
         new Thread(() -> {
             sendToEmail(
                     "New Response",
-                    "User name: " + response.getUsername()
-                            + "\n\nText: \n" + response.getText()
+                    "User name: " + response.getUsername() +
+                            "\nText: " + response.getText()
             );
         }).start();
         this.responseService.add(response);

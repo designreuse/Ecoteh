@@ -253,7 +253,7 @@ public class ForgotUserInformationController {
     private static String getMessageText(final User user) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Информация о пользователе\n\n")
-                .append(user.toString())
+                .append(user.getName())
                 .append("\nLogin: ").append(user.getLogin())
                 .append("\nPassword: ").append(user.getPassword());
         if (user.isLocked()) {

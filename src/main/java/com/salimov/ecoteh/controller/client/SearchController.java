@@ -60,7 +60,7 @@ public class SearchController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {"", "/", "/result"},
+            value = { "", "/", "/result" },
             method = RequestMethod.GET
     )
     public ModelAndView search() {
@@ -84,9 +84,9 @@ public class SearchController {
             method = RequestMethod.POST
     )
     public ModelAndView searchResult(
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "content") final String content,
-            @RequestParam(value = "how_search") final boolean howSearch
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "content", defaultValue = "") final String content,
+            @RequestParam(value = "how_search", defaultValue = "false") final boolean howSearch
     ) {
         return this.searchService.search(keywords, content, howSearch);
     }
