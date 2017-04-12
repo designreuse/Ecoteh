@@ -3,7 +3,8 @@ html {
     font-size: 10px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%
+    -ms-text-size-adjust: 100%;
+    word-wrap: break-word
 }
 
 body {
@@ -2127,8 +2128,13 @@ a.label:focus {
     color: #808080
 }
 
-.path, .response, .copyright {
+.path, .copyright, .username {
     font-size: 15px
+}
+
+.response, .message {
+    font-size: 15px;
+    text-align: justify
 }
 
 .video-frame {
