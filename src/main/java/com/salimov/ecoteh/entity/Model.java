@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * The abstract superclass class implements a set of standard methods
+ * The abstract superclass implements a set of standard methods
  * for working with entity of the {@link Model} class or subclasses.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)

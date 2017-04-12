@@ -15,6 +15,7 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
 <c:set var="category_priority" value="0.5"/>
 <c:set var="article_priority" value="0.5"/>
 <c:set var="company_priority" value="0.5"/>
+<c:set var="other_priority" value="0.5"/>
 
 <compress:xml removeIntertagSpaces="true">
     <?xml version="1.0" encoding="UTF-8"?>
@@ -70,7 +71,7 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
                 http://<c:out value="${domain}"/>/responses
             </loc>
             <changefreq>${changefreq}</changefreq>
-            <priority>0.5</priority>
+            <priority>${other_priority}</priority>
         </url>
             <%-- Categories URLs --%>
         <c:if test="${fn:length(categories) gt 0}">

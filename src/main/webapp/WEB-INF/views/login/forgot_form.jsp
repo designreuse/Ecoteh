@@ -81,6 +81,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                minlength="3" maxlength="100" autofocus value="${username}"
                                                placeholder="Введите логин или e-mail">
                                     </div>
+                                        <%-- Google reCaptcha --%>
                                     <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <button type="submit" class="btn btn-default"
@@ -105,6 +106,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
     </body>
     </html>
 </compress:html>

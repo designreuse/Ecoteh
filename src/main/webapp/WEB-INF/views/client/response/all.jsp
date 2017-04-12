@@ -36,7 +36,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <body>
         <%-- Navigation bar --%>
     <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
-    <c:set var="length" value="${fn:length(responses_list)}"/>
+    <c:set var="length" value="${fn:length(responses)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -91,64 +91,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             </div>
         </div>
         <c:if test="${length gt 0}">
-            <c:if test="${(print_responses eq null) or (print_responses gt length) or (print_responses le 0)}">
-                <c:set var="print_responses" value="${length}"/>
-            </c:if>
             <div class="container">
                 <div class="row">
                     <div class="box">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <c:forEach items="${responses_list}" var="response" end="${print_responses - 1}">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <p>
-                                        <c:if test="${!response.validated}">
-                                            <span class="glyphicon glyphicon-eye-close little red" aria-hidden="true"
-                                                  title="Не отображается для клиентов"></span>&nbsp;
-                                        </c:if>
-                                        <span class="response green"><c:out value="${response.username}"/></span>&nbsp;
-                                        <span class="little">(<c:out value="${response.dateToString}"/>)</span>
-                                    </p>
-                                    <p class="response">
-                                        <c:out value="${response.text}"/>
-                                    </p>
-                                        <%-- Administrator actions --%>
-                                    <c:if test="${authorized_user ne null}">
-                                        <p class="response">
-                                            <c:choose>
-                                                <c:when test="${response.validated}">
-                                                    <a href="<c:url value="/admin/response/valid/${response.id}"/>"
-                                                       title="Не отображать отзыв, его не смогут увидеть клиенты.">
-                                                        <button class="btn btn-default">
-                                                            <span class="glyphicon glyphicon-eye-close yellow"
-                                                                  aria-hidden="true"></span>
-                                                            &nbsp;Не отображать
-                                                        </button>
-                                                    </a>&nbsp;
-                                                </c:when>
-                                                <c:when test="${!response.validated}">
-                                                    <a href="<c:url value="/admin/response/valid/${response.id}"/>"
-                                                       title="Одобрить отзыв, его смогут увидеть клиенты.">
-                                                        <button class="btn btn-default">
-                                                            <span class="glyphicon glyphicon-eye-open"
-                                                                  aria-hidden="true"></span>
-                                                            &nbsp;Отображать
-                                                        </button>
-                                                    </a>&nbsp;
-                                                </c:when>
-                                            </c:choose>&nbsp;&nbsp;
-                                            <a href="<c:url value="/admin/response/delete/${response.id}"/>"
-                                               title="Удалить отзыв">
-                                                <button class="btn btn-default">
-                                                    <span class="glyphicon glyphicon-minus red"
-                                                          aria-hidden="true"></span>
-                                                    &nbsp;Удалить
-                                                </button>
-                                            </a>
-                                        </p>
-                                    </c:if>
-                                    <br>
-                                </div>
-                            </c:forEach>
+                                <%-- Responses list --%>
+                            <jsp:include page="/WEB-INF/views/client/response/list.jsp"/>
                         </div>
                         <div class="clearfix"></div>
                     </div>

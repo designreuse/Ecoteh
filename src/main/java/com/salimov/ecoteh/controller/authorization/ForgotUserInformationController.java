@@ -108,12 +108,12 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by user name or E-mail or phone.
+     * Seeking a user by user name or E-mail.
      * and sends information about him to e-mail.
      * Request mapping: /forgot
      * Method: POST
      *
-     * @param username a user name or E-mail or phone for whom to remind information.
+     * @param username a user name or E-mail for whom to remind information.
      * @param request  a implementation of the interface to provide
      *                 request information for HTTP servlets.
      * @return The ready object of class ModelAndView.
@@ -142,18 +142,12 @@ public class ForgotUserInformationController {
                     ex2.printStackTrace();
                     LOGGER.error(ex2.getMessage(), ex2);
                     try {
-                        searchByPhoneAndSend(username);
-                    } catch (Exception ex3) {
-                        ex3.printStackTrace();
-                        LOGGER.error(ex3.getMessage(), ex3);
-                        try {
-                            searchInMainCompanyAndSend(username);
-                            isForgot = true;
-                        } catch (Exception ex4) {
-                            ex4.printStackTrace();
-                            LOGGER.error(ex4.getMessage(), ex4);
-                            isForgot = false;
-                        }
+                        searchInMainCompanyAndSend(username);
+                        isForgot = true;
+                    } catch (Exception ex4) {
+                        ex4.printStackTrace();
+                        LOGGER.error(ex4.getMessage(), ex4);
+                        isForgot = false;
                     }
                 }
             }

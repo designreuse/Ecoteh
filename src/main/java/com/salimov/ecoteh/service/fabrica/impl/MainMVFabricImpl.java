@@ -334,7 +334,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView allSortResponsesByDatePage(final boolean revers) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject(
-                "responses_list",
+                "responses",
                 this.responseService.sortByDate(
                         this.responseService.getAll(isValidContent()),
                         revers

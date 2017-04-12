@@ -79,7 +79,7 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
             <%-- Partner-companies logo list  --%>
         <%@include file="/WEB-INF/views/client/company/logos_list.jsp" %>
             <%-- Client responses--%>
-        <jsp:include page="/WEB-INF/views/client/response/list.jsp"/>
+        <%@include file="/WEB-INF/views/client/response/list_to_home.jsp" %>
     </div>
         <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>

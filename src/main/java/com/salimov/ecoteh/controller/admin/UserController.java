@@ -294,6 +294,7 @@ public class UserController {
             @RequestParam(value = "is_locked") final boolean isLocked,
             final ModelAndView modelAndView
     ) {
+        System.out.println("PHONE: " + mobilePhone);
         final User user = new User(
                 name, description,
                 new Contacts(

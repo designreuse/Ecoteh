@@ -70,43 +70,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             </div>
         </div>
         <c:if test="${length gt 0}">
-            <c:if test="${(print_messages eq null) or (print_messages gt length) or (print_messages le 0)}">
-                <c:set var="print_messages" value="${length}"/>
-            </c:if>
             <div class="container">
                 <div class="row">
                     <div class="box">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <c:forEach items="${messages}" var="message" end="${print_messages - 1}">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <%-- Message action --%>
-                                    <p class="response green">
-                                        <c:out value="${message.dateToString}"/>&nbsp;&nbsp;&nbsp;
-                                        <a href="<c:url value="/admin/messages/delete/${message.id}"/>"
-                                           title="Удалить сообщение">
-                                            <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-minus red" aria-hidden="true"></span>
-                                                &nbsp;Удалить
-                                            </button>
-                                        </a>
-                                    </p>
-                                    <p class="response">
-                                        <c:out value="${message.text}"/>
-                                    </p>
-                                    <p class="response">
-                                        <c:out value="${message.user.name}"/>,&nbsp;
-                                        <a href="tel:<c:out value="${message.user.contacts.mobilePhone}"/>">
-                                            <c:out value="${message.user.contacts.mobilePhone}"/>
-                                        </a>
-                                        <c:if test="${not empty message.user.contacts.email}">
-                                            ,&nbsp;
-                                            <a href="mailto:<c:out value="${message.user.contacts.email}"/>">
-                                                <c:out value="${message.user.contacts.email}"/>
-                                            </a>
-                                        </c:if>
-                                    </p>
-                                </div>
-                            </c:forEach>
+                            <%-- Messages list --%>
+                            <%@include file="/WEB-INF/views/admin/message/list.jsp" %>
                         </div>
                         <div class="clearfix"></div>
                     </div>
