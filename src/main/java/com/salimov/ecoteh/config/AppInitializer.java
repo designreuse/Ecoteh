@@ -96,8 +96,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     public void onStartup(final ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        final FilterRegistration.Dynamic filter =
-                servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
+        final FilterRegistration.Dynamic filter = servletContext
+                .addFilter("encodingFilter", new CharacterEncodingFilter());
         filter.setInitParameter("encoding", ENCODING);
         filter.setInitParameter("forceEncoding", Boolean.toString(FORCE_ENCODING));
         filter.addMappingForUrlPatterns(
