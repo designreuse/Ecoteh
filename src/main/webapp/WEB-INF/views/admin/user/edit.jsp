@@ -98,12 +98,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                               rows="3"><c:out value="${user.description}"/></textarea>
                                     </td>
                                 </tr>
+                                <c:set var="contacts" value="${user.contacts}"/>
                                 <tr>
                                     <td class="ths">
                                         <span class="red">*</span>
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.mobilePhone}">
-                                                <a href="tel:<c:out value="${user.contacts.mobilePhone}"/>"
+                                            <c:when test="${not empty contacts.mobilePhone}">
+                                                <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
                                                     Мобильный телефон
                                                 </a>
@@ -114,32 +115,32 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="mobile_phone" required
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${user.contacts.mobilePhone}"/>">
+                                               value="<c:out value="${contacts.mobilePhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.landlinePhone}">
-                                                <a href="tel:<c:out value="${user.contacts.landlinePhone}"/>"
+                                            <c:when test="${not empty contacts.landlinePhone}">
+                                                <a href="tel:<c:out value="${contacts.landlinePhone}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
-                                                    Домашний телефон
+                                                    Стационарный телефон
                                                 </a>
                                             </c:when>
-                                            <c:otherwise>Домашний телефон</c:otherwise>
+                                            <c:otherwise>Стационарный телефон</c:otherwise>
                                         </c:choose>
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="landline_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${user.contacts.landlinePhone}"/>">
+                                               value="<c:out value="${contacts.landlinePhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.fax}">
-                                                <a href="tel:<c:out value="${user.contacts.fax}"/>"
+                                            <c:when test="${not empty contacts.fax}">
+                                                <a href="tel:<c:out value="${contacts.fax}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
                                                     Факс
                                                 </a>
@@ -150,15 +151,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="fax"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${user.contacts.fax}"/>">
+                                               value="<c:out value="${contacts.fax}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <span class="red">*</span>
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.email}">
-                                                <a href="mailto:<c:out value="${user.contacts.email}"/>" target="_blank"
+                                            <c:when test="${not empty contacts.email}">
+                                                <a href="mailto:<c:out value="${contacts.email}"/>" target="_blank"
                                                    title="Написать письмо для &quot;<c:out value="${user.name}"/>&quot;">
                                                     Электронная почта
                                                 </a>
@@ -169,14 +170,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100"
                                                required placeholder="name@mail.com"
-                                               value="<c:out value="${user.contacts.email}"/>">
+                                               value="<c:out value="${contacts.email}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.vkontakte}">
-                                                <a href="<c:out value="${user.contacts.vkontakte}"/>"
+                                            <c:when test="${not empty contacts.vkontakte}">
+                                                <a href="<c:out value="${contacts.vkontakte}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
                                             </c:when>
@@ -188,15 +189,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
-                                               maxlength="200" value="<c:out value="${user.contacts.vkontakte}"/>"
+                                               maxlength="200" value="<c:out value="${contacts.vkontakte}"/>"
                                                placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.facebook}">
-                                                <a href="<c:out value="${user.contacts.facebook}"/>"
+                                            <c:when test="${not empty contacts.facebook}">
+                                                <a href="<c:out value="${contacts.facebook}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Facebook"
                                                    target="_blank">Facebook</a>
                                             </c:when>
@@ -210,14 +211,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <input type="text" class="form-control" name="facebook"
                                                minlength="5" maxlength="200"
                                                placeholder="Ссылка на групу или профиль в социальной сети Facebook"
-                                               value="<c:out value="${user.contacts.facebook}"/>">
+                                               value="<c:out value="${contacts.facebook}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.twitter}">
-                                                <a href="<c:out value="${user.contacts.twitter}"/>"
+                                            <c:when test="${not empty contacts.twitter}">
+                                                <a href="<c:out value="${contacts.twitter}"/>"
                                                    title="Профиль &quot;<c:out value="${user.name}"/>&quot; в Twitter"
                                                    target="_blank">Twitter</a>
                                             </c:when>
@@ -230,14 +231,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка в социальной сети Twitter"
-                                               value="<c:out value="${user.contacts.twitter}"/>">
+                                               value="<c:out value="${contacts.twitter}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty user.contacts.skype}">
-                                                <a href="skype:<c:out value="${user.contacts.skype}"/>?call"
+                                            <c:when test="${not empty contacts.skype}">
+                                                <a href="skype:<c:out value="${contacts.skype}"/>?call"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; в Skype">
                                                     Skype
                                                 </a>
@@ -248,7 +249,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype"
-                                               value="<c:out value="${user.contacts.skype}"/>">
+                                               value="<c:out value="${contacts.skype}"/>">
                                     </td>
                                 </tr>
                                 <tr>

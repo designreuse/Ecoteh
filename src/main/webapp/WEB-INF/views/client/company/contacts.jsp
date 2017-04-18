@@ -58,70 +58,71 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <br><br>
             </div>
         </c:if>
-        <c:if test="${not empty company.contacts.mobilePhone}">
+        <c:set var="contacts" value="${company.contacts}"/>
+        <c:if test="${not empty contacts.mobilePhone}">
             <div class="text-center">
-                <a href="tel:<c:out value="${company.contacts.mobilePhone}"/>"
+                <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
                    title="Позвонить на мобильный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<b><c:out value="${company.contacts.mobilePhone}"/></b>
+                    &nbsp;&nbsp;<b><c:out value="${contacts.mobilePhone}"/></b>
                 </a>
                 <br>
             </div>
         </c:if>
-        <c:if test="${not empty company.contacts.landlinePhone}">
+        <c:if test="${not empty contacts.landlinePhone}">
             <div class="text-center">
-                <a href="tel:<c:out value="${company.contacts.landlinePhone}"/>"
+                <a href="tel:<c:out value="${contacts.landlinePhone}"/>"
                    title="Позвонить на стационарный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<c:out value="${company.contacts.landlinePhone}"/>
+                    &nbsp;&nbsp;<c:out value="${contacts.landlinePhone}"/>
                 </a>
                 <br>
             </div>
         </c:if>
-        <c:if test="${not empty company.contacts.fax}">
+        <c:if test="${not empty contacts.fax}">
             <div class="text-center">
-                <a href="tel:<c:out value="${company.contacts.fax}"/>" title="Факс &quot;${company.title}&quot;">
+                <a href="tel:<c:out value="${contacts.fax}"/>" title="Факс &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<c:out value="${company.contacts.fax}"/>
+                    &nbsp;&nbsp;<c:out value="${contacts.fax}"/>
                 </a>
                 <br>
             </div>
         </c:if>
-        <c:if test="${not empty company.contacts.email}">
+        <c:if test="${not empty contacts.email}">
             <div class="text-center">
                 <br>
-                <a href="mailto:<c:out value="${company.contacts.email}"/>"
+                <a href="mailto:<c:out value="${contacts.email}"/>"
                    title="Написать письмо &quot;${company.title}&quot;" target="_blank">
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    &nbsp;<c:out value="${company.contacts.email}"/>
+                    &nbsp;<c:out value="${contacts.email}"/>
                 </a>
                 <br>
             </div>
         </c:if>
-        <c:if test="${(not empty company.contacts.vkontakte) or (not empty company.contacts.facebook) or
-                             (not empty company.contacts.twitter) or (not empty company.contacts.skype)}">
+        <c:if test="${(not empty contacts.vkontakte) or (not empty contacts.facebook) or
+                             (not empty contacts.twitter) or (not empty contacts.skype)}">
             <div class="text-center">
                 <br>В социальных сетях:<br>
-                <c:if test="${not empty company.contacts.vkontakte}">
-                    <a href="<c:out value="${company.contacts.vkontakte}"/>" target="_blank"
+                <c:if test="${not empty contacts.vkontakte}">
+                    <a href="<c:out value="${contacts.vkontakte}"/>" target="_blank"
                        title="Группа &quot;${company.title}&quot; в ВКонтакте">
                         <span class="fa fa-vk fa-2x"></span>
                     </a>&nbsp;&nbsp;
                 </c:if>
-                <c:if test="${not empty company.contacts.facebook}">
-                    <a href="<c:out value="${company.contacts.facebook}"/>" target="_blank"
+                <c:if test="${not empty contacts.facebook}">
+                    <a href="<c:out value="${contacts.facebook}"/>" target="_blank"
                        title="Группа &quot;${company.title}&quot; в Facebook">
                         <span class="fa fa-facebook-official fa-2x"></span>
                     </a>&nbsp;&nbsp;
                 </c:if>
-                <c:if test="${not empty company.contacts.twitter}">
-                    <a href="<c:out value="${company.contacts.twitter}"/>" target="_blank"
+                <c:if test="${not empty contacts.twitter}">
+                    <a href="<c:out value="${contacts.twitter}"/>" target="_blank"
                        title="&quot;${company.title}&quot; в Twitter">
                         <span class="fa fa-twitter fa-2x"></span>
                     </a>&nbsp;&nbsp;
                 </c:if>
-                <c:if test="${not empty company.contacts.skype}">
-                    <a href="skype:<c:out value="${company.contacts.skype}"/>?call"
+                <c:if test="${not empty contacts.skype}">
+                    <a href="skype:<c:out value="${contacts.skype}"/>?call"
                        title="Позвонить &quot;${company.title}&quot; в Skype">
                         <span class="fa fa-skype fa-2x"></span>
                     </a>

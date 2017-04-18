@@ -49,62 +49,63 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             </c:when>
         </c:choose>
     </h4>
-    <c:if test="${not empty authorized_user.contacts.mobilePhone}">
+    <c:set var="contacts" value="${authorized_user.contacts}"/>
+    <c:if test="${not empty contacts.mobilePhone}">
         <h4>
-            <a href="tel:<c:out value="${authorized_user.contacts.mobilePhone}"/>"
+            <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
                title="Позвонить на мобильный телефон">
                 <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                &nbsp;<c:out value="${authorized_user.contacts.mobilePhone}"/>
+                &nbsp;<c:out value="${contacts.mobilePhone}"/>
             </a>
         </h4>
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.landlinePhone}">
+    <c:if test="${not empty contacts.landlinePhone}">
         <h4>
-            <a href="tel:<c:out value="${authorized_user.contacts.landlinePhone}"/>"
+            <a href="tel:<c:out value="${contacts.landlinePhone}"/>"
                title="Позвонить на стационарный телефон">
                 <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                &nbsp;<c:out value="${authorized_user.contacts.landlinePhone}"/>
+                &nbsp;<c:out value="${contacts.landlinePhone}"/>
             </a>
         </h4>
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.fax}">
+    <c:if test="${not empty contacts.fax}">
         <h4>
-            <a href="tel:<c:out value="${authorized_user.contacts.fax}"/>" title="Факс">
+            <a href="tel:<c:out value="${contacts.fax}"/>" title="Факс">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                &nbsp;<c:out value="${authorized_user.contacts.fax}"/>
+                &nbsp;<c:out value="${contacts.fax}"/>
             </a>
         </h4>
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.email}">
+    <c:if test="${not empty contacts.email}">
         <h4>
-            <a href="mailto:<c:out value="${authorized_user.contacts.email}"/>" target="_blank"
+            <a href="mailto:<c:out value="${contacts.email}"/>" target="_blank"
                title="Написать письмо для &quot;<c:out value="${authorized_user.name}"/>&quot;">
                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                &nbsp;<c:out value="${authorized_user.contacts.email}"/>
+                &nbsp;<c:out value="${contacts.email}"/>
             </a>
         </h4>
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.vkontakte}">
-        <a href="<c:out value="${authorized_user.contacts.vkontakte}"/>" title="Профиль в ВКонтакте" target="_blank">
+    <c:if test="${not empty contacts.vkontakte}">
+        <a href="<c:out value="${contacts.vkontakte}"/>" title="Профиль в ВКонтакте" target="_blank">
             <span class="fa fa-vk fa-2x"></span>
         </a>&nbsp;&nbsp;
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.facebook}">
-        <a href="<c:out value="${authorized_user.contacts.facebook}"/>" title="Профиль в Facebook" target="_blank">
+    <c:if test="${not empty contacts.facebook}">
+        <a href="<c:out value="${contacts.facebook}"/>" title="Профиль в Facebook" target="_blank">
             <span class="fa fa-facebook-official fa-2x"></span>
         </a>&nbsp;&nbsp;
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.twitter}">
-        <a href="<c:out value="${authorized_user.contacts.twitter}"/>" title="Профиль в Twitter" target="_blank">
+    <c:if test="${not empty contacts.twitter}">
+        <a href="<c:out value="${contacts.twitter}"/>" title="Профиль в Twitter" target="_blank">
             <span class="fa fa-twitter fa-2x"></span>
         </a>&nbsp;&nbsp;
     </c:if>
-    <c:if test="${not empty authorized_user.contacts.skype}">
-        <a href="skype:<c:out value="${authorized_user.contacts.skype}"/>?call" title="Позвонить в Skype">
+    <c:if test="${not empty contacts.skype}">
+        <a href="skype:<c:out value="${contacts.skype}"/>?call" title="Позвонить в Skype">
             <span class="fa fa-skype fa-2x"></span>
         </a>
     </c:if>
-    <c:if test="${authorized_user.id ne null}">
+    <c:if test="${authorized_user.id ne '0'}">
         <div class="pad">
             <a href="<c:url value="/admin/user/edit/${authorized_user.url}"/>"
                title="Редактировать информацию о <c:out value="${authorized_user.name}"/>">

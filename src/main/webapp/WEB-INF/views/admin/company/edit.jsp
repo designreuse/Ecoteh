@@ -151,12 +151,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </td>
                                     </tr>
                                 </c:if>
+                                <c:set var="contacts" value="${company.contacts}"/>
                                 <tr>
                                     <td class="ths">Мобильный телефон</td>
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="mobile_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${company.contacts.mobilePhone}"/>">
+                                               value="<c:out value="${contacts.mobilePhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -164,7 +165,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="landline_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${company.contacts.landlinePhone}"/>">
+                                               value="<c:out value="${contacts.landlinePhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -172,7 +173,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="phone form-control" name="fax" maxlength="20"
                                                placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${company.contacts.fax}"/>">
+                                               value="<c:out value="${contacts.fax}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -180,7 +181,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="email" class="form-control" name="email" maxlength="100"
                                                minlength="3" placeholder="name@mail.com"
-                                               value="<c:out value="${company.contacts.email}"/>">
+                                               value="<c:out value="${contacts.email}"/>">
                                     </td>
                                 </tr>
                                 <c:if test="${main}">
@@ -209,8 +210,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty company.contacts.vkontakte}">
-                                                <a href="<c:out value="${company.contacts.vkontakte}"/>"
+                                            <c:when test="${not empty contacts.vkontakte}">
+                                                <a href="<c:out value="${contacts.vkontakte}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в ВКонтакте"
                                                    target="_blank">Vkontakte</a>
                                             </c:when>
@@ -222,15 +223,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="vkontakte" minlength="5"
-                                               maxlength="200" value="<c:out value="${company.contacts.vkontakte}"/>"
+                                               maxlength="200" value="<c:out value="${contacts.vkontakte}"/>"
                                                placeholder="Ссылка на групу или профиль в социальной сети Vkontakte">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty company.contacts.facebook}">
-                                                <a href="<c:out value="${company.contacts.facebook}"/>"
+                                            <c:when test="${not empty contacts.facebook}">
+                                                <a href="<c:out value="${contacts.facebook}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Facebook"
                                                    target="_blank">Facebook</a>
                                             </c:when>
@@ -242,15 +243,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="facebook" minlength="5"
-                                               maxlength="200" value="<c:out value="${company.contacts.facebook}"/>"
+                                               maxlength="200" value="<c:out value="${contacts.facebook}"/>"
                                                placeholder="Ссылка на групу или профиль в социальной сети Facebook">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty company.contacts.twitter}">
-                                                <a href="<c:out value="${company.contacts.twitter}"/>"
+                                            <c:when test="${not empty contacts.twitter}">
+                                                <a href="<c:out value="${contacts.twitter}"/>"
                                                    title="Профиль &quot;<c:out value="${company.title}"/>&quot; в Twitter"
                                                    target="_blank">Twitter</a>
                                             </c:when>
@@ -263,7 +264,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="form-control" name="twitter" minlength="5"
                                                maxlength="200" placeholder="Ссылка в социальной сети Twitter"
-                                               value="<c:out value="${company.contacts.twitter}"/>">
+                                               value="<c:out value="${contacts.twitter}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -271,7 +272,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <input type="text" class="form-control" name="skype" minlength="5"
                                                maxlength="100" placeholder="Имя в месенджере Skype"
-                                               value="<c:out value="${company.contacts.skype}"/>">
+                                               value="<c:out value="${contacts.skype}"/>">
                                     </td>
                                 </tr>
                                 <tr>
