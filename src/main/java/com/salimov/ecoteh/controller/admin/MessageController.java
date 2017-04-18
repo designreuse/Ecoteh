@@ -85,20 +85,15 @@ public class MessageController {
      * Method: GET
      *
      * @param id           a id of the message to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteMessageById(
-            @PathVariable("id") final Long id,
-            final ModelAndView modelAndView
-    ) {
+    public String deleteMessageById(@PathVariable("id") final long id) {
         this.messageService.remove(id);
-        modelAndView.setViewName("redirect:/admin/messages");
-        return modelAndView;
+        return "redirect:/admin/messages";
     }
 
     /**
@@ -106,16 +101,14 @@ public class MessageController {
      * Request mapping: /admin/message/delete/all
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllMessages(final ModelAndView modelAndView) {
+    public String deleteAllMessages() {
         this.messageService.removeAll();
-        modelAndView.setViewName("redirect:/admin/messages");
-        return modelAndView;
+        return "redirect:/admin/messages";
     }
 }

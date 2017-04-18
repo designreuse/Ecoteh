@@ -67,17 +67,15 @@ public class CacheController {
      * Request mapping: /admin/cache/clear
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/clear",
             method = RequestMethod.GET
     )
-    public ModelAndView clearCache(final ModelAndView modelAndView) {
+    public String clearCache() {
         Cache.clear();
-        modelAndView.setViewName("redirect:/superadmin/cache");
-        return modelAndView;
+        return "redirect:/superadmin/cache";
     }
 
     /**
@@ -86,19 +84,14 @@ public class CacheController {
      * Method: GET
      *
      * @param key          a object key in the cache.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/remove/{key}",
             method = RequestMethod.GET
     )
-    public ModelAndView removeObjectFromCache(
-            @PathVariable("key") final String key,
-            final ModelAndView modelAndView
-    ) {
+    public String removeObjectFromCache(@PathVariable("key") final String key) {
         Cache.remove(key);
-        modelAndView.setViewName("redirect:/superadmin/cache");
-        return modelAndView;
+        return "redirect:/superadmin/cache";
     }
 }

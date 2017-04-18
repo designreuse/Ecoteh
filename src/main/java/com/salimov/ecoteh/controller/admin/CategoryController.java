@@ -100,17 +100,15 @@ public class CategoryController {
      * @param keywords      a title of the new category.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the new category.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addCategory(
+    public String addCategory(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_valid") final boolean isValid
     ) {
         final Category category = new Category(
                 title,
@@ -123,8 +121,7 @@ public class CategoryController {
         }
         this.categoryService.add(category);
         Cache.clear();
-        modelAndView.setViewName("redirect:/category/" + category.getUrl());
-        return modelAndView;
+        return "redirect:/category/" + category.getUrl();
     }
 
     /**
@@ -170,18 +167,16 @@ public class CategoryController {
      * @param keywords      a new description to the category.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the category.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView updateCategory(
+    public String updateCategory(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_valid") final boolean isValid
     ) {
         final Category category = new Category(
                 title,
@@ -194,8 +189,7 @@ public class CategoryController {
         }
         this.categoryService.update(url, category);
         Cache.clear();
-        modelAndView.setViewName("redirect:/category/" + category.getUrl());
-        return modelAndView;
+        return "redirect:/category/" + category.getUrl();
     }
 
     /**
@@ -221,18 +215,13 @@ public class CategoryController {
      * Method: GET
      *
      * @param url          a URL of the article to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
-    public ModelAndView deleteCategoryByUrl(
-            @PathVariable("url") final String url,
-            final ModelAndView modelAndView
-    ) {
+    public String deleteCategoryByUrl(@PathVariable("url") final String url) {
         this.categoryService.removeByUrl(url);
         Cache.clear();
-        modelAndView.setViewName("redirect:/");
-        return modelAndView;
+        return "redirect:/";
     }
 
     /**
@@ -240,14 +229,12 @@ public class CategoryController {
      * Request mapping: /admin/category/delete/{url}
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
-    public ModelAndView deleteAllCategories(final ModelAndView modelAndView) {
+    public String deleteAllCategories() {
         this.categoryService.removeAll();
-        modelAndView.setViewName("redirect:/");
         Cache.clear();
-        return modelAndView;
+        return "redirect:/";
     }
 }

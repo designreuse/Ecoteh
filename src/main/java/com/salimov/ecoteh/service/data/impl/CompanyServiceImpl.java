@@ -7,6 +7,7 @@ import com.salimov.ecoteh.enums.CompanyType;
 import com.salimov.ecoteh.repository.CompanyRepository;
 import com.salimov.ecoteh.service.data.interfaces.CompanyService;
 import com.salimov.ecoteh.service.data.interfaces.FileService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
         }
 )
 public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(CompanyServiceImpl.class);
 
     /**
      * The interface provides a set of standard methods for working
@@ -126,8 +132,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
         try {
             mainCompany = this.repository.findByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
-            ex.printStackTrace();
-            //throw new NullPointerException("Information about main company is absent!");
+            LOGGER.error(ex.getMessage(), ex);
             mainCompany = new Company();
         }
         return mainCompany;

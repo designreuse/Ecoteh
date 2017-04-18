@@ -83,7 +83,7 @@ public class FileController {
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
-            value = {"", "/", "/all"},
+            value = { "", "/", "/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllFilePage() {
@@ -115,22 +115,19 @@ public class FileController {
      * @param title         a title of the new file.
      * @param type          a type of the new file.
      * @param multipartFile a multipart file of the new file.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/add",
             method = RequestMethod.POST
     )
-    public ModelAndView addFile(
+    public String addFile(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "type") final String type,
-            @RequestParam(value = "file") final MultipartFile multipartFile,
-            final ModelAndView modelAndView
+            @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
         this.fileService.add(title, getType(type), multipartFile);
-        modelAndView.setViewName("redirect:/admin/file/all");
-        return modelAndView;
+        return "redirect:/admin/file/all";
     }
 
     /**
@@ -163,7 +160,7 @@ public class FileController {
             value = "/edit/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView editFilePage(@PathVariable("id") final Long id) {
+    public ModelAndView editFilePage(@PathVariable("id") final long id) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("file", this.fileService.get(id));
         modelAndView.setViewName("admin/file/edit");
@@ -180,23 +177,20 @@ public class FileController {
      * @param title         a new title to the file.
      * @param type          a type of the new file.
      * @param multipartFile a multipart file of the new file.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/update",
             method = RequestMethod.POST
     )
-    public ModelAndView updateFile(
-            @RequestParam(value = "id") final Long id,
+    public String updateFile(
+            @RequestParam(value = "id") final long id,
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "type") final String type,
-            @RequestParam(value = "file") final MultipartFile multipartFile,
-            final ModelAndView modelAndView
+            @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
         this.fileService.update(id, title, getType(type), multipartFile);
-        modelAndView.setViewName("redirect:/admin/file/all");
-        return modelAndView;
+        return "redirect:/admin/file/all";
     }
 
     /**
@@ -222,21 +216,16 @@ public class FileController {
      * Request mapping: /admin/file/delete/{id}
      * Method: GET
      *
-     * @param id           a id of the file to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param id a id of the file to remove.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteFileById(
-            @PathVariable("id") final Long id,
-            final ModelAndView modelAndView
-    ) {
+    public String deleteFileById(@PathVariable("id") final long id) {
         this.fileService.remove(id);
-        modelAndView.setViewName("redirect:/admin/file/all");
-        return modelAndView;
+        return "redirect:/admin/file/all";
     }
 
     /**
@@ -244,19 +233,15 @@ public class FileController {
      * Request mapping: /admin/file/delete/all
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllFiles(
-            final ModelAndView modelAndView
-    ) {
+    public String deleteAllFiles() {
         this.fileService.removeAll();
-        modelAndView.setViewName("redirect:/admin/file/all");
-        return modelAndView;
+        return "redirect:/admin/file/all";
     }
 
     /**

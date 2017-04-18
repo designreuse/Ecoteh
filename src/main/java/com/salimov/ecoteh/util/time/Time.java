@@ -94,7 +94,6 @@ public class Time implements ITime {
         return this.correctTime;
     }
 
-
     /**
      * Returns a correct hours of the time.
      * If input time has than 0 hours,
@@ -170,7 +169,7 @@ public class Time implements ITime {
         if (isNotBlankTime()) {
             try {
                 final int minutes = Integer.parseInt(time.split(":")[1]);
-                this.minutes = minutes < 0 ? 0 : minutes % 60;
+                this.minutes = (minutes < 0) ? 0 : minutes % 60;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                 LOGGER.error(ex.getMessage(), ex);
             }
@@ -185,7 +184,7 @@ public class Time implements ITime {
     private String createTime() {
         final int hours = getHours();
         final int minutes = getMinutes();
-        return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
+        return getCorrectTime(hours) + ":" + getCorrectTime(minutes);
     }
 
     /**
@@ -203,6 +202,21 @@ public class Time implements ITime {
     }
 
     /**
+     * Returns true if today is the working day.
+     *
+     * @return true if today is the working day, false otherwise.
+     */
+    public static boolean isWorkDay() {
+        boolean result = true;
+        switch (getDayOfWeek()) {
+        case Calendar.SUNDAY:
+        case Calendar.SATURDAY:
+            result = false;
+        }
+        return result;
+    }
+
+    /**
      * Checks whether the current time
      * is included in the interval.
      *
@@ -217,7 +231,7 @@ public class Time implements ITime {
             final Date finishDate
     ) {
         boolean result = false;
-        if (currentTime != null && startDate != null && finishDate != null) {
+        if ((currentTime != null) && checkDate(startDate, finishDate)) {
             final long time = currentTime.getTime();
             result = (time >= startDate.getTime()) && (time <= finishDate.getTime());
         }
@@ -235,7 +249,9 @@ public class Time implements ITime {
             final Date startDate,
             final Date finishDate
     ) {
-        return (startDate != null) && (finishDate != null) && (startDate.getTime() <= finishDate.getTime());
+        return (startDate != null) && (finishDate != null)
+                && !startDate.equals(finishDate)
+                && (startDate.getTime() <= finishDate.getTime());
     }
 
     /**
@@ -253,10 +269,20 @@ public class Time implements ITime {
     }
 
     /**
+     * Returns correct time (hours / minutes) in format "00".
+     *
+     * @param time a input time (hours / minutes).
+     * @return The time (hours / minutes) in format "00:00".
+     */
+    private static String getCorrectTime(int time) {
+        return "" + ((time < 10) ? "0" + time : time);
+    }
+
+    /**
      * Checks whether a now time belongs at a given time interval.
      *
-     * @param start  a start work time of a company.
-     * @param finish a finish work time of a company.
+     * @param start  a start work time.
+     * @param finish a finish work time.
      * @return Returns true if a now time belongs at a given
      * time interval, false otherwise.
      */
@@ -266,15 +292,38 @@ public class Time implements ITime {
     ) {
         boolean result;
         try {
-            final int from = new Time(start).getHours();
-            final int to = new Time(finish).getHours();
-            final int hourNow = getHourOfDay();
-            result = hourNow >= from && hourNow < to;
+            final int from = getHours(start);
+            final int to = getHours(finish);
+            final int now = getHourOfDay();
+            result = checkHours(now, from, to);
         } catch (NumberFormatException ex) {
             LOGGER.error(ex.getMessage(), ex);
             result = false;
         }
         return result;
+    }
+
+    /**
+     * Returns a time hours.
+     *
+     * @param time a string time.
+     * @return a hours.
+     */
+    private static int getHours(String time) {
+        return new Time(time).getHours();
+    }
+
+    /**
+     * Checks whether a now time belongs at a given time interval.
+     *
+     * @param now  a now time
+     * @param from a start work time of a company.
+     * @param to   a finish work time of a company.
+     * @return Returns true if a now time belongs at a given
+     * time interval, false otherwise.
+     */
+    private static boolean checkHours(final int now, final int from, final int to) {
+        return (now >= from) && (now <= to);
     }
 
     /**
@@ -295,21 +344,6 @@ public class Time implements ITime {
     ) {
         dateFormat.setTimeZone(timeZone);
         return dateFormat.format(date != null ? date : new Date());
-    }
-
-    /**
-     * Returns true if today is the working day.
-     *
-     * @return true if today is the working day, false otherwise.
-     */
-    private static boolean isWorkDay() {
-        boolean result = true;
-        switch (getDayOfWeek()) {
-            case Calendar.SUNDAY:
-            case Calendar.SATURDAY:
-                result = false;
-        }
-        return result;
     }
 
     /**

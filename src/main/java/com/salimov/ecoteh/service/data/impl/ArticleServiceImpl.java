@@ -314,9 +314,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
         if ((articles != null) && !articles.isEmpty()) {
             result.addAll(
                     articles.stream()
-                            .filter(
-                                    ArticleServiceImpl::validFilter
-                            ).collect(Collectors.toList())
+                            .filter(ArticleServiceImpl::validFilter)
+                            .collect(Collectors.toList())
             );
         }
         return result;

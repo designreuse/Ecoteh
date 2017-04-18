@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The class implements a set of methods for working with
@@ -53,23 +52,18 @@ public class ResponseController {
      * Method: GET
      *
      * @param id           a id of the response to update.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/valid/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView reverseValidResponse(
-            @PathVariable("id") final long id,
-            final ModelAndView modelAndView
-    ) {
+    public String reverseValidResponse(@PathVariable("id") final long id) {
         final Response response = this.responseService.get(id);
         response.reverseValidated();
         this.responseService.update(response);
         Cache.clear();
-        modelAndView.setViewName("redirect:/responses");
-        return modelAndView;
+        return "redirect:/responses";
     }
 
     /**
@@ -78,21 +72,16 @@ public class ResponseController {
      * Method: GET
      *
      * @param id           a id of the response to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteResponseById(
-            @PathVariable("id") final long id,
-            final ModelAndView modelAndView
-    ) {
+    public String deleteResponseById(@PathVariable("id") final long id) {
         this.responseService.remove(id);
         Cache.clear();
-        modelAndView.setViewName("redirect:/responses");
-        return modelAndView;
+        return "redirect:/responses";
     }
 
     /**
@@ -100,17 +89,15 @@ public class ResponseController {
      * Request mapping: /admin/response/delete/all
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllResponses(final ModelAndView modelAndView) {
+    public String deleteAllResponses() {
         this.responseService.removeAll();
         Cache.clear();
-        modelAndView.setViewName("redirect:/responses");
-        return modelAndView;
+        return "redirect:/responses";
     }
 }

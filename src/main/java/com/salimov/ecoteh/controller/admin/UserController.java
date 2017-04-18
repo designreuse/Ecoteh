@@ -159,14 +159,13 @@ public class UserController {
      * @param isValid        a validated of the new user.
      * @param isMailing      a permit to send a letters on the user email.
      * @param isLocked       locked the user or not.
-     * @param modelAndView   a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/add",
             method = RequestMethod.POST
     )
-    public ModelAndView addUser(
+    public String addUser(
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "login") final String login,
             @RequestParam(value = "password") final String password,
@@ -182,8 +181,7 @@ public class UserController {
             @RequestParam(value = "photo") final MultipartFile multipartPhoto,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
-            @RequestParam(value = "is_locked") final boolean isLocked,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_locked") final boolean isLocked
     ) {
         final User user = new User(
                 name, description,
@@ -203,8 +201,7 @@ public class UserController {
         }
         this.userService.add(user);
         Cache.removeAll("Main Company");
-        modelAndView.setViewName("redirect:/admin/user/all");
-        return modelAndView;
+        return "redirect:/admin/user/all";
     }
 
     /**
@@ -267,14 +264,13 @@ public class UserController {
      * @param isValid        a validated of the user.
      * @param isMailing      a permit to send a letters on the user email.
      * @param isLocked       locked the user or not.
-     * @param modelAndView   a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/update",
             method = RequestMethod.POST
     )
-    public ModelAndView updateUser(
+    public String updateUser(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "login") final String login,
@@ -291,10 +287,8 @@ public class UserController {
             @RequestParam(value = "photo") final MultipartFile multipartPhoto,
             @RequestParam(value = "is_valid") final boolean isValid,
             @RequestParam(value = "is_mailing") final boolean isMailing,
-            @RequestParam(value = "is_locked") final boolean isLocked,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_locked") final boolean isLocked
     ) {
-        System.out.println("PHONE: " + mobilePhone);
         final User user = new User(
                 name, description,
                 new Contacts(
@@ -313,8 +307,7 @@ public class UserController {
         }
         this.userService.update(url, user);
         Cache.removeAll("Main Company");
-        modelAndView.setViewName("redirect:/admin/user/all");
-        return modelAndView;
+        return "redirect:/admin/user/all";
     }
 
     /**
@@ -341,21 +334,16 @@ public class UserController {
      * Method: GET
      *
      * @param url          a URL of the user to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteUserByUrl(
-            @PathVariable("url") final String url,
-            final ModelAndView modelAndView
-    ) {
+    public String deleteUserByUrl(@PathVariable("url") final String url) {
         this.userService.removeByUrl(url);
         Cache.removeAll("Main Company");
-        modelAndView.setViewName("redirect:/admin/user/all");
-        return modelAndView;
+        return "redirect:/admin/user/all";
     }
 
     /**
@@ -363,18 +351,16 @@ public class UserController {
      * Request mapping: /admin/user/delete/all
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllUsers(final ModelAndView modelAndView) {
+    public String deleteAllUsers() {
         this.userService.removeAll();
         Cache.removeAll("Main Company");
-        modelAndView.setViewName("redirect:/admin/user/all");
-        return modelAndView;
+        return "redirect:/admin/user/all";
     }
 
     /**

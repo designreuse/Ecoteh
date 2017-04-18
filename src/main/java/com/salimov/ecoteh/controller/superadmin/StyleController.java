@@ -87,20 +87,15 @@ public class StyleController {
      * Method: POST
      *
      * @param styles a new CSS styles.
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/update",
             method = RequestMethod.POST
     )
-    public ModelAndView updateStyles(
-            @RequestParam(value = "styles") final String styles,
-            final ModelAndView modelAndView
-    ) {
+    public String updateStyles(@RequestParam(value = "styles") final String styles) {
         this.styleService.save(styles);
-        modelAndView.setViewName("redirect:/superadmin/style");
-        return modelAndView;
+        return "redirect:/superadmin/style";
     }
 
     /**
@@ -125,16 +120,14 @@ public class StyleController {
      * Request mapping: /admin/style/rollback
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/rollback",
             method = RequestMethod.GET
     )
-    public ModelAndView rollbackStyles(final ModelAndView modelAndView) {
+    public String rollbackStyles() {
         this.styleService.rollback();
-        modelAndView.setViewName("redirect:/superadmin/style");
-        return modelAndView;
+        return "redirect:/superadmin/style";
     }
 }

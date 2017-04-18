@@ -71,7 +71,6 @@ public class AuthorizationController {
     /**
      * Logout user and redirects to /login?logout.
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @param request      a implementation of the interface to provide
      *                     request information for HTTP servlets.
      * @param response     a implementation of the interface to provide
@@ -82,8 +81,7 @@ public class AuthorizationController {
             value = "/logout",
             method = RequestMethod.GET
     )
-    public ModelAndView logoutPage(
-            final ModelAndView modelAndView,
+    public String logoutPage(
             final HttpServletRequest request,
             final HttpServletResponse response
     ) {
@@ -92,7 +90,6 @@ public class AuthorizationController {
                 SecurityContextHolder.getContext().getAuthentication()
         );
         Cache.removeAll("Admin");
-        modelAndView.setViewName("redirect:/login?logout");
-        return modelAndView;
+        return "redirect:/login?logout";
     }
 }

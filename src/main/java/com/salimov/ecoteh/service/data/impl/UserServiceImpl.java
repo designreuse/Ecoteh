@@ -563,8 +563,6 @@ public final class UserServiceImpl extends DataServiceImpl<User> implements User
      * @param to   a object to copy
      */
     protected void copy(final User from, final User to) {
-        System.out.println("FROM: " + from);
-        System.out.println("\nTO: " + to);
         to.initialize(from);
     }
 }

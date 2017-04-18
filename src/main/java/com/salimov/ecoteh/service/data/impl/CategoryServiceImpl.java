@@ -144,9 +144,8 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
         if (categories != null && !categories.isEmpty()) {
             result.addAll(
                     categories.stream()
-                            .filter(
-                                    CategoryServiceImpl::validFilter
-                            ).collect(Collectors.toList())
+                            .filter(CategoryServiceImpl::validFilter)
+                            .collect(Collectors.toList())
             );
         }
         return result;

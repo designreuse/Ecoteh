@@ -122,14 +122,13 @@ public class ArticleController {
      * @param categoryUrl   a category url of the new article.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the new article.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/add",
             method = RequestMethod.POST
     )
-    public ModelAndView addArticle(
+    public String addArticle(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "desc") final String description,
             @RequestParam(value = "text") final String text,
@@ -138,8 +137,7 @@ public class ArticleController {
             @RequestParam(value = "price", defaultValue = "0") final String price,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_valid") final boolean isValid
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
@@ -157,8 +155,7 @@ public class ArticleController {
         }
         this.articleService.add(article);
         Cache.clear();
-        modelAndView.setViewName(getViewName(article));
-        return modelAndView;
+        return getViewName(article);
     }
 
     /**
@@ -215,14 +212,13 @@ public class ArticleController {
      * @param categoryUrl   a category URL of the article.
      * @param multipartLogo a file of photo to the new category.
      * @param isValid       a validated of the article.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/update",
             method = RequestMethod.POST
     )
-    public ModelAndView updateArticle(
+    public String updateArticle(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "desc") final String description,
@@ -232,8 +228,7 @@ public class ArticleController {
             @RequestParam(value = "price") final String price,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_valid") final boolean isValid
     ) {
         final Category category = isNotBlank(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
@@ -250,9 +245,8 @@ public class ArticleController {
             article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
         }
         this.articleService.update(url, article);
-        modelAndView.setViewName(getViewName(article));
         Cache.clear();
-        return modelAndView;
+        return getViewName(article);
     }
 
     /**
@@ -286,14 +280,10 @@ public class ArticleController {
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteArticleByUrl(
-            @PathVariable("url") final String url,
-            final ModelAndView modelAndView
-    ) {
+    public String deleteArticleByUrl(@PathVariable("url") final String url) {
         this.articleService.removeByUrl(url);
-        modelAndView.setViewName("redirect:/");
         Cache.clear();
-        return modelAndView;
+        return "redirect:/";
     }
 
     /**
@@ -301,18 +291,16 @@ public class ArticleController {
      * Request mapping: /admin/article/delete/all
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllArticles(final ModelAndView modelAndView) {
+    public String deleteAllArticles() {
         this.articleService.removeAll();
-        modelAndView.setViewName("redirect:/");
         Cache.clear();
-        return modelAndView;
+        return "redirect:/";
     }
 
     /**

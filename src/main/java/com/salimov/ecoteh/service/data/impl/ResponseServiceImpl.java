@@ -4,6 +4,7 @@ import com.salimov.ecoteh.entity.Response;
 import com.salimov.ecoteh.repository.ResponseRepository;
 import com.salimov.ecoteh.service.data.interfaces.ResponseService;
 import com.salimov.ecoteh.util.comparator.ResponseComparator;
+import com.salimov.ecoteh.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -200,9 +201,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
             final Date startDate,
             final Date finishDate
     ) {
-        return (startDate != null) && (finishDate != null)
-                && !startDate.equals(finishDate)
-                && (startDate.getTime() <= finishDate.getTime());
+        return Time.checkDate(startDate, finishDate);
     }
 
     /**

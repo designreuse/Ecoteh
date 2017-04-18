@@ -126,14 +126,13 @@ public class CompanyController {
      * @param address       a new address to the main company.
      * @param googleMaps    a new google maps URL to the main company.
      * @param multipartLogo a new logo to the main company.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/update/main",
             method = RequestMethod.POST
     )
-    public ModelAndView updateMainCompany(
+    public String updateMainCompany(
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
@@ -154,8 +153,7 @@ public class CompanyController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
-            @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            final ModelAndView modelAndView
+            @RequestParam(value = "logo") final MultipartFile multipartLogo
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -178,9 +176,8 @@ public class CompanyController {
         }
         company.setType(CompanyType.MAIN);
         this.companyService.updateMainCompany(company);
-        modelAndView.setViewName("redirect:/company/main");
         Cache.clear();
-        return modelAndView;
+        return "redirect:/company/main";
     }
 
     /**
@@ -238,14 +235,13 @@ public class CompanyController {
      * @param googleMaps    a google maps URL of the new company.
      * @param multipartLogo a logo to the new company.
      * @param isValid       a validated of the new company.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/add",
             method = RequestMethod.POST
     )
-    public ModelAndView addPartner(
+    public String addPartner(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "domain") final String domain,
             @RequestParam(value = "tagline") final String tagline,
@@ -263,8 +259,7 @@ public class CompanyController {
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_valid") final boolean isValid
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -286,8 +281,7 @@ public class CompanyController {
         }
         this.companyService.add(company);
         Cache.clear();
-        modelAndView.setViewName("redirect:/company/" + company.getUrl());
-        return modelAndView;
+        return "redirect:/company/" + company.getUrl();
     }
 
     /**
@@ -353,14 +347,13 @@ public class CompanyController {
      * @param googleMaps    a new google maps URL to the company.
      * @param multipartLogo a new logo to the company.
      * @param isValid       a validated of the article.
-     * @param modelAndView  a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/update",
             method = RequestMethod.POST
     )
-    public ModelAndView updatePartnerCompany(
+    public String updatePartnerCompany(
             @RequestParam(value = "url") final String url,
             @RequestParam(value = "title") final String title,
             @RequestParam(value = "domain") final String domain,
@@ -379,8 +372,7 @@ public class CompanyController {
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            final ModelAndView modelAndView
+            @RequestParam(value = "is_valid") final boolean isValid
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -402,8 +394,7 @@ public class CompanyController {
         }
         this.companyService.update(url, company);
         Cache.clear();
-        modelAndView.setViewName("redirect:/company/" + company.getUrl());
-        return modelAndView;
+        return "redirect:/company/" + company.getUrl();
     }
 
     /**
@@ -429,22 +420,17 @@ public class CompanyController {
      * Request mapping: /admin/company/delete/{url}
      * Method: GET
      *
-     * @param url          a URL of the company to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param url a URL of the company to remove.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/{url}",
             method = RequestMethod.GET
     )
-    public ModelAndView deletePartnerByUrl(
-            @PathVariable("url") final String url,
-            final ModelAndView modelAndView
-    ) {
+    public String deletePartnerByUrl(@PathVariable("url") final String url) {
         this.companyService.removeByUrl(url);
-        modelAndView.setViewName("redirect:/");
         Cache.clear();
-        return modelAndView;
+        return "redirect:/";
     }
 
     /**
@@ -452,17 +438,15 @@ public class CompanyController {
      * Request mapping: /admin/company/delete/all
      * Method: GET
      *
-     * @param modelAndView a object of class ModelAndView for to update.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
             value = "/delete/all",
             method = RequestMethod.GET
     )
-    public ModelAndView deleteAllPartners(final ModelAndView modelAndView) {
+    public String deleteAllPartners() {
         this.companyService.removeAll();
-        modelAndView.setViewName("redirect:/");
         Cache.clear();
-        return modelAndView;
+        return "redirect:/";
     }
 }

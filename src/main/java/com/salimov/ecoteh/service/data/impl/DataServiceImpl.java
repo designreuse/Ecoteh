@@ -303,12 +303,24 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         List<T> result;
         if (models == null || models.isEmpty()) {
             result = new ArrayList<>();
-        } else if ((fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < models.size())) {
+        } else if (checkIndexes(fromIndex, toIndex, models.size())) {
             result = new ArrayList<>(models).subList(fromIndex, toIndex);
         } else {
             result = new ArrayList<>(models);
         }
         return result;
+    }
+
+    /**
+     * Checks a incoming indexes.
+     *
+     * @param fromIndex a initial index.
+     * @param toIndex   a final index.
+     * @param size      a models size.
+     * @return true if incoming indexes is correct, false otherwise.
+     */
+    private static boolean checkIndexes(final int fromIndex, final int toIndex, final int size) {
+        return (fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < size);
     }
 
     /**
