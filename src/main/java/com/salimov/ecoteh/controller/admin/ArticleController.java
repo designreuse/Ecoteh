@@ -272,8 +272,7 @@ public class ArticleController {
      * Request mapping: /admin/article/delete/{url}
      * Method: GET
      *
-     * @param url          a URL of the article to remove.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param url a URL of the article to remove.
      * @return The ready object of class ModelAndView.
      */
     @RequestMapping(
