@@ -2,6 +2,7 @@ package com.salimov.ecoteh.mocks.service.data;
 
 import com.salimov.ecoteh.entity.*;
 import com.salimov.ecoteh.enums.UserRole;
+import com.salimov.ecoteh.service.data.impl.StyleServiceImpl;
 import com.salimov.ecoteh.service.data.interfaces.*;
 import com.salimov.ecoteh.service.search.SearchService;
 import com.salimov.ecoteh.service.seo.SeoService;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static com.salimov.ecoteh.mocks.MockConstants.*;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.*;
+import static com.salimov.ecoteh.mocks.properties.MockContentProperties.getContentProperties;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +32,7 @@ public final class MockServices {
     private static UserService userService;
     private static SearchService searchService;
     private static SeoService seoService;
+    private static StyleService styleService;
 
     public static ArticleService getArticleService() {
         if (articleService == null) {
@@ -92,6 +95,13 @@ public final class MockServices {
             initSeoService();
         }
         return seoService;
+    }
+
+    public static StyleService getStyleService() {
+        if (styleService == null) {
+            initStyleService();
+        }
+        return styleService;
     }
 
     private static void initArticleService() {
@@ -282,5 +292,9 @@ public final class MockServices {
         seoService = mock(SeoService.class);
         when(seoService.getRobotsTxt()).thenReturn(robotsModelAndView);
         when(seoService.getSiteMapXml()).thenReturn(siteMapModelAndView);
+    }
+
+    private static void initStyleService() {
+        styleService = new StyleServiceImpl(getContentProperties());
     }
 }

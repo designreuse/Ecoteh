@@ -69,7 +69,7 @@ public final class CategoryTest extends ContentTest<Category> {
                 ", url='" + category.getUrl() + '\'' +
                 ", description='" + category.getDescription() + '\'' +
                 ", keywords='" + category.getKeywords() + '\'' +
-                ", " + category.getLogo() +
+                ", logo=" + category.getLogo() +
                 '}' +
                 '}';
         assertEquals(category.toString(), categoryToString);

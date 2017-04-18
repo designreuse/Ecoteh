@@ -159,6 +159,7 @@ public final class MockEntity {
     private static void initAddress() {
         address = new Address(ADDRESS, GOOGLE_MAPS);
         address.setId(ID);
+        address.setValidated(true);
     }
 
     private static void initArticle() {
@@ -168,6 +169,7 @@ public final class MockEntity {
         );
         article.setId(ID);
         article.setUrl(URL);
+        article.setValidated(true);
     }
 
     private static void initCategory() {
@@ -178,6 +180,7 @@ public final class MockEntity {
         category.setUrl(URL);
         category.setLogo(getFile());
         category.addArticle(getArticle());
+        category.setValidated(true);
     }
 
     private static void initCompany() {
@@ -202,21 +205,25 @@ public final class MockEntity {
         company.setAddress(
                 new Address(ADDRESS, GOOGLE_MAPS)
         );
+        company.setValidated(true);
     }
 
     private static void initMessage() {
         message = new Message(getUser(), ANY_STRING, TEXT);
         message.setId(ID);
+        message.setValidated(true);
     }
 
     private static void initFile() {
         file = new File(TITLE, URL);
         file.setId(ID);
+        file.setValidated(true);
     }
 
     private static void initResponse() {
         response = new Response(NAME, TEXT);
         response.setId(ID);
+        response.setValidated(true);
         response.setValidated(true);
     }
 
@@ -232,6 +239,7 @@ public final class MockEntity {
         user.setLogin(LOGIN);
         user.setPassword(PASSWORD);
         user.setRole(USER_ROLE);
+        user.setValidated(true);
     }
 
     private static void initAddresses() {

@@ -12,10 +12,6 @@ public class CacheMVFabricImplTest extends MainMVFabricImplTest {
 
     @Before
     public void beforeTests() {
-        setFabric(
-                new CacheMVFabricImpl(
-                        getMainMVFabric()
-                )
-        );
+        setFabric(new CacheMVFabricImpl(getMainMVFabric()));
     }
 }

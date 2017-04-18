@@ -1,11 +1,13 @@
 package com.salimov.ecoteh.mocks.repository;
 
 import com.salimov.ecoteh.entity.*;
+import com.salimov.ecoteh.enums.CompanyType;
 import com.salimov.ecoteh.repository.*;
 import com.salimov.ecoteh.util.encryption.Encryptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static com.salimov.ecoteh.mocks.MockConstants.*;
 import static com.salimov.ecoteh.mocks.enity.MockEntity.*;
@@ -117,11 +119,12 @@ public class MockRepository {
 
     private static void initCompanyRepository() {
         final Company company = getCompany();
+        List<Company> companies = getCompanies();
         companyRepository = mock(CompanyRepository.class);
         initDataRepository(
                 companyRepository,
                 company,
-                getCompanies()
+                companies
         );
         when(companyRepository.findByTitle(TITLE)).thenReturn(company);
         when(companyRepository.findByTitle(ANY_STRING)).thenReturn(null);
@@ -129,6 +132,7 @@ public class MockRepository {
         when(companyRepository.findByUrl(URL)).thenReturn(company);
         when(companyRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(companyRepository.findByUrl(null)).thenReturn(null);
+        when(companyRepository.findByType(CompanyType.PARTNER)).thenReturn(companies);
     }
 
     private static void initFileRepository() {
@@ -199,13 +203,11 @@ public class MockRepository {
     ) {
         when(repository.save(model)).thenReturn(model);
         when(repository.save((T) null)).thenReturn(null);
-        when(repository.save(models))
-                .thenReturn(new ArrayList<>(models));
+        when(repository.save(models)).thenReturn(new ArrayList<>(models));
         when(repository.findOne(ID)).thenReturn(model);
         when(repository.findOne(UNKNOWN_ID)).thenReturn(null);
         when(repository.findOne((Long) null)).thenReturn(null);
-        when(repository.findAll())
-                .thenReturn(new ArrayList<>(models));
+        when(repository.findAll()).thenReturn(new ArrayList<>(models));
         when(repository.exists(ID)).thenReturn(true);
         when(repository.exists(UNKNOWN_ID)).thenReturn(false);
         when(repository.exists((Long) null)).thenReturn(false);

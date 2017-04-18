@@ -3,14 +3,11 @@ package com.salimov.ecoteh.controller.admin;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
-import org.springframework.web.servlet.ModelAndView;
 
-import static com.salimov.ecoteh.mocks.MockConstants.FILE_TYPE;
-import static com.salimov.ecoteh.mocks.MockConstants.ID;
-import static com.salimov.ecoteh.mocks.MockConstants.TITLE;
+import static com.salimov.ecoteh.mocks.MockConstants.*;
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static com.salimov.ecoteh.mocks.controller.MockAdminController.getFileController;
-
+import static org.junit.Assert.assertEquals;
 
 public class FileControllerTest {
 
@@ -41,11 +38,8 @@ public class FileControllerTest {
 
     @Test
     public void whenAddFileByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.addFile(TITLE, FILE_TYPE, null, new ModelAndView()),
-                "redirect:/admin/file/all",
-                null
-        );
+        String viewName = controller.addFile(TITLE, FILE_TYPE, null);
+        assertEquals(viewName, "redirect:/admin/file/all");
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -64,11 +58,8 @@ public class FileControllerTest {
 
     @Test
     public void whenUpdateFileByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.updateFile(ID, TITLE, FILE_TYPE, null, new ModelAndView()),
-                "redirect:/admin/file/all",
-                null
-        );
+        String viewName = controller.updateFile(ID, TITLE, FILE_TYPE, null);
+        assertEquals(viewName, "redirect:/admin/file/all");
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -78,19 +69,13 @@ public class FileControllerTest {
 
     @Test
     public void whenDeleteFileByIdThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteFileById(ID, new ModelAndView()),
-                "redirect:/admin/file/all",
-                null
-        );
+        String viewName = controller.deleteFileById(ID);
+        assertEquals(viewName, "redirect:/admin/file/all");
     }
 
     @Test
     public void whenDeleteAllFilesThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteAllFiles(new ModelAndView()),
-                "redirect:/admin/file/all",
-                null
-        );
+        String viewName = controller.deleteAllFiles();
+        assertEquals(viewName, "redirect:/admin/file/all");
     }
 }

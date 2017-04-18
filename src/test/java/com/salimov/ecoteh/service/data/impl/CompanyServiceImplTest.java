@@ -49,12 +49,12 @@ public final class CompanyServiceImplTest extends ContentServiceImplTest<Company
     }
 
     @Test
-    public void whenGetValidPartnersThenReturnNotEmptyList() {
-        assertTrue(this.service.getPartners(true).isEmpty());
+    public void whenGetValidPartnersThenReturnSomeList() {
+        assertFalse(this.service.getPartners(true).isEmpty());
     }
 
     @Test
-    public void whenGetInvalidPartnersThenReturnNotEmptyList() {
+    public void whenGetPartnersThenReturnSomeList() {
         assertFalse(this.service.getPartners(false).isEmpty());
     }
 

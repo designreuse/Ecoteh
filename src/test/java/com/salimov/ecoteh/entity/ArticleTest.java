@@ -89,12 +89,13 @@ public final class ArticleTest extends ContentTest<Article> {
                 ", url='" + article.getUrl() + '\'' +
                 ", description='" + article.getDescription() + '\'' +
                 ", keywords='" + article.getKeywords() + '\'' +
-                ", " + article.getLogo() +
+                ", logo=" + article.getLogo() +
                 '}' +
                 ", number='" + article.getNumber() + '\'' +
                 ", text='" + article.getText() + '\'' +
                 ", date=" + article.getDate() +
-                ", " + article.getCategory() +
+                ", price=" + article.getPrice() +
+                ", category=" + article.getCategory() +
                 '}';
         assertEquals(article.toString(), articleToString);
     }
@@ -129,7 +130,7 @@ public final class ArticleTest extends ContentTest<Article> {
         final Article article2 = article1.clone();
         assertEquals(article1, article2);
         final boolean value = article1.getTitle().equalsIgnoreCase(article2.getTitle()) &&
-                        article1.getUrl().equalsIgnoreCase(article2.getUrl());
+                article1.getUrl().equalsIgnoreCase(article2.getUrl());
         assertEquals(article1.equals(article2), value);
     }
 

@@ -166,14 +166,14 @@ public final class CacheTest {
     }
 
     @Test
-    public void whenGetAllByNullKeyThenReturnNull() {
-        assertNull(Cache.getAll(null));
+    public void whenGetAllByNullKeyThenReturnEmptyCollection() {
+        assertTrue(Cache.getAll(null).isEmpty());
     }
 
     @Test
-    public void whenGetAllByBlankKeyThenReturnNull() {
-        assertNull(Cache.getAll(""));
-        assertNull(Cache.getAll("   "));
+    public void whenGetAllByBlankKeyThenReturnEmptyCollection() {
+        assertTrue(Cache.getAll("").isEmpty());
+        assertTrue(Cache.getAll("").isEmpty());
     }
 
     @Test

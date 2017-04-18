@@ -14,15 +14,14 @@ import static org.junit.Assert.*;
 
 public abstract class DataServiceImplTest<T extends Model> {
 
-    @Test
-    public void whenAddNullThenReturnsIt() {
+    @Test(expected = NullPointerException.class)
+    public void whenAddNullThenThrowException() {
         assertNull(getService().add(null));
     }
 
-    @Test
-    public void whenAddInvalidModelThenReturnsIt() {
+    @Test(expected = NullPointerException.class)
+    public void whenAddInvalidModelThenThrowException() {
         assertNull(getService().add(null));
-        assertNull(getService().add(getInvalidObject()));
     }
 
     @Test
@@ -45,8 +44,8 @@ public abstract class DataServiceImplTest<T extends Model> {
         assertFalse(getService().addAll(getObjects()).isEmpty());
     }
 
-    @Test
-    public void whenUpdateNullThenReturnsIt() {
+    @Test(expected = NullPointerException.class)
+    public void whenUpdateNullThenThrowException() {
         assertNull(getService().update((T) null));
     }
 
@@ -78,8 +77,8 @@ public abstract class DataServiceImplTest<T extends Model> {
     }
 
     @Test
-    public void whenGetAllThenReturnSomeModels() {
-        assertTrue(getService().getAll().isEmpty());
+    public void whenGetAllThenReturnSomeList() {
+        assertFalse(getService().getAll().isEmpty());
     }
 
     @Test
@@ -88,8 +87,8 @@ public abstract class DataServiceImplTest<T extends Model> {
     }
 
     @Test
-    public void whenGetAllWithTrueValidThenReturnSomeModels() {
-        assertTrue(getService().getAll(true).isEmpty());
+    public void whenGetAllWithTrueValidThenReturnSomeList() {
+        assertFalse(getService().getAll(true).isEmpty());
     }
 
     @Test
@@ -155,18 +154,18 @@ public abstract class DataServiceImplTest<T extends Model> {
     }
 
     @Test
-    public void whenGetAndSubListWithFromIndexGreatToIndexThenReturnEmptyList() {
-        assertTrue(getService().getAndSubList(2, 1).isEmpty());
+    public void whenGetAndSubListWithFromIndexGreatToIndexThenReturnAllList() {
+        assertFalse(getService().getAndSubList(2, 1).isEmpty());
     }
 
     @Test
-    public void whenGetAndSubListWithMoreBigIndexThenReturnEmptyList() {
-        assertTrue(getService().getAndSubList(Integer.MAX_VALUE - 1, Integer.MAX_VALUE).isEmpty());
+    public void whenGetAndSubListWithMoreBigIndexThenReturnSomeList() {
+        assertFalse(getService().getAndSubList(Integer.MAX_VALUE - 1, Integer.MAX_VALUE).isEmpty());
     }
 
     @Test
-    public void whenGetAndSubListWithMoreBigToIndexThenReturnEmptyList() {
-        assertTrue(getService().getAndSubList(1, Integer.MAX_VALUE).isEmpty());
+    public void whenGetAndSubListWithMoreBigToIndexThenReturnAllList() {
+        assertFalse(getService().getAndSubList(1, Integer.MAX_VALUE).isEmpty());
     }
 
     @Test
@@ -180,13 +179,13 @@ public abstract class DataServiceImplTest<T extends Model> {
     }
 
     @Test
-    public void whenFilteredByValidForValidModelsThenReturnsEmptyList() {
-        assertTrue(getService().filteredByValid(getObjects()).isEmpty());
+    public void whenFilteredByValidForValidModelsThenReturnsSomeList() {
+        assertFalse(getService().filteredByValid(getObjects()).isEmpty());
     }
 
     @Test
     public void whenGetAndSubListWithAllValidParametersThenReturnSubList() {
-        assertTrue(getService().getAndSubList(1, 2).isEmpty());
+        assertFalse(getService().getAndSubList(1, 2).isEmpty());
     }
 
     @Test

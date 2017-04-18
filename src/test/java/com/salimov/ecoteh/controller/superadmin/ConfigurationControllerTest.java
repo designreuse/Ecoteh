@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static com.salimov.ecoteh.mocks.controller.MockConfigurationController.getConfigurationController;
+import static com.salimov.ecoteh.mocks.controller.MockSuperadminController.getConfigurationController;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)

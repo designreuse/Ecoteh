@@ -205,7 +205,7 @@ public class MainMVFabricImplTest {
         checkModelAndView(
                 this.fabric.allResponsesPage(),
                 "client/response/all",
-                new String[]{"main_company", "categories", "responses_list"}
+                new String[]{"main_company", "categories", "responses"}
         );
     }
 
@@ -214,12 +214,12 @@ public class MainMVFabricImplTest {
         checkModelAndView(
                 this.fabric.allSortResponsesByDatePage(true),
                 "client/response/all",
-                new String[]{"main_company", "categories", "responses_list"}
+                new String[]{"main_company", "categories", "responses"}
         );
         checkModelAndView(
                 this.fabric.allSortResponsesByDatePage(false),
                 "client/response/all",
-                new String[]{"main_company", "categories", "responses_list"}
+                new String[]{"main_company", "categories", "responses"}
         );
     }
 

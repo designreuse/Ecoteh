@@ -2,11 +2,11 @@ package com.salimov.ecoteh.controller.admin;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
 
 import static com.salimov.ecoteh.mocks.MockConstants.ID;
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static com.salimov.ecoteh.mocks.controller.MockAdminController.getMessageController;
+import static org.junit.Assert.assertEquals;
 
 public class MessageControllerTest {
 
@@ -28,19 +28,13 @@ public class MessageControllerTest {
 
     @Test
     public void whenDeleteMessageByIdThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteMessageById(ID, new ModelAndView()),
-                "redirect:/admin/messages",
-                null
-        );
+        String viewName = controller.deleteMessageById(ID);
+        assertEquals(viewName, "redirect:/admin/messages");
     }
 
     @Test
     public void whenDeleteAllMessagesThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteAllMessages(new ModelAndView()),
-                "redirect:/admin/messages",
-                null
-        );
+        String viewName = controller.deleteAllMessages();
+        assertEquals(viewName, "redirect:/admin/messages");
     }
 }

@@ -4,11 +4,11 @@ import com.salimov.ecoteh.util.translator.Translator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
-import org.springframework.web.servlet.ModelAndView;
 
 import static com.salimov.ecoteh.mocks.MockConstants.*;
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static com.salimov.ecoteh.mocks.controller.MockAdminController.getCategoryController;
+import static org.junit.Assert.assertEquals;
 
 public class CategoryControllerTest {
 
@@ -24,21 +24,17 @@ public class CategoryControllerTest {
         checkModelAndView(
                 controller.getNewCategoryPage(),
                 "admin/category/add",
-                new String[]{"main_company", "categories"}
+                new String[] { "main_company", "categories" }
         );
     }
 
     @Test
     public void whenAddCategoryByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.addCategory(
-                        TITLE, DESCRIPTION,
-                        KEYWORDS, null, true,
-                        new ModelAndView()
-                ),
-                "redirect:/category/" + Translator.fromCyrillicToLatin(TITLE),
-                null
+        String viewName = controller.addCategory(
+                TITLE, DESCRIPTION,
+                KEYWORDS, null, true
         );
+        assertEquals(viewName, "redirect:/category/" + Translator.fromCyrillicToLatin(TITLE));
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -51,21 +47,17 @@ public class CategoryControllerTest {
         checkModelAndView(
                 controller.editCategory(URL),
                 "admin/category/edit",
-                new String[]{"main_company", "categories", "category"}
+                new String[] { "main_company", "categories", "category" }
         );
     }
 
     @Test
     public void whenUpdateCategoryByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.updateCategory(
-                        URL, TITLE, DESCRIPTION, KEYWORDS,
-                        null, true,
-                        new ModelAndView()
-                ),
-                "redirect:/category/" + Translator.fromCyrillicToLatin(TITLE),
-                null
+        String viewName = controller.updateCategory(
+                URL, TITLE, DESCRIPTION, KEYWORDS,
+                null, true
         );
+        assertEquals(viewName, "redirect:/category/" + Translator.fromCyrillicToLatin(TITLE));
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -75,19 +67,13 @@ public class CategoryControllerTest {
 
     @Test
     public void whenDeleteCategoryByUrlMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteCategoryByUrl(URL, new ModelAndView()),
-                "redirect:/",
-                null
-        );
+        String viewName = controller.deleteCategoryByUrl(URL);
+        assertEquals(viewName, "redirect:/");
     }
 
     @Test
     public void whenDeleteAllCategoriesMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteAllCategories(new ModelAndView()),
-                "redirect:/",
-                null
-        );
+        String viewName = controller.deleteAllCategories();
+        assertEquals(viewName, "redirect:/");
     }
 }

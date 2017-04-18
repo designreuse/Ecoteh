@@ -54,13 +54,13 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
         this.service.getByNumber("", false);
     }
 
-    @Test
-    public void whenGetByValidNumberAndTrueValidThenReturnsSomeArticle() {
+    @Test(expected = NullPointerException.class)
+    public void whenGetByValidNumberAndTrueValidThenReturnsSomeArticleOrThrowException() {
         assertNotNull(this.service.getByNumber(NUMBER, true));
     }
 
-    @Test
-    public void whenGetByValidNumberAndFalseValidThenReturnsSomeArticle() {
+    @Test(expected = NullPointerException.class)
+    public void whenGetByValidNumberAndFalseValidThenReturnsSomeArticleOrThrowException() {
         assertNotNull(this.service.getByNumber(NUMBER, false));
     }
 
@@ -135,24 +135,22 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
-    public void whenGetAndSortByNumberWithTrueReversThenReturnsEmptyList() {
+    public void whenGetAndSortByNumberWithTrueReversThenReturnsSomeList() {
         assertFalse(this.service.getAndSortByNumber(true).isEmpty());
     }
 
     @Test
-    public void whenGetAndSortByNumberWithFalseReversThenReturnsEmptyList() {
-        assertFalse(
-                this.service.getAndSortByNumber(false).isEmpty()
-        );
+    public void whenGetAndSortByNumberWithFalseReversThenReturnsSomeList() {
+        assertFalse(this.service.getAndSortByNumber(false).isEmpty());
     }
 
     @Test
-    public void whenGetAndSortByDateWithTrueReversThenReturnsEmptyList() {
+    public void whenGetAndSortByDateWithTrueReversThenReturnsSomeList() {
         assertFalse(this.service.getAndSortByDate(true).isEmpty());
     }
 
     @Test
-    public void whenGetAndSortByDateWithFalseReversThenReturnsEmptyList() {
+    public void whenGetAndSortByDateWithFalseReversThenReturnsSomeList() {
         assertFalse(this.service.getAndSortByDate(false).isEmpty());
     }
 
@@ -229,7 +227,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
         this.service.removeByNumber("  ");
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void whenRemoveByNumberThenDoIt() {
         this.service.removeByNumber(NUMBER);
     }

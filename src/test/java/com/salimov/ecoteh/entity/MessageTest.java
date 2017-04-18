@@ -27,12 +27,11 @@ public final class MessageTest extends ModelTest<Message> {
                 "id=" + message.getId() +
                 ", validated=" + message.isValidated() +
                 '}' +
-                ", " + message.getUser() +
+                ", user=" + message.getUser() +
                 ", subject='" + message.getSubject() + '\'' +
                 ", text='" + message.getText() + '\'' +
                 ", date=" + message.getDate() +
                 '}';
-        System.out.println(message.getId());
         assertEquals(message.toString(), messageToString);
     }
 

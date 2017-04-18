@@ -116,9 +116,9 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
         this.service.getByEmail("");
     }
 
-    @Test
-    public void whenGetByEmailThenReturnSomeUser() {
-        assertNull(this.service.getByEmail(EMAIL));
+    @Test(expected = NullPointerException.class)
+    public void whenGetByEmailThenReturnSomeUserOrThrowException() {
+        assertNotNull(this.service.getByEmail(EMAIL));
     }
 
     @Test
@@ -246,32 +246,32 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndSortByNameWithTrueReversThenReturnSomeList() {
-        assertTrue(this.service.getAndSortByName(true).isEmpty());
+        assertFalse(this.service.getAndSortByName(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByNameWithFalseReversThenReturnSomeList() {
-        assertTrue(this.service.getAndSortByName(false).isEmpty());
+        assertFalse(this.service.getAndSortByName(false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByUrlWithTrueReversThenReturnSomeList() {
-        assertTrue(this.service.getAndSortByUrl(true).isEmpty());
+        assertFalse(this.service.getAndSortByUrl(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByUrlWithFalseReversThenReturnSomeList() {
-        assertTrue(this.service.getAndSortByUrl(false).isEmpty());
+        assertFalse(this.service.getAndSortByUrl(false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByRoleWithTrueReversThenReturnSomeList() {
-        assertTrue(this.service.getAndSortByRole(USER_ROLE, true).isEmpty());
+        assertFalse(this.service.getAndSortByRole(USER_ROLE, true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByRoleWithFalseReversThenReturnSomeList() {
-        assertTrue(this.service.getAndSortByRole(USER_ROLE, false).isEmpty());
+        assertFalse(this.service.getAndSortByRole(USER_ROLE, false).isEmpty());
     }
 
     @Test
@@ -337,19 +337,19 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenGetAndFilterByNullRolesThenReturnSomeNotFileterList() {
-        assertTrue(this.service.getAndFilterByRoles(null).isEmpty());
+        assertFalse(this.service.getAndFilterByRoles(null).isEmpty());
     }
 
     @Test
-    public void whenGetAndFilterByEmptyRolesThenReturnSomeNotFileterList() {
-        assertTrue(this.service.getAndFilterByRoles(new ArrayList<>()).isEmpty());
+    public void whenGetAndFilterByEmptyRolesThenReturnSomeList() {
+        assertFalse(this.service.getAndFilterByRoles(new ArrayList<>()).isEmpty());
     }
 
     @Test
     public void whenGetAndFilterByRolesThenReturnSomeList() {
         final List<UserRole> roles = new ArrayList<>();
         roles.add(USER_ROLE);
-        assertTrue(this.service.getAndFilterByRoles(roles).isEmpty());
+        assertFalse(this.service.getAndFilterByRoles(roles).isEmpty());
     }
 
     @Test
@@ -364,7 +364,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenFilteredByValidThenReturnSomeList() {
-        assertTrue(this.service.filteredByValid(getUsers()).isEmpty());
+        assertFalse(this.service.filteredByValid(getUsers()).isEmpty());
     }
 
     @Test

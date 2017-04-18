@@ -15,6 +15,7 @@ import static com.salimov.ecoteh.mocks.enity.MockEntity.getCategory;
 import static com.salimov.ecoteh.mocks.repository.MockRepository.getCategoryRepository;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getArticleService;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getFileService;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -48,7 +49,7 @@ public final class CategoryServiceImplTest extends ContentServiceImplTest<Catego
 
     @Test
     public void whenFilteredByValidThenReturnSomeList() {
-        assertTrue(this.service.filteredByValid(getCategories()).isEmpty());
+        assertFalse(this.service.filteredByValid(getCategories()).isEmpty());
     }
 
     @Ignore

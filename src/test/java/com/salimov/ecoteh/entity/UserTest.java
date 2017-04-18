@@ -90,8 +90,8 @@ public final class UserTest extends ModelTest<User> {
                 ", Login='" + user.getLogin() + '\'' +
                 ", Password='" + user.getPassword() + '\'' +
                 ", description='" + user.getDescription() + '\'' +
-                ", " + user.getContacts() +
-                ", " + user.getPhoto() +
+                ", contacts=" + user.getContacts() +
+                ", photo=" + user.getPhoto() +
                 ", role=" + user.getRole() +
                 ", isMailing=" + user.isMailing() +
                 ", isLocked=" + user.isLocked() +

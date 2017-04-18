@@ -20,7 +20,8 @@ public abstract class MainControllerTest {
                         "categories",
                         "company",
                         "print_partners",
-                        "print_responses"
+                        "print_responses",
+                        "favicon"
                 }
         );
     }
@@ -33,7 +34,8 @@ public abstract class MainControllerTest {
                 "client/category/all",
                 new String[]{
                         "main_company",
-                        "categories"
+                        "categories",
+                        "favicon"
                 }
         );
     }
@@ -48,7 +50,8 @@ public abstract class MainControllerTest {
                         "main_company",
                         "categories",
                         "category",
-                        "articles_list"
+                        "articles_list",
+                        "favicon"
                 }
         );
     }
@@ -62,7 +65,8 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "article"
+                        "article",
+                        "favicon"
                 }
         );
     }
@@ -76,7 +80,8 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "article"
+                        "article",
+                        "favicon"
                 }
         );
     }
@@ -90,7 +95,8 @@ public abstract class MainControllerTest {
                 new String[]{
                         "articles_list",
                         "main_company",
-                        "categories"
+                        "categories",
+                        "favicon"
                 }
         );
     }
@@ -105,7 +111,8 @@ public abstract class MainControllerTest {
                         "main_company",
                         "categories",
                         "company",
-                        "users_list"
+                        "users_list",
+                        "favicon"
                 }
         );
     }
@@ -125,7 +132,7 @@ public abstract class MainControllerTest {
                 getController()
                         .getPartnersPage(),
                 "client/company/all",
-                new String[]{"main_company", "categories"}
+                new String[]{"main_company", "categories", "favicon"}
         );
     }
 
@@ -137,7 +144,8 @@ public abstract class MainControllerTest {
                 new String[]{
                         "main_company",
                         "categories",
-                        "company"
+                        "company",
+                        "favicon"
                 }
         );
     }
@@ -145,13 +153,15 @@ public abstract class MainControllerTest {
     @Test
     public void whenGetResponsesPageThenReturnSomeModelAndViewWithAllResponse() {
         checkModelAndView(
-                getController()
-                        .getAllResponsesPage(),
+                getController().getAllResponsesPage(),
                 "client/response/all",
                 new String[]{
-                        "responses_list",
+                        "is_captcha",
+                        "responses",
+                        "revers",
                         "main_company",
-                        "categories"
+                        "categories",
+                        "favicon"
                 }
         );
     }

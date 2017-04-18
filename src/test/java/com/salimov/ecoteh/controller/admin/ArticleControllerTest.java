@@ -4,11 +4,11 @@ import com.salimov.ecoteh.util.translator.Translator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
-import org.springframework.web.servlet.ModelAndView;
 
 import static com.salimov.ecoteh.mocks.MockConstants.*;
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static com.salimov.ecoteh.mocks.controller.MockAdminController.getArticleController;
+import static org.junit.Assert.assertEquals;
 
 public class ArticleControllerTest {
 
@@ -30,15 +30,12 @@ public class ArticleControllerTest {
 
     @Test
     public void whenAddArticleByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.addArticle(
+        String viewName = controller.addArticle(
                         TITLE, DESCRIPTION, TEXT,
-                        KEYWORDS, NUMBER, PRICE, URL, null, true,
-                        new ModelAndView()
-                ),
-                "redirect:/article/" + Translator.fromCyrillicToLatin(TITLE),
-                null
-        );
+                        KEYWORDS, NUMBER, PRICE, URL,
+                        null, true
+                );
+        assertEquals(viewName, "redirect:/article/" + Translator.fromCyrillicToLatin(TITLE));
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -57,17 +54,13 @@ public class ArticleControllerTest {
 
     @Test
     public void whenUpdateArticleByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.updateArticle(
+        String viewName = controller.updateArticle(
                         URL, TITLE,
                         DESCRIPTION, TEXT,
                         KEYWORDS, NUMBER, PRICE,
-                        URL, null, true,
-                        new ModelAndView()
-                ),
-                "redirect:/article/" + Translator.fromCyrillicToLatin(TITLE),
-                null
-        );
+                        URL, null, true
+                );
+        assertEquals(viewName, "redirect:/article/" + Translator.fromCyrillicToLatin(TITLE));
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -77,19 +70,13 @@ public class ArticleControllerTest {
 
     @Test
     public void whenDeleteArticleByUrlMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteArticleByUrl(URL, new ModelAndView()),
-                "redirect:/",
-                null
-        );
+        String viewName = controller.deleteArticleByUrl(URL);
+        assertEquals(viewName, "redirect:/");
     }
 
     @Test
     public void whenDeleteAllArticlesMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.deleteAllArticles(new ModelAndView()),
-                "redirect:/",
-                null
-        );
+        String viewName = controller.deleteAllArticles();
+        assertEquals(viewName, "redirect:/");
     }
 }

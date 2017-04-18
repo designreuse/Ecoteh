@@ -46,7 +46,7 @@ public abstract class ContentServiceImplTest<T extends Content> extends DataServ
 
     @Test
     public void whenGetByTitleWithTrueValidThenReturnsSomeContent() {
-        assertNull(getService().getByTitle(TITLE, true));
+        assertNotNull(getService().getByTitle(TITLE, true));
     }
 
     @Test
@@ -166,7 +166,7 @@ public abstract class ContentServiceImplTest<T extends Content> extends DataServ
 
     @Test
     public void whenGetAndSortByUrlWithTrueReversThenReturnSomeCollection() {
-        assertTrue(getService().getAndSortByUrl(true).isEmpty());
+        assertFalse(getService().getAndSortByUrl(true).isEmpty());
     }
 
     @Test

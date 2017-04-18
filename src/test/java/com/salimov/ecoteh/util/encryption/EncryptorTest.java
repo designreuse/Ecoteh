@@ -5,8 +5,10 @@ import org.junit.Test;
 import javax.crypto.SecretKey;
 
 import static com.salimov.ecoteh.mocks.MockConstants.ANY_STRING;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public final class EncryptorTest {
 
@@ -27,23 +29,23 @@ public final class EncryptorTest {
     }
 
     @Test
-    public void whenEncryptByNullValueThenReturnNull() {
-        assertNull(new Encryptor(null).encrypt());
+    public void whenEncryptByNullValueThenReturnEmptyString() {
+        assertTrue(isBlank(new Encryptor(null).encrypt()));
     }
 
     @Test
     public void whenEncryptThenReturnSomeValue() {
-        assertNotNull(new Encryptor(ANY_STRING).encrypt());
+        assertTrue(isNotBlank(new Encryptor(ANY_STRING).encrypt()));
     }
 
     @Test
-    public void whenDecryptByNullValueThenReturnNull() {
-        assertNull(new Encryptor(null).decrypt());
+    public void whenDecryptByNullValueThenReturnEmptyString() {
+        assertTrue(isBlank(new Encryptor(null).decrypt()));
     }
 
     @Test
-    public void whenDecryptByUnknownStringThenReturnNull() {
-        assertNull(new Encryptor(ANY_STRING).decrypt());
+    public void whenDecryptByUnknownStringThenReturnEmptyString() {
+        assertTrue(isBlank(new Encryptor(ANY_STRING).decrypt()));
     }
 
     @Test

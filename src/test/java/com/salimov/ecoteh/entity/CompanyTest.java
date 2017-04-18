@@ -14,10 +14,11 @@ import static org.junit.Assert.*;
 public final class CompanyTest extends ContentTest<Company> {
 
     @Test
-    public void whenSetNullTypeThenGetNull() {
+    public void whenSetNullTypeThenGetDefaultType() {
         final Company company = getCompany();
         company.setType(null);
-        assertNull(company.getType());
+        assertNotNull(company.getType());
+        assertEquals(company.getType(), COMPANY_TYPE);
     }
 
     @Test
@@ -134,8 +135,6 @@ public final class CompanyTest extends ContentTest<Company> {
         final Company model1 = getInstance();
         final Company model2 = getObject();
         model1.initialize(model2);
-        System.out.println(model1);
-        System.out.println(model2);
         assertTrue(model1.equals(model2));
     }
 
@@ -162,10 +161,10 @@ public final class CompanyTest extends ContentTest<Company> {
                 ", url='" + company.getUrl() + '\'' +
                 ", description='" + company.getDescription() + '\'' +
                 ", keywords='" + company.getKeywords() + '\'' +
-                ", " + company.getLogo() +
+                ", logo=" + company.getLogo() +
                 '}' +
-                ", " + company.getContacts() +
-                ", " + company.getAddress() +
+                ", contacts=" + company.getContacts() +
+                ", address=" + company.getAddress() +
                 ", tagline='" + company.getTagline() + '\'' +
                 ", information='" + company.getInformation() + '\'' +
                 ", domain='" + company.getDomain() + '\'' +

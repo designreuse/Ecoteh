@@ -1,8 +1,16 @@
 package com.salimov.ecoteh.mocks.enity.test;
 
-public final class MockCompanyTest /*extends MockModelTest<Company>*/ {
+import com.salimov.ecoteh.entity.Company;
 
-/*
+import java.util.Collection;
+
+import static com.salimov.ecoteh.mocks.enity.MockEntity.getCompanies;
+import static com.salimov.ecoteh.mocks.enity.MockEntity.getCompany;
+import static org.junit.Assert.assertNotNull;
+
+public final class MockCompanyTest extends MockModelTest<Company> {
+
+
     @Override
     public void whenGetModelThenReturnValidModel() {
         final Company company = getCompany();
@@ -12,34 +20,23 @@ public final class MockCompanyTest /*extends MockModelTest<Company>*/ {
         assertNotNull(company.getTagline());
         assertNotNull(company.getDescription());
         assertNotNull(company.getInformation());
-        assertNotNull(company.getMobilePhone());
-        assertNotNull(company.getLandlinePhone());
-        assertNotNull(company.getFax());
-        assertNotNull(company.getEmail());
+        assertNotNull(company.getContacts());
         assertNotNull(company.getSenderEmail());
         assertNotNull(company.getSenderPass());
-        assertNotNull(company.getVkontakte());
-        assertNotNull(company.getFacebook());
-        assertNotNull(company.getTwitter());
-        assertNotNull(company.getSkype());
         assertNotNull(company.getAddress());
         assertNotNull(company.getKeywords());
-        assertNotNull(company.getGoogleMaps());
-        assertNotNull(company.getLogoUrl());
-        assertNotNull(company.getFaviconUrl());
+        assertNotNull(company.getAddress());
         assertNotNull(company.getWorkTimeFrom());
         assertNotNull(company.getWorkTimeTo());
     }
 
-    @Ignore
     @Override
     protected Company getObject() {
         return getCompany();
     }
 
-    @Ignore
     @Override
     protected Collection<Company> getObjects() {
         return getCompanies();
-    }*/
+    }
 }

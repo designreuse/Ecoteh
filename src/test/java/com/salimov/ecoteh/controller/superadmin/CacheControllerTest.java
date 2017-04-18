@@ -2,11 +2,11 @@ package com.salimov.ecoteh.controller.superadmin;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
 
 import static com.salimov.ecoteh.mocks.MockConstants.KEYWORDS;
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static com.salimov.ecoteh.mocks.controller.MockCacheController.getCacheController;
+import static com.salimov.ecoteh.mocks.controller.MockSuperadminController.getCacheController;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -26,25 +26,19 @@ public class CacheControllerTest {
         checkModelAndView(
                 controller.getCachePage(),
                 "superadmin/cache/cache",
-                new String[]{"main_company", "categories", "objects"}
+                new String[] { "main_company", "categories", "objects" }
         );
     }
 
     @Test
     public void whenClearCacheThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.clearCache(new ModelAndView()),
-                "redirect:/superadmin/cache",
-                null
-        );
+        String viewName = controller.clearCache();
+        assertEquals(viewName, "redirect:/superadmin/cache");
     }
 
     @Test
     public void whenRemoveObjectFromCacheThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.removeObjectFromCache(KEYWORDS, new ModelAndView()),
-                "redirect:/superadmin/cache",
-                null
-        );
+        String viewName = controller.removeObjectFromCache(KEYWORDS);
+        assertEquals(viewName, "redirect:/superadmin/cache");
     }
 }

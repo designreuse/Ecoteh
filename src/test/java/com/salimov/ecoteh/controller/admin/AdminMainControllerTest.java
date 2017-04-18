@@ -24,7 +24,7 @@ public class AdminMainControllerTest extends MainControllerTest {
         checkModelAndView(
                 controller.getAdminMenu(),
                 "admin/menu/menu",
-                new String[]{"user", "main_company", "categories"}
+                new String[] { "authorized_user", "main_company", "categories", "favicon" }
         );
     }
 
