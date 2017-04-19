@@ -378,6 +378,7 @@ public class Contacts extends Model implements IContacts {
             this.setEmail(contacts.getEmail());
             this.setMobilePhone(contacts.getMobilePhone());
             this.setLandlinePhone(contacts.getLandlinePhone());
+            this.setFax(contacts.getFax());
             this.setVkontakte(contacts.getVkontakte());
             this.setFacebook(contacts.getFacebook());
             this.setTwitter(contacts.getTwitter());
