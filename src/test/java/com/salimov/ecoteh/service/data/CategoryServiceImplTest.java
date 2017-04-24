@@ -1,7 +1,6 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Category;
-import com.salimov.ecoteh.service.data.interfaces.CategoryService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,9 +14,7 @@ import static com.salimov.ecoteh.mocks.enity.MockEntity.getCategory;
 import static com.salimov.ecoteh.mocks.repository.MockRepository.getCategoryRepository;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getArticleService;
 import static com.salimov.ecoteh.mocks.service.data.MockServices.getFileService;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public final class CategoryServiceImplTest extends ContentServiceImplTest<Category> {
 

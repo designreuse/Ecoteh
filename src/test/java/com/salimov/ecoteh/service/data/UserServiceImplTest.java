@@ -1,8 +1,7 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.enums.UserRole;
-import com.salimov.ecoteh.service.data.interfaces.UserService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -1,7 +1,7 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Model;
-import com.salimov.ecoteh.service.data.interfaces.DataService;
+import com.salimov.ecoteh.service.data.DataService;
 import org.junit.Ignore;
 import org.junit.Test;
 

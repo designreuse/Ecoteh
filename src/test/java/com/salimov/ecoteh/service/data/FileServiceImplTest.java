@@ -1,7 +1,6 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.File;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
 import org.junit.Before;
 import org.junit.Ignore;
 

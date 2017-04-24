@@ -1,8 +1,9 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Company;
 import com.salimov.ecoteh.enums.CompanyType;
-import com.salimov.ecoteh.service.data.interfaces.CompanyService;
+import com.salimov.ecoteh.service.data.CompanyServiceImpl;
+import com.salimov.ecoteh.service.data.CompanyService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

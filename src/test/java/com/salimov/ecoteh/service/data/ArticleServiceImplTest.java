@@ -1,7 +1,8 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Article;
-import com.salimov.ecoteh.service.data.interfaces.ArticleService;
+import com.salimov.ecoteh.service.data.ArticleServiceImpl;
+import com.salimov.ecoteh.service.data.ArticleService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
