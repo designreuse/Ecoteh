@@ -20,4 +20,6 @@ Administrator can navigate on all the pages of the site, in particular through t
     ecoteh.com.ua
 </a>**
 
-[_**Yurii Salimov**_](https://www.linkedin.com/in/yurii-salimov)
+_**<a href="https://www.linkedin.com/in/yurii-salimov" title="LinkedIn" target="_blank">
+    Yurii Salimov
+</a>**_
