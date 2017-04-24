@@ -1,8 +1,8 @@
-package com.salimov.ecoteh.service.fabrica.impl;
+package com.salimov.ecoteh.service.fabrica;
 
 import org.junit.Before;
 
-import static com.salimov.ecoteh.mocks.service.fabrica.MockMVFabric.getMainMVFabric;
+import static com.salimov.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -12,6 +12,6 @@ public class CacheMVFabricImplTest extends MainMVFabricImplTest {
 
     @Before
     public void beforeTests() {
-        setFabric(new CacheMVFabricImpl(getMainMVFabric()));
+        setFabric(getCacheMVFabric());
     }
 }

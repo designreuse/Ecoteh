@@ -1,6 +1,5 @@
-package com.salimov.ecoteh.service.fabrica.impl;
+package com.salimov.ecoteh.service.fabrica;
 
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -9,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import static com.salimov.ecoteh.mocks.MockConstants.NUMBER;
 import static com.salimov.ecoteh.mocks.MockConstants.URL;
 import static com.salimov.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static com.salimov.ecoteh.mocks.service.data.MockServices.*;
+import static com.salimov.ecoteh.mocks.service.fabrica.MockMVFabric.getMainMVFabric;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -21,14 +20,7 @@ public class MainMVFabricImplTest {
 
     @Before
     public void beforeTests() {
-        this.fabric = new MainMVFabricImpl(
-                getArticleService(),
-                getCategoryService(),
-                getCompanyService(),
-                getFileService(),
-                getResponseService(),
-                getUserService()
-        );
+        this.fabric = getMainMVFabric();
     }
 
     @Test
