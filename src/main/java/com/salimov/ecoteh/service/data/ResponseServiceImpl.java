@@ -1,8 +1,7 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Response;
 import com.salimov.ecoteh.repository.ResponseRepository;
-import com.salimov.ecoteh.service.data.interfaces.ResponseService;
 import com.salimov.ecoteh.util.comparator.ResponseComparator;
 import com.salimov.ecoteh.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,9 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 @Service
-@ComponentScan(basePackages = "com.salimov.ecoteh.dao")
-public final class ResponseServiceImpl extends DataServiceImpl<Response> implements ResponseService {
+@ComponentScan(basePackages = "com.salimov.ecoteh.repository")
+public final class ResponseServiceImpl extends DataServiceImpl<Response>
+        implements ResponseService {
 
     /**
      * Constructor.

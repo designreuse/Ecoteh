@@ -1,10 +1,8 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Content;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.repository.ContentRepository;
-import com.salimov.ecoteh.service.data.interfaces.ContentService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.util.comparator.ContentComparator;
 import org.springframework.transaction.annotation.Transactional;
 

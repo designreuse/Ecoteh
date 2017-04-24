@@ -1,8 +1,7 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Message;
 import com.salimov.ecoteh.repository.MessageRepository;
-import com.salimov.ecoteh.service.data.interfaces.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,9 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service
-@ComponentScan(basePackages = "com.salimov.ecoteh.dao")
-public final class MessageServiceImpl extends DataServiceImpl<Message> implements MessageService {
+@ComponentScan(basePackages = "com.salimov.ecoteh.repository")
+public final class MessageServiceImpl extends DataServiceImpl<Message>
+        implements MessageService {
 
     /**
      * Constructor.

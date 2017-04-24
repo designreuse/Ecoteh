@@ -1,6 +1,5 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
-import com.salimov.ecoteh.service.data.interfaces.StyleService;
 import com.salimov.ecoteh.util.compressor.CssCompressor;
 import com.salimov.ecoteh.util.loader.FileContentsLoader;
 import com.salimov.ecoteh.util.properties.ContentProperties;

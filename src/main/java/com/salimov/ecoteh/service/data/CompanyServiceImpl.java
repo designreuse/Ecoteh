@@ -1,12 +1,10 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Company;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.entity.Model;
 import com.salimov.ecoteh.enums.CompanyType;
 import com.salimov.ecoteh.repository.CompanyRepository;
-import com.salimov.ecoteh.service.data.interfaces.CompanyService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,7 +28,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Service
 @ComponentScan(
         basePackages = {
-                "com.salimov.ecoteh.dao",
+                "com.salimov.ecoteh.repository",
                 "com.salimov.ecoteh.service.data"
         }
 )

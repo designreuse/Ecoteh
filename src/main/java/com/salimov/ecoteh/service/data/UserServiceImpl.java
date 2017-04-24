@@ -1,12 +1,10 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.config.DefaultConfig;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.enums.UserRole;
 import com.salimov.ecoteh.repository.UserRepository;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
-import com.salimov.ecoteh.service.data.interfaces.UserService;
 import com.salimov.ecoteh.util.comparator.UserComparator;
 import com.salimov.ecoteh.util.encryption.Encryptor;
 import org.apache.log4j.Logger;
@@ -35,8 +33,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 @Service
-@ComponentScan(basePackages = "com.salimov.ecoteh.dao")
-public final class UserServiceImpl extends DataServiceImpl<User> implements UserService, UserDetailsService {
+@ComponentScan(basePackages = "com.salimov.ecoteh.repository")
+public final class UserServiceImpl extends DataServiceImpl<User>
+        implements UserService, UserDetailsService {
 
     /**
      * The object for logging information.

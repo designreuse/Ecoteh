@@ -1,8 +1,7 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Model;
 import com.salimov.ecoteh.repository.DataRepository;
-import com.salimov.ecoteh.service.data.interfaces.DataService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;

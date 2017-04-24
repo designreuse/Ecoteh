@@ -1,11 +1,8 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Article;
 import com.salimov.ecoteh.entity.Category;
 import com.salimov.ecoteh.repository.CategoryRepository;
-import com.salimov.ecoteh.service.data.interfaces.ArticleService;
-import com.salimov.ecoteh.service.data.interfaces.CategoryService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -28,7 +25,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Service
 @ComponentScan(
         basePackages = {
-                "com.salimov.ecoteh.dao",
+                "com.salimov.ecoteh.repository",
                 "com.salimov.ecoteh.service.data"
         }
 )

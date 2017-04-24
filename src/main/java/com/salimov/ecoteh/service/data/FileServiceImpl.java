@@ -1,9 +1,8 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.enums.FileType;
 import com.salimov.ecoteh.repository.FileRepository;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.util.comparator.FileComparator;
 import com.salimov.ecoteh.util.loader.MultipartFileLoader;
 import com.salimov.ecoteh.util.properties.ContentProperties;
@@ -31,7 +30,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Service
 @ComponentScan(
         basePackages = {
-                "com.salimov.ecoteh.dao",
+                "com.salimov.ecoteh.repository",
                 "com.salimov.ecoteh.util.properties"
         }
 )

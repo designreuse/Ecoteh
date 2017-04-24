@@ -1,10 +1,8 @@
-package com.salimov.ecoteh.service.data.impl;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Article;
 import com.salimov.ecoteh.entity.Category;
 import com.salimov.ecoteh.repository.ArticleRepository;
-import com.salimov.ecoteh.service.data.interfaces.ArticleService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
 import com.salimov.ecoteh.util.comparator.ArticleComparator;
 import com.salimov.ecoteh.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Service
 @ComponentScan(
         basePackages = {
-                "com.salimov.ecoteh.dao",
+                "com.salimov.ecoteh.repository",
                 "com.salimov.ecoteh.service.data"
         }
 )
