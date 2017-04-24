@@ -3,7 +3,7 @@ package com.salimov.ecoteh.mocks.service.data.test;
 import com.salimov.ecoteh.entity.Category;
 import com.salimov.ecoteh.mocks.enity.MockEntity;
 import com.salimov.ecoteh.mocks.service.data.MockServices;
-import com.salimov.ecoteh.service.data.interfaces.CategoryService;
+import com.salimov.ecoteh.service.data.CategoryService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

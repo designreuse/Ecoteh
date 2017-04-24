@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.mocks.service.data.test;
 
 import com.salimov.ecoteh.entity.Article;
-import com.salimov.ecoteh.service.data.interfaces.ArticleService;
+import com.salimov.ecoteh.service.data.ArticleService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

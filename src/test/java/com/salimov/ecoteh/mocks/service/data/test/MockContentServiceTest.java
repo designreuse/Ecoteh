@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.mocks.service.data.test;
 
 import com.salimov.ecoteh.entity.Content;
-import com.salimov.ecoteh.service.data.interfaces.ContentService;
+import com.salimov.ecoteh.service.data.ContentService;
 import org.junit.Ignore;
 import org.junit.Test;
 

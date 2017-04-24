@@ -2,8 +2,7 @@ package com.salimov.ecoteh.mocks.service.data;
 
 import com.salimov.ecoteh.entity.*;
 import com.salimov.ecoteh.enums.UserRole;
-import com.salimov.ecoteh.service.data.impl.StyleServiceImpl;
-import com.salimov.ecoteh.service.data.interfaces.*;
+import com.salimov.ecoteh.service.data.*;
 import com.salimov.ecoteh.service.search.SearchService;
 import com.salimov.ecoteh.service.seo.SeoService;
 import com.salimov.ecoteh.util.comparator.ContentComparator;

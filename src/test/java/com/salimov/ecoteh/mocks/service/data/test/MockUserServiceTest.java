@@ -2,7 +2,7 @@ package com.salimov.ecoteh.mocks.service.data.test;
 
 import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.enums.UserRole;
-import com.salimov.ecoteh.service.data.interfaces.UserService;
+import com.salimov.ecoteh.service.data.UserService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

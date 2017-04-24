@@ -1,9 +1,9 @@
 package com.salimov.ecoteh.mocks.service.fabrica;
 
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.impl.MainMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.CacheMVFabric;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabric;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import org.junit.Ignore;
 
 import static com.salimov.ecoteh.mocks.service.data.MockServices.*;

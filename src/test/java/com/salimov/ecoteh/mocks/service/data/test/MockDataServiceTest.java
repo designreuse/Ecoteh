@@ -3,7 +3,7 @@ package com.salimov.ecoteh.mocks.service.data.test;
 import com.salimov.ecoteh.entity.Model;
 import org.junit.Ignore;
 import org.junit.Test;
-import com.salimov.ecoteh.service.data.interfaces.DataService;
+import com.salimov.ecoteh.service.data.DataService;
 
 import java.util.Collection;
 
