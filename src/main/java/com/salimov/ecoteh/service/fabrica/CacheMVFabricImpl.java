@@ -1,7 +1,5 @@
-package com.salimov.ecoteh.service.fabrica.impl;
+package com.salimov.ecoteh.service.fabrica;
 
-import com.salimov.ecoteh.service.fabrica.interfaces.CacheMVFabric;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
 import com.salimov.ecoteh.util.cache.Cache;
 import org.springframework.web.servlet.ModelAndView;
 

@@ -1,9 +1,8 @@
-package com.salimov.ecoteh.service.fabrica.impl;
+package com.salimov.ecoteh.service.fabrica;
 
 import com.salimov.ecoteh.entity.*;
 import com.salimov.ecoteh.enums.FileType;
-import com.salimov.ecoteh.service.data.interfaces.*;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
