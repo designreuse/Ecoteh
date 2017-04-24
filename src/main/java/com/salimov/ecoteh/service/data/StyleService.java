@@ -1,4 +1,4 @@
-package com.salimov.ecoteh.service.data.interfaces;
+package com.salimov.ecoteh.service.data;
 
 /**
  * The interface of the service layer, describes a set of methods

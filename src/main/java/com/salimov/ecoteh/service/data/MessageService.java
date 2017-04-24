@@ -1,4 +1,4 @@
-package com.salimov.ecoteh.service.data.interfaces;
+package com.salimov.ecoteh.service.data;
 
 import com.salimov.ecoteh.entity.Message;
 
