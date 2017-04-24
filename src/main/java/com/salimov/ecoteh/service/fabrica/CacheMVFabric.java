@@ -1,4 +1,4 @@
-package com.salimov.ecoteh.service.fabrica.interfaces;
+package com.salimov.ecoteh.service.fabrica;
 
 /**
  * The interface provides a set of standard methods for creates

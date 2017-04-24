@@ -1,4 +1,4 @@
-package com.salimov.ecoteh.service.fabrica.interfaces;
+package com.salimov.ecoteh.service.fabrica;
 
 import org.springframework.web.servlet.ModelAndView;
 
