@@ -1,6 +1,4 @@
-package com.salimov.ecoteh.entity.interfaces;
-
-import com.salimov.ecoteh.entity.Address;
+package com.salimov.ecoteh.entity;
 
 /**
  * The interface describes a set of methods

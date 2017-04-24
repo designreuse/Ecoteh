@@ -1,8 +1,5 @@
-package com.salimov.ecoteh.entity.interfaces;
+package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.Address;
-import com.salimov.ecoteh.entity.Company;
-import com.salimov.ecoteh.entity.Contacts;
 import com.salimov.ecoteh.enums.CompanyType;
 
 /**

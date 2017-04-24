@@ -1,6 +1,4 @@
-package com.salimov.ecoteh.entity.interfaces;
-
-import com.salimov.ecoteh.entity.Model;
+package com.salimov.ecoteh.entity;
 
 import java.io.Serializable;
 

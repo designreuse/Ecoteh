@@ -1,8 +1,5 @@
-package com.salimov.ecoteh.entity.interfaces;
+package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.Contacts;
-import com.salimov.ecoteh.entity.File;
-import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.enums.UserRole;
 
 /**

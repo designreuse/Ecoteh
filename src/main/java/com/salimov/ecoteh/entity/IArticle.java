@@ -1,7 +1,4 @@
-package com.salimov.ecoteh.entity.interfaces;
-
-import com.salimov.ecoteh.entity.Article;
-import com.salimov.ecoteh.entity.Category;
+package com.salimov.ecoteh.entity;
 
 import java.util.Date;
 

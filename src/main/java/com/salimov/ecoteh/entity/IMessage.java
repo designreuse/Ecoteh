@@ -1,7 +1,4 @@
-package com.salimov.ecoteh.entity.interfaces;
-
-import com.salimov.ecoteh.entity.Message;
-import com.salimov.ecoteh.entity.User;
+package com.salimov.ecoteh.entity;
 
 import java.util.Date;
 

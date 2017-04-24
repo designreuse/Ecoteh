@@ -1,6 +1,4 @@
-package com.salimov.ecoteh.entity.interfaces;
-
-import com.salimov.ecoteh.entity.Response;
+package com.salimov.ecoteh.entity;
 
 import java.util.Date;
 
