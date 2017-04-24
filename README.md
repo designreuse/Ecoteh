@@ -16,8 +16,6 @@ Administrator can navigate on all the pages of the site, in particular through t
 
  Java EE, Maven, Servlets, Spring Framework (IoC, MVC, Data, Security), JPA / Hibernate, MySQL, JSP / JSTL, CSS, JavaScript, Junit, Mockito, Jacoco, CKEditor
 
-([**SCREENSHOTS**](https://github.com/YuriiSalimov/Ecoteh/tree/master/screenshots))
-
-([**EXAMPLE**](http://ecoteh.com.ua))
+[**ecoteh.com.ua**](http://ecoteh.com.ua)
 
 [_**Yurii Salimov**_](https://www.linkedin.com/in/yurii-salimov)
