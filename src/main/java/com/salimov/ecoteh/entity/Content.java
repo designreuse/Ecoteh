@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IContent;
 import com.salimov.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;

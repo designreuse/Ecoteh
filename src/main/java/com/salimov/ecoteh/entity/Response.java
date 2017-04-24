@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IResponse;
 import com.salimov.ecoteh.util.time.Time;
 
 import javax.persistence.Column;

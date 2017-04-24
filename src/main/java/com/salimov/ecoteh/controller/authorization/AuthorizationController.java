@@ -1,10 +1,11 @@
 package com.salimov.ecoteh.controller.authorization;
 
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.util.cache.Cache;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  */
 @Controller
+@ComponentScan(basePackages = "com.salimov.ecoteh.service.fabrica")
 public class AuthorizationController {
 
     /**

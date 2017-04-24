@@ -1,8 +1,8 @@
 package com.salimov.ecoteh.controller.superadmin;
 
-import com.salimov.ecoteh.service.data.interfaces.StyleService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.StyleService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 )
 @ComponentScan(
         basePackages = {
-                "com.salimov.ecoteh.service",
+                "com.salimov.ecoteh.service.fabrica",
                 "com.salimov.ecoteh.util.properties"
         }
 )

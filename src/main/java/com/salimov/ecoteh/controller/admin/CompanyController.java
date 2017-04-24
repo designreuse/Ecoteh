@@ -6,10 +6,10 @@ import com.salimov.ecoteh.entity.Company;
 import com.salimov.ecoteh.entity.Contacts;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.enums.CompanyType;
-import com.salimov.ecoteh.service.data.interfaces.CompanyService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.CompanyService;
+import com.salimov.ecoteh.service.data.FileService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.util.cache.Cache;
 import com.salimov.ecoteh.util.compressor.HtmlCompressor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,12 @@ import org.springframework.web.servlet.ModelAndView;
                 "/admin/companies"
         }
 )
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.service.data"
+        }
+)
 @SuppressWarnings("SpringMVCViewInspection")
 public class CompanyController {
 

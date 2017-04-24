@@ -1,12 +1,12 @@
 package com.salimov.ecoteh.controller.client;
 
 import com.salimov.ecoteh.entity.*;
-import com.salimov.ecoteh.service.data.interfaces.CompanyService;
-import com.salimov.ecoteh.service.data.interfaces.MessageService;
-import com.salimov.ecoteh.service.data.interfaces.ResponseService;
-import com.salimov.ecoteh.service.data.interfaces.UserService;
-import com.salimov.ecoteh.service.fabrica.interfaces.CacheMVFabric;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.CompanyService;
+import com.salimov.ecoteh.service.data.MessageService;
+import com.salimov.ecoteh.service.data.ResponseService;
+import com.salimov.ecoteh.service.data.UserService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabric;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.service.sender.SenderService;
 import com.salimov.ecoteh.util.cache.Cache;
 import org.springframework.web.bind.annotation.PathVariable;

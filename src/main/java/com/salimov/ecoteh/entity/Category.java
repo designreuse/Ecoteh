@@ -1,7 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.ICategory;
-
 import javax.persistence.*;
 import java.util.*;
 

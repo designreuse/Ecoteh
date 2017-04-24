@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IMessage;
 import com.salimov.ecoteh.util.time.Time;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

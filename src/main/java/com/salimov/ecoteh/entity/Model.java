@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IModel;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;

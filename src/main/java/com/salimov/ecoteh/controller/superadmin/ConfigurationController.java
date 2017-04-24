@@ -1,9 +1,10 @@
 package com.salimov.ecoteh.controller.superadmin;
 
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.util.properties.ContentProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
         value = {
                 "/superadmin/config",
                 "/superadmin/configuration"
+        }
+)
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.util.properties"
         }
 )
 public class ConfigurationController {

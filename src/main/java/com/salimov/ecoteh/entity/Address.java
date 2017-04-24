@@ -1,7 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IAddress;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

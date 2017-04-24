@@ -1,8 +1,8 @@
 package com.salimov.ecoteh.service.search;
 
 import com.salimov.ecoteh.entity.Model;
-import com.salimov.ecoteh.service.data.interfaces.*;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.*;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;

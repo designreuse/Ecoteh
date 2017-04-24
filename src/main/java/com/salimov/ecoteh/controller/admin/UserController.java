@@ -5,12 +5,12 @@ import com.salimov.ecoteh.entity.Contacts;
 import com.salimov.ecoteh.entity.File;
 import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.enums.UserRole;
-import com.salimov.ecoteh.service.data.interfaces.CompanyService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
-import com.salimov.ecoteh.service.data.interfaces.UserService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.CacheMVFabric;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.CompanyService;
+import com.salimov.ecoteh.service.data.FileService;
+import com.salimov.ecoteh.service.data.UserService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabric;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.service.sender.SenderService;
 import com.salimov.ecoteh.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
                 "/admin/users"
         }
 )
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.service.data"
+        }
+)
 @SuppressWarnings("SpringMVCViewInspection")
 public class UserController {
 

@@ -1,7 +1,7 @@
 package com.salimov.ecoteh.controller.admin;
 
 import com.salimov.ecoteh.entity.Response;
-import com.salimov.ecoteh.service.data.interfaces.ResponseService;
+import com.salimov.ecoteh.service.data.ResponseService;
 import com.salimov.ecoteh.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;

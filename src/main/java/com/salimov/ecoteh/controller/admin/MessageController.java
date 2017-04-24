@@ -1,10 +1,10 @@
 package com.salimov.ecoteh.controller.admin;
 
 import com.salimov.ecoteh.entity.Message;
-import com.salimov.ecoteh.service.data.interfaces.MessageService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
-import com.salimov.ecoteh.service.fabrica.interfaces.CacheMVFabric;
+import com.salimov.ecoteh.service.data.MessageService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,12 @@ import org.springframework.web.servlet.ModelAndView;
                 "/admin/messages"
         }
 )
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.service.data"
+        }
+)
 @SuppressWarnings("SpringMVCViewInspection")
 public class MessageController {
 

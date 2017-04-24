@@ -2,10 +2,11 @@ package com.salimov.ecoteh.controller.advice;
 
 import com.salimov.ecoteh.exception.DisableException;
 import com.salimov.ecoteh.exception.DuplicateException;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 @ControllerAdvice
+@ComponentScan(basePackages = "com.salimov.ecoteh.service.fabrica")
 public class AdviceController {
 
     /**

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @version 1.0
  */
 @Controller
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(basePackages = "com.salimov.ecoteh.service.data")
 public class SeoController {
 
     /**

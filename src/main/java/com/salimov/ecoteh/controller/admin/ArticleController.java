@@ -4,11 +4,11 @@ import com.googlecode.htmlcompressor.compressor.Compressor;
 import com.salimov.ecoteh.entity.Article;
 import com.salimov.ecoteh.entity.Category;
 import com.salimov.ecoteh.entity.File;
-import com.salimov.ecoteh.service.data.interfaces.ArticleService;
-import com.salimov.ecoteh.service.data.interfaces.CategoryService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.ArticleService;
+import com.salimov.ecoteh.service.data.CategoryService;
+import com.salimov.ecoteh.service.data.FileService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.util.cache.Cache;
 import com.salimov.ecoteh.util.compressor.HtmlCompressor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
                 "/admin/articles"
         }
 )
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.service.data"
+        }
+)
 @SuppressWarnings("SpringMVCViewInspection")
 public class ArticleController {
 

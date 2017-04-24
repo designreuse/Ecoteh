@@ -2,10 +2,10 @@ package com.salimov.ecoteh.controller.admin;
 
 import com.salimov.ecoteh.entity.Category;
 import com.salimov.ecoteh.entity.File;
-import com.salimov.ecoteh.service.data.interfaces.CategoryService;
-import com.salimov.ecoteh.service.data.interfaces.FileService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.CategoryService;
+import com.salimov.ecoteh.service.data.FileService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.util.cache.Cache;
 import com.salimov.ecoteh.util.compressor.HtmlCompressor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,12 @@ import org.springframework.web.servlet.ModelAndView;
                 "/admin/categories"
         }
 )
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.service.data"
+        }
+)
 @SuppressWarnings("SpringMVCViewInspection")
 public class CategoryController {
 

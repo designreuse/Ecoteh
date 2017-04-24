@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IUser;
 import com.salimov.ecoteh.enums.UserRole;
 import com.salimov.ecoteh.util.encryption.Encryptor;
 import com.salimov.ecoteh.util.translator.Translator;

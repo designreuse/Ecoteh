@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IFile;
 import com.salimov.ecoteh.enums.FileType;
 import com.salimov.ecoteh.util.translator.Translator;
 

@@ -1,6 +1,5 @@
 package com.salimov.ecoteh.entity;
 
-import com.salimov.ecoteh.entity.interfaces.IArticle;
 import com.salimov.ecoteh.util.generator.StringGenerator;
 import com.salimov.ecoteh.util.time.Time;
 import org.hibernate.annotations.Fetch;

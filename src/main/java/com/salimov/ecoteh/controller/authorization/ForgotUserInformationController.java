@@ -4,10 +4,10 @@ import com.salimov.ecoteh.config.DefaultConfig;
 import com.salimov.ecoteh.entity.Company;
 import com.salimov.ecoteh.entity.User;
 import com.salimov.ecoteh.service.captcha.CaptchaService;
-import com.salimov.ecoteh.service.data.interfaces.CompanyService;
-import com.salimov.ecoteh.service.data.interfaces.UserService;
-import com.salimov.ecoteh.service.fabrica.impl.CacheMVFabricImpl;
-import com.salimov.ecoteh.service.fabrica.interfaces.MainMVFabric;
+import com.salimov.ecoteh.service.data.CompanyService;
+import com.salimov.ecoteh.service.data.UserService;
+import com.salimov.ecoteh.service.fabrica.CacheMVFabricImpl;
+import com.salimov.ecoteh.service.fabrica.MainMVFabric;
 import com.salimov.ecoteh.service.sender.SenderService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,12 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * @version 1.0
  */
 @Controller
-@ComponentScan(basePackages = "com.salimov.ecoteh.service")
+@ComponentScan(
+        basePackages = {
+                "com.salimov.ecoteh.service.fabrica",
+                "com.salimov.ecoteh.service.data"
+        }
+)
 @SuppressWarnings("SpringMVCViewInspection")
 public class ForgotUserInformationController {
 
