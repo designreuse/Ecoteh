@@ -102,7 +102,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <c:if test="${(not empty contacts.vkontakte) or (not empty contacts.facebook) or
                              (not empty contacts.twitter) or (not empty contacts.skype)}">
             <div class="text-center">
-                <br>В социальных сетях:<br>
+                <br>
                 <c:if test="${not empty contacts.vkontakte}">
                     <a href="<c:out value="${contacts.vkontakte}"/>" target="_blank"
                        title="Группа &quot;${company.title}&quot; в ВКонтакте">
@@ -134,5 +134,5 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </div>
 </div>
 <%-- Google map with address of the incoming company. --%>
-<jsp:include page="/WEB-INF/views/google/map.jsp"/>
+<%@include file="/WEB-INF/views/google/map.jsp" %>
 <div class="clearfix"></div>

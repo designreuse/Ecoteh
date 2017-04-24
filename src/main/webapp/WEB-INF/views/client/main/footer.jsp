@@ -15,10 +15,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <c:set var="start" value="2016" scope="session"/>
 <c:choose>
     <c:when test="${now ne start}">
-        <c:set var="years" value="${start}-${now}" scope="session"/>
+        <c:set var="period" value="${start}-${now}" scope="session"/>
     </c:when>
     <c:otherwise>
-        <c:set var="years" value="${start}" scope="session"/>
+        <c:set var="period" value="${start}" scope="session"/>
     </c:otherwise>
 </c:choose>
 
@@ -93,7 +93,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <div class="hidden-xs col-sm-6 col-md-4 col-lg-4">
                     <div class="text-right">
                         <p class="copyright">
-                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
                             <c:if test="${not empty main_company.domain}">
                                 <a href=" http://<c:out value="${main_company.domain}"/>"
                                    title="<c:out value="${main_company.title}"/>">
@@ -106,13 +105,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </c:otherwise>
                                     </c:choose>
                                     <c:out value="${main_company.domain}"/>
-                                </a><br>
+                                </a>
+                                <br>
                             </c:if>
-                            <a href="https://www.linkedin.com/in/yurii-salimov" target="_blank"
-                               title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img class="icon-size" src="<c:url value="/resources/img/static/mr_alex.png"/>"
-                                     alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
-                            </a>
+                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${period}<br>
+                            О.В. Маматов
                         </p>
                     </div>
                 </div>
@@ -120,7 +117,31 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
                     <div class="text-center">
                         <p class="copyright">
-                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${years}<br>
+                            <c:if test="${not empty contacts.vkontakte}">
+                                <a href="https://vk.com/<c:out value="${contacts.vkontakte}"/>"
+                                   title="Группа в ВКонтакте" target="_blank">
+                                    <span class="fa fa-vk fa-2x vk"></span>
+                                </a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${not empty contacts.facebook}">
+                                <a href="https://www.facebook.com/<c:out value="${contacts.facebook}"/>"
+                                   title="Группа в Facebook" target="_blank">
+                                    <span class="fa fa-facebook-official fa-2x fb"></span>
+                                </a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${not empty contacts.twitter}">
+                                <a href="https://twitter.com/<c:out value="${contacts.twitter}"/>"
+                                   title="Мы в Twitter" target="_blank">
+                                    <span class="fa fa-twitter fa-2x tw"></span>
+                                </a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${not empty contacts.skype}">
+                                <a href="skype:<c:out value="${contacts.skype}"/>?call"
+                                   title="Позвонить в Skype">
+                                    <span class="fa fa-skype fa-2x sk"></span>
+                                </a>
+                            </c:if>
+                            <br>
                             <c:if test="${not empty contacts.mobilePhone}">
                                 <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
                                    title="Мобильный телефон">
@@ -159,11 +180,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                                 <br>
                             </c:if>
-                            <a href="https://www.linkedin.com/in/yurii-salimov"
-                               title="Разработчик Yurii Salimov | Профиль в Linkedin">
-                                <img src="<c:url value="/resources/img/static/mr_alex.png"/>" class="icon-size"
-                                     alt="Mr. Alex" title="Mr. Alex">&nbsp;Yurii Salimov
-                            </a>
+                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${period}
+                            О.В. Маматов
                         </p>
                     </div>
                 </div>
