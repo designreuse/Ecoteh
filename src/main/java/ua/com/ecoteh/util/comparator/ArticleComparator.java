@@ -1,0 +1,76 @@
+package ua.com.ecoteh.util.comparator;
+
+import ua.com.ecoteh.entity.Article;
+
+import java.util.Comparator;
+
+/**
+ * The class implements a set of methods for working
+ * with comparators for {@link Article}.
+ *
+ * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @version 1.0
+ */
+public final class ArticleComparator {
+
+    /**
+     * The class implements a method for working with comparator
+     * for {@link Article} by number.
+     */
+    public final static class ByNumber implements Comparator<Article> {
+        /**
+         * Compares its two arguments for order.
+         *
+         * @param article1 The first object to be compared.
+         * @param article2 The second object to be compared.
+         * @return A negative integer, zero, or a positive integer as the
+         * first argument is less than, equal to, or greater than the
+         * second.
+         */
+        @Override
+        public int compare(final Article article1, final Article article2) {
+            int result;
+            if (article1 == null && article2 == null) {
+                result = 0;
+            } else if (article1 == null) {
+                result = -1;
+            } else if (article2 == null) {
+                result = 1;
+            } else {
+                result = article1.getNumber().compareTo(article2.getNumber());
+            }
+            return result;
+        }
+    }
+
+    /**
+     * The class implements a method for working with comparator
+     * for {@link Article} by date.
+     */
+    public final static class ByDate implements Comparator<Article> {
+
+        /**
+         * Compares its two arguments for order.
+         *
+         * @param article1 the first object to be compared.
+         * @param article2 the second object to be compared.
+         * @return A negative integer, zero, or a positive integer as the
+         * first argument is less than, equal to, or greater than the
+         * second.
+         */
+        @Override
+        public int compare(final Article article1, final Article article2) {
+            int result;
+            if (article1 == null && article2 == null) {
+                result = 0;
+            } else if (article1 == null) {
+                result = -1;
+            } else if (article2 == null) {
+                result = 1;
+            } else {
+                result = article1.getDate().compareTo(article2.getDate());
+            }
+            return result;
+        }
+    }
+}
