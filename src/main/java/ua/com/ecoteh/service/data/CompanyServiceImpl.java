@@ -113,7 +113,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
         if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        mainCompany.initialize(company);
+        copy(company, mainCompany);
         return update(mainCompany);
     }
 
