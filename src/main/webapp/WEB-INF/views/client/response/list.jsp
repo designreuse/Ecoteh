@@ -19,7 +19,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <span class="glyphicon glyphicon-eye-close little red" aria-hidden="true"
                       title="Не отображается для клиентов"></span>&nbsp;
             </c:if>
-            <span class="green"><c:out value="${response.username}"/></span>
+            <span class="green"><c:out value="${response.username}"/></span>&nbsp;
             <span class="little">(<c:out value="${response.dateToString}"/>)</span>
         </p>
         <p class="response">
