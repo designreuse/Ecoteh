@@ -116,7 +116,6 @@ public final class CompanyTest extends ContentTest<Company> {
                 + company.getType().hashCode()
                 + company.getDomain().hashCode()
                 + company.getTagline().hashCode()
-                + company.getDescription().hashCode()
                 + company.getInformation().hashCode();
         for (int i = 0; i < 10; i++) {
             assertEquals(company.hashCode(), value);
