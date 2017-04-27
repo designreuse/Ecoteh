@@ -74,20 +74,31 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                value="<c:out value="${user.name}"/>">
                                     </td>
                                 </tr>
+                                <c:set var="me" value="${(user eq authorized_user) or (user.role eq 'SUPERADMIN')}"/>
                                 <tr>
                                     <td class="ths">Логин</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="login" minlength="5"
                                                maxlength="100" placeholder="Логин для входа на сайт."
-                                               value="<c:out value="${user.login}"/>">
+                                               value="<c:out value="${user.login}"/>"
+                                               <c:if test="${me eq false}">disabled</c:if>>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Пароль</td>
                                     <td class="tds">
-                                        <input type="password" class="form-control" name="password" minlength="5"
+                                        <c:choose>
+                                            <c:when test="${me eq true}">
+                                                <c:set var="type" value="text"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="type" value="password"/>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <input type="${type}" class="form-control" name="password" minlength="5"
                                                maxlength="100" placeholder="Пароль для входа на сайт."
-                                               value="<c:out value="${user.password}"/>">
+                                               value="<c:out value="${user.password}"/>"
+                                               <c:if test="${me eq false}">disabled</c:if>>
                                     </td>
                                 </tr>
                                 <tr>

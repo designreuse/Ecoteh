@@ -73,7 +73,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Пароль</td>
                                     <td class="tds">
-                                        <input type="password" class="form-control" name="password" minlength="5"
+                                        <input type="text" class="form-control" name="password" minlength="5"
                                                maxlength="100" placeholder="Пароль для входа на сайт.">
                                     </td>
                                 </tr>

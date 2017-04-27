@@ -14,10 +14,7 @@ public abstract class ExceptionTest {
     ) {
         assertNotNull(ex);
         if (!message.isEmpty()) {
-            assertEquals(
-                    ex.getMessage(),
-                    message
-            );
+            assertEquals(ex.getMessage(), message);
         }
     }
 }
