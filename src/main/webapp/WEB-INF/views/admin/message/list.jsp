@@ -14,18 +14,16 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 </c:if>
 <c:forEach items="${messages}" var="message" end="${print_messages - 1}">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <c:set var="user" value="${message.user.name}"/>
-        <c:set var="contacts" value="${user.contacts}"/>
         <p class="username">
-            <span class="green"><c:out value="${user.name}"/></span>
+            <span class="green"><c:out value="${message.user.name}"/></span>
             ,&nbsp;
-            <a href="tel:<c:out value="${contacts.mobilePhone}"/>">
-                <c:out value="$contacts.mobilePhone}"/>
+            <a href="tel:<c:out value="${message.user.contacts.mobilePhone}"/>">
+                <c:out value="${message.user.contacts.mobilePhone}"/>
             </a>
-            <c:if test="${not empty contacts.email}">
+            <c:if test="${not empty message.user.contacts.email}">
                 ,&nbsp;
-                <a href="mailto:<c:out value="${contacts.email}"/>">
-                    <c:out value="${contacts.email}"/>
+                <a href="mailto:<c:out value="${message.user.contacts.email}"/>">
+                    <c:out value="${message.user.contacts.email}"/>
                 </a>
             </c:if>
             &nbsp;
