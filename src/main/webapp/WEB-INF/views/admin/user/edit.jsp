@@ -74,7 +74,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                value="<c:out value="${user.name}"/>">
                                     </td>
                                 </tr>
-                                <c:set var="me" value="${(user eq authorized_user) or (user.role eq 'SUPERADMIN')}"/>
+                                <c:set var="me" value="${(user eq authorized_user) or (authorized_user.role eq 'SUPERADMIN')}"/>
                                 <tr>
                                     <td class="ths">Логин</td>
                                     <td class="tds">
