@@ -83,8 +83,8 @@ public class Response extends Model implements IResponse {
         boolean result = false;
         if (super.equals(object)) {
             final Response other = (Response) object;
-            result = this.username.equals(other.username) &&
-                    this.text.equals(other.text);
+            result = this.getUsername().equals(other.getUsername()) &&
+                    this.getText().equals(other.getText());
         }
         return result;
     }
@@ -98,7 +98,7 @@ public class Response extends Model implements IResponse {
      */
     @Override
     public int hashCode() {
-        return this.username.hashCode() + this.text.hashCode();
+        return getUsername().hashCode() + getText().hashCode();
     }
 
     /**

@@ -120,9 +120,9 @@ public abstract class Content <T extends Content> extends Model implements ICont
         boolean result = super.equals(object);
         if (result) {
             final Content other = (Content) object;
-            result = this.title.equalsIgnoreCase(other.title) &&
-                    this.url.equalsIgnoreCase(other.url) &&
-                    this.description.equalsIgnoreCase(other.description);
+            result = this.getTitle().equalsIgnoreCase(other.getTitle()) &&
+                    this.getUrl().equalsIgnoreCase(other.getUrl()) &&
+                    this.getDescription().equalsIgnoreCase(other.getDescription());
         }
         return result;
     }
@@ -136,7 +136,9 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public int hashCode() {
-        return this.title.hashCode() + this.url.hashCode() + this.description.hashCode();
+        return getTitle().hashCode() +
+                getUrl().hashCode() +
+                getDescription().hashCode();
     }
 
     /**

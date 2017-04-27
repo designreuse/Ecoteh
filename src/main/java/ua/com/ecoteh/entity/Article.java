@@ -145,8 +145,8 @@ public class Article extends Content implements IArticle {
         boolean result = super.equals(object);
         if (result) {
             final Article other = (Article) object;
-            result = this.number.equalsIgnoreCase(other.number)
-                    && this.text.equalsIgnoreCase(other.text);
+            result = this.getNumber().equalsIgnoreCase(other.getNumber()) &&
+                    this.getText().equalsIgnoreCase(other.getText());
         }
         return result;
     }
@@ -160,7 +160,9 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() + this.number.hashCode() + this.text.hashCode();
+        return super.hashCode() +
+                getNumber().hashCode() +
+                getText().hashCode();
     }
 
     /**

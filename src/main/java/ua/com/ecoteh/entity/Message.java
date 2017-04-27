@@ -115,9 +115,9 @@ public class Message extends Model implements IMessage {
         boolean result = super.equals(object);
         if (result) {
             final Message other = (Message) object;
-            result = this.user.equals(other.user) &&
-                    this.subject.equalsIgnoreCase(other.subject) &&
-                    this.text.equalsIgnoreCase(other.text);
+            result = this.getUser().equals(other.getUser()) &&
+                    this.getSubject().equalsIgnoreCase(other.getSubject()) &&
+                    this.getText().equalsIgnoreCase(other.getText());
         }
         return result;
     }
@@ -131,7 +131,9 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public int hashCode() {
-        return this.user.hashCode() + this.subject.hashCode() + this.text.hashCode();
+        return getUser().hashCode() +
+                getSubject().hashCode() +
+                getText().hashCode();
     }
 
     /**

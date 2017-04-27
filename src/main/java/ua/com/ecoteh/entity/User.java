@@ -208,9 +208,9 @@ public class User extends Model implements IUser, UserDetails {
         boolean result = false;
         if (super.equals(object)) {
             final User other = (User) object;
-            result = this.name.equalsIgnoreCase(other.name) &&
-                    this.description.equalsIgnoreCase(other.description) &&
-                    this.role.equals(other.role);
+            result = this.getName().equalsIgnoreCase(other.getName()) &&
+                    this.getDescription().equalsIgnoreCase(other.getDescription()) &&
+                    this.getRole().equals(other.getRole());
         }
         return result;
     }
@@ -224,7 +224,9 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public int hashCode() {
-        return this.name.hashCode() + this.description.hashCode() + this.role.hashCode();
+        return getName().hashCode() +
+                getDescription().hashCode() +
+                getRole().hashCode();
     }
 
     /**

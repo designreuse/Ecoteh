@@ -91,8 +91,8 @@ public class Address extends Model implements IAddress {
         boolean result = super.equals(object);
         if (result) {
             final Address other = (Address) object;
-            result = this.address.equalsIgnoreCase(other.address) &&
-                    this.googleMaps.equalsIgnoreCase(other.googleMaps);
+            result = this.getAddress().equalsIgnoreCase(other.getAddress()) &&
+                    this.getGoogleMaps().equalsIgnoreCase(other.getGoogleMaps());
         }
         return result;
     }
@@ -106,7 +106,7 @@ public class Address extends Model implements IAddress {
      */
     @Override
     public int hashCode() {
-        return this.address.hashCode() + this.googleMaps.hashCode();
+        return getAddress().hashCode() + getGoogleMaps().hashCode();
     }
 
     /**

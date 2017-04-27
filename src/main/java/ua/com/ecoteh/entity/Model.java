@@ -92,6 +92,18 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     }
 
     /**
+     * Returns a hash code value for the object.
+     * This method is supported for the benefit
+     * of hash tables such as those provided by HashMap.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
+    }
+
+    /**
      * Returns a unique identifier of the model.
      *
      * @return The unique identifier.
@@ -145,14 +157,4 @@ public abstract class Model implements IModel, Serializable, Cloneable {
         }
         return this;
     }
-
-    /**
-     * Returns a hash code value for the object.
-     * This method is supported for the benefit
-     * of hash tables such as those provided by HashMap.
-     *
-     * @return A hash code value for this object.
-     */
-    @Override
-    public abstract int hashCode();
 }

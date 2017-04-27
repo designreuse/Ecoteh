@@ -125,8 +125,8 @@ public class File extends Model implements IFile {
         boolean result = super.equals(object);
         if (result) {
             final File other = (File) object;
-            result = this.title.equalsIgnoreCase(other.title) &&
-                    this.url.equalsIgnoreCase(other.url);
+            result = this.getTitle().equalsIgnoreCase(other.getTitle()) &&
+                    this.getUrl().equalsIgnoreCase(other.getUrl());
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public int hashCode() {
-        return this.title.hashCode() + this.url.hashCode();
+        return getTitle().hashCode() + getUrl().hashCode();
     }
 
     /**

@@ -211,11 +211,10 @@ public class Company extends Content implements ICompany {
         boolean result = super.equals(object);
         if (result) {
             final Company other = (Company) object;
-            result = (this.type.equals(other.type)) &&
-                    this.domain.equalsIgnoreCase(other.domain) &&
-                    this.tagline.equals(other.tagline) &&
-                    this.getDescription().equalsIgnoreCase(other.getDescription()) &&
-                    this.information.equals(other.information);
+            result = (this.getType().equals(other.getType())) &&
+                    this.getDomain().equalsIgnoreCase(other.getDomain()) &&
+                    this.getTagline().equals(other.getTagline()) &&
+                    this.getInformation().equals(other.getInformation());
         }
         return result;
     }
@@ -229,9 +228,11 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() + this.type.hashCode() + this.domain.hashCode()
-                + this.tagline.hashCode() + getDescription().hashCode()
-                + this.information.hashCode();
+        return super.hashCode() +
+                getType().hashCode() +
+                getDomain().hashCode() +
+                getTagline().hashCode() +
+                getInformation().hashCode();
     }
 
     /**

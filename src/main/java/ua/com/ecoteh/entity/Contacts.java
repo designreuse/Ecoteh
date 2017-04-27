@@ -164,14 +164,14 @@ public class Contacts extends Model implements IContacts {
         boolean result = super.equals(object);
         if (result) {
             final Contacts other = (Contacts) object;
-            result = this.email.equalsIgnoreCase(other.email) &&
-                    this.mobilePhone.equalsIgnoreCase(other.mobilePhone) &&
-                    this.landlinePhone.equalsIgnoreCase(other.landlinePhone) &&
-                    this.fax.equalsIgnoreCase(other.fax) &&
-                    this.vkontakte.equalsIgnoreCase(other.vkontakte) &&
-                    this.facebook.equalsIgnoreCase(other.facebook) &&
-                    this.twitter.equalsIgnoreCase(other.twitter) &&
-                    this.skype.equalsIgnoreCase(other.skype);
+            result = this.getEmail().equalsIgnoreCase(other.getEmail()) &&
+                    this.getMobilePhone().equalsIgnoreCase(other.getMobilePhone()) &&
+                    this.getLandlinePhone().equalsIgnoreCase(other.getLandlinePhone()) &&
+                    this.getFax().equalsIgnoreCase(other.getFax()) &&
+                    this.getVkontakte().equalsIgnoreCase(other.getVkontakte()) &&
+                    this.getFacebook().equalsIgnoreCase(other.getFacebook()) &&
+                    this.getTwitter().equalsIgnoreCase(other.getTwitter()) &&
+                    this.getSkype().equalsIgnoreCase(other.getSkype());
         }
         return result;
     }
@@ -185,14 +185,14 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public int hashCode() {
-        return this.email.hashCode() +
-                this.mobilePhone.hashCode() +
-                this.landlinePhone.hashCode() +
-                this.fax.hashCode() +
-                this.vkontakte.hashCode() +
-                this.facebook.hashCode() +
-                this.twitter.hashCode() +
-                this.skype.hashCode();
+        return getEmail().hashCode() +
+                getMobilePhone().hashCode() +
+                getLandlinePhone().hashCode() +
+                getFax().hashCode() +
+                getVkontakte().hashCode() +
+                getFacebook().hashCode() +
+                getTwitter().hashCode() +
+                getSkype().hashCode();
     }
 
     /**
