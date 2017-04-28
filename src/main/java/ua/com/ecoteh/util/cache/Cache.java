@@ -1,10 +1,7 @@
 package ua.com.ecoteh.util.cache;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -37,21 +34,18 @@ public final class Cache {
     private static volatile Map<Key, Object> cache;
 
     /**
+     * Сache is modified.
+     */
+    private static volatile boolean isNewCache;
+
+    /**
      * Static constructor.
      * Creates and starts ScheduledExecutorService.
      */
     static {
         cache = new ConcurrentHashMap<>();
-        final ScheduledExecutorService scheduler =
-                Executors.newSingleThreadScheduledExecutor(
-                        new ThreadDaemonFactory()
-                );
-        scheduler.scheduleAtFixedRate(
-                new CacheCleaner(cache),
-                SCHEDULER_INITIAL_DELAY,
-                SCHEDULER_PERIOD,
-                TIME_UNIT
-        );
+        setNewCache();
+        createScheduledExecutorService();
     }
 
     /**
@@ -91,7 +85,8 @@ public final class Cache {
     ) {
         Object savingObject = null;
         if (isNotNull(key) && isNotNull(object)) {
-            savingObject = cache.put(key, object);
+            savingObject = getCache().put(key, object);
+            setNewCache();
         }
         return isNotNull(savingObject) ? savingObject : object;
     }
@@ -283,11 +278,9 @@ public final class Cache {
     public static Collection<Object> getAll(final String subKey) {
         final List<Object> objects = new ArrayList<>();
         if (isNotBlank(subKey)) {
-            cache.keySet().stream()
+            getCache().keySet().stream()
                     .filter(key -> containsKey(key, subKey))
-                    .forEach(key -> {
-                        objects.add(get(key));
-                    });
+                    .forEach(key -> objects.add(get(key)));
         }
         return objects;
     }
@@ -347,7 +340,7 @@ public final class Cache {
      * Clears the cache.
      */
     public static void clear() {
-        cache.clear();
+        getCache().clear();
     }
 
     /**
@@ -357,7 +350,7 @@ public final class Cache {
      */
     public static void clear(final Class object) {
         if (object != null) {
-            cache.entrySet()
+            getCache().entrySet()
                     .stream()
                     .filter(entry -> filterByClass(entry, object))
                     .forEach(entry -> remove(entry.getKey()));
@@ -385,9 +378,10 @@ public final class Cache {
     public static Map<String, String> getEntriesToString() {
         final String key = "Cache information";
         Map<String, String> result = (Map) get(key);
-        if (checkResultMap(result)) {
+        if (isNewCache()) {
             result = getNewEntriesToString(key);
             put(key, result);
+            setOldCache();
         }
         return result;
     }
@@ -423,7 +417,7 @@ public final class Cache {
     private static <T> Object get(final Key<T> key) {
         Object object = null;
         if (isNotNull(key)) {
-            object = cache.get(key);
+            object = getCache().get(key);
         }
         return object;
     }
@@ -437,18 +431,9 @@ public final class Cache {
      */
     private static <T> void remove(final Key<T> key) {
         if (isNotNull(key)) {
-            cache.remove(key);
+            getCache().remove(key);
+            setNewCache();
         }
-    }
-
-    /**
-     * Checks the map with entries in the cache.
-     *
-     * @param result a maps with entries.
-     * @return true if maps is valid, false otherwise.
-     */
-    private static boolean checkResultMap(final Map<String, String> result) {
-        return !isNotNull(result) || (result.size() != cache.size());
     }
 
     /**
@@ -459,7 +444,7 @@ public final class Cache {
      */
     private static Map<String, String> getNewEntriesToString(final String key) {
         Map<String, String> result = new HashMap<>();
-        for (Map.Entry<Key, Object> entry : cache.entrySet()) {
+        for (Map.Entry<Key, Object> entry : getCache().entrySet()) {
             result.put(
                     entry.getKey().getKey().toString(),
                     entry.getValue().getClass().getName()
@@ -486,7 +471,7 @@ public final class Cache {
      * @param entry  a entry to filter.
      * @param object a class to equals.
      * @param <T>    a type of key.
-     * @return true if entry class equals to oblect class, false otherwise.
+     * @return true if entry class equals to object class, false otherwise.
      */
     private static <T> boolean filterByClass(
             final Map.Entry<T, Object> entry,
@@ -499,7 +484,7 @@ public final class Cache {
      * Checks if input object is not null.
      *
      * @param object a object to check.
-     * @return true if object is null, false otherwise.
+     * @return true if object is not null, false otherwise.
      */
     private static boolean isNotNull(final Object object) {
         return (object != null);
@@ -513,5 +498,64 @@ public final class Cache {
      */
     private static boolean isNotEmptyMap(final Map map) {
         return isNotNull(map) && !map.isEmpty();
+    }
+
+    /**
+     * Сache is modified.
+     *
+     * @return true if cache is modified, false otherwise.
+     */
+    private static boolean isNewCache() {
+        return isNewCache;
+    }
+
+    /**
+     * Sets that the cache has been changed.
+     */
+    private static void setNewCache() {
+        isNewCache = true;
+    }
+
+    /**
+     * Sets that the cache has been not changed.
+     */
+    private static void setOldCache() {
+        isNewCache = false;
+    }
+
+    /**
+     * Returns the cache map.
+     *
+     * @return The cache map.
+     */
+    private static Map<Key, Object> getCache() {
+        return cache;
+    }
+
+    /**
+     * Creates and configures a new ScheduledExecutorService.
+     */
+    private static void createScheduledExecutorService() {
+        Executors.newSingleThreadScheduledExecutor(
+                createThreadFactory()
+        ).scheduleAtFixedRate(
+                new CacheCleaner(getCache()),
+                SCHEDULER_INITIAL_DELAY,
+                SCHEDULER_PERIOD,
+                TIME_UNIT
+        );
+    }
+
+    /**
+     * Creates a new threads factory for constructing a new thread-demand.
+     *
+     * @return The new threads factory.
+     */
+    private static ThreadFactory createThreadFactory() {
+        return runnable -> {
+            final Thread thread = new Thread(runnable);
+            thread.setDaemon(true);
+            return thread;
+        };
     }
 }

@@ -101,7 +101,7 @@ final class CacheCleaner implements Runnable {
      * Cleans cache when cache.size() great maxSize.
      */
     private void cleanCache() {
-        if (checkCacheMaxSize()) {
+        if (isGreatMaxSize()) {
             final List<Key> keys = new ArrayList<>(this.cache.keySet());
             Collections.sort(keys, new KeyComparator());
             cleanToNormalSize(keys);
@@ -116,7 +116,7 @@ final class CacheCleaner implements Runnable {
     private void cleanToNormalSize(final List<Key> keys) {
         for (Key key : keys) {
             this.cache.remove(key);
-            if (checkCacheNormalSize()) {
+            if (isNormalSize()) {
                 break;
             }
         }
@@ -127,7 +127,7 @@ final class CacheCleaner implements Runnable {
      *
      * @return true if cache.size() great maxSize, false otherwise.
      */
-    private boolean checkCacheMaxSize() {
+    private boolean isGreatMaxSize() {
         return (this.cache.size() > getMaxSize());
     }
 
@@ -136,7 +136,7 @@ final class CacheCleaner implements Runnable {
      *
      * @return true if cache.size() great normalSize, false otherwise.
      */
-    private boolean checkCacheNormalSize() {
+    private boolean isNormalSize() {
         return (this.cache.size() <= getMaxSize() / 2);
     }
 }

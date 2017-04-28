@@ -62,7 +62,7 @@ final class Key<T> implements Comparable {
      * @return Returns true if object is dead, otherwise returns false.
      */
     boolean isDead() {
-        return System.currentTimeMillis() > this.timeout;
+        return (System.currentTimeMillis() > this.timeout);
     }
 
     /**
