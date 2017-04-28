@@ -32,12 +32,12 @@ public final class SeoServiceImpl implements SeoService {
     /**
      * The robots txt key.
      */
-    private final static String ROBOTS_KEY = "SEO robots.txt";
+    private final static String ROBOTS_KEY = "SEO robots";
 
     /**
      * The sitemap xml key.
      */
-    private final static String SITEMAP_KEY = "SEO sitemap.xml";
+    private final static String SITEMAP_KEY = "SEO sitemap";
 
     /**
      * The describes a set of methods for working
