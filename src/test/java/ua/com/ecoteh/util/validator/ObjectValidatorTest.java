@@ -1,11 +1,13 @@
 package ua.com.ecoteh.util.validator;
 
 import org.junit.Test;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -125,6 +127,18 @@ public class ObjectValidatorTest {
         assertFalse(ObjectValidator.isNotEmpty("   "));
         assertFalse(ObjectValidator.isNotEmpty("          "));
         assertTrue(ObjectValidator.isNotEmpty("string"));
+    }
+
+    @Test
+    public void isEmptyMultipartFile() throws Exception {
+        assertTrue(ObjectValidator.isEmpty((MultipartFile) null));
+        assertFalse(ObjectValidator.isEmpty(mock(MultipartFile.class)));
+    }
+
+    @Test
+    public void isNotEmptyMultipartFile() throws Exception {
+        assertFalse(ObjectValidator.isNotEmpty((MultipartFile) null));
+        assertTrue(ObjectValidator.isNotEmpty(mock(MultipartFile.class)));
     }
 
     @Test
