@@ -178,10 +178,10 @@ public final class ObjectValidator {
     /**
      * Checks if a array is not null and not empty.
      * <pre>
-     * isEmpty(null) = false
-     * isEmpty(new Object[]{}) = false
-     * isEmpty(new Object[]{new Object()}) = true
-     * isEmpty(new Object[]{new Object(), new Object()}) = true
+     * isNotEmpty(null) = false
+     * isNotEmpty(new Object[]{}) = false
+     * isNotEmpty(new Object[]{new Object()}) = true
+     * isNotEmpty(new Object[]{new Object(), new Object()}) = true
      * </pre>
      *
      * @param array the array to check, may be null
