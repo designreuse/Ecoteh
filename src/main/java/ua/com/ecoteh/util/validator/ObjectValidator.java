@@ -1,5 +1,7 @@
 package ua.com.ecoteh.util.validator;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -156,6 +158,27 @@ public final class ObjectValidator {
      */
     public static boolean isNotEmpty(final String string) {
         return !isEmpty(string);
+    }
+
+    /**
+     * Return whether the uploaded file is null or empty, that is, either no file has
+     * been chosen in the multipart form or the chosen file has no content.
+     *
+     * @param file the incoming multipart file to check.
+     * @return true if file is null or empty, false otherwise.
+     */
+    public static boolean isEmpty(final MultipartFile file) {
+        return isNull(file) || file.isEmpty();
+    }
+
+    /**
+     * Return whether the uploaded file is not null or not empty.
+     *
+     * @param file the incoming multipart file to check.
+     * @return true if file is null or empty, false otherwise.
+     */
+    public static boolean isNotEmpty(final MultipartFile file) {
+        return !isEmpty(file);
     }
 
     /**
