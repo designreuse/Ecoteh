@@ -12,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class of the service layer, implements a set of methods
  * to adjust the search engine optimization (SEO).
@@ -84,7 +86,7 @@ public final class SeoServiceImpl implements SeoService {
     @Override
     public ModelAndView getRobotsTxt() {
         ModelAndView robotsTxt = (ModelAndView) Cache.get(ROBOTS_KEY);
-        if (robotsTxt == null) {
+        if (isNull(robotsTxt)) {
             robotsTxt = createRobotsTxt();
             Cache.put(ROBOTS_KEY, robotsTxt, DEFAULT_TIMEOUT);
         }
@@ -100,7 +102,7 @@ public final class SeoServiceImpl implements SeoService {
     @Override
     public ModelAndView getSiteMapXml() {
         ModelAndView sitemap = (ModelAndView) Cache.get(SITEMAP_KEY);
-        if (sitemap == null) {
+        if (isNull(sitemap)) {
             sitemap = createSitemap();
             Cache.put(SITEMAP_KEY, sitemap, DEFAULT_TIMEOUT);
         }

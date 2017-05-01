@@ -1,5 +1,10 @@
 package ua.com.ecoteh.service.data;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.enums.FileType;
 import ua.com.ecoteh.repository.FileRepository;
@@ -7,20 +12,12 @@ import ua.com.ecoteh.util.comparator.FileComparator;
 import ua.com.ecoteh.util.loader.MultipartFileLoader;
 import ua.com.ecoteh.util.properties.ContentProperties;
 import ua.com.ecoteh.util.translator.Translator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -206,7 +203,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Override
     @Transactional(readOnly = true)
     public File getByTitle(final String title) throws IllegalArgumentException {
-        if (isBlank(title)) {
+        if (isEmpty(title)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_TITLE_MESSAGE, getClassSimpleName())
             );
@@ -224,7 +221,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Override
     @Transactional(readOnly = true)
     public File getByUrl(final String url) throws IllegalArgumentException {
-        if (isBlank(url)) {
+        if (isEmpty(url)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_URL_MESSAGE, getClassSimpleName())
             );
@@ -241,7 +238,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Override
     @Transactional
     public void removeByTitle(final String title) {
-        if (isNotBlank(title)) {
+        if (isNotEmpty(title)) {
             this.repository.deleteByTitle(title);
         }
     }
@@ -265,7 +262,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Override
     @Transactional
     public void remove(final File file) throws IllegalArgumentException {
-        if (file != null) {
+        if (isNotNull(file)) {
             if (!file.isValidated()) {
                 throw new IllegalArgumentException(FORBIDDEN_STATIC_FILE_MESSAGE);
             }
@@ -282,7 +279,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Override
     @Transactional
     public void remove(final Collection<File> files) {
-        if (files != null && !files.isEmpty()) {
+        if (isNotEmpty(files)) {
             files.forEach(this::remove);
         }
     }
@@ -358,15 +355,15 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final boolean exist,
             final boolean duplicate
     ) {
-        if (file == null) {
+        if (isNull(file)) {
             return false;
         }
         if (exist && !exists(file)) {
             return false;
         }
         if (duplicate) {
-            if ((this.repository.findByTitle(file.getTitle()) != null)
-                    || (this.repository.findByUrl(file.getUrl()) != null)) {
+            if (isNotNull(this.repository.findByTitle(file.getTitle())) ||
+                    isNotNull(this.repository.findByUrl(file.getUrl()))) {
                 return false;
             }
         }
@@ -399,7 +396,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Override
     @Transactional(readOnly = true)
     public List<File> getByType(final FileType type) throws IllegalArgumentException {
-        if (type == null) {
+        if (isNull(type)) {
             throw new IllegalArgumentException(
                     String.format(NULL_TYPE_MESSAGE, getClassSimpleName())
             );
@@ -418,7 +415,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     public File getLastByType(final FileType type) {
         final List<File> files = getByType(type);
         File file;
-        if (!files.isEmpty()) {
+        if (isNotEmpty(files)) {
             file = files.get(files.size() - 1);
         } else {
             file = new File();
@@ -446,7 +443,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         if (isEmpty(file)) {
             throw new NullPointerException(MULTIPART_FILE_IS_EMPTY_MESSAGE);
         }
-        if (file.getSize() > this.properties.getMaxFileSize()) {
+        if (isGreatMaxSize(file.getSize())) {
             throw new IllegalArgumentException(
                     String.format(
                             MAX_FILE_SIZE_MESSAGE,
@@ -454,6 +451,15 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
                     )
             );
         }
+    }
+
+    /**
+     *
+     * @param size
+     * @return
+     */
+    private boolean isGreatMaxSize(final long size) {
+        return (size > this.properties.getMaxFileSize());
     }
 
     /**
@@ -468,7 +474,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final String rootPath
     ) {
         return this.properties.getProjectAbsolutePath() +
-                (isNotBlank(rootPath) ? rootPath : file.getOriginalFilename());
+                (isNotEmpty(rootPath) ? rootPath : file.getOriginalFilename());
     }
 
     /**

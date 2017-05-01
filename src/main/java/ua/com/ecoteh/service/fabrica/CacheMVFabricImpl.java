@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ua.com.ecoteh.util.cache.Cache;
 import org.springframework.web.servlet.ModelAndView;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class implements a set of standard methods for creates
  * and returns the main modelAndViews which saves in cache.
@@ -120,7 +122,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView homePage() {
         ModelAndView modelAndView = getFromCache(HOME_PAGE_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.homePage();
             putToCache(modelAndView, HOME_PAGE_KEY);
         }
@@ -136,7 +138,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView allCategoriesPage() {
         ModelAndView modelAndView = getFromCache(ALL_CATEGORIES_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allCategoriesPage();
             putToCache(modelAndView, ALL_CATEGORIES_KEY);
         }
@@ -152,7 +154,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView allArticlesPage() {
         ModelAndView modelAndView = getFromCache(ALL_ARTICLES_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allArticlesPage();
             putToCache(modelAndView, ALL_ARTICLES_KEY);
         }
@@ -174,7 +176,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     ) {
         final String key = ALL_SORT_ARTICLES_KEY + ", " + sortType + ", " + revers;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allSortArticlesPage(sortType, revers);
             putToCache(modelAndView, key);
         }
@@ -192,7 +194,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView aboutCompanyPage() {
         ModelAndView modelAndView = getFromCache(MAIN_COMPANY_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.aboutCompanyPage();
             putToCache(modelAndView, MAIN_COMPANY_KEY);
         }
@@ -208,7 +210,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView contactsPage() {
         ModelAndView modelAndView = getFromCache(CONTACTS_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.contactsPage();
             putToCache(modelAndView, CONTACTS_KEY);
         }
@@ -224,7 +226,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView allPartnersPage() {
         ModelAndView modelAndView = getFromCache(ALL_PARTNERS_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allPartnersPage();
             putToCache(modelAndView, ALL_PARTNERS_KEY);
         }
@@ -242,7 +244,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView allSortPartnersByTitlePage(final boolean revers) {
         final String key = ALL_SORT_PARTNERS_KEY + ", " + revers;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allSortPartnersByTitlePage(revers);
             putToCache(modelAndView, key);
         }
@@ -261,7 +263,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView categoryPage(final String url) {
         final String key = CATEGORY_BY_URL_KEY + url;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.categoryPage(url);
             putToCache(modelAndView, key);
         }
@@ -287,7 +289,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
         final String key = CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY
                 + ", " + url + ", " + sortType + ", " + revers;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.categoryWithSortArticlesPage(url, sortType, revers);
             putToCache(modelAndView, key);
         }
@@ -306,7 +308,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView articleByUrlPage(final String url) {
         final String key = ARTICLE_BY_URL_KEY + " " + url;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.articleByUrlPage(url);
             putToCache(modelAndView, key);
         }
@@ -324,7 +326,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView articleByNumberPage(final String number) {
         final String key = ARTICLE_BY_NUMBER_KEY + " " + number;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.articleByNumberPage(number);
             putToCache(modelAndView, key);
         }
@@ -342,7 +344,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView partnerPage(final String url) {
         final String key = COMPANY_BY_URL_KEY + " " + url;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.partnerPage(url);
             putToCache(modelAndView, key);
         }
@@ -358,7 +360,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView allResponsesPage() {
         ModelAndView modelAndView = getFromCache(ALL_RESPONSES_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allResponsesPage();
             putToCache(modelAndView, ALL_RESPONSES_KEY);
         }
@@ -376,7 +378,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     public ModelAndView allSortResponsesByDatePage(final boolean revers) {
         final String key = ALL_SORT_RESPONSES_KEY + ", " + revers;
         ModelAndView modelAndView = getFromCache(key);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.allSortResponsesByDatePage(revers);
             putToCache(modelAndView, key);
         }
@@ -393,7 +395,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     @Override
     public ModelAndView getDefaultModelAndView() {
         ModelAndView modelAndView = getFromCache(DEFAULT_MAV_KEY);
-        if (modelAndView == null) {
+        if (isNull(modelAndView)) {
             modelAndView = this.fabric.getDefaultModelAndView();
             putToCache(modelAndView, DEFAULT_MAV_KEY);
         }

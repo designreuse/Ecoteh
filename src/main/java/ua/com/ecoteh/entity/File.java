@@ -5,8 +5,9 @@ import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -172,8 +173,8 @@ public class File extends Model implements IFile {
      */
     @Override
     public void setTitle(final String title) {
-        this.title = isNotBlank(title) ? title : "";
-        if (isBlank(this.url)) {
+        this.title = isNotEmpty(title) ? title : "";
+        if (isEmpty(this.url)) {
             translateAndSetUrl(this.title);
         }
     }
@@ -196,7 +197,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public void setUrl(final String url) {
-        this.url = isNotBlank(url) ? url : "";
+        this.url = isNotEmpty(url) ? url : "";
     }
 
     /**
@@ -217,7 +218,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public void setType(final FileType type) {
-        this.type = (type != null) ? type : FileType.OTHER;
+        this.type = isNotNull(type) ? type : FileType.OTHER;
     }
 
     /**
@@ -229,7 +230,7 @@ public class File extends Model implements IFile {
     @Override
     public void translateAndSetUrl(final String url) {
         String newUrl = null;
-        if (isNotBlank(url)) {
+        if (isNotEmpty(url)) {
             final char oldChar = '.';
             final char newChar = '!';
             newUrl = Translator.fromCyrillicToLatin(
@@ -247,18 +248,22 @@ public class File extends Model implements IFile {
      */
     @Override
     public File initialize(final File file) {
-        if (file != null) {
+        if (isNotNull(file)) {
             super.initialize(file);
-            if (isNotBlank(file.getTitle())) {
-                this.setTitle(file.getTitle());
-            }
-            if (!this.getType().equals(FileType.STATIC) && isNotBlank(file.getUrl())) {
+            this.setTitle(file.getTitle());
+            if (!isStaticFile()) {
                 this.setUrl(file.getUrl());
             }
-            if (file.getType() != null) {
-                this.setType(file.getType());
-            }
+            this.setType(file.getType());
         }
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private boolean isStaticFile() {
+        return this.getType().equals(FileType.STATIC);
     }
 }

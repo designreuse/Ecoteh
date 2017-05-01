@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * Class to work with the default users.
  *
@@ -103,7 +105,7 @@ public final class DefaultConfig {
      */
     private static boolean check(final UserRole role) {
         final User user = getAuthenticatedUser();
-        return (user != null) && (user.getRole().equals(role));
+        return isNotNull(user) && (user.getRole().equals(role));
     }
 
     /**

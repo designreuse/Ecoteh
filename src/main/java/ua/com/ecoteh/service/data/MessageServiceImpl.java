@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class of the service layer, implements a set of methods for working
  * with objects of the {@link Message} class.
@@ -15,8 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
-public final class MessageServiceImpl extends DataServiceImpl<Message>
-        implements MessageService {
+public final class MessageServiceImpl extends DataServiceImpl<Message> implements MessageService {
 
     /**
      * Constructor.
@@ -55,7 +56,7 @@ public final class MessageServiceImpl extends DataServiceImpl<Message>
             final boolean duplicate
     ) {
         boolean result = true;
-        if (message == null) {
+        if (isNull(message)) {
             result = false;
         }
         if (result && exist) {

@@ -43,6 +43,12 @@ public class AdminMainController extends MainController {
     private static final Logger LOGGER = Logger.getLogger(AdminMainController.class);
 
     /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
+
+    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
@@ -138,7 +144,9 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/send_message\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/send_message")
+        );
     }
 
     /**
@@ -177,6 +185,8 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/response/send\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/response/send")
+        );
     }
 }

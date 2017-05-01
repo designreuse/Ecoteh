@@ -38,6 +38,13 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ClientMainController extends MainController {
+
+    /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
+
     /**
      * The implementation of the {@link CaptchaService} interface.
      */
@@ -124,7 +131,9 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/send_message\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/send_message")
+        );
     }
 
     /**
@@ -168,6 +177,8 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/response/send\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/response/send")
+        );
     }
 }

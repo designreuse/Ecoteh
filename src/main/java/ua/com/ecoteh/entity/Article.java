@@ -1,14 +1,16 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.util.generator.StringGenerator;
-import ua.com.ecoteh.util.time.Time;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ua.com.ecoteh.util.generator.StringGenerator;
+import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -193,7 +195,7 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public void setNumber(final String number) {
-        if (isNotBlank(number)) {
+        if (isNotEmpty(number)) {
             this.number = number;
         } else {
             newNumber();
@@ -226,7 +228,7 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public void setText(final String text) {
-        this.text = isNotBlank(text) ? text : "";
+        this.text = isNotEmpty(text) ? text : "";
     }
 
     /**
@@ -247,7 +249,7 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public void setDate(final Date date) {
-        this.date = (date != null) ? date : new Date();
+        this.date = isNotNull(date) ? date : new Date();
     }
 
     /**
@@ -268,7 +270,7 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public void setPrice(final String price) {
-        this.price = isNotBlank(price) ? price : "0";
+        this.price = isNotEmpty(price) ? price : "0";
     }
 
     /**
@@ -291,15 +293,15 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public void setCategory(final Category category) {
-        if (this.category == null) {
+        if (isNull(this.category)) {
             this.category = category;
         } else if (!this.category.equals(category)) {
             final Category temp = this.category;
             this.category = category;
-            if ((this.category != null) && !this.category.containsArticle(this)) {
+            if (isNotNull(this.category) && !this.category.containsArticle(this)) {
                 this.category.addArticle(this);
             }
-            if (temp != null) {
+            if (isNotNull(temp)) {
                 temp.removeArticle(this);
             }
         }
@@ -323,15 +325,13 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public Article initialize(final Article article) {
-        if (article != null) {
+        if (isNotNull(article)) {
             super.initialize(article);
             this.setNumber(article.getNumber());
             this.setText(article.getText());
             this.setDate(article.getDate());
             this.setPrice(article.getPrice());
-            if (article.getCategory() != null) {
-                this.setCategory(article.getCategory());
-            }
+            this.setCategory(article.getCategory());
         }
         return this;
     }

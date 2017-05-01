@@ -23,6 +23,8 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+
 /**
  * The class implements a set of methods for working with
  * objects of {@link Company} class or subclasses for admins.
@@ -46,6 +48,12 @@ import ua.com.ecoteh.util.compressor.HtmlCompressor;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class CompanyController {
+
+    /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -176,7 +184,7 @@ public class CompanyController {
                 )
         );
         company.setAddress(new Address(address, googleMaps));
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
         }
         company.setType(CompanyType.MAIN);
@@ -197,7 +205,9 @@ public class CompanyController {
      */
     @RequestMapping(value = "/update/main", method = RequestMethod.GET)
     public void updateMainCompany() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/company/update/main\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/company/update/main")
+        );
     }
 
     /**
@@ -281,7 +291,7 @@ public class CompanyController {
                 )
         );
         company.setAddress(new Address(address, googleMaps));
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
         }
         this.companyService.add(company);
@@ -304,7 +314,9 @@ public class CompanyController {
             method = RequestMethod.GET
     )
     public void addPartner() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/company/add\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/company/add")
+        );
     }
 
     /**
@@ -394,7 +406,7 @@ public class CompanyController {
                 )
         );
         company.setAddress(new Address(address, googleMaps));
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
         }
         this.companyService.update(url, company);
@@ -417,7 +429,9 @@ public class CompanyController {
             method = RequestMethod.GET
     )
     public void updatePartnerCompany() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/company/update\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/company/update")
+        );
     }
 
     /**

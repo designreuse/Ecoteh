@@ -4,7 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -213,7 +214,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setEmail(final String email) {
-        this.email = isNotBlank(email) ? email : "";
+        this.email = isNotEmpty(email) ? email : "";
     }
 
     /**
@@ -234,7 +235,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setMobilePhone(final String mobilePhone) {
-        this.mobilePhone = isNotBlank(mobilePhone) ? mobilePhone : "";
+        this.mobilePhone = isNotEmpty(mobilePhone) ? mobilePhone : "";
     }
 
     /**
@@ -255,7 +256,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setLandlinePhone(final String landlinePhone) {
-        this.landlinePhone = isNotBlank(landlinePhone) ? landlinePhone : "";
+        this.landlinePhone = isNotEmpty(landlinePhone) ? landlinePhone : "";
     }
 
     /**
@@ -276,7 +277,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setFax(final String fax) {
-        this.fax = isNotBlank(fax) ? fax : "";
+        this.fax = isNotEmpty(fax) ? fax : "";
     }
 
     /**
@@ -297,7 +298,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setVkontakte(final String vkontakte) {
-        this.vkontakte = isNotBlank(vkontakte) ? vkontakte : "";
+        this.vkontakte = isNotEmpty(vkontakte) ? vkontakte : "";
     }
 
     /**
@@ -318,7 +319,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setFacebook(final String facebook) {
-        this.facebook = isNotBlank(facebook) ? facebook : "";
+        this.facebook = isNotEmpty(facebook) ? facebook : "";
     }
 
     /**
@@ -339,7 +340,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setTwitter(final String twitter) {
-        this.twitter = isNotBlank(twitter) ? twitter : "";
+        this.twitter = isNotEmpty(twitter) ? twitter : "";
     }
 
     /**
@@ -360,7 +361,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public void setSkype(final String skype) {
-        this.skype = isNotBlank(skype) ? skype : "";
+        this.skype = isNotEmpty(skype) ? skype : "";
     }
 
     /**
@@ -371,7 +372,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public Contacts initialize(final Contacts contacts) {
-        if (contacts != null) {
+        if (isNotNull(contacts)) {
             super.initialize(contacts);
             this.setEmail(contacts.getEmail());
             this.setMobilePhone(contacts.getMobilePhone());

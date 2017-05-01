@@ -1,21 +1,20 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.enums.UserRole;
-import ua.com.ecoteh.util.encryption.Encryptor;
-import ua.com.ecoteh.util.translator.Translator;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.util.encryption.Encryptor;
+import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of standard methods for working
@@ -330,8 +329,8 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setName(final String name) {
-        this.name = isNotBlank(name) ? name : "";
-        if (isBlank(this.url)) {
+        this.name = isNotEmpty(name) ? name : "";
+        if (isEmpty(this.url)) {
             translateAndSetUrl(this.name);
         }
     }
@@ -344,7 +343,7 @@ public class User extends Model implements IUser, UserDetails {
     @Override
     public void setLogin(final String login) {
         setEncryptedLogin(
-                isNotBlank(login) ? new Encryptor(login).encrypt() : ""
+                isNotEmpty(login) ? new Encryptor(login).encrypt() : ""
         );
     }
 
@@ -355,8 +354,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public String getLogin() {
-        return isNotBlank(this.encryptedLogin) ?
-                new Encryptor(this.encryptedLogin).decrypt() : "";
+        return isNotEmpty(this.encryptedLogin) ? new Encryptor(this.encryptedLogin).decrypt() : "";
     }
 
     /**
@@ -377,7 +375,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setEncryptedLogin(final String login) {
-        this.encryptedLogin = isNotBlank(login) ? login : "";
+        this.encryptedLogin = isNotEmpty(login) ? login : "";
     }
 
     /**
@@ -388,7 +386,7 @@ public class User extends Model implements IUser, UserDetails {
     @Transient
     @Override
     public String getPassword() {
-        return isNotBlank(this.encryptedPassword) ?
+        return isNotEmpty(this.encryptedPassword) ?
                 new Encryptor(this.encryptedPassword).decrypt() : "";
     }
 
@@ -401,7 +399,7 @@ public class User extends Model implements IUser, UserDetails {
     @Override
     public void setPassword(final String password) {
         setEncryptedPassword(
-                isNotBlank(password) ? new Encryptor(password).encrypt() : ""
+                isNotEmpty(password) ? new Encryptor(password).encrypt() : ""
         );
     }
 
@@ -423,7 +421,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setEncryptedPassword(final String password) {
-        this.encryptedPassword = isNotBlank(password) ? password : "";
+        this.encryptedPassword = isNotEmpty(password) ? password : "";
     }
 
     /**
@@ -455,7 +453,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setUrl(final String url) {
-        this.url = isNotBlank(url) ? url : "";
+        this.url = isNotEmpty(url) ? url : "";
     }
 
     /**
@@ -476,7 +474,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setDescription(final String description) {
-        this.description = isNotBlank(description) ? description : "";
+        this.description = isNotEmpty(description) ? description : "";
     }
 
     /**
@@ -496,7 +494,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setPhoto(final File photo) {
-        if (this.photo == null) {
+        if (isNull(this.photo)) {
             this.photo = new File();
         }
         this.photo.initialize(photo);
@@ -519,7 +517,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setContacts(final Contacts contacts) {
-        if (this.contacts == null) {
+        if (isNull(this.contacts)) {
             this.contacts = new Contacts();
         }
         this.contacts.initialize(contacts);
@@ -543,7 +541,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setRole(final UserRole role) {
-        this.role = role != null ? role : UserRole.ANOTHER;
+        this.role = isNotNull(role) ? role : UserRole.ANOTHER;
     }
 
     /**
@@ -598,7 +596,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public User initialize(final User user) {
-        if (user != null) {
+        if (isNotNull(user)) {
             this.setName(user.getName());
             this.setUrl(user.getUrl());
             this.setEncryptedLogin(user.getEncryptedLogin());

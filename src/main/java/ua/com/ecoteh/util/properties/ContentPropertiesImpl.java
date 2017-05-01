@@ -2,8 +2,8 @@ package ua.com.ecoteh.util.properties;
 
 import java.io.IOException;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements the methods for getting application properties.
@@ -101,17 +101,17 @@ public final class ContentPropertiesImpl implements ContentProperties {
             final String loginViewName,
             final String projectDirectory
     ) {
-        this.catalinaHome = isNotBlank(catalinaHome) ? catalinaHome : "";
-        this.contentType = isNotBlank(contentType) ? contentType : "";
-        this.prefix = isNotBlank(prefix) ? prefix : "";
-        this.suffix = isNotBlank(suffix) ? suffix : "";
+        this.catalinaHome = isNotEmpty(catalinaHome) ? catalinaHome : "";
+        this.contentType = isNotEmpty(contentType) ? contentType : "";
+        this.prefix = isNotEmpty(prefix) ? prefix : "";
+        this.suffix = isNotEmpty(suffix) ? suffix : "";
         this.exposeContextBeansAsAttributes = exposeContextBeansAsAttributes;
-        this.resourcesUrl = isNotBlank(resourcesUrl) ? resourcesUrl : "";
-        this.resourcesLocation = isNotBlank(resourcesLocation) ? resourcesLocation : "";
-        this.maxFileSize = maxFileSize;
-        this.loginRequest = isNotBlank(loginRequest) ? loginRequest : "";
-        this.loginViewName = isNotBlank(loginViewName) ? loginViewName : "";
-        this.projectDirectory = isNotBlank(projectDirectory) ? projectDirectory : "";
+        this.resourcesUrl = isNotEmpty(resourcesUrl) ? resourcesUrl : "";
+        this.resourcesLocation = isNotEmpty(resourcesLocation) ? resourcesLocation : "";
+        this.maxFileSize = (maxFileSize > 0) ? maxFileSize : 0;
+        this.loginRequest = isNotEmpty(loginRequest) ? loginRequest : "";
+        this.loginViewName = isNotEmpty(loginViewName) ? loginViewName : "";
+        this.projectDirectory = isNotEmpty(projectDirectory) ? projectDirectory : "";
     }
 
     /**
@@ -232,7 +232,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
      */
     @Override
     public String getProjectAbsolutePath() {
-        if (isBlank(filePath)) {
+        if (isEmpty(filePath)) {
             createFilePath();
         }
         return filePath + "/webapps/" + this.projectDirectory;

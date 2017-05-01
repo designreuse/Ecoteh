@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IllegalAccessController {
 
     /**
+     *
+     */
+    private final static String ILLEGAL_ACCESS_MESSAGE =
+            "You do not have sufficient permissions to access this page.";
+
+    /**
      * The method throws an exception in the case of reference to it.
      * The exception sender:
      * "You do not have sufficient permissions to access this page."
@@ -28,6 +34,6 @@ public class IllegalAccessController {
             method = RequestMethod.GET
     )
     public void getIllegalAccessException() throws IllegalAccessException {
-        throw new IllegalAccessException("You do not have sufficient permissions to access this page.");
+        throw new IllegalAccessException(ILLEGAL_ACCESS_MESSAGE);
     }
 }

@@ -1,7 +1,13 @@
 package ua.com.ecoteh.entity;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -81,10 +87,9 @@ public class Category extends Content implements ICategory {
      */
     @Override
     public void addArticle(final Article article) {
-        if (article != null) {
+        if (isNotNull(article)) {
             this.articles.add(article);
-            final Category category = article.getCategory();
-            if ((category == null) || (!category.equals(this))) {
+            if (!this.equals(article.getCategory())) {
                 article.setCategory(this);
             }
         }
@@ -98,7 +103,7 @@ public class Category extends Content implements ICategory {
      */
     @Override
     public void addArticles(final Collection<Article> articles) {
-        if ((articles != null) && (!articles.isEmpty())) {
+        if (isNotEmpty(articles)) {
             articles.forEach(this::addArticle);
         }
     }
@@ -110,10 +115,9 @@ public class Category extends Content implements ICategory {
      */
     @Override
     public void removeArticle(final Article article) {
-        if ((article != null) && containsArticle(article)) {
+        if (isNotNull(article) && containsArticle(article)) {
             this.articles.remove(article);
-            final Category category = article.getCategory();
-            if ((category != null) && category.equals(this)) {
+            if (this.equals(article.getCategory())) {
                 article.setCategory(null);
             }
         }
@@ -126,7 +130,7 @@ public class Category extends Content implements ICategory {
      */
     @Override
     public void removeArticles(final Collection<Article> articles) {
-        if ((articles != null) && !articles.isEmpty()) {
+        if (isNotEmpty(articles)) {
             articles.forEach(this::removeArticle);
         }
     }
@@ -192,9 +196,7 @@ public class Category extends Content implements ICategory {
      */
     @Override
     public Category initialize(final Category category) {
-        if (category != null) {
-            super.initialize(category);
-        }
+        super.initialize(category);
         return this;
     }
 }

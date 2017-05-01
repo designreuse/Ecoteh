@@ -1,12 +1,5 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.config.DefaultConfig;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
-import ua.com.ecoteh.repository.UserRepository;
-import ua.com.ecoteh.util.comparator.UserComparator;
-import ua.com.ecoteh.util.encryption.Encryptor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,14 +9,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.config.DefaultConfig;
+import ua.com.ecoteh.entity.File;
+import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.repository.UserRepository;
+import ua.com.ecoteh.util.comparator.UserComparator;
+import ua.com.ecoteh.util.encryption.Encryptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -58,19 +57,19 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     private final static String BLANK_PHONE_MESSAGE = "Incoming %s phone is blank!";
 
     private final static String FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming name %s!";
+            "Can`t find object of the %s class by incoming name %s!";
 
     private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming URL %s!";
+            "Can`t find object of the %s class by incoming URL %s!";
 
     private final static String FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming login %s!";
+            "Can`t find object of the %s class by incoming login %s!";
 
     private final static String FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming E-mail %s!";
+            "Can`t find object of the %s class by incoming E-mail %s!";
 
     private final static String FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming phone %s!";
+            "Can`t find object of the %s class by incoming phone %s!";
 
     /**
      * The interface provides a set of standard methods for working
@@ -134,7 +133,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
         User user;
         try {
             user = DefaultConfig.getDefaultUser(username);
-            if (user == null) {
+            if (isNull(user)) {
                 user = getByLogin(username);
             }
         } catch (NullPointerException ex) {
@@ -152,7 +151,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Override
     @Transactional
     public User add(final User user) {
-        if (user != null) {
+        if (isNotNull(user)) {
             user.setRole(UserRole.ADMIN);
         }
         return super.add(user);
@@ -174,7 +173,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
         final User userToUpdate = getByUrl(url);
         final File newPhoto = user.getPhoto();
         final File oldPhoto = userToUpdate.getPhoto();
-        if (!newPhoto.equals(oldPhoto) && isNotBlank(newPhoto.getUrl())) {
+        if (isNewPhoto(newPhoto, oldPhoto)) {
             this.fileService.deleteFile(oldPhoto.getUrl());
         }
         copy(user, userToUpdate);
@@ -192,13 +191,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Override
     @Transactional(readOnly = true)
     public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
-        if (isBlank(name)) {
+        if (isEmpty(name)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_NAME_MESSAGE, getClassSimpleName())
             );
         }
         final User user = this.repository.findByName(name);
-        if (user == null) {
+        if (isNull(user)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
@@ -219,15 +218,14 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByUrl(final String url)
-            throws IllegalArgumentException, NullPointerException {
-        if (isBlank(url)) {
+    public User getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
+        if (isEmpty(url)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_URL_MESSAGE, getClassSimpleName())
             );
         }
         final User user = this.repository.findByUrl(url);
-        if (user == null) {
+        if (isNull(user)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
@@ -248,9 +246,8 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByLogin(final String login)
-            throws IllegalArgumentException, NullPointerException {
-        if (isBlank(login)) {
+    public User getByLogin(final String login) throws IllegalArgumentException, NullPointerException {
+        if (isEmpty(login)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_LOGIN_MESSAGE, getClassSimpleName())
             );
@@ -258,7 +255,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
         final User user = this.repository.findByEncryptedLogin(
                 new Encryptor(login).encrypt()
         );
-        if (user == null) {
+        if (isNull(user)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
@@ -279,15 +276,14 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByEmail(final String email)
-            throws IllegalArgumentException, NullPointerException {
-        if (isBlank(email)) {
+    public User getByEmail(final String email) throws IllegalArgumentException, NullPointerException {
+        if (isEmpty(email)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_EMAIL_MESSAGE, getClassSimpleName())
             );
         }
         User user = this.repository.findByContactsEmail(email);
-        if (user == null) {
+        if (isNull(user)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
@@ -308,19 +304,18 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByPhone(final String phone)
-            throws IllegalArgumentException, NullPointerException {
-        if (isBlank(phone)) {
+    public User getByPhone(final String phone) throws IllegalArgumentException, NullPointerException {
+        if (isEmpty(phone)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_PHONE_MESSAGE, getClassSimpleName())
             );
         }
         User user = getByMobilePhone(phone);
-        if (user == null) {
+        if (isNull(user)) {
             user = getByLandlinePhone(phone);
-            if (user == null) {
+            if (isNull(user)) {
                 user = getByFax(phone);
-                if (user == null) {
+                if (isNull(user)) {
                     throw new NullPointerException(
                             String.format(
                                     FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
@@ -375,7 +370,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Override
     @Transactional
     public void removeByName(final String name) {
-        if (isNotBlank(name)) {
+        if (isNotEmpty(name)) {
             this.repository.deleteByName(name);
         }
     }
@@ -389,7 +384,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        if (isNotBlank(url)) {
+        if (isNotEmpty(url)) {
             this.repository.deleteByUrl(url);
         }
     }
@@ -498,7 +493,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             final UserRole role
     ) {
         List<UserRole> roles = null;
-        if (role != null) {
+        if (isNotNull(role)) {
             roles = new ArrayList<>(1);
             roles.add(role);
         }
@@ -521,8 +516,8 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             final Collection<UserRole> roles
     ) {
         final List<User> result = new ArrayList<>();
-        if ((users != null) && !users.isEmpty()) {
-            if ((roles != null) && !roles.isEmpty()) {
+        if (isNotEmpty(users)) {
+            if (isNotEmpty(roles)) {
                 for (User user : users) {
                     result.addAll(
                             roles.stream()
@@ -573,7 +568,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional
     public List<User> filteredByValid(final Collection<User> users) {
         List<User> result = new ArrayList<>();
-        if (users != null && !users.isEmpty()) {
+        if (isNotEmpty(users)) {
             result.addAll(
                     users.stream()
                             .filter(
@@ -598,15 +593,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             final boolean exist,
             final boolean duplicate
     ) {
-        if (user == null) {
+        if (isNull(user)) {
             return false;
         }
         if (exist && !exists(user)) {
             return false;
         }
         if (duplicate) {
-            if ((this.repository.findByName(user.getName()) != null)
-                    || (this.repository.findByUrl(user.getUrl()) != null)) {
+            if (isNotNull(this.repository.findByName(user.getName())) ||
+                    isNotNull(this.repository.findByUrl(user.getUrl()))) {
                 return false;
             }
         }
@@ -658,10 +653,19 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
+     * @param newPhoto
+     * @param oldPhoto
+     * @return
+     */
+    protected static boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
+        return !newPhoto.equals(oldPhoto) && isNotEmpty(newPhoto.getUrl());
+    }
+
+    /**
      * @param user
      * @return
      */
     private static boolean validFilter(final User user) {
-        return (user != null) && (user.isValidated());
+        return isNotNull(user) && user.isValidated();
     }
 }

@@ -19,6 +19,8 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+
 /**
  * The class implements a set of methods for working with
  * objects of {@link Category} class or subclasses for admins.
@@ -42,6 +44,12 @@ import ua.com.ecoteh.util.compressor.HtmlCompressor;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class CategoryController {
+
+    /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -121,7 +129,7 @@ public class CategoryController {
                 keywords
         );
         category.setValidated(isValid);
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
         }
         this.categoryService.add(category);
@@ -141,7 +149,9 @@ public class CategoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public void addCategory() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/category/add\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/category/add")
+        );
     }
 
     /**
@@ -189,7 +199,7 @@ public class CategoryController {
                 keywords
         );
         category.setValidated(isValid);
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
         }
         this.categoryService.update(url, category);
@@ -210,7 +220,7 @@ public class CategoryController {
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public void updateCategory() throws IllegalMappingException {
         throw new IllegalMappingException(
-                "GET method in \"/admin/category/update\" is not supported!"
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/category/update")
         );
     }
 

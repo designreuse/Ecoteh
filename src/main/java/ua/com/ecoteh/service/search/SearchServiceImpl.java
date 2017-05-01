@@ -1,19 +1,18 @@
 package ua.com.ecoteh.service.search;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import ua.com.ecoteh.entity.Model;
-import ua.com.ecoteh.entity.*;
-import ua.com.ecoteh.service.data.*;
-import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.entity.*;
+import ua.com.ecoteh.service.data.*;
+import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -46,7 +45,7 @@ public class SearchServiceImpl implements SearchService {
      * The keywords of page with information about main company.
      */
     private final static String ABOUT_COMPANY_KEYWORDS = "о компании, описание, main company, " +
-                    "about company, about main company";
+            "about company, about main company";
 
     /**
      * The keywords of page with contacts of main company.
@@ -117,7 +116,7 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public SearchServiceImpl(
-            @Qualifier("cacheMVFabricImpl")final MainMVFabric fabric,
+            @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
             final CategoryService categoryService,
             final ArticleService articleService,
             final CompanyService companyService,
@@ -144,9 +143,9 @@ public class SearchServiceImpl implements SearchService {
             final String content,
             final boolean howSearch
     ) {
-        final String _content = isNotBlank(content) ? content : "all";
+        final String _content = isNotEmpty(content) ? content : "all";
         ModelAndView modelAndView = new ModelAndView();
-        if (isNotBlank(keywords)) {
+        if (isNotEmpty(keywords)) {
             final boolean isPage = getPageBySearch(keywords, modelAndView);
             if (!isPage) {
                 modelAndView = prepareDefaultSearchPage(keywords);
@@ -172,7 +171,7 @@ public class SearchServiceImpl implements SearchService {
             final ModelAndView modelAndView
     ) {
         final String temp = keywords.toLowerCase();
-        String viewName = null;
+        String viewName = "";
         if (HOME_KEYWORDS.contains(temp)) {
             viewName = "redirect:/home";
         } else if (ALL_CATEGORIES_KEYWORDS.contains(temp)) {
@@ -191,7 +190,7 @@ public class SearchServiceImpl implements SearchService {
             viewName = "redirect:/company/main";
         }
         modelAndView.setViewName(viewName);
-        return viewName != null;
+        return isNotEmpty(viewName);
     }
 
     /**
@@ -208,7 +207,7 @@ public class SearchServiceImpl implements SearchService {
             final String content,
             final ModelAndView modelAndView
     ) {
-        if (isNotBlank(keywords)) {
+        if (isNotEmpty(keywords)) {
             if (content.contains("all")) {
                 searchByAllContent(
                         keywords,

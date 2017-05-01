@@ -1,13 +1,15 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.enums.CompanyType;
-import ua.com.ecoteh.util.time.Time;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -263,12 +265,11 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setDomain(final String domain) {
-        if (isNotBlank(domain)) {
-            final String temp = domain.replace("http://", "")
-                    .replace("https://", "");
-            this.domain = isNotBlank(temp) ? temp : "";
+        if (isNotEmpty(domain)) {
+            final String temp = domain.replace("http://", "").replace("https://", "");
+            this.domain = isNotEmpty(temp) ? temp : "";
         } else {
-            this.domain = null;
+            this.domain = "";
         }
     }
 
@@ -290,7 +291,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setTagline(final String tagline) {
-        this.tagline = isNotBlank(tagline) ? tagline : "";
+        this.tagline = isNotEmpty(tagline) ? tagline : "";
     }
 
     /**
@@ -311,7 +312,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setInformation(final String information) {
-        this.information = isNotBlank(information) ? information : "";
+        this.information = isNotEmpty(information) ? information : "";
     }
 
     /**
@@ -332,7 +333,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setSenderEmail(final String senderEmail) {
-        this.senderEmail = isNotBlank(senderEmail) ? senderEmail : "";
+        this.senderEmail = isNotEmpty(senderEmail) ? senderEmail : "";
     }
 
     /**
@@ -352,7 +353,7 @@ public class Company extends Content implements ICompany {
      * @param senderPass a new sender password to the company.
      */
     public void setSenderPass(final String senderPass) {
-        this.senderPass = isNotBlank(senderPass) ? senderPass : "";
+        this.senderPass = isNotEmpty(senderPass) ? senderPass : "";
     }
 
     /**
@@ -412,7 +413,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setContacts(final Contacts contacts) {
-        if (this.contacts == null) {
+        if (isNull(this.contacts)) {
             this.contacts = new Contacts();
         }
         this.contacts.initialize(contacts);
@@ -435,7 +436,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setAddress(final Address address) {
-        if (this.address == null) {
+        if (isNull(this.address)) {
             this.address = new Address();
         }
         this.address.initialize(address);
@@ -458,7 +459,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public void setType(final CompanyType type) {
-        this.type = (type != null) ? type : CompanyType.PARTNER;
+        this.type = isNotNull(type) ? type : CompanyType.PARTNER;
     }
 
     /**
@@ -469,7 +470,7 @@ public class Company extends Content implements ICompany {
     @Override
     public String getUrl() {
         String url = super.getUrl();
-        if (url == null) {
+        if (isNull(url)) {
             url = getDomain();
         }
         return url;
@@ -494,7 +495,7 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public Company initialize(final Company company) {
-        if (company != null) {
+        if (isNotNull(company)) {
             super.initialize(company);
             this.setInformation(company.getInformation());
             this.setDomain(company.getDomain());

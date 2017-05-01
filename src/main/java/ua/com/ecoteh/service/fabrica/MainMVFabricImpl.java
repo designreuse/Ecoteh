@@ -1,17 +1,19 @@
 package ua.com.ecoteh.service.fabrica;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.com.ecoteh.enums.FileType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.*;
+import ua.com.ecoteh.enums.FileType;
 import ua.com.ecoteh.service.data.*;
 
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The abstract class implements a set of standard methods for creates
@@ -367,7 +369,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public void addAuthUser(final ModelAndView modelAndView) {
-        if (modelAndView != null) {
+        if (isNotNull(modelAndView)) {
             modelAndView.addObject("authorized_user", this.userService.getAuthenticatedUser());
         }
     }
@@ -379,7 +381,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      */
     @Override
     public boolean isValidContent() {
-        return this.userService.getAuthenticatedUser() == null;
+        return isNull(this.userService.getAuthenticatedUser());
     }
 
     /**
@@ -545,7 +547,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     private ModelAndView articlePage(final Article article) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("article", article);
-        if ((article.getCategory() != null) && isNotBlank(article.getCategory().getUrl())) {
+        if (validCategory(article.getCategory())) {
             final Category category = this.categoryService.getByUrl(
                     article.getCategory().getUrl(), isValidContent()
             );
@@ -556,5 +558,14 @@ public final class MainMVFabricImpl implements MainMVFabric {
         }
         modelAndView.setViewName("client/article/one");
         return modelAndView;
+    }
+
+    /**
+     *
+     * @param category
+     * @return
+     */
+    private static boolean validCategory(final Category category) {
+        return isNotNull(category) && isNotEmpty(category.getUrl());
     }
 }

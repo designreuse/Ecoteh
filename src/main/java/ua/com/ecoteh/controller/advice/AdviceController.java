@@ -243,9 +243,7 @@ public class AdviceController {
      * @param request to provide requested information for HTTP servlets.
      */
     private static void logRequest(final HttpServletRequest request) {
-        if (request != null) {
-            LOGGER.error(createRequestMessage(request));
-        }
+        LOGGER.error(createRequestMessage(request));
     }
 
     /**
@@ -259,7 +257,6 @@ public class AdviceController {
     }
 
     /**
-     *
      * @param ex
      * @return
      */
@@ -268,7 +265,6 @@ public class AdviceController {
     }
 
     /**
-     *
      * @param request
      * @return
      */

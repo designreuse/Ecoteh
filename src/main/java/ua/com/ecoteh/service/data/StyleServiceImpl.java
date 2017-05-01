@@ -1,13 +1,13 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.util.compressor.CssCompressor;
-import ua.com.ecoteh.util.loader.FileContentsLoader;
-import ua.com.ecoteh.util.properties.ContentProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+import ua.com.ecoteh.util.compressor.CssCompressor;
+import ua.com.ecoteh.util.loader.FileContentsLoader;
+import ua.com.ecoteh.util.properties.ContentProperties;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -68,7 +68,7 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public void save(final String styles) {
-        if (isNotBlank(styles)) {
+        if (isNotEmpty(styles)) {
             saveStyles(styles);
             saveCompressStyles(styles);
         }

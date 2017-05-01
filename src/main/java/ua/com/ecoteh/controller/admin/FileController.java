@@ -44,6 +44,12 @@ import javax.servlet.http.HttpServletRequest;
 public class FileController {
 
     /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
+
+    /**
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(FileController.class);
@@ -149,7 +155,9 @@ public class FileController {
             method = RequestMethod.GET
     )
     public void addFile() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/file/add\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/file/add")
+        );
     }
 
     /**
@@ -212,7 +220,9 @@ public class FileController {
             method = RequestMethod.GET
     )
     public void updateFile() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/file/update\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/file/update")
+        );
     }
 
     /**

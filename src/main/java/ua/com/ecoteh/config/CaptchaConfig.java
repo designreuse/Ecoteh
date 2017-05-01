@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class describes a google captcha configurations.
  *
@@ -72,7 +74,7 @@ public class CaptchaConfig {
      */
     @Bean
     public Captcha captcha() {
-        if (captcha == null) {
+        if (isNull(captcha)) {
             initCaptcha();
         }
         return captcha;

@@ -22,7 +22,8 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working with
@@ -47,6 +48,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class ArticleController {
+
+    /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -144,7 +151,7 @@ public class ArticleController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid
     ) {
-        final Category category = isNotBlank(categoryUrl) ?
+        final Category category = isNotEmpty(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Compressor compressor = new HtmlCompressor();
         final Article article = new Article(
@@ -155,7 +162,7 @@ public class ArticleController {
         );
         article.setValidated(isValid);
         article.setCategory(category);
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
         }
         this.articleService.add(article);
@@ -178,7 +185,9 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public void addArticle() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/article/add\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/article/add")
+        );
     }
 
     /**
@@ -235,7 +244,7 @@ public class ArticleController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean isValid
     ) {
-        final Category category = isNotBlank(categoryUrl) ?
+        final Category category = isNotEmpty(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
         final Compressor compressor = new HtmlCompressor();
         final Article article = new Article(
@@ -246,7 +255,7 @@ public class ArticleController {
         );
         article.setValidated(isValid);
         article.setCategory(category);
-        if ((multipartLogo != null) && !multipartLogo.isEmpty()) {
+        if (isNotEmpty(multipartLogo)) {
             article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
         }
         this.articleService.update(url, article);
@@ -269,7 +278,9 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public void updateArticle() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/article/update\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/article/update")
+        );
     }
 
     /**
@@ -320,13 +331,21 @@ public class ArticleController {
      */
     private static String getViewName(final Article article) {
         String viewName;
-        if (isNotBlank(article.getText())) {
+        if (isNotEmpty(article.getText())) {
             viewName = "redirect:/article/" + article.getUrl();
-        } else if ((article.getCategory() != null) && (article.getCategory().isValidated())) {
+        } else if (isValidCategory(article.getCategory())) {
             viewName = "redirect:/category/" + article.getCategory().getUrl();
         } else {
             viewName = "redirect:/article/all";
         }
         return viewName;
+    }
+
+    /**
+     * @param category
+     * @return
+     */
+    private static boolean isValidCategory(final Category category) {
+        return isNotNull(category) && category.isValidated();
     }
 }

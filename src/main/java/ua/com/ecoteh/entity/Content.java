@@ -4,8 +4,7 @@ import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The abstract superclass class implements a set of standard methods
@@ -170,8 +169,8 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public void setTitle(final String title) {
-        this.title = isNotBlank(title) ? title : "";
-        if (isBlank(this.url)) {
+        this.title = isNotEmpty(title) ? title : "";
+        if (isEmpty(this.url)) {
             translateAndSetUrl(this.title);
         }
     }
@@ -194,7 +193,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public void setUrl(final String url) {
-        this.url = isNotBlank(url) ? url : "";
+        this.url = isNotEmpty(url) ? url : "";
     }
 
     /**
@@ -225,7 +224,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public void setDescription(final String description) {
-        this.description = isNotBlank(description) ? description : "";
+        this.description = isNotEmpty(description) ? description : "";
     }
 
     /**
@@ -246,7 +245,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public void setKeywords(final String keywords) {
-        this.keywords = isNotBlank(keywords) ? keywords : "";
+        this.keywords = isNotEmpty(keywords) ? keywords : "";
     }
 
     /**
@@ -266,7 +265,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public void setLogo(final File logo) {
-        if (this.logo == null) {
+        if (isNull(this.logo)) {
             this.logo = new File();
         }
         this.logo.initialize(logo);
@@ -280,7 +279,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
      */
     @Override
     public Content initialize(final Content content) {
-        if (content != null) {
+        if (isNotNull(content)) {
             super.initialize(content);
             this.setTitle(content.getTitle());
             this.setUrl(content.getUrl());

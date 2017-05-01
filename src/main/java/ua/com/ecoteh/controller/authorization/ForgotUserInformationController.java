@@ -20,7 +20,7 @@ import ua.com.ecoteh.service.sender.SenderService;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 
 /**
  * The class implements a set of methods for forgot password.
@@ -42,6 +42,17 @@ public class ForgotUserInformationController {
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(ForgotUserInformationController.class);
+
+    /**
+     *
+     */
+    private final static String BLANK_EMAIL_MESSAGE = "Incoming E-mail is blank!";
+
+    /**
+     *
+     */
+    private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class by incoming E-mail %s!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -147,12 +158,19 @@ public class ForgotUserInformationController {
                     ex2.printStackTrace();
                     LOGGER.error(ex2.getMessage(), ex2);
                     try {
-                        searchInMainCompanyAndSend(username);
+                        searchByPhoneAndSend(username);
                         isForgot = true;
                     } catch (Exception ex4) {
                         ex4.printStackTrace();
                         LOGGER.error(ex4.getMessage(), ex4);
-                        isForgot = false;
+                        try {
+                            searchInMainCompanyAndSend(username);
+                            isForgot = true;
+                        } catch (Exception ex5) {
+                            ex5.printStackTrace();
+                            LOGGER.error(ex5.getMessage(), ex5);
+                            isForgot = false;
+                        }
                     }
                 }
             }
@@ -215,12 +233,17 @@ public class ForgotUserInformationController {
      */
     private void searchInMainCompanyAndSend(final String email)
             throws IllegalArgumentException, NullPointerException {
-        if (isBlank(email)) {
-            throw new IllegalArgumentException("Input E-mail is blank!");
+        if (isEmpty(email)) {
+            throw new IllegalArgumentException(BLANK_EMAIL_MESSAGE);
         }
         final String mainEmail = this.companyService.getMainCompany().getContacts().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
-            throw new NullPointerException("Can`t find company with E-mail \"" + email + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                            Company.class.getSimpleName(), email
+                    )
+            );
         }
         sendUserInformationToEmail(DefaultConfig.getDefaultAdmin(), mainEmail);
     }

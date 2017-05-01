@@ -1,16 +1,15 @@
 package ua.com.ecoteh.service.data;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.Content;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.repository.ContentRepository;
 import ua.com.ecoteh.util.comparator.ContentComparator;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, describes a set of methods
@@ -89,7 +88,7 @@ public abstract class ContentServiceImpl<T extends Content>
             final String url,
             final T content
     ) throws IllegalArgumentException {
-        if (content == null) {
+        if (isNull(content)) {
             throw new IllegalArgumentException(
                     String.format(
                             INCOMING_OBJECT_IS_NULL_MESSAGE,
@@ -100,7 +99,7 @@ public abstract class ContentServiceImpl<T extends Content>
         final T contentToUpdate = getByUrl(url, false);
         final File newLogo = content.getLogo();
         final File oldLogo = contentToUpdate.getLogo();
-        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
+        if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
         copy(content, contentToUpdate);
@@ -122,13 +121,13 @@ public abstract class ContentServiceImpl<T extends Content>
             final String title,
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
-        if (isBlank(title)) {
+        if (isEmpty(title)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_TITLE_MESSAGE, getClassSimpleName())
             );
         }
         final T content = this.repository.findByTitle(title);
-        if ((content == null) || (isValid && !content.isValidated())) {
+        if (isNotValidContent(content, isValid)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
@@ -154,11 +153,11 @@ public abstract class ContentServiceImpl<T extends Content>
             final String url,
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
-        if (isBlank(url)) {
+        if (isEmpty(url)) {
             throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
         }
         final T content = this.repository.findByUrl(url);
-        if ((content == null) || (isValid && !content.isValidated())) {
+        if (isNotValidContent(content, isValid)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
@@ -178,7 +177,7 @@ public abstract class ContentServiceImpl<T extends Content>
     @Override
     @Transactional
     public void removeByTitle(final String title) {
-        if (isNotBlank(title)) {
+        if (isNotEmpty(title)) {
             this.repository.deleteByTitle(title);
         }
     }
@@ -191,7 +190,7 @@ public abstract class ContentServiceImpl<T extends Content>
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        if (isNotBlank(url)) {
+        if (isNotEmpty(url)) {
             this.repository.deleteByUrl(url);
         }
     }
@@ -266,19 +265,28 @@ public abstract class ContentServiceImpl<T extends Content>
             final boolean exist,
             final boolean duplicate
     ) {
-        if (content == null) {
+        if (isNull(content)) {
             return false;
         }
         if (exist && !exists(content)) {
             return false;
         }
         if (duplicate) {
-            if ((this.repository.findByTitle(content.getTitle()) != null)
-                    || (this.repository.findByUrl(content.getUrl()) != null)) {
+            if (isNotNull(this.repository.findByTitle(content.getTitle())) ||
+                    isNotNull(this.repository.findByUrl(content.getUrl()))) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * @param newLogo
+     * @param oldLogo
+     * @return
+     */
+    protected static boolean isNewLogo(final File newLogo, final File oldLogo) {
+        return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
     }
 
     /**
@@ -288,4 +296,17 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param to   a object to copy
      */
     protected abstract void copy(T from, T to);
+
+    /**
+     * @param content
+     * @param isValid
+     * @param <T>
+     * @return
+     */
+    private static <T extends Content> boolean isNotValidContent(
+            final T content,
+            final boolean isValid
+    ) {
+        return isNull(content) || (isValid && !content.isValidated());
+    }
 }

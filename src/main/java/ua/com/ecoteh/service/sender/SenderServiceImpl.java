@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The class implements a set of methods for working with E-mail.
  *
@@ -143,7 +146,7 @@ public final class SenderServiceImpl implements SenderService {
             final Collection<User> recipients,
             final User sender
     ) {
-        if (validRecipients(recipients)) {
+        if (isNotEmpty(recipients)) {
             for (User recipient : recipients) {
                 send(subject, text, recipient, sender);
             }
@@ -167,7 +170,7 @@ public final class SenderServiceImpl implements SenderService {
             final String senderEmail,
             final String senderEmailPass
     ) {
-        if (validRecipients(recipients)) {
+        if (isNotEmpty(recipients)) {
             recipients.stream()
                     .filter(SenderServiceImpl::validRecipient)
                     .forEach(
@@ -187,25 +190,5 @@ public final class SenderServiceImpl implements SenderService {
      */
     private static boolean validRecipient(final User recipient) {
         return isNotNull(recipient) && recipient.isMailing();
-    }
-
-    /**
-     * Validated a recipients.
-     *
-     * @param recipients a recipients to validate.
-     * @return true if recipients is valid, false otherwise.
-     */
-    private static boolean validRecipients(final Collection<User> recipients) {
-        return isNotNull(recipients) && !recipients.isEmpty();
-    }
-
-    /**
-     * Checks if input object is not null.
-     *
-     * @param object a object to check.
-     * @return true if object is null, false otherwise.
-     */
-    private static boolean isNotNull(final Object object) {
-        return (object != null);
     }
 }

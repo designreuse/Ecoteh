@@ -1,5 +1,9 @@
 package ua.com.ecoteh.controller.client;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.Company;
 import ua.com.ecoteh.entity.Message;
 import ua.com.ecoteh.entity.Response;
@@ -12,14 +16,10 @@ import ua.com.ecoteh.service.fabrica.CacheMVFabric;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.sender.SenderService;
 import ua.com.ecoteh.util.cache.Cache;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The abstract class implements a set of methods for working
@@ -382,7 +382,7 @@ public abstract class MainController {
             final boolean isCaptcha
     ) {
         ModelAndView modelAndView = new ModelAndView();
-        if (isNotBlank(url)) {
+        if (isNotEmpty(url)) {
             switch (url) {
                 case "":
                 case "/":
@@ -414,8 +414,8 @@ public abstract class MainController {
             final User user = message.getUser();
             final String text = "User name: " + user.getName() +
                     "\nPhone: " + user.getContacts().getMobilePhone() +
-                    (isNotBlank(user.getContacts().getEmail()) ? "\nE-mail: " + user.getContacts().getEmail() : "") +
-                    (isNotBlank(message.getText()) ? "\nText: " + message.getText() : "");
+                    (isNotEmpty(user.getContacts().getEmail()) ? "\nE-mail: " + user.getContacts().getEmail() : "") +
+                    (isNotEmpty(message.getText()) ? "\nText: " + message.getText() : "");
             sendToEmail(message.getSubject(), text);
         }).start();
         this.messageService.add(message);

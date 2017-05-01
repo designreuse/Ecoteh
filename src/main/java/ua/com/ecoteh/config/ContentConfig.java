@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class describes a Content configurations.
  *
@@ -96,7 +98,7 @@ public class ContentConfig {
      */
     @Bean
     public ContentProperties contentProperties() {
-        if (contentProperties == null) {
+        if (isNull(contentProperties)) {
             initContentProperties();
         }
         return contentProperties;

@@ -1,19 +1,20 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Article;
-import ua.com.ecoteh.entity.Category;
-import ua.com.ecoteh.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.Article;
+import ua.com.ecoteh.entity.Category;
+import ua.com.ecoteh.repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -94,7 +95,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @Override
     @Transactional
     public void removeByTitle(final String title) {
-        if (isNotBlank(title)) {
+        if (isNotEmpty(title)) {
             remove(getByTitle(title, false));
         }
     }
@@ -107,7 +108,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        if (isNotBlank(url)) {
+        if (isNotEmpty(url)) {
             remove(getByUrl(url, false));
         }
     }
@@ -121,7 +122,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @Override
     @Transactional
     public void remove(final Category category) {
-        if (category != null) {
+        if (isNotNull(category)) {
             clearArticles(category);
             super.remove(category);
         }
@@ -138,7 +139,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @Transactional
     public List<Category> filteredByValid(final Collection<Category> categories) {
         final List<Category> result = new ArrayList<>();
-        if (categories != null && !categories.isEmpty()) {
+        if (isNotEmpty(categories)) {
             result.addAll(
                     categories.stream()
                             .filter(CategoryServiceImpl::validFilter)
@@ -187,6 +188,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * @return true if article is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Category category) {
-        return (category != null) && (category.isValidated());
+        return isNotNull(category) && category.isValidated();
     }
 }

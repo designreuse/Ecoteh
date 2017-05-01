@@ -42,7 +42,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param categoryTitle a category title of the articles to return.
      * @return The object of class {@link Article}.
      */
-    List<Article> getByCategoryTitle(final String categoryTitle);
+    List<Article> getByCategoryTitle(final String title);
 
     /**
      * Removes article the parameter number.

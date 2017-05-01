@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The abstract superclass implements a set of standard methods
  * for working with entity of the {@link Model} class or subclasses.
@@ -88,7 +90,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
      */
     @Override
     public boolean equals(final Object object) {
-        return (object != null) && (super.equals(object) || (getClass() == object.getClass()));
+        return isNotNull(object) && (super.equals(object) || (getClass() == object.getClass()));
     }
 
     /**
@@ -152,7 +154,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
      */
     @Override
     public Model initialize(final Model model) {
-        if (model != null) {
+        if (isNotNull(model)) {
             this.setValidated(model.isValidated());
         }
         return this;

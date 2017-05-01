@@ -23,7 +23,8 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.sender.SenderService;
 import ua.com.ecoteh.util.cache.Cache;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working
@@ -50,6 +51,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class UserController {
+
+    /**
+     *
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard
@@ -200,7 +207,7 @@ public class UserController {
         user.setMailing(isMailing);
         user.setLocked(isLocked);
         user.setRole(UserRole.ADMIN);
-        if (multipartPhoto != null) {
+        if (isNotEmpty(multipartPhoto)) {
             user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
         }
         this.userService.add(user);
@@ -223,7 +230,9 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void addUser() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/user/add\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/user/add")
+        );
     }
 
     /**
@@ -306,7 +315,7 @@ public class UserController {
         user.setMailing(isMailing);
         user.setLocked(isLocked);
         user.setRole(UserRole.ADMIN);
-        if ((multipartPhoto != null) && (!multipartPhoto.isEmpty())) {
+        if (isNotEmpty(multipartPhoto)) {
             user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
         }
         this.userService.update(url, user);
@@ -329,7 +338,9 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void updateUser() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/admin/user/update\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/user/update")
+        );
     }
 
     /**
@@ -388,19 +399,19 @@ public class UserController {
             String _subject = subject;
             String message = text;
             final User user = this.userService.getAuthenticatedUser();
-            if (user != null) {
-                if (isNotBlank(user.getName())) {
+            if (isNotNull(user)) {
+                if (isNotEmpty(user.getName())) {
                     _subject += " - " + user.getName();
                     message += "\n\n" + user.getName();
                 }
-                if (user.getContacts() != null) {
-                    if (isNotBlank(user.getContacts().getMobilePhone())) {
+                if (isNotNull(user.getContacts())) {
+                    if (isNotEmpty(user.getContacts().getMobilePhone())) {
                         message += "\nMobile Phone: " + user.getContacts().getMobilePhone();
                     }
-                    if (isNotBlank(user.getContacts().getLandlinePhone())) {
+                    if (isNotEmpty(user.getContacts().getLandlinePhone())) {
                         message += "\nLandline Phone: " + user.getContacts().getLandlinePhone();
                     }
-                    if (isNotBlank(user.getContacts().getEmail())) {
+                    if (isNotEmpty(user.getContacts().getEmail())) {
                         message += "\nE-mail: " + user.getContacts().getEmail();
                     }
                 }
@@ -428,10 +439,12 @@ public class UserController {
      *                                 the mapping between object and datastore.
      */
     @RequestMapping(
-            value = "/user/send_message",
+            value = "/send_message",
             method = RequestMethod.GET
     )
     public void sendMessageForPersonnel() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/user/send_message\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/user/send_message")
+        );
     }
 }

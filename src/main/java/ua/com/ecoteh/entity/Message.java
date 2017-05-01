@@ -1,13 +1,15 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.util.time.Time;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -163,7 +165,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public void setUser(final User user) {
-        if (this.user == null) {
+        if (isNull(this.user)) {
             this.user = new User();
         }
         this.user.initialize(user);
@@ -187,7 +189,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public void setSubject(final String subject) {
-        this.subject = isNotBlank(subject) ? subject : "";
+        this.subject = isNotEmpty(subject) ? subject : "";
     }
 
     /**
@@ -208,7 +210,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public void setText(final String text) {
-        this.text = isNotBlank(text) ? text : "";
+        this.text = isNotEmpty(text) ? text : "";
     }
 
     /**
@@ -229,7 +231,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public void setDate(final Date date) {
-        this.date = date != null ? date : new Date();
+        this.date = isNotNull(date) ? date : new Date();
     }
 
     /**
@@ -250,7 +252,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public Message initialize(final Message message) {
-        if (message != null) {
+        if (isNotNull(message)) {
             super.initialize(message);
             this.setUser(message.getUser());
             this.setSubject(message.getSubject());

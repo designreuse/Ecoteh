@@ -1,22 +1,23 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.entity.Model;
-import ua.com.ecoteh.enums.CompanyType;
-import ua.com.ecoteh.repository.CompanyRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.Company;
+import ua.com.ecoteh.entity.File;
+import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.repository.CompanyRepository;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -43,7 +44,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      *
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming domain %s!";
+            "Can`t find object of the %s class by incoming domain %s!";
 
     /**
      * The object for logging information.
@@ -103,7 +104,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     @Transactional
     public Company add(final Company company) {
-        if (company != null) {
+        if (isNotNull(company)) {
             company.setType(CompanyType.PARTNER);
         }
         return super.add(company);
@@ -121,7 +122,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
         final Company mainCompany = getMainCompany();
         final File newLogo = company.getLogo();
         final File oldLogo = mainCompany.getLogo();
-        if (!newLogo.equals(oldLogo) && isNotBlank(newLogo.getUrl())) {
+        if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
         copy(company, mainCompany);
@@ -177,13 +178,13 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     @Transactional(readOnly = true)
     public Company getByDomain(final String domain) throws IllegalArgumentException {
-        if (isBlank(domain)) {
+        if (isEmpty(domain)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_DOMAIN_MESSAGE, getClassSimpleName())
             );
         }
         Company company = this.repository.findByDomain(domain);
-        if (company == null) {
+        if (isNull(company)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
@@ -203,7 +204,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     @Transactional
     public void remove(final Company company) {
-        if ((company != null) && !company.getType().equals(CompanyType.MAIN)) {
+        if (isNotMainCompany(company)) {
             super.remove(company);
         }
     }
@@ -246,4 +247,14 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     protected Class<Company> getModelClass() {
         return Company.class;
     }
+
+    /**
+     *
+     * @param company
+     * @return
+     */
+    private static boolean isNotMainCompany(final Company company) {
+        return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);
+    }
+
 }

@@ -4,7 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -137,7 +138,7 @@ public class Address extends Model implements IAddress {
      */
     @Override
     public void setAddress(final String address) {
-        this.address = isNotBlank(address) ? address : "";
+        this.address = isNotEmpty(address) ? address : "";
     }
 
     /**
@@ -158,7 +159,7 @@ public class Address extends Model implements IAddress {
      */
     @Override
     public void setGoogleMaps(final String googleMaps) {
-        this.googleMaps = isNotBlank(googleMaps) ? googleMaps : "";
+        this.googleMaps = isNotEmpty(googleMaps) ? googleMaps : "";
     }
 
     /**
@@ -169,7 +170,7 @@ public class Address extends Model implements IAddress {
      */
     @Override
     public Address initialize(final Address address) {
-        if (address != null) {
+        if (isNotNull(address)) {
             super.initialize(address);
             this.setAddress(address.getAddress());
             this.setGoogleMaps(address.getGoogleMaps());

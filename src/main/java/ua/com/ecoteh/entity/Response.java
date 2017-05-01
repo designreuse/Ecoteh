@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -143,7 +144,7 @@ public class Response extends Model implements IResponse {
      */
     @Override
     public void setUsername(final String username) {
-        this.username = isNotBlank(username) ? username : "";
+        this.username = isNotEmpty(username) ? username : "";
     }
 
     /**
@@ -164,7 +165,7 @@ public class Response extends Model implements IResponse {
      */
     @Override
     public void setText(final String text) {
-        this.text = isNotBlank(text) ? text : "";
+        this.text = isNotEmpty(text) ? text : "";
     }
 
     /**
@@ -185,7 +186,7 @@ public class Response extends Model implements IResponse {
      */
     @Override
     public void setDate(final Date date) {
-        this.date = date != null ? date : new Date();
+        this.date = isNotNull(date) ? date : new Date();
     }
 
     /**
@@ -214,7 +215,7 @@ public class Response extends Model implements IResponse {
      */
     @Override
     public Response initialize(final Response response) {
-        if (response != null) {
+        if (isNotNull(response)) {
             super.initialize(response);
             this.setUsername(response.getUsername());
             this.setText(response.getText());

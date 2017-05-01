@@ -1,20 +1,24 @@
 package ua.com.ecoteh.service.data;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.Article;
 import ua.com.ecoteh.entity.Category;
 import ua.com.ecoteh.repository.ArticleRepository;
 import ua.com.ecoteh.util.comparator.ArticleComparator;
 import ua.com.ecoteh.util.time.Time;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -41,7 +45,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      *
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming number %s!";
+            "Can`t find object of the %s class by incoming number %s!";
 
     /**
      *
@@ -86,13 +90,13 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final String number,
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
-        if (isBlank(number)) {
+        if (isEmpty(number)) {
             throw new IllegalArgumentException(
                     String.format(BLANK_NUMBER_MESSAGE, getClassSimpleName())
             );
         }
         final Article article = this.repository.findByNumber(number);
-        if ((article == null) || (isValid && !article.isValidated())) {
+        if (notValidFilter(article, isValid)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
@@ -119,18 +123,18 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     /**
      * Returns article with the category title.
      *
-     * @param categoryTitle a category title of the articles to return.
+     * @param title a category title of the articles to return.
      * @return The object of class {@link Article}.
      * @throws IllegalArgumentException Throw exception when parameter categoryTitle is blank.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Article> getByCategoryTitle(final String categoryTitle)
+    public List<Article> getByCategoryTitle(final String title)
             throws IllegalArgumentException {
-        if (isBlank(categoryTitle)) {
+        if (isEmpty(title)) {
             throw new IllegalArgumentException(CATEGORY_TITLE_IS_BKANK_MESSAGE);
         }
-        return this.repository.findByCategoryTitle(categoryTitle);
+        return this.repository.findByCategoryTitle(title);
     }
 
     /**
@@ -208,7 +212,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final Date finishDate
     ) {
         final List<Article> result = new ArrayList<>();
-        if ((articles != null) && !articles.isEmpty()) {
+        if (isNotEmpty(articles)) {
             if (Time.checkDate(startDate, finishDate)) {
                 result.addAll(
                         articles.stream()
@@ -257,8 +261,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final Collection<Category> categories
     ) {
         final List<Article> result = new ArrayList<>();
-        if ((articles != null) && !articles.isEmpty()) {
-            if ((categories != null) && !categories.isEmpty()) {
+        if (isNotEmpty(articles)) {
+            if (isNotEmpty(categories)) {
                 for (Article article : articles) {
                     result.addAll(
                             categories.stream()
@@ -330,7 +334,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final Collection<Article> articles
     ) {
         List<Article> result = new ArrayList<>();
-        if ((articles != null) && !articles.isEmpty()) {
+        if (isNotEmpty(articles)) {
             result.addAll(
                     articles.stream()
                             .filter(ArticleServiceImpl::validFilter)
@@ -360,7 +364,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Override
     @Transactional
     public void removeByTitle(final String title) {
-        if (isNotBlank(title)) {
+        if (isNotEmpty(title)) {
             remove(getByTitle(title, false));
         }
     }
@@ -373,7 +377,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        if (isNotBlank(url)) {
+        if (isNotEmpty(url)) {
             remove(getByUrl(url, false));
         }
     }
@@ -387,7 +391,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Override
     @Transactional
     public void removeByNumber(final String number) {
-        if (isNotBlank(number)) {
+        if (isNotEmpty(number)) {
             remove(getByNumber(number, false));
         }
     }
@@ -401,7 +405,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Override
     @Transactional
     public void remove(final Article article) {
-        if (article != null) {
+        if (isNotNull(article)) {
             article.setCategory(null);
             super.remove(article);
         }
@@ -475,6 +479,16 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @return true if article is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Article article) {
-        return (article != null) && article.isValidated();
+        return isNotNull(article) && article.isValidated();
+    }
+
+    /**
+     *
+     * @param article
+     * @param isValid
+     * @return
+     */
+    private static boolean notValidFilter(final Article article, final boolean isValid) {
+        return isNotNull(article) || (isValid && !article.isValidated());
     }
 }

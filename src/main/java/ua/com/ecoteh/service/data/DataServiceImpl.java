@@ -35,7 +35,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      */
     private final static String FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class class by incoming id %d!";
+            "Can`t find object of the %s class by incoming id %d!";
 
     /**
      * The object provides a set of standard JPA methods
@@ -229,7 +229,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional
     public void remove(final Collection<T> models) {
-        if (models != null && !models.isEmpty()) {
+        if (isNotEmpty(models)) {
             models.forEach(this::remove);
         }
     }
@@ -426,7 +426,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @return true if model is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Model model) {
-        return (model != null) && model.isValidated();
+        return isNotNull(model) && model.isValidated();
     }
 
     /**

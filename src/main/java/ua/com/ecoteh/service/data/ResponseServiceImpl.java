@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The class of the service layer, implements a set of methods for working
  * with objects of the {@link Response} class.
@@ -24,8 +27,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
-public final class ResponseServiceImpl extends DataServiceImpl<Response>
-        implements ResponseService {
+public final class ResponseServiceImpl extends DataServiceImpl<Response> implements ResponseService {
 
     /**
      * Constructor.
@@ -102,7 +104,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response>
             final Date finishDate
     ) {
         final List<Response> result = new ArrayList<>();
-        if (responses != null && !responses.isEmpty()) {
+        if (isNotEmpty(responses)) {
             if (checkDate(startDate, finishDate)) {
                 result.addAll(
                         responses.stream()
@@ -143,7 +145,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response>
     @Override
     public List<Response> filteredByValid(Collection<Response> responses) {
         List<Response> result = new ArrayList<>();
-        if (responses != null && !responses.isEmpty()) {
+        if (isNotEmpty(responses)) {
             result.addAll(
                     responses.stream()
                             .filter(
@@ -174,12 +176,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response>
      */
     @Override
     protected boolean validated(
-            Response response,
-            boolean exist,
-            boolean duplicate
+            final Response response,
+            final boolean exist,
+            final boolean duplicate
     ) {
         boolean result = false;
-        if (response != null) {
+        if (isNotNull(response)) {
             result = true;
             if (exist) {
                 result = exists(response);
@@ -228,6 +230,6 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response>
      * @return true if response is not null and is valid, false otherwise.
      */
     private static boolean validFilter(final Response response) {
-        return (response != null) && response.isValidated();
+        return isNotNull(response) && response.isValidated();
     }
 }
