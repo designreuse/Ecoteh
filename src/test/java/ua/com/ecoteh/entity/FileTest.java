@@ -1,14 +1,14 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.mocks.MockConstants;
-import ua.com.ecoteh.util.translator.Translator;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import ua.com.ecoteh.mocks.MockConstants;
 import ua.com.ecoteh.mocks.enity.MockEntity;
+import ua.com.ecoteh.util.translator.Translator;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 public final class FileTest extends ModelTest<File> {
 
@@ -166,13 +166,8 @@ public final class FileTest extends ModelTest<File> {
         int value = 0;
         assertEquals(file.hashCode(), value);
         file.setTitle(MockConstants.TITLE);
-        value += (
-                isNotBlank(file.getTitle()) ?
-                        file.getTitle().hashCode() : 0
-        ) + (
-                isNotBlank(file.getUrl()) ?
-                        file.getUrl().hashCode() : 0
-        );
+        value += (isNotEmpty(file.getTitle()) ? file.getTitle().hashCode() : 0) +
+                (isNotEmpty(file.getUrl()) ? file.getUrl().hashCode() : 0);
         assertEquals(file.hashCode(), value);
     }
 
@@ -212,10 +207,7 @@ public final class FileTest extends ModelTest<File> {
         file.setUrl(MockConstants.URL);
         assertNotNull(file.getUrl());
         final String url = Translator.fromCyrillicToLatin(MockConstants.URL.replace(".", "!"));
-        assertEquals(
-                file.getUrl(),
-                isNotBlank(url) ? url.replace("!", ".") : url
-        );
+        assertEquals(file.getUrl(), isNotEmpty(url) ? url.replace("!", ".") : url);
     }
 
     @Test

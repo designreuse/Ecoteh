@@ -1,19 +1,19 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.mocks.MockConstants;
-import ua.com.ecoteh.util.translator.Translator;
 import org.junit.Assert;
 import org.junit.Test;
+import ua.com.ecoteh.mocks.MockConstants;
+import ua.com.ecoteh.util.translator.Translator;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 public abstract class ContentTest<T extends Content> extends ModelTest<T> {
 
     @Test
     public void toStringTest() {
         final T content = getObject();
-        assertTrue(isNotBlank(content.toString()));
+        assertTrue(isNotEmpty(content.toString()));
         String value = content.getClass().getSimpleName() + " \"" + content.getTitle()
                 + "\"\nKeywords: " + content.getKeywords()
                 + "\nURL: " + content.getUrl()

@@ -5,8 +5,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 @Ignore
 public final class ModelAndViews {
@@ -24,7 +24,7 @@ public final class ModelAndViews {
             final String[] keys
     ) {
         assertNotNull(modelAndView);
-        if (isNotBlank(view)) {
+        if (isNotEmpty(view)) {
             assertEquals(modelAndView.getViewName(), view);
         }
         if (keys != null && keys.length > 0) {

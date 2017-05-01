@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import javax.crypto.SecretKey;
 
-import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 public final class EncryptorTest {
 
@@ -30,22 +30,22 @@ public final class EncryptorTest {
 
     @Test
     public void whenEncryptByNullValueThenReturnEmptyString() {
-        assertTrue(isBlank(new Encryptor(null).encrypt()));
+        assertTrue(isEmpty(new Encryptor(null).encrypt()));
     }
 
     @Test
     public void whenEncryptThenReturnSomeValue() {
-        assertTrue(isNotBlank(new Encryptor(ANY_STRING).encrypt()));
+        assertTrue(isNotEmpty(new Encryptor(ANY_STRING).encrypt()));
     }
 
     @Test
     public void whenDecryptByNullValueThenReturnEmptyString() {
-        assertTrue(isBlank(new Encryptor(null).decrypt()));
+        assertTrue(isEmpty(new Encryptor(null).decrypt()));
     }
 
     @Test
     public void whenDecryptByUnknownStringThenReturnEmptyString() {
-        assertTrue(isBlank(new Encryptor(ANY_STRING).decrypt()));
+        assertTrue(isEmpty(new Encryptor(ANY_STRING).decrypt()));
     }
 
     @Test

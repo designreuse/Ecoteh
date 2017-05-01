@@ -8,8 +8,8 @@ import ua.com.ecoteh.mocks.enity.MockEntity;
 
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.Assert.*;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 public final class ResponseTest extends ModelTest<Response> {
 
@@ -88,10 +88,10 @@ public final class ResponseTest extends ModelTest<Response> {
         int value = 0;
         assertEquals(response.hashCode(), value);
         response.setUsername(MockConstants.NAME);
-        value = isNotBlank(response.getUsername()) ? response.getUsername().hashCode() : 0;
+        value = isNotEmpty(response.getUsername()) ? response.getUsername().hashCode() : 0;
         assertEquals(response.hashCode(), value);
         response.setText(MockConstants.TEXT);
-        value += isNotBlank(response.getText()) ? response.getText().hashCode() : 0;
+        value += isNotEmpty(response.getText()) ? response.getText().hashCode() : 0;
         assertEquals(response.hashCode(), value);
     }
 

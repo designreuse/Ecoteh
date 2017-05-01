@@ -1,15 +1,16 @@
 package ua.com.ecoteh.entity;
 
-import ua.com.ecoteh.enums.CompanyType;
 import org.junit.Ignore;
 import org.junit.Test;
+import ua.com.ecoteh.enums.CompanyType;
 import ua.com.ecoteh.mocks.enity.MockEntity;
 
 import java.util.Calendar;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.junit.Assert.*;
-import static ua.com.ecoteh.mocks.MockConstants.*;
+import static ua.com.ecoteh.mocks.MockConstants.COMPANY_TYPE;
+import static ua.com.ecoteh.mocks.MockConstants.URL;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 
 public final class CompanyTest extends ContentTest<Company> {
 
@@ -76,7 +77,7 @@ public final class CompanyTest extends ContentTest<Company> {
     @Test
     public void whenSetNullUrlThenGetEmptyString() {
         final Company company = MockEntity.getCompany();
-        if (isBlank(company.getDomain())) {
+        if (isEmpty(company.getDomain())) {
             company.setDomain(URL);
         }
         company.setUrl(null);
@@ -87,7 +88,7 @@ public final class CompanyTest extends ContentTest<Company> {
     @Test
     public void whenSetBlankUrlThenGetEmptyString() {
         final Company company = MockEntity.getCompany();
-        if (isBlank(company.getDomain())) {
+        if (isEmpty(company.getDomain())) {
             company.setDomain(URL);
         }
         company.setUrl("");
