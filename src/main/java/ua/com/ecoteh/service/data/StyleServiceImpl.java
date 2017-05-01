@@ -58,7 +58,7 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public String get() {
-        return new FileContentsLoader(getAbsolutePath(STYLES_PATH)).read();
+        return read(STYLES_PATH);
     }
 
     /**
@@ -69,14 +69,8 @@ public final class StyleServiceImpl implements StyleService {
     @Override
     public void save(final String styles) {
         if (isNotBlank(styles)) {
-            new FileContentsLoader(
-                    getAbsolutePath(STYLES_PATH),
-                    styles
-            ).write();
-            new FileContentsLoader(
-                    getAbsolutePath(MIN_STYLES_PATH),
-                    new CssCompressor().compress(styles)
-            ).write();
+            saveStyles(styles);
+            saveCompressStyles(styles);
         }
     }
 
@@ -85,11 +79,49 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public void rollback() {
+        save(read(DEFAULT_STYLES_PATH));
+    }
+
+    /**
+     *
+     * @param styles
+     */
+    private void saveStyles(final String styles) {
+        save(STYLES_PATH, styles);
+    }
+
+    /**
+     *
+     * @param styles
+     */
+    private void saveCompressStyles(final String styles) {
         save(
-                new FileContentsLoader(
-                        getAbsolutePath(DEFAULT_STYLES_PATH)
-                ).read()
+                MIN_STYLES_PATH,
+                new CssCompressor().compress(styles)
         );
+    }
+
+    /**
+     *
+     * @param styles
+     * @param path
+     */
+    private void save(final String styles, final String path) {
+        new FileContentsLoader(
+                getAbsolutePath(path),
+                styles
+        ).write();
+    }
+
+    /**
+     *
+     * @param path
+     * @return
+     */
+    private String read(final String path) {
+        return new FileContentsLoader(
+                getAbsolutePath(path)
+        ).read();
     }
 
     /**

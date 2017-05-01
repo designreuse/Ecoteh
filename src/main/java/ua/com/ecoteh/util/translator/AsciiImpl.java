@@ -1,8 +1,6 @@
 package ua.com.ecoteh.util.translator;
 
-import org.apache.log4j.Logger;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for translate to ASCII and from ASCII.
@@ -11,11 +9,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 public final class AsciiImpl implements Ascii {
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(AsciiImpl.class);
 
     /**
      * The string to translate.
@@ -45,7 +38,7 @@ public final class AsciiImpl implements Ascii {
     @Override
     public String to() {
         String result = "";
-        if (isNotBlank(this.value)) {
+        if (isNotEmpty(this.value)) {
             final StringBuilder sb = new StringBuilder();
             for (Character character : this.value.toCharArray()) {
                 sb.append((int) character).append(",");
@@ -65,7 +58,7 @@ public final class AsciiImpl implements Ascii {
     @Override
     public String from() {
         String result = "";
-        if (isNotBlank(this.value)) {
+        if (isNotEmpty(this.value)) {
             try {
                 final StringBuilder sb = new StringBuilder();
                 for (String st : this.value.split(",")) {
@@ -77,7 +70,7 @@ public final class AsciiImpl implements Ascii {
                 }
                 result = sb.toString();
             } catch (NumberFormatException ex) {
-                LOGGER.error(ex.getMessage(), ex);
+                result = "";
             }
         }
         return result;

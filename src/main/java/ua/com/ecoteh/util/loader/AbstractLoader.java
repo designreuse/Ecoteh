@@ -2,7 +2,7 @@ package ua.com.ecoteh.util.loader;
 
 import java.io.File;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The abstract class implements the methods for working
@@ -37,7 +37,7 @@ public abstract class AbstractLoader implements Loader {
     @Override
     public boolean delete() {
         boolean result = false;
-        if (isNotBlank(this.path)) {
+        if (isNotEmpty(this.path)) {
             final File file = new File(this.path);
             if (isFile(file)) {
                 result = file.delete();

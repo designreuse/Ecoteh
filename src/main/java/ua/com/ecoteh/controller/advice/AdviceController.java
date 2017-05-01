@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice
 @ComponentScan(basePackages = "ua.com.ecoteh.service.fabrica")
+@SuppressWarnings("SpringMVCViewInspection")
 public class AdviceController {
 
     /**
@@ -209,10 +210,7 @@ public class AdviceController {
     ) {
         logRequest(request);
         logException(ex);
-        return prepareModelAndView(
-                status,
-                ex.getClass().getSimpleName() + " : " + ex.getMessage()
-        );
+        return prepareModelAndView(status, createExceptionMessage(ex));
     }
 
     /**
@@ -222,7 +220,6 @@ public class AdviceController {
      * @param message a message of the exception.
      * @return The ModelAndView object with information about exception.
      */
-    @SuppressWarnings("SpringMVCViewInspection")
     private ModelAndView prepareModelAndView(
             final HttpStatus status,
             final String message
@@ -247,7 +244,7 @@ public class AdviceController {
      */
     private static void logRequest(final HttpServletRequest request) {
         if (request != null) {
-            LOGGER.error(request.getRemoteAddr() + " : " + request.getRequestURL());
+            LOGGER.error(createRequestMessage(request));
         }
     }
 
@@ -259,5 +256,23 @@ public class AdviceController {
     private static void logException(final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         ex.printStackTrace();
+    }
+
+    /**
+     *
+     * @param ex
+     * @return
+     */
+    private static String createExceptionMessage(final Exception ex) {
+        return ex.getClass().getSimpleName() + " : " + ex.getMessage();
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    private static String createRequestMessage(final HttpServletRequest request) {
+        return request.getRemoteAddr() + " : " + request.getRequestURL();
     }
 }

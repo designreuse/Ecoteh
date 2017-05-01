@@ -11,6 +11,11 @@ import com.googlecode.htmlcompressor.compressor.Compressor;
 public final class HtmlCompressor extends AbstractCompressor implements Compressor {
 
     /**
+     * Remove Intertag Spaces.
+     */
+    private final static boolean REMOVED_INTERTAG_SPACES = true;
+
+    /**
      * Returns Compressor object.
      *
      * @return The HTML compressor instance.
@@ -19,7 +24,7 @@ public final class HtmlCompressor extends AbstractCompressor implements Compress
     protected Compressor getCompressor() {
         final com.googlecode.htmlcompressor.compressor.HtmlCompressor compressor =
                 new com.googlecode.htmlcompressor.compressor.HtmlCompressor();
-        compressor.setRemoveIntertagSpaces(true);
+        compressor.setRemoveIntertagSpaces(REMOVED_INTERTAG_SPACES);
         return compressor;
     }
 }

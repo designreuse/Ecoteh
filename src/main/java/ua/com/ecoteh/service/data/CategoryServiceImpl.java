@@ -149,16 +149,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Return Class object of {@link Category} class.
-     *
-     * @return The Class object of {@link Category} class.
-     */
-    @Override
-    protected Class<Category> getModelClass() {
-        return Category.class;
-    }
-
-    /**
      * Copies the object "from" to object "to".
      *
      * @param from a copied object
@@ -167,6 +157,16 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     @Override
     protected void copy(final Category from, final Category to) {
         to.initialize(from);
+    }
+
+    /**
+     * Return Class object of {@link Category} class.
+     *
+     * @return The Class object of {@link Category} class.
+     */
+    @Override
+    protected Class<Category> getModelClass() {
+        return Category.class;
     }
 
     /**

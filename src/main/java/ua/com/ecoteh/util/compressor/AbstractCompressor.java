@@ -2,7 +2,7 @@ package ua.com.ecoteh.util.compressor;
 
 import com.googlecode.htmlcompressor.compressor.Compressor;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The abstract class implements a set of methods for compressing data.
@@ -21,7 +21,7 @@ public abstract class AbstractCompressor implements Compressor {
     @Override
     public String compress(final String source) {
         String result = "";
-        if (isNotBlank(source)) {
+        if (isNotEmpty(source)) {
             result = getCompressor().compress(source);
         }
         return result;

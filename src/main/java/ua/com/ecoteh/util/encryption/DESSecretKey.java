@@ -3,6 +3,8 @@ package ua.com.ecoteh.util.encryption;
 import javax.crypto.SecretKey;
 import java.util.Arrays;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * Class describes DES secret key.
  *
@@ -65,7 +67,7 @@ final class DESSecretKey implements SecretKey {
         if (this == object) {
             return true;
         }
-        if ((object == null) || (this.getClass() != object.getClass())) {
+        if (isNull(object) || (this.getClass() != object.getClass())) {
             return false;
         }
         final DESSecretKey other = (DESSecretKey) object;

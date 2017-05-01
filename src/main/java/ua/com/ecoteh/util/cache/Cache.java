@@ -1,9 +1,12 @@
 package ua.com.ecoteh.util.cache;
 
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of methods for working with cache.
@@ -181,7 +184,7 @@ public final class Cache {
             final Map<T, Object> map,
             final long milliseconds
     ) {
-        if (isNotEmptyMap(map)) {
+        if (isNotEmpty(map)) {
             for (Map.Entry<T, Object> entry : map.entrySet()) {
                 put(entry.getKey(), entry.getValue(), milliseconds);
             }
@@ -277,7 +280,7 @@ public final class Cache {
      */
     public static Collection<Object> getAll(final String subKey) {
         final List<Object> objects = new ArrayList<>();
-        if (isNotBlank(subKey)) {
+        if (isNotEmpty(subKey)) {
             getCache().keySet().stream()
                     .filter(key -> containsKey(key, subKey))
                     .forEach(key -> objects.add(get(key)));
@@ -311,7 +314,7 @@ public final class Cache {
             new Thread(() -> {
                 final Collection<Key> cacheKeys = new ArrayList<>(cache.keySet());
                 for (String sKey : keys) {
-                    if (isNotBlank(sKey)) {
+                    if (isNotEmpty(sKey)) {
                         cacheKeys.stream()
                                 .filter(key -> containsKey(key, sKey))
                                 .forEach(Cache::remove);
@@ -329,7 +332,7 @@ public final class Cache {
      */
     public static <T> void setAll(final Map<T, Object> map) {
         cache = new ConcurrentHashMap<>();
-        if (isNotEmptyMap(map)) {
+        if (isNotEmpty(map)) {
             for (Map.Entry<T, Object> entry : map.entrySet()) {
                 put(entry.getKey(), entry.getValue());
             }
@@ -349,7 +352,7 @@ public final class Cache {
      * @param object a objects class to remove.
      */
     public static void clear(final Class object) {
-        if (object != null) {
+        if (isNotNull(object)) {
             getCache().entrySet()
                     .stream()
                     .filter(entry -> filterByClass(entry, object))
@@ -478,26 +481,6 @@ public final class Cache {
             final Class object
     ) {
         return entry.getValue().getClass().equals(object);
-    }
-
-    /**
-     * Checks if input object is not null.
-     *
-     * @param object a object to check.
-     * @return true if object is not null, false otherwise.
-     */
-    private static boolean isNotNull(final Object object) {
-        return (object != null);
-    }
-
-    /**
-     * Checks if input map is not empty.
-     *
-     * @param map a map to check.
-     * @return true if map is not empty, false otherwise.
-     */
-    private static boolean isNotEmptyMap(final Map map) {
-        return isNotNull(map) && !map.isEmpty();
     }
 
     /**

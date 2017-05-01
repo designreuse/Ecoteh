@@ -10,7 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of methods for sending letters by e-mail.
@@ -104,7 +105,7 @@ public final class SenderImpl implements Sender {
      */
     @Override
     public void send() {
-        if (validate()) {
+        if (isValidated()) {
             final Thread thread = new Thread(this);
             thread.setDaemon(true);
             thread.start();
@@ -137,12 +138,12 @@ public final class SenderImpl implements Sender {
      * @return true if all parameters are valid to create sender,
      * false otherwise.
      */
-    private boolean validate() {
-        return isNotBlank(this.subject) &&
-                isNotBlank(this.text) &&
-                isNotBlank(this.recipientEmail) &&
-                isNotBlank(this.senderEmail) &&
-                isNotBlank(this.senderEmailPass);
+    private boolean isValidated() {
+        return isNotEmpty(this.subject) &&
+                isNotEmpty(this.text) &&
+                isNotEmpty(this.recipientEmail) &&
+                isNotEmpty(this.senderEmail) &&
+                isNotEmpty(this.senderEmailPass);
     }
 
     /**
@@ -307,7 +308,7 @@ public final class SenderImpl implements Sender {
      * @return The Properties object.
      */
     private Properties getTLSProperties() {
-        if (this.tlsProperties == null) {
+        if (isNull(this.tlsProperties)) {
             initTlsProperties();
         }
         return this.tlsProperties;
@@ -319,7 +320,7 @@ public final class SenderImpl implements Sender {
      * @return The Properties object.
      */
     private Properties getSSLProperties() {
-        if (this.sslProperties == null) {
+        if (isNull(this.sslProperties)) {
             initSslProperties();
         }
         return this.sslProperties;

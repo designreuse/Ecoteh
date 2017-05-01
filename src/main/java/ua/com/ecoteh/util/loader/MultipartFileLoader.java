@@ -7,7 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements the methods for working
@@ -58,7 +59,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      */
     @Override
     public void write() {
-        if (this.file != null) {
+        if (isNotNull(this.file)) {
             final String path = getPathToFile();
             checkPath(path);
             try (final OutputStream stream = new FileOutputStream(path)) {
@@ -96,6 +97,6 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      * @return The path to file.
      */
     private String getPathToFile() {
-        return isNotBlank(getPath()) ? getPath() : this.file.getOriginalFilename();
+        return isNotEmpty(getPath()) ? getPath() : this.file.getOriginalFilename();
     }
 }

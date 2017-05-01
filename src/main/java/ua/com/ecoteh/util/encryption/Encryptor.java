@@ -1,7 +1,6 @@
 package ua.com.ecoteh.util.encryption;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -9,7 +8,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.SecretKey;
 import java.io.UnsupportedEncodingException;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements methods for data encryption.
@@ -18,11 +18,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 public final class Encryptor implements IEncryptor {
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(Encryptor.class);
 
     /**
      * Default primary encoding format.
@@ -139,7 +134,7 @@ public final class Encryptor implements IEncryptor {
             this.encryptCipher.init(Cipher.ENCRYPT_MODE, secretKey);
             this.decryptCipher = Cipher.getInstance(secretKey.getAlgorithm());
             this.decryptCipher.init(Cipher.DECRYPT_MODE, secretKey);
-            if (isNotBlank(charsetName)) {
+            if (isNotEmpty(charsetName)) {
                 this.charsetName = charsetName;
             } else {
                 this.charsetName = Encryptor.staticCharsetName;
@@ -160,7 +155,7 @@ public final class Encryptor implements IEncryptor {
         try {
             result = getEncryptedString();
         } catch (Exception ex) {
-            LOGGER.error(ex.getMessage(), ex);
+            ex.printStackTrace();
             result = "";
         }
         return result;
@@ -177,7 +172,7 @@ public final class Encryptor implements IEncryptor {
         try {
             result = getDecryptedString();
         } catch (Exception ex) {
-            LOGGER.error(ex.getMessage(), ex);
+            ex.printStackTrace();
             result = "";
         }
         return result;
@@ -199,7 +194,7 @@ public final class Encryptor implements IEncryptor {
      * @param secretKey a primary encoding format.
      */
     public static void setSecretKey(final String secretKey) {
-        if (isNotBlank(secretKey)) {
+        if (isNotEmpty(secretKey)) {
             setSecretKey(secretKey.getBytes());
         } else {
             setSecretKey(DEFAULT_KEY);
@@ -212,7 +207,7 @@ public final class Encryptor implements IEncryptor {
      * @param secretKey a primary encoding format.
      */
     public static void setSecretKey(final byte[] secretKey) {
-        if ((secretKey != null) && (secretKey.length > 0)) {
+        if (isNotEmpty(secretKey)) {
             setSecretKey(new DESSecretKey(secretKey));
         } else {
             setSecretKey(DEFAULT_KEY);
@@ -225,7 +220,7 @@ public final class Encryptor implements IEncryptor {
      * @param secretKey a primary encoding format.
      */
     public static void setSecretKey(final SecretKey secretKey) {
-        if (secretKey != null) {
+        if (isNotNull(secretKey)) {
             Encryptor.staticSecretKey = secretKey;
         } else {
             Encryptor.staticSecretKey = DEFAULT_KEY;
@@ -238,7 +233,7 @@ public final class Encryptor implements IEncryptor {
      * @param charsetName a name of a default supported Charset.
      */
     public static void setCharsetName(final String charsetName) {
-        if (isNotBlank(charsetName)) {
+        if (isNotEmpty(charsetName)) {
             Encryptor.staticCharsetName = charsetName;
         } else {
             Encryptor.staticCharsetName = DEFAULT_CHARSET_NAME;

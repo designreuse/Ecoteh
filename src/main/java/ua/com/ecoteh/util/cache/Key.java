@@ -1,5 +1,8 @@
 package ua.com.ecoteh.util.cache;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class implements a set of methods
  * for working with Key object in the cache.
@@ -93,15 +96,15 @@ final class Key<T> implements Comparable {
     @Override
     public boolean equals(final Object object) {
         boolean result = false;
-        if (object != null) {
+        if (isNotNull(object)) {
             if (super.equals(object)) {
                 result = true;
             } else if (this.getClass() == object.getClass()) {
                 final Key other = (Key) object;
-                if (this.key != null) {
+                if (isNotNull(this.key)) {
                     result = this.key.equals(other.key);
                 } else {
-                    result = other.key == null;
+                    result = isNull(other.key);
                 }
             }
         }
@@ -142,7 +145,7 @@ final class Key<T> implements Comparable {
     @Override
     public int compareTo(final Object object) {
         int result = 0;
-        if (object == null) {
+        if (isNull(object)) {
             result = -1;
         } else {
             final Key other = (Key) object;

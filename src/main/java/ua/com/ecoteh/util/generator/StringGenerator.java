@@ -2,7 +2,8 @@ package ua.com.ecoteh.util.generator;
 
 import java.util.Random;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for generating random string.
@@ -85,7 +86,7 @@ public final class StringGenerator implements Generator<String> {
      * @param length  a length to generate string.
      */
     public StringGenerator(final char[] pattern, final long length) {
-        if (isNotEmptyPattern(pattern)) {
+        if (isNotEmpty(pattern)) {
             this.pattern = pattern;
         } else {
             this.pattern = DEFAULT_PATTERN;
@@ -116,7 +117,7 @@ public final class StringGenerator implements Generator<String> {
      */
     @Override
     public String get() {
-        if (isBlank(this.string)) {
+        if (isEmpty(this.string)) {
             generate();
         }
         return this.string;
@@ -138,15 +139,5 @@ public final class StringGenerator implements Generator<String> {
      */
     private int getRandomInt() {
         return RANDOM.nextInt(this.pattern.length);
-    }
-
-    /**
-     * Checks if pattern is not empty.
-     *
-     * @param pattern a pattern to generated new string.
-     * @return true if pattern is not empty, false otherwise.
-     */
-    private static boolean isNotEmptyPattern(final char[] pattern) {
-        return (pattern != null) && (pattern.length > 0);
     }
 }

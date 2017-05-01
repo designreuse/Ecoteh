@@ -1,15 +1,14 @@
 package ua.com.ecoteh.util.time;
 
-import org.apache.log4j.Logger;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working
@@ -19,11 +18,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 public class Time implements ITime {
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(Time.class);
 
     /**
      * It is s an object for date/time formatting subclasses which formats
@@ -68,7 +62,7 @@ public class Time implements ITime {
      */
     public Time(final String time) {
         this.time = time;
-        this.isNotBlankTime = isNotBlank(this.time);
+        this.isNotBlankTime = isNotEmpty(this.time);
     }
 
     /**
@@ -88,7 +82,7 @@ public class Time implements ITime {
      * @return The correct time.
      */
     public String getCorrectTime() {
-        if (isBlank(this.correctTime)) {
+        if (isEmpty(this.correctTime)) {
             initCorrectTime();
         }
         return this.correctTime;
@@ -157,7 +151,7 @@ public class Time implements ITime {
                 final int hours = Integer.parseInt(times[0]) + Integer.parseInt(times[1]) / 60;
                 this.hours = (hours >= 24 || hours <= 0) ? 0 : hours;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                LOGGER.error(ex.getMessage(), ex);
+                this.hours = 0;
             }
         }
     }
@@ -171,7 +165,7 @@ public class Time implements ITime {
                 final int minutes = Integer.parseInt(time.split(":")[1]);
                 this.minutes = (minutes < 0) ? 0 : minutes % 60;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                LOGGER.error(ex.getMessage(), ex);
+                this.minutes = 0;
             }
         }
     }
@@ -231,7 +225,7 @@ public class Time implements ITime {
             final Date finishDate
     ) {
         boolean result = false;
-        if ((currentTime != null) && checkDate(startDate, finishDate)) {
+        if (isNotNull(currentTime) && checkDate(startDate, finishDate)) {
             final long time = currentTime.getTime();
             result = (time >= startDate.getTime()) && (time <= finishDate.getTime());
         }
@@ -249,7 +243,7 @@ public class Time implements ITime {
             final Date startDate,
             final Date finishDate
     ) {
-        return (startDate != null) && (finishDate != null)
+        return (isNotNull(startDate) && isNotNull(finishDate))
                 && !startDate.equals(finishDate)
                 && (startDate.getTime() <= finishDate.getTime());
     }
@@ -297,7 +291,6 @@ public class Time implements ITime {
             final int now = getHourOfDay();
             result = checkHours(now, from, to);
         } catch (NumberFormatException ex) {
-            LOGGER.error(ex.getMessage(), ex);
             result = false;
         }
         return result;
@@ -343,7 +336,7 @@ public class Time implements ITime {
             final TimeZone timeZone
     ) {
         dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(date != null ? date : new Date());
+        return dateFormat.format(isNotNull(date) ? date : new Date());
     }
 
     /**

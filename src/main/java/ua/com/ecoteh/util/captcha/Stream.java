@@ -2,6 +2,8 @@ package ua.com.ecoteh.util.captcha;
 
 import java.io.*;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The class implements a set of methods
  * for working with streams.
@@ -39,7 +41,7 @@ final class Stream {
         final StringBuilder response = new StringBuilder();
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String inputLine;
-            while ((inputLine = reader.readLine()) != null) {
+            while (isNotNull(inputLine = reader.readLine())) {
                 response.append(inputLine);
             }
         }

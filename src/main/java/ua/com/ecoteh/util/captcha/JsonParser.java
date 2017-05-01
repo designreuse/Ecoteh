@@ -4,7 +4,7 @@ import javax.json.Json;
 import javax.json.JsonReader;
 import java.io.StringReader;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working
@@ -36,7 +36,7 @@ final class JsonParser {
      */
     boolean parse() {
         boolean result = false;
-        if (isNotBlank(this.response)) {
+        if (isNotEmpty(this.response)) {
             try (final JsonReader jsonReader = Json.createReader(new StringReader(this.response))) {
                 result = jsonReader.readObject().getBoolean("success");
             }

@@ -4,6 +4,8 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.URL;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class implements a set of methods for working
  * with https URL connection.
@@ -65,7 +67,7 @@ final class Connection {
      * @throws IOException If an I/O error occurs.
      */
     HttpsURLConnection getHttpsURLConnection() throws IOException {
-        if (this.connection == null) {
+        if (isNull(this.connection)) {
             prepareHttpsURLConnection();
         }
         return this.connection;

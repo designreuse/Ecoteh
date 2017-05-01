@@ -2,10 +2,12 @@ package ua.com.ecoteh.util.captcha;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import java.io.IOException;
 import java.net.URL;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of methods
@@ -95,7 +97,7 @@ public final class ReCaptcha implements Captcha {
     public boolean isVerify(final HttpServletRequest request) {
         this.status = null;
         boolean result = false;
-        if (request != null) {
+        if (isNotNull(request)) {
             result = isVerify(
                     request.getParameter(this.parameter),
                     getIpAddress(request)
@@ -118,7 +120,7 @@ public final class ReCaptcha implements Captcha {
     ) {
         this.status = null;
         boolean result = false;
-        if (isNotBlank(captcha) && isNotBlank(ipAddress)) {
+        if (isNotEmpty(captcha) && isNotEmpty(ipAddress)) {
             try {
                 result = new JsonParser(
                         getResponse(
@@ -130,7 +132,7 @@ public final class ReCaptcha implements Captcha {
                 ex.printStackTrace();
             }
         }
-        if (isNotBlank(this.status)) {
+        if (isNotEmpty(this.status)) {
             this.status += "\nSuccess = " + result;
         }
         return result;
@@ -171,9 +173,9 @@ public final class ReCaptcha implements Captcha {
      */
     private String getIpAddress(final HttpServletRequest request) {
         String ipAddress = null;
-        if (request != null) {
+        if (isNotNull(request)) {
             ipAddress = request.getHeader(this.header);
-            if (ipAddress == null) {
+            if (isNull(ipAddress)) {
                 ipAddress = request.getRemoteAddr();
             }
         }
@@ -226,8 +228,8 @@ public final class ReCaptcha implements Captcha {
             final String captcha,
             final String ipAddress
     ) {
-        return "secret=" + this.serverKey
-                + "&response=" + captcha
-                + "&remoteip=" + ipAddress;
+        return "secret=" + this.serverKey +
+                "&response=" + captcha +
+                "&remoteip=" + ipAddress;
     }
 }

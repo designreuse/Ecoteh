@@ -1,6 +1,6 @@
 package ua.com.ecoteh.util.translator;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for translate to Latin.
@@ -32,7 +32,7 @@ public final class ToLatinImpl implements ToLatin {
     @Override
     public String fromCyrillic() {
         StringBuilder sb = new StringBuilder();
-        if (isNotBlank(this.value)) {
+        if (isNotEmpty(this.value)) {
             for (char ch : convertToChars(this.value)) {
                 sb.append(translate(ch));
             }

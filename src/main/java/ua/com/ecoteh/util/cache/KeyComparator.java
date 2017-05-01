@@ -2,6 +2,8 @@ package ua.com.ecoteh.util.cache;
 
 import java.util.Comparator;
 
+import static java.util.Objects.isNull;
+
 /**
  * The class implements a set of methods for working
  * with comparators for {@link Key}.
@@ -28,15 +30,5 @@ final class KeyComparator implements Comparator<Key> {
             result = (int) (key1.getTimeout() - key2.getTimeout());
         }
         return result;
-    }
-
-    /**
-     * Checks if input key is null.
-     *
-     * @param key a key to check.
-     * @return true if key is null, false otherwise.
-     */
-    private static boolean isNull(final Key key) {
-        return (key == null);
     }
 }

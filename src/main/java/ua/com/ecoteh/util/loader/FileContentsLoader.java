@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements the methods for working
@@ -89,6 +89,6 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
      * @param text a new text to the article.
      */
     private void setText(final String text) {
-        this.text = isNotBlank(text) ? text : "";
+        this.text = isNotEmpty(text) ? text : "";
     }
 }
