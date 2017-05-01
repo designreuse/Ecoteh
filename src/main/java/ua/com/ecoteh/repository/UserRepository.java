@@ -80,4 +80,13 @@ public interface UserRepository extends DataRepository<User> {
      * @return The object of class {@link User}.
      */
     User findByContactsLandlinePhone(final String landlinePhone);
+
+    /**
+     * Returns user from a database,
+     * which matches the parameter fax.
+     *
+     * @param fax a fax phone of the user to return.
+     * @return The object of class {@link User}.
+     */
+    User findByContactsFax(final String fax);
 }
