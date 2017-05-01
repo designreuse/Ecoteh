@@ -10,10 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -34,6 +31,23 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
         }
 )
 public final class ArticleServiceImpl extends ContentServiceImpl<Article> implements ArticleService {
+
+    /**
+     *
+     */
+    private final static String BLANK_NUMBER_MESSAGE = "Incoming %s number is blank!";
+
+    /**
+     *
+     */
+    private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming number %s!";
+
+    /**
+     *
+     */
+    private final static String CATEGORY_TITLE_IS_BKANK_MESSAGE =
+            "Incoming category title is blank!";
 
     /**
      * The interface provides a set of standard methods
@@ -73,11 +87,18 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(number)) {
-            throw new IllegalArgumentException("Article number is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_NUMBER_MESSAGE, getClassSimpleName())
+            );
         }
         final Article article = this.repository.findByNumber(number);
         if ((article == null) || (isValid && !article.isValidated())) {
-            throw new NullPointerException("Can`t find article by number \"" + number + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), number
+                    )
+            );
         }
         article.getCategory().getArticles();
         return article;
@@ -107,7 +128,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     public List<Article> getByCategoryTitle(final String categoryTitle)
             throws IllegalArgumentException {
         if (isBlank(categoryTitle)) {
-            throw new IllegalArgumentException("Article category title is blank!");
+            throw new IllegalArgumentException(CATEGORY_TITLE_IS_BKANK_MESSAGE);
         }
         return this.repository.findByCategoryTitle(categoryTitle);
     }
@@ -396,16 +417,6 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     }
 
     /**
-     * Return Class object of {@link Article} class.
-     *
-     * @return The Class object of {@link Article} class.
-     */
-    @Override
-    protected Class<Article> getModelClass() {
-        return Article.class;
-    }
-
-    /**
      * Copies the object "from" to object "to".
      *
      * @param from a copied object
@@ -414,6 +425,16 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Override
     protected void copy(final Article from, final Article to) {
         to.initialize(from);
+    }
+
+    /**
+     * Return Class object of {@link Article} class.
+     *
+     * @return The Class object of {@link Article} class.
+     */
+    @Override
+    protected Class<Article> getModelClass() {
+        return Article.class;
     }
 
     /**

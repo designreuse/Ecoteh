@@ -19,6 +19,8 @@ import java.util.Random;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class of the service layer, implements a set of methods
@@ -35,6 +37,40 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
         }
 )
 public final class FileServiceImpl extends DataServiceImpl<File> implements FileService {
+
+    /**
+     *
+     */
+    private final static String BLANK_TITLE_MESSAGE = "Incoming %s title is blank!";
+
+    /**
+     *
+     */
+    private final static String BLANK_URL_MESSAGE = "Incoming %s URL is blank!";
+
+    /**
+     *
+     */
+    private final static String NULL_TYPE_MESSAGE = "Incoming %s type is null!";
+
+    /**
+     *
+     */
+    private final static String FORBIDDEN_STATIC_FILE_MESSAGE =
+            "Static files are forbidden to remove!";
+
+    /**
+     *
+     */
+    private final static String MULTIPART_FILE_IS_EMPTY_MESSAGE =
+            "Incoming multipart file is null or empty!";
+
+    /**
+     *
+     */
+    private final static String MAX_FILE_SIZE_MESSAGE =
+            "Maximum file size must be no larger than %d bytes. " +
+                    "Size of the incoming file is %d bytes.";
 
     /**
      * The interface provides a set of standard methods
@@ -82,7 +118,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final MultipartFile multipartFile
     ) {
         File file;
-        if (isNotEmptyFile(multipartFile)) {
+        if (isNotEmpty(multipartFile)) {
             checkMultipartFile(multipartFile);
             file = new File(title, createRelativePath(title, multipartFile));
             file.setType(type);
@@ -133,7 +169,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         if (!file.getType().equals(FileType.STATIC)) {
             file.setType(type);
         }
-        if (isNotEmptyFile(multipartFile)) {
+        if (isNotEmpty(multipartFile)) {
             checkMultipartFile(multipartFile);
             deleteFile(file.getUrl());
             saveFile(multipartFile, file.getUrl());
@@ -171,7 +207,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public File getByTitle(final String title) throws IllegalArgumentException {
         if (isBlank(title)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_TITLE_MESSAGE, getClassSimpleName())
+            );
         }
         return this.repository.findByTitle(title);
     }
@@ -187,7 +225,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public File getByUrl(final String url) throws IllegalArgumentException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " URL is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_URL_MESSAGE, getClassSimpleName())
+            );
         }
         return this.repository.findByUrl(url);
     }
@@ -227,7 +267,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     public void remove(final File file) throws IllegalArgumentException {
         if (file != null) {
             if (!file.isValidated()) {
-                throw new IllegalArgumentException("Static files forbidden to remove!");
+                throw new IllegalArgumentException(FORBIDDEN_STATIC_FILE_MESSAGE);
             }
             deleteFile(file.getUrl());
             super.remove(file);
@@ -257,52 +297,50 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Saves the multipart file in the file system in the directory rootPath.
-     * Saves file if it is not null and is not empty.
+     * Saves a multipart file in the file system in a directory rootPath.
+     * Saves file if it is not null and not empty.
      *
-     * @param multipartFile the multipart file to save.
-     * @param rootPath      a directory path.
+     * @param file     the multipart file to save.
+     * @param rootPath a directory path.
      */
     @Override
     @Transactional
     public void saveFile(
-            final MultipartFile multipartFile,
+            final MultipartFile file,
             final String rootPath
     ) {
-        if (isNotEmptyFile(multipartFile)) {
+        if (isNotEmpty(file)) {
             new MultipartFileLoader(
-                    multipartFile,
-                    this.properties.getProjectAbsolutePath()
-                            + (isNotBlank(rootPath) ? rootPath : multipartFile.getOriginalFilename())
+                    file, createAbsolutePath(file, rootPath)
             ).write();
         }
     }
 
     /**
-     * Saves the multipart file in the file system.
-     * Saves file if it is not null.
+     * Saves a multipart file in the file system.
+     * Saves file if it is not null and not empty.
      *
-     * @param multipartFile the multipart file to save.
+     * @param file the multipart file to save.
      */
     @Override
     @Transactional
-    public void saveFile(final MultipartFile multipartFile) {
-        saveFile(multipartFile, multipartFile.getOriginalFilename());
+    public void saveFile(final MultipartFile file) {
+        saveFile(file, file.getOriginalFilename());
     }
 
     /**
      * Deletes file in the file system.
      * Deletes file if path is not blank.
      *
-     * @param rootPath the file path.
+     * @param path the file path.
      * @return Returns true if able to delete the file,
      * otherwise return false.
      */
     @Override
     @Transactional
-    public boolean deleteFile(final String rootPath) {
+    public boolean deleteFile(final String path) {
         return new MultipartFileLoader(
-                this.properties.getProjectAbsolutePath() + rootPath
+                this.properties.getProjectAbsolutePath() + path
         ).delete();
     }
 
@@ -362,7 +400,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public List<File> getByType(final FileType type) throws IllegalArgumentException {
         if (type == null) {
-            throw new IllegalArgumentException("File type is null");
+            throw new IllegalArgumentException(
+                    String.format(NULL_TYPE_MESSAGE, getClassSimpleName())
+            );
         }
         return this.repository.findAllByType(type);
     }
@@ -396,70 +436,72 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
         return File.class;
     }
 
-    private void checkMultipartFile(final MultipartFile multipartFile)
+    /**
+     * @param file
+     * @throws NullPointerException
+     * @throws IllegalArgumentException
+     */
+    private void checkMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
-        if ((multipartFile == null) || multipartFile.isEmpty()) {
-            throw new NullPointerException("Can`t find multipart file!");
+        if (isEmpty(file)) {
+            throw new NullPointerException(MULTIPART_FILE_IS_EMPTY_MESSAGE);
         }
-        if (multipartFile.getSize() > this.properties.getMaxFileSize()) {
+        if (file.getSize() > this.properties.getMaxFileSize()) {
             throw new IllegalArgumentException(
-                    "Maximum file size must be no larger than " + this.properties.getMaxFileSize() + " bytes. "
-                            + "Size of the input file is " + multipartFile.getSize() + " bytes."
+                    String.format(
+                            MAX_FILE_SIZE_MESSAGE,
+                            this.properties.getMaxFileSize(), file.getSize()
+                    )
             );
         }
     }
 
     /**
-     * Creates ad returns a relative path to file.
+     * Creates and returns a absolute path to a file.
      *
-     * @param title         a file title.
-     * @param multipartFile a multipart file.
+     * @param file a multipart file.
+     * @param rootPath a root directory path.
+     * @return The relative path to file.
+     */
+    private String createAbsolutePath(
+            final MultipartFile file,
+            final String rootPath
+    ) {
+        return this.properties.getProjectAbsolutePath() +
+                (isNotBlank(rootPath) ? rootPath : file.getOriginalFilename());
+    }
+
+    /**
+     * Creates and returns a relative path to a file.
+     *
+     * @param title a file title.
+     * @param file  a multipart file.
      * @return The relative path to file.
      */
     private String createRelativePath(
             final String title,
-            final MultipartFile multipartFile
+            final MultipartFile file
     ) {
         return this.properties.getResourcesLocation() +
                 Translator.fromCyrillicToLatin(title) +
                 new Random().nextInt() +
-                getMultipartFileType(multipartFile);
+                getMultipartFileType(file);
     }
 
     /**
      * Returns a multipart file type.
      *
-     * @param multipartFile a multipart file.
+     * @param file a multipart file.
      * @return The multipart file type.
      */
-    private static String getMultipartFileType(final MultipartFile multipartFile) {
+    private static String getMultipartFileType(final MultipartFile file) {
         String type;
-        final String name = multipartFile.getOriginalFilename();
+        final String name = file.getOriginalFilename();
         if (name.contains(".")) {
             type = name.substring(name.lastIndexOf("."), name.length());
         } else {
             type = "";
         }
         return type;
-    }
-
-    /**
-     * Checks if file is empty.
-     *
-     * @param multipartFile a multipart file.
-     * @return true if file is null or empty, false otherwise.
-     */
-    private static boolean isEmptyFile(final MultipartFile multipartFile) {
-        return !isNotEmptyFile(multipartFile);
-    }
-
-    /**
-     * Checks if file is not empty.
-     *
-     * @param multipartFile a multipart file.
-     * @return true if file is not null or empty, false otherwise.
-     */
-    private static boolean isNotEmptyFile(final MultipartFile multipartFile) {
-        return (multipartFile != null) && !multipartFile.isEmpty();
     }
 }

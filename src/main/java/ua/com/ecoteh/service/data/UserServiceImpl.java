@@ -33,7 +33,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @version 1.0
  */
 @Service
-@ComponentScan(basePackages = "ua.com.ecoteh.repository")
+@ComponentScan(
+        basePackages = {
+                "ua.com.ecoteh.repository",
+                "ua.com.ecoteh.service.data"
+        }
+)
 public final class UserServiceImpl extends DataServiceImpl<User>
         implements UserService, UserDetailsService {
 
@@ -41,6 +46,31 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * The object for logging information.
      */
     private final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
+
+    private final static String BLANK_NAME_MESSAGE = "Incoming %s name is blank!";
+
+    private final static String BLANK_URL_MESSAGE = "Incoming %s URL is blank!";
+
+    private final static String BLANK_LOGIN_MESSAGE = "Incoming %s login is blank!";
+
+    private final static String BLANK_EMAIL_MESSAGE = "Incoming %s E-mail is blank!";
+
+    private final static String BLANK_PHONE_MESSAGE = "Incoming %s phone is blank!";
+
+    private final static String FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming name %s!";
+
+    private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming URL %s!";
+
+    private final static String FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming login %s!";
+
+    private final static String FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming E-mail %s!";
+
+    private final static String FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming phone %s!";
 
     /**
      * The interface provides a set of standard methods for working
@@ -163,11 +193,18 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
         if (isBlank(name)) {
-            throw new IllegalArgumentException("Input name is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_NAME_MESSAGE, getClassSimpleName())
+            );
         }
         final User user = this.repository.findByName(name);
         if (user == null) {
-            throw new NullPointerException("Can`t find user by name \"" + name + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), name
+                    )
+            );
         }
         return user;
     }
@@ -185,11 +222,18 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     public User getByUrl(final String url)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(url)) {
-            throw new IllegalArgumentException("Input URL is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_URL_MESSAGE, getClassSimpleName())
+            );
         }
         final User user = this.repository.findByUrl(url);
         if (user == null) {
-            throw new NullPointerException("Can`t find user by URL \"" + url + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), url
+                    )
+            );
         }
         return user;
     }
@@ -207,13 +251,20 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     public User getByLogin(final String login)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(login)) {
-            throw new IllegalArgumentException("Input login is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_LOGIN_MESSAGE, getClassSimpleName())
+            );
         }
         final User user = this.repository.findByEncryptedLogin(
                 new Encryptor(login).encrypt()
         );
         if (user == null) {
-            throw new NullPointerException("Can`t find user by login \"" + login + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), login
+                    )
+            );
         }
         return user;
     }
@@ -231,11 +282,18 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     public User getByEmail(final String email)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(email)) {
-            throw new IllegalArgumentException("Input E-mail is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_EMAIL_MESSAGE, getClassSimpleName())
+            );
         }
         User user = this.repository.findByContactsEmail(email);
         if (user == null) {
-            throw new NullPointerException("Can`t find user by E-mail \"" + email + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), email
+                    )
+            );
         }
         return user;
     }
@@ -253,14 +311,24 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     public User getByPhone(final String phone)
             throws IllegalArgumentException, NullPointerException {
         if (isBlank(phone)) {
-            throw new IllegalArgumentException("Input phone is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_PHONE_MESSAGE, getClassSimpleName())
+            );
         }
-        User user = this.repository.findByContactsMobilePhone(phone);
+        User user = getByMobilePhone(phone);
         if (user == null) {
-            user = this.repository.findByContactsLandlinePhone(phone);
-        }
-        if (user == null) {
-            throw new NullPointerException("Can`t find user by phone \"" + phone + "\"!");
+            user = getByLandlinePhone(phone);
+            if (user == null) {
+                user = getByFax(phone);
+                if (user == null) {
+                    throw new NullPointerException(
+                            String.format(
+                                    FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
+                                    getClassSimpleName(), phone
+                            )
+                    );
+                }
+            }
         }
         return user;
     }
@@ -509,21 +577,11 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             result.addAll(
                     users.stream()
                             .filter(
-                                    user -> (user != null) && (user.isValidated())
+                                    UserServiceImpl::validFilter
                             ).collect(Collectors.toList())
             );
         }
         return result;
-    }
-
-    /**
-     * Return Class object of {@link User} class.
-     *
-     * @return The Class object of {@link User} class.
-     */
-    @Override
-    protected Class<User> getModelClass() {
-        return User.class;
     }
 
     /**
@@ -556,6 +614,16 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
+     * Return Class object of {@link User} class.
+     *
+     * @return The Class object of {@link User} class.
+     */
+    @Override
+    protected Class<User> getModelClass() {
+        return User.class;
+    }
+
+    /**
      * Copies the object "from" to object "to".
      *
      * @param from a copied object
@@ -563,5 +631,37 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     protected void copy(final User from, final User to) {
         to.initialize(from);
+    }
+
+    /**
+     * @param phone
+     * @return
+     */
+    private User getByMobilePhone(final String phone) {
+        return this.repository.findByContactsMobilePhone(phone);
+    }
+
+    /**
+     * @param phone
+     * @return
+     */
+    private User getByLandlinePhone(final String phone) {
+        return this.repository.findByContactsLandlinePhone(phone);
+    }
+
+    /**
+     * @param phone
+     * @return
+     */
+    private User getByFax(final String phone) {
+        return this.repository.findByContactsFax(phone);
+    }
+
+    /**
+     * @param user
+     * @return
+     */
+    private static boolean validFilter(final User user) {
+        return (user != null) && (user.isValidated());
     }
 }

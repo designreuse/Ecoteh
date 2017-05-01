@@ -24,6 +24,29 @@ public abstract class ContentServiceImpl<T extends Content>
         extends DataServiceImpl<T> implements ContentService<T> {
 
     /**
+     *
+     */
+    private final static String INCOMING_OBJECT_IS_NULL_MESSAGE =
+            "Incoming object of the %s class is null!";
+
+    /**
+     *
+     */
+    private final static String BLANK_TITLE_MESSAGE = "Incoming %s title is blank!";
+
+    /**
+     *
+     */
+    private final static String FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class by incoming title %s!";
+
+    /**
+     *
+     */
+    private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class by incoming URL %s!";
+
+    /**
      * The object provides a set of standard JPA methods
      * for working {@link Content} objects with the database.
      */
@@ -67,7 +90,12 @@ public abstract class ContentServiceImpl<T extends Content>
             final T content
     ) throws IllegalArgumentException {
         if (content == null) {
-            throw new IllegalArgumentException("Input " + getClassSimpleName() + "pbject is null!");
+            throw new IllegalArgumentException(
+                    String.format(
+                            INCOMING_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName()
+                    )
+            );
         }
         final T contentToUpdate = getByUrl(url, false);
         final File newLogo = content.getLogo();
@@ -95,13 +123,17 @@ public abstract class ContentServiceImpl<T extends Content>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isBlank(title)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " title is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_TITLE_MESSAGE, getClassSimpleName())
+            );
         }
         final T content = this.repository.findByTitle(title);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
-                    "Can`t find object of " + getClassSimpleName() +
-                            " by title \"" + title + "\"!"
+                    String.format(
+                            FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), title
+                    )
             );
         }
         return content;
@@ -128,8 +160,10 @@ public abstract class ContentServiceImpl<T extends Content>
         final T content = this.repository.findByUrl(url);
         if ((content == null) || (isValid && !content.isValidated())) {
             throw new NullPointerException(
-                    "Can`t find object of " + getClassSimpleName() +
-                            " by URL \"" + url + "\"!"
+                    String.format(
+                            FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), url
+                    )
             );
         }
         return content;

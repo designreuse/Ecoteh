@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
+
 /**
  * The class of the service layer, describes a set of methods
  * for working with objects of {@link Model} class or subclasses.
@@ -16,6 +18,24 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
+
+    /**
+     *
+     */
+    private final static String SAVING_OBJECT_IS_NULL_MESSAGE =
+            "Saving object of the %s class is null!";
+
+    /**
+     *
+     */
+    private final static String UPDATING_OBJECT_IS_NULL_MESSAGE =
+            "Updating object of the %s class is null!";
+
+    /**
+     *
+     */
+    private final static String FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming id %d!";
 
     /**
      * The object provides a set of standard JPA methods
@@ -48,8 +68,13 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         if (validated(model, false, true)) {
             result = this.repository.save(model);
         }
-        if (model == null) {
-            throw new NullPointerException("Saving model is null!");
+        if (isNull(result)) {
+            throw new NullPointerException(
+                    String.format(
+                            SAVING_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName()
+                    )
+            );
         }
         return result;
     }
@@ -65,7 +90,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Transactional
     public Collection<T> addAll(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
-        if (models != null && !models.isEmpty()) {
+        if (isNotEmpty(models)) {
             result.addAll(
                     models.stream()
                             .map(this::add)
@@ -90,8 +115,13 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         if (validated(model, true, false)) {
             result = this.repository.save(model);
         }
-        if (result == null) {
-            throw new NullPointerException("Saving model is null!");
+        if (isNull(result)) {
+            throw new NullPointerException(
+                    String.format(
+                            UPDATING_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName()
+                    )
+            );
         }
         return result;
     }
@@ -107,7 +137,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Transactional
     public Collection<T> update(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
-        if (models != null && !models.isEmpty()) {
+        if (isNotEmpty(models)) {
             result.addAll(
                     models.stream()
                             .map(this::update)
@@ -127,12 +157,16 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public T get(final long id) throws NullPointerException {
-        final T model = this.repository.findOne(id);
-        if (model == null) {
-            throw new NullPointerException("Can`t find " + getClassSimpleName() + " by id " + id + "!");
+        final T result = this.repository.findOne(id);
+        if (isNull(result)) {
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), id
+                    )
+            );
         }
-        return model;
-
+        return result;
     }
 
     /**
@@ -181,7 +215,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional
     public void remove(final T model) {
-        if (model != null) {
+        if (isNotNull(model)) {
             this.repository.delete(model);
         }
     }
@@ -234,7 +268,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional(readOnly = true)
     public boolean exists(final T model) {
-        return (model != null) && exists(model.getId());
+        return isNotNull(model) && exists(model.getId());
     }
 
     /**
@@ -254,9 +288,9 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             final boolean revers
     ) {
         final List<T> result = new ArrayList<>();
-        if (models != null && !models.isEmpty()) {
+        if (isNotEmpty(models)) {
             result.addAll(models);
-            if (comparator != null) {
+            if (isNotNull(comparator)) {
                 Collections.sort(
                         result,
                         getReversComparator(comparator, revers)
@@ -300,7 +334,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             final int toIndex
     ) {
         List<T> result;
-        if (models == null || models.isEmpty()) {
+        if (isEmpty(models)) {
             result = new ArrayList<>();
         } else if (checkIndexes(fromIndex, toIndex, models.size())) {
             result = new ArrayList<>(models).subList(fromIndex, toIndex);
@@ -347,7 +381,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     public List<T> filteredByValid(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
-        if (models != null && !models.isEmpty()) {
+        if (isNotEmpty(models)) {
             result.addAll(
                     models.stream()
                             .filter(
@@ -372,24 +406,6 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Return name of {@link Model} class or subclasses.
-     *
-     * @return The name of {@link Model} class or subclasses.
-     */
-    protected String getClassName() {
-        return getModelClass().getName();
-    }
-
-    /**
-     * Return simple name of {@link Model} class or subclasses.
-     *
-     * @return The simple name of {@link Model} class or subclasses.
-     */
-    String getClassSimpleName() {
-        return getModelClass().getSimpleName();
-    }
-
-    /**
      * Gets revers input comparator if revers is true.
      *
      * @param comparator a comparator to sort models.
@@ -411,6 +427,24 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      */
     private static boolean validFilter(final Model model) {
         return (model != null) && model.isValidated();
+    }
+
+    /**
+     * Return name of {@link Model} class or subclasses.
+     *
+     * @return The name of {@link Model} class or subclasses.
+     */
+    protected String getClassName() {
+        return getModelClass().getName();
+    }
+
+    /**
+     * Return simple name of {@link Model} class or subclasses.
+     *
+     * @return The simple name of {@link Model} class or subclasses.
+     */
+    String getClassSimpleName() {
+        return getModelClass().getSimpleName();
     }
 
     /**

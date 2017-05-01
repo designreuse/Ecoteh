@@ -35,6 +35,17 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
 
     /**
+     *
+     */
+    private final static String BLANK_DOMAIN_MESSAGE = "Incoming %s domain is blank!";
+
+    /**
+     *
+     */
+    private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
+            "Can`t find object of the %s class class by incoming domain %s!";
+
+    /**
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(CompanyServiceImpl.class);
@@ -167,11 +178,18 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Transactional(readOnly = true)
     public Company getByDomain(final String domain) throws IllegalArgumentException {
         if (isBlank(domain)) {
-            throw new IllegalArgumentException("Company domain is blank!");
+            throw new IllegalArgumentException(
+                    String.format(BLANK_DOMAIN_MESSAGE, getClassSimpleName())
+            );
         }
         Company company = this.repository.findByDomain(domain);
         if (company == null) {
-            throw new NullPointerException("Can`t find company by domain \"" + domain + "\"!");
+            throw new NullPointerException(
+                    String.format(
+                            FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), domain
+                    )
+            );
         }
         return company;
     }
@@ -209,16 +227,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     }
 
     /**
-     * Return Class object of {@link Company} class.
-     *
-     * @return The Class object of {@link Company} class.
-     */
-    @Override
-    protected Class<Company> getModelClass() {
-        return Company.class;
-    }
-
-    /**
      * Copies the object "from" to object "to".
      *
      * @param from a copied object
@@ -227,5 +235,15 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     @Override
     protected void copy(final Company from, final Company to) {
         to.initialize(from);
+    }
+
+    /**
+     * Return Class object of {@link Company} class.
+     *
+     * @return The Class object of {@link Company} class.
+     */
+    @Override
+    protected Class<Company> getModelClass() {
+        return Company.class;
     }
 }

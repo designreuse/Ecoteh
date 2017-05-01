@@ -115,30 +115,30 @@ public interface FileService extends DataService<File> {
     );
 
     /**
-     * Save the multipart file in the file system in the directory rootPath.
+     * Save a multipart file in the file system in the directory rootPath.
      *
-     * @param multipartFile a file to save.
+     * @param file thr file to save.
      * @param rootPath      a directory path.
      */
     void saveFile(
-            final MultipartFile multipartFile,
+            final MultipartFile file,
             final String rootPath
     );
 
     /**
-     * Save the multipart file in the file system.
+     * Save a multipart file in the file system.
      *
-     * @param multipartFile a file to save.
+     * @param file the file to save.
      */
-    void saveFile(final MultipartFile multipartFile);
+    void saveFile(final MultipartFile file);
 
     /**
      * Deletes file in the file system.
      *
-     * @param rootPath a file path.
+     * @param path the file path.
      * @return true if able to delete the file, false otherwise.
      */
-    boolean deleteFile(final String rootPath);
+    boolean deleteFile(final String path);
 
     /**
      * Returns files with the type.
