@@ -1,18 +1,17 @@
 package ua.com.ecoteh.controller.advice;
 
-import ua.com.ecoteh.exception.DisableException;
-import ua.com.ecoteh.exception.DuplicateException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import ua.com.ecoteh.exception.DuplicateException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.mockito.Mockito.mock;
 import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static ua.com.ecoteh.mocks.controller.MockAdviceController.getAdviceController;
-import static org.mockito.Mockito.mock;
 
 public class AdviceControllerTest {
 
@@ -88,18 +87,6 @@ public class AdviceControllerTest {
         checkModelAndView(
                 controller.duplicateException(
                         new DuplicateException(),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
-        );
-    }
-
-    @Test
-    public void whenDisableExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.disableException(
-                        new DisableException(),
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
