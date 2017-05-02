@@ -85,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * Typically subclasses should not invoke this method by calling
      * super as it may override their configuration.
      *
-     * @param httpSecurity a object of the HttpSecurity class.
+     * @param httpSecurity the object of the HttpSecurity class.
      * @throws Exception Exception maybe throws HttpSecurity class methods.
      */
     @Override
@@ -122,7 +122,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * Setting up users with their roles. Users will be loaded from a database
      * using UserDetailsService implementation of interface methods.
      *
-     * @param builder a object of the AuthenticationManagerBuilder class.
+     * @param builder the object of the AuthenticationManagerBuilder class.
      * @throws Exception Exception maybe throws AuthenticationManagerBuilder
      * class methods.
      */

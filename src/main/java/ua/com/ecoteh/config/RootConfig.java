@@ -169,7 +169,7 @@ public class RootConfig {
      * Returns the transaction manager, which is suitable for applications
      * that use a single JPA EntityManagerFactory for transactional data access.
      *
-     * @param factory a object of class which implements
+     * @param factory the object of class which implements
      *                EntityManagerFactory.
      * @return Returns the transaction manager.
      */
@@ -181,7 +181,7 @@ public class RootConfig {
     /**
      * Create the entity manager factory.
      *
-     * @param dataSource a object of the DataSource class with
+     * @param dataSource the object of the DataSource class with
      *                   configurations for to connection to the database.
      * @param adapter    Adapter to connect to the database.
      * @return The object of the LocalContainerEntityManagerFactoryBean class.
@@ -201,7 +201,7 @@ public class RootConfig {
 
     /**
      * Returns a object of class DataSource with configurations for to get
-     * a physical connection to the database.
+     * a physical connection to a database.
      *
      * @return The object of the DataSource class.
      */
@@ -221,7 +221,8 @@ public class RootConfig {
     }
 
     /**
-     * Returns setting adapter (JPA provider) to connect to the database.
+     * Creates and returns setting adapter (JPA provider)
+     * to connect to a database.
      *
      * @return The object of the HibernateJpaVendorAdapter class.
      */
@@ -235,6 +236,7 @@ public class RootConfig {
     }
 
     /**
+     * Creates and return object of the PersistenceExceptionTranslationPostProcessor class.
      * Intercepts any JPA or Hibernate exceptions in Spring exception.
      *
      * @return The new object of class which implements BeanPostProcessor
@@ -246,8 +248,8 @@ public class RootConfig {
     }
 
     /**
-     * Return object of the CommonsMultipartResolver class for save files
-     * in the Servlet Container temporary catalog.
+     * Creates and return object of the CommonsMultipartResolver class
+     * for save files in the Servlet Container temporary catalog.
      *
      * @return The new object of the CommonsMultipartResolver class.
      */
@@ -257,7 +259,7 @@ public class RootConfig {
     }
 
     /**
-     * Return object of the PropertySourcesPlaceholderConfigurer class .
+     * Creates and return object of the PropertySourcesPlaceholderConfigurer class.
      *
      * @return The new object of the PropertySourcesPlaceholderConfigurer class.
      */
@@ -267,7 +269,7 @@ public class RootConfig {
     }
 
     /**
-     * Creates datasource URL.
+     * Creates and returns datasource URL.
      *
      * @return The datasource URL.
      */
@@ -277,7 +279,7 @@ public class RootConfig {
     }
 
     /**
-     * Creates database connection properties.
+     * Creates and returns a properties for database connection.
      *
      * @return The object of String class with properties.
      */

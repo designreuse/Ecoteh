@@ -24,7 +24,7 @@ public class ExceptionAspectController {
      * The method will be called in the event of exceptional situations,
      * logged information about the exception.
      *
-     * @param exception a object of the Exception class or any subclasses.
+     * @param exception the object of the Exception class or any subclasses.
      */
     @AfterThrowing(
             pointcut = "execution(* ua.com.ecoteh..controller..*(..))",

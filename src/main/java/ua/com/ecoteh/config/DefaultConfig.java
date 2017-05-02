@@ -1,14 +1,12 @@
 package ua.com.ecoteh.config;
 
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
+import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.enums.UserRole;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class to work with the default users.
@@ -29,11 +27,11 @@ public final class DefaultConfig {
     private final static Map<String, User> USERS;
 
     /**
-     * Static block for initialization of map
+     * Static block for initialization of the global map
      * with a default users.
      */
     static {
-        USERS = new HashMap<>();
+        USERS = new ConcurrentHashMap<>();
         addDefaultAdmin();
         addSuperAdmin();
     }
@@ -41,9 +39,8 @@ public final class DefaultConfig {
     /**
      * Returns a default user with the username.
      *
-     * @param username a name of user to return.
-     * @return The user if it exist,
-     * null otherwise.
+     * @param username the name of user to return.
+     * @return The user if it exist, null otherwise.
      */
     public static User getDefaultUser(final String username) {
         User user;
@@ -75,43 +72,10 @@ public final class DefaultConfig {
     }
 
     /**
-     * Checks a role of an authorized user.
-     * Authorized user must have the ADMIN role.
-     *
-     * @return true if an authorized user has
-     * the ADMIN role, false otherwise.
-     */
-    private static boolean checkUser() {
-        return check(UserRole.ADMIN);
-    }
-
-    /**
-     * Checks a role of an authorized user.
-     * Authorized user must have the SUPERMAN role.
-     *
-     * @return true if an authorized user has
-     * the SUPERMAN role, false otherwise.
-     */
-    private static boolean checkSuperUser() {
-        return check(UserRole.SUPERADMIN);
-    }
-
-    /**
-     * Checks a role of an authorized user.
-     *
-     * @param role a role to check.
-     * @return true if an authorized user has the role,
-     * false otherwise.
-     */
-    private static boolean check(final UserRole role) {
-        final User user = getAuthenticatedUser();
-        return isNotNull(user) && (user.getRole().equals(role));
-    }
-
-    /**
      * Returns authenticated user.
+     * If authenticated user is empty then returns null.
      *
-     * @return The authenticated user.
+     * @return The authenticated user or null.
      */
     private static User getAuthenticatedUser() {
         User user;
@@ -127,11 +91,13 @@ public final class DefaultConfig {
 
     /**
      * Adds a default admin to global map.
+     * Creates a user with ADMIN role
+     * and adds it to global map.
      */
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "login", "password",
+                "admin", "eco20pass17",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -139,23 +105,25 @@ public final class DefaultConfig {
 
     /**
      * Adds a super admin to global map.
+     * Creates a user with SUPERADMIN role
+     * and adds it to global map.
      */
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "login", "password",
+                "superadmin", "super20pass17",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);
     }
 
     /**
-     * Creates and returns a new user.
+     * Creates a new user and returns it.
      *
-     * @param name     a name of the new user.
-     * @param login    a login of the new user.
-     * @param password a password of the new user.
-     * @param role     a role of the new user.
+     * @param name     the name of a new user.
+     * @param login    the login of a new user.
+     * @param password the password of a new user.
+     * @param role     the role of a new user.
      * @return The new user.
      */
     private static User createUser(

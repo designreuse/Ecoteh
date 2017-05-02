@@ -38,7 +38,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     /**
      * Constructor.
      *
-     * @param properties implementation of the {@link ContentProperties}  interface.
+     * @param properties the implementation of
+     *                   the {@link ContentProperties} interface.
      */
     @Autowired
     public WebConfig(final ContentProperties properties) {
@@ -70,7 +71,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * files from specific locations under web application root, the classpath,
      * and others.
      *
-     * @param registry The object of the ResourceHandlerRegistry class.
+     * @param registry the object of the ResourceHandlerRegistry class.
      */
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
