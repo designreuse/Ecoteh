@@ -23,24 +23,25 @@ public abstract class ContentServiceImpl<T extends Content>
         extends DataServiceImpl<T> implements ContentService<T> {
 
     /**
-     *
+     * The message that a incoming object is null.
      */
     private final static String INCOMING_OBJECT_IS_NULL_MESSAGE =
             "Incoming object of the %s class is null!";
 
     /**
-     *
+     * The message that a incoming title is null or empty.
      */
-    private final static String BLANK_TITLE_MESSAGE = "Incoming %s title is blank!";
+    private final static String BLANK_TITLE_MESSAGE =
+            "Incoming %s title is null or empty!";
 
     /**
-     *
+     * The message that a service cannot find content by incoming title.
      */
     private final static String FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming title %s!";
 
     /**
-     *
+     * The message that a service cannot find content by incoming URL.
      */
     private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming URL %s!";
@@ -281,15 +282,6 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * @param newLogo
-     * @param oldLogo
-     * @return
-     */
-    protected static boolean isNewLogo(final File newLogo, final File oldLogo) {
-        return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
-    }
-
-    /**
      * Copies the object "from" to object "to".
      *
      * @param from a copied object
@@ -298,12 +290,51 @@ public abstract class ContentServiceImpl<T extends Content>
     protected abstract void copy(T from, T to);
 
     /**
-     * @param content
-     * @param isValid
-     * @param <T>
-     * @return
+     * Checks incoming photos.
+     * The new photo must be not equals to the old photo.
+     * <pre>
+     *     File photo1 = new File();
+     *     isNewLogo(photo1, photo1) = false
+     *
+     *     File photo2 = new File();
+     *     isNewLogo(photo1, photo2) = false
+     *
+     *     photo2.setUrl("photo_2);
+     *     isNewLogo(photo1, photo2) = true
+     * </pre>
+     *
+     * @param newLogo the new photo (newer null).
+     * @param oldLogo the old photo (newer null).
+     * @return true if the incoming photos is not equals and
+     * new photo URL is not empty.
      */
-    private static <T extends Content> boolean isNotValidContent(
+    protected static boolean isNewLogo(final File newLogo, final File oldLogo) {
+        return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
+    }
+
+    /**
+     * Check the incoming content to not valid.
+     * Content is not valid if it is null or not valid.
+     * <pre>
+     *     isNotValidContent(null, false) = true
+     *     isNotValidContent(null, true) = true
+     *
+     *     Content content = new Content();
+     *     content.setValidated(false);
+     *     isNotValidContent(content, false) = true
+     *     isNotValidContent(content, true) = false
+     *
+     *     content.setValidated(true);
+     *     isNotValidContent(content, false) = true
+     *     isNotValidContent(content, true) = true
+     * </pre>
+     *
+     * @param content the content to check.
+     * @param isValid checks the incoming content to valid or not.
+     * @param <T>     entity type, extends {@link Content}.
+     * @return true if the content is null or it is not valid.
+     */
+    protected static <T extends Content> boolean isNotValidContent(
             final T content,
             final boolean isValid
     ) {

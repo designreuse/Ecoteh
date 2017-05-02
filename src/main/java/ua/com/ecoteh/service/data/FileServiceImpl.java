@@ -36,34 +36,38 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 public final class FileServiceImpl extends DataServiceImpl<File> implements FileService {
 
     /**
-     *
+     * The message that a incoming title is null or empty.
      */
-    private final static String BLANK_TITLE_MESSAGE = "Incoming %s title is blank!";
+    private final static String BLANK_TITLE_MESSAGE =
+            "Incoming %s title is null or empty!";
 
     /**
-     *
+     * The message that a incoming URL is null or empty.
      */
-    private final static String BLANK_URL_MESSAGE = "Incoming %s URL is blank!";
+    private final static String BLANK_URL_MESSAGE =
+            "Incoming %s URL is null or empty!";
 
     /**
-     *
+     * The message that a incoming type is null.
      */
-    private final static String NULL_TYPE_MESSAGE = "Incoming %s type is null!";
+    private final static String NULL_TYPE_MESSAGE =
+            "Incoming %s type is null!";
 
     /**
-     *
+     * The message that a static files are forbidden to remove.
      */
     private final static String FORBIDDEN_STATIC_FILE_MESSAGE =
             "Static files are forbidden to remove!";
 
     /**
-     *
+     * The message that a incoming multipart file is null or empty.
      */
     private final static String MULTIPART_FILE_IS_EMPTY_MESSAGE =
             "Incoming multipart file is null or empty!";
 
     /**
-     *
+     * The message that a incoming multipart file has size greater
+     * than max sixe.
      */
     private final static String MAX_FILE_SIZE_MESSAGE =
             "Maximum file size must be no larger than %d bytes. " +
@@ -116,7 +120,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     ) {
         File file;
         if (isNotEmpty(multipartFile)) {
-            checkMultipartFile(multipartFile);
+            isValidMultipartFile(multipartFile);
             file = new File(title, createRelativePath(title, multipartFile));
             file.setType(type);
             saveFile(multipartFile, file.getUrl());
@@ -167,7 +171,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             file.setType(type);
         }
         if (isNotEmpty(multipartFile)) {
-            checkMultipartFile(multipartFile);
+            isValidMultipartFile(multipartFile);
             deleteFile(file.getUrl());
             saveFile(multipartFile, file.getUrl());
         }
@@ -438,7 +442,18 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * @throws NullPointerException
      * @throws IllegalArgumentException
      */
-    private void checkMultipartFile(final MultipartFile file)
+
+    /**
+     * Validated a multipart file.
+     * File is valid if it is not null,
+     * not empty and it has normal size.
+     *
+     * @param file the multipart file to check.
+     * @throws NullPointerException     if the incoming file is null or empty.
+     * @throws IllegalArgumentException if the incoming file size is greater
+     *                                  than max file size
+     */
+    private void isValidMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
         if (isEmpty(file)) {
             throw new NullPointerException(MULTIPART_FILE_IS_EMPTY_MESSAGE);
@@ -454,9 +469,21 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
+     * Checks an incoming file size.
+     * <pre>
+     *     int maxSize = 1024; - for example
+     *     int size = 2048;
+     *     isGreatMaxSize(size) = true
      *
-     * @param size
-     * @return
+     *     size = 512;
+     *     isGreatMaxSize(size) = false
+     *     size = maxSize;
+     *     isGreatMaxSize(size) = false
+     * </pre>
+     *
+     * @param size the incoming file size.
+     * @return true if size is greater than max file size,
+     * false otherwise.
      */
     private boolean isGreatMaxSize(final long size) {
         return (size > this.properties.getMaxFileSize());
@@ -465,7 +492,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     /**
      * Creates and returns a absolute path to a file.
      *
-     * @param file a multipart file.
+     * @param file     a multipart file.
      * @param rootPath a root directory path.
      * @return The relative path to file.
      */

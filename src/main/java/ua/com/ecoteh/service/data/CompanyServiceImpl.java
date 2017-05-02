@@ -36,12 +36,12 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
 
     /**
-     *
+     * The message that a incoming company domain is null or empty.
      */
-    private final static String BLANK_DOMAIN_MESSAGE = "Incoming %s domain is blank!";
+    private final static String BLANK_DOMAIN_MESSAGE = "Incoming %s domain is null or empty!";
 
     /**
-     *
+     * The message that a service cannot find company by incoming domain.
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming domain %s!";
@@ -249,12 +249,23 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     }
 
     /**
+     * Check if a incoming company is not main company.
+     * <pre>
+     *     isNotMainCompany(null) = false
      *
-     * @param company
-     * @return
+     *     Company company = new Company();
+     *     company.setType(CompanyType.MAIN);
+     *     isNotMainCompany(company) = false
+     *
+     *     company.setType(CompanyType.PARTNER);
+     *     isNotMainCompany(company) = true
+     * </pre>
+     *
+     * @param company the company to check.
+     * @return true if the company is not null and
+     * it has not MAIN company type.
      */
     private static boolean isNotMainCompany(final Company company) {
         return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);
     }
-
 }

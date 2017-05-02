@@ -20,19 +20,19 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
 
     /**
-     *
+     * The message that a saving object is null.
      */
     private final static String SAVING_OBJECT_IS_NULL_MESSAGE =
             "Saving object of the %s class is null!";
 
     /**
-     *
+     * The message that a updateing object is null.
      */
     private final static String UPDATING_OBJECT_IS_NULL_MESSAGE =
             "Updating object of the %s class is null!";
 
     /**
-     *
+     * The message that a service cannot find object by incoming id.
      */
     private final static String FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming id %d!";

@@ -46,28 +46,60 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     private final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
-    private final static String BLANK_NAME_MESSAGE = "Incoming %s name is blank!";
+    /**
+     * The message that a incoming user name is null or empty.
+     */
+    private final static String BLANK_NAME_MESSAGE =
+            "Incoming %s name is null or empty!";
 
-    private final static String BLANK_URL_MESSAGE = "Incoming %s URL is blank!";
+    /**
+     * The message that a incoming user URL is null or empty.
+     */
+    private final static String BLANK_URL_MESSAGE =
+            "Incoming %s URL is null or empty!";
 
-    private final static String BLANK_LOGIN_MESSAGE = "Incoming %s login is blank!";
+    /**
+     * The message that a incoming user login is null or empty.
+     */
+    private final static String BLANK_LOGIN_MESSAGE =
+            "Incoming %s login is null or empty!";
 
-    private final static String BLANK_EMAIL_MESSAGE = "Incoming %s E-mail is blank!";
+    /**
+     * The message that a incoming user E-mail is null or empty.
+     */
+    private final static String BLANK_EMAIL_MESSAGE =
+            "Incoming %s E-mail is null or empty!";
 
-    private final static String BLANK_PHONE_MESSAGE = "Incoming %s phone is blank!";
+    /**
+     * The message that a incoming user phone is null or empty.
+     */
+    private final static String BLANK_PHONE_MESSAGE =
+            "Incoming %s phone is null or empty!";
 
+    /**
+     * The message that a service cannot find user by incoming name.
+     */
     private final static String FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming name %s!";
-
+    /**
+     * The message that a service cannot find user by incoming URL.
+     */
     private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming URL %s!";
-
+    /**
+     * The message that a service cannot find user by incoming login.
+     */
     private final static String FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming login %s!";
-
+    /**
+     * The message that a service cannot find user by incoming E-mail.
+     */
     private final static String FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming E-mail %s!";
 
+    /**
+     * The message that a service cannot find user by incoming phone.
+     */
     private final static String FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming phone %s!";
 
@@ -184,7 +216,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * Returns user with the parameter name.
      *
      * @param name a name of the user to return.
-     * @return The user with the parameter name .
+     * @return The user with the parameter name.
      * @throws IllegalArgumentException Throw exception when parameter name is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -572,7 +604,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             result.addAll(
                     users.stream()
                             .filter(
-                                    UserServiceImpl::validFilter
+                                    UserServiceImpl::isValidUser
                             ).collect(Collectors.toList())
             );
         }
@@ -629,43 +661,76 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * @param phone
-     * @return
+     * Returns user with a mobile phone.
+     *
+     * @param phone the mobile phone of the user to return.
+     * @return The user with a mobile phone.
      */
     private User getByMobilePhone(final String phone) {
         return this.repository.findByContactsMobilePhone(phone);
     }
 
     /**
-     * @param phone
-     * @return
+     * Returns user with a landline phone.
+     *
+     * @param phone the landline phone of the user to return.
+     * @return The user with a landline phone.
      */
     private User getByLandlinePhone(final String phone) {
         return this.repository.findByContactsLandlinePhone(phone);
     }
 
     /**
-     * @param phone
-     * @return
+     * Returns user with a fax number.
+     *
+     * @param phone the fax number of the user to return.
+     * @return The user with a fax number.
      */
     private User getByFax(final String phone) {
         return this.repository.findByContactsFax(phone);
     }
 
     /**
-     * @param newPhoto
-     * @param oldPhoto
-     * @return
+     * Checks incoming photos.
+     * The new photo must be not equals to the old photo.
+     * <pre>
+     *     File photo1 = new File();
+     *     isNewPhoto(photo1, photo1) = false
+     *
+     *     File photo2 = new File();
+     *     isNewPhoto(photo1, photo2) = false
+     *
+     *     photo2.setUrl("photo_2);
+     *     isNewPhoto(photo1, photo2) = true
+     * </pre>
+     *
+     * @param newPhoto the new photo (newer null).
+     * @param oldPhoto the old photo (newer null).
+     * @return true if the incoming photos is not equals and
+     * new photo URL is not empty.
      */
-    protected static boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
+    private static boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
         return !newPhoto.equals(oldPhoto) && isNotEmpty(newPhoto.getUrl());
     }
 
     /**
-     * @param user
-     * @return
+     * Validated a incoming user.
+     * User is valid if it is not null and it validated.
+     * <pre>
+     *     isValidUser(null) = false
+     *
+     *     User user = new User();
+     *     user.setValidated(false);
+     *     isValidUser(user) = false
+     *
+     *     user.setValidated(true);
+     *     isValidUser(user) = true
+     * </pre>
+     *
+     * @param user the user to check.
+     * @return true if the user is not null and it validated.
      */
-    private static boolean validFilter(final User user) {
+    private static boolean isValidUser(final User user) {
         return isNotNull(user) && user.isValidated();
     }
 }

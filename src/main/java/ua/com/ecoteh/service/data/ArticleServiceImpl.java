@@ -37,21 +37,21 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 public final class ArticleServiceImpl extends ContentServiceImpl<Article> implements ArticleService {
 
     /**
-     *
+     * The message that a incoming number is null or empty.
      */
-    private final static String BLANK_NUMBER_MESSAGE = "Incoming %s number is blank!";
+    private final static String BLANK_NUMBER_MESSAGE = "Incoming %s number is null or empty!";
 
     /**
-     *
+     * The message that a incoming category title is null or empty.
+     */
+    private final static String BLANK_CATEGORY_TITLE_MESSAGE =
+            "Incoming category title is null or empty!";
+
+    /**
+     * The message that a service cannot find article by incoming number.
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming number %s!";
-
-    /**
-     *
-     */
-    private final static String CATEGORY_TITLE_IS_BKANK_MESSAGE =
-            "Incoming category title is blank!";
 
     /**
      * The interface provides a set of standard methods
@@ -96,7 +96,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             );
         }
         final Article article = this.repository.findByNumber(number);
-        if (notValidFilter(article, isValid)) {
+        if (isNotValidContent(article, isValid)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
@@ -132,7 +132,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     public List<Article> getByCategoryTitle(final String title)
             throws IllegalArgumentException {
         if (isEmpty(title)) {
-            throw new IllegalArgumentException(CATEGORY_TITLE_IS_BKANK_MESSAGE);
+            throw new IllegalArgumentException(BLANK_CATEGORY_TITLE_MESSAGE);
         }
         return this.repository.findByCategoryTitle(title);
     }
@@ -480,15 +480,5 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      */
     private static boolean validFilter(final Article article) {
         return isNotNull(article) && article.isValidated();
-    }
-
-    /**
-     *
-     * @param article
-     * @param isValid
-     * @return
-     */
-    private static boolean notValidFilter(final Article article, final boolean isValid) {
-        return isNotNull(article) || (isValid && !article.isValidated());
     }
 }

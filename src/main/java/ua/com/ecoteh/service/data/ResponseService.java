@@ -16,11 +16,11 @@ import java.util.List;
 public interface ResponseService extends DataService<Response> {
 
     /**
-     * Initializes, updates and returns response with parameter id.
+     * Initializes, updates and returns response with incoming id.
      *
-     * @param id       a id of the response to update.
-     * @param response a response to update.
-     * @return The updating response with parameter id.
+     * @param id       the id of a response to update.
+     * @param response the response to update.
+     * @return The updating response with incoming id.
      */
     Response update(
             final long id,
@@ -48,11 +48,11 @@ public interface ResponseService extends DataService<Response> {
     List<Response> getAndSortByDate(final boolean revers);
 
     /**
-     * Filters and returns responses by the date.
+     * Filters and returns responses by the incoming dates.
      *
      * @param responses  the responses to filter.
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return The filtered list of responses.
      */
     List<Response> filterByDate(
@@ -62,10 +62,10 @@ public interface ResponseService extends DataService<Response> {
     );
 
     /**
-     * Filters and returns responses by the date.
+     * Filters and returns responses by the incoming dates.
      *
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return The filtered list of responses.
      */
     List<Response> getAndFilterByDate(
