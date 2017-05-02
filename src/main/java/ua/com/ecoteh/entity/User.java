@@ -42,7 +42,7 @@ public class User extends Model implements IUser, UserDetails {
     private String name;
 
     /**
-     * The url of a user.
+     * The URL of a user.
      */
     @Column(name = "url", nullable = false)
     private String url;
@@ -129,8 +129,8 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Constructor.
      *
-     * @param name        a name of the new user.
-     * @param description a description of the new user.
+     * @param name        the name of a new user.
+     * @param description the description of a new user.
      */
     public User(
             final String name,
@@ -144,9 +144,9 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Constructor.
      *
-     * @param name        a name of the new user.
-     * @param description a description of the new user.
-     * @param contacts    a contacts to the new user.
+     * @param name        the name of a new user.
+     * @param description the description of a new user.
+     * @param contacts    the contacts to a new user.
      */
     public User(
             final String name,
@@ -160,8 +160,8 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Constructor.
      *
-     * @param name     a name of the new user.
-     * @param contacts a contacts to the new user.
+     * @param name     the name of a new user.
+     * @param contacts the contacts to a new user.
      */
     public User(
             final String name,
@@ -323,9 +323,16 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new name to the user.
      * If parameter name is blank, then sets empty string.
-     * Also name translates and sets to url.
+     * Also, name translates and sets to URL if this URL is empty.
+     * <pre>
+     *     setName(null) - name = ""
+     *     setName("") - name = ""
+     *     setName(" ") - name = ""
+     *     setName("bob") - name = "bob"
+     *     setName(" bob ") - name = "bob"
+     * </pre>
      *
-     * @param name a new name to the user.
+     * @param name the new name to the user.
      */
     @Override
     public void setName(final String name) {
@@ -336,9 +343,16 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Sets a new login to the user.
+     * Encrypts and sets a new login to the user.
+     * <pre>
+     *     setLogin(null) - login = ""
+     *     setLogin("") - login = ""
+     *     setLogin(" ") - login = ""
+     *     setLogin("bob") - login = "bob"
+     *     setLogin(" bob ") - login = "bob"
+     * </pre>
      *
-     * @param login a new login to the user.
+     * @param login the new login to the user.
      */
     @Override
     public void setLogin(final String login) {
@@ -348,7 +362,7 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns a login of the user.
+     * Decrypts and returns a login of the user.
      *
      * @return The user login.
      */
@@ -370,6 +384,13 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new encrypted login to the user.
      * If parameter login is blank then sets empty string.
+     * <pre>
+     *     setEncryptedLogin(null) - encryptedLogin = ""
+     *     setEncryptedLogin("") - encryptedLogin = ""
+     *     setEncryptedLogin(" ") - encryptedLogin = ""
+     *     setEncryptedLogin("bob") - encryptedLogin = "bob"
+     *     setEncryptedLogin(" bob ") - encryptedLogin = "bob"
+     * </pre>
      *
      * @param login a new encrypted login to the user.
      */
@@ -379,7 +400,7 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns a password of the user.
+     * Decrypts and returns a password of the user.
      *
      * @return The user password.
      */
@@ -391,9 +412,16 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Sets a new password to the user.
+     * Encrypts and sets a new password to the user.
+     * <pre>
+     *     setPassword(null) - password = ""
+     *     setPassword("") - password = ""
+     *     setPassword(" ") - password = ""
+     *     setPassword("bob") - password = "bob"
+     *     setPassword(" bob ") - password = "bob"
+     * </pre>
      *
-     * @param password a new password to the user.
+     * @param password the new password to the user.
      */
     @Transient
     @Override
@@ -406,7 +434,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a encrypted password.
      *
-     * @return The encrypted password..
+     * @return The encrypted password.
      */
     @Override
     public String getEncryptedPassword() {
@@ -416,8 +444,15 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new encrypted password to the user.
      * If parameter password is blank then sets empty string.
+     * <pre>
+     *     setEncryptedPassword(null) - encryptedPassword = ""
+     *     setEncryptedPassword("") - encryptedPassword = ""
+     *     setEncryptedPassword(" ") - encryptedPassword = ""
+     *     setEncryptedPassword("bob") - encryptedPassword = "bob"
+     *     setEncryptedPassword(" bob ") - encryptedPassword = "bob"
+     * </pre>
      *
-     * @param password a new encrypted password to the user.
+     * @param password the new encrypted password to the user.
      */
     @Override
     public void setEncryptedPassword(final String password) {
@@ -428,7 +463,7 @@ public class User extends Model implements IUser, UserDetails {
      * Translates value and sets to url.
      * For translate used {@link Translator} method "fromCyrillicToLatin".
      *
-     * @param value a value to translate.
+     * @param value the value to translate.
      */
     @Override
     public void translateAndSetUrl(final String value) {
@@ -448,8 +483,15 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new url to the user.
      * If parameter url is blank, then sets empty string.
+     * <pre>
+     *     setUrl(null) - url = ""
+     *     setUrl("") - url = ""
+     *     setUrl(" ") - url = ""
+     *     setUrl("bob") - url = "bob"
+     *     setUrl(" bob ") - url = "bob"
+     * </pre>
      *
-     * @param url a new url to the user.
+     * @param url the new url to the user.
      */
     @Override
     public void setUrl(final String url) {
@@ -469,8 +511,15 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new description to the user.
      * If parameter description is blank, then sets empty string.
+     * <pre>
+     *     setDescription(null) - description = ""
+     *     setDescription("") - description = ""
+     *     setDescription(" ") - description = ""
+     *     setDescription("bob") - description = "bob"
+     *     setDescription(" bob ") - description = "bob"
+     * </pre>
      *
-     * @param description a new description to the user.
+     * @param description the new description to the user.
      */
     @Override
     public void setDescription(final String description) {
@@ -490,7 +539,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new photo to the user.
      *
-     * @param photo a new photo URL to the user.
+     * @param photo the new photo URL to the user.
      */
     @Override
     public void setPhoto(final File photo) {
@@ -513,7 +562,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new contacts to the user.
      *
-     * @param contacts a new contacts to the user.
+     * @param contacts the new contacts to the user.
      */
     @Override
     public void setContacts(final Contacts contacts) {
@@ -535,9 +584,13 @@ public class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets a new role to the user.
-     * If parameter role is blank, then sets empty string.
+     * Sets default role if incoming role is null.
+     * <pre>
+     *     setRole(null) - role = UserRole.ANOTHER
+     *     setRole(UserRole.ADMIN) - role = UserRole.ADMIN
+     * </pre>
      *
-     * @param role a new role to the user.
+     * @param role the new role to the user.
      */
     @Override
     public void setRole(final UserRole role) {
@@ -576,6 +629,8 @@ public class User extends Model implements IUser, UserDetails {
 
     /**
      * Sets the value of the locked user or not.
+     * If incoming value is true then, also,
+     * set validated and mailing false.
      *
      * @param locked a value of locked the user or not.
      */
@@ -590,9 +645,15 @@ public class User extends Model implements IUser, UserDetails {
 
     /**
      * Initializes the user.
+     * Returns this v with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this user
+     *     initialize(new User()) - does nothing, returns this
+     *     user with a new copied fields
+     * </pre>
      *
-     * @param user a user to copy.
-     * @return The this user with new fields.
+     * @param user the user to copy.
+     * @return The this user with a new fields.
      */
     @Override
     public User initialize(final User user) {

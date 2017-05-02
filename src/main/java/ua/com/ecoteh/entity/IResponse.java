@@ -22,7 +22,7 @@ public interface IResponse extends IModel {
     /**
      * Sets a new username to the response.
      *
-     * @param username a new text to the response.
+     * @param username the new text to the response.
      */
     void setUsername(final String username);
 
@@ -36,7 +36,7 @@ public interface IResponse extends IModel {
     /**
      * Sets a new text to the response.
      *
-     * @param text a new text to the response.
+     * @param text the new text to the response.
      */
     void setText(final String text);
 
@@ -50,7 +50,7 @@ public interface IResponse extends IModel {
     /**
      * Sets a new text to the article.
      *
-     * @param date a new date to the article.
+     * @param date the new date to the article.
      */
     void setDate(final Date date);
 
@@ -68,9 +68,10 @@ public interface IResponse extends IModel {
 
     /**
      * Initializes the response.
+     * Returns this response with a new copied fields.
      *
-     * @param response a response to copy.
-     * @return The this response with new fields.
+     * @param response the response to copy.
+     * @return This response with new fields.
      */
     Response initialize(final Response response);
 }

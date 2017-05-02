@@ -57,14 +57,14 @@ public interface IModel extends Serializable, Cloneable {
     /**
      * Sets new identifier to the model.
      *
-     * @param id a new identifier to the model.
+     * @param id the new identifier to the model.
      */
     void setId(final long id);
 
     /**
      * Sets validations of the model.
      *
-     * @param validated a validations of the model.
+     * @param validated the validations of the model.
      */
     void setValidated(final boolean validated);
 
@@ -77,9 +77,10 @@ public interface IModel extends Serializable, Cloneable {
 
     /**
      * Initializes the model.
+     * Returns this model with a new copied fields.
      *
-     * @param model a model to copy.
-     * @return The this model with new fields.
+     * @param model the model to copy.
+     * @return This model with a new copied fields.
      */
     Model initialize(final Model model);
 }

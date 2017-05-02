@@ -78,11 +78,11 @@ public class Article extends Content implements IArticle {
     /**
      * Constructor.
      *
-     * @param title       a title of the new article.
-     * @param description a description of the new article.
-     * @param text        a text of the new article.
-     * @param keywords    a keywords of the new article.
-     * @param number      a number of the new article.
+     * @param title       the title of a new article.
+     * @param description the description of a new article.
+     * @param text        the text of a new article.
+     * @param keywords    the keywords of a new article.
+     * @param number      the number of a new article.
      */
     public Article(
             final String title,
@@ -100,12 +100,12 @@ public class Article extends Content implements IArticle {
     /**
      * Constructor.
      *
-     * @param title       a title of the new article.
-     * @param description a description of the new article.
-     * @param text        a text of the new article.
-     * @param keywords    a keywords of the new article.
-     * @param number      a number of the new article.
-     * @param price       a price of the new article.
+     * @param title       the title of a new article.
+     * @param description the description of a new article.
+     * @param text        the text of a new article.
+     * @param keywords    the keywords of a new article.
+     * @param number      the number of a new article.
+     * @param price       the price of a new article.
      */
     public Article(
             final String title,
@@ -122,7 +122,7 @@ public class Article extends Content implements IArticle {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -140,7 +140,7 @@ public class Article extends Content implements IArticle {
      *
      * @param object The reference object with which to compare.
      * @return true if this object is the same as the object
-     * argument, false otherwise otherwise.
+     * argument, false otherwise.
      */
     @Override
     public boolean equals(final Object object) {
@@ -170,7 +170,7 @@ public class Article extends Content implements IArticle {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Article clone() {
@@ -180,7 +180,7 @@ public class Article extends Content implements IArticle {
     /**
      * Returns a number of the article.
      *
-     * @return The article number.
+     * @return The article number (newer null).
      */
     @Override
     public String getNumber() {
@@ -190,8 +190,15 @@ public class Article extends Content implements IArticle {
     /**
      * Sets new number to the article.
      * If parameter number is blank, then call method newNumber().
+     * <pre>
+     *     setNumber(null) - number = "NewRandomNumber"
+     *     setNumber("") - number = "NewRandomNumber"
+     *     setNumber(" ") - number = "NewRandomNumber"
+     *     setNumber("bob") - number = "bob"
+     *     setNumber(" bob ") - number = "bob"
+     * </pre>
      *
-     * @param number a new number to the article.
+     * @param number the new number to the article.
      */
     @Override
     public void setNumber(final String number) {
@@ -213,7 +220,7 @@ public class Article extends Content implements IArticle {
     /**
      * Returns a text of the article.
      *
-     * @return The article text.
+     * @return The article text or empty string (newer null).
      */
     @Override
     public String getText() {
@@ -223,6 +230,13 @@ public class Article extends Content implements IArticle {
     /**
      * Sets a new text to the article.
      * If parameter text is blank, then sets empty string.
+     * <pre>
+     *     setText(null) - text = ""
+     *     setText("") - text = ""
+     *     setText(" ") - text = ""
+     *     setText("bob") - text = "bob"
+     *     setText(" bob ") - text = "bob"
+     * </pre>
      *
      * @param text a new text to the article.
      */
@@ -234,7 +248,7 @@ public class Article extends Content implements IArticle {
     /**
      * Returns a date of the article.
      *
-     * @return The article date.
+     * @return The article date (newer null).
      */
     @Override
     public Date getDate() {
@@ -243,9 +257,13 @@ public class Article extends Content implements IArticle {
 
     /**
      * Sets a new date to the article.
-     * If parameter date is {@code null}, then sets {@code new Date()}.
+     * If parameter date is null, then sets new Date().
+     * <pre>
+     *     setDate(null) - date = new Date()
+     *     setDate(someRealDate) - date = someRealDate
+     * </pre>
      *
-     * @param date a new date to the article.
+     * @param date the new date to the article.
      */
     @Override
     public void setDate(final Date date) {
@@ -255,7 +273,7 @@ public class Article extends Content implements IArticle {
     /**
      * Returns a price of the article.
      *
-     * @return The article price.
+     * @return The article price or '0' (newer null).
      */
     @Override
     public String getPrice() {
@@ -264,9 +282,16 @@ public class Article extends Content implements IArticle {
 
     /**
      * Sets a new price to the article.
-     * If parameter text is blank, then sets new Date().
+     * If parameter price is blank, then sets 0.
+     * <pre>
+     *     setPrice(null) - price = "0"
+     *     setPrice("") - address = "0"
+     *     setPrice(" ") - address = "0"
+     *     setPrice("$100") - address = "$100"
+     *     setPrice(" $100 ") - address = " $100 "
+     * </pre>
      *
-     * @param price a new price to the article.
+     * @param price the new price to the article.
      */
     @Override
     public void setPrice(final String price) {
@@ -276,7 +301,7 @@ public class Article extends Content implements IArticle {
     /**
      * Returns an article date in string format.
      *
-     * @return The article string-date.
+     * @return The article string-date (newer null).
      */
     @Override
     public String getDateToString() {
@@ -289,7 +314,7 @@ public class Article extends Content implements IArticle {
      * or this category not equals new category.
      * Also the article deletes from old category and adds to new category.
      *
-     * @param category a new category to the article.
+     * @param category the new category to the article.
      */
     @Override
     public void setCategory(final Category category) {
@@ -319,9 +344,15 @@ public class Article extends Content implements IArticle {
 
     /**
      * Initializes the article.
+     * Returns this article with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this article
+     *     initialize(new Article()) - does nothing, returns this
+     *     article with a new copied fields
+     * </pre>
      *
-     * @param article a article to copy.
-     * @return The this article with new fields.
+     * @param article the article to copy.
+     * @return This article with new fields (newer null).
      */
     @Override
     public Article initialize(final Article article) {

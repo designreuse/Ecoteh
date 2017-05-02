@@ -22,14 +22,14 @@ public interface IUser extends IModel {
     /**
      * Sets a new name to the user.
      *
-     * @param name a new name to the user.
+     * @param name the new name to the user.
      */
     void setName(final String name);
 
     /**
      * Sets a new login to the user.
      *
-     * @param login a new login to the user.
+     * @param login the new login to the user.
      */
     void setLogin(final String login);
 
@@ -50,7 +50,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new encrypted login to the user.
      *
-     * @param login a new encrypted login to the user.
+     * @param login the new encrypted login to the user.
      */
     void setEncryptedLogin(final String login);
 
@@ -64,7 +64,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new password to the user.
      *
-     * @param password a new password to the user.
+     * @param password the new password to the user.
      */
     void setPassword(final String password);
 
@@ -78,14 +78,14 @@ public interface IUser extends IModel {
     /**
      * Sets a new encrypted password to the user.
      *
-     * @param password a new encrypted password to the user.
+     * @param password the new encrypted password to the user.
      */
     void setEncryptedPassword(final String password);
 
     /**
      * Translates value and sets to url.
      *
-     * @param value a value to translate.
+     * @param value the value to translate.
      */
     void translateAndSetUrl(final String value);
 
@@ -99,7 +99,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new url to the user.
      *
-     * @param url a new url to the user.
+     * @param url the new url to the user.
      */
     void setUrl(final String url);
 
@@ -113,7 +113,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new description to the user.
      *
-     * @param description a new description to the user.
+     * @param description the new description to the user.
      */
     void setDescription(final String description);
 
@@ -127,7 +127,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new photo to the user.
      *
-     * @param photoUrl a new photo URL to the user.
+     * @param photoUrl the new photo URL to the user.
      */
     void setPhoto(final File photoUrl);
 
@@ -141,7 +141,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new contacts to the user.
      *
-     * @param contacts a new contacts to the user.
+     * @param contacts the new contacts to the user.
      */
     void setContacts(final Contacts contacts);
 
@@ -155,7 +155,7 @@ public interface IUser extends IModel {
     /**
      * Sets a new role to the user.
      *
-     * @param role a new role to the user.
+     * @param role the new role to the user.
      */
     void setRole(final UserRole role);
 
@@ -167,9 +167,10 @@ public interface IUser extends IModel {
     boolean isMailing();
 
     /**
-     * Sets value of permit to send a letters on the user email.
+     * Sets value of permit to send a letters on the user E-mail.
      *
-     * @param isMailing a permit to send a letters on the user email.
+     * @param isMailing the permit to send a letters
+     *                  on the user E-mail.
      */
     void setMailing(final boolean isMailing);
 
@@ -183,15 +184,16 @@ public interface IUser extends IModel {
     /**
      * Sets the value of the locked user or not.
      *
-     * @param locked a value of locked the user or not.
+     * @param locked the value of locked the user or not.
      */
     void setLocked(final boolean locked);
 
     /**
      * Initializes the user.
+     * Returns this v with a new copied fields.
      *
-     * @param user a user to copy.
-     * @return The this user with new fields.
+     * @param user the user to copy.
+     * @return The this user with a new fields.
      */
     User initialize(final User user);
 }

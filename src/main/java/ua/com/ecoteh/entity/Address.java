@@ -27,13 +27,13 @@ public class Address extends Model implements IAddress {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The address.
+     * The mailing address.
      */
     @Column(name = "address", nullable = false)
     private String address;
 
     /**
-     * The google maps URL.
+     * The Google maps URL.
      */
     @Column(name = "google_maps", nullable = false)
     private String googleMaps;
@@ -49,7 +49,7 @@ public class Address extends Model implements IAddress {
     /**
      * Constructor.
      *
-     * @param address a address.
+     * @param address the mailing address of the new address.
      */
     public Address(final String address) {
         this();
@@ -59,8 +59,8 @@ public class Address extends Model implements IAddress {
     /**
      * Constructor.
      *
-     * @param address    a address
-     * @param googleMaps a google maps URL.
+     * @param address    the mailing address of the new address.
+     * @param googleMaps the google maps URL of the new address.
      */
     public Address(final String address, final String googleMaps) {
         this(address);
@@ -70,7 +70,7 @@ public class Address extends Model implements IAddress {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -85,7 +85,7 @@ public class Address extends Model implements IAddress {
      *
      * @param object The reference object with which to compare.
      * @return true if this object is the same as the object
-     * argument, false otherwise otherwise.
+     * argument, false otherwise.
      */
     @Override
     public boolean equals(Object object) {
@@ -113,7 +113,7 @@ public class Address extends Model implements IAddress {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Address clone() {
@@ -121,9 +121,9 @@ public class Address extends Model implements IAddress {
     }
 
     /**
-     * Returns a address of the company.
+     * Returns a mailing address of the address.
      *
-     * @return The company address.
+     * @return The mailing address or empty string (newer null).
      */
     @Override
     public String getAddress() {
@@ -131,10 +131,17 @@ public class Address extends Model implements IAddress {
     }
 
     /**
-     * Sets a new address to the company.
-     * If parameter address is blank, then sets empty string..
+     * Sets a new mailing address to the address.
+     * If parameter address is blank, then sets empty string.
+     * <pre>
+     *     setAddress(null) - address = ""
+     *     setAddress("") - address = ""
+     *     setAddress(" ") - address = ""
+     *     setAddress("bob") - address = "bob"
+     *     setAddress(" bob ") - address = " bob "
+     * </pre>
      *
-     * @param address a new address to the company.
+     * @param address the new mailing address to the address.
      */
     @Override
     public void setAddress(final String address) {
@@ -142,9 +149,9 @@ public class Address extends Model implements IAddress {
     }
 
     /**
-     * Returns a google maps URL of the company.
+     * Returns a Google maps URL of the address.
      *
-     * @return The company google maps URL.
+     * @return The Google maps URL or empty string (newer null).
      */
     @Override
     public String getGoogleMaps() {
@@ -152,10 +159,17 @@ public class Address extends Model implements IAddress {
     }
 
     /**
-     * Sets a new google maps URL to the company.
-     * If parameter google maps URL is blank, then sets empty string..
+     * Sets a new Google maps URL to the address.
+     * If parameter google maps URL is blank, then sets empty string.
+     * <pre>
+     *     setGoogleMaps(null) - googleMaps = ""
+     *     setGoogleMaps("") - googleMaps = ""
+     *     setGoogleMaps(" ") - googleMaps = ""
+     *     setGoogleMaps("bob") - googleMaps = "bob"
+     *     setGoogleMaps(" bob ") - googleMaps = "bob"
+     * </pre>
      *
-     * @param googleMaps a new google maps URL to the company.
+     * @param googleMaps the new Google maps URL to the address.
      */
     @Override
     public void setGoogleMaps(final String googleMaps) {
@@ -163,10 +177,16 @@ public class Address extends Model implements IAddress {
     }
 
     /**
-     * Initializes the article.
+     * Initializes the address.
+     * Returns this address with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this address
+     *     initialize(new Address()) - does nothing, returns this
+     *     address with a new copied fields
+     * </pre>
      *
-     * @param address a address to copy.
-     * @return The this address with new fields.
+     * @param address the address to copy.
+     * @return This address with a new copied fields (newer null).
      */
     @Override
     public Address initialize(final Address address) {

@@ -60,8 +60,8 @@ public class Response extends Model implements IResponse {
     /**
      * Constructor.
      *
-     * @param username a username of the new response.
-     * @param text     a text of the new response.
+     * @param username the username of a new response.
+     * @param text     the text of a new response.
      */
     public Response(
             final String username,
@@ -139,8 +139,15 @@ public class Response extends Model implements IResponse {
     /**
      * Sets a new username to the response.
      * If parameter username is blank, then sets empty string.
+     * <pre>
+     *     setUsername(null) - username = ""
+     *     setUsername("") - username = ""
+     *     setUsername(" ") - username = ""
+     *     setUsername("bob") - username = "bob"
+     *     setUsername(" bob ") - username = "bob"
+     * </pre>
      *
-     * @param username a new text to the response.
+     * @param username the new text to the response.
      */
     @Override
     public void setUsername(final String username) {
@@ -160,8 +167,15 @@ public class Response extends Model implements IResponse {
     /**
      * Sets a new text to the response.
      * If parameter text is blank, then sets empty string.
+     * <pre>
+     *     setText(null) - text = ""
+     *     setText("") - text = ""
+     *     setText(" ") - text = ""
+     *     setText("bob") - text = "bob"
+     *     setText(" bob ") - text = "bob"
+     * </pre>
      *
-     * @param text a new text to the response.
+     * @param text the new text to the response.
      */
     @Override
     public void setText(final String text) {
@@ -179,10 +193,14 @@ public class Response extends Model implements IResponse {
     }
 
     /**
-     * Sets a new text to the article.
-     * If parameter text is blank, then sets new Date().
+     * Sets a new date to the response.
+     * If parameter date is null, then sets new Date().
+     * <pre>
+     *     setDate(null) - date = new Date()
+     *     setDate(someRealDate) - date = someRealDate
+     * </pre>
      *
-     * @param date a new date to the article.
+     * @param date the new date to the response.
      */
     @Override
     public void setDate(final Date date) {
@@ -209,9 +227,15 @@ public class Response extends Model implements IResponse {
 
     /**
      * Initializes the response.
+     * Returns this response with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this response
+     *     initialize(new Response()) - does nothing, returns this
+     *     response with a new copied fields
+     * </pre>
      *
-     * @param response a response to copy.
-     * @return The this response with new fields.
+     * @param response the response to copy.
+     * @return This response with new fields.
      */
     @Override
     public Response initialize(final Response response) {

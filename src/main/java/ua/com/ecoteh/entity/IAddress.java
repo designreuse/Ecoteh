@@ -10,38 +10,39 @@ package ua.com.ecoteh.entity;
 public interface IAddress extends IModel {
 
     /**
-     * Returns a address of the company.
+     * Returns a mailing address of the address.
      *
-     * @return The company address.
+     * @return The mailing address.
      */
     String getAddress();
 
     /**
-     * Sets a new address to the company.
+     * Sets a new mailing address to the address.
      *
-     * @param address a new address to the company.
+     * @param address the new mailing address to the address.
      */
     void setAddress(final String address);
 
     /**
-     * Returns a google maps url of the company.
+     * Returns a google maps URL of the address.
      *
-     * @return The company google maps url.
+     * @return The address google maps URL.
      */
     String getGoogleMaps();
 
     /**
-     * Sets a new google maps url to the company.
+     * Sets a new Google maps URL to the address.
      *
-     * @param googleMaps a new google maps url to the company.
+     * @param googleMaps the new Google maps URL to the address.
      */
     void setGoogleMaps(final String googleMaps);
 
     /**
-     * Initializes the article.
+     * Initializes the address.
+     * Returns this address with a new copied fields.
      *
-     * @param address a address to copy.
-     * @return The this address with new fields.
+     * @param address the address to copy.
+     * @return This address with new fields.
      */
     Address initialize(final Address address);
 }

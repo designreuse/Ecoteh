@@ -45,13 +45,13 @@ public class Message extends Model implements IMessage {
     private User user;
 
     /**
-     * The subject of message.
+     * The subject of a message.
      */
     @Column(name = "subject", nullable = false)
     private String subject;
 
     /**
-     * The text of message.
+     * The text of a message.
      */
     @Column(name = "text", nullable = false)
     private String text;
@@ -75,9 +75,9 @@ public class Message extends Model implements IMessage {
     /**
      * Constructor.
      *
-     * @param user    a message user.
-     * @param subject a subject of the new message.
-     * @param text    a text of the new message.
+     * @param user    the message user.
+     * @param subject the subject of a new message.
+     * @param text    the text of a new message.
      */
     public Message(
             final User user,
@@ -93,7 +93,7 @@ public class Message extends Model implements IMessage {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -141,7 +141,7 @@ public class Message extends Model implements IMessage {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Message clone() {
@@ -151,7 +151,7 @@ public class Message extends Model implements IMessage {
     /**
      * Returns a user of the message.
      *
-     * @return The user of the message.
+     * @return The user of the message (newer null).
      */
     @Override
     public User getUser() {
@@ -161,7 +161,7 @@ public class Message extends Model implements IMessage {
     /**
      * Sets a user of the message.
      *
-     * @param user a user of the message.
+     * @param user the user of the message.
      */
     @Override
     public void setUser(final User user) {
@@ -174,7 +174,7 @@ public class Message extends Model implements IMessage {
     /**
      * Returns a subject of the message.
      *
-     * @return The message subject.
+     * @return The message subject or empty string (newer null).
      */
     @Override
     public String getSubject() {
@@ -184,6 +184,13 @@ public class Message extends Model implements IMessage {
     /**
      * Sets a new subject to the message.
      * If parameter subject is blank, then sets empty string.
+     * <pre>
+     *     setSubject(null) - subject = ""
+     *     setSubject("") - subject = ""
+     *     setSubject(" ") - subject = ""
+     *     setSubject("bob") - subject = "bob"
+     *     setSubject(" bob ") - subject = "bob"
+     * </pre>
      *
      * @param subject a new subject to the message.
      */
@@ -195,7 +202,7 @@ public class Message extends Model implements IMessage {
     /**
      * Returns a text of the message.
      *
-     * @return The message text.
+     * @return The message text or empty string (newer null).
      */
     @Override
     public String getText() {
@@ -205,6 +212,13 @@ public class Message extends Model implements IMessage {
     /**
      * Sets a new text to the message.
      * If parameter text is blank, then sets empty string.
+     * <pre>
+     *     setText(null) - text = ""
+     *     setText("") - text = ""
+     *     setText(" ") - text = ""
+     *     setText("bob") - text = "bob"
+     *     setText(" bob ") - text = "bob"
+     * </pre>
      *
      * @param text a new text to the message.
      */
@@ -216,7 +230,7 @@ public class Message extends Model implements IMessage {
     /**
      * Returns a date of the message.
      *
-     * @return The message date.
+     * @return The message date (newer null).
      */
     @Override
     public Date getDate() {
@@ -225,9 +239,13 @@ public class Message extends Model implements IMessage {
 
     /**
      * Sets a new date to the message.
-     * If parameter date is empty string, then sets new Date().
+     * If parameter date is null, then sets new Date().
+     * <pre>
+     *     setDate(null) - date = new Date()
+     *     setDate(someRealDate) - date = someRealDate
+     * </pre>
      *
-     * @param date a new text to the message.
+     * @param date the new date to the message.
      */
     @Override
     public void setDate(final Date date) {
@@ -237,7 +255,7 @@ public class Message extends Model implements IMessage {
     /**
      * Returns an article date in string format.
      *
-     * @return The message string-date.
+     * @return The message string-date (newer null).
      */
     @Override
     public String getDateToString() {
@@ -246,9 +264,15 @@ public class Message extends Model implements IMessage {
 
     /**
      * Initializes the message.
+     * Returns this message with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this message
+     *     initialize(new Message()) - does nothing, returns this
+     *     message with a new copied fields
+     * </pre>
      *
-     * @param message a message to copy.
-     * @return The this message with new fields.
+     * @param message the message to copy.
+     * @return This message with new fields (newer null).
      */
     @Override
     public Message initialize(final Message message) {

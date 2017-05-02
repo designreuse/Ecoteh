@@ -20,7 +20,7 @@ public interface IContent extends IModel {
     /**
      * Sets a new title to the content.
      *
-     * @param title a new title to the content.
+     * @param title the new title to the content.
      */
     void setTitle(final String title);
 
@@ -34,14 +34,14 @@ public interface IContent extends IModel {
     /**
      * Sets a new URL to the content.
      *
-     * @param url a new URL to the content.
+     * @param url the new URL to the content.
      */
     void setUrl(final String url);
 
     /**
      * Translates value and sets to url.
      *
-     * @param value a value to translate.
+     * @param value the value to translate.
      */
     void translateAndSetUrl(final String value);
 
@@ -55,7 +55,7 @@ public interface IContent extends IModel {
     /**
      * Sets a new description to the content.
      *
-     * @param description a new description to the content.
+     * @param description the new description to the content.
      */
     void setDescription(final String description);
 
@@ -69,7 +69,7 @@ public interface IContent extends IModel {
     /**
      * Sets a new keywords to the content.
      *
-     * @param keywords a new keywords to the content.
+     * @param keywords the new keywords to the content.
      */
     void setKeywords(final String keywords);
 
@@ -83,15 +83,16 @@ public interface IContent extends IModel {
     /**
      * Sets a new logo to the content.
      *
-     * @param logo a new logo to the content.
+     * @param logo the new logo to the content.
      */
     void setLogo(final File logo);
 
     /**
      * Initializes the content.
+     * Returns this content with a new copied fields.
      *
-     * @param content a content to copy.
-     * @return The this content with new fields.
+     * @param content the content to copy.
+     * @return This content with new fields.
      */
     Content initialize(final Content content);
 }

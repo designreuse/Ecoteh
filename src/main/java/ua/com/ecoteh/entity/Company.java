@@ -126,9 +126,9 @@ public class Company extends Content implements ICompany {
     /**
      * Constrictor.
      *
-     * @param title       a title of the new company.
-     * @param description a description of the new company.
-     * @param keywords    a keywords of the new company.
+     * @param title       the title of a new company.
+     * @param description the description of a new company.
+     * @param keywords    the keywords of a new company.
      */
     public Company(
             final String title,
@@ -144,11 +144,11 @@ public class Company extends Content implements ICompany {
     /**
      * Constrictor.
      *
-     * @param title       a title of the new company.
-     * @param description a description of the new company.
-     * @param keywords    a keywords of the new company.
-     * @param address     a address of the new company.
-     * @param contacts    a contacts of the new company.
+     * @param title       the title of a new company.
+     * @param description the description of a new company.
+     * @param keywords    the keywords of a new company.
+     * @param address     the address of a new company.
+     * @param contacts    the contacts of a new company.
      */
     public Company(
             final String title,
@@ -165,10 +165,10 @@ public class Company extends Content implements ICompany {
     /**
      * Constrictor.
      *
-     * @param title       a title of the new company.
-     * @param description a description of the new company.
-     * @param information a information of the new company.
-     * @param keywords    a keywords of the new company.
+     * @param title       the title of a new company.
+     * @param description the description of a new company.
+     * @param information the information of a new company.
+     * @param keywords    the keywords of a new company.
      */
     public Company(
             final String title,
@@ -183,7 +183,7 @@ public class Company extends Content implements ICompany {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -240,7 +240,7 @@ public class Company extends Content implements ICompany {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Company clone() {
@@ -250,7 +250,7 @@ public class Company extends Content implements ICompany {
     /**
      * Returns a domain of the company.
      *
-     * @return The company domain.
+     * @return The company domain or empty string (newer null).
      */
     @Override
     public String getDomain() {
@@ -260,6 +260,17 @@ public class Company extends Content implements ICompany {
     /**
      * Sets a new domain to the company.
      * If parameter domain is blank, then sets empty string.
+     * <pre>
+     *     setDomain(null) - domain = ""
+     *     setDomain("") - domain = ""
+     *     setDomain(" ") - domain = ""
+     *     setDomain("bob") - domain = "bob"
+     *     setDomain(" bob ") - domain = " bob "
+     *     setDomain("http://") - domain = ""
+     *     setDomain("https://") - domain = ""
+     *     setDomain("http://site.com") - domain = "site.com"
+     *     setDomain("https://site.com") - domain = "site.com"
+     * </pre>
      *
      * @param domain a new domain to the company.
      */
@@ -274,9 +285,9 @@ public class Company extends Content implements ICompany {
     }
 
     /**
-     * Returns a domain of the company.
+     * Returns a tagline of the company.
      *
-     * @return The company domain.
+     * @return The company tagline or empty string (newer null).
      */
     @Override
     public String getTagline() {
@@ -286,8 +297,15 @@ public class Company extends Content implements ICompany {
     /**
      * Sets a new tagline to the company.
      * If parameter tagline is blank, then sets empty string.
+     * <pre>
+     *     setTagline(null) - tagline = ""
+     *     setTagline("") - tagline = ""
+     *     setTagline(" ") - tagline = ""
+     *     setTagline("bob") - tagline = "bob"
+     *     setTagline(" bob ") - tagline = " bob "
+     * </pre>
      *
-     * @param tagline a new domain to the company.
+     * @param tagline a new tagline to the company.
      */
     @Override
     public void setTagline(final String tagline) {
@@ -297,7 +315,7 @@ public class Company extends Content implements ICompany {
     /**
      * Returns a information of the company.
      *
-     * @return The information domain.
+     * @return The information domain or empty string (newer null).
      */
     @Override
     public String getInformation() {
@@ -307,6 +325,13 @@ public class Company extends Content implements ICompany {
     /**
      * Sets a new information to the company.
      * If parameter information is blank, then sets empty string.
+     * <pre>
+     *     setInformation(null) - information = ""
+     *     setInformation("") - information = ""
+     *     setInformation(" ") - information = ""
+     *     setInformation("bob") - information = "bob"
+     *     setInformation(" bob ") - information = " bob "
+     * </pre>
      *
      * @param information a new information to the company.
      */
@@ -316,9 +341,9 @@ public class Company extends Content implements ICompany {
     }
 
     /**
-     * Returns a sender e-mail of the company.
+     * Returns a sender E-mail of the company.
      *
-     * @return The company sender e-mail.
+     * @return The company sender E-mail or empty string (newer null).
      */
     @Override
     public String getSenderEmail() {
@@ -326,10 +351,17 @@ public class Company extends Content implements ICompany {
     }
 
     /**
-     * Sets a new sender e-mail to the company.
-     * If parameter sender e-mail is blank, then sets empty string.
+     * Sets a new sender E-mail to the company.
+     * If parameter sender E-mail is blank, then sets empty string.
+     * <pre>
+     *     setSenderEmail(null) - senderEmail = ""
+     *     setSenderEmail("") - senderEmail = ""
+     *     setSenderEmail(" ") - senderEmail = ""
+     *     setSenderEmail("bob") - senderEmail = "bob"
+     *     setSenderEmail(" bob ") - senderEmail = " bob "
+     * </pre>
      *
-     * @param senderEmail a new sender e-mail to the company.
+     * @param senderEmail a new sender E-mail to the company.
      */
     @Override
     public void setSenderEmail(final String senderEmail) {
@@ -339,7 +371,7 @@ public class Company extends Content implements ICompany {
     /**
      * Returns a sender password of the company.
      *
-     * @return The company sender password.
+     * @return The company sender password or empty string (newer null).
      */
     @Override
     public String getSenderPass() {
@@ -349,6 +381,13 @@ public class Company extends Content implements ICompany {
     /**
      * Sets a new sender password to the company.
      * If parameter sender password is blank, then sets empty string.
+     * <pre>
+     *     setSenderPass(null) - senderPass = ""
+     *     setSenderPass("") - senderPass = ""
+     *     setSenderPass(" ") - senderPass = ""
+     *     setSenderPass("bob") - senderPass = "bob"
+     *     setSenderPass(" bob ") - senderPass = " bob "
+     * </pre>
      *
      * @param senderPass a new sender password to the company.
      */
@@ -359,7 +398,7 @@ public class Company extends Content implements ICompany {
     /**
      * Returns a start work time of the company.
      *
-     * @return The company start work time.
+     * @return The company start work time (newer null).
      */
     @Override
     public String getWorkTimeFrom() {
@@ -368,8 +407,15 @@ public class Company extends Content implements ICompany {
 
     /**
      * Sets a new start work time to the company.
+     * <pre>
+     *     setWorkTimeFrom(null) - workTimeFrom = "00:00"
+     *     setSenderPass("") - workTimeFrom = "00:00"
+     *     setSenderPass(" ") - workTimeFrom = "00:00"
+     *     setSenderPass("bob") - workTimeFrom = "00:00"
+     *     setSenderPass("12:34") - workTimeFrom = "12:34"
+     * </pre>
      *
-     * @param workTimeFrom a new start work time to the company.
+     * @param workTimeFrom the new start work time to the company.
      */
     @Override
     public void setWorkTimeFrom(final String workTimeFrom) {
@@ -379,7 +425,7 @@ public class Company extends Content implements ICompany {
     /**
      * Returns a finish work time of the company.
      *
-     * @return The company finish work time.
+     * @return The company finish work time (newer null).
      */
     @Override
     public String getWorkTimeTo() {
@@ -388,8 +434,15 @@ public class Company extends Content implements ICompany {
 
     /**
      * Sets a new finish work time to the company.
+     * <pre>
+     *     setWorkTimeTo(null) - workTimeTo = "00:00"
+     *     setWorkTimeTo("") - workTimeTo = "00:00"
+     *     setWorkTimeTo(" ") - workTimeTo = "00:00"
+     *     setWorkTimeTo("bob") - workTimeTo = "00:00"
+     *     setWorkTimeTo("12:34") - workTimeTo = "12:34"
+     * </pre>
      *
-     * @param workTimeTo a new finish work time to the company.
+     * @param workTimeTo the new finish work time to the company.
      */
     @Override
     public void setWorkTimeTo(final String workTimeTo) {
@@ -398,8 +451,9 @@ public class Company extends Content implements ICompany {
 
     /**
      * Returns a company contacts.
+     * Returns a object of the {@link Contacts} class.
      *
-     * @return The company contacts.
+     * @return The company contacts (newer null).
      */
     @Override
     public Contacts getContacts() {
@@ -409,7 +463,7 @@ public class Company extends Content implements ICompany {
     /**
      * Sets a new contacts to the company.
      *
-     * @param contacts a new contacts to the company.
+     * @param contacts the new contacts to the company.
      */
     @Override
     public void setContacts(final Contacts contacts) {
@@ -421,8 +475,9 @@ public class Company extends Content implements ICompany {
 
     /**
      * Returns a company address.
+     * Returns a object of the {@link Address} class.
      *
-     * @return The company address.
+     * @return The company address (newer null).
      */
     @Override
     public Address getAddress() {
@@ -432,7 +487,7 @@ public class Company extends Content implements ICompany {
     /**
      * Sets a new address to the company.
      *
-     * @param address a new address to the company.
+     * @param address the new address to the company.
      */
     @Override
     public void setAddress(final Address address) {
@@ -444,6 +499,7 @@ public class Company extends Content implements ICompany {
 
     /**
      * Returns a domain of the company.
+     * Returns a enum object of the {@link CompanyType} class.
      *
      * @return The company domain.
      */
@@ -454,8 +510,13 @@ public class Company extends Content implements ICompany {
 
     /**
      * Sets a new type to the company.
+     * Sets default type if incoming type is null.
+     * <pre>
+     *     setType(null) - type = CompanyType.PARTNER
+     *     setType(CompanyType.MAIN) - type = CompanyType.MAIN
+     * </pre>
      *
-     * @param type a new type to the company.
+     * @param type the new type to the company.
      */
     @Override
     public void setType(final CompanyType type) {
@@ -463,9 +524,9 @@ public class Company extends Content implements ICompany {
     }
 
     /**
-     * Returns a domain of the company.
+     * Returns a URL of the company.
      *
-     * @return The company domain.
+     * @return The company URL or empty string (newer null).
      */
     @Override
     public String getUrl() {
@@ -489,9 +550,15 @@ public class Company extends Content implements ICompany {
 
     /**
      * Initializes the company.
+     * Returns this company with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this company
+     *     initialize(new Company()) - does nothing, returns this
+     *     company with a new copied fields
+     * </pre>
      *
-     * @param company a company to copy.
-     * @return The this company with new fields.
+     * @param company the company to copy.
+     * @return This company with a new fields (newer null).
      */
     @Override
     public Company initialize(final Company company) {

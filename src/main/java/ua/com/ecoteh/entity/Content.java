@@ -15,7 +15,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Content <T extends Content> extends Model implements IContent {
+public abstract class Content extends Model implements IContent {
 
     /**
      * It is used during deserialization to verify that
@@ -74,11 +74,11 @@ public abstract class Content <T extends Content> extends Model implements ICont
     }
 
     /**
-     * Constrictor.
+     * Constructor.
      *
-     * @param title       a title of the new content.
-     * @param description a description of the new content.
-     * @param keywords    a keywords of the new content.
+     * @param title       the title of a new content.
+     * @param description the description of a new content.
+     * @param keywords    the keywords of a new content.
      */
     public Content(
             final String title,
@@ -143,7 +143,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Content clone() {
@@ -153,7 +153,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Returns a title of the content.
      *
-     * @return The content title.
+     * @return The content title or empty string (newer null).
      */
     @Override
     public String getTitle() {
@@ -163,9 +163,16 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Sets a new title to the content.
      * If parameter title is blank, then sets empty string.
-     * Also title translates and sets to URL.
+     * Also, title translates and sets to URL if this URL is empty.
+     * <pre>
+     *     setTitle(null) - title = ""
+     *     setTitle("") - title = ""
+     *     setTitle(" ") - title = ""
+     *     setTitle("bob") - title = "bob"
+     *     setTitle(" bob ") - title = " bob "
+     * </pre>
      *
-     * @param title a new title to the content.
+     * @param title the new title to the content.
      */
     @Override
     public void setTitle(final String title) {
@@ -178,7 +185,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Returns a URL of the content.
      *
-     * @return The content URL.
+     * @return The content URL or empty string (newer null).
      */
     @Override
     public String getUrl() {
@@ -188,8 +195,15 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Sets a new URL to the content.
      * If parameter URL is blank, then sets empty string.
+     * <pre>
+     *     setUrl(null) - url = ""
+     *     setUrl("") - url = ""
+     *     setUrl(" ") - url = ""
+     *     setUrl("bob") - url = "bob"
+     *     setUrl(" bob ") - url = " bob "
+     * </pre>
      *
-     * @param url a new URL to the content.
+     * @param url the new URL to the content.
      */
     @Override
     public void setUrl(final String url) {
@@ -199,7 +213,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Translates value and sets to URL.
      *
-     * @param value a value to translate.
+     * @param value the value to translate.
      */
     @Override
     public void translateAndSetUrl(final String value) {
@@ -209,7 +223,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Returns a description of the content.
      *
-     * @return The content description.
+     * @return The content description or empty string (newer null).
      */
     @Override
     public String getDescription() {
@@ -219,8 +233,15 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Sets a new description to the content.
      * If parameter description is blank, then sets empty string.
+     * <pre>
+     *     setDescription(null) - description = ""
+     *     setDescription("") - description = ""
+     *     setDescription(" ") - description = ""
+     *     setDescription("bob") - description = "bob"
+     *     setDescription(" bob ") - description = " bob "
+     * </pre>
      *
-     * @param description a new description to the content.
+     * @param description the new description to the content.
      */
     @Override
     public void setDescription(final String description) {
@@ -230,7 +251,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Returns a keywords of the content.
      *
-     * @return The content keywords.
+     * @return The content keywords or empty string (newer null).
      */
     @Override
     public String getKeywords() {
@@ -240,8 +261,15 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Sets a new keywords to the content.
      * If parameter keywords is blank, then sets empty string.
+     * <pre>
+     *     setKeywords(null) - keywords = ""
+     *     setKeywords("") - keywords = ""
+     *     setKeywords(" ") - keywords = ""
+     *     setKeywords("bob") - keywords = "bob"
+     *     setKeywords(" bob ") - keywords = " bob "
+     * </pre>
      *
-     * @param keywords a new keywords to the content.
+     * @param keywords the new keywords to the content.
      */
     @Override
     public void setKeywords(final String keywords) {
@@ -251,7 +279,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Returns a logo of the content.
      *
-     * @return The content logo.
+     * @return The content logo (newer null).
      */
     @Override
     public File getLogo() {
@@ -261,7 +289,7 @@ public abstract class Content <T extends Content> extends Model implements ICont
     /**
      * Sets a new logo to the content.
      *
-     * @param logo a new logo to the content.
+     * @param logo the new logo to the content.
      */
     @Override
     public void setLogo(final File logo) {
@@ -273,9 +301,15 @@ public abstract class Content <T extends Content> extends Model implements ICont
 
     /**
      * Initializes the content.
+     * Returns this content with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this content
+     *     initialize(new Content()) - does nothing, returns this
+     *     content with a new copied fields
+     * </pre>
      *
-     * @param content a content to copy.
-     * @return The this content with new fields.
+     * @param content the content to copy.
+     * @return This content with new fields (newer null).
      */
     @Override
     public Content initialize(final Content content) {

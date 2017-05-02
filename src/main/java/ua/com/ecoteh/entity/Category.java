@@ -52,9 +52,9 @@ public class Category extends Content implements ICategory {
     /**
      * Constructor.
      *
-     * @param title       a title of the new category.
-     * @param description a description of the new category.
-     * @param keywords    a keywords of the new category.
+     * @param title       the title of the new category.
+     * @param description the description of the new category.
+     * @param keywords    the keywords of the new category.
      */
     public Category(
             final String title,
@@ -64,6 +64,11 @@ public class Category extends Content implements ICategory {
         super(title, description, keywords);
     }
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return A string representation of the object (newer null).
+     */
     @Override
     public String toString() {
         return "Category{" + super.toString() + '}';
@@ -72,7 +77,7 @@ public class Category extends Content implements ICategory {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Category clone() {
@@ -81,7 +86,13 @@ public class Category extends Content implements ICategory {
 
     /**
      * Adds new article to the list of articles.
-     * Adds a new article, if it is valid.
+     * Adds a new article, if it is not null.
+     * <pre>
+     *     addArticle(null) - does nothing
+     *     addArticle(new Article()) - Adds the article
+     *     to the category article list.
+     *     Also, to the article sets this category.
+     * </pre>
      *
      * @param article an article to add.
      */
@@ -97,9 +108,18 @@ public class Category extends Content implements ICategory {
 
     /**
      * Adds new articles to the list of articles.
-     * Adds a new articles, if they are valid.
+     * Adds a new articles, if they are not null and not empty.
+     * <pre>
+     *     addArticles(null) - does nothing
+     *     addArticles(new ArrayList()) - does nothing
      *
-     * @param articles an articles to add.
+     *     Collection collection = new ArrayList();
+     *     collection.add(new Object);
+     *     addArticles(collection) - Adds the collection.
+     *     Also, for each article sets this category.
+     * </pre>
+     *
+     * @param articles the articles to add.
      */
     @Override
     public void addArticles(final Collection<Article> articles) {
@@ -109,9 +129,20 @@ public class Category extends Content implements ICategory {
     }
 
     /**
-     * Removes article from the list of articles.
+     * Removes an article from the list of articles.
+     * Removes an incoming article if it contains in the article list.
+     * <pre>
+     *     removeArticle(null) - does nothing
+     *     removeArticle(new Article()) - does nothing
      *
-     * @param article an article to remove.
+     *     Article article = new Article();
+     *     article.setCategory(this);
+     *     removeArticle(article) - Removes the articles
+     *     from the category article list.
+     *     Also, to the article sets null category.
+     * </pre>
+     *
+     * @param article the article to remove.
      */
     @Override
     public void removeArticle(final Article article) {
@@ -125,8 +156,18 @@ public class Category extends Content implements ICategory {
 
     /**
      * Removes articles from the list of articles.
+     * Removes a articles, if they are not null and not empty.
+     * <pre>
+     *     removeArticles(null) - does nothing
+     *     removeArticles(new ArrayList()) - does nothing
      *
-     * @param articles an articles to remove.
+     *     Collection collection = new ArrayList();
+     *     collection.add(new Object);
+     *     removeArticles(collection) - Removes the collection.
+     *     Also, for each article sets null category.
+     * </pre>
+     *
+     * @param articles the articles to remove.
      */
     @Override
     public void removeArticles(final Collection<Article> articles) {
@@ -136,9 +177,10 @@ public class Category extends Content implements ICategory {
     }
 
     /**
-     * Returns an list of articles.
+     * Returns an collection of articles.
+     * Collection can be empty.
      *
-     * @return The list of articles.
+     * @return The collection of articles (newer null).
      */
     @Override
     public Collection<Article> getArticles() {
@@ -149,7 +191,7 @@ public class Category extends Content implements ICategory {
      * Sets a new articles to list of articles.
      * Clears the list of articles and adds new articles.
      *
-     * @param articles an articles to add.
+     * @param articles the articles to add.
      */
     @Override
     public void setArticles(final Collection<Article> articles) {
@@ -158,9 +200,9 @@ public class Category extends Content implements ICategory {
     }
 
     /**
-     * Contains article in the list of articles.
+     * Contains an article in the list of articles.
      *
-     * @param article an article to contain.
+     * @param article the article to contain.
      * @return true if article is contains, false otherwise.
      */
     @Override
@@ -190,9 +232,15 @@ public class Category extends Content implements ICategory {
 
     /**
      * Initializes the category.
+     * Returns this category with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this category
+     *     initialize(new Category()) - does nothing, returns this
+     *     category with a new copied fields
+     * </pre>
      *
-     * @param category a category to copy.
-     * @return The this category with new fields.
+     * @param category the category to copy.
+     * @return This category with new fields (newer null).
      */
     @Override
     public Category initialize(final Category category) {

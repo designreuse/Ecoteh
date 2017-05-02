@@ -68,7 +68,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Model clone() {
@@ -148,9 +148,15 @@ public abstract class Model implements IModel, Serializable, Cloneable {
 
     /**
      * Initializes the model.
+     * Returns this model with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this model
+     *     initialize(new Model()) - does nothing, returns this
+     *     model with a new copied fields
+     * </pre>
      *
-     * @param model a model to copy.
-     * @return The this model with new fields.
+     * @param model the model to copy.
+     * @return This model with a new copied fields (newer null).
      */
     @Override
     public Model initialize(final Model model) {

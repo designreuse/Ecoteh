@@ -15,28 +15,28 @@ public interface ICategory extends IContent {
     /**
      * Adds new article to the list of articles.
      *
-     * @param article an article to add.
+     * @param article the article to add.
      */
     void addArticle(final Article article);
 
     /**
      * Adds new articles to the list of articles.
      *
-     * @param articles an articles to add.
+     * @param articles the articles to add.
      */
     void addArticles(final Collection<Article> articles);
 
     /**
      * Removes article from the list of articles.
      *
-     * @param article an article to remove.
+     * @param article the article to remove.
      */
     void removeArticle(final Article article);
 
     /**
      * Removes articles from the list of articles.
      *
-     * @param articles an articles to remove.
+     * @param articles the articles to remove.
      */
     void removeArticles(final Collection<Article> articles);
 
@@ -50,14 +50,14 @@ public interface ICategory extends IContent {
     /**
      * Sets a new articles to list of articles.
      *
-     * @param articles an articles to add.
+     * @param articles the articles to add.
      */
     void setArticles(final Collection<Article> articles);
 
     /**
      * Contains article in the list of articles.
      *
-     * @param article an article to contain.
+     * @param article the article to contain.
      * @return true if article is contains, false otherwise.
      */
     boolean containsArticle(final Article article);
@@ -65,7 +65,7 @@ public interface ICategory extends IContent {
     /**
      * Contains articles in the list of articles.
      *
-     * @param articles an articles to contain.
+     * @param articles the articles to contain.
      * @return true if articles are contains, false otherwise.
      */
     boolean containsArticles(final Collection<Article> articles);
@@ -77,9 +77,10 @@ public interface ICategory extends IContent {
 
     /**
      * Initializes the category.
+     * Returns this category with a new copied fields.
      *
-     * @param category a category to copy.
-     * @return The this category with new fields.
+     * @param category the category to copy.
+     * @return This category with new fields.
      */
     Category initialize(final Category category);
 }

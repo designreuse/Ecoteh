@@ -91,8 +91,8 @@ public class Contacts extends Model implements IContacts {
     /**
      * Constructor.
      *
-     * @param email       a E-mail.
-     * @param mobilePhone a mobile phone number.
+     * @param email       a E-mail of the new contacts.
+     * @param mobilePhone a mobile phone number of the new contacts.
      */
     public Contacts(
             final String email,
@@ -106,14 +106,14 @@ public class Contacts extends Model implements IContacts {
     /**
      * Constructor.
      *
-     * @param email         a E-mail.
-     * @param mobilePhone   a mobile phone number.
-     * @param landlinePhone a landline phone number.
-     * @param fax           a fax number.
-     * @param vkontakte     a Vkontakte URL
-     * @param facebook      a Facebook URL.
-     * @param twitter       a Twitter URL.
-     * @param skype         a Skype username.
+     * @param email         a E-mail of the new contacts.
+     * @param mobilePhone   a mobile phone number of the new contacts.
+     * @param landlinePhone a landline phone number of the new contacts.
+     * @param fax           a fax number of the new contacts.
+     * @param vkontakte     a Vkontakte URL of the new contacts.
+     * @param facebook      a Facebook URL of the new contacts.
+     * @param twitter       a Twitter URL of the new contacts.
+     * @param skype         a Skype username of the new contacts.
      */
     public Contacts(
             final String email,
@@ -137,7 +137,7 @@ public class Contacts extends Model implements IContacts {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -158,7 +158,7 @@ public class Contacts extends Model implements IContacts {
      *
      * @param object The reference object with which to compare.
      * @return true if this object is the same as the object
-     * argument, false otherwise otherwise.
+     * argument, false otherwise.
      */
     @Override
     public boolean equals(Object object) {
@@ -197,9 +197,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a E-mail.
+     * Returns a E-mail of the contacts.
      *
-     * @return The E-mail.
+     * @return The contacts E-mail or empty string (newer null).
      */
     @Override
     public String getEmail() {
@@ -207,10 +207,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new E-mail.
+     * Sets a new E-mail to the contacts.
      * If parameter E-mail is blank, then sets empty string.
+     * <pre>
+     *     setEmail(null) - email = ""
+     *     setEmail("") - email = ""
+     *     setEmail(" ") - email = ""
+     *     setEmail("bob") - email = "bob"
+     *     setEmail(" bob ") - email = " bob "
+     * </pre>
      *
-     * @param email a new E-mail.
+     * @param email the new E-mail to the contacts.
      */
     @Override
     public void setEmail(final String email) {
@@ -218,9 +225,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a mobile phone number.
+     * Returns a mobile phone number of the contacts.
      *
-     * @return The mobile phone number.
+     * @return The contacts mobile phone number or empty string (newer null).
      */
     @Override
     public String getMobilePhone() {
@@ -228,10 +235,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new mobile phone number.
+     * Sets a new mobile phone number to the contacts.
      * If parameter mobile phone is blank, then sets empty string.
+     * <pre>
+     *     setMobilePhone(null) - mobilePhone = ""
+     *     setMobilePhone("") - mobilePhone = ""
+     *     setMobilePhone(" ") - mobilePhone = ""
+     *     setMobilePhone("bob") - mobilePhone = "bob"
+     *     setMobilePhone(" bob ") - mobilePhone = " bob "
+     * </pre>
      *
-     * @param mobilePhone a new mobile phone number.
+     * @param mobilePhone the new mobile phone number to the contacts.
      */
     @Override
     public void setMobilePhone(final String mobilePhone) {
@@ -239,9 +253,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a landline phone number.
+     * Returns a landline phone number of the contacts.
      *
-     * @return The landline phone number.
+     * @return The contacts landline phone number or empty string (newer null).
      */
     @Override
     public String getLandlinePhone() {
@@ -249,10 +263,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new landline phone number.
+     * Sets a new landline phone number to the contacts.
      * If parameter landline phone is blank, then sets empty string.
+     * <pre>
+     *     setLandlinePhone(null) - landlinePhone = ""
+     *     setLandlinePhone("") - landlinePhone = ""
+     *     setLandlinePhone(" ") - landlinePhone = ""
+     *     setLandlinePhone("bob") - landlinePhone = "bob"
+     *     setLandlinePhone(" bob ") - landlinePhone = " bob "
+     * </pre>
      *
-     * @param landlinePhone a new landline phone number.
+     * @param landlinePhone the new landline phone number to the contacts.
      */
     @Override
     public void setLandlinePhone(final String landlinePhone) {
@@ -260,9 +281,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a fax number.
+     * Returns a fax number of the contacts.
      *
-     * @return The fax number.
+     * @return The contacts fax number or empty string (newer null).
      */
     @Override
     public String getFax() {
@@ -270,10 +291,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new fax number.
+     * Sets a new fax number to the contacts.
      * If parameter fax is blank, then sets empty string.
+     * <pre>
+     *     setFax(null) - fax = ""
+     *     setFax("") - fax = ""
+     *     setFax(" ") - fax = ""
+     *     setFax("bob") - fax = "bob"
+     *     setFax(" bob ") - fax = " bob "
+     * </pre>
      *
-     * @param fax a new fax number.
+     * @param fax the new fax number to the contacts.
      */
     @Override
     public void setFax(final String fax) {
@@ -281,9 +309,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a Vkontakte URL.
+     * Returns a Vkontakte URL of the contacts.
      *
-     * @return The Vkontakte URL.
+     * @return The contacts Vkontakte URL or empty string (newer null).
      */
     @Override
     public String getVkontakte() {
@@ -291,10 +319,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new Vkontakte URL.
+     * Sets a new Vkontakte URL to the contacts.
      * If parameter Vkontakte URL is blank, then sets empty string.
+     * <pre>
+     *     setVkontakte(null) - vkontakte = ""
+     *     setVkontakte("") - vkontakte = ""
+     *     setVkontakte(" ") - vkontakte = ""
+     *     setVkontakte("bob") - vkontakte = "bob"
+     *     setVkontakte(" bob ") - vkontakte = " bob "
+     * </pre>
      *
-     * @param vkontakte a new Vkontakte URL.
+     * @param vkontakte the new Vkontakte URL to the contacts.
      */
     @Override
     public void setVkontakte(final String vkontakte) {
@@ -302,9 +337,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a Facebook URL.
+     * Returns a Facebook URL of the contacts.
      *
-     * @return The Facebook URL.
+     * @return The contacts Facebook URL or empty string (newer null).
      */
     @Override
     public String getFacebook() {
@@ -312,10 +347,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new Facebook URL.
+     * Sets a new Facebook URL to the contacts.
      * If parameter Facebook URL is blank, then sets empty string.
+     * <pre>
+     *     setFacebook(null) - facebook = ""
+     *     setFacebook("") - facebook = ""
+     *     setFacebook(" ") - facebook = ""
+     *     setFacebook("bob") - facebook = "bob"
+     *     setFacebook(" bob ") - facebook = " bob "
+     * </pre>
      *
-     * @param facebook a new Facebook URL.
+     * @param facebook the new Facebook URL to the contacts.
      */
     @Override
     public void setFacebook(final String facebook) {
@@ -323,9 +365,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a Twitter URL.
+     * Returns a Twitter URL of the contacts.
      *
-     * @return The Twitter URL.
+     * @return The contacts Twitter URL or empty string (newer null).
      */
     @Override
     public String getTwitter() {
@@ -333,10 +375,17 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Sets a new Twitter URL.
+     * Sets a new Twitter URL to the contacts.
      * If parameter Twitter URL is blank, then sets empty string.
+     * <pre>
+     *     setTwitter(null) - twitter = ""
+     *     setTwitter("") - twitter = ""
+     *     setTwitter(" ") - twitter = ""
+     *     setTwitter("bob") - twitter = "bob"
+     *     setTwitter(" bob ") - twitter = " bob "
+     * </pre>
      *
-     * @param twitter a new Twitter url to the user.
+     * @param twitter the new Twitter URL to the contacts.
      */
     @Override
     public void setTwitter(final String twitter) {
@@ -344,9 +393,9 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
-     * Returns a Skype username.
+     * Returns a Skype username of the contacts.
      *
-     * @return The Skype username.
+     * @return The contacts Skype username or empty string (newer null).
      */
     @Override
     public String getSkype() {
@@ -356,8 +405,15 @@ public class Contacts extends Model implements IContacts {
     /**
      * Sets a new Skype username.
      * If parameter Skype username is blank, then sets empty string.
+     * <pre>
+     *     setSkype(null) - skype = ""
+     *     setSkype("") - skype = ""
+     *     setSkype(" ") - skype = ""
+     *     setSkype("bob") - skype = "bob"
+     *     setSkype(" bob ") - skype = " bob "
+     * </pre>
      *
-     * @param skype a new skype username to the user.
+     * @param skype the new Skype username to the contacts.
      */
     @Override
     public void setSkype(final String skype) {
@@ -366,9 +422,15 @@ public class Contacts extends Model implements IContacts {
 
     /**
      * Initializes the contacts.
+     * Returns this contacts with a new copied fields.
+     * <pre>
+     *     initialize(null) - does nothing, returns this contacts
+     *     initialize(new Contacts()) - does nothing, returns this
+     *     contacts with a new copied fields
+     * </pre>
      *
-     * @param contacts a contacts to copy.
-     * @return The this contacts with new fields.
+     * @param contacts the contacts to copy.
+     * @return This contacts with new fields (newer null).
      */
     @Override
     public Contacts initialize(final Contacts contacts) {

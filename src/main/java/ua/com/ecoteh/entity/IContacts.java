@@ -19,7 +19,7 @@ public interface IContacts extends IModel {
     /**
      * Sets a new E-mail .
      *
-     * @param email a new E-mail.
+     * @param email the new E-mail.
      */
     void setEmail(final String email);
 
@@ -125,7 +125,7 @@ public interface IContacts extends IModel {
      * Initializes the contacts.
      *
      * @param contacts a contacts to copy.
-     * @return The this contacts with new fields.
+     * @return This contacts with new fields.
      */
     Contacts initialize(final Contacts contacts);
 }

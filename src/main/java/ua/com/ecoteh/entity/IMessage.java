@@ -22,7 +22,7 @@ public interface IMessage extends IModel {
     /**
      * Sets a user of the message.
      *
-     * @param user a user of the message.
+     * @param user the user of the message.
      */
     void setUser(final User user);
 
@@ -36,7 +36,7 @@ public interface IMessage extends IModel {
     /**
      * Sets a new subject to the message.
      *
-     * @param subject a new subject to the message.
+     * @param subject the new subject to the message.
      */
     void setSubject(final String subject);
 
@@ -50,7 +50,7 @@ public interface IMessage extends IModel {
     /**
      * Sets a new text to the message.
      *
-     * @param text a new text to the message.
+     * @param text v new text to the message.
      */
     void setText(final String text);
 
@@ -64,7 +64,7 @@ public interface IMessage extends IModel {
     /**
      * Sets a new date to the message.
      *
-     * @param date a new text to the message.
+     * @param date the new text to the message.
      */
     void setDate(final Date date);
 
@@ -77,9 +77,10 @@ public interface IMessage extends IModel {
 
     /**
      * Initializes the message.
+     * Returns this message with a new copied fields.
      *
-     * @param message a message to copy.
-     * @return The this message with new fields.
+     * @param message the message to copy.
+     * @return This message with new fields.
      */
     Message initialize(final Message message);
 }

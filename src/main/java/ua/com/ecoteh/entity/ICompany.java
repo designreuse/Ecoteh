@@ -22,7 +22,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new domain to the company.
      *
-     * @param domain a new domain to the company.
+     * @param domain the new domain to the company.
      */
     void setDomain(final String domain);
 
@@ -36,7 +36,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new tagline to the company.
      *
-     * @param tagline a new domain to the company.
+     * @param tagline the new domain to the company.
      */
     void setTagline(final String tagline);
 
@@ -50,7 +50,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new information to the company.
      *
-     * @param information a new information to the company.
+     * @param information the new information to the company.
      */
     void setInformation(final String information);
 
@@ -64,7 +64,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new sender e-mail to the company.
      *
-     * @param senderEmail a new sender e-mail to the company.
+     * @param senderEmail the new sender e-mail to the company.
      */
     void setSenderEmail(final String senderEmail);
 
@@ -78,7 +78,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new sender password to the company.
      *
-     * @param senderPass a new sender password to the company.
+     * @param senderPass the new sender password to the company.
      */
     void setSenderPass(final String senderPass);
 
@@ -92,7 +92,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new start work time to the company.
      *
-     * @param workTimeFrom a new start work time to the company.
+     * @param workTimeFrom the new start work time to the company.
      */
     void setWorkTimeFrom(final String workTimeFrom);
 
@@ -106,7 +106,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new finish work time to the company.
      *
-     * @param workTimeTo a new finish work time to the company.
+     * @param workTimeTo the new finish work time to the company.
      */
     void setWorkTimeTo(final String workTimeTo);
 
@@ -120,7 +120,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new contacts to the company.
      *
-     * @param contacts a new contacts to the company.
+     * @param contacts the new contacts to the company.
      */
     void setContacts(final Contacts contacts);
 
@@ -134,7 +134,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new address to the company.
      *
-     * @param address a new address to the company.
+     * @param address the new address to the company.
      */
     void setAddress(final Address address);
 
@@ -148,7 +148,7 @@ public interface ICompany extends IContent {
     /**
      * Sets a new type to the company.
      *
-     * @param type a new logo to the company.
+     * @param type the new logo to the company.
      */
     void setType(final CompanyType type);
 
@@ -162,9 +162,10 @@ public interface ICompany extends IContent {
 
     /**
      * Initializes the company.
+     * Returns this company with a new copied fields.
      *
-     * @param company a company to copy.
-     * @return The this company with new fields.
+     * @param company the company to copy.
+     * @return This company with new fields.
      */
     Company initialize(final Company company);
 }
