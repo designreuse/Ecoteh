@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import ua.com.ecoteh.exception.DisableException;
 import ua.com.ecoteh.exception.DuplicateException;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
@@ -164,22 +163,6 @@ public class AdviceController {
     }
 
     /**
-     * Intercepts and handles DisableException.
-     *
-     * @param ex      an intercepted exception.
-     * @param request to provide requested information for HTTP servlets.
-     * @return The ModelAndView object with information about exception.
-     */
-    @ExceptionHandler(DisableException.class)
-    @ResponseStatus(value = HttpStatus.LOCKED)
-    public ModelAndView disableException(
-            final DisableException ex,
-            final HttpServletRequest request
-    ) {
-        return handleException(ex, request, HttpStatus.LOCKED);
-    }
-
-    /**
      * Intercepts and handles all other Exception.
      *
      * @param ex      an intercepted exception.
@@ -257,16 +240,21 @@ public class AdviceController {
     }
 
     /**
-     * @param ex
-     * @return
+     * Creates and returns a exception message to log.
+     * Returns exception class name and message.
+     *
+     * @param ex the intercepted exception.
+     * @return The exception message.
      */
     private static String createExceptionMessage(final Exception ex) {
         return ex.getClass().getSimpleName() + " : " + ex.getMessage();
     }
 
     /**
-     * @param request
-     * @return
+     * Creates and returns a request message to log.
+     *
+     * @param request to provide requested information for HTTP servlets.
+     * @return The request message.
      */
     private static String createRequestMessage(final HttpServletRequest request) {
         return request.getRemoteAddr() + " : " + request.getRequestURL();
