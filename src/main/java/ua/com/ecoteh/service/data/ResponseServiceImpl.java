@@ -1,13 +1,13 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Response;
-import ua.com.ecoteh.repository.ResponseRepository;
-import ua.com.ecoteh.util.comparator.ResponseComparator;
-import ua.com.ecoteh.util.time.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.Response;
+import ua.com.ecoteh.repository.ResponseRepository;
+import ua.com.ecoteh.util.comparator.ResponseComparator;
+import ua.com.ecoteh.util.time.Time;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param repository a implementation of the {@link ResponseRepository} interface.
+     * @param repository the implementation of the {@link ResponseRepository} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -42,11 +42,11 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
     }
 
     /**
-     * Initializes, updates and returns response with parameter id.
+     * Updates and returns response with incoming id.
      *
-     * @param id       a id of the response to update.
-     * @param response a response to update.
-     * @return The updating response with parameter id.
+     * @param id       the id of the response to update.
+     * @param response the response to update.
+     * @return The updating response with parameter id (newer null).
      */
     @Override
     @Transactional
@@ -59,10 +59,11 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Sorts and returns responses by date.
+     * For sorting used {@link ResponseComparator.ByDate} comparator.
      *
      * @param responses the responses to sort.
      * @param revers    is sort in descending or ascending.
-     * @return The sorted list of responses.
+     * @return The sorted list of responses (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -75,9 +76,10 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Sorts and returns responses by date.
+     * For sorting used {@link ResponseComparator.ByDate} comparator.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of responses.
+     * @return The sorted list of responses (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -90,10 +92,27 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Return empty list if responses is empty.
      * Return back responses list if dates are null
      * or start date is equals end to finish date.
+     *<pre>
+     *     filterByDate(null, ..., ...) = empty ArrayList()
+     *     filterByDate(new ArrayList(), ..., ...) = empty ArrayList()
+     *
+     *     Collection collection = new ArrayList();
+     *     collection.add(new Response());
+     *     filterByDate(collection, null, null) = collection
+     *     filterByDate(collection, new Date(), null) = collection
+     *     filterByDate(collection, null, new Date()) = collection
+     *
+     *     Date startDate = new Date();
+     *     Date finishDate = new Date();
+     *     if startDate greater than finishDate:
+     *     filterByDate(collection, startDate, finishDate) = collection
+     *     if finishDate greater than startDate:
+     *     filterByDate(collection, startDate, finishDate) = filtered list of responses
+     * </pre>
      *
      * @param responses  the responses to filter.
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return The filtered list of responses.
      */
     @Override
@@ -108,9 +127,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
             if (checkDate(startDate, finishDate)) {
                 result.addAll(
                         responses.stream()
-                                .filter(
-                                        response -> compareToDate(response, startDate, finishDate)
-                                ).collect(Collectors.toList())
+                                .filter(response -> compareToDate(response, startDate, finishDate))
+                                .collect(Collectors.toList())
                 );
             } else {
                 result.addAll(responses);
@@ -121,9 +139,21 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Filters and returns responses by the date.
+     * <pre>
+     *     getAndFilterByDate(null, null) = all responses
+     *     getAndFilterByDate(new Date(), null) = all articles
+     *     getAndFilterByDate(null, new Date()) = all responses
      *
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     *     Date startDate = new Date();
+     *     Date finishDate = new Date();
+     *     if startDate greater than finishDate:
+     *     filterByDate(startDate, finishDate) = all responses
+     *     if finishDate greater than startDate:
+     *     filterByDate(startDate, finishDate) = filtered list of responses
+     * </pre>
+     *
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return The filtered list of responses.
      */
     @Override
@@ -137,10 +167,23 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Returns a list valid responses.
-     * Returns empty responses list if responses is empty.
+     * Returns empty list if responses is empty.
+     * <pre>
+     *     filteredByValid(null) = empty ArrayList()
+     *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
-     * @param responses the responses to filter.
-     * @return The list of responses.
+     *     Collection responses = new ArrayList();
+     *     Response response = new Response();
+     *     response.setValidated(false);
+     *     responses.add(response);
+     *     filteredByValid(responses) = empty ArrayList()
+     *
+     *     response.setValidated(true);
+     *     filteredByValid(responses) = filtered list of articles
+     * </pre>
+     *
+     * @param responses the articles to filter.
+     * @return The filtered list of responses or empty list (newer null).
      */
     @Override
     public List<Response> filteredByValid(Collection<Response> responses) {
@@ -148,9 +191,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
         if (isNotEmpty(responses)) {
             result.addAll(
                     responses.stream()
-                            .filter(
-                                    ResponseServiceImpl::validFilter
-                            ).collect(Collectors.toList())
+                            .filter(ResponseServiceImpl::isValidated)
+                            .collect(Collectors.toList())
             );
         }
         return result;
@@ -192,11 +234,11 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
 
     /**
      * Checks a dates to correction.
-     * Dates must be not null
-     * and not equals between themselves.
+     * Dates must be not null and not equals between themselves.
+     * Used the checkDate() method of the {@link Time} class.
      *
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return true if dates are correct, false otherwise.
      */
     private static boolean checkDate(
@@ -210,8 +252,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * Compares response object date to input dates.
      *
      * @param response   the response to compare.
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return true or false.
      */
     private static boolean compareToDate(
@@ -221,15 +263,5 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
     ) {
         return (response.getDate().compareTo(startDate) == 1) &&
                 (response.getDate().compareTo(finishDate) == -1);
-    }
-
-    /**
-     * Filters response by validation.
-     *
-     * @param response a response to filter.
-     * @return true if response is not null and is valid, false otherwise.
-     */
-    private static boolean validFilter(final Response response) {
-        return isNotNull(response) && response.isValidated();
     }
 }

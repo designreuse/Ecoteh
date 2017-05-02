@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.Company;
 import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.entity.Model;
 import ua.com.ecoteh.enums.CompanyType;
 import ua.com.ecoteh.repository.CompanyRepository;
 
@@ -15,9 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -68,8 +65,8 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param repository  a implementation of the {@link CompanyRepository} interface.
-     * @param fileService a implementation of the {@link FileService} interface.
+     * @param repository  the implementation of the {@link CompanyRepository} interface.
+     * @param fileService the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -83,23 +80,26 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     }
 
     /**
-     * Returns all or valid partners
-     * depending on the parameter value.
+     * Returns all or valid partners depending on the incoming value.
+     * <pre>
+     *     getAll(false) = all partners companies
+     *     getAll(true) = all valid partners companies
+     * </pre>
      *
-     * @param valid is returns all or valid companies.
-     * @return The all models.
+     * @param isValid is returns all or valid companies.
+     * @return The all or valid partners companies (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public Collection<Company> getAll(final boolean valid) {
-        return getPartners(valid);
+    public Collection<Company> getAll(final boolean isValid) {
+        return getPartners(isValid);
     }
 
     /**
-     * Initializes, saves and returns a new company.
+     * Saves a incoming company and returns saving company.
      *
      * @param company a company to add.
-     * @return The new saving company.
+     * @return The new saving company (newer null).
      */
     @Override
     @Transactional
@@ -114,7 +114,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * Updates the main company.
      *
      * @param company a main company to update.
-     * @return The updating main company.
+     * @return The updating main company (newer null).
      */
     @Override
     @Transactional
@@ -131,13 +131,13 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Returns main company.
+     * If can`t find main company then returns new Company().
      *
-     * @return The main company.
-     * @throws NullPointerException Throws exception if main company is absent.
+     * @return The main company (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public Company getMainCompany() throws NullPointerException {
+    public Company getMainCompany() {
         Company mainCompany;
         try {
             mainCompany = this.repository.findByType(CompanyType.MAIN).get(0);
@@ -149,10 +149,14 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     }
 
     /**
-     * Returns partners companies.
+     * Returns all or valid partners depending on the incoming value.
+     * <pre>
+     *     getPartners(false) = all partners companies
+     *     getPartners(true) = all valid partners companies
+     * </pre>
      *
-     * @param isValid is get valid company or not.
-     * @return The partners companies.
+     * @param isValid is returns all or valid companies.
+     * @return The all or valid partners companies (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -160,17 +164,19 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
         List<Company> companies = this.repository.findByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
-                    .filter(Model::isValidated)
+                    .filter(Company::isValidated)
                     .collect(Collectors.toList());
         }
         return companies;
     }
 
     /**
-     * Returns article with the category domain.
+     * Returns company with the incoming domain.
+     * If a incoming domain is null or empty then throws IllegalArgumentException.
+     * If can`t find company by incoming domain then throws NullPointerException.
      *
      * @param domain a domain of the company to return.
-     * @return The object of class {@link Company}.
+     * @return The company with the incoming domain (newer null).
      * @throws IllegalArgumentException Throw exception when parameter domain is blank.
      * @throws NullPointerException     Throw exception when company with parameter domain
      *                                  is not exist.
@@ -197,7 +203,8 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Removes company.
-     * Removes company if it not null and has not type CompanyType.MAIN.
+     * Removes company if it not null
+     * and has not type CompanyType.MAIN.
      *
      * @param company the company to remove.
      */
@@ -229,9 +236,10 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
 
     /**
      * Copies the object "from" to object "to".
+     * Incoming objects must be not null.
      *
-     * @param from a copied object
-     * @param to   a object to copy
+     * @param from the copied object
+     * @param to   the object to copy
      */
     @Override
     protected void copy(final Company from, final Company to) {

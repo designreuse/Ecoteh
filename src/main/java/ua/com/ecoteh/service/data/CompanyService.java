@@ -16,7 +16,7 @@ public interface CompanyService extends ContentService<Company> {
     /**
      * Updates the main company.
      *
-     * @param company a main company to update.
+     * @param company the main company to update.
      * @return The updating main company.
      */
     Company updateMainCompany(final Company company);
@@ -34,7 +34,7 @@ public interface CompanyService extends ContentService<Company> {
     void removeMain();
 
     /**
-     * Returns partners companies.
+     * Returns all partners companies.
      *
      * @param isValid is get valid company or not.
      * @return The partners companies.
@@ -44,7 +44,7 @@ public interface CompanyService extends ContentService<Company> {
     /**
      * Returns company with the category domain.
      *
-     * @param domain a domain of the company to return.
+     * @param domain the domain of a company to return.
      * @return The object of class {@link Company}.
      */
     Company getByDomain(final String domain);

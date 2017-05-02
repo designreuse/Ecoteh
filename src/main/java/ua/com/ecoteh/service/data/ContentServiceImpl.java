@@ -63,8 +63,8 @@ public abstract class ContentServiceImpl<T extends Content>
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param repository  a implementation of the {@link ContentRepository} interface.
-     * @param fileService a implementation of the {@link FileService} interface.
+     * @param repository  the implementation of the {@link ContentRepository} interface.
+     * @param fileService the implementation of the {@link FileService} interface.
      */
     ContentServiceImpl(
             final ContentRepository<T> repository,
@@ -76,11 +76,12 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Initializes, updates and returns content with parameter url.
+     * Initializes, updates and returns content with incoming URL.
+     * If a incoming content is null then throws IllegalArgumentException.
      *
-     * @param url     a URL of the content to update.
-     * @param content a content object to update.
-     * @return The updating content with parameter id.
+     * @param url     the URL of a content to update.
+     * @param content the content object to update.
+     * @return The updating content with parameter id (newer null).
      * @throws IllegalArgumentException Throw exception when input content is null.
      */
     @Override
@@ -108,11 +109,13 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Returns object of {@link Content} or subclasses with the parameter title.
+     * Returns object of {@link Content} or subclasses with the incoming title.
+     * If a incoming title is null or empty then throws IllegalArgumentException.
+     * If can`t find content by incoming title then throws NullPointerException.
      *
-     * @param title   a title of the content to return.
+     * @param title   the title of a content to return.
      * @param isValid is get valid content or not.
-     * @return The content with parameter title.
+     * @return The content with incoming title (newer null).
      * @throws IllegalArgumentException Throw exception when object parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
@@ -128,7 +131,7 @@ public abstract class ContentServiceImpl<T extends Content>
             );
         }
         final T content = this.repository.findByTitle(title);
-        if (isNotValidContent(content, isValid)) {
+        if (isNotValidated(content, isValid)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
@@ -140,11 +143,13 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Returns object of {@link Content} or subclasses with the parameter url.
+     * Returns object of {@link Content} or subclasses with the incoming URL.
+     * If a incoming URL is null or empty then throws IllegalArgumentException.
+     * If can`t find content by incoming URL then throws NullPointerException.
      *
-     * @param url     a URL of the content to return.
+     * @param url     the URL of a content to return.
      * @param isValid is get valid content or not.
-     * @return the content with parameter url.
+     * @return The content with incoming URL (newer null).
      * @throws IllegalArgumentException Throw exception when object parameter url is blank.
      * @throws NullPointerException     Throw exception when object with parameter url is not exist.
      */
@@ -158,7 +163,7 @@ public abstract class ContentServiceImpl<T extends Content>
             throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
         }
         final T content = this.repository.findByUrl(url);
-        if (isNotValidContent(content, isValid)) {
+        if (isNotValidated(content, isValid)) {
             throw new NullPointerException(
                     String.format(
                             FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
@@ -170,10 +175,10 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Removes object of {@link Content} or subclasses with the parameter title.
+     * Removes object of {@link Content} or subclasses with the incoming title.
      * Removes content if title is not blank.
      *
-     * @param title a title of the content to remove.
+     * @param title the title of a content to remove.
      */
     @Override
     @Transactional
@@ -184,9 +189,9 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Removes object of {@link Content} or subclasses with the parameter url.
+     * Removes object of {@link Content} or subclasses with the incoming URL.
      *
-     * @param url a URL of the content to remove.
+     * @param url the URL of a content to remove.
      */
     @Override
     @Transactional
@@ -198,10 +203,11 @@ public abstract class ContentServiceImpl<T extends Content>
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by title.
+     * For sorting used {@link ContentComparator.ByTitle} comparator.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
-     * @return The sorted list of contents.
+     * @return The sorted list of contents or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -214,10 +220,11 @@ public abstract class ContentServiceImpl<T extends Content>
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by URL.
+     * For sorting used {@link ContentComparator.ByUrl} comparator.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
-     * @return The sorted list of contents.
+     * @return The sorted list of contents or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -230,9 +237,10 @@ public abstract class ContentServiceImpl<T extends Content>
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by title.
+     * For sorting used {@link ContentComparator.ByTitle} comparator.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of contents.
+     * @return The sorted list of contents or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -242,9 +250,10 @@ public abstract class ContentServiceImpl<T extends Content>
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by URL.
+     * For sorting used {@link ContentComparator.ByUrl} comparator.
      *
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of contents.
+     * @return The sorted list of contents or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -283,6 +292,7 @@ public abstract class ContentServiceImpl<T extends Content>
 
     /**
      * Copies the object "from" to object "to".
+     * Incoming objects must be not null.
      *
      * @param from a copied object
      * @param to   a object to copy
@@ -316,17 +326,17 @@ public abstract class ContentServiceImpl<T extends Content>
      * Check the incoming content to not valid.
      * Content is not valid if it is null or not valid.
      * <pre>
-     *     isNotValidContent(null, false) = true
-     *     isNotValidContent(null, true) = true
+     *     isNotValidated(null, false) = true
+     *     isNotValidated(null, true) = true
      *
      *     Content content = new Content();
      *     content.setValidated(false);
-     *     isNotValidContent(content, false) = true
-     *     isNotValidContent(content, true) = false
+     *     isNotValidated(content, false) = true
+     *     isNotValidated(content, true) = false
      *
      *     content.setValidated(true);
-     *     isNotValidContent(content, false) = true
-     *     isNotValidContent(content, true) = true
+     *     isNotValidated(content, false) = true
+     *     isNotValidated(content, true) = true
      * </pre>
      *
      * @param content the content to check.
@@ -334,7 +344,7 @@ public abstract class ContentServiceImpl<T extends Content>
      * @param <T>     entity type, extends {@link Content}.
      * @return true if the content is null or it is not valid.
      */
-    protected static <T extends Content> boolean isNotValidContent(
+    protected static <T extends Content> boolean isNotValidated(
             final T content,
             final boolean isValid
     ) {

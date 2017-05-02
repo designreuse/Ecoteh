@@ -14,37 +14,37 @@ import java.util.List;
 public interface ArticleRepository extends ContentRepository<Article> {
 
     /**
-     * Returns article from a database,
+     * Returns all article from a database,
      * which matches the parameter number.
      *
-     * @param number a title of the article to return.
+     * @param number the title of a article to return.
      * @return The object of class {@link Article}.
      */
     Article findByNumber(final String number);
 
     /**
-     * Returns articles from a database,
+     * Returns all articles from a database,
      * which matches the parameter category id.
      *
-     * @param id a category id of the article to return.
+     * @param id the category id of a article to return.
      * @return The object of class {@link Article}.
      */
     List<Article> findByCategoryId(final long id);
 
     /**
-     * Returns articles from a database,
+     * Returns all articles from a database,
      * which matches the parameter category title.
      *
-     * @param categoryTitle a category title of the articles to return.
+     * @param title the category title of a articles to return.
      * @return The object of class {@link Article}.
      */
-    List<Article> findByCategoryTitle(final String categoryTitle);
+    List<Article> findByCategoryTitle(final String title);
 
     /**
      * Removes article from a database,
      * which matches the parameter number.
      *
-     * @param number a number of the article to remove.
+     * @param number the number of the article to remove.
      */
     void deleteByNumber(final String number);
 }

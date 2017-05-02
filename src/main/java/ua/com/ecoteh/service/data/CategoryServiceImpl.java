@@ -42,9 +42,9 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     /**
      * Constructor.
      *
-     * @param repository     a implementation  of the {@link CategoryRepository} interface.
-     * @param articleService a implementation of the {@link ArticleService} interface.
-     * @param fileService    a implementation of the {@link FileService} interface.
+     * @param repository     the implementation  of the {@link CategoryRepository} interface.
+     * @param articleService the implementation of the {@link ArticleService} interface.
+     * @param fileService    the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -58,11 +58,11 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Returns category with the parameter url.
+     * Returns category with the incoming URL.
      *
-     * @param url     a URL of the category to return.
+     * @param url     the URL of the category to return.
      * @param isValid is get valid category or not.
-     * @return The category with the parameter url.
+     * @return The category with the incoming URL (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -76,9 +76,9 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes category with parameter id.
+     * Removes category with incoming id.
      *
-     * @param id a id of category to remove.
+     * @param id the id of a category to remove.
      */
     @Override
     @Transactional
@@ -87,10 +87,10 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes category with the parameter title.
+     * Removes category with the incoming title.
      * Removes content if title is not blank.
      *
-     * @param title a title of the category to remove.
+     * @param title the title of a category to remove.
      */
     @Override
     @Transactional
@@ -101,9 +101,9 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes category with the parameter url.
+     * Removes category with the incoming URL.
      *
-     * @param url a URL of the category to remove.
+     * @param url the URL of a category to remove.
      */
     @Override
     @Transactional
@@ -114,8 +114,8 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes the category. Removes category if it is not null.
-     * Also deletes file file if category file is not null
+     * Removes the category.
+     * Removes category if it is not null.
      *
      * @param category the category to remove.
      */
@@ -131,9 +131,22 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     /**
      * Returns a list valid categories.
      * Returns empty list if categories collection is empty.
+     * <pre>
+     *     filteredByValid(null) = empty ArrayList()
+     *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
-     * @param categories a categories to filter.
-     * @return The list of categories.
+     *     Collection categories = new ArrayList();
+     *     Category category = new Category();
+     *     category.setValidated(false);
+     *     categories.add(category);
+     *     filteredByValid(categories) = empty ArrayList()
+     *
+     *     category.setValidated(true);
+     *     filteredByValid(categories) = filtered list of articles
+     * </pre>
+     *
+     * @param categories the categories to filter.
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
@@ -142,7 +155,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
         if (isNotEmpty(categories)) {
             result.addAll(
                     categories.stream()
-                            .filter(CategoryServiceImpl::validFilter)
+                            .filter(CategoryServiceImpl::isValidated)
                             .collect(Collectors.toList())
             );
         }
@@ -151,9 +164,10 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
 
     /**
      * Copies the object "from" to object "to".
+     * Incoming objects must be not null.
      *
-     * @param from a copied object
-     * @param to   a object to copy
+     * @param from the copied object
+     * @param to   the object to copy
      */
     @Override
     protected void copy(final Category from, final Category to) {
@@ -179,15 +193,5 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
         final Collection<Article> articles = category.getArticles();
         category.clearArticles();
         this.articleService.update(articles);
-    }
-
-    /**
-     * Filters category by validation.
-     *
-     * @param category a category to filter.
-     * @return true if article is not null and is valid, false otherwise.
-     */
-    private static boolean validFilter(final Category category) {
-        return isNotNull(category) && category.isValidated();
     }
 }

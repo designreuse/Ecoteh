@@ -67,11 +67,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * The message that a incoming multipart file has size greater
-     * than max sixe.
+     * than max size.
      */
     private final static String MAX_FILE_SIZE_MESSAGE =
             "Maximum file size must be no larger than %d bytes. " +
-                    "Size of the incoming file is %d bytes.";
+                    "Size of the incoming file is %d bytes!";
 
     /**
      * The interface provides a set of standard methods
@@ -89,8 +89,8 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param repository a implementation of the {@link FileRepository} interface.
-     * @param properties a implementation of the {@link ContentProperties} interface.
+     * @param repository the implementation of the {@link FileRepository} interface.
+     * @param properties the implementation of the {@link ContentProperties} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -104,12 +104,12 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Initializes, saves and returns a new file.
+     * Saves and returns a new file.
      *
-     * @param title         a title of the new file.
-     * @param type          a type of the new file.
-     * @param multipartFile a multipart file of the new file.
-     * @return The new saving file.
+     * @param title         the title of a new file.
+     * @param type          the type of a new file.
+     * @param multipartFile the multipart file of a new file.
+     * @return The new saving file (newer null).
      */
     @Override
     @Transactional
@@ -132,11 +132,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Initializes, saves and returns a new file.
+     * Saves and returns a new file.
      *
-     * @param title         a title of the new file.
-     * @param multipartFile a multipart file of the new file.
-     * @return The new saving file.
+     * @param title         the title of a new file.
+     * @param multipartFile the multipart file of a new file.
+     * @return The new saving file (newer null).
      */
     @Override
     @Transactional
@@ -148,13 +148,13 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Initializes, updates and returns photo with parameter id.
+     * Initializes, updates and returns photo with incoming id.
      *
-     * @param id            a id of the photo to update.
-     * @param title         a new title to the file.
-     * @param type          a type of the new file.
-     * @param multipartFile a new multipart file to the file.
-     * @return The updating photo with parameter id.
+     * @param id            the id of a file to update.
+     * @param title         the new title to a file.
+     * @param type          the new type of a file.
+     * @param multipartFile the new multipart file to a file.
+     * @return The updating photo with incoming id (newer null).
      * @throws IllegalArgumentException Throw exception when file is static.
      */
     @Override
@@ -179,12 +179,12 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Initializes, updates and returns file with parameter id.
+     * Initializes, updates and returns file with incoming id.
      *
      * @param id            a id of the file to update.
      * @param title         a new title to the file.
      * @param multipartFile a new multipart file to the file.
-     * @return The updating file with parameter id or null.
+     * @return The updating file with incoming id (newer null).
      */
     @Override
     @Transactional
@@ -197,10 +197,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Returns file object with the parameter title.
+     * Returns file object with the incoming title.
+     * If a incoming title is null or empty then throws IllegalArgumentException.
      *
-     * @param title a title of the file to return.
-     * @return The file with parameter title.
+     * @param title the title of a file to return.
+     * @return The file with incoming title (newer null).
      * @throws IllegalArgumentException Throw exception when parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
@@ -216,11 +217,12 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Returns file object with the parameter url.
+     * Returns file object with the incoming URL.
+     * If a incoming URL is null or empty then throws IllegalArgumentException.
      *
-     * @param url a url of the file to return.
-     * @return The file with parameter url.
-     * @throws IllegalArgumentException Throw exception when parameter url is blank.
+     * @param url the URL of a file to return.
+     * @return The file with incoming URL (newer null).
+     * @throws IllegalArgumentException Throw exception when parameter URL is blank.
      */
     @Override
     @Transactional(readOnly = true)
@@ -234,10 +236,10 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Removes file object with the parameter title.
-     * Removes file if title is not blank.
+     * Removes file object with the incoming title.
+     * Removes file if title is not null and not empty.
      *
-     * @param title a title of the file to remove.
+     * @param title the title of a file to remove.
      */
     @Override
     @Transactional
@@ -248,9 +250,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Removes file object with the parameter url.
+     * Removes file object with the incoming URL.
      *
-     * @param url a url of the file to remove.
+     * @param url the URL of a file to remove.
      */
     @Override
     @Transactional
@@ -260,6 +262,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Removes file if it is not null.
+     * If incoming file is static then throws IllegalArgumentException.
      *
      * @param file the file to remove.
      */
@@ -267,7 +270,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional
     public void remove(final File file) throws IllegalArgumentException {
         if (isNotNull(file)) {
-            if (!file.isValidated()) {
+            if (isStaticFile(file)) {
                 throw new IllegalArgumentException(FORBIDDEN_STATIC_FILE_MESSAGE);
             }
             deleteFile(file.getUrl());
@@ -278,7 +281,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     /**
      * Removes files if are not empty.
      *
-     * @param files The files to remove.
+     * @param files the files to remove.
      */
     @Override
     @Transactional
@@ -302,7 +305,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Saves file if it is not null and not empty.
      *
      * @param file     the multipart file to save.
-     * @param rootPath a directory path.
+     * @param rootPath the root directory path.
      */
     @Override
     @Transactional
@@ -331,7 +334,6 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Deletes file in the file system.
-     * Deletes file if path is not blank.
      *
      * @param path the file path.
      * @return Returns true if able to delete the file,
@@ -376,10 +378,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Sorts and returns file objects by title.
+     * For sorting used {@link FileComparator.ByTitle} comparator.
      *
      * @param files  the files to sort.
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of files.
+     * @return The sorted list of files (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -391,10 +394,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * Returns files with the type.
+     * Returns files with the incoming type.
+     * If a incoming type is null then throws IllegalArgumentException.
      *
-     * @param type a type of files to return.
-     * @return The files with the type.
+     * @param type the type of files to return.
+     * @return The files with the type (newer null).
      * @throws IllegalArgumentException Throw exception when parameter type is null.
      */
     @Override
@@ -411,7 +415,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     /**
      * Returns last file with the type.
      *
-     * @param type a type of file to return.
+     * @param type the type of file to return.
      * @return The last file with the type.
      */
     @Override
@@ -423,6 +427,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             file = files.get(files.size() - 1);
         } else {
             file = new File();
+            file.setType(type);
         }
         return file;
     }
@@ -438,20 +443,16 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     }
 
     /**
-     * @param file
-     * @throws NullPointerException
-     * @throws IllegalArgumentException
-     */
-
-    /**
-     * Validated a multipart file.
-     * File is valid if it is not null,
-     * not empty and it has normal size.
+     * Validated a multipart file. File is valid if it is not null, not empty and
+     * it has normal size.
+     * If an incoming multipart file is null or empty then throws NullPointerException.
+     * If an incoming multipart file size is greater than max file size then
+     * throws IllegalArgumentException.
      *
      * @param file the multipart file to check.
      * @throws NullPointerException     if the incoming file is null or empty.
      * @throws IllegalArgumentException if the incoming file size is greater
-     *                                  than max file size
+     *                                  than max file size.
      */
     private void isValidMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
@@ -492,9 +493,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     /**
      * Creates and returns a absolute path to a file.
      *
-     * @param file     a multipart file.
-     * @param rootPath a root directory path.
-     * @return The relative path to file.
+     * @param file     the multipart file.
+     * @param rootPath the root directory path.
+     * @return The relative path to file (newer null).
      */
     private String createAbsolutePath(
             final MultipartFile file,
@@ -507,9 +508,9 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     /**
      * Creates and returns a relative path to a file.
      *
-     * @param title a file title.
-     * @param file  a multipart file.
-     * @return The relative path to file.
+     * @param title the file title.
+     * @param file  the multipart file.
+     * @return The relative path to file (newer null).
      */
     private String createRelativePath(
             final String title,
@@ -523,9 +524,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
 
     /**
      * Returns a multipart file type.
+     * If file title "File.txt" them returns ".txt".
+     * If file title "File" them returns "" (empty string).
      *
-     * @param file a multipart file.
-     * @return The multipart file type.
+     * @param file the multipart file (newer null).
+     * @return The multipart file type or empty string (newer null).
      */
     private static String getMultipartFileType(final MultipartFile file) {
         String type;
@@ -536,5 +539,15 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             type = "";
         }
         return type;
+    }
+
+    /**
+     * Checks an incoming file is static or not.
+     *
+     * @param file the file to check (newer null).
+     * @return true if file is static, false otherwise.
+     */
+    private static boolean isStaticFile(final File file) {
+        return file.getType().equals(FileType.STATIC);
     }
 }

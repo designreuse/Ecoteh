@@ -19,7 +19,7 @@ public interface ArticleService extends ContentService<Article> {
     /**
      * Returns article with the parameter number.
      *
-     * @param number  a title of the article to return.
+     * @param number  the number of an article to return.
      * @param isValid is get valid article or not.
      * @return The object of class {@link Article}.
      */
@@ -29,25 +29,25 @@ public interface ArticleService extends ContentService<Article> {
     );
 
     /**
-     * Returns article with the category id.
+     * Returns all article with the category id.
      *
-     * @param id a category id of the article to return.
-     * @return The object of class {@link Article}.
+     * @param id the category id of articles to return.
+     * @return The list of articles.
      */
     List<Article> getByCategoryId(final long id);
 
     /**
-     * Returns article with the category title.
+     * Returns all article with the category title.
      *
-     * @param categoryTitle a category title of the articles to return.
-     * @return The object of class {@link Article}.
+     * @param title the category title of articles to return.
+     * @return The list of articles.
      */
     List<Article> getByCategoryTitle(final String title);
 
     /**
-     * Removes article the parameter number.
+     * Removes all article with the parameter number.
      *
-     * @param number The number of the article to remove.
+     * @param number the number of an article to remove.
      */
     void removeByNumber(final String number);
 
@@ -92,11 +92,11 @@ public interface ArticleService extends ContentService<Article> {
     List<Article> getAndSortByDate(final boolean revers);
 
     /**
-     * Filters and returns articles by the date.
+     * Filters and returns articles by incming dates.
      *
      * @param articles  the articles to filter.
-     * @param startDate a initial date.
-     * @param endDate   a final date.
+     * @param startDate the initial date.
+     * @param endDate   the final date.
      * @return The filtered list of articles.
      */
     List<Article> filterByDate(
@@ -109,7 +109,7 @@ public interface ArticleService extends ContentService<Article> {
      * Filters and returns articles by the category.
      *
      * @param articles the articles to filter.
-     * @param category a category filtering.
+     * @param category the category filtering.
      * @return The filtered list of articles.
      */
     List<Article> filterByCategory(
@@ -121,7 +121,7 @@ public interface ArticleService extends ContentService<Article> {
      * Filters and returns articles by the categories.
      *
      * @param articles   the articles to filter.
-     * @param categories a categories filtering.
+     * @param categories the categories filtering.
      * @return The filtered list of articles.
      */
     List<Article> filterByCategories(
@@ -130,10 +130,10 @@ public interface ArticleService extends ContentService<Article> {
     );
 
     /**
-     * Filters and returns articles by the date.
+     * Filters and returns articles by the dates.
      *
-     * @param startDate a initial date.
-     * @param endDate   a final date.
+     * @param startDate the initial date.
+     * @param endDate   the final date.
      * @return The filtered list of articles.
      */
     List<Article> getAndFilterByDate(
@@ -144,7 +144,7 @@ public interface ArticleService extends ContentService<Article> {
     /**
      * Filters and returns articles by the category.
      *
-     * @param category a category filtering.
+     * @param category the category filtering.
      * @return The filtered list of articles.
      */
     List<Article> getAndFilterByCategory(final Category category);
@@ -152,7 +152,7 @@ public interface ArticleService extends ContentService<Article> {
     /**
      * Filters and returns articles by the categories.
      *
-     * @param categories a categories filtering.
+     * @param categories the categories filtering.
      * @return The filtered list of articles.
      */
     List<Article> getAndFilterByCategories(final Collection<Category> categories);

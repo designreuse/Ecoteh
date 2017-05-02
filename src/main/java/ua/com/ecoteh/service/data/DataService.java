@@ -30,12 +30,12 @@ public interface DataService<T extends Model> {
      * @param models the models to add.
      * @return The saving models.
      */
-    Collection<T> addAll(final Collection<T> models);
+    Collection<T> add(final Collection<T> models);
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.
      *
-     * @param model a model to update.
+     * @param model the model to update.
      * @return The updating models.
      */
     T update(final T model);
@@ -49,7 +49,8 @@ public interface DataService<T extends Model> {
     Collection<T> update(final Collection<T> models);
 
     /**
-     * Returns object of {@link Model} class or subclasses with parameter id.
+     * Returns object of {@link Model} class or subclasses
+     * with incoming id.
      *
      * @param id is id of object to return.
      * @return The object models with parameter id.
@@ -73,7 +74,7 @@ public interface DataService<T extends Model> {
     Collection<T> getAll(final boolean valid);
 
     /**
-     * Removes object of {@link Model} class or subclasses with parameter id.
+     * Removes object of {@link Model} class or subclasses with incoming id.
      *
      * @param id a id of the model to remove.
      */
@@ -100,7 +101,7 @@ public interface DataService<T extends Model> {
 
     /**
      * Checks whether the object of {@link Model} class or subclasses
-     * is exists with parameter id.
+     * is exists with incoming id.
      *
      * @param id a id of the model to exist.
      * @return Returns true if model is exists, otherwise returns false.
@@ -121,7 +122,7 @@ public interface DataService<T extends Model> {
      * by the comparator.
      *
      * @param models     the models to sort.
-     * @param comparator a comparator to sort models.
+     * @param comparator the comparator to sort models.
      * @param revers     Sort in descending or ascending.
      * @return The sorted list of models.
      */
@@ -136,7 +137,7 @@ public interface DataService<T extends Model> {
      * by the comparator.
      *
      * @param models     the objects to sort.
-     * @param comparator a comparator to sort models.
+     * @param comparator the comparator to sort models.
      * @return The sorted list of models.
      */
     List<T> sort(
@@ -145,12 +146,12 @@ public interface DataService<T extends Model> {
     );
 
     /**
-     * Returns a list with the incoming list objects of {@link Model} class
-     * or subclasses.
+     * Returns a list with the incoming list objects
+     * of {@link Model} class or subclasses.
      *
      * @param models    the models to be processed.
-     * @param fromIndex a initial index.
-     * @param toIndex   a final index.
+     * @param fromIndex the initial index.
+     * @param toIndex   the final index.
      * @return The models from initial index to final index.
      */
     List<T> subList(
@@ -162,8 +163,8 @@ public interface DataService<T extends Model> {
     /**
      * Returns a list objects of {@link Model} class or subclasses.
      *
-     * @param fromIndex a initial index.
-     * @param toIndex   a final index.
+     * @param fromIndex the initial index.
+     * @param toIndex   the final index.
      * @return The models from initial index to final index.
      */
     List<T> getAndSubList(final int fromIndex, final int toIndex);
@@ -179,7 +180,7 @@ public interface DataService<T extends Model> {
     /**
      * Shuffles the models and returns it.
      *
-     * @param models a models to shuffle.
+     * @param models the models to shuffle.
      * @return The shuffling models.
      */
     List<T> shuffle(final Collection<T> models);

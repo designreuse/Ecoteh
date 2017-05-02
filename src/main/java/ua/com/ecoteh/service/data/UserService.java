@@ -17,11 +17,11 @@ import java.util.List;
 public interface UserService extends DataService<User>, UserDetailsService {
 
     /**
-     * Initializes, updates and returns user with parameter id.
+     * Initializes, updates and returns user with incoming id.
      *
-     * @param url  a URL of the user to update.
-     * @param user a user to update.
-     * @return The updating user with parameter id.
+     * @param url  the URL of a user to update.
+     * @param user the user to update.
+     * @return The updating user with incoming id.
      */
     User update(
             final String url,
@@ -29,42 +29,42 @@ public interface UserService extends DataService<User>, UserDetailsService {
     );
 
     /**
-     * Returns user which the parameter name.
+     * Returns user which the incoming name.
      *
-     * @param name a name of the user to return.
-     * @return The user which the parameter name.
+     * @param name the name of a user to return.
+     * @return The user which the incoming name.
      */
     User getByName(final String name);
 
     /**
-     * Returns user which the parameter url.
+     * Returns user which the incoming url.
      *
-     * @param url a URL of the user to return.
-     * @return The user which the parameter url.
+     * @param url the URL of a user to return.
+     * @return The user which the incoming url.
      */
     User getByUrl(final String url);
 
     /**
-     * Returns user which the parameter login.
+     * Returns user which the incoming login.
      *
-     * @param login a login of the user to return.
-     * @return The user which the parameter login.
+     * @param login the login of a user to return.
+     * @return The user which the incoming login.
      */
     User getByLogin(final String login);
 
     /**
-     * Returns user which the parameter email.
+     * Returns user which the incoming E-mail.
      *
-     * @param email a E-mail of the user to return.
-     * @return The user which the parameter email.
+     * @param email the E-mail of a user to return.
+     * @return The user which the incoming email.
      */
     User getByEmail(final String email);
 
     /**
-     * Returns user which the parameter phone.
+     * Returns user which the incoming phone.
      *
-     * @param phone a phone of the user to return.
-     * @return The user which the parameter phone.
+     * @param phone the phone of a user to return.
+     * @return The user which the incoming phone.
      */
     User getByPhone(final String phone);
 
@@ -97,16 +97,16 @@ public interface UserService extends DataService<User>, UserDetailsService {
     Collection<User> getPersonnel();
 
     /**
-     * Removes user with the parameter name.
+     * Removes user with the incoming name.
      *
-     * @param name a name of the user to remove.
+     * @param name the name of a user to remove.
      */
     void removeByName(final String name);
 
     /**
-     * Removes user with the parameter url.
+     * Removes user with the incoming url.
      *
-     * @param url a URL of the user to remove.
+     * @param url the URL of a user to remove.
      */
     void removeByUrl(final String url);
 
@@ -123,7 +123,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
     );
 
     /**
-     * Sorts and returns users by url.
+     * Sorts and returns users by URL.
      *
      * @param users  the users to sort.
      * @param revers Sort in descending or ascending.
@@ -138,7 +138,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
      * Sorts and returns users by by role.
      *
      * @param users  the users to sort.
-     * @param role   a role filtering.
+     * @param role   the role filtering.
      * @param revers Sort in descending or ascending.
      * @return The sorted list of users.
      */
@@ -180,7 +180,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
      * Filters and returns users by role.
      *
      * @param users the users to filter.
-     * @param role  a role filtering.
+     * @param role  the role filtering.
      * @return The filtered list of users.
      */
     List<User> filterByRole(
@@ -192,7 +192,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
      * Filters and returns users by roles.
      *
      * @param users the users to filter.
-     * @param roles a roles filtering.
+     * @param roles the roles filtering.
      * @return The filtered list of users.
      */
     List<User> filterByRoles(
@@ -203,7 +203,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
     /**
      * Filters and returns users by role.
      *
-     * @param role a role filtering.
+     * @param role the role filtering.
      * @return The filtered list of users.
      */
     List<User> getAndFilterByRole(final UserRole role);
@@ -211,7 +211,7 @@ public interface UserService extends DataService<User>, UserDetailsService {
     /**
      * Filters and returns users by roles.
      *
-     * @param roles a roles filtering.
+     * @param roles the roles filtering.
      * @return The filtered list of users.
      */
     List<User> getAndFilterByRoles(final Collection<UserRole> roles);

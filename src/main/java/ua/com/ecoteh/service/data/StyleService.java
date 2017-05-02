@@ -19,7 +19,7 @@ public interface StyleService {
     /**
      * Saves a new CSS styles of the site.
      *
-     * @param styles a new CSS styles.
+     * @param styles the new CSS styles to save.
      */
     void save(final String styles);
 

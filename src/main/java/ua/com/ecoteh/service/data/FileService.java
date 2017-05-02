@@ -19,9 +19,9 @@ public interface FileService extends DataService<File> {
     /**
      * Initializes, saves and returns a new file.
      *
-     * @param title         a title of the new file.
-     * @param type          a type of the new file.
-     * @param multipartFile a multipart file of the new file.
+     * @param title         the title of a new file.
+     * @param type          the type of a new file.
+     * @param multipartFile the multipart file of a new file.
      * @return The new saving file.
      */
     File add(
@@ -33,8 +33,8 @@ public interface FileService extends DataService<File> {
     /**
      * Initializes, saves and returns a new file.
      *
-     * @param title         a title of the new file.
-     * @param multipartFile a multipart file of the new file.
+     * @param title         the title of the a file.
+     * @param multipartFile the multipart file of a new file.
      * @return The new saving file.
      */
     File add(
@@ -43,13 +43,13 @@ public interface FileService extends DataService<File> {
     );
 
     /**
-     * Initializes, updates and returns photo with parameter id.
+     * Initializes, updates and returns file with incoming id.
      *
-     * @param id            a id of the photo to update.
-     * @param title         a new title to the file.
-     * @param type          a type of the new file.
-     * @param multipartFile a new multipart file to the file.
-     * @return The updating photo with parameter id.
+     * @param id            the id of a file to update.
+     * @param title         the new title to the file.
+     * @param type          the type of the new file.
+     * @param multipartFile the new multipart file to the file.
+     * @return The updating file with incoming id.
      */
     File update(
             final long id,
@@ -59,12 +59,12 @@ public interface FileService extends DataService<File> {
     );
 
     /**
-     * Initializes, updates and returns photo with parameter id.
+     * Initializes, updates and returns file with incoming id.
      *
-     * @param id            a id of the photo to update.
-     * @param title         a new title to the file.
-     * @param multipartFile a new multipart file to the file.
-     * @return The updating photo with parameter id.
+     * @param id            the id of a file to update.
+     * @param title         the new title to a file.
+     * @param multipartFile the new multipart file to a file.
+     * @return The updating photo with incoming id.
      */
     File update(
             final long id,
@@ -73,30 +73,30 @@ public interface FileService extends DataService<File> {
     );
 
     /**
-     * Returns file object with the parameter title.
+     * Returns file object with the incoming title.
      *
-     * @param title a title of the media to return.
-     * @return The media with parameter title.
+     * @param title the title of a file to return.
+     * @return The media with incoming title.
      */
     File getByTitle(final String title);
 
     /**
-     * Returns file object with the parameter url.
+     * Returns file object with the incoming url.
      *
-     * @param url a URL of the file to return.
-     * @return The media with parameter url.
+     * @param url the URL of a file to return.
+     * @return The media with incoming URL.
      */
     File getByUrl(final String url);
 
     /**
-     * Removes file object with the parameter title.
+     * Removes file object with the incoming title.
      *
-     * @param title a title of the file to remove.
+     * @param title the title of a file to remove.
      */
     void removeByTitle(final String title);
 
     /**
-     * Removes file object with the parameter url.
+     * Removes file object with the incoming url.
      *
      * @param url a URL of the file to remove.
      */
@@ -117,8 +117,8 @@ public interface FileService extends DataService<File> {
     /**
      * Save a multipart file in the file system in the directory rootPath.
      *
-     * @param file thr file to save.
-     * @param rootPath      a directory path.
+     * @param file     the multipart file to save.
+     * @param rootPath the directory path.
      */
     void saveFile(
             final MultipartFile file,
@@ -128,7 +128,7 @@ public interface FileService extends DataService<File> {
     /**
      * Save a multipart file in the file system.
      *
-     * @param file the file to save.
+     * @param file the multipart file to save.
      */
     void saveFile(final MultipartFile file);
 
@@ -141,18 +141,18 @@ public interface FileService extends DataService<File> {
     boolean deleteFile(final String path);
 
     /**
-     * Returns files with the type.
+     * Returns files with the incoming type.
      *
-     * @param type a type of files to return.
-     * @return The files with the type.
+     * @param type the type of files to return.
+     * @return The files with the incoming type.
      */
     List<File> getByType(final FileType type);
 
     /**
-     * Returns last file with the type.
+     * Returns last file with the incoming type.
      *
-     * @param type a type of file to return.
-     * @return The last file with the type.
+     * @param type the type of file to return.
+     * @return The last file with the incoming type.
      */
     File getLastByType(final FileType type);
 }

@@ -118,8 +118,8 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     /**
      * Constructor.
      *
-     * @param repository  a implementation of the {@link UserRepository} interface.
-     * @param fileService a implementation of the {@link FileService} interface.
+     * @param repository  the implementation of the {@link UserRepository} interface.
+     * @param fileService the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -134,27 +134,29 @@ public final class UserServiceImpl extends DataServiceImpl<User>
 
     /**
      * Returns authenticated user.
+     * If authenticated user is empty then returns null.
      *
-     * @return The authenticated user.
+     * @return The authenticated user or null.
      */
     @Override
     @Transactional(readOnly = true)
     public User getAuthenticatedUser() {
-        User authenticatedUser;
+        User user;
         try {
-            authenticatedUser = (User) SecurityContextHolder.getContext()
+            user = (User) SecurityContextHolder.getContext()
                     .getAuthentication().getPrincipal();
         } catch (ClassCastException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            authenticatedUser = null;
+            user = null;
         }
-        return authenticatedUser;
+        return user;
     }
 
     /**
      * Locates the user based on the username.
+     * If can`t find user by incoming username then throws UsernameNotFoundException.
      *
-     * @param username The username identifying the user whose data is required.
+     * @param username the username identifying the user whose data is required.
      * @return A fully populated user record (never null).
      * @throws UsernameNotFoundException if the user could not be found
      *                                   or the user has no GrantedAuthority.
@@ -175,10 +177,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Initializes, saves and returns a new user.
+     * Saves and returns a new user.
      *
      * @param user a user to save.
-     * @return The new saving user.
+     * @return The new saving user (never null).
      */
     @Override
     @Transactional
@@ -190,11 +192,11 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Initializes, updates and returns user with parameter url.
+     * Updates and returns user with incoming URL.
      *
-     * @param url  a URL of the user to update.
-     * @param user a user to update.
-     * @return The updating user with parameter id.
+     * @param url  the URL of a user to update.
+     * @param user the user to update.
+     * @return The updating user with incoming URL (never null).
      */
     @Override
     @Transactional
@@ -213,10 +215,12 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns user with the parameter name.
+     * Returns user with the incoming name.
+     * If a incoming name is null or empty then throws IllegalArgumentException.
+     * If can`t find user by incoming name then throws NullPointerException.
      *
-     * @param name a name of the user to return.
-     * @return The user with the parameter name.
+     * @param name the name of a user to return.
+     * @return The user with the incoming name (never null).
      * @throws IllegalArgumentException Throw exception when parameter name is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -241,11 +245,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns user with the parameter url.
+     * Returns user with the incoming URL.
+     * If a incoming URL is null or empty then throws IllegalArgumentException.
+     * If can`t find user by incoming URL then throws NullPointerException.
      *
-     * @param url a URL of the user to return.
-     * @return The user with the parameter url.
-     * @throws IllegalArgumentException Throw exception when parameter url is blank.
+     * @param url the URL of a user to return.
+     * @return The user with the incoming URL (never null).
+     * @throws IllegalArgumentException Throw exception when parameter URL is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
     @Override
@@ -269,10 +275,12 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns user with the parameter login.
+     * Returns user with the incoming login.
+     * If a incoming login is null or empty then throws IllegalArgumentException.
+     * If can`t find user by incoming login then throws NullPointerException.
      *
-     * @param login a login of the user to return.
-     * @return The user with the parameter login.
+     * @param login the login of a user to return.
+     * @return The user with the incoming login (never null).
      * @throws IllegalArgumentException Throw exception when parameter login is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -299,11 +307,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns user with the parameter e-mail.
+     * Returns user with the incoming E-mail.
+     * If a incoming E-mail is null or empty then throws IllegalArgumentException.
+     * If can`t find user by incoming E-mail then throws NullPointerException.
      *
-     * @param email a e-mail of the user to return.
-     * @return The user with the parameter e-mail.
-     * @throws IllegalArgumentException Throw exception when parameter email is blank.
+     * @param email the E-mail of a user to return.
+     * @return The user with the incoming E-mail (never null).
+     * @throws IllegalArgumentException Throw exception when parameter E-mail is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
     @Override
@@ -327,10 +337,12 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns user which the parameter phone.
+     * Returns user with the incoming phone.
+     * If a incoming phone is null or empty then throws IllegalArgumentException.
+     * If can`t find user by incoming phone then throws NullPointerException.
      *
-     * @param phone a phone of the user to return.
-     * @return The user which the parameter phone.
+     * @param phone the phone of a user to return.
+     * @return The user with the incoming phone (never null).
      * @throws IllegalArgumentException Throw exception when parameter phone is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -363,7 +375,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     /**
      * Returns main admin user.
      *
-     * @return The main admin.
+     * @return The main admin (never null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -374,7 +386,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     /**
      * Returns users with role UserRole.ADMIN.
      *
-     * @return The users with role UserRole.ADMIN.
+     * @return The users with role UserRole.ADMIN (never null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -385,7 +397,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     /**
      * Returns personnel.
      *
-     * @return The all personnel.
+     * @return The all personnel (never null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -395,9 +407,9 @@ public final class UserServiceImpl extends DataServiceImpl<User>
 
     /**
      * Removes user with the parameter name.
-     * Removes user if name is not blank.
+     * Removes user if name is not null and not empty.
      *
-     * @param name a name of the user to remove.
+     * @param name the name of a user to remove.
      */
     @Override
     @Transactional
@@ -408,10 +420,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Removes user with the parameter url.
-     * Removes user if url is not blank.
+     * Removes user with the incoming URL.
+     * Removes user if URL is not null and not empty.
      *
-     * @param url a url of the user to remove.
+     * @param url the URL of a user to remove.
      */
     @Override
     @Transactional
@@ -423,10 +435,11 @@ public final class UserServiceImpl extends DataServiceImpl<User>
 
     /**
      * Sorts and returns users by name.
+     * For sorting used {@link UserComparator.ByName} comparator.
      *
      * @param users  the users to sort.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of users or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -438,11 +451,12 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Sorts and returns users by url.
+     * Sorts and returns users by URL.
+     * For sorting used {@link UserComparator.ByUrl} comparator.
      *
      * @param users  the users to sort.
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of users or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -455,11 +469,12 @@ public final class UserServiceImpl extends DataServiceImpl<User>
 
     /**
      * Sorts and returns users by role.
+     * For sorting used {@link UserComparator.ByRole} comparator.
      *
      * @param users  the users to sort.
-     * @param role   a role filtering.
-     * @param revers is ort in descending or ascending.
-     * @return The sorted list of users.
+     * @param role   the role filtering.
+     * @param revers is sort in descending or ascending.
+     * @return The sorted list of users or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -472,9 +487,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Sorts and returns users by date.
+     * Sorts and returns all users by name.
+     * For sorting used {@link UserComparator.ByName} comparator.
      *
-     * @param revers is ort in descending or ascending.
+     * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
      */
     @Override
@@ -484,9 +500,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Sorts and returns users by url.
+     * Sorts and returns all users by URL.
+     * For sorting used {@link UserComparator.ByUrl} comparator.
      *
-     * @param revers is ort in descending or ascending.
+     * @param revers is sort in descending or ascending.
      * @return The sorted list of users.
      */
     @Override
@@ -496,10 +513,11 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Sorts and returns users by role.
+     * Sorts and returns all users by role.
+     * For sorting used {@link UserComparator.ByRole} comparator.
      *
      * @param role   a role filtering.
-     * @param revers is ort in descending or ascending.
+     * @param revers is sort in descending or ascending.
      * @return The sorted list of users.
      */
     @Override
@@ -512,7 +530,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Filters and returns users by role.
+     * Filters and returns users by the incoming role.
+     * <pre>
+     *     filterByRole(null, null) = empty ArrayList()
+     *     filterByRole(null, UserRole.ADMIN) = empty ArrayList()
+     *
+     *     Collection users = new ArrayList();
+     *     users.add(new User());
+     *     filterByCategory(users, UserRole.ADMIN) = filtered list of users
+     * </pre>
      *
      * @param users the users to filter.
      * @param role  a role filtering.
@@ -533,9 +559,23 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Filters and returns users by roles.
+     * Filters and returns users by incoming roles.
      * Returns empty list if users is empty.
      * Returns back users if roles is empty.
+     * <pre>
+     *     filterByRoles(null, ..) = empty ArrayList()
+     *     filterByRoles(new ArrayList(), ..) = empty ArrayList()
+     *
+     *     Collection roles = new ArrayList();
+     *     roles.add(UserRole.ADMIN);
+     *     filterByCategories(null, roles) = empty ArrayList()
+     *
+     *     Collection users = new ArrayList();
+     *     users.add(new User());
+     *     filterByCategories(users, null) = users
+     *
+     *     filterByCategories(users, roles) = filtered list of users
+     * </pre>
      *
      * @param users the users to filter.
      * @param roles a roles filtering.
@@ -554,7 +594,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
                     result.addAll(
                             roles.stream()
                                     .filter(
-                                            role -> user.getRole().equals(role)
+                                            role -> roleFilter(user, role)
                                     ).map(role -> user)
                                     .collect(Collectors.toList())
                     );
@@ -567,7 +607,11 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Filters and returns users by role.
+     * Filters and returns users by incoming role.
+     * <pre>
+     *     getAndFilterByRole(null) = all users
+     *     getAndFilterByRole(UserRole.ADMIN) = filtered list of users
+     * </pre>
      *
      * @param role a role filtering.
      * @return The filtered list of users.
@@ -580,6 +624,14 @@ public final class UserServiceImpl extends DataServiceImpl<User>
 
     /**
      * Filters and returns users by roles.
+     * <pre>
+     *     getAndFilterByRoles(null) = all users
+     *     getAndFilterByRoles(new ArrayList()) = all users
+     *
+     *     Collection roles = new ArrayList();
+     *     roles.add(UserRole.ADMIN);
+     *     getAndFilterByRoles(roles) = filtered list of users
+     * </pre>
      *
      * @param roles a roles filtering.
      * @return The filtered list of users.
@@ -591,10 +643,24 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns a list of valid users.
+     * Returns a list valid users.
+     * Returns empty list if users is empty.
+     * <pre>
+     *     filteredByValid(null) = empty ArrayList()
+     *     filteredByValid(new ArrayList()) = empty ArrayList()
+     *
+     *     Collection users = new ArrayList();
+     *     User user = new User();
+     *     user.setValidated(false);
+     *     users.add(user);
+     *     filteredByValid(users) = empty ArrayList()
+     *
+     *     user.setValidated(true);
+     *     filteredByValid(users) = filtered list of users
+     * </pre>
      *
      * @param users the users to filter.
-     * @return The list of valid users.
+     * @return The filtered list of users or empty list (newer null).
      */
     @Override
     @Transactional
@@ -603,9 +669,8 @@ public final class UserServiceImpl extends DataServiceImpl<User>
         if (isNotEmpty(users)) {
             result.addAll(
                     users.stream()
-                            .filter(
-                                    UserServiceImpl::isValidUser
-                            ).collect(Collectors.toList())
+                            .filter(UserServiceImpl::isValidated)
+                            .collect(Collectors.toList())
             );
         }
         return result;
@@ -652,9 +717,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
 
     /**
      * Copies the object "from" to object "to".
+     * Incoming objects must be not null.
      *
-     * @param from a copied object
-     * @param to   a object to copy
+     * @param from the copied object
+     * @param to   the object to copy
      */
     protected void copy(final User from, final User to) {
         to.initialize(from);
@@ -691,6 +757,19 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
+     * Filters user by the incoming user role.
+     * Incoming user must be not null.
+     *
+     * @param user the user to filter.
+     * @param role the role filtering.
+     * @return true if user role equals to incoming role,
+     * false otherwise.
+     */
+    private static boolean roleFilter(final User user, final UserRole role) {
+        return user.getRole().equals(role);
+    }
+
+    /**
      * Checks incoming photos.
      * The new photo must be not equals to the old photo.
      * <pre>
@@ -711,26 +790,5 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     private static boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
         return !newPhoto.equals(oldPhoto) && isNotEmpty(newPhoto.getUrl());
-    }
-
-    /**
-     * Validated a incoming user.
-     * User is valid if it is not null and it validated.
-     * <pre>
-     *     isValidUser(null) = false
-     *
-     *     User user = new User();
-     *     user.setValidated(false);
-     *     isValidUser(user) = false
-     *
-     *     user.setValidated(true);
-     *     isValidUser(user) = true
-     * </pre>
-     *
-     * @param user the user to check.
-     * @return true if the user is not null and it validated.
-     */
-    private static boolean isValidUser(final User user) {
-        return isNotNull(user) && user.isValidated();
     }
 }

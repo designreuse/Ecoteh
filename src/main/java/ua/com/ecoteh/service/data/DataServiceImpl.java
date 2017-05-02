@@ -47,7 +47,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param repository a implementation of the {@link DataRepository} interface.
+     * @param repository the implementation of the {@link DataRepository} interface.
      */
     DataServiceImpl(final DataRepository<T> repository) {
         this.repository = repository;
@@ -56,9 +56,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     /**
      * Saves and returns object of {@link Model} class or subclasses.
      * Returns input object if model is not valid.
+     * If can`t find model then throws NullPointerException.
      *
      * @param model the model to add.
-     * @return The saving model or input object.
+     * @return The saving model or input object (newer null).
      * @throws NullPointerException Throw exception when saving model is null.
      */
     @Override
@@ -82,13 +83,21 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     /**
      * Saves and returns objects of {@link Model} class or subclasses.
      * Returns empty collection if models is empty.
+     * <pre>
+     *     addAll(null) = empty ArrayList()
+     *     addAll(new ArrayList()) = empty ArrayList()
+     *
+     *     Collection models = new ArrayList();
+     *     models.add(new Model());
+     *     addAll(models) = saving models
+     * </pre>
      *
      * @param models the models to add.
      * @return The saving models or empty collection.
      */
     @Override
     @Transactional
-    public Collection<T> addAll(final Collection<T> models) {
+    public Collection<T> add(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
         if (isNotEmpty(models)) {
             result.addAll(
@@ -102,10 +111,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.
-     * Return null if model is not valid.
+     * If can`t find model then throws NullPointerException.
      *
      * @param model the model to update.
-     * @return The updating models or null.
+     * @return The updating models (newer null).
      * @throws NullPointerException Throw exception when saving model is null.
      */
     @Override
@@ -129,9 +138,18 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     /**
      * Updates and returns objects of {@link Model} class or subclasses.
      * Return empty collection if models is empty.
+     * <pre>
+     *     update(null) = empty ArrayList()
+     *     update(new ArrayList()) = empty ArrayList()
+     *
+     *     Collection models = new ArrayList();
+     *     models.add(new Model());
+     *     update(models) = saving models
+     * </pre>
      *
      * @param models the models to update.
-     * @return The updating models or empty collection if models is empty.
+     * @return The updating models or empty collection
+     * if models is empty (newer null).
      */
     @Override
     @Transactional
@@ -148,10 +166,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns object of class {@link Model} or subclasses with parameter id.
+     * Returns object of class {@link Model} or subclasses with incoming id.
+     * If can`t find model then throws NullPointerException.
      *
-     * @param id is id of object to return.
-     * @return The model with parameter id.
+     * @param id the id of a model to return.
+     * @return The model with incoming id (newer null).
      * @throws NullPointerException Throw exception when object with parameter id is not exist.
      */
     @Override
@@ -172,7 +191,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     /**
      * Returns all valid objects of {@link Model} class or subclasses.
      *
-     * @return The all models.
+     * @return The all models (newer null).
      */
     @Override
     @Transactional
@@ -183,9 +202,13 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     /**
      * Returns all or valid objects of {@link Model} class or subclasses
      * depending on the parameter value.
+     * <pre>
+     *     getAll(true) = all valid models
+     *     getAll(false) = all models
+     * </pre>
      *
      * @param valid is returns all or valid models.
-     * @return The all models.
+     * @return The all models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -198,7 +221,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Removes object of {@link Model} class or subclasses
      * with parameter id.
      *
-     * @param id a id of model to remove.
+     * @param id the id of a model to remove.
      */
     @Override
     @Transactional
@@ -247,7 +270,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Checks whether the object of {@link Model} class or subclasses
      * with parameter id is exists.
      *
-     * @param id a id of the model to exists.
+     * @param id the id of a model to exists.
      * @return Returns true if the model is exists,
      * otherwise returns false.
      */
@@ -276,9 +299,9 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * by the comparator. If models is empty then return empty collection.
      *
      * @param models     the models to sort.
-     * @param comparator a comparator to sort models.
+     * @param comparator the comparator to sort models.
      * @param revers     is sort in descending or ascending.
-     * @return The sorted list of models.
+     * @return The sorted list of models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -305,8 +328,8 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * by the comparator.
      *
      * @param models     the models to sort.
-     * @param comparator a comparator to sort models.
-     * @return The sorted list of models.
+     * @param comparator the comparator to sort models.
+     * @return The sorted list of models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -320,11 +343,22 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     /**
      * Returns a list with the incoming list objects of {@link Model}
      * class or subclasses.
+     * <pre>
+     *     subList(null, ..., ...) = empty ArrayList
+     *     subList(new ArrayList(), ..., ...) = empty ArrayList
+     *
+     *     For example, listSize = 10
+     *     subList(modelsList, 1, 11) = modelsList
+     *     subList(modelsList, 11, 1) = modelsList
+     *     subList(modelsList, 11, 11) = modelsList
+     *
+     *     subList(modelsList, 1, 5) = substring list of models.
+     * </pre>
      *
      * @param models    the list of models to be processed.
-     * @param fromIndex a initial index.
-     * @param toIndex   a final index.
-     * @return The substring list of models.
+     * @param fromIndex the initial index.
+     * @param toIndex   the final index.
+     * @return The substring list of models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -345,23 +379,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Checks a incoming indexes.
-     *
-     * @param fromIndex a initial index.
-     * @param toIndex   a final index.
-     * @param size      a models size.
-     * @return true if incoming indexes is correct, false otherwise.
-     */
-    private static boolean checkIndexes(final int fromIndex, final int toIndex, final int size) {
-        return (fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < size);
-    }
-
-    /**
      * Returns a list objects of {@link Model} class or subclasses.
      *
-     * @param fromIndex a initial index.
-     * @param toIndex   a final index.
-     * @return The substring list of models.
+     * @param fromIndex the initial index.
+     * @param toIndex   the final index.
+     * @return The substring list of models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -376,7 +398,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * Returns a list valid objects of {@link Model} class or subclasses.
      *
      * @param models the models to filter.
-     * @return The filter list of models.
+     * @return The filter list of models (newer null).
      */
     @Override
     public List<T> filteredByValid(final Collection<T> models) {
@@ -384,49 +406,24 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         if (isNotEmpty(models)) {
             result.addAll(
                     models.stream()
-                            .filter(
-                                    DataServiceImpl::validFilter
-                            ).collect(Collectors.toList())
+                            .filter(DataServiceImpl::isValidated)
+                            .collect(Collectors.toList())
             );
         }
         return result;
     }
 
     /**
-     * Shuffles the models and returns it.
+     * Shuffles the incoming models and returns it.
      *
-     * @param models a models to shuffle.
-     * @return The shuffling models.
+     * @param models the models to shuffle.
+     * @return The shuffling models (newer null).
      */
     @Override
     public List<T> shuffle(final Collection<T> models) {
         final List<T> list = new ArrayList<>(models);
         Collections.shuffle(list);
         return list;
-    }
-
-    /**
-     * Gets revers input comparator if revers is true.
-     *
-     * @param comparator a comparator to sort models.
-     * @param revers     is sort in descending or ascending.
-     * @return The comparator to sort models.
-     */
-    private Comparator<T> getReversComparator(
-            final Comparator<T> comparator,
-            final boolean revers
-    ) {
-        return revers ? Collections.reverseOrder(comparator) : comparator;
-    }
-
-    /**
-     * Filters model by validation.
-     *
-     * @param model a model to filter.
-     * @return true if model is not null and is valid, false otherwise.
-     */
-    private static boolean validFilter(final Model model) {
-        return isNotNull(model) && model.isValidated();
     }
 
     /**
@@ -445,6 +442,65 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      */
     String getClassSimpleName() {
         return getModelClass().getSimpleName();
+    }
+
+    /**
+     * Gets revers input comparator if revers is true.
+     * Incoming comparator must be not null.
+     * <pre>
+     *     Comparator comparator = new SomeComparator();
+     *     getReversComparator(comparator, true) = revers comparator
+     *     getReversComparator(comparator, false) = comparator
+     * </pre>
+     *
+     * @param comparator the comparator to sort models.
+     * @param revers     is sort in descending or ascending.
+     * @return The comparator to sort models (newer null).
+     */
+    private static Comparator getReversComparator(
+            final Comparator comparator,
+            final boolean revers
+    ) {
+        return revers ? Collections.reverseOrder(comparator) : comparator;
+    }
+
+    /**
+     * Checks a incoming indexes.
+     * <pre>
+     *     checkIndexes(0, 2, 3) = true
+     *     checkIndexes(1, 2, 3) = true
+     *     checkIndexes(2, 1, 3) = false
+     *     checkIndexes(1, 4, 3) = false
+     * </pre>
+     *
+     * @param fromIndex the initial index.
+     * @param toIndex   the final index.
+     * @param size      the models size.
+     * @return true if incoming indexes is correct, false otherwise.
+     */
+    private static boolean checkIndexes(final int fromIndex, final int toIndex, final int size) {
+        return (fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < size);
+    }
+
+    /**
+     * Validated a incoming model.
+     * Model is valid if it is not null and it validated.
+     * <pre>
+     *     isValidated(null) = false
+     *
+     *     Model model = new Model();
+     *     model.setValidated(false);
+     *     isValidated(model) = false
+     *
+     *     model.setValidated(true);
+     *     isValidated(model) = true
+     * </pre>
+     *
+     * @param model the model to check.
+     * @return true if the model is not null and it validated.
+     */
+    protected static boolean isValidated(final Model model) {
+        return isNotNull(model) && model.isValidated();
     }
 
     /**

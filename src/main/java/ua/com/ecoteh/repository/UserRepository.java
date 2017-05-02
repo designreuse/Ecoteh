@@ -15,7 +15,7 @@ public interface UserRepository extends DataRepository<User> {
      * Returns user from a database,
      * which matches the parameter name.
      *
-     * @param name a name of the user to return.
+     * @param name the name of a user to return.
      * @return The object of class {@link User}.
      */
     User findByName(final String name);
@@ -24,7 +24,7 @@ public interface UserRepository extends DataRepository<User> {
      * Returns user from a database,
      * which matches the parameter login.
      *
-     * @param login a login of the user to return.
+     * @param login the login of a user to return.
      * @return The object of class {@link User}.
      */
     User findByEncryptedLogin(final String login);
@@ -33,7 +33,7 @@ public interface UserRepository extends DataRepository<User> {
      * Returns user from a database,
      * which matches the parameter url.
      *
-     * @param url a URL of the user to return.
+     * @param url the URL of a user to return.
      * @return The object of class {@link User}.
      */
     User findByUrl(final String url);
@@ -42,7 +42,7 @@ public interface UserRepository extends DataRepository<User> {
      * Removes user from a database,
      * which matches the parameter name.
      *
-     * @param name a name of the user to remove.
+     * @param name the name of a user to remove.
      */
     void deleteByName(final String name);
 
@@ -50,7 +50,7 @@ public interface UserRepository extends DataRepository<User> {
      * Removes user from a database,
      * which matches the parameter url.
      *
-     * @param url a URL of the user to remove.
+     * @param url the URL of a user to remove.
      */
     void deleteByUrl(final String url);
 
@@ -58,7 +58,7 @@ public interface UserRepository extends DataRepository<User> {
      * Returns user from a database,
      * which matches the parameter email.
      *
-     * @param email a E-mail of the user to return.
+     * @param email the E-mail of a user to return.
      * @return The object of class {@link User}.
      */
     User findByContactsEmail(final String email);
@@ -67,25 +67,25 @@ public interface UserRepository extends DataRepository<User> {
      * Returns user from a database,
      * which matches the parameter mobilePhone.
      *
-     * @param mobilePhone a mobile phone of the user to return.
+     * @param phone the mobile phone of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByContactsMobilePhone(final String mobilePhone);
+    User findByContactsMobilePhone(final String phone);
 
     /**
      * Returns user from a database,
      * which matches the parameter landlinePhone.
      *
-     * @param landlinePhone a landline phone of the user to return.
+     * @param phone the landline phone of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByContactsLandlinePhone(final String landlinePhone);
+    User findByContactsLandlinePhone(final String phone);
 
     /**
      * Returns user from a database,
      * which matches the parameter fax.
      *
-     * @param fax a fax phone of the user to return.
+     * @param fax the fax phone of a user to return.
      * @return The object of class {@link User}.
      */
     User findByContactsFax(final String fax);

@@ -15,10 +15,10 @@ import java.util.List;
 public interface CompanyRepository extends ContentRepository<Company> {
 
     /**
-     * Returns companies from a database,
+     * Returns all companies from a database,
      * which matches the parameter type.
      *
-     * @param type a type of the company to return.
+     * @param type the type of a company to return.
      * @return The objects of class {@link Company}.
      */
     List<Company> findByType(final CompanyType type);
@@ -27,7 +27,7 @@ public interface CompanyRepository extends ContentRepository<Company> {
      * Returns company from a database,
      * which matches the parameter domain.
      *
-     * @param domain a domain of the company to return.
+     * @param domain the domain of a company to return.
      * @return The object of class {@link Company}.
      */
     Company findByDomain(final String domain);

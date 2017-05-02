@@ -44,7 +44,7 @@ public final class StyleServiceImpl implements StyleService {
     /**
      * Constructor.
      *
-     * @param properties a implementation of the {@link ContentProperties} interface.
+     * @param properties the implementation of the {@link ContentProperties} interface.
      */
     @Autowired
     public StyleServiceImpl(final ContentProperties properties) {
@@ -63,8 +63,16 @@ public final class StyleServiceImpl implements StyleService {
 
     /**
      * Saves a new CSS styles of the site.
+     * Saves a styles if it is not empty.
+     * <pre>
+     *     save(null) - does nothing
+     *     save("") - does nothing
+     *     save(" ") - does nothing
+     *     save("bob") - saves a styles
+     *     save("  bob  ") = saves a styles
+     * </pre>
      *
-     * @param styles a new CSS styles to save.
+     * @param styles the new CSS styles to save.
      */
     @Override
     public void save(final String styles) {
@@ -76,6 +84,8 @@ public final class StyleServiceImpl implements StyleService {
 
     /**
      * Rollbacks a CSS styles to default.
+     * Read styles from the DEFAULT_STYLES_PATH file
+     * with the default styles and save it.
      */
     @Override
     public void rollback() {
@@ -83,16 +93,18 @@ public final class StyleServiceImpl implements StyleService {
     }
 
     /**
+     * Saves styles in the STYLES_PATH files.
      *
-     * @param styles
+     * @param styles the styles to write.
      */
     private void saveStyles(final String styles) {
         save(STYLES_PATH, styles);
     }
 
     /**
+     * Compresses and saves styles in the MIN_STYLES_PATH files.
      *
-     * @param styles
+     * @param styles the styles to write.
      */
     private void saveCompressStyles(final String styles) {
         save(
@@ -102,9 +114,10 @@ public final class StyleServiceImpl implements StyleService {
     }
 
     /**
+     * Writes a incoming styles to a file in a incoming path.
      *
-     * @param styles
-     * @param path
+     * @param styles the styles to write.
+     * @param path   the path to a file.
      */
     private void save(final String styles, final String path) {
         new FileContentsLoader(
@@ -114,9 +127,10 @@ public final class StyleServiceImpl implements StyleService {
     }
 
     /**
+     * Reads file in a incoming path and returns it styles.
      *
-     * @param path
-     * @return
+     * @param path the path to a file.
+     * @return The styles from a file.
      */
     private String read(final String path) {
         return new FileContentsLoader(
@@ -126,8 +140,10 @@ public final class StyleServiceImpl implements StyleService {
 
     /**
      * Returns a absolute path to the file.
+     * Absolute path to the file is a resources
+     * absolute path and incoming path.
      *
-     * @param path a relative path to file.
+     * @param path the relative path to file.
      * @return The absolute path
      */
     private String getAbsolutePath(final String path) {

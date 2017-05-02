@@ -23,7 +23,7 @@ public final class MessageServiceImpl extends DataServiceImpl<Message> implement
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param repository a implementation of the {@link MessageRepository} interface.
+     * @param repository the implementation of the {@link MessageRepository} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")

@@ -16,11 +16,11 @@ import java.util.List;
 public interface ContentService<T extends Content> extends DataService<T> {
 
     /**
-     * Initializes, updates and returns content with parameter url.
+     * Initializes, updates and returns content with the incoming URL
      *
-     * @param url     a url of the content to update.
-     * @param content a content to update.
-     * @return The updating content with parameter id.
+     * @param url     the URL of a content to update.
+     * @param content the content to update.
+     * @return The updating content with incoming id.
      */
     T update(
             final String url,
@@ -29,11 +29,11 @@ public interface ContentService<T extends Content> extends DataService<T> {
 
     /**
      * Returns content object of the {@link Content} class or subclasses
-     * with the parameter title.
+     * with the incoming title.
      *
-     * @param title   a title of the content to return.
+     * @param title   the title of a content to return.
      * @param isValid is get valid content or not.
-     * @return The object of class {@link Content}.
+     * @return The content with the incoming title.
      */
     T getByTitle(
             final String title,
@@ -42,11 +42,11 @@ public interface ContentService<T extends Content> extends DataService<T> {
 
     /**
      * Returns content object of the {@link Content} class or subclasses
-     * with the parameter url.
+     * with the incoming URL.
      *
-     * @param url     a URL of the content to return.
+     * @param url     the URL of a content to return.
      * @param isValid is get valid content or not.
-     * @return The content with the parameter url
+     * @return The content with the incoming URL.
      */
     T getByUrl(
             final String url,
@@ -55,17 +55,17 @@ public interface ContentService<T extends Content> extends DataService<T> {
 
     /**
      * Removes content object of the {@link Content} class or subclasses
-     * with the parameter title.
+     * with the incoming title.
      *
-     * @param title a title of the content to remove.
+     * @param title the title of a content to remove.
      */
     void removeByTitle(final String title);
 
     /**
      * Removes content object of the {@link Content} class or subclasses
-     * with the parameter url.
+     * with the incoming url.
      *
-     * @param url a URL of the content to remove.
+     * @param url the URL of a content to remove.
      */
     void removeByUrl(final String url);
 
@@ -83,7 +83,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
     );
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by url.
+     * Sorts and returns objects of {@link Content} class or subclasses by URL.
      *
      * @param contents the objects to sort.
      * @param revers   is sort in descending or ascending.
@@ -104,7 +104,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
     List<T> getAndSortByTitle(final boolean revers);
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by url.
+     * Sorts and returns objects of {@link Content} class or subclasses by URL.
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
