@@ -37,9 +37,7 @@ public abstract class MockDataServiceTest<T extends Model> {
 
     @Test
     public void whenAddModelsThenReturnThisModels() {
-        assertNotNull(
-                getService().addAll(getObjects())
-        );
+        assertNotNull(getService().add(getObjects()));
     }
 
     @Test

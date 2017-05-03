@@ -14,30 +14,22 @@ public final class TimeTest {
     public void whenInitNotBlankTimeTimeThenGetNotBlankTime() {
         final Time time = new Time(MockConstants.TIME);
         assertNotNull(time.getTime());
-        assertTrue(time.isNotBlankTime());
     }
 
     @Test
-    public void whenInitNullTimeTimeThenGetNull() {
+    public void whenInitNullTimeTimeThenGetNotNull() {
         final Time time = new Time(null);
-        assertNull(time.getTime());
-        assertFalse(time.isNotBlankTime());
+        assertNotNull(time.getTime());
     }
 
     @Test
     public void whenSetNullTimeThenGetCorrectTime() {
-        assertEquals(
-                new Time(null).getCorrectTime(),
-                "00:00"
-        );
+        assertEquals(new Time(null).getCorrectTime(), "00:00");
     }
 
     @Test
     public void whenSetInvalidTimeThenGetCorrectTime() {
-        assertEquals(
-                new Time(MockConstants.ANY_STRING).getCorrectTime(),
-                "00:00"
-        );
+        assertEquals(new Time(MockConstants.ANY_STRING).getCorrectTime(), "00:00");
     }
 
     @Test
@@ -83,29 +75,17 @@ public final class TimeTest {
 
     @Test
     public void whenCheckNullCurrentTimeThenReturnFalse() {
-        assertFalse(
-                Time.checkTime(
-                        null, new Date(), new Date()
-                )
-        );
+        assertFalse(Time.checkTime(null, new Date(), new Date()));
     }
 
     @Test
     public void whenCheckNullStartTimeThenReturnFalse() {
-        assertFalse(
-                Time.checkTime(
-                        new Date(), null, new Date()
-                )
-        );
+        assertFalse(Time.checkTime(new Date(), null, new Date()));
     }
 
     @Test
     public void whenCheckNullFinishTimeThenReturnFalse() {
-        assertFalse(
-                Time.checkTime(
-                        new Date(), new Date(), null
-                )
-        );
+        assertFalse(Time.checkTime(new Date(), new Date(), null));
     }
 
     @Test
@@ -169,7 +149,7 @@ public final class TimeTest {
 
     @Test
     public void whenIsWorkTimeWithNullStartHourThenReturnTrue() {
-       Time.isWorkTime(null, "23:59");
+        Time.isWorkTime("09:00", "18:45");
     }
 
     @Test

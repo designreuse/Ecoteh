@@ -256,7 +256,7 @@ public final class MockServices {
             final Collection<T> models
     ) {
         when(service.add(model)).thenReturn(model);
-        when(service.addAll(models)).thenReturn(models);
+        when(service.add(models)).thenReturn(models);
         when(service.update(model)).thenReturn(model);
         when(service.update(models)).thenReturn(models);
         when(service.get(MockConstants.ID)).thenReturn(model);

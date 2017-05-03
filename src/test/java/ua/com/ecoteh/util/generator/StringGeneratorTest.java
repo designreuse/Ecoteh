@@ -64,9 +64,4 @@ public class StringGeneratorTest {
             assertNotEquals(generator.generate(), generator.generate());
         }
     }
-
-    @Test
-    public void whenGetThenReturnNotNull() {
-        assertNotNull(new StringGenerator().get());
-    }
 }

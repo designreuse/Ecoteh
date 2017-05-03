@@ -14,12 +14,12 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test(expected = NullPointerException.class)
     public void whenAddNullThenThrowException() {
-        assertNull(getService().add(null));
+        assertNull(getService().add((T) null));
     }
 
     @Test(expected = NullPointerException.class)
     public void whenAddInvalidModelThenThrowException() {
-        assertNull(getService().add(null));
+        assertNull(getService().add((T) null));
     }
 
     @Test
@@ -29,17 +29,17 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenAddAllNullThenReturnsEmptyCollection() {
-        assertTrue(getService().addAll(null).isEmpty());
+        assertTrue(getService().add((Collection<T>) null).isEmpty());
     }
 
     @Test
     public void whenAddAllEmptyListThenReturnsEmptyCollection() {
-        assertTrue(getService().addAll(new ArrayList<>()).isEmpty());
+        assertTrue(getService().add(new ArrayList<>()).isEmpty());
     }
 
     @Test
     public void whenAddAllValidModelsThenReturnsIt() {
-        assertFalse(getService().addAll(getObjects()).isEmpty());
+        assertFalse(getService().add(getObjects()).isEmpty());
     }
 
     @Test(expected = NullPointerException.class)
