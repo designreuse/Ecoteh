@@ -1,6 +1,6 @@
 <h1>Ecoteh</h1>
 
-"Ecoteh" is the web-site for a company that designs and manufactures marking equipment -
+"Ecoteh" is a web-site of the company that designs and manufactures marking equipment -
 hot stamping printers (hot-stamping printer) for printing date and other information
 (lot number, logo, etc.) to the packaging. Also, the company makes symbols, matrixes,
 cliches of steel and magnesium for contact stamping.
