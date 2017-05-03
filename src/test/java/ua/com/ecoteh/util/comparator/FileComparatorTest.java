@@ -21,7 +21,7 @@ public final class FileComparatorTest {
 
     @Test
     public void getMediaComparatorByTitle() {
-        final Comparator<File> comparator = new FileComparator.ByTitle<>();
+        final Comparator<File> comparator = new FileComparator.ByTitle();
         assertNotNull(comparator);
 
         final File file1 = MockEntity.getFile();
@@ -44,14 +44,12 @@ public final class FileComparatorTest {
 
     @Test
     public void getMediaComparatorByTitleWithInvalidMedias() {
-        getMediaComparatorWithInvalidMedias(
-                new FileComparator.ByTitle<>()
-        );
+        getMediaComparatorWithInvalidMedias(new FileComparator.ByTitle());
     }
 
     @Test
     public void getMediaComparatorByUrl() {
-        final Comparator<File> comparator = new FileComparator.ByUrl<>();
+        final Comparator<File> comparator = new FileComparator.ByUrl();
         assertNotNull(comparator);
 
         final File file1 = MockEntity.getFile();
@@ -74,15 +72,11 @@ public final class FileComparatorTest {
 
     @Test
     public void getMediaComparatorByUrlWithInvalidMedias() {
-        getMediaComparatorWithInvalidMedias(
-                new FileComparator.ByUrl<>()
-        );
+        getMediaComparatorWithInvalidMedias(new FileComparator.ByUrl());
     }
 
     @Ignore
-    private static void getMediaComparatorWithInvalidMedias(
-            final Comparator<File> comparator
-    ) {
+    private static void getMediaComparatorWithInvalidMedias(final Comparator<File> comparator) {
         int value = comparator.compare(null, null);
         assertNotNull(value);
         assertEquals(value, 0);

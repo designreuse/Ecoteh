@@ -204,6 +204,9 @@ public class MockRepository {
         when(repository.save(model)).thenReturn(model);
         when(repository.save((T) null)).thenReturn(null);
         when(repository.save(models)).thenReturn(new ArrayList<>(models));
+        for (T _model : models) {
+            when(repository.save(_model)).thenReturn(_model);
+        }
         when(repository.findOne(ID)).thenReturn(model);
         when(repository.findOne(UNKNOWN_ID)).thenReturn(null);
         when(repository.findOne((Long) null)).thenReturn(null);
