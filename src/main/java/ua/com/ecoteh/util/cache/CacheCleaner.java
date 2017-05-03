@@ -1,6 +1,9 @@
 package ua.com.ecoteh.util.cache;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The class implements a set of methods for checking cache at old objects.

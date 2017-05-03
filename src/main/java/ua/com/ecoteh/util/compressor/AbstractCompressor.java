@@ -14,7 +14,7 @@ public abstract class AbstractCompressor implements Compressor {
 
     /**
      * Compresses the incoming source and returns a compressed result.
-     * Compresses the soource if it not null and not empty.
+     * Compresses the source if it not null and not empty.
      * <pre>
      *     compress(null) = "" (empty string)
      *     compress("") = "" (empty string)
