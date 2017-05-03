@@ -29,7 +29,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
     /**
      * Constructor.
      *
-     * @param path a root path of a file.
+     * @param path the root path of a file.
      */
     public FileContentsLoader(final String path) {
         this(path, "");
@@ -38,8 +38,8 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
     /**
      * Constructor.
      *
-     * @param path a root path of a file.
-     * @param text a information to save.
+     * @param path the root path of a file.
+     * @param text the information to save.
      */
     public FileContentsLoader(
             final String path,
@@ -52,7 +52,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
     /**
      * Reads a information from a file.
      *
-     * @return a information from a file.
+     * @return the information from a file.
      */
     @Override
     public String read() {
@@ -83,10 +83,10 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
     }
 
     /**
-     * Sets a new text to the article.
-     * If parameter text is blank, then sets empty string.
+     * Sets a new text.
+     * If parameter text is null or empty, then sets empty string.
      *
-     * @param text a new text to the article.
+     * @param text the new text.
      */
     private void setText(final String text) {
         this.text = isNotEmpty(text) ? text : "";

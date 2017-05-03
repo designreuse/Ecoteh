@@ -22,8 +22,8 @@ public interface Captcha {
     /**
      * Verifies captcha from ip address.
      *
-     * @param captcha   a StaticCaptcha for check.
-     * @param ipAddress a request ip address.
+     * @param captcha   the StaticCaptcha for check.
+     * @param ipAddress the request ip address.
      * @return true if captcha is verify, false otherwise.
      */
     boolean isVerify(

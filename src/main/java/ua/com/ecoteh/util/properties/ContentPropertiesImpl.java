@@ -76,17 +76,17 @@ public final class ContentPropertiesImpl implements ContentProperties {
     /**
      * Constructor.
      *
-     * @param catalinaHome                   a Apache Catalina home path.
-     * @param contentType                    a content type encoding.
-     * @param prefix                         a view name prefix.
-     * @param suffix                         a view name prefix.
+     * @param catalinaHome                   the Apache Catalina home path.
+     * @param contentType                    the content type encoding.
+     * @param prefix                         the view name prefix.
+     * @param suffix                         the view name prefix.
      * @param exposeContextBeansAsAttributes is exposed context beans as attributes.
-     * @param resourcesUrl                   a url of resources.
-     * @param resourcesLocation              a location of resources.
-     * @param maxFileSize                    a maximum file size.
-     * @param loginRequest                   a login request for authorization.
-     * @param loginViewName                  a login view name (path).
-     * @param projectDirectory               a project directory name.
+     * @param resourcesUrl                   the URL of resources.
+     * @param resourcesLocation              the location of resources.
+     * @param maxFileSize                    the maximum file size.
+     * @param loginRequest                   the login request for authorization.
+     * @param loginViewName                  the login view name (path).
+     * @param projectDirectory               the project directory name.
      */
     public ContentPropertiesImpl(
             final String catalinaHome,

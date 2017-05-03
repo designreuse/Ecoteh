@@ -21,11 +21,11 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipient.
      *
-     * @param subject         a sender subject.
-     * @param text            a sender text.
-     * @param recipientEmail  a recipient e-mail.
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
+     * @param subject         the sender subject.
+     * @param text            the sender text.
+     * @param recipientEmail  the recipient e-mail.
+     * @param senderEmail     the sender e-mail.
+     * @param senderEmailPass the sender e-mail password.
      */
     @Override
     public void send(
@@ -44,11 +44,11 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipients.
      *
-     * @param subject         a sender subject.
-     * @param text            a sender text.
-     * @param recipientEmails a recipients e-mails.
-     * @param senderEmail     a sender e-mail.
-     * @param senderEmailPass a sender e-mail password.
+     * @param subject         the sender subject.
+     * @param text            the sender text.
+     * @param recipientEmails the recipients e-mails.
+     * @param senderEmail     the sender e-mail.
+     * @param senderEmailPass the sender e-mail password.
      */
     @Override
     public void send(
@@ -68,10 +68,10 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipient.
      *
-     * @param subject        a sender subject.
-     * @param text           a sender text.
-     * @param recipientEmail a recipient e-mail.
-     * @param sender         a sender user.
+     * @param subject        the sender subject.
+     * @param text           the sender text.
+     * @param recipientEmail the recipient e-mail.
+     * @param sender         the sender user.
      */
     @Override
     public void send(
@@ -91,10 +91,10 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipients.
      *
-     * @param subject         a sender subject.
-     * @param text            a sender text.
-     * @param recipientEmails a recipients e-mails.
-     * @param sender          a sender user.
+     * @param subject         the sender subject.
+     * @param text            the sender text.
+     * @param recipientEmails the recipients e-mails.
+     * @param sender          the sender user.
      */
     @Override
     public void send(
@@ -114,10 +114,10 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipient.
      *
-     * @param subject   a sender subject.
-     * @param text      a sender text.
-     * @param recipient a recipient user.
-     * @param sender    a sender user.
+     * @param subject   the sender subject.
+     * @param text      the sender text.
+     * @param recipient the recipient user.
+     * @param sender    the sender user.
      */
     @Override
     public void send(
@@ -126,7 +126,7 @@ public final class SenderServiceImpl implements SenderService {
             final User recipient,
             final User sender
     ) {
-        if (validRecipient(recipient)) {
+        if (isMailingRecipient(recipient)) {
             send(subject, text, recipient.getContacts().getEmail(), sender);
         }
     }
@@ -134,10 +134,10 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipients.
      *
-     * @param subject    a sender subject.
-     * @param text       a sender text.
-     * @param recipients a recipients users.
-     * @param sender     a sender user.
+     * @param subject    the sender subject.
+     * @param text       the sender text.
+     * @param recipients the recipients users.
+     * @param sender     the sender user.
      */
     @Override
     public void send(
@@ -156,11 +156,11 @@ public final class SenderServiceImpl implements SenderService {
     /**
      * Creates and sends sender to recipients.
      *
-     * @param subject         a sender subject.
-     * @param text            a sender text.
-     * @param recipients      a recipients users.
-     * @param senderEmail     a sender E-mail.
-     * @param senderEmailPass a sender E-mail password.
+     * @param subject         the sender subject.
+     * @param text            the sender text.
+     * @param recipients      the recipients users.
+     * @param senderEmail     the sender E-mail.
+     * @param senderEmailPass the sender E-mail password.
      */
     @Override
     public void send(
@@ -172,7 +172,7 @@ public final class SenderServiceImpl implements SenderService {
     ) {
         if (isNotEmpty(recipients)) {
             recipients.stream()
-                    .filter(SenderServiceImpl::validRecipient)
+                    .filter(SenderServiceImpl::isMailingRecipient)
                     .forEach(
                             recipient -> send(
                                     subject, text, recipient.getContacts().getEmail(),
@@ -183,12 +183,23 @@ public final class SenderServiceImpl implements SenderService {
     }
 
     /**
-     * Validated a recipient.
+     * Validated a incoming recipient.
+     * Recipient is valid if it is not null and it is mailing.
+     * <pre>
+     *     isMailingRecipient(null) = false
      *
-     * @param recipient a recipient to validate.
-     * @return tru if recipient is valid, false otherwise.
+     *     User recipient = new User();
+     *     recipient.setMailing(false);
+     *     isMailingRecipient(model) = false
+     *
+     *     model.setMailing(true);
+     *     isMailingRecipient(model) = true
+     * </pre>
+     *
+     * @param recipient the recipient to check.
+     * @return true if the recipient is not null and it is mailing.
      */
-    private static boolean validRecipient(final User recipient) {
+    private static boolean isMailingRecipient(final User recipient) {
         return isNotNull(recipient) && recipient.isMailing();
     }
 }

@@ -60,26 +60,9 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
-     * @param <T>          a type of key.
-     * @param key          a object key in the cache.
-     * @param object       a object to save.
-     * @param milliseconds a lifetime of objects (milliseconds).
-     * @return The saving object.
-     */
-    public static <T> Object put(
-            final T key,
-            final Object object,
-            final long milliseconds
-    ) {
-        return put(new Key<>(key, milliseconds), object);
-    }
-
-    /**
-     * Saves object in the cache.
-     *
-     * @param <T>    a type of key.
-     * @param key    a object key in the cache.
-     * @param object a object to save.
+     * @param <T>    the type of a key.
+     * @param key    the object key in the cache.
+     * @param object the object to save.
      * @return The saving object.
      */
     private static <T> Object put(
@@ -97,11 +80,43 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
-     * @param <T>          a type of key.
-     * @param key          a object key in the cache.
-     * @param object       a object to save.
-     * @param seconds      a lifetime of objects (seconds).
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of a key.
+     * @param key          the object key in the cache.
+     * @param object       the object to save.
+     * @param milliseconds the lifetime of objects (milliseconds).
+     * @return The saving object.
+     */
+    public static <T> Object put(
+            final T key,
+            final Object object,
+            final long milliseconds
+    ) {
+        return put(new Key<>(key, milliseconds), object);
+    }
+
+    /**
+     * Saves object in the cache with default lifetime.
+     *
+     * @param <T>    the type of a key.
+     * @param key    the object key in the cache.
+     * @param object the object to save.
+     * @return The saving object.
+     */
+    public static <T> Object put(
+            final T key,
+            final Object object
+    ) {
+        return put(key, object, -1L);
+    }
+
+    /**
+     * Saves object in the cache.
+     *
+     * @param <T>          the type of a key.
+     * @param key          the object key in the cache.
+     * @param object       the object to save.
+     * @param seconds      the lifetime of objects (seconds).
+     * @param milliseconds the lifetime of objects (milliseconds).
      * @return The saving object.
      */
     public static <T> Object put(
@@ -116,12 +131,12 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
-     * @param <T>          a type of key.
-     * @param key          a object key in the cache.
-     * @param object       a object to save.
-     * @param minutes      a lifetime of objects (minutes).
-     * @param seconds      a lifetime of objects (seconds).
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of a key.
+     * @param key          the object key in the cache.
+     * @param object       the object to save.
+     * @param minutes      the lifetime of objects (minutes).
+     * @param seconds      the lifetime of objects (seconds).
+     * @param milliseconds the lifetime of objects (milliseconds).
      * @return The saving object.
      */
     public static <T> Object put(
@@ -137,13 +152,13 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
-     * @param <T>          a type of key.
-     * @param key          a object key in the cache.
-     * @param object       a object to save.
-     * @param hours        a lifetime of objects (hours).
-     * @param minutes      a lifetime of objects (minutes).
-     * @param seconds      a lifetime of objects (seconds).
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of a key.
+     * @param key          the object key in the cache.
+     * @param object       the object to save.
+     * @param hours        the lifetime of objects (hours).
+     * @param minutes      the lifetime of objects (minutes).
+     * @param seconds      the lifetime of objects (seconds).
+     * @param milliseconds the lifetime of objects (milliseconds).
      * @return The saving object.
      */
     public static <T> Object put(
@@ -158,27 +173,12 @@ public final class Cache {
     }
 
     /**
-     * Saves object in the cache with default lifetime.
-     *
-     * @param <T>    a type of key.
-     * @param key    a object key in the cache.
-     * @param object a object to save.
-     * @return The saving object.
-     */
-    public static <T> Object put(
-            final T key,
-            final Object object
-    ) {
-        return put(key, object, -1L);
-    }
-
-    /**
      * Saves objects in the cache.
      * Saves objects if map is not empty.
      *
-     * @param <T>          a type of key.
-     * @param map          a map with objects to save.
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of key.
+     * @param map          the map with objects to save.
+     * @param milliseconds the lifetime of objects (milliseconds).
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -194,10 +194,10 @@ public final class Cache {
     /**
      * Saves objects in the cache.
      *
-     * @param <T>          a type of key.
-     * @param map          a map with objects to save.
-     * @param seconds      a lifetime of objects (seconds).
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of key.
+     * @param map          the map with objects to save.
+     * @param seconds      the lifetime of objects (seconds).
+     * @param milliseconds the lifetime of objects (milliseconds).
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -210,11 +210,11 @@ public final class Cache {
     /**
      * Saves objects in the cache.
      *
-     * @param <T>          a type of key.
-     * @param map          a map with objects to save.
-     * @param minutes      a lifetime of objects (minutes).
-     * @param seconds      a lifetime of objects (seconds).
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of key.
+     * @param map          the map with objects to save.
+     * @param minutes      the lifetime of objects (minutes).
+     * @param seconds      the lifetime of objects (seconds).
+     * @param milliseconds the lifetime of objects (milliseconds).
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -228,12 +228,12 @@ public final class Cache {
     /**
      * Saves objects in the cache.
      *
-     * @param <T>          a type of key.
-     * @param map          a map with objects to save.
-     * @param hours        a lifetime of objects (hours).
-     * @param minutes      a lifetime of objects (minutes).
-     * @param seconds      a lifetime of objects (seconds).
-     * @param milliseconds a lifetime of objects (milliseconds).
+     * @param <T>          the type of key.
+     * @param map          the map with objects to save.
+     * @param hours        the lifetime of objects (hours).
+     * @param minutes      the lifetime of objects (minutes).
+     * @param seconds      the lifetime of objects (seconds).
+     * @param milliseconds the lifetime of objects (milliseconds).
      */
     public static <T> void putAll(
             final Map<T, Object> map,
@@ -246,10 +246,10 @@ public final class Cache {
     }
 
     /**
-     * Saves objects in the cache with default lifetime..
+     * Saves objects in the cache with default lifetime.
      *
-     * @param <T> a type of key.
-     * @param map a map with objects to save.
+     * @param <T> the type of a key.
+     * @param map the map with objects to save.
      */
     public static <T> void putAll(final Map<T, Object> map) {
         final long milliseconds = -1;
@@ -260,8 +260,8 @@ public final class Cache {
      * Returns object from cache with key.
      * Returns null if key is null.
      *
-     * @param <T> a type of key.
-     * @param key a object key in the cache.
+     * @param <T> the type of a key.
+     * @param key the object key in the cache.
      * @return The object with key or null.
      */
     public static <T> Object get(final T key) {
@@ -275,7 +275,7 @@ public final class Cache {
     /**
      * Returns all objects from cache with subKey.
      *
-     * @param subKey a object key in the cache.
+     * @param subKey the object key in the cache.
      * @return The objects with key or empty list.
      */
     public static Collection<Object> getAll(final String subKey) {
@@ -292,8 +292,8 @@ public final class Cache {
      * Removes object from cache with key.
      * Removes object if key is not null.
      *
-     * @param <T> a type of key.
-     * @param key a object key in the cache.
+     * @param <T> the type of a key.
+     * @param key the object key in the cache.
      */
     public static <T> void remove(final T key) {
         if (isNotNull(key)) {
@@ -307,10 +307,10 @@ public final class Cache {
      * Removes objects if subKey is not blank.
      * The objects are removed in a parallel thread.
      *
-     * @param keys a key string.
+     * @param keys the key strings.
      */
     public static void removeAll(final String... keys) {
-        if (isNotNull(keys) && keys.length > 0) {
+        if (isNotEmpty(keys)) {
             new Thread(() -> {
                 final Collection<Key> cacheKeys = new ArrayList<>(cache.keySet());
                 for (String sKey : keys) {
@@ -327,8 +327,8 @@ public final class Cache {
     /**
      * Sets map with objects.
      *
-     * @param <T> a type of key.
-     * @param map a map with objects.
+     * @param <T> the type of a key.
+     * @param map the map with objects.
      */
     public static <T> void setAll(final Map<T, Object> map) {
         cache = new ConcurrentHashMap<>();
@@ -349,7 +349,7 @@ public final class Cache {
     /**
      * Clears objects by class.
      *
-     * @param object a objects class to remove.
+     * @param object the objects class to remove.
      */
     public static void clear(final Class object) {
         if (isNotNull(object)) {
@@ -363,8 +363,8 @@ public final class Cache {
     /**
      * Checks if exist object with the key in the cache.
      *
-     * @param <T> a type of key.
-     * @param key a object key in the cache.
+     * @param <T> the type of a key.
+     * @param key the object key in the cache.
      * @return true if object is exist, false otherwise.
      */
     public static <T> boolean exist(final T key) {
@@ -401,8 +401,8 @@ public final class Cache {
     /**
      * Checks if exist object with the key in the cache.
      *
-     * @param <T> a type of key.
-     * @param key a object key in the cache.
+     * @param <T> the type of a key.
+     * @param key the object key in the cache.
      * @return true if object is exist, false otherwise.
      */
     private static <T> boolean exist(final Key<T> key) {
@@ -413,8 +413,8 @@ public final class Cache {
      * Returns object from cache with key.
      * Returns null if key is null.
      *
-     * @param <T> a type of key.
-     * @param key a object key in the cache.
+     * @param <T> the type of a key.
+     * @param key the object key in the cache.
      * @return The object with key or null.
      */
     private static <T> Object get(final Key<T> key) {
@@ -429,8 +429,8 @@ public final class Cache {
      * Removes object from cache with key.
      * Removes object if key is not null.
      *
-     * @param <T> a type of key.
-     * @param key a object key in the cache.
+     * @param <T> the type of a key.
+     * @param key the object key in the cache.
      */
     private static <T> void remove(final Key<T> key) {
         if (isNotNull(key)) {
@@ -442,7 +442,7 @@ public final class Cache {
     /**
      * Returns information about objects in cache.
      *
-     * @param key a object key in the cache.
+     * @param key the object key in the cache.
      * @return The maps with entries.
      */
     private static Map<String, String> getNewEntriesToString(final String key) {
@@ -460,8 +460,8 @@ public final class Cache {
     /**
      * Checks if key contains subKey.
      *
-     * @param key    a object key in the cache.
-     * @param subKey a object key in the cache.
+     * @param key    the object key in the cache.
+     * @param subKey the object key in the cache.
      * @return true if key contains subKey, false otherwise.
      */
     private static boolean containsKey(final Key key, final String subKey) {
@@ -471,9 +471,9 @@ public final class Cache {
     /**
      * Filters entry object class with input class.
      *
-     * @param entry  a entry to filter.
-     * @param object a class to equals.
-     * @param <T>    a type of key.
+     * @param <T>    the type of a key.
+     * @param entry  the entry to filter.
+     * @param object the class to equals.
      * @return true if entry class equals to object class, false otherwise.
      */
     private static <T> boolean filterByClass(

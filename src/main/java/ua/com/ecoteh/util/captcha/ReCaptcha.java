@@ -61,13 +61,13 @@ public final class ReCaptcha implements Captcha {
     /**
      * Constructor.
      *
-     * @param userAgent      a captcha user agent.
-     * @param acceptLanguage a captcha accept language.
-     * @param doOutput       a do output.
-     * @param url            a captcha URL.
-     * @param serverKey      a captcha server key.
-     * @param parameter      a captcha request param.
-     * @param header         a captcha header param.
+     * @param userAgent      the captcha user agent.
+     * @param acceptLanguage the captcha accept language.
+     * @param doOutput       the do output.
+     * @param url            the captcha URL.
+     * @param serverKey      the captcha server key.
+     * @param parameter      the captcha request param.
+     * @param header         the captcha header param.
      */
     public ReCaptcha(
             final String userAgent,
@@ -90,7 +90,7 @@ public final class ReCaptcha implements Captcha {
     /**
      * Verifies captcha from request.
      *
-     * @param request a request from client.
+     * @param request the request from client.
      * @return true if captcha is verify, false otherwise.
      */
     @Override
@@ -109,8 +109,8 @@ public final class ReCaptcha implements Captcha {
     /**
      * Verifies captcha from ip address.
      *
-     * @param captcha   a StaticCaptcha for check.
-     * @param ipAddress a request ip address.
+     * @param captcha   the StaticCaptcha for check.
+     * @param ipAddress the request ip address.
      * @return true if captcha is verify, false otherwise.
      */
     @Override
@@ -151,9 +151,9 @@ public final class ReCaptcha implements Captcha {
     /**
      * Create work status.
      *
-     * @param url          a request URL.
-     * @param postParams   a post parameters.
-     * @param responseCode a response code.
+     * @param url          the request URL.
+     * @param postParams   the post parameters.
+     * @param responseCode the response code.
      */
     private void setStatus(
             final URL url,
@@ -168,7 +168,7 @@ public final class ReCaptcha implements Captcha {
     /**
      * Returns the request ip address.
      *
-     * @param request a request from client.
+     * @param request the request from client.
      * @return The ip address.
      */
     private String getIpAddress(final HttpServletRequest request) {
@@ -185,9 +185,9 @@ public final class ReCaptcha implements Captcha {
     /**
      * Send request and return response.
      *
-     * @param url       a request URL.
-     * @param captcha   a StaticCaptcha for check.
-     * @param ipAddress a request ip address.
+     * @param url       the request URL.
+     * @param captcha   the StaticCaptcha for check.
+     * @param ipAddress the request ip address.
      * @return The response to string.
      * @throws IOException If an I/O error occurs.
      */
@@ -206,7 +206,7 @@ public final class ReCaptcha implements Captcha {
     /**
      * Returns a https URL connection.
      *
-     * @param url a request URL.
+     * @param url the request URL.
      * @return The https URL connection.
      * @throws IOException If an I/O error occurs.
      */
@@ -220,8 +220,8 @@ public final class ReCaptcha implements Captcha {
     /**
      * Returns a post params.
      *
-     * @param captcha   a StaticCaptcha for check.
-     * @param ipAddress a request ip address.
+     * @param captcha   the StaticCaptcha for check.
+     * @param ipAddress the request ip address.
      * @return The post params.
      */
     private String getPostParams(

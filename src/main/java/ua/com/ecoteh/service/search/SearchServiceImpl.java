@@ -107,11 +107,11 @@ public class SearchServiceImpl implements SearchService {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric} interface.
-     * @param categoryService a implementation of the {@link CategoryService} interface.
-     * @param articleService  a implementation of the {@link ArticleService} interface.
-     * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param userService     a implementation of the {@link UserService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param categoryService the implementation of the {@link CategoryService} interface.
+     * @param articleService  the implementation of the {@link ArticleService} interface.
+     * @param companyService  the implementation of the {@link CompanyService} interface.
+     * @param userService     the implementation of the {@link UserService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -132,9 +132,9 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Returns the page with the found content.
      *
-     * @param keywords  a keywords for content search.
-     * @param content   a objects list for content search.
-     * @param howSearch a search mode.
+     * @param keywords  the keywords for content search.
+     * @param content   the objects list for content search.
+     * @param howSearch the search mode.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -162,8 +162,8 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Returns one of the pages of a site if it corresponds to the keywords.
      *
-     * @param keywords     a keywords for content search.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param keywords     the keywords for content search.
+     * @param modelAndView the object of class ModelAndView for to update.
      * @return true if page is exist, false otherwise.
      */
     private static boolean getPageBySearch(
@@ -196,10 +196,10 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for all content.
      *
-     * @param keywords     a keywords for content search.
-     * @param howSearch    a search mode.
-     * @param content      a objects list for content search.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param keywords     the keywords for content search.
+     * @param howSearch    the search mode.
+     * @param content      the objects list for content search.
+     * @param modelAndView the object of class ModelAndView for to update.
      */
     private void searchFromContent(
             final String keywords,
@@ -228,9 +228,9 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Search by all content.
      *
-     * @param keywords     a keywords for content search.
-     * @param howSearch    a search mode.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param keywords     the keywords for content search.
+     * @param howSearch    the search mode.
+     * @param modelAndView the object of class ModelAndView for to update.
      */
     private void searchByAllContent(
             final String keywords,
@@ -267,10 +267,10 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Search by choose content.
      *
-     * @param content      a objects list for content search.
-     * @param keywords     a keywords for content search.
-     * @param howSearch    a search mode.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param content      the objects list for content search.
+     * @param keywords     the keywords for content search.
+     * @param howSearch    the search mode.
+     * @param modelAndView the object of class ModelAndView for to update.
      */
     private void searchByChooseContent(
             final String content,
@@ -308,13 +308,13 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for some content and adds it to modelAndView.
      *
-     * @param keywordArray a keyword array for content search.
-     * @param howSearch    a search mode.
-     * @param dataService  a implementation of the interface describes a set
+     * @param <T>          the entity type, extends {@link Model}.
+     * @param keywordArray the keyword array for content search.
+     * @param howSearch    the search mode.
+     * @param dataService  the implementation of the interface describes a set
      *                     of methods for working with objects.
-     * @param name         a name of the object to add in modelAndView.
-     * @param modelAndView a object of class ModelAndView for to update.
-     * @param <T>          entity type, extends {@link Model}.
+     * @param name         the name of the object to add in modelAndView.
+     * @param modelAndView the object of class ModelAndView for to update.
      */
     private static <T extends Model> void searchFromModelAndAdd(
             final String[] keywordArray,
@@ -334,11 +334,11 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for some content.
      *
-     * @param keywordArray a keyword array for content search.
-     * @param howSearch    a search mode.
-     * @param dataService  a implementation of the interface describes a set
+     * @param <T>          the entity type, extends {@link Model}.
+     * @param keywordArray the keyword array for content search.
+     * @param howSearch    the search mode.
+     * @param dataService  the implementation of the interface describes a set
      *                     of methods for working with objects.
-     * @param <T>          entity type, extends {@link Model}.
      * @return The list of found objects.
      */
     private static <T extends Model> List<T> searchFromModel(
@@ -364,7 +364,7 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Prepares default modelAndView.
      *
-     * @param keywords a keywords for content search.
+     * @param keywords the keywords for content search.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView prepareDefaultSearchPage(final String keywords) {
@@ -377,9 +377,9 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Adds content keys to modelAndView.
      *
-     * @param content      a objects list for content search.
-     * @param howSearch    a search mode.
-     * @param modelAndView a object of class ModelAndView for to update.
+     * @param content      the objects list for content search.
+     * @param howSearch    the search mode.
+     * @param modelAndView the object of class ModelAndView for to update.
      */
     private static void addKeys(
             final String content,

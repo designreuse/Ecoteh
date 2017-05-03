@@ -12,7 +12,7 @@ public final class Translator {
     /**
      * Translates value from cyrillic to latin.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      * @return The translated string (newer null).
      */
     public static String fromCyrillicToLatin(final String value) {
@@ -22,7 +22,7 @@ public final class Translator {
     /**
      * Translates value to ASCII.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      * @return The translated string (newer null).
      */
     public static String toAscii(final String value) {
@@ -32,7 +32,7 @@ public final class Translator {
     /**
      * Translates value from ASCII.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      * @return The translated string (newer null).
      */
     public static String fromAscii(final String value) {
@@ -42,7 +42,7 @@ public final class Translator {
     /**
      * Translates value to ASCII.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      * @return The translated string (newer null).
      */
     public static String toAscii(final int value) {
@@ -52,7 +52,7 @@ public final class Translator {
     /**
      * Translates value from ASCII.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      * @return The translated string (newer null).
      */
     public static String fromAscii(final int value) {

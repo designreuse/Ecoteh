@@ -21,8 +21,8 @@ public final class ArticleComparator {
         /**
          * Compares its two arguments for order.
          *
-         * @param article1 The first object to be compared.
-         * @param article2 The second object to be compared.
+         * @param article1 the first object to be compared.
+         * @param article2 the second object to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.

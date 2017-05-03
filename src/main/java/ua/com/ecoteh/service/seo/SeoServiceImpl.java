@@ -63,9 +63,9 @@ public final class SeoServiceImpl implements SeoService {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param categoryService a implementation of the {@link CategoryService} interface.
-     * @param articleService  a implementation of the {@link ArticleService} interface.
+     * @param companyService  the implementation of the {@link CompanyService} interface.
+     * @param categoryService the implementation of the {@link CategoryService} interface.
+     * @param articleService  the implementation of the {@link ArticleService} interface.
      */
     @Autowired
     public SeoServiceImpl(

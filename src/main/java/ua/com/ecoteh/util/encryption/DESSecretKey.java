@@ -31,7 +31,7 @@ final class DESSecretKey implements SecretKey {
     /**
      * Constructor.
      *
-     * @param key a primary encoding format.
+     * @param key the primary encoding format.
      */
     DESSecretKey(final byte[] key) {
         if (key.length != 8) {

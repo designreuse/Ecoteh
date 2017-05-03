@@ -21,7 +21,7 @@ public abstract class AbstractLoader implements Loader {
     /**
      * Constructor.
      *
-     * @param path a root path of a file.
+     * @param path the root path of a file.
      */
     public AbstractLoader(final String path) {
         this.path = path;
@@ -60,7 +60,7 @@ public abstract class AbstractLoader implements Loader {
      * Checks a path to file.
      * Creates directories if it is not exist.
      *
-     * @param path a path to file.
+     * @param path the path to file.
      * @return true if directories to file is exist, false otherwise.
      */
     static boolean checkPath(final String path) {
@@ -75,7 +75,7 @@ public abstract class AbstractLoader implements Loader {
     /**
      * Checks input file.
      *
-     * @param file a file to check.
+     * @param file the file to check.
      * @return true if a file is file, false otherwise.
      */
     private static boolean isFile(final File file) {

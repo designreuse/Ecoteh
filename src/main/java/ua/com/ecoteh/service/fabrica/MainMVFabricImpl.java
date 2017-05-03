@@ -65,12 +65,12 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Constructor.
      *
-     * @param articleService  a implementation  of the {@link ArticleService} interface.
-     * @param categoryService a implementation of the {@link CategoryService} interface.
-     * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param fileService     a implementation of the {@link FileService} interface.
-     * @param responseService a implementation of the {@link ResponseService} interface.
-     * @param userService     a implementation of the {@link UserService} interface.
+     * @param articleService  the implementation  of the {@link ArticleService} interface.
+     * @param categoryService the implementation of the {@link CategoryService} interface.
+     * @param companyService  the implementation of the {@link CompanyService} interface.
+     * @param fileService     the implementation of the {@link FileService} interface.
+     * @param responseService the implementation of the {@link ResponseService} interface.
+     * @param userService     the implementation of the {@link UserService} interface.
      */
     @Autowired
     public MainMVFabricImpl(
@@ -136,8 +136,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all articles sorted by sortType.
      *
-     * @param sortType a sort type.
-     * @param revers   a sorting direction, true or false.
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -147,17 +147,17 @@ public final class MainMVFabricImpl implements MainMVFabric {
     ) {
         ModelAndView modelAndView;
         switch (sortType) {
-            case "title":
-                modelAndView = allSortByTitleArticlesPage(revers);
-                break;
-            case "date":
-                modelAndView = allSortByDateArticlesPage(revers);
-                break;
-            case "number":
-                modelAndView = allSortByNumberArticlesPage(revers);
-                break;
-            default:
-                modelAndView = allArticlesPage();
+        case "title":
+            modelAndView = allSortByTitleArticlesPage(revers);
+            break;
+        case "date":
+            modelAndView = allSortByDateArticlesPage(revers);
+            break;
+        case "number":
+            modelAndView = allSortByNumberArticlesPage(revers);
+            break;
+        default:
+            modelAndView = allArticlesPage();
         }
         modelAndView.setViewName("client/article/all");
         return modelAndView;
@@ -212,7 +212,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all sorted partners.
      *
-     * @param revers a sorting direction, true or false.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -231,9 +231,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns page with one category with parameter url.
+     * Creates and returns page with one category with incoming URL.
      *
-     * @param url a URL of the category to return.
+     * @param url the URL of the category to return.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -247,9 +247,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with category
      * with all articles sorted by sortType.
      *
-     * @param url      a category URL.
-     * @param sortType a sort type.
-     * @param revers   a sorting direction, true or false.
+     * @param url      the category URL.
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -260,17 +260,17 @@ public final class MainMVFabricImpl implements MainMVFabric {
     ) {
         ModelAndView modelAndView;
         switch (sortType) {
-            case "title":
-                modelAndView = categoryWithSortByTitleArticlesPage(url, revers);
-                break;
-            case "date":
-                modelAndView = categoryWithSortByDateArticlesPage(url, revers);
-                break;
-            case "number":
-                modelAndView = categoryWithSortByNumberArticlesPage(url, revers);
-                break;
-            default:
-                modelAndView = categoryPage(url);
+        case "title":
+            modelAndView = categoryWithSortByTitleArticlesPage(url, revers);
+            break;
+        case "date":
+            modelAndView = categoryWithSortByDateArticlesPage(url, revers);
+            break;
+        case "number":
+            modelAndView = categoryWithSortByNumberArticlesPage(url, revers);
+            break;
+        default:
+            modelAndView = categoryPage(url);
         }
         modelAndView.setViewName("client/category/one");
         return modelAndView;
@@ -279,7 +279,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with one article with parameter url.
      *
-     * @param url a URL of the article to return.
+     * @param url the URL of the article to return.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -292,7 +292,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with one article with parameter number.
      *
-     * @param number a number of the article to return.
+     * @param number the number of the article to return.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -305,7 +305,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with one partner with parameter url.
      *
-     * @param url a URL of the partner to return.
+     * @param url the URL of the partner to return.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -330,7 +330,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all sorted responses.
      *
-     * @param revers a sorting direction, true or false.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -365,7 +365,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Adds authenticated user to the modelAndView.
      *
-     * @param modelAndView a model and view to update.
+     * @param modelAndView the model and view to update.
      */
     @Override
     public void addAuthUser(final ModelAndView modelAndView) {
@@ -385,7 +385,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * @param revers a sorting direction, true or false.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView allSortByTitleArticlesPage(
@@ -403,7 +403,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Creates and returns page with all articles sorted by date.
      *
-     * @param revers a sorting direction, true or false.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView allSortByDateArticlesPage(
@@ -439,9 +439,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
     /**
      * Prepared and returns already page with the sorted articles.
      *
-     * @param sortType a sort type.
-     * @param revers   a sorting direction, true or false.
-     * @param articles a sorted articles.
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
+     * @param articles the sorted articles.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView sortArticlesPage(
@@ -460,8 +460,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with category
      * with all articles sorted by title.
      *
-     * @param url    a category URL.
-     * @param revers a sorting direction, true or false.
+     * @param url    the category URL.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView categoryWithSortByTitleArticlesPage(
@@ -486,8 +486,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with category
      * with all articles sorted by date.
      *
-     * @param url    a category URL.
-     * @param revers a sorting direction, true or false.
+     * @param url    the category URL.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView categoryWithSortByDateArticlesPage(
@@ -514,8 +514,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * Creates and returns page with category
      * with all articles sorted by number.
      *
-     * @param url    a category URL.
-     * @param revers a sorting direction, true or false.
+     * @param url    the category URL.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     private ModelAndView categoryWithSortByNumberArticlesPage(
@@ -547,7 +547,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     private ModelAndView articlePage(final Article article) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("article", article);
-        if (validCategory(article.getCategory())) {
+        if (isValidCategory(article.getCategory())) {
             final Category category = this.categoryService.getByUrl(
                     article.getCategory().getUrl(), isValidContent()
             );
@@ -561,11 +561,21 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
+     * Validated a incoming category.
+     * Category is valid if it is not null and it URL is not empty.
+     * <pre>
+     *     validCategory(null) = false
+     *     validCategory(new Category()) = false
      *
-     * @param category
-     * @return
+     *     Category category = new Category();
+     *     category.setUrl("bob");
+     *     validCategory(category) = true
+     * </pre>
+     *
+     * @param category the category to check.
+     * @return true if the category is not null and category URL is not empty.
      */
-    private static boolean validCategory(final Category category) {
+    private static boolean isValidCategory(final Category category) {
         return isNotNull(category) && isNotEmpty(category.getUrl());
     }
 }

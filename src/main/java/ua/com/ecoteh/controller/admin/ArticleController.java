@@ -342,8 +342,21 @@ public class ArticleController {
     }
 
     /**
-     * @param category
-     * @return
+     * Validated a incoming category.
+     * Category is valid if it is not null and and it validated.
+     * <pre>
+     *     isValidCategory(null) = false
+     *
+     *     Category category = new Category();
+     *     category.setValidated(false);
+     *     isValidCategory(category) = false
+     *
+     *     category.setValidated(true);
+     *     isValidCategory(category) = true
+     * </pre>
+     *
+     * @param category the category to check.
+     * @return true if the category is not null and it validated.
      */
     private static boolean isValidCategory(final Category category) {
         return isNotNull(category) && category.isValidated();

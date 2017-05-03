@@ -13,9 +13,17 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 public abstract class AbstractCompressor implements Compressor {
 
     /**
-     * Compresses the given source and returns a compressed result.
+     * Compresses the incoming source and returns a compressed result.
+     * Compresses the soource if it not null and not empty.
+     * <pre>
+     *     compress(null) = "" (empty string)
+     *     compress("") = "" (empty string)
+     *     compress(" ") = "" (empty string)
+     *     compress("bob") = "bob"
+     *     compress("bob") = "bob"
+     * </pre>
      *
-     * @param source The source to compress.
+     * @param source the source to compress.
      * @return Compressed result.
      */
     @Override

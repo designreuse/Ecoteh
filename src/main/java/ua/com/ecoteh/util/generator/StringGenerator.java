@@ -2,7 +2,6 @@ package ua.com.ecoteh.util.generator;
 
 import java.util.Random;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
@@ -40,11 +39,6 @@ public final class StringGenerator implements Generator<String> {
     private final long length;
 
     /**
-     * Generated string.
-     */
-    private String string;
-
-    /**
      * Static block.
      * Default pattern initialization.
      */
@@ -64,7 +58,7 @@ public final class StringGenerator implements Generator<String> {
     /**
      * Constructor.
      *
-     * @param length a length to generate string.
+     * @param length the length to generate string.
      */
     public StringGenerator(final long length) {
         this(DEFAULT_PATTERN, length);
@@ -73,7 +67,7 @@ public final class StringGenerator implements Generator<String> {
     /**
      * Constructor.
      *
-     * @param pattern a pattern to generated new string.
+     * @param pattern the pattern to generated new string.
      */
     public StringGenerator(final char[] pattern) {
         this(pattern, DEFAULT_LENGTH);
@@ -82,8 +76,8 @@ public final class StringGenerator implements Generator<String> {
     /**
      * Constructor.
      *
-     * @param pattern a pattern to generated new string.
-     * @param length  a length to generate string.
+     * @param pattern the pattern to generated new string.
+     * @param length  the length to generate string.
      */
     public StringGenerator(final char[] pattern, final long length) {
         if (isNotEmpty(pattern)) {
@@ -97,7 +91,7 @@ public final class StringGenerator implements Generator<String> {
     /**
      * Generates random string.
      *
-     * @return The generated string.
+     * @return The generated string (newer null).
      */
     @Override
     public String generate() {
@@ -105,22 +99,7 @@ public final class StringGenerator implements Generator<String> {
         for (int i = 0; i < this.length; i++) {
             sb.append(getRandomChar());
         }
-        this.string = sb.toString();
-        return this.string;
-    }
-
-    /**
-     * Returns generated string.
-     * If string is null then calls method generate().
-     *
-     * @return The generated string.
-     */
-    @Override
-    public String get() {
-        if (isEmpty(this.string)) {
-            generate();
-        }
-        return this.string;
+        return sb.toString();
     }
 
     /**

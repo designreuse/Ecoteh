@@ -22,8 +22,8 @@ public final class FileComparator {
         /**
          * Compares its two arguments for order.
          *
-         * @param file1 The first object to be compared.
-         * @param file2 The second object to be compared.
+         * @param file1 the first object to be compared.
+         * @param file2 the second object to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
@@ -53,8 +53,8 @@ public final class FileComparator {
         /**
          * Compares its two arguments for order.
          *
-         * @param file1 The first object to be compared.
-         * @param file2 The second object to be compared.
+         * @param file1 the first object to be compared.
+         * @param file2 the second object to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.

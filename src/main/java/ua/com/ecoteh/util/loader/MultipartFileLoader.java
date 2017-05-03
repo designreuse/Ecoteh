@@ -34,7 +34,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
     /**
      * Constructor.
      *
-     * @param path a root path of a file.
+     * @param path the root path of a file.
      */
     public MultipartFileLoader(final String path) {
         this(null, path);
@@ -43,8 +43,8 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
     /**
      * Constructor.
      *
-     * @param file a file to write.
-     * @param path a root path of a file.
+     * @param file the multipart file to write.
+     * @param path the root path of a file.
      */
     public MultipartFileLoader(
             final MultipartFile file,
@@ -85,7 +85,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
     /**
      * Returns a multipart file.
      *
-     * @return The multipart file or (@code null) if file not initialized.
+     * @return The multipart file or null if file not initialized.
      */
     public MultipartFile getFile() {
         return this.file;

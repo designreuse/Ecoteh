@@ -16,8 +16,8 @@ final class Stream {
     /**
      * Writes value in the stream.
      *
-     * @param value        a value to write.
-     * @param outputStream a output stream.
+     * @param value        the value to write.
+     * @param outputStream the output stream.
      * @throws IOException If an I/O error occurs.
      */
     static void write(
@@ -33,7 +33,7 @@ final class Stream {
     /**
      * Reads response with the stream and returns response to string.
      *
-     * @param inputStream a input stream.
+     * @param inputStream the input stream.
      * @return The response to string.
      * @throws IOException If an I/O error occurs.
      */

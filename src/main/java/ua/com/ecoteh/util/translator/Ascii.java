@@ -28,14 +28,14 @@ public interface Ascii {
     /**
      * Sets a string to translate.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      */
     void setValue(final String value);
 
     /**
      * Sets a integer to translate.
      *
-     * @param value a integer to translate.
+     * @param value the integer to translate.
      */
     void setValue(final int value);
 

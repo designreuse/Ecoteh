@@ -18,7 +18,7 @@ public final class ToLatinImpl implements ToLatin {
     /**
      * Constructor.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      */
     public ToLatinImpl(String value) {
         this.value = value;
@@ -54,7 +54,7 @@ public final class ToLatinImpl implements ToLatin {
      * Converts an input value to chars array
      * and returns it.
      *
-     * @param value a value to convert.
+     * @param value the value to convert.
      * @return The chars array.
      */
     private static char[] convertToChars(final String value) {
@@ -64,7 +64,7 @@ public final class ToLatinImpl implements ToLatin {
     /**
      * Translates char from cyrillic to latin.
      *
-     * @param ch a char to translate.
+     * @param ch the char to translate.
      * @return The translated char.
      */
     private static String translate(char ch) {

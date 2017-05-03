@@ -35,8 +35,8 @@ public interface MainMVFabric {
     /**
      * Creates and returns page with all articles sorted by sortType.
      *
-     * @param sortType a sort type.
-     * @param revers   a sorting direction, true / false.
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true / false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortArticlesPage(
@@ -74,9 +74,9 @@ public interface MainMVFabric {
     ModelAndView allSortPartnersByTitlePage(final boolean revers);
 
     /**
-     * Creates and returns page with one category with parameter url.
+     * Creates and returns page with one category with incoming URL.
      *
-     * @param url a URL of the category to return.
+     * @param url the URL of the category to return.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView categoryPage(final String url);
@@ -85,9 +85,9 @@ public interface MainMVFabric {
      * Creates and returns page with category
      * with all articles sorted by sortType.
      *
-     * @param url      a category URL.
-     * @param sortType a sort type.
-     * @param revers   a sorting direction, true or false.
+     * @param url      the category URL.
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView categoryWithSortArticlesPage(
@@ -97,25 +97,25 @@ public interface MainMVFabric {
     );
 
     /**
-     * Creates and returns page with one article with parameter url.
+     * Creates and returns page with one article with incoming URL.
      *
-     * @param url a URL of the article to return.
+     * @param url the URL of the article to return.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView articleByUrlPage(final String url);
 
     /**
-     * Creates and returns page with one article with parameter number.
+     * Creates and returns page with one article with incoming number.
      *
-     * @param number a number of the article to return.
+     * @param number the number of the article to return.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView articleByNumberPage(final String number);
 
     /**
-     * Creates and returns page with one partner with parameter url.
+     * Creates and returns page with one partner with incoming url.
      *
-     * @param url a URL of the partner to return.
+     * @param url the URL of the partner to return.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView partnerPage(final String url);
@@ -130,7 +130,7 @@ public interface MainMVFabric {
     /**
      * Creates and returns page with all sorted responses.
      *
-     * @param revers a sorting direction, true or false.
+     * @param revers the sorting direction, true or false.
      * @return The ready object of class ModelAndView.
      */
     ModelAndView allSortResponsesByDatePage(final boolean revers);
@@ -145,7 +145,7 @@ public interface MainMVFabric {
     /**
      * Adds authenticated user to the modelAndView.
      *
-     * @param modelAndView a model and view to update.
+     * @param modelAndView the model and view to update.
      */
     void addAuthUser(final ModelAndView modelAndView);
 

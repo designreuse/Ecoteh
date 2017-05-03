@@ -43,10 +43,10 @@ final class Connection {
     /**
      * Constructor.
      *
-     * @param url            a request URL.
-     * @param userAgent      a user agent.
-     * @param acceptLanguage a accept language.
-     * @param doOutput       a do output.
+     * @param url            the request URL.
+     * @param userAgent      the user agent.
+     * @param acceptLanguage the accept language.
+     * @param doOutput       the do output.
      */
     Connection(
             final URL url,

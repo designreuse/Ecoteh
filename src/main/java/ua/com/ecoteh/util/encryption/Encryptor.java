@@ -78,7 +78,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Constructor.
      *
-     * @param value a value to encrypt or to decrypt.
+     * @param value the value to encrypt or to decrypt.
      */
     public Encryptor(final String value) {
         this(value, Encryptor.staticSecretKey);
@@ -87,8 +87,8 @@ public final class Encryptor implements IEncryptor {
     /**
      * Constructor.
      *
-     * @param value     a value to encrypt or to decrypt.
-     * @param secretKey a primary encoding format.
+     * @param value     the value to encrypt or to decrypt.
+     * @param secretKey the primary encoding format.
      */
     public Encryptor(final String value, final String secretKey) {
         this(value, secretKey.getBytes());
@@ -97,8 +97,8 @@ public final class Encryptor implements IEncryptor {
     /**
      * Constructor.
      *
-     * @param value     a value to encrypt or to decrypt.
-     * @param secretKey a primary encoding format.
+     * @param value     the value to encrypt or to decrypt.
+     * @param secretKey the primary encoding format.
      */
     public Encryptor(final String value, final byte[] secretKey) {
         this(value, new DESSecretKey(secretKey));
@@ -107,8 +107,8 @@ public final class Encryptor implements IEncryptor {
     /**
      * Constructor.
      *
-     * @param value     a value to encrypt or to decrypt.
-     * @param secretKey a primary encoding format.
+     * @param value     the value to encrypt or to decrypt.
+     * @param secretKey the primary encoding format.
      */
     public Encryptor(final String value, final SecretKey secretKey) {
         this(value, secretKey, Encryptor.staticCharsetName);
@@ -117,9 +117,9 @@ public final class Encryptor implements IEncryptor {
     /**
      * Constructor.
      *
-     * @param value       a value to encrypt or to decrypt.
-     * @param secretKey   a primary encoding format.
-     * @param charsetName a name of supported Charset.
+     * @param value       the value to encrypt or to decrypt.
+     * @param secretKey   the primary encoding format.
+     * @param charsetName the name of supported Charset.
      * @throws IllegalArgumentException Throw exception when
      *                                  input parameters is illegal.
      */
@@ -147,7 +147,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Encrypts a data.
      *
-     * @return The encrypted data.
+     * @return The encrypted data or empty string (newer null).
      */
     @Override
     public String encrypt() {
@@ -164,7 +164,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Decrypts a date.
      *
-     * @return The decrypted data
+     * @return The decrypted data or empty string (newer null).
      */
     @Override
     public String decrypt() {
@@ -181,7 +181,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Returns a value to encrypt or to decrypt.
      *
-     * @return The value to encrypt or to decrypt.
+     * @return The value to encrypt or to decrypt (newer null).
      */
     @Override
     public String getValue() {
@@ -191,7 +191,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Sets a primary encoding format.
      *
-     * @param secretKey a primary encoding format.
+     * @param secretKey the primary encoding format.
      */
     public static void setSecretKey(final String secretKey) {
         if (isNotEmpty(secretKey)) {
@@ -204,7 +204,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Sets a primary encoding format.
      *
-     * @param secretKey a primary encoding format.
+     * @param secretKey the primary encoding format.
      */
     public static void setSecretKey(final byte[] secretKey) {
         if (isNotEmpty(secretKey)) {
@@ -217,7 +217,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Sets a primary encoding format.
      *
-     * @param secretKey a primary encoding format.
+     * @param secretKey the primary encoding format.
      */
     public static void setSecretKey(final SecretKey secretKey) {
         if (isNotNull(secretKey)) {
@@ -230,7 +230,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Sets name of a default supported Charset.
      *
-     * @param charsetName a name of a default supported Charset.
+     * @param charsetName the name of a default supported Charset.
      */
     public static void setCharsetName(final String charsetName) {
         if (isNotEmpty(charsetName)) {
@@ -243,7 +243,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Encrypts a string and returns it.
      *
-     * @return The encrypted string.
+     * @return The encrypted string (newer null).
      * @throws BadPaddingException          if this cipher is in decryption mode,
      *                                      and (un)padding has been requested,
      *                                      but the decrypted data is not bounded
@@ -270,7 +270,7 @@ public final class Encryptor implements IEncryptor {
     /**
      * Decrypts a string and returns it.
      *
-     * @return The decrypted string.
+     * @return The decrypted string (newer null).
      * @throws BadPaddingException          if this cipher is in decryption mode,
      *                                      and (un)padding has been requested,
      *                                      but the decrypted data is not bounded

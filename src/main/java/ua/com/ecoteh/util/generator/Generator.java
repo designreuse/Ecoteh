@@ -15,11 +15,4 @@ public interface Generator<T> {
      * @return The generated object.
      */
     T generate();
-
-    /**
-     * Returns generated object.
-     *
-     * @return The generated object.
-     */
-    T get();
 }

@@ -16,14 +16,14 @@ public final class AsciiImpl implements Ascii {
     private String value;
 
     /**
-     * @param value a string to translate.
+     * @param value the string to translate.
      */
     public AsciiImpl(final String value) {
-        this.value = value;
+        setValue(value);
     }
 
     /**
-     * @param value a string to translate.
+     * @param value the string to translate.
      */
     public AsciiImpl(final int value) {
         this(Integer.toString(value));
@@ -79,17 +79,17 @@ public final class AsciiImpl implements Ascii {
     /**
      * Sets a string to translate.
      *
-     * @param value a string to translate.
+     * @param value the string to translate.
      */
     @Override
     public void setValue(final String value) {
-        this.value = value;
+        this.value = isNotEmpty(value) ? value : "";
     }
 
     /**
      * Sets a integer to translate.
      *
-     * @param value a integer to translate.
+     * @param value the integer to translate.
      */
     @Override
     public void setValue(final int value) {

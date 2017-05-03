@@ -33,8 +33,8 @@ final class CacheCleaner implements Runnable {
     /**
      * Constructor.
      *
-     * @param cache   a map where can be stored some objects.
-     * @param maxSize a maximum size of objects
+     * @param cache   the map where can be stored some objects.
+     * @param maxSize the maximum size of objects
      *                which can be stored in the cache.
      */
     CacheCleaner(
@@ -48,7 +48,7 @@ final class CacheCleaner implements Runnable {
     /**
      * Constructor.
      *
-     * @param cache a map where can be stored some objects.
+     * @param cache the map where can be stored some objects.
      */
     CacheCleaner(final Map<Key, Object> cache) {
         this(cache, DEFAULT_MAX_SIZE);
@@ -80,7 +80,7 @@ final class CacheCleaner implements Runnable {
      * Sets maximum size of objects which
      * can be stored in the cache.
      *
-     * @param maxSize a maximum size of objects which
+     * @param maxSize the maximum size of objects which
      *                can be stored in the cache.
      */
     void setMaxSize(final int maxSize) {
@@ -111,7 +111,7 @@ final class CacheCleaner implements Runnable {
     /**
      * Cleans cache. Leaves last maxSize / 2 objects.
      *
-     * @param keys a keys list.
+     * @param keys the keys list.
      */
     private void cleanToNormalSize(final List<Key> keys) {
         for (Key key : keys) {

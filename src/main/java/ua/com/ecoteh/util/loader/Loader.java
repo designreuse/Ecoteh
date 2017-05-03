@@ -12,7 +12,7 @@ public interface Loader {
     /**
      * Reads a file in the file system.
      *
-     * @return a information from a file.
+     * @return the information from a file.
      */
     String read();
 
