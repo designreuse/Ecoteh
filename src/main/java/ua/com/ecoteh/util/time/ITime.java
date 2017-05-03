@@ -35,12 +35,4 @@ public interface ITime {
      * @return The value of a correct minutes.
      */
     int getMinutes();
-
-    /**
-     * Returns the value of input time is not blank.
-     *
-     * @return true if the input time is not blank,
-     * false otherwise.
-     */
-    boolean isNotBlankTime();
 }

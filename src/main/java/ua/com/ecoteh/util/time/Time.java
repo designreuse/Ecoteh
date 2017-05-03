@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
@@ -36,33 +35,13 @@ public class Time implements ITime {
     private final String time;
 
     /**
-     * The value of input time is not blank.
-     */
-    private final boolean isNotBlankTime;
-
-    /**
-     * The correct time.
-     */
-    private String correctTime;
-
-    /**
-     * The number of hours in the input time.
-     */
-    private int hours;
-
-    /**
-     * The number of minutes in the input time.
-     */
-    private int minutes;
-
-    /**
      * Constructor.
+     * If an incoming time is null or empty then sets "00:00".
      *
-     * @param time an input time.
+     * @param time the time in string format.
      */
     public Time(final String time) {
-        this.time = time;
-        this.isNotBlankTime = isNotEmpty(this.time);
+        this.time = isNotEmpty(time) ? time : "00:00";
     }
 
     /**
@@ -82,10 +61,9 @@ public class Time implements ITime {
      * @return The correct time.
      */
     public String getCorrectTime() {
-        if (isEmpty(this.correctTime)) {
-            initCorrectTime();
-        }
-        return this.correctTime;
+        final int hours = getHours();
+        final int minutes = getMinutes();
+        return getCorrectTime(hours) + ":" + getCorrectTime(minutes);
     }
 
     /**
@@ -99,10 +77,15 @@ public class Time implements ITime {
      * @return The value of a correct minutes.
      */
     public int getHours() {
-        if (this.hours == 0) {
-            initHours();
+        int hours;
+        try {
+            final String[] times = this.time.split(":");
+            hours = Integer.parseInt(times[0]) + Integer.parseInt(times[1]) / 60;
+            hours = (hours >= 24 || hours <= 0) ? 0 : hours;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+            hours = 0;
         }
-        return this.hours;
+        return hours;
     }
 
     /**
@@ -115,88 +98,34 @@ public class Time implements ITime {
      * @return The value of a correct minutes.
      */
     public int getMinutes() {
-        if (this.minutes == 0) {
-            initMinutes();
+        int minutes;
+        try {
+            minutes = Integer.parseInt(time.split(":")[1]);
+            minutes = (minutes < 0) ? 0 : minutes % 60;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+            minutes = 0;
         }
-        return this.minutes;
-    }
-
-    /**
-     * Returns the value of input time is not blank.
-     *
-     * @return true if the input time is not blank, false otherwise.
-     */
-    public boolean isNotBlankTime() {
-        return this.isNotBlankTime;
-    }
-
-    /**
-     * Initializes a correct time value from the time.
-     */
-    private void initCorrectTime() {
-        if (isNotBlankTime()) {
-            this.correctTime = createTime();
-        } else {
-            this.correctTime = "00:00";
-        }
-    }
-
-    /**
-     * Initializes a hours value from the time.
-     */
-    private void initHours() {
-        if (isNotBlankTime()) {
-            try {
-                final String[] times = this.time.split(":");
-                final int hours = Integer.parseInt(times[0]) + Integer.parseInt(times[1]) / 60;
-                this.hours = (hours >= 24 || hours <= 0) ? 0 : hours;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                this.hours = 0;
-            }
-        }
-    }
-
-    /**
-     * Initializes a minutes value from the time.
-     */
-    private void initMinutes() {
-        if (isNotBlankTime()) {
-            try {
-                final int minutes = Integer.parseInt(time.split(":")[1]);
-                this.minutes = (minutes < 0) ? 0 : minutes % 60;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                this.minutes = 0;
-            }
-        }
-    }
-
-    /**
-     * Creates and returns time in format "00:00".
-     *
-     * @return The time in format "00:00".
-     */
-    private String createTime() {
-        final int hours = getHours();
-        final int minutes = getMinutes();
-        return getCorrectTime(hours) + ":" + getCorrectTime(minutes);
+        return minutes;
     }
 
     /**
      * Returns true if now time is the working time.
      *
-     * @param startHour  a start work time of a company.
-     * @param finishHour a finish work time of a company.
+     * @param startTime  the start work time of a company.
+     * @param finishTime the finish work time of a company.
      * @return true if now time is the working time, false otherwise.
      */
     public static boolean isWorkTime(
-            final String startHour,
-            final String finishHour
+            final String startTime,
+            final String finishTime
     ) {
-        return isWorkDay() && isWorkHour(startHour, finishHour);
+        return isWorkDay() && checkWorkTime(startTime, finishTime);
     }
 
     /**
      * Returns true if today is the working day.
+     * Sunday and Saturday are not working day,
+     * another are working day.
      *
      * @return true if today is the working day, false otherwise.
      */
@@ -213,10 +142,23 @@ public class Time implements ITime {
     /**
      * Checks whether the current time
      * is included in the interval.
+     * <pre>
+     *     checkTime(null, ..., ...) = false
+     *     checkTime(new Date(), null, null) = false
+     *     checkTime(new Date(), new Date(), null) = false
+     *     checkTime(new Date(), null, new Date()) = false
      *
-     * @param currentTime a time to checks.
-     * @param startDate   a initial date.
-     * @param finishDate  a final date.
+     *     Date date1 = new Date();
+     *     checkTime(new Date(), date1, date1) = false
+     *
+     *     Date date2 = new Date();
+     *     checkTime(new Date(), date2, date1) = false
+     *     checkTime(new Date(), date1, date2) = true
+     * </pre>
+     *
+     * @param currentTime the time to checks.
+     * @param startDate   the initial date.
+     * @param finishDate  the final date.
      * @return true if time is correct, false otherwise.
      */
     public static boolean checkTime(
@@ -234,24 +176,36 @@ public class Time implements ITime {
 
     /**
      * Checks on the correct date.
+     * <pre>
+     *     checkDate(null, null) = false
+     *     checkDate(new Date(), null) = false
+     *     checkDate(null, new Date()) = false
      *
-     * @param startDate  a initial date.
-     * @param finishDate a final date.
+     *     Date date1 = new Date();
+     *     checkDate(date1, date1) = false
+     *
+     *     Date date2 = new Date();
+     *     checkDate(date2, date1) = false
+     *     checkDate(date1, date2) = true
+     * </pre>
+     *
+     * @param startDate  the initial date.
+     * @param finishDate the final date.
      * @return true if dates are correct, false otherwise.
      */
     public static boolean checkDate(
             final Date startDate,
             final Date finishDate
     ) {
-        return (isNotNull(startDate) && isNotNull(finishDate))
-                && !startDate.equals(finishDate)
-                && (startDate.getTime() <= finishDate.getTime());
+        return isNotNull(startDate) && isNotNull(finishDate) &&
+                !startDate.equals(finishDate) &&
+                (startDate.getTime() <= finishDate.getTime());
     }
 
     /**
      * Returns a model date in string format.
      *
-     * @param date a date to translate in string.
+     * @param date the date to translate in string.
      * @return The model string-date.
      */
     public static String getDateToString(final Date date) {
@@ -264,32 +218,39 @@ public class Time implements ITime {
 
     /**
      * Returns correct time (hours / minutes) in format "00".
+     * <pre>
+     *     getCorrectTime(0) = "00"
+     *     getCorrectTime(1) = "01"
+     *     getCorrectTime(12) = "12"
+     * </pre>
      *
-     * @param time a input time (hours / minutes).
-     * @return The time (hours / minutes) in format "00:00".
+     * @param time the input time (hours / minutes).
+     * @return The time (hours / minutes) in format "00" (newer null).
      */
-    private static String getCorrectTime(int time) {
-        return "" + ((time < 10) ? "0" + time : time);
+    private static String getCorrectTime(final int time) {
+        return (time < 10) ? "0" + time : "" + time;
     }
 
     /**
      * Checks whether a now time belongs at a given time interval.
      *
-     * @param start  a start work time.
-     * @param finish a finish work time.
+     * @param startTime  the start work time.
+     * @param finishTime the finish work time.
      * @return Returns true if a now time belongs at a given
      * time interval, false otherwise.
      */
-    private static boolean isWorkHour(
-            final String start,
-            final String finish
+    private static boolean checkWorkTime(
+            final String startTime,
+            final String finishTime
     ) {
         boolean result;
         try {
-            final int from = getHours(start);
-            final int to = getHours(finish);
-            final int now = getHourOfDay();
-            result = checkHours(now, from, to);
+            final Time from = new Time(startTime);
+            final Time to = new Time(finishTime);
+            result = checkHours(getHourOfDay(), from.getHours(), to.getHours());
+            if (getHourOfDay() == to.getHours()) {
+                result = getMinutesOfDay() < to.getMinutes();
+            }
         } catch (NumberFormatException ex) {
             result = false;
         }
@@ -297,38 +258,38 @@ public class Time implements ITime {
     }
 
     /**
-     * Returns a time hours.
-     *
-     * @param time a string time.
-     * @return a hours.
-     */
-    private static int getHours(String time) {
-        return new Time(time).getHours();
-    }
-
-    /**
      * Checks whether a now time belongs at a given time interval.
+     * <pre>
+     *     checkHours(1, 3, 5) = false
+     *     checkHours(1, 5, 3) = false
+     *     checkHours(6, 3, 5) = false
+     *     checkHours(3, 1, 5) = true
+     * </pre>
      *
-     * @param now  a now time
-     * @param from a start work time of a company.
-     * @param to   a finish work time of a company.
+     * @param now  the now time
+     * @param from the start work time of a company.
+     * @param to   the finish work time of a company.
      * @return Returns true if a now time belongs at a given
      * time interval, false otherwise.
      */
     private static boolean checkHours(final int now, final int from, final int to) {
-        return (now >= from) && (now <= to);
+        return (to >= from) && (now >= from) && (to > now);
     }
 
     /**
      * Returns a model date in string format with some date format.
+     * <pre>
+     *     getDateToStringWithFormat(null, dateFormat, timeZone) = dateFormat.format(new Date())
+     *     getDateToStringWithFormat(date, dateFormat, timeZone) = dateFormat.format(date)
+     * </pre>
      *
-     * @param date       a date to translate in string.
-     * @param dateFormat is an object for date/time formatting subclasses
+     * @param date       the date to translate in string.
+     * @param dateFormat the object for date/time formatting subclasses
      *                   which formats and parses dates or time in
-     *                   a language-independent manner.
-     * @param timeZone   represents a timezone offset,
-     *                   and also figures out daylight savings.
-     * @return The model string-date.
+     *                   a language-independent manner (newer null).
+     * @param timeZone   the represents a timezone offset,
+     *                   and also figures out daylight savings (newer null).
+     * @return The model string-date (newer null).
      */
     private static String getDateToStringWithFormat(
             final Date date,
@@ -349,6 +310,15 @@ public class Time implements ITime {
     }
 
     /**
+     * Returns the value of a minutes of day.
+     *
+     * @return the value of a minutes of day.
+     */
+    private static int getMinutesOfDay() {
+        return getFromCalendar(Calendar.MINUTE);
+    }
+
+    /**
      * Returns the value of a day of week.
      *
      * @return the value of a day of week.
@@ -360,7 +330,7 @@ public class Time implements ITime {
     /**
      * Returns the value of the given calendar field.
      *
-     * @param calendarFieldNumber a calendar field number.
+     * @param calendarFieldNumber the calendar field number.
      * @return The value for the given calendar field.
      */
     private static int getFromCalendar(final int calendarFieldNumber) {
