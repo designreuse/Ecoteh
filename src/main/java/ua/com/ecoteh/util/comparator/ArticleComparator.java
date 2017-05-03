@@ -11,35 +11,49 @@ import java.util.Comparator;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class ArticleComparator {
+public class ArticleComparator extends ContentComparator {
 
     /**
      * The class implements a method for working with comparator
      * for {@link Article} by number.
      */
     public final static class ByNumber implements Comparator<Article> {
+
         /**
-         * Compares its two arguments for order.
+         * Compares two articles by number.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Article()) = -1
+         *     compare(new Article(), null) = 1
+         *     compare(new Article(), new Article()) = compares by number
+         * </pre>
          *
-         * @param article1 the first object to be compared.
-         * @param article2 the second object to be compared.
+         * @param first  the first article to be compared.
+         * @param second the second article to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first article number is less than, equal to, or greater than the
+         * second article number.
          */
         @Override
-        public int compare(final Article article1, final Article article2) {
-            int result;
-            if (article1 == null && article2 == null) {
-                result = 0;
-            } else if (article1 == null) {
-                result = -1;
-            } else if (article2 == null) {
-                result = 1;
-            } else {
-                result = article1.getNumber().compareTo(article2.getNumber());
+        public int compare(final Article first, final Article second) {
+            int result = ArticleComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByNumber(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two articles by number.
+         *
+         * @param first  the first article to be compared (newer null).
+         * @param second the second article to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first article number is less than, equal to, or greater than the
+         * second article number.
+         */
+        private static int compareByNumber(final Article first, final Article second) {
+            return first.getNumber().compareTo(second.getNumber());
         }
     }
 
@@ -50,27 +64,40 @@ public final class ArticleComparator {
     public final static class ByDate implements Comparator<Article> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two articles by date.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Article()) = -1
+         *     compare(new Article(), null) = 1
+         *     compare(new Article(), new Article()) = compares by date
+         * </pre>
          *
-         * @param article1 the first object to be compared.
-         * @param article2 the second object to be compared.
+         * @param first  the article object to be compared.
+         * @param second the article object to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first article date is less than, equal to, or greater than the
+         * second article date.
          */
         @Override
-        public int compare(final Article article1, final Article article2) {
-            int result;
-            if (article1 == null && article2 == null) {
-                result = 0;
-            } else if (article1 == null) {
-                result = -1;
-            } else if (article2 == null) {
-                result = 1;
-            } else {
-                result = article1.getDate().compareTo(article2.getDate());
+        public int compare(final Article first, final Article second) {
+            int result = ArticleComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByDate(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two articles by date.
+         *
+         * @param first  the first article to be compared (newer null).
+         * @param second the second article to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first article date is less than, equal to, or greater than the
+         * second article date.
+         */
+        private static int compareByDate(final Article first, final Article second) {
+            return first.getDate().compareTo(second.getDate());
         }
     }
 }

@@ -5,6 +5,8 @@ import ua.com.ecoteh.enums.UserRole;
 
 import java.util.Comparator;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The class implements a set of methods
  * for working with comparators for {@link User}.
@@ -12,7 +14,7 @@ import java.util.Comparator;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class UserComparator {
+public class UserComparator extends AbstractComparator {
 
     /**
      * The class implements a method
@@ -21,27 +23,40 @@ public final class UserComparator {
     public final static class ByName implements Comparator<User> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two users by name.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new User()) = -1
+         *     compare(new User(), null) = 1
+         *     compare(new User(), new User()) = compares by name
+         * </pre>
          *
-         * @param user1 the first object to be compared.
-         * @param user2 the second object to be compared.
+         * @param first  the first article to be compared.
+         * @param second the second article to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first user name is less than, equal to, or greater than the
+         * second user name.
          */
         @Override
-        public int compare(final User user1, final User user2) {
-            int result;
-            if ((user1 == null) && (user2 == null)) {
-                result = 0;
-            } else if (user1 == null) {
-                result = -1;
-            } else if (user2 == null) {
-                result = 1;
-            } else {
-                result = user1.getName().compareToIgnoreCase(user2.getName());
+        public int compare(final User first, final User second) {
+            int result = UserComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByName(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two users by name.
+         *
+         * @param first  the first article to be compared (newer null).
+         * @param second the second article to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first user name is less than, equal to, or greater than the
+         * second user name.
+         */
+        private static int compareByName(final User first, final User second) {
+            return first.getName().compareToIgnoreCase(second.getName());
         }
     }
 
@@ -52,27 +67,40 @@ public final class UserComparator {
     public final static class ByUrl implements Comparator<User> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two users by URL.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new User()) = -1
+         *     compare(new User(), null) = 1
+         *     compare(new User(), new User()) = compares by URL
+         * </pre>
          *
-         * @param user1 the first object to be compared.
-         * @param user2 the second object to be compared.
+         * @param first  the first article to be compared.
+         * @param second the second article to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first user URL is less than, equal to, or greater than the
+         * second user URL.
          */
         @Override
-        public int compare(final User user1, final User user2) {
-            int result;
-            if (user1 == null && user2 == null) {
-                result = 0;
-            } else if (user1 == null) {
-                result = -1;
-            } else if (user2 == null) {
-                result = 1;
-            } else {
-                result = user1.getUrl().compareToIgnoreCase(user2.getUrl());
+        public int compare(final User first, final User second) {
+            int result = UserComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByUrl(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two users by URL.
+         *
+         * @param first  the first article to be compared (newer null).
+         * @param second the second article to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first user URL is less than, equal to, or greater than the
+         * second user URL.
+         */
+        private static int compareByUrl(final User first, final User second) {
+            return first.getUrl().compareToIgnoreCase(second.getUrl());
         }
     }
 
@@ -93,33 +121,69 @@ public final class UserComparator {
          * @param role The role comparing.
          */
         public ByRole(final UserRole role) {
-            this.role = role;
+            this.role = isNotNull(role) ? role : UserRole.ANOTHER;
         }
 
         /**
-         * Compares its two arguments for order.
+         * Compares two users by role.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new User()) = -1
+         *     compare(new User(), null) = 1
+         *     compare(new User(), new User()) = compares by role
+         * </pre>
          *
-         * @param user1 the first object to be compared.
-         * @param user2 the second object to be compared.
+         * @param first  the first article to be compared.
+         * @param second the second article to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first user role is less than, equal to, or greater than the
+         * second user role.
          */
         @Override
-        public int compare(final User user1, final User user2) {
-            int result = 0;
-            if (user1 == null && user2 == null) {
-                result = 0;
-            } else if (user1 == null) {
-                result = -1;
-            } else if (user2 == null ||
-                    ((user1.getRole() != null) && (user1.getRole().equals(role)))) {
-                result = 1;
-            } else if ((user2.getRole() != null) &&
-                    (user2.getRole().equals(role))) {
-                result = -1;
+        public int compare(final User first, final User second) {
+            int result = UserComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByRole(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two users by role.
+         *
+         * @param first  the first article to be compared (newer null).
+         * @param second the second article to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first user role is less than, equal to, or greater than the
+         * second user role.
+         */
+        private int compareByRole(final User first, final User second) {
+            int result;
+            if (equalsRole(first, this.role)) {
+                result = 1;
+            } else if (equalsRole(second, this.role)) {
+                result = -1;
+            } else {
+                result = 0;
+            }
+            return result;
+        }
+
+        /**
+         * Returns true if the user role is equal to the incoming role.
+         * <pre>
+         *     User user = new User();
+         *     user.setRole(UserRole.ANOTHER);
+         *     equalsRole(user, UserRole.ANOTHER) = true
+         *     equalsRole(user, UserRole.ADMIN) = false
+         * </pre>
+         *
+         * @param user the user to equals to role (newer null).
+         * @param role the role to equals (newer null).
+         * @return true if the user role is equal to the incoming role.
+         */
+        private static boolean equalsRole(final User user, final UserRole role) {
+            return user.getRole().equals(role);
         }
     }
 }

@@ -11,7 +11,7 @@ import java.util.Comparator;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class ResponseComparator {
+public class ResponseComparator extends AbstractComparator {
 
     /**
      * The class implements a method
@@ -20,30 +20,40 @@ public final class ResponseComparator {
     public final static class ByDate implements Comparator<Response> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two responses by date.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Response()) = -1
+         *     compare(new Response(), null) = 1
+         *     compare(new Response(), new Response()) = compares by date
+         * </pre>
          *
-         * @param response1 the first object to be compared.
-         * @param response2 the second object to be compared.
+         * @param first  the first response to be compared.
+         * @param second the second response to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first response date is less than, equal to, or greater than the
+         * second response date.
          */
         @Override
-        public int compare(
-                final Response response1,
-                final Response response2
-        ) {
-            int result;
-            if ((response1 == null) && (response2 == null)) {
-                result = 0;
-            } else if (response1 == null) {
-                result = -1;
-            } else if (response2 == null) {
-                result = 1;
-            } else {
-                result = response1.getDate().compareTo(response2.getDate());
+        public int compare(final Response first, final Response second) {
+            int result = ResponseComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByDate(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two responses by date.
+         *
+         * @param first  the first response to be compared (newer null).
+         * @param second the second response to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first response date is less than, equal to, or greater than the
+         * second response date.
+         */
+        private static int compareByDate(final Response first, final Response second) {
+            return first.getDate().compareTo(second.getDate());
         }
     }
 }

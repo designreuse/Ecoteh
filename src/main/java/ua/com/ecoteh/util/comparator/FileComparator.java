@@ -11,36 +11,49 @@ import java.util.Comparator;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class FileComparator {
+public class FileComparator extends AbstractComparator {
 
     /**
      * The class implements a method for working 
      * with comparator for {@link File} by title.
      */
-    public final static class ByTitle<T extends File> implements Comparator<T> {
+    public final static class ByTitle implements Comparator<File> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two files by title.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new File()) = -1
+         *     compare(new File(), null) = 1
+         *     compare(new File(), new File()) = compares by title
+         * </pre>
          *
-         * @param file1 the first object to be compared.
-         * @param file2 the second object to be compared.
+         * @param first  the first file to be compared.
+         * @param second the second file to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first file title is less than, equal to, or greater than the
+         * second file title.
          */
         @Override
-        public int compare(final T file1, final T file2) {
-            int result;
-            if (file1 == null && file2 == null) {
-                result = 0;
-            } else if (file1 == null) {
-                result = -1;
-            } else if (file2 == null) {
-                result = 1;
-            } else {
-                result = file1.getTitle().compareToIgnoreCase(file2.getTitle());
+        public int compare(final File first, final File second) {
+            int result = FileComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByTitle(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two files by title.
+         *
+         * @param first  the first file to be compared (newer null).
+         * @param second the second file to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first file title is less than, equal to, or greater than the
+         * second file title.
+         */
+        private static int compareByTitle(final File first, final File second) {
+            return first.getTitle().compareToIgnoreCase(second.getTitle());
         }
     }
 
@@ -48,30 +61,43 @@ public final class FileComparator {
      * The class implements a method for working
      * with comparator for {@link File} by URL.
      */
-    public final static class ByUrl<T extends File> implements Comparator<T> {
+    public final static class ByUrl implements Comparator<File> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two files by URL.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new File()) = -1
+         *     compare(new File(), null) = 1
+         *     compare(new File(), new File()) = compares by URL
+         * </pre>
          *
-         * @param file1 the first object to be compared.
-         * @param file2 the second object to be compared.
+         * @param first  the first file to be compared.
+         * @param second the second file to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first file URL is less than, equal to, or greater than the
+         * second file URL.
          */
         @Override
-        public int compare(final T file1, final T file2) {
-            int result;
-            if (file1 == null && file2 == null) {
-                result = 0;
-            } else if (file1 == null) {
-                result = -1;
-            } else if (file2 == null) {
-                result = 1;
-            } else {
-                result = file1.getUrl().compareTo(file2.getUrl());
+        public int compare(final File first, final File second) {
+            int result = FileComparator.compare(first, second);;
+            if (result == 2) {
+                result = compareByUrl(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two files by URL.
+         *
+         * @param first  the first file to be compared (newer null).
+         * @param second the second file to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first file URL is less than, equal to, or greater than the
+         * second file URL.
+         */
+        private static int compareByUrl(final File first, final File second) {
+            return first.getUrl().compareToIgnoreCase(second.getUrl());
         }
     }
 }

@@ -11,36 +11,52 @@ import java.util.Comparator;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class ContentComparator {
+public class ContentComparator extends AbstractComparator {
 
     /**
      * The class implements a method for working
      * with comparator for {@link Content} by title.
+     *
+     * @param <T> entity type, extends {@link Content}.
      */
     public final static class ByTitle<T extends Content> implements Comparator<T> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two contents by title.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Content()) = -1
+         *     compare(new Content(), null) = 1
+         *     compare(new Content(), new Content()) = compares by title
+         * </pre>
          *
-         * @param content1 the first object to be compared.
-         * @param content2 the second object to be compared.
+         * @param first  the first content to be compared.
+         * @param second the second content to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first content title is less than, equal to, or greater than the
+         * second content title.
          */
         @Override
-        public int compare(final T content1, final T content2) {
-            int result;
-            if ((content1 == null) && (content2 == null)) {
-                result = 0;
-            } else if (content1 == null) {
-                result = -1;
-            } else if (content2 == null) {
-                result = 1;
-            } else {
-                result = content1.getTitle().compareToIgnoreCase(content2.getTitle());
+        public int compare(final T first, final T second) {
+            int result = ContentComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByTitle(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two contents by title.
+         *
+         * @param <T>    entity type, extends {@link Content}.
+         * @param first  the first content to be compared (newer null).
+         * @param second the second content to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first content title is less than, equal to, or greater than the
+         * second content title.
+         */
+        private static <T extends Content> int compareByTitle(final T first, final T second) {
+            return first.getTitle().compareToIgnoreCase(second.getTitle());
         }
     }
 
@@ -48,30 +64,57 @@ public final class ContentComparator {
      * The class implements a method for working
      * with comparator for {@link Content} by URL.
      */
+
+    /**
+     * The class implements a method for working
+     * with comparator for {@link Content} by URL.
+     *
+     * @param <T> entity type, extends {@link Content}.
+     */
     public final static class ByUrl<T extends Content> implements Comparator<T> {
 
         /**
-         * Compares its two arguments for order.
+         * Compares two contents by URL.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Content()) = -1
+         *     compare(new Content(), null) = 1
+         *     compare(new Content(), new Content()) = compares by URL
+         * </pre>
          *
-         * @param content1 the first object to be compared.
-         * @param content2 the second object to be compared.
+         * @param first  the first content to be compared.
+         * @param second the second content to be compared.
          * @return A negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
+         * first content URL is less than, equal to, or greater than the
+         * second content URL.
          */
         @Override
-        public int compare(final T content1, final T content2) {
-            int result;
-            if (content1 == null && content2 == null) {
-                result = 0;
-            } else if (content1 == null) {
-                result = -1;
-            } else if (content2 == null) {
-                result = 1;
-            } else {
-                result = content1.getUrl().compareToIgnoreCase(content2.getUrl());
+        public int compare(final T first, final T second) {
+            int result = ContentComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByUrl(first, second);
             }
             return result;
+        }
+
+        /**
+         * Compares two contents by URL.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Content()) = -1
+         *     compare(new Content(), null) = 1
+         *     compare(new Content(), new Content()) = compares by URL
+         * </pre>
+         *
+         * @param <T>    entity type, extends {@link Content}.
+         * @param first  the first content to be compared (newer null).
+         * @param second the second content to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first content URL is less than, equal to, or greater than the
+         * second content URL.
+         */
+        private static <T extends Content> int compareByUrl(final T first, final T second) {
+            return first.getUrl().compareToIgnoreCase(second.getUrl());
         }
     }
 }
