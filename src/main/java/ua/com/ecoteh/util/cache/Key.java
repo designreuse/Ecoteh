@@ -144,16 +144,12 @@ final class Key<T> implements Comparable {
      */
     @Override
     public int compareTo(final Object object) {
-        int result = 0;
+        int result;
         if (isNull(object)) {
             result = -1;
         } else {
             final Key other = (Key) object;
-            if (this.timeout < other.timeout) {
-                result = 1;
-            } else if (this.timeout > other.timeout) {
-                result = -1;
-            }
+            result = (int) (other.timeout - this.timeout);
         }
         return result;
     }

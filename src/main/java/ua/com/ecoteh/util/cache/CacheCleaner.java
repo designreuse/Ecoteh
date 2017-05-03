@@ -1,9 +1,6 @@
 package ua.com.ecoteh.util.cache;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The class implements a set of methods for checking cache at old objects.
@@ -94,7 +91,7 @@ final class CacheCleaner implements Runnable {
         this.cache.keySet()
                 .stream()
                 .filter(Key::isDead)
-                .forEach(cache::remove);
+                .forEach(this.cache::remove);
     }
 
     /**

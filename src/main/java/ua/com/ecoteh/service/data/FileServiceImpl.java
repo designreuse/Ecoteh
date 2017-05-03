@@ -390,7 +390,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final Collection<File> files,
             final boolean revers
     ) {
-        return sort(files, new FileComparator.ByTitle<>(), revers);
+        return sort(files, new FileComparator.ByTitle(), revers);
     }
 
     /**
