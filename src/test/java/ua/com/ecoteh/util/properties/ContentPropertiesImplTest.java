@@ -1,6 +1,6 @@
 package ua.com.ecoteh.util.properties;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -8,11 +8,11 @@ import static org.junit.Assert.assertTrue;
 
 public final class ContentPropertiesImplTest {
 
-    private ContentProperties contentProperties;
+    private static ContentProperties contentProperties;
 
-    @Before
-    public void beforeTest() {
-        this.contentProperties = new ContentPropertiesImpl(
+    @BeforeClass
+    public static void beforeTest() {
+        contentProperties = new ContentPropertiesImpl(
                 "catalinaHome",
                 "contentType",
                 "prefix",
@@ -28,68 +28,78 @@ public final class ContentPropertiesImplTest {
     }
 
     @Test
+    public void constructorWithNullProperties() {
+        new ContentPropertiesImpl(null, null, null, null, true, null, null, -1L, null, null, null);
+    }
+
+    @Test
+    public void constructorWithEmptyProperties() {
+        new ContentPropertiesImpl("", "", "", "", true, "", "", -1L, "", "", "");
+    }
+
+    @Test
     public void contentPropertiesNotNull() {
-        assertNotNull(this.contentProperties);
+        assertNotNull(contentProperties);
     }
 
     @Test
     public void whenGetCatalinaHomeThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getCatalinaHome());
+        assertNotNull(contentProperties.getCatalinaHome());
     }
 
     @Test
     public void whenGetPrefixThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getPrefix());
+        assertNotNull(contentProperties.getPrefix());
     }
 
     @Test
     public void whenGetSuffixThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getSuffix());
+        assertNotNull(contentProperties.getSuffix());
     }
 
     @Test
     public void whenIsExposeContextBeansAsAttributesThenReturnTrue() {
-        assertTrue(this.contentProperties.isExposeContextBeansAsAttributes());
+        assertTrue(contentProperties.isExposeContextBeansAsAttributes());
     }
 
     @Test
     public void whenGeResourcesUrlThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getResourcesUrl());
+        assertNotNull(contentProperties.getResourcesUrl());
     }
 
     @Test
     public void whenResourcesLocationThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getResourcesLocation());
+        assertNotNull(contentProperties.getResourcesLocation());
     }
 
     @Test
     public void whenGetMaxFileSizeThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getMaxFileSize());
-        assertTrue(this.contentProperties.getMaxFileSize() > 0);
+        assertNotNull(contentProperties.getMaxFileSize());
+        assertTrue(contentProperties.getMaxFileSize() > 0);
     }
 
     @Test
     public void whenGetLoginRequestThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getLoginRequest());
+        assertNotNull(contentProperties.getLoginRequest());
     }
 
     @Test
     public void whenGetLoginViewNameThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getLoginViewName());
+        assertNotNull(contentProperties.getLoginViewName());
     }
 
     @Test
     public void whenGetProjectDirectoryThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getProjectDirectory());
+        assertNotNull(contentProperties.getProjectDirectory());
     }
 
     @Test
     public void whenGetResourcesAbsolutePathThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getResourcesAbsolutePath());
+        assertNotNull(contentProperties.getResourcesAbsolutePath());
     }
 
     @Test
     public void whenGetContentTypeThenReturnNotNull() {
-        assertNotNull(this.contentProperties.getContentType());
+        assertNotNull(contentProperties.getContentType());
     }
 }

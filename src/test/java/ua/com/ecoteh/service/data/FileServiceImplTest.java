@@ -1,8 +1,8 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.File;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
+import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.mocks.repository.MockRepository;
 
 import java.util.Collection;
@@ -13,11 +13,11 @@ import static ua.com.ecoteh.mocks.properties.MockContentProperties.getContentPro
 
 public final class FileServiceImplTest extends DataServiceImplTest<File> {
 
-    private FileService service;
+    private static FileService service;
 
-    @Before
-    public void beforeTest() {
-        this.service = new FileServiceImpl(
+    @BeforeClass
+    public static void beforeTest() {
+        service = new FileServiceImpl(
                 MockRepository.getFileRepository(),
                 getContentProperties()
         );
@@ -26,7 +26,7 @@ public final class FileServiceImplTest extends DataServiceImplTest<File> {
     @Ignore
     @Override
     protected FileService getService() {
-        return this.service;
+        return service;
     }
 
     @Ignore

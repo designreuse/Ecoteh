@@ -34,4 +34,14 @@ public final class DefaultConfigTest {
     public void whenGetSuperAdminUserThenReturnSomeUser() {
         assertNotNull(DefaultConfig.getDefaultUser("superadmin"));
     }
+
+    @Test
+    public void whenGetAdminThenReturnSomeUser() {
+        assertNotNull(DefaultConfig.getDefaultAdmin());
+    }
+
+    @Test
+    public void whenGetSuperAdminThenReturnSomeUser() {
+        assertNotNull(DefaultConfig.getSuperAdmin());
+    }
 }

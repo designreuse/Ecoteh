@@ -1,9 +1,9 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Article;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import ua.com.ecoteh.entity.Article;
 import ua.com.ecoteh.mocks.repository.MockRepository;
 
 import java.util.ArrayList;
@@ -11,18 +11,18 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.*;
 import static ua.com.ecoteh.mocks.MockConstants.*;
 import static ua.com.ecoteh.mocks.enity.MockEntity.*;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getFileService;
-import static org.junit.Assert.*;
 
 public final class ArticleServiceImplTest extends ContentServiceImplTest<Article> {
 
-    private ArticleService service;
+    private static ArticleService service;
 
-    @Before
-    public void beforeTest() {
-        this.service = new ArticleServiceImpl(
+    @BeforeClass
+    public static void beforeTest() {
+        service = new ArticleServiceImpl(
                 MockRepository.getArticleRepository(),
                 getFileService()
         );
@@ -30,127 +30,127 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
 
     @Test
     public void whenUpdateThenReturnSomeArticle() {
-        assertNotNull(this.service.update(URL, getArticle()));
+        assertNotNull(service.update(URL, getArticle()));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetByInvalidNumberAndValidThenThrowIllegalArgumentException() {
-        this.service.getByNumber(null, true);
+        service.getByNumber(null, true);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetByInvalidNumberAndInvalidThenThrowIllegalArgumentException() {
-        this.service.getByNumber(null, false);
+        service.getByNumber(null, false);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetByBlankNumberAndValidThenThrowIllegalArgumentException() {
-        this.service.getByNumber("", true);
+        service.getByNumber("", true);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetByBlankNumberAndInvalidThenThrowIllegalArgumentException() {
-        this.service.getByNumber("", false);
+        service.getByNumber("", false);
     }
 
     @Test(expected = NullPointerException.class)
     public void whenGetByValidNumberAndTrueValidThenReturnsSomeArticleOrThrowException() {
-        assertNotNull(this.service.getByNumber(NUMBER, true));
+        assertNotNull(service.getByNumber(NUMBER, true));
     }
 
     @Test(expected = NullPointerException.class)
     public void whenGetByValidNumberAndFalseValidThenReturnsSomeArticleOrThrowException() {
-        assertNotNull(this.service.getByNumber(NUMBER, false));
+        assertNotNull(service.getByNumber(NUMBER, false));
     }
 
     @Test(expected = NullPointerException.class)
     public void whenGetByUnknownNumberAndValidThenThrowNullPointerException() {
-        this.service.getByNumber(ANY_STRING, true);
+        service.getByNumber(ANY_STRING, true);
     }
 
     @Test(expected = NullPointerException.class)
     public void whenGetByUnknownNumberAndInvalidThenThrowNullPointerException() {
-        this.service.getByNumber(ANY_STRING, false);
+        service.getByNumber(ANY_STRING, false);
     }
 
     @Test
     public void whenSortByNumberWithNullCollectionAndTrueReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByNumber(null, true).isEmpty());
+        assertTrue(service.sortByNumber(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByNumberWithNullCollectionAndFalseReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByNumber(null, false).isEmpty());
+        assertTrue(service.sortByNumber(null, false).isEmpty());
     }
 
     @Test
     public void whenSortByNumberWithEmptyCollectionAndTrueReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByNumber(new ArrayList<>(), true).isEmpty());
+        assertTrue(service.sortByNumber(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByNumberWithEmptyCollectionAndFalseReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByNumber(new ArrayList<>(), false).isEmpty());
+        assertTrue(service.sortByNumber(new ArrayList<>(), false).isEmpty());
     }
 
     @Test
     public void whenSortByNumberWithValidInputCollectionAndTrueReversThenReturnsEmptyList() {
-        assertFalse(this.service.sortByNumber(getArticles(), false).isEmpty());
+        assertFalse(service.sortByNumber(getArticles(), false).isEmpty());
     }
 
     @Test
     public void whenSortByNumberWithValidInputCollectionAndFalseReversThenReturnsEmptyList() {
-        assertFalse(this.service.sortByNumber(getArticles(), true).isEmpty());
+        assertFalse(service.sortByNumber(getArticles(), true).isEmpty());
     }
 
     @Test
     public void whenSortByDateWithNullCollectionAndTrueReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByDate(null, true).isEmpty());
+        assertTrue(service.sortByDate(null, true).isEmpty());
     }
 
     @Test
     public void whenSortByDateWithNullCollectionAndFalseReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByDate(null, false).isEmpty());
+        assertTrue(service.sortByDate(null, false).isEmpty());
     }
 
     @Test
     public void whenSortByDateWithEmptyCollectionAndTrueReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByDate(new ArrayList<>(), true).isEmpty());
+        assertTrue(service.sortByDate(new ArrayList<>(), true).isEmpty());
     }
 
     @Test
     public void whenSortByDateWithEmptyCollectionAndFalseReversThenReturnsEmptyList() {
-        assertTrue(this.service.sortByDate(new ArrayList<>(), false).isEmpty());
+        assertTrue(service.sortByDate(new ArrayList<>(), false).isEmpty());
     }
 
     @Test
     public void whenSortByDateAndValidInputCollectionWithTrueReversThenReturnsEmptyList() {
-        assertFalse(this.service.sortByDate(getArticles(), true).isEmpty());
+        assertFalse(service.sortByDate(getArticles(), true).isEmpty());
     }
 
     @Test
     public void whenSortByDateAndValidInputCollectionWithFalseReversThenReturnsEmptyList() {
-        assertFalse(this.service.sortByDate(getArticles(), false).isEmpty());
+        assertFalse(service.sortByDate(getArticles(), false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByNumberWithTrueReversThenReturnsSomeList() {
-        assertFalse(this.service.getAndSortByNumber(true).isEmpty());
+        assertFalse(service.getAndSortByNumber(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByNumberWithFalseReversThenReturnsSomeList() {
-        assertFalse(this.service.getAndSortByNumber(false).isEmpty());
+        assertFalse(service.getAndSortByNumber(false).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByDateWithTrueReversThenReturnsSomeList() {
-        assertFalse(this.service.getAndSortByDate(true).isEmpty());
+        assertFalse(service.getAndSortByDate(true).isEmpty());
     }
 
     @Test
     public void whenGetAndSortByDateWithFalseReversThenReturnsSomeList() {
-        assertFalse(this.service.getAndSortByDate(false).isEmpty());
+        assertFalse(service.getAndSortByDate(false).isEmpty());
     }
 
     @Test
@@ -162,7 +162,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
             ex.printStackTrace();
         }
         final Date finishDate = new Date();
-        assertTrue(this.service.filterByDate(null, startDate, finishDate).isEmpty());
+        assertTrue(service.filterByDate(null, startDate, finishDate).isEmpty());
     }
 
     @Test
@@ -174,13 +174,13 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
             ex.printStackTrace();
         }
         final Date finishDate = new Date();
-        assertTrue(this.service.filterByDate(new ArrayList<>(), startDate, finishDate).isEmpty());
+        assertTrue(service.filterByDate(new ArrayList<>(), startDate, finishDate).isEmpty());
     }
 
     @Test
     public void whenFilterByDateWithNullStartDateThenReturnsEmptyList() {
         final List<Article> articles = getArticles();
-        final List<Article> filterArticles = this.service.filterByDate(
+        final List<Article> filterArticles = service.filterByDate(
                 articles, null, new Date()
         );
         assertFalse(filterArticles.isEmpty());
@@ -190,7 +190,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     @Test
     public void whenFilterByDateWithNullEndDateThenReturnsEmptyList() {
         final List<Article> articles = getArticles();
-        final List<Article> filterArticles = this.service.filterByDate(
+        final List<Article> filterArticles = service.filterByDate(
                 articles, new Date(), null
         );
         assertFalse(filterArticles.isEmpty());
@@ -207,7 +207,7 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
             ex.printStackTrace();
         }
         final Date startDate = new Date();
-        final List<Article> filterArticles = this.service.filterByDate(
+        final List<Article> filterArticles = service.filterByDate(
                 articles, startDate, finishDate
         );
         assertFalse(filterArticles.isEmpty());
@@ -215,85 +215,146 @@ public final class ArticleServiceImplTest extends ContentServiceImplTest<Article
     }
 
     @Test
+    public void whenFilterByByDateThenReturnsList() {
+        final List<Article> articles = getArticles();
+        try {
+            for (Article article : articles) {
+                article.setDate(new Date());
+                Thread.sleep(100);
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        final Date startDate = articles.get(articles.size() - 1).getDate();
+        final Date finishDate = new Date();
+        final List<Article> filterArticles = service.filterByDate(
+                articles, startDate, finishDate
+        );
+        assertFalse(filterArticles.isEmpty());
+        assertNotEquals(articles.size(), filterArticles.size());
+    }
+
+    @Test
     public void whenRemoveByNullNumberThenDoNothing() {
-        this.service.removeByNumber(null);
+        service.removeByNumber(null);
     }
 
     @Test
     public void whenRemoveByBlankNumberThenDoNothing() {
-        this.service.removeByNumber("");
-        this.service.removeByNumber(" ");
-        this.service.removeByNumber("  ");
+        service.removeByNumber("");
+        service.removeByNumber(" ");
+        service.removeByNumber("  ");
     }
 
     @Test(expected = NullPointerException.class)
+    public void whenRemoveByUnknownNumberThenThrowNullPointerException() {
+        service.removeByNumber(ANY_STRING);
+    }
+
+    @Test
     public void whenRemoveByNumberThenDoIt() {
-        this.service.removeByNumber(NUMBER);
+        service.removeByNumber(NUMBER);
     }
 
     @Test
     public void whenFilterByCategoryWithNullArticlesThenReturnSomeList() {
-        assertNotNull(this.service.filterByCategory(null, getCategory()));
+        assertNotNull(service.filterByCategory(null, getCategory()));
     }
 
     @Test
     public void whenFilterByCategoryWithEmptyArticlesThenReturnSomeList() {
-        assertNotNull(this.service.filterByCategory(new ArrayList<>(), getCategory()));
+        assertNotNull(service.filterByCategory(new ArrayList<>(), getCategory()));
     }
 
     @Test
     public void whenFilterByCategoriesWithNullArticlesThenReturnSomeList() {
-        assertNotNull(this.service.filterByCategories(null, getCategories()));
+        assertNotNull(service.filterByCategories(null, getCategories()));
     }
 
     @Test
     public void whenFilterByCategoriesWithEmptyArticlesThenReturnSomeList() {
-        assertNotNull(this.service.filterByCategories(new ArrayList<>(), getCategories()));
+        assertNotNull(service.filterByCategories(new ArrayList<>(), getCategories()));
     }
 
     @Test
     public void whenFilterByCategoriesWithNullCategoriesThenReturnSomeList() {
-        assertNotNull(this.service.filterByCategories(getArticles(), null));
+        assertNotNull(service.filterByCategories(getArticles(), null));
     }
 
     @Test
     public void whenFilterByCategoriesWithEmptyCategoriesThenReturnSomeList() {
-        assertNotNull(this.service.filterByCategories(getArticles(), new ArrayList<>()));
+        assertNotNull(service.filterByCategories(getArticles(), new ArrayList<>()));
+    }
+
+    @Test
+    public void whenFilterByCategoriesThenReturnSomeList() {
+        assertNotNull(service.filterByCategories(getArticles(), getCategories()));
     }
 
     @Test
     public void whenFilterByDateThenReturnsSomeList() {
-        assertNotNull(this.service.getAndFilterByDate(new Date(), new Date()));
+        assertNotNull(service.getAndFilterByDate(new Date(), new Date()));
     }
 
     @Test
     public void whenFilterByDateWithNullStartDateThenReturnsSomeList() {
-        assertNotNull(this.service.getAndFilterByDate(null, new Date()));
+        assertNotNull(service.getAndFilterByDate(null, new Date()));
     }
 
     @Test
     public void whenFilterByDateWithNullFinishDateThenReturnsSomeList() {
-        assertNotNull(this.service.getAndFilterByDate(new Date(), null));
+        assertNotNull(service.getAndFilterByDate(new Date(), null));
     }
 
     @Test
     public void whenGetAndFilterByCategoriesWithNullCategoryThenReturnSomeList() {
-        assertNotNull(this.service.getAndFilterByCategories(null));
+        assertNotNull(service.getAndFilterByCategories(null));
     }
 
     @Test
     public void whenGetAndFilterByCategoriesWithEmptyCategoryThenReturnSomeList() {
-        assertNotNull(this.service.getAndFilterByCategories(new ArrayList<>()));
+        assertNotNull(service.getAndFilterByCategories(new ArrayList<>()));
     }
 
-    @Ignore
-    public void whenAddInvalidModelThenReturnsIt() {
+    @Test
+    public void whenGetByCategoryIdThenReturnSomeList() {
+        assertNotNull(service.getByCategoryId(ID));
+    }
+
+    @Test
+    public void whenGetByUnknownCategoryIdThenReturnSomeList() {
+        assertNotNull(service.getByCategoryId(UNKNOWN_ID));
+    }
+
+    @Test
+    public void whenGetByCategoryTitleThenReturnSomeList() {
+        assertNotNull(service.getByCategoryTitle(TITLE));
+    }
+
+    @Test
+    public void whenGetByUnknownCategoryTitleThenReturnSomeList() {
+        assertNotNull(service.getByCategoryTitle(ANY_STRING));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetByNullCategoryTitleThenThrowIllegalArgumentException() {
+        service.getByCategoryTitle(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetByEmptyCategoryTitleThenThrowIllegalArgumentException() {
+        service.getByCategoryTitle("");
+    }
+
+    @Test
+    public void whenGetAndFilterByNullCategory() {
+        assertNotNull(service.getAndFilterByCategory(null));
     }
 
     @Ignore
     @Override
     protected ArticleService getService() {
-        return this.service;
+        return service;
     }
 
     @Ignore

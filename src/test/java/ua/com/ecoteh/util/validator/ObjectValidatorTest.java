@@ -8,6 +8,7 @@ import java.util.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -132,7 +133,11 @@ public class ObjectValidatorTest {
     @Test
     public void isEmptyMultipartFile() throws Exception {
         assertTrue(ObjectValidator.isEmpty((MultipartFile) null));
-        assertFalse(ObjectValidator.isEmpty(mock(MultipartFile.class)));
+        MultipartFile file = mock(MultipartFile.class);
+        when(file.isEmpty()).thenReturn(false);
+        assertFalse(ObjectValidator.isEmpty(file));
+        when(file.isEmpty()).thenReturn(true);
+        assertTrue(ObjectValidator.isEmpty(file));
     }
 
     @Test

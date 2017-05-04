@@ -3,7 +3,9 @@ package ua.com.ecoteh.controller.advice;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import ua.com.ecoteh.exception.DuplicateException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,21 @@ public class AdviceControllerTest {
     }
 
     @Test
+    public void whenNoHandlerFoundExceptionThenReturnSomeModelAndView() {
+        checkModelAndView(
+                controller.noHandlerFoundException(
+                        new NoHandlerFoundException(
+                                "httpMethod", "requestURL",
+                                mock(HttpHeaders.class)
+                        ),
+                        mock(HttpServletRequest.class)
+                ),
+                "error/error",
+                new String[] { "main_company", "categories", "status", "message" }
+        );
+    }
+
+    @Test
     public void whenNullPointerExceptionThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.nullPointerException(
@@ -30,7 +47,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 
@@ -42,7 +59,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 
@@ -54,7 +71,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 
@@ -66,7 +83,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 
@@ -78,7 +95,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 
@@ -90,7 +107,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 
@@ -102,7 +119,7 @@ public class AdviceControllerTest {
                         mock(HttpServletRequest.class)
                 ),
                 "error/error",
-                new String[]{"main_company", "categories", "status", "message"}
+                new String[] { "main_company", "categories", "status", "message" }
         );
     }
 }

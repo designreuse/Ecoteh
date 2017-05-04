@@ -207,6 +207,11 @@ public abstract class ContentServiceImplTest<T extends Content> extends DataServ
         getService().removeByUrl(URL);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenUpdateNullContentThenThrowIllegalArgumentException() {
+        getService().update(URL, null);
+    }
+
     @Ignore
     @Override
     protected abstract ContentService<T> getService();

@@ -64,8 +64,13 @@ public abstract class DataServiceImplTest<T extends Model> {
     }
 
     @Test
-    public void whenUpdateAllInvalidModelThenReturnEmptyCollection() {assertTrue(
-                getService().update(new ArrayList<>()).isEmpty());
+    public void whenUpdateAllInvalidModelThenReturnEmptyCollection() {
+        assertTrue(getService().update(new ArrayList<>()).isEmpty());
+    }
+
+    @Test
+    public void whenUpdateModelsThenReturnSomeCollection() {
+        assertFalse(getService().update(getObjects()).isEmpty());
     }
 
     @Test(expected = NullPointerException.class)
@@ -106,11 +111,7 @@ public abstract class DataServiceImplTest<T extends Model> {
 
     @Test
     public void whenExistsByModelThenReturnsTrue() {
-        assertTrue(
-                getService().exists(
-                        getObject()
-                )
-        );
+        assertTrue(getService().exists(getObject()));
     }
 
     @Test
@@ -232,13 +233,23 @@ public abstract class DataServiceImplTest<T extends Model> {
     }
 
     @Test
-    public void whenGetObjectsThenReturnNotEmptyCollecton() {
+    public void whenGetObjectsThenReturnNotEmptyCollection() {
         assertFalse(getObjects().isEmpty());
     }
 
     @Test
     public void whenGetInvalidObjectThenReturnNotNull() {
         assertNotNull(getInvalidObject());
+    }
+
+    @Test
+    public void whenSortWithNullComparatorThenReturnSomeList() {
+        assertFalse(getService().sort(getObjects(), null).isEmpty());
+    }
+
+    @Test
+    public void whenShuffleThenReturnSomeList() {
+        assertFalse(getService().shuffle(getObjects()).isEmpty());
     }
 
     @Ignore

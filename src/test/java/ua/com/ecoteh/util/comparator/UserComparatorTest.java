@@ -116,6 +116,12 @@ public final class UserComparatorTest {
         getUserComparatorWithInvalidUsers(comparator);
     }
 
+    @Test
+    public void getUserComparatorByRoleWithNullRole() {
+        Comparator<User> comparator = new UserComparator.ByRole(null);
+        getUserComparatorWithInvalidUsers(comparator);
+    }
+
     @Ignore
     private static void getUserComparatorWithInvalidUsers(Comparator<User> comparator) {
         int value = comparator.compare(null, null);

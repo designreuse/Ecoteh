@@ -1,26 +1,34 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.enums.CompanyType;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import ua.com.ecoteh.entity.Company;
+import ua.com.ecoteh.enums.CompanyType;
 import ua.com.ecoteh.mocks.enity.MockEntity;
 import ua.com.ecoteh.mocks.repository.MockRepository;
+import ua.com.ecoteh.repository.CompanyRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
+import static ua.com.ecoteh.mocks.MockConstants.DOMAIN;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getFileService;
-import static org.junit.Assert.*;
 
 public final class CompanyServiceImplTest extends ContentServiceImplTest<Company> {
 
-    private CompanyService service;
+    private static CompanyService service;
 
-    @Before
-    public void beforeTest() {
-        this.service = new CompanyServiceImpl(
+    @BeforeClass
+    public static void beforeTest() {
+        service = new CompanyServiceImpl(
                 MockRepository.getCompanyRepository(),
                 getFileService()
         );
@@ -28,57 +36,86 @@ public final class CompanyServiceImplTest extends ContentServiceImplTest<Company
 
     @Test
     public void whenAddThenReturnSomeCompany() {
-        assertNotNull(this.service.add(MockEntity.getCompany()));
+        assertNotNull(service.add(MockEntity.getCompany()));
     }
 
     @Test
     public void whenInitAndUpdateThenReturnSomeCompany() {
-        assertNotNull(this.service.update(URL, MockEntity.getCompany()));
+        assertNotNull(service.update(URL, MockEntity.getCompany()));
     }
 
     @Test
     public void whenUpdateMainCompanyThenReturnSomeCompany() {
-        assertNotNull(this.service.updateMainCompany(MockEntity.getCompany()));
+        assertNotNull(service.updateMainCompany(MockEntity.getCompany()));
+    }
+
+    @Test
+    public void whenThisServiceGetMainCompanyThenReturnMainCompany() {
+        CompanyRepository repository = mock(CompanyRepository.class);
+        List<Company> companies = new ArrayList<>(getObjects());
+        when(repository.findByType(CompanyType.MAIN)).thenReturn(companies);
+        CompanyService service = new CompanyServiceImpl(repository, null);
+        assertNotNull(service.getMainCompany());
     }
 
     @Test
     public void whenGetMainCompanyThenReturnMainCompany() {
-        assertNotNull(this.service.getMainCompany());
+        assertNotNull(service.getMainCompany());
     }
 
     @Test
     public void whenGetValidPartnersThenReturnSomeList() {
-        assertFalse(this.service.getPartners(true).isEmpty());
+        assertFalse(service.getPartners(true).isEmpty());
     }
 
     @Test
     public void whenGetPartnersThenReturnSomeList() {
-        assertFalse(this.service.getPartners(false).isEmpty());
+        assertFalse(service.getPartners(false).isEmpty());
     }
 
     @Test
     public void whenRemoveCompanyWithMainTypeThenDoNothing() {
         final Company company = getObject();
         company.setType(CompanyType.MAIN);
-        this.service.remove(company);
+        service.remove(company);
     }
 
     @Test
     public void whenRemoveCompanyWithNotMainTypeThenDoIt() {
         final Company company = getObject();
         company.setType(CompanyType.PARTNER);
-        this.service.remove(company);
+        service.remove(company);
     }
 
     @Test
     public void whenRemoveMainCompanyThenDoIt() {
-        this.service.removeMain();
+        service.removeMain();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetByNullDomainThenThrowIllegalArgumentException() {
+        service.getByDomain(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetByEmptyDomainThenThrowIllegalArgumentException() {
+        service.getByDomain("");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void whenGetByUnknownDomainThenThrowNullPointerException() {
+        service.getByDomain(ANY_STRING);
+    }
+
+    @Test
+    public void whenGetByDomainThenReturnSomeCompany() {
+        assertNotNull(service.getByDomain(DOMAIN));
     }
 
     @Ignore
     @Override
     protected CompanyService getService() {
-        return this.service;
+        return service;
     }
 
     @Ignore

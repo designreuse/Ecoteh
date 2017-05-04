@@ -258,6 +258,7 @@ public final class MockEntity {
             article.setId((long) i);
             article.setTitle(article.getTitle() + " " + getRandomInt());
             article.newNumber();
+            article.setCategory(getCategory());
             articles.add(article);
         }
     }

@@ -22,7 +22,9 @@ public interface MockConstants {
     String LOGIN = "login";
     String PASSWORD = "password";
     String EMAIL = "my_email@gmail.com";
-    String PHONE = "+380000000000";
+    String PHONE = "+380000000001";
+    String PHONE_2 = "+380000000002";
+    String FAX = "+380000000003";
     String VKONTAKTE = "vkontakte";
     String FACEBOOK = "facebook";
     String TWITTER = "twitter";

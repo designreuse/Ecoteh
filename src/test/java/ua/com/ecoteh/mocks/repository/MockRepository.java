@@ -80,6 +80,7 @@ public class MockRepository {
     private static void initArticleRepository() {
         articleRepository = mock(ArticleRepository.class);
         final Article article = getArticle();
+        article.setCategory(getCategory());
         final Collection<Article> articles = getArticles();
         initDataRepository(
                 articleRepository,
@@ -95,10 +96,11 @@ public class MockRepository {
         when(articleRepository.findByNumber(NUMBER)).thenReturn(article);
         when(articleRepository.findByNumber(ANY_STRING)).thenReturn(null);
         when(articleRepository.findByNumber(null)).thenReturn(null);
-        when(articleRepository.findByCategoryId(ID))
-                .thenReturn(new ArrayList<>(articles));
-        when(articleRepository.findByCategoryId(UNKNOWN_ID))
-                .thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryId(ID)).thenReturn(new ArrayList<>(articles));
+        when(articleRepository.findByCategoryId(UNKNOWN_ID)).thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryTitle(TITLE)).thenReturn(new ArrayList<>(articles));
+        when(articleRepository.findByCategoryTitle(null)).thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryTitle(ANY_STRING)).thenReturn(new ArrayList<>());
     }
 
     private static void initCategoryRepository() {
@@ -133,6 +135,10 @@ public class MockRepository {
         when(companyRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(companyRepository.findByUrl(null)).thenReturn(null);
         when(companyRepository.findByType(CompanyType.PARTNER)).thenReturn(companies);
+        when(companyRepository.findByDomain(null)).thenReturn(null);
+        when(companyRepository.findByDomain("")).thenReturn(null);
+        when(companyRepository.findByDomain(ANY_STRING)).thenReturn(null);
+        when(companyRepository.findByDomain(DOMAIN)).thenReturn(company);
     }
 
     private static void initFileRepository() {
@@ -194,6 +200,18 @@ public class MockRepository {
                 )
         ).thenReturn(null);
         when(userRepository.findByEncryptedLogin(null)).thenReturn(null);
+        when(userRepository.findByContactsEmail(EMAIL)).thenReturn(user);
+        when(userRepository.findByContactsEmail(null)).thenReturn(null);
+        when(userRepository.findByContactsEmail(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsMobilePhone(PHONE)).thenReturn(user);
+        when(userRepository.findByContactsMobilePhone(null)).thenReturn(null);
+        when(userRepository.findByContactsMobilePhone(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsLandlinePhone(PHONE_2)).thenReturn(user);
+        when(userRepository.findByContactsLandlinePhone(null)).thenReturn(null);
+        when(userRepository.findByContactsLandlinePhone(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsFax(FAX)).thenReturn(user);
+        when(userRepository.findByContactsFax(null)).thenReturn(null);
+        when(userRepository.findByContactsFax(ANY_STRING)).thenReturn(null);
     }
 
     private static <T extends Model, E extends DataRepository<T>> void initDataRepository(

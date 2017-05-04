@@ -1,8 +1,8 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Message;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
+import ua.com.ecoteh.entity.Message;
 import ua.com.ecoteh.mocks.enity.MockEntity;
 import ua.com.ecoteh.mocks.repository.MockRepository;
 
@@ -10,11 +10,11 @@ import java.util.Collection;
 
 public class MessageServiceImplTest extends DataServiceImplTest<Message> {
 
-    private MessageService service;
+    private static MessageService service;
 
-    @Before
-    public void beforeTest() {
-        this.service = new MessageServiceImpl(MockRepository.getMessageRepository());
+    @BeforeClass
+    public static void beforeTest() {
+        service = new MessageServiceImpl(MockRepository.getMessageRepository());
     }
 
     @Ignore
@@ -25,7 +25,7 @@ public class MessageServiceImplTest extends DataServiceImplTest<Message> {
     @Ignore
     @Override
     protected MessageService getService() {
-        return this.service;
+        return service;
     }
 
     @Ignore
