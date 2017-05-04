@@ -85,6 +85,7 @@ public final class ReCaptcha implements Captcha {
         this.serverKey = serverKey;
         this.parameter = parameter;
         this.header = header;
+        this.status = "";
     }
 
     /**
@@ -95,7 +96,7 @@ public final class ReCaptcha implements Captcha {
      */
     @Override
     public boolean isVerify(final HttpServletRequest request) {
-        this.status = null;
+        this.status = "";
         boolean result = false;
         if (isNotNull(request)) {
             result = isVerify(
@@ -118,7 +119,7 @@ public final class ReCaptcha implements Captcha {
             final String captcha,
             final String ipAddress
     ) {
-        this.status = null;
+        this.status = "";
         boolean result = false;
         if (isNotEmpty(captcha) && isNotEmpty(ipAddress)) {
             try {

@@ -209,9 +209,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public File getByTitle(final String title) throws IllegalArgumentException {
         if (isEmpty(title)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_TITLE_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_TITLE_MESSAGE, getClassSimpleName());
         }
         return this.repository.findByTitle(title);
     }
@@ -228,9 +226,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public File getByUrl(final String url) throws IllegalArgumentException {
         if (isEmpty(url)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_URL_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_URL_MESSAGE, getClassSimpleName());
         }
         return this.repository.findByUrl(url);
     }
@@ -271,7 +267,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     public void remove(final File file) throws IllegalArgumentException {
         if (isNotNull(file)) {
             if (isStaticFile(file)) {
-                throw new IllegalArgumentException(FORBIDDEN_STATIC_FILE_MESSAGE);
+                throw getIllegalArgumentException(FORBIDDEN_STATIC_FILE_MESSAGE);
             }
             deleteFile(file.getUrl());
             super.remove(file);
@@ -343,7 +339,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional
     public boolean deleteFile(final String path) {
         return new MultipartFileLoader(
-                this.properties.getProjectAbsolutePath() + path
+                createAbsolutePath(path)
         ).delete();
     }
 
@@ -405,9 +401,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public List<File> getByType(final FileType type) throws IllegalArgumentException {
         if (isNull(type)) {
-            throw new IllegalArgumentException(
-                    String.format(NULL_TYPE_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(NULL_TYPE_MESSAGE, getClassSimpleName());
         }
         return this.repository.findAllByType(type);
     }
@@ -457,14 +451,11 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     private void isValidMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
         if (isEmpty(file)) {
-            throw new NullPointerException(MULTIPART_FILE_IS_EMPTY_MESSAGE);
+            throw getNullPointerException(MULTIPART_FILE_IS_EMPTY_MESSAGE);
         }
         if (isGreatMaxSize(file.getSize())) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            MAX_FILE_SIZE_MESSAGE,
-                            this.properties.getMaxFileSize(), file.getSize()
-                    )
+            throw getIllegalArgumentException(
+                    MAX_FILE_SIZE_MESSAGE, getMaxFileSize(), file.getSize()
             );
         }
     }
@@ -487,7 +478,16 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * false otherwise.
      */
     private boolean isGreatMaxSize(final long size) {
-        return (size > this.properties.getMaxFileSize());
+        return (size > getMaxFileSize());
+    }
+
+    /**
+     * Returns a maximum file size.
+     *
+     * @return The maximum file size.
+     */
+    private long getMaxFileSize() {
+        return this.properties.getMaxFileSize();
     }
 
     /**
@@ -495,14 +495,24 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      *
      * @param file     the multipart file.
      * @param rootPath the root directory path.
-     * @return The relative path to file (newer null).
+     * @return The absolute path to file (newer null).
      */
     private String createAbsolutePath(
             final MultipartFile file,
             final String rootPath
     ) {
-        return this.properties.getProjectAbsolutePath() +
-                (isNotEmpty(rootPath) ? rootPath : file.getOriginalFilename());
+        return createAbsolutePath(rootPath) +
+                (isEmpty(rootPath) ? file.getOriginalFilename() : "");
+    }
+
+    /**
+     * Creates and returns a absolute path.
+     *
+     * @param rootPath the root directory path.
+     * @return The absolute path (newer null).
+     */
+    private String createAbsolutePath(final String rootPath) {
+        return this.properties.getProjectAbsolutePath() + rootPath;
     }
 
     /**

@@ -93,17 +93,13 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(number)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_NUMBER_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_NUMBER_MESSAGE, getClassSimpleName());
         }
         final Article article = this.repository.findByNumber(number);
         if (isNotValidated(article, isValid)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), number
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), number
             );
         }
         article.getCategory().getArticles();
@@ -134,7 +130,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Transactional(readOnly = true)
     public List<Article> getByCategoryTitle(final String title) throws IllegalArgumentException {
         if (isEmpty(title)) {
-            throw new IllegalArgumentException(BLANK_CATEGORY_TITLE_MESSAGE);
+            throw getIllegalArgumentException(BLANK_CATEGORY_TITLE_MESSAGE);
         }
         return this.repository.findByCategoryTitle(title);
     }
@@ -239,9 +235,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             if (checkDate(startDate, finishDate)) {
                 result.addAll(
                         articles.stream()
-                                .filter(
-                                        article -> timeFilter(article, startDate, finishDate)
-                                ).collect(Collectors.toList())
+                                .filter(article -> timeFilter(article, startDate, finishDate))
+                                .collect(Collectors.toList())
                 );
             } else {
                 result.addAll(articles);
@@ -310,9 +305,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
                 for (Article article : articles) {
                     result.addAll(
                             categories.stream()
-                                    .filter(
-                                            category -> categoryFilter(article, category)
-                                    ).map(category -> article)
+                                    .filter(category -> categoryFilter(article, category))
+                                    .map(category -> article)
                                     .collect(Collectors.toList())
                     );
                 }
@@ -568,6 +562,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final Article article,
             final Category category
     ) {
-        return article.getCategory().equals(category);
+        return isNotNull(article) && isNotNull(article.getCategory()) &&
+                article.getCategory().equals(category);
     }
 }

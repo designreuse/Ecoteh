@@ -70,12 +70,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             result = this.repository.save(model);
         }
         if (isNull(result)) {
-            throw new NullPointerException(
-                    String.format(
-                            SAVING_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName()
-                    )
-            );
+            throw getNullPointerException(SAVING_OBJECT_IS_NULL_MESSAGE, getClassSimpleName());
         }
         return result;
     }
@@ -125,12 +120,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             result = this.repository.save(model);
         }
         if (isNull(result)) {
-            throw new NullPointerException(
-                    String.format(
-                            UPDATING_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName()
-                    )
-            );
+            throw getNullPointerException(UPDATING_OBJECT_IS_NULL_MESSAGE, getClassSimpleName());
         }
         return result;
     }
@@ -178,11 +168,9 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     public T get(final long id) throws NullPointerException {
         final T result = this.repository.findOne(id);
         if (isNull(result)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), id
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), id
             );
         }
         return result;
@@ -314,10 +302,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         if (isNotEmpty(models)) {
             result.addAll(models);
             if (isNotNull(comparator)) {
-                Collections.sort(
-                        result,
-                        getReversComparator(comparator, revers)
-                );
+                Collections.sort(result, prepareComparator(comparator, revers));
             }
         }
         return result;
@@ -445,6 +430,68 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
+     * Validated a incoming model.
+     * Model is valid if it is not null and it validated.
+     * <pre>
+     *     isValidated(null) = false
+     *
+     *     Model model = new Model();
+     *     model.setValidated(false);
+     *     isValidated(model) = false
+     *
+     *     model.setValidated(true);
+     *     isValidated(model) = true
+     * </pre>
+     *
+     * @param model the model to check.
+     * @return true if the model is not null and it validated.
+     */
+    protected static boolean isValidated(final Model model) {
+        return isNotNull(model) && model.isValidated();
+    }
+
+    /**
+     * @param message
+     * @param parameters
+     * @return
+     */
+    protected static NullPointerException getNullPointerException(
+            final String message,
+            final Object... parameters
+    ) {
+        return new NullPointerException(
+                prepareMessage(message, (Object[]) parameters)
+        );
+    }
+
+    /**
+     * @param message
+     * @param parameters
+     * @return
+     */
+    protected static IllegalArgumentException getIllegalArgumentException(
+            final String message,
+            final Object... parameters
+    ) {
+        return new IllegalArgumentException(
+                prepareMessage(message, (Object[]) parameters)
+        );
+    }
+
+    /**
+     *
+     * @param message
+     * @param parameters
+     * @return
+     */
+    private static String prepareMessage(
+            final String message,
+            final Object... parameters
+    ) {
+        return isNotEmpty(parameters) ? String.format(message, parameters) : message;
+    }
+
+    /**
      * Gets revers input comparator if revers is true.
      * Incoming comparator must be not null.
      * <pre>
@@ -453,12 +500,13 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *     getReversComparator(comparator, false) = comparator
      * </pre>
      *
+     * @param <T>        entity type, extends {@link Model}.
      * @param comparator the comparator to sort models.
      * @param revers     is sort in descending or ascending.
      * @return The comparator to sort models (newer null).
      */
-    private static Comparator getReversComparator(
-            final Comparator comparator,
+    private static <T extends Model> Comparator<T> prepareComparator(
+            final Comparator<T> comparator,
             final boolean revers
     ) {
         return revers ? Collections.reverseOrder(comparator) : comparator;
@@ -478,29 +526,12 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param size      the models size.
      * @return true if incoming indexes is correct, false otherwise.
      */
-    private static boolean checkIndexes(final int fromIndex, final int toIndex, final int size) {
+    private static boolean checkIndexes(
+            final int fromIndex,
+            final int toIndex,
+            final int size
+    ) {
         return (fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < size);
-    }
-
-    /**
-     * Validated a incoming model.
-     * Model is valid if it is not null and it validated.
-     * <pre>
-     *     isValidated(null) = false
-     *
-     *     Model model = new Model();
-     *     model.setValidated(false);
-     *     isValidated(model) = false
-     *
-     *     model.setValidated(true);
-     *     isValidated(model) = true
-     * </pre>
-     *
-     * @param model the model to check.
-     * @return true if the model is not null and it validated.
-     */
-    protected static boolean isValidated(final Model model) {
-        return isNotNull(model) && model.isValidated();
     }
 
     /**

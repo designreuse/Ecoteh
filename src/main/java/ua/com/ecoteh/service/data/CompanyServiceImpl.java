@@ -33,6 +33,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
 
     /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(CompanyServiceImpl.class);
+
+    /**
      * The message that a incoming company domain is null or empty.
      */
     private final static String BLANK_DOMAIN_MESSAGE = "Incoming %s domain is null or empty!";
@@ -42,11 +47,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming domain %s!";
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(CompanyServiceImpl.class);
 
     /**
      * The interface provides a set of standard methods for working
@@ -183,19 +183,16 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     @Override
     @Transactional(readOnly = true)
-    public Company getByDomain(final String domain) throws IllegalArgumentException {
+    public Company getByDomain(final String domain)
+            throws IllegalArgumentException, NullPointerException {
         if (isEmpty(domain)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_DOMAIN_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_DOMAIN_MESSAGE, getClassSimpleName());
         }
         Company company = this.repository.findByDomain(domain);
         if (isNull(company)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), domain
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), domain
             );
         }
         return company;

@@ -35,6 +35,12 @@ public abstract class ContentServiceImpl<T extends Content>
             "Incoming %s title is null or empty!";
 
     /**
+     * The message that a incoming URL is null or empty.
+     */
+    private final static String BLANK_URL_MESSAGE =
+            "Incoming %s URL is null or empty!";
+
+    /**
      * The message that a service cannot find content by incoming title.
      */
     private final static String FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE =
@@ -91,12 +97,7 @@ public abstract class ContentServiceImpl<T extends Content>
             final T content
     ) throws IllegalArgumentException {
         if (isNull(content)) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            INCOMING_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName()
-                    )
-            );
+            throw getIllegalArgumentException(INCOMING_OBJECT_IS_NULL_MESSAGE, getClassSimpleName());
         }
         final T contentToUpdate = getByUrl(url, false);
         final File newLogo = content.getLogo();
@@ -126,17 +127,13 @@ public abstract class ContentServiceImpl<T extends Content>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(title)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_TITLE_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_TITLE_MESSAGE, getClassSimpleName());
         }
         final T content = this.repository.findByTitle(title);
         if (isNotValidated(content, isValid)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), title
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), title
             );
         }
         return content;
@@ -160,15 +157,13 @@ public abstract class ContentServiceImpl<T extends Content>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
-            throw new IllegalArgumentException(getClassSimpleName() + " url is blank!");
+            throw getIllegalArgumentException(BLANK_URL_MESSAGE);
         }
         final T content = this.repository.findByUrl(url);
         if (isNotValidated(content, isValid)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), url
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), url
             );
         }
         return content;

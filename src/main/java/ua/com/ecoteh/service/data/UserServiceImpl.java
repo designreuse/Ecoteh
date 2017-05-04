@@ -145,7 +145,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
         try {
             user = (User) SecurityContextHolder.getContext()
                     .getAuthentication().getPrincipal();
-        } catch (ClassCastException ex) {
+        } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
             user = null;
         }
@@ -228,17 +228,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(name)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_NAME_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_NAME_MESSAGE, getClassSimpleName());
         }
         final User user = this.repository.findByName(name);
         if (isNull(user)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), name
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), name
             );
         }
         return user;
@@ -258,17 +254,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_URL_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_URL_MESSAGE, getClassSimpleName());
         }
         final User user = this.repository.findByUrl(url);
         if (isNull(user)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), url
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), url
             );
         }
         return user;
@@ -288,19 +280,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByLogin(final String login) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(login)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_LOGIN_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_LOGIN_MESSAGE, getClassSimpleName());
         }
         final User user = this.repository.findByEncryptedLogin(
                 new Encryptor(login).encrypt()
         );
         if (isNull(user)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), login
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), login
             );
         }
         return user;
@@ -320,17 +308,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByEmail(final String email) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(email)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_EMAIL_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_EMAIL_MESSAGE, getClassSimpleName());
         }
         User user = this.repository.findByContactsEmail(email);
         if (isNull(user)) {
-            throw new NullPointerException(
-                    String.format(
-                            FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
-                            getClassSimpleName(), email
-                    )
+            throw getNullPointerException(
+                    FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), email
             );
         }
         return user;
@@ -350,9 +334,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByPhone(final String phone) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(phone)) {
-            throw new IllegalArgumentException(
-                    String.format(BLANK_PHONE_MESSAGE, getClassSimpleName())
-            );
+            throw getIllegalArgumentException(BLANK_PHONE_MESSAGE, getClassSimpleName());
         }
         User user = getByMobilePhone(phone);
         if (isNull(user)) {
@@ -360,11 +342,9 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             if (isNull(user)) {
                 user = getByFax(phone);
                 if (isNull(user)) {
-                    throw new NullPointerException(
-                            String.format(
-                                    FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
-                                    getClassSimpleName(), phone
-                            )
+                    throw getNullPointerException(
+                            FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
+                            getClassSimpleName(), phone
                     );
                 }
             }
@@ -593,9 +573,8 @@ public final class UserServiceImpl extends DataServiceImpl<User>
                 for (User user : users) {
                     result.addAll(
                             roles.stream()
-                                    .filter(
-                                            role -> roleFilter(user, role)
-                                    ).map(role -> user)
+                                    .filter(role -> roleFilter(user, role))
+                                    .map(role -> user)
                                     .collect(Collectors.toList())
                     );
                 }
