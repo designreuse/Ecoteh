@@ -203,17 +203,62 @@ public class Time implements ITime {
     }
 
     /**
-     * Returns a model date in string format.
+     * Returns a date in string format.
+     *
+     * @return he date in string format.
+     */
+    public static String getDate() {
+        return getDate(new Date());
+    }
+
+    /**
+     * Returns a date in string format.
      *
      * @param date the date to translate in string.
-     * @return The model string-date.
+     * @return The date in string format.
      */
-    public static String getDateToString(final Date date) {
-        return getDateToStringWithFormat(
-                date,
-                new SimpleDateFormat(DATE_PATTERN),
-                TimeZone.getTimeZone(TIME_ZONE)
-        );
+    public static String getDate(final Date date) {
+        return getDate(date, getDefaultTimeZone());
+    }
+
+    /**
+     * Returns a model date in string format with some date format.
+     * <pre>
+     *     getDate(null, dateFormat, timeZone) = dateFormat.format(new Date())
+     *     getDate(date, dateFormat, timeZone) = dateFormat.format(date)
+     * </pre>
+     *
+     * @param date       the date to translate in string.
+     * @param timeZone   the represents a timezone offset,
+     *                   and also figures out daylight savings (newer null).
+     * @return The model string-date (newer null).
+     */
+    public static String getDate(final Date date, final TimeZone timeZone) {
+        return getDate(date, getDefaultDateFormat(), timeZone);
+    }
+
+    /**
+     * Returns a model date in string format with some date format.
+     * <pre>
+     *     getDate(null, dateFormat, timeZone) = dateFormat.format(new Date())
+     *     getDate(date, dateFormat, timeZone) = dateFormat.format(date)
+     * </pre>
+     *
+     * @param date       the date to translate in string.
+     * @param dateFormat the object for date/time formatting subclasses
+     *                   which formats and parses dates or time in
+     *                   a language-independent manner (newer null).
+     * @param timeZone   the represents a timezone offset,
+     *                   and also figures out daylight savings (newer null).
+     * @return The model string-date (newer null).
+     */
+    public static String getDate(
+            final Date date,
+            final DateFormat dateFormat,
+            final TimeZone timeZone
+    ) {
+        dateFormat.setTimeZone(timeZone);
+        return dateFormat.format(isNotNull(date) ? date : new Date());
     }
 
     /**
@@ -277,30 +322,6 @@ public class Time implements ITime {
     }
 
     /**
-     * Returns a model date in string format with some date format.
-     * <pre>
-     *     getDateToStringWithFormat(null, dateFormat, timeZone) = dateFormat.format(new Date())
-     *     getDateToStringWithFormat(date, dateFormat, timeZone) = dateFormat.format(date)
-     * </pre>
-     *
-     * @param date       the date to translate in string.
-     * @param dateFormat the object for date/time formatting subclasses
-     *                   which formats and parses dates or time in
-     *                   a language-independent manner (newer null).
-     * @param timeZone   the represents a timezone offset,
-     *                   and also figures out daylight savings (newer null).
-     * @return The model string-date (newer null).
-     */
-    private static String getDateToStringWithFormat(
-            final Date date,
-            final DateFormat dateFormat,
-            final TimeZone timeZone
-    ) {
-        dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(isNotNull(date) ? date : new Date());
-    }
-
-    /**
      * Returns the value of a hour of day.
      *
      * @return the value of a hour of day.
@@ -334,6 +355,24 @@ public class Time implements ITime {
      * @return The value for the given calendar field.
      */
     private static int getFromCalendar(final int calendarFieldNumber) {
-        return Calendar.getInstance().get(calendarFieldNumber);
+        return Calendar.getInstance(getDefaultTimeZone()).get(calendarFieldNumber);
+    }
+
+    /**
+     * Returns a default time zone.
+     *
+     * @return The default time zone.
+     */
+    private static TimeZone getDefaultTimeZone() {
+        return TimeZone.getTimeZone(TIME_ZONE);
+    }
+
+    /**
+     * Returns a default date format.
+     *
+     * @return The default date format.
+     */
+    private static DateFormat getDefaultDateFormat() {
+        return new SimpleDateFormat(DATE_PATTERN);
     }
 }
