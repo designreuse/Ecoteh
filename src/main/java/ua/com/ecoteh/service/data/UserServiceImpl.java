@@ -80,28 +80,28 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * The message that a service cannot find user by incoming name.
      */
     private final static String FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming name %s!";
+            "Can`t find a object of the %s class by the incoming name \"%s\"!";
     /**
      * The message that a service cannot find user by incoming URL.
      */
     private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming URL %s!";
+            "Can`t find a object of the %s class by the incoming URL \"%s\"!";
     /**
      * The message that a service cannot find user by incoming login.
      */
     private final static String FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming login %s!";
+            "Can`t find a object of the %s class by the incoming login \"%s\"!";
     /**
      * The message that a service cannot find user by incoming E-mail.
      */
     private final static String FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming E-mail %s!";
+            "Can`t find a object of the %s class by the incoming E-mail \"%s\"!";
 
     /**
      * The message that a service cannot find user by incoming phone.
      */
     private final static String FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming phone %s!";
+            "Can`t find a object of the %s class by the incoming phone \"%s\"!";
 
     /**
      * The interface provides a set of standard methods for working

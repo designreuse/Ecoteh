@@ -44,12 +44,12 @@ public class ForgotUserInformationController {
     private static final Logger LOGGER = Logger.getLogger(ForgotUserInformationController.class);
 
     /**
-     *
+     * The message that a incoming E-mail is null or empty.
      */
-    private final static String BLANK_EMAIL_MESSAGE = "Incoming E-mail is blank!";
+    private final static String BLANK_EMAIL_MESSAGE = "Incoming E-mail is null or empty!";
 
     /**
-     *
+     * The message that a service cannot find object by incoming number.
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
             "Can`t find object of the %s class by incoming E-mail %s!";
@@ -86,11 +86,11 @@ public class ForgotUserInformationController {
     /**
      * Constructor.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric} interface.
-     * @param userService    a implementation of the {@link UserService} interface.
-     * @param companyService a implementation of the {@link CompanyService} interface.
-     * @param senderService  a implementation of the {@link SenderService} interface.
-     * @param captchaService a implementation of the {@link CaptchaService} interface.
+     * @param fabric         the implementation of the {@link MainMVFabric} interface.
+     * @param userService    the implementation of the {@link UserService} interface.
+     * @param companyService the implementation of the {@link CompanyService} interface.
+     * @param senderService  the implementation of the {@link SenderService} interface.
+     * @param captchaService the implementation of the {@link CaptchaService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -109,7 +109,7 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Get page to forgot user information.
+     * Get a page to forgot user information.
      * Request mapping: /forgot_password
      * Method: GET
      *
@@ -124,15 +124,15 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by user name or E-mail.
-     * and sends information about him to e-mail.
+     * Seeking a user by name or E-mail.
+     * and sends information about him to E-mail.
      * Request mapping: /forgot
      * Method: POST
      *
-     * @param username a user name or E-mail for whom to remind information.
-     * @param request  a implementation of the interface to provide
+     * @param username the user name or E-mail for whom to remind information.
+     * @param request  the implementation of the interface to provide
      *                 request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/forgot",
@@ -194,9 +194,9 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by username and sends information about him to e-mail.
+     * Seeking a user by username and sends information about him to E-mail.
      *
-     * @param username a user name for whom to remind information.
+     * @param username the user name for whom to remind information.
      */
     private void searchByLoginAndSend(final String username) {
         final User user = this.userService.getByLogin(username);
@@ -204,9 +204,9 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by E-mail and sends information about him to e-mail.
+     * Seeking a user by E-mail and sends information about him to E-mail.
      *
-     * @param email a user E-mail for whom to remind information.
+     * @param email the user E-mail for whom to remind information.
      */
     private void searchByEmailAndSend(final String email) {
         final User user = this.userService.getByEmail(email);
@@ -214,9 +214,9 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by email and sends information about him to e-mail.
+     * Seeking a user by email and sends information about him to E-mail.
      *
-     * @param phone a user phone for whom to remind information.
+     * @param phone the user phone for whom to remind information.
      */
     private void searchByPhoneAndSend(final String phone) {
         final User user = this.userService.getByPhone(phone);
@@ -225,9 +225,9 @@ public class ForgotUserInformationController {
 
     /**
      * Seeking a default user by equals email from main company email
-     * and sends information about him to e-mail.
+     * and sends information about him to E-mail.
      *
-     * @param email a user email for whom to remind information.
+     * @param email the user email for whom to remind information.
      * @throws IllegalArgumentException Throw exception when parameter login is blank.
      * @throws NullPointerException     Throws exception if user is absent.
      */
@@ -249,10 +249,10 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Sends user information to the user e-mail.
+     * Sends user information to the incoming user e-mail.
      *
-     * @param user           a user for whom to remind information.
-     * @param recipientEmail a recipient email.
+     * @param user           the user for whom to remind information.
+     * @param recipientEmail the recipient email.
      */
     private void sendUserInformationToEmail(
             final User user,
@@ -269,7 +269,7 @@ public class ForgotUserInformationController {
     /**
      * Gets message to the user.
      *
-     * @param user a user for whom to send message.
+     * @param user the user for whom to send message.
      * @return The message.
      */
     private static String getMessageText(final User user) {
@@ -291,10 +291,10 @@ public class ForgotUserInformationController {
     /**
      * Creates ModelAndView object and returns it.
      *
-     * @param username  a user name for whom to remind information.
-     * @param isCaptcha a result of the captcha verification.
-     * @param isForgot  a result of the search.
-     * @return The ready object of class ModelAndView.
+     * @param username  the user name for whom to remind information.
+     * @param isCaptcha the result of the captcha verification.
+     * @param isForgot  the result of the search.
+     * @return The ready object of the ModelAndView class.
      */
     private ModelAndView createModelAndView(
             final String username,

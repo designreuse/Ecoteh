@@ -27,7 +27,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working with
- * objects of {@link Article} class or subclasses for admins.
+ * objects of the {@link Article} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -50,7 +50,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 public class ArticleController {
 
     /**
-     *
+     * The message that a get method is not supported.
      */
     private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
             "GET method in \"%s\" is not supported!";
@@ -83,10 +83,10 @@ public class ArticleController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric} interface.
-     * @param articleService  a implementation of the {@link ArticleService} interface.
-     * @param categoryService a implementation of the {@link CategoryService} interface.
-     * @param fileService     a implementation of the {@link FileService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param articleService  the implementation of the {@link ArticleService} interface.
+     * @param categoryService the implementation of the {@link CategoryService} interface.
+     * @param fileService     the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -103,11 +103,11 @@ public class ArticleController {
     }
 
     /**
-     * Returns the page to add a new article.
+     * Returns a page to add a new article.
      * Request mapping: /admin/article/new
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/new",
@@ -121,20 +121,23 @@ public class ArticleController {
     }
 
     /**
-     * Adds new article and redirects by URL /admin/article/{url}.
+     * Adds a new article with the incoming parameters
+     * and redirects by the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
      * Request mapping: /admin/article/add
      * Method: POST
      *
-     * @param title         a title of the new article.
-     * @param description   a description of the new article.
-     * @param text          a text of the new article.
-     * @param keywords      a keywords of the new article.
-     * @param number        a number of the new article.
-     * @param price         a new price to the article.
-     * @param categoryUrl   a category url of the new article.
-     * @param multipartLogo a file of photo to the new category.
-     * @param isValid       a validated of the new article.
-     * @return The ready object of class ModelAndView.
+     * @param title         the title of a new article.
+     * @param description   the description of a new article.
+     * @param text          the text of a new article.
+     * @param keywords      the keywords of a new article.
+     * @param number        the number of a new article.
+     * @param price         the price to a new article.
+     * @param categoryUrl   the category URL of a new article.
+     * @param multipartLogo thea file of photo to a new category.
+     * @param validated     the validated of a new article.
+     * @return The redirect string to the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
      */
     @RequestMapping(
             value = "/add",
@@ -149,7 +152,7 @@ public class ArticleController {
             @RequestParam(value = "price", defaultValue = "0") final String price,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Category category = isNotEmpty(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
@@ -160,7 +163,7 @@ public class ArticleController {
                 compressor.compress(text),
                 keywords, number, price
         );
-        article.setValidated(isValid);
+        article.setValidated(validated);
         article.setCategory(category);
         if (isNotEmpty(multipartLogo)) {
             article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
@@ -191,12 +194,13 @@ public class ArticleController {
     }
 
     /**
-     * Returns the page to edit the article with url.
-     * Request mapping: /admin/article/edit/{url}
+     * Returns a page to edit an article with the incoming URL.
+     * Request mapping: /admin/article/edit/{url},
+     * where {url} is a URL of an article to edit.
      * Method: GET
      *
-     * @param url a URL of the article to edit.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a article to edit.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/edit/{url}",
@@ -211,22 +215,24 @@ public class ArticleController {
     }
 
     /**
-     * Updates and save the article with url
-     * and redirects by URL /admin/article/{url}.
+     * Updates and save an article with the incoming URL
+     * and redirects by the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
      * Request mapping: /admin/article/update
      * Method: POST
      *
-     * @param url           a URL of the article to update.
-     * @param title         a new title to the article.
-     * @param description   a new description to the article.
-     * @param text          a new text to the article.
-     * @param keywords      a new keywords to the article.
-     * @param number        a new number to the article.
-     * @param price         a new price to the article.
-     * @param categoryUrl   a category URL of the article.
-     * @param multipartLogo a file of photo to the new category.
-     * @param isValid       a validated of the article.
-     * @return The ready object of class ModelAndView.
+     * @param url           the URL of a article to update.
+     * @param title         the new title to a article.
+     * @param description   the new description to a article.
+     * @param text          the new text to a article.
+     * @param keywords      the new keywords to a article.
+     * @param number        the new number to a article.
+     * @param price         the new price to a article.
+     * @param categoryUrl   the category URL of a article.
+     * @param multipartLogo the file of photo to a new category.
+     * @param validated     the validated of a article.
+     * @return The redirect string to the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
      */
     @RequestMapping(
             value = "/update",
@@ -242,7 +248,7 @@ public class ArticleController {
             @RequestParam(value = "price") final String price,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Category category = isNotEmpty(categoryUrl) ?
                 this.categoryService.getByUrl(categoryUrl, false) : null;
@@ -253,7 +259,7 @@ public class ArticleController {
                 compressor.compress(text),
                 keywords, number, price
         );
-        article.setValidated(isValid);
+        article.setValidated(validated);
         article.setCategory(category);
         if (isNotEmpty(multipartLogo)) {
             article.setLogo(this.fileService.add(article.getTitle(), multipartLogo));
@@ -284,12 +290,14 @@ public class ArticleController {
     }
 
     /**
-     * Removes article with url and redirects by URL /admin/.
-     * Request mapping: /admin/article/delete/{url}
+     * Removes an article with the incoming URL
+     * and redirects by the "/" URL.
+     * Request mapping: /admin/article/delete/{url},
+     * where {url} is a URL of an article to remove.
      * Method: GET
      *
-     * @param url a URL of the article to remove.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of an article to remove.
+     * @return The redirect string to the "/" URL.
      */
     @RequestMapping(
             value = "/delete/{url}",
@@ -302,11 +310,11 @@ public class ArticleController {
     }
 
     /**
-     * Removes all articles and redirects by URL /admin/.
+     * Removes an all articles and redirects by the "/" URL.
      * Request mapping: /admin/article/delete/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/" URL.
      */
     @RequestMapping(
             value = "/delete/all",
@@ -320,10 +328,11 @@ public class ArticleController {
 
     /**
      * Returns a view name for the article.
-     * If the article text is not blank then
-     * returns "redirect:/admin/article/{article_url}",
-     * else if the article category is not null
-     * then returns "redirect:/admin/category/{category_url}",
+     * If an article text is not blank then returns "redirect:/admin/article/{url}",
+     * where {url} is a URL of an article;
+     * else if an article category is not null
+     * then returns "redirect:/admin/category/{url}",
+     * where {url} is a URL of an article category;
      * else returns "redirect:/admin/article/all";
      *
      * @param article the article to get view name.

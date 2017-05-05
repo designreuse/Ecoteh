@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.util.time.Time;
+
+import java.util.Date;
 
 /**
  * Super admin controller.
@@ -62,7 +65,7 @@ public class ConfigurationController {
     /**
      * Returns page with project configuration.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = {"", "/"},
@@ -77,6 +80,8 @@ public class ConfigurationController {
             ex.printStackTrace();
             modelAndView = new ModelAndView();
         }
+        modelAndView.addObject("server_date", new Date());
+        modelAndView.addObject("conf_date", Time.getDate());
         modelAndView.setViewName("superadmin/configuration/configuration");
         return modelAndView;
     }

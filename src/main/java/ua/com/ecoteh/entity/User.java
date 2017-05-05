@@ -104,13 +104,13 @@ public class User extends Model implements IUser, UserDetails {
      * The permit to send a letters on the user email.
      */
     @Column(name = "mailing")
-    private boolean isMailing;
+    private boolean mailing;
 
     /**
      * Locked the user or not.
      */
     @Column(name = "locked")
-    private boolean isLocked;
+    private boolean locked;
 
     /**
      * Default constructor.
@@ -247,7 +247,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public boolean isAccountNonExpired() {
-        return !this.isLocked;
+        return !isLocked();
     }
 
     /**
@@ -258,7 +258,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public boolean isAccountNonLocked() {
-        return !this.isLocked;
+        return !isLocked();
     }
 
     /**
@@ -270,7 +270,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public boolean isCredentialsNonExpired() {
-        return !this.isLocked;
+        return !isLocked();
     }
 
     /**
@@ -282,7 +282,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return !this.isLocked;
+        return !isLocked();
     }
 
     /**
@@ -604,17 +604,17 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public boolean isMailing() {
-        return this.isMailing;
+        return this.mailing;
     }
 
     /**
      * Sets value of permit to send a letters on the user email.
      *
-     * @param isMailing a permit to send a letters on the user email.
+     * @param mailing the permit to send a letters on the user email.
      */
     @Override
-    public void setMailing(final boolean isMailing) {
-        this.isMailing = isMailing;
+    public void setMailing(final boolean mailing) {
+        this.mailing = mailing;
     }
 
     /**
@@ -624,7 +624,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public boolean isLocked() {
-        return this.isLocked;
+        return this.locked;
     }
 
     /**
@@ -636,10 +636,10 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public void setLocked(final boolean locked) {
-        this.isLocked = locked;
+        this.locked = locked;
         if (locked) {
             setValidated(false);
-            this.isMailing = false;
+            setMailing(false);
         }
     }
 

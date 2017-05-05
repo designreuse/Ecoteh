@@ -117,7 +117,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns home page.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView homePage() {
@@ -133,7 +133,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with all categories.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allCategoriesPage() {
@@ -149,7 +149,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with all articles.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allArticlesPage() {
@@ -167,7 +167,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      *
      * @param sortType the sort type.
      * @param revers   the sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allSortArticlesPage(
@@ -189,7 +189,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with information about main company.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView aboutCompanyPage() {
@@ -205,7 +205,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with contacts information about main company.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView contactsPage() {
@@ -221,7 +221,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with all partners.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allPartnersPage() {
@@ -238,7 +238,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all sorted partners.
      *
      * @param revers the sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allSortPartnersByTitlePage(final boolean revers) {
@@ -257,7 +257,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with one category with incoming URL.
      *
      * @param url the URL of the category to return.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView categoryPage(final String url) {
@@ -278,7 +278,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param url      the category URL.
      * @param sortType the sort type.
      * @param revers   the sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView categoryWithSortArticlesPage(
@@ -302,7 +302,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with one article with incoming URL.
      *
      * @param url the URL of the article to return.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView articleByUrlPage(final String url) {
@@ -320,7 +320,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with one article with incoming number.
      *
      * @param number the number of the article to return.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView articleByNumberPage(final String number) {
@@ -338,7 +338,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with one partner with incoming URL.
      *
      * @param url the URL of the partner to return.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView partnerPage(final String url) {
@@ -355,7 +355,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns page with all responses.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allResponsesPage() {
@@ -372,7 +372,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * Creates and returns page with all sorted responses.
      *
      * @param revers the sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allSortResponsesByDatePage(final boolean revers) {
@@ -390,7 +390,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * Creates and returns default modelAndView.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView getDefaultModelAndView() {

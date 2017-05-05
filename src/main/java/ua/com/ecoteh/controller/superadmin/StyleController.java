@@ -68,7 +68,7 @@ public class StyleController {
      * Request mapping: /admin/style/
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = {"", "/edit"},
@@ -87,7 +87,7 @@ public class StyleController {
      * Method: POST
      *
      * @param styles a new CSS styles.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/update",
@@ -120,7 +120,7 @@ public class StyleController {
      * Request mapping: /admin/style/rollback
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/rollback",

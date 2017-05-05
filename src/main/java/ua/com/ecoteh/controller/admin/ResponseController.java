@@ -1,14 +1,19 @@
 package ua.com.ecoteh.controller.admin;
 
-import ua.com.ecoteh.entity.Response;
-import ua.com.ecoteh.service.data.ResponseService;
-import ua.com.ecoteh.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.entity.Response;
+import ua.com.ecoteh.service.data.ResponseService;
+import ua.com.ecoteh.service.fabrica.MainMVFabric;
+import ua.com.ecoteh.util.cache.Cache;
 
 /**
  * The class implements a set of methods for working with
@@ -30,6 +35,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ResponseController {
 
     /**
+     * The message that a get method is not supported.
+     */
+    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
+            "GET method in \"%s\" is not supported!";
+
+    /**
+     * The implementation of the interface provides a set of standard methods
+     * for creates and returns the main modelAndViews.
+     */
+    private final MainMVFabric fabric;
+
+    /**
      * The implementation of the interface describes a set of methods
      * for working with objects of the {@link Response} class.
      */
@@ -39,20 +56,95 @@ public class ResponseController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param responseService a implementation of the {@link ResponseService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param responseService the implementation of the {@link ResponseService} interface.
      */
     @Autowired
-    public ResponseController(final ResponseService responseService) {
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    public ResponseController(
+            @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
+            final ResponseService responseService
+    ) {
+        this.fabric = fabric;
         this.responseService = responseService;
     }
 
     /**
-     * Changes response validation and redirects by URL /admin/responses.
-     * Request mapping: /admin/response/valid/{id}
+     * Returns the page to edit a response with the incoming id.
+     * Request mapping: /admin/response/edit/{id},
+     * where {id} is a id of a response to edit.
      * Method: GET
      *
-     * @param id           a id of the response to update.
-     * @return The ready object of class ModelAndView.
+     * @param id the id of a response to edit.
+     * @return The ready object of the ModelAndView class.
+     */
+    @RequestMapping(
+            value = "/edit/{id}",
+            method = RequestMethod.GET
+    )
+    public ModelAndView editArticle(@PathVariable("id") final long id) {
+        final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
+        modelAndView.addObject("response", this.responseService.get(id));
+        modelAndView.setViewName("admin/response/edit");
+        return modelAndView;
+    }
+
+    /**
+     * Updates and save a response with the incoming id
+     * and redirects by the "/responses/" URL.
+     * Request mapping: /admin/response/update
+     * Method: POST
+     *
+     * @param id        the id of a response to update.
+     * @param username  the user name of a new response.
+     * @param text      the text name of a new response.
+     * @param validated is valid new response.
+     * @return The redirect string to the "/responses/" URL.
+     */
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
+    public String updateResponse(
+            @RequestParam(value = "id") final long id,
+            @RequestParam(value = "username") final String username,
+            @RequestParam(value = "text") final String text,
+            @RequestParam(value = "is_valid") final boolean validated
+    ) {
+        final Response response = new Response(username, text, validated);
+        this.responseService.update(id, response);
+        return "redirect:/responses/";
+    }
+
+    /**
+     * The method throws an exception in the case of reference to it.
+     * The exception message:
+     * "GET method in "/admin/response/update" is not supported!"
+     * Request mapping: /admin/response/update
+     * Method: GET
+     *
+     * @throws IllegalMappingException thrown when an error occurs reading
+     *                                 the mapping between object and datastore.
+     */
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.GET
+    )
+    public void updateResponse() throws IllegalMappingException {
+        throw new IllegalMappingException(
+                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/response/update")
+        );
+    }
+
+    /**
+     * Changes a response validation and redirects
+     * by the "/responses" URL.
+     * Request mapping: /admin/response/valid/{id},
+     * where {id} is a id of a saving response.
+     * Method: GET
+     *
+     * @param id a id of the response to update.
+     * @return The redirect string to the "/responses/" URL.
      */
     @RequestMapping(
             value = "/valid/{id}",
@@ -67,12 +159,14 @@ public class ResponseController {
     }
 
     /**
-     * Removes response with id and redirects by URL /admin/responses.
-     * Request mapping: /admin/response/delete/{id}
+     * Removes a response with the incoming id
+     * and redirects by the "/responses" URL.
+     * Request mapping: /admin/response/delete/{id},
+     * where {id} is a id of a response to remove.
      * Method: GET
      *
-     * @param id           a id of the response to remove.
-     * @return The ready object of class ModelAndView.
+     * @param id the id of a response to remove.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/delete/{id}",
@@ -85,11 +179,12 @@ public class ResponseController {
     }
 
     /**
-     * Removes all responses and redirects by URL /admin/responses.
+     * Removes an all responses and redirects
+     * by the "/responses" URL.
      * Request mapping: /admin/response/delete/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/responses" URL.
      */
     @RequestMapping(
             value = "/delete/all",

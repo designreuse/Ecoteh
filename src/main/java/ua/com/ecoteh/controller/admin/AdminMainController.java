@@ -43,7 +43,7 @@ public class AdminMainController extends MainController {
     private static final Logger LOGGER = Logger.getLogger(AdminMainController.class);
 
     /**
-     *
+     * The message that a get method is not supported.
      */
     private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
             "GET method in \"%s\" is not supported!";
@@ -52,12 +52,12 @@ public class AdminMainController extends MainController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric} interface.
-     * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param userService     a implementation of the {@link UserService} interface.
-     * @param messageService  a implementation of the {@link MessageService} interface.
-     * @param senderService   a implementation of the {@link SenderService} interface.
-     * @param responseService a implementation of the {@link ResponseService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param companyService  the implementation of the {@link CompanyService} interface.
+     * @param userService     the implementation of the {@link UserService} interface.
+     * @param messageService  the implementation of the {@link MessageService} interface.
+     * @param senderService   the implementation of the {@link SenderService} interface.
+     * @param responseService the implementation of the {@link ResponseService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -76,11 +76,11 @@ public class AdminMainController extends MainController {
     }
 
     /**
-     * Returns page with administrator menu.
+     * Returns page with an administrator menu.
      * Request mapping: /admin/menu
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/menu",
@@ -101,16 +101,16 @@ public class AdminMainController extends MainController {
     }
 
     /**
-     * Sends message.
+     * Creates and sends a message with the incoming parameters.
      * Request mapping: /admin/send_message
      * Method: POST
      *
-     * @param url         a URL of the page which must be to redirect.
-     * @param name        a sender name.
-     * @param phone       a phone name.
-     * @param email       a email name.
-     * @param userMessage a sender sender.
-     * @return The ready object of class ModelAndView.
+     * @param url         the URL of a page which must be to redirect.
+     * @param name        the sender name.
+     * @param phone       the phone name.
+     * @param email       the email name.
+     * @param userMessage the sender sender.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/send_message",
@@ -131,8 +131,7 @@ public class AdminMainController extends MainController {
 
     /**
      * The method throws an exception in the case of reference to it.
-     * The exception message:
-     * "GET method in "/admin/send_message" is not supported!"
+     * The exception message: "GET method in "/admin/send_message" is not supported!"
      * Request mapping: /admin/send_message
      * Method: POST
      *
@@ -150,13 +149,14 @@ public class AdminMainController extends MainController {
     }
 
     /**
-     * Sends response and redirects by URL /responses.
+     * Creates and sends response with the incoming parameters.
+     * Redirects to "/responses" URL.
      * Request mapping: /admin/response/send
      * Method: POST
      *
-     * @param name a sender name.
-     * @param text a sender text.
-     * @return The ready object of class ModelAndView.
+     * @param name the sender name.
+     * @param text the sender text.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/response/send",

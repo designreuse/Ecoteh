@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IllegalAccessController {
 
     /**
-     *
+     * The message that a user does not have sufficient permissions to access this page.
      */
     private final static String ILLEGAL_ACCESS_MESSAGE =
             "You do not have sufficient permissions to access this page.";

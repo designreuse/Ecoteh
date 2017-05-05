@@ -46,7 +46,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * The message that a service cannot find company by incoming domain.
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming domain %s!";
+            "Can`t find a object of the %s class by the incoming domain \"%s\"!";
 
     /**
      * The interface provides a set of standard methods for working

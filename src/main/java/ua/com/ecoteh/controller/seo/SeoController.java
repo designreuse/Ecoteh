@@ -27,7 +27,7 @@ public class SeoController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param seoService a implementation of the {@link SeoService} interface.
+     * @param seoService the implementation of the {@link SeoService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -36,7 +36,7 @@ public class SeoController {
     }
 
     /**
-     * Returns information about the site for search engines.
+     * Returns an information about a site for search engines.
      * Request mapping: /robots.txt, /robots
      * Produces: text/plain
      *
@@ -53,7 +53,7 @@ public class SeoController {
 
     /**
      * Creates and returns a sitemap.
-     * This is a list of all pages on the site,
+     * This is a list of all pages on a site,
      * which consists of the links to these pages.
      * Request mapping: /sitemap.xml, /sitemap
      * Produces: text/plain

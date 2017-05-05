@@ -44,8 +44,8 @@ public class SearchController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric        a implementation of the {@link MainMVFabric} interface.
-     * @param searchService a implementation of the {@link SearchService} interface.
+     * @param fabric        the implementation of the {@link MainMVFabric} interface.
+     * @param searchService the implementation of the {@link SearchService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -58,11 +58,11 @@ public class SearchController {
     }
 
     /**
-     * Returns the page to search for content on the site.
-     * Request mapping: /search, /search/
+     * Returns a page to search for content on the site.
+     * Request mapping: /search, /search/result
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = { "", "/", "/result" },
@@ -75,14 +75,14 @@ public class SearchController {
     }
 
     /**
-     * Returns the page with the found content.
+     * Returns a page with a found content.
      * Request mapping: /search/result
      * Method: POST
      *
-     * @param keywords  a keywords for content search.
-     * @param content   a objects list for content search.
-     * @param howSearch a search mode.
-     * @return The ready object of class ModelAndView.
+     * @param keywords  the keywords for a content search.
+     * @param content   the objects list for a content search.
+     * @param howSearch the search mode.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/result",

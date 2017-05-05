@@ -305,7 +305,7 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public String getDateToString() {
-        return Time.getDateToString(this.date);
+        return Time.getDate(getDate());
     }
 
     /**

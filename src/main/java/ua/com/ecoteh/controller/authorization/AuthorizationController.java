@@ -40,7 +40,7 @@ public class AuthorizationController {
     /**
      * Constructor.
      *
-     * @param fabric a implementation of the {@link MainMVFabric} interface.
+     * @param fabric the implementation of the {@link MainMVFabric} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -51,7 +51,7 @@ public class AuthorizationController {
     /**
      * Login user.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/login",
@@ -73,11 +73,11 @@ public class AuthorizationController {
     /**
      * Logout user and redirects to /login?logout.
      *
-     * @param request      a implementation of the interface to provide
+     * @param request      the implementation of the interface to provide
      *                     request information for HTTP servlets.
-     * @param response     a implementation of the interface to provide
+     * @param response     the implementation of the interface to provide
      *                     response information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/logout",

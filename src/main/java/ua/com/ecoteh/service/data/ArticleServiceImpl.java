@@ -51,7 +51,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * The message that a service cannot find article by incoming number.
      */
     private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming number %s!";
+            "Can`t find a object of the %s class by the incoming number \"%s\"!";
 
     /**
      * The interface provides a set of standard methods

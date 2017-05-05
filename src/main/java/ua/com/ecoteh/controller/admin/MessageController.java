@@ -52,8 +52,8 @@ public class MessageController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric} interface.
-     * @param messageService a implementation of the {@link MessageService} interface.
+     * @param fabric         the implementation of a {@link MainMVFabric} interface.
+     * @param messageService the implementation of the {@link MessageService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -66,14 +66,14 @@ public class MessageController {
     }
 
     /**
-     * Returns modelAndView with information about page with all messages.
-     * Request mapping: /admin/messages, /admin/messages/
+     * Returns a page with an all messages.
+     * Request mapping: /admin/messages, /admin/messages/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = {"", "/", "/all"},
+            value = { "", "/", "/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getMessagesPage() {
@@ -84,12 +84,14 @@ public class MessageController {
     }
 
     /**
-     * Removes message with id and redirects by URL /admin/messages.
-     * Request mapping: /admin/message/delete/{id}
+     * Removes a message with the incoming id
+     * and redirects by the "/admin/messages" URL.
+     * Request mapping: /admin/message/delete/{id},
+     * where {id} is a id of a message to remove.
      * Method: GET
      *
-     * @param id           a id of the message to remove.
-     * @return The ready object of class ModelAndView.
+     * @param id the id of a message to remove.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/delete/{id}",
@@ -101,11 +103,12 @@ public class MessageController {
     }
 
     /**
-     * Removes all messages and redirects by URL /admin/messages.
-     * Request mapping: /admin/message/delete/all
+     * Removes an all messages and redirects
+     * by the "/admin/messages" URL.
+     * Request mapping: /admin/article/delete/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/admin/messages" URL.
      */
     @RequestMapping(
             value = "/delete/all",

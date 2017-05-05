@@ -26,7 +26,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             "Saving object of the %s class is null!";
 
     /**
-     * The message that a updateing object is null.
+     * The message that a updating object is null.
      */
     private final static String UPDATING_OBJECT_IS_NULL_MESSAGE =
             "Updating object of the %s class is null!";
@@ -35,7 +35,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * The message that a service cannot find object by incoming id.
      */
     private final static String FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming id %d!";
+            "Can`t find a object of the %s class by the incoming id \"%d\"!";
 
     /**
      * The object provides a set of standard JPA methods
@@ -451,9 +451,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * @param message
-     * @param parameters
-     * @return
+     * Creates and returns a instance of the NullPointerException class.
+     *
+     * @param message    the exception message.
+     * @param parameters the message parameters.
+     * @return The instance of the NullPointerException class.
      */
     protected static NullPointerException getNullPointerException(
             final String message,
@@ -465,9 +467,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * @param message
-     * @param parameters
-     * @return
+     * Creates and returns a instance of the IllegalArgumentException class.
+     *
+     * @param message    the exception message.
+     * @param parameters the message parameters.
+     * @return The instance of the IllegalArgumentException class.
      */
     protected static IllegalArgumentException getIllegalArgumentException(
             final String message,
@@ -479,10 +483,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
+     * Creates and returns the incoming message.
      *
-     * @param message
-     * @param parameters
-     * @return
+     * @param message    the message to prepare.
+     * @param parameters the message parameters.
+     * @return the prepared message.
      */
     private static String prepareMessage(
             final String message,

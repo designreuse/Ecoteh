@@ -259,7 +259,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public String getDateToString() {
-        return Time.getDateToString(this.date);
+        return Time.getDate(getDate());
     }
 
     /**

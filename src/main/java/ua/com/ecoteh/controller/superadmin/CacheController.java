@@ -36,7 +36,7 @@ public class CacheController {
      * Constructor.
      * Initializes a implementation of the interface.
      *
-     * @param fabric a implementation of the {@link MainMVFabric} interface.
+     * @param fabric the implementation of the {@link MainMVFabric} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -45,11 +45,11 @@ public class CacheController {
     }
 
     /**
-     * Returns page with information about objects in the cache.
-     * Request mapping: /admin/cache, /admin/cache/
+     * Returns a page with information about objects in a cache.
+     * Request mapping: /superadmin/cache
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = { "", "/" },
@@ -63,11 +63,11 @@ public class CacheController {
     }
 
     /**
-     * Cleans cache and redirect by URL /admin/cache.
-     * Request mapping: /admin/cache/clear
+     * Cleans cache and redirect by the "/superadmin/cache" URL.
+     * Request mapping: /superadmin/cache/clear
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/superadmin/cache" URL.
      */
     @RequestMapping(
             value = "/clear",
@@ -79,12 +79,13 @@ public class CacheController {
     }
 
     /**
-     * Removes object from cache with key and redirect by URL /admin/cache.
-     * Request mapping: /admin/cache/remove/{key}
+     * Removes a object with the incoming key from a cache
+     * and redirect by the "/superadmin/cache" URL.
+     * Request mapping: /superadmin/cache/remove/{key}
      * Method: GET
      *
      * @param key a object key in the cache.
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/superadmin/cache" URL.
      */
     @RequestMapping(
             value = "/remove/{key}",

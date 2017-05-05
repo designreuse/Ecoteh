@@ -12,32 +12,32 @@ import org.springframework.web.servlet.ModelAndView;
 public interface MainMVFabric {
 
     /**
-     * Creates and returns home page.
+     * Creates and returns a home page.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView homePage();
 
     /**
-     * Creates and returns page with all categories.
+     * Creates and returns a page with all categories.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allCategoriesPage();
 
     /**
-     * Creates and returns page with all articles.
+     * Creates and returns a page with all articles sorted by date.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allArticlesPage();
 
     /**
-     * Creates and returns page with all articles sorted by sortType.
+     * Creates and returns a page with all articles sorted by sortType.
      *
      * @param sortType the sort type.
-     * @param revers   the sorting direction, true / false.
-     * @return The ready object of class ModelAndView.
+     * @param revers   the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allSortArticlesPage(
             final String sortType,
@@ -45,50 +45,50 @@ public interface MainMVFabric {
     );
 
     /**
-     * Creates and returns page with information about main company.
+     * Creates and returns a page with information about main company.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView aboutCompanyPage();
 
     /**
-     * Creates and returns page with contacts information about main company.
+     * Creates and returns a page with contacts information about main company.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView contactsPage();
 
     /**
-     * Creates and returns page with all partners.
+     * Creates and returns a page with all partners.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allPartnersPage();
 
     /**
-     * Creates and returns page with all sorted partners.
+     * Creates and returns a page with all sorted partners.
      *
-     * @param revers a sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @param revers the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allSortPartnersByTitlePage(final boolean revers);
 
     /**
-     * Creates and returns page with one category with incoming URL.
+     * Creates and returns a page with one category with incoming URL.
      *
-     * @param url the URL of the category to return.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a category to return.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView categoryPage(final String url);
 
     /**
-     * Creates and returns page with category
-     * with all articles sorted by sortType.
+     * Creates and returns a page with category
+     * with all articles sorted by the incoming sort type.
      *
      * @param url      the category URL.
      * @param sortType the sort type.
      * @param revers   the sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView categoryWithSortArticlesPage(
             final String url,
@@ -97,62 +97,62 @@ public interface MainMVFabric {
     );
 
     /**
-     * Creates and returns page with one article with incoming URL.
+     * Creates and returns a page with one article with the incoming URL.
      *
-     * @param url the URL of the article to return.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a article to return.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView articleByUrlPage(final String url);
 
     /**
-     * Creates and returns page with one article with incoming number.
+     * Creates and returns a page with one article with the incoming number.
      *
-     * @param number the number of the article to return.
-     * @return The ready object of class ModelAndView.
+     * @param number the number of a article to return.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView articleByNumberPage(final String number);
 
     /**
-     * Creates and returns page with one partner with incoming url.
+     * Creates and returns a page with one partner with the incoming URL.
      *
-     * @param url the URL of the partner to return.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a partner to return.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView partnerPage(final String url);
 
     /**
-     * Creates and returns page with all responses.
+     * Creates and returns a page with all responses.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allResponsesPage();
 
     /**
-     * Creates and returns page with all sorted responses.
+     * Creates and returns a page with all sorted responses.
      *
      * @param revers the sorting direction, true or false.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView allSortResponsesByDatePage(final boolean revers);
 
     /**
-     * Creates and returns default modelAndView.
+     * Creates and returns a default modelAndView.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     ModelAndView getDefaultModelAndView();
 
     /**
-     * Adds authenticated user to the modelAndView.
+     * Adds an authenticated user to the modelAndView.
      *
      * @param modelAndView the model and view to update.
      */
     void addAuthUser(final ModelAndView modelAndView);
 
     /**
-     * Validates output objects.
+     * Validates an output objects.
      *
-     * @return Returns true if need to return valid objects,
+     * @return Returns true if need to return a valid objects,
      * false otherwise.
      */
     boolean isValidContent();

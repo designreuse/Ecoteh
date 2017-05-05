@@ -40,7 +40,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ClientMainController extends MainController {
 
     /**
-     *
+     * The message that a get method is not supported.
      */
     private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
             "GET method in \"%s\" is not supported!";
@@ -54,13 +54,13 @@ public class ClientMainController extends MainController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric} interface.
-     * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param userService     a implementation of the {@link UserService} interface.
-     * @param responseService a implementation of the {@link ResponseService} interface.
-     * @param messageService  a implementation of the {@link MessageService} interface.
-     * @param senderService   a implementation of the {@link SenderService} interface.
-     * @param captchaService  a implementation of the {@link CaptchaService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param companyService  the implementation of the {@link CompanyService} interface.
+     * @param userService     the implementation of the {@link UserService} interface.
+     * @param responseService the implementation of the {@link ResponseService} interface.
+     * @param messageService  the implementation of the {@link MessageService} interface.
+     * @param senderService   the implementation of the {@link SenderService} interface.
+     * @param captchaService  the implementation of the {@link CaptchaService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -81,19 +81,19 @@ public class ClientMainController extends MainController {
     }
 
     /**
-     * Send client message and redirect by URL
-     * if it is not blank, otherwise by URL /.
+     * Send a client message and redirect by the incoming URL
+     * if it is not blank, otherwise by the "/" URL.
      * Request mapping: /send_message
      * Method: POST
      *
-     * @param url         a URL of the page which must be to redirect.
-     * @param name        a client name.
-     * @param phone       a phone name.
-     * @param email       a email name.
-     * @param userMessage a client message.
-     * @param request     a implementation of the interface to provide
+     * @param url         the URL of a page which must be to redirect.
+     * @param name        the client name.
+     * @param phone       the phone name.
+     * @param email       the email name.
+     * @param userMessage the client message.
+     * @param request     the implementation of the interface to provide
      *                    request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/send_message",
@@ -137,15 +137,16 @@ public class ClientMainController extends MainController {
     }
 
     /**
-     * Sends response and redirects by URL /responses.
+     * Sends a response with the incoming parameters
+     * and redirects by the "/responses" URL.
      * Request mapping: /send_response
      * Method: POST
      *
-     * @param name    a sender name.
-     * @param text    a sender text.
+     * @param name    the sender name.
+     * @param text    the sender text.
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/response/send",

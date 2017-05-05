@@ -53,7 +53,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 public class UserController {
 
     /**
-     *
+     * The message that a get method is not supported.
      */
     private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
             "GET method in \"%s\" is not supported!";
@@ -91,11 +91,11 @@ public class UserController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric} interface.
-     * @param userService    a implementation of the {@link UserService} interface.
-     * @param companyService a implementation of the {@link CompanyService} interface.
-     * @param fileService    a implementation of the {@link FileService} interface.
-     * @param senderService  a implementation of the {@link SenderService} interface.
+     * @param fabric         the implementation of the {@link MainMVFabric} interface.
+     * @param userService    the implementation of the {@link UserService} interface.
+     * @param companyService the implementation of the {@link CompanyService} interface.
+     * @param fileService    the implementation of the {@link FileService} interface.
+     * @param senderService  the implementation of the {@link SenderService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -114,14 +114,14 @@ public class UserController {
     }
 
     /**
-     * Returns the page with all users.
+     * Returns a page with an all users.
      * Request mapping: /admin/user/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = {"", "/all"},
+            value = { "", "/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllUsersPage() {
@@ -137,7 +137,7 @@ public class UserController {
      * Request mapping: /admin/user/new
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/new",
@@ -150,27 +150,28 @@ public class UserController {
     }
 
     /**
-     * Adds new user and redirects by URL /admin/user/{url}.
+     * Adds a new user with the incoming parameters
+     * and redirects by the "/admin/user/all" URL.
      * Request mapping: /admin/user/add
      * Method: POST
      *
-     * @param name           a name of the new user.
-     * @param login          a login of the new user.
-     * @param password       a password of the new user.
-     * @param description    a description of the new user.
-     * @param mobilePhone    a mobile phone of the new user.
-     * @param landlinePhone  a landline phone of the new user.
-     * @param fax            a fax of the new user.
-     * @param email          a e-mail of the new user.
-     * @param vkontakte      a vkontakte URL of the new user.
-     * @param facebook       a facebook URL of the new user.
-     * @param twitter        a twitter URL of the new user.
-     * @param skype          a skype username of the new user.
-     * @param multipartPhoto a photo to the new user.
-     * @param isValid        a validated of the new user.
-     * @param isMailing      a permit to send a letters on the user email.
-     * @param isLocked       locked the user or not.
-     * @return The ready object of class ModelAndView.
+     * @param name           the name of a new user.
+     * @param login          the login of a new user.
+     * @param password       the password of a new user.
+     * @param description    the description of a new user.
+     * @param mobilePhone    the mobile phone of a new user.
+     * @param landlinePhone  the landline phone of a new user.
+     * @param fax            the fax of a new user.
+     * @param email          the e-mail of a new user.
+     * @param vkontakte      the vkontakte URL of a new user.
+     * @param facebook       the facebook URL of a new user.
+     * @param twitter        the twitter URL of a new user.
+     * @param skype          the skype username of a new user.
+     * @param multipartPhoto the photo to a new user.
+     * @param validated      the validated of a new user.
+     * @param isMailing      the permit to send a letters to a user email.
+     * @param locked         the locked a user or not.
+     * @return The redirect string to the "/admin/user/all" URL.
      */
     @RequestMapping(
             value = "/add",
@@ -190,9 +191,9 @@ public class UserController {
             @RequestParam(value = "twitter") final String twitter,
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "photo") final MultipartFile multipartPhoto,
-            @RequestParam(value = "is_valid") final boolean isValid,
+            @RequestParam(value = "is_valid") final boolean validated,
             @RequestParam(value = "is_mailing") final boolean isMailing,
-            @RequestParam(value = "is_locked") final boolean isLocked
+            @RequestParam(value = "is_locked") final boolean locked
     ) {
         final User user = new User(
                 name, description,
@@ -203,9 +204,9 @@ public class UserController {
         );
         user.setLogin(login);
         user.setPassword(password);
-        user.setValidated(isValid);
+        user.setValidated(validated);
         user.setMailing(isMailing);
-        user.setLocked(isLocked);
+        user.setLocked(locked);
         user.setRole(UserRole.ADMIN);
         if (isNotEmpty(multipartPhoto)) {
             user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
@@ -236,12 +237,13 @@ public class UserController {
     }
 
     /**
-     * Returns the page to edit the user with URL.
-     * Request mapping: /admin/user/edit/{url}
+     * Returns a page to edit a user with the incoming URL.
+     * Request mapping: /admin/user/edit/{url},
+     * where {url} is a URL of a user to edit.
      * Method: GET
      *
-     * @param url a URL of the article to edit.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a user to edit.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/edit/{url}",
@@ -255,29 +257,29 @@ public class UserController {
     }
 
     /**
-     * Updates and save the user with url and redirects
-     * by URL /admin/user/{url}.
+     * Updates and save a user with the incoming URL
+     * and redirects by the "/admin/user/all" URL.
      * Request mapping: /admin/user/update
      * Method: POST
      *
-     * @param url            a URL of the user to update.
-     * @param name           a new name to the user.
-     * @param login          a new login to the user.
-     * @param password       a new password to the user.
-     * @param description    a new description to the user.
-     * @param mobilePhone    a new mobile phone to the user.
-     * @param landlinePhone  a new landline phone to the user.
-     * @param fax            a new fax to the user.
-     * @param email          a new E-mail to the user.
-     * @param vkontakte      a new Vkontakte URL to the user.
-     * @param facebook       a new Facebook URL to the user.
-     * @param twitter        a new Twitter URL to the user.
-     * @param skype          a new Skype username to the user.
-     * @param multipartPhoto a photo to the user.
-     * @param isValid        a validated of the user.
-     * @param isMailing      a permit to send a letters on the user email.
-     * @param isLocked       locked the user or not.
-     * @return The ready object of class ModelAndView.
+     * @param url            the URL of a user to update.
+     * @param name           the new name to a user.
+     * @param login          the new login to a user.
+     * @param password       the new password to a user.
+     * @param description    the new description to a user.
+     * @param mobilePhone    the new mobile phone to a user.
+     * @param landlinePhone  the new landline phone to a user.
+     * @param fax            the new fax to a user.
+     * @param email          the new E-mail to a user.
+     * @param vkontakte      the new Vkontakte URL to a user.
+     * @param facebook       the new Facebook URL to a user.
+     * @param twitter        the new Twitter URL to a user.
+     * @param skype          the new Skype username to a user.
+     * @param multipartPhoto the photo to a user.
+     * @param isValid        the validated of a user.
+     * @param isMailing      the permit to send a letters to a user E-mail.
+     * @param isLocked       the locked a user or not.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/update",
@@ -344,12 +346,14 @@ public class UserController {
     }
 
     /**
-     * Removes user with url and redirects by URL /admin/user/all.
-     * Request mapping: /admin/user/delete/{url}
+     * Removes a user with the incoming URL
+     * and redirects by the "/admin/user/all" URL.
+     * Request mapping: /admin/user/delete/{url},
+     * where {url} is a URL of a user to remove.
      * Method: GET
      *
-     * @param url          a URL of the user to remove.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a user to remove.
+     * @return The redirect string to the "/admin/user/all" URL.
      */
     @RequestMapping(
             value = "/delete/{url}",
@@ -362,11 +366,12 @@ public class UserController {
     }
 
     /**
-     * Removes all users and redirects by URL /admin/user/all.
-     * Request mapping: /admin/user/delete/all
+     * Removes an all users and redirects
+     * by the "/admin/user/all" URL.
+     * Request mapping: /admin/article/user/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/delete/all",
@@ -379,13 +384,14 @@ public class UserController {
     }
 
     /**
-     * Sends sender to personnel and redirects by URL /admin/user/all.
-     * Request mapping: /admin//user/send_message
+     * Creates a message with the incoming parameters and
+     * sends it to personnel. Redirects by URL /admin/user/all.
+     * Request mapping: /admin/user/send_message
      * Method: POST
      *
-     * @param subject a subject of the sender.
-     * @param text    a text of the sender.
-     * @return The ready object of class ModelAndView.
+     * @param subject the subject of a message.
+     * @param text    the text of a message.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/send_message",
@@ -431,8 +437,8 @@ public class UserController {
     /**
      * The method throws an exception in the case of reference to it.
      * The exception sender:
-     * "GET method in "/user/send_message" is not supported!"
-     * Request mapping: /admin/send_message
+     * "GET method in "/admin/user/send_message" is not supported!"
+     * Request mapping: /admin/user/send_message
      * Method: POST
      *
      * @throws IllegalMappingException thrown when an error occurs reading

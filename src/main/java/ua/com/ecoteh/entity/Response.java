@@ -73,6 +73,22 @@ public class Response extends Model implements IResponse {
     }
 
     /**
+     * Constructor.
+     *
+     * @param username  the username of a new response.
+     * @param text      the text of a new response.
+     * @param validated is validated of a new response.
+     */
+    public Response(
+            final String username,
+            final String text,
+            final boolean validated
+    ) {
+        this(username, text);
+        setValidated(validated);
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.
@@ -214,7 +230,7 @@ public class Response extends Model implements IResponse {
      */
     @Override
     public String getDateToString() {
-        return Time.getDateToString(this.date);
+        return Time.getDate(this.date);
     }
 
     /**

@@ -27,7 +27,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
- * objects of {@link Company} class or subclasses for admins.
+ * objects of the {@link Company} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -50,7 +50,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 public class CompanyController {
 
     /**
-     *
+     * The message that a get method is not supported.
      */
     private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
             "GET method in \"%s\" is not supported!";
@@ -77,9 +77,9 @@ public class CompanyController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric         a implementation of the {@link MainMVFabric} interface.
-     * @param companyService a implementation of the {@link CompanyService} interface.
-     * @param fileService    a implementation of the {@link FileService} interface.
+     * @param fabric         the implementation of the {@link MainMVFabric} interface.
+     * @param companyService the implementation of the {@link CompanyService} interface.
+     * @param fileService    the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -98,7 +98,7 @@ public class CompanyController {
      * Request mapping: /admin/company/edit/main
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/edit/main",
@@ -113,33 +113,33 @@ public class CompanyController {
     }
 
     /**
-     * Updates and save the main company and redirects
-     * by URL /admin/company/main.
-     * Request mapping: /admin/article/update/main
+     * Updates and save the main company with the incoming URL
+     * and redirects by the "/company/main" URL.
+     * Request mapping: /admin/company/update/main
      * Method: POST
      *
-     * @param title         a new title to the main company.
-     * @param domain        a new domain to the main company.
-     * @param tagline       a new tagline to the main company.
-     * @param description   a new description to the main company.
-     * @param information   a new information to the main company.
-     * @param keywords      a new keywords to the main company.
-     * @param workTimeFrom  a new start work time to the main company.
-     * @param workTimeTo    a new finish work time to the main company.
-     * @param mobilePhone   a new mobile phone to the main company.
-     * @param landlinePhone a new landline phone to the main company.
-     * @param fax           a new fax to the main company.
-     * @param email         a new e-mail to the main company.
-     * @param senderEmail   a new sender e-mail to the main company.
-     * @param senderPass    a new sender password to the main company.
-     * @param vkontakte     a new vkontakte URL to the main company.
-     * @param facebook      a new facebook URL to the main company.
-     * @param twitter       a new twitter URL to the main company.
-     * @param skype         a new skype username to the main company.
-     * @param address       a new address to the main company.
-     * @param googleMaps    a new google maps URL to the main company.
-     * @param multipartLogo a new logo to the main company.
-     * @return The ready object of class ModelAndView.
+     * @param title         the new title to a main company.
+     * @param domain        the new domain to a main company.
+     * @param tagline       the new tagline to a main company.
+     * @param description   the new description to a main company.
+     * @param information   the new information to a main company.
+     * @param keywords      the new keywords to a main company.
+     * @param workTimeFrom  the new start work time to a main company.
+     * @param workTimeTo    the new finish work time to a main company.
+     * @param mobilePhone   the new mobile phone to a main company.
+     * @param landlinePhone the new landline phone to a main company.
+     * @param fax           the new fax to a main company.
+     * @param email         the new E-mail to a main company.
+     * @param senderEmail   the new sender e-mail to a main company.
+     * @param senderPass    the new sender password to a main company.
+     * @param vkontakte     the new Vkontakte URL to a main company.
+     * @param facebook      the new Facebook URL to a main company.
+     * @param twitter       the new Twitter URL to a main company.
+     * @param skype         the new Skype username to a main company.
+     * @param address       the new address to a main company.
+     * @param googleMaps    the new google maps URL to a main company.
+     * @param multipartLogo the new logo to a main company.
+     * @return The redirect string to the "/company/main" URL.
      */
     @RequestMapping(
             value = "/update/main",
@@ -215,7 +215,7 @@ public class CompanyController {
      * Request mapping: /admin/company/new
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/new",
@@ -228,29 +228,32 @@ public class CompanyController {
     }
 
     /**
-     * Adds new company and redirects by URL /admin/company/{url}.
+     * Adds a new company with the incoming parameters
+     * and redirects by the "/company/{url}" URL,
+     * where {url} is a URL of a saving company.
      * Request mapping: /admin/company/add
      * Method: POST
      *
-     * @param title         a title of the new company.
-     * @param domain        a domain of the new company.
-     * @param tagline       a tagline of the new company.
-     * @param description   a description of the new company.
-     * @param information   a information of the new company.
-     * @param keywords      a keywords of the new company.
-     * @param mobilePhone   a mobile phone of the new company.
-     * @param landlinePhone a landline phone of the new company.
-     * @param fax           a fax of the new company.
-     * @param email         a e-mail of the new company.
-     * @param vkontakte     a vkontakte URL of the new company.
-     * @param facebook      a facebook URL of the new company.
-     * @param twitter       a twitter URL of the new company.
-     * @param skype         a skype username of the new company.
-     * @param address       a address of the new company.
-     * @param googleMaps    a google maps URL of the new company.
-     * @param multipartLogo a logo to the new company.
-     * @param isValid       a validated of the new company.
-     * @return The ready object of class ModelAndView.
+     * @param title         the title of a new company.
+     * @param domain        the domain of a new company.
+     * @param tagline       the tagline of a new company.
+     * @param description   the description of a new company.
+     * @param information   the information of a new company.
+     * @param keywords      the keywords of a new company.
+     * @param mobilePhone   the mobile phone of a new company.
+     * @param landlinePhone the landline phone of a new company.
+     * @param fax           the fax of a new company.
+     * @param email         the e-mail of a new company.
+     * @param vkontakte     the vkontakte URL of a new company.
+     * @param facebook      the facebook URL of a new company.
+     * @param twitter       the twitter URL of a new company.
+     * @param skype         the skype username of a new company.
+     * @param address       the address of a new company.
+     * @param googleMaps    the google maps URL of a new company.
+     * @param multipartLogo the logo to a new company.
+     * @param validated     the validated of a new company.
+     * @return The redirect string to the "/company/{url}" URL,
+     * where {url} is a URL of a saving company.
      */
     @RequestMapping(
             value = "/add",
@@ -274,7 +277,7 @@ public class CompanyController {
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -283,7 +286,7 @@ public class CompanyController {
         company.setKeywords(keywords);
         company.setDomain(domain);
         company.setTagline(tagline);
-        company.setValidated(isValid);
+        company.setValidated(validated);
         company.setContacts(
                 new Contacts(
                         email, mobilePhone, landlinePhone, fax,
@@ -325,7 +328,7 @@ public class CompanyController {
      * Method: GET
      *
      * @param url a URL of the company to edit.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/edit/{url}",
@@ -340,31 +343,33 @@ public class CompanyController {
     }
 
     /**
-     * Updates and save the company with url and redirects
-     * by URL /admin/company/{url}.
+     * Updates and save a company with the incoming URL
+     * and redirects by the "/company/{url}" URL,
+     * where {url} is a URL of a saving company.
      * Request mapping: /admin/company/update
      * Method: POST
      *
-     * @param url           a URL of the company to update.
-     * @param title         a new title to the company.
-     * @param domain        a new domain to the company.
-     * @param tagline       a new tagline to the company.
-     * @param description   a new description to the company.
-     * @param information   a new information to the company.
-     * @param keywords      a new keywords to the company.
-     * @param mobilePhone   a new mobile phone to the company.
-     * @param landlinePhone a new landline phone to the company.
-     * @param fax           a new fax to the company.
-     * @param email         a new e-mail to the company.
-     * @param vkontakte     a new vkontakte URL to the company.
-     * @param facebook      a new facebook URL to the company.
-     * @param twitter       a new twitter URL to the company.
-     * @param skype         a new skype username to the company.
-     * @param address       a new address to the company.
-     * @param googleMaps    a new google maps URL to the company.
-     * @param multipartLogo a new logo to the company.
-     * @param isValid       a validated of the article.
-     * @return The ready object of class ModelAndView.
+     * @param url           the URL of a company to update.
+     * @param title         the new title to a company.
+     * @param domain        the new domain to a company.
+     * @param tagline       the new tagline to a company.
+     * @param description   the new description to a company.
+     * @param information   the new information to a company.
+     * @param keywords      the new keywords to a company.
+     * @param mobilePhone   the new mobile phone to a company.
+     * @param landlinePhone the new landline phone to a company.
+     * @param fax           the new fax to a company.
+     * @param email         the new e-mail to a company.
+     * @param vkontakte     the new vkontakte URL to a company.
+     * @param facebook      the new facebook URL to a company.
+     * @param twitter       the new twitter URL to a company.
+     * @param skype         the new skype username to a company.
+     * @param address       the new address to a company.
+     * @param googleMaps    the new google maps URL to a company.
+     * @param multipartLogo the new logo to a company.
+     * @param validated     the validated of a article.
+     * @return The redirect string to the "/company/{url}" URL,
+     * where {url} is a URL of a saving company.
      */
     @RequestMapping(
             value = "/update",
@@ -389,7 +394,7 @@ public class CompanyController {
             @RequestParam(value = "address") final String address,
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -398,7 +403,7 @@ public class CompanyController {
         company.setKeywords(keywords);
         company.setDomain(domain);
         company.setTagline(tagline);
-        company.setValidated(isValid);
+        company.setValidated(validated);
         company.setContacts(
                 new Contacts(
                         email, mobilePhone, landlinePhone, fax,
@@ -435,12 +440,14 @@ public class CompanyController {
     }
 
     /**
-     * Removes company with url and redirects by URL /admin/.
-     * Request mapping: /admin/company/delete/{url}
+     * Removes an company with the incoming URL
+     * and redirects by the "/" URL.
+     * Request mapping: /admin/company/delete/{url},
+     * where {url} is a URL of an company to remove.
      * Method: GET
      *
-     * @param url a URL of the company to remove.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a company to remove.
+     * @return The redirect string to the "/" URL.
      */
     @RequestMapping(
             value = "/delete/{url}",
@@ -453,11 +460,11 @@ public class CompanyController {
     }
 
     /**
-     * Removes all companies and redirects by URL /admin/.
+     * Removes an all companies and redirects by the "/" URL.
      * Request mapping: /admin/company/delete/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/" URL.
      */
     @RequestMapping(
             value = "/delete/all",

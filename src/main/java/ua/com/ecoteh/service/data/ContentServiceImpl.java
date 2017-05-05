@@ -44,13 +44,13 @@ public abstract class ContentServiceImpl<T extends Content>
      * The message that a service cannot find content by incoming title.
      */
     private final static String FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming title %s!";
+            "Can`t find a object of the %s class by the incoming title \"%s\"!";
 
     /**
      * The message that a service cannot find content by incoming URL.
      */
     private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming URL %s!";
+            "Can`t find a object of the %s class by the incoming URL \"%s\"!";
 
     /**
      * The object provides a set of standard JPA methods

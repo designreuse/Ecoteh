@@ -73,12 +73,12 @@ public abstract class MainController {
      * Constructor.
      * Initializes a implementation of the service layer interface.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric} interface.
-     * @param companyService  a implementation of the {@link CompanyService} interface.
-     * @param userService     a implementation of the {@link UserService} interface.
-     * @param responseService a implementation of the {@link ResponseService} interface.
-     * @param messageService  a implementation of the {@link MessageService} interface.
-     * @param senderService   a implementation of the {@link SenderService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param companyService  the implementation of the {@link CompanyService} interface.
+     * @param userService     the implementation of the {@link UserService} interface.
+     * @param responseService the implementation of the {@link ResponseService} interface.
+     * @param messageService  the implementation of the {@link MessageService} interface.
+     * @param senderService   the implementation of the {@link SenderService} interface.
      */
     protected MainController(
             final MainMVFabric fabric,
@@ -97,14 +97,14 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about home page.
+     * Returns a home page.
      * Request mapping: '', /, /index, /home
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = {"", "/", "/index", "/home"},
+            value = { "", "/", "/index", "/home" },
             method = RequestMethod.GET
     )
     public ModelAndView getHomePage() {
@@ -114,11 +114,11 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with all categories.
+     * Returns a page with an all categories.
      * Request mapping: /category/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/category/all",
@@ -129,12 +129,13 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with some category.
-     * Request mapping: /category/{url}
+     * Returns a page with a category with the incoming URL.
+     * Request mapping: /category/{url},
+     * where {url} is a URL of a category to return.
      * Method: GET
      *
-     * @param url a URL of the category to return.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a category to return.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/category/{url}",
@@ -145,14 +146,16 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with some category.
-     * Request mapping: /category/{url}
+     * Returns a page with a category with the incoming URL.
+     * And sorts a category articles by title.
+     * Request mapping: /category/{url}/sort,
+     * where {url} is a URL of a category to return.
      * Method: GET
      *
-     * @param url     a URL of the category to return.
-     * @param request a implementation of the interface to provide
+     * @param url     the URL of a category to return.
+     * @param request the implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/category/{url}/sort",
@@ -169,12 +172,13 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with some article.
-     * Request mapping: /article/{url}
+     * Returns a page with a article with the incoming URL.
+     * Request mapping: /article/{url},
+     * where {url} is a URL of an article to return.
      * Method: GET
      *
-     * @param url a URL of the article to return.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a article to return.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/article/{url}",
@@ -185,12 +189,13 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with some article.
-     * Request mapping: /article/num_{number}
+     * Returns a page with a article with the incoming number.
+     * Request mapping: /article/num_{number},
+     * where {number} is a number of an article to return.
      * Method: GET
      *
-     * @param number a number of the article to return.
-     * @return The ready object of class ModelAndView.
+     * @param number the number of a article to return.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/article/num_{number}",
@@ -201,14 +206,14 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with all articles.
-     * Request mapping: /article/all
+     * Returns a page with an all articles.
+     * Request mapping: /articles, /article/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/article/all",
+            value = { "/articles", "/article/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllArticlesPage() {
@@ -216,17 +221,16 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with
-     * all sorted article.
-     * Request mapping: /article/all/sort
+     * Returns a page with an all articles sorted by the incoming type.
+     * Request mapping: /articles/sort, /article/all/sort,
      * Method: GET
      *
-     * @param request a implementation of the interface to provide
+     * @param request the implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/article/all/sort",
+            value = { "/articles/sort", "/article/all/sort" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllSortArticlesPage(final HttpServletRequest request) {
@@ -237,11 +241,11 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with main company.
+     * Returns a page with main company.
      * Request mapping: /company/main
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/company/main",
@@ -252,15 +256,14 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page
-     * with contacts about main company.
+     * Returns a page with contacts about a main company.
      * Request mapping: /contacts, /address
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = {"/contacts", "/address"},
+            value = { "/contacts", "/address" },
             method = RequestMethod.GET
     )
     public ModelAndView getContactsPage() {
@@ -270,12 +273,11 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page
-     * with all partners companies.
+     * Returns  page with an all partners companies.
      * Request mapping: /company/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/company/all",
@@ -286,17 +288,16 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with
-     * all sorted partner-companies.
-     * Request mapping: /company/all/sort
+     * Returns a page with all sorted partner-companies.
+     * Request mapping: /companies/sort, /company/all/sort
      * Method: GET
      *
      * @param request a implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/company/all/sort",
+            value = { "/companies/sort", "/company/all/sort" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllSortPartnersPage(final HttpServletRequest request) {
@@ -306,12 +307,13 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with some company.
-     * Request mapping: /company/{url}
+     * Returns a page with a company with the incoming URL.
+     * Request mapping: /company/{url},
+     * where {url} is a URL of a company to return.
      * Method: GET
      *
-     * @param url a URL of the company to return.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a company to return.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
             value = "/company/{url}",
@@ -322,14 +324,14 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with all responses.
-     * Request mapping: /responses
+     * Returns page with all responses.
+     * Request mapping: /responses, /response/all
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/responses",
+            value = { "/responses", "/response/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllResponsesPage() {
@@ -340,17 +342,16 @@ public abstract class MainController {
     }
 
     /**
-     * Returns modelAndView with information about page with
-     * all sorted responses.
-     * Request mapping: /responses/sort
+     * Returns page with an all responses sorted by date.
+     * Request mapping: /responses/sort, /response/all/sort
      * Method: GET
      *
-     * @param request a implementation of the interface to provide
+     * @param request the implementation of the interface to provide
      *                request information for HTTP servlets.
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/responses/sort",
+            value = { "/responses/sort", "/response/all/sort" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllSortResponsesByDatePage(final HttpServletRequest request) {
@@ -364,18 +365,18 @@ public abstract class MainController {
     /**
      * Returns default modelAndView.
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     protected ModelAndView getDefaultModelAndView() {
         return this.fabric.getDefaultModelAndView();
     }
 
     /**
-     * Returns page by parameter url.
+     * Returns a page by the incoming URL.
      *
-     * @param url       a URL of request.
-     * @param isCaptcha a result of google-captcha verification.
-     * @return The ready object of class ModelAndView.
+     * @param url       the URL of request.
+     * @param isCaptcha the result of a google-captcha verification.
+     * @return The ready object of the ModelAndView class.
      */
     protected ModelAndView getMessageMV(
             final String url,
@@ -384,18 +385,18 @@ public abstract class MainController {
         ModelAndView modelAndView = new ModelAndView();
         if (isNotEmpty(url)) {
             switch (url) {
-                case "":
-                case "/":
-                case "/index":
-                case "/home":
-                    modelAndView = getHomePage();
-                    break;
-                case "/contacts":
-                case "/address":
-                    modelAndView = getContactsPage();
-                    break;
-                default:
-                    modelAndView.setViewName("redirect:" + url);
+            case "":
+            case "/":
+            case "/index":
+            case "/home":
+                modelAndView = getHomePage();
+                break;
+            case "/contacts":
+            case "/address":
+                modelAndView = getContactsPage();
+                break;
+            default:
+                modelAndView.setViewName("redirect:" + url);
             }
         } else {
             modelAndView.setViewName("redirect:" + "/");
@@ -405,9 +406,9 @@ public abstract class MainController {
     }
 
     /**
-     * Sends client message to email and saves it.
+     * Sends a client message to E-mail and saves it.
      *
-     * @param message a message to send.
+     * @param message the message to send.
      */
     protected void sendMess(final Message message) {
         new Thread(() -> {
@@ -422,9 +423,9 @@ public abstract class MainController {
     }
 
     /**
-     * Sends client response to email and saves it.
+     * Sends a client response to E-mail and saves it.
      *
-     * @param response a response.
+     * @param response the response.
      */
     protected void sendResp(final Response response) {
         new Thread(() -> {
@@ -439,10 +440,10 @@ public abstract class MainController {
     }
 
     /**
-     * Sends some message to emails by personnel.
+     * Creates and sends a message to personnel E-mails.
      *
-     * @param subject a subject of message.
-     * @param text    a text of message.
+     * @param subject the subject of a new message.
+     * @param text    the text of a new message.
      */
     private void sendToEmail(
             final String subject,
@@ -457,10 +458,10 @@ public abstract class MainController {
     }
 
     /**
-     * Returns responses page.
+     * Returns a responses page.
      *
-     * @param isCaptcha a result of google-captcha verification.
-     * @return The ready object of class ModelAndView.
+     * @param isCaptcha the result of a google-captcha verification.
+     * @return The ready object of the ModelAndView class.
      */
     protected ModelAndView getResponsesMV(final boolean isCaptcha) {
         final ModelAndView modelAndView = getAllResponsesPage();

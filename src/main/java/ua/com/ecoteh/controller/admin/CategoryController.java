@@ -23,7 +23,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
- * objects of {@link Category} class or subclasses for admins.
+ * objects of the {@link Category} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -46,7 +46,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 public class CategoryController {
 
     /**
-     *
+     * The message that a get method is not supported.
      */
     private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
             "GET method in \"%s\" is not supported!";
@@ -73,9 +73,9 @@ public class CategoryController {
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
-     * @param fabric          a implementation of the {@link MainMVFabric} interface.
-     * @param categoryService a implementation of the {@link CategoryService} interface.
-     * @param fileService     a implementation of the {@link CategoryService} interface.
+     * @param fabric          the implementation of the {@link MainMVFabric} interface.
+     * @param categoryService the implementation of the {@link CategoryService} interface.
+     * @param fileService     the implementation of the {@link CategoryService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -94,7 +94,7 @@ public class CategoryController {
      * Request mapping: /admin/category/new
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView getNewCategoryPage() {
@@ -104,16 +104,19 @@ public class CategoryController {
     }
 
     /**
-     * Adds new category and redirects by URL /admin/category/{url}.
+     * Adds a new category with the incoming parameters
+     * and redirects by the "/category/{url}" URL,
+     * where {url} is a URL of a saving category.
      * Request mapping: /admin/category/add
      * Method: POST
      *
-     * @param title         a title of the new category.
-     * @param description   a title of the new category.
-     * @param keywords      a title of the new category.
-     * @param multipartLogo a file of photo to the new category.
-     * @param isValid       a validated of the new category.
-     * @return The ready object of class ModelAndView.
+     * @param title         the title of the a category.
+     * @param description   the description of a new category.
+     * @param keywords      the keywords of the a category.
+     * @param multipartLogo the file of photo to a new category.
+     * @param validated     the validated of a new category.
+     * @return The redirect string to the "/category/{url}" URL,
+     * where {url} is a URL of a saving category.
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addCategory(
@@ -121,14 +124,14 @@ public class CategoryController {
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Category category = new Category(
                 title,
                 new HtmlCompressor().compress(description),
                 keywords
         );
-        category.setValidated(isValid);
+        category.setValidated(validated);
         if (isNotEmpty(multipartLogo)) {
             category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
         }
@@ -155,12 +158,13 @@ public class CategoryController {
     }
 
     /**
-     * Returns the page to edit the category with url.
-     * Request mapping: /admin/category/edit/{url}
+     * Returns a page to edit a category with the incoming URL.
+     * Request mapping: /admin/category/edit/{url},
+     * where {url} is a URL of a category to edit.
      * Method: GET
      *
-     * @param url a URL of the category to edit.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a category to edit.
+     * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(value = "/edit/{url}", method = RequestMethod.GET)
     public ModelAndView editCategory(@PathVariable("url") final String url) {
@@ -171,18 +175,20 @@ public class CategoryController {
     }
 
     /**
-     * Updates and save the category with url and redirects
-     * by URL /admin/category/{url}.
+     * Updates and save a category with the incoming URL
+     * and redirects by the "/category/{url}" URL,
+     * where {url} is a URL of a saving category.
      * Request mapping: /admin/category/update
      * Method: POST
      *
-     * @param url           a URL of the category to update.
-     * @param title         a new title to the category.
-     * @param description   a new description to the category.
-     * @param keywords      a new description to the category.
-     * @param multipartLogo a file of photo to the new category.
-     * @param isValid       a validated of the category.
-     * @return The ready object of class ModelAndView.
+     * @param url           the URL of a category to update.
+     * @param title         the new title to a category.
+     * @param description   the new description to a category.
+     * @param keywords      the new description to a category.
+     * @param multipartLogo the new file of photo to a category.
+     * @param validated     the validated of a category.
+     * @return The redirect string to the "/category/{url}" URL,
+     * where {url} is a URL of a saving category.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateCategory(
@@ -191,14 +197,14 @@ public class CategoryController {
             @RequestParam(value = "text") final String description,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean isValid
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Category category = new Category(
                 title,
                 new HtmlCompressor().compress(description),
                 keywords
         );
-        category.setValidated(isValid);
+        category.setValidated(validated);
         if (isNotEmpty(multipartLogo)) {
             category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
         }
@@ -225,12 +231,14 @@ public class CategoryController {
     }
 
     /**
-     * Removes category with url and redirects by URL /admin/.
-     * Request mapping: /admin/category/delete/{url}
+     * Removes a category with the incoming URL
+     * and redirects by the "/" URL.
+     * Request mapping: /admin/category/delete/{url},
+     * where {url} is a URL of a category to remove.
      * Method: GET
      *
-     * @param url          a URL of the article to remove.
-     * @return The ready object of class ModelAndView.
+     * @param url the URL of a category to remove.
+     * @return The redirect string to the "/" URL.
      */
     @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
     public String deleteCategoryByUrl(@PathVariable("url") final String url) {
@@ -240,11 +248,11 @@ public class CategoryController {
     }
 
     /**
-     * Removes all categories and redirects by URL /admin/.
+     * Removes an all categories and redirects by the "/" URL.
      * Request mapping: /admin/category/delete/{url}
      * Method: GET
      *
-     * @return The ready object of class ModelAndView.
+     * @return The redirect string to the "/" URL.
      */
     @RequestMapping(value = "/delete/all", method = RequestMethod.GET)
     public String deleteAllCategories() {
