@@ -50,8 +50,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <c:choose>
                             <c:when test="${(article.category ne null)
                             and (article.category.validated or (authorized_user ne null))}">
-                                → <a href="<c:url value="/category/all"/>"
-                                     title="Перейти к всем категориям">Все категории</a>
+                                →
+                                <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
+                                    Все категории
+                                </a>
                                 →
                                 <a href="<c:url value="/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
@@ -59,10 +61,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                → <a href="<c:url value="/article/all"/>" title="Статьи">Статьи</a>
+                                → <a href="<c:url value="/article/all"/>" title="Все товары">Товары</a>
                             </c:otherwise>
                         </c:choose>
-                        → <a href="#"><c:out value="${article.title}"/></a>
+                        →
+                        <a href="<c:url value="/article/${article.url}"/>">
+                            <c:out value="${article.title}"/>
+                        </a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>

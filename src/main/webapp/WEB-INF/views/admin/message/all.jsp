@@ -44,8 +44,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href=" <c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="#">Сообщения</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
+                        → <a href="<c:url value="/admin/message/"/>">Сообщения</a>
                     </p>
                     <hr>
                     <c:set var="length" value="${fn:length(messages)}"/>

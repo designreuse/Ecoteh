@@ -43,10 +43,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <div class="box">
                         <%-- Site page path --%>
                     <p class="path">
-                        <a href="<c:url value="/"/>"
-                           title="Перейти на главную страницу">Главная</a>
-                        → <a href="<c:url value="/company/main"/>"
-                             title="Описание нашей компании">Описание компании</a>
+                        <a href="<c:url value="/"/>" title="Перейти на главную страницу">
+                            Главная
+                        </a>
+                        →
+                        <a href="<c:url value="/company/main"/>" title="Описание нашей компании">
+                            Описание компании
+                        </a>
                         → <a href="<c:url value="/responses"/>">Отзывы о компании</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

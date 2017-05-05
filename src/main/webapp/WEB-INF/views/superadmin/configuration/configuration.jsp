@@ -42,7 +42,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="#"/>">Конфигурация</a>
+                        → <a href="<c:url value="/superadmin/configuration/"/>">Конфигурация</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
@@ -69,6 +69,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <%@include file="/WEB-INF/views/superadmin/configuration/captcha.jsp" %>
         <%-- Site Verification Configuration --%>
     <%@include file="/WEB-INF/views/superadmin/configuration/verification.jsp" %>
+        <%-- Server Time Configuration --%>
+    <%@include file="/WEB-INF/views/superadmin/configuration/time.jsp" %>
     <c:if test="${main_company ne null}">
         <%-- Footer --%>
         <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>

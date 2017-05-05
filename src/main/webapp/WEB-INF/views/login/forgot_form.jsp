@@ -42,7 +42,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/login"/>">Авторизация</a>
-                        → <a href="<c:url value="#"/>">Напоминание пароля</a>
+                        → <a href="<c:url value="/forgot_password"/>">Напоминание пароля</a>
                     </p>
                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
                         <div class="text-center">

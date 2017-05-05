@@ -51,8 +51,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/category/all"/>">Все категории</a>
-                        → <a href=" #">Редактирование категории</a>
+                        →
+                        <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
+                            Все категории
+                        </a>
+                        →
+                        <a href="<c:url value="/admin/category/edit/${category.url}"/>">
+                            Редактирование категории
+                        </a>
                     </p>
                     <hr>
                     <h3 class="text-center">

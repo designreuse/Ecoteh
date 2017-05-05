@@ -46,7 +46,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <p class="path">
                             <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                             → <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
-                            → <a href="#"><c:out value="${company.title}"/></a>
+                            →
+                            <a href="<c:url value="/company/${company.url}"/>">
+                                <c:out value="${company.title}"/>
+                            </a>
                         </p>
                         <c:if test="${not empty company.logo.url}">
                             <hr>

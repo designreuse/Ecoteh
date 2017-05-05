@@ -49,7 +49,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <%-- Site page path --%>
                         <p class="path">
                             <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                            → <a href="#">Описание компании &quot;<c:out value="${company.title}"/>&quot;</a>
+                            →
+                            <a href="<c:url value="/company/main"/>">
+                                Описание компании &quot;<c:out value="${company.title}"/>&quot;
+                            </a>
                         </p>
                         <c:if test="${not empty company.logo.url}">
                             <hr>

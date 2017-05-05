@@ -46,7 +46,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/article/all"/>">Все статьи</a>
-                        → <a href="#">Новая статья</a>
+                        → <a href="/admin/article/new">Новая статья</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>

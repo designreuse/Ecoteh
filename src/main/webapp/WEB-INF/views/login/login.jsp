@@ -41,7 +41,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Авторизация</a>
+                        → <a href="/login">Авторизация</a>
                     </p>
                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
                         <div class="text-center">

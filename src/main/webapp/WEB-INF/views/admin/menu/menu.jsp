@@ -42,7 +42,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
-                        → <a href="#" title="">Меню администратора</a>
+                        → <a href="<c:url value="/admin/menu"/>" title="">Меню администратора</a>
                     </p>
                     <hr>
                     <h3 class="text-center green">Меню администратора</h3>

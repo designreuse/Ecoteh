@@ -43,7 +43,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="#">Стиля</a>
+                        → <a href="/superadmin/style/edit">Стиля</a>
                     </p>
                     <hr>
                     <h3 class="text-center">Стиля CSS</h3>

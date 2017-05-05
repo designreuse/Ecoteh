@@ -55,7 +55,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <%-- Site page path --%>
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
-                        → <a href="#">Поиск</a>
+                        → <a href="<c:url value="/search/"/>">Поиск</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>

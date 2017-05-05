@@ -10,8 +10,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- Calculates period of company work --%>
-<jsp:useBean id="utilDate" class="java.util.Date" scope="session"/>
-<fmt:formatDate var="now" value="${utilDate}" pattern="y" scope="session"/>
+<jsp:useBean id="date" class="java.util.Date" scope="session"/>
+<fmt:formatDate var="now" value="${date}" pattern="y" scope="session"/>
 <c:set var="start" value="2016" scope="session"/>
 <c:choose>
     <c:when test="${now ne start}">

@@ -46,7 +46,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/company/all"/>">Все партнеры</a>
-                        → <a href="#">Новый партнер</a>
+                        → <a href="<c:url value="/admin/company/new"/>">Новый партнер</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление нового партнера">Новый партнер</h3>

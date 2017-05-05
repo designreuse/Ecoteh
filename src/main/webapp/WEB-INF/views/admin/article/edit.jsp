@@ -53,8 +53,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:choose>
                             <c:when test="${article.category ne null}">
-                                → <a href="<c:url value="/category/all"/>"
-                                     title="Перейти к всем категориям">Все категории</a>
+                                →
+                                <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
+                                    Все категории
+                                </a>
                                 →
                                 <a href="<c:url value="/category/${article.category.url}"/>"
                                    title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
@@ -65,7 +67,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 → <a href="<c:url value="/article/all"/>" title="Статьи">Статьи</a>
                             </c:otherwise>
                         </c:choose>
-                        → <a href="#">Редактирование статьи</a>
+                        →
+                        <a href="<c:url value="/admin/article/edit/${article.url}"/>">
+                            Редактирование статьи
+                        </a>
                     </p>
                     <hr>
                     <h3 class="text-center">

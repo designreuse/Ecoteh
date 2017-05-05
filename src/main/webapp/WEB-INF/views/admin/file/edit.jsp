@@ -54,7 +54,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/admin/file/all"/>">Все файлы</a>
-                        → <a href="#">Редактирование файла</a>
+                        → <a href="<c:url value="/admin/file/edit/${file.id}"/>">Редактирование файла</a>
                     </p>
                     <hr>
                     <h3 class="text-center">

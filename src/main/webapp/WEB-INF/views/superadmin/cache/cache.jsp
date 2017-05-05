@@ -43,7 +43,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="#">Кэш сервера</a>
+                        → <a href="<c:url value="/superadmin/cache/"/>">Кэш сервера</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <c:set var="length" value="${fn:length(objects)}"/>
@@ -55,7 +55,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <%-- Cache actions --%>
                         <c:if test="${length gt 10}">
                             <div class="text-center">
-                                <a href="<c:url value="/superadmin/cache"/>"
+                                <a href="<c:url value="/superadmin/cache/"/>"
                                    title="Обновить информацию об объектах, которые хранятся в памяти.">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>

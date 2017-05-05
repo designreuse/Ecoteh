@@ -50,13 +50,21 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        <c:if test="${company ne main_company}">
-                            → <a href="<c:url value="/company/all"/>">Все партнеры</a>
-                        </c:if>
-                        →
-                        <a href="#" title="Редактировать&nbsp;&quot;<c:out value="${company.title}&quot;"/>">
-                            Редактирование компании
-                        </a>
+                        <c:choose>
+                            <c:when test="${company ne main_company}">
+                                → <a href="<c:url value="/company/all"/>">Все партнеры</a>
+                                →
+                                <a href="<c:url value="/admin/company/edit/${company.url}"/>">
+                                    Редактирование компании&nbsp;&quot;<c:out value="${company.title}"/>&quot;
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                →
+                                <a href="<c:url value="/admin/company/edit/main"/>">
+                                    Редактирование компании&nbsp;&quot;<c:out value="${company.title}"/>&quot;
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
                     </p>
                     <hr>
                     <h3 class="text-center">
