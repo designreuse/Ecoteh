@@ -55,9 +55,19 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <br>
                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                 &nbsp;<c:out value="${company.address.address}"/>
-                <br><br>
+                <br>
             </div>
         </c:if>
+        <c:if test="${(not empty company.workTimeFrom) and (not empty company.workTimeTo)}">
+            <div class="text-center">
+                <br>
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                &nbsp;Пн - Пт,&nbsp;
+                <c:out value="${company.workTimeFrom}"/> - <c:out value="${company.workTimeTo}"/>
+                <br>
+            </div>
+        </c:if>
+        <br>
         <c:set var="contacts" value="${company.contacts}"/>
         <c:if test="${not empty contacts.mobilePhone}">
             <div class="text-center">
