@@ -75,8 +75,7 @@ public final class StyleServiceImpl implements StyleService {
      * @param styles the new CSS styles to save.
      */
     @Override
-    public void save(final String styles) {// TODO
-        System.out.println("save(final String styles) = " + isNotEmpty(styles));
+    public void save(final String styles) {
         if (isNotEmpty(styles)) {
             saveStyles(styles);
             saveCompressStyles(styles);
@@ -118,7 +117,6 @@ public final class StyleServiceImpl implements StyleService {
      * @param path   the path to a file.
      */
     private void save(final String styles, final String path) {
-        System.out.println(getAbsolutePath(path)); // TODO
         new FileContentsLoader(
                 getAbsolutePath(path),
                 styles
