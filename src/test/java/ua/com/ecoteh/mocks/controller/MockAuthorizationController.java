@@ -1,6 +1,7 @@
 package ua.com.ecoteh.mocks.controller;
 
 import ua.com.ecoteh.controller.authorization.AuthorizationController;
+import ua.com.ecoteh.mocks.service.data.MockServices;
 import ua.com.ecoteh.mocks.service.fabrica.MockMVFabric;
 
 public class MockAuthorizationController {
@@ -15,6 +16,9 @@ public class MockAuthorizationController {
     }
 
     private static void initWorkController() {
-        authorizationController = new AuthorizationController(MockMVFabric.getMainMVFabric());
+        authorizationController = new AuthorizationController(
+                MockMVFabric.getMainMVFabric(),
+                MockServices.getUserService()
+        );
     }
 }
