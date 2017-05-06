@@ -51,7 +51,7 @@ public final class MockClientController {
     }
 
     private static void initAdminResponseController() {
-        responseController =  new ResponseController(getResponseService());
+        responseController =  new ResponseController(getMainMVFabric(), getResponseService());
     }
 
     private static void initAdminUserController() {

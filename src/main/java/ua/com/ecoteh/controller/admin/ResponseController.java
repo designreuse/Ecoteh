@@ -82,7 +82,7 @@ public class ResponseController {
             value = "/edit/{id}",
             method = RequestMethod.GET
     )
-    public ModelAndView editArticle(@PathVariable("id") final long id) {
+    public ModelAndView editResponse(@PathVariable("id") final long id) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("response", this.responseService.get(id));
         modelAndView.setViewName("admin/response/edit");
@@ -113,7 +113,8 @@ public class ResponseController {
     ) {
         final Response response = new Response(username, text, validated);
         this.responseService.update(id, response);
-        return "redirect:/responses/";
+        Cache.clear();
+        return "redirect:/responses";
     }
 
     /**

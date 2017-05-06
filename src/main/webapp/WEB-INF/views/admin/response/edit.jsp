@@ -88,12 +88,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                         <label title="Одобрить отзыв, его смогут увидеть клиенты.">
                                             <input type="radio" name="is_valid" value="true" required
-                                                   <c:if test="${article.validated}">checked</c:if>/>
+                                                   <c:if test="${response.validated}">checked</c:if>/>
                                             &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Не отображать отзыв, его не смогут увидеть клиенты.">
                                             <input type="radio" name="is_valid" value="false" required
-                                                   <c:if test="${!article.validated}">checked</c:if>/>
+                                                   <c:if test="${!response.validated}">checked</c:if>/>
                                             &nbsp;Не отображать
                                         </label>
                                     </td>
@@ -129,10 +129,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
-    <script>CKEDITOR.replace("desc");</script>
-    <script>CKEDITOR.replace("text");</script>
-    <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
     </body>

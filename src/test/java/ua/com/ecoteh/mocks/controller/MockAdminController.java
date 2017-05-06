@@ -5,6 +5,7 @@ import ua.com.ecoteh.mocks.service.fabrica.MockMVFabric;
 import ua.com.ecoteh.mocks.service.message.MockSenderService;
 
 import static ua.com.ecoteh.mocks.service.data.MockServices.*;
+import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getMainMVFabric;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -128,6 +129,7 @@ public class MockAdminController {
 
     private static void initResponseController() {
         responseController = new ResponseController(
+                getMainMVFabric(),
                 getResponseService()
         );
     }

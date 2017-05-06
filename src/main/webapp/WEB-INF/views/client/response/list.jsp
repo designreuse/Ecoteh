@@ -33,7 +33,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <a href="<c:url value="/admin/response/valid/${response.id}"/>"
                            title="Не отображать отзыв, его не смогут увидеть клиенты.">
                             <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-eye-close yellow" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"></span>
                                 &nbsp;Не отображать
                             </button>
                         </a>&nbsp;
@@ -47,7 +47,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             </button>
                         </a>&nbsp;
                     </c:when>
-                </c:choose>&nbsp;&nbsp;
+                </c:choose>
+                <a href="<c:url value="/admin/response/edit/${response.id}"/>"
+                   title="Редактировать отзыв">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                        &nbsp;Редактировать
+                    </button>
+                </a>&nbsp;&nbsp;
                 <a href="<c:url value="/admin/response/delete/${response.id}"/>"
                    title="Удалить отзыв">
                     <button class="btn btn-default">
