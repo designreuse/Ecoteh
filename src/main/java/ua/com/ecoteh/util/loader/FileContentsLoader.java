@@ -61,6 +61,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
             in.read(buf);
             setText(new String(buf));
         } catch (IOException ex) {
+            ex.printStackTrace();
             LOGGER.error(ex.getMessage(), ex);
             setText("");
         }
@@ -78,6 +79,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
             out.setLength(0);
             out.write(buf);
         } catch (IOException ex) {
+            ex.printStackTrace();
             LOGGER.error(ex.getMessage(), ex);
         }
     }

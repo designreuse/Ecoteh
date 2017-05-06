@@ -77,13 +77,13 @@ public class AdminMainController extends MainController {
 
     /**
      * Returns page with an administrator menu.
-     * Request mapping: /admin/menu
+     * Request mapping: /admin/, /admin/menu
      * Method: GET
      *
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/menu",
+            value = { "", "/", "/menu" },
             method = RequestMethod.GET
     )
     public ModelAndView getAdminMenu() {
