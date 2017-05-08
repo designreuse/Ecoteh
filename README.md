@@ -15,6 +15,6 @@ _Administrator_ also can add, edit, and delete information about the site conten
     ecoteh.com.ua
 </a>**
 
-_**<a href="https://www.linkedin.com/in/yurii-salimov" title="LinkedIn" target="_blank">
+_**<a href="https://yuriisalimov.github.io" title="LinkedIn" target="_blank">
     Yurii Salimov
 </a>**_
