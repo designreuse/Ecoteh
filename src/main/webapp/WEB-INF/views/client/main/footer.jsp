@@ -98,7 +98,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${not empty favicon.url}">
-                                            <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt="">
+                                            <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt=""
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -136,15 +138,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>&nbsp;&nbsp;
                             </c:if>
                             <c:if test="${not empty contacts.skype}">
-                                <a href="skype:<c:out value="${contacts.skype}"/>?call"
-                                   title="Позвонить в Skype">
+                                <a href="skype:<c:out value="${contacts.skype}"/>?call" title="Позвонить в Skype">
                                     <span class="fa fa-skype fa-2x sk"></span>
                                 </a>
                             </c:if>
                             <br>
                             <c:if test="${not empty contacts.mobilePhone}">
-                                <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
-                                   title="Мобильный телефон">
+                                <a href="tel:<c:out value="${contacts.mobilePhone}"/>" title="Мобильный телефон">
                                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                                     &nbsp;<c:out value="${contacts.mobilePhone}"/>
                                 </a>
@@ -158,8 +158,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <br>
                             </c:if>
                             <c:if test="${not empty contacts.email}">
-                                <a href="mailto:<c:out value="${contacts.email}"/>"
-                                   title="Написать письмо" target="_blank">
+                                <a href="mailto:<c:out value="${contacts.email}"/>" title="Написать письмо"
+                                   target="_blank">
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                     &nbsp;<c:out value="${contacts.email}"/>
                                 </a>
@@ -170,7 +170,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                    title="<c:out value="${main_company.title}"/>">
                                     <c:choose>
                                         <c:when test="${not empty favicon.url}">
-                                            <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt="">
+                                            <img src="<c:url value="${favicon.url}"/>" class="icon-size" alt=""
+                                                 onerror="this.src='<c:url
+                                                         value="/resources/img/static/default_file.gif"/>'">
                                         </c:when>
                                         <c:otherwise>
                                             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
@@ -181,7 +183,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <br>
                             </c:if>
                             <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${period}
-                            О.В. Маматов
+                            О.В.&nbsp;Маматов
                         </p>
                     </div>
                 </div>

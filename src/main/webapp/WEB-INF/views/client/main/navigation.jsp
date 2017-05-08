@@ -67,14 +67,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             </c:forEach>
                             <li class="text-center">
                                 <a href="<c:url value="/article/all"/>" title="Перейти к списку всех товаров">
-                                    <h4 class="text-center">Все товары</h4>
+                                    <h4 class="text-center">Все&nbsp;товары</h4>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <c:if test="${main_company ne null}">
                         <li class="dropdown-top">
-                            <a class="dropdown-top" href="<c:url value="/company/main"/>">О компании</a>
+                            <a class="dropdown-top" href="<c:url value="/company/main"/>">О&nbsp;компании</a>
                             <ul class="dropdown-inside" role="menu">
                                 <li class="text-center">
                                     <a href="<c:url value="/company/main"/>"
@@ -161,7 +161,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     </li>
                     <c:if test="${main_company ne null}">
                         <li>
-                            <a href="<c:url value="/company/main"/>">О компании</a>
+                            <a href="<c:url value="/company/main"/>">О&nbsp;компании</a>
                         </li>
                         <li>
                             <a href="<c:url value="/contacts"/>">Контакты</a>

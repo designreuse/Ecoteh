@@ -36,8 +36,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <c:if test="${not empty slide.url}">
                             <div class="text-center item<c:if test="${count}"> active
                                                     <c:set var="count" value="false"/></c:if>">
-                                <img src="<c:url value="${slide.url}"/>" onerror="this.src='<c:url
-                                        value="/resources/img/static/default_slide.jpg"/>'" alt="${company.title}">
+                                <img src="<c:url value="${slide.url}"/>" alt="<c:out value="${company.title}"/>"
+                                     onerror="this.src='<c:url value="/resources/img/static/default_slide.jpg"/>'">
                             </div>
                         </c:if>
                     </c:forEach>
@@ -56,7 +56,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <%-- Default slide (if slides list is empty) --%>
                 <div class="carousel-inner">
                     <div class="text-center item active">
-                        <img src="<c:url value="/resources/img/static/default_slide.jpg"/>" class="slide" alt="">
+                        <img src="<c:url value="/resources/img/static/default_slide.jpg"/>" class="slide" alt=""
+                             onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                     </div>
                 </div>
             </c:otherwise>

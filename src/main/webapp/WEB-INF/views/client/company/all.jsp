@@ -107,8 +107,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <a href="<c:url value="/resources/img/static/ukraine.gif"/>" rel="lightgallery"
                            title="Наши партнеры на карте Украины">
-                            <img src="<c:url value="/resources/img/static/ukraine.gif"/>" class="map"
-                                 alt="" title="Карта Украины">
+                            <img src="<c:url value="/resources/img/static/ukraine.gif"/>" class="map" alt=""
+                                 title="Карта Украины"
+                                 onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                         </a>
                         <h4 class="text-center">
                             Наши партнеры на карте Украины
