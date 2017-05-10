@@ -24,7 +24,7 @@ public class AuthorizationControllerTest {
     public void whenLoginPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.loginPage(),
-                "login/login",
+                "redirect:/admin/menu",
                 null
         );
     }
