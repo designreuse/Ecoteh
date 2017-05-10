@@ -18,7 +18,7 @@ public interface UserRepository extends DataRepository<User> {
      * @param name the name of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByName(final String name);
+    User findByName(String name);
 
     /**
      * Returns user from a database,
@@ -27,7 +27,7 @@ public interface UserRepository extends DataRepository<User> {
      * @param login the login of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByEncryptedLogin(final String login);
+    User findByEncryptedLogin(String login);
 
     /**
      * Returns user from a database,
@@ -36,7 +36,7 @@ public interface UserRepository extends DataRepository<User> {
      * @param url the URL of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByUrl(final String url);
+    User findByUrl(String url);
 
     /**
      * Removes user from a database,
@@ -44,7 +44,7 @@ public interface UserRepository extends DataRepository<User> {
      *
      * @param name the name of a user to remove.
      */
-    void deleteByName(final String name);
+    void deleteByName(String name);
 
     /**
      * Removes user from a database,
@@ -52,7 +52,7 @@ public interface UserRepository extends DataRepository<User> {
      *
      * @param url the URL of a user to remove.
      */
-    void deleteByUrl(final String url);
+    void deleteByUrl(String url);
 
     /**
      * Returns user from a database,
@@ -61,7 +61,7 @@ public interface UserRepository extends DataRepository<User> {
      * @param email the E-mail of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByContactsEmail(final String email);
+    User findByContactsEmail(String email);
 
     /**
      * Returns user from a database,
@@ -70,7 +70,7 @@ public interface UserRepository extends DataRepository<User> {
      * @param phone the mobile phone of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByContactsMobilePhone(final String phone);
+    User findByContactsMobilePhone(String phone);
 
     /**
      * Returns user from a database,
@@ -79,7 +79,7 @@ public interface UserRepository extends DataRepository<User> {
      * @param phone the landline phone of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByContactsLandlinePhone(final String phone);
+    User findByContactsLandlinePhone(String phone);
 
     /**
      * Returns user from a database,
@@ -88,5 +88,5 @@ public interface UserRepository extends DataRepository<User> {
      * @param fax the fax phone of a user to return.
      * @return The object of class {@link User}.
      */
-    User findByContactsFax(final String fax);
+    User findByContactsFax(String fax);
 }

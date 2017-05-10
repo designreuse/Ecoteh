@@ -24,7 +24,7 @@ public interface IFile extends IModel {
      *
      * @param title the new title to the file.
      */
-    void setTitle(final String title);
+    void setTitle(String title);
 
     /**
      * Returns a URL of the file.
@@ -38,7 +38,7 @@ public interface IFile extends IModel {
      *
      * @param url the new URL to the file.
      */
-    void setUrl(final String url);
+    void setUrl(String url);
 
     /**
      * Returns a file type.
@@ -52,14 +52,14 @@ public interface IFile extends IModel {
      *
      * @param type the new file type.
      */
-    void setType(final FileType type);
+    void setType(FileType type);
 
     /**
      * Translates and sets a new URL to the file.
      *
      * @param url the URL to translate and set.
      */
-    void translateAndSetUrl(final String url);
+    void translateAndSetUrl(String url);
 
     /**
      * Initializes the file.
@@ -68,5 +68,5 @@ public interface IFile extends IModel {
      * @param file the file to copy.
      * @return This file with new fields.
      */
-    File initialize(final File file);
+    File initialize(File file);
 }

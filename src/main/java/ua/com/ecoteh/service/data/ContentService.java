@@ -22,10 +22,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param content the content to update.
      * @return The updating content with incoming id.
      */
-    T update(
-            final String url,
-            final T content
-    );
+    T update(String url, T content);
 
     /**
      * Returns content object of the {@link Content} class or subclasses
@@ -35,10 +32,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param isValid is get valid content or not.
      * @return The content with the incoming title.
      */
-    T getByTitle(
-            final String title,
-            final boolean isValid
-    );
+    T getByTitle(String title, boolean isValid);
 
     /**
      * Returns content object of the {@link Content} class or subclasses
@@ -48,10 +42,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param isValid is get valid content or not.
      * @return The content with the incoming URL.
      */
-    T getByUrl(
-            final String url,
-            final boolean isValid
-    );
+    T getByUrl(String url, boolean isValid);
 
     /**
      * Removes content object of the {@link Content} class or subclasses
@@ -59,7 +50,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      *
      * @param title the title of a content to remove.
      */
-    void removeByTitle(final String title);
+    void removeByTitle(String title);
 
     /**
      * Removes content object of the {@link Content} class or subclasses
@@ -67,7 +58,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      *
      * @param url the URL of a content to remove.
      */
-    void removeByUrl(final String url);
+    void removeByUrl(String url);
 
     /**
      * Sorts and returns objects of {@link Content} class
@@ -77,10 +68,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents.
      */
-    List<T> sortByTitle(
-            final Collection<T> contents,
-            final boolean revers
-    );
+    List<T> sortByTitle(Collection<T> contents, boolean revers);
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by URL.
@@ -89,10 +77,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents.
      */
-    List<T> sortByUrl(
-            final Collection<T> contents,
-            final boolean revers
-    );
+    List<T> sortByUrl(Collection<T> contents, boolean revers);
 
     /**
      * Sorts and returns objects of {@link Content} class
@@ -101,7 +86,7 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
      */
-    List<T> getAndSortByTitle(final boolean revers);
+    List<T> getAndSortByTitle(boolean revers);
 
     /**
      * Sorts and returns objects of {@link Content} class or subclasses by URL.
@@ -109,5 +94,5 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents.
      */
-    List<T> getAndSortByUrl(final boolean revers);
+    List<T> getAndSortByUrl(boolean revers);
 }

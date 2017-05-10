@@ -527,9 +527,9 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns a photo URL of the user.
+     * Returns a photo of the user.
      *
-     * @return The user photo URL.
+     * @return The user photo.
      */
     @Override
     public File getPhoto() {
@@ -539,7 +539,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Sets a new photo to the user.
      *
-     * @param photo the new photo URL to the user.
+     * @param photo the new photo to the user.
      */
     @Override
     public void setPhoto(final File photo) {

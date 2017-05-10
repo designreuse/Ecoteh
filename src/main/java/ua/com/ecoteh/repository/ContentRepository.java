@@ -21,7 +21,7 @@ public interface ContentRepository<T extends Content> extends DataRepository<T> 
      * @param title the title of a content object to return.
      * @return The content object with parameter title.
      */
-    T findByTitle(final String title);
+    T findByTitle(String title);
 
     /**
      * Returns content object of the {@link Content} class or subclasses
@@ -30,7 +30,7 @@ public interface ContentRepository<T extends Content> extends DataRepository<T> 
      * @param url the URL of a content object to return.
      * @return The content object with parameter url.
      */
-    T findByUrl(final String url);
+    T findByUrl(String url);
 
     /**
      * Removes content object of the {@link Content} class or subclasses
@@ -38,12 +38,12 @@ public interface ContentRepository<T extends Content> extends DataRepository<T> 
      *
      * @param title the title of a content object to remove.
      */
-    void deleteByTitle(final String title);
+    void deleteByTitle(String title);
 
     /**
      * Removes content object with the parameter url from a database.
      *
      * @param url the URL of a content object to remove.
      */
-    void deleteByUrl(final String url);
+    void deleteByUrl(String url);
 }

@@ -24,11 +24,7 @@ public interface FileService extends DataService<File> {
      * @param multipartFile the multipart file of a new file.
      * @return The new saving file.
      */
-    File add(
-            final String title,
-            final FileType type,
-            final MultipartFile multipartFile
-    );
+    File add(String title, FileType type, MultipartFile multipartFile);
 
     /**
      * Initializes, saves and returns a new file.
@@ -37,10 +33,7 @@ public interface FileService extends DataService<File> {
      * @param multipartFile the multipart file of a new file.
      * @return The new saving file.
      */
-    File add(
-            final String title,
-            final MultipartFile multipartFile
-    );
+    File add(String title, MultipartFile multipartFile);
 
     /**
      * Initializes, updates and returns file with incoming id.
@@ -52,10 +45,10 @@ public interface FileService extends DataService<File> {
      * @return The updating file with incoming id.
      */
     File update(
-            final long id,
-            final String title,
-            final FileType type,
-            final MultipartFile multipartFile
+            long id,
+            String title,
+            FileType type,
+            MultipartFile multipartFile
     );
 
     /**
@@ -67,9 +60,9 @@ public interface FileService extends DataService<File> {
      * @return The updating photo with incoming id.
      */
     File update(
-            final long id,
-            final String title,
-            final MultipartFile multipartFile
+            long id,
+            String title,
+            MultipartFile multipartFile
     );
 
     /**
@@ -78,7 +71,7 @@ public interface FileService extends DataService<File> {
      * @param title the title of a file to return.
      * @return The media with incoming title.
      */
-    File getByTitle(final String title);
+    File getByTitle(String title);
 
     /**
      * Returns file object with the incoming url.
@@ -86,21 +79,21 @@ public interface FileService extends DataService<File> {
      * @param url the URL of a file to return.
      * @return The media with incoming URL.
      */
-    File getByUrl(final String url);
+    File getByUrl(String url);
 
     /**
      * Removes file object with the incoming title.
      *
      * @param title the title of a file to remove.
      */
-    void removeByTitle(final String title);
+    void removeByTitle(String title);
 
     /**
      * Removes file object with the incoming url.
      *
      * @param url a URL of the file to remove.
      */
-    void removeByUrl(final String url);
+    void removeByUrl(String url);
 
     /**
      * Sorts and returns file objects by title.
@@ -109,10 +102,7 @@ public interface FileService extends DataService<File> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of files.
      */
-    List<File> sortByTitle(
-            final Collection<File> files,
-            final boolean revers
-    );
+    List<File> sortByTitle(Collection<File> files, boolean revers);
 
     /**
      * Save a multipart file in the file system in the directory rootPath.
@@ -120,17 +110,14 @@ public interface FileService extends DataService<File> {
      * @param file     the multipart file to save.
      * @param rootPath the directory path.
      */
-    void saveFile(
-            final MultipartFile file,
-            final String rootPath
-    );
+    void saveFile(MultipartFile file, String rootPath);
 
     /**
      * Save a multipart file in the file system.
      *
      * @param file the multipart file to save.
      */
-    void saveFile(final MultipartFile file);
+    void saveFile(MultipartFile file);
 
     /**
      * Deletes file in the file system.
@@ -138,7 +125,7 @@ public interface FileService extends DataService<File> {
      * @param path the file path.
      * @return true if able to delete the file, false otherwise.
      */
-    boolean deleteFile(final String path);
+    boolean deleteFile(String path);
 
     /**
      * Returns files with the incoming type.
@@ -146,7 +133,7 @@ public interface FileService extends DataService<File> {
      * @param type the type of files to return.
      * @return The files with the incoming type.
      */
-    List<File> getByType(final FileType type);
+    List<File> getByType(FileType type);
 
     /**
      * Returns last file with the incoming type.
@@ -154,5 +141,5 @@ public interface FileService extends DataService<File> {
      * @param type the type of file to return.
      * @return The last file with the incoming type.
      */
-    File getLastByType(final FileType type);
+    File getLastByType(FileType type);
 }

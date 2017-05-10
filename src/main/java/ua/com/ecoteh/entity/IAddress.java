@@ -21,7 +21,7 @@ public interface IAddress extends IModel {
      *
      * @param address the new mailing address to the address.
      */
-    void setAddress(final String address);
+    void setAddress(String address);
 
     /**
      * Returns a google maps URL of the address.
@@ -35,7 +35,7 @@ public interface IAddress extends IModel {
      *
      * @param googleMaps the new Google maps URL to the address.
      */
-    void setGoogleMaps(final String googleMaps);
+    void setGoogleMaps(String googleMaps);
 
     /**
      * Initializes the address.
@@ -44,5 +44,5 @@ public interface IAddress extends IModel {
      * @param address the address to copy.
      * @return This address with new fields.
      */
-    Address initialize(final Address address);
+    Address initialize(Address address);
 }

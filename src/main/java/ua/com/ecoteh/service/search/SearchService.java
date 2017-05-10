@@ -19,9 +19,5 @@ public interface SearchService {
      * @param howSearch a search mode.
      * @return The ready object of class ModelAndView.
      */
-    ModelAndView search(
-            final String keywords,
-            final String content,
-            final boolean howSearch
-    );
+    ModelAndView search(String keywords, String content, boolean howSearch);
 }

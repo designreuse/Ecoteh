@@ -21,7 +21,7 @@ public interface FileRepository extends DataRepository<File> {
      * @param title the title of the file to return.
      * @return The object of class {@link File}.
      */
-    File findByTitle(final String title);
+    File findByTitle(String title);
 
     /**
      * Returns file from a database,
@@ -30,7 +30,7 @@ public interface FileRepository extends DataRepository<File> {
      * @param url the URL of a file to return.
      * @return The object of class {@link File}.
      */
-    File findByUrl(final String url);
+    File findByUrl(String url);
 
     /**
      * Removes file from a database,
@@ -38,7 +38,7 @@ public interface FileRepository extends DataRepository<File> {
      *
      * @param title the title of a file to remove.
      */
-    void deleteByTitle(final String title);
+    void deleteByTitle(String title);
 
     /**
      * Removes file from a database,
@@ -46,7 +46,7 @@ public interface FileRepository extends DataRepository<File> {
      *
      * @param url the URL of a file to remove.
      */
-    void deleteByUrl(final String url);
+    void deleteByUrl(String url);
 
     /**
      * Returns all files with the type.
@@ -54,5 +54,5 @@ public interface FileRepository extends DataRepository<File> {
      * @param type the type of files to return.
      * @return The files with the type.
      */
-    List<File> findAllByType(final FileType type);
+    List<File> findAllByType(FileType type);
 }

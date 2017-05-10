@@ -22,7 +22,7 @@ public interface IContent extends IModel {
      *
      * @param title the new title to the content.
      */
-    void setTitle(final String title);
+    void setTitle(String title);
 
     /**
      * Returns a URL of the content.
@@ -36,14 +36,14 @@ public interface IContent extends IModel {
      *
      * @param url the new URL to the content.
      */
-    void setUrl(final String url);
+    void setUrl(String url);
 
     /**
      * Translates value and sets to url.
      *
      * @param value the value to translate.
      */
-    void translateAndSetUrl(final String value);
+    void translateAndSetUrl(String value);
 
     /**
      * Returns a description of the content.
@@ -57,7 +57,7 @@ public interface IContent extends IModel {
      *
      * @param description the new description to the content.
      */
-    void setDescription(final String description);
+    void setDescription(String description);
 
     /**
      * Returns a keywords of the content.
@@ -71,7 +71,7 @@ public interface IContent extends IModel {
      *
      * @param keywords the new keywords to the content.
      */
-    void setKeywords(final String keywords);
+    void setKeywords(String keywords);
 
     /**
      * Returns a logo of the content.
@@ -85,7 +85,7 @@ public interface IContent extends IModel {
      *
      * @param logo the new logo to the content.
      */
-    void setLogo(final File logo);
+    void setLogo(File logo);
 
     /**
      * Initializes the content.
@@ -94,5 +94,5 @@ public interface IContent extends IModel {
      * @param content the content to copy.
      * @return This content with new fields.
      */
-    Content initialize(final Content content);
+    Content initialize(Content content);
 }

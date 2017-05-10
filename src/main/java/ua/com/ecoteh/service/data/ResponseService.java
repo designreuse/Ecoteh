@@ -22,10 +22,7 @@ public interface ResponseService extends DataService<Response> {
      * @param response the response to update.
      * @return The updating response with incoming id.
      */
-    Response update(
-            final long id,
-            final Response response
-    );
+    Response update(long id, Response response);
 
     /**
      * Sorts and returns responses by date.
@@ -34,10 +31,7 @@ public interface ResponseService extends DataService<Response> {
      * @param revers    Sort in descending or ascending.
      * @return The sorted list of responses.
      */
-    List<Response> sortByDate(
-            final Collection<Response> responses,
-            final boolean revers
-    );
+    List<Response> sortByDate(Collection<Response> responses, boolean revers);
 
     /**
      * Sorts and returns responses by date.
@@ -45,31 +39,28 @@ public interface ResponseService extends DataService<Response> {
      * @param revers Sort in descending or ascending.
      * @return The sorted list of responses.
      */
-    List<Response> getAndSortByDate(final boolean revers);
+    List<Response> getAndSortByDate(boolean revers);
 
     /**
      * Filters and returns responses by the incoming dates.
      *
      * @param responses  the responses to filter.
      * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param finishDate the  date.
      * @return The filtered list of responses.
      */
     List<Response> filterByDate(
-            final Collection<Response> responses,
-            final Date startDate,
-            final Date finishDate
+            Collection<Response> responses,
+            Date startDate,
+            Date finishDate
     );
 
     /**
      * Filters and returns responses by the incoming dates.
      *
      * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param finishDate the  date.
      * @return The filtered list of responses.
      */
-    List<Response> getAndFilterByDate(
-            final Date startDate,
-            final Date finishDate
-    );
+    List<Response> getAndFilterByDate(Date startDate, Date finishDate);
 }

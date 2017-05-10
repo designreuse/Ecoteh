@@ -24,7 +24,7 @@ public interface IMessage extends IModel {
      *
      * @param user the user of the message.
      */
-    void setUser(final User user);
+    void setUser(User user);
 
     /**
      * Returns a subject of the message.
@@ -38,7 +38,7 @@ public interface IMessage extends IModel {
      *
      * @param subject the new subject to the message.
      */
-    void setSubject(final String subject);
+    void setSubject(String subject);
 
     /**
      * Returns a text of the message.
@@ -52,7 +52,7 @@ public interface IMessage extends IModel {
      *
      * @param text v new text to the message.
      */
-    void setText(final String text);
+    void setText(String text);
 
     /**
      * Returns a date of the message.
@@ -66,7 +66,7 @@ public interface IMessage extends IModel {
      *
      * @param date the new text to the message.
      */
-    void setDate(final Date date);
+    void setDate(Date date);
 
     /**
      * Returns an article date in string format.
@@ -82,5 +82,5 @@ public interface IMessage extends IModel {
      * @param message the message to copy.
      * @return This message with new fields.
      */
-    Message initialize(final Message message);
+    Message initialize(Message message);
 }

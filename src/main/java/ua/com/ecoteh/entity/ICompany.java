@@ -24,7 +24,7 @@ public interface ICompany extends IContent {
      *
      * @param domain the new domain to the company.
      */
-    void setDomain(final String domain);
+    void setDomain(String domain);
 
     /**
      * Returns a domain of the company.
@@ -38,7 +38,7 @@ public interface ICompany extends IContent {
      *
      * @param tagline the new domain to the company.
      */
-    void setTagline(final String tagline);
+    void setTagline(String tagline);
 
     /**
      * Returns a information of the company.
@@ -52,7 +52,7 @@ public interface ICompany extends IContent {
      *
      * @param information the new information to the company.
      */
-    void setInformation(final String information);
+    void setInformation(String information);
 
     /**
      * Returns a sender e-mail of the company.
@@ -66,7 +66,7 @@ public interface ICompany extends IContent {
      *
      * @param senderEmail the new sender e-mail to the company.
      */
-    void setSenderEmail(final String senderEmail);
+    void setSenderEmail(String senderEmail);
 
     /**
      * Returns a sender password of the company.
@@ -80,7 +80,7 @@ public interface ICompany extends IContent {
      *
      * @param senderPass the new sender password to the company.
      */
-    void setSenderPass(final String senderPass);
+    void setSenderPass(String senderPass);
 
     /**
      * Returns a start work time of the company.
@@ -94,7 +94,7 @@ public interface ICompany extends IContent {
      *
      * @param workTimeFrom the new start work time to the company.
      */
-    void setWorkTimeFrom(final String workTimeFrom);
+    void setWorkTimeFrom(String workTimeFrom);
 
     /**
      * Returns a finish work time of the company.
@@ -108,7 +108,7 @@ public interface ICompany extends IContent {
      *
      * @param workTimeTo the new finish work time to the company.
      */
-    void setWorkTimeTo(final String workTimeTo);
+    void setWorkTimeTo(String workTimeTo);
 
     /**
      * Returns a company contacts.
@@ -122,7 +122,7 @@ public interface ICompany extends IContent {
      *
      * @param contacts the new contacts to the company.
      */
-    void setContacts(final Contacts contacts);
+    void setContacts(Contacts contacts);
 
     /**
      * Returns a company address.
@@ -136,7 +136,7 @@ public interface ICompany extends IContent {
      *
      * @param address the new address to the company.
      */
-    void setAddress(final Address address);
+    void setAddress(Address address);
 
     /**
      * Returns a domain of the company.
@@ -150,7 +150,7 @@ public interface ICompany extends IContent {
      *
      * @param type the new logo to the company.
      */
-    void setType(final CompanyType type);
+    void setType(CompanyType type);
 
     /**
      * Checks whether the company is opened now.
@@ -167,5 +167,5 @@ public interface ICompany extends IContent {
      * @param company the company to copy.
      * @return This company with new fields.
      */
-    Company initialize(final Company company);
+    Company initialize(Company company);
 }

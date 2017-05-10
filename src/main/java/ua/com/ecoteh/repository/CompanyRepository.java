@@ -21,7 +21,7 @@ public interface CompanyRepository extends ContentRepository<Company> {
      * @param type the type of a company to return.
      * @return The objects of class {@link Company}.
      */
-    List<Company> findByType(final CompanyType type);
+    List<Company> findByType(CompanyType type);
 
     /**
      * Returns company from a database,
@@ -30,5 +30,5 @@ public interface CompanyRepository extends ContentRepository<Company> {
      * @param domain the domain of a company to return.
      * @return The object of class {@link Company}.
      */
-    Company findByDomain(final String domain);
+    Company findByDomain(String domain);
 }

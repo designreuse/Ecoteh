@@ -20,7 +20,7 @@ public interface ArticleRepository extends ContentRepository<Article> {
      * @param number the title of a article to return.
      * @return The object of class {@link Article}.
      */
-    Article findByNumber(final String number);
+    Article findByNumber(String number);
 
     /**
      * Returns all articles from a database,
@@ -29,7 +29,7 @@ public interface ArticleRepository extends ContentRepository<Article> {
      * @param id the category id of a article to return.
      * @return The object of class {@link Article}.
      */
-    List<Article> findByCategoryId(final long id);
+    List<Article> findByCategoryId(long id);
 
     /**
      * Returns all articles from a database,
@@ -38,7 +38,7 @@ public interface ArticleRepository extends ContentRepository<Article> {
      * @param title the category title of a articles to return.
      * @return The object of class {@link Article}.
      */
-    List<Article> findByCategoryTitle(final String title);
+    List<Article> findByCategoryTitle(String title);
 
     /**
      * Removes article from a database,
@@ -46,5 +46,5 @@ public interface ArticleRepository extends ContentRepository<Article> {
      *
      * @param number the number of the article to remove.
      */
-    void deleteByNumber(final String number);
+    void deleteByNumber(String number);
 }

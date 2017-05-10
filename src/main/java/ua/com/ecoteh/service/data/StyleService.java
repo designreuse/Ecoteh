@@ -21,7 +21,7 @@ public interface StyleService {
      *
      * @param styles the new CSS styles to save.
      */
-    void save(final String styles);
+    void save(String styles);
 
     /**
      * Rollbacks a CSS styles.

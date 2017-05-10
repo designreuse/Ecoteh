@@ -23,7 +23,7 @@ public interface IArticle extends IContent {
      *
      * @param number the new number to the article.
      */
-    void setNumber(final String number);
+    void setNumber(String number);
 
     /**
      * Generates new number to the article.
@@ -42,7 +42,7 @@ public interface IArticle extends IContent {
      *
      * @param text the new text to the article.
      */
-    void setText(final String text);
+    void setText(String text);
 
     /**
      * Returns a date of the article.
@@ -56,7 +56,7 @@ public interface IArticle extends IContent {
      *
      * @param date the new date to the article.
      */
-    void setDate(final Date date);
+    void setDate(Date date);
 
     /**
      * Returns an article date in string format.
@@ -78,14 +78,14 @@ public interface IArticle extends IContent {
      *
      * @param price the new price to the article.
      */
-    void setPrice(final String price);
+    void setPrice(String price);
 
     /**
      * Sets a new category to the article.
      *
      * @param category the new category to the article.
      */
-    void setCategory(final Category category);
+    void setCategory(Category category);
 
     /**
      * Returns a category of the article.
@@ -101,5 +101,5 @@ public interface IArticle extends IContent {
      * @param article the article to copy.
      * @return This article with new fields.
      */
-    Article initialize(final Article article);
+    Article initialize(Article article);
 }

@@ -22,11 +22,11 @@ public interface SenderService {
      * @param senderEmailPass a sender e-mail password.
      */
     void send(
-            final String subject,
-            final String text,
-            final String recipientEmail,
-            final String senderEmail,
-            final String senderEmailPass
+            String subject,
+            String text,
+            String recipientEmail,
+            String senderEmail,
+            String senderEmailPass
     );
 
     /**
@@ -38,10 +38,10 @@ public interface SenderService {
      * @param sender         a sender user.
      */
     void send(
-            final String subject,
-            final String text,
-            final String recipientEmail,
-            final User sender
+            String subject,
+            String text,
+            String recipientEmail,
+            User sender
     );
 
     /**
@@ -53,10 +53,10 @@ public interface SenderService {
      * @param sender    a sender user.
      */
     void send(
-            final String subject,
-            final String text,
-            final User recipient,
-            final User sender
+            String subject,
+            String text,
+            User recipient,
+            User sender
     );
 
     /**
@@ -69,11 +69,11 @@ public interface SenderService {
      * @param senderEmailPass a sender e-mail password.
      */
     void send(
-            final String subject,
-            final String text,
-            final String[] recipientEmails,
-            final String senderEmail,
-            final String senderEmailPass
+            String subject,
+            String text,
+            String[] recipientEmails,
+            String senderEmail,
+            String senderEmailPass
     );
 
     /**
@@ -85,10 +85,10 @@ public interface SenderService {
      * @param sender          a sender user.
      */
     void send(
-            final String subject,
-            final String text,
-            final String[] recipientEmails,
-            final User sender
+            String subject,
+            String text,
+            String[] recipientEmails,
+            User sender
     );
 
     /**
@@ -100,10 +100,10 @@ public interface SenderService {
      * @param sender     a sender user.
      */
     void send(
-            final String subject,
-            final String text,
-            final Collection<User> recipients,
-            final User sender
+            String subject,
+            String text,
+            Collection<User> recipients,
+            User sender
     );
 
     /**
@@ -116,10 +116,10 @@ public interface SenderService {
      * @param senderEmailPass a sender e-mail password.
      */
     void send(
-            final String subject,
-            final String text,
-            final Collection<User> recipients,
-            final String senderEmail,
-            final String senderEmailPass
+            String subject,
+            String text,
+            Collection<User> recipients,
+            String senderEmail,
+            String senderEmailPass
     );
 }

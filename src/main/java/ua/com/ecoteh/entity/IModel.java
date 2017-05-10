@@ -27,7 +27,7 @@ public interface IModel extends Serializable, Cloneable {
      * argument, otherwise returns false.
      */
     @Override
-    boolean equals(final Object object);
+    boolean equals(Object object);
 
     /**
      * Returns a hash code value for the object.
@@ -59,14 +59,14 @@ public interface IModel extends Serializable, Cloneable {
      *
      * @param id the new identifier to the model.
      */
-    void setId(final long id);
+    void setId(long id);
 
     /**
      * Sets validations of the model.
      *
      * @param validated the validations of the model.
      */
-    void setValidated(final boolean validated);
+    void setValidated(boolean validated);
 
     /**
      * Validates the model.
@@ -82,5 +82,5 @@ public interface IModel extends Serializable, Cloneable {
      * @param model the model to copy.
      * @return This model with a new copied fields.
      */
-    Model initialize(final Model model);
+    Model initialize(Model model);
 }

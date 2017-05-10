@@ -17,28 +17,28 @@ public interface ICategory extends IContent {
      *
      * @param article the article to add.
      */
-    void addArticle(final Article article);
+    void addArticle(Article article);
 
     /**
      * Adds new articles to the list of articles.
      *
      * @param articles the articles to add.
      */
-    void addArticles(final Collection<Article> articles);
+    void addArticles(Collection<Article> articles);
 
     /**
      * Removes article from the list of articles.
      *
      * @param article the article to remove.
      */
-    void removeArticle(final Article article);
+    void removeArticle(Article article);
 
     /**
      * Removes articles from the list of articles.
      *
      * @param articles the articles to remove.
      */
-    void removeArticles(final Collection<Article> articles);
+    void removeArticles(Collection<Article> articles);
 
     /**
      * Returns an list of articles.
@@ -52,7 +52,7 @@ public interface ICategory extends IContent {
      *
      * @param articles the articles to add.
      */
-    void setArticles(final Collection<Article> articles);
+    void setArticles(Collection<Article> articles);
 
     /**
      * Contains article in the list of articles.
@@ -60,7 +60,7 @@ public interface ICategory extends IContent {
      * @param article the article to contain.
      * @return true if article is contains, false otherwise.
      */
-    boolean containsArticle(final Article article);
+    boolean containsArticle(Article article);
 
     /**
      * Contains articles in the list of articles.
@@ -68,7 +68,7 @@ public interface ICategory extends IContent {
      * @param articles the articles to contain.
      * @return true if articles are contains, false otherwise.
      */
-    boolean containsArticles(final Collection<Article> articles);
+    boolean containsArticles(Collection<Article> articles);
 
     /**
      * Clears the list of articles.
@@ -82,5 +82,5 @@ public interface ICategory extends IContent {
      * @param category the category to copy.
      * @return This category with new fields.
      */
-    Category initialize(final Category category);
+    Category initialize(Category category);
 }

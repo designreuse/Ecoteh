@@ -154,11 +154,7 @@ public interface DataService<T extends Model> {
      * @param toIndex   the final index.
      * @return The models from initial index to final index.
      */
-    List<T> subList(
-            final Collection<T> models,
-            final int fromIndex,
-            final int toIndex
-    );
+    List<T> subList(Collection<T> models, int fromIndex, int toIndex);
 
     /**
      * Returns a list objects of {@link Model} class or subclasses.
@@ -167,7 +163,7 @@ public interface DataService<T extends Model> {
      * @param toIndex   the final index.
      * @return The models from initial index to final index.
      */
-    List<T> getAndSubList(final int fromIndex, final int toIndex);
+    List<T> getAndSubList(int fromIndex, int toIndex);
 
     /**
      * Returns a list valid objects of {@link Model} class or subclasses.
@@ -175,7 +171,7 @@ public interface DataService<T extends Model> {
      * @param models the models to filter.
      * @return The filtered models.
      */
-    List<T> filteredByValid(final Collection<T> models);
+    List<T> filteredByValid(Collection<T> models);
 
     /**
      * Shuffles the models and returns it.
@@ -183,5 +179,5 @@ public interface DataService<T extends Model> {
      * @param models the models to shuffle.
      * @return The shuffling models.
      */
-    List<T> shuffle(final Collection<T> models);
+    List<T> shuffle(Collection<T> models);
 }

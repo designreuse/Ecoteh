@@ -21,7 +21,7 @@ public interface IContacts extends IModel {
      *
      * @param email the new E-mail.
      */
-    void setEmail(final String email);
+    void setEmail(String email);
 
     /**
      * Returns a mobile phone number.
@@ -35,7 +35,7 @@ public interface IContacts extends IModel {
      *
      * @param mobilePhone a new mobile phone number.
      */
-    void setMobilePhone(final String mobilePhone);
+    void setMobilePhone(String mobilePhone);
 
     /**
      * Returns a landline phone number.
@@ -49,7 +49,7 @@ public interface IContacts extends IModel {
      *
      * @param landlinePhone a new landline phone number.
      */
-    void setLandlinePhone(final String landlinePhone);
+    void setLandlinePhone(String landlinePhone);
 
     /**
      * Returns a fax number.
@@ -63,7 +63,7 @@ public interface IContacts extends IModel {
      *
      * @param fax a new fax number.
      */
-    void setFax(final String fax);
+    void setFax(String fax);
 
     /**
      * Returns a Vkontakte URL.
@@ -77,7 +77,7 @@ public interface IContacts extends IModel {
      *
      * @param vkontakte a new Vkontakte URL.
      */
-    void setVkontakte(final String vkontakte);
+    void setVkontakte(String vkontakte);
 
     /**
      * Returns a Facebook URL.
@@ -91,7 +91,7 @@ public interface IContacts extends IModel {
      *
      * @param facebook a new Facebook URL.
      */
-    void setFacebook(final String facebook);
+    void setFacebook(String facebook);
 
     /**
      * Returns a Twitter URL.
@@ -105,7 +105,7 @@ public interface IContacts extends IModel {
      *
      * @param twitter a new Twitter url URL.
      */
-    void setTwitter(final String twitter);
+    void setTwitter(String twitter);
 
     /**
      * Returns a skype username.
@@ -119,7 +119,7 @@ public interface IContacts extends IModel {
      *
      * @param skype a new skype username.
      */
-    void setSkype(final String skype);
+    void setSkype(String skype);
 
     /**
      * Initializes the contacts.
@@ -127,5 +127,5 @@ public interface IContacts extends IModel {
      * @param contacts a contacts to copy.
      * @return This contacts with new fields.
      */
-    Contacts initialize(final Contacts contacts);
+    Contacts initialize(Contacts contacts);
 }

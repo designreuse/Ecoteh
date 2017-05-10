@@ -30,14 +30,14 @@ public interface Ascii {
      *
      * @param value the string to translate.
      */
-    void setValue(final String value);
+    void setValue(String value);
 
     /**
      * Sets a integer to translate.
      *
      * @param value the integer to translate.
      */
-    void setValue(final int value);
+    void setValue(int value);
 
     /**
      * Returns a string to translate.

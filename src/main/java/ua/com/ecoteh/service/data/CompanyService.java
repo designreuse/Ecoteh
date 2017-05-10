@@ -19,7 +19,7 @@ public interface CompanyService extends ContentService<Company> {
      * @param company the main company to update.
      * @return The updating main company.
      */
-    Company updateMainCompany(final Company company);
+    Company updateMainCompany(Company company);
 
     /**
      * Returns main company.
@@ -39,7 +39,7 @@ public interface CompanyService extends ContentService<Company> {
      * @param isValid is get valid company or not.
      * @return The partners companies.
      */
-    List<Company> getPartners(final boolean isValid);
+    List<Company> getPartners(boolean isValid);
 
     /**
      * Returns company with the category domain.
@@ -47,5 +47,5 @@ public interface CompanyService extends ContentService<Company> {
      * @param domain the domain of a company to return.
      * @return The object of class {@link Company}.
      */
-    Company getByDomain(final String domain);
+    Company getByDomain(String domain);
 }

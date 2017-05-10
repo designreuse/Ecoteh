@@ -23,10 +23,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param isValid is get valid article or not.
      * @return The object of class {@link Article}.
      */
-    Article getByNumber(
-            final String number,
-            final boolean isValid
-    );
+    Article getByNumber(String number, boolean isValid);
 
     /**
      * Returns all article with the category id.
@@ -34,7 +31,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param id the category id of articles to return.
      * @return The list of articles.
      */
-    List<Article> getByCategoryId(final long id);
+    List<Article> getByCategoryId(long id);
 
     /**
      * Returns all article with the category title.
@@ -42,14 +39,14 @@ public interface ArticleService extends ContentService<Article> {
      * @param title the category title of articles to return.
      * @return The list of articles.
      */
-    List<Article> getByCategoryTitle(final String title);
+    List<Article> getByCategoryTitle(String title);
 
     /**
      * Removes all article with the parameter number.
      *
      * @param number the number of an article to remove.
      */
-    void removeByNumber(final String number);
+    void removeByNumber(String number);
 
     /**
      * Sorts and returns articles by number.
@@ -58,10 +55,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articles.
      */
-    List<Article> sortByNumber(
-            final Collection<Article> articles,
-            final boolean revers
-    );
+    List<Article> sortByNumber(Collection<Article> articles, boolean revers);
 
     /**
      * Sorts and returns articles by date.
@@ -70,10 +64,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articles.
      */
-    List<Article> sortByDate(
-            final Collection<Article> articles,
-            final boolean revers
-    );
+    List<Article> sortByDate(Collection<Article> articles, boolean revers);
 
     /**
      * Sorts and returns articles by number.
@@ -81,7 +72,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
      */
-    List<Article> getAndSortByNumber(final boolean revers);
+    List<Article> getAndSortByNumber(boolean revers);
 
     /**
      * Sorts and returns articles by date.
@@ -89,7 +80,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articles.
      */
-    List<Article> getAndSortByDate(final boolean revers);
+    List<Article> getAndSortByDate(boolean revers);
 
     /**
      * Filters and returns articles by incming dates.
@@ -99,11 +90,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param endDate   the final date.
      * @return The filtered list of articles.
      */
-    List<Article> filterByDate(
-            final Collection<Article> articles,
-            final Date startDate,
-            final Date endDate
-    );
+    List<Article> filterByDate(Collection<Article> articles, Date startDate, Date endDate);
 
     /**
      * Filters and returns articles by the category.
@@ -112,10 +99,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param category the category filtering.
      * @return The filtered list of articles.
      */
-    List<Article> filterByCategory(
-            final Collection<Article> articles,
-            final Category category
-    );
+    List<Article> filterByCategory(Collection<Article> articles, Category category);
 
     /**
      * Filters and returns articles by the categories.
@@ -124,10 +108,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param categories the categories filtering.
      * @return The filtered list of articles.
      */
-    List<Article> filterByCategories(
-            final Collection<Article> articles,
-            final Collection<Category> categories
-    );
+    List<Article> filterByCategories(Collection<Article> articles, Collection<Category> categories);
 
     /**
      * Filters and returns articles by the dates.
@@ -136,10 +117,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param endDate   the final date.
      * @return The filtered list of articles.
      */
-    List<Article> getAndFilterByDate(
-            final Date startDate,
-            final Date endDate
-    );
+    List<Article> getAndFilterByDate(Date startDate, Date endDate);
 
     /**
      * Filters and returns articles by the category.
@@ -147,7 +125,7 @@ public interface ArticleService extends ContentService<Article> {
      * @param category the category filtering.
      * @return The filtered list of articles.
      */
-    List<Article> getAndFilterByCategory(final Category category);
+    List<Article> getAndFilterByCategory(Category category);
 
     /**
      * Filters and returns articles by the categories.
@@ -155,5 +133,5 @@ public interface ArticleService extends ContentService<Article> {
      * @param categories the categories filtering.
      * @return The filtered list of articles.
      */
-    List<Article> getAndFilterByCategories(final Collection<Category> categories);
+    List<Article> getAndFilterByCategories(Collection<Category> categories);
 }
