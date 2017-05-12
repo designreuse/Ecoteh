@@ -73,7 +73,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                value="<c:out value="${user.name}"/>">
                                     </td>
                                 </tr>
-                                <c:set var="me" value="${(user eq authorized_user) or (authorized_user.role eq 'SUPERADMIN')}"/>
+                                <c:set var="me"
+                                       value="${(user eq authorized_user) or (authorized_user.role eq 'SUPERADMIN')}"/>
                                 <tr>
                                     <td class="ths">Логин</td>
                                     <td class="tds">
@@ -86,18 +87,17 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Пароль</td>
                                     <td class="tds">
-                                        <c:choose>
-                                            <c:when test="${me eq true}">
-                                                <c:set var="type" value="text"/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:set var="type" value="password"/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <input type="${type}" class="form-control" name="password" minlength="5"
+                                        <input class="form-control" name="password" minlength="5"
                                                maxlength="100" placeholder="Пароль для входа на сайт."
-                                               value="<c:out value="${user.password}"/>"
-                                               <c:if test="${me eq false}">disabled</c:if>>
+                                        <c:choose>
+                                        <c:when test="${me eq true}">
+                                               type="text" value="<c:out value="${user.password}"/>"
+                                        </c:when>
+                                        <c:otherwise>
+                                               type="password" value="********" disabled
+                                        </c:otherwise>
+                                        </c:choose>
+                                        >
                                     </td>
                                 </tr>
                                 <tr>
