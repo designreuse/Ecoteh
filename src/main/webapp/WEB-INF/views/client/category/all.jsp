@@ -71,7 +71,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории">
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                            &nbsp;Удалить все
+                                            &nbsp;Удалить&nbsp;все
                                         </button>
                                     </a>
                                 </c:if>

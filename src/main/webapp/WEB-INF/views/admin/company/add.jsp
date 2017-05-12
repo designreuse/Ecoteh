@@ -45,8 +45,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/company/all"/>">Все партнеры</a>
-                        → <a href="<c:url value="/admin/company/new"/>">Новый партнер</a>
+                        → <a href="<c:url value="/company/all"/>">Все&nbsp;партнеры</a>
+                        → <a href="<c:url value="/admin/company/new"/>">Новый&nbsp;партнер</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление нового партнера">Новый партнер</h3>
@@ -219,7 +219,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </label>&nbsp;&nbsp;
                                         <label title="Компанию смогут увидеть только администраторы">
                                             <input type="radio" name="is_valid" value="false" required/>
-                                            &nbsp;Не отображать
+                                            &nbsp;Не&nbsp;отображать
                                         </label>
                                     </td>
                                 </tr>

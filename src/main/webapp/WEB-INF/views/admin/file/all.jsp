@@ -59,7 +59,7 @@
                                 <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                        &nbsp;Удалить все
+                                        &nbsp;Удалить&nbsp;все
                                     </button>
                                 </a>
                             </c:if>
@@ -70,8 +70,9 @@
                             <p class="path">
                                 <a href="#">Сортировка</a>:
                                 <a href="<c:url value="/admin/file/all/sort?revers=${revers}"/>"
-                                   title="Сортировать по названию">По названия</a>
-                            </p><br>
+                                   title="Сортировать по названию">По&nbsp;названия</a>
+                            </p>
+                            <br>
                         </c:if>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <%@include file="/WEB-INF/views/admin/file/list.jsp" %>

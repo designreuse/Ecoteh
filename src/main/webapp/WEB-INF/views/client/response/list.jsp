@@ -34,7 +34,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                            title="Не отображать отзыв, его не смогут увидеть клиенты.">
                             <button class="btn btn-default">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"></span>
-                                &nbsp;Не отображать
+                                &nbsp;Не&nbsp;отображать
                             </button>
                         </a>&nbsp;
                     </c:when>

@@ -52,7 +52,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         <c:choose>
                             <c:when test="${company ne main_company}">
-                                → <a href="<c:url value="/company/all"/>">Все партнеры</a>
+                                → <a href="<c:url value="/company/all"/>">Все&nbsp;партнеры</a>
                                 →
                                 <a href="<c:url value="/admin/company/edit/${company.url}"/>">
                                     Редактирование компании&nbsp;&quot;<c:out value="${company.title}"/>&quot;
@@ -355,7 +355,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                             <label title="Компанию смогут увидеть только администраторы">
                                                 <input type="radio" name="is_valid" value="false" required
                                                        <c:if test="${!company.validated}">checked</c:if>/>
-                                                &nbsp;Не отображать
+                                                &nbsp;Не&nbsp;отображать
                                             </label>
                                         </td>
                                     </tr>

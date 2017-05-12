@@ -49,7 +49,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/category/all"/>"
-                             title="Перейти к всем категориям">Все категории</a>
+                             title="Перейти к всем категориям">Все&nbsp;категории</a>
                         →
                         <a href="<c:url value="/category/${category.url}"/>">
                             <c:out value="${category.title}"/>
@@ -67,7 +67,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <a href="<c:url value="/admin/article/new"/>" title="Добавить новую статью">
                                     <button class=" btn btn-default">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        &nbsp;Новая статья
+                                        &nbsp;Новая&nbsp;статья
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/category/edit/${category.url}"/>"
@@ -95,11 +95,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по названию">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
+                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
@@ -109,11 +109,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по номеру (артиклю)">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order-alt"
+                                        По&nbsp;номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order"
+                                        По&nbsp;номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
@@ -123,11 +123,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                        По&nbsp;дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
+                                        По&nbsp;дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>

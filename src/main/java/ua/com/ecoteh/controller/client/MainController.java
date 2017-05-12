@@ -121,7 +121,7 @@ public abstract class MainController {
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/category/all",
+            value = { "/categories", "/category/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getAllCategoriesPage() {
@@ -280,7 +280,7 @@ public abstract class MainController {
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = "/company/all",
+            value = { "/companies", "/partners", "/company/all" },
             method = RequestMethod.GET
     )
     public ModelAndView getPartnersPage() {

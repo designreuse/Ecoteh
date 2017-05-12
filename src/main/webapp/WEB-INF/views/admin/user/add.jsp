@@ -178,7 +178,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <label title="Не отображать пользователя">
                                             <b>
                                                 <input type="radio" name="is_valid" value="false" required/>
-                                                &nbsp;Не отображать
+                                                &nbsp;Не&nbsp;отображать
                                             </b>
                                         </label>
                                     </td>

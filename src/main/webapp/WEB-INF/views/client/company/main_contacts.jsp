@@ -43,7 +43,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         → <a href="<c:url value="/company/main"/>"
-                             title="Описание нашей компании">Описание компании</a>
+                             title="Описание нашей компании">Описание&nbsp;компании</a>
                         → <a href="<c:url value="/contacts"/>" title="Контакты">Контакты</a>
                     </p>
                     <hr>

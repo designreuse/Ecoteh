@@ -73,6 +73,13 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
             <changefreq>${changefreq}</changefreq>
             <priority>${other_priority}</priority>
         </url>
+        <url>
+            <loc>
+                http://<c:out value="${domain}"/>/response/all
+            </loc>
+            <changefreq>${changefreq}</changefreq>
+            <priority>${other_priority}</priority>
+        </url>
             <%-- Categories URLs --%>
         <c:if test="${fn:length(categories) gt 0}">
             <url>
@@ -82,10 +89,17 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
                 <changefreq>${changefreq}</changefreq>
                 <priority>${category_priority}</priority>
             </url>
+            <url>
+                <loc>
+                    http://<c:out value="${domain}"/>/categories
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${category_priority}</priority>
+            </url>
             <c:forEach items="${categories}" var="cactegory">
                 <url>
                     <loc>
-                        http://<c:out value="${domain}"/>/category/c
+                        http://<c:out value="${domain}"/>/category/<c:out value="${cactegory.url}"/>
                     </loc>
                     <changefreq>${changefreq}</changefreq>
                     <priority>${category_priority}</priority>
@@ -97,6 +111,13 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
             <url>
                 <loc>
                     http://<c:out value="${domain}"/>/article/all
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${article_priority}</priority>
+            </url>
+            <url>
+                <loc>
+                    http://<c:out value="${domain}"/>/articles
                 </loc>
                 <changefreq>${changefreq}</changefreq>
                 <priority>${article_priority}</priority>
@@ -116,6 +137,20 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
             <url>
                 <loc>
                     http://<c:out value="${domain}"/>/company/all
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${company_priority}</priority>
+            </url>
+            <url>
+                <loc>
+                    http://<c:out value="${domain}"/>/companies
+                </loc>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${company_priority}</priority>
+            </url>
+            <url>
+                <loc>
+                    http://<c:out value="${domain}"/>/partners
                 </loc>
                 <changefreq>${changefreq}</changefreq>
                 <priority>${company_priority}</priority>

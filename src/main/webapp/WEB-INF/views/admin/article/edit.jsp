@@ -18,8 +18,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>
-            Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; |
-            <c:out value="${main_company.title}"/>
+            Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out value="${main_company.title}"/>
         </title>
         <meta name="title"
               content="Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out value="${main_company.title}"/>">
@@ -55,7 +54,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <c:when test="${article.category ne null}">
                                 →
                                 <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
-                                    Все категории
+                                    Все&nbsp;категории
                                 </a>
                                 →
                                 <a href="<c:url value="/category/${article.category.url}"/>"

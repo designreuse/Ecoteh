@@ -69,7 +69,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров">
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                            &nbsp;Удалить всех
+                                            &nbsp;Удалить&nbsp;всех
                                         </button>
                                     </a>
                                 </c:if>
@@ -84,11 +84,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по названию">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
+                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>

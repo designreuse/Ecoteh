@@ -22,8 +22,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>
-            Редактирование файла &quot;<c:out value="${file.title}"/>&quot; |
-            <c:out value="${main_company.title}"/>
+            Редактирование файла &quot;<c:out value="${file.title}"/>&quot; | <c:out value="${main_company.title}"/>
         </title>
         <meta name="title"
               content="Редактирование файла &quot;<c:out value="${file.title}"/>&quot; | <c:out value="${main_company.title}"/>">
@@ -53,7 +52,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/file/all"/>">Все файлы</a>
+                        → <a href="<c:url value="/admin/file/all"/>">Все&nbsp;файлы</a>
                         → <a href="<c:url value="/admin/file/edit/${file.id}"/>">Редактирование файла</a>
                     </p>
                     <hr>

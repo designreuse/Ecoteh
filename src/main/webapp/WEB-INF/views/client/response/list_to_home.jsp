@@ -25,7 +25,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Удалить все отзывы о компании">
                                 <button class="btn btn-default">
                                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                    &nbsp;Удалить все
+                                    &nbsp;Удалить&nbsp;все
                                 </button>
                             </a>
                         </div>
@@ -39,7 +39,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <a href="<c:url value="/responses"/>"
                                    title="Перейти ко всем отзывам о нашей компании">
                                     <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                                    &nbsp;Все отзывы...
+                                    &nbsp;Все&nbsp;отзывы...
                                 </a>
                             </p>
                         </div>

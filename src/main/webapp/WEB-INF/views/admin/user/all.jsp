@@ -69,7 +69,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <a href="<c:url value="/admin/user/delete/all"/>" title="Удалить всех пользователей">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                        &nbsp;Удалить всех
+                                        &nbsp;Удалить&nbsp;всех
                                     </button>
                                 </a>
                             </c:if>

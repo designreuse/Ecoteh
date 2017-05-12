@@ -36,7 +36,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить все
+                    &nbsp;Удалить&nbsp;все
                 </button>
             </a>
         </td>
@@ -55,7 +55,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить все
+                    &nbsp;Удалить&nbsp;все
                 </button>
             </a>
         </td>
@@ -74,7 +74,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить всех
+                    &nbsp;Удалить&nbsp;всех
                 </button>
             </a>
         </td>
@@ -94,7 +94,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                title="Удалить всех пользователей">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить всех
+                    &nbsp;Удалить&nbsp;всех
                 </button>
             </a>
         </td>
@@ -114,7 +114,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить все
+                    &nbsp;Удалить&nbsp;все
                 </button>
             </a>
         </td>
@@ -128,7 +128,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                title="Удалить все отзывы о компании">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить все
+                    &nbsp;Удалить&nbsp;все
                 </button>
             </a>
         </td>
@@ -142,7 +142,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                title="Удалить все сообщения от пользователей">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                    &nbsp;Удалить все
+                    &nbsp;Удалить&nbsp;все
                 </button>
             </a>
         </td>

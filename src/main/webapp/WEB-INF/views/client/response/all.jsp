@@ -48,7 +48,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </a>
                         →
                         <a href="<c:url value="/company/main"/>" title="Описание нашей компании">
-                            Описание компании
+                            Описание&nbsp;компании
                         </a>
                         → <a href="<c:url value="/responses"/>">Отзывы о компании</a>
                     </p>
@@ -63,7 +63,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                    title="Удалить все отзывы о компании">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                        &nbsp;Удалить все
+                                        &nbsp;Удалить&nbsp;все
                                     </button>
                                 </a>
                             </div>
@@ -76,14 +76,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <a href="<c:url value="/responses/sort?revers=${revers}"/>" title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По дате&nbsp;
+                                        По&nbsp;дате&nbsp;
                                         <span class="glyphicon glyphicon-sort-by-attributes-alt"
                                               aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По дате&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-attributes"
-                                              aria-hidden="true"></span>
+                                        По&nbsp;дате&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
                             </a>

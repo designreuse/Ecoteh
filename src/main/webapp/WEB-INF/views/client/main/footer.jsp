@@ -80,8 +80,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </a>&nbsp;&nbsp;
                                 </c:if>
                                 <c:if test="${not empty contacts.skype}">
-                                    <a href="skype:<c:out value="${contacts.skype}"/>?call"
-                                       title="Позвонить в Skype">
+                                    <a href="skype:<c:out value="${contacts.skype}"/>?call" title="Позвонить в Skype">
                                         <span class="fa fa-skype fa-2x sk"></span>
                                     </a>
                                 </c:if>
@@ -111,7 +110,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <br>
                             </c:if>
                             <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${period}<br>
-                            О.В. Маматов
+                            О.В.&nbsp;Маматов
                         </p>
                     </div>
                 </div>

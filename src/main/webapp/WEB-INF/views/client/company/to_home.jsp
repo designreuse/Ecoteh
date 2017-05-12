@@ -17,7 +17,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <c:when test="${not empty company.description}">
                             <hr>
                             <h3 class="intro-text text-center">
-                                <a href="<c:url value="/company/main"/>" title="Описание нашей компании">О нас</a>
+                                <a href="<c:url value="/company/main"/>" title="Описание нашей компании">О&nbsp;нас</a>
                             </h3>
                             <hr>
                             <p>${company.description}</p>
@@ -33,7 +33,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="text-right">
                         <a href="<c:url value="/company/main"/>" title="Описание нашей компании">
                             <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                            &nbsp;Подробнее о нас...
+                            &nbsp;Подробнее&nbsp;о&nbsp;нас...
                         </a>
                     </p>
                 </div>

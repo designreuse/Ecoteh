@@ -47,9 +47,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         →
                         <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
-                            Все категории
+                            Все&nbsp;категории
                         </a>
-                        → <a href="<c:url value="/admin/category/new"/>">Новая категория</a>
+                        → <a href="<c:url value="/admin/category/new"/>">Новая&nbsp;категория</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление новой категории">Новая категория</h3>
@@ -104,7 +104,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </label>&nbsp;&nbsp;
                                         <label title="Категорию смогут увидеть только администраторы">
                                             <input type="radio" name="is_valid" value="false" required/>
-                                            &nbsp;Не отображать
+                                            &nbsp;Не&nbsp;отображать
                                         </label>
                                     </td>
                                 </tr>

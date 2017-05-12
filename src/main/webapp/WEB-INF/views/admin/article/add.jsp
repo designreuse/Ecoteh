@@ -45,8 +45,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/article/all"/>">Все статьи</a>
-                        → <a href="/admin/article/new">Новая статья</a>
+                        → <a href="<c:url value="/article/all"/>">Все&nbsp;статьи</a>
+                        → <a href="/admin/article/new">Новая&nbsp;статья</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>
@@ -133,7 +133,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
                                             <input type="radio" name="is_valid" value="false" required/>
-                                            &nbsp;Не отображать
+                                            &nbsp;Не&nbsp;отображать
                                         </label>
                                     </td>
                                 </tr>

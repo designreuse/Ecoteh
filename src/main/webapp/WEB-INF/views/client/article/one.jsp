@@ -52,7 +52,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             and (article.category.validated or (authorized_user ne null))}">
                                 →
                                 <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
-                                    Все категории
+                                    Все&nbsp;категории
                                 </a>
                                 →
                                 <a href="<c:url value="/category/${article.category.url}"/>"

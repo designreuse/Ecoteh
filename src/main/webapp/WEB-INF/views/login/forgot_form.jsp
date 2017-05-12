@@ -74,18 +74,18 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <label>
                                             <b>
                                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                &nbsp;Логин или e-mail:
+                                                &nbsp;Логин или E-mail:
                                             </b>
                                         </label>
                                         <input class="form-control" type="text" name="username" required
                                                minlength="3" maxlength="100" autofocus value="${username}"
-                                               placeholder="Введите логин или e-mail">
+                                               placeholder="Введите логин или E-mail">
                                     </div>
                                         <%-- Google reCaptcha --%>
                                     <jsp:include page="/WEB-INF/views/google/recaptcha.jsp"/>
                                     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <button type="submit" class="btn btn-default"
-                                                title="Отправить пароль на e-mail">
+                                                title="Отправить пароль на E-mail">
                                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                             &nbsp;Отправить
                                         </button>

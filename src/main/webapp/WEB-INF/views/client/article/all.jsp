@@ -50,7 +50,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную страницу">Главная</a>
                         →
-                        <a href="<c:url value="/article/all"/>">Все товары</a>
+                        <a href="<c:url value="/article/all"/>">Все&nbsp;товары</a>
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
@@ -72,7 +72,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
-                                            &nbsp;Удалить все
+                                            &nbsp;Удалить&nbsp;все
                                         </button>
                                     </a>
                                 </c:if>
@@ -87,11 +87,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по названию">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
+                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
@@ -101,11 +101,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по номеру (артиклю)">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order-alt"
+                                        По&nbsp;номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order"
+                                        По&nbsp;номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
@@ -115,11 +115,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по дате">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                        По&nbsp;дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"
                                         aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
+                                        По&nbsp;дате&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"
                                         aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>

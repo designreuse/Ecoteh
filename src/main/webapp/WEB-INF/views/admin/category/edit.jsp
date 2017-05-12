@@ -53,7 +53,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         →
                         <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
-                            Все категории
+                            Все&nbsp;категории
                         </a>
                         →
                         <a href="<c:url value="/admin/category/edit/${category.url}"/>">
@@ -139,7 +139,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <label title="Категорию смогут увидеть только администраторы">
                                             <input type="radio" name="is_valid" value="false" required
                                                    <c:if test="${!category.validated}">checked</c:if>/>
-                                            &nbsp;Не отображать
+                                            &nbsp;Не&nbsp;отображать
                                         </label>
                                     </td>
                                 </tr>

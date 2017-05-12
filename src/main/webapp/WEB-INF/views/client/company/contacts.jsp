@@ -62,8 +62,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <div class="text-center">
                 <br>
                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                &nbsp;Пн - Пт,&nbsp;
-                <c:out value="${company.workTimeFrom}"/> - <c:out value="${company.workTimeTo}"/>
+                &nbsp;Пн&nbsp;-&nbsp;Пт,&nbsp;
+                <c:out value="${company.workTimeFrom}"/>&nbsp;-&nbsp;<c:out value="${company.workTimeTo}"/>
                 <br>
             </div>
         </c:if>

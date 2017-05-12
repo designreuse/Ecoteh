@@ -48,8 +48,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/admin/file/all"/>">Все файлы</a>
-                        → <a href="<c:url value="/admin/file/new"/>">Новый файл</a>
+                        → <a href="<c:url value="/admin/file/all"/>">Все&nbsp;файлы</a>
+                        → <a href="<c:url value="/admin/file/new"/>">Новый&nbsp;файл</a>
                     </p>
                     <hr>
                     <h3 class="text-center" title="Добавление нового файла">Новый файл</h3>

@@ -18,8 +18,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <title>
-            Редактирование &quot;<c:out value="${user.name}"/>&quot; |
-            <c:out value="${main_company.title}"/>
+            Редактирование &quot;<c:out value="${user.name}"/>&quot; | <c:out value="${main_company.title}"/>
         </title>
         <meta name="title"
               content="Редактирование &quot;<c:out value="${user.name}"/>&quot; | <c:out value="${main_company.title}"/>">

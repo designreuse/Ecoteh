@@ -84,7 +84,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <hr class="hidden-md hidden-lg hidden-xl">
                         <p class="text-right">
                             <a href="<c:url value="/company/all"/>" title="Перейти к списку всех партнеров">
-                                <span class="glyphicon glyphicon-share-alt"></span>&nbsp;Все партнеры...
+                                <span class="glyphicon glyphicon-share-alt"></span>&nbsp;Все&nbsp;партнеры...
                             </a>
                         </p>
                     </div>

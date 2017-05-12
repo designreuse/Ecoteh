@@ -94,7 +94,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <label title="Не отображать отзыв, его не смогут увидеть клиенты.">
                                             <input type="radio" name="is_valid" value="false" required
                                                    <c:if test="${!response.validated}">checked</c:if>/>
-                                            &nbsp;Не отображать
+                                            &nbsp;Не&nbsp;отображать
                                         </label>
                                     </td>
                                 </tr>
