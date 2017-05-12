@@ -51,7 +51,7 @@ public class File extends Model implements IFile {
     public File() {
         this.title = "";
         this.url = "";
-        this.type = FileType.OTHER;
+        this.type = FileType.ANOTHER;
         setValidated(true);
     }
 
@@ -233,7 +233,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public void setType(final FileType type) {
-        this.type = isNotNull(type) ? type : FileType.OTHER;
+        this.type = isNotNull(type) ? type : FileType.ANOTHER;
     }
 
     /**

@@ -16,5 +16,10 @@ public enum CompanyType {
     /**
      * The partner company type.
      */
-    PARTNER
+    PARTNER,
+
+    /**
+     * Type of another company.
+     */
+    ANOTHER
 }

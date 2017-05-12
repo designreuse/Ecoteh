@@ -144,7 +144,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final String title,
             final MultipartFile multipartFile
     ) {
-        return add(title, FileType.OTHER, multipartFile);
+        return add(title, FileType.ANOTHER, multipartFile);
     }
 
     /**
@@ -193,7 +193,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
             final String title,
             final MultipartFile multipartFile
     ) {
-        return update(id, title, FileType.OTHER, multipartFile);
+        return update(id, title, FileType.ANOTHER, multipartFile);
     }
 
     /**

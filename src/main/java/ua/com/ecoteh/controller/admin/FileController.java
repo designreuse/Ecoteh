@@ -312,7 +312,7 @@ public class FileController {
             fileType = FileType.valueOf(name);
         } catch (IllegalArgumentException ex) {
             LOGGER.error(ex.getMessage(), ex);
-            fileType = FileType.OTHER;
+            fileType = FileType.ANOTHER;
         }
         return fileType;
     }

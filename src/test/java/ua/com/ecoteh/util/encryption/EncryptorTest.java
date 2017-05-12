@@ -13,11 +13,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 public final class EncryptorTest {
 
     @Test
-    public void callDefaultConstructor() {
-        new Encryptor();
-    }
-
-    @Test
     public void callConstructorWithOneParameter() {
         new Encryptor(ANY_STRING);
     }

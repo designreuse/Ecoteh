@@ -24,7 +24,7 @@ public enum FileType {
     SLIDE,
 
     /**
-     * Type of other files.
+     * Type of another files.
      */
-    OTHER
+    ANOTHER
 }
