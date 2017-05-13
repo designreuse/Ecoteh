@@ -269,7 +269,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public File initialize(final File file) {
-        if (isNotNull(file)) {
+        if (isNotEmptyFile(file)) {
             super.initialize(file);
             this.setTitle(file.getTitle());
             if (!isStaticFile()) {
@@ -287,5 +287,15 @@ public class File extends Model implements IFile {
      */
     private boolean isStaticFile() {
         return this.getType().equals(FileType.STATIC);
+    }
+
+    /**
+     * Checks the incoming file is not empty.
+     *
+     * @param file the file to check
+     * @return true if the file is not empty, false otherwise.
+     */
+    private static boolean isNotEmptyFile(final File file) {
+        return isNotNull(file) && isNotEmpty(file.getTitle()) && isNotEmpty(file.getUrl());
     }
 }
