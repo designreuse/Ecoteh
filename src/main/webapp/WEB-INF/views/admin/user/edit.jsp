@@ -94,7 +94,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                type="text" value="<c:out value="${user.password}"/>"
                                         </c:when>
                                         <c:otherwise>
-                                               type="password" value="********" disabled
+                                               type="password" value="******" disabled
                                         </c:otherwise>
                                         </c:choose>
                                         >
