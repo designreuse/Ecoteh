@@ -13,6 +13,7 @@ import ua.com.ecoteh.config.DefaultConfig;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.UserRepository;
 import ua.com.ecoteh.util.comparator.UserComparator;
 import ua.com.ecoteh.util.encryption.Encryptor;
@@ -45,63 +46,6 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * The object for logging information.
      */
     private final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
-
-    /**
-     * The message that a incoming user name is null or empty.
-     */
-    private final static String BLANK_NAME_MESSAGE =
-            "Incoming %s name is null or empty!";
-
-    /**
-     * The message that a incoming user URL is null or empty.
-     */
-    private final static String BLANK_URL_MESSAGE =
-            "Incoming %s URL is null or empty!";
-
-    /**
-     * The message that a incoming user login is null or empty.
-     */
-    private final static String BLANK_LOGIN_MESSAGE =
-            "Incoming %s login is null or empty!";
-
-    /**
-     * The message that a incoming user E-mail is null or empty.
-     */
-    private final static String BLANK_EMAIL_MESSAGE =
-            "Incoming %s E-mail is null or empty!";
-
-    /**
-     * The message that a incoming user phone is null or empty.
-     */
-    private final static String BLANK_PHONE_MESSAGE =
-            "Incoming %s phone is null or empty!";
-
-    /**
-     * The message that a service cannot find user by incoming name.
-     */
-    private final static String FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming name \"%s\"!";
-    /**
-     * The message that a service cannot find user by incoming URL.
-     */
-    private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming URL \"%s\"!";
-    /**
-     * The message that a service cannot find user by incoming login.
-     */
-    private final static String FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming login \"%s\"!";
-    /**
-     * The message that a service cannot find user by incoming E-mail.
-     */
-    private final static String FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming E-mail \"%s\"!";
-
-    /**
-     * The message that a service cannot find user by incoming phone.
-     */
-    private final static String FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming phone \"%s\"!";
 
     /**
      * The interface provides a set of standard methods for working
@@ -228,12 +172,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(name)) {
-            throw getIllegalArgumentException(BLANK_NAME_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_NAME_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final User user = this.repository.findByName(name);
         if (isNull(user)) {
             throw getNullPointerException(
-                    FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), name
             );
         }
@@ -254,12 +201,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
-            throw getIllegalArgumentException(BLANK_URL_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_URL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final User user = this.repository.findByUrl(url);
         if (isNull(user)) {
             throw getNullPointerException(
-                    FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), url
             );
         }
@@ -280,14 +230,17 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByLogin(final String login) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(login)) {
-            throw getIllegalArgumentException(BLANK_LOGIN_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_LOGIN_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final User user = this.repository.findByEncryptedLogin(
                 new Encryptor(login).encrypt()
         );
         if (isNull(user)) {
             throw getNullPointerException(
-                    FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), login
             );
         }
@@ -308,12 +261,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByEmail(final String email) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(email)) {
-            throw getIllegalArgumentException(BLANK_EMAIL_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_EMAIL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         User user = this.repository.findByContactsEmail(email);
         if (isNull(user)) {
             throw getNullPointerException(
-                    FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), email
             );
         }
@@ -334,7 +290,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     @Transactional(readOnly = true)
     public User getByPhone(final String phone) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(phone)) {
-            throw getIllegalArgumentException(BLANK_PHONE_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_PHONE_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         User user = getByMobilePhone(phone);
         if (isNull(user)) {
@@ -343,7 +302,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
                 user = getByFax(phone);
                 if (isNull(user)) {
                     throw getNullPointerException(
-                            FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
+                            ExceptionMessage.FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
                             getClassSimpleName(), phone
                     );
                 }
@@ -702,7 +661,16 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * @param to   the object to copy
      */
     protected void copy(final User from, final User to) {
+        if (!isUser(to)) {
+            from.setLogin(to.getLogin());
+            from.setPassword(to.getPassword());
+        }
         to.initialize(from);
+    }
+
+    private boolean isUser(final User user) {
+        return user.equals(getAuthenticatedUser()) ||
+                getAuthenticatedUser().getRole().equals(UserRole.SUPERADMIN);
     }
 
     /**

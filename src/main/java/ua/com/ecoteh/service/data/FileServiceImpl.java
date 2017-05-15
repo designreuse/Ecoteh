@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.enums.FileType;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.FileRepository;
 import ua.com.ecoteh.util.comparator.FileComparator;
 import ua.com.ecoteh.util.loader.MultipartFileLoader;
@@ -34,44 +35,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
         }
 )
 public final class FileServiceImpl extends DataServiceImpl<File> implements FileService {
-
-    /**
-     * The message that a incoming title is null or empty.
-     */
-    private final static String BLANK_TITLE_MESSAGE =
-            "Incoming %s title is null or empty!";
-
-    /**
-     * The message that a incoming URL is null or empty.
-     */
-    private final static String BLANK_URL_MESSAGE =
-            "Incoming %s URL is null or empty!";
-
-    /**
-     * The message that a incoming type is null.
-     */
-    private final static String NULL_TYPE_MESSAGE =
-            "Incoming %s type is null!";
-
-    /**
-     * The message that a static files are forbidden to remove.
-     */
-    private final static String FORBIDDEN_STATIC_FILE_MESSAGE =
-            "Static files are forbidden to remove!";
-
-    /**
-     * The message that a incoming multipart file is null or empty.
-     */
-    private final static String MULTIPART_FILE_IS_EMPTY_MESSAGE =
-            "Incoming multipart file is null or empty!";
-
-    /**
-     * The message that a incoming multipart file has size greater
-     * than max size.
-     */
-    private final static String MAX_FILE_SIZE_MESSAGE =
-            "Maximum file size must be no larger than %d bytes. " +
-                    "Size of the incoming file is %d bytes!";
 
     /**
      * The interface provides a set of standard methods
@@ -209,7 +172,10 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public File getByTitle(final String title) throws IllegalArgumentException {
         if (isEmpty(title)) {
-            throw getIllegalArgumentException(BLANK_TITLE_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_TITLE_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         return this.repository.findByTitle(title);
     }
@@ -226,7 +192,10 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public File getByUrl(final String url) throws IllegalArgumentException {
         if (isEmpty(url)) {
-            throw getIllegalArgumentException(BLANK_URL_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_URL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         return this.repository.findByUrl(url);
     }
@@ -267,7 +236,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     public void remove(final File file) throws IllegalArgumentException {
         if (isNotNull(file)) {
             if (isStaticFile(file)) {
-                throw getIllegalArgumentException(FORBIDDEN_STATIC_FILE_MESSAGE);
+                throw getIllegalArgumentException(ExceptionMessage.FORBIDDEN_STATIC_FILE_MESSAGE);
             }
             deleteFile(file.getUrl());
             super.remove(file);
@@ -401,7 +370,10 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     @Transactional(readOnly = true)
     public List<File> getByType(final FileType type) throws IllegalArgumentException {
         if (isNull(type)) {
-            throw getIllegalArgumentException(NULL_TYPE_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_TYPE_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         return this.repository.findAllByType(type);
     }
@@ -451,11 +423,12 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
     private void isValidMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
         if (isEmpty(file)) {
-            throw getNullPointerException(MULTIPART_FILE_IS_EMPTY_MESSAGE);
+            throw getNullPointerException(ExceptionMessage.MULTIPART_FILE_IS_EMPTY_MESSAGE);
         }
         if (isGreatMaxSize(file.getSize())) {
             throw getIllegalArgumentException(
-                    MAX_FILE_SIZE_MESSAGE, getMaxFileSize(), file.getSize()
+                    ExceptionMessage.MAX_FILE_SIZE_MESSAGE,
+                    getMaxFileSize(), file.getSize()
             );
         }
     }

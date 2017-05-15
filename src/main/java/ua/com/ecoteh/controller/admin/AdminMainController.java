@@ -16,6 +16,7 @@ import ua.com.ecoteh.entity.Message;
 import ua.com.ecoteh.entity.Response;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.MessageService;
 import ua.com.ecoteh.service.data.ResponseService;
@@ -41,12 +42,6 @@ public class AdminMainController extends MainController {
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(AdminMainController.class);
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * Constructor.
@@ -118,8 +113,8 @@ public class AdminMainController extends MainController {
     )
     public ModelAndView sendMessage(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "phone") final String phone,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "phone", defaultValue = "") final String phone,
             @RequestParam(value = "email", required = false) final String email,
             @RequestParam(value = "message", required = false) final String userMessage
     ) {
@@ -144,7 +139,10 @@ public class AdminMainController extends MainController {
     )
     public void sendMessage() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/send_message")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/send_message"
+                )
         );
     }
 
@@ -186,7 +184,10 @@ public class AdminMainController extends MainController {
     )
     public void sendResponse() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/response/send")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/response/send"
+                )
         );
     }
 }

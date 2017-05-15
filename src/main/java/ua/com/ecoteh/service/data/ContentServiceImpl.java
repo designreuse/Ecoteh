@@ -3,6 +3,7 @@ package ua.com.ecoteh.service.data;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.Content;
 import ua.com.ecoteh.entity.File;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ContentRepository;
 import ua.com.ecoteh.util.comparator.ContentComparator;
 
@@ -21,36 +22,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  */
 public abstract class ContentServiceImpl<T extends Content>
         extends DataServiceImpl<T> implements ContentService<T> {
-
-    /**
-     * The message that a incoming object is null.
-     */
-    private final static String INCOMING_OBJECT_IS_NULL_MESSAGE =
-            "Incoming object of the %s class is null!";
-
-    /**
-     * The message that a incoming title is null or empty.
-     */
-    private final static String BLANK_TITLE_MESSAGE =
-            "Incoming %s title is null or empty!";
-
-    /**
-     * The message that a incoming URL is null or empty.
-     */
-    private final static String BLANK_URL_MESSAGE =
-            "Incoming %s URL is null or empty!";
-
-    /**
-     * The message that a service cannot find content by incoming title.
-     */
-    private final static String FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming title \"%s\"!";
-
-    /**
-     * The message that a service cannot find content by incoming URL.
-     */
-    private final static String FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming URL \"%s\"!";
 
     /**
      * The object provides a set of standard JPA methods
@@ -97,7 +68,10 @@ public abstract class ContentServiceImpl<T extends Content>
             final T content
     ) throws IllegalArgumentException {
         if (isNull(content)) {
-            throw getIllegalArgumentException(INCOMING_OBJECT_IS_NULL_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final T contentToUpdate = getByUrl(url, false);
         final File newLogo = content.getLogo();
@@ -127,12 +101,15 @@ public abstract class ContentServiceImpl<T extends Content>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(title)) {
-            throw getIllegalArgumentException(BLANK_TITLE_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_TITLE_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final T content = this.repository.findByTitle(title);
         if (isNotValidated(content, isValid)) {
             throw getNullPointerException(
-                    FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), title
             );
         }
@@ -157,12 +134,12 @@ public abstract class ContentServiceImpl<T extends Content>
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
-            throw getIllegalArgumentException(BLANK_URL_MESSAGE);
+            throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
         }
         final T content = this.repository.findByUrl(url);
         if (isNotValidated(content, isValid)) {
             throw getNullPointerException(
-                    FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), url
             );
         }

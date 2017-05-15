@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.config.DefaultConfig;
 import ua.com.ecoteh.entity.Company;
 import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.captcha.CaptchaService;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.UserService;
@@ -42,17 +43,6 @@ public class ForgotUserInformationController {
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(ForgotUserInformationController.class);
-
-    /**
-     * The message that a incoming E-mail is null or empty.
-     */
-    private final static String BLANK_EMAIL_MESSAGE = "Incoming E-mail is null or empty!";
-
-    /**
-     * The message that a service cannot find object by incoming number.
-     */
-    private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find object of the %s class by incoming E-mail %s!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -139,7 +129,7 @@ public class ForgotUserInformationController {
             method = RequestMethod.POST
     )
     public ModelAndView forgotUserByUsername(
-            @RequestParam(value = "username") final String username,
+            @RequestParam(value = "username", defaultValue = "") final String username,
             final HttpServletRequest request
     ) {
         boolean isForgot = false;
@@ -234,13 +224,13 @@ public class ForgotUserInformationController {
     private void searchInMainCompanyAndSend(final String email)
             throws IllegalArgumentException, NullPointerException {
         if (isEmpty(email)) {
-            throw new IllegalArgumentException(BLANK_EMAIL_MESSAGE);
+            throw new IllegalArgumentException(ExceptionMessage.BLANK_EMAIL_MESSAGE);
         }
         final String mainEmail = this.companyService.getMainCompany().getContacts().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
             throw new NullPointerException(
                     String.format(
-                            FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                            ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                             Company.class.getSimpleName(), email
                     )
             );

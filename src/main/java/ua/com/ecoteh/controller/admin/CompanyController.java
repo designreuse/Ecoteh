@@ -17,6 +17,7 @@ import ua.com.ecoteh.entity.Company;
 import ua.com.ecoteh.entity.Contacts;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
@@ -48,12 +49,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class CompanyController {
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -146,26 +141,26 @@ public class CompanyController {
             method = RequestMethod.POST
     )
     public String updateMainCompany(
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "domain") final String domain,
-            @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "text") final String description,
-            @RequestParam(value = "information") final String information,
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "time_from") final String workTimeFrom,
-            @RequestParam(value = "time_to") final String workTimeTo,
-            @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landline_phone") final String landlinePhone,
-            @RequestParam(value = "fax") final String fax,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "domain", defaultValue = "") final String domain,
+            @RequestParam(value = "tagline", defaultValue = "") final String tagline,
+            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "information", defaultValue = "") final String information,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "time_from", defaultValue = "00:00") final String workTimeFrom,
+            @RequestParam(value = "time_to", defaultValue = "00:00") final String workTimeTo,
+            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
+            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
+            @RequestParam(value = "fax", defaultValue = "") final String fax,
             @RequestParam(value = "email") final String email,
-            @RequestParam(value = "sender_email") final String senderEmail,
-            @RequestParam(value = "sender_pass") final String senderPass,
-            @RequestParam(value = "vkontakte") final String vkontakte,
-            @RequestParam(value = "facebook") final String facebook,
-            @RequestParam(value = "twitter") final String twitter,
-            @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "address") final String address,
-            @RequestParam(value = "google_maps") final String googleMaps,
+            @RequestParam(value = "sender_email", defaultValue = "") final String senderEmail,
+            @RequestParam(value = "sender_pass", defaultValue = "") final String senderPass,
+            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
+            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
+            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
+            @RequestParam(value = "skype", defaultValue = "") final String skype,
+            @RequestParam(value = "address", defaultValue = "") final String address,
+            @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo
     ) {
         final Compressor compressor = new HtmlCompressor();
@@ -206,7 +201,10 @@ public class CompanyController {
     @RequestMapping(value = "/update/main", method = RequestMethod.GET)
     public void updateMainCompany() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/company/update/main")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/company/update/main"
+                )
         );
     }
 
@@ -260,24 +258,24 @@ public class CompanyController {
             method = RequestMethod.POST
     )
     public String addPartner(
-            @RequestParam(value = "title") String title,
-            @RequestParam(value = "domain") final String domain,
-            @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "text") final String description,
-            @RequestParam(value = "information") final String information,
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landline_phone") final String landlinePhone,
-            @RequestParam(value = "fax") final String fax,
+            @RequestParam(value = "title", defaultValue = "") String title,
+            @RequestParam(value = "domain", defaultValue = "") final String domain,
+            @RequestParam(value = "tagline", defaultValue = "") final String tagline,
+            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "information", defaultValue = "") final String information,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
+            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
+            @RequestParam(value = "fax", defaultValue = "") final String fax,
             @RequestParam(value = "email") final String email,
-            @RequestParam(value = "vkontakte") final String vkontakte,
-            @RequestParam(value = "facebook") final String facebook,
-            @RequestParam(value = "twitter") final String twitter,
-            @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "address") final String address,
-            @RequestParam(value = "google_maps") final String googleMaps,
+            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
+            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
+            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
+            @RequestParam(value = "skype", defaultValue = "") final String skype,
+            @RequestParam(value = "address", defaultValue = "") final String address,
+            @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -318,7 +316,10 @@ public class CompanyController {
     )
     public void addPartner() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/company/add")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/company/add"
+                )
         );
     }
 
@@ -377,24 +378,24 @@ public class CompanyController {
     )
     public String updatePartnerCompany(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "domain") final String domain,
-            @RequestParam(value = "tagline") final String tagline,
-            @RequestParam(value = "text") final String description,
-            @RequestParam(value = "information") final String information,
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landline_phone") final String landlinePhone,
-            @RequestParam(value = "fax") final String fax,
-            @RequestParam(value = "email") final String email,
-            @RequestParam(value = "vkontakte") final String vkontakte,
-            @RequestParam(value = "facebook") final String facebook,
-            @RequestParam(value = "twitter") final String twitter,
-            @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "address") final String address,
-            @RequestParam(value = "google_maps") final String googleMaps,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "domain", defaultValue = "") final String domain,
+            @RequestParam(value = "tagline", defaultValue = "") final String tagline,
+            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "information", defaultValue = "") final String information,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
+            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
+            @RequestParam(value = "fax", defaultValue = "") final String fax,
+            @RequestParam(value = "email", defaultValue = "") final String email,
+            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
+            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
+            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
+            @RequestParam(value = "skype", defaultValue = "") final String skype,
+            @RequestParam(value = "address", defaultValue = "") final String address,
+            @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final Company company = new Company(title, compressor.compress(description), keywords);
@@ -435,7 +436,10 @@ public class CompanyController {
     )
     public void updatePartnerCompany() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/company/update")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/company/update"
+                )
         );
     }
 

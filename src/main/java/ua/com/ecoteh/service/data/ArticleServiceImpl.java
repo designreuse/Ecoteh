@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.Article;
 import ua.com.ecoteh.entity.Category;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ArticleRepository;
 import ua.com.ecoteh.util.comparator.ArticleComparator;
 import ua.com.ecoteh.util.time.Time;
@@ -35,23 +36,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
         }
 )
 public final class ArticleServiceImpl extends ContentServiceImpl<Article> implements ArticleService {
-
-    /**
-     * The message that a incoming number is null or empty.
-     */
-    private final static String BLANK_NUMBER_MESSAGE = "Incoming %s number is null or empty!";
-
-    /**
-     * The message that a incoming category title is null or empty.
-     */
-    private final static String BLANK_CATEGORY_TITLE_MESSAGE =
-            "Incoming category title is null or empty!";
-
-    /**
-     * The message that a service cannot find article by incoming number.
-     */
-    private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming number \"%s\"!";
 
     /**
      * The interface provides a set of standard methods
@@ -93,12 +77,15 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
             final boolean isValid
     ) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(number)) {
-            throw getIllegalArgumentException(BLANK_NUMBER_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_NUMBER_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final Article article = this.repository.findByNumber(number);
         if (isNotValidated(article, isValid)) {
             throw getNullPointerException(
-                    FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), number
             );
         }
@@ -130,7 +117,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
     @Transactional(readOnly = true)
     public List<Article> getByCategoryTitle(final String title) throws IllegalArgumentException {
         if (isEmpty(title)) {
-            throw getIllegalArgumentException(BLANK_CATEGORY_TITLE_MESSAGE);
+            throw getIllegalArgumentException(ExceptionMessage.BLANK_CATEGORY_TITLE_MESSAGE);
         }
         return this.repository.findByCategoryTitle(title);
     }

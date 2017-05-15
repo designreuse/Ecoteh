@@ -14,6 +14,7 @@ import ua.com.ecoteh.entity.Message;
 import ua.com.ecoteh.entity.Response;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.captcha.CaptchaService;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.MessageService;
@@ -38,12 +39,6 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ClientMainController extends MainController {
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the {@link CaptchaService} interface.
@@ -101,8 +96,8 @@ public class ClientMainController extends MainController {
     )
     public ModelAndView sendMessage(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "phone") final String phone,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "phone", defaultValue = "") final String phone,
             @RequestParam(value = "email", required = false) final String email,
             @RequestParam(value = "message", required = false) final String userMessage,
             final HttpServletRequest request
@@ -132,7 +127,10 @@ public class ClientMainController extends MainController {
     )
     public void sendMessage() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/send_message")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/send_message"
+                )
         );
     }
 
@@ -153,8 +151,8 @@ public class ClientMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendResponse(
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "response") final String text,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "response", defaultValue = "") final String text,
             final HttpServletRequest request
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
@@ -179,7 +177,10 @@ public class ClientMainController extends MainController {
     )
     public void sendResponse() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/response/send")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/response/send"
+                )
         );
     }
 }

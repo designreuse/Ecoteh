@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.StyleService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
@@ -56,7 +57,7 @@ public class StyleController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public StyleController(
-            @Qualifier("cacheMVFabricImpl")final MainMVFabric fabric,
+            @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
             final StyleService styleService
     ) {
         this.fabric = fabric;
@@ -71,7 +72,7 @@ public class StyleController {
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = {"", "/edit"},
+            value = { "", "/edit" },
             method = RequestMethod.GET
     )
     public ModelAndView getStylesToEdit() {
@@ -93,7 +94,7 @@ public class StyleController {
             value = "/update",
             method = RequestMethod.POST
     )
-    public String updateStyles(@RequestParam(value = "styles") final String styles) {
+    public String updateStyles(@RequestParam(value = "styles", defaultValue = "") final String styles) {
         this.styleService.save(styles);
         return "redirect:/superadmin/style";
     }
@@ -112,7 +113,12 @@ public class StyleController {
             method = RequestMethod.GET
     )
     public void updateStyles() throws IllegalMappingException {
-        throw new IllegalMappingException("GET method in \"/superadmin/style/update\" is not supported!");
+        throw new IllegalMappingException(
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/superadmin/style/update"
+                )
+        );
     }
 
     /**

@@ -1,6 +1,7 @@
 package ua.com.ecoteh.service.data;
 
 import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.DataRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,24 +19,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * @version 1.0
  */
 public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
-
-    /**
-     * The message that a saving object is null.
-     */
-    private final static String SAVING_OBJECT_IS_NULL_MESSAGE =
-            "Saving object of the %s class is null!";
-
-    /**
-     * The message that a updating object is null.
-     */
-    private final static String UPDATING_OBJECT_IS_NULL_MESSAGE =
-            "Updating object of the %s class is null!";
-
-    /**
-     * The message that a service cannot find object by incoming id.
-     */
-    private final static String FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming id \"%d\"!";
 
     /**
      * The object provides a set of standard JPA methods
@@ -70,7 +53,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             result = this.repository.save(model);
         }
         if (isNull(result)) {
-            throw getNullPointerException(SAVING_OBJECT_IS_NULL_MESSAGE, getClassSimpleName());
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         return result;
     }
@@ -120,7 +106,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
             result = this.repository.save(model);
         }
         if (isNull(result)) {
-            throw getNullPointerException(UPDATING_OBJECT_IS_NULL_MESSAGE, getClassSimpleName());
+            throw getNullPointerException(
+                    ExceptionMessage.UPDATING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         return result;
     }
@@ -169,7 +158,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         final T result = this.repository.findOne(id);
         if (isNull(result)) {
             throw getNullPointerException(
-                    FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), id
             );
         }

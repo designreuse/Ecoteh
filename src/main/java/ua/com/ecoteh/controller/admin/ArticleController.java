@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.Article;
 import ua.com.ecoteh.entity.Category;
 import ua.com.ecoteh.entity.File;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.data.FileService;
@@ -48,12 +49,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class ArticleController {
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -144,13 +139,13 @@ public class ArticleController {
             method = RequestMethod.POST
     )
     public String addArticle(
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "desc") final String description,
-            @RequestParam(value = "text") final String text,
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "number") final String number,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "desc", defaultValue = "") final String description,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "number", defaultValue = "") final String number,
             @RequestParam(value = "price", defaultValue = "0") final String price,
-            @RequestParam(value = "category_url") final String categoryUrl,
+            @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean validated
     ) {
@@ -189,7 +184,10 @@ public class ArticleController {
     )
     public void addArticle() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/article/add")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/article/add"
+                )
         );
     }
 
@@ -285,7 +283,10 @@ public class ArticleController {
     )
     public void updateArticle() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/article/update")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/article/update"
+                )
         );
     }
 

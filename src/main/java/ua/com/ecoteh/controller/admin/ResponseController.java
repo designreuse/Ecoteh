@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.Response;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.ResponseService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
@@ -33,12 +34,6 @@ import ua.com.ecoteh.util.cache.Cache;
 @ComponentScan(basePackages = "ua.com.ecoteh.service.data")
 @SuppressWarnings("SpringMVCViewInspection")
 public class ResponseController {
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -107,9 +102,9 @@ public class ResponseController {
     )
     public String updateResponse(
             @RequestParam(value = "id") final long id,
-            @RequestParam(value = "username") final String username,
-            @RequestParam(value = "text") final String text,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "username", defaultValue = "") final String username,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Response response = new Response(username, text, validated);
         this.responseService.update(id, response);
@@ -133,7 +128,10 @@ public class ResponseController {
     )
     public void updateResponse() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/response/update")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/response/update"
+                )
         );
     }
 

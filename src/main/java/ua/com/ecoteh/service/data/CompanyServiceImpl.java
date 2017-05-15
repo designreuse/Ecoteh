@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.Company;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CompanyRepository;
 
 import java.util.Collection;
@@ -36,17 +37,6 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * The object for logging information.
      */
     private static final Logger LOGGER = Logger.getLogger(CompanyServiceImpl.class);
-
-    /**
-     * The message that a incoming company domain is null or empty.
-     */
-    private final static String BLANK_DOMAIN_MESSAGE = "Incoming %s domain is null or empty!";
-
-    /**
-     * The message that a service cannot find company by incoming domain.
-     */
-    private final static String FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE =
-            "Can`t find a object of the %s class by the incoming domain \"%s\"!";
 
     /**
      * The interface provides a set of standard methods for working
@@ -186,12 +176,15 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
     public Company getByDomain(final String domain)
             throws IllegalArgumentException, NullPointerException {
         if (isEmpty(domain)) {
-            throw getIllegalArgumentException(BLANK_DOMAIN_MESSAGE, getClassSimpleName());
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_DOMAIN_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         Company company = this.repository.findByDomain(domain);
         if (isNull(company)) {
             throw getNullPointerException(
-                    FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                    ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), domain
             );
         }

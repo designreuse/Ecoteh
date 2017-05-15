@@ -3,6 +3,7 @@ package ua.com.ecoteh.controller.client;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.com.ecoteh.exception.ExceptionMessage;
 
 /**
  * Illegal access controller.
@@ -12,12 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class IllegalAccessController {
-
-    /**
-     * The message that a user does not have sufficient permissions to access this page.
-     */
-    private final static String ILLEGAL_ACCESS_MESSAGE =
-            "You do not have sufficient permissions to access this page.";
 
     /**
      * The method throws an exception in the case of reference to it.
@@ -34,6 +29,6 @@ public class IllegalAccessController {
             method = RequestMethod.GET
     )
     public void getIllegalAccessException() throws IllegalAccessException {
-        throw new IllegalAccessException(ILLEGAL_ACCESS_MESSAGE);
+        throw new IllegalAccessException(ExceptionMessage.ILLEGAL_ACCESS_MESSAGE);
     }
 }

@@ -16,6 +16,7 @@ import ua.com.ecoteh.entity.Contacts;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.data.UserService;
@@ -51,12 +52,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class UserController {
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * The implementation of the interface provides a set of standard
@@ -232,7 +227,10 @@ public class UserController {
     )
     public void addUser() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/user/add")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/user/add"
+                )
         );
     }
 
@@ -287,22 +285,22 @@ public class UserController {
     )
     public String updateUser(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "login") final String login,
-            @RequestParam(value = "password") final String password,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landline_phone") final String landlinePhone,
-            @RequestParam(value = "fax") final String fax,
-            @RequestParam(value = "email") final String email,
-            @RequestParam(value = "vkontakte") final String vkontakte,
-            @RequestParam(value = "facebook") final String facebook,
-            @RequestParam(value = "twitter") final String twitter,
-            @RequestParam(value = "skype") final String skype,
-            @RequestParam(value = "photo") final MultipartFile multipartPhoto,
-            @RequestParam(value = "is_valid") final boolean isValid,
-            @RequestParam(value = "is_mailing") final boolean isMailing,
-            @RequestParam(value = "is_locked") final boolean isLocked
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "login", defaultValue = "") final String login,
+            @RequestParam(value = "password", defaultValue = "") final String password,
+            @RequestParam(value = "description", defaultValue = "") final String description,
+            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
+            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
+            @RequestParam(value = "fax", defaultValue = "") final String fax,
+            @RequestParam(value = "email", defaultValue = "") final String email,
+            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
+            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
+            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
+            @RequestParam(value = "skype", defaultValue = "") final String skype,
+            @RequestParam(value = "photo", defaultValue = "") final MultipartFile multipartPhoto,
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean isValid,
+            @RequestParam(value = "is_mailing", defaultValue = "false") final boolean isMailing,
+            @RequestParam(value = "is_locked", defaultValue = "false") final boolean isLocked
     ) {
         final User user = new User(
                 name, description,
@@ -341,7 +339,10 @@ public class UserController {
     )
     public void updateUser() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/user/update")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/user/update"
+                )
         );
     }
 
@@ -398,8 +399,8 @@ public class UserController {
             method = RequestMethod.POST
     )
     public ModelAndView sendMessage(
-            @RequestParam(value = "subject") final String subject,
-            @RequestParam(value = "sender") final String text
+            @RequestParam(value = "subject", defaultValue = "") final String subject,
+            @RequestParam(value = "sender", defaultValue = "") final String text
     ) {
         new Thread(() -> {
             String _subject = subject;
@@ -450,7 +451,10 @@ public class UserController {
     )
     public void sendMessageForPersonnel() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/user/send_message")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/user/send_message"
+                )
         );
     }
 }

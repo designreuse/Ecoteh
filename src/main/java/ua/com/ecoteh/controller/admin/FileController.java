@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.enums.FileType;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
@@ -42,12 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 )
 @SuppressWarnings("SpringMVCViewInspection")
 public class FileController {
-
-    /**
-     * The message that a get method is not supported.
-     */
-    private final static String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
 
     /**
      * The object for logging information.
@@ -154,7 +149,10 @@ public class FileController {
     )
     public void addFile() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/file/add")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/file/add"
+                )
         );
     }
 
@@ -196,8 +194,8 @@ public class FileController {
     )
     public String updateFile(
             @RequestParam(value = "id") final long id,
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "type") final String type,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "type", defaultValue = "") final String type,
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
         this.fileService.update(id, title, getType(type), multipartFile);
@@ -220,7 +218,10 @@ public class FileController {
     )
     public void updateFile() throws IllegalMappingException {
         throw new IllegalMappingException(
-                String.format(GET_METHOD_NOT_SUPPORTED_MESSAGE, "/admin/file/update")
+                String.format(
+                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                        "/admin/file/update"
+                )
         );
     }
 
