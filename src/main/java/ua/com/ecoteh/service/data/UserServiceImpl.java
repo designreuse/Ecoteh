@@ -661,16 +661,42 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * @param to   the object to copy
      */
     protected void copy(final User from, final User to) {
-        if (!isUser(to)) {
+        if (!isAuthenticatedUser(to)) {
             from.setLogin(to.getLogin());
             from.setPassword(to.getPassword());
         }
         to.initialize(from);
     }
 
-    private boolean isUser(final User user) {
-        return user.equals(getAuthenticatedUser()) ||
-                getAuthenticatedUser().getRole().equals(UserRole.SUPERADMIN);
+    /**
+     * Checks an authenticated user.
+     * <pre>
+     *     If authenticated user is null:
+     *     isAuthenticatedUser(null) = false
+     *     isAuthenticatedUser(user) = false
+     *
+     *     If the incoming user is authenticated user:
+     *     isAuthenticatedUser(user) = true
+     *
+     *     If the incoming user is not authenticated user,
+     *     but the authenticated user has super admin role:
+     *     isAuthenticatedUser(user) = true
+     * </pre>
+     *
+     * @param user the user to check.
+     * @return true if the user is authenticated user or
+     * if authenticated user has super admin role.
+     */
+    private boolean isAuthenticatedUser(final User user) {
+        boolean result = false;
+        if (isNotNull(user)) {
+            final User authenticatedUser = getAuthenticatedUser();
+            if (isNotNull(authenticatedUser)) {
+                result = user.equals(authenticatedUser) ||
+                        authenticatedUser.getRole().equals(UserRole.SUPERADMIN);
+            }
+        }
+        return result;
     }
 
     /**
