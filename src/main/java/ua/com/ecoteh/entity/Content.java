@@ -147,7 +147,9 @@ public abstract class Content extends Model implements IContent {
      */
     @Override
     public Content clone() {
-        return (Content) super.clone();
+        final Content content = (Content) super.clone();
+        content.setLogo(getLogo().clone());
+        return content;
     }
 
     /**

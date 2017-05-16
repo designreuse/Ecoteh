@@ -197,6 +197,16 @@ public class Contacts extends Model implements IContacts {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance.
+     */
+    @Override
+    public Contacts clone() {
+        return (Contacts) super.clone();
+    }
+
+    /**
      * Returns a E-mail of the contacts.
      *
      * @return The contacts E-mail or empty string (newer null).

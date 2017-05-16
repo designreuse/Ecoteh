@@ -244,7 +244,10 @@ public class Company extends Content implements ICompany {
      */
     @Override
     public Company clone() {
-        return (Company) super.clone();
+        final Company company = (Company) super.clone();
+        company.setContacts(getContacts().clone());
+        company.setAddress(getAddress().clone());
+        return company;
     }
 
     /**

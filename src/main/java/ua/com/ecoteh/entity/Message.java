@@ -145,7 +145,9 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public Message clone() {
-        return (Message) super.clone();
+        final Message message = (Message) super.clone();
+        message.setUser(getUser().clone());
+        return message;
     }
 
     /**

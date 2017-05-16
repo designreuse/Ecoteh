@@ -235,7 +235,10 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public User clone() {
-        return (User) super.clone();
+        final User user = (User) super.clone();
+        user.setContacts(getContacts().clone());
+        user.setPhoto(getPhoto().clone());
+        return user;
     }
 
     /**
