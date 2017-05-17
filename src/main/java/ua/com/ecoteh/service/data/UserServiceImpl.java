@@ -1,6 +1,5 @@
 package ua.com.ecoteh.service.data;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,11 +40,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 )
 public final class UserServiceImpl extends DataServiceImpl<User>
         implements UserService, UserDetailsService {
-
-    /**
-     * The object for logging information.
-     */
-    private final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
     /**
      * The interface provides a set of standard methods for working
@@ -90,7 +84,6 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             user = (User) SecurityContextHolder.getContext()
                     .getAuthentication().getPrincipal();
         } catch (Exception ex) {
-            LOGGER.error(ex.getMessage(), ex);
             user = null;
         }
         return user;
