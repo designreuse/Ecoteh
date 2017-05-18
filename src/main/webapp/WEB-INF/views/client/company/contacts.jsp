@@ -38,7 +38,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <c:choose>
                         <c:when test="${not empty company.logo.url}">
                             <img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="/${company.logo.url}"/>"
+                                 src="<c:url value="${company.logo.url}"/>"
                                  onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                         </c:when>
                         <c:otherwise>
