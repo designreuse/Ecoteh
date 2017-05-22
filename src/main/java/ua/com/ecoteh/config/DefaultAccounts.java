@@ -1,7 +1,6 @@
 package ua.com.ecoteh.config;
 
 import org.apache.log4j.Logger;
-import org.springframework.security.core.context.SecurityContextHolder;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
 
@@ -14,12 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public final class DefaultConfig {
+public final class DefaultAccounts {
 
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER = Logger.getLogger(DefaultConfig.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultAccounts.class);
 
     /**
      * The map of a default users.
@@ -42,7 +41,7 @@ public final class DefaultConfig {
      * @param username the name of user to return.
      * @return The user if it exist, null otherwise.
      */
-    public static User getDefaultUser(final String username) {
+    public static User get(final String username) {
         User user;
         try {
             user = USERS.get(username).clone();
@@ -59,7 +58,7 @@ public final class DefaultConfig {
      * @return The default admin.
      */
     public static User getDefaultAdmin() {
-        return getDefaultUser("admin");
+        return get("admin");
     }
 
     /**
@@ -68,25 +67,7 @@ public final class DefaultConfig {
      * @return The default super admin.
      */
     public static User getSuperAdmin() {
-        return getDefaultUser("superadmin");
-    }
-
-    /**
-     * Returns authenticated user.
-     * If authenticated user is empty then returns null.
-     *
-     * @return The authenticated user or null.
-     */
-    private static User getAuthenticatedUser() {
-        User user;
-        try {
-            user = (User) SecurityContextHolder.getContext()
-                    .getAuthentication().getPrincipal();
-        } catch (NullPointerException ex) {
-            LOGGER.error(ex.getMessage(), ex);
-            user = null;
-        }
-        return user;
+        return get("superadmin");
     }
 
     /**
