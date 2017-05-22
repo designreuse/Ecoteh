@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.ecoteh.config.DefaultConfig;
+import ua.com.ecoteh.config.DefaultAccounts;
 import ua.com.ecoteh.entity.File;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
@@ -103,7 +103,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         User user;
         try {
-            user = DefaultConfig.getDefaultUser(username);
+            user = DefaultAccounts.get(username);
             if (isNull(user)) {
                 user = getByLogin(username);
             }

@@ -68,6 +68,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
                 RootConfig.class,
+                DatabaseConfig.class,
                 SecurityConfig.class,
                 ContentConfig.class,
                 CaptchaConfig.class

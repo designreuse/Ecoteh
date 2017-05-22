@@ -83,15 +83,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             </div>
         </div>
         <c:if test="${length gt 0}">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
-                            <%-- Categories list --%>
-                        <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
+            <%-- Categories list --%>
+            <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
         </c:if>
     </div>
         <%-- Footer --%>

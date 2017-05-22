@@ -382,7 +382,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * Returns last file with the type.
      *
      * @param type the type of file to return.
-     * @return The last file with the type.
+     * @return The last file with the type (newer null).
      */
     @Override
     @Transactional(readOnly = true)

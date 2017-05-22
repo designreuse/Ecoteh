@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.config.DefaultConfig;
+import ua.com.ecoteh.config.DefaultAccounts;
 import ua.com.ecoteh.entity.Company;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.exception.ExceptionMessage;
@@ -235,7 +235,7 @@ public class ForgotUserInformationController {
                     )
             );
         }
-        sendUserInformationToEmail(DefaultConfig.getDefaultAdmin(), mainEmail);
+        sendUserInformationToEmail(DefaultAccounts.getDefaultAdmin(), mainEmail);
     }
 
     /**
