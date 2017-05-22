@@ -2,7 +2,7 @@ package ua.com.ecoteh.service.data;
 
 import org.junit.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import ua.com.ecoteh.config.DefaultConfig;
+import ua.com.ecoteh.config.DefaultAccounts;
 import ua.com.ecoteh.entity.User;
 import ua.com.ecoteh.enums.UserRole;
 import ua.com.ecoteh.mocks.MockConstants;
@@ -41,7 +41,7 @@ public final class UserServiceImplTest extends DataServiceImplTest<User> {
 
     @Test
     public void whenLoadUserByDefaultUsernameThenReturnSomeUser() {
-        assertNotNull(service.loadUserByUsername(DefaultConfig.getDefaultAdmin().getLogin()));
+        assertNotNull(service.loadUserByUsername(DefaultAccounts.getDefaultAdmin().getLogin()));
     }
 
     @Test

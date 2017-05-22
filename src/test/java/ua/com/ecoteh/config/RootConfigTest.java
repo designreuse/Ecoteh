@@ -3,18 +3,13 @@ package ua.com.ecoteh.config;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ua.com.ecoteh.repository.*;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -71,35 +66,6 @@ public final class RootConfigTest {
     @Test
     public void userRepositoryNotNull() {
         assertNotNull(this.userRepository);
-    }
-
-    @Test
-    public void dataSourceTest() throws Exception {
-        assertNotNull(new RootConfig().dataSource());
-    }
-
-    @Test
-    public void jpaVendorAdapterTest() throws Exception {
-        assertNotNull(new RootConfig().hibernateJpaVendorAdapter());
-    }
-
-    @Test
-    public void entityManagerFactoryTest() throws Exception {
-        assertNotNull(
-                new RootConfig().entityManagerFactory(
-                        mock(DataSource.class),
-                        mock(HibernateJpaVendorAdapter.class)
-                )
-        );
-    }
-
-    @Test
-    public void transactionManagerTest() {
-        assertNotNull(
-                new RootConfig().transactionManager(
-                        mock(EntityManagerFactory.class)
-                )
-        );
     }
 
     @Test

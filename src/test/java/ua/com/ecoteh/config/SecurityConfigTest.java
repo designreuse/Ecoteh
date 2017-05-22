@@ -24,7 +24,7 @@ public final class SecurityConfigTest {
 
     @Test
     public void serviceTest() {
-        assertNotNull(userService);
+        assertNotNull(this.userService);
     }
 
     @Test

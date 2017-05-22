@@ -6,42 +6,42 @@ import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public final class DefaultConfigTest {
+public final class DefaultAccountsTest {
 
     @Test
     public void whenGetDefaultUserWithNullUsernameThenReturnNull() {
-        assertNull(DefaultConfig.getDefaultUser(null));
+        assertNull(DefaultAccounts.get(null));
     }
 
     @Test
     public void whenGetDefaultUserWithBlankUsernameThenReturnNull() {
-        assertNull(DefaultConfig.getDefaultUser(""));
-        assertNull(DefaultConfig.getDefaultUser(" "));
-        assertNull(DefaultConfig.getDefaultUser("   "));
+        assertNull(DefaultAccounts.get(""));
+        assertNull(DefaultAccounts.get(" "));
+        assertNull(DefaultAccounts.get("   "));
     }
 
     @Test
     public void whenGetDefaultUserWithUnknownUsernameThenReturnNull() {
-        assertNull(DefaultConfig.getDefaultUser(ANY_STRING));
+        assertNull(DefaultAccounts.get(ANY_STRING));
     }
 
     @Test
     public void whenGetAdminUserThenReturnSomeUser() {
-        assertNotNull(DefaultConfig.getDefaultUser("admin"));
+        assertNotNull(DefaultAccounts.get("admin"));
     }
 
     @Test
     public void whenGetSuperAdminUserThenReturnSomeUser() {
-        assertNotNull(DefaultConfig.getDefaultUser("superadmin"));
+        assertNotNull(DefaultAccounts.get("superadmin"));
     }
 
     @Test
     public void whenGetAdminThenReturnSomeUser() {
-        assertNotNull(DefaultConfig.getDefaultAdmin());
+        assertNotNull(DefaultAccounts.getDefaultAdmin());
     }
 
     @Test
     public void whenGetSuperAdminThenReturnSomeUser() {
-        assertNotNull(DefaultConfig.getSuperAdmin());
+        assertNotNull(DefaultAccounts.getSuperAdmin());
     }
 }
