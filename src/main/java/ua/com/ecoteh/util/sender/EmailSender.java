@@ -13,17 +13,16 @@ import java.util.Properties;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
- * The class implements a set of methods for sending letters by e-mail.
+ * The class implements a set of methods for sending letters by E-mail.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
-public final class SenderImpl implements Sender {
+public final class EmailSender implements Sender {
 
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER = Logger.getLogger(SenderImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
 
     /**
      * The sender charset.
@@ -69,7 +68,7 @@ public final class SenderImpl implements Sender {
      * @param senderEmail     the sender E-mail.
      * @param senderEmailPass the sender E-mail password.
      */
-    public SenderImpl(
+    public EmailSender(
             final String subject,
             final String text,
             final String recipientEmail,
@@ -84,7 +83,7 @@ public final class SenderImpl implements Sender {
     }
 
     /**
-     * Sends a message to an E-mail in new thread.
+     * Sends a message to an E-mail in a new thread.
      */
     @Override
     public void send() {
@@ -96,7 +95,7 @@ public final class SenderImpl implements Sender {
     }
 
     /**
-     * Used to create a SenderImpl thread, starting the thread causes
+     * Used to create a EmailSender thread, starting the thread causes
      * the object's run method to be called in that separately executing
      * thread.
      */
