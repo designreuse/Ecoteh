@@ -1,5 +1,5 @@
 <%--
-Page to add a new article.
+Page for editing a incoming article.
 
 Yurii Salimov (yuriy.alex.salimov@gmail.com)
 --%>
@@ -17,11 +17,16 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
-        <title>Новая статья | <c:out value="${main_company.title}"/></title>
-        <meta name="title" content="Новая статья | <c:out value="${main_company.title}"/>">
         <meta name="robots" content="noindex,nofollow">
-        <meta name="description" content="Форма для добавления новой статьи.">
-        <meta name="keywords" content="Новая статья, добавление статьи"/>
+        <title>
+            Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out value="${main_company.title}"/>
+        </title>
+        <meta name="title"
+              content="Редактирование статьи &quot;<c:out value="${article.title}"/>&quot; | <c:out value="${main_company.title}"/>">
+        <meta name="description"
+              content="Форма для редактирования статьи &quot;<c:out value="${article.title}"/>&quot;.">
+        <meta name="keywords"
+              content="Редактирование статии, <c:out value="${article.title}"/>, <c:out value="${article.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -36,7 +41,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -45,15 +50,39 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <p class="path">
                         <a href="<c:url value="/"/>" title="Перейти на главную странцу">Главная</a>
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
-                        → <a href="<c:url value="/article/all"/>">Все&nbsp;статьи</a>
-                        → <a href="/admin/article/new">Новая&nbsp;статья</a>
+                        <c:choose>
+                            <c:when test="${article.category ne null}">
+                                →
+                                <a href="<c:url value="/category/all"/>" title="Перейти к всем категориям">
+                                    Все&nbsp;категории
+                                </a>
+                                →
+                                <a href="<c:url value="/category/${article.category.url}"/>"
+                                   title="Перейти к категории &quot;<c:out value="${article.category.title}"/>&quot;">
+                                    <c:out value="${article.category.title}"/>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                → <a href="<c:url value="/article/all"/>" title="Статьи">Статьи</a>
+                            </c:otherwise>
+                        </c:choose>
+                        →
+                        <a href="<c:url value="/admin/article/edit/${article.url}"/>">
+                            Редактирование статьи
+                        </a>
                     </p>
                     <hr>
-                    <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>
+                    <h3 class="text-center">
+                        Редактирование статьи
+                        &quot;<a href="<c:url value="/article/${article.url}"/>"><c:out
+                            value="${article.title}"/></a>&quot;
+                    </h3>
                     <hr>
                     <div class="text-center">
-                        <%-- Form to add a new article --%>
-                        <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
+                            <%-- Form for editing a incoming article --%>
+                        <form action="<c:url value="/admin/article/update"/>" method="post"
+                              enctype="multipart/form-data">
+                            <input type="hidden" name="url" value="<c:out value="${article.url}"/>">
                             <table align="center" class="table-size">
                                 <tr>
                                     <td class="ths">
@@ -61,7 +90,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="title" minlength="2"
-                                               maxlength="100" placeholder="Название статьи" required>
+                                               maxlength="100" placeholder="Название статьи" required
+                                               value="<c:out value="${article.title}"/>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -69,53 +99,92 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <span class="red">*</span>&nbsp;Описание
                                     </td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="desc" rows="10" title="" required
-                                                  placeholder="Краткое описание статьи (анонс)."></textarea>
+                                    <textarea class="form-control textarea" name="desc" title="" required
+                                              placeholder="Краткое описание статьи (анонс)."
+                                              rows="10"><c:out value="${article.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Основной текст</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="text" rows="10" title=""
-                                              placeholder="Основная информация статьи."></textarea>
+                                    <textarea class="form-control textarea" name="text"
+                                              placeholder="Основная информация статьи." title=""
+                                              rows="10"><c:out value="${article.text}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Ключевые слова</td>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Ключевые слова
+                                    </td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" rows="7" title=""
-                                              placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
+                                    <textarea class="form-control textarea" name="keywords" required title=""
+                                              placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
+                                              rows="7"><c:out value="${article.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Артикль</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="number" minlength="2"
-                                               maxlength="100" placeholder="Номер статьи, например: АС142.">
+                                               maxlength="100" placeholder="Номер статьи, например: АС142."
+                                               value="<c:out value="${article.number}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Цена</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="price" minlength="1"
-                                               maxlength="100" placeholder="Цена">
+                                               maxlength="100" placeholder="Цена"
+                                               value="<c:out value="${article.price}"/>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
-                                            <option value="">Нет</option>
+                                            <c:choose>
+                                                <c:when test="${article.category eq null}">
+                                                    <option value="">Нет</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="<c:out value="${article.category.url}"/>">
+                                                        <c:out value="${article.category.title}"/>
+                                                    </option>
+                                                </c:otherwise>
+                                            </c:choose>
                                             <c:forEach items="${categories}" var="category">
-                                                <option value="<c:out value="${category.url}"/>"><c:out
-                                                        value="${category.title}"/></option>
+                                                <c:if test="${category.id ne article.category.id}">
+                                                    <option value="<c:out value="${category.url}"/>">
+                                                        <c:out value="${category.title}"/>
+                                                    </option>
+                                                </c:if>
                                             </c:forEach>
+                                            <c:if test="${article.category ne null}">
+                                                <option value="">Нет</option>
+                                            </c:if>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Логотип</td>
                                     <td class="tds">
+                                        <c:choose>
+                                            <c:when test="${not empty article.logo.url}">
+                                                <a href="<c:url value="${article.logo.url}"/>" rel="lightgallery"
+                                                   title="<c:out value="${article.title}"/>">
+                                                    <img class="img-responsive img-in-list"
+                                                         alt="<c:out value="${article.title}"/>"
+                                                         src="<c:url value="${article.logo.url}"/>"
+                                                         onerror="this.src='<c:url
+                                                                 value="/resources/img/static/default_file.gif"/>'">
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="img-responsive img-in-list"
+                                                     alt="<c:out value="${article.title}"/>"
+                                                     src="<c:url value="/resources/img/static/default_file.gif"/>">
+                                            </c:otherwise>
+                                        </c:choose><br>
                                         <input type="file" name="logo" class="form-control">
                                     </td>
                                 </tr>
@@ -128,23 +197,25 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                     <td class="tds">
                                         <label title="Статью смогут увидеть все пользователей">
-                                            <input type="radio" name="is_valid" value="true" checked required/>
+                                            <input type="radio" name="is_valid" value="true" required
+                                                   <c:if test="${article.validated}">checked</c:if>/>
                                             &nbsp;Отображать
                                         </label>&nbsp;&nbsp;
                                         <label title="Статью смогут увидеть только администраторы">
-                                            <input type="radio" name="is_valid" value="false" required/>
-                                            &nbsp;Не&nbsp;отображать
+                                            <input type="radio" name="is_valid" value="false" required
+                                                   <c:if test="${!article.validated}">checked</c:if>/>
+                                            &nbsp;Не отображать
                                         </label>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin: 10px">
-                                <button type="submit" class="btn btn-default" title="Сохранить информацию">
+                                <button type="submit" class="btn btn-default" title="Сохранить изменения">
                                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                                     &nbsp;Сохранить
                                 </button>
                                 &nbsp;&nbsp;
-                                <button type="reset" class="btn btn-default" title="Сбросить информацию">
+                                <button type="reset" class="btn btn-default" title="Сбросить изменения">
                                     <span class="glyphicon glyphicon-retweet yellow" aria-hidden="true"></span>
                                     &nbsp;Сброс
                                 </button>
@@ -164,7 +235,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </div>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
