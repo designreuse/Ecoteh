@@ -148,5 +148,5 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </td>
     </tr>
     <%-- Superadmin menu --%>
-    <%@include file="/WEB-INF/views/admin/menu/super_menu_table.jsp" %>
+    <%@include file="/WEB-INF/views/admin/super_menu_table.jsp" %>
 </table>
