@@ -16,10 +16,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="noindex,nofollow">
         <title>Project Configuration</title>
         <meta name="title" content="Project Configuration">
         <meta name="description" content="Project Configuration">
-        <meta name="robots" content="noindex,nofollow">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -33,7 +33,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -56,24 +56,24 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </div>
     </div>
         <%-- Content Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/content.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/content.jsp" %>
         <%-- Content Properties Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/content_properties.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/content_properties.jsp" %>
         <%-- Database Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/database.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/database.jsp" %>
         <%-- Securiyt Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/security.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/security.jsp" %>
         <%-- Log4j Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/log4j.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/log4j.jsp" %>
         <%-- Google reCaptcha Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/captcha.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/captcha.jsp" %>
         <%-- Site Verification Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/verification.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/verification.jsp" %>
         <%-- Server Time Configuration --%>
-    <%@include file="/WEB-INF/views/superadmin/configuration/time.jsp" %>
+    <%@include file="/WEB-INF/views/configuration/time.jsp" %>
     <c:if test="${main_company ne null}">
         <%-- Footer --%>
-        <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
     </c:if>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>

@@ -7,6 +7,7 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%-- log4j.properties --%>
 <fmt:setBundle basename="log4j" var="log4j"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
