@@ -1,4 +1,4 @@
-package ua.com.ecoteh.controller.client;
+package ua.com.ecoteh.controller.seo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +44,6 @@ public class FaviconController {
             method = RequestMethod.GET
     )
     public String getFavicon() {
-        System.out.println("!!!!! FAVICON !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         final File favicon = this.fileService.getLastByType(FileType.FAVICON);
         return "forward:" + favicon.getUrl();
     }

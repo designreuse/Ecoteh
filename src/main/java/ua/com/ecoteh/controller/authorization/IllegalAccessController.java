@@ -1,4 +1,4 @@
-package ua.com.ecoteh.controller.client;
+package ua.com.ecoteh.controller.authorization;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,6 @@ import ua.com.ecoteh.exception.ExceptionMessage;
  * Illegal access controller.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 public class IllegalAccessController {
