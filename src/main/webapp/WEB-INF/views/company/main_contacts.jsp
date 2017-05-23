@@ -16,12 +16,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="index,follow">
         <title>Контакты | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Контакты | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="index,follow">
         <meta name="description" content="Контакты и адрес нашей компании.">
         <meta name="keywords"
-              content="Контакты, адрес, как проехать, карта, google maps, телефон, e-mail, социальные сети"/>
+              content="Контакты, адрес, как проехать, карта, google maps, телефон, e-mail, электронная почта"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -34,7 +34,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -62,7 +62,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </div>
                     </c:if>
                         <%-- Contact information of the incoming company --%>
-                    <jsp:include page="/WEB-INF/views/client/company/contacts.jsp"/>
+                    <jsp:include page="/WEB-INF/views/company/contacts.jsp"/>
                 </div>
             </div>
         </div>
@@ -70,14 +70,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <div class="row">
                 <div class="box">
                         <%-- Form for sending a message --%>
-                    <%@include file="/WEB-INF/views/client/message/to_contacts.jsp" %>
+                    <%@include file="/WEB-INF/views/message/to_contacts.jsp" %>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>

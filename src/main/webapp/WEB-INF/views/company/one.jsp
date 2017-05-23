@@ -16,10 +16,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="index,follow">
         <title>О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/></title>
         <meta name="title"
               content="О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="index,follow">
         <meta name="description"
               content="Описание компании &quot;<c:out value="${company.title}"/>&quot;: <c:out value="${company.description}"/>.">
         <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
@@ -36,7 +36,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -82,7 +82,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             </div>
                         </c:if>
                             <%-- Company logo --%>
-                        <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
+                        <jsp:include page="/WEB-INF/views/company/logo.jsp"/>
                         <c:if test="${!company.validated}">
                             <p class="no-valid" title="Не отображается для клиентов">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
@@ -111,13 +111,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <h3 class="intro-text text-center">Контакты</h3>
                     <hr>
                         <%-- Contact information of the incoming company --%>
-                    <jsp:include page="/WEB-INF/views/client/company/contacts.jsp"/>
+                    <jsp:include page="/WEB-INF/views/company/contacts.jsp"/>
                 </div>
             </div>
         </div>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>

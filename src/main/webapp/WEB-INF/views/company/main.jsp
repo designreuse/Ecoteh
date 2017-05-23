@@ -17,9 +17,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="index,follow">
         <title>О компании | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="О компании | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="index,follow">
         <meta name="description"
               content="Описание компании &quot;<c:out value="${main_company.title}"/>&quot;: <c:out value="${main_company.description}"/>.">
         <meta name="keywords" content="Главная компания, <c:out value="${main_company.keywords}"/>"/>
@@ -40,7 +40,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -72,7 +72,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             </c:if>
                         </c:if>
                             <%-- Main company logo --%>
-                        <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
+                        <jsp:include page="/WEB-INF/views/company/logo.jsp"/>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p>${company.description}</p>
@@ -90,7 +90,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <h3 class="intro-text text-center">Наша команда</h3>
                         <hr>
                             <%-- Personnel list --%>
-                        <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
+                        <jsp:include page="/WEB-INF/views/user/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </c:if>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
