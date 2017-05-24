@@ -17,9 +17,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="index,follow">
         <title>Отзывы о компании | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Отзывы о компании | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="index,follow">
         <meta name="description" content="Отзывы о компании &quot;<c:out value="${main_company.title}"/>&quot;.">
         <meta name="keywords" content="Отзывы о компании, <c:out value="${main_company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
@@ -35,7 +35,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <c:set var="length" value="${fn:length(responses)}"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
@@ -98,7 +98,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <div class="box">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <%-- Responses list --%>
-                            <jsp:include page="/WEB-INF/views/client/response/list.jsp"/>
+                            <jsp:include page="/WEB-INF/views/response/list.jsp"/>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -109,14 +109,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <div class="row">
                 <div class="box">
                         <%-- Form for sending a response --%>
-                    <%@include file="/WEB-INF/views/client/message/to_responses.jsp" %>
+                    <%@include file="/WEB-INF/views/message/to_responses.jsp" %>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
