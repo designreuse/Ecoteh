@@ -110,23 +110,29 @@ public final class AsciiImpl implements Ascii {
     }
 
     /**
-     * @return
+     * Converts this value to a new character array and returns it.
+     *
+     * @return The char array.
      */
     private char[] getValueChars() {
         return this.value.toCharArray();
     }
 
     /**
-     * @param character
-     * @return
+     * Parses the incoming char to integer.
+     *
+     * @param character the char to parse
+     * @return the integer.
      */
     private static int charToInt(final char character) {
         return (int) character;
     }
 
     /**
-     * @param number the number to string.
-     * @return
+     * Parses the incoming number to char.
+     *
+     * @param number the string number to parse (newer null).
+     * @return The char.
      */
     private char numberToChar(final String number) {
         return (char) Integer.parseInt(number);
