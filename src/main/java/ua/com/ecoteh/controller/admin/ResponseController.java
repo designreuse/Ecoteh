@@ -22,7 +22,6 @@ import ua.com.ecoteh.util.cache.Cache;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -80,7 +79,7 @@ public class ResponseController {
     public ModelAndView editResponse(@PathVariable("id") final long id) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("response", this.responseService.get(id));
-        modelAndView.setViewName("admin/response/edit");
+        modelAndView.setViewName("response/edit");
         return modelAndView;
     }
 

@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
  * Class intercepts exceptions that are not specified in the controller.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @ControllerAdvice
 @ComponentScan(basePackages = "ua.com.ecoteh.service.fabrica")

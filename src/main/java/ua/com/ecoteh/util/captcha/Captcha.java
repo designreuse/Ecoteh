@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
  * for working with google reCAPTCHA.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface Captcha {
 

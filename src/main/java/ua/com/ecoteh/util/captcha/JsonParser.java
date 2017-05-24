@@ -11,7 +11,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * with JsonParser parser.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 final class JsonParser {
 

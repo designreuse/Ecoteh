@@ -10,7 +10,6 @@ import java.util.List;
  * for working {@link Company} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface CompanyRepository extends ContentRepository<Company> {
 

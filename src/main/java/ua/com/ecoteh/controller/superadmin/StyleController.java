@@ -18,7 +18,6 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -78,7 +77,7 @@ public class StyleController {
     public ModelAndView getStylesToEdit() {
         ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("styles", this.styleService.get());
-        modelAndView.setViewName("superadmin/style/edit");
+        modelAndView.setViewName("style/edit");
         return modelAndView;
     }
 

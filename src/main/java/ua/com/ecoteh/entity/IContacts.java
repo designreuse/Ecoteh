@@ -5,7 +5,6 @@ package ua.com.ecoteh.entity;
  * for working with objects of the {@link Contacts} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface IContacts extends IModel {
 

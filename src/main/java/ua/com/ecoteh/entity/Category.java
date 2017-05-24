@@ -14,7 +14,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * with entity of the {@link Category} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Entity
 @Table(name = "categories")

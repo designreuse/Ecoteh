@@ -25,24 +25,31 @@ public final class Base64Encryptor implements Encryptor {
     private final static Logger LOGGER = Logger.getLogger(Base64Encryptor.class);
 
     /**
-     * Default primary encoding format.
+     * Default key.
      */
-    private final static SecretKey DEFAULT_KEY;
+    private final static String KEY = "6Lex4goUAAAAACmMLbkj";
+
+    /**
+     * Default secret key.
+     */
+    private final static SecretKey DEFAULT_KEY = new DESSecretKey(KEY.getBytes());
 
     /**
      * Name of a default supported Charset.
      */
-    private final static String DEFAULT_CHARSET_NAME;
+    private final static String DEFAULT_CHARSET_NAME = "UTF8";
 
     /**
      * Primary encoding format.
      */
-    private static SecretKey staticSecretKey;
+    private static SecretKey staticSecretKey = DEFAULT_KEY;
+    ;
 
     /**
      * Name of a default supported Charset.
      */
-    private static String staticCharsetName;
+    private static String staticCharsetName = DEFAULT_CHARSET_NAME;
+    ;
 
     /**
      * Name of a supported Charset.
@@ -63,21 +70,6 @@ public final class Base64Encryptor implements Encryptor {
      * The value to encrypt or to decrypt.
      */
     private final String value;
-
-    /**
-     * Static block.
-     */
-    static {
-        final String key = "KJkbkjdslmI435KNnsadqw33";
-        DEFAULT_KEY = new DESSecretKey(key.getBytes());
-        DEFAULT_CHARSET_NAME = "UTF8";
-        staticSecretKey = DEFAULT_KEY;
-        staticCharsetName = DEFAULT_CHARSET_NAME;
-    }
-
-    public Base64Encryptor() {
-        this("");
-    }
 
     /**
      * Constructor.

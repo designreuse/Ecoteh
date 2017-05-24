@@ -24,7 +24,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * The authorization controller.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @ComponentScan(basePackages = "ua.com.ecoteh.service.fabrica")

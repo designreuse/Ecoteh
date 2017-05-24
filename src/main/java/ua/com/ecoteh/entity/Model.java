@@ -12,7 +12,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * for working with entity of the {@link Model} class or subclasses.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -55,7 +54,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {

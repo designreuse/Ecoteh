@@ -12,7 +12,6 @@ import java.util.List;
  * for working with objects of the class {@link User}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface UserService extends DataService<User>, UserDetailsService {
 

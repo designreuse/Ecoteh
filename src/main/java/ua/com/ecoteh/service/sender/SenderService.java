@@ -8,7 +8,6 @@ import java.util.Collection;
  * The interface describes a set of methods for working with E-mail.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface SenderService {
 

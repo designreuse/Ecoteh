@@ -19,7 +19,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * to adjust the search engine optimization (SEO).
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.service")

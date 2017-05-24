@@ -15,7 +15,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * with entity of the {@link Response} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Entity
 @Table(name = "responses")
@@ -121,7 +120,7 @@ public class Response extends Model implements IResponse {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -135,7 +134,7 @@ public class Response extends Model implements IResponse {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public Response clone() {
@@ -145,7 +144,7 @@ public class Response extends Model implements IResponse {
     /**
      * Returns a username of the response.
      *
-     * @return The response username.
+     * @return The response username (newer null).
      */
     @Override
     public String getUsername() {
@@ -173,7 +172,7 @@ public class Response extends Model implements IResponse {
     /**
      * Returns a text of the response.
      *
-     * @return The response text.
+     * @return The response text (newer null).
      */
     @Override
     public String getText() {
@@ -201,7 +200,7 @@ public class Response extends Model implements IResponse {
     /**
      * Returns a date of the response.
      *
-     * @return The response date.
+     * @return The response date (newer null).
      */
     @Override
     public Date getDate() {
@@ -226,7 +225,7 @@ public class Response extends Model implements IResponse {
     /**
      * Returns an article date in string format.
      *
-     * @return The article string-date.
+     * @return The article string-date (newer null).
      */
     @Override
     public String getDateToString() {
@@ -251,7 +250,7 @@ public class Response extends Model implements IResponse {
      * </pre>
      *
      * @param response the response to copy.
-     * @return This response with new fields.
+     * @return This response with new fields (newer null).
      */
     @Override
     public Response initialize(final Response response) {

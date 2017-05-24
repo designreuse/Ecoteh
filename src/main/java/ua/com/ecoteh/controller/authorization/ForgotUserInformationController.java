@@ -27,7 +27,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
  * The class implements a set of methods for forgot password.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @ComponentScan(

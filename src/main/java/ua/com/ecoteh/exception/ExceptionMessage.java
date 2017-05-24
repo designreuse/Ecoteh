@@ -158,4 +158,9 @@ public interface ExceptionMessage {
      */
     String ILLEGAL_ACCESS_MESSAGE =
             "You do not have sufficient permissions to access this page.";
+
+    /**
+     * The message that a operation (method) is not supported by some class.
+     */
+    String UNSUPPORTED_OPERATION_MESSAGE = "Not supported by %s class!";
 }

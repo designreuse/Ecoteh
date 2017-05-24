@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
  * for search for content on the site.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface SearchService {
 

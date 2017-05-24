@@ -21,7 +21,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * with objects of the class {@link Category}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(

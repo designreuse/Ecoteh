@@ -6,7 +6,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * The class implements a set of methods for translate to Latin.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class ToLatinImpl implements ToLatin {
 
@@ -31,13 +30,13 @@ public final class ToLatinImpl implements ToLatin {
      */
     @Override
     public String fromCyrillic() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (isNotEmpty(this.value)) {
             for (char ch : convertToChars(this.value)) {
                 sb.append(translate(ch));
             }
         }
-        return sb.toString().replace("__", "_");
+        return sb.toString().replaceAll("__", "_");
     }
 
     /**

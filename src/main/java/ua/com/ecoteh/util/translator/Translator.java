@@ -5,9 +5,14 @@ package ua.com.ecoteh.util.translator;
  * from Cyrillic to Latin, to ASCII, from ASCII.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class Translator {
+
+    /**
+     * Private constructor.
+     */
+    private Translator(){
+    }
 
     /**
      * Translates value from cyrillic to latin.

@@ -1,7 +1,5 @@
 package ua.com.ecoteh.util.loader;
 
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -12,14 +10,8 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * with files in file system.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class FileContentsLoader extends AbstractLoader implements Loader {
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(FileContentsLoader.class);
 
     /**
      * Thr text to save.
@@ -61,8 +53,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
             in.read(buf);
             setText(new String(buf));
         } catch (IOException ex) {
-            ex.printStackTrace();
-            LOGGER.error(ex.getMessage(), ex);
+            logException(ex);
             setText("");
         }
         return this.text;
@@ -79,8 +70,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
             out.setLength(0);
             out.write(buf);
         } catch (IOException ex) {
-            ex.printStackTrace();
-            LOGGER.error(ex.getMessage(), ex);
+            logException(ex);
         }
     }
 

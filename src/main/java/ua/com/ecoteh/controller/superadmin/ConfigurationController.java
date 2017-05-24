@@ -17,7 +17,6 @@ import java.util.Date;
  * Super admin controller.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -82,7 +81,7 @@ public class ConfigurationController {
         }
         modelAndView.addObject("server_date", new Date());
         modelAndView.addObject("conf_date", Time.getDate());
-        modelAndView.setViewName("superadmin/configuration/configuration");
+        modelAndView.setViewName("configuration/configuration");
         return modelAndView;
     }
 }

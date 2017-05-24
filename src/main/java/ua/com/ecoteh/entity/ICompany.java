@@ -8,7 +8,6 @@ import ua.com.ecoteh.enums.CompanyType;
  * the {@link Company} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface ICompany extends IContent {
 

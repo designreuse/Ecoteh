@@ -35,7 +35,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * of the interface {@link MainMVFabric}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -123,7 +122,7 @@ public class UserController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("users_list", this.userService.getPersonnel());
         modelAndView.addObject("is_captcha", null);
-        modelAndView.setViewName("admin/user/all");
+        modelAndView.setViewName("user/all");
         return modelAndView;
     }
 
@@ -140,7 +139,7 @@ public class UserController {
     )
     public ModelAndView newUserPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/user/add");
+        modelAndView.setViewName("user/add");
         return modelAndView;
     }
 
@@ -250,7 +249,7 @@ public class UserController {
     public ModelAndView editUserByUrl(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("user", this.userService.getByUrl(url));
-        modelAndView.setViewName("admin/user/edit");
+        modelAndView.setViewName("user/edit");
         return modelAndView;
     }
 

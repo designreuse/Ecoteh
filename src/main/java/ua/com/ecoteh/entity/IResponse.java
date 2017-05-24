@@ -8,7 +8,6 @@ import java.util.Date;
  * the {@link Response} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface IResponse extends IModel {
 

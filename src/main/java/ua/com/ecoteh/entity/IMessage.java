@@ -8,7 +8,6 @@ import java.util.Date;
  * the {@link Message} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface IMessage extends IModel {
 

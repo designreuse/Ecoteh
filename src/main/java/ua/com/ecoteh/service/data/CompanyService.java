@@ -9,7 +9,6 @@ import java.util.List;
  * for working with objects of the {@link Company} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface CompanyService extends ContentService<Company> {
 

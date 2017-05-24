@@ -1,5 +1,6 @@
 package ua.com.ecoteh.service.data;
 
+import org.apache.log4j.Logger;
 import ua.com.ecoteh.entity.Model;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.DataRepository;
@@ -16,9 +17,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  *
  * @param <T> entity type, extends {@link Model}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
+
+    /**
+     * The object for logging information.
+     */
+    private static final Logger LOGGER = Logger.getLogger(DataServiceImpl.class);
 
     /**
      * The object provides a set of standard JPA methods
@@ -469,6 +474,16 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
         return new IllegalArgumentException(
                 prepareMessage(message, (Object[]) parameters)
         );
+    }
+
+    /**
+     * Error logging.
+     *
+     * @param ex the intercepted exception.
+     */
+    protected static void logException(final Exception ex) {
+        LOGGER.error(ex.getMessage(), ex);
+        ex.printStackTrace();
     }
 
     /**

@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
  * The class of controller to adjust the search engine optimization (SEO).
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @ComponentScan(basePackages = "ua.com.ecoteh.service.data")

@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
  * to adjust the search engine optimization (SEO).
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface SeoService {
 

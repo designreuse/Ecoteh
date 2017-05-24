@@ -16,7 +16,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * with entity of the {@link Company} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Entity
 @Table(name = "companies")

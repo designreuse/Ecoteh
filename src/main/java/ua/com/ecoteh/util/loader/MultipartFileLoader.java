@@ -1,12 +1,12 @@
 package ua.com.ecoteh.util.loader;
 
-import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import static ua.com.ecoteh.exception.ExceptionMessage.UNSUPPORTED_OPERATION_MESSAGE;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
@@ -15,14 +15,8 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * with multipart files in file system.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class MultipartFileLoader extends AbstractLoader implements Loader {
-
-    /**
-     * The object for logging information.
-     */
-    private final static Logger LOGGER = Logger.getLogger(MultipartFileLoader.class);
 
     /**
      * The file to write.
@@ -65,7 +59,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
             try (final OutputStream stream = new FileOutputStream(path)) {
                 stream.write(this.file.getBytes());
             } catch (IOException ex) {
-                LOGGER.error(ex.getMessage(), ex);
+                logException(ex);
             }
         }
     }
@@ -79,8 +73,15 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      */
     @Override
     public String read() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Not supported by MultipartFileLoader");
+        throw new UnsupportedOperationException(
+                String.format(
+                        UNSUPPORTED_OPERATION_MESSAGE,
+                        MultipartFileLoader.class.getSimpleName()
+                )
+        );
     }
+
+
 
     /**
      * Returns a multipart file.

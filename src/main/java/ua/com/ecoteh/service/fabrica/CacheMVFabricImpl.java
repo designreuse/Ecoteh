@@ -12,7 +12,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * and returns the main modelAndViews which saves in cache.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 public final class CacheMVFabricImpl implements CacheMVFabric {

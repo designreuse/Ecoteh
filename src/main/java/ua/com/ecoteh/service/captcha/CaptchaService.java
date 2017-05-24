@@ -7,7 +7,6 @@ import ua.com.ecoteh.util.captcha.Captcha;
  * for working with google reCAPTCHA.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface CaptchaService extends Captcha {
 }

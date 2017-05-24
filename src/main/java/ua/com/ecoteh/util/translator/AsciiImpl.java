@@ -3,10 +3,10 @@ package ua.com.ecoteh.util.translator;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
- * The class implements a set of methods for translate to ASCII and from ASCII.
+ * The class implements a set of methods for translate
+ * to ASCII and from ASCII.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class AsciiImpl implements Ascii {
 
@@ -16,6 +16,8 @@ public final class AsciiImpl implements Ascii {
     private String value;
 
     /**
+     * Constructor.
+     *
      * @param value the string to translate.
      */
     public AsciiImpl(final String value) {
@@ -23,6 +25,8 @@ public final class AsciiImpl implements Ascii {
     }
 
     /**
+     * Constructor.
+     *
      * @param value the string to translate.
      */
     public AsciiImpl(final int value) {
@@ -40,11 +44,14 @@ public final class AsciiImpl implements Ascii {
         String result = "";
         if (isNotEmpty(this.value)) {
             final StringBuilder sb = new StringBuilder();
-            for (Character character : this.value.toCharArray()) {
-                sb.append((int) character).append(",");
+            final char[] charArray = getValueChars();
+            for (int i = 0; i < charArray.length; i++) {
+                sb.append(charToInt(charArray[i]));
+                if (i != charArray.length - 1) {
+                    sb.append(",");
+                }
             }
             result = sb.toString();
-            result = result.substring(0, result.length() - 1);
         }
         return result;
     }
@@ -61,12 +68,8 @@ public final class AsciiImpl implements Ascii {
         if (isNotEmpty(this.value)) {
             try {
                 final StringBuilder sb = new StringBuilder();
-                for (String st : this.value.split(",")) {
-                    sb.append(
-                            Character.toString(
-                                    (char) Integer.parseInt(st)
-                            )
-                    );
+                for (String number : this.value.split(",")) {
+                    sb.append(numberToChar(number));
                 }
                 result = sb.toString();
             } catch (NumberFormatException ex) {
@@ -104,5 +107,28 @@ public final class AsciiImpl implements Ascii {
     @Override
     public String getValue() {
         return this.value;
+    }
+
+    /**
+     * @return
+     */
+    private char[] getValueChars() {
+        return this.value.toCharArray();
+    }
+
+    /**
+     * @param character
+     * @return
+     */
+    private static int charToInt(final char character) {
+        return (int) character;
+    }
+
+    /**
+     * @param number the number to string.
+     * @return
+     */
+    private char numberToChar(final String number) {
+        return (char) Integer.parseInt(number);
     }
 }

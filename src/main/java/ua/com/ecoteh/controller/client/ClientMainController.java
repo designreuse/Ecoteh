@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
  * with implementation ClientMVFabric interface.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @ComponentScan(basePackages = "ua.com.ecoteh.service")

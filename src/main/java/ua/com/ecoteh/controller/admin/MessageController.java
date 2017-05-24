@@ -18,7 +18,6 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -79,7 +78,7 @@ public class MessageController {
     public ModelAndView getMessagesPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("messages", this.messageService.getAll(false));
-        modelAndView.setViewName("admin/message/all");
+        modelAndView.setViewName("message/all");
         return modelAndView;
     }
 

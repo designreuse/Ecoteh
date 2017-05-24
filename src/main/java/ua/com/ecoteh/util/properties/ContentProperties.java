@@ -5,7 +5,6 @@ package ua.com.ecoteh.util.properties;
  * for getting application properties.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface ContentProperties {
     /**

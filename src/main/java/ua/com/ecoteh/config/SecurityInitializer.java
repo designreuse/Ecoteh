@@ -8,7 +8,6 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * (them saw and inhaled the Root Application Context).
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer {
 }

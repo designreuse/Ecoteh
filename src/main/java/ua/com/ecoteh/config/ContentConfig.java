@@ -13,7 +13,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * The class describes a Content configurations.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Configuration
 @PropertySource("classpath:content.properties")

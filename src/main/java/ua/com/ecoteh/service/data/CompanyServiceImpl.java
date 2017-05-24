@@ -1,6 +1,5 @@
 package ua.com.ecoteh.service.data;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * with objects of the {@link Company} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(
@@ -32,11 +30,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
         }
 )
 public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(CompanyServiceImpl.class);
 
     /**
      * The interface provides a set of standard methods for working
@@ -132,7 +125,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
         try {
             mainCompany = this.repository.findByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
-            LOGGER.error(ex.getMessage(), ex);
+            logException(ex);
             mainCompany = new Company();
         }
         return mainCompany;

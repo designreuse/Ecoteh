@@ -11,7 +11,6 @@ import java.util.List;
  * for working with objects of the class {@link Response}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface ResponseService extends DataService<Response> {
 

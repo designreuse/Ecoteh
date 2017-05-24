@@ -8,11 +8,10 @@ import java.util.Comparator;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
- * The class implements a set of methods
- * for working with comparators for {@link User}.
+ * The class implements a set of methods for working
+ * with comparators for objects of the {@link User} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class UserComparator extends AbstractComparator {
 

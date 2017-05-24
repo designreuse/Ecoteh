@@ -11,7 +11,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * for working with entity of the {@link Content} class or subclasses.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

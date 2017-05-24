@@ -32,7 +32,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -103,7 +102,7 @@ public class CompanyController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getMainCompany());
         modelAndView.addObject("main", true);
-        modelAndView.setViewName("admin/company/edit");
+        modelAndView.setViewName("company/edit");
         return modelAndView;
     }
 
@@ -221,7 +220,7 @@ public class CompanyController {
     )
     public ModelAndView newPartnerPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/company/add");
+        modelAndView.setViewName("company/add");
         return modelAndView;
     }
 
@@ -339,7 +338,7 @@ public class CompanyController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getByUrl(url, false));
         modelAndView.addObject("main", false);
-        modelAndView.setViewName("admin/company/edit");
+        modelAndView.setViewName("company/edit");
         return modelAndView;
     }
 

@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * Spring Security Configuration class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Configuration
 @EnableWebSecurity

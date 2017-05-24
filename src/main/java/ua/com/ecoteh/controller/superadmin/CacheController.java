@@ -18,7 +18,6 @@ import ua.com.ecoteh.util.cache.Cache;
  * For the work used implementation of the interface {@link MainMVFabric}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(value = "/superadmin/cache")
@@ -58,7 +57,7 @@ public class CacheController {
     public ModelAndView getCachePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("objects", Cache.getEntriesToString());
-        modelAndView.setViewName("superadmin/cache/cache");
+        modelAndView.setViewName("cache/cache");
         return modelAndView;
     }
 

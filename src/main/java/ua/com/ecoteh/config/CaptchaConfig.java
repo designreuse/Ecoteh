@@ -13,7 +13,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * The class describes a google captcha configurations.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Configuration
 @PropertySource("classpath:captcha.properties")

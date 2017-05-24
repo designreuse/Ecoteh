@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Class to work with the default users.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class DefaultAccounts {
 
@@ -78,7 +77,7 @@ public final class DefaultAccounts {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "login", "password",
+                "admin", "eco20pass17",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -92,7 +91,7 @@ public final class DefaultAccounts {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "login", "password",
+                "superadmin", "super20pass17",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);

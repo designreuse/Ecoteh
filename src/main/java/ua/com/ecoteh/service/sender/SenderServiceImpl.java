@@ -1,7 +1,7 @@
 package ua.com.ecoteh.service.sender;
 
 import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.util.sender.SenderImpl;
+import ua.com.ecoteh.util.sender.EmailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,7 +13,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * The class implements a set of methods for working with E-mail.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 public final class SenderServiceImpl implements SenderService {
@@ -35,7 +34,7 @@ public final class SenderServiceImpl implements SenderService {
             final String senderEmail,
             final String senderEmailPass
     ) {
-        new SenderImpl(
+        new EmailSender(
                 subject, text, recipientEmail,
                 senderEmail, senderEmailPass
         ).send();

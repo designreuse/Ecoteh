@@ -11,7 +11,6 @@ import java.util.List;
  *
  * @param <T> entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface ContentService<T extends Content> extends DataService<T> {
 

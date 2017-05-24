@@ -7,7 +7,6 @@ import java.util.Date;
  * for working with objects of the {@link Article} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface IArticle extends IContent {
 

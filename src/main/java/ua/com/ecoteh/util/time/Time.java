@@ -14,7 +14,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * with time string in the format "00:00".
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class Time implements ITime {
 

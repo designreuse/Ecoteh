@@ -15,7 +15,6 @@ import ua.com.ecoteh.service.search.SearchService;
  * The class implements a set of methods for search for content on the site.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(value = "/search")
@@ -70,7 +69,7 @@ public class SearchController {
     )
     public ModelAndView search() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("client/search/result");
+        modelAndView.setViewName("search/search");
         return modelAndView;
     }
 

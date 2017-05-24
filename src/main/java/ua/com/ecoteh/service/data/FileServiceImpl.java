@@ -25,7 +25,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * for working with objects of the {@link File} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(

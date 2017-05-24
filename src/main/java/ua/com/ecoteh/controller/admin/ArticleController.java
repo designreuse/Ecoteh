@@ -32,7 +32,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -111,7 +110,7 @@ public class ArticleController {
     public ModelAndView getNewArticlePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("categories", this.categoryService.getAll(false));
-        modelAndView.setViewName("admin/article/add");
+        modelAndView.setViewName("article/add");
         return modelAndView;
     }
 
@@ -208,7 +207,7 @@ public class ArticleController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("article", this.articleService.getByUrl(url, false));
         modelAndView.addObject("categories", this.categoryService.getAll(false));
-        modelAndView.setViewName("admin/article/edit");
+        modelAndView.setViewName("article/edit");
         return modelAndView;
     }
 

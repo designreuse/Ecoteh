@@ -13,7 +13,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * with objects of the {@link Message} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")

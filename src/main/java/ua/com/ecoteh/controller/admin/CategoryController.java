@@ -28,7 +28,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -94,7 +93,7 @@ public class CategoryController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView getNewCategoryPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/category/add");
+        modelAndView.setViewName("category/add");
         return modelAndView;
     }
 
@@ -168,7 +167,7 @@ public class CategoryController {
     public ModelAndView editCategory(@PathVariable("url") final String url) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("category", this.categoryService.getByUrl(url, false));
-        modelAndView.setViewName("admin/category/edit");
+        modelAndView.setViewName("category/edit");
         return modelAndView;
     }
 

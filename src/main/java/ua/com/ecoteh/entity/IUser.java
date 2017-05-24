@@ -8,7 +8,6 @@ import ua.com.ecoteh.enums.UserRole;
  * the {@link User} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface IUser extends IModel {
 

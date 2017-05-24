@@ -19,7 +19,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * for search for content on the site.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
@@ -370,7 +369,7 @@ public class SearchServiceImpl implements SearchService {
     private ModelAndView prepareDefaultSearchPage(final String keywords) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("keywords", keywords);
-        modelAndView.setViewName("client/search/result");
+        modelAndView.setViewName("search/search");
         return modelAndView;
     }
 

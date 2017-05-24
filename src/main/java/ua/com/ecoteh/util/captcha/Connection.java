@@ -11,7 +11,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * with https URL connection.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 final class Connection {
 

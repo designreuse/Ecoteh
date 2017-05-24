@@ -5,8 +5,10 @@ import ua.com.ecoteh.entity.Model;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
+ * The class implements a set of methods for working
+ * with comparators for objects of the {@link Model} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public abstract class AbstractComparator {
 

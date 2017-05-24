@@ -20,7 +20,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * and returns the main modelAndViews.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @SuppressWarnings("SpringMVCViewInspection")
@@ -105,7 +104,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject("print_partners", 6);
         modelAndView.addObject("responses", this.responseService.getAndSortByDate(true));
         modelAndView.addObject("print_responses", 3);
-        modelAndView.setViewName("client/main/index");
+        modelAndView.setViewName("home/index");
         return modelAndView;
     }
 
@@ -117,7 +116,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView allCategoriesPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.setViewName("client/category/all");
+        modelAndView.setViewName("category/all");
         return modelAndView;
     }
 
@@ -129,7 +128,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView allArticlesPage() {
         final ModelAndView modelAndView = allSortByTitleArticlesPage(false);
-        modelAndView.setViewName("client/article/all");
+        modelAndView.setViewName("article/all");
         return modelAndView;
     }
 
@@ -159,7 +158,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         default:
             modelAndView = allArticlesPage();
         }
-        modelAndView.setViewName("client/article/all");
+        modelAndView.setViewName("article/all");
         return modelAndView;
     }
 
@@ -181,7 +180,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
             personnel = this.userService.getPersonnel();
         }
         modelAndView.addObject("users_list", personnel);
-        modelAndView.setViewName("client/company/main");
+        modelAndView.setViewName("company/main");
         return modelAndView;
     }
 
@@ -195,7 +194,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company mainCompany = this.companyService.getMainCompany();
         modelAndView.addObject("company", mainCompany);
-        modelAndView.setViewName("client/company/main_contacts");
+        modelAndView.setViewName("company/main_contacts");
         return modelAndView;
     }
 
@@ -226,7 +225,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
                 )
         );
         modelAndView.addObject("revers", !revers);
-        modelAndView.setViewName("client/company/all");
+        modelAndView.setViewName("company/all");
         return modelAndView;
     }
 
@@ -239,7 +238,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView categoryPage(final String url) {
         final ModelAndView modelAndView = categoryWithSortByTitleArticlesPage(url, false);
-        modelAndView.setViewName("client/category/one");
+        modelAndView.setViewName("category/one");
         return modelAndView;
     }
 
@@ -272,7 +271,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         default:
             modelAndView = categoryPage(url);
         }
-        modelAndView.setViewName("client/category/one");
+        modelAndView.setViewName("category/one");
         return modelAndView;
     }
 
@@ -313,7 +312,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         final ModelAndView modelAndView = getDefaultModelAndView();
         final Company company = this.companyService.getByUrl(url, isValidContent());
         modelAndView.addObject("company", company);
-        modelAndView.setViewName("client/company/one");
+        modelAndView.setViewName("company/one");
         return modelAndView;
     }
 
@@ -344,7 +343,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
                 )
         );
         modelAndView.addObject("revers", !revers);
-        modelAndView.setViewName("client/response/all");
+        modelAndView.setViewName("response/all");
         return modelAndView;
     }
 
@@ -553,7 +552,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
             modelAndView.addObject("articles", articles);
             modelAndView.addObject("category", category);
         }
-        modelAndView.setViewName("client/article/one");
+        modelAndView.setViewName("article/one");
         return modelAndView;
     }
 

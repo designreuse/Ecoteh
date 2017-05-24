@@ -5,7 +5,6 @@ package ua.com.ecoteh.util.loader;
  * with files in file system.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public interface Loader {
 

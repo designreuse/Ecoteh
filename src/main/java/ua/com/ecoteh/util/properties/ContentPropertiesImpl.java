@@ -9,7 +9,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * The class implements the methods for getting application properties.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class ContentPropertiesImpl implements ContentProperties {
 

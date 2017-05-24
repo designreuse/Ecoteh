@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(
@@ -105,7 +104,7 @@ public class FileController {
     )
     public ModelAndView getNewFilePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.setViewName("admin/file/add");
+        modelAndView.setViewName("file/add");
         return modelAndView;
     }
 
@@ -172,7 +171,7 @@ public class FileController {
     public ModelAndView editFilePage(@PathVariable("id") final long id) {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("file", this.fileService.get(id));
-        modelAndView.setViewName("admin/file/edit");
+        modelAndView.setViewName("file/edit");
         return modelAndView;
     }
 
@@ -297,7 +296,7 @@ public class FileController {
                 )
         );
         modelAndView.addObject("revers", !revers);
-        modelAndView.setViewName("admin/file/all");
+        modelAndView.setViewName("file/all");
         return modelAndView;
     }
 

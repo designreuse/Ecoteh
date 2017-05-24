@@ -1,5 +1,7 @@
 package ua.com.ecoteh.util.loader;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
@@ -9,9 +11,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * with files in file system.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
-public abstract class AbstractLoader implements Loader {
+abstract class AbstractLoader implements Loader {
+
+    /**
+     * The object for logging information.
+     */
+    private final static Logger LOGGER = Logger.getLogger(AbstractLoader.class);
 
     /**
      * The root path of a file.
@@ -23,7 +29,7 @@ public abstract class AbstractLoader implements Loader {
      *
      * @param path the root path of a file.
      */
-    public AbstractLoader(final String path) {
+    AbstractLoader(final String path) {
         this.path = path;
     }
 
@@ -63,13 +69,23 @@ public abstract class AbstractLoader implements Loader {
      * @param path the path to file.
      * @return true if directories to file is exist, false otherwise.
      */
-    static boolean checkPath(final String path) {
+    protected static boolean checkPath(final String path) {
         final File directory = new File(path).getParentFile();
         boolean isExists = directory.exists();
         if (!isExists) {
             isExists = directory.mkdirs();
         }
         return isExists;
+    }
+
+    /**
+     * Error logging.
+     *
+     * @param ex the intercepted exception.
+     */
+    protected static void logException(final Exception ex) {
+        LOGGER.error(ex.getMessage(), ex);
+        ex.printStackTrace();
     }
 
     /**

@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ua.com.ecoteh.enums.UserRole;
-import ua.com.ecoteh.util.encryption.Encryptor;
+import ua.com.ecoteh.util.encryption.Base64Encryptor;
 import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
@@ -21,7 +21,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * with entity of the {@link User} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Entity
 @Table(name = "users")
@@ -175,7 +174,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a string representation of the object.
      *
-     * @return A string representation of the object.
+     * @return A string representation of the object (newer null).
      */
     @Override
     public String toString() {
@@ -231,7 +230,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Creates and returns a copy of this object.
      *
-     * @return A clone of this instance.
+     * @return A clone of this instance (newer null).
      */
     @Override
     public User clone() {
@@ -292,7 +291,7 @@ public class User extends Model implements IUser, UserDetails {
      * Returns the authorities granted to the user.
      * Cannot return null.
      *
-     * @return the authorities, sorted by natural key (never null)
+     * @return the authorities, sorted by natural key (never null).
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -316,7 +315,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a name of the user.
      *
-     * @return The user name.
+     * @return The user name (newer null).
      */
     @Override
     public String getName() {
@@ -360,24 +359,24 @@ public class User extends Model implements IUser, UserDetails {
     @Override
     public void setLogin(final String login) {
         setEncryptedLogin(
-                isNotEmpty(login) ? new Encryptor(login).encrypt() : ""
+                isNotEmpty(login) ? new Base64Encryptor(login).encrypt() : ""
         );
     }
 
     /**
      * Decrypts and returns a login of the user.
      *
-     * @return The user login.
+     * @return The user login (newer null).
      */
     @Override
     public String getLogin() {
-        return isNotEmpty(this.encryptedLogin) ? new Encryptor(this.encryptedLogin).decrypt() : "";
+        return isNotEmpty(this.encryptedLogin) ? new Base64Encryptor(this.encryptedLogin).decrypt() : "";
     }
 
     /**
      * Returns a encrypted login.
      *
-     * @return The encrypted login.
+     * @return The encrypted login (newer null).
      */
     @Override
     public String getEncryptedLogin() {
@@ -405,13 +404,13 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Decrypts and returns a password of the user.
      *
-     * @return The user password.
+     * @return The user password (newer null).
      */
     @Transient
     @Override
     public String getPassword() {
         return isNotEmpty(this.encryptedPassword) ?
-                new Encryptor(this.encryptedPassword).decrypt() : "";
+                new Base64Encryptor(this.encryptedPassword).decrypt() : "";
     }
 
     /**
@@ -430,14 +429,14 @@ public class User extends Model implements IUser, UserDetails {
     @Override
     public void setPassword(final String password) {
         setEncryptedPassword(
-                isNotEmpty(password) ? new Encryptor(password).encrypt() : ""
+                isNotEmpty(password) ? new Base64Encryptor(password).encrypt() : ""
         );
     }
 
     /**
      * Returns a encrypted password.
      *
-     * @return The encrypted password.
+     * @return The encrypted password (newer null).
      */
     @Override
     public String getEncryptedPassword() {
@@ -474,9 +473,9 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns a url of the user.
+     * Returns a URL of the user.
      *
-     * @return The user url.
+     * @return The user URL (newer null).
      */
     @Override
     public String getUrl() {
@@ -504,7 +503,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a description of the user.
      *
-     * @return The user description.
+     * @return The user description (newer null).
      */
     @Override
     public String getDescription() {
@@ -532,7 +531,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a photo of the user.
      *
-     * @return The user photo.
+     * @return The user photo (newer null).
      */
     @Override
     public File getPhoto() {
@@ -555,7 +554,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a user contacts.
      *
-     * @return The user contacts.
+     * @return The user contacts (newer null).
      */
     @Override
     public Contacts getContacts() {
@@ -578,7 +577,7 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Returns a role of the user.
      *
-     * @return The user role.
+     * @return The user role (newer null).
      */
     @Override
     public UserRole getRole() {
@@ -656,7 +655,7 @@ public class User extends Model implements IUser, UserDetails {
      * </pre>
      *
      * @param user the user to copy.
-     * @return The this user with a new fields.
+     * @return The this user with a new fields (newer null).
      */
     @Override
     public User initialize(final User user) {

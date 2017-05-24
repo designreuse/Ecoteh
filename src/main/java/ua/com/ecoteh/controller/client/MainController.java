@@ -28,7 +28,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * {@link CacheMVFabric} with implementation {@link MainMVFabric} interface.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @SuppressWarnings("SpringMVCViewInspection")
 public abstract class MainController {
@@ -337,7 +336,7 @@ public abstract class MainController {
     public ModelAndView getAllResponsesPage() {
         final ModelAndView modelAndView = this.fabric.allResponsesPage();
         modelAndView.addObject("is_captcha", null);
-        modelAndView.setViewName("client/response/all");
+        modelAndView.setViewName("response/all");
         return modelAndView;
     }
 

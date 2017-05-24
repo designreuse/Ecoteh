@@ -8,7 +8,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * The class implements a set of methods for generating random string.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class StringGenerator implements Generator<String> {
 

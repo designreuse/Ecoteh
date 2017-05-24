@@ -9,7 +9,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  * Class describes DES secret key.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 final class DESSecretKey implements SecretKey {
 

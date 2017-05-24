@@ -9,7 +9,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * for working with streams.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 final class Stream {
 

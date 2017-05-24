@@ -48,10 +48,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="noindex,nofollow">
         <title><c:out value="${description}"/></title>
         <meta name="title" content="<c:out value="${description}"/>">
         <meta name="description" content="<c:out value="${description}"/> - <c:out value="${message}"/>">
-        <meta name="robots" content="noindex,nofollow">
         <link rel="shortcut icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -65,7 +65,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -98,7 +98,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </div>
     <c:if test="${main_company ne null}">
         <%-- Footer --%>
-        <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+        <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
     </c:if>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>

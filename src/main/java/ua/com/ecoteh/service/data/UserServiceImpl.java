@@ -15,7 +15,7 @@ import ua.com.ecoteh.enums.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.UserRepository;
 import ua.com.ecoteh.util.comparator.UserComparator;
-import ua.com.ecoteh.util.encryption.Encryptor;
+import ua.com.ecoteh.util.encryption.Base64Encryptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +29,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * with objects of the {@link User} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Service
 @ComponentScan(
@@ -229,7 +228,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             );
         }
         final User user = this.repository.findByEncryptedLogin(
-                new Encryptor(login).encrypt()
+                new Base64Encryptor(login).encrypt()
         );
         if (isNull(user)) {
             throw getNullPointerException(

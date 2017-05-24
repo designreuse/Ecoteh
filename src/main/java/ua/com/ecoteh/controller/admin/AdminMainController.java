@@ -30,7 +30,6 @@ import ua.com.ecoteh.service.sender.SenderService;
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Controller
 @RequestMapping(value = "/admin")
@@ -91,7 +90,7 @@ public class AdminMainController extends MainController {
             modelAndView = new ModelAndView();
         }
         modelAndView.addObject("authorized_user", this.userService.getAuthenticatedUser());
-        modelAndView.setViewName("admin/menu/menu");
+        modelAndView.setViewName("admin/menu");
         return modelAndView;
     }
 

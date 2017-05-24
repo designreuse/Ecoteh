@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.JstlView;
  * and how to display them. Class is the source of bean definitions.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 @Configuration
 @EnableWebMvc

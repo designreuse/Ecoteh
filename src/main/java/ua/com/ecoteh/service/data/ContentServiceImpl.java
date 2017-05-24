@@ -18,7 +18,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  *
  * @param <T> entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public abstract class ContentServiceImpl<T extends Content>
         extends DataServiceImpl<T> implements ContentService<T> {

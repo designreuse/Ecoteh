@@ -5,11 +5,10 @@ import ua.com.ecoteh.entity.Content;
 import java.util.Comparator;
 
 /**
- * The class implements a set of methods
- * for working with comparators for {@link Content}.
+ * The class implements a set of methods for working
+ * with comparators for objects of the {@link Content} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class ContentComparator extends AbstractComparator {
 
