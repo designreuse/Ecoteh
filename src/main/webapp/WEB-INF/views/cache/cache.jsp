@@ -17,9 +17,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="noindex,nofollow">
         <title>Кэш | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Кэш | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Информация об объектах, которых хранятся в памяти в данный момент времени.">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
@@ -34,7 +34,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -52,46 +52,18 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             Кэш<c:if test="${length le 0}"> пустой!</c:if>
                         </h3>
                         <hr>
-                            <%-- Cache actions --%>
                         <c:if test="${length gt 10}">
-                            <div class="text-center">
-                                <a href="<c:url value="/superadmin/cache/"/>"
-                                   title="Обновить информацию об объектах, которые хранятся в памяти.">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        &nbsp;Обновить
-                                    </button>
-                                </a>&nbsp;&nbsp;
-                                <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
-                                        &nbsp;Очистить
-                                    </button>
-                                </a>
-                            </div>
+                            <%-- Cache actions --%>
+                            <%@include file="/WEB-INF/views/cache/actions.jsp" %>
                         </c:if>
                     </div>
                     <c:if test="${length gt 0}">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <%-- Table with information about objects --%>
-                            <%@include file="/WEB-INF/views/superadmin/cache/table.jsp" %>
+                            <%@include file="/WEB-INF/views/cache/table.jsp" %>
                             <br>
                                 <%-- Cache actions --%>
-                            <div class="text-center">
-                                <a href="<c:url value="/superadmin/cache"/>"
-                                   title="Обновить информацию об объектах, которые хранятся в памяти.">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        &nbsp;Обновить
-                                    </button>
-                                </a>&nbsp;&nbsp;
-                                <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
-                                        &nbsp;Очистить
-                                    </button>
-                                </a>
-                            </div>
+                            <%@include file="/WEB-INF/views/cache/actions.jsp" %>
                         </div>
                     </c:if>
                     <div class="clearfix"></div>
@@ -100,7 +72,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </div>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
