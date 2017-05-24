@@ -11,11 +11,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
-<c:set var="categories_length" value="${fn:length(categories_list)}"/>
-<c:set var="articles_length" value="${fn:length(articles_list)}"/>
-<c:set var="partners_length" value="${fn:length(partners_list)}"/>
-<c:set var="users_length" value="${fn:length(users_list)}"/>
-<c:set var="result"
+<c:set var="categories_length" value="${fn:length(categories_list)}" scope="page"/>
+<c:set var="articles_length" value="${fn:length(articles_list)}" scope="page"/>
+<c:set var="partners_length" value="${fn:length(partners_list)}" scope="page"/>
+<c:set var="users_length" value="${fn:length(users_list)}" scope="page"/>
+<c:set var="result" scope="page"
        value="${(categories_length gt 0) or (articles_length gt 0) or (partners_length gt 0) or (users_length gt 0)}"/>
 
 <compress:html removeIntertagSpaces="true">
@@ -26,9 +26,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="noindex,nofollow">
         <title>Результаты поиска | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Результаты поиска | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
@@ -47,7 +47,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -138,56 +138,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </div>
     </div>
         <%-- Search result --%>
-    <c:choose>
-        <c:when test="${result}">
-            <%-- Categories list --%>
-            <c:if test="${categories_length gt 0}">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <c:if test="${fn:length(categories_list) gt 0}">
-                        <div class="container">
-                            <div class="row">
-                                <div class="box">
-                                    <hr>
-                                    <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
-            </c:if>
-            <%-- Articles list --%>
-            <c:if test="${articles_length gt 0}">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <jsp:include page="/WEB-INF/views/client/article/list.jsp"/>
-                </div>
-            </c:if>
-            <%-- Partners list --%>
-            <c:if test="${partners_length gt 0}">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <jsp:include page="/WEB-INF/views/client/company/list.jsp"/>
-                </div>
-            </c:if>
-            <%-- Users list --%>
-            <c:if test="${users_length gt 0}">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <div class="container">
-                        <div class="row">
-                            <div class="box">
-                                <jsp:include page="/WEB-INF/views/client/user/list.jsp"/>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-        </c:when>
-        <c:otherwise>
-            <br><br><br>
-        </c:otherwise>
-    </c:choose>
+    <%@include file="/WEB-INF/views/search/result.jsp" %>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
