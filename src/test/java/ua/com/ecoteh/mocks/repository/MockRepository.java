@@ -3,7 +3,7 @@ package ua.com.ecoteh.mocks.repository;
 import ua.com.ecoteh.entity.*;
 import ua.com.ecoteh.enums.CompanyType;
 import ua.com.ecoteh.repository.*;
-import ua.com.ecoteh.util.encryption.Encryptor;
+import ua.com.ecoteh.util.encryption.Base64Encryptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -191,12 +191,12 @@ public class MockRepository {
         when(userRepository.findByUrl(null)).thenReturn(null);
         when(
                 userRepository.findByEncryptedLogin(
-                        new Encryptor(LOGIN).encrypt()
+                        new Base64Encryptor(LOGIN).encrypt()
                 )
         ).thenReturn(user);
         when(
                 userRepository.findByEncryptedLogin(
-                        new Encryptor(ANY_STRING).encrypt()
+                        new Base64Encryptor(ANY_STRING).encrypt()
                 )
         ).thenReturn(null);
         when(userRepository.findByEncryptedLogin(null)).thenReturn(null);

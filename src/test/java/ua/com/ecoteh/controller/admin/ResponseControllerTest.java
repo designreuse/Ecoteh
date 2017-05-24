@@ -23,7 +23,7 @@ public class ResponseControllerTest {
     public void whenEditResponsePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editResponse(ID),
-                "admin/response/edit",
+                "response/edit",
                 new String[]{"main_company", "categories", "response"}
         );
     }

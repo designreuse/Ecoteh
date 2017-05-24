@@ -27,10 +27,10 @@ public class MainMVFabricImplTest {
     public void whenGetHomepageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.homePage(),
-                "client/main/index",
-                new String[]{"main_company", "categories", "company",
+                "home/index",
+                new String[] { "main_company", "categories", "company",
                         "partners", "print_partners", "responses",
-                        "print_responses"}
+                        "print_responses" }
         );
     }
 
@@ -38,8 +38,8 @@ public class MainMVFabricImplTest {
     public void whenGetAllArticlesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.homePage(),
-                "client/main/index",
-                new String[]{"main_company", "categories"}
+                "home/index",
+                new String[] { "main_company", "categories" }
         );
     }
 
@@ -47,27 +47,27 @@ public class MainMVFabricImplTest {
     public void whenGetAllSortArticlesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.allSortArticlesPage("title", true),
-                "client/article/all",
-                new String[]{"main_company", "categories", "articles_list",
-                        "sort", "revers"}
+                "article/all",
+                new String[] { "main_company", "categories", "articles_list",
+                        "sort", "revers" }
         );
         checkModelAndView(
                 this.fabric.allSortArticlesPage("date", true),
-                "client/article/all",
-                new String[]{"main_company", "categories", "articles_list",
-                        "sort", "revers"}
+                "article/all",
+                new String[] { "main_company", "categories", "articles_list",
+                        "sort", "revers" }
         );
         checkModelAndView(
                 this.fabric.allSortArticlesPage("number", true),
-                "client/article/all",
-                new String[]{"main_company", "categories", "articles_list",
-                        "sort", "revers"}
+                "article/all",
+                new String[] { "main_company", "categories", "articles_list",
+                        "sort", "revers" }
         );
         checkModelAndView(
                 this.fabric.allSortArticlesPage("unknown", true),
-                "client/article/all",
-                new String[]{"main_company", "categories", "articles_list",
-                        "sort", "revers"}
+                "article/all",
+                new String[] { "main_company", "categories", "articles_list",
+                        "sort", "revers" }
         );
     }
 
@@ -75,8 +75,8 @@ public class MainMVFabricImplTest {
     public void whenGetAboutCompanyPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.aboutCompanyPage(),
-                "client/company/main",
-                new String[]{"main_company", "categories", "company", "users_list"}
+                "company/main",
+                new String[] { "main_company", "categories", "company", "users_list" }
         );
     }
 
@@ -84,8 +84,8 @@ public class MainMVFabricImplTest {
     public void whenGetContactsPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.contactsPage(),
-                "client/company/main_contacts",
-                new String[]{"main_company", "categories", "company", "favicon"}
+                "company/main_contacts",
+                new String[] { "main_company", "categories", "company", "favicon" }
         );
     }
 
@@ -93,8 +93,8 @@ public class MainMVFabricImplTest {
     public void whenGetAllPartnersPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.allPartnersPage(),
-                "client/company/all",
-                new String[]{"main_company", "categories", "partners_list", "revers"}
+                "company/all",
+                new String[] { "main_company", "categories", "partners_list", "revers" }
         );
     }
 
@@ -102,13 +102,13 @@ public class MainMVFabricImplTest {
     public void whenGetAllSortPartnersByTitlePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.allSortPartnersByTitlePage(true),
-                "client/company/all",
-                new String[]{"main_company", "categories", "partners_list", "revers"}
+                "company/all",
+                new String[] { "main_company", "categories", "partners_list", "revers" }
         );
         checkModelAndView(
                 this.fabric.allSortPartnersByTitlePage(false),
-                "client/company/all",
-                new String[]{"main_company", "categories", "partners_list", "revers"}
+                "company/all",
+                new String[] { "main_company", "categories", "partners_list", "revers" }
         );
     }
 
@@ -116,8 +116,8 @@ public class MainMVFabricImplTest {
     public void whenGetCategoryPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.categoryPage(URL),
-                "client/category/one",
-                new String[]{"main_company", "categories"}
+                "category/one",
+                new String[] { "main_company", "categories" }
         );
     }
 
@@ -125,43 +125,43 @@ public class MainMVFabricImplTest {
     public void whenGetCategoryWithSortArticlesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "title", true),
-                "client/category/one",
-                new String[]{"main_company", "categories"}
+                "category/one",
+                new String[] { "main_company", "categories" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "title", false),
-                "client/category/one",
-                new String[]{"main_company", "categories"}
+                "category/one",
+                new String[] { "main_company", "categories" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "date", true),
-                "client/category/one",
-                new String[]{"main_company", "categories"}
+                "category/one",
+                new String[] { "main_company", "categories" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "date", false),
-                "client/category/one",
-                new String[]{"main_company", "categories", "articles_list"}
+                "category/one",
+                new String[] { "main_company", "categories", "articles_list" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "number", true),
-                "client/category/one",
-                new String[]{"main_company", "categories", "articles_list"}
+                "category/one",
+                new String[] { "main_company", "categories", "articles_list" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "number", false),
-                "client/category/one",
-                new String[]{"main_company", "categories", "articles_list"}
+                "category/one",
+                new String[] { "main_company", "categories", "articles_list" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "unknown", true),
-                "client/category/one",
-                new String[]{"main_company", "categories", "articles_list"}
+                "category/one",
+                new String[] { "main_company", "categories", "articles_list" }
         );
         checkModelAndView(
                 this.fabric.categoryWithSortArticlesPage(URL, "unknown", false),
-                "client/category/one",
-                new String[]{"main_company", "categories", "articles_list"}
+                "category/one",
+                new String[] { "main_company", "categories", "articles_list" }
         );
     }
 
@@ -169,8 +169,8 @@ public class MainMVFabricImplTest {
     public void whenGetArticleByUrlPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.articleByUrlPage(URL),
-                "client/article/one",
-                new String[]{"main_company", "categories", "article"}
+                "article/one",
+                new String[] { "main_company", "categories", "article" }
         );
     }
 
@@ -178,8 +178,8 @@ public class MainMVFabricImplTest {
     public void whenGetArticleByNumberPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.articleByNumberPage(NUMBER),
-                "client/article/one",
-                new String[]{"main_company", "categories", "article"}
+                "article/one",
+                new String[] { "main_company", "categories", "article" }
         );
     }
 
@@ -187,8 +187,8 @@ public class MainMVFabricImplTest {
     public void whenGetPartnerPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.partnerPage(URL),
-                "client/company/one",
-                new String[]{"main_company", "categories", "company"}
+                "company/one",
+                new String[] { "main_company", "categories", "company" }
         );
     }
 
@@ -196,8 +196,8 @@ public class MainMVFabricImplTest {
     public void whenGetAllResponsesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.allResponsesPage(),
-                "client/response/all",
-                new String[]{"main_company", "categories", "responses"}
+                "response/all",
+                new String[] { "main_company", "categories", "responses" }
         );
     }
 
@@ -205,13 +205,13 @@ public class MainMVFabricImplTest {
     public void whenGetAllSortResponsesByDatePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.allSortResponsesByDatePage(true),
-                "client/response/all",
-                new String[]{"main_company", "categories", "responses"}
+                "response/all",
+                new String[] { "main_company", "categories", "responses" }
         );
         checkModelAndView(
                 this.fabric.allSortResponsesByDatePage(false),
-                "client/response/all",
-                new String[]{"main_company", "categories", "responses"}
+                "response/all",
+                new String[] { "main_company", "categories", "responses" }
         );
     }
 
@@ -219,7 +219,7 @@ public class MainMVFabricImplTest {
     public void whenGetDefaultModelAndViewThenReturnSomeModelAndView() {
         checkModelAndView(
                 this.fabric.getDefaultModelAndView(),
-                null, new String[]{"main_company", "categories"}
+                null, new String[] { "main_company", "categories" }
         );
     }
 
@@ -236,10 +236,5 @@ public class MainMVFabricImplTest {
     @Ignore
     public void setFabric(MainMVFabric fabric) {
         this.fabric = fabric;
-    }
-
-    @Ignore
-    public MainMVFabric getFabric() {
-        return this.fabric;
     }
 }

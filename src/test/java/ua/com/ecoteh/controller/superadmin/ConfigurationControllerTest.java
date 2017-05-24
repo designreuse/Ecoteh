@@ -23,8 +23,8 @@ public class ConfigurationControllerTest {
     public void whenGetPropertiesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getPropertiesPage(),
-                "superadmin/configuration/configuration",
-                new String[]{"main_company", "categories", "properties"}
+                "configuration/configuration",
+                new String[] { "main_company", "categories", "properties" }
         );
     }
 }

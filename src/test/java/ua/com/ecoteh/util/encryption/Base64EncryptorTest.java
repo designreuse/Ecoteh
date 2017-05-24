@@ -10,89 +10,89 @@ import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
-public final class EncryptorTest {
+public final class Base64EncryptorTest {
 
     @Test
     public void callConstructorWithOneParameter() {
-        new Encryptor(ANY_STRING);
+        new Base64Encryptor(ANY_STRING);
     }
 
     @Test
     public void callConstructorWithTwoParameter() {
-        new Encryptor(ANY_STRING, ANY_STRING);
-        new Encryptor(ANY_STRING, ANY_STRING.getBytes());
+        new Base64Encryptor(ANY_STRING, ANY_STRING);
+        new Base64Encryptor(ANY_STRING, ANY_STRING.getBytes());
     }
 
     @Test
     public void whenEncryptByNullValueThenReturnEmptyString() {
-        assertTrue(isEmpty(new Encryptor(null).encrypt()));
+        assertTrue(isEmpty(new Base64Encryptor(null).encrypt()));
     }
 
     @Test
     public void whenEncryptThenReturnSomeValue() {
-        assertTrue(isNotEmpty(new Encryptor(ANY_STRING).encrypt()));
+        assertTrue(isNotEmpty(new Base64Encryptor(ANY_STRING).encrypt()));
     }
 
     @Test
     public void whenDecryptByNullValueThenReturnEmptyString() {
-        assertTrue(isEmpty(new Encryptor(null).decrypt()));
+        assertTrue(isEmpty(new Base64Encryptor(null).decrypt()));
     }
 
     @Test
     public void whenDecryptByUnknownStringThenReturnEmptyString() {
-        assertTrue(isEmpty(new Encryptor(ANY_STRING).decrypt()));
+        assertTrue(isEmpty(new Base64Encryptor(ANY_STRING).decrypt()));
     }
 
     @Test
     public void whenDecryptThenReturnSomeValue() {
-        assertNotNull(new Encryptor("tw/uslp2VOg").decrypt());
+        assertNotNull(new Base64Encryptor("tw/uslp2VOg").decrypt());
     }
 
     @Test
     public void whenGetValueThenReturnSomeValue() {
-        assertNotNull(new Encryptor(ANY_STRING).getValue());
+        assertNotNull(new Base64Encryptor(ANY_STRING).getValue());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenInitByIllegalParameterThenThrowIllegalArgumentException() {
-        new Encryptor(null, null, null);
+        new Base64Encryptor(null, null, null);
     }
 
     @Test
     public void whenSetNullSecretKeyThenSteDefaultCharsetName() {
-        Encryptor.setSecretKey((String) null);
-        Encryptor.setSecretKey((byte[]) null);
-        Encryptor.setSecretKey((SecretKey) null);
+        Base64Encryptor.setSecretKey((String) null);
+        Base64Encryptor.setSecretKey((byte[]) null);
+        Base64Encryptor.setSecretKey((SecretKey) null);
     }
 
     @Test
     public void whenSetBlankSecretKeyThenSteDefaultCharsetName() {
-        Encryptor.setSecretKey("");
-        Encryptor.setSecretKey(" ");
-        Encryptor.setSecretKey("   ");
-        Encryptor.setSecretKey(new byte[]{});
+        Base64Encryptor.setSecretKey("");
+        Base64Encryptor.setSecretKey(" ");
+        Base64Encryptor.setSecretKey("   ");
+        Base64Encryptor.setSecretKey(new byte[]{});
     }
 
     @Test
     public void whenSetNormalSecretKeyThenSetIt() {
-        Encryptor.setSecretKey("6Lex4goUACmMLbkjLR2GQvVceS61rF4G");
-        Encryptor.setSecretKey(("6Lex4goUACmMLbkjLR2GQvVceS61rF4G").getBytes());
+        Base64Encryptor.setSecretKey("6Lex4goUACmMLbkjLR2GQvVceS61rF4G");
+        Base64Encryptor.setSecretKey(("6Lex4goUACmMLbkjLR2GQvVceS61rF4G").getBytes());
     }
 
     @Test
     public void whenSetNullCharsetNameThenSteDefaultCharsetName() {
-        Encryptor.setCharsetName(null);
+        Base64Encryptor.setCharsetName(null);
     }
 
     @Test
     public void whenSetBlankCharsetNameThenSteDefaultCharsetName() {
-        Encryptor.setCharsetName("");
-        Encryptor.setCharsetName(" ");
-        Encryptor.setCharsetName("   ");
+        Base64Encryptor.setCharsetName("");
+        Base64Encryptor.setCharsetName(" ");
+        Base64Encryptor.setCharsetName("   ");
     }
 
     @Test
     public void whenSetNormalCharsetNameThenSetIt() {
-        Encryptor.setCharsetName("UTF8");
+        Base64Encryptor.setCharsetName("UTF8");
     }
 }

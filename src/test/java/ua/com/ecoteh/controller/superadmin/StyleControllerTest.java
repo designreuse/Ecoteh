@@ -26,7 +26,7 @@ public class StyleControllerTest {
     public void whenGetStylesToEditThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getStylesToEdit(),
-                "superadmin/style/edit",
+                "style/edit",
                 new String[] { "styles", "main_company", "categories", "favicon" }
         );
     }

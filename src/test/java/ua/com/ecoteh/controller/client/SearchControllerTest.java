@@ -24,7 +24,7 @@ public class SearchControllerTest {
     public void whenSearchThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.search(),
-                "client/search/result",
+                "search/search",
                 null
         );
     }
@@ -33,7 +33,7 @@ public class SearchControllerTest {
     public void whenSearchResultByPostMethodThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.searchResult(MockConstants.KEYWORDS, "all", false),
-                "client/search/result_page",
+                "search/search",
                 null
         );
     }

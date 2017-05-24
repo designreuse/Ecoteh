@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class MockSenderImplServiceTest {
+public class MockEmailSenderServiceTest {
 
     @Test
     public void whenGetMockServiceThenReturnNotNull() {

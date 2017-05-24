@@ -2,6 +2,7 @@ package ua.com.ecoteh.controller.client;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ua.com.ecoteh.controller.authorization.IllegalAccessController;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)

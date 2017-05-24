@@ -14,15 +14,9 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getHomePage(),
-                "client/main/index",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "company",
-                        "print_partners",
-                        "print_responses",
-                        "favicon"
-                }
+                "home/index",
+                new String[] { "main_company", "categories", "company",
+                        "print_partners", "print_responses", "favicon" }
         );
     }
 
@@ -31,28 +25,17 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getAllCategoriesPage(),
-                "client/category/all",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "favicon"
-                }
+                "category/all",
+                new String[] { "main_company", "categories", "favicon" }
         );
     }
 
     @Test
     public void whenGetCategoryPageThenReturnSomeModelAndViewWithTheCategory() {
         checkModelAndView(
-                getController()
-                        .getCategoryPage(URL),
-                "client/category/one",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "category",
-                        "articles_list",
-                        "favicon"
-                }
+                getController().getCategoryPage(URL),
+                "category/one",
+                new String[] { "main_company", "categories", "category", "articles_list", "favicon" }
         );
     }
 
@@ -61,43 +44,26 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getArticlePage(URL),
-                "client/article/one",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "article",
-                        "favicon"
-                }
+                "article/one",
+                new String[] { "main_company", "categories", "article", "favicon" }
         );
     }
 
     @Test
     public void whenGetArticleByNumberPageThenReturnSomeModelAndViewWithTheArticle() {
         checkModelAndView(
-                getController()
-                        .getArticleByNumberPage(NUMBER),
-                "client/article/one",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "article",
-                        "favicon"
-                }
+                getController().getArticleByNumberPage(NUMBER),
+                "article/one",
+                new String[] { "main_company", "categories", "article", "favicon" }
         );
     }
 
     @Test
     public void whenGetAllArticlesPageThenReturnSomeModelAndViewWithAllArticles() {
         checkModelAndView(
-                getController()
-                        .getAllArticlesPage(),
-                "client/article/all",
-                new String[]{
-                        "articles_list",
-                        "main_company",
-                        "categories",
-                        "favicon"
-                }
+                getController().getAllArticlesPage(),
+                "article/all",
+                new String[] { "articles_list", "main_company", "categories", "favicon" }
         );
     }
 
@@ -106,14 +72,8 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getAboutCompanyPage(),
-                "client/company/main",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "company",
-                        "users_list",
-                        "favicon"
-                }
+                "company/main",
+                new String[] { "main_company", "categories", "company", "users_list", "favicon" }
         );
     }
 
@@ -121,8 +81,8 @@ public abstract class MainControllerTest {
     public void whenGetContactsPageThenReturnSomeModelAndViewWithTheContacts() {
         checkModelAndView(
                 getController().getContactsPage(),
-                "client/company/main_contacts",
-                new String[]{"is_captcha", "company", "main_company", "categories", "favicon"}
+                "company/main_contacts",
+                new String[] { "is_captcha", "company", "main_company", "categories", "favicon" }
         );
     }
 
@@ -131,8 +91,8 @@ public abstract class MainControllerTest {
         checkModelAndView(
                 getController()
                         .getPartnersPage(),
-                "client/company/all",
-                new String[]{"main_company", "categories", "favicon"}
+                "company/all",
+                new String[] { "main_company", "categories", "favicon" }
         );
     }
 
@@ -140,13 +100,8 @@ public abstract class MainControllerTest {
     public void whenGetPartnerPageThenReturnSomeModelAndViewWithThePartner() {
         checkModelAndView(
                 getController().getPartnerPage(URL),
-                "client/company/one",
-                new String[]{
-                        "main_company",
-                        "categories",
-                        "company",
-                        "favicon"
-                }
+                "company/one",
+                new String[] { "main_company", "categories", "company", "favicon" }
         );
     }
 
@@ -154,15 +109,9 @@ public abstract class MainControllerTest {
     public void whenGetResponsesPageThenReturnSomeModelAndViewWithAllResponse() {
         checkModelAndView(
                 getController().getAllResponsesPage(),
-                "client/response/all",
-                new String[]{
-                        "is_captcha",
-                        "responses",
-                        "revers",
-                        "main_company",
-                        "categories",
-                        "favicon"
-                }
+                "response/all",
+                new String[] { "is_captcha", "responses", "revers",
+                        "main_company", "categories", "favicon" }
         );
     }
 

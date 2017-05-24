@@ -13,7 +13,7 @@ public final class ModelAndViews {
 
     public static void checkModelAndView(
             final ModelAndView modelAndView,
-            final  String view
+            final String view
     ) {
         checkModelAndView(modelAndView, view, null);
     }
@@ -24,10 +24,18 @@ public final class ModelAndViews {
             final String[] keys
     ) {
         assertNotNull(modelAndView);
+        checkView(modelAndView, view);
+        checkKeys(modelAndView, keys);
+    }
+
+    private static void checkView(final ModelAndView modelAndView, final String view) {
         if (isNotEmpty(view)) {
             assertEquals(modelAndView.getViewName(), view);
         }
-        if (keys != null && keys.length > 0) {
+    }
+
+    private static void checkKeys(final ModelAndView modelAndView, final String[] keys) {
+        if (isNotEmpty(keys)) {
             final Map<String, Object> map = modelAndView.getModel();
             assertTrue(map.size() >= keys.length);
             for (String key : keys) {

@@ -282,7 +282,7 @@ public final class MockServices {
     private static void initSearchService() {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("all", true);
-        modelAndView.setViewName("client/search/result_page");
+        modelAndView.setViewName("search/search");
         searchService = mock(SearchService.class);
         when(searchService.search(MockConstants.KEYWORDS, "all", false)).thenReturn(modelAndView);
     }

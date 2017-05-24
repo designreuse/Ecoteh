@@ -3,13 +3,13 @@ package ua.com.ecoteh.util.sender;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SenderImplTest {
+public class EmailSenderTest {
 
     private Sender sender;
 
     @Before
     public void beforeTests() {
-        this.sender = new SenderImpl(
+        this.sender = new EmailSender(
                 "subject",
                 "text",
                 "recipientEmail",

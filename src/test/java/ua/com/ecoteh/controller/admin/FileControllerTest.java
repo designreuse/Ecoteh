@@ -22,7 +22,7 @@ public class FileControllerTest {
     public void whenGetAllFilePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getAllFilePage(),
-                "admin/file/all",
+                "file/all",
                 new String[]{"main_company", "categories", "files"}
         );
     }
@@ -31,7 +31,7 @@ public class FileControllerTest {
     public void whenGetNewFilePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getNewFilePage(),
-                "admin/file/add",
+                "file/add",
                 new String[]{"main_company", "categories"}
         );
     }
@@ -51,7 +51,7 @@ public class FileControllerTest {
     public void whenEditFilePageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editFilePage(MockConstants.ID),
-                "admin/file/edit",
+                "file/edit",
                 new String[]{"main_company", "categories", "file"}
         );
     }

@@ -21,7 +21,7 @@ public class MessageControllerTest {
     public void whenGetMessagesPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getMessagesPage(),
-                "admin/message/all",
+                "message/all",
                 new String[]{"main_company", "categories", "messages"}
         );
     }

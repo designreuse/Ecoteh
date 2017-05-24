@@ -24,7 +24,7 @@ public class CategoryControllerTest {
     public void whenGetNewCategoryPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.getNewCategoryPage(),
-                "admin/category/add",
+                "category/add",
                 new String[] { "main_company", "categories" }
         );
     }
@@ -47,7 +47,7 @@ public class CategoryControllerTest {
     public void whenGetEditCategoryPageThenReturnSomeModelAndView() {
         checkModelAndView(
                 controller.editCategory(MockConstants.URL),
-                "admin/category/edit",
+                "category/edit",
                 new String[] { "main_company", "categories", "category" }
         );
     }
