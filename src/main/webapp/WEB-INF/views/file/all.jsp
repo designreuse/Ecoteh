@@ -11,9 +11,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
+        <meta name="robots" content="noindex,nofollow">
         <title>Файлы | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Файлы | <c:out value="${main_company.title}"/>">
-        <meta name="robots" content="noindex,nofollow">
         <meta name="description" content="Сохраненный файлы на сервере.">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
@@ -29,7 +29,7 @@
     </head>
     <body>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
@@ -75,7 +75,7 @@
                             <br>
                         </c:if>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <%@include file="/WEB-INF/views/admin/file/list.jsp" %>
+                            <%@include file="/WEB-INF/views/file/list.jsp" %>
                         </div>
                     </c:if>
                     <div class="clearfix"></div>
@@ -84,7 +84,7 @@
         </div>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
