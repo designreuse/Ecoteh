@@ -61,7 +61,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </form>
     <div class="message-text">
         <%-- Call back message --%>
-        <jsp:include page="/WEB-INF/views/client/message/call_back_message.jsp"/>
+        <jsp:include page="/WEB-INF/views/message/call_back_message.jsp"/>
     </div>
     <hr>
 </div>

@@ -27,7 +27,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <hr>
     <p>
         <%-- Call back message --%>
-        <jsp:include page="/WEB-INF/views/client/message/call_back_message.jsp"/>
+        <jsp:include page="/WEB-INF/views/message/call_back_message.jsp"/>
     </p>
     <%-- Administrator actions --%>
     <c:if test="${authorized_user ne null}">
