@@ -9,7 +9,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  *
  * @param <T> a type of key.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 final class Key<T> implements Comparable {
 

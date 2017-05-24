@@ -2,53 +2,35 @@ package ua.com.ecoteh.util.cache;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.*;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working with cache.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public final class Cache {
 
     /**
-     * The time to delay first execution (5 hours).
-     */
-    private final static long SCHEDULER_INITIAL_DELAY = 5L;
-
-    /**
-     * The period between successive executions (3 hour).
-     */
-    private final static long SCHEDULER_PERIOD = 3L;
-
-    /**
-     * Time unit representing one hour.
-     */
-    private final static TimeUnit TIME_UNIT = TimeUnit.HOURS;
-
-    /**
      * The map where can be stored some objects.
      */
-    private static volatile Map<Key, Object> cache;
+    private static volatile Map<Key, Object> cache = new ConcurrentHashMap<>();
 
     /**
      * Сache is modified.
      */
-    private static volatile boolean isNewCache;
+    private static volatile boolean isNewCache = true;
 
     /**
      * Static constructor.
-     * Creates and starts ScheduledExecutorService.
+     * Creates and starts a new ScheduledExecutorService
+     * for cleaning the cache.
      */
     static {
-        cache = new ConcurrentHashMap<>();
-        setNewCache();
-        createScheduledExecutorService();
+        final CacheCleaner cleaner = new CacheCleaner(getCache());
+        new CacheScheduledExecutor(cleaner).go();
     }
 
     /**
@@ -276,7 +258,7 @@ public final class Cache {
      * Returns all objects from cache with subKey.
      *
      * @param subKey the object key in the cache.
-     * @return The objects with key or empty list.
+     * @return The objects with key or empty list (newer null).
      */
     public static Collection<Object> getAll(final String subKey) {
         final List<Object> objects = new ArrayList<>();
@@ -375,7 +357,7 @@ public final class Cache {
      * Returns information about objects in cache.
      * Information about cache saved in cache too.
      *
-     * @return The maps with entries.
+     * @return The maps with entries (newer null).
      */
     @SuppressWarnings("unchecked")
     public static Map<String, String> getEntriesToString() {
@@ -443,7 +425,7 @@ public final class Cache {
      * Returns information about objects in cache.
      *
      * @param key the object key in the cache.
-     * @return The maps with entries.
+     * @return The maps with entries (newer null).
      */
     private static Map<String, String> getNewEntriesToString(final String key) {
         Map<String, String> result = new HashMap<>();
@@ -513,32 +495,5 @@ public final class Cache {
      */
     private static Map<Key, Object> getCache() {
         return cache;
-    }
-
-    /**
-     * Creates and configures a new ScheduledExecutorService.
-     */
-    private static void createScheduledExecutorService() {
-        Executors.newSingleThreadScheduledExecutor(
-                createThreadFactory()
-        ).scheduleAtFixedRate(
-                new CacheCleaner(getCache()),
-                SCHEDULER_INITIAL_DELAY,
-                SCHEDULER_PERIOD,
-                TIME_UNIT
-        );
-    }
-
-    /**
-     * Creates a new threads factory for constructing a new thread-demand.
-     *
-     * @return The new threads factory.
-     */
-    private static ThreadFactory createThreadFactory() {
-        return runnable -> {
-            final Thread thread = new Thread(runnable);
-            thread.setDaemon(true);
-            return thread;
-        };
     }
 }
