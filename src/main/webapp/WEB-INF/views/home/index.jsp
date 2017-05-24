@@ -15,17 +15,17 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
     <!DOCTYPE HTML>
     <html lang="ru">
     <head>
-        <title>Главная | <c:out value="${main_company.title}"/></title>
-        <meta name="title" content="Главная | <c:out value="${main_company.title}"/>">
-        <meta name="description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>.">
-        <meta name="keywords" content="<c:out value="${main_company.keywords}"/>"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <meta name="robots" content="index,follow">
+        <title>Главная | <c:out value="${main_company.title}"/></title>
+        <meta name="title" content="Главная | <c:out value="${main_company.title}"/>">
+        <meta name="description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>.">
+        <meta name="keywords" content="<c:out value="${main_company.keywords}"/>"/>
             <%-- Site verification --%>
-        <%@include file="/WEB-INF/views/client/main/verification.jsp" %>
+        <%@include file="/WEB-INF/views/seo/verification.jsp" %>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -40,17 +40,17 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
     </head>
     <body>
         <%-- Main company logo --%>
-    <jsp:include page="/WEB-INF/views/client/company/logo.jsp"/>
+    <jsp:include page="/WEB-INF/views/company/logo.jsp"/>
         <%-- Navigation bar --%>
-    <jsp:include page="/WEB-INF/views/client/main/navigation.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container">
             <div class="row">
                 <div class="box">
                         <%-- Main company sliders --%>
-                    <%@include file="/WEB-INF/views/client/main/slider.jsp" %>
+                    <%@include file="/WEB-INF/views/home/slider.jsp" %>
                         <%-- Quick message from client --%>
-                    <%@include file="/WEB-INF/views/client/message/to_home.jsp" %>
+                    <%@include file="/WEB-INF/views/message/to_home.jsp" %>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -68,21 +68,21 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
                         </h3>
                         <hr>
                             <%-- Product categories --%>
-                        <jsp:include page="/WEB-INF/views/client/category/list.jsp"/>
+                        <jsp:include page="/WEB-INF/views/category/list.jsp"/>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
         </c:if>
             <%-- Main company description --%>
-        <%@include file="/WEB-INF/views/client/company/to_home.jsp" %>
+        <%@include file="/WEB-INF/views/company/to_home.jsp" %>
             <%-- Partner-companies logo list  --%>
-        <%@include file="/WEB-INF/views/client/company/logos_list.jsp" %>
+        <%@include file="/WEB-INF/views/company/logos_list.jsp" %>
             <%-- Client responses--%>
-        <%@include file="/WEB-INF/views/client/response/list_to_home.jsp" %>
+        <%@include file="/WEB-INF/views/response/list_to_home.jsp" %>
     </div>
         <%-- Footer --%>
-    <jsp:include page="/WEB-INF/views/client/main/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
