@@ -1,20 +1,13 @@
-<h1>Ecoteh</h1>
+# Ecoteh
 
-The web-site of the Ecoteh Company that designs and manufactures marking equipment:
+The website of the сompany that designs and manufactures marking equipment:
 hot stamping printers, symbols and matrices of steel and magnesium for contact stamping.
-_Clients_ can only navigate through the main pages of the website, view categories and articles,
-information about partners, send messages and responses.
-_Administrator_ also can add, edit, and delete information about the site content.
 
-<h4>Technologies</h4>
+**Technologies**
 
- Java EE, Maven, Servlets, Spring Framework (IoC, MVC, Data, Security), JPA / Hibernate,
- MySQL, JSP / JSTL, CSS, JavaScript, Junit, Mockito, Jacoco, CKEditor
+ Java, Maven, Servlets, Spring Framework (IoC, MVC, Data, Security), MySQL, JPA / Hibernate,
+ JSP / JSTL, HTML, CSS, JS, JavaMail, Junit, Mockito, Jacoco.
 
-**<a href="http://ecoteh.com.ua" title="Ecoteh site" target="_blank">
-    ecoteh.com.ua
-</a>**
+[**ecoteh.com.ua**](http://ecoteh.com.ua)
 
-_**<a href="https://yuriisalimov.github.io" target="_blank">
-    Yurii Salimov
-</a>**_
+[_**Yurii Salimov**_](https://yuriisalimov.github.io)
