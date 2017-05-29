@@ -109,7 +109,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                                 <br>
                             </c:if>
-                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${period}<br>
+                            <a href="<c:url value="/company/main"/>">
+                                <c:out value="${main_company.title}"/>
+                            </a>
+                            &nbsp;&copy;&nbsp;${period}<br>
                             О.В.&nbsp;Маматов
                         </p>
                     </div>
@@ -181,7 +184,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                                 <br>
                             </c:if>
-                            <c:out value="${main_company.title}"/>&nbsp;&copy;&nbsp;${period}
+                            <a href="<c:url value="/company/main"/>">
+                                <c:out value="${main_company.title}"/>
+                            </a>
+                            &nbsp;&copy;&nbsp;${period}
                             О.В.&nbsp;Маматов
                         </p>
                     </div>
