@@ -451,7 +451,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param parameters the message parameters.
      * @return The instance of the NullPointerException class.
      */
-    protected static NullPointerException getNullPointerException(
+    protected NullPointerException getNullPointerException(
             final String message,
             final Object... parameters
     ) {
@@ -467,7 +467,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param parameters the message parameters.
      * @return The instance of the IllegalArgumentException class.
      */
-    protected static IllegalArgumentException getIllegalArgumentException(
+    protected IllegalArgumentException getIllegalArgumentException(
             final String message,
             final Object... parameters
     ) {
@@ -481,7 +481,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *
      * @param ex the intercepted exception.
      */
-    protected static void logException(final Exception ex) {
+    protected void logException(final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         ex.printStackTrace();
     }
@@ -493,10 +493,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param parameters the message parameters.
      * @return the prepared message.
      */
-    private static String prepareMessage(
-            final String message,
-            final Object... parameters
-    ) {
+    private String prepareMessage(final String message, final Object... parameters) {
         return isNotEmpty(parameters) ? String.format(message, parameters) : message;
     }
 
@@ -514,7 +511,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param revers     is sort in descending or ascending.
      * @return The comparator to sort models (newer null).
      */
-    private static <T extends Model> Comparator<T> prepareComparator(
+    private <T extends Model> Comparator<T> prepareComparator(
             final Comparator<T> comparator,
             final boolean revers
     ) {
@@ -535,11 +532,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @param size      the models size.
      * @return true if incoming indexes is correct, false otherwise.
      */
-    private static boolean checkIndexes(
-            final int fromIndex,
-            final int toIndex,
-            final int size
-    ) {
+    private boolean checkIndexes(final int fromIndex, final int toIndex, final int size) {
         return (fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < size);
     }
 

@@ -31,19 +31,17 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </div>
                     </c:if>
                         <%-- Responses list --%>
-                    <jsp:include page="/WEB-INF/views/client/response/list.jsp"/>
-                    <c:if test="${length gt print_responses}">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <hr class="hidden-md hidden-lg hidden-xl">
-                            <p class="text-right">
-                                <a href="<c:url value="/responses"/>"
-                                   title="Перейти ко всем отзывам о нашей компании">
-                                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                                    &nbsp;Все&nbsp;отзывы...
-                                </a>
-                            </p>
-                        </div>
-                    </c:if>
+                    <jsp:include page="/WEB-INF/views/response/list.jsp"/>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <hr class="hidden-md hidden-lg hidden-xl">
+                        <p class="text-right">
+                            <a href="<c:url value="/responses"/>"
+                               title="Перейти ко всем отзывам о нашей компании">
+                                <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                                &nbsp;Все&nbsp;отзывы...
+                            </a>
+                        </p>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>

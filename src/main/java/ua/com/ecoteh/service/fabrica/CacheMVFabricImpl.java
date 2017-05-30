@@ -393,13 +393,13 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView getDefaultModelAndView() {
-        ModelAndView modelAndView = getFromCache(DEFAULT_MAV_KEY);
-        if (isNull(modelAndView)) {
-            modelAndView = this.fabric.getDefaultModelAndView();
-            putToCache(modelAndView, DEFAULT_MAV_KEY);
+        ModelAndView temp = getFromCache(DEFAULT_MAV_KEY);
+        if (isNull(temp)) {
+            temp = this.fabric.getDefaultModelAndView();
+            putToCache(temp, DEFAULT_MAV_KEY);
         }
-        addAuthUser(modelAndView);
-        return modelAndView;
+        addAuthUser(temp);
+        return new ModelAndView(temp.getViewName(), temp.getModel());
     }
 
     /**

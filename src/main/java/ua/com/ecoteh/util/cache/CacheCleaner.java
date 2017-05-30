@@ -16,13 +16,13 @@ final class CacheCleaner implements Runnable {
      * The default maximum size of objects
      * which can be stored in the cache.
      */
-    private final static int DEFAULT_MAX_SIZE = 100;
+    private final static int DEFAULT_MAX_SIZE = 150;
 
     /**
      * The maximum size of objects
      * which can be stored in the cache.
      */
-    private int maxSize;
+    private final int maxSize;
 
     /**
      * The map where can be stored some objects.
@@ -41,7 +41,7 @@ final class CacheCleaner implements Runnable {
             final int maxSize
     ) {
         this.cache = cache;
-        setMaxSize(maxSize);
+        this.maxSize = (maxSize > 0) ? maxSize : DEFAULT_MAX_SIZE;
     }
 
     /**
@@ -71,19 +71,8 @@ final class CacheCleaner implements Runnable {
      * @return The maximum size of objects
      * which can be stored in the cache.
      */
-    int getMaxSize() {
+    public int getMaxSize() {
         return this.maxSize;
-    }
-
-    /**
-     * Sets maximum size of objects which
-     * can be stored in the cache.
-     *
-     * @param maxSize the maximum size of objects which
-     *                can be stored in the cache.
-     */
-    void setMaxSize(final int maxSize) {
-        this.maxSize = (maxSize > 0) ? maxSize : DEFAULT_MAX_SIZE;
     }
 
     /**

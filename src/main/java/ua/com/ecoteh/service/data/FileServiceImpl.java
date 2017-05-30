@@ -512,7 +512,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * @param file the multipart file (newer null).
      * @return The multipart file type or empty string (newer null).
      */
-    private static String getMultipartFileType(final MultipartFile file) {
+    private String getMultipartFileType(final MultipartFile file) {
         String type;
         final String name = file.getOriginalFilename();
         if (name.contains(".")) {
@@ -529,7 +529,7 @@ public final class FileServiceImpl extends DataServiceImpl<File> implements File
      * @param file the file to check (newer null).
      * @return true if file is static, false otherwise.
      */
-    private static boolean isStaticFile(final File file) {
+    private boolean isStaticFile(final File file) {
         return file.getType().equals(FileType.STATIC);
     }
 }

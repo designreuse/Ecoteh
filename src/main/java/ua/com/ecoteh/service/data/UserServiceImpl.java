@@ -730,7 +730,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * @return true if user role equals to incoming role,
      * false otherwise.
      */
-    private static boolean roleFilter(final User user, final UserRole role) {
+    private boolean roleFilter(final User user, final UserRole role) {
         return user.getRole().equals(role);
     }
 
@@ -753,7 +753,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * @return true if the incoming photos is not equals and
      * new photo URL is not empty.
      */
-    private static boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
+    private boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
         return !newPhoto.equals(oldPhoto) && isNotEmpty(newPhoto.getUrl());
     }
 }

@@ -511,10 +511,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param finishDate the final date.
      * @return true if dates are correct, false otherwise.
      */
-    private static boolean checkDate(
-            final Date startDate,
-            final Date finishDate
-    ) {
+    private boolean checkDate(final Date startDate, final Date finishDate) {
         return Time.checkDate(startDate, finishDate);
     }
 
@@ -527,11 +524,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @param finishDate the final date.
      * @return true if time is correct, false otherwise.
      */
-    private static boolean timeFilter(
-            final Article article,
-            final Date startDate,
-            final Date finishDate
-    ) {
+    private boolean timeFilter(final Article article, final Date startDate, final Date finishDate) {
         return Time.checkTime(article.getDate(), startDate, finishDate);
     }
 
@@ -544,10 +537,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article> implem
      * @return true if article category equals to incoming category,
      * false otherwise.
      */
-    private static boolean categoryFilter(
-            final Article article,
-            final Category category
-    ) {
+    private boolean categoryFilter(final Article article, final Category category) {
         return isNotNull(article) && isNotNull(article.getCategory()) &&
                 article.getCategory().equals(category);
     }

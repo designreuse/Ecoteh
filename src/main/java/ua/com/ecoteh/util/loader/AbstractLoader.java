@@ -69,7 +69,7 @@ abstract class AbstractLoader implements Loader {
      * @param path the path to file.
      * @return true if directories to file is exist, false otherwise.
      */
-    protected static boolean checkPath(final String path) {
+    protected boolean checkPath(final String path) {
         final File directory = new File(path).getParentFile();
         boolean isExists = directory.exists();
         if (!isExists) {
@@ -83,7 +83,7 @@ abstract class AbstractLoader implements Loader {
      *
      * @param ex the intercepted exception.
      */
-    protected static void logException(final Exception ex) {
+    protected void logException(final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         ex.printStackTrace();
     }
@@ -94,7 +94,7 @@ abstract class AbstractLoader implements Loader {
      * @param file the file to check.
      * @return true if a file is file, false otherwise.
      */
-    private static boolean isFile(final File file) {
+    private boolean isFile(final File file) {
         return file.exists() && file.isFile();
     }
 }

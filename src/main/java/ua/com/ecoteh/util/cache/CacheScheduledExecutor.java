@@ -70,7 +70,7 @@ final class CacheScheduledExecutor {
      *
      * @return the instance of the ScheduledExecutorService class (newer null).
      */
-    private static ScheduledExecutorService createScheduledExecutorService() {
+    private ScheduledExecutorService createScheduledExecutorService() {
         return Executors.newSingleThreadScheduledExecutor(createThreadFactory());
     }
 
@@ -79,7 +79,7 @@ final class CacheScheduledExecutor {
      *
      * @return The new threads factory (newer null).
      */
-    private static ThreadFactory createThreadFactory() {
+    private ThreadFactory createThreadFactory() {
         return runnable -> {
             final Thread thread = new Thread(runnable);
             thread.setDaemon(true);

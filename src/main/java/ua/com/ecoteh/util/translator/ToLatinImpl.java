@@ -56,7 +56,7 @@ public final class ToLatinImpl implements ToLatin {
      * @param value the value to convert.
      * @return The chars array.
      */
-    private static char[] convertToChars(final String value) {
+    private char[] convertToChars(final String value) {
         return value.toLowerCase().toCharArray();
     }
 
@@ -66,7 +66,7 @@ public final class ToLatinImpl implements ToLatin {
      * @param ch the char to translate.
      * @return The translated char.
      */
-    private static String translate(char ch) {
+    private String translate(char ch) {
         switch (ch) {
             case 'а':
                 return "a";

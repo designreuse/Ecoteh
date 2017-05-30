@@ -124,7 +124,7 @@ public final class AsciiImpl implements Ascii {
      * @param character the char to parse
      * @return the integer.
      */
-    private static int charToInt(final char character) {
+    private int charToInt(final char character) {
         return (int) character;
     }
 

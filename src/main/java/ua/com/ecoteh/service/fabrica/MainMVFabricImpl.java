@@ -571,7 +571,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * @param category the category to check.
      * @return true if the category is not null and category URL is not empty.
      */
-    private static boolean isValidCategory(final Category category) {
+    private boolean isValidCategory(final Category category) {
         return isNotNull(category) && isNotEmpty(category.getUrl());
     }
 }

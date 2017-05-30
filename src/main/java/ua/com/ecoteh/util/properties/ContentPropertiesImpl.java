@@ -253,7 +253,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
      * Creates file path.
      * It is path to tomcat.
      */
-    private static void createFilePath() {
+    private void createFilePath() {
         final java.io.File file = new java.io.File("");
         try {
             filePath = file.getCanonicalPath();

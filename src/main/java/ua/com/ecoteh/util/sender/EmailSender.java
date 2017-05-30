@@ -140,7 +140,7 @@ public final class EmailSender implements Sender {
      * @throws UnsupportedEncodingException If the encoding fails
      *                                      in MimeUtility.encodeText(...).
      */
-    private static void prepareAndSend(
+    private void prepareAndSend(
             final String subject,
             final String text,
             final String recipientEmail,
@@ -181,7 +181,7 @@ public final class EmailSender implements Sender {
      * @throws UnsupportedEncodingException If the encoding fails
      *                                      in MimeUtility.encodeText(...).
      */
-    private static void doWork(
+    private void doWork(
             final Properties properties,
             final String subject,
             final String text,
@@ -189,13 +189,12 @@ public final class EmailSender implements Sender {
             final String senderEmail,
             final String senderEmailPass
     ) throws UnsupportedEncodingException, MessagingException {
-        sendMessage(
-                generateMessage(
-                        getSession(properties, senderEmail, senderEmailPass),
-                        subject, text,
-                        recipientEmail, senderEmail
-                )
+        final Message message = generateMessage(
+                getSession(properties, senderEmail, senderEmailPass),
+                subject, text,
+                recipientEmail, senderEmail
         );
+        sendMessage(message);
     }
 
     /**
@@ -204,7 +203,7 @@ public final class EmailSender implements Sender {
      * @param message the sender to recipient from sender.
      * @throws MessagingException If the parse failed in Transport.send(...).
      */
-    private static void sendMessage(final Message message) throws MessagingException {
+    private void sendMessage(final Message message) throws MessagingException {
         Transport.send(message);
     }
 
@@ -222,7 +221,7 @@ public final class EmailSender implements Sender {
      * @throws UnsupportedEncodingException If the encoding fails
      *                                      in MimeUtility.encodeText(...).
      */
-    private static Message generateMessage(
+    private Message generateMessage(
             final Session session,
             final String subject,
             final String text,
@@ -250,7 +249,7 @@ public final class EmailSender implements Sender {
      *
      * @return The content.
      */
-    private static String getContent() {
+    private String getContent() {
         return "text/plain;charset=" + CHARSET;
     }
 
@@ -263,7 +262,7 @@ public final class EmailSender implements Sender {
      * @param senderEmailPass the sender E-mail password.
      * @return The Session object (newer null).
      */
-    private static Session getSession(
+    private Session getSession(
             final Properties properties,
             final String senderEmail,
             final String senderEmailPass
@@ -281,7 +280,7 @@ public final class EmailSender implements Sender {
      * @param senderEmailPass the sender E-mail password.
      * @return The Authenticator object (newer null).
      */
-    private static Authenticator getAuthenticator(
+    private Authenticator getAuthenticator(
             final String senderEmail,
             final String senderEmailPass
     ) {
@@ -298,7 +297,7 @@ public final class EmailSender implements Sender {
      *
      * @return The Properties object.
      */
-    private static Properties getTLSProperties() {
+    private Properties getTLSProperties() {
         final Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -312,7 +311,7 @@ public final class EmailSender implements Sender {
      *
      * @return The Properties object.
      */
-    private static Properties getSSLProperties() {
+    private Properties getSSLProperties() {
         final Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.socketFactory.port", "465");

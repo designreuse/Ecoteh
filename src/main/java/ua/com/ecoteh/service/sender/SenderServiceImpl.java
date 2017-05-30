@@ -171,7 +171,7 @@ public final class SenderServiceImpl implements SenderService {
     ) {
         if (isNotEmpty(recipients)) {
             recipients.stream()
-                    .filter(SenderServiceImpl::isMailingRecipient)
+                    .filter(this::isMailingRecipient)
                     .forEach(
                             recipient -> send(
                                     subject, text, recipient.getContacts().getEmail(),
@@ -198,7 +198,7 @@ public final class SenderServiceImpl implements SenderService {
      * @param recipient the recipient to check.
      * @return true if the recipient is not null and it is mailing.
      */
-    private static boolean isMailingRecipient(final User recipient) {
+    private boolean isMailingRecipient(final User recipient) {
         return isNotNull(recipient) && recipient.isMailing();
     }
 }

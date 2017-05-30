@@ -240,10 +240,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param finishDate the final date.
      * @return true if dates are correct, false otherwise.
      */
-    private static boolean checkDate(
-            final Date startDate,
-            final Date finishDate
-    ) {
+    private boolean checkDate(final Date startDate, final Date finishDate) {
         return Time.checkDate(startDate, finishDate);
     }
 
@@ -255,11 +252,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response> impleme
      * @param finishDate the final date.
      * @return true or false.
      */
-    private static boolean compareToDate(
-            final Response response,
-            final Date startDate,
-            final Date finishDate
-    ) {
+    private boolean compareToDate(final Response response, final Date startDate, final Date finishDate) {
         return (response.getDate().compareTo(startDate) == 1) &&
                 (response.getDate().compareTo(finishDate) == -1);
     }

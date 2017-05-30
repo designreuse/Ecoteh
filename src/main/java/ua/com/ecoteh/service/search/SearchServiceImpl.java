@@ -165,7 +165,7 @@ public class SearchServiceImpl implements SearchService {
      * @param modelAndView the object of class ModelAndView for to update.
      * @return true if page is exist, false otherwise.
      */
-    private static boolean getPageBySearch(
+    private boolean getPageBySearch(
             final String keywords,
             final ModelAndView modelAndView
     ) {
@@ -315,19 +315,15 @@ public class SearchServiceImpl implements SearchService {
      * @param name         the name of the object to add in modelAndView.
      * @param modelAndView the object of class ModelAndView for to update.
      */
-    private static <T extends Model> void searchFromModelAndAdd(
+    private <T extends Model> void searchFromModelAndAdd(
             final String[] keywordArray,
             final boolean howSearch,
             final DataService<T> dataService,
             final String name,
             final ModelAndView modelAndView
     ) {
-        modelAndView.addObject(
-                name,
-                searchFromModel(
-                        keywordArray, howSearch, dataService
-                )
-        );
+        final List<T> result = searchFromModel(keywordArray, howSearch, dataService);
+        modelAndView.addObject(name, result);
     }
 
     /**
@@ -340,7 +336,7 @@ public class SearchServiceImpl implements SearchService {
      *                     of methods for working with objects.
      * @return The list of found objects.
      */
-    private static <T extends Model> List<T> searchFromModel(
+    private <T extends Model> List<T> searchFromModel(
             final String[] keywordArray,
             final boolean howSearch,
             final DataService<T> dataService
@@ -380,7 +376,7 @@ public class SearchServiceImpl implements SearchService {
      * @param howSearch    the search mode.
      * @param modelAndView the object of class ModelAndView for to update.
      */
-    private static void addKeys(
+    private void addKeys(
             final String content,
             final boolean howSearch,
             final ModelAndView modelAndView

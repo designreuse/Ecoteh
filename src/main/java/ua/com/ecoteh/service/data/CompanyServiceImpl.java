@@ -256,7 +256,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * @return true if the company is not null and
      * it has not MAIN company type.
      */
-    private static boolean isNotMainCompany(final Company company) {
+    private boolean isNotMainCompany(final Company company) {
         return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);
     }
 }
