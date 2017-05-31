@@ -55,8 +55,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         &nbsp;Редактировать
                     </button>
                 </a>&nbsp;&nbsp;
-                <a href="<c:url value="/admin/response/delete/${response.id}"/>"
-                   title="Удалить отзыв">
+                <a href="<c:url value="/admin/response/delete/${response.id}"/>" title="Удалить отзыв"
+                   onclick="if(confirm('Вы точно хотите удалить этот отзыв? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-minus red" aria-hidden="true"></span>
                         &nbsp;Удалить

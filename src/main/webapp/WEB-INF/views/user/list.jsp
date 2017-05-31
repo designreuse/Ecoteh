@@ -143,7 +143,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </button>
                     </a>&nbsp;&nbsp;
                     <a href="<c:url value="/admin/user/delete/${user.url}"/>"
-                       title="Удалить &quot;<c:out value="${user.name}"/>&quot;">
+                       title="Удалить &quot;<c:out value="${user.name}"/>&quot;"
+                       onclick="if(confirm('Вы точно хотите удалить пользователя &quot;<c:out value="${user.name}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                         <button class="btn btn-default">
                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                             &nbsp;Удалить

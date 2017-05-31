@@ -15,12 +15,32 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <c:forEach items="${partners_list}" var="partner">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h3 class="text-center">
-                            <b>
-                                <a href="<c:url value="/company/${partner.url}"/>">
-                                    <c:out value="${partner.title}"/>
-                                </a>
-                            </b>
+                            <a href="<c:url value="/company/${partner.url}"/>">
+                                <c:out value="${partner.title}"/>
+                            </a>
                         </h3>
+                            <%-- Administrator actions --%>
+                        <c:if test="${authorized_user ne null}">
+                            <h3 class="text-center">
+                                <a href="<c:url value="/admin/company/edit/${partner.url}"/>"
+                                   title="Редактировать компанию &quot;<c:out value="${partner.title}"/>&quot;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
+                                        &nbsp;Редактировать
+                                    </button>
+                                </a>
+                                &nbsp;&nbsp;
+                                <a href="<c:url value="/admin/company/delete/${partner.url}"/>"
+                                   title="Удалить компанию &quot;<c:out value="${partner.title}"/>&quot;"
+                                   onclick="if(confirm('Вы точно хотите удалить компанию &quot;<c:out
+                                           value="${partner.title}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                                        &nbsp;Удалить
+                                    </button>
+                                </a>
+                            </h3>
+                        </c:if>
                         <c:if test="${!partner.validated}">
                             <p class="little">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"

@@ -73,7 +73,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/company/delete/${company.url}"/>"
-                                   title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;">
+                                   title="Удалить партнера &quot;<c:out value="${company.title}"/>&quot;"
+                                   onclick="if(confirm('Вы точно хотите удалить компанию &quot;<c:out
+                                           value="${company.title}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                         &nbsp;Удалить

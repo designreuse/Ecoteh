@@ -14,7 +14,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             &nbsp;Обновить
         </button>
     </a>&nbsp;&nbsp;
-    <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти">
+    <a href="<c:url value="/superadmin/cache/clear"/>" title="Удалить все объекты с памяти"
+       onclick="if(confirm('Вы точно хотите очистить кэш?')) this.submit; else return false;">
         <button class="btn btn-default">
             <span class="glyphicon glyphicon-floppy-remove red" aria-hidden="true"></span>
             &nbsp;Очистить

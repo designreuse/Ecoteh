@@ -15,8 +15,7 @@
                 <c:out value="${object.key}"/>
             </td>
             <td>
-                <a href="<c:url value="/superadmin/cache/remove/${object.key}"/>"
-                   title="Удалить объект с кэша">
+                <a href="<c:url value="/superadmin/cache/remove/${object.key}"/>" title="Удалить объект с кэша">
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     </button>

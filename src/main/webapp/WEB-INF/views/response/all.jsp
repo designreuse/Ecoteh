@@ -60,7 +60,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <c:if test="${(authorized_user ne null) and (length gt 0)}">
                             <div class="text-center">
                                 <a href="<c:url value="/admin/response/delete/all"/>"
-                                   title="Удалить все отзывы о компании">
+                                   title="Удалить все отзывы о компании"
+                                   onclick="if(confirm('Вы точно хотите удалить все отзывы? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                         &nbsp;Удалить&nbsp;все

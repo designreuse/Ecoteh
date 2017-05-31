@@ -33,7 +33,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     &nbsp;Новая
                 </button>
             </a>&nbsp;&nbsp;
-            <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории">
+            <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории"
+               onclick="if(confirm('Вы точно хотите удалить все категории? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;все
@@ -52,7 +53,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     &nbsp;Новая
                 </button>
             </a>&nbsp;&nbsp;
-            <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи">
+            <a href="<c:url value="/admin/article/delete/all"/>" title="Удалить все статьи"
+               onclick="if(confirm('Вы точно хотите удалить все статьи? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;все
@@ -71,7 +73,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     &nbsp;Новый
                 </button>
             </a>&nbsp;&nbsp;
-            <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров">
+            <a href="<c:url value="/admin/company/delete/all"/>" title="Удалить всех партнеров"
+               onclick="if(confirm('Вы точно хотите удалить всех партнеров? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;всех
@@ -90,8 +93,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     &nbsp;Новый
                 </button>
             </a>&nbsp;&nbsp;
-            <a href="<c:url value="/admin/user/delete/all"/>"
-               title="Удалить всех пользователей">
+            <a href="<c:url value="/admin/user/delete/all"/>" title="Удалить всех пользователей"
+               onclick="if(confirm('Вы точно хотите удалить всех пользователей? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;всех
@@ -111,7 +114,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     &nbsp;Новый
                 </button>
             </a>&nbsp;&nbsp;
-            <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
+            <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы"
+               onclick="if(confirm('Вы точно хотите удалить все файлы? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;все
@@ -124,8 +128,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <a href="<c:url value="/responses"/>" title="Отзывы о компании">Отзывы</a>
         </th>
         <td class="pad">
-            <a href="<c:url value="/admin/response/delete/all"/>"
-               title="Удалить все отзывы о компании">
+            <a href="<c:url value="/admin/response/delete/all"/>" title="Удалить все отзывы о компании"
+               onclick="if(confirm('Вы точно хотите удалить все отзывы? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;все
@@ -138,8 +142,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <a href="<c:url value="/admin/messages/"/>" title="Сообщения от пользователей">Сообщения</a>
         </th>
         <td class="pad">
-            <a href="<c:url value="/admin/messages/delete/all"/>"
-               title="Удалить все сообщения от пользователей">
+            <a href="<c:url value="/admin/messages/delete/all"/>" title="Удалить все сообщения от пользователей"
+               onclick="if(confirm('Вы точно хотите удалить все сообщения? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                     &nbsp;Удалить&nbsp;все

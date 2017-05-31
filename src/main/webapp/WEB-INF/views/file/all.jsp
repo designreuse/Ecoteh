@@ -56,7 +56,8 @@
                             <c:set var="length" value="${fn:length(files)}"/>
                             <c:if test="${length gt 0}">
                                 &nbsp;&nbsp;
-                                <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы">
+                                <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы"
+                                   onclick="if(confirm('Вы точно хотите удалить все файлы? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                         &nbsp;Удалить&nbsp;все

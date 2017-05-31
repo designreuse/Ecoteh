@@ -66,7 +66,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             </a>
                             <c:if test="${length gt 0}">
                                 &nbsp;&nbsp;
-                                <a href="<c:url value="/admin/user/delete/all"/>" title="Удалить всех пользователей">
+                                <a href="<c:url value="/admin/user/delete/all"/>" title="Удалить всех пользователей"
+                                   onclick="if(confirm('Вы точно хотите удалить всех пользователей? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                         &nbsp;Удалить&nbsp;всех

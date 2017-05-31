@@ -35,9 +35,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
                                         &nbsp;Редактировать
                                     </button>
-                                </a>&nbsp;&nbsp;
+                                </a>
+                                &nbsp;&nbsp;
                                 <a href="<c:url value="/admin/article/delete/${article.url}"/>"
-                                   title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;">
+                                   title="Удалить статью &quot;<c:out value="${article.title}"/>&quot;"
+                                   onclick="if(confirm('Вы точно хотите удалить статью &quot;<c:out
+                                           value="${article.title}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                         &nbsp;Удалить

@@ -78,7 +78,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </button>
                                 </a>&nbsp;&nbsp;
                                 <a href="<c:url value="/admin/category/delete/${category.url}"/>"
-                                   title="Удалить категорию &quot;<c:out value="${category.title}"/>&quot;">
+                                   title="Удалить категорию &quot;<c:out value="${category.title}"/>&quot;"
+                                   onclick="if(confirm('Вы точно хотите удалить статью категорию &quot;<c:out
+                                           value="${category.title}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                         &nbsp;Удалить

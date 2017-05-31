@@ -57,7 +57,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <c:if test="${length gt 0}">
                         <div class="text-center">
                             <a href="<c:url value="/admin/messages/delete/all"/>"
-                               title="Удалить все сообщения от клиентов">
+                               title="Удалить все сообщения от клиентов"
+                               onclick="if(confirm('Вы точно хотите удалить все сообщения? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                 <button class=" btn btn-default">
                                     <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                     &nbsp;Удалить&nbsp;все
@@ -74,7 +75,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <div class="row">
                     <div class="box">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <%-- Messages list --%>
+                                <%-- Messages list --%>
                             <%@include file="/WEB-INF/views/message/list.jsp" %>
                         </div>
                         <div class="clearfix"></div>

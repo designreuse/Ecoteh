@@ -11,7 +11,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <c:if test="${not empty file.url}">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <div class="text-center">
-                <a href="<c:url value="${file.url}"/>" title="${file.title}" rel="lightgallery[files]">
+                <a href="<c:url value="${file.url}"/>" title="<c:out value="${file.title}"/>" rel="lightgallery[files]">
                     <img src="<c:url value="${file.url}"/>" class="file" alt="" title="Увеличить"
                          onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                 </a>
@@ -21,13 +21,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 </a>
                 <br>
                 <button class="btn-clipboard btn btn-default"
-                        title="Скорировать ссылку файла &quot;${file.title}&quot;"
+                        title="Скорировать ссылку файла &quot;<c:out value="${file.title}"/>&quot;"
                         data-clipboard-text="<c:url value="${file.url}"/>">
                     <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                 </button>
                 &nbsp;
                 <a href="<c:url value="/admin/file/edit/${file.id}"/>"
-                   title="Редактировать файл &quot;${file.title}&quot;">
+                   title="Редактировать файл &quot;<c:out value="${file.title}"/>&quot;">
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-edit yellow" aria-hidden="true"></span>
                     </button>
@@ -35,7 +35,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <c:if test="${file.validated}">
                     &nbsp;
                     <a href="<c:url value="/admin/file/delete/${file.id}"/>"
-                       title="Удалить файл &quot;${file.title}&quot;">
+                       title="Удалить файл &quot;<c:out value="${file.title}"/>&quot;"
+                       onclick="if(confirm('Вы точно хотите удалить все файл &quot;<c:out
+                               value="${file.title}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                         <button class="btn btn-default">
                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                         </button>

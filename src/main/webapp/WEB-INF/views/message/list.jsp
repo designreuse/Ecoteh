@@ -34,8 +34,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </p>
             <%-- Message action --%>
         <p class="message green">
-            <a href="<c:url value="/admin/messages/delete/${message.id}"/>"
-               title="Удалить сообщение">
+            <a href="<c:url value="/admin/messages/delete/${message.id}"/>" title="Удалить сообщение"
+               onclick="if(confirm('Вы точно хотите удалить это сообщение? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                 <button class="btn btn-default">
                     <span class="glyphicon glyphicon-minus red" aria-hidden="true"></span>
                     &nbsp;Удалить

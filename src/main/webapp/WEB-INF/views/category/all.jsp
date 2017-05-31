@@ -68,7 +68,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                                 <c:if test="${length gt 0}">
                                     &nbsp;&nbsp;
-                                    <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории">
+                                    <a href="<c:url value="/admin/category/delete/all"/>" title="Удалить все категории"
+                                       onclick="if(confirm('Вы точно хотите удалить все категории? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
                                             &nbsp;Удалить&nbsp;все
