@@ -1,4 +1,6 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.contacts;
+
+import ua.com.ecoteh.entity.model.ModelEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +11,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
- * with entity of the {@link Contacts} class.
+ * with entity of the {@link ContactsEntity} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Entity
 @Table(name = "contacts")
-public class Contacts extends Model implements IContacts {
+public class ContactsEntity extends ModelEntity {
 
     /**
      * It is used during deserialization to verify that
@@ -76,7 +78,7 @@ public class Contacts extends Model implements IContacts {
     /**
      * Default constructor.
      */
-    public Contacts() {
+    public ContactsEntity() {
         this.email = "";
         this.mobilePhone = "";
         this.landlinePhone = "";
@@ -90,10 +92,10 @@ public class Contacts extends Model implements IContacts {
     /**
      * Constructor.
      *
-     * @param email       a E-mail of the new contacts.
-     * @param mobilePhone a mobile phone number of the new contacts.
+     * @param email       a E-mail of the new contactsEntity.
+     * @param mobilePhone a mobile phone number of the new contactsEntity.
      */
-    public Contacts(
+    public ContactsEntity(
             final String email,
             final String mobilePhone
     ) {
@@ -105,16 +107,16 @@ public class Contacts extends Model implements IContacts {
     /**
      * Constructor.
      *
-     * @param email         a E-mail of the new contacts.
-     * @param mobilePhone   a mobile phone number of the new contacts.
-     * @param landlinePhone a landline phone number of the new contacts.
-     * @param fax           a fax number of the new contacts.
-     * @param vkontakte     a Vkontakte URL of the new contacts.
-     * @param facebook      a Facebook URL of the new contacts.
-     * @param twitter       a Twitter URL of the new contacts.
-     * @param skype         a Skype username of the new contacts.
+     * @param email         a E-mail of the new contactsEntity.
+     * @param mobilePhone   a mobile phone number of the new contactsEntity.
+     * @param landlinePhone a landline phone number of the new contactsEntity.
+     * @param fax           a fax number of the new contactsEntity.
+     * @param vkontakte     a Vkontakte URL of the new contactsEntity.
+     * @param facebook      a Facebook URL of the new contactsEntity.
+     * @param twitter       a Twitter URL of the new contactsEntity.
+     * @param skype         a Skype username of the new contactsEntity.
      */
-    public Contacts(
+    public ContactsEntity(
             final String email,
             final String mobilePhone,
             final String landlinePhone,
@@ -140,7 +142,7 @@ public class Contacts extends Model implements IContacts {
      */
     @Override
     public String toString() {
-        return "Contacts{" + super.toString() +
+        return "ContactsEntity{" + super.toString() +
                 ", email='" + getEmail() + '\'' +
                 ", mobilePhone='" + getMobilePhone() + '\'' +
                 ", landlinePhone='" + getLandlinePhone() + '\'' +
@@ -163,7 +165,7 @@ public class Contacts extends Model implements IContacts {
     public boolean equals(Object object) {
         boolean result = super.equals(object);
         if (result) {
-            final Contacts other = (Contacts) object;
+            final ContactsEntity other = (ContactsEntity) object;
             result = this.getEmail().equalsIgnoreCase(other.getEmail()) &&
                     this.getMobilePhone().equalsIgnoreCase(other.getMobilePhone()) &&
                     this.getLandlinePhone().equalsIgnoreCase(other.getLandlinePhone()) &&
@@ -201,22 +203,21 @@ public class Contacts extends Model implements IContacts {
      * @return A clone of this instance.
      */
     @Override
-    public Contacts clone() {
-        return (Contacts) super.clone();
+    public ContactsEntity clone() {
+        return (ContactsEntity) super.clone();
     }
 
     /**
-     * Returns a E-mail of the contacts.
+     * Returns a E-mail of the contactsEntity.
      *
-     * @return The contacts E-mail or empty string (newer null).
+     * @return The contactsEntity E-mail or empty string (newer null).
      */
-    @Override
     public String getEmail() {
         return this.email;
     }
 
     /**
-     * Sets a new E-mail to the contacts.
+     * Sets a new E-mail to the contactsEntity.
      * If parameter E-mail is blank, then sets empty string.
      * <pre>
      *     setEmail(null) - email = ""
@@ -226,25 +227,23 @@ public class Contacts extends Model implements IContacts {
      *     setEmail(" bob ") - email = " bob "
      * </pre>
      *
-     * @param email the new E-mail to the contacts.
+     * @param email the new E-mail to the contactsEntity.
      */
-    @Override
     public void setEmail(final String email) {
         this.email = isNotEmpty(email) ? email : "";
     }
 
     /**
-     * Returns a mobile phone number of the contacts.
+     * Returns a mobile phone number of the contactsEntity.
      *
-     * @return The contacts mobile phone number or empty string (newer null).
+     * @return The contactsEntity mobile phone number or empty string (newer null).
      */
-    @Override
     public String getMobilePhone() {
         return this.mobilePhone;
     }
 
     /**
-     * Sets a new mobile phone number to the contacts.
+     * Sets a new mobile phone number to the contactsEntity.
      * If parameter mobile phone is blank, then sets empty string.
      * <pre>
      *     setMobilePhone(null) - mobilePhone = ""
@@ -254,25 +253,23 @@ public class Contacts extends Model implements IContacts {
      *     setMobilePhone(" bob ") - mobilePhone = " bob "
      * </pre>
      *
-     * @param mobilePhone the new mobile phone number to the contacts.
+     * @param mobilePhone the new mobile phone number to the contactsEntity.
      */
-    @Override
     public void setMobilePhone(final String mobilePhone) {
         this.mobilePhone = isNotEmpty(mobilePhone) ? mobilePhone : "";
     }
 
     /**
-     * Returns a landline phone number of the contacts.
+     * Returns a landline phone number of the contactsEntity.
      *
-     * @return The contacts landline phone number or empty string (newer null).
+     * @return The contactsEntity landline phone number or empty string (newer null).
      */
-    @Override
     public String getLandlinePhone() {
         return this.landlinePhone;
     }
 
     /**
-     * Sets a new landline phone number to the contacts.
+     * Sets a new landline phone number to the contactsEntity.
      * If parameter landline phone is blank, then sets empty string.
      * <pre>
      *     setLandlinePhone(null) - landlinePhone = ""
@@ -282,25 +279,23 @@ public class Contacts extends Model implements IContacts {
      *     setLandlinePhone(" bob ") - landlinePhone = " bob "
      * </pre>
      *
-     * @param landlinePhone the new landline phone number to the contacts.
+     * @param landlinePhone the new landline phone number to the contactsEntity.
      */
-    @Override
     public void setLandlinePhone(final String landlinePhone) {
         this.landlinePhone = isNotEmpty(landlinePhone) ? landlinePhone : "";
     }
 
     /**
-     * Returns a fax number of the contacts.
+     * Returns a fax number of the contactsEntity.
      *
-     * @return The contacts fax number or empty string (newer null).
+     * @return The contactsEntity fax number or empty string (newer null).
      */
-    @Override
     public String getFax() {
         return this.fax;
     }
 
     /**
-     * Sets a new fax number to the contacts.
+     * Sets a new fax number to the contactsEntity.
      * If parameter fax is blank, then sets empty string.
      * <pre>
      *     setFax(null) - fax = ""
@@ -310,25 +305,23 @@ public class Contacts extends Model implements IContacts {
      *     setFax(" bob ") - fax = " bob "
      * </pre>
      *
-     * @param fax the new fax number to the contacts.
+     * @param fax the new fax number to the contactsEntity.
      */
-    @Override
     public void setFax(final String fax) {
         this.fax = isNotEmpty(fax) ? fax : "";
     }
 
     /**
-     * Returns a Vkontakte URL of the contacts.
+     * Returns a Vkontakte URL of the contactsEntity.
      *
-     * @return The contacts Vkontakte URL or empty string (newer null).
+     * @return The contactsEntity Vkontakte URL or empty string (newer null).
      */
-    @Override
     public String getVkontakte() {
         return this.vkontakte;
     }
 
     /**
-     * Sets a new Vkontakte URL to the contacts.
+     * Sets a new Vkontakte URL to the contactsEntity.
      * If parameter Vkontakte URL is blank, then sets empty string.
      * <pre>
      *     setVkontakte(null) - vkontakte = ""
@@ -338,25 +331,23 @@ public class Contacts extends Model implements IContacts {
      *     setVkontakte(" bob ") - vkontakte = " bob "
      * </pre>
      *
-     * @param vkontakte the new Vkontakte URL to the contacts.
+     * @param vkontakte the new Vkontakte URL to the contactsEntity.
      */
-    @Override
     public void setVkontakte(final String vkontakte) {
         this.vkontakte = isNotEmpty(vkontakte) ? vkontakte : "";
     }
 
     /**
-     * Returns a Facebook URL of the contacts.
+     * Returns a Facebook URL of the contactsEntity.
      *
-     * @return The contacts Facebook URL or empty string (newer null).
+     * @return The contactsEntity Facebook URL or empty string (newer null).
      */
-    @Override
     public String getFacebook() {
         return this.facebook;
     }
 
     /**
-     * Sets a new Facebook URL to the contacts.
+     * Sets a new Facebook URL to the contactsEntity.
      * If parameter Facebook URL is blank, then sets empty string.
      * <pre>
      *     setFacebook(null) - facebook = ""
@@ -366,25 +357,23 @@ public class Contacts extends Model implements IContacts {
      *     setFacebook(" bob ") - facebook = " bob "
      * </pre>
      *
-     * @param facebook the new Facebook URL to the contacts.
+     * @param facebook the new Facebook URL to the contactsEntity.
      */
-    @Override
     public void setFacebook(final String facebook) {
         this.facebook = isNotEmpty(facebook) ? facebook : "";
     }
 
     /**
-     * Returns a Twitter URL of the contacts.
+     * Returns a Twitter URL of the contactsEntity.
      *
-     * @return The contacts Twitter URL or empty string (newer null).
+     * @return The contactsEntity Twitter URL or empty string (newer null).
      */
-    @Override
     public String getTwitter() {
         return this.twitter;
     }
 
     /**
-     * Sets a new Twitter URL to the contacts.
+     * Sets a new Twitter URL to the contactsEntity.
      * If parameter Twitter URL is blank, then sets empty string.
      * <pre>
      *     setTwitter(null) - twitter = ""
@@ -394,19 +383,17 @@ public class Contacts extends Model implements IContacts {
      *     setTwitter(" bob ") - twitter = " bob "
      * </pre>
      *
-     * @param twitter the new Twitter URL to the contacts.
+     * @param twitter the new Twitter URL to the contactsEntity.
      */
-    @Override
     public void setTwitter(final String twitter) {
         this.twitter = isNotEmpty(twitter) ? twitter : "";
     }
 
     /**
-     * Returns a Skype username of the contacts.
+     * Returns a Skype username of the contactsEntity.
      *
-     * @return The contacts Skype username or empty string (newer null).
+     * @return The contactsEntity Skype username or empty string (newer null).
      */
-    @Override
     public String getSkype() {
         return this.skype;
     }
@@ -422,38 +409,44 @@ public class Contacts extends Model implements IContacts {
      *     setSkype(" bob ") - skype = " bob "
      * </pre>
      *
-     * @param skype the new Skype username to the contacts.
+     * @param skype the new Skype username to the contactsEntity.
      */
-    @Override
     public void setSkype(final String skype) {
         this.skype = isNotEmpty(skype) ? skype : "";
     }
 
     /**
-     * Initializes the contacts.
-     * Returns this contacts with a new copied fields.
+     * Initializes the contactsEntity.
+     * Returns this contactsEntity with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this contacts
-     *     initialize(new Contacts()) - does nothing, returns this
-     *     contacts with a new copied fields
+     *     initialize(null) - does nothing, returns this contactsEntity
+     *     initialize(new ContactsEntity()) - does nothing, returns this
+     *     contactsEntity with a new copied fields
      * </pre>
      *
-     * @param contacts the contacts to copy.
-     * @return This contacts with new fields (newer null).
+     * @param contactsEntity the contactsEntity to copy.
+     * @return This contactsEntity with new fields (newer null).
      */
-    @Override
-    public Contacts initialize(final Contacts contacts) {
-        if (isNotNull(contacts)) {
-            super.initialize(contacts);
-            this.setEmail(contacts.getEmail());
-            this.setMobilePhone(contacts.getMobilePhone());
-            this.setLandlinePhone(contacts.getLandlinePhone());
-            this.setFax(contacts.getFax());
-            this.setVkontakte(contacts.getVkontakte());
-            this.setFacebook(contacts.getFacebook());
-            this.setTwitter(contacts.getTwitter());
-            this.setSkype(contacts.getSkype());
+    public ContactsEntity initialize(final ContactsEntity contactsEntity) {
+        if (isNotNull(contactsEntity)) {
+            super.initialize(contactsEntity);
+            this.setEmail(contactsEntity.getEmail());
+            this.setMobilePhone(contactsEntity.getMobilePhone());
+            this.setLandlinePhone(contactsEntity.getLandlinePhone());
+            this.setFax(contactsEntity.getFax());
+            this.setVkontakte(contactsEntity.getVkontakte());
+            this.setFacebook(contactsEntity.getFacebook());
+            this.setTwitter(contactsEntity.getTwitter());
+            this.setSkype(contactsEntity.getSkype());
         }
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Contacts convert() {
+        return new ContactsEntityConverter(this).convert();
     }
 }

@@ -1,7 +1,9 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.article;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.content.ContentEntity;
 import ua.com.ecoteh.util.generator.StringGenerator;
 import ua.com.ecoteh.util.time.Time;
 
@@ -14,13 +16,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
- * with entity of the {@link Article} class.
+ * with entity of the {@link ArticleEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Entity
 @Table(name = "articles")
-public class Article extends Content implements IArticle {
+public class ArticleEntity extends ContentEntity {
 
     /**
      * It is used during deserialization to verify that
@@ -31,31 +33,31 @@ public class Article extends Content implements IArticle {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The number of an article.
+     * The number of an articleEntity.
      */
     @Column(name = "number", nullable = false, unique = true)
     private String number;
 
     /**
-     * The text of an article.
+     * The text of an articleEntity.
      */
     @Column(name = "text", nullable = false)
     private String text;
 
     /**
-     * The date of an article.
+     * The date of an articleEntity.
      */
     @Column(name = "date", nullable = false)
     private Date date;
 
     /**
-     * The price of an article.
+     * The price of an articleEntity.
      */
     @Column(name = "price")
     private String price;
 
     /**
-     * The category of an article.
+     * The categoryEntity of an articleEntity.
      */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
@@ -63,12 +65,12 @@ public class Article extends Content implements IArticle {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private Category category;
+    private CategoryEntity categoryEntity;
 
     /**
      * Default constructor.
      */
-    public Article() {
+    public ArticleEntity() {
         this.text = "";
         this.date = new Date();
         newNumber();
@@ -77,13 +79,13 @@ public class Article extends Content implements IArticle {
     /**
      * Constructor.
      *
-     * @param title       the title of a new article.
-     * @param description the description of a new article.
-     * @param text        the text of a new article.
-     * @param keywords    the keywords of a new article.
-     * @param number      the number of a new article.
+     * @param title       the title of a new articleEntity.
+     * @param description the description of a new articleEntity.
+     * @param text        the text of a new articleEntity.
+     * @param keywords    the keywords of a new articleEntity.
+     * @param number      the number of a new articleEntity.
      */
-    public Article(
+    public ArticleEntity(
             final String title,
             final String description,
             final String text,
@@ -99,14 +101,14 @@ public class Article extends Content implements IArticle {
     /**
      * Constructor.
      *
-     * @param title       the title of a new article.
-     * @param description the description of a new article.
-     * @param text        the text of a new article.
-     * @param keywords    the keywords of a new article.
-     * @param number      the number of a new article.
-     * @param price       the price of a new article.
+     * @param title       the title of a new articleEntity.
+     * @param description the description of a new articleEntity.
+     * @param text        the text of a new articleEntity.
+     * @param keywords    the keywords of a new articleEntity.
+     * @param number      the number of a new articleEntity.
+     * @param price       the price of a new articleEntity.
      */
-    public Article(
+    public ArticleEntity(
             final String title,
             final String description,
             final String text,
@@ -125,12 +127,12 @@ public class Article extends Content implements IArticle {
      */
     @Override
     public String toString() {
-        return "Article{" + super.toString() +
+        return "ArticleEntity{" + super.toString() +
                 ", number='" + getNumber() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
                 ", price=" + getPrice() +
-                ", category=" + getCategory() +
+                ", categoryEntity=" + getCategoryEntity() +
                 '}';
     }
 
@@ -145,7 +147,7 @@ public class Article extends Content implements IArticle {
     public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
-            final Article other = (Article) object;
+            final ArticleEntity other = (ArticleEntity) object;
             result = this.getNumber().equalsIgnoreCase(other.getNumber()) &&
                     this.getText().equalsIgnoreCase(other.getText());
         }
@@ -172,22 +174,21 @@ public class Article extends Content implements IArticle {
      * @return A clone of this instance (newer null).
      */
     @Override
-    public Article clone() {
-        return (Article) super.clone();
+    public ArticleEntity clone() {
+        return (ArticleEntity) super.clone();
     }
 
     /**
-     * Returns a number of the article.
+     * Returns a number of the articleEntity.
      *
-     * @return The article number (newer null).
+     * @return The articleEntity number (newer null).
      */
-    @Override
     public String getNumber() {
         return this.number;
     }
 
     /**
-     * Sets new number to the article.
+     * Sets new number to the articleEntity.
      * If parameter number is blank, then call method newNumber().
      * <pre>
      *     setNumber(null) - number = "NewRandomNumber"
@@ -197,9 +198,8 @@ public class Article extends Content implements IArticle {
      *     setNumber(" bob ") - number = "bob"
      * </pre>
      *
-     * @param number the new number to the article.
+     * @param number the new number to the articleEntity.
      */
-    @Override
     public void setNumber(final String number) {
         if (isNotEmpty(number)) {
             this.number = number;
@@ -209,25 +209,23 @@ public class Article extends Content implements IArticle {
     }
 
     /**
-     * Generates new number to the article.
+     * Generates new number to the articleEntity.
      */
-    @Override
     public void newNumber() {
         this.number = new StringGenerator().generate();
     }
 
     /**
-     * Returns a text of the article.
+     * Returns a text of the articleEntity.
      *
-     * @return The article text or empty string (newer null).
+     * @return The articleEntity text or empty string (newer null).
      */
-    @Override
     public String getText() {
         return this.text;
     }
 
     /**
-     * Sets a new text to the article.
+     * Sets a new text to the articleEntity.
      * If parameter text is blank, then sets empty string.
      * <pre>
      *     setText(null) - text = ""
@@ -237,50 +235,46 @@ public class Article extends Content implements IArticle {
      *     setText(" bob ") - text = "bob"
      * </pre>
      *
-     * @param text a new text to the article.
+     * @param text a new text to the articleEntity.
      */
-    @Override
     public void setText(final String text) {
         this.text = isNotEmpty(text) ? text : "";
     }
 
     /**
-     * Returns a date of the article.
+     * Returns a date of the articleEntity.
      *
-     * @return The article date (newer null).
+     * @return The articleEntity date (newer null).
      */
-    @Override
     public Date getDate() {
         return this.date;
     }
 
     /**
-     * Sets a new date to the article.
+     * Sets a new date to the articleEntity.
      * If parameter date is null, then sets new Date().
      * <pre>
      *     setDate(null) - date = new Date()
      *     setDate(someRealDate) - date = someRealDate
      * </pre>
      *
-     * @param date the new date to the article.
+     * @param date the new date to the articleEntity.
      */
-    @Override
     public void setDate(final Date date) {
         this.date = isNotNull(date) ? date : new Date();
     }
 
     /**
-     * Returns a price of the article.
+     * Returns a price of the articleEntity.
      *
-     * @return The article price or '0' (newer null).
+     * @return The articleEntity price or '0' (newer null).
      */
-    @Override
     public String getPrice() {
         return this.price;
     }
 
     /**
-     * Sets a new price to the article.
+     * Sets a new price to the articleEntity.
      * If parameter price is blank, then sets 0.
      * <pre>
      *     setPrice(null) - price = "0"
@@ -290,40 +284,37 @@ public class Article extends Content implements IArticle {
      *     setPrice(" $100 ") - address = " $100 "
      * </pre>
      *
-     * @param price the new price to the article.
+     * @param price the new price to the articleEntity.
      */
-    @Override
     public void setPrice(final String price) {
         this.price = isNotEmpty(price) ? price : "0";
     }
 
     /**
-     * Returns an article date in string format.
+     * Returns an articleEntity date in string format.
      *
-     * @return The article string-date (newer null).
+     * @return The articleEntity string-date (newer null).
      */
-    @Override
     public String getDateToString() {
         return Time.getDate(getDate());
     }
 
     /**
-     * Sets a new category to the article.
-     * Sets a new category if this category equals null
-     * or this category not equals new category.
-     * Also the article deletes from old category and adds to new category.
+     * Sets a new categoryEntity to the articleEntity.
+     * Sets a new categoryEntity if this categoryEntity equals null
+     * or this categoryEntity not equals new categoryEntity.
+     * Also the articleEntity deletes from old categoryEntity and adds to new categoryEntity.
      *
-     * @param category the new category to the article.
+     * @param categoryEntity the new categoryEntity to the articleEntity.
      */
-    @Override
-    public void setCategory(final Category category) {
-        if (isNull(this.category)) {
-            this.category = category;
-        } else if (!this.category.equals(category)) {
-            final Category temp = this.category;
-            this.category = category;
-            if (isNotNull(this.category) && !this.category.containsArticle(this)) {
-                this.category.addArticle(this);
+    public void setCategoryEntity(final CategoryEntity categoryEntity) {
+        if (isNull(this.categoryEntity)) {
+            this.categoryEntity = categoryEntity;
+        } else if (!this.categoryEntity.equals(categoryEntity)) {
+            final CategoryEntity temp = this.categoryEntity;
+            this.categoryEntity = categoryEntity;
+            if (isNotNull(this.categoryEntity) && !this.categoryEntity.containsArticle(this)) {
+                this.categoryEntity.addArticle(this);
             }
             if (isNotNull(temp)) {
                 temp.removeArticle(this);
@@ -332,37 +323,39 @@ public class Article extends Content implements IArticle {
     }
 
     /**
-     * Returns a category of the article.
+     * Returns a categoryEntity of the articleEntity.
      *
-     * @return The article category.
+     * @return The articleEntity categoryEntity.
      */
-    @Override
-    public Category getCategory() {
-        return this.category;
+    public CategoryEntity getCategoryEntity() {
+        return this.categoryEntity;
     }
 
     /**
-     * Initializes the article.
-     * Returns this article with a new copied fields.
+     * Initializes the articleEntity.
+     * Returns this articleEntity with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this article
-     *     initialize(new Article()) - does nothing, returns this
-     *     article with a new copied fields
+     *     initialize(null) - does nothing, returns this articleEntity
+     *     initialize(new ArticleEntity()) - does nothing, returns this
+     *     articleEntity with a new copied fields
      * </pre>
      *
-     * @param article the article to copy.
-     * @return This article with new fields (newer null).
+     * @param articleEntity the articleEntity to copy.
+     * @return This articleEntity with new fields (newer null).
      */
-    @Override
-    public Article initialize(final Article article) {
-        if (isNotNull(article)) {
-            super.initialize(article);
-            this.setNumber(article.getNumber());
-            this.setText(article.getText());
-            this.setDate(article.getDate());
-            this.setPrice(article.getPrice());
-            this.setCategory(article.getCategory());
+    public ArticleEntity initialize(final ArticleEntity articleEntity) {
+        if (isNotNull(articleEntity)) {
+            super.initialize(articleEntity);
+            this.setNumber(articleEntity.getNumber());
+            this.setText(articleEntity.getText());
+            this.setDate(articleEntity.getDate());
+            this.setPrice(articleEntity.getPrice());
+            this.setCategoryEntity(articleEntity.getCategoryEntity());
         }
         return this;
+    }
+
+    public Article convert() {
+        return new ArticleEntityConverter(this).convert();
     }
 }

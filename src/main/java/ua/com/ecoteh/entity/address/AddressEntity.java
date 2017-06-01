@@ -1,4 +1,6 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.address;
+
+import ua.com.ecoteh.entity.model.ModelEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +11,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
- * with entity of the {@link Address} class.
+ * with entity of the {@link AddressEntity} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Entity
 @Table(name = "addresses")
-public class Address extends Model implements IAddress {
+public class AddressEntity extends ModelEntity {
 
     /**
      * It is used during deserialization to verify that
@@ -26,7 +28,7 @@ public class Address extends Model implements IAddress {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The mailing address.
+     * The mailing addressEntity.
      */
     @Column(name = "address", nullable = false)
     private String address;
@@ -40,7 +42,7 @@ public class Address extends Model implements IAddress {
     /**
      * Default constructor.
      */
-    public Address() {
+    public AddressEntity() {
         this.address = "";
         this.googleMaps = "";
     }
@@ -48,9 +50,9 @@ public class Address extends Model implements IAddress {
     /**
      * Constructor.
      *
-     * @param address the mailing address of the new address.
+     * @param address the mailing addressEntity of the new addressEntity.
      */
-    public Address(final String address) {
+    public AddressEntity(final String address) {
         this();
         setAddress(address);
     }
@@ -58,10 +60,10 @@ public class Address extends Model implements IAddress {
     /**
      * Constructor.
      *
-     * @param address    the mailing address of the new address.
-     * @param googleMaps the google maps URL of the new address.
+     * @param address    the mailing addressEntity of the new addressEntity.
+     * @param googleMaps the google maps URL of the new addressEntity.
      */
-    public Address(final String address, final String googleMaps) {
+    public AddressEntity(final String address, final String googleMaps) {
         this(address);
         setGoogleMaps(googleMaps);
     }
@@ -73,8 +75,8 @@ public class Address extends Model implements IAddress {
      */
     @Override
     public String toString() {
-        return "Address{" + super.toString() +
-                ", address='" + getAddress() + '\'' +
+        return "AddressEntity{" + super.toString() +
+                ", addressEntity='" + getAddress() + '\'' +
                 ", googleMaps='" + getGoogleMaps() + '\'' +
                 '}';
     }
@@ -90,7 +92,7 @@ public class Address extends Model implements IAddress {
     public boolean equals(Object object) {
         boolean result = super.equals(object);
         if (result) {
-            final Address other = (Address) object;
+            final AddressEntity other = (AddressEntity) object;
             result = this.getAddress().equalsIgnoreCase(other.getAddress()) &&
                     this.getGoogleMaps().equalsIgnoreCase(other.getGoogleMaps());
         }
@@ -115,50 +117,47 @@ public class Address extends Model implements IAddress {
      * @return A clone of this instance (newer null).
      */
     @Override
-    public Address clone() {
-        return (Address) super.clone();
+    public AddressEntity clone() {
+        return (AddressEntity) super.clone();
     }
 
     /**
-     * Returns a mailing address of the address.
+     * Returns a mailing addressEntity of the addressEntity.
      *
-     * @return The mailing address or empty string (newer null).
+     * @return The mailing addressEntity or empty string (newer null).
      */
-    @Override
     public String getAddress() {
         return this.address;
     }
 
     /**
-     * Sets a new mailing address to the address.
-     * If parameter address is blank, then sets empty string.
+     * Sets a new mailing addressEntity to the addressEntity.
+     * If parameter addressEntity is blank, then sets empty string.
      * <pre>
-     *     setAddress(null) - address = ""
-     *     setAddress("") - address = ""
-     *     setAddress(" ") - address = ""
-     *     setAddress("bob") - address = "bob"
-     *     setAddress(" bob ") - address = " bob "
+     *     setAddressEntity(null) - addressEntity = ""
+     *     setAddressEntity("") - addressEntity = ""
+     *     setAddressEntity(" ") - addressEntity = ""
+     *     setAddressEntity("bob") - addressEntity = "bob"
+     *     setAddressEntity(" bob ") - addressEntity = " bob "
      * </pre>
      *
-     * @param address the new mailing address to the address.
+     * @param address the new mailing addressEntity to the addressEntity.
      */
-    @Override
     public void setAddress(final String address) {
         this.address = isNotEmpty(address) ? address : "";
     }
 
     /**
-     * Returns a Google maps URL of the address.
+     * Returns a Google maps URL of the addressEntity.
      *
      * @return The Google maps URL or empty string (newer null).
      */
-    @Override
     public String getGoogleMaps() {
         return this.googleMaps;
     }
 
     /**
-     * Sets a new Google maps URL to the address.
+     * Sets a new Google maps URL to the addressEntity.
      * If parameter google maps URL is blank, then sets empty string.
      * <pre>
      *     setGoogleMaps(null) - googleMaps = ""
@@ -168,32 +167,38 @@ public class Address extends Model implements IAddress {
      *     setGoogleMaps(" bob ") - googleMaps = "bob"
      * </pre>
      *
-     * @param googleMaps the new Google maps URL to the address.
+     * @param googleMaps the new Google maps URL to the addressEntity.
      */
-    @Override
     public void setGoogleMaps(final String googleMaps) {
         this.googleMaps = isNotEmpty(googleMaps) ? googleMaps : "";
     }
 
     /**
-     * Initializes the address.
-     * Returns this address with a new copied fields.
+     * Initializes the addressEntity.
+     * Returns this addressEntity with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this address
-     *     initialize(new Address()) - does nothing, returns this
-     *     address with a new copied fields
+     *     initialize(null) - does nothing, returns this addressEntity
+     *     initialize(new AddressEntity()) - does nothing, returns this
+     *     addressEntity with a new copied fields
      * </pre>
      *
-     * @param address the address to copy.
-     * @return This address with a new copied fields (newer null).
+     * @param addressEntity the addressEntity to copy.
+     * @return This addressEntity with a new copied fields (newer null).
      */
-    @Override
-    public Address initialize(final Address address) {
-        if (isNotNull(address)) {
-            super.initialize(address);
-            this.setAddress(address.getAddress());
-            this.setGoogleMaps(address.getGoogleMaps());
+    public AddressEntity initialize(final AddressEntity addressEntity) {
+        if (isNotNull(addressEntity)) {
+            super.initialize(addressEntity);
+            this.setAddress(addressEntity.getAddress());
+            this.setGoogleMaps(addressEntity.getGoogleMaps());
         }
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Address convert() {
+        return new AddressEntityConverter(this).convert();
     }
 }

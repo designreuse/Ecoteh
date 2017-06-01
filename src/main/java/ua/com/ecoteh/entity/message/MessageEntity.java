@@ -1,7 +1,9 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.message;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ua.com.ecoteh.entity.model.ModelEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
@@ -13,13 +15,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
- * with entity of the {@link Message} class.
+ * with entity of the {@link MessageEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Entity
 @Table(name = "messages")
-public class Message extends Model implements IMessage {
+public class MessageEntity extends ModelEntity {
 
     /**
      * It is used during deserialization to verify that
@@ -30,7 +32,7 @@ public class Message extends Model implements IMessage {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The message user.
+     * The messageEntity userEntity.
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -41,22 +43,22 @@ public class Message extends Model implements IMessage {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private User user;
+    private UserEntity userEntity;
 
     /**
-     * The subject of a message.
+     * The subject of a messageEntity.
      */
     @Column(name = "subject", nullable = false)
     private String subject;
 
     /**
-     * The text of a message.
+     * The text of a messageEntity.
      */
     @Column(name = "text", nullable = false)
     private String text;
 
     /**
-     * The date of created message.
+     * The date of created messageEntity.
      */
     @Column(name = "date", nullable = false)
     private Date date;
@@ -64,8 +66,8 @@ public class Message extends Model implements IMessage {
     /**
      * Default constructor.
      */
-    public Message() {
-        this.user = new User();
+    public MessageEntity() {
+        this.userEntity = new UserEntity();
         this.subject = "";
         this.text = "";
         this.date = new Date();
@@ -74,17 +76,17 @@ public class Message extends Model implements IMessage {
     /**
      * Constructor.
      *
-     * @param user    the message user.
-     * @param subject the subject of a new message.
-     * @param text    the text of a new message.
+     * @param userEntity the messageEntity userEntity.
+     * @param subject    the subject of a new messageEntity.
+     * @param text       the text of a new messageEntity.
      */
-    public Message(
-            final User user,
+    public MessageEntity(
+            final UserEntity userEntity,
             final String subject,
             final String text
     ) {
         this();
-        setUser(user);
+        setUserEntity(userEntity);
         setSubject(subject);
         setText(text);
     }
@@ -96,8 +98,8 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public String toString() {
-        return "Message{" + super.toString() +
-                ", user=" + getUser() +
+        return "MessageEntity{" + super.toString() +
+                ", userEntity=" + getUserEntity() +
                 ", subject='" + getSubject() + '\'' +
                 ", text='" + getText() + '\'' +
                 ", date=" + getDate() +
@@ -115,8 +117,8 @@ public class Message extends Model implements IMessage {
     public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
-            final Message other = (Message) object;
-            result = this.getUser().equals(other.getUser()) &&
+            final MessageEntity other = (MessageEntity) object;
+            result = this.getUserEntity().equals(other.getUserEntity()) &&
                     this.getSubject().equalsIgnoreCase(other.getSubject()) &&
                     this.getText().equalsIgnoreCase(other.getText());
         }
@@ -132,7 +134,7 @@ public class Message extends Model implements IMessage {
      */
     @Override
     public int hashCode() {
-        return getUser().hashCode() +
+        return getUserEntity().hashCode() +
                 getSubject().hashCode() +
                 getText().hashCode();
     }
@@ -143,47 +145,44 @@ public class Message extends Model implements IMessage {
      * @return A clone of this instance (newer null).
      */
     @Override
-    public Message clone() {
-        final Message message = (Message) super.clone();
-        message.setUser(getUser().clone());
-        return message;
+    public MessageEntity clone() {
+        final MessageEntity messageEntity = (MessageEntity) super.clone();
+        messageEntity.setUserEntity(getUserEntity().clone());
+        return messageEntity;
     }
 
     /**
-     * Returns a user of the message.
+     * Returns a userEntity of the messageEntity.
      *
-     * @return The user of the message (newer null).
+     * @return The userEntity of the messageEntity (newer null).
      */
-    @Override
-    public User getUser() {
-        return this.user;
+    public UserEntity getUserEntity() {
+        return this.userEntity;
     }
 
     /**
-     * Sets a user of the message.
+     * Sets a userEntity of the messageEntity.
      *
-     * @param user the user of the message.
+     * @param userEntity the userEntity of the messageEntity.
      */
-    @Override
-    public void setUser(final User user) {
-        if (isNull(this.user)) {
-            this.user = new User();
+    public void setUserEntity(final UserEntity userEntity) {
+        if (isNull(this.userEntity)) {
+            this.userEntity = new UserEntity();
         }
-        this.user.initialize(user);
+        this.userEntity.initialize(userEntity);
     }
 
     /**
-     * Returns a subject of the message.
+     * Returns a subject of the messageEntity.
      *
-     * @return The message subject or empty string (newer null).
+     * @return The messageEntity subject or empty string (newer null).
      */
-    @Override
     public String getSubject() {
         return this.subject;
     }
 
     /**
-     * Sets a new subject to the message.
+     * Sets a new subject to the messageEntity.
      * If parameter subject is blank, then sets empty string.
      * <pre>
      *     setSubject(null) - subject = ""
@@ -193,25 +192,23 @@ public class Message extends Model implements IMessage {
      *     setSubject(" bob ") - subject = "bob"
      * </pre>
      *
-     * @param subject a new subject to the message.
+     * @param subject a new subject to the messageEntity.
      */
-    @Override
     public void setSubject(final String subject) {
         this.subject = isNotEmpty(subject) ? subject : "";
     }
 
     /**
-     * Returns a text of the message.
+     * Returns a text of the messageEntity.
      *
-     * @return The message text or empty string (newer null).
+     * @return The messageEntity text or empty string (newer null).
      */
-    @Override
     public String getText() {
         return this.text;
     }
 
     /**
-     * Sets a new text to the message.
+     * Sets a new text to the messageEntity.
      * If parameter text is blank, then sets empty string.
      * <pre>
      *     setText(null) - text = ""
@@ -221,34 +218,31 @@ public class Message extends Model implements IMessage {
      *     setText(" bob ") - text = "bob"
      * </pre>
      *
-     * @param text a new text to the message.
+     * @param text a new text to the messageEntity.
      */
-    @Override
     public void setText(final String text) {
         this.text = isNotEmpty(text) ? text : "";
     }
 
     /**
-     * Returns a date of the message.
+     * Returns a date of the messageEntity.
      *
-     * @return The message date (newer null).
+     * @return The messageEntity date (newer null).
      */
-    @Override
     public Date getDate() {
         return this.date;
     }
 
     /**
-     * Sets a new date to the message.
+     * Sets a new date to the messageEntity.
      * If parameter date is null, then sets new Date().
      * <pre>
      *     setDate(null) - date = new Date()
      *     setDate(someRealDate) - date = someRealDate
      * </pre>
      *
-     * @param date the new date to the message.
+     * @param date the new date to the messageEntity.
      */
-    @Override
     public void setDate(final Date date) {
         this.date = isNotNull(date) ? date : new Date();
     }
@@ -256,34 +250,40 @@ public class Message extends Model implements IMessage {
     /**
      * Returns an article date in string format.
      *
-     * @return The message string-date (newer null).
+     * @return The messageEntity string-date (newer null).
      */
-    @Override
     public String getDateToString() {
         return Time.getDate(getDate());
     }
 
     /**
-     * Initializes the message.
-     * Returns this message with a new copied fields.
+     * Initializes the messageEntity.
+     * Returns this messageEntity with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this message
-     *     initialize(new Message()) - does nothing, returns this
-     *     message with a new copied fields
+     *     initialize(null) - does nothing, returns this messageEntity
+     *     initialize(new MessageEntity()) - does nothing, returns this
+     *     messageEntity with a new copied fields
      * </pre>
      *
-     * @param message the message to copy.
-     * @return This message with new fields (newer null).
+     * @param messageEntity the messageEntity to copy.
+     * @return This messageEntity with new fields (newer null).
      */
-    @Override
-    public Message initialize(final Message message) {
-        if (isNotNull(message)) {
-            super.initialize(message);
-            this.setUser(message.getUser());
-            this.setSubject(message.getSubject());
-            this.setText(message.getText());
-            this.setDate(message.getDate());
+    public MessageEntity initialize(final MessageEntity messageEntity) {
+        if (isNotNull(messageEntity)) {
+            super.initialize(messageEntity);
+            this.setUserEntity(messageEntity.getUserEntity());
+            this.setSubject(messageEntity.getSubject());
+            this.setText(messageEntity.getText());
+            this.setDate(messageEntity.getDate());
         }
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Message convert() {
+        return new MessageEntityConverter(this).convert();
     }
 }

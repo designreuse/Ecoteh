@@ -1,6 +1,6 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.file;
 
-import ua.com.ecoteh.enums.FileType;
+import ua.com.ecoteh.entity.model.ModelEntity;
 import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
@@ -9,13 +9,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of standard methods for working
- * with entity of the {@link File} class.
+ * with entity of the {@link FileEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Entity
 @Table(name = "files")
-public class File extends Model implements IFile {
+public class FileEntity extends ModelEntity {
 
     /**
      * It is used during deserialization to verify that
@@ -26,19 +26,19 @@ public class File extends Model implements IFile {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The title of a file.
+     * The title of a fileEntity.
      */
     @Column(name = "title", nullable = false)
     private String title;
 
     /**
-     * The URL of a file.
+     * The URL of a fileEntity.
      */
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
     /**
-     * The type of a file.
+     * The type of a fileEntity.
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
@@ -47,7 +47,7 @@ public class File extends Model implements IFile {
     /**
      * Default constructor.
      */
-    public File() {
+    public FileEntity() {
         this.title = "";
         this.url = "";
         this.type = FileType.ANOTHER;
@@ -57,9 +57,9 @@ public class File extends Model implements IFile {
     /**
      * Constructor.
      *
-     * @param title the title of a new file.
+     * @param title the title of a new fileEntity.
      */
-    public File(final String title) {
+    public FileEntity(final String title) {
         this();
         setTitle(title);
     }
@@ -67,10 +67,10 @@ public class File extends Model implements IFile {
     /**
      * Constructor.
      *
-     * @param title the title of a new file.
-     * @param url   the URL of a new file.
+     * @param title the title of a new fileEntity.
+     * @param url   the URL of a new fileEntity.
      */
-    public File(
+    public FileEntity(
             final String title,
             final String url
     ) {
@@ -82,11 +82,11 @@ public class File extends Model implements IFile {
     /**
      * Constructor.
      *
-     * @param title the title of a new file.
-     * @param url   the URL of a new file.
-     * @param type  the type of a new file.
+     * @param title the title of a new fileEntity.
+     * @param url   the URL of a new fileEntity.
+     * @param type  the type of a new fileEntity.
      */
-    public File(
+    public FileEntity(
             final String title,
             final String url,
             final FileType type
@@ -102,7 +102,7 @@ public class File extends Model implements IFile {
      */
     @Override
     public String toString() {
-        return "File{" + super.toString() +
+        return "FileEntity{" + super.toString() +
                 ", title='" + getTitle() + '\'' +
                 ", type='" + getType() + '\'' +
                 ", url='" + getUrl() + '\'' +
@@ -120,7 +120,7 @@ public class File extends Model implements IFile {
     public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
-            final File other = (File) object;
+            final FileEntity other = (FileEntity) object;
             result = this.getTitle().equalsIgnoreCase(other.getTitle()) &&
                     this.getUrl().equalsIgnoreCase(other.getUrl());
         }
@@ -145,22 +145,21 @@ public class File extends Model implements IFile {
      * @return A clone of this instance (newer null).
      */
     @Override
-    public File clone() {
-        return (File) super.clone();
+    public FileEntity clone() {
+        return (FileEntity) super.clone();
     }
 
     /**
-     * Returns a title of the file.
+     * Returns a title of the fileEntity.
      *
-     * @return The file title or empty string (newer null).
+     * @return The fileEntity title or empty string (newer null).
      */
-    @Override
     public String getTitle() {
         return this.title;
     }
 
     /**
-     * Sets a new title to the file.
+     * Sets a new title to the fileEntity.
      * If parameter title is blank, then sets empty string.
      * Also title translates and sets to URL if this URL is empty.
      * <pre>
@@ -171,9 +170,8 @@ public class File extends Model implements IFile {
      *     setTitle(" bob ") - title = "bob"
      * </pre>
      *
-     * @param title the new title to the file.
+     * @param title the new title to the fileEntity.
      */
-    @Override
     public void setTitle(final String title) {
         this.title = isNotEmpty(title) ? title : "";
         if (isEmpty(this.url)) {
@@ -182,17 +180,16 @@ public class File extends Model implements IFile {
     }
 
     /**
-     * Returns a URL of the file.
+     * Returns a URL of the fileEntity.
      *
-     * @return The file URL or empty string (newer null).
+     * @return The fileEntity URL or empty string (newer null).
      */
-    @Override
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Sets a new URL to the file.
+     * Sets a new URL to the fileEntity.
      * If parameter URL is blank, then sets empty string.
      * <pre>
      *     setUrl(null) - url = ""
@@ -202,46 +199,42 @@ public class File extends Model implements IFile {
      *     setUrl(" bob ") - url = "bob"
      * </pre>
      *
-     * @param url the new URL to the file.
+     * @param url the new URL to the fileEntity.
      */
-    @Override
     public void setUrl(final String url) {
         this.url = isNotEmpty(url) ? url : "";
     }
 
     /**
-     * Returns a file type.
+     * Returns a fileEntity type.
      * Returns a enum object of the {@link FileType} class.
      *
-     * @return The file type (newer null).
+     * @return The fileEntity type (newer null).
      */
-    @Override
     public FileType getType() {
         return this.type;
     }
 
     /**
-     * Sets a new type to the file.
+     * Sets a new type to the fileEntity.
      * Sets default type if incoming type is null.
      * <pre>
      *     setType(null) - type = FileType.OTHER
      *     setType(FileType.SLIDE) - type = FileType.SLIDE
      * </pre>
      *
-     * @param type the new file type.
+     * @param type the new fileEntity type.
      */
-    @Override
     public void setType(final FileType type) {
         this.type = isNotNull(type) ? type : FileType.ANOTHER;
     }
 
     /**
-     * Translates and sets a new URL to the file.
+     * Translates and sets a new URL to the fileEntity.
      * If parameter URL is blank, then sets empty string.
      *
      * @param url the URL to translate and set.
      */
-    @Override
     public void translateAndSetUrl(final String url) {
         String newUrl = null;
         if (isNotEmpty(url)) {
@@ -255,46 +248,53 @@ public class File extends Model implements IFile {
     }
 
     /**
-     * Initializes the file.
-     * Returns this file with a new copied fields.
+     * Initializes the fileEntity.
+     * Returns this fileEntity with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this file
-     *     initialize(new File()) - does nothing, returns this
-     *     file with a new copied fields
+     *     initialize(null) - does nothing, returns this fileEntity
+     *     initialize(new FileEntity()) - does nothing, returns this
+     *     fileEntity with a new copied fields
      * </pre>
      *
-     * @param file the file to copy.
-     * @return This file with new fields (newer null).
+     * @param fileEntity the fileEntity to copy.
+     * @return This fileEntity with new fields (newer null).
      */
-    @Override
-    public File initialize(final File file) {
-        if (isNotEmptyFile(file)) {
-            super.initialize(file);
-            this.setTitle(file.getTitle());
+    public FileEntity initialize(final FileEntity fileEntity) {
+        if (isNotEmptyFile(fileEntity)) {
+            super.initialize(fileEntity);
+            this.setTitle(fileEntity.getTitle());
             if (!isStaticFile()) {
-                this.setUrl(file.getUrl());
+                this.setUrl(fileEntity.getUrl());
             }
-            this.setType(file.getType());
+            this.setType(fileEntity.getType());
         }
         return this;
     }
 
     /**
-     * Checks this file if it has STATIC file type.
      *
-     * @return true if this file has STATIC type, false otherwise.
+     * @return
+     */
+    public File convert() {
+        return new FileEntityConverter(this).convert();
+    }
+
+    /**
+     * Checks this fileEntity if it has STATIC fileEntity type.
+     *
+     * @return true if this fileEntity has STATIC type, false otherwise.
      */
     private boolean isStaticFile() {
         return this.getType().equals(FileType.STATIC);
     }
 
     /**
-     * Checks the incoming file is not empty.
+     * Checks the incoming fileEntity is not empty.
      *
-     * @param file the file to check
-     * @return true if the file is not empty, false otherwise.
+     * @param fileEntity the fileEntity to check
+     * @return true if the fileEntity is not empty, false otherwise.
      */
-    private static boolean isNotEmptyFile(final File file) {
-        return isNotNull(file) && isNotEmpty(file.getTitle()) && isNotEmpty(file.getUrl());
+    private static boolean isNotEmptyFile(final FileEntity fileEntity) {
+        return isNotNull(fileEntity) && isNotEmpty(fileEntity.getTitle()) && isNotEmpty(fileEntity.getUrl());
     }
 }

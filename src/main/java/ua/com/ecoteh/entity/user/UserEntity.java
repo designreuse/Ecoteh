@@ -1,11 +1,13 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.user;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.contacts.ContactsEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.model.ModelEntity;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 import ua.com.ecoteh.util.translator.Translator;
 
@@ -18,13 +20,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of standard methods for working
- * with entity of the {@link User} class.
+ * with entity of the {@link UserEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Entity
 @Table(name = "users")
-public class User extends Model implements IUser, UserDetails {
+public class UserEntity extends ModelEntity implements UserDetails {
 
     /**
      * It is used during deserialization to verify that
@@ -35,37 +37,37 @@ public class User extends Model implements IUser, UserDetails {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The name of a user.
+     * The name of a userEntity.
      */
     @Column(name = "name", nullable = false)
     private String name;
 
     /**
-     * The URL of a user.
+     * The URL of a userEntity.
      */
     @Column(name = "url", nullable = false)
     private String url;
 
     /**
-     * The login of a user.
+     * The login of a userEntity.
      */
     @Column(name = "login", nullable = false)
     private String encryptedLogin;
 
     /**
-     * The password of a user.
+     * The password of a userEntity.
      */
     @Column(name = "password", nullable = false)
     private String encryptedPassword;
 
     /**
-     * The tagline of a user.
+     * The tagline of a userEntity.
      */
     @Column(name = "description", nullable = false)
     private String description;
 
     /**
-     * The user contacts.
+     * The userEntity contactsEntity.
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -76,10 +78,10 @@ public class User extends Model implements IUser, UserDetails {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private Contacts contacts;
+    private ContactsEntity contactsEntity;
 
     /**
-     * The user contacts.
+     * The userEntity contactsEntity.
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -90,23 +92,23 @@ public class User extends Model implements IUser, UserDetails {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private File photo;
+    private FileEntity photo;
 
     /**
-     * The role of a user.
+     * The role of a userEntity.
      */
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
     /**
-     * The permit to send a letters on the user email.
+     * The permit to send a letters on the userEntity email.
      */
     @Column(name = "mailing")
     private boolean mailing;
 
     /**
-     * Locked the user or not.
+     * Locked the userEntity or not.
      */
     @Column(name = "locked")
     private boolean locked;
@@ -114,24 +116,24 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Default constructor.
      */
-    public User() {
+    public UserEntity() {
         this.name = "";
         this.url = "";
         this.encryptedLogin = "";
         this.encryptedPassword = "";
         this.description = "";
-        this.photo = new File();
-        this.contacts = new Contacts();
+        this.photo = new FileEntity();
+        this.contactsEntity = new ContactsEntity();
         this.role = UserRole.ANOTHER;
     }
 
     /**
      * Constructor.
      *
-     * @param name        the name of a new user.
-     * @param description the description of a new user.
+     * @param name        the name of a new userEntity.
+     * @param description the description of a new userEntity.
      */
-    public User(
+    public UserEntity(
             final String name,
             final String description
     ) {
@@ -143,32 +145,32 @@ public class User extends Model implements IUser, UserDetails {
     /**
      * Constructor.
      *
-     * @param name        the name of a new user.
-     * @param description the description of a new user.
-     * @param contacts    the contacts to a new user.
+     * @param name        the name of a new userEntity.
+     * @param description the description of a new userEntity.
+     * @param contactsEntity    the contactsEntity to a new userEntity.
      */
-    public User(
+    public UserEntity(
             final String name,
             final String description,
-            final Contacts contacts
+            final ContactsEntity contactsEntity
     ) {
         this(name, description);
-        setContacts(contacts);
+        setContactsEntity(contactsEntity);
     }
 
     /**
      * Constructor.
      *
-     * @param name     the name of a new user.
-     * @param contacts the contacts to a new user.
+     * @param name     the name of a new userEntity.
+     * @param contactsEntity the contactsEntity to a new userEntity.
      */
-    public User(
+    public UserEntity(
             final String name,
-            final Contacts contacts
+            final ContactsEntity contactsEntity
     ) {
         this();
         setName(name);
-        setContacts(contacts);
+        setContactsEntity(contactsEntity);
     }
 
     /**
@@ -178,7 +180,7 @@ public class User extends Model implements IUser, UserDetails {
      */
     @Override
     public String toString() {
-        return "User{" + super.toString() +
+        return "UserEntity{" + super.toString() +
                 ", name='" + getName() + '\'' +
                 ", url='" + getUrl() + '\'' +
                 ", encryptedLogin='" + getEncryptedLogin() + '\'' +
@@ -186,8 +188,8 @@ public class User extends Model implements IUser, UserDetails {
                 ", Login='" + getLogin() + '\'' +
                 ", Password='" + getPassword() + '\'' +
                 ", description='" + getDescription() + '\'' +
-                ", contacts=" + getContacts() +
-                ", photo=" + getPhoto() +
+                ", contactsEntity=" + getContactsEntity() +
+                ", photoEntity=" + getPhotoEntity() +
                 ", role=" + getRole() +
                 ", isMailing=" + isMailing() +
                 ", isLocked=" + isLocked() +
@@ -205,7 +207,7 @@ public class User extends Model implements IUser, UserDetails {
     public boolean equals(final Object object) {
         boolean result = false;
         if (super.equals(object)) {
-            final User other = (User) object;
+            final UserEntity other = (UserEntity) object;
             result = this.getName().equalsIgnoreCase(other.getName()) &&
                     this.getDescription().equalsIgnoreCase(other.getDescription()) &&
                     this.getRole().equals(other.getRole());
@@ -233,18 +235,18 @@ public class User extends Model implements IUser, UserDetails {
      * @return A clone of this instance (newer null).
      */
     @Override
-    public User clone() {
-        final User user = (User) super.clone();
-        user.setContacts(getContacts().clone());
-        user.setPhoto(getPhoto().clone());
-        return user;
+    public UserEntity clone() {
+        final UserEntity userEntity = (UserEntity) super.clone();
+        userEntity.setContactsEntity(getContactsEntity().clone());
+        userEntity.setPhotoEntity(getPhotoEntity().clone());
+        return userEntity;
     }
 
     /**
-     * Indicates whether the user's account has expired.
+     * Indicates whether the userEntity's account has expired.
      * An expired account cannot be authenticated.
      *
-     * @return true if the user's account is valid (ie non-expired),
+     * @return true if the userEntity's account is valid (ie non-expired),
      * false if no longer valid (ie expired)
      */
     @Override
@@ -253,10 +255,10 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Indicates whether the user is locked or unlocked.
-     * A locked user cannot be authenticated.
+     * Indicates whether the userEntity is locked or unlocked.
+     * A locked userEntity cannot be authenticated.
      *
-     * @return true if the user is not locked, false otherwise.
+     * @return true if the userEntity is not locked, false otherwise.
      */
     @Override
     public boolean isAccountNonLocked() {
@@ -264,10 +266,10 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Indicates whether the user's credentials (password) has expired.
+     * Indicates whether the userEntity's credentials (password) has expired.
      * Expired credentials prevent authentication.
      *
-     * @return true if the user's credentials are valid
+     * @return true if the userEntity's credentials are valid
      * (ie non-expired), false if no longer valid (ie expired)
      */
     @Override
@@ -276,10 +278,10 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Indicates whether the user is enabled or disabled.
-     * A disabled user cannot be authenticated.
+     * Indicates whether the userEntity is enabled or disabled.
+     * A disabled userEntity cannot be authenticated.
      *
-     * @return true if the user's credentials are valid
+     * @return true if the userEntity's credentials are valid
      * (ie non-expired), false if no longer valid (ie expired)
      */
     @Override
@@ -288,7 +290,7 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns the authorities granted to the user.
+     * Returns the authorities granted to the userEntity.
      * Cannot return null.
      *
      * @return the authorities, sorted by natural key (never null).
@@ -301,7 +303,7 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns the username used to authenticate the user.
+     * Returns the username used to authenticate the userEntity.
      * Cannot return null. Return the empty string
      * if username is null.
      *
@@ -313,17 +315,16 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Returns a name of the user.
+     * Returns a name of the userEntity.
      *
-     * @return The user name (newer null).
+     * @return The userEntity name (newer null).
      */
-    @Override
     public String getName() {
         return this.name;
     }
 
     /**
-     * Sets a new name to the user.
+     * Sets a new name to the userEntity.
      * If parameter name is blank, then sets empty string.
      * Also, name translates and sets to URL if this URL is empty.
      * <pre>
@@ -334,9 +335,8 @@ public class User extends Model implements IUser, UserDetails {
      *     setName(" bob ") - name = "bob"
      * </pre>
      *
-     * @param name the new name to the user.
+     * @param name the new name to the userEntity.
      */
-    @Override
     public void setName(final String name) {
         this.name = isNotEmpty(name) ? name : "";
         if (isEmpty(this.url)) {
@@ -345,7 +345,7 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Encrypts and sets a new login to the user.
+     * Encrypts and sets a new login to the userEntity.
      * <pre>
      *     setLogin(null) - login = ""
      *     setLogin("") - login = ""
@@ -354,9 +354,8 @@ public class User extends Model implements IUser, UserDetails {
      *     setLogin(" bob ") - login = "bob"
      * </pre>
      *
-     * @param login the new login to the user.
+     * @param login the new login to the userEntity.
      */
-    @Override
     public void setLogin(final String login) {
         setEncryptedLogin(
                 isNotEmpty(login) ? new Base64Encryptor(login).encrypt() : ""
@@ -364,11 +363,10 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Decrypts and returns a login of the user.
+     * Decrypts and returns a login of the userEntity.
      *
-     * @return The user login (newer null).
+     * @return The userEntity login (newer null).
      */
-    @Override
     public String getLogin() {
         return isNotEmpty(this.encryptedLogin) ? new Base64Encryptor(this.encryptedLogin).decrypt() : "";
     }
@@ -378,13 +376,12 @@ public class User extends Model implements IUser, UserDetails {
      *
      * @return The encrypted login (newer null).
      */
-    @Override
     public String getEncryptedLogin() {
         return this.encryptedLogin;
     }
 
     /**
-     * Sets a new encrypted login to the user.
+     * Sets a new encrypted login to the userEntity.
      * If parameter login is blank then sets empty string.
      * <pre>
      *     setEncryptedLogin(null) - encryptedLogin = ""
@@ -394,17 +391,16 @@ public class User extends Model implements IUser, UserDetails {
      *     setEncryptedLogin(" bob ") - encryptedLogin = "bob"
      * </pre>
      *
-     * @param login a new encrypted login to the user.
+     * @param login a new encrypted login to the userEntity.
      */
-    @Override
     public void setEncryptedLogin(final String login) {
         this.encryptedLogin = isNotEmpty(login) ? login : "";
     }
 
     /**
-     * Decrypts and returns a password of the user.
+     * Decrypts and returns a password of the userEntity.
      *
-     * @return The user password (newer null).
+     * @return The userEntity password (newer null).
      */
     @Transient
     @Override
@@ -414,7 +410,7 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Encrypts and sets a new password to the user.
+     * Encrypts and sets a new password to the userEntity.
      * <pre>
      *     setPassword(null) - password = ""
      *     setPassword("") - password = ""
@@ -423,10 +419,9 @@ public class User extends Model implements IUser, UserDetails {
      *     setPassword(" bob ") - password = "bob"
      * </pre>
      *
-     * @param password the new password to the user.
+     * @param password the new password to the userEntity.
      */
     @Transient
-    @Override
     public void setPassword(final String password) {
         setEncryptedPassword(
                 isNotEmpty(password) ? new Base64Encryptor(password).encrypt() : ""
@@ -438,13 +433,12 @@ public class User extends Model implements IUser, UserDetails {
      *
      * @return The encrypted password (newer null).
      */
-    @Override
     public String getEncryptedPassword() {
         return encryptedPassword;
     }
 
     /**
-     * Sets a new encrypted password to the user.
+     * Sets a new encrypted password to the userEntity.
      * If parameter password is blank then sets empty string.
      * <pre>
      *     setEncryptedPassword(null) - encryptedPassword = ""
@@ -454,9 +448,8 @@ public class User extends Model implements IUser, UserDetails {
      *     setEncryptedPassword(" bob ") - encryptedPassword = "bob"
      * </pre>
      *
-     * @param password the new encrypted password to the user.
+     * @param password the new encrypted password to the userEntity.
      */
-    @Override
     public void setEncryptedPassword(final String password) {
         this.encryptedPassword = isNotEmpty(password) ? password : "";
     }
@@ -467,23 +460,21 @@ public class User extends Model implements IUser, UserDetails {
      *
      * @param value the value to translate.
      */
-    @Override
     public void translateAndSetUrl(final String value) {
         setUrl(Translator.fromCyrillicToLatin(value));
     }
 
     /**
-     * Returns a URL of the user.
+     * Returns a URL of the userEntity.
      *
-     * @return The user URL (newer null).
+     * @return The userEntity URL (newer null).
      */
-    @Override
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Sets a new url to the user.
+     * Sets a new url to the userEntity.
      * If parameter url is blank, then sets empty string.
      * <pre>
      *     setUrl(null) - url = ""
@@ -493,25 +484,23 @@ public class User extends Model implements IUser, UserDetails {
      *     setUrl(" bob ") - url = "bob"
      * </pre>
      *
-     * @param url the new url to the user.
+     * @param url the new url to the userEntity.
      */
-    @Override
     public void setUrl(final String url) {
         this.url = isNotEmpty(url) ? url : "";
     }
 
     /**
-     * Returns a description of the user.
+     * Returns a description of the userEntity.
      *
-     * @return The user description (newer null).
+     * @return The userEntity description (newer null).
      */
-    @Override
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Sets a new description to the user.
+     * Sets a new description to the userEntity.
      * If parameter description is blank, then sets empty string.
      * <pre>
      *     setDescription(null) - description = ""
@@ -521,122 +510,111 @@ public class User extends Model implements IUser, UserDetails {
      *     setDescription(" bob ") - description = "bob"
      * </pre>
      *
-     * @param description the new description to the user.
+     * @param description the new description to the userEntity.
      */
-    @Override
     public void setDescription(final String description) {
         this.description = isNotEmpty(description) ? description : "";
     }
 
     /**
-     * Returns a photo of the user.
+     * Returns a photo of the userEntity.
      *
-     * @return The user photo (newer null).
+     * @return The userEntity photo (newer null).
      */
-    @Override
-    public File getPhoto() {
+    public FileEntity getPhotoEntity() {
         return this.photo;
     }
 
     /**
-     * Sets a new photo to the user.
+     * Sets a new photo to the userEntity.
      *
-     * @param photo the new photo to the user.
+     * @param photo the new photo to the userEntity.
      */
-    @Override
-    public void setPhoto(final File photo) {
+    public void setPhotoEntity(final FileEntity photo) {
         if (isNull(this.photo)) {
-            this.photo = new File();
+            this.photo = new FileEntity();
         }
         this.photo.initialize(photo);
     }
 
     /**
-     * Returns a user contacts.
+     * Returns a userEntity contactsEntity.
      *
-     * @return The user contacts (newer null).
+     * @return The userEntity contactsEntity (newer null).
      */
-    @Override
-    public Contacts getContacts() {
-        return this.contacts;
+    public ContactsEntity getContactsEntity() {
+        return this.contactsEntity;
     }
 
     /**
-     * Sets a new contacts to the user.
+     * Sets a new contactsEntity to the userEntity.
      *
-     * @param contacts the new contacts to the user.
+     * @param contactsEntity the new contactsEntity to the userEntity.
      */
-    @Override
-    public void setContacts(final Contacts contacts) {
-        if (isNull(this.contacts)) {
-            this.contacts = new Contacts();
+    public void setContactsEntity(final ContactsEntity contactsEntity) {
+        if (isNull(this.contactsEntity)) {
+            this.contactsEntity = new ContactsEntity();
         }
-        this.contacts.initialize(contacts);
+        this.contactsEntity.initialize(contactsEntity);
     }
 
     /**
-     * Returns a role of the user.
+     * Returns a role of the userEntity.
      *
-     * @return The user role (newer null).
+     * @return The userEntity role (newer null).
      */
-    @Override
     public UserRole getRole() {
         return this.role;
     }
 
     /**
-     * Sets a new role to the user.
+     * Sets a new role to the userEntity.
      * Sets default role if incoming role is null.
      * <pre>
      *     setRole(null) - role = UserRole.ANOTHER
      *     setRole(UserRole.ADMIN) - role = UserRole.ADMIN
      * </pre>
      *
-     * @param role the new role to the user.
+     * @param role the new role to the userEntity.
      */
-    @Override
     public void setRole(final UserRole role) {
         this.role = isNotNull(role) ? role : UserRole.ANOTHER;
     }
 
     /**
-     * Returns the value of permit to send a letters on the user email.
+     * Returns the value of permit to send a letters on the userEntity email.
      *
-     * @return The permit to send a letters on the user email.
+     * @return The permit to send a letters on the userEntity email.
      */
-    @Override
     public boolean isMailing() {
         return this.mailing;
     }
 
     /**
-     * Sets value of permit to send a letters on the user email.
+     * Sets value of permit to send a letters on the userEntity email.
      *
-     * @param mailing the permit to send a letters on the user email.
+     * @param mailing the permit to send a letters on the userEntity email.
      */
-    @Override
     public void setMailing(final boolean mailing) {
         this.mailing = mailing;
     }
 
     /**
-     * Returns the value of the locked user or not.
+     * Returns the value of the locked userEntity or not.
      *
-     * @return The value of the locked user or not.
+     * @return The value of the locked userEntity or not.
      */
-    @Override
     public boolean isLocked() {
         return this.locked;
     }
 
     /**
-     * Sets the value of the locked user or not.
+     * Sets the value of the locked userEntity or not.
      * If incoming value is true then, also,
      * set validated and mailing false.
      *
-     * @param locked a value of locked the user or not.
+     * @param locked a value of locked the userEntity or not.
      */
-    @Override
     public void setLocked(final boolean locked) {
         this.locked = locked;
         if (locked) {
@@ -646,32 +624,39 @@ public class User extends Model implements IUser, UserDetails {
     }
 
     /**
-     * Initializes the user.
+     * Initializes the userEntity.
      * Returns this v with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this user
-     *     initialize(new User()) - does nothing, returns this
-     *     user with a new copied fields
+     *     initialize(null) - does nothing, returns this userEntity
+     *     initialize(new UserEntity()) - does nothing, returns this
+     *     userEntity with a new copied fields
      * </pre>
      *
-     * @param user the user to copy.
-     * @return The this user with a new fields (newer null).
+     * @param userEntity the userEntity to copy.
+     * @return The this userEntity with a new fields (newer null).
      */
-    @Override
-    public User initialize(final User user) {
-        if (isNotNull(user)) {
-            this.setName(user.getName());
-            this.setUrl(user.getUrl());
-            this.setEncryptedLogin(user.getEncryptedLogin());
-            this.setEncryptedPassword(user.getEncryptedPassword());
-            this.setDescription(user.getDescription());
-            this.setPhoto(user.getPhoto());
-            this.setRole(user.getRole());
-            this.setMailing(user.isMailing());
-            this.setLocked(user.isLocked());
-            this.setValidated(user.isValidated());
-            this.setContacts(user.getContacts());
+    public UserEntity initialize(final UserEntity userEntity) {
+        if (isNotNull(userEntity)) {
+            this.setName(userEntity.getName());
+            this.setUrl(userEntity.getUrl());
+            this.setEncryptedLogin(userEntity.getEncryptedLogin());
+            this.setEncryptedPassword(userEntity.getEncryptedPassword());
+            this.setDescription(userEntity.getDescription());
+            this.setPhotoEntity(userEntity.getPhotoEntity());
+            this.setRole(userEntity.getRole());
+            this.setMailing(userEntity.isMailing());
+            this.setLocked(userEntity.isLocked());
+            this.setValidated(userEntity.isValidated());
+            this.setContactsEntity(userEntity.getContactsEntity());
         }
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public User convert() {
+        return new UserEntityConverter(this).convert();
     }
 }

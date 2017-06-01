@@ -1,4 +1,4 @@
-package ua.com.ecoteh.entity;
+package ua.com.ecoteh.entity.model;
 
 import org.apache.log4j.Logger;
 
@@ -9,13 +9,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The abstract superclass implements a set of standard methods
- * for working with entity of the {@link Model} class or subclasses.
+ * for working with entity of the {@link ModelEntity} class or subclasses.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Model implements IModel, Serializable, Cloneable {
+public abstract class ModelEntity implements Serializable, Cloneable {
 
     /**
      * It is used during deserialization to verify that
@@ -28,7 +28,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     /**
      * The object for logging information.
      */
-    private static final Logger LOGGER = Logger.getLogger(Model.class);
+    private static final Logger LOGGER = Logger.getLogger(ModelEntity.class);
 
     /**
      * The unique identifier for each object.
@@ -39,17 +39,10 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     private long id;
 
     /**
-     * The value of validations of the model.
+     * The value of validations of the modelEntity.
      */
     @Column(name = "validated")
     private boolean validated;
-
-    /**
-     * Default constructor.
-     */
-    public Model() {
-        this.validated = false;
-    }
 
     /**
      * Returns a string representation of the object.
@@ -58,7 +51,7 @@ public abstract class Model implements IModel, Serializable, Cloneable {
      */
     @Override
     public String toString() {
-        return "Model{" +
+        return "ModelEntity{" +
                 "id=" + getId() +
                 ", validated=" + isValidated() +
                 '}';
@@ -70,14 +63,14 @@ public abstract class Model implements IModel, Serializable, Cloneable {
      * @return A clone of this instance (newer null).
      */
     @Override
-    public Model clone() {
-        Model model = null;
+    public ModelEntity clone() {
+        ModelEntity modelEntity = null;
         try {
-            model = (Model) super.clone();
+            modelEntity = (ModelEntity) super.clone();
         } catch (CloneNotSupportedException ex) {
             LOGGER.error(ex.getMessage(), ex);
         }
-        return model;
+        return modelEntity;
     }
 
     /**
@@ -93,62 +86,57 @@ public abstract class Model implements IModel, Serializable, Cloneable {
     }
 
     /**
-     * Returns a unique identifier of the model.
+     * Returns a unique identifier of the modelEntity.
      *
      * @return The unique identifier.
      */
-    @Override
     public long getId() {
         return this.id;
     }
 
     /**
-     * Sets new identifier to the model.
+     * Sets new identifier to the modelEntity.
      *
-     * @param id a new identifier to the model.
+     * @param id a new identifier to the modelEntity.
      */
-    @Override
     public void setId(final long id) {
         this.id = id;
     }
 
     /**
-     * Sets validations of the model.
-     * Sets true if the model is valid, false is invalid.
+     * Sets validations of the modelEntity.
+     * Sets true if the modelEntity is valid, false is invalid.
      *
-     * @param validated a validations of the model.
+     * @param validated a validations of the modelEntity.
      */
-    @Override
     public void setValidated(final boolean validated) {
         this.validated = validated;
     }
 
     /**
-     * Validates the model.
+     * Validates the modelEntity.
      *
-     * @return true if the model is valid, false otherwise.
+     * @return true if the modelEntity is valid, false otherwise.
      */
-    @Override
     public boolean isValidated() {
         return this.validated;
     }
 
     /**
-     * Initializes the model.
-     * Returns this model with a new copied fields.
+     * Initializes the modelEntity.
+     * Returns this modelEntity with a new copied fields.
      * <pre>
-     *     initialize(null) - does nothing, returns this model
-     *     initialize(new Model()) - does nothing, returns this
-     *     model with a new copied fields
+     *     initialize(null) - does nothing, returns this modelEntity
+     *     initialize(new ModelEntity()) - does nothing, returns this
+     *     modelEntity with a new copied fields
      * </pre>
      *
-     * @param model the model to copy.
-     * @return This model with a new copied fields (newer null).
+     * @param modelEntity the modelEntity to copy.
+     * @return This modelEntity with a new copied fields (newer null).
      */
-    @Override
-    public Model initialize(final Model model) {
-        if (isNotNull(model)) {
-            this.setValidated(model.isValidated());
+    public ModelEntity initialize(final ModelEntity modelEntity) {
+        if (isNotNull(modelEntity)) {
+            this.setValidated(modelEntity.isValidated());
         }
         return this;
     }
