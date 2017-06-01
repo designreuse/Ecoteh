@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.sender;
 
-import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.util.sender.EmailSender;
 import org.springframework.stereotype.Service;
 
@@ -77,12 +77,12 @@ public final class SenderServiceImpl implements SenderService {
             final String subject,
             final String text,
             final String recipientEmail,
-            final User sender
+            final UserEntity sender
     ) {
         if (isNotNull(sender)) {
             send(
                     subject, text, recipientEmail,
-                    sender.getContacts().getEmail(), sender.getPassword()
+                    sender.getContactsEntity().getEmail(), sender.getPassword()
             );
         }
     }
@@ -100,12 +100,12 @@ public final class SenderServiceImpl implements SenderService {
             final String subject,
             final String text,
             final String[] recipientEmails,
-            final User sender
+            final UserEntity sender
     ) {
         if (isNotNull(sender)) {
             send(
                     subject, text, recipientEmails,
-                    sender.getContacts().getEmail(), sender.getPassword()
+                    sender.getContactsEntity().getEmail(), sender.getPassword()
             );
         }
     }
@@ -122,11 +122,11 @@ public final class SenderServiceImpl implements SenderService {
     public void send(
             final String subject,
             final String text,
-            final User recipient,
-            final User sender
+            final UserEntity recipient,
+            final UserEntity sender
     ) {
         if (isMailingRecipient(recipient)) {
-            send(subject, text, recipient.getContacts().getEmail(), sender);
+            send(subject, text, recipient.getContactsEntity().getEmail(), sender);
         }
     }
 
@@ -142,11 +142,11 @@ public final class SenderServiceImpl implements SenderService {
     public void send(
             final String subject,
             final String text,
-            final Collection<User> recipients,
-            final User sender
+            final Collection<UserEntity> recipients,
+            final UserEntity sender
     ) {
         if (isNotEmpty(recipients)) {
-            for (User recipient : recipients) {
+            for (UserEntity recipient : recipients) {
                 send(subject, text, recipient, sender);
             }
         }
@@ -165,7 +165,7 @@ public final class SenderServiceImpl implements SenderService {
     public void send(
             final String subject,
             final String text,
-            final Collection<User> recipients,
+            final Collection<UserEntity> recipients,
             final String senderEmail,
             final String senderEmailPass
     ) {
@@ -174,7 +174,7 @@ public final class SenderServiceImpl implements SenderService {
                     .filter(this::isMailingRecipient)
                     .forEach(
                             recipient -> send(
-                                    subject, text, recipient.getContacts().getEmail(),
+                                    subject, text, recipient.getContactsEntity().getEmail(),
                                     senderEmail, senderEmailPass
                             )
                     );
@@ -187,7 +187,7 @@ public final class SenderServiceImpl implements SenderService {
      * <pre>
      *     isMailingRecipient(null) = false
      *
-     *     User recipient = new User();
+     *     UserEntity recipient = new UserEntity();
      *     recipient.setMailing(false);
      *     isMailingRecipient(model) = false
      *
@@ -198,7 +198,7 @@ public final class SenderServiceImpl implements SenderService {
      * @param recipient the recipient to check.
      * @return true if the recipient is not null and it is mailing.
      */
-    private boolean isMailingRecipient(final User recipient) {
+    private boolean isMailingRecipient(final UserEntity recipient) {
         return isNotNull(recipient) && recipient.isMailing();
     }
 }

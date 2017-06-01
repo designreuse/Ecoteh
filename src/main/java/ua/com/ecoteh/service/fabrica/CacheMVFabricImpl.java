@@ -39,12 +39,12 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * The main company page key.
      */
-    private final static String MAIN_COMPANY_KEY = "Main Company";
+    private final static String MAIN_COMPANY_KEY = "Main CompanyEntity";
 
     /**
      * The contacts (address) page key.
      */
-    private final static String CONTACTS_KEY = "Contacts";
+    private final static String CONTACTS_KEY = "ContactsEntity";
 
     /**
      * The all partners companies page key.
@@ -59,27 +59,27 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     /**
      * The category by URL page key.
      */
-    private final static String CATEGORY_BY_URL_KEY = "Category By URL ";
+    private final static String CATEGORY_BY_URL_KEY = "CategoryEntity By URL ";
 
     /**
      * The category by RUL with sort articles page key.
      */
-    private final static String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "Category By URL with sort articles";
+    private final static String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "CategoryEntity By URL with sort articles";
 
     /**
      * The article by URL page key.
      */
-    private final static String ARTICLE_BY_URL_KEY = "Article By URL";
+    private final static String ARTICLE_BY_URL_KEY = "ArticleEntity By URL";
 
     /**
      * The article by number page key.
      */
-    private final static String ARTICLE_BY_NUMBER_KEY = "Article By Number";
+    private final static String ARTICLE_BY_NUMBER_KEY = "ArticleEntity By Number";
 
     /**
      * The company by URL page key.
      */
-    private final static String COMPANY_BY_URL_KEY = "Company by URL";
+    private final static String COMPANY_BY_URL_KEY = "CompanyEntity by URL";
 
     /**
      * The all responses page key.

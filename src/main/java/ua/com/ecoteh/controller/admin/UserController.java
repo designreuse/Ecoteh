@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.entity.Contacts;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.contacts.ContactsEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
@@ -29,7 +29,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working
- * with main ModelAndView objects and object of the {@link User}
+ * with main ModelAndView objects and object of the {@link UserEntity}
  * class for admins. Class methods create and return modelsAndView,
  * depending on the request. For the work used implementation
  * of the interface {@link MainMVFabric}.
@@ -59,19 +59,19 @@ public class UserController {
     private final MainMVFabric fabric;
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link User} class.
+     * for working with objects of the {@link UserEntity} class.
      */
     private final UserService userService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Company} class.
+     * for working with objects of the {@link CompanyEntity} class.
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
+     * for working with objects of the {@link FileEntity} class.
      */
     private final FileService fileService;
 
@@ -189,24 +189,24 @@ public class UserController {
             @RequestParam(value = "is_mailing") final boolean isMailing,
             @RequestParam(value = "is_locked") final boolean locked
     ) {
-        final User user = new User(
+        final UserEntity userEntity = new UserEntity(
                 name, description,
-                new Contacts(
+                new ContactsEntity(
                         email, mobilePhone, landlinePhone, fax,
                         vkontakte, facebook, twitter, skype
                 )
         );
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setValidated(validated);
-        user.setMailing(isMailing);
-        user.setLocked(locked);
-        user.setRole(UserRole.ADMIN);
+        userEntity.setLogin(login);
+        userEntity.setPassword(password);
+        userEntity.setValidated(validated);
+        userEntity.setMailing(isMailing);
+        userEntity.setLocked(locked);
+        userEntity.setRole(UserRole.ADMIN);
         if (isNotEmpty(multipartPhoto)) {
-            user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
+            userEntity.setPhotoEntity(this.fileService.add(userEntity.getName(), multipartPhoto));
         }
-        this.userService.add(user);
-        Cache.removeAll("Main Company");
+        this.userService.add(userEntity);
+        Cache.removeAll("Main CompanyEntity");
         return "redirect:/admin/user/all";
     }
 
@@ -301,24 +301,24 @@ public class UserController {
             @RequestParam(value = "is_mailing", defaultValue = "false") final boolean isMailing,
             @RequestParam(value = "is_locked", defaultValue = "false") final boolean isLocked
     ) {
-        final User user = new User(
+        final UserEntity userEntity = new UserEntity(
                 name, description,
-                new Contacts(
+                new ContactsEntity(
                         email, mobilePhone, landlinePhone, fax,
                         vkontakte, facebook, twitter, skype
                 )
         );
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setValidated(isValid);
-        user.setMailing(isMailing);
-        user.setLocked(isLocked);
-        user.setRole(UserRole.ADMIN);
+        userEntity.setLogin(login);
+        userEntity.setPassword(password);
+        userEntity.setValidated(isValid);
+        userEntity.setMailing(isMailing);
+        userEntity.setLocked(isLocked);
+        userEntity.setRole(UserRole.ADMIN);
         if (isNotEmpty(multipartPhoto)) {
-            user.setPhoto(this.fileService.add(user.getName(), multipartPhoto));
+            userEntity.setPhotoEntity(this.fileService.add(userEntity.getName(), multipartPhoto));
         }
-        this.userService.update(url, user);
-        Cache.removeAll("Main Company");
+        this.userService.update(url, userEntity);
+        Cache.removeAll("Main CompanyEntity");
         return "redirect:/admin/user/all";
     }
 
@@ -361,7 +361,7 @@ public class UserController {
     )
     public String deleteUserByUrl(@PathVariable("url") final String url) {
         this.userService.removeByUrl(url);
-        Cache.removeAll("Main Company");
+        Cache.removeAll("Main CompanyEntity");
         return "redirect:/admin/user/all";
     }
 
@@ -379,7 +379,7 @@ public class UserController {
     )
     public String deleteAllUsers() {
         this.userService.removeAll();
-        Cache.removeAll("Main Company");
+        Cache.removeAll("Main CompanyEntity");
         return "redirect:/admin/user/all";
     }
 
@@ -404,29 +404,29 @@ public class UserController {
         new Thread(() -> {
             String _subject = subject;
             String message = text;
-            final User user = this.userService.getAuthenticatedUser();
-            if (isNotNull(user)) {
-                if (isNotEmpty(user.getName())) {
-                    _subject += " - " + user.getName();
-                    message += "\n\n" + user.getName();
+            final UserEntity userEntity = this.userService.getAuthenticatedUser();
+            if (isNotNull(userEntity)) {
+                if (isNotEmpty(userEntity.getName())) {
+                    _subject += " - " + userEntity.getName();
+                    message += "\n\n" + userEntity.getName();
                 }
-                if (isNotNull(user.getContacts())) {
-                    if (isNotEmpty(user.getContacts().getMobilePhone())) {
-                        message += "\nMobile Phone: " + user.getContacts().getMobilePhone();
+                if (isNotNull(userEntity.getContactsEntity())) {
+                    if (isNotEmpty(userEntity.getContactsEntity().getMobilePhone())) {
+                        message += "\nMobile Phone: " + userEntity.getContactsEntity().getMobilePhone();
                     }
-                    if (isNotEmpty(user.getContacts().getLandlinePhone())) {
-                        message += "\nLandline Phone: " + user.getContacts().getLandlinePhone();
+                    if (isNotEmpty(userEntity.getContactsEntity().getLandlinePhone())) {
+                        message += "\nLandline Phone: " + userEntity.getContactsEntity().getLandlinePhone();
                     }
-                    if (isNotEmpty(user.getContacts().getEmail())) {
-                        message += "\nE-mail: " + user.getContacts().getEmail();
+                    if (isNotEmpty(userEntity.getContactsEntity().getEmail())) {
+                        message += "\nE-mail: " + userEntity.getContactsEntity().getEmail();
                     }
                 }
             }
-            final Company mainCompany = this.companyService.getMainCompany();
+            final CompanyEntity mainCompanyEntity = this.companyService.getMainCompany();
             this.senderService.send(
-                    _subject + " | " + mainCompany.getTitle(), message,
+                    _subject + " | " + mainCompanyEntity.getTitle(), message,
                     this.userService.getPersonnel(),
-                    mainCompany.getSenderEmail(), mainCompany.getSenderPass()
+                    mainCompanyEntity.getSenderEmail(), mainCompanyEntity.getSenderPass()
             );
         }).start();
         final ModelAndView modelAndView = getAllUsersPage();

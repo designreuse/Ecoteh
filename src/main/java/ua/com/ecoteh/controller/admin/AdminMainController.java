@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.controller.client.MainController;
-import ua.com.ecoteh.entity.Contacts;
-import ua.com.ecoteh.entity.Message;
-import ua.com.ecoteh.entity.Response;
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.contacts.ContactsEntity;
+import ua.com.ecoteh.entity.message.MessageEntity;
+import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.MessageService;
@@ -117,9 +117,9 @@ public class AdminMainController extends MainController {
             @RequestParam(value = "email", required = false) final String email,
             @RequestParam(value = "message", required = false) final String userMessage
     ) {
-        final User user = new User(name, new Contacts(email, phone));
-        user.setRole(UserRole.CLIENT);
-        sendMess(new Message(user, "New Message", userMessage));
+        final UserEntity userEntity = new UserEntity(name, new ContactsEntity(email, phone));
+        userEntity.setRole(UserRole.CLIENT);
+        sendMess(new MessageEntity(userEntity, "New MessageEntity", userMessage));
         return getMessageMV(url, true);
     }
 
@@ -163,7 +163,7 @@ public class AdminMainController extends MainController {
             @RequestParam(value = "name") final String name,
             @RequestParam(value = "response") final String text
     ) {
-        sendResp(new Response(name, text));
+        sendResp(new ResponseEntity(name, text));
         return getResponsesMV(true);
     }
 

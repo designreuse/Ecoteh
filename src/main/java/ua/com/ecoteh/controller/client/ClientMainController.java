@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Contacts;
-import ua.com.ecoteh.entity.Message;
-import ua.com.ecoteh.entity.Response;
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.contacts.ContactsEntity;
+import ua.com.ecoteh.entity.message.MessageEntity;
+import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.captcha.CaptchaService;
 import ua.com.ecoteh.service.data.CompanyService;
@@ -103,9 +103,9 @@ public class ClientMainController extends MainController {
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            final User user = new User(name, new Contacts(email, phone));
-            user.setRole(UserRole.CLIENT);
-            sendMess(new Message(user, "New Message", userMessage));
+            final UserEntity userEntity = new UserEntity(name, new ContactsEntity(email, phone));
+            userEntity.setRole(UserRole.CLIENT);
+            sendMess(new MessageEntity(userEntity, "New MessageEntity", userMessage));
         }
         return getMessageMV(url, isCaptcha);
     }
@@ -156,7 +156,7 @@ public class ClientMainController extends MainController {
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            sendResp(new Response(name, text));
+            sendResp(new ResponseEntity(name, text));
         }
         return getResponsesMV(isCaptcha);
     }

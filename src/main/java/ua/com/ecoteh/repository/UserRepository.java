@@ -1,41 +1,41 @@
 package ua.com.ecoteh.repository;
 
-import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.entity.user.UserEntity;
 
 /**
  * The interface provides a set of JPA methods
- * for working {@link User} objects with a database.
+ * for working {@link UserEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface UserRepository extends DataRepository<User> {
+public interface UserRepository extends DataRepository<UserEntity> {
 
     /**
      * Returns user from a database,
      * which matches the parameter name.
      *
      * @param name the name of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByName(String name);
+    UserEntity findByName(String name);
 
     /**
      * Returns user from a database,
      * which matches the parameter login.
      *
      * @param login the login of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByEncryptedLogin(String login);
+    UserEntity findByEncryptedLogin(String login);
 
     /**
      * Returns user from a database,
      * which matches the parameter url.
      *
      * @param url the URL of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByUrl(String url);
+    UserEntity findByUrl(String url);
 
     /**
      * Removes user from a database,
@@ -58,34 +58,34 @@ public interface UserRepository extends DataRepository<User> {
      * which matches the parameter email.
      *
      * @param email the E-mail of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByContactsEmail(String email);
+    UserEntity findByContactsEntityEmail(String email);
 
     /**
      * Returns user from a database,
      * which matches the parameter mobilePhone.
      *
      * @param phone the mobile phone of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByContactsMobilePhone(String phone);
+    UserEntity findByContactsEntityMobilePhone(String phone);
 
     /**
      * Returns user from a database,
      * which matches the parameter landlinePhone.
      *
      * @param phone the landline phone of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByContactsLandlinePhone(String phone);
+    UserEntity findByContactsEntityLandlinePhone(String phone);
 
     /**
      * Returns user from a database,
      * which matches the parameter fax.
      *
      * @param fax the fax phone of a user to return.
-     * @return The object of class {@link User}.
+     * @return The object of class {@link UserEntity}.
      */
-    User findByContactsFax(String fax);
+    UserEntity findByContactsEntityFax(String fax);
 }

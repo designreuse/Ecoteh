@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.*;
+import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.model.ModelEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.service.data.*;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
@@ -76,28 +80,28 @@ public class SearchServiceImpl implements SearchService {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Category}
+     * for working with objects of the {@link CategoryEntity}
      * class.
      */
     private final CategoryService categoryService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Article}
+     * for working with objects of the {@link ArticleEntity}
      * class.
      */
     private final ArticleService articleService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Company}
+     * for working with objects of the {@link CompanyEntity}
      * class.
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link User}
+     * for working with objects of the {@link UserEntity}
      * class.
      */
     private final UserService userService;
@@ -307,7 +311,7 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for some content and adds it to modelAndView.
      *
-     * @param <T>          the entity type, extends {@link Model}.
+     * @param <T>          the entity type, extends {@link ModelEntity}.
      * @param keywordArray the keyword array for content search.
      * @param howSearch    the search mode.
      * @param dataService  the implementation of the interface describes a set
@@ -315,7 +319,7 @@ public class SearchServiceImpl implements SearchService {
      * @param name         the name of the object to add in modelAndView.
      * @param modelAndView the object of class ModelAndView for to update.
      */
-    private <T extends Model> void searchFromModelAndAdd(
+    private <T extends ModelEntity> void searchFromModelAndAdd(
             final String[] keywordArray,
             final boolean howSearch,
             final DataService<T> dataService,
@@ -329,14 +333,14 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for some content.
      *
-     * @param <T>          the entity type, extends {@link Model}.
+     * @param <T>          the entity type, extends {@link ModelEntity}.
      * @param keywordArray the keyword array for content search.
      * @param howSearch    the search mode.
      * @param dataService  the implementation of the interface describes a set
      *                     of methods for working with objects.
      * @return The list of found objects.
      */
-    private <T extends Model> List<T> searchFromModel(
+    private <T extends ModelEntity> List<T> searchFromModel(
             final String[] keywordArray,
             final boolean howSearch,
             final DataService<T> dataService

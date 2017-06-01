@@ -1,7 +1,7 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Collection;
@@ -9,187 +9,187 @@ import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the class {@link User}.
+ * for working with objects of the class {@link UserEntity}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface UserService extends DataService<User>, UserDetailsService {
+public interface UserService extends DataService<UserEntity>, UserDetailsService {
 
     /**
-     * Initializes, updates and returns user with incoming id.
+     * Initializes, updates and returns userEntity with incoming id.
      *
-     * @param url  the URL of a user to update.
-     * @param user the user to update.
-     * @return The updating user with incoming id.
+     * @param url  the URL of a userEntity to update.
+     * @param userEntity the userEntity to update.
+     * @return The updating userEntity with incoming id.
      */
-    User update(String url, User user);
+    UserEntity update(String url, UserEntity userEntity);
 
     /**
-     * Returns user which the incoming name.
+     * Returns userEntity which the incoming name.
      *
-     * @param name the name of a user to return.
-     * @return The user which the incoming name.
+     * @param name the name of a userEntity to return.
+     * @return The userEntity which the incoming name.
      */
-    User getByName(String name);
+    UserEntity getByName(String name);
 
     /**
-     * Returns user which the incoming url.
+     * Returns userEntity which the incoming url.
      *
-     * @param url the URL of a user to return.
-     * @return The user which the incoming url.
+     * @param url the URL of a userEntity to return.
+     * @return The userEntity which the incoming url.
      */
-    User getByUrl(String url);
+    UserEntity getByUrl(String url);
 
     /**
-     * Returns user which the incoming login.
+     * Returns userEntity which the incoming login.
      *
-     * @param login the login of a user to return.
-     * @return The user which the incoming login.
+     * @param login the login of a userEntity to return.
+     * @return The userEntity which the incoming login.
      */
-    User getByLogin(String login);
+    UserEntity getByLogin(String login);
 
     /**
-     * Returns user which the incoming E-mail.
+     * Returns userEntity which the incoming E-mail.
      *
-     * @param email the E-mail of a user to return.
-     * @return The user which the incoming email.
+     * @param email the E-mail of a userEntity to return.
+     * @return The userEntity which the incoming email.
      */
-    User getByEmail(String email);
+    UserEntity getByEmail(String email);
 
     /**
-     * Returns user which the incoming phone.
+     * Returns userEntity which the incoming phone.
      *
-     * @param phone the phone of a user to return.
-     * @return The user which the incoming phone.
+     * @param phone the phone of a userEntity to return.
+     * @return The userEntity which the incoming phone.
      */
-    User getByPhone(String phone);
+    UserEntity getByPhone(String phone);
 
     /**
-     * Returns authenticated user.
+     * Returns authenticated userEntity.
      *
-     * @return The authenticated user.
+     * @return The authenticated userEntity.
      */
-    User getAuthenticatedUser();
+    UserEntity getAuthenticatedUser();
 
     /**
-     * Returns main admin user.
+     * Returns main admin userEntity.
      *
-     * @return The main admin user.
+     * @return The main admin userEntity.
      */
-    User getMainAdmin();
+    UserEntity getMainAdmin();
 
     /**
-     * Returns users with role "ADMIN".
+     * Returns userEntities with role "ADMIN".
      *
      * @return The all admin.
      */
-    Collection<User> getAdmins();
+    Collection<UserEntity> getAdmins();
 
     /**
      * Returns personnel.
      *
      * @return The all personnel.
      */
-    Collection<User> getPersonnel();
+    Collection<UserEntity> getPersonnel();
 
     /**
-     * Removes user with the incoming name.
+     * Removes userEntity with the incoming name.
      *
-     * @param name the name of a user to remove.
+     * @param name the name of a userEntity to remove.
      */
     void removeByName(String name);
 
     /**
-     * Removes user with the incoming url.
+     * Removes userEntity with the incoming url.
      *
-     * @param url the URL of a user to remove.
+     * @param url the URL of a userEntity to remove.
      */
     void removeByUrl(String url);
 
     /**
-     * Sorts and returns users by name.
+     * Sorts and returns userEntities by name.
      *
-     * @param users  the users to sort.
+     * @param userEntities  the userEntities to sort.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
-    List<User> sortByName(Collection<User> users, boolean revers);
+    List<UserEntity> sortByName(Collection<UserEntity> userEntities, boolean revers);
 
     /**
-     * Sorts and returns users by URL.
+     * Sorts and returns userEntities by URL.
      *
-     * @param users  the users to sort.
+     * @param userEntities  the userEntities to sort.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
-    List<User> sortByUrl(Collection<User> users, boolean revers);
+    List<UserEntity> sortByUrl(Collection<UserEntity> userEntities, boolean revers);
 
     /**
-     * Sorts and returns users by by role.
+     * Sorts and returns userEntities by by role.
      *
-     * @param users  the users to sort.
+     * @param userEntities  the userEntities to sort.
      * @param role   the role filtering.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
-    List<User> sortByRole(Collection<User> users, UserRole role, boolean revers);
+    List<UserEntity> sortByRole(Collection<UserEntity> userEntities, UserRole role, boolean revers);
 
     /**
-     * Sorts and returns users by date.
+     * Sorts and returns userEntities by date.
      *
      * @param revers Sort in descending or ascending.
      * @return The sorted list of articles.
      */
-    List<User> getAndSortByName(boolean revers);
+    List<UserEntity> getAndSortByName(boolean revers);
 
     /**
-     * Sorts and returns users by URL.
+     * Sorts and returns userEntities by URL.
      *
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
-    List<User> getAndSortByUrl(boolean revers);
+    List<UserEntity> getAndSortByUrl(boolean revers);
 
     /**
-     * Sorts and returns users by role.
+     * Sorts and returns userEntities by role.
      *
      * @param role   the role filtering.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
-    List<User> getAndSortByRole(UserRole role, boolean revers);
+    List<UserEntity> getAndSortByRole(UserRole role, boolean revers);
 
     /**
-     * Filters and returns users by role.
+     * Filters and returns userEntities by role.
      *
-     * @param users the users to filter.
+     * @param userEntities the userEntities to filter.
      * @param role  the role filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
-    List<User> filterByRole(Collection<User> users, UserRole role);
+    List<UserEntity> filterByRole(Collection<UserEntity> userEntities, UserRole role);
 
     /**
-     * Filters and returns users by roles.
+     * Filters and returns userEntities by roles.
      *
-     * @param users the users to filter.
+     * @param userEntities the userEntities to filter.
      * @param roles the roles filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
-    List<User> filterByRoles(Collection<User> users, Collection<UserRole> roles);
+    List<UserEntity> filterByRoles(Collection<UserEntity> userEntities, Collection<UserRole> roles);
 
     /**
-     * Filters and returns users by role.
+     * Filters and returns userEntities by role.
      *
      * @param role the role filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
-    List<User> getAndFilterByRole(UserRole role);
+    List<UserEntity> getAndFilterByRole(UserRole role);
 
     /**
-     * Filters and returns users by roles.
+     * Filters and returns userEntities by roles.
      *
      * @param roles the roles filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
-    List<User> getAndFilterByRoles(Collection<UserRole> roles);
+    List<UserEntity> getAndFilterByRoles(Collection<UserRole> roles);
 }

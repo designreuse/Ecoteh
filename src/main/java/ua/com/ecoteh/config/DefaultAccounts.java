@@ -1,8 +1,8 @@
 package ua.com.ecoteh.config;
 
 import org.apache.log4j.Logger;
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,7 +22,7 @@ public final class DefaultAccounts {
     /**
      * The map of a default users.
      */
-    private final static Map<String, User> USERS;
+    private final static Map<String, UserEntity> USERS;
 
     /**
      * Static block for initialization of the global map
@@ -40,15 +40,15 @@ public final class DefaultAccounts {
      * @param username the name of user to return.
      * @return The user if it exist, null otherwise.
      */
-    public static User get(final String username) {
-        User user;
+    public static UserEntity get(final String username) {
+        UserEntity userEntity;
         try {
-            user = USERS.get(username).clone();
+            userEntity = USERS.get(username).clone();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
-            user = null;
+            userEntity = null;
         }
-        return user;
+        return userEntity;
     }
 
     /**
@@ -56,7 +56,7 @@ public final class DefaultAccounts {
      *
      * @return The default admin.
      */
-    public static User getDefaultAdmin() {
+    public static UserEntity getDefaultAdmin() {
         return get("admin");
     }
 
@@ -65,7 +65,7 @@ public final class DefaultAccounts {
      *
      * @return The default super admin.
      */
-    public static User getSuperAdmin() {
+    public static UserEntity getSuperAdmin() {
         return get("superadmin");
     }
 
@@ -75,12 +75,12 @@ public final class DefaultAccounts {
      * and adds it to global map.
      */
     private static void addDefaultAdmin() {
-        final User user = createUser(
+        final UserEntity userEntity = createUser(
                 "Default Admin",
                 "login", "password",
                 UserRole.ADMIN
         );
-        USERS.put(user.getLogin(), user);
+        USERS.put(userEntity.getLogin(), userEntity);
     }
 
     /**
@@ -89,12 +89,12 @@ public final class DefaultAccounts {
      * and adds it to global map.
      */
     private static void addSuperAdmin() {
-        final User user = createUser(
+        final UserEntity userEntity = createUser(
                 "Super Admin",
                 "login", "password",
                 UserRole.SUPERADMIN
         );
-        USERS.put(user.getLogin(), user);
+        USERS.put(userEntity.getLogin(), userEntity);
     }
 
     /**
@@ -106,17 +106,17 @@ public final class DefaultAccounts {
      * @param role     the role of a new user.
      * @return The new user.
      */
-    private static User createUser(
+    private static UserEntity createUser(
             final String name,
             final String login,
             final String password,
             final UserRole role
     ) {
-        final User user = new User();
-        user.setName(name);
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setRole(role);
-        return user;
+        final UserEntity userEntity = new UserEntity();
+        userEntity.setName(name);
+        userEntity.setLogin(login);
+        userEntity.setPassword(password);
+        userEntity.setRole(role);
+        return userEntity;
     }
 }

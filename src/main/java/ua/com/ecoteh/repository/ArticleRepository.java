@@ -1,43 +1,43 @@
 package ua.com.ecoteh.repository;
 
-import ua.com.ecoteh.entity.Article;
+import ua.com.ecoteh.entity.article.ArticleEntity;
 
 import java.util.List;
 
 /**
  * The interface provides a set of JPA methods for working
- * {@link Article} objects with a database.
+ * {@link ArticleEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface ArticleRepository extends ContentRepository<Article> {
+public interface ArticleRepository extends ContentRepository<ArticleEntity> {
 
     /**
      * Returns all article from a database,
      * which matches the parameter number.
      *
      * @param number the title of a article to return.
-     * @return The object of class {@link Article}.
+     * @return The object of class {@link ArticleEntity}.
      */
-    Article findByNumber(String number);
+    ArticleEntity findByNumber(String number);
 
     /**
      * Returns all articles from a database,
      * which matches the parameter category id.
      *
      * @param id the category id of a article to return.
-     * @return The object of class {@link Article}.
+     * @return The object of class {@link ArticleEntity}.
      */
-    List<Article> findByCategoryId(long id);
+    List<ArticleEntity> findByCategoryEntityId(long id);
 
     /**
      * Returns all articles from a database,
      * which matches the parameter category title.
      *
      * @param title the category title of a articles to return.
-     * @return The object of class {@link Article}.
+     * @return The object of class {@link ArticleEntity}.
      */
-    List<Article> findByCategoryTitle(String title);
+    List<ArticleEntity> findByCategoryEntityTitle(String title);
 
     /**
      * Removes article from a database,

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.service.data.UserService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
@@ -42,7 +42,7 @@ public class AuthorizationController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link User} class.
+     * for working with objects of the {@link UserEntity} class.
      */
     private final UserService userService;
 

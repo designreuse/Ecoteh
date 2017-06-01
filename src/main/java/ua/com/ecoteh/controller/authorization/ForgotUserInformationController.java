@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.config.DefaultAccounts;
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.captcha.CaptchaService;
 import ua.com.ecoteh.service.data.CompanyService;
@@ -51,13 +51,13 @@ public class ForgotUserInformationController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link User} class.
+     * for working with objects of the {@link UserEntity} class.
      */
     private final UserService userService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Company} class.
+     * for working with objects of the {@link CompanyEntity} class.
      */
     private final CompanyService companyService;
 
@@ -98,7 +98,7 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Get a page to forgot user information.
+     * Get a page to forgot userEntity information.
      * Request mapping: /forgot_password
      * Method: GET
      *
@@ -113,12 +113,12 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by name or E-mail.
+     * Seeking a userEntity by name or E-mail.
      * and sends information about him to E-mail.
      * Request mapping: /forgot
      * Method: POST
      *
-     * @param username the user name or E-mail for whom to remind information.
+     * @param username the userEntity name or E-mail for whom to remind information.
      * @param request  the implementation of the interface to provide
      *                 request information for HTTP servlets.
      * @return The ready object of the ModelAndView class.
@@ -183,54 +183,54 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Seeking a user by username and sends information about him to E-mail.
+     * Seeking a userEntity by username and sends information about him to E-mail.
      *
-     * @param username the user name for whom to remind information.
+     * @param username the userEntity name for whom to remind information.
      */
     private void searchByLoginAndSend(final String username) {
-        final User user = this.userService.getByLogin(username);
-        sendUserInformationToEmail(user, user.getContacts().getEmail());
+        final UserEntity userEntity = this.userService.getByLogin(username);
+        sendUserInformationToEmail(userEntity, userEntity.getContactsEntity().getEmail());
     }
 
     /**
-     * Seeking a user by E-mail and sends information about him to E-mail.
+     * Seeking a userEntity by E-mail and sends information about him to E-mail.
      *
-     * @param email the user E-mail for whom to remind information.
+     * @param email the userEntity E-mail for whom to remind information.
      */
     private void searchByEmailAndSend(final String email) {
-        final User user = this.userService.getByEmail(email);
-        sendUserInformationToEmail(user, user.getContacts().getEmail());
+        final UserEntity userEntity = this.userService.getByEmail(email);
+        sendUserInformationToEmail(userEntity, userEntity.getContactsEntity().getEmail());
     }
 
     /**
-     * Seeking a user by email and sends information about him to E-mail.
+     * Seeking a userEntity by email and sends information about him to E-mail.
      *
-     * @param phone the user phone for whom to remind information.
+     * @param phone the userEntity phone for whom to remind information.
      */
     private void searchByPhoneAndSend(final String phone) {
-        final User user = this.userService.getByPhone(phone);
-        sendUserInformationToEmail(user, user.getContacts().getEmail());
+        final UserEntity userEntity = this.userService.getByPhone(phone);
+        sendUserInformationToEmail(userEntity, userEntity.getContactsEntity().getEmail());
     }
 
     /**
-     * Seeking a default user by equals email from main company email
+     * Seeking a default userEntity by equals email from main company email
      * and sends information about him to E-mail.
      *
-     * @param email the user email for whom to remind information.
+     * @param email the userEntity email for whom to remind information.
      * @throws IllegalArgumentException Throw exception when parameter login is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
+     * @throws NullPointerException     Throws exception if userEntity is absent.
      */
     private void searchInMainCompanyAndSend(final String email)
             throws IllegalArgumentException, NullPointerException {
         if (isEmpty(email)) {
             throw new IllegalArgumentException(ExceptionMessage.BLANK_EMAIL_MESSAGE);
         }
-        final String mainEmail = this.companyService.getMainCompany().getContacts().getEmail();
+        final String mainEmail = this.companyService.getMainCompany().getContactsEntity().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
             throw new NullPointerException(
                     String.format(
                             ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
-                            Company.class.getSimpleName(), email
+                            CompanyEntity.class.getSimpleName(), email
                     )
             );
         }
@@ -238,36 +238,36 @@ public class ForgotUserInformationController {
     }
 
     /**
-     * Sends user information to the incoming user e-mail.
+     * Sends userEntity information to the incoming userEntity e-mail.
      *
-     * @param user           the user for whom to remind information.
+     * @param userEntity           the userEntity for whom to remind information.
      * @param recipientEmail the recipient email.
      */
     private void sendUserInformationToEmail(
-            final User user,
+            final UserEntity userEntity,
             final String recipientEmail
     ) {
-        final Company company = this.companyService.getMainCompany();
+        final CompanyEntity companyEntity = this.companyService.getMainCompany();
         this.senderService.send(
-                "Напоминание пароля | " + company.getTitle(),
-                getMessageText(user), recipientEmail,
-                company.getSenderEmail(), company.getSenderPass()
+                "Напоминание пароля | " + companyEntity.getTitle(),
+                getMessageText(userEntity), recipientEmail,
+                companyEntity.getSenderEmail(), companyEntity.getSenderPass()
         );
     }
 
     /**
-     * Gets message to the user.
+     * Gets message to the userEntity.
      *
-     * @param user the user for whom to send message.
+     * @param userEntity the userEntity for whom to send message.
      * @return The message.
      */
-    private static String getMessageText(final User user) {
+    private static String getMessageText(final UserEntity userEntity) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Информация о пользователе\n\n")
-                .append(user.getName())
-                .append("\nLogin: ").append(user.getLogin())
-                .append("\nPassword: ").append(user.getPassword());
-        if (user.isLocked()) {
+                .append(userEntity.getName())
+                .append("\nLogin: ").append(userEntity.getLogin())
+                .append("\nPassword: ").append(userEntity.getPassword());
+        if (userEntity.isLocked()) {
             sb.append("\n\nПОЛЬЗОВАТЕЛЬ ЗАБЛОКИРОВАН");
         }
         sb.append("\n\nПосле прочтения этого письма, ")
@@ -280,7 +280,7 @@ public class ForgotUserInformationController {
     /**
      * Creates ModelAndView object and returns it.
      *
-     * @param username  the user name for whom to remind information.
+     * @param username  the userEntity name for whom to remind information.
      * @param isCaptcha the result of the captcha verification.
      * @param isForgot  the result of the search.
      * @return The ready object of the ModelAndView class.

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.enums.FileType;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link File} class for admins.
+ * objects of the {@link FileEntity} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -56,7 +56,7 @@ public class FileController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
+     * for working with objects of the {@link FileEntity} class.
      */
     private final FileService fileService;
 

@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.entity.model.ModelEntity;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -8,15 +8,15 @@ import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of {@link Model} class or subclasses.
+ * for working with objects of {@link ModelEntity} class or subclasses.
  *
- * @param <T> Entity type, extends {@link Model}.
+ * @param <T> Entity type, extends {@link ModelEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface DataService<T extends Model> {
+public interface DataService<T extends ModelEntity> {
 
     /**
-     * Saves and returns model object of {@link Model} class or subclasses.
+     * Saves and returns model object of {@link ModelEntity} class or subclasses.
      *
      * @param model the model to add.
      * @return The saving model.
@@ -24,7 +24,7 @@ public interface DataService<T extends Model> {
     T add(final T model);
 
     /**
-     * Saves and returns objects of {@link Model} class or subclasses.
+     * Saves and returns objects of {@link ModelEntity} class or subclasses.
      *
      * @param models the models to add.
      * @return The saving models.
@@ -32,7 +32,7 @@ public interface DataService<T extends Model> {
     Collection<T> add(final Collection<T> models);
 
     /**
-     * Updates and returns object of {@link Model} class or subclasses.
+     * Updates and returns object of {@link ModelEntity} class or subclasses.
      *
      * @param model the model to update.
      * @return The updating models.
@@ -40,7 +40,7 @@ public interface DataService<T extends Model> {
     T update(final T model);
 
     /**
-     * Updates and returns objects of {@link Model} class or subclasses.
+     * Updates and returns objects of {@link ModelEntity} class or subclasses.
      *
      * @param models the models to update.
      * @return The updating models.
@@ -48,7 +48,7 @@ public interface DataService<T extends Model> {
     Collection<T> update(final Collection<T> models);
 
     /**
-     * Returns object of {@link Model} class or subclasses
+     * Returns object of {@link ModelEntity} class or subclasses
      * with incoming id.
      *
      * @param id is id of object to return.
@@ -57,14 +57,14 @@ public interface DataService<T extends Model> {
     T get(final long id);
 
     /**
-     * Returns all valid objects of {@link Model} class or subclasses.
+     * Returns all valid objects of {@link ModelEntity} class or subclasses.
      *
      * @return The all valid models.
      */
     Collection<T> getAll();
 
     /**
-     * Returns all or valid objects of {@link Model} class or subclasses
+     * Returns all or valid objects of {@link ModelEntity} class or subclasses
      * depending on the parameter value.
      *
      * @param valid It is returns all or valid objects.
@@ -73,33 +73,33 @@ public interface DataService<T extends Model> {
     Collection<T> getAll(final boolean valid);
 
     /**
-     * Removes object of {@link Model} class or subclasses with incoming id.
+     * Removes object of {@link ModelEntity} class or subclasses with incoming id.
      *
      * @param id a id of the model to remove.
      */
     void remove(final long id);
 
     /**
-     * Removes object of {@link Model} class or subclasses.
+     * Removes object of {@link ModelEntity} class or subclasses.
      *
      * @param model the model to remove.
      */
     void remove(final T model);
 
     /**
-     * Removes objects of {@link Model} class or subclasses.
+     * Removes objects of {@link ModelEntity} class or subclasses.
      *
      * @param models the models to remove.
      */
     void remove(final Collection<T> models);
 
     /**
-     * Removes all objects of {@link Model} class or subclasses.
+     * Removes all objects of {@link ModelEntity} class or subclasses.
      */
     void removeAll();
 
     /**
-     * Checks whether the object of {@link Model} class or subclasses
+     * Checks whether the object of {@link ModelEntity} class or subclasses
      * is exists with incoming id.
      *
      * @param id a id of the model to exist.
@@ -108,7 +108,7 @@ public interface DataService<T extends Model> {
     boolean exists(final long id);
 
     /**
-     * Checks whether the object of {@link Model} class
+     * Checks whether the object of {@link ModelEntity} class
      * or subclasses is exists.
      *
      * @param model the model to exists.
@@ -117,7 +117,7 @@ public interface DataService<T extends Model> {
     boolean exists(final T model);
 
     /**
-     * Sorts and returns objects of {@link Model} class or subclasses
+     * Sorts and returns objects of {@link ModelEntity} class or subclasses
      * by the comparator.
      *
      * @param models     the models to sort.
@@ -132,7 +132,7 @@ public interface DataService<T extends Model> {
     );
 
     /**
-     * Sorts and returns objects of {@link Model} class or subclasses
+     * Sorts and returns objects of {@link ModelEntity} class or subclasses
      * by the comparator.
      *
      * @param models     the objects to sort.
@@ -146,7 +146,7 @@ public interface DataService<T extends Model> {
 
     /**
      * Returns a list with the incoming list objects
-     * of {@link Model} class or subclasses.
+     * of {@link ModelEntity} class or subclasses.
      *
      * @param models    the models to be processed.
      * @param fromIndex the initial index.
@@ -156,7 +156,7 @@ public interface DataService<T extends Model> {
     List<T> subList(Collection<T> models, int fromIndex, int toIndex);
 
     /**
-     * Returns a list objects of {@link Model} class or subclasses.
+     * Returns a list objects of {@link ModelEntity} class or subclasses.
      *
      * @param fromIndex the initial index.
      * @param toIndex   the final index.
@@ -165,7 +165,7 @@ public interface DataService<T extends Model> {
     List<T> getAndSubList(int fromIndex, int toIndex);
 
     /**
-     * Returns a list valid objects of {@link Model} class or subclasses.
+     * Returns a list valid objects of {@link ModelEntity} class or subclasses.
      *
      * @param models the models to filter.
      * @return The filtered models.

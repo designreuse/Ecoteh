@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Response;
+import ua.com.ecoteh.entity.response.ResponseEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.ResponseService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
@@ -18,7 +18,7 @@ import ua.com.ecoteh.util.cache.Cache;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link Response} class for admins.
+ * objects of the {@link ResponseEntity} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -42,7 +42,7 @@ public class ResponseController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Response} class.
+     * for working with objects of the {@link ResponseEntity} class.
      */
     private final ResponseService responseService;
 
@@ -105,8 +105,8 @@ public class ResponseController {
             @RequestParam(value = "text", defaultValue = "") final String text,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Response response = new Response(username, text, validated);
-        this.responseService.update(id, response);
+        final ResponseEntity responseEntity = new ResponseEntity(username, text, validated);
+        this.responseService.update(id, responseEntity);
         Cache.clear();
         return "redirect:/responses";
     }
@@ -149,9 +149,9 @@ public class ResponseController {
             method = RequestMethod.GET
     )
     public String reverseValidResponse(@PathVariable("id") final long id) {
-        final Response response = this.responseService.get(id);
-        response.reverseValidated();
-        this.responseService.update(response);
+        final ResponseEntity responseEntity = this.responseService.get(id);
+        responseEntity.reverseValidated();
+        this.responseService.update(responseEntity);
         Cache.clear();
         return "redirect:/responses";
     }

@@ -1,35 +1,35 @@
 package ua.com.ecoteh.repository;
 
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.enums.FileType;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.file.FileType;
 
 import java.util.List;
 
 /**
  * The interface provides a set of JPA methods
- * for working {@link File} objects with a database.
+ * for working {@link FileEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface FileRepository extends DataRepository<File> {
+public interface FileRepository extends DataRepository<FileEntity> {
 
     /**
      * Returns file from a database,
      * which matches the parameter title.
      *
      * @param title the title of the file to return.
-     * @return The object of class {@link File}.
+     * @return The object of class {@link FileEntity}.
      */
-    File findByTitle(String title);
+    FileEntity findByTitle(String title);
 
     /**
      * Returns file from a database,
      * which matches the parameter url.
      *
      * @param url the URL of a file to return.
-     * @return The object of class {@link File}.
+     * @return The object of class {@link FileEntity}.
      */
-    File findByUrl(String url);
+    FileEntity findByUrl(String url);
 
     /**
      * Removes file from a database,
@@ -53,5 +53,5 @@ public interface FileRepository extends DataRepository<File> {
      * @param type the type of files to return.
      * @return The files with the type.
      */
-    List<File> findAllByType(FileType type);
+    List<FileEntity> findAllByType(FileType type);
 }

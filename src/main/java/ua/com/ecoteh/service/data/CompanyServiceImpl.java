@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.company.CompanyType;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CompanyRepository;
 
@@ -18,7 +18,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the {@link Company} class.
+ * with objects of the {@link CompanyEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -29,18 +29,18 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class CompanyServiceImpl extends ContentServiceImpl<Company> implements CompanyService {
+public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> implements CompanyService {
 
     /**
      * The interface provides a set of standard methods for working
-     * {@link Company} objects with the database.
+     * {@link CompanyEntity} objects with the database.
      */
     private final CompanyRepository repository;
 
     /**
      * The interface of the service layer,
      * describes a set of methods for working
-     * with objects of the class {@link File}.
+     * with objects of the class {@link FileEntity}.
      */
     private final FileService fileService;
 
@@ -74,61 +74,61 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     @Override
     @Transactional(readOnly = true)
-    public Collection<Company> getAll(final boolean isValid) {
+    public Collection<CompanyEntity> getAll(final boolean isValid) {
         return getPartners(isValid);
     }
 
     /**
-     * Saves a incoming company and returns saving company.
+     * Saves a incoming companyEntity and returns saving companyEntity.
      *
-     * @param company a company to add.
-     * @return The new saving company (newer null).
+     * @param companyEntity a companyEntity to add.
+     * @return The new saving companyEntity (newer null).
      */
     @Override
     @Transactional
-    public Company add(final Company company) {
-        if (isNotNull(company)) {
-            company.setType(CompanyType.PARTNER);
+    public CompanyEntity add(final CompanyEntity companyEntity) {
+        if (isNotNull(companyEntity)) {
+            companyEntity.setType(CompanyType.PARTNER);
         }
-        return super.add(company);
+        return super.add(companyEntity);
     }
 
     /**
-     * Updates the main company.
+     * Updates the main companyEntity.
      *
-     * @param company a main company to update.
-     * @return The updating main company (newer null).
+     * @param companyEntity a main companyEntity to update.
+     * @return The updating main companyEntity (newer null).
      */
     @Override
     @Transactional
-    public Company updateMainCompany(final Company company) {
-        final Company mainCompany = getMainCompany();
-        final File newLogo = company.getLogo();
-        final File oldLogo = mainCompany.getLogo();
+    public CompanyEntity updateMainCompany(final CompanyEntity companyEntity) {
+        final CompanyEntity mainCompanyEntity = getMainCompany();
+        final FileEntity newLogo = companyEntity.getLogoEntity();
+        final FileEntity oldLogo = mainCompanyEntity.getLogoEntity();
         if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        copy(company, mainCompany);
-        return update(mainCompany);
+        copy(companyEntity, mainCompanyEntity);
+        return update(mainCompanyEntity);
     }
 
     /**
-     * Returns main company.
-     * If can`t find main company then returns new Company().
+     * Returns main companyEntity.
+     * If can`t find main companyEntity then returns new CompanyEntity().
      *
-     * @return The main company (newer null).
+     * @return The main companyEntity (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public Company getMainCompany() {
-        Company mainCompany;
+    public CompanyEntity getMainCompany() {
+        CompanyEntity mainCompanyEntity;
         try {
-            mainCompany = this.repository.findByType(CompanyType.MAIN).get(0);
+            mainCompanyEntity = this.repository.findByType(CompanyType.MAIN).get(0);
         } catch (IndexOutOfBoundsException ex) {
             logException(ex);
-            mainCompany = new Company();
+            mainCompanyEntity = new CompanyEntity();
         }
-        return mainCompany;
+        return mainCompanyEntity;
     }
 
     /**
@@ -143,30 +143,30 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Company> getPartners(final boolean isValid) {
-        List<Company> companies = this.repository.findByType(CompanyType.PARTNER);
+    public List<CompanyEntity> getPartners(final boolean isValid) {
+        List<CompanyEntity> companies = this.repository.findByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
-                    .filter(Company::isValidated)
+                    .filter(CompanyEntity::isValidated)
                     .collect(Collectors.toList());
         }
         return companies;
     }
 
     /**
-     * Returns company with the incoming domain.
+     * Returns companyEntity with the incoming domain.
      * If a incoming domain is null or empty then throws IllegalArgumentException.
-     * If can`t find company by incoming domain then throws NullPointerException.
+     * If can`t find companyEntity by incoming domain then throws NullPointerException.
      *
-     * @param domain a domain of the company to return.
-     * @return The company with the incoming domain (newer null).
+     * @param domain a domain of the companyEntity to return.
+     * @return The companyEntity with the incoming domain (newer null).
      * @throws IllegalArgumentException Throw exception when parameter domain is blank.
-     * @throws NullPointerException     Throw exception when company with parameter domain
+     * @throws NullPointerException     Throw exception when companyEntity with parameter domain
      *                                  is not exist.
      */
     @Override
     @Transactional(readOnly = true)
-    public Company getByDomain(final String domain)
+    public CompanyEntity getByDomain(final String domain)
             throws IllegalArgumentException, NullPointerException {
         if (isEmpty(domain)) {
             throw getIllegalArgumentException(
@@ -174,33 +174,33 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
                     getClassSimpleName()
             );
         }
-        Company company = this.repository.findByDomain(domain);
-        if (isNull(company)) {
+        CompanyEntity companyEntity = this.repository.findByDomain(domain);
+        if (isNull(companyEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), domain
             );
         }
-        return company;
+        return companyEntity;
     }
 
     /**
-     * Removes company.
-     * Removes company if it not null
+     * Removes companyEntity.
+     * Removes companyEntity if it not null
      * and has not type CompanyType.MAIN.
      *
-     * @param company the company to remove.
+     * @param companyEntity the companyEntity to remove.
      */
     @Override
     @Transactional
-    public void remove(final Company company) {
-        if (isNotMainCompany(company)) {
-            super.remove(company);
+    public void remove(final CompanyEntity companyEntity) {
+        if (isNotMainCompany(companyEntity)) {
+            super.remove(companyEntity);
         }
     }
 
     /**
-     * Removes main company.
+     * Removes main companyEntity.
      */
     @Override
     @Transactional
@@ -225,38 +225,38 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company> implem
      * @param to   the object to copy
      */
     @Override
-    protected void copy(final Company from, final Company to) {
+    protected void copy(final CompanyEntity from, final CompanyEntity to) {
         to.initialize(from);
     }
 
     /**
-     * Return Class object of {@link Company} class.
+     * Return Class object of {@link CompanyEntity} class.
      *
-     * @return The Class object of {@link Company} class.
+     * @return The Class object of {@link CompanyEntity} class.
      */
     @Override
-    protected Class<Company> getModelClass() {
-        return Company.class;
+    protected Class<CompanyEntity> getModelClass() {
+        return CompanyEntity.class;
     }
 
     /**
-     * Check if a incoming company is not main company.
+     * Check if a incoming companyEntity is not main companyEntity.
      * <pre>
      *     isNotMainCompany(null) = false
      *
-     *     Company company = new Company();
-     *     company.setType(CompanyType.MAIN);
-     *     isNotMainCompany(company) = false
+     *     CompanyEntity companyEntity = new CompanyEntity();
+     *     companyEntity.setType(CompanyType.MAIN);
+     *     isNotMainCompany(companyEntity) = false
      *
-     *     company.setType(CompanyType.PARTNER);
-     *     isNotMainCompany(company) = true
+     *     companyEntity.setType(CompanyType.PARTNER);
+     *     isNotMainCompany(companyEntity) = true
      * </pre>
      *
-     * @param company the company to check.
-     * @return true if the company is not null and
-     * it has not MAIN company type.
+     * @param companyEntity the companyEntity to check.
+     * @return true if the companyEntity is not null and
+     * it has not MAIN companyEntity type.
      */
-    private boolean isNotMainCompany(final Company company) {
-        return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);
+    private boolean isNotMainCompany(final CompanyEntity companyEntity) {
+        return isNotNull(companyEntity) && !companyEntity.getType().equals(CompanyType.MAIN);
     }
 }

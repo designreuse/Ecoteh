@@ -1,8 +1,8 @@
 package ua.com.ecoteh.service.data;
 
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.ecoteh.entity.Content;
-import ua.com.ecoteh.entity.File;
+import ua.com.ecoteh.entity.content.ContentEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ContentRepository;
 import ua.com.ecoteh.util.comparator.ContentComparator;
@@ -14,24 +14,24 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, describes a set of methods
- * for working with objects of {@link Content} class or subclass.
+ * for working with objects of {@link ContentEntity} class or subclass.
  *
- * @param <T> entity type, extends {@link Content}.
+ * @param <T> entity type, extends {@link ContentEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public abstract class ContentServiceImpl<T extends Content>
+public abstract class ContentServiceImpl<T extends ContentEntity>
         extends DataServiceImpl<T> implements ContentService<T> {
 
     /**
      * The object provides a set of standard JPA methods
-     * for working {@link Content} objects with the database.
+     * for working {@link ContentEntity} objects with the database.
      */
     private final ContentRepository<T> repository;
 
     /**
      * The interface of the service layer,
      * describes a set of methods for working
-     * with objects of the class {@link File}.
+     * with objects of the class {@link FileEntity}.
      */
     private final FileService fileService;
 
@@ -73,8 +73,8 @@ public abstract class ContentServiceImpl<T extends Content>
             );
         }
         final T contentToUpdate = getByUrl(url, false);
-        final File newLogo = content.getLogo();
-        final File oldLogo = contentToUpdate.getLogo();
+        final FileEntity newLogo = content.getLogoEntity();
+        final FileEntity oldLogo = contentToUpdate.getLogoEntity();
         if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
@@ -83,7 +83,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Returns object of {@link Content} or subclasses with the incoming title.
+     * Returns object of {@link ContentEntity} or subclasses with the incoming title.
      * If a incoming title is null or empty then throws IllegalArgumentException.
      * If can`t find content by incoming title then throws NullPointerException.
      *
@@ -116,7 +116,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Returns object of {@link Content} or subclasses with the incoming URL.
+     * Returns object of {@link ContentEntity} or subclasses with the incoming URL.
      * If a incoming URL is null or empty then throws IllegalArgumentException.
      * If can`t find content by incoming URL then throws NullPointerException.
      *
@@ -146,7 +146,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Removes object of {@link Content} or subclasses with the incoming title.
+     * Removes object of {@link ContentEntity} or subclasses with the incoming title.
      * Removes content if title is not blank.
      *
      * @param title the title of a content to remove.
@@ -160,7 +160,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Removes object of {@link Content} or subclasses with the incoming URL.
+     * Removes object of {@link ContentEntity} or subclasses with the incoming URL.
      *
      * @param url the URL of a content to remove.
      */
@@ -173,7 +173,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by title.
+     * Sorts and returns objects of {@link ContentEntity} class or subclasses by title.
      * For sorting used {@link ContentComparator.ByTitle} comparator.
      *
      * @param contents the contents to sort.
@@ -190,7 +190,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by URL.
+     * Sorts and returns objects of {@link ContentEntity} class or subclasses by URL.
      * For sorting used {@link ContentComparator.ByUrl} comparator.
      *
      * @param contents the contents to sort.
@@ -207,7 +207,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by title.
+     * Sorts and returns objects of {@link ContentEntity} class or subclasses by title.
      * For sorting used {@link ContentComparator.ByTitle} comparator.
      *
      * @param revers is sort in descending or ascending.
@@ -220,7 +220,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Sorts and returns objects of {@link Content} class or subclasses by URL.
+     * Sorts and returns objects of {@link ContentEntity} class or subclasses by URL.
      * For sorting used {@link ContentComparator.ByUrl} comparator.
      *
      * @param revers Sort in descending or ascending.
@@ -233,7 +233,7 @@ public abstract class ContentServiceImpl<T extends Content>
     }
 
     /**
-     * Validates input object of {@link Content} class or subclasses.
+     * Validates input object of {@link ContentEntity} class or subclasses.
      *
      * @param content   the contents to valid.
      * @param exist     is validate input object by exists.
@@ -274,10 +274,10 @@ public abstract class ContentServiceImpl<T extends Content>
      * Checks incoming photos.
      * The new photo must be not equals to the old photo.
      * <pre>
-     *     File photo1 = new File();
+     *     FileEntity photo1 = new FileEntity();
      *     isNewLogo(photo1, photo1) = false
      *
-     *     File photo2 = new File();
+     *     FileEntity photo2 = new FileEntity();
      *     isNewLogo(photo1, photo2) = false
      *
      *     photo2.setUrl("photo_2);
@@ -289,18 +289,18 @@ public abstract class ContentServiceImpl<T extends Content>
      * @return true if the incoming photos is not equals and
      * new photo URL is not empty.
      */
-    protected static boolean isNewLogo(final File newLogo, final File oldLogo) {
+    protected static boolean isNewLogo(final FileEntity newLogo, final FileEntity oldLogo) {
         return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
     }
 
     /**
      * Check the incoming content to not valid.
-     * Content is not valid if it is null or not valid.
+     * ContentEntity is not valid if it is null or not valid.
      * <pre>
      *     isNotValidated(null, false) = true
      *     isNotValidated(null, true) = true
      *
-     *     Content content = new Content();
+     *     ContentEntity content = new ContentEntity();
      *     content.setValidated(false);
      *     isNotValidated(content, false) = true
      *     isNotValidated(content, true) = false
@@ -312,10 +312,10 @@ public abstract class ContentServiceImpl<T extends Content>
      *
      * @param content the content to check.
      * @param isValid checks the incoming content to valid or not.
-     * @param <T>     entity type, extends {@link Content}.
+     * @param <T>     entity type, extends {@link ContentEntity}.
      * @return true if the content is null or it is not valid.
      */
-    protected static <T extends Content> boolean isNotValidated(
+    protected static <T extends ContentEntity> boolean isNotValidated(
             final T content,
             final boolean isValid
     ) {

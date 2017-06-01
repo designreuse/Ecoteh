@@ -1,8 +1,8 @@
 package ua.com.ecoteh.service.seo;
 
-import ua.com.ecoteh.entity.Article;
-import ua.com.ecoteh.entity.Category;
-import ua.com.ecoteh.entity.Company;
+import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.company.CompanyEntity;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.data.CompanyService;
@@ -42,19 +42,19 @@ public final class SeoServiceImpl implements SeoService {
 
     /**
      * The describes a set of methods for working
-     * with objects of the {@link Company} class.
+     * with objects of the {@link CompanyEntity} class.
      */
     private final CompanyService companyService;
 
     /**
      * The describes a set of methods for working
-     * with objects of the {@link Category} class.
+     * with objects of the {@link CategoryEntity} class.
      */
     private final CategoryService categoryService;
 
     /**
      * The describes a set of methods for working
-     * with objects of the {@link Article} class.
+     * with objects of the {@link ArticleEntity} class.
      */
     private final ArticleService articleService;
 

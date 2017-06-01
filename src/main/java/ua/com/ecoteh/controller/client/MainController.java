@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.entity.Message;
-import ua.com.ecoteh.entity.Response;
-import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.message.MessageEntity;
+import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.MessageService;
 import ua.com.ecoteh.service.data.ResponseService;
@@ -34,7 +34,7 @@ public abstract class MainController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link User} class.
+     * for working with objects of the {@link UserEntity} class.
      */
     protected final UserService userService;
 
@@ -46,19 +46,19 @@ public abstract class MainController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Company} class.
+     * for working with objects of the {@link CompanyEntity} class.
      */
     protected final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Response} class.
+     * for working with objects of the {@link ResponseEntity} class.
      */
     protected final ResponseService responseService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Message} class.
+     * for working with objects of the {@link MessageEntity} class.
      */
     protected final MessageService messageService;
 
@@ -324,7 +324,7 @@ public abstract class MainController {
 
     /**
      * Returns page with all responses.
-     * Request mapping: /responses, /response/all
+     * Request mapping: /responses, /responseEntity/all
      * Method: GET
      *
      * @return The ready object of the ModelAndView class.
@@ -336,13 +336,13 @@ public abstract class MainController {
     public ModelAndView getAllResponsesPage() {
         final ModelAndView modelAndView = this.fabric.allResponsesPage();
         modelAndView.addObject("is_captcha", null);
-        modelAndView.setViewName("response/all");
+        modelAndView.setViewName("responseEntity/all");
         return modelAndView;
     }
 
     /**
      * Returns page with an all responses sorted by date.
-     * Request mapping: /responses/sort, /response/all/sort
+     * Request mapping: /responses/sort, /responseEntity/all/sort
      * Method: GET
      *
      * @param request the implementation of the interface to provide
@@ -405,54 +405,54 @@ public abstract class MainController {
     }
 
     /**
-     * Sends a client message to E-mail and saves it.
+     * Sends a client messageEntity to E-mail and saves it.
      *
-     * @param message the message to send.
+     * @param messageEntity the messageEntity to send.
      */
-    protected void sendMess(final Message message) {
+    protected void sendMess(final MessageEntity messageEntity) {
         new Thread(() -> {
-            final User user = message.getUser();
-            final String text = "User name: " + user.getName() +
-                    "\nPhone: " + user.getContacts().getMobilePhone() +
-                    (isNotEmpty(user.getContacts().getEmail()) ? "\nE-mail: " + user.getContacts().getEmail() : "") +
-                    (isNotEmpty(message.getText()) ? "\nText: " + message.getText() : "");
-            sendToEmail(message.getSubject(), text);
+            final UserEntity userEntity = messageEntity.getUserEntity();
+            final String text = "UserEntity name: " + userEntity.getName() +
+                    "\nPhone: " + userEntity.getContactsEntity().getMobilePhone() +
+                    (isNotEmpty(userEntity.getContactsEntity().getEmail()) ? "\nE-mail: " + userEntity.getContactsEntity().getEmail() : "") +
+                    (isNotEmpty(messageEntity.getText()) ? "\nText: " + messageEntity.getText() : "");
+            sendToEmail(messageEntity.getSubject(), text);
         }).start();
-        this.messageService.add(message);
+        this.messageService.add(messageEntity);
     }
 
     /**
-     * Sends a client response to E-mail and saves it.
+     * Sends a client responseEntity to E-mail and saves it.
      *
-     * @param response the response.
+     * @param responseEntity the responseEntity.
      */
-    protected void sendResp(final Response response) {
+    protected void sendResp(final ResponseEntity responseEntity) {
         new Thread(() -> {
             sendToEmail(
-                    "New Response",
-                    "User name: " + response.getUsername() +
-                            "\nText: " + response.getText()
+                    "New ResponseEntity",
+                    "UserEntity name: " + responseEntity.getUsername() +
+                            "\nText: " + responseEntity.getText()
             );
         }).start();
-        this.responseService.add(response);
-        Cache.removeAll("Response");
+        this.responseService.add(responseEntity);
+        Cache.removeAll("ResponseEntity");
     }
 
     /**
-     * Creates and sends a message to personnel E-mails.
+     * Creates and sends a messageEntity to personnel E-mails.
      *
-     * @param subject the subject of a new message.
-     * @param text    the text of a new message.
+     * @param subject the subject of a new messageEntity.
+     * @param text    the text of a new messageEntity.
      */
     private void sendToEmail(
             final String subject,
             final String text
     ) {
-        final Company mainCompany = this.companyService.getMainCompany();
+        final CompanyEntity mainCompanyEntity = this.companyService.getMainCompany();
         this.senderService.send(
-                subject + " | " + mainCompany.getTitle(), text,
+                subject + " | " + mainCompanyEntity.getTitle(), text,
                 this.userService.getPersonnel(),
-                mainCompany.getSenderEmail(), mainCompany.getSenderPass()
+                mainCompanyEntity.getSenderEmail(), mainCompanyEntity.getSenderPass()
         );
     }
 

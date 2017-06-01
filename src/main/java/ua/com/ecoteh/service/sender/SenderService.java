@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.sender;
 
-import ua.com.ecoteh.entity.User;
+import ua.com.ecoteh.entity.user.UserEntity;
 
 import java.util.Collection;
 
@@ -40,7 +40,7 @@ public interface SenderService {
             String subject,
             String text,
             String recipientEmail,
-            User sender
+            UserEntity sender
     );
 
     /**
@@ -54,8 +54,8 @@ public interface SenderService {
     void send(
             String subject,
             String text,
-            User recipient,
-            User sender
+            UserEntity recipient,
+            UserEntity sender
     );
 
     /**
@@ -87,7 +87,7 @@ public interface SenderService {
             String subject,
             String text,
             String[] recipientEmails,
-            User sender
+            UserEntity sender
     );
 
     /**
@@ -101,8 +101,8 @@ public interface SenderService {
     void send(
             String subject,
             String text,
-            Collection<User> recipients,
-            User sender
+            Collection<UserEntity> recipients,
+            UserEntity sender
     );
 
     /**
@@ -117,7 +117,7 @@ public interface SenderService {
     void send(
             String subject,
             String text,
-            Collection<User> recipients,
+            Collection<UserEntity> recipients,
             String senderEmail,
             String senderEmailPass
     );

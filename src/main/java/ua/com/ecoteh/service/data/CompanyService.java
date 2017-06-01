@@ -1,50 +1,50 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Company;
+import ua.com.ecoteh.entity.company.CompanyEntity;
 
 import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the {@link Company} class.
+ * for working with objects of the {@link CompanyEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface CompanyService extends ContentService<Company> {
+public interface CompanyService extends ContentService<CompanyEntity> {
 
     /**
-     * Updates the main company.
+     * Updates the main companyEntity.
      *
-     * @param company the main company to update.
-     * @return The updating main company.
+     * @param companyEntity the main companyEntity to update.
+     * @return The updating main companyEntity.
      */
-    Company updateMainCompany(Company company);
+    CompanyEntity updateMainCompany(CompanyEntity companyEntity);
 
     /**
-     * Returns main company.
+     * Returns main companyEntity.
      *
-     * @return The main company.
+     * @return The main companyEntity.
      */
-    Company getMainCompany();
+    CompanyEntity getMainCompany();
 
     /**
-     * Removes main company.
+     * Removes main companyEntity.
      */
     void removeMain();
 
     /**
      * Returns all partners companies.
      *
-     * @param isValid is get valid company or not.
+     * @param isValid is get valid companyEntity or not.
      * @return The partners companies.
      */
-    List<Company> getPartners(boolean isValid);
+    List<CompanyEntity> getPartners(boolean isValid);
 
     /**
-     * Returns company with the category domain.
+     * Returns companyEntity with the category domain.
      *
-     * @param domain the domain of a company to return.
-     * @return The object of class {@link Company}.
+     * @param domain the domain of a companyEntity to return.
+     * @return The object of class {@link CompanyEntity}.
      */
-    Company getByDomain(String domain);
+    CompanyEntity getByDomain(String domain);
 }

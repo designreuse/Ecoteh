@@ -4,8 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.*;
-import ua.com.ecoteh.enums.FileType;
+import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.service.data.*;
 
 import java.util.Collection;
@@ -27,37 +32,37 @@ public final class MainMVFabricImpl implements MainMVFabric {
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Article}.
+     * for working with objects of the class {@link ArticleEntity}.
      */
     private final ArticleService articleService;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Category}.
+     * for working with objects of the class {@link CategoryEntity}.
      */
     private final CategoryService categoryService;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Company}.
+     * for working with objects of the class {@link CompanyEntity}.
      */
     private final CompanyService companyService;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link File}.
+     * for working with objects of the class {@link FileEntity}.
      */
     private final FileService fileService;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link Response}.
+     * for working with objects of the class {@link ResponseEntity}.
      */
     private final ResponseService responseService;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the class {@link User}.
+     * for working with objects of the class {@link UserEntity}.
      */
     private final UserService userService;
 
@@ -116,24 +121,24 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView allCategoriesPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.setViewName("category/all");
+        modelAndView.setViewName("categoryEntity/all");
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with all articles sorted by date.
+     * Creates and returns a page with all articleEntities sorted by date.
      *
      * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView allArticlesPage() {
         final ModelAndView modelAndView = allSortByTitleArticlesPage(false);
-        modelAndView.setViewName("article/all");
+        modelAndView.setViewName("articleEntity/all");
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with all articles sorted by sortType.
+     * Creates and returns a page with all articleEntities sorted by sortType.
      *
      * @param sortType the sort type.
      * @param revers   the sorting direction, true or false.
@@ -158,7 +163,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         default:
             modelAndView = allArticlesPage();
         }
-        modelAndView.setViewName("article/all");
+        modelAndView.setViewName("articleEntity/all");
         return modelAndView;
     }
 
@@ -171,7 +176,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     public ModelAndView aboutCompanyPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getMainCompany());
-        final Collection<User> personnel;
+        final Collection<UserEntity> personnel;
         if (isValidContent()) {
             personnel = this.userService.filteredByValid(
                     this.userService.getPersonnel()
@@ -192,8 +197,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView contactsPage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        final Company mainCompany = this.companyService.getMainCompany();
-        modelAndView.addObject("company", mainCompany);
+        final CompanyEntity mainCompanyEntity = this.companyService.getMainCompany();
+        modelAndView.addObject("company", mainCompanyEntity);
         modelAndView.setViewName("company/main_contacts");
         return modelAndView;
     }
@@ -230,23 +235,23 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns a page with one category with incoming URL.
+     * Creates and returns a page with one categoryEntity with incoming URL.
      *
-     * @param url the URL of a category to return.
+     * @param url the URL of a categoryEntity to return.
      * @return The ready object of the ModelAndView class.
      */
     @Override
     public ModelAndView categoryPage(final String url) {
         final ModelAndView modelAndView = categoryWithSortByTitleArticlesPage(url, false);
-        modelAndView.setViewName("category/one");
+        modelAndView.setViewName("categoryEntity/one");
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with category
-     * with all articles sorted by the incoming sort type.
+     * Creates and returns a page with categoryEntity
+     * with all articleEntities sorted by the incoming sort type.
      *
-     * @param url      the category URL.
+     * @param url      the categoryEntity URL.
      * @param sortType the sort type.
      * @param revers   the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
@@ -271,14 +276,14 @@ public final class MainMVFabricImpl implements MainMVFabric {
         default:
             modelAndView = categoryPage(url);
         }
-        modelAndView.setViewName("category/one");
+        modelAndView.setViewName("categoryEntity/one");
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with one article with the incoming URL.
+     * Creates and returns a page with one articleEntity with the incoming URL.
      *
-     * @param url the URL of a article to return.
+     * @param url the URL of a articleEntity to return.
      * @return The ready object of the ModelAndView class.
      */
     @Override
@@ -289,9 +294,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns a page with one article with the incoming number.
+     * Creates and returns a page with one articleEntity with the incoming number.
      *
-     * @param number the number of a article to return.
+     * @param number the number of a articleEntity to return.
      * @return The ready object of the ModelAndView class.
      */
     @Override
@@ -310,9 +315,9 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView partnerPage(final String url) {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        final Company company = this.companyService.getByUrl(url, isValidContent());
-        modelAndView.addObject("company", company);
-        modelAndView.setViewName("company/one");
+        final CompanyEntity companyEntity = this.companyService.getByUrl(url, isValidContent());
+        modelAndView.addObject("company", companyEntity);
+        modelAndView.setViewName("companyEntity/one");
         return modelAndView;
     }
 
@@ -385,7 +390,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns a page with all articles sorted by title.
+     * Creates and returns a page with all articleEntities sorted by title.
      *
      * @param revers the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
@@ -401,7 +406,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns a page with all articles sorted by date.
+     * Creates and returns a page with all articleEntities sorted by date.
      *
      * @param revers the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
@@ -417,7 +422,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns a page with all articles sorted by number.
+     * Creates and returns a page with all articleEntities sorted by number.
      *
      * @param revers the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
@@ -433,30 +438,30 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
-     * Creates and returns a page with a articles sorted by the incoming sort type.
+     * Creates and returns a page with a articleEntities sorted by the incoming sort type.
      *
      * @param sortType the sort type.
      * @param revers   the sorting direction, true or false.
-     * @param articles the sorted articles.
+     * @param articleEntities the sorted articleEntities.
      * @return The ready object of the ModelAndView class.
      */
     private ModelAndView sortArticlesPage(
             final String sortType,
             final boolean revers,
-            final List<Article> articles
+            final List<ArticleEntity> articleEntities
     ) {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject("articles_list", articles);
+        modelAndView.addObject("articles_list", articleEntities);
         modelAndView.addObject("sort", sortType);
         modelAndView.addObject("revers", !revers);
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with category
-     * with all articles sorted by title.
+     * Creates and returns a page with categoryEntity
+     * with all articleEntities sorted by title.
      *
-     * @param url    the category URL.
+     * @param url    the categoryEntity URL.
      * @param revers the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
      */
@@ -464,25 +469,25 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final String url,
             final boolean revers
     ) {
-        final Category category = this.categoryService.getByUrl(url, isValidContent());
+        final CategoryEntity categoryEntity = this.categoryService.getByUrl(url, isValidContent());
         final ModelAndView modelAndView = sortArticlesPage(
                 "date", revers,
                 this.articleService.sortByTitle(
                         isValidContent() ?
-                                this.articleService.filteredByValid(category.getArticles())
-                                : category.getArticles(),
+                                this.articleService.filteredByValid(categoryEntity.getArticleEntities())
+                                : categoryEntity.getArticleEntities(),
                         revers
                 )
         );
-        modelAndView.addObject("category", category);
+        modelAndView.addObject("category", categoryEntity);
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with category
-     * with all articles sorted by date.
+     * Creates and returns a page with categoryEntity
+     * with all articleEntities sorted by date.
      *
-     * @param url    the category URL.
+     * @param url    the categoryEntity URL.
      * @param revers the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
      */
@@ -490,27 +495,27 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final String url,
             final boolean revers
     ) {
-        final Category category = this.categoryService.getByUrl(
+        final CategoryEntity categoryEntity = this.categoryService.getByUrl(
                 url, isValidContent()
         );
         final ModelAndView modelAndView = sortArticlesPage(
                 "date", revers,
                 this.articleService.sortByDate(
                         isValidContent() ?
-                                this.articleService.filteredByValid(category.getArticles())
-                                : category.getArticles(),
+                                this.articleService.filteredByValid(categoryEntity.getArticleEntities())
+                                : categoryEntity.getArticleEntities(),
                         revers
                 )
         );
-        modelAndView.addObject("category", category);
+        modelAndView.addObject("category", categoryEntity);
         return modelAndView;
     }
 
     /**
-     * Creates and returns a page with category
-     * with all articles sorted by number.
+     * Creates and returns a page with categoryEntity
+     * with all articleEntities sorted by number.
      *
-     * @param url    the category URL.
+     * @param url    the categoryEntity URL.
      * @param revers the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
      */
@@ -518,60 +523,60 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final String url,
             final boolean revers
     ) {
-        final Category category = this.categoryService.getByUrl(
+        final CategoryEntity categoryEntity = this.categoryService.getByUrl(
                 url, isValidContent()
         );
         final ModelAndView modelAndView = sortArticlesPage(
                 "date", revers,
                 this.articleService.sortByNumber(
                         isValidContent() ?
-                                this.articleService.filteredByValid(category.getArticles())
-                                : category.getArticles(),
+                                this.articleService.filteredByValid(categoryEntity.getArticleEntities())
+                                : categoryEntity.getArticleEntities(),
                         revers
                 )
         );
-        modelAndView.addObject("category", category);
+        modelAndView.addObject("category", categoryEntity);
         return modelAndView;
     }
 
     /**
-     * Returns a page with the incoming article.
+     * Returns a page with the incoming articleEntity.
      *
-     * @param article the article to return.
+     * @param articleEntity the articleEntity to return.
      * @return The ready object of the ModelAndView class.
      */
-    private ModelAndView articlePage(final Article article) {
+    private ModelAndView articlePage(final ArticleEntity articleEntity) {
         final ModelAndView modelAndView = getDefaultModelAndView();
-        modelAndView.addObject("article", article);
-        if (isValidCategory(article.getCategory())) {
-            final Category category = this.categoryService.getByUrl(
-                    article.getCategory().getUrl(), isValidContent()
+        modelAndView.addObject("article", articleEntity);
+        if (isValidCategory(articleEntity.getCategoryEntity())) {
+            final CategoryEntity categoryEntity = this.categoryService.getByUrl(
+                    articleEntity.getCategoryEntity().getUrl(), isValidContent()
             );
-            final List<Article> articles = this.articleService.shuffle(category.getArticles());
-            articles.remove(article);
-            modelAndView.addObject("articles", articles);
-            modelAndView.addObject("category", category);
+            final List<ArticleEntity> articleEntities = this.articleService.shuffle(categoryEntity.getArticleEntities());
+            articleEntities.remove(articleEntity);
+            modelAndView.addObject("articles", articleEntities);
+            modelAndView.addObject("category", categoryEntity);
         }
-        modelAndView.setViewName("article/one");
+        modelAndView.setViewName("articleEntity/one");
         return modelAndView;
     }
 
     /**
-     * Validated a incoming category.
-     * Category is valid if it is not null and it URL is not empty.
+     * Validated a incoming categoryEntity.
+     * CategoryEntity is valid if it is not null and it URL is not empty.
      * <pre>
      *     validCategory(null) = false
-     *     validCategory(new Category()) = false
+     *     validCategory(new CategoryEntity()) = false
      *
-     *     Category category = new Category();
-     *     category.setUrl("bob");
-     *     validCategory(category) = true
+     *     CategoryEntity categoryEntity = new CategoryEntity();
+     *     categoryEntity.setUrl("bob");
+     *     validCategory(categoryEntity) = true
      * </pre>
      *
-     * @param category the category to check.
-     * @return true if the category is not null and category URL is not empty.
+     * @param categoryEntity the categoryEntity to check.
+     * @return true if the categoryEntity is not null and categoryEntity URL is not empty.
      */
-    private boolean isValidCategory(final Category category) {
-        return isNotNull(category) && isNotEmpty(category.getUrl());
+    private boolean isValidCategory(final CategoryEntity categoryEntity) {
+        return isNotNull(categoryEntity) && isNotEmpty(categoryEntity.getUrl());
     }
 }

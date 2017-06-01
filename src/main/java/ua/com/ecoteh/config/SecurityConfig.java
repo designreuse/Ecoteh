@@ -1,6 +1,6 @@
 package ua.com.ecoteh.config;
 
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.user.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;

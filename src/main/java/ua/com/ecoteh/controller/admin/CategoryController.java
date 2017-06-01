@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Category;
-import ua.com.ecoteh.entity.File;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.data.FileService;
@@ -24,7 +24,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link Category} class or subclasses for admins.
+ * objects of the {@link CategoryEntity} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -53,13 +53,13 @@ public class CategoryController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Category} class.
+     * for working with objects of the {@link CategoryEntity} class.
      */
     private final CategoryService categoryService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
+     * for working with objects of the {@link FileEntity} class.
      */
     private final FileService fileService;
 
@@ -120,18 +120,18 @@ public class CategoryController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Category category = new Category(
+        final CategoryEntity categoryEntity = new CategoryEntity(
                 title,
                 new HtmlCompressor().compress(description),
                 keywords
         );
-        category.setValidated(validated);
+        categoryEntity.setValidated(validated);
         if (isNotEmpty(multipartLogo)) {
-            category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
+            categoryEntity.setLogoEntity(this.fileService.add(categoryEntity.getTitle(), multipartLogo));
         }
-        this.categoryService.add(category);
+        this.categoryService.add(categoryEntity);
         Cache.clear();
-        return "redirect:/category/" + category.getUrl();
+        return "redirect:/categoryEntity/" + categoryEntity.getUrl();
     }
 
     /**
@@ -196,18 +196,18 @@ public class CategoryController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Category category = new Category(
+        final CategoryEntity categoryEntity = new CategoryEntity(
                 title,
                 new HtmlCompressor().compress(description),
                 keywords
         );
-        category.setValidated(validated);
+        categoryEntity.setValidated(validated);
         if (isNotEmpty(multipartLogo)) {
-            category.setLogo(this.fileService.add(category.getTitle(), multipartLogo));
+            categoryEntity.setLogoEntity(this.fileService.add(categoryEntity.getTitle(), multipartLogo));
         }
-        this.categoryService.update(url, category);
+        this.categoryService.update(url, categoryEntity);
         Cache.clear();
-        return "redirect:/category/" + category.getUrl();
+        return "redirect:/categoryEntity/" + categoryEntity.getUrl();
     }
 
     /**

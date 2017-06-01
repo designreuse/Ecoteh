@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Address;
-import ua.com.ecoteh.entity.Company;
-import ua.com.ecoteh.entity.Contacts;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.entity.address.AddressEntity;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.contacts.ContactsEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.company.CompanyType;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
@@ -28,7 +28,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link Company} class or subclasses for admins.
+ * objects of the {@link CompanyEntity} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -57,13 +57,13 @@ public class CompanyController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Company} class.
+     * for working with objects of the {@link CompanyEntity} class.
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
+     * for working with objects of the {@link FileEntity} class.
      */
     private final FileService fileService;
 
@@ -163,26 +163,26 @@ public class CompanyController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final Company company = new Company(title, compressor.compress(description), keywords);
-        company.setInformation(compressor.compress(information));
-        company.setDomain(domain);
-        company.setTagline(tagline);
-        company.setSenderEmail(senderEmail);
-        company.setSenderPass(senderPass);
-        company.setWorkTimeFrom(workTimeFrom);
-        company.setWorkTimeTo(workTimeTo);
-        company.setContacts(
-                new Contacts(
+        final CompanyEntity companyEntity = new CompanyEntity(title, compressor.compress(description), keywords);
+        companyEntity.setInformation(compressor.compress(information));
+        companyEntity.setDomain(domain);
+        companyEntity.setTagline(tagline);
+        companyEntity.setSenderEmail(senderEmail);
+        companyEntity.setSenderPass(senderPass);
+        companyEntity.setWorkTimeFrom(workTimeFrom);
+        companyEntity.setWorkTimeTo(workTimeTo);
+        companyEntity.setContactsEntity(
+                new ContactsEntity(
                         email, mobilePhone, landlinePhone, fax,
                         vkontakte, facebook, twitter, skype
                 )
         );
-        company.setAddress(new Address(address, googleMaps));
+        companyEntity.setAddressEntity(new AddressEntity(address, googleMaps));
         if (isNotEmpty(multipartLogo)) {
-            company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
+            companyEntity.setLogoEntity(this.fileService.add(companyEntity.getTitle(), multipartLogo));
         }
-        company.setType(CompanyType.MAIN);
-        this.companyService.updateMainCompany(company);
+        companyEntity.setType(CompanyType.MAIN);
+        this.companyService.updateMainCompany(companyEntity);
         Cache.clear();
         return "redirect:/company/main";
     }
@@ -277,26 +277,26 @@ public class CompanyController {
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final Company company = new Company(title, compressor.compress(description), keywords);
-        company.setInformation(compressor.compress(information));
-        company.setTitle(title);
-        company.setKeywords(keywords);
-        company.setDomain(domain);
-        company.setTagline(tagline);
-        company.setValidated(validated);
-        company.setContacts(
-                new Contacts(
+        final CompanyEntity companyEntity = new CompanyEntity(title, compressor.compress(description), keywords);
+        companyEntity.setInformation(compressor.compress(information));
+        companyEntity.setTitle(title);
+        companyEntity.setKeywords(keywords);
+        companyEntity.setDomain(domain);
+        companyEntity.setTagline(tagline);
+        companyEntity.setValidated(validated);
+        companyEntity.setContactsEntity(
+                new ContactsEntity(
                         email, mobilePhone, landlinePhone, fax,
                         vkontakte, facebook, twitter, skype
                 )
         );
-        company.setAddress(new Address(address, googleMaps));
+        companyEntity.setAddressEntity(new AddressEntity(address, googleMaps));
         if (isNotEmpty(multipartLogo)) {
-            company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
+            companyEntity.setLogoEntity(this.fileService.add(companyEntity.getTitle(), multipartLogo));
         }
-        this.companyService.add(company);
+        this.companyService.add(companyEntity);
         Cache.clear();
-        return "redirect:/company/" + company.getUrl();
+        return "redirect:/companyEntity/" + companyEntity.getUrl();
     }
 
     /**
@@ -397,26 +397,26 @@ public class CompanyController {
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final Company company = new Company(title, compressor.compress(description), keywords);
-        company.setInformation(compressor.compress(information));
-        company.setTitle(title);
-        company.setKeywords(keywords);
-        company.setDomain(domain);
-        company.setTagline(tagline);
-        company.setValidated(validated);
-        company.setContacts(
-                new Contacts(
+        final CompanyEntity companyEntity = new CompanyEntity(title, compressor.compress(description), keywords);
+        companyEntity.setInformation(compressor.compress(information));
+        companyEntity.setTitle(title);
+        companyEntity.setKeywords(keywords);
+        companyEntity.setDomain(domain);
+        companyEntity.setTagline(tagline);
+        companyEntity.setValidated(validated);
+        companyEntity.setContactsEntity(
+                new ContactsEntity(
                         email, mobilePhone, landlinePhone, fax,
                         vkontakte, facebook, twitter, skype
                 )
         );
-        company.setAddress(new Address(address, googleMaps));
+        companyEntity.setAddressEntity(new AddressEntity(address, googleMaps));
         if (isNotEmpty(multipartLogo)) {
-            company.setLogo(this.fileService.add(company.getTitle(), multipartLogo));
+            companyEntity.setLogoEntity(this.fileService.add(companyEntity.getTitle(), multipartLogo));
         }
-        this.companyService.update(url, company);
+        this.companyService.update(url, companyEntity);
         Cache.clear();
-        return "redirect:/company/" + company.getUrl();
+        return "redirect:/companyEntity/" + companyEntity.getUrl();
     }
 
     /**

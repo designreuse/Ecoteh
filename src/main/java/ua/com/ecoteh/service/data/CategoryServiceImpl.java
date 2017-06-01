@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.ecoteh.entity.Article;
-import ua.com.ecoteh.entity.Category;
+import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
 import ua.com.ecoteh.repository.CategoryRepository;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the class {@link Category}.
+ * with objects of the class {@link CategoryEntity}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -29,12 +29,12 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class CategoryServiceImpl extends ContentServiceImpl<Category> implements CategoryService {
+public final class CategoryServiceImpl extends ContentServiceImpl<CategoryEntity> implements CategoryService {
 
     /**
      * The interface of the service layer,
      * describes a set of methods for working
-     * with objects of the class {@link Article}.
+     * with objects of the class {@link ArticleEntity}.
      */
     private final ArticleService articleService;
 
@@ -57,27 +57,27 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Returns category with the incoming URL.
+     * Returns categoryEntity with the incoming URL.
      *
-     * @param url     the URL of the category to return.
-     * @param isValid is get valid category or not.
-     * @return The category with the incoming URL (newer null).
+     * @param url     the URL of the categoryEntity to return.
+     * @param isValid is get valid categoryEntity or not.
+     * @return The categoryEntity with the incoming URL (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public Category getByUrl(
+    public CategoryEntity getByUrl(
             final String url,
             final boolean isValid
     ) {
-        final Category category = super.getByUrl(url, isValid);
-        category.getArticles().size();
-        return category;
+        final CategoryEntity categoryEntity = super.getByUrl(url, isValid);
+        categoryEntity.getArticleEntities().size();
+        return categoryEntity;
     }
 
     /**
-     * Removes category with incoming id.
+     * Removes categoryEntity with incoming id.
      *
-     * @param id the id of a category to remove.
+     * @param id the id of a categoryEntity to remove.
      */
     @Override
     @Transactional
@@ -86,10 +86,10 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes category with the incoming title.
+     * Removes categoryEntity with the incoming title.
      * Removes content if title is not blank.
      *
-     * @param title the title of a category to remove.
+     * @param title the title of a categoryEntity to remove.
      */
     @Override
     @Transactional
@@ -100,9 +100,9 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes category with the incoming URL.
+     * Removes categoryEntity with the incoming URL.
      *
-     * @param url the URL of a category to remove.
+     * @param url the URL of a categoryEntity to remove.
      */
     @Override
     @Transactional
@@ -113,17 +113,17 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
     }
 
     /**
-     * Removes the category.
-     * Removes category if it is not null.
+     * Removes the categoryEntity.
+     * Removes categoryEntity if it is not null.
      *
-     * @param category the category to remove.
+     * @param categoryEntity the categoryEntity to remove.
      */
     @Override
     @Transactional
-    public void remove(final Category category) {
-        if (isNotNull(category)) {
-            clearArticles(category);
-            super.remove(category);
+    public void remove(final CategoryEntity categoryEntity) {
+        if (isNotNull(categoryEntity)) {
+            clearArticles(categoryEntity);
+            super.remove(categoryEntity);
         }
     }
 
@@ -135,12 +135,12 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
      *     Collection categories = new ArrayList();
-     *     Category category = new Category();
-     *     category.setValidated(false);
-     *     categories.add(category);
+     *     CategoryEntity categoryEntity = new CategoryEntity();
+     *     categoryEntity.setValidated(false);
+     *     categories.add(categoryEntity);
      *     filteredByValid(categories) = empty ArrayList()
      *
-     *     category.setValidated(true);
+     *     categoryEntity.setValidated(true);
      *     filteredByValid(categories) = filtered list of articles
      * </pre>
      *
@@ -149,8 +149,8 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      */
     @Override
     @Transactional
-    public List<Category> filteredByValid(final Collection<Category> categories) {
-        final List<Category> result = new ArrayList<>();
+    public List<CategoryEntity> filteredByValid(final Collection<CategoryEntity> categories) {
+        final List<CategoryEntity> result = new ArrayList<>();
         if (isNotEmpty(categories)) {
             result.addAll(
                     categories.stream()
@@ -169,28 +169,28 @@ public final class CategoryServiceImpl extends ContentServiceImpl<Category> impl
      * @param to   the object to copy
      */
     @Override
-    protected void copy(final Category from, final Category to) {
+    protected void copy(final CategoryEntity from, final CategoryEntity to) {
         to.initialize(from);
     }
 
     /**
-     * Return Class object of {@link Category} class.
+     * Return Class object of {@link CategoryEntity} class.
      *
-     * @return The Class object of {@link Category} class.
+     * @return The Class object of {@link CategoryEntity} class.
      */
     @Override
-    protected Class<Category> getModelClass() {
-        return Category.class;
+    protected Class<CategoryEntity> getModelClass() {
+        return CategoryEntity.class;
     }
 
     /**
-     * Remove articles in selected category.
+     * Remove articles in selected categoryEntity.
      *
-     * @param category a selected category.
+     * @param categoryEntity a selected categoryEntity.
      */
-    private void clearArticles(final Category category) {
-        final Collection<Article> articles = category.getArticles();
-        category.clearArticles();
-        this.articleService.update(articles);
+    private void clearArticles(final CategoryEntity categoryEntity) {
+        final Collection<ArticleEntity> articleEntities = categoryEntity.getArticleEntities();
+        categoryEntity.clearArticles();
+        this.articleService.update(articleEntities);
     }
 }

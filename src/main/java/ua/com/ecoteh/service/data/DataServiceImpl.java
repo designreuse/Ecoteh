@@ -1,7 +1,7 @@
 package ua.com.ecoteh.service.data;
 
 import org.apache.log4j.Logger;
-import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.entity.model.ModelEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.DataRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,12 +13,12 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, describes a set of methods
- * for working with objects of {@link Model} class or subclasses.
+ * for working with objects of {@link ModelEntity} class or subclasses.
  *
- * @param <T> entity type, extends {@link Model}.
+ * @param <T> entity type, extends {@link ModelEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
+public abstract class DataServiceImpl<T extends ModelEntity> implements DataService<T> {
 
     /**
      * The object for logging information.
@@ -27,7 +27,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
 
     /**
      * The object provides a set of standard JPA methods
-     * for working {@link Model} objects with the database.
+     * for working {@link ModelEntity} objects with the database.
      */
     private final DataRepository<T> repository;
 
@@ -42,13 +42,13 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Saves and returns object of {@link Model} class or subclasses.
-     * Returns input object if model is not valid.
-     * If can`t find model then throws NullPointerException.
+     * Saves and returns object of {@link ModelEntity} class or subclasses.
+     * Returns input object if modelEntity is not valid.
+     * If can`t find modelEntity then throws NullPointerException.
      *
-     * @param model the model to add.
-     * @return The saving model or input object (newer null).
-     * @throws NullPointerException Throw exception when saving model is null.
+     * @param model the modelEntity to add.
+     * @return The saving modelEntity or input object (newer null).
+     * @throws NullPointerException Throw exception when saving modelEntity is null.
      */
     @Override
     @Transactional
@@ -67,14 +67,14 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Saves and returns objects of {@link Model} class or subclasses.
+     * Saves and returns objects of {@link ModelEntity} class or subclasses.
      * Returns empty collection if models is empty.
      * <pre>
      *     addAll(null) = empty ArrayList()
      *     addAll(new ArrayList()) = empty ArrayList()
      *
      *     Collection models = new ArrayList();
-     *     models.add(new Model());
+     *     models.add(new ModelEntity());
      *     addAll(models) = saving models
      * </pre>
      *
@@ -96,12 +96,12 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Updates and returns object of {@link Model} class or subclasses.
-     * If can`t find model then throws NullPointerException.
+     * Updates and returns object of {@link ModelEntity} class or subclasses.
+     * If can`t find modelEntity then throws NullPointerException.
      *
-     * @param model the model to update.
+     * @param model the modelEntity to update.
      * @return The updating models (newer null).
-     * @throws NullPointerException Throw exception when saving model is null.
+     * @throws NullPointerException Throw exception when saving modelEntity is null.
      */
     @Override
     @Transactional
@@ -120,14 +120,14 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Updates and returns objects of {@link Model} class or subclasses.
+     * Updates and returns objects of {@link ModelEntity} class or subclasses.
      * Return empty collection if models is empty.
      * <pre>
      *     update(null) = empty ArrayList()
      *     update(new ArrayList()) = empty ArrayList()
      *
      *     Collection models = new ArrayList();
-     *     models.add(new Model());
+     *     models.add(new ModelEntity());
      *     update(models) = saving models
      * </pre>
      *
@@ -150,11 +150,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns object of class {@link Model} or subclasses with incoming id.
-     * If can`t find model then throws NullPointerException.
+     * Returns object of class {@link ModelEntity} or subclasses with incoming id.
+     * If can`t find modelEntity then throws NullPointerException.
      *
-     * @param id the id of a model to return.
-     * @return The model with incoming id (newer null).
+     * @param id the id of a modelEntity to return.
+     * @return The modelEntity with incoming id (newer null).
      * @throws NullPointerException Throw exception when object with parameter id is not exist.
      */
     @Override
@@ -171,7 +171,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns all valid objects of {@link Model} class or subclasses.
+     * Returns all valid objects of {@link ModelEntity} class or subclasses.
      *
      * @return The all models (newer null).
      */
@@ -182,7 +182,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns all or valid objects of {@link Model} class or subclasses
+     * Returns all or valid objects of {@link ModelEntity} class or subclasses
      * depending on the parameter value.
      * <pre>
      *     getAll(true) = all valid models
@@ -200,10 +200,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Removes object of {@link Model} class or subclasses
+     * Removes object of {@link ModelEntity} class or subclasses
      * with parameter id.
      *
-     * @param id the id of a model to remove.
+     * @param id the id of a modelEntity to remove.
      */
     @Override
     @Transactional
@@ -212,10 +212,10 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Removes object of {@link Model} class or subclasses.
-     * Removes model if it is not null.
+     * Removes object of {@link ModelEntity} class or subclasses.
+     * Removes modelEntity if it is not null.
      *
-     * @param model the model to remove.
+     * @param model the modelEntity to remove.
      */
     @Override
     @Transactional
@@ -226,7 +226,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Removes objects of {@link Model} class or subclasses.
+     * Removes objects of {@link ModelEntity} class or subclasses.
      * Removes models if are not null.
      *
      * @param models the models to remove.
@@ -240,7 +240,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Removes all objects of {@link Model} class or subclasses.
+     * Removes all objects of {@link ModelEntity} class or subclasses.
      */
     @Override
     @Transactional
@@ -249,11 +249,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Checks whether the object of {@link Model} class or subclasses
+     * Checks whether the object of {@link ModelEntity} class or subclasses
      * with parameter id is exists.
      *
-     * @param id the id of a model to exists.
-     * @return Returns true if the model is exists,
+     * @param id the id of a modelEntity to exists.
+     * @return Returns true if the modelEntity is exists,
      * otherwise returns false.
      */
     @Override
@@ -263,11 +263,11 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Checks whether the object of {@link Model} class
-     * or subclasses is exists. If model is null then return false.
+     * Checks whether the object of {@link ModelEntity} class
+     * or subclasses is exists. If modelEntity is null then return false.
      *
      * @param model the models to exists.
-     * @return Returns true if the model is exists,
+     * @return Returns true if the modelEntity is exists,
      * otherwise returns false.
      */
     @Override
@@ -277,7 +277,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Sorts and returns objects of {@link Model} class or subclasses
+     * Sorts and returns objects of {@link ModelEntity} class or subclasses
      * by the comparator. If models is empty then return empty collection.
      *
      * @param models     the models to sort.
@@ -303,7 +303,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Sorts and returns objects of {@link Model} class or subclasses
+     * Sorts and returns objects of {@link ModelEntity} class or subclasses
      * by the comparator.
      *
      * @param models     the models to sort.
@@ -320,7 +320,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns a list with the incoming list objects of {@link Model}
+     * Returns a list with the incoming list objects of {@link ModelEntity}
      * class or subclasses.
      * <pre>
      *     subList(null, ..., ...) = empty ArrayList
@@ -358,7 +358,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns a list objects of {@link Model} class or subclasses.
+     * Returns a list objects of {@link ModelEntity} class or subclasses.
      *
      * @param fromIndex the initial index.
      * @param toIndex   the final index.
@@ -374,7 +374,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Returns a list valid objects of {@link Model} class or subclasses.
+     * Returns a list valid objects of {@link ModelEntity} class or subclasses.
      *
      * @param models the models to filter.
      * @return The filter list of models (newer null).
@@ -406,42 +406,42 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Return name of {@link Model} class or subclasses.
+     * Return name of {@link ModelEntity} class or subclasses.
      *
-     * @return The name of {@link Model} class or subclasses.
+     * @return The name of {@link ModelEntity} class or subclasses.
      */
     protected String getClassName() {
         return getModelClass().getName();
     }
 
     /**
-     * Return simple name of {@link Model} class or subclasses.
+     * Return simple name of {@link ModelEntity} class or subclasses.
      *
-     * @return The simple name of {@link Model} class or subclasses.
+     * @return The simple name of {@link ModelEntity} class or subclasses.
      */
     String getClassSimpleName() {
         return getModelClass().getSimpleName();
     }
 
     /**
-     * Validated a incoming model.
-     * Model is valid if it is not null and it validated.
+     * Validated a incoming modelEntity.
+     * ModelEntity is valid if it is not null and it validated.
      * <pre>
      *     isValidated(null) = false
      *
-     *     Model model = new Model();
-     *     model.setValidated(false);
-     *     isValidated(model) = false
+     *     ModelEntity modelEntity = new ModelEntity();
+     *     modelEntity.setValidated(false);
+     *     isValidated(modelEntity) = false
      *
-     *     model.setValidated(true);
-     *     isValidated(model) = true
+     *     modelEntity.setValidated(true);
+     *     isValidated(modelEntity) = true
      * </pre>
      *
-     * @param model the model to check.
-     * @return true if the model is not null and it validated.
+     * @param modelEntity the modelEntity to check.
+     * @return true if the modelEntity is not null and it validated.
      */
-    protected static boolean isValidated(final Model model) {
-        return isNotNull(model) && model.isValidated();
+    protected static boolean isValidated(final ModelEntity modelEntity) {
+        return isNotNull(modelEntity) && modelEntity.isValidated();
     }
 
     /**
@@ -506,12 +506,12 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      *     getReversComparator(comparator, false) = comparator
      * </pre>
      *
-     * @param <T>        entity type, extends {@link Model}.
+     * @param <T>        entity type, extends {@link ModelEntity}.
      * @param comparator the comparator to sort models.
      * @param revers     is sort in descending or ascending.
      * @return The comparator to sort models (newer null).
      */
-    private <T extends Model> Comparator<T> prepareComparator(
+    private <T extends ModelEntity> Comparator<T> prepareComparator(
             final Comparator<T> comparator,
             final boolean revers
     ) {
@@ -537,19 +537,19 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     }
 
     /**
-     * Return Class object of {@link Model} or subclasses.
+     * Return Class object of {@link ModelEntity} or subclasses.
      *
-     * @return The Class object of {@link Model} or subclasses.
+     * @return The Class object of {@link ModelEntity} or subclasses.
      */
     protected abstract Class<T> getModelClass();
 
     /**
-     * Validates input object of class {@link Model} or subclasses.
+     * Validates input object of class {@link ModelEntity} or subclasses.
      *
-     * @param model     the model to valid.
-     * @param exist     is validate input model by exists.
-     * @param duplicate is validate input model by duplicate.
-     * @return Returns true if the model is valid, otherwise returns false.
+     * @param model     the modelEntity to valid.
+     * @param exist     is validate input modelEntity by exists.
+     * @param duplicate is validate input modelEntity by duplicate.
+     * @return Returns true if the modelEntity is valid, otherwise returns false.
      */
     protected abstract boolean validated(
             final T model,

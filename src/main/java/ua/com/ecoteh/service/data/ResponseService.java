@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Response;
+import ua.com.ecoteh.entity.response.ResponseEntity;
 
 import java.util.Collection;
 import java.util.Date;
@@ -8,58 +8,58 @@ import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the class {@link Response}.
+ * for working with objects of the class {@link ResponseEntity}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface ResponseService extends DataService<Response> {
+public interface ResponseService extends DataService<ResponseEntity> {
 
     /**
-     * Initializes, updates and returns response with incoming id.
+     * Initializes, updates and returns responseEntity with incoming id.
      *
-     * @param id       the id of a response to update.
-     * @param response the response to update.
-     * @return The updating response with incoming id.
+     * @param id       the id of a responseEntity to update.
+     * @param responseEntity the responseEntity to update.
+     * @return The updating responseEntity with incoming id.
      */
-    Response update(long id, Response response);
+    ResponseEntity update(long id, ResponseEntity responseEntity);
 
     /**
-     * Sorts and returns responses by date.
+     * Sorts and returns responseEntities by date.
      *
-     * @param responses the responses to sort.
+     * @param responseEntities the responseEntities to sort.
      * @param revers    Sort in descending or ascending.
-     * @return The sorted list of responses.
+     * @return The sorted list of responseEntities.
      */
-    List<Response> sortByDate(Collection<Response> responses, boolean revers);
+    List<ResponseEntity> sortByDate(Collection<ResponseEntity> responseEntities, boolean revers);
 
     /**
-     * Sorts and returns responses by date.
+     * Sorts and returns responseEntities by date.
      *
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of responses.
+     * @return The sorted list of responseEntities.
      */
-    List<Response> getAndSortByDate(boolean revers);
+    List<ResponseEntity> getAndSortByDate(boolean revers);
 
     /**
-     * Filters and returns responses by the incoming dates.
+     * Filters and returns responseEntities by the incoming dates.
      *
-     * @param responses  the responses to filter.
+     * @param responseEntities  the responseEntities to filter.
      * @param startDate  the initial date.
      * @param finishDate the  date.
-     * @return The filtered list of responses.
+     * @return The filtered list of responseEntities.
      */
-    List<Response> filterByDate(
-            Collection<Response> responses,
+    List<ResponseEntity> filterByDate(
+            Collection<ResponseEntity> responseEntities,
             Date startDate,
             Date finishDate
     );
 
     /**
-     * Filters and returns responses by the incoming dates.
+     * Filters and returns responseEntities by the incoming dates.
      *
      * @param startDate  the initial date.
      * @param finishDate the  date.
-     * @return The filtered list of responses.
+     * @return The filtered list of responseEntities.
      */
-    List<Response> getAndFilterByDate(Date startDate, Date finishDate);
+    List<ResponseEntity> getAndFilterByDate(Date startDate, Date finishDate);
 }

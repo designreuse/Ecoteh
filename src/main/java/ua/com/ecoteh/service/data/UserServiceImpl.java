@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.config.DefaultAccounts;
-import ua.com.ecoteh.entity.File;
-import ua.com.ecoteh.entity.User;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.UserRepository;
 import ua.com.ecoteh.util.comparator.UserComparator;
@@ -26,7 +26,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the {@link User} class.
+ * with objects of the {@link UserEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -37,18 +37,18 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class UserServiceImpl extends DataServiceImpl<User>
+public final class UserServiceImpl extends DataServiceImpl<UserEntity>
         implements UserService, UserDetailsService {
 
     /**
      * The interface provides a set of standard methods for working
-     * {@link User} objects with the database.
+     * {@link UserEntity} objects with the database.
      */
     private final UserRepository repository;
 
     /**
      * The interface of the service layer, describes a set of methods
-     * for working with objects of the {@link File} class.
+     * for working with objects of the {@link FileEntity} class.
      */
     private final FileService fileService;
 
@@ -70,229 +70,229 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Returns authenticated user.
-     * If authenticated user is empty then returns null.
+     * Returns authenticated userEntity.
+     * If authenticated userEntity is empty then returns null.
      *
-     * @return The authenticated user or null.
+     * @return The authenticated userEntity or null.
      */
     @Override
     @Transactional(readOnly = true)
-    public User getAuthenticatedUser() {
-        User user;
+    public UserEntity getAuthenticatedUser() {
+        UserEntity userEntity;
         try {
-            user = (User) SecurityContextHolder.getContext()
+            userEntity = (UserEntity) SecurityContextHolder.getContext()
                     .getAuthentication().getPrincipal();
         } catch (Exception ex) {
-            user = null;
+            userEntity = null;
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Locates the user based on the username.
-     * If can`t find user by incoming username then throws UsernameNotFoundException.
+     * Locates the userEntity based on the username.
+     * If can`t find userEntity by incoming username then throws UsernameNotFoundException.
      *
-     * @param username the username identifying the user whose data is required.
-     * @return A fully populated user record (never null).
-     * @throws UsernameNotFoundException if the user could not be found
-     *                                   or the user has no GrantedAuthority.
+     * @param username the username identifying the userEntity whose data is required.
+     * @return A fully populated userEntity record (never null).
+     * @throws UsernameNotFoundException if the userEntity could not be found
+     *                                   or the userEntity has no GrantedAuthority.
      */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        User user;
+        UserEntity userEntity;
         try {
-            user = DefaultAccounts.get(username);
-            if (isNull(user)) {
-                user = getByLogin(username);
+            userEntity = DefaultAccounts.get(username);
+            if (isNull(userEntity)) {
+                userEntity = getByLogin(username);
             }
         } catch (NullPointerException ex) {
             throw new UsernameNotFoundException(ex.getMessage(), ex);
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Saves and returns a new user.
+     * Saves and returns a new userEntity.
      *
-     * @param user a user to save.
-     * @return The new saving user (never null).
+     * @param userEntity a userEntity to save.
+     * @return The new saving userEntity (never null).
      */
     @Override
     @Transactional
-    public User add(final User user) {
-        if (isNotNull(user)) {
-            user.setRole(UserRole.ADMIN);
+    public UserEntity add(final UserEntity userEntity) {
+        if (isNotNull(userEntity)) {
+            userEntity.setRole(UserRole.ADMIN);
         }
-        return super.add(user);
+        return super.add(userEntity);
     }
 
     /**
-     * Updates and returns user with incoming URL.
+     * Updates and returns userEntity with incoming URL.
      *
-     * @param url  the URL of a user to update.
-     * @param user the user to update.
-     * @return The updating user with incoming URL (never null).
+     * @param url  the URL of a userEntity to update.
+     * @param userEntity the userEntity to update.
+     * @return The updating userEntity with incoming URL (never null).
      */
     @Override
     @Transactional
-    public User update(
+    public UserEntity update(
             final String url,
-            final User user
+            final UserEntity userEntity
     ) {
-        final User userToUpdate = getByUrl(url);
-        final File newPhoto = user.getPhoto();
-        final File oldPhoto = userToUpdate.getPhoto();
+        final UserEntity userEntityToUpdate = getByUrl(url);
+        final FileEntity newPhoto = userEntity.getPhotoEntity();
+        final FileEntity oldPhoto = userEntityToUpdate.getPhotoEntity();
         if (isNewPhoto(newPhoto, oldPhoto)) {
             this.fileService.deleteFile(oldPhoto.getUrl());
         }
-        copy(user, userToUpdate);
-        return update(userToUpdate);
+        copy(userEntity, userEntityToUpdate);
+        return update(userEntityToUpdate);
     }
 
     /**
-     * Returns user with the incoming name.
+     * Returns userEntity with the incoming name.
      * If a incoming name is null or empty then throws IllegalArgumentException.
-     * If can`t find user by incoming name then throws NullPointerException.
+     * If can`t find userEntity by incoming name then throws NullPointerException.
      *
-     * @param name the name of a user to return.
-     * @return The user with the incoming name (never null).
+     * @param name the name of a userEntity to return.
+     * @return The userEntity with the incoming name (never null).
      * @throws IllegalArgumentException Throw exception when parameter name is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
+     * @throws NullPointerException     Throws exception if userEntity is absent.
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByName(final String name) throws IllegalArgumentException, NullPointerException {
+    public UserEntity getByName(final String name) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(name)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_NAME_MESSAGE,
                     getClassSimpleName()
             );
         }
-        final User user = this.repository.findByName(name);
-        if (isNull(user)) {
+        final UserEntity userEntity = this.repository.findByName(name);
+        if (isNull(userEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_NAME_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), name
             );
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Returns user with the incoming URL.
+     * Returns userEntity with the incoming URL.
      * If a incoming URL is null or empty then throws IllegalArgumentException.
-     * If can`t find user by incoming URL then throws NullPointerException.
+     * If can`t find userEntity by incoming URL then throws NullPointerException.
      *
-     * @param url the URL of a user to return.
-     * @return The user with the incoming URL (never null).
+     * @param url the URL of a userEntity to return.
+     * @return The userEntity with the incoming URL (never null).
      * @throws IllegalArgumentException Throw exception when parameter URL is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
+     * @throws NullPointerException     Throws exception if userEntity is absent.
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
+    public UserEntity getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_URL_MESSAGE,
                     getClassSimpleName()
             );
         }
-        final User user = this.repository.findByUrl(url);
-        if (isNull(user)) {
+        final UserEntity userEntity = this.repository.findByUrl(url);
+        if (isNull(userEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), url
             );
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Returns user with the incoming login.
+     * Returns userEntity with the incoming login.
      * If a incoming login is null or empty then throws IllegalArgumentException.
-     * If can`t find user by incoming login then throws NullPointerException.
+     * If can`t find userEntity by incoming login then throws NullPointerException.
      *
-     * @param login the login of a user to return.
-     * @return The user with the incoming login (never null).
+     * @param login the login of a userEntity to return.
+     * @return The userEntity with the incoming login (never null).
      * @throws IllegalArgumentException Throw exception when parameter login is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
+     * @throws NullPointerException     Throws exception if userEntity is absent.
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByLogin(final String login) throws IllegalArgumentException, NullPointerException {
+    public UserEntity getByLogin(final String login) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(login)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_LOGIN_MESSAGE,
                     getClassSimpleName()
             );
         }
-        final User user = this.repository.findByEncryptedLogin(
+        final UserEntity userEntity = this.repository.findByEncryptedLogin(
                 new Base64Encryptor(login).encrypt()
         );
-        if (isNull(user)) {
+        if (isNull(userEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_LOGIN_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), login
             );
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Returns user with the incoming E-mail.
+     * Returns userEntity with the incoming E-mail.
      * If a incoming E-mail is null or empty then throws IllegalArgumentException.
-     * If can`t find user by incoming E-mail then throws NullPointerException.
+     * If can`t find userEntity by incoming E-mail then throws NullPointerException.
      *
-     * @param email the E-mail of a user to return.
-     * @return The user with the incoming E-mail (never null).
+     * @param email the E-mail of a userEntity to return.
+     * @return The userEntity with the incoming E-mail (never null).
      * @throws IllegalArgumentException Throw exception when parameter E-mail is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
+     * @throws NullPointerException     Throws exception if userEntity is absent.
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByEmail(final String email) throws IllegalArgumentException, NullPointerException {
+    public UserEntity getByEmail(final String email) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(email)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_EMAIL_MESSAGE,
                     getClassSimpleName()
             );
         }
-        User user = this.repository.findByContactsEmail(email);
-        if (isNull(user)) {
+        UserEntity userEntity = this.repository.findByContactsEntityEmail(email);
+        if (isNull(userEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_EMAIL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), email
             );
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Returns user with the incoming phone.
+     * Returns userEntity with the incoming phone.
      * If a incoming phone is null or empty then throws IllegalArgumentException.
-     * If can`t find user by incoming phone then throws NullPointerException.
+     * If can`t find userEntity by incoming phone then throws NullPointerException.
      *
-     * @param phone the phone of a user to return.
-     * @return The user with the incoming phone (never null).
+     * @param phone the phone of a userEntity to return.
+     * @return The userEntity with the incoming phone (never null).
      * @throws IllegalArgumentException Throw exception when parameter phone is blank.
-     * @throws NullPointerException     Throws exception if user is absent.
+     * @throws NullPointerException     Throws exception if userEntity is absent.
      */
     @Override
     @Transactional(readOnly = true)
-    public User getByPhone(final String phone) throws IllegalArgumentException, NullPointerException {
+    public UserEntity getByPhone(final String phone) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(phone)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_PHONE_MESSAGE,
                     getClassSimpleName()
             );
         }
-        User user = getByMobilePhone(phone);
-        if (isNull(user)) {
-            user = getByLandlinePhone(phone);
-            if (isNull(user)) {
-                user = getByFax(phone);
-                if (isNull(user)) {
+        UserEntity userEntity = getByMobilePhone(phone);
+        if (isNull(userEntity)) {
+            userEntity = getByLandlinePhone(phone);
+            if (isNull(userEntity)) {
+                userEntity = getByFax(phone);
+                if (isNull(userEntity)) {
                     throw getNullPointerException(
                             ExceptionMessage.FINDING_BY_PHONE_OBJECT_IS_NULL_MESSAGE,
                             getClassSimpleName(), phone
@@ -300,28 +300,28 @@ public final class UserServiceImpl extends DataServiceImpl<User>
                 }
             }
         }
-        return user;
+        return userEntity;
     }
 
     /**
-     * Returns main admin user.
+     * Returns main admin userEntity.
      *
      * @return The main admin (never null).
      */
     @Override
     @Transactional(readOnly = true)
-    public User getMainAdmin() {
+    public UserEntity getMainAdmin() {
         return get(1L);
     }
 
     /**
-     * Returns users with role UserRole.ADMIN.
+     * Returns userEntities with role UserRole.ADMIN.
      *
-     * @return The users with role UserRole.ADMIN (never null).
+     * @return The userEntities with role UserRole.ADMIN (never null).
      */
     @Override
     @Transactional(readOnly = true)
-    public Collection<User> getAdmins() {
+    public Collection<UserEntity> getAdmins() {
         return getAndFilterByRole(UserRole.ADMIN);
     }
 
@@ -332,15 +332,15 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     @Override
     @Transactional(readOnly = true)
-    public Collection<User> getPersonnel() {
+    public Collection<UserEntity> getPersonnel() {
         return getAdmins();
     }
 
     /**
-     * Removes user with the parameter name.
-     * Removes user if name is not null and not empty.
+     * Removes userEntity with the parameter name.
+     * Removes userEntity if name is not null and not empty.
      *
-     * @param name the name of a user to remove.
+     * @param name the name of a userEntity to remove.
      */
     @Override
     @Transactional
@@ -351,10 +351,10 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Removes user with the incoming URL.
-     * Removes user if URL is not null and not empty.
+     * Removes userEntity with the incoming URL.
+     * Removes userEntity if URL is not null and not empty.
      *
-     * @param url the URL of a user to remove.
+     * @param url the URL of a userEntity to remove.
      */
     @Override
     @Transactional
@@ -365,60 +365,60 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Sorts and returns users by name.
+     * Sorts and returns userEntities by name.
      * For sorting used {@link UserComparator.ByName} comparator.
      *
-     * @param users  the users to sort.
+     * @param userEntities  the userEntities to sort.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of users or empty list (newer null).
+     * @return The sorted list of userEntities or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> sortByName(
-            final Collection<User> users,
+    public List<UserEntity> sortByName(
+            final Collection<UserEntity> userEntities,
             final boolean revers
     ) {
-        return sort(users, new UserComparator.ByName(), revers);
+        return sort(userEntities, new UserComparator.ByName(), revers);
     }
 
     /**
-     * Sorts and returns users by URL.
+     * Sorts and returns userEntities by URL.
      * For sorting used {@link UserComparator.ByUrl} comparator.
      *
-     * @param users  the users to sort.
+     * @param userEntities  the userEntities to sort.
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of users or empty list (newer null).
+     * @return The sorted list of userEntities or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> sortByUrl(
-            final Collection<User> users,
+    public List<UserEntity> sortByUrl(
+            final Collection<UserEntity> userEntities,
             final boolean revers
     ) {
-        return sort(users, new UserComparator.ByUrl(), revers);
+        return sort(userEntities, new UserComparator.ByUrl(), revers);
     }
 
     /**
-     * Sorts and returns users by role.
+     * Sorts and returns userEntities by role.
      * For sorting used {@link UserComparator.ByRole} comparator.
      *
-     * @param users  the users to sort.
+     * @param userEntities  the userEntities to sort.
      * @param role   the role filtering.
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of users or empty list (newer null).
+     * @return The sorted list of userEntities or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> sortByRole(
-            final Collection<User> users,
+    public List<UserEntity> sortByRole(
+            final Collection<UserEntity> userEntities,
             final UserRole role,
             final boolean revers
     ) {
-        return sort(users, new UserComparator.ByRole(role), revers);
+        return sort(userEntities, new UserComparator.ByRole(role), revers);
     }
 
     /**
-     * Sorts and returns all users by name.
+     * Sorts and returns all userEntities by name.
      * For sorting used {@link UserComparator.ByName} comparator.
      *
      * @param revers is sort in descending or ascending.
@@ -426,34 +426,34 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndSortByName(final boolean revers) {
+    public List<UserEntity> getAndSortByName(final boolean revers) {
         return sortByName(getAll(), revers);
     }
 
     /**
-     * Sorts and returns all users by URL.
+     * Sorts and returns all userEntities by URL.
      * For sorting used {@link UserComparator.ByUrl} comparator.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndSortByUrl(final boolean revers) {
+    public List<UserEntity> getAndSortByUrl(final boolean revers) {
         return sortByUrl(getAll(), revers);
     }
 
     /**
-     * Sorts and returns all users by role.
+     * Sorts and returns all userEntities by role.
      * For sorting used {@link UserComparator.ByRole} comparator.
      *
      * @param role   a role filtering.
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of users.
+     * @return The sorted list of userEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndSortByRole(
+    public List<UserEntity> getAndSortByRole(
             final UserRole role,
             final boolean revers
     ) {
@@ -461,24 +461,24 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Filters and returns users by the incoming role.
+     * Filters and returns userEntities by the incoming role.
      * <pre>
      *     filterByRole(null, null) = empty ArrayList()
      *     filterByRole(null, UserRole.ADMIN) = empty ArrayList()
      *
-     *     Collection users = new ArrayList();
-     *     users.add(new User());
-     *     filterByCategory(users, UserRole.ADMIN) = filtered list of users
+     *     Collection userEntities = new ArrayList();
+     *     userEntities.add(new UserEntity());
+     *     filterByCategory(userEntities, UserRole.ADMIN) = filtered list of userEntities
      * </pre>
      *
-     * @param users the users to filter.
+     * @param userEntities the userEntities to filter.
      * @param role  a role filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> filterByRole(
-            final Collection<User> users,
+    public List<UserEntity> filterByRole(
+            final Collection<UserEntity> userEntities,
             final UserRole role
     ) {
         List<UserRole> roles = null;
@@ -486,13 +486,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
             roles = new ArrayList<>(1);
             roles.add(role);
         }
-        return filterByRoles(users, roles);
+        return filterByRoles(userEntities, roles);
     }
 
     /**
-     * Filters and returns users by incoming roles.
-     * Returns empty list if users is empty.
-     * Returns back users if roles is empty.
+     * Filters and returns userEntities by incoming roles.
+     * Returns empty list if userEntities is empty.
+     * Returns back userEntities if roles is empty.
      * <pre>
      *     filterByRoles(null, ..) = empty ArrayList()
      *     filterByRoles(new ArrayList(), ..) = empty ArrayList()
@@ -501,104 +501,104 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      *     roles.add(UserRole.ADMIN);
      *     filterByCategories(null, roles) = empty ArrayList()
      *
-     *     Collection users = new ArrayList();
-     *     users.add(new User());
-     *     filterByCategories(users, null) = users
+     *     Collection userEntities = new ArrayList();
+     *     userEntities.add(new UserEntity());
+     *     filterByCategories(userEntities, null) = userEntities
      *
-     *     filterByCategories(users, roles) = filtered list of users
+     *     filterByCategories(userEntities, roles) = filtered list of userEntities
      * </pre>
      *
-     * @param users the users to filter.
+     * @param userEntities the userEntities to filter.
      * @param roles a roles filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> filterByRoles(
-            final Collection<User> users,
+    public List<UserEntity> filterByRoles(
+            final Collection<UserEntity> userEntities,
             final Collection<UserRole> roles
     ) {
-        final List<User> result = new ArrayList<>();
-        if (isNotEmpty(users)) {
+        final List<UserEntity> result = new ArrayList<>();
+        if (isNotEmpty(userEntities)) {
             if (isNotEmpty(roles)) {
-                for (User user : users) {
+                for (UserEntity userEntity : userEntities) {
                     result.addAll(
                             roles.stream()
-                                    .filter(role -> roleFilter(user, role))
-                                    .map(role -> user)
+                                    .filter(role -> roleFilter(userEntity, role))
+                                    .map(role -> userEntity)
                                     .collect(Collectors.toList())
                     );
                 }
             } else {
-                result.addAll(users);
+                result.addAll(userEntities);
             }
         }
         return result;
     }
 
     /**
-     * Filters and returns users by incoming role.
+     * Filters and returns userEntities by incoming role.
      * <pre>
-     *     getAndFilterByRole(null) = all users
-     *     getAndFilterByRole(UserRole.ADMIN) = filtered list of users
+     *     getAndFilterByRole(null) = all userEntities
+     *     getAndFilterByRole(UserRole.ADMIN) = filtered list of userEntities
      * </pre>
      *
      * @param role a role filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRole(final UserRole role) {
+    public List<UserEntity> getAndFilterByRole(final UserRole role) {
         return filterByRole(getAll(false), role);
     }
 
     /**
-     * Filters and returns users by roles.
+     * Filters and returns userEntities by roles.
      * <pre>
-     *     getAndFilterByRoles(null) = all users
-     *     getAndFilterByRoles(new ArrayList()) = all users
+     *     getAndFilterByRoles(null) = all userEntities
+     *     getAndFilterByRoles(new ArrayList()) = all userEntities
      *
      *     Collection roles = new ArrayList();
      *     roles.add(UserRole.ADMIN);
-     *     getAndFilterByRoles(roles) = filtered list of users
+     *     getAndFilterByRoles(roles) = filtered list of userEntities
      * </pre>
      *
      * @param roles a roles filtering.
-     * @return The filtered list of users.
+     * @return The filtered list of userEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAndFilterByRoles(final Collection<UserRole> roles) {
+    public List<UserEntity> getAndFilterByRoles(final Collection<UserRole> roles) {
         return filterByRoles(getAll(), roles);
     }
 
     /**
-     * Returns a list valid users.
-     * Returns empty list if users is empty.
+     * Returns a list valid userEntities.
+     * Returns empty list if userEntities is empty.
      * <pre>
      *     filteredByValid(null) = empty ArrayList()
      *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
-     *     Collection users = new ArrayList();
-     *     User user = new User();
-     *     user.setValidated(false);
-     *     users.add(user);
-     *     filteredByValid(users) = empty ArrayList()
+     *     Collection userEntities = new ArrayList();
+     *     UserEntity userEntity = new UserEntity();
+     *     userEntity.setValidated(false);
+     *     userEntities.add(userEntity);
+     *     filteredByValid(userEntities) = empty ArrayList()
      *
-     *     user.setValidated(true);
-     *     filteredByValid(users) = filtered list of users
+     *     userEntity.setValidated(true);
+     *     filteredByValid(userEntities) = filtered list of userEntities
      * </pre>
      *
-     * @param users the users to filter.
-     * @return The filtered list of users or empty list (newer null).
+     * @param userEntities the userEntities to filter.
+     * @return The filtered list of userEntities or empty list (newer null).
      */
     @Override
     @Transactional
-    public List<User> filteredByValid(final Collection<User> users) {
-        List<User> result = new ArrayList<>();
-        if (isNotEmpty(users)) {
+    public List<UserEntity> filteredByValid(final Collection<UserEntity> userEntities) {
+        List<UserEntity> result = new ArrayList<>();
+        if (isNotEmpty(userEntities)) {
             result.addAll(
-                    users.stream()
+                    userEntities.stream()
                             .filter(UserServiceImpl::isValidated)
                             .collect(Collectors.toList())
             );
@@ -607,28 +607,28 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Validates input user.
+     * Validates input userEntity.
      *
-     * @param user      the user to valid.
+     * @param userEntity      the userEntity to valid.
      * @param exist     is validate input object by exists.
      * @param duplicate is validate input object by duplicate.
-     * @return Returns true if user is valid, false otherwise.
+     * @return Returns true if userEntity is valid, false otherwise.
      */
     @Override
     protected boolean validated(
-            final User user,
+            final UserEntity userEntity,
             final boolean exist,
             final boolean duplicate
     ) {
-        if (isNull(user)) {
+        if (isNull(userEntity)) {
             return false;
         }
-        if (exist && !exists(user)) {
+        if (exist && !exists(userEntity)) {
             return false;
         }
         if (duplicate) {
-            if (isNotNull(this.repository.findByName(user.getName())) ||
-                    isNotNull(this.repository.findByUrl(user.getUrl()))) {
+            if (isNotNull(this.repository.findByName(userEntity.getName())) ||
+                    isNotNull(this.repository.findByUrl(userEntity.getUrl()))) {
                 return false;
             }
         }
@@ -636,13 +636,13 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Return Class object of {@link User} class.
+     * Return Class object of {@link UserEntity} class.
      *
-     * @return The Class object of {@link User} class.
+     * @return The Class object of {@link UserEntity} class.
      */
     @Override
-    protected Class<User> getModelClass() {
-        return User.class;
+    protected Class<UserEntity> getModelClass() {
+        return UserEntity.class;
     }
 
     /**
@@ -652,7 +652,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * @param from the copied object
      * @param to   the object to copy
      */
-    protected void copy(final User from, final User to) {
+    protected void copy(final UserEntity from, final UserEntity to) {
         if (!isAuthenticatedUser(to)) {
             from.setLogin(to.getLogin());
             from.setPassword(to.getPassword());
@@ -661,87 +661,87 @@ public final class UserServiceImpl extends DataServiceImpl<User>
     }
 
     /**
-     * Checks an authenticated user.
+     * Checks an authenticated userEntity.
      * <pre>
-     *     If authenticated user is null:
+     *     If authenticated userEntity is null:
      *     isAuthenticatedUser(null) = false
-     *     isAuthenticatedUser(user) = false
+     *     isAuthenticatedUser(userEntity) = false
      *
-     *     If the incoming user is authenticated user:
-     *     isAuthenticatedUser(user) = true
+     *     If the incoming userEntity is authenticated userEntity:
+     *     isAuthenticatedUser(userEntity) = true
      *
-     *     If the incoming user is not authenticated user,
-     *     but the authenticated user has super admin role:
-     *     isAuthenticatedUser(user) = true
+     *     If the incoming userEntity is not authenticated userEntity,
+     *     but the authenticated userEntity has super admin role:
+     *     isAuthenticatedUser(userEntity) = true
      * </pre>
      *
-     * @param user the user to check.
-     * @return true if the user is authenticated user or
-     * if authenticated user has super admin role.
+     * @param userEntity the userEntity to check.
+     * @return true if the userEntity is authenticated userEntity or
+     * if authenticated userEntity has super admin role.
      */
-    private boolean isAuthenticatedUser(final User user) {
+    private boolean isAuthenticatedUser(final UserEntity userEntity) {
         boolean result = false;
-        if (isNotNull(user)) {
-            final User authenticatedUser = getAuthenticatedUser();
-            if (isNotNull(authenticatedUser)) {
-                result = user.equals(authenticatedUser) ||
-                        authenticatedUser.getRole().equals(UserRole.SUPERADMIN);
+        if (isNotNull(userEntity)) {
+            final UserEntity authenticatedUserEntity = getAuthenticatedUser();
+            if (isNotNull(authenticatedUserEntity)) {
+                result = userEntity.equals(authenticatedUserEntity) ||
+                        authenticatedUserEntity.getRole().equals(UserRole.SUPERADMIN);
             }
         }
         return result;
     }
 
     /**
-     * Returns user with a mobile phone.
+     * Returns userEntity with a mobile phone.
      *
-     * @param phone the mobile phone of the user to return.
-     * @return The user with a mobile phone.
+     * @param phone the mobile phone of the userEntity to return.
+     * @return The userEntity with a mobile phone.
      */
-    private User getByMobilePhone(final String phone) {
-        return this.repository.findByContactsMobilePhone(phone);
+    private UserEntity getByMobilePhone(final String phone) {
+        return this.repository.findByContactsEntityMobilePhone(phone);
     }
 
     /**
-     * Returns user with a landline phone.
+     * Returns userEntity with a landline phone.
      *
-     * @param phone the landline phone of the user to return.
-     * @return The user with a landline phone.
+     * @param phone the landline phone of the userEntity to return.
+     * @return The userEntity with a landline phone.
      */
-    private User getByLandlinePhone(final String phone) {
-        return this.repository.findByContactsLandlinePhone(phone);
+    private UserEntity getByLandlinePhone(final String phone) {
+        return this.repository.findByContactsEntityLandlinePhone(phone);
     }
 
     /**
-     * Returns user with a fax number.
+     * Returns userEntity with a fax number.
      *
-     * @param phone the fax number of the user to return.
-     * @return The user with a fax number.
+     * @param phone the fax number of the userEntity to return.
+     * @return The userEntity with a fax number.
      */
-    private User getByFax(final String phone) {
-        return this.repository.findByContactsFax(phone);
+    private UserEntity getByFax(final String phone) {
+        return this.repository.findByContactsEntityFax(phone);
     }
 
     /**
-     * Filters user by the incoming user role.
-     * Incoming user must be not null.
+     * Filters userEntity by the incoming userEntity role.
+     * Incoming userEntity must be not null.
      *
-     * @param user the user to filter.
+     * @param userEntity the userEntity to filter.
      * @param role the role filtering.
-     * @return true if user role equals to incoming role,
+     * @return true if userEntity role equals to incoming role,
      * false otherwise.
      */
-    private boolean roleFilter(final User user, final UserRole role) {
-        return user.getRole().equals(role);
+    private boolean roleFilter(final UserEntity userEntity, final UserRole role) {
+        return userEntity.getRole().equals(role);
     }
 
     /**
      * Checks incoming photos.
      * The new photo must be not equals to the old photo.
      * <pre>
-     *     File photo1 = new File();
+     *     FileEntity photo1 = new FileEntity();
      *     isNewPhoto(photo1, photo1) = false
      *
-     *     File photo2 = new File();
+     *     FileEntity photo2 = new FileEntity();
      *     isNewPhoto(photo1, photo2) = false
      *
      *     photo2.setUrl("photo_2);
@@ -753,7 +753,7 @@ public final class UserServiceImpl extends DataServiceImpl<User>
      * @return true if the incoming photos is not equals and
      * new photo URL is not empty.
      */
-    private boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
+    private boolean isNewPhoto(final FileEntity newPhoto, final FileEntity oldPhoto) {
         return !newPhoto.equals(oldPhoto) && isNotEmpty(newPhoto.getUrl());
     }
 }

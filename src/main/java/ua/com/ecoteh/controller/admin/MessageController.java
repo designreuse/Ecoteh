@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Message;
+import ua.com.ecoteh.entity.message.MessageEntity;
 import ua.com.ecoteh.service.data.MessageService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link Message} class for admins.
+ * objects of the {@link MessageEntity} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -43,7 +43,7 @@ public class MessageController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link Message} class.
+     * for working with objects of the {@link MessageEntity} class.
      */
     private final MessageService messageService;
 
