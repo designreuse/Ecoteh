@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Content;
+import ua.com.ecoteh.entity.content.ContentEntity;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static ua.com.ecoteh.mocks.MockConstants.TITLE;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static org.junit.Assert.*;
 
-public abstract class ContentServiceImplTest<T extends Content> extends DataServiceImplTest<T> {
+public abstract class ContentServiceImplTest<T extends ContentEntity> extends DataServiceImplTest<T> {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetByNullTitleWithValidThenThrowsIllegalArgumentException() {

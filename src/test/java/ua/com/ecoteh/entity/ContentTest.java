@@ -2,13 +2,14 @@ package ua.com.ecoteh.entity;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ua.com.ecoteh.entity.content.ContentEntity;
 import ua.com.ecoteh.mocks.MockConstants;
 import ua.com.ecoteh.util.translator.Translator;
 
 import static org.junit.Assert.*;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
-public abstract class ContentTest<T extends Content> extends ModelTest<T> {
+public abstract class ContentTest<T extends ContentEntity> extends ModelTest<T> {
 
     @Test
     public void toStringTest() {

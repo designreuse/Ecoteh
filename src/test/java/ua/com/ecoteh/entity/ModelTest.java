@@ -2,10 +2,11 @@ package ua.com.ecoteh.entity;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import ua.com.ecoteh.entity.model.ModelEntity;
 
 import static org.junit.Assert.*;
 
-public abstract class ModelTest<T extends Model> {
+public abstract class ModelTest<T extends ModelEntity> {
 
     @Test
     public void equalsValidObjects() {

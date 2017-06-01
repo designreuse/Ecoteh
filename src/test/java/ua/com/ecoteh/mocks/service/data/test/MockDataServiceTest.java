@@ -1,6 +1,6 @@
 package ua.com.ecoteh.mocks.service.data.test;
 
-import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.entity.model.ModelEntity;
 import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.ecoteh.service.data.DataService;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static ua.com.ecoteh.mocks.MockConstants.ID;
 import static ua.com.ecoteh.mocks.MockConstants.UNKNOWN_ID;
 
-public abstract class MockDataServiceTest<T extends Model> {
+public abstract class MockDataServiceTest<T extends ModelEntity> {
 
     @Test
     public void whenGetMockServiceThenReturnNotNull() {

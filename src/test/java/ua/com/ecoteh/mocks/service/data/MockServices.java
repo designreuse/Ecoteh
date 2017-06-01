@@ -1,13 +1,13 @@
 package ua.com.ecoteh.mocks.service.data;
 
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.content.ContentEntity;
+import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.service.search.SearchService;
 import ua.com.ecoteh.service.seo.SeoService;
 import ua.com.ecoteh.util.comparator.ContentComparator;
 import org.junit.Ignore;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.Content;
-import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.entity.model.ModelEntity;
 import ua.com.ecoteh.mocks.MockConstants;
 import ua.com.ecoteh.mocks.enity.MockEntity;
 import ua.com.ecoteh.mocks.properties.MockContentProperties;
@@ -106,111 +106,111 @@ public final class MockServices {
 
     private static void initArticleService() {
         articleService = mock(ArticleService.class);
-        contentService(articleService, MockEntity.getArticle(), MockEntity.getArticles());
-        when(articleService.update(MockConstants.URL, MockEntity.getArticle())).thenReturn(MockEntity.getArticle());
-        when(articleService.getByNumber(MockConstants.NUMBER, true)).thenReturn(MockEntity.getArticle());
-        when(articleService.getByNumber(MockConstants.NUMBER, false)).thenReturn(MockEntity.getArticle());
-        when(articleService.sortByNumber(MockEntity.getArticles(), true)).thenReturn(MockEntity.getArticles());
-        when(articleService.sortByNumber(MockEntity.getArticles(), false)).thenReturn(MockEntity.getArticles());
-        when(articleService.sortByDate(MockEntity.getArticles(), true)).thenReturn(MockEntity.getArticles());
-        when(articleService.sortByDate(MockEntity.getArticles(), false)).thenReturn(MockEntity.getArticles());
-        when(articleService.getAndSortByNumber(true)).thenReturn(MockEntity.getArticles());
-        when(articleService.getAndSortByNumber(false)).thenReturn(MockEntity.getArticles());
-        when(articleService.getAndSortByDate(true)).thenReturn(MockEntity.getArticles());
-        when(articleService.getAndSortByDate(false)).thenReturn(MockEntity.getArticles());
-        when(articleService.filterByDate(MockEntity.getArticles(), MockConstants.DATE, MockConstants.DATE)).thenReturn(
-                MockEntity.getArticles());
-        when(articleService.filterByCategory(MockEntity.getArticles(), MockEntity.getCategory())).thenReturn(
-                MockEntity.getArticles());
-        when(articleService.filterByCategories(MockEntity.getArticles(), MockEntity.getCategories())).thenReturn(
-                MockEntity.getArticles());
+        contentService(articleService, MockEntity.getArticleEntity(), MockEntity.getArticleEntities());
+        when(articleService.update(MockConstants.URL, MockEntity.getArticleEntity())).thenReturn(MockEntity.getArticleEntity());
+        when(articleService.getByNumber(MockConstants.NUMBER, true)).thenReturn(MockEntity.getArticleEntity());
+        when(articleService.getByNumber(MockConstants.NUMBER, false)).thenReturn(MockEntity.getArticleEntity());
+        when(articleService.sortByNumber(MockEntity.getArticleEntities(), true)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.sortByNumber(MockEntity.getArticleEntities(), false)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.sortByDate(MockEntity.getArticleEntities(), true)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.sortByDate(MockEntity.getArticleEntities(), false)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.getAndSortByNumber(true)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.getAndSortByNumber(false)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.getAndSortByDate(true)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.getAndSortByDate(false)).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.filterByDate(MockEntity.getArticleEntities(), MockConstants.DATE, MockConstants.DATE)).thenReturn(
+                MockEntity.getArticleEntities());
+        when(articleService.filterByCategory(MockEntity.getArticleEntities(), MockEntity.getCategoryEntity())).thenReturn(
+                MockEntity.getArticleEntities());
+        when(articleService.filterByCategories(MockEntity.getArticleEntities(), MockEntity.getCategories())).thenReturn(
+                MockEntity.getArticleEntities());
         when(articleService.getAndFilterByDate(MockConstants.DATE, MockConstants.DATE)).thenReturn(
-                MockEntity.getArticles());
-        when(articleService.getAndFilterByCategory(MockEntity.getCategory())).thenReturn(MockEntity.getArticles());
-        when(articleService.getAndFilterByCategories(MockEntity.getCategories())).thenReturn(MockEntity.getArticles());
+                MockEntity.getArticleEntities());
+        when(articleService.getAndFilterByCategory(MockEntity.getCategoryEntity())).thenReturn(MockEntity.getArticleEntities());
+        when(articleService.getAndFilterByCategories(MockEntity.getCategories())).thenReturn(MockEntity.getArticleEntities());
     }
 
     private static void initCategoryService() {
         categoryService = mock(CategoryService.class);
-        contentService(categoryService, MockEntity.getCategory(), MockEntity.getCategories());
-        when(categoryService.update(MockConstants.URL, MockEntity.getCategory())).thenReturn(MockEntity.getCategory());
+        contentService(categoryService, MockEntity.getCategoryEntity(), MockEntity.getCategories());
+        when(categoryService.update(MockConstants.URL, MockEntity.getCategoryEntity())).thenReturn(MockEntity.getCategoryEntity());
     }
 
     private static void initCompanyService() {
         companyService = mock(CompanyService.class);
-        contentService(companyService, MockEntity.getCompany(), MockEntity.getCompanies());
-        when(companyService.add(MockEntity.getCompany())).thenReturn(MockEntity.getCompany());
-        when(companyService.update(MockConstants.URL, MockEntity.getCompany())).thenReturn(MockEntity.getCompany());
-        when(companyService.getMainCompany()).thenReturn(MockEntity.getCompany());
+        contentService(companyService, MockEntity.getCompanyEntity(), MockEntity.getCompanies());
+        when(companyService.add(MockEntity.getCompanyEntity())).thenReturn(MockEntity.getCompanyEntity());
+        when(companyService.update(MockConstants.URL, MockEntity.getCompanyEntity())).thenReturn(MockEntity.getCompanyEntity());
+        when(companyService.getMainCompany()).thenReturn(MockEntity.getCompanyEntity());
         when(companyService.getPartners(true)).thenReturn(MockEntity.getCompanies());
     }
 
     private static void initFileService() {
         fileService = mock(FileService.class);
-        dateService(fileService, MockEntity.getFile(), MockEntity.getFiles());
-        when(fileService.getByTitle(MockConstants.TITLE)).thenReturn(MockEntity.getFile());
-        when(fileService.getByUrl(MockConstants.URL)).thenReturn(MockEntity.getFile());
-        when(fileService.add(MockConstants.TITLE, null)).thenReturn(MockEntity.getFile());
-        when(fileService.update(MockConstants.ID, MockConstants.TITLE, null)).thenReturn(MockEntity.getFile());
+        dateService(fileService, MockEntity.getFileEntity(), MockEntity.getFileEntities());
+        when(fileService.getByTitle(MockConstants.TITLE)).thenReturn(MockEntity.getFileEntity());
+        when(fileService.getByUrl(MockConstants.URL)).thenReturn(MockEntity.getFileEntity());
+        when(fileService.add(MockConstants.TITLE, null)).thenReturn(MockEntity.getFileEntity());
+        when(fileService.update(MockConstants.ID, MockConstants.TITLE, null)).thenReturn(MockEntity.getFileEntity());
         when(fileService.deleteFile(MockConstants.PATH)).thenReturn(true);
     }
 
     private static void initMessageService() {
         messageService = mock(MessageService.class);
-        dateService(messageService, MockEntity.getMessage(), MockEntity.getMessages());
+        dateService(messageService, MockEntity.getMessageEntity(), MockEntity.getMessageEntities());
     }
 
     private static void initResponseService() {
         responseService = mock(ResponseService.class);
-        dateService(responseService, MockEntity.getResponse(), MockEntity.getResponses());
-        when(responseService.add(MockEntity.getResponse())).thenReturn(MockEntity.getResponse());
-        when(responseService.update(MockConstants.ID, MockEntity.getResponse())).thenReturn(MockEntity.getResponse());
-        when(responseService.sortByDate(MockEntity.getResponses(), true)).thenReturn(MockEntity.getResponses());
-        when(responseService.sortByDate(MockEntity.getResponses(), false)).thenReturn(MockEntity.getResponses());
-        when(responseService.getAndSortByDate(true)).thenReturn(MockEntity.getResponses());
-        when(responseService.getAndSortByDate(false)).thenReturn(MockEntity.getResponses());
-        when(responseService.filterByDate(MockEntity.getResponses(), MockConstants.DATE, MockConstants.DATE)).thenReturn(
-                MockEntity.getResponses());
+        dateService(responseService, MockEntity.getResponseEntity(), MockEntity.getResponseEntities());
+        when(responseService.add(MockEntity.getResponseEntity())).thenReturn(MockEntity.getResponseEntity());
+        when(responseService.update(MockConstants.ID, MockEntity.getResponseEntity())).thenReturn(MockEntity.getResponseEntity());
+        when(responseService.sortByDate(MockEntity.getResponseEntities(), true)).thenReturn(MockEntity.getResponseEntities());
+        when(responseService.sortByDate(MockEntity.getResponseEntities(), false)).thenReturn(MockEntity.getResponseEntities());
+        when(responseService.getAndSortByDate(true)).thenReturn(MockEntity.getResponseEntities());
+        when(responseService.getAndSortByDate(false)).thenReturn(MockEntity.getResponseEntities());
+        when(responseService.filterByDate(MockEntity.getResponseEntities(), MockConstants.DATE, MockConstants.DATE)).thenReturn(
+                MockEntity.getResponseEntities());
         when(responseService.getAndFilterByDate(MockConstants.DATE, MockConstants.DATE)).thenReturn(
-                MockEntity.getResponses());
+                MockEntity.getResponseEntities());
     }
 
     private static void initUserService() {
         userService = mock(UserService.class);
-        dateService(userService, MockEntity.getUser(), MockEntity.getUsers());
-        when(userService.add(MockEntity.getUser())).thenReturn(MockEntity.getUser());
-        when(userService.update(MockConstants.URL, MockEntity.getUser())).thenReturn(MockEntity.getUser());
-        when(userService.getByName(MockConstants.NAME)).thenReturn(MockEntity.getUser());
-        when(userService.getByUrl(MockConstants.URL)).thenReturn(MockEntity.getUser());
-        when(userService.getByLogin(MockConstants.LOGIN)).thenReturn(MockEntity.getUser());
-        when(userService.getByEmail(MockConstants.EMAIL)).thenReturn(MockEntity.getUser());
-        when(userService.getAuthenticatedUser()).thenReturn(MockEntity.getUser());
-        when(userService.getMainAdmin()).thenReturn(MockEntity.getUser());
-        when(userService.getAdmins()).thenReturn(MockEntity.getUsers());
-        when(userService.getPersonnel()).thenReturn(MockEntity.getUsers());
-        when(userService.sortByName(MockEntity.getUsers(), true)).thenReturn(MockEntity.getUsers());
-        when(userService.sortByName(MockEntity.getUsers(), false)).thenReturn(MockEntity.getUsers());
-        when(userService.sortByUrl(MockEntity.getUsers(), true)).thenReturn(MockEntity.getUsers());
-        when(userService.sortByUrl(MockEntity.getUsers(), false)).thenReturn(MockEntity.getUsers());
-        when(userService.sortByRole(MockEntity.getUsers(), MockConstants.USER_ROLE, true)).thenReturn(
-                MockEntity.getUsers());
-        when(userService.sortByRole(MockEntity.getUsers(), MockConstants.USER_ROLE, false)).thenReturn(
-                MockEntity.getUsers());
-        when(userService.getAndSortByName(true)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndSortByName(false)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndSortByUrl(true)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndSortByUrl(false)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndSortByRole(MockConstants.USER_ROLE, true)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndSortByRole(MockConstants.USER_ROLE, false)).thenReturn(MockEntity.getUsers());
-        when(userService.filterByRole(MockEntity.getUsers(), MockConstants.USER_ROLE)).thenReturn(MockEntity.getUsers());
+        dateService(userService, MockEntity.getUserEntity(), MockEntity.getUserEntities());
+        when(userService.add(MockEntity.getUserEntity())).thenReturn(MockEntity.getUserEntity());
+        when(userService.update(MockConstants.URL, MockEntity.getUserEntity())).thenReturn(MockEntity.getUserEntity());
+        when(userService.getByName(MockConstants.NAME)).thenReturn(MockEntity.getUserEntity());
+        when(userService.getByUrl(MockConstants.URL)).thenReturn(MockEntity.getUserEntity());
+        when(userService.getByLogin(MockConstants.LOGIN)).thenReturn(MockEntity.getUserEntity());
+        when(userService.getByEmail(MockConstants.EMAIL)).thenReturn(MockEntity.getUserEntity());
+        when(userService.getAuthenticatedUser()).thenReturn(MockEntity.getUserEntity());
+        when(userService.getMainAdmin()).thenReturn(MockEntity.getUserEntity());
+        when(userService.getAdmins()).thenReturn(MockEntity.getUserEntities());
+        when(userService.getPersonnel()).thenReturn(MockEntity.getUserEntities());
+        when(userService.sortByName(MockEntity.getUserEntities(), true)).thenReturn(MockEntity.getUserEntities());
+        when(userService.sortByName(MockEntity.getUserEntities(), false)).thenReturn(MockEntity.getUserEntities());
+        when(userService.sortByUrl(MockEntity.getUserEntities(), true)).thenReturn(MockEntity.getUserEntities());
+        when(userService.sortByUrl(MockEntity.getUserEntities(), false)).thenReturn(MockEntity.getUserEntities());
+        when(userService.sortByRole(MockEntity.getUserEntities(), MockConstants.USER_ROLE, true)).thenReturn(
+                MockEntity.getUserEntities());
+        when(userService.sortByRole(MockEntity.getUserEntities(), MockConstants.USER_ROLE, false)).thenReturn(
+                MockEntity.getUserEntities());
+        when(userService.getAndSortByName(true)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndSortByName(false)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndSortByUrl(true)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndSortByUrl(false)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndSortByRole(MockConstants.USER_ROLE, true)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndSortByRole(MockConstants.USER_ROLE, false)).thenReturn(MockEntity.getUserEntities());
+        when(userService.filterByRole(MockEntity.getUserEntities(), MockConstants.USER_ROLE)).thenReturn(MockEntity.getUserEntities());
         final List<UserRole> roles = new ArrayList<>();
         roles.add(MockConstants.USER_ROLE);
-        when(userService.filterByRoles(MockEntity.getUsers(), roles)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndFilterByRole(MockConstants.USER_ROLE)).thenReturn(MockEntity.getUsers());
-        when(userService.getAndFilterByRoles(roles)).thenReturn(MockEntity.getUsers());
+        when(userService.filterByRoles(MockEntity.getUserEntities(), roles)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndFilterByRole(MockConstants.USER_ROLE)).thenReturn(MockEntity.getUserEntities());
+        when(userService.getAndFilterByRoles(roles)).thenReturn(MockEntity.getUserEntities());
     }
 
-    private static <T extends Content, E extends ContentService<T>> void contentService(
+    private static <T extends ContentEntity, E extends ContentService<T>> void contentService(
             final E service,
             final T content,
             final Collection<T> contents
@@ -250,7 +250,7 @@ public final class MockServices {
         when(service.sort(contents, new ContentComparator.ByTitle<>())).thenReturn(new ArrayList<>(contents));
     }
 
-    private static <T extends Model, E extends DataService<T>> void dateService(
+    private static <T extends ModelEntity, E extends DataService<T>> void dateService(
             final E service,
             final T model,
             final Collection<T> models
@@ -261,7 +261,7 @@ public final class MockServices {
         when(service.update(models)).thenReturn(models);
         when(service.get(MockConstants.ID)).thenReturn(model);
         when(service.get(MockConstants.UNKNOWN_ID)).thenThrow(
-                new NullPointerException("Can`t find Model by id " + MockConstants.UNKNOWN_ID + "!")
+                new NullPointerException("Can`t find ModelEntity by id " + MockConstants.UNKNOWN_ID + "!")
         );
         when(service.getAll()).thenReturn(models);
         when(service.getAll(true)).thenReturn(models);
@@ -294,7 +294,7 @@ public final class MockServices {
         final ModelAndView siteMapModelAndView = new ModelAndView();
         siteMapModelAndView.addObject("domain", MockConstants.DOMAIN);
         siteMapModelAndView.addObject("categories", MockEntity.getCategories());
-        siteMapModelAndView.addObject("articles", MockEntity.getArticles());
+        siteMapModelAndView.addObject("articles", MockEntity.getArticleEntities());
         siteMapModelAndView.addObject("companies", MockEntity.getCompanies());
         siteMapModelAndView.setViewName("seo/sitemap");
         seoService = mock(SeoService.class);

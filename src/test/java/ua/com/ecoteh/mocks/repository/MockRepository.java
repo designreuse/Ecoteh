@@ -1,7 +1,12 @@
 package ua.com.ecoteh.mocks.repository;
 
-import ua.com.ecoteh.entity.*;
-import ua.com.ecoteh.enums.CompanyType;
+import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.model.ModelEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.company.CompanyType;
 import ua.com.ecoteh.repository.*;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 
@@ -79,80 +84,80 @@ public class MockRepository {
 
     private static void initArticleRepository() {
         articleRepository = mock(ArticleRepository.class);
-        final Article article = getArticle();
-        article.setCategory(getCategory());
-        final Collection<Article> articles = getArticles();
+        final ArticleEntity articleEntity = getArticleEntity();
+        articleEntity.setCategoryEntity(getCategoryEntity());
+        final Collection<ArticleEntity> articleEntities = getArticleEntities();
         initDataRepository(
                 articleRepository,
-                article,
-                articles
+                articleEntity,
+                articleEntities
         );
-        when(articleRepository.findByTitle(TITLE)).thenReturn(article);
+        when(articleRepository.findByTitle(TITLE)).thenReturn(articleEntity);
         when(articleRepository.findByTitle(ANY_STRING)).thenReturn(null);
         when(articleRepository.findByTitle(null)).thenReturn(null);
-        when(articleRepository.findByUrl(URL)).thenReturn(article);
+        when(articleRepository.findByUrl(URL)).thenReturn(articleEntity);
         when(articleRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(articleRepository.findByUrl(null)).thenReturn(null);
-        when(articleRepository.findByNumber(NUMBER)).thenReturn(article);
+        when(articleRepository.findByNumber(NUMBER)).thenReturn(articleEntity);
         when(articleRepository.findByNumber(ANY_STRING)).thenReturn(null);
         when(articleRepository.findByNumber(null)).thenReturn(null);
-        when(articleRepository.findByCategoryId(ID)).thenReturn(new ArrayList<>(articles));
-        when(articleRepository.findByCategoryId(UNKNOWN_ID)).thenReturn(new ArrayList<>());
-        when(articleRepository.findByCategoryTitle(TITLE)).thenReturn(new ArrayList<>(articles));
-        when(articleRepository.findByCategoryTitle(null)).thenReturn(new ArrayList<>());
-        when(articleRepository.findByCategoryTitle(ANY_STRING)).thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryEntityId(ID)).thenReturn(new ArrayList<>(articleEntities));
+        when(articleRepository.findByCategoryEntityId(UNKNOWN_ID)).thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryEntityTitle(TITLE)).thenReturn(new ArrayList<>(articleEntities));
+        when(articleRepository.findByCategoryEntityTitle(null)).thenReturn(new ArrayList<>());
+        when(articleRepository.findByCategoryEntityTitle(ANY_STRING)).thenReturn(new ArrayList<>());
     }
 
     private static void initCategoryRepository() {
         categoryRepository = mock(CategoryRepository.class);
-        final Category category = getCategory();
+        final CategoryEntity categoryEntity = getCategoryEntity();
         initDataRepository(
                 categoryRepository,
-                category,
+                categoryEntity,
                 getCategories()
         );
-        when(categoryRepository.findByTitle(TITLE)).thenReturn(category);
+        when(categoryRepository.findByTitle(TITLE)).thenReturn(categoryEntity);
         when(categoryRepository.findByTitle(ANY_STRING)).thenReturn(null);
         when(categoryRepository.findByTitle(null)).thenReturn(null);
-        when(categoryRepository.findByUrl(URL)).thenReturn(category);
+        when(categoryRepository.findByUrl(URL)).thenReturn(categoryEntity);
         when(categoryRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(categoryRepository.findByUrl(null)).thenReturn(null);
     }
 
     private static void initCompanyRepository() {
-        final Company company = getCompany();
-        List<Company> companies = getCompanies();
+        final CompanyEntity companyEntity = getCompanyEntity();
+        List<CompanyEntity> companies = getCompanies();
         companyRepository = mock(CompanyRepository.class);
         initDataRepository(
                 companyRepository,
-                company,
+                companyEntity,
                 companies
         );
-        when(companyRepository.findByTitle(TITLE)).thenReturn(company);
+        when(companyRepository.findByTitle(TITLE)).thenReturn(companyEntity);
         when(companyRepository.findByTitle(ANY_STRING)).thenReturn(null);
         when(companyRepository.findByTitle(null)).thenReturn(null);
-        when(companyRepository.findByUrl(URL)).thenReturn(company);
+        when(companyRepository.findByUrl(URL)).thenReturn(companyEntity);
         when(companyRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(companyRepository.findByUrl(null)).thenReturn(null);
         when(companyRepository.findByType(CompanyType.PARTNER)).thenReturn(companies);
         when(companyRepository.findByDomain(null)).thenReturn(null);
         when(companyRepository.findByDomain("")).thenReturn(null);
         when(companyRepository.findByDomain(ANY_STRING)).thenReturn(null);
-        when(companyRepository.findByDomain(DOMAIN)).thenReturn(company);
+        when(companyRepository.findByDomain(DOMAIN)).thenReturn(companyEntity);
     }
 
     private static void initFileRepository() {
-        final File file = getFile();
+        final FileEntity fileEntity = getFileEntity();
         fileRepository = mock(FileRepository.class);
         initDataRepository(
                 fileRepository,
-                file,
-                getFiles()
+                fileEntity,
+                getFileEntities()
         );
-        when(fileRepository.findByTitle(TITLE)).thenReturn(file);
+        when(fileRepository.findByTitle(TITLE)).thenReturn(fileEntity);
         when(fileRepository.findByTitle(ANY_STRING)).thenReturn(null);
         when(fileRepository.findByTitle(null)).thenReturn(null);
-        when(fileRepository.findByUrl(URL)).thenReturn(file);
+        when(fileRepository.findByUrl(URL)).thenReturn(fileEntity);
         when(fileRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(fileRepository.findByUrl(null)).thenReturn(null);
     }
@@ -161,8 +166,8 @@ public class MockRepository {
         messageRepository = mock(MessageRepository.class);
         initDataRepository(
                 messageRepository,
-                getMessage(),
-                getMessages()
+                getMessageEntity(),
+                getMessageEntities()
         );
     }
 
@@ -170,51 +175,51 @@ public class MockRepository {
         responseRepository = mock(ResponseRepository.class);
         initDataRepository(
                 responseRepository,
-                getResponse(),
-                getResponses()
+                getResponseEntity(),
+                getResponseEntities()
         );
     }
 
     private static void initUserRepository() {
-        final User user = getUser();
+        final UserEntity userEntity = getUserEntity();
         userRepository = mock(UserRepository.class);
         initDataRepository(
                 userRepository,
-                user,
-                getUsers()
+                userEntity,
+                getUserEntities()
         );
-        when(userRepository.findByName(NAME)).thenReturn(user);
+        when(userRepository.findByName(NAME)).thenReturn(userEntity);
         when(userRepository.findByName(ANY_STRING)).thenReturn(null);
         when(userRepository.findByName(null)).thenReturn(null);
-        when(userRepository.findByUrl(URL)).thenReturn(user);
+        when(userRepository.findByUrl(URL)).thenReturn(userEntity);
         when(userRepository.findByUrl(ANY_STRING)).thenReturn(null);
         when(userRepository.findByUrl(null)).thenReturn(null);
         when(
                 userRepository.findByEncryptedLogin(
                         new Base64Encryptor(LOGIN).encrypt()
                 )
-        ).thenReturn(user);
+        ).thenReturn(userEntity);
         when(
                 userRepository.findByEncryptedLogin(
                         new Base64Encryptor(ANY_STRING).encrypt()
                 )
         ).thenReturn(null);
         when(userRepository.findByEncryptedLogin(null)).thenReturn(null);
-        when(userRepository.findByContactsEmail(EMAIL)).thenReturn(user);
-        when(userRepository.findByContactsEmail(null)).thenReturn(null);
-        when(userRepository.findByContactsEmail(ANY_STRING)).thenReturn(null);
-        when(userRepository.findByContactsMobilePhone(PHONE)).thenReturn(user);
-        when(userRepository.findByContactsMobilePhone(null)).thenReturn(null);
-        when(userRepository.findByContactsMobilePhone(ANY_STRING)).thenReturn(null);
-        when(userRepository.findByContactsLandlinePhone(PHONE_2)).thenReturn(user);
-        when(userRepository.findByContactsLandlinePhone(null)).thenReturn(null);
-        when(userRepository.findByContactsLandlinePhone(ANY_STRING)).thenReturn(null);
-        when(userRepository.findByContactsFax(FAX)).thenReturn(user);
-        when(userRepository.findByContactsFax(null)).thenReturn(null);
-        when(userRepository.findByContactsFax(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsEntityEmail(EMAIL)).thenReturn(userEntity);
+        when(userRepository.findByContactsEntityEmail(null)).thenReturn(null);
+        when(userRepository.findByContactsEntityEmail(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsEntityMobilePhone(PHONE)).thenReturn(userEntity);
+        when(userRepository.findByContactsEntityMobilePhone(null)).thenReturn(null);
+        when(userRepository.findByContactsEntityMobilePhone(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsEntityLandlinePhone(PHONE_2)).thenReturn(userEntity);
+        when(userRepository.findByContactsEntityLandlinePhone(null)).thenReturn(null);
+        when(userRepository.findByContactsEntityLandlinePhone(ANY_STRING)).thenReturn(null);
+        when(userRepository.findByContactsEntityFax(FAX)).thenReturn(userEntity);
+        when(userRepository.findByContactsEntityFax(null)).thenReturn(null);
+        when(userRepository.findByContactsEntityFax(ANY_STRING)).thenReturn(null);
     }
 
-    private static <T extends Model, E extends DataRepository<T>> void initDataRepository(
+    private static <T extends ModelEntity, E extends DataRepository<T>> void initDataRepository(
             final E repository,
             final T model,
             final Collection<T> models

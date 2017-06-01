@@ -1,7 +1,7 @@
 package ua.com.ecoteh.mocks;
 
-import ua.com.ecoteh.enums.CompanyType;
-import ua.com.ecoteh.enums.UserRole;
+import ua.com.ecoteh.entity.company.CompanyType;
+import ua.com.ecoteh.entity.user.UserRole;
 import org.junit.Ignore;
 
 import java.util.Date;

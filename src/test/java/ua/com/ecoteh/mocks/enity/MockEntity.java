@@ -1,7 +1,15 @@
 package ua.com.ecoteh.mocks.enity;
 
 import org.junit.Ignore;
-import ua.com.ecoteh.entity.*;
+import ua.com.ecoteh.entity.address.AddressEntity;
+import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.contacts.ContactsEntity;
+import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.message.MessageEntity;
+import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.user.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,134 +22,134 @@ public final class MockEntity {
 
     private final static Random RANDOM = new Random(System.nanoTime());
 
-    private static Address address;
-    private static Article article;
-    private static Category category;
-    private static Company company;
-    private static File file;
-    private static Message message;
-    private static Response response;
-    private static User user;
+    private static AddressEntity addressEntity;
+    private static ArticleEntity articleEntity;
+    private static CategoryEntity categoryEntity;
+    private static CompanyEntity companyEntity;
+    private static FileEntity fileEntity;
+    private static MessageEntity messageEntity;
+    private static ResponseEntity responseEntity;
+    private static UserEntity userEntity;
 
-    private static List<Address> addresses;
-    private static List<Article> articles;
-    private static List<Category> categories;
-    private static List<Company> companies;
-    private static List<File> files;
-    private static List<Message> messages;
-    private static List<Response> responses;
-    private static List<User> users;
+    private static List<AddressEntity> addressEntities;
+    private static List<ArticleEntity> articleEntities;
+    private static List<CategoryEntity> categories;
+    private static List<CompanyEntity> companies;
+    private static List<FileEntity> fileEntities;
+    private static List<MessageEntity> messageEntities;
+    private static List<ResponseEntity> responseEntities;
+    private static List<UserEntity> userEntities;
 
-    public static Address getAddress() {
-        if (address == null) {
+    public static AddressEntity getAddressEntity() {
+        if (addressEntity == null) {
             initAddress();
         }
-        return address.clone();
+        return addressEntity.clone();
     }
 
-    public static Article getArticle() {
-        if (article == null) {
+    public static ArticleEntity getArticleEntity() {
+        if (articleEntity == null) {
             initArticle();
         }
-        return article.clone();
+        return articleEntity.clone();
     }
 
-    public static Category getCategory() {
-        if (category == null) {
+    public static CategoryEntity getCategoryEntity() {
+        if (categoryEntity == null) {
             initCategory();
         }
-        return category.clone();
+        return categoryEntity.clone();
     }
 
-    public static Company getCompany() {
-        if (company == null) {
+    public static CompanyEntity getCompanyEntity() {
+        if (companyEntity == null) {
             initCompany();
         }
-        return company.clone();
+        return companyEntity.clone();
     }
 
-    public static Message getMessage() {
-        if (message == null) {
+    public static MessageEntity getMessageEntity() {
+        if (messageEntity == null) {
             initMessage();
         }
-        return message.clone();
+        return messageEntity.clone();
     }
 
-    public static File getFile() {
-        if (file == null) {
+    public static FileEntity getFileEntity() {
+        if (fileEntity == null) {
             initFile();
         }
-        return file.clone();
+        return fileEntity.clone();
     }
 
-    public static Response getResponse() {
-        if (response == null) {
+    public static ResponseEntity getResponseEntity() {
+        if (responseEntity == null) {
             initResponse();
         }
-        return response.clone();
+        return responseEntity.clone();
     }
 
-    public static User getUser() {
-        if (user == null) {
+    public static UserEntity getUserEntity() {
+        if (userEntity == null) {
             initUser();
         }
-        return user.clone();
+        return userEntity.clone();
     }
 
-    public static List<Address> getAddresses() {
-        if (addresses == null || addresses.isEmpty()) {
+    public static List<AddressEntity> getAddressEntities() {
+        if (addressEntities == null || addressEntities.isEmpty()) {
             initAddresses();
         }
-        return new ArrayList<>(addresses);
+        return new ArrayList<>(addressEntities);
     }
 
-    public static List<Article> getArticles() {
-        if (articles == null || articles.isEmpty()) {
+    public static List<ArticleEntity> getArticleEntities() {
+        if (articleEntities == null || articleEntities.isEmpty()) {
             initArticles();
         }
-        return new ArrayList<>(articles);
+        return new ArrayList<>(articleEntities);
     }
 
-    public static List<Category> getCategories() {
+    public static List<CategoryEntity> getCategories() {
         if (categories == null || categories.isEmpty()) {
             initCategories();
         }
         return new ArrayList<>(categories);
     }
 
-    public static List<Company> getCompanies() {
+    public static List<CompanyEntity> getCompanies() {
         if (companies == null || companies.isEmpty()) {
             initCompanies();
         }
         return new ArrayList<>(companies);
     }
 
-    public static List<Message> getMessages() {
-        if (messages == null || messages.isEmpty()) {
+    public static List<MessageEntity> getMessageEntities() {
+        if (messageEntities == null || messageEntities.isEmpty()) {
             initMessages();
         }
-        return new ArrayList<>(messages);
+        return new ArrayList<>(messageEntities);
     }
 
-    public static List<File> getFiles() {
-        if (files == null || files.isEmpty()) {
+    public static List<FileEntity> getFileEntities() {
+        if (fileEntities == null || fileEntities.isEmpty()) {
             initFiles();
         }
-        return new ArrayList<>(files);
+        return new ArrayList<>(fileEntities);
     }
 
-    public static List<Response> getResponses() {
-        if (responses == null || responses.isEmpty()) {
+    public static List<ResponseEntity> getResponseEntities() {
+        if (responseEntities == null || responseEntities.isEmpty()) {
             initResponses();
         }
-        return new ArrayList<>(responses);
+        return new ArrayList<>(responseEntities);
     }
 
-    public static List<User> getUsers() {
-        if (users == null || users.isEmpty()) {
+    public static List<UserEntity> getUserEntities() {
+        if (userEntities == null || userEntities.isEmpty()) {
             initUsers();
         }
-        return new ArrayList<>(users);
+        return new ArrayList<>(userEntities);
     }
 
     public static int getRandomInt(final int length) {
@@ -157,168 +165,168 @@ public final class MockEntity {
     }
 
     private static void initAddress() {
-        address = new Address(ADDRESS, GOOGLE_MAPS);
-        address.setId(ID);
-        address.setValidated(true);
+        addressEntity = new AddressEntity(ADDRESS, GOOGLE_MAPS);
+        addressEntity.setId(ID);
+        addressEntity.setValidated(true);
     }
 
     private static void initArticle() {
-        article = new Article(
+        articleEntity = new ArticleEntity(
                 TITLE, DESCRIPTION,
                 TEXT, KEYWORDS, NUMBER
         );
-        article.setId(ID);
-        article.setUrl(URL);
-        article.setValidated(true);
+        articleEntity.setId(ID);
+        articleEntity.setUrl(URL);
+        articleEntity.setValidated(true);
     }
 
     private static void initCategory() {
-        category = new Category(
+        categoryEntity = new CategoryEntity(
                 TITLE, DESCRIPTION, KEYWORDS
         );
-        category.setId(ID);
-        category.setUrl(URL);
-        category.setLogo(getFile());
-        category.addArticle(getArticle());
-        category.setValidated(true);
+        categoryEntity.setId(ID);
+        categoryEntity.setUrl(URL);
+        categoryEntity.setLogoEntity(getFileEntity());
+        categoryEntity.addArticle(getArticleEntity());
+        categoryEntity.setValidated(true);
     }
 
     private static void initCompany() {
-        company = new Company();
-        company.setTitle(TITLE);
-        company.setDescription(DESCRIPTION);
-        company.setInformation(INFORMATION);
-        company.setKeywords(KEYWORDS);
-        company.setDomain(DOMAIN);
-        company.setTagline(TAGLINE);
-        company.setLogo(getFile());
-        company.setId(ID);
-        company.setUrl(URL);
-        company.setWorkTimeFrom(TIME);
-        company.setWorkTimeTo(TIME);
-        company.setContacts(
-                new Contacts(
+        companyEntity = new CompanyEntity();
+        companyEntity.setTitle(TITLE);
+        companyEntity.setDescription(DESCRIPTION);
+        companyEntity.setInformation(INFORMATION);
+        companyEntity.setKeywords(KEYWORDS);
+        companyEntity.setDomain(DOMAIN);
+        companyEntity.setTagline(TAGLINE);
+        companyEntity.setLogoEntity(getFileEntity());
+        companyEntity.setId(ID);
+        companyEntity.setUrl(URL);
+        companyEntity.setWorkTimeFrom(TIME);
+        companyEntity.setWorkTimeTo(TIME);
+        companyEntity.setContactsEntity(
+                new ContactsEntity(
                         EMAIL, PHONE, PHONE, PHONE,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE
                 )
         );
-        company.setAddress(
-                new Address(ADDRESS, GOOGLE_MAPS)
+        companyEntity.setAddressEntity(
+                new AddressEntity(ADDRESS, GOOGLE_MAPS)
         );
-        company.setValidated(true);
+        companyEntity.setValidated(true);
     }
 
     private static void initMessage() {
-        message = new Message(getUser(), ANY_STRING, TEXT);
-        message.setId(ID);
-        message.setValidated(true);
+        messageEntity = new MessageEntity(getUserEntity(), ANY_STRING, TEXT);
+        messageEntity.setId(ID);
+        messageEntity.setValidated(true);
     }
 
     private static void initFile() {
-        file = new File(TITLE, URL);
-        file.setId(ID);
-        file.setValidated(true);
+        fileEntity = new FileEntity(TITLE, URL);
+        fileEntity.setId(ID);
+        fileEntity.setValidated(true);
     }
 
     private static void initResponse() {
-        response = new Response(NAME, TEXT);
-        response.setId(ID);
-        response.setValidated(true);
-        response.setValidated(true);
+        responseEntity = new ResponseEntity(NAME, TEXT);
+        responseEntity.setId(ID);
+        responseEntity.setValidated(true);
+        responseEntity.setValidated(true);
     }
 
     private static void initUser() {
-        user = new User(
+        userEntity = new UserEntity(
                 NAME, DESCRIPTION,
-                new Contacts(
+                new ContactsEntity(
                         EMAIL, PHONE, PHONE, PHONE,
                         VKONTAKTE, FACEBOOK, TWITTER, SKYPE
                 )
         );
-        user.setId(ID);
-        user.setLogin(LOGIN);
-        user.setPassword(PASSWORD);
-        user.setRole(USER_ROLE);
-        user.setValidated(true);
+        userEntity.setId(ID);
+        userEntity.setLogin(LOGIN);
+        userEntity.setPassword(PASSWORD);
+        userEntity.setRole(USER_ROLE);
+        userEntity.setValidated(true);
     }
 
     private static void initAddresses() {
-        addresses = new ArrayList<>();
+        addressEntities = new ArrayList<>();
         for (int i =0; i < DEFAULT_SIZE; i++) {
-            final Address address = getAddress();
-            address.setId((long) i);
-            addresses.add(address);
+            final AddressEntity addressEntity = getAddressEntity();
+            addressEntity.setId((long) i);
+            addressEntities.add(addressEntity);
         }
     }
 
     private static void initArticles() {
-        articles = new ArrayList<>();
+        articleEntities = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final Article article = getArticle();
-            article.setId((long) i);
-            article.setTitle(article.getTitle() + " " + getRandomInt());
-            article.newNumber();
-            article.setCategory(getCategory());
-            articles.add(article);
+            final ArticleEntity articleEntity = getArticleEntity();
+            articleEntity.setId((long) i);
+            articleEntity.setTitle(articleEntity.getTitle() + " " + getRandomInt());
+            articleEntity.newNumber();
+            articleEntity.setCategoryEntity(getCategoryEntity());
+            articleEntities.add(articleEntity);
         }
     }
 
     private static void initCategories() {
         categories = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final Category category = getCategory();
-            category.setId((long) i);
-            category.setTitle(category.getTitle() + " " + getRandomInt());
-            categories.add(category);
+            final CategoryEntity categoryEntity = getCategoryEntity();
+            categoryEntity.setId((long) i);
+            categoryEntity.setTitle(categoryEntity.getTitle() + " " + getRandomInt());
+            categories.add(categoryEntity);
         }
     }
     private static void initCompanies() {
         companies = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final Company company = getCompany();
-            company.setId((long) i);
-            company.setTitle(company.getTitle() + " " + getRandomInt());
-            companies.add(company);
+            final CompanyEntity companyEntity = getCompanyEntity();
+            companyEntity.setId((long) i);
+            companyEntity.setTitle(companyEntity.getTitle() + " " + getRandomInt());
+            companies.add(companyEntity);
         }
     }
     private static void initMessages() {
-        messages = new ArrayList<>();
+        messageEntities = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final Message message = getMessage();
-            message.setId((long) i);
-            message.setSubject(message.getSubject() + " " + getRandomInt());
-            messages.add(message);
+            final MessageEntity messageEntity = getMessageEntity();
+            messageEntity.setId((long) i);
+            messageEntity.setSubject(messageEntity.getSubject() + " " + getRandomInt());
+            messageEntities.add(messageEntity);
         }
     }
     private static void initFiles() {
-        files = new ArrayList<>();
+        fileEntities = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final File file = getFile();
-            file.setId((long) i);
-            file.setTitle(file.getTitle() + " " + getRandomInt());
-            files.add(file);
+            final FileEntity fileEntity = getFileEntity();
+            fileEntity.setId((long) i);
+            fileEntity.setTitle(fileEntity.getTitle() + " " + getRandomInt());
+            fileEntities.add(fileEntity);
         }
     }
 
     private static void initResponses() {
-        responses = new ArrayList<>();
+        responseEntities = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final Response response = getResponse();
-            response.setId((long) i);
-            response.setUsername(response.getUsername() + " " + getRandomInt());
-            responses.add(response);
+            final ResponseEntity responseEntity = getResponseEntity();
+            responseEntity.setId((long) i);
+            responseEntity.setUsername(responseEntity.getUsername() + " " + getRandomInt());
+            responseEntities.add(responseEntity);
         }
     }
 
     private static void initUsers() {
-        users = new ArrayList<>();
+        userEntities = new ArrayList<>();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
-            final User user = getUser();
-            user.setId((long) i);
-            user.setName(user.getName() + " " + getRandomInt());
-            user.setLogin(user.getLogin() + " " + getRandomInt());
-            user.setPassword(user.getPassword() + " " + getRandomInt());
-            users.add(user);
+            final UserEntity userEntity = getUserEntity();
+            userEntity.setId((long) i);
+            userEntity.setName(userEntity.getName() + " " + getRandomInt());
+            userEntity.setLogin(userEntity.getLogin() + " " + getRandomInt());
+            userEntity.setPassword(userEntity.getPassword() + " " + getRandomInt());
+            userEntities.add(userEntity);
         }
     }
 }

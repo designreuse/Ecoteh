@@ -1,6 +1,6 @@
 package ua.com.ecoteh.mocks.service.data.test;
 
-import ua.com.ecoteh.entity.Content;
+import ua.com.ecoteh.entity.content.ContentEntity;
 import ua.com.ecoteh.service.data.ContentService;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import static ua.com.ecoteh.mocks.MockConstants.TITLE;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static org.junit.Assert.assertNotNull;
 
-public abstract class MockContentServiceTest<T extends Content> extends MockDataServiceTest<T> {
+public abstract class MockContentServiceTest<T extends ContentEntity> extends MockDataServiceTest<T> {
 
     @Test
     public void whenGetByTitleThenReturnSomeContent() {

@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.Model;
+import ua.com.ecoteh.entity.model.ModelEntity;
 import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.ecoteh.mocks.MockConstants;
@@ -10,7 +10,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-public abstract class DataServiceImplTest<T extends Model> {
+public abstract class DataServiceImplTest<T extends ModelEntity> {
 
     @Test(expected = NullPointerException.class)
     public void whenAddNullThenThrowException() {
