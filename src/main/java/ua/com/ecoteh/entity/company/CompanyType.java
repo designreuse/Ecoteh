@@ -1,4 +1,4 @@
-package ua.com.ecoteh.enums;
+package ua.com.ecoteh.entity.company;
 
 /**
  * The types of some company.
