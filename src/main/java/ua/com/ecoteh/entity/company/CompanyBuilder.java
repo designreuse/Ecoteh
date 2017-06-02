@@ -139,7 +139,14 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
     }
 
     private String getDomain() {
-        return isNotEmpty(this.domain) ? this.domain : "";
+        String result;
+        if (isNotEmpty(this.domain)) {
+            result = this.domain.replace("http://", "").replace("https://", "");
+            result = isNotEmpty(result) ? result : "";
+        } else {
+            result = "";
+        }
+        return result;
     }
 
     private String getSenderEmail() {

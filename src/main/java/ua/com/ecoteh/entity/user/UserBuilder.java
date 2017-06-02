@@ -142,6 +142,11 @@ public final class UserBuilder extends ModelBuilder<User, UserBuilder> {
         return this.addLocked(false);
     }
 
+    @Override
+    protected boolean isValidated() {
+        return !this.locked && super.isValidated();
+    }
+
     private String getName() {
         return isNotEmpty(this.name) ? this.name : "";
     }
@@ -183,7 +188,7 @@ public final class UserBuilder extends ModelBuilder<User, UserBuilder> {
     }
 
     private boolean isMailing() {
-        return this.mailing;
+        return !this.locked && this.mailing;
     }
 
     private boolean isLocked() {

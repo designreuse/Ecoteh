@@ -1,5 +1,6 @@
 package ua.com.ecoteh.entity.file;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.model.ModelBuilder;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
@@ -25,6 +26,8 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
      */
     private FileType type;
 
+    private MultipartFile multipartFile;
+
     /**
      *
      */
@@ -36,7 +39,7 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
         return new File(
                 getId(), isValidated(),
                 getTitle(), getUrl(),
-                getType()
+                getType(), getMultipartFile()
         );
     }
 
@@ -55,6 +58,11 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
         return this;
     }
 
+    public FileBuilder addMultipartFile(final MultipartFile multipartFile) {
+        this.multipartFile = multipartFile;
+        return this;
+    }
+
     private String getTitle() {
         return isNotEmpty(this.title) ? this.title : "";
     }
@@ -65,5 +73,9 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
 
     private FileType getType() {
         return isNotNull(this.type) ? this.type : FileType.ANOTHER;
+    }
+
+    private MultipartFile getMultipartFile() {
+        return this.multipartFile;
     }
 }
