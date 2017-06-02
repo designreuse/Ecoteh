@@ -1,5 +1,6 @@
 package ua.com.ecoteh.entity.file;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.model.Model;
 
 /**
@@ -32,6 +33,11 @@ public final class File extends Model {
 
     /**
      *
+     */
+    private final MultipartFile multipartFile;
+
+    /**
+     *
      * @param id
      * @param validated
      * @param title
@@ -41,12 +47,13 @@ public final class File extends Model {
     File(
             final long id, final boolean validated,
             final String title, final String url,
-            final FileType type
+            final FileType type, final MultipartFile multipartFile
     ) {
         super(id, validated);
         this.title = title;
         this.url = url;
         this.type = type;
+        this.multipartFile = multipartFile;
     }
 
     /**
@@ -120,6 +127,14 @@ public final class File extends Model {
      */
     public FileType getType() {
         return this.type;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public MultipartFile getMultipartFile() {
+        return this.multipartFile;
     }
 
     /**

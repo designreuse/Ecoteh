@@ -330,6 +330,14 @@ public final class User extends Model implements UserDetails {
      *
      * @return
      */
+    public UserEntity convert() {
+        return new UserConverter(this).convert();
+    }
+
+    /**
+     *
+     * @return
+     */
     public static UserBuilder getBuilder() {
         return new UserBuilder();
     }

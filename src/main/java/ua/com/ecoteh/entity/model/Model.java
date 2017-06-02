@@ -27,6 +27,11 @@ public abstract class Model implements Serializable {
      */
     private final boolean validated;
 
+    /**
+     *
+     * @param id
+     * @param validated
+     */
     public Model(final long id, final boolean validated) {
         this.id = id;
         this.validated = validated;
@@ -84,4 +89,6 @@ public abstract class Model implements Serializable {
      */
     @Override
     public abstract int hashCode();
+
+    public abstract<E extends ModelEntity> E convert();
 }

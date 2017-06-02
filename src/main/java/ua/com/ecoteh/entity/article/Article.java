@@ -45,6 +45,21 @@ public final class Article extends Content {
      */
     private final Category category;
 
+    /**
+     *
+     * @param id
+     * @param validated
+     * @param title
+     * @param url
+     * @param description
+     * @param keywords
+     * @param number
+     * @param text
+     * @param date
+     * @param price
+     * @param logo
+     * @param category
+     */
     Article(
             final long id, final boolean validated,
             final String title, final String url,
@@ -161,6 +176,10 @@ public final class Article extends Content {
      */
     public Category getCategory() {
         return this.category;
+    }
+
+    public ArticleEntity convert() {
+        return new ArticleConverter(this).convert();
     }
 
     /**

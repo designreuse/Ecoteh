@@ -33,7 +33,15 @@ public final class Response extends Model {
      */
     private final Date date;
 
-    public Response(
+    /**
+     *
+     * @param id
+     * @param validated
+     * @param username
+     * @param text
+     * @param date
+     */
+    Response(
             final long id, final boolean validated,
             final String username, final String text,
             final Date date
@@ -122,6 +130,14 @@ public final class Response extends Model {
      */
     public String getDateToString() {
         return Time.getDate(this.date);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ResponseEntity convert() {
+        return new ResponseConverter(this).convert();
     }
 
     /**

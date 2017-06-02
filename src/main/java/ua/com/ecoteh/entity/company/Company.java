@@ -273,6 +273,10 @@ public final class Company extends Content {
         return Time.isWorkTime(this.workTimeFrom, this.workTimeTo);
     }
 
+    public CompanyEntity convert() {
+        return new CompanyConverter(this).convert();
+    }
+
     /**
      *
      * @return

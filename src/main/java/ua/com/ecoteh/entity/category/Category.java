@@ -60,8 +60,12 @@ public final class Category extends Content {
      *
      * @return The collection of articleEntities (newer null).
      */
-    public Collection<Article> getArticle() {
+    public Collection<Article> getArticles() {
         return this.articles;
+    }
+
+    public CategoryEntity convert() {
+        return new CategoryConverter(this).convert();
     }
 
     /**

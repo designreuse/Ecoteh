@@ -1,7 +1,7 @@
 package ua.com.ecoteh.entity.message;
 
-import org.springframework.security.core.userdetails.User;
 import ua.com.ecoteh.entity.model.Model;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.util.time.Time;
 
 import java.util.Date;
@@ -151,6 +151,14 @@ public final class Message extends Model {
      */
     public String getDateToString() {
         return Time.getDate(getDate());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public MessageEntity convert() {
+        return new MessageConverter(this).convert();
     }
 
     /**
