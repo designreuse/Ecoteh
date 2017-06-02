@@ -2,16 +2,13 @@ package ua.com.ecoteh.entity.company;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ua.com.ecoteh.entity.address.AddressEntity;
 import ua.com.ecoteh.entity.contacts.ContactsEntity;
 import ua.com.ecoteh.entity.content.ContentEntity;
-import ua.com.ecoteh.entity.address.AddressEntity;
-import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -85,7 +82,7 @@ public class CompanyEntity extends ContentEntity {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private ContactsEntity contactsEntity;
+    private ContactsEntity contacts;
 
     /**
      * The companyEntity addressEntity.
@@ -99,7 +96,7 @@ public class CompanyEntity extends ContentEntity {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private AddressEntity addressEntity;
+    private AddressEntity address;
 
     /**
      * The type of a companyEntity.
@@ -111,74 +108,7 @@ public class CompanyEntity extends ContentEntity {
     /**
      * Default constructor.
      */
-    public CompanyEntity() {
-        this.tagline = "";
-        this.information = "";
-        this.domain = "";
-        this.senderEmail = "";
-        this.senderPass = "";
-        this.workTimeFrom = "";
-        this.workTimeTo = "";
-        this.type = CompanyType.PARTNER;
-        this.contactsEntity = new ContactsEntity();
-        this.addressEntity = new AddressEntity();
-    }
-
-    /**
-     * Constrictor.
-     *
-     * @param title       the title of a new companyEntity.
-     * @param description the description of a new companyEntity.
-     * @param keywords    the keywords of a new companyEntity.
-     */
-    public CompanyEntity(
-            final String title,
-            final String description,
-            final String keywords
-    ) {
-        this();
-        setTitle(title);
-        setDescription(description);
-        setKeywords(keywords);
-    }
-
-    /**
-     * Constrictor.
-     *
-     * @param title       the title of a new companyEntity.
-     * @param description the description of a new companyEntity.
-     * @param keywords    the keywords of a new companyEntity.
-     * @param addressEntity     the addressEntity of a new companyEntity.
-     * @param contactsEntity    the contactsEntity of a new companyEntity.
-     */
-    public CompanyEntity(
-            final String title,
-            final String description,
-            final String keywords,
-            final AddressEntity addressEntity,
-            final ContactsEntity contactsEntity
-    ) {
-        this(title, description, keywords);
-        setAddressEntity(addressEntity);
-        setContactsEntity(contactsEntity);
-    }
-
-    /**
-     * Constrictor.
-     *
-     * @param title       the title of a new companyEntity.
-     * @param description the description of a new companyEntity.
-     * @param information the information of a new companyEntity.
-     * @param keywords    the keywords of a new companyEntity.
-     */
-    public CompanyEntity(
-            final String title,
-            final String description,
-            final String information,
-            final String keywords
-    ) {
-        this(title, description, keywords);
-        setInformation(information);
+    protected CompanyEntity() {
     }
 
     /**
@@ -189,16 +119,16 @@ public class CompanyEntity extends ContentEntity {
     @Override
     public String toString() {
         return "CompanyEntity{" + super.toString() +
-                ", contactsEntity=" + getContactsEntity() +
-                ", addressEntity=" + getAddressEntity() +
-                ", tagline='" + getTagline() + '\'' +
-                ", information='" + getInformation() + '\'' +
-                ", domain='" + getDomain() + '\'' +
-                ", senderEmail='" + getSenderEmail() + '\'' +
-                ", senderPass='" + getSenderPass() + '\'' +
-                ", workTimeFrom='" + getWorkTimeFrom() + '\'' +
-                ", workTimeTo='" + getWorkTimeTo() + '\'' +
-                ", type=" + getType() +
+                ", contactsEntity=" + this.contacts +
+                ", addressEntity=" + this.address +
+                ", tagline='" + this.tagline + '\'' +
+                ", information='" + this.information + '\'' +
+                ", domain='" + this.domain + '\'' +
+                ", senderEmail='" + this.senderEmail + '\'' +
+                ", senderPass='" + this.senderPass + '\'' +
+                ", workTimeFrom='" + this.workTimeFrom + '\'' +
+                ", workTimeTo='" + this.workTimeTo + '\'' +
+                ", type=" + this.type +
                 '}';
     }
 
@@ -214,10 +144,10 @@ public class CompanyEntity extends ContentEntity {
         boolean result = super.equals(object);
         if (result) {
             final CompanyEntity other = (CompanyEntity) object;
-            result = (this.getType().equals(other.getType())) &&
-                    this.getDomain().equalsIgnoreCase(other.getDomain()) &&
-                    this.getTagline().equals(other.getTagline()) &&
-                    this.getInformation().equals(other.getInformation());
+            result = (this.type.equals(other.type)) &&
+                    this.domain.equalsIgnoreCase(other.domain) &&
+                    this.tagline.equals(other.tagline) &&
+                    this.information.equals(other.information);
         }
         return result;
     }
@@ -232,10 +162,10 @@ public class CompanyEntity extends ContentEntity {
     @Override
     public int hashCode() {
         return super.hashCode() +
-                getType().hashCode() +
-                getDomain().hashCode() +
-                getTagline().hashCode() +
-                getInformation().hashCode();
+                this.type.hashCode() +
+                this.domain.hashCode() +
+                this.tagline.hashCode() +
+                this.information.hashCode();
     }
 
     /**
@@ -245,10 +175,10 @@ public class CompanyEntity extends ContentEntity {
      */
     @Override
     public CompanyEntity clone() {
-        final CompanyEntity companyEntity = (CompanyEntity) super.clone();
-        companyEntity.setContactsEntity(getContactsEntity().clone());
-        companyEntity.setAddressEntity(getAddressEntity().clone());
-        return companyEntity;
+        final CompanyEntity clone = (CompanyEntity) super.clone();
+        clone.contacts = this.contacts.clone();
+        clone.address = this.address.clone();
+        return clone;
     }
 
     /**
@@ -278,12 +208,7 @@ public class CompanyEntity extends ContentEntity {
      * @param domain a new domain to the companyEntity.
      */
     public void setDomain(final String domain) {
-        if (isNotEmpty(domain)) {
-            final String temp = domain.replace("http://", "").replace("https://", "");
-            this.domain = isNotEmpty(temp) ? temp : "";
-        } else {
-            this.domain = "";
-        }
+        this.domain = domain;
     }
 
     /**
@@ -309,7 +234,7 @@ public class CompanyEntity extends ContentEntity {
      * @param tagline a new tagline to the companyEntity.
      */
     public void setTagline(final String tagline) {
-        this.tagline = isNotEmpty(tagline) ? tagline : "";
+        this.tagline = tagline;
     }
 
     /**
@@ -335,7 +260,7 @@ public class CompanyEntity extends ContentEntity {
      * @param information a new information to the companyEntity.
      */
     public void setInformation(final String information) {
-        this.information = isNotEmpty(information) ? information : "";
+        this.information = information;
     }
 
     /**
@@ -361,7 +286,7 @@ public class CompanyEntity extends ContentEntity {
      * @param senderEmail a new sender E-mail to the companyEntity.
      */
     public void setSenderEmail(final String senderEmail) {
-        this.senderEmail = isNotEmpty(senderEmail) ? senderEmail : "";
+        this.senderEmail = senderEmail;
     }
 
     /**
@@ -387,7 +312,7 @@ public class CompanyEntity extends ContentEntity {
      * @param senderPass a new sender password to the companyEntity.
      */
     public void setSenderPass(final String senderPass) {
-        this.senderPass = isNotEmpty(senderPass) ? senderPass : "";
+        this.senderPass = senderPass;
     }
 
     /**
@@ -412,7 +337,7 @@ public class CompanyEntity extends ContentEntity {
      * @param workTimeFrom the new start work time to the companyEntity.
      */
     public void setWorkTimeFrom(final String workTimeFrom) {
-        this.workTimeFrom = new Time(workTimeFrom).getCorrectTime();
+        this.workTimeFrom = workTimeFrom;
     }
 
     /**
@@ -437,7 +362,7 @@ public class CompanyEntity extends ContentEntity {
      * @param workTimeTo the new finish work time to the companyEntity.
      */
     public void setWorkTimeTo(final String workTimeTo) {
-        this.workTimeTo = new Time(workTimeTo).getCorrectTime();
+        this.workTimeTo = workTimeTo;
     }
 
     /**
@@ -447,19 +372,16 @@ public class CompanyEntity extends ContentEntity {
      * @return The companyEntity contactsEntity (newer null).
      */
     public ContactsEntity getContactsEntity() {
-        return this.contactsEntity;
+        return this.contacts;
     }
 
     /**
      * Sets a new contactsEntity to the companyEntity.
      *
-     * @param contactsEntity the new contactsEntity to the companyEntity.
+     * @param contacts the new contactsEntity to the companyEntity.
      */
-    public void setContactsEntity(final ContactsEntity contactsEntity) {
-        if (isNull(this.contactsEntity)) {
-            this.contactsEntity = new ContactsEntity();
-        }
-        this.contactsEntity.initialize(contactsEntity);
+    public void setContactsEntity(final ContactsEntity contacts) {
+        this.contacts = contacts;
     }
 
     /**
@@ -469,19 +391,16 @@ public class CompanyEntity extends ContentEntity {
      * @return The companyEntity addressEntity (newer null).
      */
     public AddressEntity getAddressEntity() {
-        return this.addressEntity;
+        return this.address;
     }
 
     /**
      * Sets a new addressEntity to the companyEntity.
      *
-     * @param addressEntity the new addressEntity to the companyEntity.
+     * @param address the new addressEntity to the companyEntity.
      */
-    public void setAddressEntity(final AddressEntity addressEntity) {
-        if (isNull(this.addressEntity)) {
-            this.addressEntity = new AddressEntity();
-        }
-        this.addressEntity.initialize(addressEntity);
+    public void setAddressEntity(final AddressEntity address) {
+        this.address = address;
     }
 
     /**
@@ -509,55 +428,10 @@ public class CompanyEntity extends ContentEntity {
     }
 
     /**
-     * Returns a URL of the companyEntity.
      *
-     * @return The companyEntity URL or empty string (newer null).
+     * @return
      */
-    @Override
-    public String getUrl() {
-        String url = super.getUrl();
-        if (isNull(url)) {
-            url = getDomain();
-        }
-        return url;
-    }
-
-    /**
-     * Checks whether the companyEntity is opened now.
-     *
-     * @return Returns true if the companyEntity is opened now,
-     * otherwise returns false.
-     */
-    public boolean isOpen() {
-        return Time.isWorkTime(this.workTimeFrom, this.workTimeTo);
-    }
-
-    /**
-     * Initializes the companyEntity.
-     * Returns this companyEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this companyEntity
-     *     initialize(new CompanyEntity()) - does nothing, returns this
-     *     companyEntity with a new copied fields
-     * </pre>
-     *
-     * @param companyEntity the companyEntity to copy.
-     * @return This companyEntity with a new fields (newer null).
-     */
-    public CompanyEntity initialize(final CompanyEntity companyEntity) {
-        if (isNotNull(companyEntity)) {
-            super.initialize(companyEntity);
-            this.setInformation(companyEntity.getInformation());
-            this.setDomain(companyEntity.getDomain());
-            this.setTagline(companyEntity.getTagline());
-            this.setSenderEmail(companyEntity.getSenderEmail());
-            this.setSenderPass(companyEntity.getSenderPass());
-            this.setWorkTimeFrom(companyEntity.getWorkTimeFrom());
-            this.setWorkTimeTo(companyEntity.getWorkTimeTo());
-            this.setType(companyEntity.getType());
-            this.setContactsEntity(companyEntity.getContactsEntity());
-            this.setAddressEntity(companyEntity.getAddressEntity());
-        }
-        return this;
+    public Company convert() {
+        return new CompanyEntityConverter(this).convert();
     }
 }

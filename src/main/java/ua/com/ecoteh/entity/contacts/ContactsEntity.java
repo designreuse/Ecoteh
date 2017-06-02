@@ -6,9 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-
 /**
  * The class implements a set of standard methods for working
  * with entity of the {@link ContactsEntity} class.
@@ -75,64 +72,7 @@ public class ContactsEntity extends ModelEntity {
     @Column(name = "skype", nullable = false)
     private String skype;
 
-    /**
-     * Default constructor.
-     */
-    public ContactsEntity() {
-        this.email = "";
-        this.mobilePhone = "";
-        this.landlinePhone = "";
-        this.fax = "";
-        this.vkontakte = "";
-        this.facebook = "";
-        this.twitter = "";
-        this.skype = "";
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param email       a E-mail of the new contactsEntity.
-     * @param mobilePhone a mobile phone number of the new contactsEntity.
-     */
-    public ContactsEntity(
-            final String email,
-            final String mobilePhone
-    ) {
-        this();
-        setEmail(email);
-        setMobilePhone(mobilePhone);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param email         a E-mail of the new contactsEntity.
-     * @param mobilePhone   a mobile phone number of the new contactsEntity.
-     * @param landlinePhone a landline phone number of the new contactsEntity.
-     * @param fax           a fax number of the new contactsEntity.
-     * @param vkontakte     a Vkontakte URL of the new contactsEntity.
-     * @param facebook      a Facebook URL of the new contactsEntity.
-     * @param twitter       a Twitter URL of the new contactsEntity.
-     * @param skype         a Skype username of the new contactsEntity.
-     */
-    public ContactsEntity(
-            final String email,
-            final String mobilePhone,
-            final String landlinePhone,
-            final String fax,
-            final String vkontakte,
-            final String facebook,
-            final String twitter,
-            final String skype
-    ) {
-        this(email, mobilePhone);
-        setLandlinePhone(landlinePhone);
-        setFax(fax);
-        setVkontakte(vkontakte);
-        setFacebook(facebook);
-        setTwitter(twitter);
-        setSkype(skype);
+    protected ContactsEntity() {
     }
 
     /**
@@ -143,14 +83,14 @@ public class ContactsEntity extends ModelEntity {
     @Override
     public String toString() {
         return "ContactsEntity{" + super.toString() +
-                ", email='" + getEmail() + '\'' +
-                ", mobilePhone='" + getMobilePhone() + '\'' +
-                ", landlinePhone='" + getLandlinePhone() + '\'' +
-                ", fax='" + getFax() + '\'' +
-                ", vkontakte='" + getVkontakte() + '\'' +
-                ", facebook='" + getFacebook() + '\'' +
-                ", twitter='" + getTwitter() + '\'' +
-                ", skype='" + getSkype() + '\'' +
+                ", email='" + this.email + '\'' +
+                ", mobilePhone='" + this.mobilePhone + '\'' +
+                ", landlinePhone='" + this.landlinePhone + '\'' +
+                ", fax='" + this.fax + '\'' +
+                ", vkontakte='" + this.vkontakte + '\'' +
+                ", facebook='" + this.facebook + '\'' +
+                ", twitter='" + this.twitter + '\'' +
+                ", skype='" + this.skype + '\'' +
                 '}';
     }
 
@@ -166,14 +106,14 @@ public class ContactsEntity extends ModelEntity {
         boolean result = super.equals(object);
         if (result) {
             final ContactsEntity other = (ContactsEntity) object;
-            result = this.getEmail().equalsIgnoreCase(other.getEmail()) &&
-                    this.getMobilePhone().equalsIgnoreCase(other.getMobilePhone()) &&
-                    this.getLandlinePhone().equalsIgnoreCase(other.getLandlinePhone()) &&
-                    this.getFax().equalsIgnoreCase(other.getFax()) &&
-                    this.getVkontakte().equalsIgnoreCase(other.getVkontakte()) &&
-                    this.getFacebook().equalsIgnoreCase(other.getFacebook()) &&
-                    this.getTwitter().equalsIgnoreCase(other.getTwitter()) &&
-                    this.getSkype().equalsIgnoreCase(other.getSkype());
+            result = this.email.equalsIgnoreCase(other.email) &&
+                    this.mobilePhone.equalsIgnoreCase(other.mobilePhone) &&
+                    this.landlinePhone.equalsIgnoreCase(other.landlinePhone) &&
+                    this.fax.equalsIgnoreCase(other.fax) &&
+                    this.vkontakte.equalsIgnoreCase(other.vkontakte) &&
+                    this.facebook.equalsIgnoreCase(other.facebook) &&
+                    this.twitter.equalsIgnoreCase(other.twitter) &&
+                    this.skype.equalsIgnoreCase(other.skype);
         }
         return result;
     }
@@ -187,14 +127,14 @@ public class ContactsEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return getEmail().hashCode() +
-                getMobilePhone().hashCode() +
-                getLandlinePhone().hashCode() +
-                getFax().hashCode() +
-                getVkontakte().hashCode() +
-                getFacebook().hashCode() +
-                getTwitter().hashCode() +
-                getSkype().hashCode();
+        return this.email.hashCode() +
+                this.mobilePhone.hashCode() +
+                this.landlinePhone.hashCode() +
+                this.fax.hashCode() +
+                this.vkontakte.hashCode() +
+                this.facebook.hashCode() +
+                this.twitter.hashCode() +
+                this.skype.hashCode();
     }
 
     /**
@@ -230,7 +170,7 @@ public class ContactsEntity extends ModelEntity {
      * @param email the new E-mail to the contactsEntity.
      */
     public void setEmail(final String email) {
-        this.email = isNotEmpty(email) ? email : "";
+        this.email = email;
     }
 
     /**
@@ -256,7 +196,7 @@ public class ContactsEntity extends ModelEntity {
      * @param mobilePhone the new mobile phone number to the contactsEntity.
      */
     public void setMobilePhone(final String mobilePhone) {
-        this.mobilePhone = isNotEmpty(mobilePhone) ? mobilePhone : "";
+        this.mobilePhone = mobilePhone;
     }
 
     /**
@@ -282,7 +222,7 @@ public class ContactsEntity extends ModelEntity {
      * @param landlinePhone the new landline phone number to the contactsEntity.
      */
     public void setLandlinePhone(final String landlinePhone) {
-        this.landlinePhone = isNotEmpty(landlinePhone) ? landlinePhone : "";
+        this.landlinePhone = landlinePhone;
     }
 
     /**
@@ -308,7 +248,7 @@ public class ContactsEntity extends ModelEntity {
      * @param fax the new fax number to the contactsEntity.
      */
     public void setFax(final String fax) {
-        this.fax = isNotEmpty(fax) ? fax : "";
+        this.fax = fax;
     }
 
     /**
@@ -334,7 +274,7 @@ public class ContactsEntity extends ModelEntity {
      * @param vkontakte the new Vkontakte URL to the contactsEntity.
      */
     public void setVkontakte(final String vkontakte) {
-        this.vkontakte = isNotEmpty(vkontakte) ? vkontakte : "";
+        this.vkontakte = vkontakte;
     }
 
     /**
@@ -360,7 +300,7 @@ public class ContactsEntity extends ModelEntity {
      * @param facebook the new Facebook URL to the contactsEntity.
      */
     public void setFacebook(final String facebook) {
-        this.facebook = isNotEmpty(facebook) ? facebook : "";
+        this.facebook = facebook;
     }
 
     /**
@@ -386,7 +326,7 @@ public class ContactsEntity extends ModelEntity {
      * @param twitter the new Twitter URL to the contactsEntity.
      */
     public void setTwitter(final String twitter) {
-        this.twitter = isNotEmpty(twitter) ? twitter : "";
+        this.twitter = twitter;
     }
 
     /**
@@ -412,38 +352,10 @@ public class ContactsEntity extends ModelEntity {
      * @param skype the new Skype username to the contactsEntity.
      */
     public void setSkype(final String skype) {
-        this.skype = isNotEmpty(skype) ? skype : "";
+        this.skype = skype;
     }
 
     /**
-     * Initializes the contactsEntity.
-     * Returns this contactsEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this contactsEntity
-     *     initialize(new ContactsEntity()) - does nothing, returns this
-     *     contactsEntity with a new copied fields
-     * </pre>
-     *
-     * @param contactsEntity the contactsEntity to copy.
-     * @return This contactsEntity with new fields (newer null).
-     */
-    public ContactsEntity initialize(final ContactsEntity contactsEntity) {
-        if (isNotNull(contactsEntity)) {
-            super.initialize(contactsEntity);
-            this.setEmail(contactsEntity.getEmail());
-            this.setMobilePhone(contactsEntity.getMobilePhone());
-            this.setLandlinePhone(contactsEntity.getLandlinePhone());
-            this.setFax(contactsEntity.getFax());
-            this.setVkontakte(contactsEntity.getVkontakte());
-            this.setFacebook(contactsEntity.getFacebook());
-            this.setTwitter(contactsEntity.getTwitter());
-            this.setSkype(contactsEntity.getSkype());
-        }
-        return this;
-    }
-
-    /**
-     *
      * @return
      */
     public Contacts convert() {

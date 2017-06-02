@@ -45,6 +45,12 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     private boolean validated;
 
     /**
+     *
+     */
+    protected ModelEntity() {
+    }
+
+    /**
      * Returns a string representation of the object.
      *
      * @return A string representation of the object (newer null).
@@ -52,25 +58,9 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     @Override
     public String toString() {
         return "ModelEntity{" +
-                "id=" + getId() +
-                ", validated=" + isValidated() +
+                "id=" + this.id +
+                ", validated=" + this.validated +
                 '}';
-    }
-
-    /**
-     * Creates and returns a copy of this object.
-     *
-     * @return A clone of this instance (newer null).
-     */
-    @Override
-    public ModelEntity clone() {
-        ModelEntity modelEntity = null;
-        try {
-            modelEntity = (ModelEntity) super.clone();
-        } catch (CloneNotSupportedException ex) {
-            LOGGER.error(ex.getMessage(), ex);
-        }
-        return modelEntity;
     }
 
     /**
@@ -83,6 +73,22 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     @Override
     public boolean equals(final Object object) {
         return isNotNull(object) && (super.equals(object) || (getClass() == object.getClass()));
+    }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public ModelEntity clone() {
+        ModelEntity clone = null;
+        try {
+            clone = (ModelEntity) super.clone();
+        } catch (CloneNotSupportedException ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return clone;
     }
 
     /**
@@ -123,25 +129,6 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     }
 
     /**
-     * Initializes the modelEntity.
-     * Returns this modelEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this modelEntity
-     *     initialize(new ModelEntity()) - does nothing, returns this
-     *     modelEntity with a new copied fields
-     * </pre>
-     *
-     * @param modelEntity the modelEntity to copy.
-     * @return This modelEntity with a new copied fields (newer null).
-     */
-    public ModelEntity initialize(final ModelEntity modelEntity) {
-        if (isNotNull(modelEntity)) {
-            this.setValidated(modelEntity.isValidated());
-        }
-        return this;
-    }
-
-    /**
      * Returns a hash code value for the object.
      * This method is supported for the benefit
      * of hash tables such as those provided by HashMap.
@@ -150,4 +137,6 @@ public abstract class ModelEntity implements Serializable, Cloneable {
      */
     @Override
     public abstract int hashCode();
+
+    public abstract <T extends Model> T convert();
 }

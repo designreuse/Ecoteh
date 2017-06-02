@@ -1,15 +1,11 @@
 package ua.com.ecoteh.entity.response;
 
 import ua.com.ecoteh.entity.model.ModelEntity;
-import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -50,42 +46,7 @@ public class ResponseEntity extends ModelEntity {
     /**
      * Default constructor.
      */
-    public ResponseEntity() {
-        this.username = "";
-        this.text = "";
-        this.date = new Date();
-        setValidated(false);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param username the username of a new responseEntity.
-     * @param text     the text of a new responseEntity.
-     */
-    public ResponseEntity(
-            final String username,
-            final String text
-    ) {
-        this();
-        setUsername(username);
-        setText(text);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param username  the username of a new responseEntity.
-     * @param text      the text of a new responseEntity.
-     * @param validated is validated of a new responseEntity.
-     */
-    public ResponseEntity(
-            final String username,
-            final String text,
-            final boolean validated
-    ) {
-        this(username, text);
-        setValidated(validated);
+    protected ResponseEntity() {
     }
 
     /**
@@ -96,9 +57,9 @@ public class ResponseEntity extends ModelEntity {
     @Override
     public String toString() {
         return "ResponseEntity{" + super.toString() +
-                ", username='" + getUsername() + '\'' +
-                ", text='" + getText() + '\'' +
-                ", date=" + getDate() +
+                ", username='" + this.username + '\'' +
+                ", text='" + this.text + '\'' +
+                ", date=" + this.date +
                 '}';
     }
 
@@ -114,8 +75,9 @@ public class ResponseEntity extends ModelEntity {
         boolean result = false;
         if (super.equals(object)) {
             final ResponseEntity other = (ResponseEntity) object;
-            result = this.getUsername().equals(other.getUsername()) &&
-                    this.getText().equals(other.getText());
+            result = this.username.equals(other.username) &&
+                    this.date.equals(other.date) &&
+                    this.text.equals(other.text);
         }
         return result;
     }
@@ -129,7 +91,9 @@ public class ResponseEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return getUsername().hashCode() + getText().hashCode();
+        return this.username.hashCode() +
+                this.date.hashCode() +
+                this.text.hashCode();
     }
 
     /**
@@ -165,7 +129,7 @@ public class ResponseEntity extends ModelEntity {
      * @param username the new text to the responseEntity.
      */
     public void setUsername(final String username) {
-        this.username = isNotEmpty(username) ? username : "";
+        this.username = username;
     }
 
     /**
@@ -191,7 +155,7 @@ public class ResponseEntity extends ModelEntity {
      * @param text the new text to the responseEntity.
      */
     public void setText(final String text) {
-        this.text = isNotEmpty(text) ? text : "";
+        this.text = text;
     }
 
     /**
@@ -214,45 +178,7 @@ public class ResponseEntity extends ModelEntity {
      * @param date the new date to the responseEntity.
      */
     public void setDate(final Date date) {
-        this.date = isNotNull(date) ? date : new Date();
-    }
-
-    /**
-     * Returns an article date in string format.
-     *
-     * @return The article string-date (newer null).
-     */
-    public String getDateToString() {
-        return Time.getDate(this.date);
-    }
-
-    /**
-     * Changes responseEntity validation.
-     */
-    public void reverseValidated() {
-        setValidated(!isValidated());
-    }
-
-    /**
-     * Initializes the responseEntity.
-     * Returns this responseEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this responseEntity
-     *     initialize(new ResponseEntity()) - does nothing, returns this
-     *     responseEntity with a new copied fields
-     * </pre>
-     *
-     * @param responseEntity the responseEntity to copy.
-     * @return This responseEntity with new fields (newer null).
-     */
-    public ResponseEntity initialize(final ResponseEntity responseEntity) {
-        if (isNotNull(responseEntity)) {
-            super.initialize(responseEntity);
-            this.setUsername(responseEntity.getUsername());
-            this.setText(responseEntity.getText());
-            this.setDate(responseEntity.getDate());
-        }
-        return this;
+        this.date = date;
     }
 
     /**

@@ -26,7 +26,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  */
 @Entity
 @Table(name = "users")
-public class UserEntity extends ModelEntity implements UserDetails {
+public class UserEntity extends ModelEntity {
 
     /**
      * It is used during deserialization to verify that
@@ -52,13 +52,13 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * The login of a userEntity.
      */
     @Column(name = "login", nullable = false)
-    private String encryptedLogin;
+    private String login;
 
     /**
      * The password of a userEntity.
      */
     @Column(name = "password", nullable = false)
-    private String encryptedPassword;
+    private String password;
 
     /**
      * The tagline of a userEntity.
@@ -78,7 +78,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private ContactsEntity contactsEntity;
+    private ContactsEntity contacts;
 
     /**
      * The userEntity contactsEntity.
@@ -116,61 +116,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
     /**
      * Default constructor.
      */
-    public UserEntity() {
-        this.name = "";
-        this.url = "";
-        this.encryptedLogin = "";
-        this.encryptedPassword = "";
-        this.description = "";
-        this.photo = new FileEntity();
-        this.contactsEntity = new ContactsEntity();
-        this.role = UserRole.ANOTHER;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param name        the name of a new userEntity.
-     * @param description the description of a new userEntity.
-     */
-    public UserEntity(
-            final String name,
-            final String description
-    ) {
-        this();
-        setName(name);
-        setDescription(description);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param name        the name of a new userEntity.
-     * @param description the description of a new userEntity.
-     * @param contactsEntity    the contactsEntity to a new userEntity.
-     */
-    public UserEntity(
-            final String name,
-            final String description,
-            final ContactsEntity contactsEntity
-    ) {
-        this(name, description);
-        setContactsEntity(contactsEntity);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param name     the name of a new userEntity.
-     * @param contactsEntity the contactsEntity to a new userEntity.
-     */
-    public UserEntity(
-            final String name,
-            final ContactsEntity contactsEntity
-    ) {
-        this();
-        setName(name);
-        setContactsEntity(contactsEntity);
+    protected UserEntity() {
     }
 
     /**
@@ -181,18 +127,16 @@ public class UserEntity extends ModelEntity implements UserDetails {
     @Override
     public String toString() {
         return "UserEntity{" + super.toString() +
-                ", name='" + getName() + '\'' +
-                ", url='" + getUrl() + '\'' +
-                ", encryptedLogin='" + getEncryptedLogin() + '\'' +
-                ", encryptedPassword='" + getEncryptedPassword() + '\'' +
-                ", Login='" + getLogin() + '\'' +
-                ", Password='" + getPassword() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", contactsEntity=" + getContactsEntity() +
-                ", photoEntity=" + getPhotoEntity() +
-                ", role=" + getRole() +
-                ", isMailing=" + isMailing() +
-                ", isLocked=" + isLocked() +
+                ", name='" + this.name + '\'' +
+                ", url='" + this.url + '\'' +
+                ", login='" + this.login + '\'' +
+                ", password='" + this.password + '\'' +
+                ", description='" + this.description + '\'' +
+                ", contacts=" + this.contacts +
+                ", photo=" + this.photo +
+                ", role=" + this.role +
+                ", isMailing=" + this.mailing +
+                ", isLocked=" + this.locked +
                 '}';
     }
 
@@ -208,9 +152,9 @@ public class UserEntity extends ModelEntity implements UserDetails {
         boolean result = false;
         if (super.equals(object)) {
             final UserEntity other = (UserEntity) object;
-            result = this.getName().equalsIgnoreCase(other.getName()) &&
-                    this.getDescription().equalsIgnoreCase(other.getDescription()) &&
-                    this.getRole().equals(other.getRole());
+            result = this.name.equalsIgnoreCase(other.name) &&
+                    this.description.equalsIgnoreCase(other.description) &&
+                    this.role.equals(other.role);
         }
         return result;
     }
@@ -224,9 +168,9 @@ public class UserEntity extends ModelEntity implements UserDetails {
      */
     @Override
     public int hashCode() {
-        return getName().hashCode() +
-                getDescription().hashCode() +
-                getRole().hashCode();
+        return this.name.hashCode() +
+                this.description.hashCode() +
+                this.role.hashCode();
     }
 
     /**
@@ -236,82 +180,10 @@ public class UserEntity extends ModelEntity implements UserDetails {
      */
     @Override
     public UserEntity clone() {
-        final UserEntity userEntity = (UserEntity) super.clone();
-        userEntity.setContactsEntity(getContactsEntity().clone());
-        userEntity.setPhotoEntity(getPhotoEntity().clone());
-        return userEntity;
-    }
-
-    /**
-     * Indicates whether the userEntity's account has expired.
-     * An expired account cannot be authenticated.
-     *
-     * @return true if the userEntity's account is valid (ie non-expired),
-     * false if no longer valid (ie expired)
-     */
-    @Override
-    public boolean isAccountNonExpired() {
-        return !isLocked();
-    }
-
-    /**
-     * Indicates whether the userEntity is locked or unlocked.
-     * A locked userEntity cannot be authenticated.
-     *
-     * @return true if the userEntity is not locked, false otherwise.
-     */
-    @Override
-    public boolean isAccountNonLocked() {
-        return !isLocked();
-    }
-
-    /**
-     * Indicates whether the userEntity's credentials (password) has expired.
-     * Expired credentials prevent authentication.
-     *
-     * @return true if the userEntity's credentials are valid
-     * (ie non-expired), false if no longer valid (ie expired)
-     */
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return !isLocked();
-    }
-
-    /**
-     * Indicates whether the userEntity is enabled or disabled.
-     * A disabled userEntity cannot be authenticated.
-     *
-     * @return true if the userEntity's credentials are valid
-     * (ie non-expired), false if no longer valid (ie expired)
-     */
-    @Override
-    public boolean isEnabled() {
-        return !isLocked();
-    }
-
-    /**
-     * Returns the authorities granted to the userEntity.
-     * Cannot return null.
-     *
-     * @return the authorities, sorted by natural key (never null).
-     */
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<GrantedAuthority> roles = new ArrayList<>(1);
-        roles.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
-        return roles;
-    }
-
-    /**
-     * Returns the username used to authenticate the userEntity.
-     * Cannot return null. Return the empty string
-     * if username is null.
-     *
-     * @return the username or the empty string (never null).
-     */
-    @Override
-    public String getUsername() {
-        return getLogin();
+        final UserEntity clone = (UserEntity) super.clone();
+        clone.contacts = this.contacts.clone();
+        clone.photo = this.photo;
+        return clone;
     }
 
     /**
@@ -338,10 +210,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @param name the new name to the userEntity.
      */
     public void setName(final String name) {
-        this.name = isNotEmpty(name) ? name : "";
-        if (isEmpty(this.url)) {
-            translateAndSetUrl(this.name);
-        }
+        this.name = name;
     }
 
     /**
@@ -357,9 +226,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @param login the new login to the userEntity.
      */
     public void setLogin(final String login) {
-        setEncryptedLogin(
-                isNotEmpty(login) ? new Base64Encryptor(login).encrypt() : ""
-        );
+        this.login = login;
     }
 
     /**
@@ -368,33 +235,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @return The userEntity login (newer null).
      */
     public String getLogin() {
-        return isNotEmpty(this.encryptedLogin) ? new Base64Encryptor(this.encryptedLogin).decrypt() : "";
-    }
-
-    /**
-     * Returns a encrypted login.
-     *
-     * @return The encrypted login (newer null).
-     */
-    public String getEncryptedLogin() {
-        return this.encryptedLogin;
-    }
-
-    /**
-     * Sets a new encrypted login to the userEntity.
-     * If parameter login is blank then sets empty string.
-     * <pre>
-     *     setEncryptedLogin(null) - encryptedLogin = ""
-     *     setEncryptedLogin("") - encryptedLogin = ""
-     *     setEncryptedLogin(" ") - encryptedLogin = ""
-     *     setEncryptedLogin("bob") - encryptedLogin = "bob"
-     *     setEncryptedLogin(" bob ") - encryptedLogin = "bob"
-     * </pre>
-     *
-     * @param login a new encrypted login to the userEntity.
-     */
-    public void setEncryptedLogin(final String login) {
-        this.encryptedLogin = isNotEmpty(login) ? login : "";
+        return this.login;
     }
 
     /**
@@ -402,11 +243,8 @@ public class UserEntity extends ModelEntity implements UserDetails {
      *
      * @return The userEntity password (newer null).
      */
-    @Transient
-    @Override
     public String getPassword() {
-        return isNotEmpty(this.encryptedPassword) ?
-                new Base64Encryptor(this.encryptedPassword).decrypt() : "";
+        return this.password;
     }
 
     /**
@@ -423,45 +261,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      */
     @Transient
     public void setPassword(final String password) {
-        setEncryptedPassword(
-                isNotEmpty(password) ? new Base64Encryptor(password).encrypt() : ""
-        );
-    }
-
-    /**
-     * Returns a encrypted password.
-     *
-     * @return The encrypted password (newer null).
-     */
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
-
-    /**
-     * Sets a new encrypted password to the userEntity.
-     * If parameter password is blank then sets empty string.
-     * <pre>
-     *     setEncryptedPassword(null) - encryptedPassword = ""
-     *     setEncryptedPassword("") - encryptedPassword = ""
-     *     setEncryptedPassword(" ") - encryptedPassword = ""
-     *     setEncryptedPassword("bob") - encryptedPassword = "bob"
-     *     setEncryptedPassword(" bob ") - encryptedPassword = "bob"
-     * </pre>
-     *
-     * @param password the new encrypted password to the userEntity.
-     */
-    public void setEncryptedPassword(final String password) {
-        this.encryptedPassword = isNotEmpty(password) ? password : "";
-    }
-
-    /**
-     * Translates value and sets to url.
-     * For translate used {@link Translator} method "fromCyrillicToLatin".
-     *
-     * @param value the value to translate.
-     */
-    public void translateAndSetUrl(final String value) {
-        setUrl(Translator.fromCyrillicToLatin(value));
+        this.password = password;
     }
 
     /**
@@ -487,7 +287,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @param url the new url to the userEntity.
      */
     public void setUrl(final String url) {
-        this.url = isNotEmpty(url) ? url : "";
+        this.url = url;
     }
 
     /**
@@ -513,7 +313,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @param description the new description to the userEntity.
      */
     public void setDescription(final String description) {
-        this.description = isNotEmpty(description) ? description : "";
+        this.description = description;
     }
 
     /**
@@ -531,10 +331,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @param photo the new photo to the userEntity.
      */
     public void setPhotoEntity(final FileEntity photo) {
-        if (isNull(this.photo)) {
-            this.photo = new FileEntity();
-        }
-        this.photo.initialize(photo);
+        this.photo = photo;
     }
 
     /**
@@ -543,7 +340,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @return The userEntity contactsEntity (newer null).
      */
     public ContactsEntity getContactsEntity() {
-        return this.contactsEntity;
+        return this.contacts;
     }
 
     /**
@@ -551,11 +348,8 @@ public class UserEntity extends ModelEntity implements UserDetails {
      *
      * @param contactsEntity the new contactsEntity to the userEntity.
      */
-    public void setContactsEntity(final ContactsEntity contactsEntity) {
-        if (isNull(this.contactsEntity)) {
-            this.contactsEntity = new ContactsEntity();
-        }
-        this.contactsEntity.initialize(contactsEntity);
+    public void setContactsEntity(final ContactsEntity contacts) {
+        this.contacts = contacts;
     }
 
     /**
@@ -578,7 +372,7 @@ public class UserEntity extends ModelEntity implements UserDetails {
      * @param role the new role to the userEntity.
      */
     public void setRole(final UserRole role) {
-        this.role = isNotNull(role) ? role : UserRole.ANOTHER;
+        this.role = role;
     }
 
     /**
@@ -621,35 +415,6 @@ public class UserEntity extends ModelEntity implements UserDetails {
             setValidated(false);
             setMailing(false);
         }
-    }
-
-    /**
-     * Initializes the userEntity.
-     * Returns this v with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this userEntity
-     *     initialize(new UserEntity()) - does nothing, returns this
-     *     userEntity with a new copied fields
-     * </pre>
-     *
-     * @param userEntity the userEntity to copy.
-     * @return The this userEntity with a new fields (newer null).
-     */
-    public UserEntity initialize(final UserEntity userEntity) {
-        if (isNotNull(userEntity)) {
-            this.setName(userEntity.getName());
-            this.setUrl(userEntity.getUrl());
-            this.setEncryptedLogin(userEntity.getEncryptedLogin());
-            this.setEncryptedPassword(userEntity.getEncryptedPassword());
-            this.setDescription(userEntity.getDescription());
-            this.setPhotoEntity(userEntity.getPhotoEntity());
-            this.setRole(userEntity.getRole());
-            this.setMailing(userEntity.isMailing());
-            this.setLocked(userEntity.isLocked());
-            this.setValidated(userEntity.isValidated());
-            this.setContactsEntity(userEntity.getContactsEntity());
-        }
-        return this;
     }
 
     /**

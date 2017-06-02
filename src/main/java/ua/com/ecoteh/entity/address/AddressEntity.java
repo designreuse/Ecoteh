@@ -6,9 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-
 /**
  * The class implements a set of standard methods for working
  * with entity of the {@link AddressEntity} class.
@@ -39,33 +36,7 @@ public class AddressEntity extends ModelEntity {
     @Column(name = "google_maps", nullable = false)
     private String googleMaps;
 
-    /**
-     * Default constructor.
-     */
-    public AddressEntity() {
-        this.address = "";
-        this.googleMaps = "";
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param address the mailing addressEntity of the new addressEntity.
-     */
-    public AddressEntity(final String address) {
-        this();
-        setAddress(address);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param address    the mailing addressEntity of the new addressEntity.
-     * @param googleMaps the google maps URL of the new addressEntity.
-     */
-    public AddressEntity(final String address, final String googleMaps) {
-        this(address);
-        setGoogleMaps(googleMaps);
+    protected AddressEntity() {
     }
 
     /**
@@ -76,8 +47,8 @@ public class AddressEntity extends ModelEntity {
     @Override
     public String toString() {
         return "AddressEntity{" + super.toString() +
-                ", addressEntity='" + getAddress() + '\'' +
-                ", googleMaps='" + getGoogleMaps() + '\'' +
+                ", address='" + this.address + '\'' +
+                ", googleMaps='" + this.googleMaps + '\'' +
                 '}';
     }
 
@@ -93,8 +64,8 @@ public class AddressEntity extends ModelEntity {
         boolean result = super.equals(object);
         if (result) {
             final AddressEntity other = (AddressEntity) object;
-            result = this.getAddress().equalsIgnoreCase(other.getAddress()) &&
-                    this.getGoogleMaps().equalsIgnoreCase(other.getGoogleMaps());
+            result = this.address.equalsIgnoreCase(other.address) &&
+                    this.googleMaps.equalsIgnoreCase(other.googleMaps);
         }
         return result;
     }
@@ -108,7 +79,7 @@ public class AddressEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return getAddress().hashCode() + getGoogleMaps().hashCode();
+        return this.address.hashCode() + this.googleMaps.hashCode();
     }
 
     /**
@@ -144,7 +115,7 @@ public class AddressEntity extends ModelEntity {
      * @param address the new mailing addressEntity to the addressEntity.
      */
     public void setAddress(final String address) {
-        this.address = isNotEmpty(address) ? address : "";
+        this.address = address;
     }
 
     /**
@@ -170,28 +141,7 @@ public class AddressEntity extends ModelEntity {
      * @param googleMaps the new Google maps URL to the addressEntity.
      */
     public void setGoogleMaps(final String googleMaps) {
-        this.googleMaps = isNotEmpty(googleMaps) ? googleMaps : "";
-    }
-
-    /**
-     * Initializes the addressEntity.
-     * Returns this addressEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this addressEntity
-     *     initialize(new AddressEntity()) - does nothing, returns this
-     *     addressEntity with a new copied fields
-     * </pre>
-     *
-     * @param addressEntity the addressEntity to copy.
-     * @return This addressEntity with a new copied fields (newer null).
-     */
-    public AddressEntity initialize(final AddressEntity addressEntity) {
-        if (isNotNull(addressEntity)) {
-            super.initialize(addressEntity);
-            this.setAddress(addressEntity.getAddress());
-            this.setGoogleMaps(addressEntity.getGoogleMaps());
-        }
-        return this;
+        this.googleMaps = googleMaps;
     }
 
     /**

@@ -1,11 +1,8 @@
 package ua.com.ecoteh.entity.file;
 
 import ua.com.ecoteh.entity.model.ModelEntity;
-import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of standard methods for working
@@ -45,54 +42,9 @@ public class FileEntity extends ModelEntity {
     private FileType type;
 
     /**
-     * Default constructor.
-     */
-    public FileEntity() {
-        this.title = "";
-        this.url = "";
-        this.type = FileType.ANOTHER;
-        setValidated(true);
-    }
-
-    /**
-     * Constructor.
      *
-     * @param title the title of a new fileEntity.
      */
-    public FileEntity(final String title) {
-        this();
-        setTitle(title);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param title the title of a new fileEntity.
-     * @param url   the URL of a new fileEntity.
-     */
-    public FileEntity(
-            final String title,
-            final String url
-    ) {
-        this();
-        setTitle(title);
-        setUrl(url);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param title the title of a new fileEntity.
-     * @param url   the URL of a new fileEntity.
-     * @param type  the type of a new fileEntity.
-     */
-    public FileEntity(
-            final String title,
-            final String url,
-            final FileType type
-    ) {
-        this(title, url);
-        setType(type);
+    protected FileEntity() {
     }
 
     /**
@@ -103,9 +55,9 @@ public class FileEntity extends ModelEntity {
     @Override
     public String toString() {
         return "FileEntity{" + super.toString() +
-                ", title='" + getTitle() + '\'' +
-                ", type='" + getType() + '\'' +
-                ", url='" + getUrl() + '\'' +
+                ", title='" + this.title + '\'' +
+                ", type='" + this.type + '\'' +
+                ", url='" + this.url + '\'' +
                 '}';
     }
 
@@ -121,8 +73,8 @@ public class FileEntity extends ModelEntity {
         boolean result = super.equals(object);
         if (result) {
             final FileEntity other = (FileEntity) object;
-            result = this.getTitle().equalsIgnoreCase(other.getTitle()) &&
-                    this.getUrl().equalsIgnoreCase(other.getUrl());
+            result = this.title.equalsIgnoreCase(other.title) &&
+                    this.url.equalsIgnoreCase(other.url);
         }
         return result;
     }
@@ -136,7 +88,7 @@ public class FileEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return getTitle().hashCode() + getUrl().hashCode();
+        return this.title.hashCode() + this.url.hashCode();
     }
 
     /**
@@ -173,10 +125,7 @@ public class FileEntity extends ModelEntity {
      * @param title the new title to the fileEntity.
      */
     public void setTitle(final String title) {
-        this.title = isNotEmpty(title) ? title : "";
-        if (isEmpty(this.url)) {
-            translateAndSetUrl(this.title);
-        }
+        this.title = title;
     }
 
     /**
@@ -202,7 +151,7 @@ public class FileEntity extends ModelEntity {
      * @param url the new URL to the fileEntity.
      */
     public void setUrl(final String url) {
-        this.url = isNotEmpty(url) ? url : "";
+        this.url = url;
     }
 
     /**
@@ -226,49 +175,7 @@ public class FileEntity extends ModelEntity {
      * @param type the new fileEntity type.
      */
     public void setType(final FileType type) {
-        this.type = isNotNull(type) ? type : FileType.ANOTHER;
-    }
-
-    /**
-     * Translates and sets a new URL to the fileEntity.
-     * If parameter URL is blank, then sets empty string.
-     *
-     * @param url the URL to translate and set.
-     */
-    public void translateAndSetUrl(final String url) {
-        String newUrl = null;
-        if (isNotEmpty(url)) {
-            final char oldChar = '.';
-            final char newChar = '!';
-            newUrl = Translator.fromCyrillicToLatin(
-                    url.replace(oldChar, newChar)
-            ).replace(newChar, oldChar);
-        }
-        setUrl(newUrl);
-    }
-
-    /**
-     * Initializes the fileEntity.
-     * Returns this fileEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this fileEntity
-     *     initialize(new FileEntity()) - does nothing, returns this
-     *     fileEntity with a new copied fields
-     * </pre>
-     *
-     * @param fileEntity the fileEntity to copy.
-     * @return This fileEntity with new fields (newer null).
-     */
-    public FileEntity initialize(final FileEntity fileEntity) {
-        if (isNotEmptyFile(fileEntity)) {
-            super.initialize(fileEntity);
-            this.setTitle(fileEntity.getTitle());
-            if (!isStaticFile()) {
-                this.setUrl(fileEntity.getUrl());
-            }
-            this.setType(fileEntity.getType());
-        }
-        return this;
+        this.type = type;
     }
 
     /**
@@ -277,24 +184,5 @@ public class FileEntity extends ModelEntity {
      */
     public File convert() {
         return new FileEntityConverter(this).convert();
-    }
-
-    /**
-     * Checks this fileEntity if it has STATIC fileEntity type.
-     *
-     * @return true if this fileEntity has STATIC type, false otherwise.
-     */
-    private boolean isStaticFile() {
-        return this.getType().equals(FileType.STATIC);
-    }
-
-    /**
-     * Checks the incoming fileEntity is not empty.
-     *
-     * @param fileEntity the fileEntity to check
-     * @return true if the fileEntity is not empty, false otherwise.
-     */
-    private static boolean isNotEmptyFile(final FileEntity fileEntity) {
-        return isNotNull(fileEntity) && isNotEmpty(fileEntity.getTitle()) && isNotEmpty(fileEntity.getUrl());
     }
 }

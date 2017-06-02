@@ -4,14 +4,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ua.com.ecoteh.entity.model.ModelEntity;
 import ua.com.ecoteh.entity.user.UserEntity;
-import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
 import java.util.Date;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -43,7 +38,7 @@ public class MessageEntity extends ModelEntity {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private UserEntity userEntity;
+    private UserEntity user;
 
     /**
      * The subject of a messageEntity.
@@ -66,29 +61,7 @@ public class MessageEntity extends ModelEntity {
     /**
      * Default constructor.
      */
-    public MessageEntity() {
-        this.userEntity = new UserEntity();
-        this.subject = "";
-        this.text = "";
-        this.date = new Date();
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param userEntity the messageEntity userEntity.
-     * @param subject    the subject of a new messageEntity.
-     * @param text       the text of a new messageEntity.
-     */
-    public MessageEntity(
-            final UserEntity userEntity,
-            final String subject,
-            final String text
-    ) {
-        this();
-        setUserEntity(userEntity);
-        setSubject(subject);
-        setText(text);
+    protected MessageEntity() {
     }
 
     /**
@@ -99,10 +72,10 @@ public class MessageEntity extends ModelEntity {
     @Override
     public String toString() {
         return "MessageEntity{" + super.toString() +
-                ", userEntity=" + getUserEntity() +
-                ", subject='" + getSubject() + '\'' +
-                ", text='" + getText() + '\'' +
-                ", date=" + getDate() +
+                ", userEntity=" + this.user +
+                ", subject='" + this.subject + '\'' +
+                ", text='" + this.text + '\'' +
+                ", date=" + this.date +
                 '}';
     }
 
@@ -118,9 +91,10 @@ public class MessageEntity extends ModelEntity {
         boolean result = super.equals(object);
         if (result) {
             final MessageEntity other = (MessageEntity) object;
-            result = this.getUserEntity().equals(other.getUserEntity()) &&
-                    this.getSubject().equalsIgnoreCase(other.getSubject()) &&
-                    this.getText().equalsIgnoreCase(other.getText());
+            result = this.user.equals(other.user) &&
+                    this.date.equals(other.date) &&
+                    this.subject.equalsIgnoreCase(other.subject) &&
+                    this.text.equalsIgnoreCase(other.text);
         }
         return result;
     }
@@ -134,9 +108,10 @@ public class MessageEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return getUserEntity().hashCode() +
-                getSubject().hashCode() +
-                getText().hashCode();
+        return this.user.hashCode() +
+                this.date.hashCode() +
+                this.subject.hashCode() +
+                this.text.hashCode();
     }
 
     /**
@@ -146,9 +121,9 @@ public class MessageEntity extends ModelEntity {
      */
     @Override
     public MessageEntity clone() {
-        final MessageEntity messageEntity = (MessageEntity) super.clone();
-        messageEntity.setUserEntity(getUserEntity().clone());
-        return messageEntity;
+        final MessageEntity clone = (MessageEntity) super.clone();
+        clone.user = this.user.clone();
+        return clone;
     }
 
     /**
@@ -157,19 +132,16 @@ public class MessageEntity extends ModelEntity {
      * @return The userEntity of the messageEntity (newer null).
      */
     public UserEntity getUserEntity() {
-        return this.userEntity;
+        return this.user;
     }
 
     /**
      * Sets a userEntity of the messageEntity.
      *
-     * @param userEntity the userEntity of the messageEntity.
+     * @param user the userEntity of the messageEntity.
      */
-    public void setUserEntity(final UserEntity userEntity) {
-        if (isNull(this.userEntity)) {
-            this.userEntity = new UserEntity();
-        }
-        this.userEntity.initialize(userEntity);
+    public void setUserEntity(final UserEntity user) {
+        this.user = user;
     }
 
     /**
@@ -195,7 +167,7 @@ public class MessageEntity extends ModelEntity {
      * @param subject a new subject to the messageEntity.
      */
     public void setSubject(final String subject) {
-        this.subject = isNotEmpty(subject) ? subject : "";
+        this.subject = subject;
     }
 
     /**
@@ -221,7 +193,7 @@ public class MessageEntity extends ModelEntity {
      * @param text a new text to the messageEntity.
      */
     public void setText(final String text) {
-        this.text = isNotEmpty(text) ? text : "";
+        this.text = text;
     }
 
     /**
@@ -244,43 +216,10 @@ public class MessageEntity extends ModelEntity {
      * @param date the new date to the messageEntity.
      */
     public void setDate(final Date date) {
-        this.date = isNotNull(date) ? date : new Date();
+        this.date = date;
     }
 
     /**
-     * Returns an article date in string format.
-     *
-     * @return The messageEntity string-date (newer null).
-     */
-    public String getDateToString() {
-        return Time.getDate(getDate());
-    }
-
-    /**
-     * Initializes the messageEntity.
-     * Returns this messageEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this messageEntity
-     *     initialize(new MessageEntity()) - does nothing, returns this
-     *     messageEntity with a new copied fields
-     * </pre>
-     *
-     * @param messageEntity the messageEntity to copy.
-     * @return This messageEntity with new fields (newer null).
-     */
-    public MessageEntity initialize(final MessageEntity messageEntity) {
-        if (isNotNull(messageEntity)) {
-            super.initialize(messageEntity);
-            this.setUserEntity(messageEntity.getUserEntity());
-            this.setSubject(messageEntity.getSubject());
-            this.setText(messageEntity.getText());
-            this.setDate(messageEntity.getDate());
-        }
-        return this;
-    }
-
-    /**
-     *
      * @return
      */
     public Message convert() {

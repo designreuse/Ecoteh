@@ -4,15 +4,10 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ua.com.ecoteh.entity.category.CategoryEntity;
 import ua.com.ecoteh.entity.content.ContentEntity;
-import ua.com.ecoteh.util.generator.StringGenerator;
 import ua.com.ecoteh.util.time.Time;
 
 import javax.persistence.*;
 import java.util.Date;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of standard methods for working
@@ -65,59 +60,12 @@ public class ArticleEntity extends ContentEntity {
             referencedColumnName = "id"
     )
     @Fetch(FetchMode.JOIN)
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 
     /**
-     * Default constructor.
-     */
-    public ArticleEntity() {
-        this.text = "";
-        this.date = new Date();
-        newNumber();
-    }
-
-    /**
-     * Constructor.
      *
-     * @param title       the title of a new articleEntity.
-     * @param description the description of a new articleEntity.
-     * @param text        the text of a new articleEntity.
-     * @param keywords    the keywords of a new articleEntity.
-     * @param number      the number of a new articleEntity.
      */
-    public ArticleEntity(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number
-    ) {
-        super(title, description, keywords);
-        setText(text);
-        setDate(new Date());
-        setNumber(number);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param title       the title of a new articleEntity.
-     * @param description the description of a new articleEntity.
-     * @param text        the text of a new articleEntity.
-     * @param keywords    the keywords of a new articleEntity.
-     * @param number      the number of a new articleEntity.
-     * @param price       the price of a new articleEntity.
-     */
-    public ArticleEntity(
-            final String title,
-            final String description,
-            final String text,
-            final String keywords,
-            final String number,
-            final String price
-    ) {
-        this(title, description, text, keywords, number);
-        setPrice(price);
+    protected ArticleEntity() {
     }
 
     /**
@@ -128,11 +76,11 @@ public class ArticleEntity extends ContentEntity {
     @Override
     public String toString() {
         return "ArticleEntity{" + super.toString() +
-                ", number='" + getNumber() + '\'' +
-                ", text='" + getText() + '\'' +
-                ", date=" + getDate() +
-                ", price=" + getPrice() +
-                ", categoryEntity=" + getCategoryEntity() +
+                ", number='" + this.number + '\'' +
+                ", text='" + this.text + '\'' +
+                ", date=" + this.date +
+                ", price=" + this.price +
+                ", categoryEntity=" + this.category +
                 '}';
     }
 
@@ -148,8 +96,8 @@ public class ArticleEntity extends ContentEntity {
         boolean result = super.equals(object);
         if (result) {
             final ArticleEntity other = (ArticleEntity) object;
-            result = this.getNumber().equalsIgnoreCase(other.getNumber()) &&
-                    this.getText().equalsIgnoreCase(other.getText());
+            result = this.number.equalsIgnoreCase(other.number) &&
+                    this.text.equalsIgnoreCase(other.text);
         }
         return result;
     }
@@ -164,8 +112,8 @@ public class ArticleEntity extends ContentEntity {
     @Override
     public int hashCode() {
         return super.hashCode() +
-                getNumber().hashCode() +
-                getText().hashCode();
+                this.number.hashCode() +
+                this.text.hashCode();
     }
 
     /**
@@ -201,18 +149,7 @@ public class ArticleEntity extends ContentEntity {
      * @param number the new number to the articleEntity.
      */
     public void setNumber(final String number) {
-        if (isNotEmpty(number)) {
             this.number = number;
-        } else {
-            newNumber();
-        }
-    }
-
-    /**
-     * Generates new number to the articleEntity.
-     */
-    public void newNumber() {
-        this.number = new StringGenerator().generate();
     }
 
     /**
@@ -238,7 +175,7 @@ public class ArticleEntity extends ContentEntity {
      * @param text a new text to the articleEntity.
      */
     public void setText(final String text) {
-        this.text = isNotEmpty(text) ? text : "";
+        this.text = text;
     }
 
     /**
@@ -261,7 +198,7 @@ public class ArticleEntity extends ContentEntity {
      * @param date the new date to the articleEntity.
      */
     public void setDate(final Date date) {
-        this.date = isNotNull(date) ? date : new Date();
+        this.date = date;
     }
 
     /**
@@ -287,7 +224,7 @@ public class ArticleEntity extends ContentEntity {
      * @param price the new price to the articleEntity.
      */
     public void setPrice(final String price) {
-        this.price = isNotEmpty(price) ? price : "0";
+        this.price = price;
     }
 
     /**
@@ -305,21 +242,10 @@ public class ArticleEntity extends ContentEntity {
      * or this categoryEntity not equals new categoryEntity.
      * Also the articleEntity deletes from old categoryEntity and adds to new categoryEntity.
      *
-     * @param categoryEntity the new categoryEntity to the articleEntity.
+     * @param category the new categoryEntity to the articleEntity.
      */
-    public void setCategoryEntity(final CategoryEntity categoryEntity) {
-        if (isNull(this.categoryEntity)) {
-            this.categoryEntity = categoryEntity;
-        } else if (!this.categoryEntity.equals(categoryEntity)) {
-            final CategoryEntity temp = this.categoryEntity;
-            this.categoryEntity = categoryEntity;
-            if (isNotNull(this.categoryEntity) && !this.categoryEntity.containsArticle(this)) {
-                this.categoryEntity.addArticle(this);
-            }
-            if (isNotNull(temp)) {
-                temp.removeArticle(this);
-            }
-        }
+    public void setCategoryEntity(final CategoryEntity category) {
+        this.category = category;
     }
 
     /**
@@ -328,31 +254,7 @@ public class ArticleEntity extends ContentEntity {
      * @return The articleEntity categoryEntity.
      */
     public CategoryEntity getCategoryEntity() {
-        return this.categoryEntity;
-    }
-
-    /**
-     * Initializes the articleEntity.
-     * Returns this articleEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this articleEntity
-     *     initialize(new ArticleEntity()) - does nothing, returns this
-     *     articleEntity with a new copied fields
-     * </pre>
-     *
-     * @param articleEntity the articleEntity to copy.
-     * @return This articleEntity with new fields (newer null).
-     */
-    public ArticleEntity initialize(final ArticleEntity articleEntity) {
-        if (isNotNull(articleEntity)) {
-            super.initialize(articleEntity);
-            this.setNumber(articleEntity.getNumber());
-            this.setText(articleEntity.getText());
-            this.setDate(articleEntity.getDate());
-            this.setPrice(articleEntity.getPrice());
-            this.setCategoryEntity(articleEntity.getCategoryEntity());
-        }
-        return this;
+        return this.category;
     }
 
     public Article convert() {

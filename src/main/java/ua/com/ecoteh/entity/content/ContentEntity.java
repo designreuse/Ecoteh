@@ -2,11 +2,8 @@ package ua.com.ecoteh.entity.content;
 
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.model.ModelEntity;
-import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The abstract superclass class implements a set of standard methods
@@ -63,33 +60,7 @@ public abstract class ContentEntity extends ModelEntity {
     )
     private FileEntity logo;
 
-    /**
-     * Default constructor.
-     */
-    public ContentEntity() {
-        this.title = "";
-        this.url = "";
-        this.description = "";
-        this.keywords = "";
-        this.logo = new FileEntity();
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param title       the title of a new contentEntity.
-     * @param description the description of a new contentEntity.
-     * @param keywords    the keywords of a new contentEntity.
-     */
-    public ContentEntity(
-            final String title,
-            final String description,
-            final String keywords
-    ) {
-        this();
-        setTitle(title);
-        setDescription(description);
-        setKeywords(keywords);
+    protected ContentEntity() {
     }
 
     /**
@@ -100,11 +71,11 @@ public abstract class ContentEntity extends ModelEntity {
     @Override
     public String toString() {
         return "ContentEntity{" + super.toString() +
-                ", title='" + getTitle() + '\'' +
-                ", url='" + getUrl() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", keywords='" + getKeywords() + '\'' +
-                ", logo=" + getLogoEntity() +
+                ", title='" + this.title + '\'' +
+                ", url='" + this.url + '\'' +
+                ", description='" + this.description + '\'' +
+                ", keywords='" + this.keywords + '\'' +
+                ", logo=" + this.logo +
                 '}';
     }
 
@@ -120,9 +91,9 @@ public abstract class ContentEntity extends ModelEntity {
         boolean result = super.equals(object);
         if (result) {
             final ContentEntity other = (ContentEntity) object;
-            result = this.getTitle().equalsIgnoreCase(other.getTitle()) &&
-                    this.getUrl().equalsIgnoreCase(other.getUrl()) &&
-                    this.getDescription().equalsIgnoreCase(other.getDescription());
+            result = this.title.equalsIgnoreCase(other.title) &&
+                    this.url.equalsIgnoreCase(other.url) &&
+                    this.description.equalsIgnoreCase(other.description);
         }
         return result;
     }
@@ -136,9 +107,9 @@ public abstract class ContentEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return getTitle().hashCode() +
-                getUrl().hashCode() +
-                getDescription().hashCode();
+        return this.title.hashCode() +
+                this.url.hashCode() +
+                this.description.hashCode();
     }
 
     /**
@@ -148,9 +119,9 @@ public abstract class ContentEntity extends ModelEntity {
      */
     @Override
     public ContentEntity clone() {
-        final ContentEntity contentEntity = (ContentEntity) super.clone();
-        contentEntity.setLogoEntity(getLogoEntity().clone());
-        return contentEntity;
+        final ContentEntity clone = (ContentEntity) super.clone();
+        clone.logo = this.logo.clone();
+        return clone;
     }
 
     /**
@@ -177,10 +148,7 @@ public abstract class ContentEntity extends ModelEntity {
      * @param title the new title to the contentEntity.
      */
     public void setTitle(final String title) {
-        this.title = isNotEmpty(title) ? title : "";
-        if (isEmpty(this.url)) {
-            translateAndSetUrl(this.title);
-        }
+        this.title = title;
     }
 
     /**
@@ -206,16 +174,7 @@ public abstract class ContentEntity extends ModelEntity {
      * @param url the new URL to the contentEntity.
      */
     public void setUrl(final String url) {
-        this.url = isNotEmpty(url) ? url : "";
-    }
-
-    /**
-     * Translates value and sets to URL.
-     *
-     * @param value the value to translate.
-     */
-    public void translateAndSetUrl(final String value) {
-        setUrl(Translator.fromCyrillicToLatin(value));
+        this.url = url;
     }
 
     /**
@@ -241,7 +200,7 @@ public abstract class ContentEntity extends ModelEntity {
      * @param description the new description to the contentEntity.
      */
     public void setDescription(final String description) {
-        this.description = isNotEmpty(description) ? description : "";
+        this.description = description;
     }
 
     /**
@@ -267,7 +226,7 @@ public abstract class ContentEntity extends ModelEntity {
      * @param keywords the new keywords to the contentEntity.
      */
     public void setKeywords(final String keywords) {
-        this.keywords = isNotEmpty(keywords) ? keywords : "";
+        this.keywords = keywords;
     }
 
     /**
@@ -285,33 +244,6 @@ public abstract class ContentEntity extends ModelEntity {
      * @param logo the new logo to the contentEntity.
      */
     public void setLogoEntity(final FileEntity logo) {
-        if (isNull(this.logo)) {
-            this.logo = new FileEntity();
-        }
-        this.logo.initialize(logo);
-    }
-
-    /**
-     * Initializes the contentEntity.
-     * Returns this contentEntity with a new copied fields.
-     * <pre>
-     *     initialize(null) - does nothing, returns this contentEntity
-     *     initialize(new ContentEntity()) - does nothing, returns this
-     *     contentEntity with a new copied fields
-     * </pre>
-     *
-     * @param contentEntity the contentEntity to copy.
-     * @return This contentEntity with new fields (newer null).
-     */
-    public ContentEntity initialize(final ContentEntity contentEntity) {
-        if (isNotNull(contentEntity)) {
-            super.initialize(contentEntity);
-            this.setTitle(contentEntity.getTitle());
-            this.setUrl(contentEntity.getUrl());
-            this.setDescription(contentEntity.getDescription());
-            this.setKeywords(contentEntity.getKeywords());
-            this.setLogoEntity(contentEntity.getLogoEntity());
-        }
-        return this;
+        this.logo = logo;
     }
 }
