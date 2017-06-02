@@ -6,4 +6,6 @@ package ua.com.ecoteh.entity.model;
 public interface Converter<T> {
 
     T convert();
+
+    T syncConvert();
 }

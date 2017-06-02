@@ -2,43 +2,28 @@ package ua.com.ecoteh.entity.contacts;
 
 import ua.com.ecoteh.entity.model.ModelConverter;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-final class ContactsConverter extends ModelConverter<ContactsEntity> {
+final class ContactsConverter extends ModelConverter<Contacts, ContactsEntity> {
 
-    private final Contacts contacts;
-
-    ContactsConverter(final Contacts contacts) {
-        this.contacts = contacts;
+    ContactsConverter(final Contacts model) {
+        super(model);
     }
 
     @Override
     public ContactsEntity convert() {
-        Contacts contacts;
-        if (isNotNull(this.contacts)) {
-            contacts = this.contacts;
-        } else {
-            contacts = new ContactsBuilder().build();
-        }
-        return convertToEntity(contacts);
-    }
-
-    
-    private ContactsEntity convertToEntity(final Contacts contacts) {
         final ContactsEntity contactsEntity = new ContactsEntity();
-        contactsEntity.setId(contacts.getId());
-        contactsEntity.setValidated(contacts.isValidated());
-        contactsEntity.setEmail(contacts.getEmail());
-        contactsEntity.setMobilePhone(contacts.getMobilePhone());
-        contactsEntity.setLandlinePhone(contacts.getLandlinePhone());
-        contactsEntity.setFax(contacts.getFax());
-        contactsEntity.setVkontakte(contacts.getVkontakte());
-        contactsEntity.setFacebook(contacts.getFacebook());
-        contactsEntity.setTwitter(contacts.getTwitter());
-        contactsEntity.setSkype(contacts.getSkype());
+            contactsEntity.setId(this.model.getId());
+            contactsEntity.setValidated(this.model.isValidated());
+            contactsEntity.setEmail(this.model.getEmail());
+            contactsEntity.setMobilePhone(this.model.getMobilePhone());
+            contactsEntity.setLandlinePhone(this.model.getLandlinePhone());
+            contactsEntity.setFax(this.model.getFax());
+            contactsEntity.setVkontakte(this.model.getVkontakte());
+            contactsEntity.setFacebook(this.model.getFacebook());
+            contactsEntity.setTwitter(this.model.getTwitter());
+            contactsEntity.setSkype(this.model.getSkype());
         return contactsEntity;
     }
 }
