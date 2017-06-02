@@ -4,23 +4,19 @@ import ua.com.ecoteh.entity.content.ContentEntityConverter;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-final class CompanyEntityConverter extends ContentEntityConverter<Company> {
-
-    private final CompanyEntity entity;
+final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity, Company> {
 
     CompanyEntityConverter(final CompanyEntity entity) {
-        this.entity = entity;
+        super(entity);
     }
 
     @Override
     protected CompanyBuilder prepareBuilder() {
         final CompanyBuilder builder = new CompanyBuilder();
-        if (isNotNull(this.entity)) {
             builder.addId(this.entity.getId())
                     .addValidated(this.entity.isValidated())
                     .addTitle(this.entity.getTitle())
@@ -38,7 +34,6 @@ final class CompanyEntityConverter extends ContentEntityConverter<Company> {
                     .addLogo(this.entity.getLogoEntity().convert())
                     .addContacts(this.entity.getContactsEntity().convert())
                     .addAddress(this.entity.getAddressEntity().convert());
-        }
         return null;
     }
 
