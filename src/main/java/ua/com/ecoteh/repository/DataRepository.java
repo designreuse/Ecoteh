@@ -12,5 +12,5 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @NoRepositoryBean
-public interface DataRepository<T extends ModelEntity> extends JpaRepository<T, Long> {
+public interface DataRepository<E extends ModelEntity> extends JpaRepository<E, Long> {
 }

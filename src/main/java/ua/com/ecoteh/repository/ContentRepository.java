@@ -7,11 +7,11 @@ import org.springframework.data.repository.NoRepositoryBean;
  * The interface provides a set of standard JPA methods
  * for working objects which extends {@link ContentEntity} with a database.
  *
- * @param <T> Entity type, extends {@link ContentEntity}.
+ * @param <E> Entity type, extends {@link ContentEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @NoRepositoryBean
-public interface ContentRepository<T extends ContentEntity> extends DataRepository<T> {
+public interface ContentRepository<E extends ContentEntity> extends DataRepository<E> {
 
     /**
      * Returns content object of the {@link ContentEntity} class or subclasses
@@ -20,7 +20,7 @@ public interface ContentRepository<T extends ContentEntity> extends DataReposito
      * @param title the title of a content object to return.
      * @return The content object with parameter title.
      */
-    T findByTitle(String title);
+    E findByTitle(String title);
 
     /**
      * Returns content object of the {@link ContentEntity} class or subclasses
@@ -29,7 +29,7 @@ public interface ContentRepository<T extends ContentEntity> extends DataReposito
      * @param url the URL of a content object to return.
      * @return The content object with parameter url.
      */
-    T findByUrl(String url);
+    E findByUrl(String url);
 
     /**
      * Removes content object of the {@link ContentEntity} class or subclasses
