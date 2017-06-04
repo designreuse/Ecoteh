@@ -1,12 +1,12 @@
 package ua.com.ecoteh.util.comparator;
 
-import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.article.Article;
 
 import java.util.Comparator;
 
 /**
  * The class implements a set of methods for working
- * with comparators for objects of the {@link ArticleEntity} class.
+ * with comparators for objects of the {@link Article} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -14,17 +14,17 @@ public class ArticleComparator extends ContentComparator {
 
     /**
      * The class implements a method for working with comparator
-     * for {@link ArticleEntity} by number.
+     * for {@link Article} by number.
      */
-    public final static class ByNumber implements Comparator<ArticleEntity> {
+    public final static class ByNumber implements Comparator<Article> {
 
         /**
          * Compares two articles by number.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new ArticleEntity()) = -1
-         *     compare(new ArticleEntity(), null) = 1
-         *     compare(new ArticleEntity(), new ArticleEntity()) = compares by number
+         *     compare(null, new Article()) = -1
+         *     compare(new Article(), null) = 1
+         *     compare(new Article(), new Article()) = compares by number
          * </pre>
          *
          * @param first  the first article to be compared.
@@ -34,7 +34,7 @@ public class ArticleComparator extends ContentComparator {
          * second article number.
          */
         @Override
-        public int compare(final ArticleEntity first, final ArticleEntity second) {
+        public int compare(final Article first, final Article second) {
             int result = ArticleComparator.compare(first, second);
             if (result == 2) {
                 result = compareByNumber(first, second);
@@ -51,24 +51,24 @@ public class ArticleComparator extends ContentComparator {
          * first article number is less than, equal to, or greater than the
          * second article number.
          */
-        private static int compareByNumber(final ArticleEntity first, final ArticleEntity second) {
+        private int compareByNumber(final Article first, final Article second) {
             return first.getNumber().compareTo(second.getNumber());
         }
     }
 
     /**
      * The class implements a method for working with comparator
-     * for {@link ArticleEntity} by date.
+     * for {@link Article} by date.
      */
-    public final static class ByDate implements Comparator<ArticleEntity> {
+    public final static class ByDate implements Comparator<Article> {
 
         /**
          * Compares two articles by date.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new ArticleEntity()) = -1
-         *     compare(new ArticleEntity(), null) = 1
-         *     compare(new ArticleEntity(), new ArticleEntity()) = compares by date
+         *     compare(null, new Article()) = -1
+         *     compare(new Article(), null) = 1
+         *     compare(new Article(), new Article()) = compares by date
          * </pre>
          *
          * @param first  the article object to be compared.
@@ -78,7 +78,7 @@ public class ArticleComparator extends ContentComparator {
          * second article date.
          */
         @Override
-        public int compare(final ArticleEntity first, final ArticleEntity second) {
+        public int compare(final Article first, final Article second) {
             int result = ArticleComparator.compare(first, second);
             if (result == 2) {
                 result = compareByDate(first, second);
@@ -95,7 +95,7 @@ public class ArticleComparator extends ContentComparator {
          * first article date is less than, equal to, or greater than the
          * second article date.
          */
-        private static int compareByDate(final ArticleEntity first, final ArticleEntity second) {
+        private int compareByDate(final Article first, final Article second) {
             return first.getDate().compareTo(second.getDate());
         }
     }

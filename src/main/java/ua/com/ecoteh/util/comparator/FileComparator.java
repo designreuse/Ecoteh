@@ -1,12 +1,12 @@
 package ua.com.ecoteh.util.comparator;
 
-import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.file.File;
 
 import java.util.Comparator;
 
 /**
  * The class implements a set of methods for working
- * with comparators for objects of the {@link FileEntity} class.
+ * with comparators for objects of the {@link File} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -14,17 +14,17 @@ public class FileComparator extends AbstractComparator {
 
     /**
      * The class implements a method for working 
-     * with comparator for {@link FileEntity} by title.
+     * with comparator for {@link File} by title.
      */
-    public final static class ByTitle implements Comparator<FileEntity> {
+    public final static class ByTitle implements Comparator<File> {
 
         /**
          * Compares two files by title.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new FileEntity()) = -1
-         *     compare(new FileEntity(), null) = 1
-         *     compare(new FileEntity(), new FileEntity()) = compares by title
+         *     compare(null, new File()) = -1
+         *     compare(new File(), null) = 1
+         *     compare(new File(), new File()) = compares by title
          * </pre>
          *
          * @param first  the first file to be compared.
@@ -34,7 +34,7 @@ public class FileComparator extends AbstractComparator {
          * second file title.
          */
         @Override
-        public int compare(final FileEntity first, final FileEntity second) {
+        public int compare(final File first, final File second) {
             int result = FileComparator.compare(first, second);
             if (result == 2) {
                 result = compareByTitle(first, second);
@@ -51,24 +51,24 @@ public class FileComparator extends AbstractComparator {
          * first file title is less than, equal to, or greater than the
          * second file title.
          */
-        private static int compareByTitle(final FileEntity first, final FileEntity second) {
+        private int compareByTitle(final File first, final File second) {
             return first.getTitle().compareToIgnoreCase(second.getTitle());
         }
     }
 
     /**
      * The class implements a method for working
-     * with comparator for {@link FileEntity} by URL.
+     * with comparator for {@link File} by URL.
      */
-    public final static class ByUrl implements Comparator<FileEntity> {
+    public final static class ByUrl implements Comparator<File> {
 
         /**
          * Compares two files by URL.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new FileEntity()) = -1
-         *     compare(new FileEntity(), null) = 1
-         *     compare(new FileEntity(), new FileEntity()) = compares by URL
+         *     compare(null, new File()) = -1
+         *     compare(new File(), null) = 1
+         *     compare(new File(), new File()) = compares by URL
          * </pre>
          *
          * @param first  the first file to be compared.
@@ -78,7 +78,7 @@ public class FileComparator extends AbstractComparator {
          * second file URL.
          */
         @Override
-        public int compare(final FileEntity first, final FileEntity second) {
+        public int compare(final File first, final File second) {
             int result = FileComparator.compare(first, second);;
             if (result == 2) {
                 result = compareByUrl(first, second);
@@ -95,7 +95,7 @@ public class FileComparator extends AbstractComparator {
          * first file URL is less than, equal to, or greater than the
          * second file URL.
          */
-        private static int compareByUrl(final FileEntity first, final FileEntity second) {
+        private int compareByUrl(final File first, final File second) {
             return first.getUrl().compareToIgnoreCase(second.getUrl());
         }
     }

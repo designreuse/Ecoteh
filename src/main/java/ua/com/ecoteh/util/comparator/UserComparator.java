@@ -1,6 +1,6 @@
 package ua.com.ecoteh.util.comparator;
 
-import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserRole;
 
 import java.util.Comparator;
@@ -9,7 +9,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working
- * with comparators for objects of the {@link UserEntity} class.
+ * with comparators for objects of the {@link User} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -17,17 +17,17 @@ public class UserComparator extends AbstractComparator {
 
     /**
      * The class implements a method
-     * for working with comparator for {@link UserEntity} by name.
+     * for working with comparator for {@link User} by name.
      */
-    public final static class ByName implements Comparator<UserEntity> {
+    public final static class ByName implements Comparator<User> {
 
         /**
          * Compares two users by name.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new UserEntity()) = -1
-         *     compare(new UserEntity(), null) = 1
-         *     compare(new UserEntity(), new UserEntity()) = compares by name
+         *     compare(null, new User()) = -1
+         *     compare(new User(), null) = 1
+         *     compare(new User(), new User()) = compares by name
          * </pre>
          *
          * @param first  the first article to be compared.
@@ -37,7 +37,7 @@ public class UserComparator extends AbstractComparator {
          * second userEntity name.
          */
         @Override
-        public int compare(final UserEntity first, final UserEntity second) {
+        public int compare(final User first, final User second) {
             int result = UserComparator.compare(first, second);
             if (result == 2) {
                 result = compareByName(first, second);
@@ -54,24 +54,24 @@ public class UserComparator extends AbstractComparator {
          * first userEntity name is less than, equal to, or greater than the
          * second userEntity name.
          */
-        private static int compareByName(final UserEntity first, final UserEntity second) {
+        private static int compareByName(final User first, final User second) {
             return first.getName().compareToIgnoreCase(second.getName());
         }
     }
 
     /**
      * The class implements a method for working
-     * with comparator for {@link UserEntity} by URL.
+     * with comparator for {@link User} by URL.
      */
-    public final static class ByUrl implements Comparator<UserEntity> {
+    public final static class ByUrl implements Comparator<User> {
 
         /**
          * Compares two users by URL.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new UserEntity()) = -1
-         *     compare(new UserEntity(), null) = 1
-         *     compare(new UserEntity(), new UserEntity()) = compares by URL
+         *     compare(null, new User()) = -1
+         *     compare(new User(), null) = 1
+         *     compare(new User(), new User()) = compares by URL
          * </pre>
          *
          * @param first  the first article to be compared.
@@ -81,7 +81,7 @@ public class UserComparator extends AbstractComparator {
          * second userEntity URL.
          */
         @Override
-        public int compare(final UserEntity first, final UserEntity second) {
+        public int compare(final User first, final User second) {
             int result = UserComparator.compare(first, second);
             if (result == 2) {
                 result = compareByUrl(first, second);
@@ -98,16 +98,16 @@ public class UserComparator extends AbstractComparator {
          * first userEntity URL is less than, equal to, or greater than the
          * second userEntity URL.
          */
-        private static int compareByUrl(final UserEntity first, final UserEntity second) {
+        private static int compareByUrl(final User first, final User second) {
             return first.getUrl().compareToIgnoreCase(second.getUrl());
         }
     }
 
     /**
      * The class implements a method for working
-     * with comparator for {@link UserEntity} by role.
+     * with comparator for {@link User} by role.
      */
-    public final static class ByRole implements Comparator<UserEntity> {
+    public final static class ByRole implements Comparator<User> {
 
         /**
          * The role comparing.
@@ -127,9 +127,9 @@ public class UserComparator extends AbstractComparator {
          * Compares two users by role.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new UserEntity()) = -1
-         *     compare(new UserEntity(), null) = 1
-         *     compare(new UserEntity(), new UserEntity()) = compares by role
+         *     compare(null, new User()) = -1
+         *     compare(new User(), null) = 1
+         *     compare(new User(), new User()) = compares by role
          * </pre>
          *
          * @param first  the first article to be compared.
@@ -139,7 +139,7 @@ public class UserComparator extends AbstractComparator {
          * second userEntity role.
          */
         @Override
-        public int compare(final UserEntity first, final UserEntity second) {
+        public int compare(final User first, final User second) {
             int result = UserComparator.compare(first, second);
             if (result == 2) {
                 result = compareByRole(first, second);
@@ -156,7 +156,7 @@ public class UserComparator extends AbstractComparator {
          * first userEntity role is less than, equal to, or greater than the
          * second userEntity role.
          */
-        private int compareByRole(final UserEntity first, final UserEntity second) {
+        private int compareByRole(final User first, final User second) {
             int result;
             if (equalsRole(first, this.role)) {
                 result = 1;
@@ -171,7 +171,7 @@ public class UserComparator extends AbstractComparator {
         /**
          * Returns true if the userEntity role is equal to the incoming role.
          * <pre>
-         *     UserEntity userEntity = new UserEntity();
+         *     User userEntity = new User();
          *     userEntity.setRole(UserRole.ANOTHER);
          *     equalsRole(userEntity, UserRole.ANOTHER) = true
          *     equalsRole(userEntity, UserRole.ADMIN) = false
@@ -181,7 +181,7 @@ public class UserComparator extends AbstractComparator {
          * @param role the role to equals (newer null).
          * @return true if the userEntity role is equal to the incoming role.
          */
-        private static boolean equalsRole(final UserEntity userEntity, final UserRole role) {
+        private boolean equalsRole(final User userEntity, final UserRole role) {
             return userEntity.getRole().equals(role);
         }
     }

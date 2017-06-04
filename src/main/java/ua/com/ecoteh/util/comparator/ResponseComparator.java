@@ -1,12 +1,12 @@
 package ua.com.ecoteh.util.comparator;
 
-import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.response.Response;
 
 import java.util.Comparator;
 
 /**
  * The class implements a set of methods for working
- * with comparators for objects of the {@link ResponseEntity} class.
+ * with comparators for objects of the {@link Response} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -14,17 +14,17 @@ public class ResponseComparator extends AbstractComparator {
 
     /**
      * The class implements a method
-     * for working with comparator for {@link ResponseEntity} by date.
+     * for working with comparator for {@link Response} by date.
      */
-    public final static class ByDate implements Comparator<ResponseEntity> {
+    public final static class ByDate implements Comparator<Response> {
 
         /**
          * Compares two responses by date.
          * <pre>
          *     compare(null, null) = 0
-         *     compare(null, new ResponseEntity()) = -1
-         *     compare(new ResponseEntity(), null) = 1
-         *     compare(new ResponseEntity(), new ResponseEntity()) = compares by date
+         *     compare(null, new Response()) = -1
+         *     compare(new Response(), null) = 1
+         *     compare(new Response(), new Response()) = compares by date
          * </pre>
          *
          * @param first  the first response to be compared.
@@ -34,7 +34,7 @@ public class ResponseComparator extends AbstractComparator {
          * second response date.
          */
         @Override
-        public int compare(final ResponseEntity first, final ResponseEntity second) {
+        public int compare(final Response first, final Response second) {
             int result = ResponseComparator.compare(first, second);
             if (result == 2) {
                 result = compareByDate(first, second);
@@ -51,7 +51,7 @@ public class ResponseComparator extends AbstractComparator {
          * first response date is less than, equal to, or greater than the
          * second response date.
          */
-        private static int compareByDate(final ResponseEntity first, final ResponseEntity second) {
+        private int compareByDate(final Response first, final Response second) {
             return first.getDate().compareTo(second.getDate());
         }
     }
