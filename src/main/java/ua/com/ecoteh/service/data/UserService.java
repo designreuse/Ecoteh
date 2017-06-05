@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserRole;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -9,11 +9,11 @@ import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the class {@link UserEntity}.
+ * for working with objects of the class {@link User}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface UserService extends DataService<UserEntity>, UserDetailsService {
+public interface UserService extends DataService<User>, UserDetailsService {
 
     /**
      * Initializes, updates and returns userEntity with incoming id.
@@ -22,7 +22,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param userEntity the userEntity to update.
      * @return The updating userEntity with incoming id.
      */
-    UserEntity update(String url, UserEntity userEntity);
+    User update(String url, User userEntity);
 
     /**
      * Returns userEntity which the incoming name.
@@ -30,7 +30,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param name the name of a userEntity to return.
      * @return The userEntity which the incoming name.
      */
-    UserEntity getByName(String name);
+    User getByName(String name);
 
     /**
      * Returns userEntity which the incoming url.
@@ -38,7 +38,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param url the URL of a userEntity to return.
      * @return The userEntity which the incoming url.
      */
-    UserEntity getByUrl(String url);
+    User getByUrl(String url);
 
     /**
      * Returns userEntity which the incoming login.
@@ -46,7 +46,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param login the login of a userEntity to return.
      * @return The userEntity which the incoming login.
      */
-    UserEntity getByLogin(String login);
+    User getByLogin(String login);
 
     /**
      * Returns userEntity which the incoming E-mail.
@@ -54,7 +54,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param email the E-mail of a userEntity to return.
      * @return The userEntity which the incoming email.
      */
-    UserEntity getByEmail(String email);
+    User getByEmail(String email);
 
     /**
      * Returns userEntity which the incoming phone.
@@ -62,35 +62,35 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param phone the phone of a userEntity to return.
      * @return The userEntity which the incoming phone.
      */
-    UserEntity getByPhone(String phone);
+    User getByPhone(String phone);
 
     /**
      * Returns authenticated userEntity.
      *
      * @return The authenticated userEntity.
      */
-    UserEntity getAuthenticatedUser();
+    User getAuthenticatedUser();
 
     /**
      * Returns main admin userEntity.
      *
      * @return The main admin userEntity.
      */
-    UserEntity getMainAdmin();
+    User getMainAdmin();
 
     /**
      * Returns userEntities with role "ADMIN".
      *
      * @return The all admin.
      */
-    Collection<UserEntity> getAdmins();
+    Collection<User> getAdmins();
 
     /**
      * Returns personnel.
      *
      * @return The all personnel.
      */
-    Collection<UserEntity> getPersonnel();
+    Collection<User> getPersonnel();
 
     /**
      * Removes userEntity with the incoming name.
@@ -113,7 +113,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param revers Sort in descending or ascending.
      * @return The sorted list of userEntities.
      */
-    List<UserEntity> sortByName(Collection<UserEntity> userEntities, boolean revers);
+    List<User> sortByName(Collection<User> userEntities, boolean revers);
 
     /**
      * Sorts and returns userEntities by URL.
@@ -122,7 +122,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param revers Sort in descending or ascending.
      * @return The sorted list of userEntities.
      */
-    List<UserEntity> sortByUrl(Collection<UserEntity> userEntities, boolean revers);
+    List<User> sortByUrl(Collection<User> userEntities, boolean revers);
 
     /**
      * Sorts and returns userEntities by by role.
@@ -132,7 +132,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param revers Sort in descending or ascending.
      * @return The sorted list of userEntities.
      */
-    List<UserEntity> sortByRole(Collection<UserEntity> userEntities, UserRole role, boolean revers);
+    List<User> sortByRole(Collection<User> userEntities, UserRole role, boolean revers);
 
     /**
      * Sorts and returns userEntities by date.
@@ -140,7 +140,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param revers Sort in descending or ascending.
      * @return The sorted list of articles.
      */
-    List<UserEntity> getAndSortByName(boolean revers);
+    List<User> getAndSortByName(boolean revers);
 
     /**
      * Sorts and returns userEntities by URL.
@@ -148,7 +148,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param revers Sort in descending or ascending.
      * @return The sorted list of userEntities.
      */
-    List<UserEntity> getAndSortByUrl(boolean revers);
+    List<User> getAndSortByUrl(boolean revers);
 
     /**
      * Sorts and returns userEntities by role.
@@ -157,7 +157,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param revers Sort in descending or ascending.
      * @return The sorted list of userEntities.
      */
-    List<UserEntity> getAndSortByRole(UserRole role, boolean revers);
+    List<User> getAndSortByRole(UserRole role, boolean revers);
 
     /**
      * Filters and returns userEntities by role.
@@ -166,7 +166,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param role  the role filtering.
      * @return The filtered list of userEntities.
      */
-    List<UserEntity> filterByRole(Collection<UserEntity> userEntities, UserRole role);
+    List<User> filterByRole(Collection<User> userEntities, UserRole role);
 
     /**
      * Filters and returns userEntities by roles.
@@ -175,7 +175,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param roles the roles filtering.
      * @return The filtered list of userEntities.
      */
-    List<UserEntity> filterByRoles(Collection<UserEntity> userEntities, Collection<UserRole> roles);
+    List<User> filterByRoles(Collection<User> userEntities, Collection<UserRole> roles);
 
     /**
      * Filters and returns userEntities by role.
@@ -183,7 +183,7 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param role the role filtering.
      * @return The filtered list of userEntities.
      */
-    List<UserEntity> getAndFilterByRole(UserRole role);
+    List<User> getAndFilterByRole(UserRole role);
 
     /**
      * Filters and returns userEntities by roles.
@@ -191,5 +191,5 @@ public interface UserService extends DataService<UserEntity>, UserDetailsService
      * @param roles the roles filtering.
      * @return The filtered list of userEntities.
      */
-    List<UserEntity> getAndFilterByRoles(Collection<UserRole> roles);
+    List<User> getAndFilterByRoles(Collection<UserRole> roles);
 }

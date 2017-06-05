@@ -1,5 +1,6 @@
 package ua.com.ecoteh.service.data;
 
+import ua.com.ecoteh.entity.model.Model;
 import ua.com.ecoteh.entity.model.ModelEntity;
 
 import java.util.Collection;
@@ -13,7 +14,7 @@ import java.util.List;
  * @param <T> Entity type, extends {@link ModelEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface DataService<T extends ModelEntity> {
+public interface DataService<T extends Model> {
 
     /**
      * Saves and returns model object of {@link ModelEntity} class or subclasses.
@@ -125,11 +126,7 @@ public interface DataService<T extends ModelEntity> {
      * @param revers     Sort in descending or ascending.
      * @return The sorted list of models.
      */
-    List<T> sort(
-            final Collection<T> models,
-            final Comparator<T> comparator,
-            final boolean revers
-    );
+    List<T> sort(final Collection<T> models, final Comparator<T> comparator, final boolean revers);
 
     /**
      * Sorts and returns objects of {@link ModelEntity} class or subclasses
@@ -139,10 +136,7 @@ public interface DataService<T extends ModelEntity> {
      * @param comparator the comparator to sort models.
      * @return The sorted list of models.
      */
-    List<T> sort(
-            final Collection<T> models,
-            final Comparator<T> comparator
-    );
+    List<T> sort(final Collection<T> models, final Comparator<T> comparator);
 
     /**
      * Returns a list with the incoming list objects

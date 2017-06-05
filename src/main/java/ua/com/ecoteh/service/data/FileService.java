@@ -1,6 +1,6 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileType;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,11 +9,11 @@ import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the {@link FileEntity} class.
+ * for working with objects of the {@link File} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface FileService extends DataService<FileEntity> {
+public interface FileService extends DataService<File> {
 
     /**
      * Initializes, saves and returns a new file.
@@ -23,7 +23,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param multipartFile the multipart file of a new file.
      * @return The new saving file.
      */
-    FileEntity add(String title, FileType type, MultipartFile multipartFile);
+    File add(String title, FileType type, MultipartFile multipartFile);
 
     /**
      * Initializes, saves and returns a new file.
@@ -32,7 +32,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param multipartFile the multipart file of a new file.
      * @return The new saving file.
      */
-    FileEntity add(String title, MultipartFile multipartFile);
+    File add(String title, MultipartFile multipartFile);
 
     /**
      * Initializes, updates and returns file with incoming id.
@@ -43,7 +43,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param multipartFile the new multipart file to the file.
      * @return The updating file with incoming id.
      */
-    FileEntity update(
+    File update(
             long id,
             String title,
             FileType type,
@@ -58,7 +58,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param multipartFile the new multipart file to a file.
      * @return The updating photo with incoming id.
      */
-    FileEntity update(
+    File update(
             long id,
             String title,
             MultipartFile multipartFile
@@ -70,7 +70,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param title the title of a file to return.
      * @return The media with incoming title.
      */
-    FileEntity getByTitle(String title);
+    File getByTitle(String title);
 
     /**
      * Returns file object with the incoming url.
@@ -78,7 +78,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param url the URL of a file to return.
      * @return The media with incoming URL.
      */
-    FileEntity getByUrl(String url);
+    File getByUrl(String url);
 
     /**
      * Removes file object with the incoming title.
@@ -101,7 +101,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of fileEntities.
      */
-    List<FileEntity> sortByTitle(Collection<FileEntity> fileEntities, boolean revers);
+    List<File> sortByTitle(Collection<File> fileEntities, boolean revers);
 
     /**
      * Save a multipart file in the file system in the directory rootPath.
@@ -132,7 +132,7 @@ public interface FileService extends DataService<FileEntity> {
      * @param type the type of fileEntities to return.
      * @return The fileEntities with the incoming type.
      */
-    List<FileEntity> getByType(FileType type);
+    List<File> getByType(FileType type);
 
     /**
      * Returns last file with the incoming type.
@@ -140,5 +140,5 @@ public interface FileService extends DataService<FileEntity> {
      * @param type the type of file to return.
      * @return The last file with the incoming type.
      */
-    FileEntity getLastByType(FileType type);
+    File getLastByType(FileType type);
 }

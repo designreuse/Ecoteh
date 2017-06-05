@@ -1,7 +1,7 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.article.ArticleEntity;
-import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.article.Article;
+import ua.com.ecoteh.entity.category.Category;
 
 import java.util.Collection;
 import java.util.Date;
@@ -9,20 +9,20 @@ import java.util.List;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the {@link ArticleEntity} class.
+ * for working with objects of the {@link Article} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface ArticleService extends ContentService<ArticleEntity> {
+public interface ArticleService extends ContentService<Article> {
 
     /**
      * Returns article with the parameter number.
      *
      * @param number  the number of an article to return.
      * @param isValid is get valid article or not.
-     * @return The object of class {@link ArticleEntity}.
+     * @return The object of class {@link Article}.
      */
-    ArticleEntity getByNumber(String number, boolean isValid);
+    Article getByNumber(String number, boolean isValid);
 
     /**
      * Returns all article with the categoryEntity id.
@@ -30,7 +30,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param id the categoryEntity id of articleEntities to return.
      * @return The list of articleEntities.
      */
-    List<ArticleEntity> getByCategoryId(long id);
+    Collection<Article> getByCategoryId(long id);
 
     /**
      * Returns all article with the categoryEntity title.
@@ -38,7 +38,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param title the categoryEntity title of articleEntities to return.
      * @return The list of articleEntities.
      */
-    List<ArticleEntity> getByCategoryTitle(String title);
+    Collection<Article> getByCategoryTitle(String title);
 
     /**
      * Removes all article with the parameter number.
@@ -54,7 +54,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articleEntities.
      */
-    List<ArticleEntity> sortByNumber(Collection<ArticleEntity> articleEntities, boolean revers);
+    List<Article> sortByNumber(Collection<Article> articleEntities, boolean revers);
 
     /**
      * Sorts and returns articleEntities by date.
@@ -63,7 +63,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of articleEntities.
      */
-    List<ArticleEntity> sortByDate(Collection<ArticleEntity> articleEntities, boolean revers);
+    List<Article> sortByDate(Collection<Article> articleEntities, boolean revers);
 
     /**
      * Sorts and returns articleEntities by number.
@@ -71,7 +71,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articleEntities.
      */
-    List<ArticleEntity> getAndSortByNumber(boolean revers);
+    List<Article> getAndSortByNumber(boolean revers);
 
     /**
      * Sorts and returns articleEntities by date.
@@ -79,7 +79,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param revers is sort in descending or ascending.
      * @return The sorted list of articleEntities.
      */
-    List<ArticleEntity> getAndSortByDate(boolean revers);
+    List<Article> getAndSortByDate(boolean revers);
 
     /**
      * Filters and returns articleEntities by incming dates.
@@ -89,7 +89,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param endDate   the final date.
      * @return The filtered list of articleEntities.
      */
-    List<ArticleEntity> filterByDate(Collection<ArticleEntity> articleEntities, Date startDate, Date endDate);
+    List<Article> filterByDate(Collection<Article> articleEntities, Date startDate, Date endDate);
 
     /**
      * Filters and returns articleEntities by the categoryEntity.
@@ -98,7 +98,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param categoryEntity the categoryEntity filtering.
      * @return The filtered list of articleEntities.
      */
-    List<ArticleEntity> filterByCategory(Collection<ArticleEntity> articleEntities, CategoryEntity categoryEntity);
+    List<Article> filterByCategory(Collection<Article> articleEntities, Category categoryEntity);
 
     /**
      * Filters and returns articleEntities by the categories.
@@ -107,7 +107,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param categories the categories filtering.
      * @return The filtered list of articleEntities.
      */
-    List<ArticleEntity> filterByCategories(Collection<ArticleEntity> articleEntities, Collection<CategoryEntity> categories);
+    List<Article> filterByCategories(Collection<Article> articleEntities, Collection<Category> categories);
 
     /**
      * Filters and returns articleEntities by the dates.
@@ -116,7 +116,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param endDate   the final date.
      * @return The filtered list of articleEntities.
      */
-    List<ArticleEntity> getAndFilterByDate(Date startDate, Date endDate);
+    List<Article> getAndFilterByDate(Date startDate, Date endDate);
 
     /**
      * Filters and returns articleEntities by the categoryEntity.
@@ -124,7 +124,7 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param categoryEntity the categoryEntity filtering.
      * @return The filtered list of articleEntities.
      */
-    List<ArticleEntity> getAndFilterByCategory(CategoryEntity categoryEntity);
+    List<Article> getAndFilterByCategory(Category categoryEntity);
 
     /**
      * Filters and returns articleEntities by the categories.
@@ -132,5 +132,5 @@ public interface ArticleService extends ContentService<ArticleEntity> {
      * @param categories the categories filtering.
      * @return The filtered list of articleEntities.
      */
-    List<ArticleEntity> getAndFilterByCategories(Collection<CategoryEntity> categories);
+    List<Article> getAndFilterByCategories(Collection<Category> categories);
 }

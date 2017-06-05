@@ -1,16 +1,16 @@
 package ua.com.ecoteh.service.data;
 
-import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.company.Company;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The interface of the service layer, describes a set of methods
- * for working with objects of the {@link CompanyEntity} class.
+ * for working with objects of the {@link Company} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public interface CompanyService extends ContentService<CompanyEntity> {
+public interface CompanyService extends ContentService<Company> {
 
     /**
      * Updates the main companyEntity.
@@ -18,14 +18,14 @@ public interface CompanyService extends ContentService<CompanyEntity> {
      * @param companyEntity the main companyEntity to update.
      * @return The updating main companyEntity.
      */
-    CompanyEntity updateMainCompany(CompanyEntity companyEntity);
+    Company updateMainCompany(Company companyEntity);
 
     /**
      * Returns main companyEntity.
      *
      * @return The main companyEntity.
      */
-    CompanyEntity getMainCompany();
+    Company getMainCompany();
 
     /**
      * Removes main companyEntity.
@@ -38,13 +38,13 @@ public interface CompanyService extends ContentService<CompanyEntity> {
      * @param isValid is get valid companyEntity or not.
      * @return The partners companies.
      */
-    List<CompanyEntity> getPartners(boolean isValid);
+    Collection<Company> getPartners(boolean isValid);
 
     /**
      * Returns companyEntity with the category domain.
      *
      * @param domain the domain of a companyEntity to return.
-     * @return The object of class {@link CompanyEntity}.
+     * @return The object of class {@link Company}.
      */
-    CompanyEntity getByDomain(String domain);
+    Company getByDomain(String domain);
 }
