@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.company.Company;
+import ua.com.ecoteh.entity.company.CompanyBuilder;
 import ua.com.ecoteh.entity.company.CompanyEntity;
-import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.company.CompanyType;
+import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CompanyRepository;
 
@@ -29,7 +32,9 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> implements CompanyService {
+public final class CompanyServiceImpl
+        extends ContentServiceImpl<Company, CompanyEntity>
+        implements CompanyService {
 
     /**
      * The interface provides a set of standard methods for working
@@ -74,42 +79,26 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
      */
     @Override
     @Transactional(readOnly = true)
-    public Collection<CompanyEntity> getAll(final boolean isValid) {
+    public Collection<Company> getAll(final boolean isValid) {
         return getPartners(isValid);
-    }
-
-    /**
-     * Saves a incoming companyEntity and returns saving companyEntity.
-     *
-     * @param companyEntity a companyEntity to add.
-     * @return The new saving companyEntity (newer null).
-     */
-    @Override
-    @Transactional
-    public CompanyEntity add(final CompanyEntity companyEntity) {
-        if (isNotNull(companyEntity)) {
-            companyEntity.setType(CompanyType.PARTNER);
-        }
-        return super.add(companyEntity);
     }
 
     /**
      * Updates the main companyEntity.
      *
-     * @param companyEntity a main companyEntity to update.
+     * @param company a main companyEntity to update.
      * @return The updating main companyEntity (newer null).
      */
     @Override
     @Transactional
-    public CompanyEntity updateMainCompany(final CompanyEntity companyEntity) {
-        final CompanyEntity mainCompanyEntity = getMainCompany();
-        final FileEntity newLogo = companyEntity.getLogoEntity();
-        final FileEntity oldLogo = mainCompanyEntity.getLogoEntity();
+    public Company updateMainCompany(final Company company) {
+        final Company mainCompany = getMainCompany();
+        final File newLogo = company.getLogo();
+        final File oldLogo = mainCompany.getLogo();
         if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        copy(companyEntity, mainCompanyEntity);
-        return update(mainCompanyEntity);
+        return update(company);
     }
 
     /**
@@ -120,15 +109,18 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
      */
     @Override
     @Transactional(readOnly = true)
-    public CompanyEntity getMainCompany() {
-        CompanyEntity mainCompanyEntity;
+    public Company getMainCompany() {
+        Company mainCompany;
         try {
-            mainCompanyEntity = this.repository.findByType(CompanyType.MAIN).get(0);
+            final CompanyEntity entity = this.repository.findByType(CompanyType.MAIN).get(0);
+            mainCompany = entity.convert();
         } catch (IndexOutOfBoundsException ex) {
             logException(ex);
-            mainCompanyEntity = new CompanyEntity();
+            final CompanyBuilder builder = Company.getBuilder();
+            builder.addType(CompanyType.MAIN);
+            mainCompany = builder.build();
         }
-        return mainCompanyEntity;
+        return mainCompany;
     }
 
     /**
@@ -143,14 +135,14 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
      */
     @Override
     @Transactional(readOnly = true)
-    public List<CompanyEntity> getPartners(final boolean isValid) {
+    public Collection<Company> getPartners(final boolean isValid) {
         List<CompanyEntity> companies = this.repository.findByType(CompanyType.PARTNER);
         if (isValid) {
             companies = companies.stream()
                     .filter(CompanyEntity::isValidated)
                     .collect(Collectors.toList());
         }
-        return companies;
+        return convertToModels(companies);
     }
 
     /**
@@ -166,22 +158,21 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
      */
     @Override
     @Transactional(readOnly = true)
-    public CompanyEntity getByDomain(final String domain)
-            throws IllegalArgumentException, NullPointerException {
+    public Company getByDomain(final String domain) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(domain)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_DOMAIN_MESSAGE,
                     getClassSimpleName()
             );
         }
-        CompanyEntity companyEntity = this.repository.findByDomain(domain);
-        if (isNull(companyEntity)) {
+        final CompanyEntity entity = this.repository.findByDomain(domain);
+        if (isNull(entity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), domain
             );
         }
-        return companyEntity;
+        return entity.convert();
     }
 
     /**
@@ -189,13 +180,13 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
      * Removes companyEntity if it not null
      * and has not type CompanyType.MAIN.
      *
-     * @param companyEntity the companyEntity to remove.
+     * @param company the companyEntity to remove.
      */
     @Override
     @Transactional
-    public void remove(final CompanyEntity companyEntity) {
-        if (isNotMainCompany(companyEntity)) {
-            super.remove(companyEntity);
+    public void remove(final Company company) {
+        if (isNotMainCompany(company)) {
+            super.remove(company);
         }
     }
 
@@ -218,25 +209,13 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
     }
 
     /**
-     * Copies the object "from" to object "to".
-     * Incoming objects must be not null.
-     *
-     * @param from the copied object
-     * @param to   the object to copy
-     */
-    @Override
-    protected void copy(final CompanyEntity from, final CompanyEntity to) {
-        to.initialize(from);
-    }
-
-    /**
      * Return Class object of {@link CompanyEntity} class.
      *
      * @return The Class object of {@link CompanyEntity} class.
      */
     @Override
-    protected Class<CompanyEntity> getModelClass() {
-        return CompanyEntity.class;
+    protected Class<Company> getModelClass() {
+        return Company.class;
     }
 
     /**
@@ -252,11 +231,11 @@ public final class CompanyServiceImpl extends ContentServiceImpl<CompanyEntity> 
      *     isNotMainCompany(companyEntity) = true
      * </pre>
      *
-     * @param companyEntity the companyEntity to check.
+     * @param company the companyEntity to check.
      * @return true if the companyEntity is not null and
      * it has not MAIN companyEntity type.
      */
-    private boolean isNotMainCompany(final CompanyEntity companyEntity) {
-        return isNotNull(companyEntity) && !companyEntity.getType().equals(CompanyType.MAIN);
+    private boolean isNotMainCompany(final Company company) {
+        return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);
     }
 }

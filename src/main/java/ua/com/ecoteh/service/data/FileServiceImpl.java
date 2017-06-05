@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.exception.ExceptionMessage;
@@ -33,7 +34,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
                 "ua.com.ecoteh.util.properties"
         }
 )
-public final class FileServiceImpl extends DataServiceImpl<FileEntity> implements FileService {
+public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> implements FileService {
 
     /**
      * The interface provides a set of standard methods
@@ -75,12 +76,12 @@ public final class FileServiceImpl extends DataServiceImpl<FileEntity> implement
      */
     @Override
     @Transactional
-    public FileEntity add(
+    public File add(
             final String title,
             final FileType type,
             final MultipartFile multipartFile
     ) {
-        FileEntity fileEntity;
+        File file;
         if (isNotEmpty(multipartFile)) {
             isValidMultipartFile(multipartFile);
             fileEntity = new FileEntity(title, createRelativePath(title, multipartFile));
@@ -309,35 +310,6 @@ public final class FileServiceImpl extends DataServiceImpl<FileEntity> implement
         return new MultipartFileLoader(
                 createAbsolutePath(path)
         ).delete();
-    }
-
-    /**
-     * Validates input fileEntity object.
-     *
-     * @param fileEntity      the fileEntity to valid.
-     * @param exist     is validate by exists.
-     * @param duplicate is validate by duplicate.
-     * @return true if fileEntity is valid, false otherwise.
-     */
-    @Override
-    protected boolean validated(
-            final FileEntity fileEntity,
-            final boolean exist,
-            final boolean duplicate
-    ) {
-        if (isNull(fileEntity)) {
-            return false;
-        }
-        if (exist && !exists(fileEntity)) {
-            return false;
-        }
-        if (duplicate) {
-            if (isNotNull(this.repository.findByTitle(fileEntity.getTitle())) ||
-                    isNotNull(this.repository.findByUrl(fileEntity.getUrl()))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

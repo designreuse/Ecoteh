@@ -1,7 +1,9 @@
 package ua.com.ecoteh.service.data;
 
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.content.Content;
 import ua.com.ecoteh.entity.content.ContentEntity;
+import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ContentRepository;
@@ -19,14 +21,14 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * @param <T> entity type, extends {@link ContentEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public abstract class ContentServiceImpl<T extends ContentEntity>
-        extends DataServiceImpl<T> implements ContentService<T> {
+public abstract class ContentServiceImpl<T extends Content, E extends ContentEntity>
+        extends DataServiceImpl<T, E> implements ContentService<T> {
 
     /**
      * The object provides a set of standard JPA methods
      * for working {@link ContentEntity} objects with the database.
      */
-    private final ContentRepository<T> repository;
+    private final ContentRepository<E> repository;
 
     /**
      * The interface of the service layer,
@@ -43,7 +45,7 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      * @param fileService the implementation of the {@link FileService} interface.
      */
     ContentServiceImpl(
-            final ContentRepository<T> repository,
+            final ContentRepository<E> repository,
             final FileService fileService
     ) {
         super(repository);
@@ -62,10 +64,7 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      */
     @Override
     @Transactional
-    public T update(
-            final String url,
-            final T content
-    ) throws IllegalArgumentException {
+    public T update(final String url, final T content) throws IllegalArgumentException {
         if (isNull(content)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
@@ -73,13 +72,12 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
             );
         }
         final T contentToUpdate = getByUrl(url, false);
-        final FileEntity newLogo = content.getLogoEntity();
-        final FileEntity oldLogo = contentToUpdate.getLogoEntity();
+        final File newLogo = content.getLogo();
+        final File oldLogo = contentToUpdate.getLogo();
         if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        copy(content, contentToUpdate);
-        return update(contentToUpdate);
+        return update(content);
     }
 
     /**
@@ -95,24 +93,22 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      */
     @Override
     @Transactional(readOnly = true)
-    public T getByTitle(
-            final String title,
-            final boolean isValid
-    ) throws IllegalArgumentException, NullPointerException {
+    public T getByTitle(final String title, final boolean isValid)
+            throws IllegalArgumentException, NullPointerException {
         if (isEmpty(title)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_TITLE_MESSAGE,
                     getClassSimpleName()
             );
         }
-        final T content = this.repository.findByTitle(title);
-        if (isNotValidated(content, isValid)) {
+        final E entity = this.repository.findByTitle(title);
+        if (isNotValidated(entity, isValid)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), title
             );
         }
-        return content;
+        return entity.convert();
     }
 
     /**
@@ -128,21 +124,19 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      */
     @Override
     @Transactional(readOnly = true)
-    public T getByUrl(
-            final String url,
-            final boolean isValid
-    ) throws IllegalArgumentException, NullPointerException {
+    public T getByUrl(final String url, final boolean isValid)
+            throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
             throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
         }
-        final T content = this.repository.findByUrl(url);
-        if (isNotValidated(content, isValid)) {
+        final E entity = this.repository.findByUrl(url);
+        if (isNotValidated(entity, isValid)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), url
             );
         }
-        return content;
+        return entity.convert();
     }
 
     /**
@@ -182,10 +176,7 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      */
     @Override
     @Transactional(readOnly = true)
-    public List<T> sortByTitle(
-            final Collection<T> contents,
-            final boolean revers
-    ) {
+    public List<T> sortByTitle(final Collection<T> contents, final boolean revers) {
         return sort(contents, new ContentComparator.ByTitle<>(), revers);
     }
 
@@ -199,10 +190,7 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      */
     @Override
     @Transactional(readOnly = true)
-    public List<T> sortByUrl(
-            final Collection<T> contents,
-            final boolean revers
-    ) {
+    public List<T> sortByUrl(final Collection<T> contents, final boolean revers) {
         return sort(contents, new ContentComparator.ByUrl<>(), revers);
     }
 
@@ -233,44 +221,6 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
     }
 
     /**
-     * Validates input object of {@link ContentEntity} class or subclasses.
-     *
-     * @param content   the contents to valid.
-     * @param exist     is validate input object by exists.
-     * @param duplicate is validate input object by duplicate.
-     * @return Returns true if object is valid, otherwise returns false.
-     */
-    @Override
-    protected boolean validated(
-            final T content,
-            final boolean exist,
-            final boolean duplicate
-    ) {
-        if (isNull(content)) {
-            return false;
-        }
-        if (exist && !exists(content)) {
-            return false;
-        }
-        if (duplicate) {
-            if (isNotNull(this.repository.findByTitle(content.getTitle())) ||
-                    isNotNull(this.repository.findByUrl(content.getUrl()))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Copies the object "from" to object "to".
-     * Incoming objects must be not null.
-     *
-     * @param from a copied object
-     * @param to   a object to copy
-     */
-    protected abstract void copy(T from, T to);
-
-    /**
      * Checks incoming photos.
      * The new photo must be not equals to the old photo.
      * <pre>
@@ -289,7 +239,7 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      * @return true if the incoming photos is not equals and
      * new photo URL is not empty.
      */
-    protected static boolean isNewLogo(final FileEntity newLogo, final FileEntity oldLogo) {
+    static boolean isNewLogo(final File newLogo, final File oldLogo) {
         return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
     }
 
@@ -310,15 +260,11 @@ public abstract class ContentServiceImpl<T extends ContentEntity>
      *     isNotValidated(content, true) = true
      * </pre>
      *
-     * @param content the content to check.
+     * @param entity  the content to check.
      * @param isValid checks the incoming content to valid or not.
-     * @param <T>     entity type, extends {@link ContentEntity}.
      * @return true if the content is null or it is not valid.
      */
-    protected static <T extends ContentEntity> boolean isNotValidated(
-            final T content,
-            final boolean isValid
-    ) {
-        return isNull(content) || (isValid && !content.isValidated());
+    boolean isNotValidated(final E entity, final boolean isValid) {
+        return isNull(entity) || (isValid && !entity.isValidated());
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.response.ResponseEntity;
 import ua.com.ecoteh.repository.ResponseRepository;
 import ua.com.ecoteh.util.comparator.ResponseComparator;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -26,7 +26,9 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
-public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> implements ResponseService {
+public final class ResponseServiceImpl
+        extends DataServiceImpl<Response, ResponseEntity>
+        implements ResponseService {
 
     /**
      * Constructor.
@@ -41,36 +43,17 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
     }
 
     /**
-     * Updates and returns responseEntity with incoming id.
-     *
-     * @param id       the id of the responseEntity to update.
-     * @param responseEntity the responseEntity to update.
-     * @return The updating responseEntity with parameter id (newer null).
-     */
-    @Override
-    @Transactional
-    public ResponseEntity update(
-            final long id,
-            final ResponseEntity responseEntity
-    ) {
-        return update(get(id).initialize(responseEntity));
-    }
-
-    /**
      * Sorts and returns responseEntities by date.
      * For sorting used {@link ResponseComparator.ByDate} comparator.
      *
-     * @param responseEntities the responseEntities to sort.
+     * @param responses the responseEntities to sort.
      * @param revers    is sort in descending or ascending.
      * @return The sorted list of responseEntities (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ResponseEntity> sortByDate(
-            final Collection<ResponseEntity> responseEntities,
-            final boolean revers
-    ) {
-        return sort(responseEntities, new ResponseComparator.ByDate(), revers);
+    public List<Response> sortByDate(final Collection<Response> responses, final boolean revers) {
+        return sort(responses, new ResponseComparator.ByDate(), revers);
     }
 
     /**
@@ -82,7 +65,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ResponseEntity> getAndSortByDate(final boolean revers) {
+    public List<Response> getAndSortByDate(final boolean revers) {
         return sortByDate(getAll(), revers);
     }
 
@@ -91,7 +74,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
      * Return empty list if responseEntities is empty.
      * Return back responseEntities list if dates are null
      * or start date is equals end to finish date.
-     *<pre>
+     * <pre>
      *     filterByDate(null, ..., ...) = empty ArrayList()
      *     filterByDate(new ArrayList(), ..., ...) = empty ArrayList()
      *
@@ -109,28 +92,28 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
      *     filterByDate(collection, startDate, finishDate) = filtered list of responseEntities
      * </pre>
      *
-     * @param responseEntities  the responseEntities to filter.
+     * @param responses  the responseEntities to filter.
      * @param startDate  the initial date.
      * @param finishDate the final date.
      * @return The filtered list of responseEntities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ResponseEntity> filterByDate(
-            final Collection<ResponseEntity> responseEntities,
+    public List<Response> filterByDate(
+            final Collection<Response> responses,
             final Date startDate,
             final Date finishDate
     ) {
-        final List<ResponseEntity> result = new ArrayList<>();
-        if (isNotEmpty(responseEntities)) {
+        final List<Response> result = new ArrayList<>();
+        if (isNotEmpty(responses)) {
             if (checkDate(startDate, finishDate)) {
                 result.addAll(
-                        responseEntities.stream()
+                        responses.stream()
                                 .filter(response -> compareToDate(response, startDate, finishDate))
                                 .collect(Collectors.toList())
                 );
             } else {
-                result.addAll(responseEntities);
+                result.addAll(responses);
             }
         }
         return result;
@@ -157,10 +140,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ResponseEntity> getAndFilterByDate(
-            final Date startDate,
-            final Date finishDate
-    ) {
+    public List<Response> getAndFilterByDate(final Date startDate, final Date finishDate) {
         return filterByDate(getAll(), startDate, finishDate);
     }
 
@@ -185,12 +165,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
      * @return The filtered list of responseEntities or empty list (newer null).
      */
     @Override
-    public List<ResponseEntity> filteredByValid(Collection<ResponseEntity> responseEntities) {
-        List<ResponseEntity> result = new ArrayList<>();
+    public List<Response> filteredByValid(final Collection<Response> responseEntities) {
+        final List<Response> result = new ArrayList<>();
         if (isNotEmpty(responseEntities)) {
             result.addAll(
                     responseEntities.stream()
-                            .filter(ResponseServiceImpl::isValidated)
+                            .filter(this::isValidated)
                             .collect(Collectors.toList())
             );
         }
@@ -203,32 +183,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
      * @return The Class object of {@link ResponseEntity} class.
      */
     @Override
-    protected Class<ResponseEntity> getModelClass() {
-        return ResponseEntity.class;
-    }
-
-    /**
-     * Validates input responseEntity.
-     *
-     * @param responseEntity  the responseEntity to valid.
-     * @param exist     is validate input object by exists.
-     * @param duplicate is validate input object by duplicate.
-     * @return Returns true if responseEntity is valid, otherwise returns false.
-     */
-    @Override
-    protected boolean validated(
-            final ResponseEntity responseEntity,
-            final boolean exist,
-            final boolean duplicate
-    ) {
-        boolean result = false;
-        if (isNotNull(responseEntity)) {
-            result = true;
-            if (exist) {
-                result = exists(responseEntity);
-            }
-        }
-        return result;
+    Class<Response> getModelClass() {
+        return Response.class;
     }
 
     /**
@@ -245,15 +201,15 @@ public final class ResponseServiceImpl extends DataServiceImpl<ResponseEntity> i
     }
 
     /**
-     * Compares responseEntity object date to input dates.
+     * Compares response object date to input dates.
      *
-     * @param responseEntity   the responseEntity to compare.
+     * @param response   the response to compare.
      * @param startDate  the initial date.
      * @param finishDate the final date.
      * @return true or false.
      */
-    private boolean compareToDate(final ResponseEntity responseEntity, final Date startDate, final Date finishDate) {
-        return (responseEntity.getDate().compareTo(startDate) == 1) &&
-                (responseEntity.getDate().compareTo(finishDate) == -1);
+    private boolean compareToDate(final Response response, final Date startDate, final Date finishDate) {
+        return (response.getDate().compareTo(startDate) == 1) &&
+                (response.getDate().compareTo(finishDate) == -1);
     }
 }

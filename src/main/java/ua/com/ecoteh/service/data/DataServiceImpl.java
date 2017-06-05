@@ -1,10 +1,12 @@
 package ua.com.ecoteh.service.data;
 
 import org.apache.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.model.Model;
 import ua.com.ecoteh.entity.model.ModelEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.DataRepository;
-import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.util.validator.ObjectValidator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,7 +20,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
  * @param <T> entity type, extends {@link ModelEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public abstract class DataServiceImpl<T extends ModelEntity> implements DataService<T> {
+public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> implements DataService<T> {
 
     /**
      * The object for logging information.
@@ -29,7 +31,7 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      * The object provides a set of standard JPA methods
      * for working {@link ModelEntity} objects with the database.
      */
-    private final DataRepository<T> repository;
+    private final DataRepository<E> repository;
 
     /**
      * Constructor.
@@ -37,7 +39,7 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *
      * @param repository the implementation of the {@link DataRepository} interface.
      */
-    DataServiceImpl(final DataRepository<T> repository) {
+    DataServiceImpl(final DataRepository<E> repository) {
         this.repository = repository;
     }
 
@@ -48,22 +50,27 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *
      * @param model the modelEntity to add.
      * @return The saving modelEntity or input object (newer null).
-     * @throws NullPointerException Throw exception when saving modelEntity is null.
+     * @throws IllegalArgumentException
+     * @throws NullPointerException     Throw exception when saving modelEntity is null.
      */
     @Override
     @Transactional
-    public T add(final T model) throws NullPointerException {
-        T result = model;
-        if (validated(model, false, true)) {
-            result = this.repository.save(model);
+    public T add(final T model) throws IllegalArgumentException, NullPointerException {
+        if (isNull(model)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
-        if (isNull(result)) {
+        final E incomingEntity = model.convert();
+        final E savingEntity = this.repository.save(incomingEntity);
+        if (isNull(savingEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName()
             );
         }
-        return result;
+        return savingEntity.convert();
     }
 
     /**
@@ -101,22 +108,11 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *
      * @param model the modelEntity to update.
      * @return The updating models (newer null).
-     * @throws NullPointerException Throw exception when saving modelEntity is null.
      */
     @Override
     @Transactional
-    public T update(final T model) throws NullPointerException {
-        T result = model;
-        if (validated(model, true, false)) {
-            result = this.repository.save(model);
-        }
-        if (isNull(result)) {
-            throw getNullPointerException(
-                    ExceptionMessage.UPDATING_OBJECT_IS_NULL_MESSAGE,
-                    getClassSimpleName()
-            );
-        }
-        return result;
+    public T update(final T model) {
+        return add(model);
     }
 
     /**
@@ -160,14 +156,14 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
     @Override
     @Transactional(readOnly = true)
     public T get(final long id) throws NullPointerException {
-        final T result = this.repository.findOne(id);
-        if (isNull(result)) {
+        final E entity = this.repository.findOne(id);
+        if (isNull(entity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_ID_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), id
             );
         }
-        return result;
+        return entity.convert();
     }
 
     /**
@@ -195,7 +191,8 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
     @Override
     @Transactional(readOnly = true)
     public Collection<T> getAll(final boolean valid) {
-        final Collection<T> models = this.repository.findAll();
+        final Collection<E> entities = this.repository.findAll();
+        final Collection<T> models = convertToModels(entities);
         return valid ? filteredByValid(models) : models;
     }
 
@@ -221,7 +218,8 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
     @Transactional
     public void remove(final T model) {
         if (isNotNull(model)) {
-            this.repository.delete(model);
+            final E entity = model.convert();
+            this.repository.delete(entity);
         }
     }
 
@@ -235,7 +233,8 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
     @Transactional
     public void remove(final Collection<T> models) {
         if (isNotEmpty(models)) {
-            models.forEach(this::remove);
+            final Collection<E> entities = convertToEntities(models);
+            this.repository.delete(entities);
         }
     }
 
@@ -385,7 +384,7 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
         if (isNotEmpty(models)) {
             result.addAll(
                     models.stream()
-                            .filter(DataServiceImpl::isValidated)
+                            .filter(this::isValidated)
                             .collect(Collectors.toList())
             );
         }
@@ -405,12 +404,32 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
         return list;
     }
 
+    Collection<T> convertToModels(final Collection<E> entities) {
+        final Collection<T> models = new ArrayList<>();
+        if (isNotEmpty(entities)) {
+            entities.stream()
+                    .filter(ObjectValidator::isNotNull)
+                    .forEach(model -> models.add(model.convert()));
+        }
+        return models;
+    }
+
+    Collection<E> convertToEntities(final Collection<T> models) {
+        final Collection<E> entities = new ArrayList<>();
+        if (isNotEmpty(models)) {
+            models.stream()
+                    .filter(ObjectValidator::isNotNull)
+                    .forEach(model -> entities.add(model.convert()));
+        }
+        return entities;
+    }
+
     /**
      * Return name of {@link ModelEntity} class or subclasses.
      *
      * @return The name of {@link ModelEntity} class or subclasses.
      */
-    protected String getClassName() {
+    String getClassName() {
         return getModelClass().getName();
     }
 
@@ -437,11 +456,19 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *     isValidated(modelEntity) = true
      * </pre>
      *
-     * @param modelEntity the modelEntity to check.
+     * @param model the modelEntity to check.
      * @return true if the modelEntity is not null and it validated.
      */
-    protected static boolean isValidated(final ModelEntity modelEntity) {
-        return isNotNull(modelEntity) && modelEntity.isValidated();
+    boolean isValidated(final T model) {
+        return isNotNull(model) && model.isValidated();
+    }
+
+    E convertToEntity(final T model) {
+        return model.convert();
+    }
+
+    T convertToModel(final E model) {
+        return model.convert();
     }
 
     /**
@@ -451,7 +478,7 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      * @param parameters the message parameters.
      * @return The instance of the NullPointerException class.
      */
-    protected NullPointerException getNullPointerException(
+    NullPointerException getNullPointerException(
             final String message,
             final Object... parameters
     ) {
@@ -467,7 +494,7 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      * @param parameters the message parameters.
      * @return The instance of the IllegalArgumentException class.
      */
-    protected IllegalArgumentException getIllegalArgumentException(
+    IllegalArgumentException getIllegalArgumentException(
             final String message,
             final Object... parameters
     ) {
@@ -481,7 +508,7 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *
      * @param ex the intercepted exception.
      */
-    protected void logException(final Exception ex) {
+    void logException(final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         ex.printStackTrace();
     }
@@ -506,12 +533,11 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *     getReversComparator(comparator, false) = comparator
      * </pre>
      *
-     * @param <T>        entity type, extends {@link ModelEntity}.
      * @param comparator the comparator to sort models.
      * @param revers     is sort in descending or ascending.
      * @return The comparator to sort models (newer null).
      */
-    private <T extends ModelEntity> Comparator<T> prepareComparator(
+    private Comparator<T> prepareComparator(
             final Comparator<T> comparator,
             final boolean revers
     ) {
@@ -541,19 +567,5 @@ public abstract class DataServiceImpl<T extends ModelEntity> implements DataServ
      *
      * @return The Class object of {@link ModelEntity} or subclasses.
      */
-    protected abstract Class<T> getModelClass();
-
-    /**
-     * Validates input object of class {@link ModelEntity} or subclasses.
-     *
-     * @param model     the modelEntity to valid.
-     * @param exist     is validate input modelEntity by exists.
-     * @param duplicate is validate input modelEntity by duplicate.
-     * @return Returns true if the modelEntity is valid, otherwise returns false.
-     */
-    protected abstract boolean validated(
-            final T model,
-            final boolean exist,
-            final boolean duplicate
-    );
+    abstract Class<T> getModelClass();
 }

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CategoryRepository;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class of the service layer, implements a set of methods for working
@@ -29,31 +30,26 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class CategoryServiceImpl extends ContentServiceImpl<CategoryEntity> implements CategoryService {
+public final class CategoryServiceImpl
+        extends ContentServiceImpl<Category, CategoryEntity>
+        implements CategoryService {
 
-    /**
-     * The interface of the service layer,
-     * describes a set of methods for working
-     * with objects of the class {@link ArticleEntity}.
-     */
-    private final ArticleService articleService;
+    private final CategoryRepository repository;
 
     /**
      * Constructor.
      *
      * @param repository     the implementation  of the {@link CategoryRepository} interface.
-     * @param articleService the implementation of the {@link ArticleService} interface.
      * @param fileService    the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CategoryServiceImpl(
             final CategoryRepository repository,
-            final ArticleService articleService,
             final FileService fileService
     ) {
         super(repository, fileService);
-        this.articleService = articleService;
+        this.repository = repository;
     }
 
     /**
@@ -62,27 +58,25 @@ public final class CategoryServiceImpl extends ContentServiceImpl<CategoryEntity
      * @param url     the URL of the categoryEntity to return.
      * @param isValid is get valid categoryEntity or not.
      * @return The categoryEntity with the incoming URL (newer null).
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
      */
     @Override
     @Transactional(readOnly = true)
-    public CategoryEntity getByUrl(
-            final String url,
-            final boolean isValid
-    ) {
-        final CategoryEntity categoryEntity = super.getByUrl(url, isValid);
-        categoryEntity.getArticleEntities().size();
-        return categoryEntity;
-    }
-
-    /**
-     * Removes categoryEntity with incoming id.
-     *
-     * @param id the id of a categoryEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void remove(final long id) {
-        remove(get(id));
+    public Category getByUrl(final String url, final boolean isValid)
+            throws IllegalArgumentException, NullPointerException {
+        if (isEmpty(url)) {
+            throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
+        }
+        final CategoryEntity entity = this.repository.findByUrl(url);
+        if (isNotValidated(entity, isValid)) {
+            throw getNullPointerException(
+                    ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), url
+            );
+        }
+        entity.getArticleEntities().size();
+        return entity.convert();
     }
 
     /**
@@ -113,21 +107,6 @@ public final class CategoryServiceImpl extends ContentServiceImpl<CategoryEntity
     }
 
     /**
-     * Removes the categoryEntity.
-     * Removes categoryEntity if it is not null.
-     *
-     * @param categoryEntity the categoryEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void remove(final CategoryEntity categoryEntity) {
-        if (isNotNull(categoryEntity)) {
-            clearArticles(categoryEntity);
-            super.remove(categoryEntity);
-        }
-    }
-
-    /**
      * Returns a list valid categories.
      * Returns empty list if categories collection is empty.
      * <pre>
@@ -149,28 +128,16 @@ public final class CategoryServiceImpl extends ContentServiceImpl<CategoryEntity
      */
     @Override
     @Transactional
-    public List<CategoryEntity> filteredByValid(final Collection<CategoryEntity> categories) {
-        final List<CategoryEntity> result = new ArrayList<>();
+    public List<Category> filteredByValid(final Collection<Category> categories) {
+        final List<Category> result = new ArrayList<>();
         if (isNotEmpty(categories)) {
             result.addAll(
                     categories.stream()
-                            .filter(CategoryServiceImpl::isValidated)
+                            .filter(this::isValidated)
                             .collect(Collectors.toList())
             );
         }
         return result;
-    }
-
-    /**
-     * Copies the object "from" to object "to".
-     * Incoming objects must be not null.
-     *
-     * @param from the copied object
-     * @param to   the object to copy
-     */
-    @Override
-    protected void copy(final CategoryEntity from, final CategoryEntity to) {
-        to.initialize(from);
     }
 
     /**
@@ -179,18 +146,7 @@ public final class CategoryServiceImpl extends ContentServiceImpl<CategoryEntity
      * @return The Class object of {@link CategoryEntity} class.
      */
     @Override
-    protected Class<CategoryEntity> getModelClass() {
-        return CategoryEntity.class;
-    }
-
-    /**
-     * Remove articles in selected categoryEntity.
-     *
-     * @param categoryEntity a selected categoryEntity.
-     */
-    private void clearArticles(final CategoryEntity categoryEntity) {
-        final Collection<ArticleEntity> articleEntities = categoryEntity.getArticleEntities();
-        categoryEntity.clearArticles();
-        this.articleService.update(articleEntities);
+    protected Class<Category> getModelClass() {
+        return Category.class;
     }
 }
