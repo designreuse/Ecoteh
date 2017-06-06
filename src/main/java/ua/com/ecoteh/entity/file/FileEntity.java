@@ -9,6 +9,7 @@ import javax.persistence.*;
  * with entity of the {@link FileEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see File
  */
 @Entity
 @Table(name = "files")
@@ -23,26 +24,28 @@ public class FileEntity extends ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The title of a fileEntity.
+     * The title of this file entity.
      */
     @Column(name = "title", nullable = false)
     private String title;
 
     /**
-     * The URL of a fileEntity.
+     * The URL of this file entity.
      */
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
     /**
-     * The type of a fileEntity.
+     * The type of this file entity.
+     *
+     * @see FileType
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private FileType type;
 
     /**
-     *
+     * Constructor.
      */
     protected FileEntity() {
     }
@@ -102,86 +105,69 @@ public class FileEntity extends ModelEntity {
     }
 
     /**
-     * Returns a title of the fileEntity.
+     * Returns a title of the file entity.
      *
-     * @return The fileEntity title or empty string (newer null).
+     * @return The file entity title or empty string (newer null).
      */
     public String getTitle() {
         return this.title;
     }
 
     /**
-     * Sets a new title to the fileEntity.
-     * If parameter title is blank, then sets empty string.
-     * Also title translates and sets to URL if this URL is empty.
-     * <pre>
-     *     setTitle(null) - title = ""
-     *     setTitle("") - title = ""
-     *     setTitle(" ") - title = ""
-     *     setTitle("bob") - title = "bob"
-     *     setTitle(" bob ") - title = "bob"
-     * </pre>
+     * Sets a new title to the file entity.
      *
-     * @param title the new title to the fileEntity.
+     * @param title the new title to the file entity.
      */
     public void setTitle(final String title) {
         this.title = title;
     }
 
     /**
-     * Returns a URL of the fileEntity.
+     * Returns a URL of the file entity.
      *
-     * @return The fileEntity URL or empty string (newer null).
+     * @return The file entity URL or empty string (newer null).
      */
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Sets a new URL to the fileEntity.
-     * If parameter URL is blank, then sets empty string.
-     * <pre>
-     *     setUrl(null) - url = ""
-     *     setUrl("") - url = ""
-     *     setUrl(" ") - url = ""
-     *     setUrl("bob") - url = "bob"
-     *     setUrl(" bob ") - url = "bob"
-     * </pre>
+     * Sets a new URL to the file entity.
      *
-     * @param url the new URL to the fileEntity.
+     * @param url the new URL to the file entity.
      */
     public void setUrl(final String url) {
         this.url = url;
     }
 
     /**
-     * Returns a fileEntity type.
-     * Returns a enum object of the {@link FileType} class.
+     * Returns this file entity type.
      *
-     * @return The fileEntity type (newer null).
+     * @return The file entity type (newer null).
+     * @see FileType
      */
     public FileType getType() {
         return this.type;
     }
 
     /**
-     * Sets a new type to the fileEntity.
-     * Sets default type if incoming type is null.
-     * <pre>
-     *     setType(null) - type = FileType.OTHER
-     *     setType(FileType.SLIDE) - type = FileType.SLIDE
-     * </pre>
+     * Sets a new type to the file entity.
      *
-     * @param type the new fileEntity type.
+     * @param type the new file entity type.
+     * @see FileType
      */
     public void setType(final FileType type) {
         this.type = type;
     }
 
     /**
+     * Converts this entity and returns a object
+     * of the {@link File} class.
      *
-     * @return
+     * @return The object of the {@link File} class (newer null).
+     * @see File
      */
+    @Override
     public File convert() {
         return new FileEntityConverter(this).convert();
     }

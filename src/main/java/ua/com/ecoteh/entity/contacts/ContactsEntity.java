@@ -11,6 +11,7 @@ import javax.persistence.Table;
  * with entity of the {@link ContactsEntity} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Contacts
  */
 @Entity
 @Table(name = "contacts")
@@ -102,7 +103,7 @@ public class ContactsEntity extends ModelEntity {
      * argument, false otherwise.
      */
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
             final ContactsEntity other = (ContactsEntity) object;
@@ -148,191 +149,135 @@ public class ContactsEntity extends ModelEntity {
     }
 
     /**
-     * Returns a E-mail of the contactsEntity.
+     * Returns a E-mail of the contacts entity.
      *
-     * @return The contactsEntity E-mail or empty string (newer null).
+     * @return The contacts entity E-mail or empty string (newer null).
      */
     public String getEmail() {
         return this.email;
     }
 
     /**
-     * Sets a new E-mail to the contactsEntity.
-     * If parameter E-mail is blank, then sets empty string.
-     * <pre>
-     *     setEmail(null) - email = ""
-     *     setEmail("") - email = ""
-     *     setEmail(" ") - email = ""
-     *     setEmail("bob") - email = "bob"
-     *     setEmail(" bob ") - email = " bob "
-     * </pre>
+     * Sets a new E-mail to the contacts entity.
      *
-     * @param email the new E-mail to the contactsEntity.
+     * @param email the new E-mail to the contacts entity.
      */
     public void setEmail(final String email) {
         this.email = email;
     }
 
     /**
-     * Returns a mobile phone number of the contactsEntity.
+     * Returns a mobile phone number of the contacts entity.
      *
-     * @return The contactsEntity mobile phone number or empty string (newer null).
+     * @return The contacts entity mobile phone number or empty string (newer null).
      */
     public String getMobilePhone() {
         return this.mobilePhone;
     }
 
     /**
-     * Sets a new mobile phone number to the contactsEntity.
-     * If parameter mobile phone is blank, then sets empty string.
-     * <pre>
-     *     setMobilePhone(null) - mobilePhone = ""
-     *     setMobilePhone("") - mobilePhone = ""
-     *     setMobilePhone(" ") - mobilePhone = ""
-     *     setMobilePhone("bob") - mobilePhone = "bob"
-     *     setMobilePhone(" bob ") - mobilePhone = " bob "
-     * </pre>
+     * Sets a new mobile phone number to the contacts entity.
      *
-     * @param mobilePhone the new mobile phone number to the contactsEntity.
+     * @param mobilePhone the new mobile phone number to the contacts entity.
      */
     public void setMobilePhone(final String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 
     /**
-     * Returns a landline phone number of the contactsEntity.
+     * Returns a landline phone number of the contacts entity.
      *
-     * @return The contactsEntity landline phone number or empty string (newer null).
+     * @return The contacts entity landline phone number or empty string (newer null).
      */
     public String getLandlinePhone() {
         return this.landlinePhone;
     }
 
     /**
-     * Sets a new landline phone number to the contactsEntity.
-     * If parameter landline phone is blank, then sets empty string.
-     * <pre>
-     *     setLandlinePhone(null) - landlinePhone = ""
-     *     setLandlinePhone("") - landlinePhone = ""
-     *     setLandlinePhone(" ") - landlinePhone = ""
-     *     setLandlinePhone("bob") - landlinePhone = "bob"
-     *     setLandlinePhone(" bob ") - landlinePhone = " bob "
-     * </pre>
+     * Sets a new landline phone number to the contacts entity.
      *
-     * @param landlinePhone the new landline phone number to the contactsEntity.
+     * @param landlinePhone the new landline phone number to the contacts entity.
      */
     public void setLandlinePhone(final String landlinePhone) {
         this.landlinePhone = landlinePhone;
     }
 
     /**
-     * Returns a fax number of the contactsEntity.
+     * Returns a fax number of the contacts entity.
      *
-     * @return The contactsEntity fax number or empty string (newer null).
+     * @return The contacts entity fax number or empty string (newer null).
      */
     public String getFax() {
         return this.fax;
     }
 
     /**
-     * Sets a new fax number to the contactsEntity.
-     * If parameter fax is blank, then sets empty string.
-     * <pre>
-     *     setFax(null) - fax = ""
-     *     setFax("") - fax = ""
-     *     setFax(" ") - fax = ""
-     *     setFax("bob") - fax = "bob"
-     *     setFax(" bob ") - fax = " bob "
-     * </pre>
+     * Sets a new fax number to the contacts entity.
      *
-     * @param fax the new fax number to the contactsEntity.
+     * @param fax the new fax number to the contacts entity.
      */
     public void setFax(final String fax) {
         this.fax = fax;
     }
 
     /**
-     * Returns a Vkontakte URL of the contactsEntity.
+     * Returns a Vkontakte URL of the contacts entity.
      *
-     * @return The contactsEntity Vkontakte URL or empty string (newer null).
+     * @return The contacts entity Vkontakte URL or empty string (newer null).
      */
     public String getVkontakte() {
         return this.vkontakte;
     }
 
     /**
-     * Sets a new Vkontakte URL to the contactsEntity.
-     * If parameter Vkontakte URL is blank, then sets empty string.
-     * <pre>
-     *     setVkontakte(null) - vkontakte = ""
-     *     setVkontakte("") - vkontakte = ""
-     *     setVkontakte(" ") - vkontakte = ""
-     *     setVkontakte("bob") - vkontakte = "bob"
-     *     setVkontakte(" bob ") - vkontakte = " bob "
-     * </pre>
+     * Sets a new Vkontakte URL to the contacts entity.
      *
-     * @param vkontakte the new Vkontakte URL to the contactsEntity.
+     * @param vkontakte the new Vkontakte URL to the contacts entity.
      */
     public void setVkontakte(final String vkontakte) {
         this.vkontakte = vkontakte;
     }
 
     /**
-     * Returns a Facebook URL of the contactsEntity.
+     * Returns a Facebook URL of the contacts entity.
      *
-     * @return The contactsEntity Facebook URL or empty string (newer null).
+     * @return The contacts entity Facebook URL or empty string (newer null).
      */
     public String getFacebook() {
         return this.facebook;
     }
 
     /**
-     * Sets a new Facebook URL to the contactsEntity.
-     * If parameter Facebook URL is blank, then sets empty string.
-     * <pre>
-     *     setFacebook(null) - facebook = ""
-     *     setFacebook("") - facebook = ""
-     *     setFacebook(" ") - facebook = ""
-     *     setFacebook("bob") - facebook = "bob"
-     *     setFacebook(" bob ") - facebook = " bob "
-     * </pre>
+     * Sets a new Facebook URL to the contacts entity.
      *
-     * @param facebook the new Facebook URL to the contactsEntity.
+     * @param facebook the new Facebook URL to the contacts entity.
      */
     public void setFacebook(final String facebook) {
         this.facebook = facebook;
     }
 
     /**
-     * Returns a Twitter URL of the contactsEntity.
+     * Returns a Twitter URL of the contacts entity.
      *
-     * @return The contactsEntity Twitter URL or empty string (newer null).
+     * @return The contacts entity Twitter URL or empty string (newer null).
      */
     public String getTwitter() {
         return this.twitter;
     }
 
     /**
-     * Sets a new Twitter URL to the contactsEntity.
-     * If parameter Twitter URL is blank, then sets empty string.
-     * <pre>
-     *     setTwitter(null) - twitter = ""
-     *     setTwitter("") - twitter = ""
-     *     setTwitter(" ") - twitter = ""
-     *     setTwitter("bob") - twitter = "bob"
-     *     setTwitter(" bob ") - twitter = " bob "
-     * </pre>
+     * Sets a new Twitter URL to the contacts entity.
      *
-     * @param twitter the new Twitter URL to the contactsEntity.
+     * @param twitter the new Twitter URL to the contacts entity.
      */
     public void setTwitter(final String twitter) {
         this.twitter = twitter;
     }
 
     /**
-     * Returns a Skype username of the contactsEntity.
+     * Returns a Skype username of the contacts entity.
      *
-     * @return The contactsEntity Skype username or empty string (newer null).
+     * @return The contacts entity Skype username or empty string (newer null).
      */
     public String getSkype() {
         return this.skype;
@@ -340,24 +285,21 @@ public class ContactsEntity extends ModelEntity {
 
     /**
      * Sets a new Skype username.
-     * If parameter Skype username is blank, then sets empty string.
-     * <pre>
-     *     setSkype(null) - skype = ""
-     *     setSkype("") - skype = ""
-     *     setSkype(" ") - skype = ""
-     *     setSkype("bob") - skype = "bob"
-     *     setSkype(" bob ") - skype = " bob "
-     * </pre>
      *
-     * @param skype the new Skype username to the contactsEntity.
+     * @param skype the new Skype username to the contacts entity.
      */
     public void setSkype(final String skype) {
         this.skype = skype;
     }
 
     /**
-     * @return
+     * Converts this entity and returns a object
+     * of the {@link Contacts} class.
+     *
+     * @return The object of the {@link Contacts} class (newer null).
+     * @see Contacts
      */
+    @Override
     public Contacts convert() {
         return new ContactsEntityConverter(this).convert();
     }

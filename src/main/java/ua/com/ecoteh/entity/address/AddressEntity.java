@@ -11,6 +11,7 @@ import javax.persistence.Table;
  * with entity of the {@link AddressEntity} class.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Address
  */
 @Entity
 @Table(name = "addresses")
@@ -25,10 +26,10 @@ public class AddressEntity extends ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The mailing addressEntity.
+     * The post address.
      */
     @Column(name = "address", nullable = false)
-    private String address;
+    private String postAddress;
 
     /**
      * The Google maps URL.
@@ -36,6 +37,9 @@ public class AddressEntity extends ModelEntity {
     @Column(name = "google_maps", nullable = false)
     private String googleMaps;
 
+    /**
+     * Constructor.
+     */
     protected AddressEntity() {
     }
 
@@ -47,7 +51,7 @@ public class AddressEntity extends ModelEntity {
     @Override
     public String toString() {
         return "AddressEntity{" + super.toString() +
-                ", address='" + this.address + '\'' +
+                ", postAddress='" + this.postAddress + '\'' +
                 ", googleMaps='" + this.googleMaps + '\'' +
                 '}';
     }
@@ -60,11 +64,11 @@ public class AddressEntity extends ModelEntity {
      * argument, false otherwise.
      */
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
             final AddressEntity other = (AddressEntity) object;
-            result = this.address.equalsIgnoreCase(other.address) &&
+            result = this.postAddress.equalsIgnoreCase(other.postAddress) &&
                     this.googleMaps.equalsIgnoreCase(other.googleMaps);
         }
         return result;
@@ -79,7 +83,7 @@ public class AddressEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return this.address.hashCode() + this.googleMaps.hashCode();
+        return this.postAddress.hashCode() + this.googleMaps.hashCode();
     }
 
     /**
@@ -93,33 +97,25 @@ public class AddressEntity extends ModelEntity {
     }
 
     /**
-     * Returns a mailing addressEntity of the addressEntity.
+     * Returns an post address of the address entity.
      *
      * @return The mailing addressEntity or empty string (newer null).
      */
-    public String getAddress() {
-        return this.address;
+    public String getPostAddress() {
+        return this.postAddress;
     }
 
     /**
-     * Sets a new mailing addressEntity to the addressEntity.
-     * If parameter addressEntity is blank, then sets empty string.
-     * <pre>
-     *     setAddressEntity(null) - addressEntity = ""
-     *     setAddressEntity("") - addressEntity = ""
-     *     setAddressEntity(" ") - addressEntity = ""
-     *     setAddressEntity("bob") - addressEntity = "bob"
-     *     setAddressEntity(" bob ") - addressEntity = " bob "
-     * </pre>
+     * Sets a new post address to the address entity.
      *
-     * @param address the new mailing addressEntity to the addressEntity.
+     * @param postAddress the post address to the address entity.
      */
-    public void setAddress(final String address) {
-        this.address = address;
+    public void setPostAddress(final String postAddress) {
+        this.postAddress = postAddress;
     }
 
     /**
-     * Returns a Google maps URL of the addressEntity.
+     * Returns a Google maps URL of the address entity.
      *
      * @return The Google maps URL or empty string (newer null).
      */
@@ -128,26 +124,22 @@ public class AddressEntity extends ModelEntity {
     }
 
     /**
-     * Sets a new Google maps URL to the addressEntity.
-     * If parameter google maps URL is blank, then sets empty string.
-     * <pre>
-     *     setGoogleMaps(null) - googleMaps = ""
-     *     setGoogleMaps("") - googleMaps = ""
-     *     setGoogleMaps(" ") - googleMaps = ""
-     *     setGoogleMaps("bob") - googleMaps = "bob"
-     *     setGoogleMaps(" bob ") - googleMaps = "bob"
-     * </pre>
+     * Sets a new Google maps URL to the address entity.
      *
-     * @param googleMaps the new Google maps URL to the addressEntity.
+     * @param googleMaps the new Google maps URL to the address entity.
      */
     public void setGoogleMaps(final String googleMaps) {
         this.googleMaps = googleMaps;
     }
 
     /**
+     * Converts this entity and returns a object
+     * of the {@link Address} class.
      *
-     * @return
+     * @return The object of the {@link Address} class (newer null).
+     * @see Address
      */
+    @Override
     public Address convert() {
         return new AddressEntityConverter(this).convert();
     }

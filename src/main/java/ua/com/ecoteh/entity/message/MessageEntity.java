@@ -13,6 +13,7 @@ import java.util.Date;
  * with entity of the {@link MessageEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Message
  */
 @Entity
 @Table(name = "messages")
@@ -27,7 +28,9 @@ public class MessageEntity extends ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The messageEntity userEntity.
+     * The user entity of this message entity.
+     *
+     * @see UserEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -41,19 +44,19 @@ public class MessageEntity extends ModelEntity {
     private UserEntity user;
 
     /**
-     * The subject of a messageEntity.
+     * The subject of this message entity.
      */
     @Column(name = "subject", nullable = false)
     private String subject;
 
     /**
-     * The text of a messageEntity.
+     * The text of this message entity.
      */
     @Column(name = "text", nullable = false)
     private String text;
 
     /**
-     * The date of created messageEntity.
+     * The date of created message entity.
      */
     @Column(name = "date", nullable = false)
     private Date date;
@@ -72,7 +75,7 @@ public class MessageEntity extends ModelEntity {
     @Override
     public String toString() {
         return "MessageEntity{" + super.toString() +
-                ", userEntity=" + this.user +
+                ", user entity=" + this.user +
                 ", subject='" + this.subject + '\'' +
                 ", text='" + this.text + '\'' +
                 ", date=" + this.date +
@@ -127,101 +130,87 @@ public class MessageEntity extends ModelEntity {
     }
 
     /**
-     * Returns a userEntity of the messageEntity.
+     * Returns a user entity of the message entity.
      *
-     * @return The userEntity of the messageEntity (newer null).
+     * @return The user entity of the message entity (newer null).
+     * @see UserEntity
      */
     public UserEntity getUserEntity() {
         return this.user;
     }
 
     /**
-     * Sets a userEntity of the messageEntity.
+     * Sets a user entity of the message entity.
      *
-     * @param user the userEntity of the messageEntity.
+     * @param user the user entity of the message entity.
+     * @see UserEntity
      */
     public void setUserEntity(final UserEntity user) {
         this.user = user;
     }
 
     /**
-     * Returns a subject of the messageEntity.
+     * Returns a subject of the message entity.
      *
-     * @return The messageEntity subject or empty string (newer null).
+     * @return The message entity subject or empty string (newer null).
      */
     public String getSubject() {
         return this.subject;
     }
 
     /**
-     * Sets a new subject to the messageEntity.
-     * If parameter subject is blank, then sets empty string.
-     * <pre>
-     *     setSubject(null) - subject = ""
-     *     setSubject("") - subject = ""
-     *     setSubject(" ") - subject = ""
-     *     setSubject("bob") - subject = "bob"
-     *     setSubject(" bob ") - subject = "bob"
-     * </pre>
+     * Sets a new subject to the message entity.
      *
-     * @param subject a new subject to the messageEntity.
+     * @param subject a new subject to the message entity.
      */
     public void setSubject(final String subject) {
         this.subject = subject;
     }
 
     /**
-     * Returns a text of the messageEntity.
+     * Returns a text of the message entity.
      *
-     * @return The messageEntity text or empty string (newer null).
+     * @return The message entity text or empty string (newer null).
      */
     public String getText() {
         return this.text;
     }
 
     /**
-     * Sets a new text to the messageEntity.
-     * If parameter text is blank, then sets empty string.
-     * <pre>
-     *     setText(null) - text = ""
-     *     setText("") - text = ""
-     *     setText(" ") - text = ""
-     *     setText("bob") - text = "bob"
-     *     setText(" bob ") - text = "bob"
-     * </pre>
+     * Sets a new text to the message entity.
      *
-     * @param text a new text to the messageEntity.
+     * @param text a new text to the message entity.
      */
     public void setText(final String text) {
         this.text = text;
     }
 
     /**
-     * Returns a date of the messageEntity.
+     * Returns a date of the message entity.
      *
-     * @return The messageEntity date (newer null).
+     * @return The message entity date (newer null).
      */
     public Date getDate() {
         return this.date;
     }
 
     /**
-     * Sets a new date to the messageEntity.
-     * If parameter date is null, then sets new Date().
-     * <pre>
-     *     setDate(null) - date = new Date()
-     *     setDate(someRealDate) - date = someRealDate
-     * </pre>
+     * Sets a new date to the message entity.
      *
-     * @param date the new date to the messageEntity.
+     * @param date the new date to the message entity.
      */
     public void setDate(final Date date) {
         this.date = date;
     }
 
     /**
-     * @return
+     * Converts this entity and returns a object
+     * of the {@link Message} class.
+     *
+     * @return The object of the {@link Message} class (newer null).
+     * @see Message
      */
+    @Override
     public Message convert() {
         return new MessageEntityConverter(this).convert();
     }

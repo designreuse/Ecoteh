@@ -45,7 +45,7 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     private boolean validated;
 
     /**
-     *
+     * Constructor.
      */
     protected ModelEntity() {
     }
@@ -138,5 +138,11 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     @Override
     public abstract int hashCode();
 
-    public abstract <T extends Model> T convert();
+    /**
+     * Converts this entity and returns a object
+     * of the {@link Model} class.
+     *
+     * @return The object of the {@link Model} class.
+     */
+    public abstract Model convert();
 }

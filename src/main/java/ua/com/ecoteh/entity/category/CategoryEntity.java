@@ -11,6 +11,7 @@ import java.util.Collection;
  * with entity of the {@link CategoryEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Category
  */
 @Entity
 @Table(name = "categories")
@@ -25,7 +26,9 @@ public class CategoryEntity extends ContentEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The set of a articleEntities.
+     * The set of a article entities.
+     *
+     * @see ArticleEntity
      */
     @OneToMany(
             mappedBy = "categoryEntity",
@@ -65,25 +68,34 @@ public class CategoryEntity extends ContentEntity {
     }
 
     /**
-     * Returns an collection of articleEntities.
+     * Returns an collection of article entities.
      * Collection can be empty.
      *
-     * @return The collection of articleEntities (newer null).
+     * @return The collection of article entities (newer null).
+     * @see ArticleEntity
      */
     public Collection<ArticleEntity> getArticleEntities() {
         return this.articles;
     }
 
     /**
-     * Sets a new articleEntities to list of articleEntities.
-     * Clears the list of articleEntities and adds new articleEntities.
+     * Sets a new article entities to list of article entities.
      *
-     * @param articles the articleEntities to add.
+     * @param articles the article entities to add.
+     * @see ArticleEntity
      */
     public void setArticleEntities(final Collection<ArticleEntity> articles) {
         this.articles = articles;
     }
 
+    /**
+     * Converts this entity and returns a object
+     * of the {@link Category} class.
+     *
+     * @return The object of the {@link Category} class (newer null).
+     * @see Category
+     */
+    @Override
     public Category convert() {
         return new CategoryEntityConverter(this).convert();
     }

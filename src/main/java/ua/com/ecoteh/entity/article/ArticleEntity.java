@@ -28,31 +28,31 @@ public class ArticleEntity extends ContentEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The number of an articleEntity.
+     * The number of this article entity.
      */
     @Column(name = "number", nullable = false, unique = true)
     private String number;
 
     /**
-     * The text of an articleEntity.
+     * The text of this article entity.
      */
     @Column(name = "text", nullable = false)
     private String text;
 
     /**
-     * The date of an articleEntity.
+     * The date of this article entity.
      */
     @Column(name = "date", nullable = false)
     private Date date;
 
     /**
-     * The price of an articleEntity.
+     * The price of this article entity.
      */
     @Column(name = "price")
     private String price;
 
     /**
-     * The categoryEntity of an articleEntity.
+     * The category entity of this article entity.
      */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
@@ -80,7 +80,7 @@ public class ArticleEntity extends ContentEntity {
                 ", text='" + this.text + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
-                ", categoryEntity=" + this.category +
+                ", category entity=" + this.category +
                 '}';
     }
 
@@ -127,16 +127,16 @@ public class ArticleEntity extends ContentEntity {
     }
 
     /**
-     * Returns a number of the articleEntity.
+     * Returns a number of the article entity.
      *
-     * @return The articleEntity number (newer null).
+     * @return The article entity number (newer null).
      */
     public String getNumber() {
         return this.number;
     }
 
     /**
-     * Sets new number to the articleEntity.
+     * Sets new number to the article entity.
      * If parameter number is blank, then call method newNumber().
      * <pre>
      *     setNumber(null) - number = "NewRandomNumber"
@@ -146,23 +146,23 @@ public class ArticleEntity extends ContentEntity {
      *     setNumber(" bob ") - number = "bob"
      * </pre>
      *
-     * @param number the new number to the articleEntity.
+     * @param number the new number to the article entity.
      */
     public void setNumber(final String number) {
             this.number = number;
     }
 
     /**
-     * Returns a text of the articleEntity.
+     * Returns a text of the article entity.
      *
-     * @return The articleEntity text or empty string (newer null).
+     * @return The article entity text or empty string (newer null).
      */
     public String getText() {
         return this.text;
     }
 
     /**
-     * Sets a new text to the articleEntity.
+     * Sets a new text to the article entity.
      * If parameter text is blank, then sets empty string.
      * <pre>
      *     setText(null) - text = ""
@@ -172,91 +172,87 @@ public class ArticleEntity extends ContentEntity {
      *     setText(" bob ") - text = "bob"
      * </pre>
      *
-     * @param text a new text to the articleEntity.
+     * @param text a new text to the article entity.
      */
     public void setText(final String text) {
         this.text = text;
     }
 
     /**
-     * Returns a date of the articleEntity.
+     * Returns a date of the article entity.
      *
-     * @return The articleEntity date (newer null).
+     * @return The article entity date (newer null).
      */
     public Date getDate() {
         return this.date;
     }
 
     /**
-     * Sets a new date to the articleEntity.
+     * Sets a new date to the article entity.
      * If parameter date is null, then sets new Date().
      * <pre>
      *     setDate(null) - date = new Date()
      *     setDate(someRealDate) - date = someRealDate
      * </pre>
      *
-     * @param date the new date to the articleEntity.
+     * @param date the new date to the article entity.
      */
     public void setDate(final Date date) {
         this.date = date;
     }
 
     /**
-     * Returns a price of the articleEntity.
+     * Returns a price of the article entity.
      *
-     * @return The articleEntity price or '0' (newer null).
+     * @return The article entity price (newer null).
      */
     public String getPrice() {
         return this.price;
     }
 
     /**
-     * Sets a new price to the articleEntity.
-     * If parameter price is blank, then sets 0.
-     * <pre>
-     *     setPrice(null) - price = "0"
-     *     setPrice("") - address = "0"
-     *     setPrice(" ") - address = "0"
-     *     setPrice("$100") - address = "$100"
-     *     setPrice(" $100 ") - address = " $100 "
-     * </pre>
+     * Sets a new price to the article entity.
      *
-     * @param price the new price to the articleEntity.
+     * @param price the new price to the article entity.
      */
     public void setPrice(final String price) {
         this.price = price;
     }
 
     /**
-     * Returns an articleEntity date in string format.
+     * Returns this article entity date in string format.
      *
-     * @return The articleEntity string-date (newer null).
+     * @return The article entity string-date (newer null).
      */
     public String getDateToString() {
         return Time.getDate(getDate());
     }
 
     /**
-     * Sets a new categoryEntity to the articleEntity.
-     * Sets a new categoryEntity if this categoryEntity equals null
-     * or this categoryEntity not equals new categoryEntity.
-     * Also the articleEntity deletes from old categoryEntity and adds to new categoryEntity.
+     * Sets a new category entity to the article entity.
      *
-     * @param category the new categoryEntity to the articleEntity.
+     * @param category the new category entity to the article entity.
      */
     public void setCategoryEntity(final CategoryEntity category) {
         this.category = category;
     }
 
     /**
-     * Returns a categoryEntity of the articleEntity.
+     * Returns a category entity of the article entity.
      *
-     * @return The articleEntity categoryEntity.
+     * @return The article entity category entity.
      */
     public CategoryEntity getCategoryEntity() {
         return this.category;
     }
 
+    /**
+     * Converts this entity and returns a object
+     * of the {@link Article} class.
+     *
+     * @return The object of the {@link Article} class (newer null).
+     */
+    @Override
     public Article convert() {
         return new ArticleEntityConverter(this).convert();
     }

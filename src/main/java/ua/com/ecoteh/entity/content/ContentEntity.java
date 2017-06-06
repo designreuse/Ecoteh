@@ -10,6 +10,7 @@ import javax.persistence.*;
  * for working with entity of the {@link ContentEntity} class or subclasses.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Content
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -24,31 +25,31 @@ public abstract class ContentEntity extends ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The title of a contentEntity.
+     * The title of this content entity.
      */
     @Column(name = "title", nullable = false)
     private String title;
 
     /**
-     * The URL of a contentEntity.
+     * The URL of this content entity.
      */
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
     /**
-     * The description of a contentEntity.
+     * The description of this content entity.
      */
     @Column(name = "description", nullable = false)
     private String description;
 
     /**
-     * The keywords of a contentEntity.
+     * The keywords of this content entity.
      */
     @Column(name = "keywords", nullable = false)
     private String keywords;
 
     /**
-     * The category logo.
+     * The logo of this content entity.
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -60,6 +61,9 @@ public abstract class ContentEntity extends ModelEntity {
     )
     private FileEntity logo;
 
+    /**
+     * Constructor
+     */
     protected ContentEntity() {
     }
 
@@ -125,125 +129,104 @@ public abstract class ContentEntity extends ModelEntity {
     }
 
     /**
-     * Returns a title of the contentEntity.
+     * Returns a title of the content entity.
      *
-     * @return The contentEntity title or empty string (newer null).
+     * @return The content entity title or empty string (newer null).
      */
     public String getTitle() {
         return this.title;
     }
 
     /**
-     * Sets a new title to the contentEntity.
-     * If parameter title is blank, then sets empty string.
-     * Also, title translates and sets to URL if this URL is empty.
-     * <pre>
-     *     setTitle(null) - title = ""
-     *     setTitle("") - title = ""
-     *     setTitle(" ") - title = ""
-     *     setTitle("bob") - title = "bob"
-     *     setTitle(" bob ") - title = " bob "
-     * </pre>
+     * Sets a new title to the content entity.
      *
-     * @param title the new title to the contentEntity.
+     * @param title the new title to the content entity.
      */
     public void setTitle(final String title) {
         this.title = title;
     }
 
     /**
-     * Returns a URL of the contentEntity.
+     * Returns a URL of the content entity.
      *
-     * @return The contentEntity URL or empty string (newer null).
+     * @return The content entity URL or empty string (newer null).
      */
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Sets a new URL to the contentEntity.
-     * If parameter URL is blank, then sets empty string.
-     * <pre>
-     *     setUrl(null) - url = ""
-     *     setUrl("") - url = ""
-     *     setUrl(" ") - url = ""
-     *     setUrl("bob") - url = "bob"
-     *     setUrl(" bob ") - url = " bob "
-     * </pre>
+     * Sets a new URL to the content entity.
      *
-     * @param url the new URL to the contentEntity.
+     * @param url the new URL to the content entity.
      */
     public void setUrl(final String url) {
         this.url = url;
     }
 
     /**
-     * Returns a description of the contentEntity.
+     * Returns a description of the content entity.
      *
-     * @return The contentEntity description or empty string (newer null).
+     * @return The content entity description or empty string (newer null).
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Sets a new description to the contentEntity.
-     * If parameter description is blank, then sets empty string.
-     * <pre>
-     *     setDescription(null) - description = ""
-     *     setDescription("") - description = ""
-     *     setDescription(" ") - description = ""
-     *     setDescription("bob") - description = "bob"
-     *     setDescription(" bob ") - description = " bob "
-     * </pre>
+     * Sets a new description to the content entity.
      *
-     * @param description the new description to the contentEntity.
+     * @param description the new description to the content entity.
      */
     public void setDescription(final String description) {
         this.description = description;
     }
 
     /**
-     * Returns a keywords of the contentEntity.
+     * Returns a keywords of the content entity.
      *
-     * @return The contentEntity keywords or empty string (newer null).
+     * @return The content entity keywords or empty string (newer null).
      */
     public String getKeywords() {
         return this.keywords;
     }
 
     /**
-     * Sets a new keywords to the contentEntity.
-     * If parameter keywords is blank, then sets empty string.
-     * <pre>
-     *     setKeywords(null) - keywords = ""
-     *     setKeywords("") - keywords = ""
-     *     setKeywords(" ") - keywords = ""
-     *     setKeywords("bob") - keywords = "bob"
-     *     setKeywords(" bob ") - keywords = " bob "
-     * </pre>
+     * Sets a new keywords to the content entity.
      *
-     * @param keywords the new keywords to the contentEntity.
+     * @param keywords the new keywords to the content entity.
      */
     public void setKeywords(final String keywords) {
         this.keywords = keywords;
     }
 
     /**
-     * Returns a logo of the contentEntity.
+     * Returns a logo of the content entity.
      *
-     * @return The contentEntity logo (newer null).
+     * @return The content entity logo (newer null).
+     * @see FileEntity
      */
     public FileEntity getLogoEntity() {
         return this.logo;
     }
 
     /**
-     * Sets a new logo to the contentEntity.
+     * Sets a new logo to the content entity.
      *
-     * @param logo the new logo to the contentEntity.
+     * @param logo the new logo to the content entity.
+     * @see FileEntity
      */
     public void setLogoEntity(final FileEntity logo) {
         this.logo = logo;
     }
+
+    /**
+     * Converts this entity and returns a object
+     * of the {@link Content} class.
+     *
+     * @return The object of the {@link Content} class.
+     * @see Content
+     */
+    @Override
+    public abstract Content convert();
 }

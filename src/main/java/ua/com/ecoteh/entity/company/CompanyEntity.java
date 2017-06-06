@@ -8,13 +8,12 @@ import ua.com.ecoteh.entity.content.ContentEntity;
 
 import javax.persistence.*;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-
 /**
  * The class implements a set of standard methods for working
  * with entity of the {@link CompanyEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Company
  */
 @Entity
 @Table(name = "companies")
@@ -29,49 +28,51 @@ public class CompanyEntity extends ContentEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The tagline of a companyEntity.
+     * The tagline of this company entity.
      */
     @Column(name = "tagline", nullable = false)
     private String tagline;
 
     /**
-     * The information of a companyEntity.
+     * The information of this company entity.
      */
     @Column(name = "information", nullable = false)
     private String information;
 
     /**
-     * The domain of a companyEntity.
+     * The domain of this company entity.
      */
     @Column(name = "domain", nullable = false)
     private String domain;
 
     /**
-     * The sender e-mail of a companyEntity.
+     * The sender e-mail of this company entity.
      */
     @Column(name = "sender_email", nullable = false)
     private String senderEmail;
 
     /**
-     * The sender password of a companyEntity.
+     * The sender password of this company entity.
      */
     @Column(name = "sender_pass", nullable = false)
     private String senderPass;
 
     /**
-     * The start work time of a companyEntity.
+     * The start work time of this company entity.
      */
     @Column(name = "work_time_from", nullable = false)
     private String workTimeFrom;
 
     /**
-     * The finish work time of a companyEntity.
+     * The finish work time of this company entity.
      */
     @Column(name = "work_time_to", nullable = false)
     private String workTimeTo;
 
     /**
-     * The companyEntity contactsEntity.
+     * The contacts entity of this company entity.
+     *
+     * @see ContactsEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -85,7 +86,9 @@ public class CompanyEntity extends ContentEntity {
     private ContactsEntity contacts;
 
     /**
-     * The companyEntity addressEntity.
+     * The address entity of this company entity.
+     *
+     * @see AddressEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -99,14 +102,16 @@ public class CompanyEntity extends ContentEntity {
     private AddressEntity address;
 
     /**
-     * The type of a companyEntity.
+     * The type of this company entity.
+     *
+     * @see CompanyType
      */
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private CompanyType type;
 
     /**
-     * Default constructor.
+     * Constructor.
      */
     protected CompanyEntity() {
     }
@@ -182,63 +187,43 @@ public class CompanyEntity extends ContentEntity {
     }
 
     /**
-     * Returns a domain of the companyEntity.
+     * Returns a domain of the company entity.
      *
-     * @return The companyEntity domain or empty string (newer null).
+     * @return The company entity domain or empty string (newer null).
      */
     public String getDomain() {
         return this.domain;
     }
 
     /**
-     * Sets a new domain to the companyEntity.
-     * If parameter domain is blank, then sets empty string.
-     * <pre>
-     *     setDomain(null) - domain = ""
-     *     setDomain("") - domain = ""
-     *     setDomain(" ") - domain = ""
-     *     setDomain("bob") - domain = "bob"
-     *     setDomain(" bob ") - domain = " bob "
-     *     setDomain("http://") - domain = ""
-     *     setDomain("https://") - domain = ""
-     *     setDomain("http://site.com") - domain = "site.com"
-     *     setDomain("https://site.com") - domain = "site.com"
-     * </pre>
+     * Sets a new domain to the company entity.
      *
-     * @param domain a new domain to the companyEntity.
+     * @param domain a new domain to the company entity.
      */
     public void setDomain(final String domain) {
         this.domain = domain;
     }
 
     /**
-     * Returns a tagline of the companyEntity.
+     * Returns a tagline of the company entity.
      *
-     * @return The companyEntity tagline or empty string (newer null).
+     * @return The company entity tagline or empty string (newer null).
      */
     public String getTagline() {
         return this.tagline;
     }
 
     /**
-     * Sets a new tagline to the companyEntity.
-     * If parameter tagline is blank, then sets empty string.
-     * <pre>
-     *     setTagline(null) - tagline = ""
-     *     setTagline("") - tagline = ""
-     *     setTagline(" ") - tagline = ""
-     *     setTagline("bob") - tagline = "bob"
-     *     setTagline(" bob ") - tagline = " bob "
-     * </pre>
+     * Sets a new tagline to the company entity.
      *
-     * @param tagline a new tagline to the companyEntity.
+     * @param tagline a new tagline to the company entity.
      */
     public void setTagline(final String tagline) {
         this.tagline = tagline;
     }
 
     /**
-     * Returns a information of the companyEntity.
+     * Returns a information of the company entity.
      *
      * @return The information domain or empty string (newer null).
      */
@@ -247,190 +232,155 @@ public class CompanyEntity extends ContentEntity {
     }
 
     /**
-     * Sets a new information to the companyEntity.
-     * If parameter information is blank, then sets empty string.
-     * <pre>
-     *     setInformation(null) - information = ""
-     *     setInformation("") - information = ""
-     *     setInformation(" ") - information = ""
-     *     setInformation("bob") - information = "bob"
-     *     setInformation(" bob ") - information = " bob "
-     * </pre>
+     * Sets a new information to the company entity.
      *
-     * @param information a new information to the companyEntity.
+     * @param information a new information to the company entity.
      */
     public void setInformation(final String information) {
         this.information = information;
     }
 
     /**
-     * Returns a sender E-mail of the companyEntity.
+     * Returns a sender E-mail of the company entity.
      *
-     * @return The companyEntity sender E-mail or empty string (newer null).
+     * @return The company entity sender E-mail or empty string (newer null).
      */
     public String getSenderEmail() {
         return this.senderEmail;
     }
 
     /**
-     * Sets a new sender E-mail to the companyEntity.
-     * If parameter sender E-mail is blank, then sets empty string.
-     * <pre>
-     *     setSenderEmail(null) - senderEmail = ""
-     *     setSenderEmail("") - senderEmail = ""
-     *     setSenderEmail(" ") - senderEmail = ""
-     *     setSenderEmail("bob") - senderEmail = "bob"
-     *     setSenderEmail(" bob ") - senderEmail = " bob "
-     * </pre>
+     * Sets a new sender E-mail to the company entity.
      *
-     * @param senderEmail a new sender E-mail to the companyEntity.
+     * @param senderEmail a new sender E-mail to the company entity.
      */
     public void setSenderEmail(final String senderEmail) {
         this.senderEmail = senderEmail;
     }
 
     /**
-     * Returns a sender password of the companyEntity.
+     * Returns a sender password of the company entity.
      *
-     * @return The companyEntity sender password or empty string (newer null).
+     * @return The company entity sender password or empty string (newer null).
      */
     public String getSenderPass() {
         return this.senderPass;
     }
 
     /**
-     * Sets a new sender password to the companyEntity.
-     * If parameter sender password is blank, then sets empty string.
-     * <pre>
-     *     setSenderPass(null) - senderPass = ""
-     *     setSenderPass("") - senderPass = ""
-     *     setSenderPass(" ") - senderPass = ""
-     *     setSenderPass("bob") - senderPass = "bob"
-     *     setSenderPass(" bob ") - senderPass = " bob "
-     * </pre>
+     * Sets a new sender password to the company entity.
      *
-     * @param senderPass a new sender password to the companyEntity.
+     * @param senderPass a new sender password to the company entity.
      */
     public void setSenderPass(final String senderPass) {
         this.senderPass = senderPass;
     }
 
     /**
-     * Returns a start work time of the companyEntity.
+     * Returns a start work time of the company entity.
      *
-     * @return The companyEntity start work time (newer null).
+     * @return The company entity start work time (newer null).
      */
     public String getWorkTimeFrom() {
         return this.workTimeFrom;
     }
 
     /**
-     * Sets a new start work time to the companyEntity.
-     * <pre>
-     *     setWorkTimeFrom(null) - workTimeFrom = "00:00"
-     *     setSenderPass("") - workTimeFrom = "00:00"
-     *     setSenderPass(" ") - workTimeFrom = "00:00"
-     *     setSenderPass("bob") - workTimeFrom = "00:00"
-     *     setSenderPass("12:34") - workTimeFrom = "12:34"
-     * </pre>
+     * Sets a new start work time to the company entity.
      *
-     * @param workTimeFrom the new start work time to the companyEntity.
+     * @param workTimeFrom the new start work time to the company entity.
      */
     public void setWorkTimeFrom(final String workTimeFrom) {
         this.workTimeFrom = workTimeFrom;
     }
 
     /**
-     * Returns a finish work time of the companyEntity.
+     * Returns a finish work time of the company entity.
      *
-     * @return The companyEntity finish work time (newer null).
+     * @return The company entity finish work time (newer null).
      */
     public String getWorkTimeTo() {
         return this.workTimeTo;
     }
 
     /**
-     * Sets a new finish work time to the companyEntity.
-     * <pre>
-     *     setWorkTimeTo(null) - workTimeTo = "00:00"
-     *     setWorkTimeTo("") - workTimeTo = "00:00"
-     *     setWorkTimeTo(" ") - workTimeTo = "00:00"
-     *     setWorkTimeTo("bob") - workTimeTo = "00:00"
-     *     setWorkTimeTo("12:34") - workTimeTo = "12:34"
-     * </pre>
+     * Sets a new finish work time to the company entity.
      *
-     * @param workTimeTo the new finish work time to the companyEntity.
+     * @param workTimeTo the new finish work time to the company entity.
      */
     public void setWorkTimeTo(final String workTimeTo) {
         this.workTimeTo = workTimeTo;
     }
 
     /**
-     * Returns a companyEntity contactsEntity.
-     * Returns a object of the {@link ContactsEntity} class.
+     * Returns a contacts entity of this company entity.
      *
-     * @return The companyEntity contactsEntity (newer null).
+     * @return The contacts entity of this company entity (newer null).
+     * @see ContactsEntity
      */
     public ContactsEntity getContactsEntity() {
         return this.contacts;
     }
 
     /**
-     * Sets a new contactsEntity to the companyEntity.
+     * Sets a new contacts entity to the company entity.
      *
-     * @param contacts the new contactsEntity to the companyEntity.
+     * @param contacts the new contacts entity to the company entity.
+     * @see ContactsEntity
      */
     public void setContactsEntity(final ContactsEntity contacts) {
         this.contacts = contacts;
     }
 
     /**
-     * Returns a companyEntity addressEntity.
-     * Returns a object of the {@link AddressEntity} class.
+     * Returns a address entity of this company entity.
      *
-     * @return The companyEntity addressEntity (newer null).
+     * @return The contacts entity to the company entity (newer null).
+     * @see AddressEntity
      */
     public AddressEntity getAddressEntity() {
         return this.address;
     }
 
     /**
-     * Sets a new addressEntity to the companyEntity.
+     * Sets a new address entity to the company entity.
      *
-     * @param address the new addressEntity to the companyEntity.
+     * @param address the new address entity to the company entity.
+     * @see AddressEntity
      */
     public void setAddressEntity(final AddressEntity address) {
         this.address = address;
     }
 
     /**
-     * Returns a domain of the companyEntity.
+     * Returns a domain of the company entity.
      * Returns a enum object of the {@link CompanyType} class.
      *
-     * @return The companyEntity domain.
+     * @return The company entity domain.
+     * @see CompanyType
      */
     public CompanyType getType() {
         return this.type;
     }
 
     /**
-     * Sets a new type to the companyEntity.
-     * Sets default type if incoming type is null.
-     * <pre>
-     *     setType(null) - type = CompanyType.PARTNER
-     *     setType(CompanyType.MAIN) - type = CompanyType.MAIN
-     * </pre>
+     * Sets a new type to the company entity.
      *
-     * @param type the new type to the companyEntity.
+     * @param type the new type to the company entity.
+     * @see CompanyType
      */
     public void setType(final CompanyType type) {
-        this.type = isNotNull(type) ? type : CompanyType.PARTNER;
+        this.type = type;
     }
 
     /**
+     * Converts this entity and returns a object
+     * of the {@link Company} class.
      *
-     * @return
+     * @return The object of the {@link Company} class (newer null).
+     * @see Company
      */
+    @Override
     public Company convert() {
         return new CompanyEntityConverter(this).convert();
     }

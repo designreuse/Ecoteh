@@ -2,27 +2,18 @@ package ua.com.ecoteh.entity.user;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import ua.com.ecoteh.entity.contacts.ContactsEntity;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.model.ModelEntity;
-import ua.com.ecoteh.util.encryption.Base64Encryptor;
-import ua.com.ecoteh.util.translator.Translator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of standard methods for working
  * with entity of the {@link UserEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see User
  */
 @Entity
 @Table(name = "users")
@@ -37,37 +28,39 @@ public class UserEntity extends ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The name of a userEntity.
+     * The name of this user entity.
      */
     @Column(name = "name", nullable = false)
     private String name;
 
     /**
-     * The URL of a userEntity.
+     * The URL of this user entity.
      */
     @Column(name = "url", nullable = false)
     private String url;
 
     /**
-     * The login of a userEntity.
+     * The login of this user entity.
      */
     @Column(name = "login", nullable = false)
     private String login;
 
     /**
-     * The password of a userEntity.
+     * The password of this user entity.
      */
     @Column(name = "password", nullable = false)
     private String password;
 
     /**
-     * The tagline of a userEntity.
+     * The tagline of this user entity.
      */
     @Column(name = "description", nullable = false)
     private String description;
 
     /**
-     * The userEntity contactsEntity.
+     * The contacts entity of this user entity.
+     *
+     * @see ContactsEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -81,7 +74,9 @@ public class UserEntity extends ModelEntity {
     private ContactsEntity contacts;
 
     /**
-     * The userEntity contactsEntity.
+     * The photo entity of this user entity.
+     *
+     * @see FileEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -95,26 +90,28 @@ public class UserEntity extends ModelEntity {
     private FileEntity photo;
 
     /**
-     * The role of a userEntity.
+     * The role of this user entity.
+     *
+     * @see UserRole
      */
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
     /**
-     * The permit to send a letters on the userEntity email.
+     * The permit to send a letters on the user entity email.
      */
     @Column(name = "mailing")
     private boolean mailing;
 
     /**
-     * Locked the userEntity or not.
+     * Locked the user entity or not.
      */
     @Column(name = "locked")
     private boolean locked;
 
     /**
-     * Default constructor.
+     * Constructor.
      */
     protected UserEntity() {
     }
@@ -187,77 +184,54 @@ public class UserEntity extends ModelEntity {
     }
 
     /**
-     * Returns a name of the userEntity.
+     * Returns a name of the user entity.
      *
-     * @return The userEntity name (newer null).
+     * @return The user entity name (newer null).
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Sets a new name to the userEntity.
-     * If parameter name is blank, then sets empty string.
-     * Also, name translates and sets to URL if this URL is empty.
-     * <pre>
-     *     setName(null) - name = ""
-     *     setName("") - name = ""
-     *     setName(" ") - name = ""
-     *     setName("bob") - name = "bob"
-     *     setName(" bob ") - name = "bob"
-     * </pre>
+     * Sets a new name to the user entity.
      *
-     * @param name the new name to the userEntity.
+     * @param name the new name to the user entity.
      */
     public void setName(final String name) {
         this.name = name;
     }
 
     /**
-     * Encrypts and sets a new login to the userEntity.
-     * <pre>
-     *     setLogin(null) - login = ""
-     *     setLogin("") - login = ""
-     *     setLogin(" ") - login = ""
-     *     setLogin("bob") - login = "bob"
-     *     setLogin(" bob ") - login = "bob"
-     * </pre>
+     * Sets a new login to the user entity.
      *
-     * @param login the new login to the userEntity.
+     * @param login the new login to the user entity.
      */
     public void setLogin(final String login) {
         this.login = login;
     }
 
     /**
-     * Decrypts and returns a login of the userEntity.
+     * Decrypts and returns a login of the user entity.
      *
-     * @return The userEntity login (newer null).
+     * @return The user entity login (newer null).
      */
     public String getLogin() {
         return this.login;
     }
 
     /**
-     * Decrypts and returns a password of the userEntity.
+     * Returns a password of the user entity.
      *
-     * @return The userEntity password (newer null).
+     * @return The user entity password (newer null).
      */
     public String getPassword() {
         return this.password;
     }
 
     /**
-     * Encrypts and sets a new password to the userEntity.
-     * <pre>
-     *     setPassword(null) - password = ""
-     *     setPassword("") - password = ""
-     *     setPassword(" ") - password = ""
-     *     setPassword("bob") - password = "bob"
-     *     setPassword(" bob ") - password = "bob"
-     * </pre>
+     * Sets a new password to the user entity.
      *
-     * @param password the new password to the userEntity.
+     * @param password the new password to the user entity.
      */
     @Transient
     public void setPassword(final String password) {
@@ -265,161 +239,143 @@ public class UserEntity extends ModelEntity {
     }
 
     /**
-     * Returns a URL of the userEntity.
+     * Returns a URL of the user entity.
      *
-     * @return The userEntity URL (newer null).
+     * @return The user entity URL (newer null).
      */
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Sets a new url to the userEntity.
-     * If parameter url is blank, then sets empty string.
-     * <pre>
-     *     setUrl(null) - url = ""
-     *     setUrl("") - url = ""
-     *     setUrl(" ") - url = ""
-     *     setUrl("bob") - url = "bob"
-     *     setUrl(" bob ") - url = "bob"
-     * </pre>
+     * Sets a new URL to the user entity.
      *
-     * @param url the new url to the userEntity.
+     * @param url the new url to the user entity.
      */
     public void setUrl(final String url) {
         this.url = url;
     }
 
     /**
-     * Returns a description of the userEntity.
+     * Returns a description of the user entity.
      *
-     * @return The userEntity description (newer null).
+     * @return The user entity description (newer null).
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Sets a new description to the userEntity.
-     * If parameter description is blank, then sets empty string.
-     * <pre>
-     *     setDescription(null) - description = ""
-     *     setDescription("") - description = ""
-     *     setDescription(" ") - description = ""
-     *     setDescription("bob") - description = "bob"
-     *     setDescription(" bob ") - description = "bob"
-     * </pre>
+     * Sets a new description to the user entity.
      *
-     * @param description the new description to the userEntity.
+     * @param description the new description to the user entity.
      */
     public void setDescription(final String description) {
         this.description = description;
     }
 
     /**
-     * Returns a photo of the userEntity.
+     * Returns a photo of the user entity.
      *
-     * @return The userEntity photo (newer null).
+     * @return The user entity photo (newer null).
+     * @see FileEntity
      */
     public FileEntity getPhotoEntity() {
         return this.photo;
     }
 
     /**
-     * Sets a new photo to the userEntity.
+     * Sets a new photo to the user entity.
      *
-     * @param photo the new photo to the userEntity.
+     * @param photo the new photo to the user entity.
+     * @see FileEntity
      */
     public void setPhotoEntity(final FileEntity photo) {
         this.photo = photo;
     }
 
     /**
-     * Returns a userEntity contactsEntity.
+     * Returns this user entity contactsEntity.
      *
-     * @return The userEntity contactsEntity (newer null).
+     * @return The user entity contacts entity (newer null).
+     * @see ContactsEntity
      */
     public ContactsEntity getContactsEntity() {
         return this.contacts;
     }
 
     /**
-     * Sets a new contactsEntity to the userEntity.
+     * Sets a new contacts entity to the user entity.
      *
-     * @param contactsEntity the new contactsEntity to the userEntity.
+     * @param contacts the new contacts entity to the user entity.
+     * @see ContactsEntity
      */
     public void setContactsEntity(final ContactsEntity contacts) {
         this.contacts = contacts;
     }
 
     /**
-     * Returns a role of the userEntity.
+     * Returns a role of the user entity.
      *
-     * @return The userEntity role (newer null).
+     * @return The user entity role (newer null).
+     * @see UserRole
      */
     public UserRole getRole() {
         return this.role;
     }
 
     /**
-     * Sets a new role to the userEntity.
-     * Sets default role if incoming role is null.
-     * <pre>
-     *     setRole(null) - role = UserRole.ANOTHER
-     *     setRole(UserRole.ADMIN) - role = UserRole.ADMIN
-     * </pre>
+     * Sets a new role to the user entity.
      *
-     * @param role the new role to the userEntity.
+     * @param role the new role to the user entity.
      */
     public void setRole(final UserRole role) {
         this.role = role;
     }
 
     /**
-     * Returns the value of permit to send a letters on the userEntity email.
+     * Returns the value of permit to send a letters on the user entity email.
      *
-     * @return The permit to send a letters on the userEntity email.
+     * @return The permit to send a letters on the user entity email.
      */
     public boolean isMailing() {
         return this.mailing;
     }
 
     /**
-     * Sets value of permit to send a letters on the userEntity email.
+     * Sets value of permit to send a letters on the user entity email.
      *
-     * @param mailing the permit to send a letters on the userEntity email.
+     * @param mailing the permit to send a letters on the user entity email.
      */
     public void setMailing(final boolean mailing) {
         this.mailing = mailing;
     }
 
     /**
-     * Returns the value of the locked userEntity or not.
+     * Returns the value of the locked user entity or not.
      *
-     * @return The value of the locked userEntity or not.
+     * @return The value of the locked user entity or not.
      */
     public boolean isLocked() {
         return this.locked;
     }
 
     /**
-     * Sets the value of the locked userEntity or not.
-     * If incoming value is true then, also,
-     * set validated and mailing false.
+     * Sets the value of the locked user entity or not.
      *
-     * @param locked a value of locked the userEntity or not.
+     * @param locked a value of locked the user entity or not.
      */
     public void setLocked(final boolean locked) {
         this.locked = locked;
-        if (locked) {
-            setValidated(false);
-            setMailing(false);
-        }
+
     }
 
     /**
+     * Converts this entity and returns a object
+     * of the {@link User} class.
      *
-     * @return
+     * @return The object of the {@link User} class (newer null).
+     * @see User
      */
     public User convert() {
         return new UserEntityConverter(this).convert();

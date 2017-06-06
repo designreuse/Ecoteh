@@ -12,6 +12,7 @@ import java.util.Date;
  * with entity of the {@link ResponseEntity} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Response
  */
 @Entity
 @Table(name = "responses")
@@ -26,25 +27,25 @@ public class ResponseEntity extends ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The username of a responseEntity.
+     * The username of this response entity.
      */
     @Column(name = "username", nullable = false)
     private String username;
 
     /**
-     * The username of a responseEntity.
+     * The username of this response entity.
      */
     @Column(name = "text", nullable = false)
     private String text;
 
     /**
-     * The date of a responseEntity.
+     * The date of this response entity.
      */
     @Column(name = "date", nullable = false)
     private Date date;
 
     /**
-     * Default constructor.
+     * Constructor.
      */
     protected ResponseEntity() {
     }
@@ -107,84 +108,67 @@ public class ResponseEntity extends ModelEntity {
     }
 
     /**
-     * Returns a username of the responseEntity.
+     * Returns a username of the response entity.
      *
-     * @return The responseEntity username (newer null).
+     * @return The response entity username (newer null).
      */
     public String getUsername() {
         return this.username;
     }
 
     /**
-     * Sets a new username to the responseEntity.
-     * If parameter username is blank, then sets empty string.
-     * <pre>
-     *     setUsername(null) - username = ""
-     *     setUsername("") - username = ""
-     *     setUsername(" ") - username = ""
-     *     setUsername("bob") - username = "bob"
-     *     setUsername(" bob ") - username = "bob"
-     * </pre>
+     * Sets a new username to the response entity.
      *
-     * @param username the new text to the responseEntity.
+     * @param username the new text to the response entity.
      */
     public void setUsername(final String username) {
         this.username = username;
     }
 
     /**
-     * Returns a text of the responseEntity.
+     * Returns a text of the response entity.
      *
-     * @return The responseEntity text (newer null).
+     * @return The response entity text (newer null).
      */
     public String getText() {
         return this.text;
     }
 
     /**
-     * Sets a new text to the responseEntity.
-     * If parameter text is blank, then sets empty string.
-     * <pre>
-     *     setText(null) - text = ""
-     *     setText("") - text = ""
-     *     setText(" ") - text = ""
-     *     setText("bob") - text = "bob"
-     *     setText(" bob ") - text = "bob"
-     * </pre>
+     * Sets a new text to the response entity.
      *
-     * @param text the new text to the responseEntity.
+     * @param text the new text to the response entity.
      */
     public void setText(final String text) {
         this.text = text;
     }
 
     /**
-     * Returns a date of the responseEntity.
+     * Returns a date of the response entity.
      *
-     * @return The responseEntity date (newer null).
+     * @return The response entity date (newer null).
      */
     public Date getDate() {
         return this.date;
     }
 
     /**
-     * Sets a new date to the responseEntity.
-     * If parameter date is null, then sets new Date().
-     * <pre>
-     *     setDate(null) - date = new Date()
-     *     setDate(someRealDate) - date = someRealDate
-     * </pre>
+     * Sets a new date to the response entity.
      *
-     * @param date the new date to the responseEntity.
+     * @param date the new date to the response entity.
      */
     public void setDate(final Date date) {
         this.date = date;
     }
 
     /**
+     * Converts this entity and returns a object
+     * of the {@link Response} class.
      *
-     * @return
+     * @return The object of the {@link Response} class (newer null).
+     * @see Response
      */
+    @Override
     public Response convert() {
         return new ResponseEntityConverter(this).convert();
     }
