@@ -16,21 +16,24 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 final class CategoryConverter extends ContentConverter<Category, CategoryEntity> {
 
-    CategoryConverter(final Category model) {
-        super(model);
+    private final Category category;
+    
+    CategoryConverter(final Category category) {
+        super(category);
+        this.category = category;
     }
 
     @Override
     public CategoryEntity convert() {
         final CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(this.model.getId());
-        categoryEntity.setValidated(this.model.isValidated());
-        categoryEntity.setTitle(this.model.getTitle());
-        categoryEntity.setUrl(this.model.getUrl());
-        categoryEntity.setDescription(this.model.getDescription());
-        categoryEntity.setKeywords(this.model.getKeywords());
-        categoryEntity.setLogoEntity(this.model.getLogo().convert());
-        categoryEntity.setArticleEntities(convertArticles(this.model.getArticles()));
+        categoryEntity.setId(this.category.getId());
+        categoryEntity.setValidated(this.category.isValidated());
+        categoryEntity.setTitle(this.category.getTitle());
+        categoryEntity.setUrl(this.category.getUrl());
+        categoryEntity.setDescription(this.category.getDescription());
+        categoryEntity.setKeywords(this.category.getKeywords());
+        categoryEntity.setLogoEntity(this.category.getLogo().convert());
+        categoryEntity.setArticleEntities(convertArticles(this.category.getArticles()));
         return categoryEntity;
     }
 

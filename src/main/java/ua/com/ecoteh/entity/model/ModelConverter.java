@@ -5,8 +5,12 @@ package ua.com.ecoteh.entity.model;
  */
 public abstract class ModelConverter<T extends Model, E extends ModelEntity> implements Converter<E> {
 
-    protected final T model;
+    private final T model;
 
+    /**
+     * Constructor.
+     * @param model
+     */
     protected ModelConverter(final T model) {
         this.model = model;
     }

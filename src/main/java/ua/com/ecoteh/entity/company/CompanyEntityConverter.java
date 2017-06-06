@@ -10,13 +10,20 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity, Company> {
 
+    private final CompanyEntity entity;
+
+    /**
+     * Constructor.
+     * @param entity
+     */
     CompanyEntityConverter(final CompanyEntity entity) {
         super(entity);
+        this.entity = entity;
     }
 
     @Override
     protected CompanyBuilder prepareBuilder() {
-        final CompanyBuilder builder = new CompanyBuilder();
+        final CompanyBuilder builder = Company.getBuilder();
             builder.addId(this.entity.getId())
                     .addValidated(this.entity.isValidated())
                     .addTitle(this.entity.getTitle())

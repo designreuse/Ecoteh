@@ -10,29 +10,36 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 final class CompanyConverter extends ContentConverter<Company, CompanyEntity> {
 
-    CompanyConverter(final Company model) {
-        super(model);
+    private final Company company;
+
+    /**
+     * Constructor.
+     * @param company
+     */
+    CompanyConverter(final Company company) {
+        super(company);
+        this.company = company;
     }
 
     @Override
     public CompanyEntity convert() {
         final CompanyEntity companyEntity = new CompanyEntity();
-            companyEntity.setId(this.model.getId());
-            companyEntity.setValidated(this.model.isValidated());
-            companyEntity.setTitle(this.model.getTitle());
-            companyEntity.setUrl(this.model.getUrl());
-            companyEntity.setDomain(this.model.getDomain());
-            companyEntity.setDescription(this.model.getDescription());
-            companyEntity.setKeywords(this.model.getKeywords());
-            companyEntity.setTagline(this.model.getTagline());
-            companyEntity.setInformation(this.model.getInformation());
-            companyEntity.setSenderEmail(this.model.getSenderEmail());
-            companyEntity.setSenderPass(encrypt(this.model.getSenderPass()));
-            companyEntity.setWorkTimeFrom(this.model.getWorkTimeFrom());
-            companyEntity.setWorkTimeTo(this.model.getWorkTimeTo());
-            companyEntity.setLogoEntity(this.model.getLogo().convert());
-            companyEntity.setContactsEntity(this.model.getContacts().convert());
-            companyEntity.setAddressEntity(this.model.getAddress().convert());
+            companyEntity.setId(this.company.getId());
+            companyEntity.setValidated(this.company.isValidated());
+            companyEntity.setTitle(this.company.getTitle());
+            companyEntity.setUrl(this.company.getUrl());
+            companyEntity.setDomain(this.company.getDomain());
+            companyEntity.setDescription(this.company.getDescription());
+            companyEntity.setKeywords(this.company.getKeywords());
+            companyEntity.setTagline(this.company.getTagline());
+            companyEntity.setInformation(this.company.getInformation());
+            companyEntity.setSenderEmail(this.company.getSenderEmail());
+            companyEntity.setSenderPass(encrypt(this.company.getSenderPass()));
+            companyEntity.setWorkTimeFrom(this.company.getWorkTimeFrom());
+            companyEntity.setWorkTimeTo(this.company.getWorkTimeTo());
+            companyEntity.setLogoEntity(this.company.getLogo().convert());
+            companyEntity.setContactsEntity(this.company.getContacts().convert());
+            companyEntity.setAddressEntity(this.company.getAddress().convert());
         return companyEntity;
     }
 

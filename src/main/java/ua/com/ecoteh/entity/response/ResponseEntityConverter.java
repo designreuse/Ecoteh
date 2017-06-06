@@ -7,13 +7,20 @@ import ua.com.ecoteh.entity.model.ModelEntityConverter;
  */
 final class ResponseEntityConverter extends ModelEntityConverter<ResponseEntity, Response> {
 
+    private final ResponseEntity entity;
+
+    /**
+     * Constructor.
+     * @param entity
+     */
     ResponseEntityConverter(final ResponseEntity entity) {
         super(entity);
+        this.entity = entity;
     }
 
     @Override
     protected ResponseBuilder prepareBuilder() {
-        final ResponseBuilder builder = new ResponseBuilder();
+        final ResponseBuilder builder = Response.getBuilder();
         builder.addId(this.entity.getId())
                 .addValidated(this.entity.isValidated())
                 .addUsername(this.entity.getUsername())

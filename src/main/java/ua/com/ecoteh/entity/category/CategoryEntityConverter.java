@@ -13,13 +13,20 @@ import java.util.stream.Collectors;
  */
 final class CategoryEntityConverter extends ContentEntityConverter<CategoryEntity, Category> {
 
+    private final CategoryEntity entity;
+
+    /**
+     * Constructor.
+     * @param entity
+     */
     CategoryEntityConverter(final CategoryEntity entity) {
         super(entity);
+        this.entity = entity;
     }
 
     @Override
     protected CategoryBuilder prepareBuilder() {
-        final CategoryBuilder builder = new CategoryBuilder();
+        final CategoryBuilder builder = Category.getBuilder();
         builder.addId(this.entity.getId())
                 .addValidated(this.entity.isValidated())
                 .addTitle(this.entity.getTitle())

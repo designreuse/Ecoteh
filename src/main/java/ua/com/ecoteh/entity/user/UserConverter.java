@@ -10,25 +10,32 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 final class UserConverter extends ModelConverter<User, UserEntity> {
 
-    UserConverter(final User model) {
-        super(model);
+    private final User user;
+
+    /**
+     * Constructor.
+     * @param user
+     */
+    UserConverter(final User user) {
+        super(user);
+        this.user = user;
     }
 
     @Override
     public UserEntity convert() {
         final UserEntity userEntity = new UserEntity();
-        userEntity.setId(this.model.getId());
-        userEntity.setValidated(this.model.isValidated());
-        userEntity.setName(this.model.getName());
-        userEntity.setUrl(this.model.getUrl());
-        userEntity.setLogin(encrypt(this.model.getLogin()));
-        userEntity.setPassword(encrypt(this.model.getPassword()));
-        userEntity.setDescription(this.model.getDescription());
-        userEntity.setRole(this.model.getRole());
-        userEntity.setMailing(this.model.isMailing());
-        userEntity.setLocked(this.model.isLocked());
-        userEntity.setContactsEntity(this.model.getContacts().convert());
-        userEntity.setPhotoEntity(this.model.getPhoto().convert());
+        userEntity.setId(this.user.getId());
+        userEntity.setValidated(this.user.isValidated());
+        userEntity.setName(this.user.getName());
+        userEntity.setUrl(this.user.getUrl());
+        userEntity.setLogin(encrypt(this.user.getLogin()));
+        userEntity.setPassword(encrypt(this.user.getPassword()));
+        userEntity.setDescription(this.user.getDescription());
+        userEntity.setRole(this.user.getRole());
+        userEntity.setMailing(this.user.isMailing());
+        userEntity.setLocked(this.user.isLocked());
+        userEntity.setContactsEntity(this.user.getContacts().convert());
+        userEntity.setPhotoEntity(this.user.getPhoto().convert());
         return userEntity;
     }
 

@@ -7,18 +7,25 @@ import ua.com.ecoteh.entity.model.ModelConverter;
  */
 final class FileConverter extends ModelConverter<File, FileEntity> {
 
-    FileConverter(final File model) {
-        super(model);
+    private final File file;
+
+    /**
+     * Constructor.
+     * @param file
+     */
+    FileConverter(final File file) {
+        super(file);
+        this.file = file;
     }
 
     @Override
     public FileEntity convert() {
         final FileEntity fileEntity = new FileEntity();
-            fileEntity.setId(this.model.getId());
-            fileEntity.setValidated(this.model.isValidated());
-            fileEntity.setTitle(this.model.getTitle());
-            fileEntity.setUrl(this.model.getUrl());
-            fileEntity.setType(this.model.getType());
+            fileEntity.setId(this.file.getId());
+            fileEntity.setValidated(this.file.isValidated());
+            fileEntity.setTitle(this.file.getTitle());
+            fileEntity.setUrl(this.file.getUrl());
+            fileEntity.setType(this.file.getType());
         return fileEntity;
     }
 }

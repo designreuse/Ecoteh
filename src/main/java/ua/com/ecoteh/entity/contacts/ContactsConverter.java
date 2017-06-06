@@ -7,23 +7,30 @@ import ua.com.ecoteh.entity.model.ModelConverter;
  */
 final class ContactsConverter extends ModelConverter<Contacts, ContactsEntity> {
 
-    ContactsConverter(final Contacts model) {
-        super(model);
+    private final Contacts contacts;
+
+    /**
+     * Constructor.
+     * @param contacts
+     */
+    ContactsConverter(final Contacts contacts) {
+        super(contacts);
+        this.contacts = contacts;
     }
 
     @Override
     public ContactsEntity convert() {
         final ContactsEntity contactsEntity = new ContactsEntity();
-            contactsEntity.setId(this.model.getId());
-            contactsEntity.setValidated(this.model.isValidated());
-            contactsEntity.setEmail(this.model.getEmail());
-            contactsEntity.setMobilePhone(this.model.getMobilePhone());
-            contactsEntity.setLandlinePhone(this.model.getLandlinePhone());
-            contactsEntity.setFax(this.model.getFax());
-            contactsEntity.setVkontakte(this.model.getVkontakte());
-            contactsEntity.setFacebook(this.model.getFacebook());
-            contactsEntity.setTwitter(this.model.getTwitter());
-            contactsEntity.setSkype(this.model.getSkype());
+            contactsEntity.setId(this.contacts.getId());
+            contactsEntity.setValidated(this.contacts.isValidated());
+            contactsEntity.setEmail(this.contacts.getEmail());
+            contactsEntity.setMobilePhone(this.contacts.getMobilePhone());
+            contactsEntity.setLandlinePhone(this.contacts.getLandlinePhone());
+            contactsEntity.setFax(this.contacts.getFax());
+            contactsEntity.setVkontakte(this.contacts.getVkontakte());
+            contactsEntity.setFacebook(this.contacts.getFacebook());
+            contactsEntity.setTwitter(this.contacts.getTwitter());
+            contactsEntity.setSkype(this.contacts.getSkype());
         return contactsEntity;
     }
 }

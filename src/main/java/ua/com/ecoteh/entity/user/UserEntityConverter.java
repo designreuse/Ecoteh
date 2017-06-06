@@ -10,13 +10,20 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 final class UserEntityConverter extends ModelEntityConverter<UserEntity, User> {
 
+    private final UserEntity entity;
+
+    /**
+     * Constructor.
+     * @param entity
+     */
     UserEntityConverter(final UserEntity entity) {
         super(entity);
+        this.entity = entity;
     }
 
     @Override
     protected UserBuilder prepareBuilder() {
-        final UserBuilder builder = new UserBuilder();
+        final UserBuilder builder = User.getBuilder();
         builder.addId(this.entity.getId())
                 .addName(this.entity.getName())
                 .addUrl(this.entity.getUrl())

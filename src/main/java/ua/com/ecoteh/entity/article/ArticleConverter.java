@@ -7,25 +7,32 @@ import ua.com.ecoteh.entity.content.ContentConverter;
  */
 final class ArticleConverter extends ContentConverter<Article, ArticleEntity> {
 
-    ArticleConverter(final Article model) {
-        super(model);
+    private final Article article;
+
+    /**
+     * Constructor.
+     * @param article
+     */
+    ArticleConverter(final Article article) {
+        super(article);
+        this.article = article;
     }
 
     @Override
     public ArticleEntity convert() {
         final ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setId(this.model.getId());
-        articleEntity.setValidated(this.model.isValidated());
-        articleEntity.setTitle(this.model.getTitle());
-        articleEntity.setUrl(this.model.getUrl());
-        articleEntity.setDescription(this.model.getDescription());
-        articleEntity.setKeywords(this.model.getKeywords());
-        articleEntity.setNumber(this.model.getNumber());
-        articleEntity.setText(this.model.getText());
-        articleEntity.setDate(this.model.getDate());
-        articleEntity.setPrice(this.model.getPrice());
-        articleEntity.setLogoEntity(this.model.getLogo().convert());
-        articleEntity.setCategoryEntity(this.model.getCategory().convert());
+        articleEntity.setId(this.article.getId());
+        articleEntity.setValidated(this.article.isValidated());
+        articleEntity.setTitle(this.article.getTitle());
+        articleEntity.setUrl(this.article.getUrl());
+        articleEntity.setDescription(this.article.getDescription());
+        articleEntity.setKeywords(this.article.getKeywords());
+        articleEntity.setNumber(this.article.getNumber());
+        articleEntity.setText(this.article.getText());
+        articleEntity.setDate(this.article.getDate());
+        articleEntity.setPrice(this.article.getPrice());
+        articleEntity.setLogoEntity(this.article.getLogo().convert());
+        articleEntity.setCategoryEntity(this.article.getCategory().convert());
         return articleEntity;
     }
 }

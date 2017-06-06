@@ -7,13 +7,20 @@ import ua.com.ecoteh.entity.content.ContentEntityConverter;
  */
 final class ArticleEntityConverter extends ContentEntityConverter<ArticleEntity, Article> {
 
+    private final ArticleEntity entity;
+
+    /**
+     * Constructor.
+     * @param entity
+     */
     ArticleEntityConverter(final ArticleEntity entity) {
         super(entity);
+        this.entity = entity;
     }
 
     @Override
     protected ArticleBuilder prepareBuilder() {
-        final ArticleBuilder builder = new ArticleBuilder();
+        final ArticleBuilder builder = Article.getBuilder();
         builder.addId(this.entity.getId())
                 .addValidated(this.entity.isValidated())
                 .addTitle(this.entity.getTitle())

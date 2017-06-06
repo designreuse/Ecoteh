@@ -7,17 +7,24 @@ import ua.com.ecoteh.entity.model.ModelConverter;
  */
 final class AddressConverter extends ModelConverter<Address, AddressEntity> {
 
-    AddressConverter(final Address model) {
-        super(model);
+    private final Address address;
+
+    /**
+     * Constructor.
+     * @param address
+     */
+    AddressConverter(final Address address) {
+        super(address);
+        this.address = address;
     }
 
     @Override
     public AddressEntity convert() {
         final AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setId(this.model.getId());
-        addressEntity.setValidated(this.model.isValidated());
-        addressEntity.setAddress(this.model.getAddress());
-        addressEntity.setGoogleMaps(this.model.getGoogleMaps());
+        addressEntity.setId(this.address.getId());
+        addressEntity.setValidated(this.address.isValidated());
+        addressEntity.setPostAddress(this.address.getPostAddress());
+        addressEntity.setGoogleMaps(this.address.getGoogleMaps());
         return addressEntity;
     }
 }

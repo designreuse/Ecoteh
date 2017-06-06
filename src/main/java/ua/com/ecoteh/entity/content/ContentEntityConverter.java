@@ -8,6 +8,10 @@ import ua.com.ecoteh.entity.model.ModelEntityConverter;
 public abstract class ContentEntityConverter<E extends ContentEntity, T extends Content>
         extends ModelEntityConverter<E, T> {
 
+    /**
+     * Constructor.
+     * @param contentEntity
+     */
     protected ContentEntityConverter(final E contentEntity) {
         super(contentEntity);
     }
