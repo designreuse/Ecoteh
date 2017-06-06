@@ -7,7 +7,11 @@ import ua.com.ecoteh.util.time.Time;
 import java.util.Date;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Message} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see MessageEntity
  */
 public final class Message extends Model {
 
@@ -20,33 +24,36 @@ public final class Message extends Model {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The messageEntity userEntity.
+     * The message user.
+     *
+     * @see User
      */
     private final User user;
 
     /**
-     * The subject of a messageEntity.
+     * The subject of this message.
      */
     private final String subject;
 
     /**
-     * The text of a messageEntity.
+     * The text of this message.
      */
     private final String text;
 
     /**
-     * The date of created messageEntity.
+     * The date of created this message.
      */
     private final Date date;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param user
-     * @param subject
-     * @param text
-     * @param date
+     * @param id        the unique identifier for each message.
+     * @param validated the validations of a new message.
+     * @param user      the user of a new message.
+     * @param subject   the subject of a new message.
+     * @param text      the text of a new message.
+     * @param date      the date of a new message.
      */
     Message(
             final long id, final boolean validated, final User user,
@@ -108,62 +115,79 @@ public final class Message extends Model {
     }
 
     /**
-     * Returns a userEntity of the messageEntity.
+     * Returns a user of the message.
      *
-     * @return The userEntity of the messageEntity (newer null).
+     * @return The user of the message (newer null).
+     * @see User
      */
     public User getUser() {
         return this.user;
     }
 
     /**
-     * Returns a subject of the messageEntity.
+     * Returns a subject of the message.
      *
-     * @return The messageEntity subject or empty string (newer null).
+     * @return The message subject or empty string (newer null).
      */
     public String getSubject() {
         return this.subject;
     }
 
     /**
-     * Returns a text of the messageEntity.
+     * Returns a text of the message.
      *
-     * @return The messageEntity text or empty string (newer null).
+     * @return The message text or empty string (newer null).
      */
     public String getText() {
         return this.text;
     }
 
     /**
-     * Returns a date of the messageEntity.
+     * Returns a date of the message.
      *
-     * @return The messageEntity date (newer null).
+     * @return The message date (newer null).
      */
     public Date getDate() {
         return this.date;
     }
 
-
     /**
      * Returns an article date in string format.
      *
-     * @return The messageEntity string-date (newer null).
+     * @return The message string-date (newer null).
      */
     public String getDateToString() {
         return Time.getDate(getDate());
     }
 
     /**
+     * Converts this object and returns an entity
+     * of the {@link MessageEntity} class.
      *
-     * @return
+     * @return The entity of the {@link MessageEntity} class (newer null).
+     * @see MessageEntity
      */
+    @Override
     public MessageEntity convert() {
         return new MessageConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this message.
      *
-     * @return
+     * @return the message editor (newer null).
+     * @see MessageEditor
+     */
+    @Override
+    public MessageEditor getEditor() {
+        return new MessageEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new message.
+     *
+     * @return the message builder (newer null).
+     * @see MessageBuilder
      */
     public static MessageBuilder getBuilder() {
         return new MessageBuilder();

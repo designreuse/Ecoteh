@@ -1,15 +1,17 @@
 package ua.com.ecoteh.entity.company;
 
 import ua.com.ecoteh.entity.address.Address;
-import ua.com.ecoteh.entity.address.AddressEntity;
 import ua.com.ecoteh.entity.contacts.Contacts;
-import ua.com.ecoteh.entity.contacts.ContactsEntity;
 import ua.com.ecoteh.entity.content.Content;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.util.time.Time;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Company} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see CompanyEntity
  */
 public final class Company extends Content {
 
@@ -22,73 +24,81 @@ public final class Company extends Content {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The tagline of a companyEntity.
+     * The tagline of this company.
      */
     private final String tagline;
 
     /**
-     * The information of a companyEntity.
+     * The information of this company.
      */
     private final String information;
 
     /**
-     * The domain of a companyEntity.
+     * The domain of this company.
      */
     private final String domain;
 
     /**
-     * The sender e-mail of a companyEntity.
+     * The sender E-mail of this company.
      */
     private final String senderEmail;
 
     /**
-     * The sender password of a companyEntity.
+     * The sender password of a company.
      */
     private final String senderPass;
 
     /**
-     * The start work time of a companyEntity.
+     * The start work time of a company.
      */
     private final String workTimeFrom;
 
     /**
-     * The finish work time of a companyEntity.
+     * The finish work time of this company.
      */
     private final String workTimeTo;
 
     /**
-     * The companyEntity contactsEntity.
+     * The company contacts.
+     *
+     * @see Contacts
      */
     private final Contacts contacts;
 
     /**
-     * The companyEntity addressEntity.
+     * The company address.
+     *
+     * @see Address
      */
     private final Address address;
 
     /**
-     * The type of a companyEntity.
+     * The type of this company.
+     *
+     * @see CompanyType
      */
     private final CompanyType type;
 
     /**
-     * @param id
-     * @param validated
-     * @param title
-     * @param url
-     * @param description
-     * @param keywords
-     * @param logo
-     * @param tagline
-     * @param information
-     * @param domain
-     * @param senderEmail
-     * @param senderPass
-     * @param workTimeFrom
-     * @param workTimeTo
-     * @param contacts
-     * @param address
-     * @param type
+     * Constructor.
+     *
+     * @param id           the unique identifier for each company.
+     * @param validated    the validations of a new company.
+     * @param title        the title of a new company.
+     * @param url          the URL of a new company.
+     * @param description  the description of a new company.
+     * @param keywords     the keywords of a new company.
+     * @param logo         the logo of a new company.
+     * @param tagline      the tagline of a new company.
+     * @param information  the information of a new company.
+     * @param domain       the domain of a new company.
+     * @param senderEmail  the sender E-mail of a new company.
+     * @param senderPass   the sender password of a new company.
+     * @param workTimeFrom the start work time of a new company.
+     * @param workTimeTo   the finish work time of a new company.
+     * @param contacts     the contacts of a new company.
+     * @param address      the address of a new company.
+     * @param type         the type of a new company.
      */
     public Company(
             final long id, final boolean validated,
@@ -171,115 +181,136 @@ public final class Company extends Content {
     }
 
     /**
-     * Returns a domain of the companyEntity.
+     * Returns a domain of the company.
      *
-     * @return The companyEntity domain or empty string (newer null).
+     * @return The company domain or empty string (newer null).
      */
     public String getDomain() {
         return this.domain;
     }
 
     /**
-     * Returns a tagline of the companyEntity.
+     * Returns a tagline of the company.
      *
-     * @return The companyEntity tagline or empty string (newer null).
+     * @return The company tagline or empty string (newer null).
      */
     public String getTagline() {
         return this.tagline;
     }
 
     /**
-     * Returns a information of the companyEntity.
+     * Returns a information of the company.
      *
-     * @return The information domain or empty string (newer null).
+     * @return The company domain or empty string (newer null).
      */
     public String getInformation() {
         return this.information;
     }
 
     /**
-     * Returns a sender E-mail of the companyEntity.
+     * Returns a sender E-mail of the company.
      *
-     * @return The companyEntity sender E-mail or empty string (newer null).
+     * @return The company sender E-mail or empty string (newer null).
      */
     public String getSenderEmail() {
         return this.senderEmail;
     }
 
     /**
-     * Returns a sender password of the companyEntity.
+     * Returns a sender password of the company.
      *
-     * @return The companyEntity sender password or empty string (newer null).
+     * @return The company sender password or empty string (newer null).
      */
     public String getSenderPass() {
         return this.senderPass;
     }
 
     /**
-     * Returns a start work time of the companyEntity.
+     * Returns a start work time of the company.
      *
-     * @return The companyEntity start work time (newer null).
+     * @return The company start work time (newer null).
      */
     public String getWorkTimeFrom() {
         return this.workTimeFrom;
     }
 
     /**
-     * Returns a finish work time of the companyEntity.
+     * Returns a finish work time of the company.
      *
-     * @return The companyEntity finish work time (newer null).
+     * @return The company finish work time (newer null).
      */
     public String getWorkTimeTo() {
         return this.workTimeTo;
     }
 
     /**
-     * Returns a companyEntity contactsEntity.
-     * Returns a object of the {@link ContactsEntity} class.
+     * Returns a company contacts.
      *
-     * @return The companyEntity contactsEntity (newer null).
+     * @return The company contacts (newer null).
+     * @see Contacts
      */
     public Contacts getContacts() {
         return this.contacts;
     }
 
     /**
-     * Returns a companyEntity addressEntity.
-     * Returns a object of the {@link AddressEntity} class.
+     * Returns a company address.
      *
-     * @return The companyEntity addressEntity (newer null).
+     * @return The company address (newer null).
+     * @see Address
      */
     public Address getAddress() {
         return this.address;
     }
 
     /**
-     * Returns a domain of the companyEntity.
-     * Returns a enum object of the {@link CompanyType} class.
+     * Returns a domain of the company.
      *
-     * @return The companyEntity domain.
+     * @return The company domain.
+     * @see CompanyType
      */
     public CompanyType getType() {
         return this.type;
     }
 
     /**
-     * Checks whether the companyEntity is opened now.
+     * Checks whether the company is opened now.
      *
-     * @return Returns true if the companyEntity is opened now,
+     * @return Returns true if the company is opened now,
      * otherwise returns false.
      */
     public boolean isOpen() {
         return Time.isWorkTime(this.workTimeFrom, this.workTimeTo);
     }
 
+    /**
+     * Converts this object and returns an entity
+     * of the {@link CompanyEntity} class.
+     *
+     * @return The entity of the {@link CompanyEntity} class (newer null).
+     * @see CompanyEntity
+     */
+    @Override
     public CompanyEntity convert() {
         return new CompanyConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this company.
      *
-     * @return
+     * @return the company editor (newer null).
+     * @see CompanyEditor
+     */
+    @Override
+    public CompanyEditor getEditor() {
+        return new CompanyEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new company.
+     *
+     * @return the company builder (newer null).
+     * @see CompanyBuilder
      */
     public static CompanyBuilder getBuilder() {
         return new CompanyBuilder();

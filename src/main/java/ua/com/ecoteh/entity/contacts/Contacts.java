@@ -3,7 +3,11 @@ package ua.com.ecoteh.entity.contacts;
 import ua.com.ecoteh.entity.model.Model;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Contacts} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ContactsEntity
  */
 public final class Contacts extends Model {
 
@@ -56,16 +60,18 @@ public final class Contacts extends Model {
     private final String skype;
 
     /**
-     * @param id
-     * @param validated
-     * @param email
-     * @param mobilePhone
-     * @param landlinePhone
-     * @param fax
-     * @param vkontakte
-     * @param facebook
-     * @param twitter
-     * @param skype
+     * Constructor.
+     *
+     * @param id            the unique identifier for each contacts.
+     * @param validated     the validations of a new contacts.
+     * @param email         the E-mail of a new contacts.
+     * @param mobilePhone   the mobile phone of a new contacts.
+     * @param landlinePhone the landline phone of a new contacts.
+     * @param fax           the fax of a new contacts.
+     * @param vkontakte     the Vkontakte URL of a new contacts.
+     * @param facebook      the Facebook URL of a new contacts.
+     * @param twitter       the Twitter URL of a new contacts.
+     * @param skype         the Skype username of a new contacts.
      */
     Contacts(
             final long id, final boolean validated,
@@ -112,7 +118,7 @@ public final class Contacts extends Model {
      * argument, false otherwise.
      */
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
             final Contacts other = (Contacts) object;
@@ -148,88 +154,105 @@ public final class Contacts extends Model {
     }
 
     /**
-     * Returns a E-mail of the contactsEntity.
+     * Returns a E-mail of the contacts.
      *
-     * @return The contactsEntity E-mail or empty string (newer null).
+     * @return The E-mail or empty string (newer null).
      */
     public String getEmail() {
         return this.email;
     }
 
     /**
-     * Returns a mobile phone number of the contactsEntity.
+     * Returns a mobile phone number of the contacts.
      *
-     * @return The contactsEntity mobile phone number or empty string (newer null).
+     * @return The mobile phone number or empty string (newer null).
      */
     public String getMobilePhone() {
         return this.mobilePhone;
     }
 
     /**
-     * Returns a landline phone number of the contactsEntity.
+     * Returns a landline phone number of the contacts.
      *
-     * @return The contactsEntity landline phone number or empty string (newer null).
+     * @return The landline phone number or empty string (newer null).
      */
     public String getLandlinePhone() {
         return this.landlinePhone;
     }
 
     /**
-     * Returns a fax number of the contactsEntity.
+     * Returns a fax number of the contacts.
      *
-     * @return The contactsEntity fax number or empty string (newer null).
+     * @return The fax number or empty string (newer null).
      */
     public String getFax() {
         return this.fax;
     }
 
     /**
-     * Returns a Vkontakte URL of the contactsEntity.
+     * Returns a Vkontakte URL of the contacts.
      *
-     * @return The contactsEntity Vkontakte URL or empty string (newer null).
+     * @return The Vkontakte URL or empty string (newer null).
      */
     public String getVkontakte() {
         return this.vkontakte;
     }
 
     /**
-     * Returns a Facebook URL of the contactsEntity.
+     * Returns a Facebook URL of the contacts.
      *
-     * @return The contactsEntity Facebook URL or empty string (newer null).
+     * @return The Facebook URL or empty string (newer null).
      */
     public String getFacebook() {
         return this.facebook;
     }
 
     /**
-     * Returns a Twitter URL of the contactsEntity.
+     * Returns a Twitter URL of the contacts.
      *
-     * @return The contactsEntity Twitter URL or empty string (newer null).
+     * @return The Twitter URL or empty string (newer null).
      */
     public String getTwitter() {
         return this.twitter;
     }
 
     /**
-     * Returns a Skype username of the contactsEntity.
+     * Returns a Skype username of the contacts.
      *
-     * @return The contactsEntity Skype username or empty string (newer null).
+     * @return The Skype username or empty string (newer null).
      */
     public String getSkype() {
         return this.skype;
     }
 
     /**
+     * Converts this object and returns an entity
+     * of the {@link ContactsEntity} class.
      *
-     * @return
+     * @return The entity of the {@link ContactsEntity} class (newer null).
+     * @see ContactsEntity
      */
+    @Override
     public ContactsEntity convert() {
         return new ContactsConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this contacts.
      *
-     * @return
+     * @return the contacts editor (newer null).
+     * @see ContactsEditor
+     */
+    @Override
+    public ContactsEditor getEditor() {
+        return new ContactsEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new contacts.
+     *
+     * @return the contacts builder (newer null).
+     * @see ContactsBuilder
      */
     public static ContactsBuilder getBuilder() {
         return new ContactsBuilder();

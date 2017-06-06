@@ -7,13 +7,16 @@ import ua.com.ecoteh.entity.contacts.Contacts;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.model.Model;
 
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link User} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see UserEntity
  */
 public final class User extends Model implements UserDetails {
 
@@ -26,68 +29,76 @@ public final class User extends Model implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The name of a userEntity.
+     * The name of this user.
      */
     private final String name;
 
     /**
-     * The URL of a userEntity.
+     * The URL of this user.
      */
     private final String url;
 
     /**
-     * The login of a userEntity.
+     * The login of this user.
      */
     private final String login;
 
     /**
-     * The password of a userEntity.
+     * The password of this user.
      */
     private final String password;
 
     /**
-     * The tagline of a userEntity.
+     * The tagline of this user.
      */
     private final String description;
 
     /**
-     * The userEntity contactsEntity.
+     * The user contacts.
+     *
+     * @see Contacts
      */
     private final Contacts contacts;
 
     /**
-     * The userEntity contactsEntity.
+     * The user photo.
+     *
+     * @see File
      */
     private final File photo;
 
     /**
-     * The role of a userEntity.
+     * The role of this user.
+     *
+     * @see UserRole
      */
     private final UserRole role;
 
     /**
-     * The permit to send a letters on the userEntity email.
+     * The permit to send a letters on the user E-mail.
      */
     private final boolean mailing;
 
     /**
-     * Locked the userEntity or not.
+     * Locked the user or not.
      */
     private final boolean locked;
 
     /**
-     * @param id
-     * @param validated
-     * @param name
-     * @param url
-     * @param login
-     * @param password
-     * @param description
-     * @param contacts
-     * @param photo
-     * @param role
-     * @param mailing
-     * @param locked
+     * Constructor.
+     *
+     * @param id          the unique identifier for each user.
+     * @param validated   the validations of a new user.
+     * @param name        the name of a new user.
+     * @param url         the URL of a new user.
+     * @param login       the login of a new user.
+     * @param password    the password of a new user.
+     * @param description the description of a new user.
+     * @param contacts    the contacts of a new user.
+     * @param photo       the photo of a new user.
+     * @param role        the role of a new user.
+     * @param mailing     the mailing of a new user.
+     * @param locked      the locked of a new user.
      */
     User(
             final long id, final boolean validated,
@@ -115,13 +126,13 @@ public final class User extends Model implements UserDetails {
      */
     @Override
     public String toString() {
-        return "UserEntity{" + super.toString() +
+        return "User{" + super.toString() +
                 ", name='" + this.name + '\'' +
                 ", url='" + this.url + '\'' +
                 ", login='" + this.login + '\'' +
                 ", password='" + this.password + '\'' +
                 ", description='" + this.description + '\'' +
-                ", contactsEntity=" + this.contacts +
+                ", contacts=" + this.contacts +
                 ", photo=" + this.photo +
                 ", role=" + this.role +
                 ", isMailing=" + this.mailing +
@@ -163,10 +174,10 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Indicates whether the userEntity's account has expired.
+     * Indicates whether the user's account has expired.
      * An expired account cannot be authenticated.
      *
-     * @return true if the userEntity's account is valid (ie non-expired),
+     * @return true if the user's account is valid (ie non-expired),
      * false if no longer valid (ie expired)
      */
     @Override
@@ -175,10 +186,10 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Indicates whether the userEntity is locked or unlocked.
-     * A locked userEntity cannot be authenticated.
+     * Indicates whether the user is locked or unlocked.
+     * A locked user cannot be authenticated.
      *
-     * @return true if the userEntity is not locked, false otherwise.
+     * @return true if the user is not locked, false otherwise.
      */
     @Override
     public boolean isAccountNonLocked() {
@@ -186,10 +197,10 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Indicates whether the userEntity's credentials (password) has expired.
+     * Indicates whether the user's credentials (password) has expired.
      * Expired credentials prevent authentication.
      *
-     * @return true if the userEntity's credentials are valid
+     * @return true if the user's credentials are valid
      * (ie non-expired), false if no longer valid (ie expired)
      */
     @Override
@@ -198,10 +209,10 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Indicates whether the userEntity is enabled or disabled.
-     * A disabled userEntity cannot be authenticated.
+     * Indicates whether the user is enabled or disabled.
+     * A disabled user cannot be authenticated.
      *
-     * @return true if the userEntity's credentials are valid
+     * @return true if the user's credentials are valid
      * (ie non-expired), false if no longer valid (ie expired)
      */
     @Override
@@ -210,7 +221,7 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Returns the authorities granted to the userEntity.
+     * Returns the authorities granted to the user.
      * Cannot return null.
      *
      * @return the authorities, sorted by natural key (never null).
@@ -223,7 +234,7 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Returns the username used to authenticate the userEntity.
+     * Returns the username used to authenticate the user.
      * Cannot return null. Return the empty string
      * if username is null.
      *
@@ -235,108 +246,127 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
-     * Returns a name of the userEntity.
+     * Returns a name of the user.
      *
-     * @return The userEntity name (newer null).
+     * @return The user name (newer null).
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Decrypts and returns a login of the userEntity.
+     * Decrypts and returns a login of the user.
      *
-     * @return The userEntity login (newer null).
+     * @return The user login (newer null).
      */
     public String getLogin() {
         return this.login;
     }
 
     /**
-     * Decrypts and returns a password of the userEntity.
+     * Decrypts and returns a password of the user.
      *
-     * @return The userEntity password (newer null).
+     * @return The user password (newer null).
      */
-    @Transient
     @Override
     public String getPassword() {
         return this.password;
     }
 
     /**
-     * Returns a URL of the userEntity.
+     * Returns a URL of the user.
      *
-     * @return The userEntity URL (newer null).
+     * @return The user URL (newer null).
      */
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Returns a description of the userEntity.
+     * Returns a description of the user.
      *
-     * @return The userEntity description (newer null).
+     * @return The user description (newer null).
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Returns a photo of the userEntity.
+     * Returns a photo of the user.
      *
-     * @return The userEntity photo (newer null).
+     * @return The user photo (newer null).
+     * @see File
      */
     public File getPhoto() {
         return this.photo;
     }
 
     /**
-     * Returns a userEntity contactsEntity.
+     * Returns a user contactsEntity.
      *
-     * @return The userEntity contactsEntity (newer null).
+     * @return The user contactsEntity (newer null).
+     * @see Contacts
      */
     public Contacts getContacts() {
         return this.contacts;
     }
 
     /**
-     * Returns a role of the userEntity.
+     * Returns a role of the user.
      *
-     * @return The userEntity role (newer null).
+     * @return The user role (newer null).
+     * @see UserRole
      */
     public UserRole getRole() {
         return this.role;
     }
 
     /**
-     * Returns the value of permit to send a letters on the userEntity email.
+     * Returns the value of permit to send a letters on the user email.
      *
-     * @return The permit to send a letters on the userEntity email.
+     * @return The permit to send a letters on the user email.
      */
     public boolean isMailing() {
         return this.mailing;
     }
 
     /**
-     * Returns the value of the locked userEntity or not.
+     * Returns the value of the locked user or not.
      *
-     * @return The value of the locked userEntity or not.
+     * @return The value of the locked user or not.
      */
     public boolean isLocked() {
         return this.locked;
     }
 
     /**
+     * Converts this object and returns an entity
+     * of the {@link UserEntity} class.
      *
-     * @return
+     * @return The entity of the {@link UserEntity} class (newer null).
+     * @see UserEntity
      */
+    @Override
     public UserEntity convert() {
         return new UserConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this user.
      *
-     * @return
+     * @return the user editor (newer null).
+     * @see UserEditor
+     */
+    @Override
+    public UserEditor getEditor() {
+        return new UserEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new user.
+     *
+     * @return the user builder (newer null).
+     * @see UserBuilder
      */
     public static UserBuilder getBuilder() {
         return new UserBuilder();

@@ -8,7 +8,11 @@ import ua.com.ecoteh.util.time.Time;
 import java.util.Date;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Article} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ArticleEntity
  */
 public final class Article extends Content {
 
@@ -21,44 +25,47 @@ public final class Article extends Content {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The number of an articleEntity.
+     * The number of this article.
      */
     private final String number;
 
     /**
-     * The text of an articleEntity.
+     * The text of this article.
      */
     private final String text;
 
     /**
-     * The date of an articleEntity.
+     * The date of this article.
      */
     private final Date date;
 
     /**
-     * The price of an articleEntity.
+     * The price of this article.
      */
     private final String price;
 
     /**
-     * The categoryEntity of an articleEntity.
+     * The category of this article.
+     *
+     * @see Category
      */
     private final Category category;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param title
-     * @param url
-     * @param description
-     * @param keywords
-     * @param number
-     * @param text
-     * @param date
-     * @param price
-     * @param logo
-     * @param category
+     * @param id          the unique identifier for each article.
+     * @param validated   the validations of a new article.
+     * @param title       the title of a new article.
+     * @param url         the url of a new article.
+     * @param description the description of a new article.
+     * @param keywords    the keywords of a new article.
+     * @param number      the number of a new article.
+     * @param text        the text of a new article.
+     * @param date        the date of a new article.
+     * @param price       the price of a new article.
+     * @param logo        the logo of a new article.
+     * @param category    the category of a new article.
      */
     Article(
             final long id, final boolean validated,
@@ -125,66 +132,88 @@ public final class Article extends Content {
     }
 
     /**
-     * Returns a number of the articleEntity.
+     * Returns a number of the article.
      *
-     * @return The articleEntity number (newer null).
+     * @return The article number (newer null).
      */
     public String getNumber() {
         return this.number;
     }
 
     /**
-     * Returns a text of the articleEntity.
+     * Returns a text of the article.
      *
-     * @return The articleEntity text or empty string (newer null).
+     * @return The article text or empty string (newer null).
      */
     public String getText() {
         return this.text;
     }
 
     /**
-     * Returns a date of the articleEntity.
+     * Returns a date of the article.
      *
-     * @return The articleEntity date (newer null).
+     * @return The article date (newer null).
      */
     public Date getDate() {
         return this.date;
     }
 
     /**
-     * Returns a price of the articleEntity.
+     * Returns a price of the article.
      *
-     * @return The articleEntity price or '0' (newer null).
+     * @return The article price (newer null).
      */
     public String getPrice() {
         return this.price;
     }
 
     /**
-     * Returns an articleEntity date in string format.
+     * Returns an article date in string format.
      *
-     * @return The articleEntity string-date (newer null).
+     * @return The article string-date (newer null).
      */
     public String getDateToString() {
         return Time.getDate(getDate());
     }
 
     /**
-     * Returns a categoryEntity of the articleEntity.
+     * Returns a category of the article.
      *
-     * @return The articleEntity categoryEntity.
+     * @return The article category.
+     * @see Category
      */
     public Category getCategory() {
         return this.category;
     }
 
+    /**
+     * Converts this object and returns an entity
+     * of the {@link ArticleEntity} class.
+     *
+     * @return The entity of the {@link ArticleEntity} class (newer null).
+     * @see ArticleEntity
+     */
+    @Override
     public ArticleEntity convert() {
         return new ArticleConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this article.
      *
-     * @return
+     * @return the article editor (newer null).
+     * @see ArticleEditor
+     */
+    @Override
+    public ArticleEditor getEditor() {
+        return new ArticleEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new article.
+     *
+     * @return the article builder (newer null).
+     * @see ArticleBuilder
      */
     public static ArticleBuilder getBuilder() {
         return new ArticleBuilder();

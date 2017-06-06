@@ -7,7 +7,11 @@ import ua.com.ecoteh.entity.file.File;
 import java.util.Collection;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Category} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see CategoryEntity
  */
 public final class Category extends Content {
 
@@ -20,20 +24,23 @@ public final class Category extends Content {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The set of a articleEntities.
+     * The set of a article.
+     *
+     * @see Article
      */
     private final Collection<Article> articles;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param title
-     * @param url
-     * @param description
-     * @param keywords
-     * @param logo
-     * @param articles
+     * @param id          the unique identifier for each category.
+     * @param validated   the validations of a new category.
+     * @param title       the title of a new category.
+     * @param url         the URL of a new category.
+     * @param description the description of a new category.
+     * @param keywords    the keywords of a new category.
+     * @param logo        the logo of a new category.
+     * @param articles    the articles of a new category.
      */
     Category(
             final long id, final boolean validated, final String title,
@@ -51,26 +58,48 @@ public final class Category extends Content {
      */
     @Override
     public String toString() {
-        return "CategoryEntity{" + super.toString() + '}';
+        return "Category{" + super.toString() + '}';
     }
 
     /**
-     * Returns an collection of articleEntities.
+     * Returns an collection of articles.
      * Collection can be empty.
      *
-     * @return The collection of articleEntities (newer null).
+     * @return The collection of articles (newer null).
+     * @see Article
      */
     public Collection<Article> getArticles() {
         return this.articles;
     }
 
+    /**
+     * Converts this object and returns an entity
+     * of the {@link CategoryEntity} class.
+     *
+     * @return The entity of the {@link CategoryEntity} class (newer null).
+     * @see CategoryEntity
+     */
+    @Override
     public CategoryEntity convert() {
         return new CategoryConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this category.
      *
-     * @return
+     * @return the category editor (newer null).
+     * @see CategoryEditor
+     */
+    @Override
+    public CategoryEditor getEditor() {
+        return new CategoryEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new category.
+     *
+     * @return the category builder (newer null).
+     * @see CategoryBuilder
      */
     public static CategoryBuilder getBuilder() {
         return new CategoryBuilder();

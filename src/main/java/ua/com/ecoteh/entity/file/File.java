@@ -4,7 +4,11 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.model.Model;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link File} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see FileEntity
  */
 public final class File extends Model {
 
@@ -28,6 +32,8 @@ public final class File extends Model {
 
     /**
      * The type of a fileEntity.
+     *
+     * @see FileType
      */
     private final FileType type;
 
@@ -37,12 +43,14 @@ public final class File extends Model {
     private final MultipartFile multipartFile;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param title
-     * @param url
-     * @param type
+     * @param id            the unique identifier for each file.
+     * @param validated     the validations of a new file.
+     * @param title         the title of a new file.
+     * @param url           the URL of a new file.
+     * @param type          the type of a new file.
+     * @param multipartFile the multipart file of a new file.
      */
     File(
             final long id, final boolean validated,
@@ -124,30 +132,49 @@ public final class File extends Model {
      * Returns a enum object of the {@link FileType} class.
      *
      * @return The fileEntity type (newer null).
+     * @see FileType
      */
     public FileType getType() {
         return this.type;
     }
 
     /**
+     * Returns the multipart file of this file.
      *
-     * @return
+     * @return the multipart file.
      */
     public MultipartFile getMultipartFile() {
         return this.multipartFile;
     }
 
     /**
+     * Converts this object and returns an entity
+     * of the {@link FileEntity} class.
      *
-     * @return
+     * @return The entity of the {@link FileEntity} class (newer null).
+     * @see FileEntity
      */
+    @Override
     public FileEntity convert() {
         return new FileConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this file.
      *
-     * @return
+     * @return the file editor (newer null).
+     * @see FileEditor
+     */
+    @Override
+    public FileEditor getEditor() {
+        return new FileEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new file.
+     *
+     * @return the file builder (newer null).
+     * @see FileBuilder
      */
     public static FileBuilder getBuilder() {
         return new FileBuilder();

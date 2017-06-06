@@ -6,7 +6,11 @@ import ua.com.ecoteh.util.time.Time;
 import java.util.Date;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Response} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ResponseEntity
  */
 public final class Response extends Model {
 
@@ -19,27 +23,28 @@ public final class Response extends Model {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The username of a responseEntity.
+     * The username of a response.
      */
     private final String username;
 
     /**
-     * The username of a responseEntity.
+     * The username of a response.
      */
     private final String text;
 
     /**
-     * The date of a responseEntity.
+     * The date of a response.
      */
     private final Date date;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param username
-     * @param text
-     * @param date
+     * @param id        the unique identifier for each response.
+     * @param validated the validations of a new response.
+     * @param username  the username of a new response.
+     * @param text      the text of a new response.
+     * @param date      the date of a new response.
      */
     Response(
             final long id, final boolean validated,
@@ -97,27 +102,27 @@ public final class Response extends Model {
     }
 
     /**
-     * Returns a username of the responseEntity.
+     * Returns a username of the response.
      *
-     * @return The responseEntity username (newer null).
+     * @return The response username (newer null).
      */
     public String getUsername() {
         return this.username;
     }
 
     /**
-     * Returns a text of the responseEntity.
+     * Returns a text of the response.
      *
-     * @return The responseEntity text (newer null).
+     * @return The response text (newer null).
      */
     public String getText() {
         return this.text;
     }
 
     /**
-     * Returns a date of the responseEntity.
+     * Returns a date of the response.
      *
-     * @return The responseEntity date (newer null).
+     * @return The response date (newer null).
      */
     public Date getDate() {
         return this.date;
@@ -133,16 +138,33 @@ public final class Response extends Model {
     }
 
     /**
+     * Converts this object and returns an entity
+     * of the {@link ResponseEntity} class.
      *
-     * @return
+     * @return The entity of the {@link ResponseEntity} class (newer null).
+     * @see ResponseEntity
      */
+    @Override
     public ResponseEntity convert() {
         return new ResponseConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this response.
      *
-     * @return
+     * @return the response editor (newer null).
+     * @see ResponseEditor
+     */
+    @Override
+    public ResponseEditor getEditor() {
+        return new ResponseEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new response.
+     *
+     * @return the response builder (newer null).
+     * @see ResponseBuilder
      */
     public static ResponseBuilder getBuilder() {
         return new ResponseBuilder();

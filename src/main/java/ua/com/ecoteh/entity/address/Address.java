@@ -3,7 +3,11 @@ package ua.com.ecoteh.entity.address;
 import ua.com.ecoteh.entity.model.Model;
 
 /**
+ * The class implements a set of methods for working
+ * with objects of the {@link Address} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see AddressEntity
  */
 public final class Address extends Model {
 
@@ -16,9 +20,9 @@ public final class Address extends Model {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The mailing addressEntity.
+     * The post address.
      */
-    private final String address;
+    private final String postAddress;
 
     /**
      * The Google maps URL.
@@ -26,18 +30,19 @@ public final class Address extends Model {
     private final String googleMaps;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param address
-     * @param googleMaps
+     * @param id          the unique identifier for each address.
+     * @param validated   the validations of a new address.
+     * @param postAddress the post address of a new address.
+     * @param googleMaps  the Google maps of a new address.
      */
     Address(
-            final long id,final  boolean validated,
-            final String address, final String googleMaps
+            final long id, final boolean validated,
+            final String postAddress, final String googleMaps
     ) {
         super(id, validated);
-        this.address = address;
+        this.postAddress = postAddress;
         this.googleMaps = googleMaps;
     }
 
@@ -49,7 +54,7 @@ public final class Address extends Model {
     @Override
     public String toString() {
         return "Address{" + super.toString() +
-                ", address='" + this.address + '\'' +
+                ", postAddress='" + this.postAddress + '\'' +
                 ", googleMaps='" + this.googleMaps + '\'' +
                 '}';
     }
@@ -62,11 +67,11 @@ public final class Address extends Model {
      * argument, false otherwise.
      */
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         boolean result = super.equals(object);
         if (result) {
             final Address other = (Address) object;
-            result = this.address.equalsIgnoreCase(other.address) &&
+            result = this.postAddress.equalsIgnoreCase(other.postAddress) &&
                     this.googleMaps.equalsIgnoreCase(other.googleMaps);
         }
         return result;
@@ -81,20 +86,20 @@ public final class Address extends Model {
      */
     @Override
     public int hashCode() {
-        return this.address.hashCode() + this.googleMaps.hashCode();
+        return this.postAddress.hashCode() + this.googleMaps.hashCode();
     }
 
     /**
-     * Returns a mailing addressEntity of the addressEntity.
+     * Returns a post address of the object.
      *
-     * @return The mailing addressEntity or empty string (newer null).
+     * @return The post address or empty string (newer null).
      */
-    public String getAddress() {
-        return this.address;
+    public String getPostAddress() {
+        return this.postAddress;
     }
 
     /**
-     * Returns a Google maps URL of the addressEntity.
+     * Returns a Google maps URL of the address.
      *
      * @return The Google maps URL or empty string (newer null).
      */
@@ -103,16 +108,33 @@ public final class Address extends Model {
     }
 
     /**
+     * Converts this object and returns an entity
+     * of the {@link AddressEntity} class.
      *
-     * @return
+     * @return The entity of the {@link AddressEntity} class (newer null).
+     * @see AddressEntity
      */
+    @Override
     public AddressEntity convert() {
         return new AddressConverter(this).convert();
     }
 
     /**
+     * Returns a editor for updating this address.
      *
-     * @return
+     * @return the address editor (newer null).
+     * @see AddressEditor
+     */
+    @Override
+    public AddressEditor getEditor() {
+        return new AddressEditor(this);
+    }
+
+    /**
+     * Returns a builder for creating a new address.
+     *
+     * @return the address builder (newer null).
+     * @see AddressBuilder
      */
     public static AddressBuilder getBuilder() {
         return new AddressBuilder();

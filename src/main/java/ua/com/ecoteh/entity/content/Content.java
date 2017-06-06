@@ -4,7 +4,11 @@ import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.model.Model;
 
 /**
+ * The abstract superclass implements a set of methods for working
+ * with objects of the {@link Content} class or subclasses.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ContentEntity
  */
 public abstract class Content extends Model {
 
@@ -17,39 +21,42 @@ public abstract class Content extends Model {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The title of a contentEntity.
+     * The title of this content.
      */
     private final String title;
 
     /**
-     * The URL of a contentEntity.
+     * The URL of this contentE.
      */
     private final String url;
 
     /**
-     * The description of a contentEntity.
+     * The description of this content.
      */
     private final String description;
 
     /**
-     * The keywords of a contentEntity.
+     * The keywords of this content.
      */
     private final String keywords;
 
     /**
-     * The category logo.
+     * The logo of this content.
+     *
+     * @see File
      */
     private final File logo;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
-     * @param title
-     * @param url
-     * @param description
-     * @param keywords
-     * @param logo
+     * @param id          the unique identifier for each content.
+     * @param validated   the validations of a new content.
+     * @param title       the title of a new content.
+     * @param url         the URL of a new content.
+     * @param description the description of a new content.
+     * @param keywords    the keywords of a new content.
+     * @param logo        the logo of a new content.
      */
     protected Content(
             final long id, final boolean validated,
@@ -115,47 +122,67 @@ public abstract class Content extends Model {
     }
 
     /**
-     * Returns a title of the contentEntity.
+     * Returns a title of the content.
      *
-     * @return The contentEntity title or empty string (newer null).
+     * @return The content title or empty string (newer null).
      */
     public String getTitle() {
         return this.title;
     }
 
     /**
-     * Returns a URL of the contentEntity.
+     * Returns a URL of the content.
      *
-     * @return The contentEntity URL or empty string (newer null).
+     * @return The content URL or empty string (newer null).
      */
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Returns a description of the contentEntity.
+     * Returns a description of the content.
      *
-     * @return The contentEntity description or empty string (newer null).
+     * @return The content description or empty string (newer null).
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Returns a keywords of the contentEntity.
+     * Returns a keywords of the content.
      *
-     * @return The contentEntity keywords or empty string (newer null).
+     * @return The content keywords or empty string (newer null).
      */
     public String getKeywords() {
         return this.keywords;
     }
 
     /**
-     * Returns a logo of the contentEntity.
+     * Returns a logo of the content.
      *
-     * @return The contentEntity logo (newer null).
+     * @return The content logo (newer null).
+     * @see File
      */
     public File getLogo() {
         return this.logo;
     }
+
+    /**
+     * Converts this object and returns an entity
+     * of the {@link ContentEntity} class.
+     *
+     * @return The entity of the {@link ContentEntity} class.
+     * @see ContentEntity
+     */
+    @Override
+    public abstract ContentEntity convert();
+
+    /**
+     * Returns a editor for updating this content.
+     *
+     * @return the content editor.
+     * @see ContentEditor
+     */
+    @Override
+    public abstract ContentEditor getEditor();
 }

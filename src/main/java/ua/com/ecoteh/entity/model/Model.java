@@ -5,7 +5,11 @@ import java.io.Serializable;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
+ * The abstract superclass implements a set of standard methods
+ * for working with objects of the {@link Model} class or subclasses.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ModelEntity
  */
 public abstract class Model implements Serializable {
 
@@ -23,14 +27,15 @@ public abstract class Model implements Serializable {
     private final long id;
 
     /**
-     * The value of validations of the modelEntity.
+     * The value of validations of the model.
      */
     private final boolean validated;
 
     /**
+     * Constructor.
      *
-     * @param id
-     * @param validated
+     * @param id        the unique identifier for each model.
+     * @param validated the validations of a new model.
      */
     public Model(final long id, final boolean validated) {
         this.id = id;
@@ -59,11 +64,12 @@ public abstract class Model implements Serializable {
      */
     @Override
     public boolean equals(final Object object) {
-        return isNotNull(object) && (super.equals(object) || (getClass() == object.getClass()));
+        return isNotNull(object) &&
+                (super.equals(object) || (getClass() == object.getClass()));
     }
 
     /**
-     * Returns a unique identifier of the modelEntity.
+     * Returns a unique identifier of the model.
      *
      * @return The unique identifier.
      */
@@ -72,9 +78,9 @@ public abstract class Model implements Serializable {
     }
 
     /**
-     * Validates the modelEntity.
+     * Validates the model.
      *
-     * @return true if the modelEntity is valid, false otherwise.
+     * @return true if the model is valid, false otherwise.
      */
     public boolean isValidated() {
         return this.validated;
@@ -85,10 +91,25 @@ public abstract class Model implements Serializable {
      * This method is supported for the benefit
      * of hash tables such as those provided by HashMap.
      *
-     * @return A hash code value for this object.
+     * @return A hash code value for this object (newer null).
      */
     @Override
     public abstract int hashCode();
 
-    public abstract<E extends ModelEntity> E convert();
+    /**
+     * Returns a editor for updating this model.
+     *
+     * @return the model editor (newer null).
+     * @see ModelEditor
+     */
+    public abstract ModelEditor getEditor();
+
+    /**
+     * Converts this object and returns an entity
+     * of the {@link ModelEntity} class.
+     *
+     * @return The entity of the {@link ModelEntity} class.
+     * @see ModelEntity
+     */
+    public abstract ModelEntity convert();
 }
