@@ -297,7 +297,7 @@ public class ContactsEntity extends ModelEntity {
      * of the {@link Contacts} class.
      *
      * @return The object of the {@link Contacts} class (newer null).
-     * @see Contacts
+     * @see ContactsEntityConverter
      */
     @Override
     public Contacts convert() {

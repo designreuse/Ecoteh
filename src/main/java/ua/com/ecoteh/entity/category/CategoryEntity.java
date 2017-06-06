@@ -27,8 +27,6 @@ public class CategoryEntity extends ContentEntity {
 
     /**
      * The set of a article entities.
-     *
-     * @see ArticleEntity
      */
     @OneToMany(
             mappedBy = "categoryEntity",
@@ -82,7 +80,6 @@ public class CategoryEntity extends ContentEntity {
      * Sets a new article entities to list of article entities.
      *
      * @param articles the article entities to add.
-     * @see ArticleEntity
      */
     public void setArticleEntities(final Collection<ArticleEntity> articles) {
         this.articles = articles;
@@ -93,7 +90,7 @@ public class CategoryEntity extends ContentEntity {
      * of the {@link Category} class.
      *
      * @return The object of the {@link Category} class (newer null).
-     * @see Category
+     * @see CategoryEntityConverter
      */
     @Override
     public Category convert() {

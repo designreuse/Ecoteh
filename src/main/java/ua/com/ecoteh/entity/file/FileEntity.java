@@ -37,8 +37,6 @@ public class FileEntity extends ModelEntity {
 
     /**
      * The type of this file entity.
-     *
-     * @see FileType
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
@@ -144,7 +142,6 @@ public class FileEntity extends ModelEntity {
      * Returns this file entity type.
      *
      * @return The file entity type (newer null).
-     * @see FileType
      */
     public FileType getType() {
         return this.type;
@@ -154,7 +151,6 @@ public class FileEntity extends ModelEntity {
      * Sets a new type to the file entity.
      *
      * @param type the new file entity type.
-     * @see FileType
      */
     public void setType(final FileType type) {
         this.type = type;
@@ -165,7 +161,7 @@ public class FileEntity extends ModelEntity {
      * of the {@link File} class.
      *
      * @return The object of the {@link File} class (newer null).
-     * @see File
+     * @see FileEntityConverter
      */
     @Override
     public File convert() {

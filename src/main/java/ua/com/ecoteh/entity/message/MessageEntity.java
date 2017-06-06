@@ -29,8 +29,6 @@ public class MessageEntity extends ModelEntity {
 
     /**
      * The user entity of this message entity.
-     *
-     * @see UserEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -62,7 +60,7 @@ public class MessageEntity extends ModelEntity {
     private Date date;
 
     /**
-     * Default constructor.
+     * Constructor.
      */
     protected MessageEntity() {
     }
@@ -133,7 +131,6 @@ public class MessageEntity extends ModelEntity {
      * Returns a user entity of the message entity.
      *
      * @return The user entity of the message entity (newer null).
-     * @see UserEntity
      */
     public UserEntity getUserEntity() {
         return this.user;
@@ -143,7 +140,6 @@ public class MessageEntity extends ModelEntity {
      * Sets a user entity of the message entity.
      *
      * @param user the user entity of the message entity.
-     * @see UserEntity
      */
     public void setUserEntity(final UserEntity user) {
         this.user = user;
@@ -208,7 +204,7 @@ public class MessageEntity extends ModelEntity {
      * of the {@link Message} class.
      *
      * @return The object of the {@link Message} class (newer null).
-     * @see Message
+     * @see MessageEntityConverter
      */
     @Override
     public Message convert() {

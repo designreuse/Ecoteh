@@ -166,7 +166,7 @@ public class ResponseEntity extends ModelEntity {
      * of the {@link Response} class.
      *
      * @return The object of the {@link Response} class (newer null).
-     * @see Response
+     * @see ResponseEntityConverter
      */
     @Override
     public Response convert() {

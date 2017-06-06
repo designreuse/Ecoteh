@@ -63,7 +63,7 @@ public class ArticleEntity extends ContentEntity {
     private CategoryEntity category;
 
     /**
-     *
+     * Constructor.
      */
     protected ArticleEntity() {
     }
@@ -80,7 +80,7 @@ public class ArticleEntity extends ContentEntity {
                 ", text='" + this.text + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
-                ", category entity=" + this.category +
+                ", categoryEntity=" + this.category +
                 '}';
     }
 
@@ -137,19 +137,11 @@ public class ArticleEntity extends ContentEntity {
 
     /**
      * Sets new number to the article entity.
-     * If parameter number is blank, then call method newNumber().
-     * <pre>
-     *     setNumber(null) - number = "NewRandomNumber"
-     *     setNumber("") - number = "NewRandomNumber"
-     *     setNumber(" ") - number = "NewRandomNumber"
-     *     setNumber("bob") - number = "bob"
-     *     setNumber(" bob ") - number = "bob"
-     * </pre>
      *
      * @param number the new number to the article entity.
      */
     public void setNumber(final String number) {
-            this.number = number;
+        this.number = number;
     }
 
     /**
@@ -163,14 +155,6 @@ public class ArticleEntity extends ContentEntity {
 
     /**
      * Sets a new text to the article entity.
-     * If parameter text is blank, then sets empty string.
-     * <pre>
-     *     setText(null) - text = ""
-     *     setText("") - text = ""
-     *     setText(" ") - text = ""
-     *     setText("bob") - text = "bob"
-     *     setText(" bob ") - text = "bob"
-     * </pre>
      *
      * @param text a new text to the article entity.
      */
@@ -189,11 +173,6 @@ public class ArticleEntity extends ContentEntity {
 
     /**
      * Sets a new date to the article entity.
-     * If parameter date is null, then sets new Date().
-     * <pre>
-     *     setDate(null) - date = new Date()
-     *     setDate(someRealDate) - date = someRealDate
-     * </pre>
      *
      * @param date the new date to the article entity.
      */
@@ -251,6 +230,7 @@ public class ArticleEntity extends ContentEntity {
      * of the {@link Article} class.
      *
      * @return The object of the {@link Article} class (newer null).
+     * @see ArticleEntityConverter
      */
     @Override
     public Article convert() {

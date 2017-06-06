@@ -137,7 +137,7 @@ public class AddressEntity extends ModelEntity {
      * of the {@link Address} class.
      *
      * @return The object of the {@link Address} class (newer null).
-     * @see Address
+     * @see AddressEntityConverter
      */
     @Override
     public Address convert() {

@@ -59,8 +59,6 @@ public class UserEntity extends ModelEntity {
 
     /**
      * The contacts entity of this user entity.
-     *
-     * @see ContactsEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -75,8 +73,6 @@ public class UserEntity extends ModelEntity {
 
     /**
      * The photo entity of this user entity.
-     *
-     * @see FileEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -91,8 +87,6 @@ public class UserEntity extends ModelEntity {
 
     /**
      * The role of this user entity.
-     *
-     * @see UserRole
      */
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -278,7 +272,6 @@ public class UserEntity extends ModelEntity {
      * Returns a photo of the user entity.
      *
      * @return The user entity photo (newer null).
-     * @see FileEntity
      */
     public FileEntity getPhotoEntity() {
         return this.photo;
@@ -288,7 +281,6 @@ public class UserEntity extends ModelEntity {
      * Sets a new photo to the user entity.
      *
      * @param photo the new photo to the user entity.
-     * @see FileEntity
      */
     public void setPhotoEntity(final FileEntity photo) {
         this.photo = photo;
@@ -298,7 +290,6 @@ public class UserEntity extends ModelEntity {
      * Returns this user entity contactsEntity.
      *
      * @return The user entity contacts entity (newer null).
-     * @see ContactsEntity
      */
     public ContactsEntity getContactsEntity() {
         return this.contacts;
@@ -308,7 +299,6 @@ public class UserEntity extends ModelEntity {
      * Sets a new contacts entity to the user entity.
      *
      * @param contacts the new contacts entity to the user entity.
-     * @see ContactsEntity
      */
     public void setContactsEntity(final ContactsEntity contacts) {
         this.contacts = contacts;
@@ -318,7 +308,6 @@ public class UserEntity extends ModelEntity {
      * Returns a role of the user entity.
      *
      * @return The user entity role (newer null).
-     * @see UserRole
      */
     public UserRole getRole() {
         return this.role;
@@ -375,7 +364,7 @@ public class UserEntity extends ModelEntity {
      * of the {@link User} class.
      *
      * @return The object of the {@link User} class (newer null).
-     * @see User
+     * @see UserEntityConverter
      */
     public User convert() {
         return new UserEntityConverter(this).convert();

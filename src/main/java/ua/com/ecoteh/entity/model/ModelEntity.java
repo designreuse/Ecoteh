@@ -39,7 +39,7 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     private long id;
 
     /**
-     * The value of validations of the modelEntity.
+     * The value of validations of the model entity.
      */
     @Column(name = "validated")
     private boolean validated;
@@ -92,7 +92,7 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     }
 
     /**
-     * Returns a unique identifier of the modelEntity.
+     * Returns a unique identifier of the model entity.
      *
      * @return The unique identifier.
      */
@@ -101,28 +101,28 @@ public abstract class ModelEntity implements Serializable, Cloneable {
     }
 
     /**
-     * Sets new identifier to the modelEntity.
+     * Sets new identifier to the model entity.
      *
-     * @param id a new identifier to the modelEntity.
+     * @param id a new identifier to the model entity.
      */
     public void setId(final long id) {
         this.id = id;
     }
 
     /**
-     * Sets validations of the modelEntity.
-     * Sets true if the modelEntity is valid, false is invalid.
+     * Sets validations of the model entity.
+     * Sets true if the model entity is valid, false is invalid.
      *
-     * @param validated a validations of the modelEntity.
+     * @param validated a validations of the model entity.
      */
     public void setValidated(final boolean validated) {
         this.validated = validated;
     }
 
     /**
-     * Validates the modelEntity.
+     * Validates the model entity.
      *
-     * @return true if the modelEntity is valid, false otherwise.
+     * @return true if the model entity is valid, false otherwise.
      */
     public boolean isValidated() {
         return this.validated;

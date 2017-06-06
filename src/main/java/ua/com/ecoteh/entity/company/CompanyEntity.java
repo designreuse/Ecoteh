@@ -71,8 +71,6 @@ public class CompanyEntity extends ContentEntity {
 
     /**
      * The contacts entity of this company entity.
-     *
-     * @see ContactsEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -87,8 +85,6 @@ public class CompanyEntity extends ContentEntity {
 
     /**
      * The address entity of this company entity.
-     *
-     * @see AddressEntity
      */
     @OneToOne(
             fetch = FetchType.EAGER,
@@ -103,8 +99,6 @@ public class CompanyEntity extends ContentEntity {
 
     /**
      * The type of this company entity.
-     *
-     * @see CompanyType
      */
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -316,7 +310,6 @@ public class CompanyEntity extends ContentEntity {
      * Returns a contacts entity of this company entity.
      *
      * @return The contacts entity of this company entity (newer null).
-     * @see ContactsEntity
      */
     public ContactsEntity getContactsEntity() {
         return this.contacts;
@@ -326,7 +319,6 @@ public class CompanyEntity extends ContentEntity {
      * Sets a new contacts entity to the company entity.
      *
      * @param contacts the new contacts entity to the company entity.
-     * @see ContactsEntity
      */
     public void setContactsEntity(final ContactsEntity contacts) {
         this.contacts = contacts;
@@ -336,7 +328,6 @@ public class CompanyEntity extends ContentEntity {
      * Returns a address entity of this company entity.
      *
      * @return The contacts entity to the company entity (newer null).
-     * @see AddressEntity
      */
     public AddressEntity getAddressEntity() {
         return this.address;
@@ -346,7 +337,6 @@ public class CompanyEntity extends ContentEntity {
      * Sets a new address entity to the company entity.
      *
      * @param address the new address entity to the company entity.
-     * @see AddressEntity
      */
     public void setAddressEntity(final AddressEntity address) {
         this.address = address;
@@ -357,7 +347,6 @@ public class CompanyEntity extends ContentEntity {
      * Returns a enum object of the {@link CompanyType} class.
      *
      * @return The company entity domain.
-     * @see CompanyType
      */
     public CompanyType getType() {
         return this.type;
@@ -367,7 +356,6 @@ public class CompanyEntity extends ContentEntity {
      * Sets a new type to the company entity.
      *
      * @param type the new type to the company entity.
-     * @see CompanyType
      */
     public void setType(final CompanyType type) {
         this.type = type;
@@ -378,7 +366,7 @@ public class CompanyEntity extends ContentEntity {
      * of the {@link Company} class.
      *
      * @return The object of the {@link Company} class (newer null).
-     * @see Company
+     * @see CompanyEntityConverter
      */
     @Override
     public Company convert() {
