@@ -142,7 +142,7 @@ public final class Response extends Model {
      * of the {@link ResponseEntity} class.
      *
      * @return The entity of the {@link ResponseEntity} class (newer null).
-     * @see ResponseEntity
+     * @see ResponseConverter
      */
     @Override
     public ResponseEntity convert() {
@@ -153,7 +153,6 @@ public final class Response extends Model {
      * Returns a editor for updating this response.
      *
      * @return the response editor (newer null).
-     * @see ResponseEditor
      */
     @Override
     public ResponseEditor getEditor() {
@@ -164,7 +163,6 @@ public final class Response extends Model {
      * Returns a builder for creating a new response.
      *
      * @return the response builder (newer null).
-     * @see ResponseBuilder
      */
     public static ResponseBuilder getBuilder() {
         return new ResponseBuilder();

@@ -230,7 +230,7 @@ public final class Contacts extends Model {
      * of the {@link ContactsEntity} class.
      *
      * @return The entity of the {@link ContactsEntity} class (newer null).
-     * @see ContactsEntity
+     * @see ContactsConverter
      */
     @Override
     public ContactsEntity convert() {
@@ -241,7 +241,6 @@ public final class Contacts extends Model {
      * Returns a editor for updating this contacts.
      *
      * @return the contacts editor (newer null).
-     * @see ContactsEditor
      */
     @Override
     public ContactsEditor getEditor() {
@@ -252,7 +251,6 @@ public final class Contacts extends Model {
      * Returns a builder for creating a new contacts.
      *
      * @return the contacts builder (newer null).
-     * @see ContactsBuilder
      */
     public static ContactsBuilder getBuilder() {
         return new ContactsBuilder();

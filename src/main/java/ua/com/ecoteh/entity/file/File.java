@@ -32,13 +32,11 @@ public final class File extends Model {
 
     /**
      * The type of a fileEntity.
-     *
-     * @see FileType
      */
     private final FileType type;
 
     /**
-     *
+     * The multipart file.
      */
     private final MultipartFile multipartFile;
 
@@ -132,7 +130,6 @@ public final class File extends Model {
      * Returns a enum object of the {@link FileType} class.
      *
      * @return The fileEntity type (newer null).
-     * @see FileType
      */
     public FileType getType() {
         return this.type;
@@ -152,7 +149,7 @@ public final class File extends Model {
      * of the {@link FileEntity} class.
      *
      * @return The entity of the {@link FileEntity} class (newer null).
-     * @see FileEntity
+     * @see FileConverter
      */
     @Override
     public FileEntity convert() {
@@ -163,7 +160,6 @@ public final class File extends Model {
      * Returns a editor for updating this file.
      *
      * @return the file editor (newer null).
-     * @see FileEditor
      */
     @Override
     public FileEditor getEditor() {
@@ -174,7 +170,6 @@ public final class File extends Model {
      * Returns a builder for creating a new file.
      *
      * @return the file builder (newer null).
-     * @see FileBuilder
      */
     public static FileBuilder getBuilder() {
         return new FileBuilder();

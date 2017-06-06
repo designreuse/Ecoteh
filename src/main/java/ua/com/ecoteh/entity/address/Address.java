@@ -112,7 +112,7 @@ public final class Address extends Model {
      * of the {@link AddressEntity} class.
      *
      * @return The entity of the {@link AddressEntity} class (newer null).
-     * @see AddressEntity
+     * @see AddressConverter
      */
     @Override
     public AddressEntity convert() {
@@ -123,7 +123,6 @@ public final class Address extends Model {
      * Returns a editor for updating this address.
      *
      * @return the address editor (newer null).
-     * @see AddressEditor
      */
     @Override
     public AddressEditor getEditor() {
@@ -134,7 +133,6 @@ public final class Address extends Model {
      * Returns a builder for creating a new address.
      *
      * @return the address builder (newer null).
-     * @see AddressBuilder
      */
     public static AddressBuilder getBuilder() {
         return new AddressBuilder();

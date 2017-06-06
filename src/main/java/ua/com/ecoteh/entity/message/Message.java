@@ -25,8 +25,6 @@ public final class Message extends Model {
 
     /**
      * The message user.
-     *
-     * @see User
      */
     private final User user;
 
@@ -118,7 +116,6 @@ public final class Message extends Model {
      * Returns a user of the message.
      *
      * @return The user of the message (newer null).
-     * @see User
      */
     public User getUser() {
         return this.user;
@@ -165,7 +162,7 @@ public final class Message extends Model {
      * of the {@link MessageEntity} class.
      *
      * @return The entity of the {@link MessageEntity} class (newer null).
-     * @see MessageEntity
+     * @see MessageConverter
      */
     @Override
     public MessageEntity convert() {
@@ -176,7 +173,6 @@ public final class Message extends Model {
      * Returns a editor for updating this message.
      *
      * @return the message editor (newer null).
-     * @see MessageEditor
      */
     @Override
     public MessageEditor getEditor() {
@@ -187,7 +183,6 @@ public final class Message extends Model {
      * Returns a builder for creating a new message.
      *
      * @return the message builder (newer null).
-     * @see MessageBuilder
      */
     public static MessageBuilder getBuilder() {
         return new MessageBuilder();

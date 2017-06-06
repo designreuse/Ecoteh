@@ -62,15 +62,11 @@ public final class User extends Model implements UserDetails {
 
     /**
      * The user photo.
-     *
-     * @see File
      */
     private final File photo;
 
     /**
      * The role of this user.
-     *
-     * @see UserRole
      */
     private final UserRole role;
 
@@ -295,7 +291,6 @@ public final class User extends Model implements UserDetails {
      * Returns a photo of the user.
      *
      * @return The user photo (newer null).
-     * @see File
      */
     public File getPhoto() {
         return this.photo;
@@ -305,7 +300,6 @@ public final class User extends Model implements UserDetails {
      * Returns a user contactsEntity.
      *
      * @return The user contactsEntity (newer null).
-     * @see Contacts
      */
     public Contacts getContacts() {
         return this.contacts;
@@ -315,7 +309,6 @@ public final class User extends Model implements UserDetails {
      * Returns a role of the user.
      *
      * @return The user role (newer null).
-     * @see UserRole
      */
     public UserRole getRole() {
         return this.role;
@@ -344,7 +337,7 @@ public final class User extends Model implements UserDetails {
      * of the {@link UserEntity} class.
      *
      * @return The entity of the {@link UserEntity} class (newer null).
-     * @see UserEntity
+     * @see UserConverter
      */
     @Override
     public UserEntity convert() {
@@ -355,7 +348,6 @@ public final class User extends Model implements UserDetails {
      * Returns a editor for updating this user.
      *
      * @return the user editor (newer null).
-     * @see UserEditor
      */
     @Override
     public UserEditor getEditor() {
@@ -366,7 +358,6 @@ public final class User extends Model implements UserDetails {
      * Returns a builder for creating a new user.
      *
      * @return the user builder (newer null).
-     * @see UserBuilder
      */
     public static UserBuilder getBuilder() {
         return new UserBuilder();

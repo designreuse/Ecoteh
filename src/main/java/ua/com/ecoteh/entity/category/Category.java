@@ -24,9 +24,7 @@ public final class Category extends Content {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The set of a article.
-     *
-     * @see Article
+     * The article collection.
      */
     private final Collection<Article> articles;
 
@@ -66,7 +64,6 @@ public final class Category extends Content {
      * Collection can be empty.
      *
      * @return The collection of articles (newer null).
-     * @see Article
      */
     public Collection<Article> getArticles() {
         return this.articles;
@@ -77,7 +74,7 @@ public final class Category extends Content {
      * of the {@link CategoryEntity} class.
      *
      * @return The entity of the {@link CategoryEntity} class (newer null).
-     * @see CategoryEntity
+     * @see CategoryConverter
      */
     @Override
     public CategoryEntity convert() {
@@ -88,7 +85,6 @@ public final class Category extends Content {
      * Returns a editor for updating this category.
      *
      * @return the category editor (newer null).
-     * @see CategoryEditor
      */
     @Override
     public CategoryEditor getEditor() {
@@ -99,7 +95,6 @@ public final class Category extends Content {
      * Returns a builder for creating a new category.
      *
      * @return the category builder (newer null).
-     * @see CategoryBuilder
      */
     public static CategoryBuilder getBuilder() {
         return new CategoryBuilder();

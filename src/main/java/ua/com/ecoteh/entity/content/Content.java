@@ -42,8 +42,6 @@ public abstract class Content extends Model {
 
     /**
      * The logo of this content.
-     *
-     * @see File
      */
     private final File logo;
 

@@ -60,22 +60,16 @@ public final class Company extends Content {
 
     /**
      * The company contacts.
-     *
-     * @see Contacts
      */
     private final Contacts contacts;
 
     /**
      * The company address.
-     *
-     * @see Address
      */
     private final Address address;
 
     /**
      * The type of this company.
-     *
-     * @see CompanyType
      */
     private final CompanyType type;
 
@@ -247,7 +241,6 @@ public final class Company extends Content {
      * Returns a company contacts.
      *
      * @return The company contacts (newer null).
-     * @see Contacts
      */
     public Contacts getContacts() {
         return this.contacts;
@@ -257,7 +250,6 @@ public final class Company extends Content {
      * Returns a company address.
      *
      * @return The company address (newer null).
-     * @see Address
      */
     public Address getAddress() {
         return this.address;
@@ -267,7 +259,6 @@ public final class Company extends Content {
      * Returns a domain of the company.
      *
      * @return The company domain.
-     * @see CompanyType
      */
     public CompanyType getType() {
         return this.type;
@@ -288,7 +279,7 @@ public final class Company extends Content {
      * of the {@link CompanyEntity} class.
      *
      * @return The entity of the {@link CompanyEntity} class (newer null).
-     * @see CompanyEntity
+     * @see CompanyConverter
      */
     @Override
     public CompanyEntity convert() {
@@ -299,7 +290,6 @@ public final class Company extends Content {
      * Returns a editor for updating this company.
      *
      * @return the company editor (newer null).
-     * @see CompanyEditor
      */
     @Override
     public CompanyEditor getEditor() {
@@ -310,7 +300,6 @@ public final class Company extends Content {
      * Returns a builder for creating a new company.
      *
      * @return the company builder (newer null).
-     * @see CompanyBuilder
      */
     public static CompanyBuilder getBuilder() {
         return new CompanyBuilder();

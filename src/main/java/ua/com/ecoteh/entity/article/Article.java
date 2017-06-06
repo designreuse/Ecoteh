@@ -46,8 +46,6 @@ public final class Article extends Content {
 
     /**
      * The category of this article.
-     *
-     * @see Category
      */
     private final Category category;
 
@@ -180,7 +178,6 @@ public final class Article extends Content {
      * Returns a category of the article.
      *
      * @return The article category.
-     * @see Category
      */
     public Category getCategory() {
         return this.category;
@@ -191,7 +188,7 @@ public final class Article extends Content {
      * of the {@link ArticleEntity} class.
      *
      * @return The entity of the {@link ArticleEntity} class (newer null).
-     * @see ArticleEntity
+     * @see ArticleConverter
      */
     @Override
     public ArticleEntity convert() {
@@ -202,7 +199,6 @@ public final class Article extends Content {
      * Returns a editor for updating this article.
      *
      * @return the article editor (newer null).
-     * @see ArticleEditor
      */
     @Override
     public ArticleEditor getEditor() {
@@ -213,7 +209,6 @@ public final class Article extends Content {
      * Returns a builder for creating a new article.
      *
      * @return the article builder (newer null).
-     * @see ArticleBuilder
      */
     public static ArticleBuilder getBuilder() {
         return new ArticleBuilder();

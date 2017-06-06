@@ -100,7 +100,6 @@ public abstract class Model implements Serializable {
      * Returns a editor for updating this model.
      *
      * @return the model editor (newer null).
-     * @see ModelEditor
      */
     public abstract ModelEditor getEditor();
 
@@ -109,7 +108,6 @@ public abstract class Model implements Serializable {
      * of the {@link ModelEntity} class.
      *
      * @return The entity of the {@link ModelEntity} class.
-     * @see ModelEntity
      */
     public abstract ModelEntity convert();
 }
