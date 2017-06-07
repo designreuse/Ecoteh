@@ -179,7 +179,7 @@ public final class UserBuilder extends ModelBuilder<User, UserBuilder> {
 
     /**
      * Adds a new mailing to a new user.
-     * Adds true if the user is mailing, false is invalid.
+     * Adds true if the user is mailing, false is not mailing.
      *
      * @param mailing the mailing of the user.
      * @return the user builder.

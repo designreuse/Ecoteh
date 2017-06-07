@@ -8,8 +8,9 @@ import org.springframework.data.repository.NoRepositoryBean;
  * The interface provides a set of standard JPA methods
  * for working objects which extends {@link ModelEntity} with a database.
  *
- * @param <T> Entity type, extends {@link ModelEntity}.
+ * @param <E> Entity type, extends {@link ModelEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ModelEntity
  */
 @NoRepositoryBean
 public interface DataRepository<E extends ModelEntity> extends JpaRepository<E, Long> {

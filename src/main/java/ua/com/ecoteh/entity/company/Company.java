@@ -44,12 +44,12 @@ public final class Company extends Content {
     private final String senderEmail;
 
     /**
-     * The sender password of a company.
+     * The sender password of this company.
      */
     private final String senderPass;
 
     /**
-     * The start work time of a company.
+     * The start work time of this company.
      */
     private final String workTimeFrom;
 

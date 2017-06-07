@@ -19,27 +19,27 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder> {
 
     /**
-     * The number of a new  article.
+     * The number of a new article.
      */
     private String number;
 
     /**
-     * The text of a new  article.
+     * The text of a new article.
      */
     private String text;
 
     /**
-     * The date of a new  article.
+     * The date of a new article.
      */
     private Date date;
 
     /**
-     * The price of a new  article.
+     * The price of a new article.
      */
     private String price;
 
     /**
-     * The category of a new  article.
+     * The category of a new article.
      */
     private Category category;
 

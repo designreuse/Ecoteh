@@ -10,6 +10,7 @@ import java.util.List;
  * for working {@link FileEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see FileEntity
  */
 public interface FileRepository extends DataRepository<FileEntity> {
 

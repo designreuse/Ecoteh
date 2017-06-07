@@ -16,17 +16,17 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
 
     /**
-     * The title of a new  file.
+     * The title of a new file.
      */
     private String title;
 
     /**
-     * The URL of a new  file.
+     * The URL of a new file.
      */
     private String url;
 
     /**
-     * The type of a new  file.
+     * The type of a new file.
      */
     private FileType type;
 

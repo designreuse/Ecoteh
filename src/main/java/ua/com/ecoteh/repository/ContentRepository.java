@@ -9,6 +9,7 @@ import org.springframework.data.repository.NoRepositoryBean;
  *
  * @param <E> Entity type, extends {@link ContentEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ContentEntity
  */
 @NoRepositoryBean
 public interface ContentRepository<E extends ContentEntity> extends DataRepository<E> {

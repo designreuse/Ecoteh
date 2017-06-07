@@ -49,14 +49,12 @@ public final class User extends Model implements UserDetails {
     private final String password;
 
     /**
-     * The tagline of this user.
+     * The description of this user.
      */
     private final String description;
 
     /**
      * The user contacts.
-     *
-     * @see Contacts
      */
     private final Contacts contacts;
 

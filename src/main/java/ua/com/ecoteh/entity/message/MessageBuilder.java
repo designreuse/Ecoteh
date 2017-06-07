@@ -23,17 +23,17 @@ public final class MessageBuilder extends ModelBuilder<Message, MessageBuilder> 
     private User user;
 
     /**
-     * The subject of this message.
+     * The subject of a new message.
      */
     private String subject;
 
     /**
-     * The text of this message.
+     * The text of a new message.
      */
     private String text;
 
     /**
-     * The date of created this message.
+     * The date of created a new message.
      */
     private Date date;
 

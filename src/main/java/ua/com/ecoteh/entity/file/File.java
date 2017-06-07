@@ -21,17 +21,17 @@ public final class File extends Model {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The title of a fileEntity.
+     * The title of this file.
      */
     private final String title;
 
     /**
-     * The URL of a fileEntity.
+     * The URL of this file.
      */
     private final String url;
 
     /**
-     * The type of a fileEntity.
+     * The type of this file.
      */
     private final FileType type;
 
@@ -108,28 +108,28 @@ public final class File extends Model {
     }
 
     /**
-     * Returns a title of the fileEntity.
+     * Returns a title of the file.
      *
-     * @return The fileEntity title or empty string (newer null).
+     * @return The file title or empty string (newer null).
      */
     public String getTitle() {
         return this.title;
     }
 
     /**
-     * Returns a URL of the fileEntity.
+     * Returns a URL of the file.
      *
-     * @return The fileEntity URL or empty string (newer null).
+     * @return The file URL or empty string (newer null).
      */
     public String getUrl() {
         return this.url;
     }
 
     /**
-     * Returns a fileEntity type.
+     * Returns this file type.
      * Returns a enum object of the {@link FileType} class.
      *
-     * @return The fileEntity type (newer null).
+     * @return The file type (newer null).
      */
     public FileType getType() {
         return this.type;

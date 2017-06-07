@@ -1,6 +1,8 @@
 package ua.com.ecoteh.exception;
 
 /**
+ * Exception messages.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 public interface ExceptionMessage {
@@ -11,6 +13,9 @@ public interface ExceptionMessage {
     String INCOMING_OBJECT_IS_NULL_MESSAGE =
             "Incoming object of the %s class is null!";
 
+    /**
+     * The message that a incoming type is null.
+     */
     String INCOMING_TYPE_IS_NULL_MESSAGE =
             "Incoming %s type is null!";
 

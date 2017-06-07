@@ -39,8 +39,6 @@ public abstract class ContentBuilder<T extends Content, B extends ContentBuilder
 
     /**
      * The logo of a new content.
-     *
-     * @see File
      */
     private File logo;
 

@@ -10,6 +10,7 @@ import java.util.List;
  * for working {@link CompanyEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see CompanyEntity
  */
 public interface CompanyRepository extends ContentRepository<CompanyEntity> {
 
@@ -19,6 +20,7 @@ public interface CompanyRepository extends ContentRepository<CompanyEntity> {
      *
      * @param type the type of a company to return.
      * @return The objects of class {@link CompanyEntity}.
+     * @see CompanyType
      */
     List<CompanyEntity> findByType(CompanyType type);
 

@@ -7,6 +7,7 @@ import ua.com.ecoteh.entity.category.CategoryEntity;
  * for working {@link CategoryEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see CategoryEntity
  */
 public interface CategoryRepository extends ContentRepository<CategoryEntity> {
 }

@@ -7,6 +7,7 @@ import ua.com.ecoteh.entity.user.UserEntity;
  * for working {@link UserEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see UserEntity
  */
 public interface UserRepository extends DataRepository<UserEntity> {
 
@@ -59,6 +60,7 @@ public interface UserRepository extends DataRepository<UserEntity> {
      *
      * @param email the E-mail of a user to return.
      * @return The object of class {@link UserEntity}.
+     * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
     UserEntity findByContactsEntityEmail(String email);
 
@@ -68,6 +70,7 @@ public interface UserRepository extends DataRepository<UserEntity> {
      *
      * @param phone the mobile phone of a user to return.
      * @return The object of class {@link UserEntity}.
+     * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
     UserEntity findByContactsEntityMobilePhone(String phone);
 
@@ -77,6 +80,7 @@ public interface UserRepository extends DataRepository<UserEntity> {
      *
      * @param phone the landline phone of a user to return.
      * @return The object of class {@link UserEntity}.
+     * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
     UserEntity findByContactsEntityLandlinePhone(String phone);
 
@@ -86,6 +90,7 @@ public interface UserRepository extends DataRepository<UserEntity> {
      *
      * @param fax the fax phone of a user to return.
      * @return The object of class {@link UserEntity}.
+     * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
     UserEntity findByContactsEntityFax(String fax);
 }

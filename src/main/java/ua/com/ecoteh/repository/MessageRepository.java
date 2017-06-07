@@ -7,6 +7,7 @@ import ua.com.ecoteh.entity.message.MessageEntity;
  * for working {@link MessageEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see MessageEntity
  */
 public interface MessageRepository extends DataRepository<MessageEntity> {
 }

@@ -14,37 +14,37 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder> {
 
     /**
-     * The tagline of this company.
+     * The tagline of a new company.
      */
     private String tagline;
 
     /**
-     * The information of this company.
+     * The information of a new company.
      */
     private String information;
 
     /**
-     * The domain of this company.
+     * The domain of a new company.
      */
     private String domain;
 
     /**
-     * The sender E-mail of this company.
+     * The sender E-mail of a new company.
      */
     private String senderEmail;
 
     /**
-     * The sender password of this company.
+     * The sender password of a new company.
      */
     private String senderPass;
 
     /**
-     * The start work time of this company.
+     * The start work time of a new company.
      */
     private String workTimeFrom;
 
     /**
-     * The finish work time of this company.
+     * The finish work time of a new company.
      */
     private String workTimeTo;
 
@@ -59,7 +59,7 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
     private Address address;
 
     /**
-     * The type of this company.
+     * The type of a new company.
      */
     private CompanyType type;
 

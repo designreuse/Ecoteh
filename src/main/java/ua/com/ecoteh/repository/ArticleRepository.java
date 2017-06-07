@@ -9,6 +9,7 @@ import java.util.List;
  * {@link ArticleEntity} objects with a database.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see ArticleEntity
  */
 public interface ArticleRepository extends ContentRepository<ArticleEntity> {
 
@@ -25,7 +26,7 @@ public interface ArticleRepository extends ContentRepository<ArticleEntity> {
      * Returns all articles from a database,
      * which matches the parameter category id.
      *
-     * @param id the category id of a article to return.
+     * @param id the category id of a articles to return.
      * @return The object of class {@link ArticleEntity}.
      */
     List<ArticleEntity> findByCategoryEntityId(long id);
@@ -36,6 +37,7 @@ public interface ArticleRepository extends ContentRepository<ArticleEntity> {
      *
      * @param title the category title of a articles to return.
      * @return The object of class {@link ArticleEntity}.
+     * @see ua.com.ecoteh.entity.category.CategoryEntity
      */
     List<ArticleEntity> findByCategoryEntityTitle(String title);
 
