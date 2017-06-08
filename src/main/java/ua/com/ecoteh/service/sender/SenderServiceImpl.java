@@ -1,8 +1,8 @@
 package ua.com.ecoteh.service.sender;
 
-import ua.com.ecoteh.entity.user.UserEntity;
-import ua.com.ecoteh.util.sender.EmailSender;
 import org.springframework.stereotype.Service;
+import ua.com.ecoteh.entity.user.User;
+import ua.com.ecoteh.util.sender.EmailSender;
 
 import java.util.Collection;
 
@@ -77,12 +77,12 @@ public final class SenderServiceImpl implements SenderService {
             final String subject,
             final String text,
             final String recipientEmail,
-            final UserEntity sender
+            final User sender
     ) {
         if (isNotNull(sender)) {
             send(
                     subject, text, recipientEmail,
-                    sender.getContactsEntity().getEmail(), sender.getPassword()
+                    sender.getContacts().getEmail(), sender.getPassword()
             );
         }
     }
@@ -100,12 +100,12 @@ public final class SenderServiceImpl implements SenderService {
             final String subject,
             final String text,
             final String[] recipientEmails,
-            final UserEntity sender
+            final User sender
     ) {
         if (isNotNull(sender)) {
             send(
                     subject, text, recipientEmails,
-                    sender.getContactsEntity().getEmail(), sender.getPassword()
+                    sender.getContacts().getEmail(), sender.getPassword()
             );
         }
     }
@@ -122,11 +122,11 @@ public final class SenderServiceImpl implements SenderService {
     public void send(
             final String subject,
             final String text,
-            final UserEntity recipient,
-            final UserEntity sender
+            final User recipient,
+            final User sender
     ) {
         if (isMailingRecipient(recipient)) {
-            send(subject, text, recipient.getContactsEntity().getEmail(), sender);
+            send(subject, text, recipient.getContacts().getEmail(), sender);
         }
     }
 
@@ -142,11 +142,11 @@ public final class SenderServiceImpl implements SenderService {
     public void send(
             final String subject,
             final String text,
-            final Collection<UserEntity> recipients,
-            final UserEntity sender
+            final Collection<User> recipients,
+            final User sender
     ) {
         if (isNotEmpty(recipients)) {
-            for (UserEntity recipient : recipients) {
+            for (User recipient : recipients) {
                 send(subject, text, recipient, sender);
             }
         }
@@ -165,7 +165,7 @@ public final class SenderServiceImpl implements SenderService {
     public void send(
             final String subject,
             final String text,
-            final Collection<UserEntity> recipients,
+            final Collection<User> recipients,
             final String senderEmail,
             final String senderEmailPass
     ) {
@@ -174,7 +174,7 @@ public final class SenderServiceImpl implements SenderService {
                     .filter(this::isMailingRecipient)
                     .forEach(
                             recipient -> send(
-                                    subject, text, recipient.getContactsEntity().getEmail(),
+                                    subject, text, recipient.getContacts().getEmail(),
                                     senderEmail, senderEmailPass
                             )
                     );
@@ -198,7 +198,7 @@ public final class SenderServiceImpl implements SenderService {
      * @param recipient the recipient to check.
      * @return true if the recipient is not null and it is mailing.
      */
-    private boolean isMailingRecipient(final UserEntity recipient) {
+    private boolean isMailingRecipient(final User recipient) {
         return isNotNull(recipient) && recipient.isMailing();
     }
 }

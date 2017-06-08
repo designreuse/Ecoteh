@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.article.ArticleEntity;
 import ua.com.ecoteh.entity.category.CategoryEntity;
 import ua.com.ecoteh.entity.company.CompanyEntity;
-import ua.com.ecoteh.entity.model.ModelEntity;
+import ua.com.ecoteh.entity.model.Model;
 import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.service.data.*;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
@@ -16,6 +16,7 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.com.ecoteh.service.search.DefaultPage.*;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
@@ -28,49 +29,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
 public class SearchServiceImpl implements SearchService {
-
-    /**
-     * The keywords of home page.
-     */
-    private final static String HOME_KEYWORDS = "домой, главная, index, home";
-
-    /**
-     * The keywords of page with all categories.
-     */
-    private final static String ALL_CATEGORIES_KEYWORDS = "все категории, all categories";
-
-    /**
-     * The keywords of page with all articles.
-     */
-    private final static String ALL_ARTICLES_KEYWORDS = "все статьи, all articles";
-
-    /**
-     * The keywords of page with information about main company.
-     */
-    private final static String ABOUT_COMPANY_KEYWORDS = "о компании, описание, main company, " +
-            "about company, about main company";
-
-    /**
-     * The keywords of page with contacts of main company.
-     */
-    private final static String CONTACTS_KEYWORDS = "контакты, позвонить, номер телефона, адресс, " +
-            "как доехать, почта, электронная почта, e-mail, contacts, address";
-
-    /**
-     * The keywords of page with all companies.
-     */
-    private final static String COMPANY_KEYWORDS = "все партнеры, все компании, " +
-            "all company, all partners";
-
-    /**
-     * The keywords of page with all responses.
-     */
-    private final static String RESPONSES_KEYWORDS = "все отзывы, all responses";
-
-    /**
-     * The keywords of page with personnel.
-     */
-    private final static String USER_KEYWORDS = "персонал, работники";
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -176,21 +134,21 @@ public class SearchServiceImpl implements SearchService {
         final String temp = keywords.toLowerCase();
         String viewName = "";
         if (HOME_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/home";
+            viewName = HOME_URL;
         } else if (ALL_CATEGORIES_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/category/all";
+            viewName = ALL_CATEGORIES_URL;
         } else if (ALL_ARTICLES_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/article/all";
+            viewName = ALL_ARTICLES_URL;
         } else if (ABOUT_COMPANY_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/company/main";
+            viewName = ABOUT_COMPANY_URL;
         } else if (CONTACTS_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/contacts";
+            viewName = CONTACTS_URL;
         } else if (COMPANY_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/company/all";
+            viewName = COMPANY_URL;
         } else if (RESPONSES_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/responses";
-        } else if (USER_KEYWORDS.contains(temp)) {
-            viewName = "redirect:/company/main";
+            viewName = RESPONSES_URL;
+        } else if (USERS_KEYWORDS.contains(temp)) {
+            viewName = USERS_URL;
         }
         modelAndView.setViewName(viewName);
         return isNotEmpty(viewName);
@@ -311,7 +269,7 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for some content and adds it to modelAndView.
      *
-     * @param <T>          the entity type, extends {@link ModelEntity}.
+     * @param <T>          the entity type, extends {@link Model}.
      * @param keywordArray the keyword array for content search.
      * @param howSearch    the search mode.
      * @param dataService  the implementation of the interface describes a set
@@ -319,7 +277,7 @@ public class SearchServiceImpl implements SearchService {
      * @param name         the name of the object to add in modelAndView.
      * @param modelAndView the object of class ModelAndView for to update.
      */
-    private <T extends ModelEntity> void searchFromModelAndAdd(
+    private <T extends Model> void searchFromModelAndAdd(
             final String[] keywordArray,
             final boolean howSearch,
             final DataService<T> dataService,
@@ -333,14 +291,14 @@ public class SearchServiceImpl implements SearchService {
     /**
      * Searches for some content.
      *
-     * @param <T>          the entity type, extends {@link ModelEntity}.
+     * @param <T>          the entity type, extends {@link Model}.
      * @param keywordArray the keyword array for content search.
      * @param howSearch    the search mode.
      * @param dataService  the implementation of the interface describes a set
      *                     of methods for working with objects.
      * @return The list of found objects.
      */
-    private <T extends ModelEntity> List<T> searchFromModel(
+    private <T extends Model> List<T> searchFromModel(
             final String[] keywordArray,
             final boolean howSearch,
             final DataService<T> dataService
@@ -351,7 +309,7 @@ public class SearchServiceImpl implements SearchService {
                 if (howSearch) {
                     keyword = " " + keyword + " ";
                 }
-                if (model.toString().toLowerCase().contains(keyword)) {
+                if (model.toString().toLowerCase().contains(keyword.toLowerCase())) {
                     models.add(model);
                     break;
                 }

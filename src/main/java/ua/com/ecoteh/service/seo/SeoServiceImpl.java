@@ -2,6 +2,7 @@ package ua.com.ecoteh.service.seo;
 
 import ua.com.ecoteh.entity.article.ArticleEntity;
 import ua.com.ecoteh.entity.category.CategoryEntity;
+import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.company.CompanyEntity;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
@@ -115,13 +116,7 @@ public final class SeoServiceImpl implements SeoService {
      */
     private ModelAndView createRobotsTxt() {
         final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(
-                "domain",
-                this.companyService.getMainCompany()
-                        .getDomain()
-                        .replace("http://", "")
-                        .replace("https://", "")
-        );
+        modelAndView.addObject("domain", getMainCompanyDomain());
         modelAndView.setViewName("seo/robots");
         return modelAndView;
     }
@@ -133,17 +128,20 @@ public final class SeoServiceImpl implements SeoService {
      */
     private ModelAndView createSitemap() {
         final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(
-                "domain",
-                this.companyService.getMainCompany()
-                        .getDomain()
-                        .replace("http://", "")
-                        .replace("https://", "")
-        );
+        modelAndView.addObject("domain", getMainCompanyDomain());
         modelAndView.addObject("categories", this.categoryService.getAll());
         modelAndView.addObject("articles", this.articleService.getAll());
         modelAndView.addObject("companies", this.companyService.getPartners(true));
         modelAndView.setViewName("seo/sitemap");
         return modelAndView;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private String getMainCompanyDomain() {
+        final Company mainCompany = this.companyService.getMainCompany();
+        return mainCompany.getDomain().replace("http://", "").replace("https://", "");
     }
 }

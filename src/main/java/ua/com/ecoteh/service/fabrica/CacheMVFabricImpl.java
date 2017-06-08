@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ua.com.ecoteh.util.cache.Cache;
 import org.springframework.web.servlet.ModelAndView;
 
+import static ua.com.ecoteh.service.fabrica.CachePageKey.*;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
@@ -15,86 +16,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  */
 @Service
 public final class CacheMVFabricImpl implements CacheMVFabric {
-
-    /**
-     * The home page key.
-     */
-    private final static String HOME_PAGE_KEY = "Home";
-
-    /**
-     * The all categories page key.
-     */
-    private final static String ALL_CATEGORIES_KEY = "All Categories";
-
-    /**
-     * The all articles page key.
-     */
-    private final static String ALL_ARTICLES_KEY = "All Articles";
-
-    /**
-     * The all sort articles page key.
-     */
-    private final static String ALL_SORT_ARTICLES_KEY = "All sort Articles";
-
-    /**
-     * The main company page key.
-     */
-    private final static String MAIN_COMPANY_KEY = "Main CompanyEntity";
-
-    /**
-     * The contacts (address) page key.
-     */
-    private final static String CONTACTS_KEY = "ContactsEntity";
-
-    /**
-     * The all partners companies page key.
-     */
-    private final static String ALL_PARTNERS_KEY = "All Partners";
-
-    /**
-     * The all sort partners companies page key.
-     */
-    private final static String ALL_SORT_PARTNERS_KEY = "All Sort Partners";
-
-    /**
-     * The category by URL page key.
-     */
-    private final static String CATEGORY_BY_URL_KEY = "CategoryEntity By URL ";
-
-    /**
-     * The category by RUL with sort articles page key.
-     */
-    private final static String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "CategoryEntity By URL with sort articles";
-
-    /**
-     * The article by URL page key.
-     */
-    private final static String ARTICLE_BY_URL_KEY = "ArticleEntity By URL";
-
-    /**
-     * The article by number page key.
-     */
-    private final static String ARTICLE_BY_NUMBER_KEY = "ArticleEntity By Number";
-
-    /**
-     * The company by URL page key.
-     */
-    private final static String COMPANY_BY_URL_KEY = "CompanyEntity by URL";
-
-    /**
-     * The all responses page key.
-     */
-    private final static String ALL_RESPONSES_KEY = "All Responses";
-
-    /**
-     * The all sort responses page key.
-     */
-    private final static String ALL_SORT_RESPONSES_KEY = "All Sort Responses";
-
-    /**
-     * The default modelAndView key.
-     */
-    private final static String DEFAULT_MAV_KEY = "Default ModelAndView";
 
     /**
      * The interface provides a set of standard methods for creates
@@ -430,7 +351,8 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @return The model and view with key.
      */
     private ModelAndView getFromCache(final String key) {
-        return (ModelAndView) Cache.get(getKey(key));
+        final String cacheKey = prepareKey(key);
+        return (ModelAndView) Cache.get(cacheKey);
     }
 
     /**
@@ -439,11 +361,9 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param key          the model and view key in the cache.
      * @param modelAndView the model and view to save.
      */
-    private void putToCache(
-            final ModelAndView modelAndView,
-            final String key
-    ) {
-        Cache.put(getKey(key), modelAndView);
+    private void putToCache(final ModelAndView modelAndView, final String key) {
+        final String cacheKey = prepareKey(key);
+        Cache.put(cacheKey, modelAndView);
     }
 
     /**
@@ -452,7 +372,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      * @param key the input key.
      * @return The key to cache.
      */
-    private String getKey(final String key) {
+    private String prepareKey(final String key) {
         return key + (isValidContent() ? " for client" : " for admin");
     }
 }
