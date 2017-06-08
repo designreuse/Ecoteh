@@ -133,7 +133,7 @@ DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE `contacts` (
   `id`             INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `mobile_phone`   VARCHAR(100)     NOT NULL DEFAULT '',
-  `landline_phone` VARCHAR(100)     NOT NULL DEFAULT '',
+  `landlines_phone` VARCHAR(100)     NOT NULL DEFAULT '',
   `fax`            VARCHAR(100)     NOT NULL DEFAULT '',
   `email`          VARCHAR(100)     NOT NULL DEFAULT '',
   `vkontakte`      VARCHAR(200)     NOT NULL DEFAULT '',
