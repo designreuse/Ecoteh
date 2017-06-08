@@ -40,7 +40,7 @@ final class ContactsEntityConverter extends ModelEntityConverter<ContactsEntity,
                 .addValidated(this.entity.isValidated())
                 .addEmail(this.entity.getEmail())
                 .addMobilePhone(this.entity.getMobilePhone())
-                .addLandlinePhone(this.entity.getLandlinePhone())
+                .addLandlinePhone(this.entity.getLandlinesPhone())
                 .addFax(this.entity.getFax())
                 .addVkontakte(this.entity.getVkontakte())
                 .addFacebook(this.entity.getFacebook())

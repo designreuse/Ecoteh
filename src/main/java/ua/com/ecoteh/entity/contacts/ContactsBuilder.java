@@ -25,9 +25,9 @@ public final class ContactsBuilder extends ModelBuilder<Contacts, ContactsBuilde
     private String mobilePhone;
 
     /**
-     * The landline phone number.
+     * The landlines phone number.
      */
-    private String landlinePhone;
+    private String landlinesPhone;
 
     /**
      * The fax number.
@@ -70,7 +70,7 @@ public final class ContactsBuilder extends ModelBuilder<Contacts, ContactsBuilde
         return new Contacts(
                 getId(), isValidated(),
                 getEmail(), getMobilePhone(),
-                getLandlinePhone(), getFax(),
+                getLandlinesPhone(), getFax(),
                 getVkontakte(), getFacebook(),
                 getTwitter(), getSkype()
         );
@@ -99,13 +99,13 @@ public final class ContactsBuilder extends ModelBuilder<Contacts, ContactsBuilde
     }
 
     /**
-     * Adds a new landline phone number to a new contacts.
+     * Adds a new landlines phone number to a new contacts.
      *
-     * @param landlinePhone the new landline phone number to a new contacts.
+     * @param landlinesPhone the new landlines phone number to a new contacts.
      * @return the contacts builder.
      */
-    public ContactsBuilder addLandlinePhone(final String landlinePhone) {
-        this.landlinePhone = landlinePhone;
+    public ContactsBuilder addLandlinePhone(final String landlinesPhone) {
+        this.landlinesPhone = landlinesPhone;
         return this;
     }
 
@@ -185,13 +185,13 @@ public final class ContactsBuilder extends ModelBuilder<Contacts, ContactsBuilde
     }
 
     /**
-     * Returns a landline phone number of a new contacts.
-     * Returns an empty string if the landline phone number is null or empty.
+     * Returns a landlines phone number of a new contacts.
+     * Returns an empty string if the landlines phone number is null or empty.
      *
-     * @return The landline phone number or empty string (newer null).
+     * @return The landlines phone number or empty string (newer null).
      */
-    private String getLandlinePhone() {
-        return isNotEmpty(this.landlinePhone) ? this.landlinePhone : "";
+    private String getLandlinesPhone() {
+        return isNotEmpty(this.landlinesPhone) ? this.landlinesPhone : "";
     }
 
     /**

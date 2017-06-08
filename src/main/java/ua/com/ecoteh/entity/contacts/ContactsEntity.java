@@ -38,10 +38,10 @@ public class ContactsEntity extends ModelEntity {
     private String mobilePhone;
 
     /**
-     * The landline phone number.
+     * The landlines phone number.
      */
-    @Column(name = "landline_phone", nullable = false)
-    private String landlinePhone;
+    @Column(name = "landlines_phone", nullable = false)
+    private String landlinesPhone;
 
     /**
      * The fax number.
@@ -86,7 +86,7 @@ public class ContactsEntity extends ModelEntity {
         return "ContactsEntity{" + super.toString() +
                 ", email='" + this.email + '\'' +
                 ", mobilePhone='" + this.mobilePhone + '\'' +
-                ", landlinePhone='" + this.landlinePhone + '\'' +
+                ", landlinesPhone='" + this.landlinesPhone + '\'' +
                 ", fax='" + this.fax + '\'' +
                 ", vkontakte='" + this.vkontakte + '\'' +
                 ", facebook='" + this.facebook + '\'' +
@@ -109,7 +109,7 @@ public class ContactsEntity extends ModelEntity {
             final ContactsEntity other = (ContactsEntity) object;
             result = this.email.equalsIgnoreCase(other.email) &&
                     this.mobilePhone.equalsIgnoreCase(other.mobilePhone) &&
-                    this.landlinePhone.equalsIgnoreCase(other.landlinePhone) &&
+                    this.landlinesPhone.equalsIgnoreCase(other.landlinesPhone) &&
                     this.fax.equalsIgnoreCase(other.fax) &&
                     this.vkontakte.equalsIgnoreCase(other.vkontakte) &&
                     this.facebook.equalsIgnoreCase(other.facebook) &&
@@ -130,7 +130,7 @@ public class ContactsEntity extends ModelEntity {
     public int hashCode() {
         return this.email.hashCode() +
                 this.mobilePhone.hashCode() +
-                this.landlinePhone.hashCode() +
+                this.landlinesPhone.hashCode() +
                 this.fax.hashCode() +
                 this.vkontakte.hashCode() +
                 this.facebook.hashCode() +
@@ -185,21 +185,21 @@ public class ContactsEntity extends ModelEntity {
     }
 
     /**
-     * Returns a landline phone number of the contacts entity.
+     * Returns a landlines phone number of the contacts entity.
      *
-     * @return The contacts entity landline phone number or empty string (newer null).
+     * @return The contacts entity landlines phone number or empty string (newer null).
      */
-    public String getLandlinePhone() {
-        return this.landlinePhone;
+    public String getLandlinesPhone() {
+        return this.landlinesPhone;
     }
 
     /**
-     * Sets a new landline phone number to the contacts entity.
+     * Sets a new landlines phone number to the contacts entity.
      *
-     * @param landlinePhone the new landline phone number to the contacts entity.
+     * @param landlinesPhone the new landlines phone number to the contacts entity.
      */
-    public void setLandlinePhone(final String landlinePhone) {
-        this.landlinePhone = landlinePhone;
+    public void setLandlinesPhone(final String landlinesPhone) {
+        this.landlinesPhone = landlinesPhone;
     }
 
     /**

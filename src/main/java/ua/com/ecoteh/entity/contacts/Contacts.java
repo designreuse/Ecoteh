@@ -30,9 +30,9 @@ public final class Contacts extends Model {
     private final String mobilePhone;
 
     /**
-     * The landline phone number.
+     * The landlines phone number.
      */
-    private final String landlinePhone;
+    private final String landlinesPhone;
 
     /**
      * The fax number.
@@ -66,7 +66,7 @@ public final class Contacts extends Model {
      * @param validated     the validations of a new contacts.
      * @param email         the E-mail of a new contacts.
      * @param mobilePhone   the mobile phone of a new contacts.
-     * @param landlinePhone the landline phone of a new contacts.
+     * @param landlinesPhone the landlines phone of a new contacts.
      * @param fax           the fax of a new contacts.
      * @param vkontakte     the Vkontakte URL of a new contacts.
      * @param facebook      the Facebook URL of a new contacts.
@@ -76,14 +76,14 @@ public final class Contacts extends Model {
     Contacts(
             final long id, final boolean validated,
             final String email, final String mobilePhone,
-            final String landlinePhone, final String fax,
+            final String landlinesPhone, final String fax,
             final String vkontakte, final String facebook,
             final String twitter, final String skype
     ) {
         super(id, validated);
         this.email = email;
         this.mobilePhone = mobilePhone;
-        this.landlinePhone = landlinePhone;
+        this.landlinesPhone = landlinesPhone;
         this.fax = fax;
         this.vkontakte = vkontakte;
         this.facebook = facebook;
@@ -101,7 +101,7 @@ public final class Contacts extends Model {
         return "Contacts{" + super.toString() +
                 ", email='" + this.email + '\'' +
                 ", mobilePhone='" + this.mobilePhone + '\'' +
-                ", landlinePhone='" + this.landlinePhone + '\'' +
+                ", landlinesPhone='" + this.landlinesPhone + '\'' +
                 ", fax='" + this.fax + '\'' +
                 ", vkontakte='" + this.vkontakte + '\'' +
                 ", facebook='" + this.facebook + '\'' +
@@ -124,7 +124,7 @@ public final class Contacts extends Model {
             final Contacts other = (Contacts) object;
             result = this.email.equalsIgnoreCase(other.email) &&
                     this.mobilePhone.equalsIgnoreCase(other.mobilePhone) &&
-                    this.landlinePhone.equalsIgnoreCase(other.landlinePhone) &&
+                    this.landlinesPhone.equalsIgnoreCase(other.landlinesPhone) &&
                     this.fax.equalsIgnoreCase(other.fax) &&
                     this.vkontakte.equalsIgnoreCase(other.vkontakte) &&
                     this.facebook.equalsIgnoreCase(other.facebook) &&
@@ -145,7 +145,7 @@ public final class Contacts extends Model {
     public int hashCode() {
         return this.email.hashCode() +
                 this.mobilePhone.hashCode() +
-                this.landlinePhone.hashCode() +
+                this.landlinesPhone.hashCode() +
                 this.fax.hashCode() +
                 this.vkontakte.hashCode() +
                 this.facebook.hashCode() +
@@ -172,12 +172,12 @@ public final class Contacts extends Model {
     }
 
     /**
-     * Returns a landline phone number of the contacts.
+     * Returns a landlines phone number of the contacts.
      *
-     * @return The landline phone number or empty string (newer null).
+     * @return The landlines phone number or empty string (newer null).
      */
-    public String getLandlinePhone() {
-        return this.landlinePhone;
+    public String getLandlinesPhone() {
+        return this.landlinesPhone;
     }
 
     /**

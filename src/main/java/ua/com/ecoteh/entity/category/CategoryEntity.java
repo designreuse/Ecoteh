@@ -32,9 +32,10 @@ public class CategoryEntity extends ContentEntity {
             mappedBy = "categoryEntity",
             fetch = FetchType.LAZY,
             cascade = {
-                    CascadeType.PERSIST,
+                    CascadeType.REMOVE,
+                    /*CascadeType.PERSIST,
                     CascadeType.MERGE,
-                    CascadeType.REFRESH
+                    CascadeType.REFRESH*/
             }
     )
     private Collection<ArticleEntity> articles;

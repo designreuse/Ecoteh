@@ -39,7 +39,7 @@ final class ContactsConverter extends ModelConverter<Contacts, ContactsEntity> {
         contactsEntity.setValidated(this.contacts.isValidated());
         contactsEntity.setEmail(this.contacts.getEmail());
         contactsEntity.setMobilePhone(this.contacts.getMobilePhone());
-        contactsEntity.setLandlinePhone(this.contacts.getLandlinePhone());
+        contactsEntity.setLandlinesPhone(this.contacts.getLandlinesPhone());
         contactsEntity.setFax(this.contacts.getFax());
         contactsEntity.setVkontakte(this.contacts.getVkontakte());
         contactsEntity.setFacebook(this.contacts.getFacebook());

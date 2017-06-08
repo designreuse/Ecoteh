@@ -112,6 +112,16 @@ public final class ResponseEditor extends ModelEditor<Response, ResponseEditor> 
     }
 
     /**
+     * Changes response validation.
+     *
+     * @return the response editor.
+     */
+    public ResponseEditor reverseValidated() {
+        final boolean valid = this.response.isValidated();
+        return addValidated(!valid);
+    }
+
+    /**
      * Returns a new username of the address.
      * Returns the response username if the username is null.
      *

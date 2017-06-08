@@ -29,9 +29,9 @@ public final class ContactsEditor extends ModelEditor<Contacts, ContactsEditor> 
     private String mobilePhone;
 
     /**
-     * The landline phone number.
+     * The landlines phone number.
      */
-    private String landlinePhone;
+    private String landlinesPhone;
 
     /**
      * The fax number.
@@ -80,7 +80,7 @@ public final class ContactsEditor extends ModelEditor<Contacts, ContactsEditor> 
                 .addValidated(isValidated())
                 .addEmail(getEmail())
                 .addMobilePhone(getMobilePhone())
-                .addLandlinePhone(getLandlinePhone())
+                .addLandlinePhone(getLandlinesPhone())
                 .addFax(getFax())
                 .addVkontakte(getVkontakte())
                 .addFacebook(getFacebook())
@@ -101,7 +101,7 @@ public final class ContactsEditor extends ModelEditor<Contacts, ContactsEditor> 
             super.copy(contacts)
                     .addEmail(contacts.getEmail())
                     .addMobilePhone(contacts.getMobilePhone())
-                    .addLandlinePhone(contacts.getLandlinePhone())
+                    .addLandlinesPhone(contacts.getLandlinesPhone())
                     .addFax(contacts.getFax())
                     .addVkontakte(contacts.getVkontakte())
                     .addFacebook(contacts.getFacebook())
@@ -134,13 +134,13 @@ public final class ContactsEditor extends ModelEditor<Contacts, ContactsEditor> 
     }
 
     /**
-     * Adds a new landline phone number to the contacts.
+     * Adds a new landlines phone number to the contacts.
      *
-     * @param landlinePhone the new landline phone number to the contacts.
+     * @param landlinesPhone the new landlines phone number to the contacts.
      * @return the contacts editor.
      */
-    public ContactsEditor addLandlinePhone(final String landlinePhone) {
-        this.landlinePhone = landlinePhone;
+    public ContactsEditor addLandlinesPhone(final String landlinesPhone) {
+        this.landlinesPhone = landlinesPhone;
         return this;
     }
 
@@ -220,13 +220,13 @@ public final class ContactsEditor extends ModelEditor<Contacts, ContactsEditor> 
     }
 
     /**
-     * Returns a new landline phone number of the contacts.
-     * Returns the contacts landline phone number if the landline phone number is null.
+     * Returns a new landlines phone number of the contacts.
+     * Returns the contacts landlines phone number if the landlines phone number is null.
      *
-     * @return The landline phone number (newer null).
+     * @return The landlines phone number (newer null).
      */
-    private String getLandlinePhone() {
-        return isNotNull(this.landlinePhone) ? this.landlinePhone : this.contacts.getLandlinePhone();
+    private String getLandlinesPhone() {
+        return isNotNull(this.landlinesPhone) ? this.landlinesPhone : this.contacts.getLandlinesPhone();
     }
 
     /**

@@ -52,7 +52,7 @@ public class UserEntity extends ModelEntity {
     private String password;
 
     /**
-     * The tagline of this user entity.
+     * The description of this user entity.
      */
     @Column(name = "description", nullable = false)
     private String description;
