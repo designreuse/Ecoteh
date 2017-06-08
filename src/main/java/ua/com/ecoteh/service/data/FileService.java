@@ -16,55 +16,6 @@ import java.util.List;
 public interface FileService extends DataService<File> {
 
     /**
-     * Initializes, saves and returns a new file.
-     *
-     * @param title         the title of a new file.
-     * @param type          the type of a new file.
-     * @param multipartFile the multipart file of a new file.
-     * @return The new saving file.
-     */
-    File add(String title, FileType type, MultipartFile multipartFile);
-
-    /**
-     * Initializes, saves and returns a new file.
-     *
-     * @param title         the title of the a file.
-     * @param multipartFile the multipart file of a new file.
-     * @return The new saving file.
-     */
-    File add(String title, MultipartFile multipartFile);
-
-    /**
-     * Initializes, updates and returns file with incoming id.
-     *
-     * @param id            the id of a file to update.
-     * @param title         the new title to the file.
-     * @param type          the type of the new file.
-     * @param multipartFile the new multipart file to the file.
-     * @return The updating file with incoming id.
-     */
-    File update(
-            long id,
-            String title,
-            FileType type,
-            MultipartFile multipartFile
-    );
-
-    /**
-     * Initializes, updates and returns file with incoming id.
-     *
-     * @param id            the id of a file to update.
-     * @param title         the new title to a file.
-     * @param multipartFile the new multipart file to a file.
-     * @return The updating photo with incoming id.
-     */
-    File update(
-            long id,
-            String title,
-            MultipartFile multipartFile
-    );
-
-    /**
      * Returns file object with the incoming title.
      *
      * @param title the title of a file to return.
@@ -97,11 +48,11 @@ public interface FileService extends DataService<File> {
     /**
      * Sorts and returns file objects by title.
      *
-     * @param fileEntities  the fileEntities to sort.
+     * @param files  the fileEntities to sort.
      * @param revers is sort in descending or ascending.
      * @return The sorted list of fileEntities.
      */
-    List<File> sortByTitle(Collection<File> fileEntities, boolean revers);
+    List<File> sortByTitle(Collection<File> files, boolean revers);
 
     /**
      * Save a multipart file in the file system in the directory rootPath.
@@ -132,7 +83,7 @@ public interface FileService extends DataService<File> {
      * @param type the type of fileEntities to return.
      * @return The fileEntities with the incoming type.
      */
-    List<File> getByType(FileType type);
+    Collection<File> getByType(FileType type);
 
     /**
      * Returns last file with the incoming type.

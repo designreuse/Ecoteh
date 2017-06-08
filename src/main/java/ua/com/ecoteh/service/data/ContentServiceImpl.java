@@ -108,7 +108,7 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
                     getClassSimpleName(), title
             );
         }
-        return entity.convert();
+        return convertToModel(entity);
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
                     getClassSimpleName(), url
             );
         }
-        return entity.convert();
+        return convertToModel(entity);
     }
 
     /**
@@ -241,30 +241,5 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
      */
     static boolean isNewLogo(final File newLogo, final File oldLogo) {
         return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
-    }
-
-    /**
-     * Check the incoming content to not valid.
-     * ContentEntity is not valid if it is null or not valid.
-     * <pre>
-     *     isNotValidated(null, false) = true
-     *     isNotValidated(null, true) = true
-     *
-     *     ContentEntity content = new ContentEntity();
-     *     content.setValidated(false);
-     *     isNotValidated(content, false) = true
-     *     isNotValidated(content, true) = false
-     *
-     *     content.setValidated(true);
-     *     isNotValidated(content, false) = true
-     *     isNotValidated(content, true) = true
-     * </pre>
-     *
-     * @param entity  the content to check.
-     * @param isValid checks the incoming content to valid or not.
-     * @return true if the content is null or it is not valid.
-     */
-    boolean isNotValidated(final E entity, final boolean isValid) {
-        return isNull(entity) || (isValid && !entity.isValidated());
     }
 }

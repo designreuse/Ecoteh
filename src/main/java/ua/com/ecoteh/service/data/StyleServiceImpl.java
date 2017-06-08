@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import ua.com.ecoteh.util.compressor.CssCompressor;
 import ua.com.ecoteh.util.loader.FileContentsLoader;
+import ua.com.ecoteh.util.loader.Loader;
 import ua.com.ecoteh.util.properties.ContentProperties;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
@@ -88,7 +89,8 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public void rollback() {
-        save(read(DEFAULT_STYLES_PATH));
+        final String defaultStyles = read(DEFAULT_STYLES_PATH);
+        save(defaultStyles);
     }
 
     /**
@@ -106,7 +108,8 @@ public final class StyleServiceImpl implements StyleService {
      * @param styles the styles to write.
      */
     private void saveCompressStyles(final String styles) {
-        save(new CssCompressor().compress(styles), MIN_STYLES_PATH);
+        final String compressedStyles = new CssCompressor().compress(styles);
+        save(compressedStyles, MIN_STYLES_PATH);
     }
 
     /**
@@ -116,10 +119,9 @@ public final class StyleServiceImpl implements StyleService {
      * @param path   the path to a file.
      */
     private void save(final String styles, final String path) {
-        new FileContentsLoader(
-                getAbsolutePath(path),
-                styles
-        ).write();
+        final String absolutePath = getAbsolutePath(path);
+        final Loader loader = new FileContentsLoader(absolutePath, styles);
+        loader.write();
     }
 
     /**
@@ -129,9 +131,9 @@ public final class StyleServiceImpl implements StyleService {
      * @return The styles from a file.
      */
     private String read(final String path) {
-        return new FileContentsLoader(
-                getAbsolutePath(path)
-        ).read();
+        final String absolutePath = getAbsolutePath(path);
+        final Loader loader = new FileContentsLoader(absolutePath);
+        return loader.read();
     }
 
     /**

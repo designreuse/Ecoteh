@@ -15,9 +15,7 @@ import ua.com.ecoteh.util.loader.MultipartFileLoader;
 import ua.com.ecoteh.util.properties.ContentProperties;
 import ua.com.ecoteh.util.translator.Translator;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
@@ -69,94 +67,72 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     /**
      * Saves and returns a new fileEntity.
      *
-     * @param title         the title of a new fileEntity.
-     * @param type          the type of a new fileEntity.
-     * @param multipartFile the multipart fileEntity of a new fileEntity.
+     * @param file the title of a new fileEntity.
      * @return The new saving fileEntity (newer null).
      */
     @Override
     @Transactional
-    public File add(
-            final String title,
-            final FileType type,
-            final MultipartFile multipartFile
-    ) {
-        File file;
-        if (isNotEmpty(multipartFile)) {
-            isValidMultipartFile(multipartFile);
-            fileEntity = new FileEntity(title, createRelativePath(title, multipartFile));
-            fileEntity.setType(type);
-            saveFile(multipartFile, fileEntity.getUrl());
-            fileEntity = add(fileEntity);
-        } else {
-            fileEntity = new FileEntity();
+    public File add(final File file) {
+        if (isNull(file)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
-        return fileEntity;
+        final File savingFile;
+        final MultipartFile multipartFile = file.getMultipartFile();
+        if (isNotEmpty(file.getMultipartFile())) {
+            isValidMultipartFile(multipartFile);
+            saveFile(multipartFile, file.getUrl());
+            savingFile = super.add(file);
+        } else {
+            savingFile = File.getBuilder().build();
+        }
+        return savingFile;
     }
 
-    /**
-     * Saves and returns a new fileEntity.
-     *
-     * @param title         the title of a new fileEntity.
-     * @param multipartFile the multipart fileEntity of a new fileEntity.
-     * @return The new saving fileEntity (newer null).
-     */
     @Override
     @Transactional
-    public FileEntity add(
-            final String title,
-            final MultipartFile multipartFile
-    ) {
-        return add(title, FileType.ANOTHER, multipartFile);
+    public Collection<File> add(final Collection<File> files) {
+        final Collection<File> result;
+        if (isNotEmpty(files)) {
+            final Collection<FileEntity> entities = convertToEntities(files);
+            final Collection<FileEntity> savingEntities = this.repository.save(entities);
+            result = convertToModels(savingEntities);
+        } else {
+            result = Collections.emptyList();
+        }
+        return result;
     }
 
     /**
      * Initializes, updates and returns photo with incoming id.
      *
-     * @param id            the id of a fileEntity to update.
-     * @param title         the new title to a fileEntity.
-     * @param type          the new type of a fileEntity.
-     * @param multipartFile the new multipart fileEntity to a fileEntity.
+     * @param file the id of a fileEntity to update.
      * @return The updating photo with incoming id (newer null).
      * @throws IllegalArgumentException Throw exception when fileEntity is static.
      */
     @Override
     @Transactional
-    public FileEntity update(
-            final long id,
-            final String title,
-            final FileType type,
-            final MultipartFile multipartFile
-    ) {
-        final FileEntity fileEntity = get(id);
-        fileEntity.setTitle(title);
-        if (!fileEntity.getType().equals(FileType.STATIC)) {
-            fileEntity.setType(type);
+    public File update(final File file) {
+        if (isNull(file)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
-        if (isNotEmpty(multipartFile)) {
+        final File savingFile;
+        final MultipartFile multipartFile = file.getMultipartFile();
+        if (isNotEmpty(file.getMultipartFile())) {
             isValidMultipartFile(multipartFile);
-            deleteFile(fileEntity.getUrl());
-            saveFile(multipartFile, fileEntity.getUrl());
+            final File toUpdateFile = get(file.getId());
+            deleteFile(toUpdateFile.getUrl());
+            saveFile(multipartFile, file.getUrl());
+            savingFile = super.update(file);
+        } else {
+            savingFile = File.getBuilder().build();
         }
-        return update(fileEntity);
-    }
-
-    /**
-     * Initializes, updates and returns fileEntity with incoming id.
-     *
-     * @param id            a id of the fileEntity to update.
-     * @param title         a new title to the fileEntity.
-     * @param multipartFile a new multipart fileEntity to the fileEntity.
-     * @return The updating fileEntity with incoming id (newer null).
-     */
-    @Override
-    @Transactional
-    public FileEntity update(
-            final long id,
-            final String title,
-            final MultipartFile multipartFile
-    ) {
-        return update(id, title, FileType.ANOTHER, multipartFile);
+        return savingFile;
     }
 
     /**
@@ -170,14 +146,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional(readOnly = true)
-    public FileEntity getByTitle(final String title) throws IllegalArgumentException {
+    public File getByTitle(final String title) throws IllegalArgumentException {
         if (isEmpty(title)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_TITLE_MESSAGE,
                     getClassSimpleName()
             );
         }
-        return this.repository.findByTitle(title);
+        final FileEntity fileEntity = this.repository.findByTitle(title);
+        return convertToModel(fileEntity);
     }
 
     /**
@@ -190,14 +167,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional(readOnly = true)
-    public FileEntity getByUrl(final String url) throws IllegalArgumentException {
+    public File getByUrl(final String url) throws IllegalArgumentException {
         if (isEmpty(url)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_URL_MESSAGE,
                     getClassSimpleName()
             );
         }
-        return this.repository.findByUrl(url);
+        final FileEntity fileEntity = this.repository.findByUrl(url);
+        return convertToModel(fileEntity);
     }
 
     /**
@@ -229,30 +207,30 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * Removes fileEntity if it is not null.
      * If incoming fileEntity is static then throws IllegalArgumentException.
      *
-     * @param fileEntity the fileEntity to remove.
+     * @param file the fileEntity to remove.
      */
     @Override
     @Transactional
-    public void remove(final FileEntity fileEntity) throws IllegalArgumentException {
-        if (isNotNull(fileEntity)) {
-            if (isStaticFile(fileEntity)) {
+    public void remove(final File file) throws IllegalArgumentException {
+        if (isNotNull(file)) {
+            if (isStaticFile(file)) {
                 throw getIllegalArgumentException(ExceptionMessage.FORBIDDEN_STATIC_FILE_MESSAGE);
             }
-            deleteFile(fileEntity.getUrl());
-            super.remove(fileEntity);
+            deleteFile(file.getUrl());
+            super.remove(file);
         }
     }
 
     /**
      * Removes fileEntities if are not empty.
      *
-     * @param fileEntities the fileEntities to remove.
+     * @param files the fileEntities to remove.
      */
     @Override
     @Transactional
-    public void remove(final Collection<FileEntity> fileEntities) {
-        if (isNotEmpty(fileEntities)) {
-            fileEntities.forEach(this::remove);
+    public void remove(final Collection<File> files) {
+        if (isNotEmpty(files)) {
+            files.forEach(this::remove);
         }
     }
 
@@ -279,9 +257,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
             final String rootPath
     ) {
         if (isNotEmpty(file)) {
-            new MultipartFileLoader(
-                    file, createAbsolutePath(file, rootPath)
-            ).write();
+            final String absolutePath = createAbsolutePath(file, rootPath);
+            new MultipartFileLoader(file, absolutePath).write();
         }
     }
 
@@ -307,26 +284,26 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional
     public boolean deleteFile(final String path) {
-        return new MultipartFileLoader(
-                createAbsolutePath(path)
-        ).delete();
+        final String absolutePath = createAbsolutePath(path);
+        return new MultipartFileLoader(absolutePath).delete();
     }
 
     /**
      * Sorts and returns fileEntity objects by title.
      * For sorting used {@link FileComparator.ByTitle} comparator.
      *
-     * @param fileEntities  the fileEntities to sort.
-     * @param revers is sort in descending or ascending.
+     * @param fileEntities the fileEntities to sort.
+     * @param revers       is sort in descending or ascending.
      * @return The sorted list of fileEntities (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<FileEntity> sortByTitle(
-            final Collection<FileEntity> fileEntities,
+    public List<File> sortByTitle(
+            final Collection<File> fileEntities,
             final boolean revers
     ) {
-        return sort(fileEntities, new FileComparator.ByTitle(), revers);
+        final Comparator<File> byTitleComparator = new FileComparator.ByTitle();
+        return sort(fileEntities, byTitleComparator, revers);
     }
 
     /**
@@ -339,14 +316,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional(readOnly = true)
-    public List<FileEntity> getByType(final FileType type) throws IllegalArgumentException {
+    public Collection<File> getByType(final FileType type) throws IllegalArgumentException {
         if (isNull(type)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.INCOMING_TYPE_IS_NULL_MESSAGE,
                     getClassSimpleName()
             );
         }
-        return this.repository.findAllByType(type);
+        final Collection<FileEntity> fileEntities = this.repository.findAllByType(type);
+        return convertToModels(fileEntities);
     }
 
     /**
@@ -357,16 +335,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional(readOnly = true)
-    public FileEntity getLastByType(final FileType type) {
-        final List<FileEntity> fileEntities = getByType(type);
-        FileEntity fileEntity;
-        if (isNotEmpty(fileEntities)) {
-            fileEntity = fileEntities.get(fileEntities.size() - 1);
+    public File getLastByType(final FileType type) {
+        final List<File> files = (List<File>) getByType(type);
+        final File file;
+        if (isNotEmpty(files)) {
+            file = files.get(files.size() - 1);
         } else {
-            fileEntity = new FileEntity();
-            fileEntity.setType(type);
+            file = File.getBuilder().build();
         }
-        return fileEntity;
+        return file;
     }
 
     /**
@@ -375,8 +352,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @return The Class object of {@link FileEntity} class.
      */
     @Override
-    protected Class<FileEntity> getModelClass() {
-        return FileEntity.class;
+    protected Class<File> getModelClass() {
+        return File.class;
     }
 
     /**
@@ -441,10 +418,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @param rootPath the root directory path.
      * @return The absolute path to fileEntity (newer null).
      */
-    private String createAbsolutePath(
-            final MultipartFile file,
-            final String rootPath
-    ) {
+    private String createAbsolutePath(final MultipartFile file, final String rootPath) {
         return createAbsolutePath(rootPath) +
                 (isEmpty(rootPath) ? file.getOriginalFilename() : "");
     }
@@ -466,10 +440,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @param file  the multipart fileEntity.
      * @return The relative path to fileEntity (newer null).
      */
-    private String createRelativePath(
-            final String title,
-            final MultipartFile file
-    ) {
+    private String createRelativePath(final String title, final MultipartFile file) {
         return this.properties.getResourcesLocation() +
                 Translator.fromCyrillicToLatin(title) +
                 new Random().nextInt() +
@@ -498,10 +469,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     /**
      * Checks an incoming fileEntity is static or not.
      *
-     * @param fileEntity the fileEntity to check (newer null).
+     * @param file the fileEntity to check (newer null).
      * @return true if fileEntity is static, false otherwise.
      */
-    private boolean isStaticFile(final FileEntity fileEntity) {
-        return fileEntity.getType().equals(FileType.STATIC);
+    private boolean isStaticFile(final File file) {
+        return file.getType().equals(FileType.STATIC);
     }
 }

@@ -12,10 +12,7 @@ import ua.com.ecoteh.repository.ArticleRepository;
 import ua.com.ecoteh.util.comparator.ArticleComparator;
 import ua.com.ecoteh.util.time.Time;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.*;
@@ -33,9 +30,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class ArticleServiceImpl
-        extends ContentServiceImpl<Article, ArticleEntity>
-        implements ArticleService {
+public final class ArticleServiceImpl extends ContentServiceImpl<Article, ArticleEntity> implements ArticleService {
 
     /**
      * The interface provides a set of standard methods
@@ -88,7 +83,7 @@ public final class ArticleServiceImpl
             );
         }
         articleEntity.getCategoryEntity().getArticleEntities();
-        return articleEntity.convert();
+        return convertToModel(articleEntity);
     }
 
     /**
@@ -114,8 +109,7 @@ public final class ArticleServiceImpl
      */
     @Override
     @Transactional(readOnly = true)
-    public Collection<Article> getByCategoryTitle(final String title)
-            throws IllegalArgumentException {
+    public Collection<Article> getByCategoryTitle(final String title) throws IllegalArgumentException {
         if (isEmpty(title)) {
             throw getIllegalArgumentException(ExceptionMessage.BLANK_CATEGORY_TITLE_MESSAGE);
         }
@@ -128,7 +122,7 @@ public final class ArticleServiceImpl
      * For sorting used {@link ArticleComparator.ByNumber} comparator.
      *
      * @param articleEntities the articleEntities to sort.
-     * @param revers   is sort in descending or ascending.
+     * @param revers          is sort in descending or ascending.
      * @return The sorted list of articleEntities or empty list (newer null).
      */
     @Override
@@ -137,7 +131,8 @@ public final class ArticleServiceImpl
             final Collection<Article> articleEntities,
             final boolean revers
     ) {
-        return sort(articleEntities, new ArticleComparator.ByNumber(), revers);
+        final Comparator<Article> byNumberComparator = new ArticleComparator.ByNumber();
+        return sort(articleEntities, byNumberComparator, revers);
     }
 
     /**
@@ -145,7 +140,7 @@ public final class ArticleServiceImpl
      * For sorting used {@link ArticleComparator.ByDate} comparator.
      *
      * @param articleEntities the articleEntities to sort.
-     * @param revers   is sort in descending or ascending.
+     * @param revers          is sort in descending or ascending.
      * @return The sorted list of articleEntities or empty list (newer null).
      */
     @Override
@@ -154,7 +149,8 @@ public final class ArticleServiceImpl
             final Collection<Article> articleEntities,
             final boolean revers
     ) {
-        return sort(articleEntities, new ArticleComparator.ByDate(), revers);
+        final Comparator<Article> byDateComparator = new ArticleComparator.ByDate();
+        return sort(articleEntities, byDateComparator, revers);
     }
 
     /**
@@ -401,46 +397,6 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Removes articleEntity with incoming id.
-     *
-     * @param id the id of an articleEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void remove(final long id) {
-        remove(get(id));
-    }
-
-    /**
-     * Removes articleEntity with the incoming title.
-     * Removes content if title is not blank.
-     *
-     * @param title the title of an articleEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void removeByTitle(final String title) {
-        if (isNotEmpty(title)) {
-            remove(getByTitle(title, false));
-        }
-    }
-
-    /**
-     * Removes articleEntity with the incoming URL.
-     * Removes articleEntity if the incoming URL
-     * is not null and not empty.
-     *
-     * @param url the URL of a articleEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void removeByUrl(final String url) {
-        if (isNotEmpty(url)) {
-            remove(getByUrl(url, false));
-        }
-    }
-
-    /**
      * Removes articleEntity with the incoming number.
      * Removes articleEntity if the incoming number
      * is not null and not empty.
@@ -451,17 +407,8 @@ public final class ArticleServiceImpl
     @Transactional
     public void removeByNumber(final String number) {
         if (isNotEmpty(number)) {
-            remove(getByNumber(number, false));
+            this.repository.deleteByNumber(number);
         }
-    }
-
-    /**
-     * Removes all articleEntities.
-     */
-    @Override
-    @Transactional
-    public void removeAll() {
-        getAll(false).forEach(this::remove);
     }
 
     /**
@@ -501,16 +448,32 @@ public final class ArticleServiceImpl
     }
 
     /**
-     * Filters articleEntity by the incoming categoryEntity.
-     * Incoming articleEntity must be not null.
+     * Filters article by the incoming category.
+     * <pre>
+     *  categoryFilter(null, not null) -> false
+     *  categoryFilter(not null, null) -> false
      *
-     * @param article  the articleEntity to filter.
-     * @param category the categoryEntity filtering.
-     * @return true if articleEntity categoryEntity equals to incoming categoryEntity,
+     *  If article category is null:
+     *  categoryFilter(not null, not null) -> false
+     *
+     *  If article category is not null and not equals incoming category:
+     *  categoryFilter(not null, not null) -> false
+     *
+     *  If article category is not null and equals incoming category:
+     *  categoryFilter(not null, not null) -> true
+     * </pre>
+     *
+     * @param article  the article to filter.
+     * @param category the category filtering.
+     * @return true if the article category equals to the incoming category,
      * false otherwise.
      */
     private boolean categoryFilter(final Article article, final Category category) {
-        return isNotNull(article) && isNotNull(article.getCategory()) &&
-                article.getCategory().equals(category);
+        boolean result = isNotNull(article);
+        if (result) {
+            final Category articleCategory = article.getCategory();
+            result = isNotNull(articleCategory) && articleCategory.equals(category);
+        }
+        return result;
     }
 }

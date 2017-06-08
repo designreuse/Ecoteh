@@ -62,7 +62,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
                     getClassSimpleName()
             );
         }
-        final E incomingEntity = model.convert();
+        final E incomingEntity = convertToEntity(model);
         final E savingEntity = this.repository.save(incomingEntity);
         if (isNull(savingEntity)) {
             throw getNullPointerException(
@@ -70,7 +70,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
                     getClassSimpleName()
             );
         }
-        return savingEntity.convert();
+        return convertToModel(savingEntity);
     }
 
     /**
@@ -91,13 +91,13 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
     @Override
     @Transactional
     public Collection<T> add(final Collection<T> models) {
-        final List<T> result = new ArrayList<>();
+        final Collection<T> result;
         if (isNotEmpty(models)) {
-            result.addAll(
-                    models.stream()
-                            .map(this::add)
-                            .collect(Collectors.toList())
-            );
+            final Collection<E> entities = convertToEntities(models);
+            final Collection<E> savingEntities = this.repository.save(entities);
+            result = convertToModels(savingEntities);
+        } else {
+            result = Collections.emptyList();
         }
         return result;
     }
@@ -134,15 +134,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
     @Override
     @Transactional
     public Collection<T> update(final Collection<T> models) {
-        final List<T> result = new ArrayList<>();
-        if (isNotEmpty(models)) {
-            result.addAll(
-                    models.stream()
-                            .map(this::update)
-                            .collect(Collectors.toList())
-            );
-        }
-        return result;
+        return add(models);
     }
 
     /**
@@ -163,7 +155,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
                     getClassSimpleName(), id
             );
         }
-        return entity.convert();
+        return convertToModel(entity);
     }
 
     /**
@@ -218,7 +210,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
     @Transactional
     public void remove(final T model) {
         if (isNotNull(model)) {
-            final E entity = model.convert();
+            final E entity = convertToEntity(model);
             this.repository.delete(entity);
         }
     }
@@ -295,7 +287,8 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
         if (isNotEmpty(models)) {
             result.addAll(models);
             if (isNotNull(comparator)) {
-                Collections.sort(result, prepareComparator(comparator, revers));
+                final Comparator<T> preparedComparator = prepareComparator(comparator, revers);
+                Collections.sort(result, preparedComparator);
             }
         }
         return result;
@@ -311,10 +304,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      */
     @Override
     @Transactional(readOnly = true)
-    public List<T> sort(
-            final Collection<T> models,
-            final Comparator<T> comparator
-    ) {
+    public List<T> sort(final Collection<T> models, final Comparator<T> comparator) {
         return sort(models, comparator, false);
     }
 
@@ -359,17 +349,14 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
     /**
      * Returns a list objects of {@link ModelEntity} class or subclasses.
      *
-     * @param fromIndex the initial index.
-     * @param toIndex   the final index.
+     * @param from the initial index.
+     * @param to   the final index.
      * @return The substring list of models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<T> getAndSubList(
-            final int fromIndex,
-            final int toIndex
-    ) {
-        return subList(getAll(), fromIndex, toIndex);
+    public List<T> getAndSubList(final int from, final int to) {
+        return subList(getAll(), from, to);
     }
 
     /**
@@ -404,22 +391,46 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
         return list;
     }
 
+    /**
+     * @param model the model to convert (newer null).
+     * @return
+     */
+    E convertToEntity(final T model) {
+        return (E) model.convert();
+    }
+
+    /**
+     * @param entity the model entity to convert (newer null).
+     * @return
+     */
+    T convertToModel(final E entity) {
+        return (T) entity.convert();
+    }
+
+    /**
+     * @param entities the model entities to convert.
+     * @return
+     */
     Collection<T> convertToModels(final Collection<E> entities) {
         final Collection<T> models = new ArrayList<>();
         if (isNotEmpty(entities)) {
             entities.stream()
                     .filter(ObjectValidator::isNotNull)
-                    .forEach(model -> models.add(model.convert()));
+                    .forEach(entity -> models.add(convertToModel(entity)));
         }
         return models;
     }
 
+    /**
+     * @param models the models to convert.
+     * @return
+     */
     Collection<E> convertToEntities(final Collection<T> models) {
         final Collection<E> entities = new ArrayList<>();
         if (isNotEmpty(models)) {
             models.stream()
                     .filter(ObjectValidator::isNotNull)
-                    .forEach(model -> entities.add(model.convert()));
+                    .forEach(model -> entities.add(convertToEntity(model)));
         }
         return entities;
     }
@@ -463,12 +474,29 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
         return isNotNull(model) && model.isValidated();
     }
 
-    E convertToEntity(final T model) {
-        return model.convert();
-    }
-
-    T convertToModel(final E model) {
-        return model.convert();
+    /**
+     * Check the incoming content to not valid.
+     * ContentEntity is not valid if it is null or not valid.
+     * <pre>
+     *     isNotValidated(null, false) = true
+     *     isNotValidated(null, true) = true
+     *
+     *     ContentEntity content = new ContentEntity();
+     *     content.setValidated(false);
+     *     isNotValidated(content, false) = true
+     *     isNotValidated(content, true) = false
+     *
+     *     content.setValidated(true);
+     *     isNotValidated(content, false) = true
+     *     isNotValidated(content, true) = true
+     * </pre>
+     *
+     * @param entity  the content to check.
+     * @param isValid checks the incoming content to valid or not.
+     * @return true if the content is null or it is not valid.
+     */
+    boolean isNotValidated(final E entity, final boolean isValid) {
+        return isNull(entity) || (isValid && !entity.isValidated());
     }
 
     /**
@@ -537,10 +565,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      * @param revers     is sort in descending or ascending.
      * @return The comparator to sort models (newer null).
      */
-    private Comparator<T> prepareComparator(
-            final Comparator<T> comparator,
-            final boolean revers
-    ) {
+    private Comparator<T> prepareComparator(final Comparator<T> comparator, final boolean revers) {
         return revers ? Collections.reverseOrder(comparator) : comparator;
     }
 
@@ -553,13 +578,13 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      *     checkIndexes(1, 4, 3) = false
      * </pre>
      *
-     * @param fromIndex the initial index.
-     * @param toIndex   the final index.
-     * @param size      the models size.
+     * @param from the initial index.
+     * @param to   the final index.
+     * @param size the models size.
      * @return true if incoming indexes is correct, false otherwise.
      */
-    private boolean checkIndexes(final int fromIndex, final int toIndex, final int size) {
-        return (fromIndex < toIndex) && (fromIndex >= 0) && (toIndex < size);
+    private boolean checkIndexes(final int from, final int to, final int size) {
+        return (from < to) && (from >= 0) && (to < size);
     }
 
     /**

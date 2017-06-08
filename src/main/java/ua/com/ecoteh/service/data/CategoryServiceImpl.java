@@ -68,42 +68,15 @@ public final class CategoryServiceImpl
         if (isEmpty(url)) {
             throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
         }
-        final CategoryEntity entity = this.repository.findByUrl(url);
-        if (isNotValidated(entity, isValid)) {
+        final CategoryEntity categoryEntity = this.repository.findByUrl(url);
+        if (isNotValidated(categoryEntity, isValid)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), url
             );
         }
-        entity.getArticleEntities().size();
-        return entity.convert();
-    }
-
-    /**
-     * Removes categoryEntity with the incoming title.
-     * Removes content if title is not blank.
-     *
-     * @param title the title of a categoryEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void removeByTitle(final String title) {
-        if (isNotEmpty(title)) {
-            remove(getByTitle(title, false));
-        }
-    }
-
-    /**
-     * Removes categoryEntity with the incoming URL.
-     *
-     * @param url the URL of a categoryEntity to remove.
-     */
-    @Override
-    @Transactional
-    public void removeByUrl(final String url) {
-        if (isNotEmpty(url)) {
-            remove(getByUrl(url, false));
-        }
+        categoryEntity.getArticleEntities().size();
+        return convertToModel(categoryEntity);
     }
 
     /**

@@ -15,9 +15,7 @@ import ua.com.ecoteh.repository.MessageRepository;
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
-public final class MessageServiceImpl
-        extends DataServiceImpl<Message, MessageEntity>
-        implements MessageService {
+public final class MessageServiceImpl extends DataServiceImpl<Message, MessageEntity> implements MessageService {
 
     /**
      * Constructor.

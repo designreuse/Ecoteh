@@ -112,8 +112,8 @@ public final class CompanyServiceImpl
     public Company getMainCompany() {
         Company mainCompany;
         try {
-            final CompanyEntity entity = this.repository.findByType(CompanyType.MAIN).get(0);
-            mainCompany = entity.convert();
+            final CompanyEntity mainCompanyEntity = this.repository.findByType(CompanyType.MAIN).get(0);
+            mainCompany = convertToModel(mainCompanyEntity);
         } catch (IndexOutOfBoundsException ex) {
             logException(ex);
             final CompanyBuilder builder = Company.getBuilder();
@@ -136,13 +136,13 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<Company> getPartners(final boolean isValid) {
-        List<CompanyEntity> companies = this.repository.findByType(CompanyType.PARTNER);
+        List<CompanyEntity> companyEntities = this.repository.findByType(CompanyType.PARTNER);
         if (isValid) {
-            companies = companies.stream()
+            companyEntities = companyEntities.stream()
                     .filter(CompanyEntity::isValidated)
                     .collect(Collectors.toList());
         }
-        return convertToModels(companies);
+        return convertToModels(companyEntities);
     }
 
     /**
@@ -165,14 +165,14 @@ public final class CompanyServiceImpl
                     getClassSimpleName()
             );
         }
-        final CompanyEntity entity = this.repository.findByDomain(domain);
-        if (isNull(entity)) {
+        final CompanyEntity companyEntity = this.repository.findByDomain(domain);
+        if (isNull(companyEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), domain
             );
         }
-        return entity.convert();
+        return convertToModel(companyEntity);
     }
 
     /**

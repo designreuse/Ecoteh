@@ -10,10 +10,7 @@ import ua.com.ecoteh.repository.ResponseRepository;
 import ua.com.ecoteh.util.comparator.ResponseComparator;
 import ua.com.ecoteh.util.time.Time;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
@@ -26,9 +23,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
-public final class ResponseServiceImpl
-        extends DataServiceImpl<Response, ResponseEntity>
-        implements ResponseService {
+public final class ResponseServiceImpl extends DataServiceImpl<Response, ResponseEntity> implements ResponseService {
 
     /**
      * Constructor.
@@ -53,7 +48,8 @@ public final class ResponseServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<Response> sortByDate(final Collection<Response> responses, final boolean revers) {
-        return sort(responses, new ResponseComparator.ByDate(), revers);
+        final Comparator<Response> byDateComparator = new ResponseComparator.ByDate();
+        return sort(responses, byDateComparator, revers);
     }
 
     /**
