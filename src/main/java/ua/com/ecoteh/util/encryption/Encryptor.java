@@ -10,21 +10,22 @@ public interface Encryptor {
     /**
      * Encrypts a data.
      *
+     * @param value the value to encrypt.
      * @return The encrypted data.
      */
-    String encrypt();
+    String encrypt(String value);
 
     /**
      * Decrypts a date.
      *
      * @return The decrypted data
      */
-    String decrypt();
 
     /**
-     * Returns a value to encrypt or to decrypt.
+     * Decrypts a date.
      *
-     * @return The value to encrypt or to decrypt.
+     * @param value the value to decrypt.
+     * @return The decrypted data.
      */
-    String getValue();
+    String decrypt(String value);
 }
