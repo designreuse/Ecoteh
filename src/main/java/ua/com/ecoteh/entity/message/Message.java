@@ -113,6 +113,19 @@ public final class Message extends Model {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Message clone() {
+        final Message clone = (Message) super.clone();
+        final MessageEditor messageEditor = clone.getEditor();
+        messageEditor.addUser(this.user.clone());
+        return messageEditor.update();
+    }
+
+    /**
      * Returns a user of the message.
      *
      * @return The user of the message (newer null).

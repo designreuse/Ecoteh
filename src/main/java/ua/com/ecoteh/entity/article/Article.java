@@ -130,6 +130,19 @@ public final class Article extends Content {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Article clone() {
+        final Article clone = (Article) super.clone();
+        final ArticleEditor articleEditor = clone.getEditor();
+        articleEditor.addCategory(this.category.clone());
+        return articleEditor.update();
+    }
+
+    /**
      * Returns a number of the article.
      *
      * @return The article number (newer null).

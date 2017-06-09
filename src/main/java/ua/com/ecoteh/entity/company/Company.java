@@ -175,6 +175,20 @@ public final class Company extends Content {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Company clone() {
+        final Company clone = (Company) super.clone();
+        final CompanyEditor companyEditor = clone.getEditor();
+        companyEditor.addContacts(this.contacts.clone())
+                .addAddress(this.address.clone());
+        return companyEditor.update();
+    }
+
+    /**
      * Returns a domain of the company.
      *
      * @return The company domain or empty string (newer null).

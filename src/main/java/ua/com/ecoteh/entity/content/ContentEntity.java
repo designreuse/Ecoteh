@@ -1,5 +1,7 @@
 package ua.com.ecoteh.entity.content;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.model.ModelEntity;
 
@@ -59,6 +61,7 @@ public abstract class ContentEntity extends ModelEntity {
             name = "logo_id",
             referencedColumnName = "id"
     )
+    @Fetch(FetchMode.JOIN)
     private FileEntity logo;
 
     /**

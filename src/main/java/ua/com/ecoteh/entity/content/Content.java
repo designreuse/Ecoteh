@@ -106,6 +106,19 @@ public abstract class Content extends Model {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Content clone() {
+        final Content clone = (Content) super.clone();
+        final ContentEditor contentEditor = clone.getEditor();
+        contentEditor.addLogo(this.logo.clone());
+        return (Content) contentEditor.update();
+    }
+
+    /**
      * Returns a hash code value for the object.
      * This method is supported for the benefit
      * of hash tables such as those provided by HashMap.

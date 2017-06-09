@@ -102,6 +102,16 @@ public final class Response extends Model {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Response clone() {
+        return (Response) super.clone();
+    }
+
+    /**
      * Returns a username of the response.
      *
      * @return The response username (newer null).

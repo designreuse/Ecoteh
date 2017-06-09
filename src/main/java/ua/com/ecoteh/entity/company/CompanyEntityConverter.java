@@ -2,8 +2,9 @@ package ua.com.ecoteh.entity.company;
 
 import ua.com.ecoteh.entity.content.ContentEntityConverter;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
+import ua.com.ecoteh.util.encryption.Encryptor;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of methods
@@ -19,6 +20,11 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
      * The company entity for converting to company.
      */
     private final CompanyEntity entity;
+
+    /**
+     * The instance of the interface for data encryption.
+     */
+    private Encryptor encryptor;
 
     /**
      * Constructor.
@@ -56,17 +62,17 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
                 .addLogo(this.entity.getLogoEntity().convert())
                 .addContacts(this.entity.getContactsEntity().convert())
                 .addAddress(this.entity.getAddressEntity().convert());
-        return null;
+        return builder;
     }
 
     /**
      * Decrypts the incoming value and returns it.
      * <pre>
-     *     decrypt(null) -> empty string
-     *     decrypt("") -> empty string
-     *     decrypt(" ") -> empty string
-     *     decrypt("   ") -> empty string
-     *     decrypt("value") -> some decrypted value
+     *     decrypt(null) - empty string
+     *     decrypt("") - empty string
+     *     decrypt(" ") - empty string
+     *     decrypt("   ") - empty string
+     *     decrypt("value") - some decrypted value
      * </pre>
      *
      * @param value the value to decrypt.
@@ -74,6 +80,20 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
      * @see Base64Encryptor
      */
     private String decrypt(final String value) {
-        return isNotEmpty(value) ? new Base64Encryptor(value).decrypt() : "";
+        final Encryptor encryptor = getEncryptor();
+        return encryptor.encrypt(value);
+    }
+
+    /**
+     * Creates and returns the object for data encryption.
+     *
+     * @return The object for data encryption.
+     * @see Base64Encryptor
+     */
+    private Encryptor getEncryptor() {
+        if (isNull(this.encryptor)) {
+            this.encryptor = new Base64Encryptor();
+        }
+        return this.encryptor;
     }
 }

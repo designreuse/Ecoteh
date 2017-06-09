@@ -104,7 +104,7 @@ public final class ContactsBuilder extends ModelBuilder<Contacts, ContactsBuilde
      * @param landlinesPhone the new landlines phone number to a new contacts.
      * @return the contacts builder.
      */
-    public ContactsBuilder addLandlinePhone(final String landlinesPhone) {
+    public ContactsBuilder addLandlinesPhone(final String landlinesPhone) {
         this.landlinesPhone = landlinesPhone;
         return this;
     }

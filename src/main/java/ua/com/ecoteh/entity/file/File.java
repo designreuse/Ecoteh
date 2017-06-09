@@ -108,6 +108,16 @@ public final class File extends Model {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public File clone() {
+        return (File) super.clone();
+    }
+
+    /**
      * Returns a title of the file.
      *
      * @return The file title or empty string (newer null).

@@ -90,6 +90,16 @@ public final class Address extends Model {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Address clone() {
+        return (Address) super.clone();
+    }
+
+    /**
      * Returns a post address of the object.
      *
      * @return The post address or empty string (newer null).

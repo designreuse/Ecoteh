@@ -27,7 +27,7 @@ public interface UserRepository extends DataRepository<UserEntity> {
      * @param login the login of a user to return.
      * @return The object of class {@link UserEntity}.
      */
-    UserEntity findByEncryptedLogin(String login);
+    UserEntity findByLogin(String login);
 
     /**
      * Returns user from a database,
@@ -62,7 +62,7 @@ public interface UserRepository extends DataRepository<UserEntity> {
      * @return The object of class {@link UserEntity}.
      * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
-    UserEntity findByContactsEntityEmail(String email);
+    UserEntity findByContactsEmail(String email);
 
     /**
      * Returns user from a database,
@@ -72,17 +72,17 @@ public interface UserRepository extends DataRepository<UserEntity> {
      * @return The object of class {@link UserEntity}.
      * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
-    UserEntity findByContactsEntityMobilePhone(String phone);
+    UserEntity findByContactsMobilePhone(String phone);
 
     /**
      * Returns user from a database,
-     * which matches the parameter landlinePhone.
+     * which matches the parameter landlinesPhone.
      *
-     * @param phone the landline phone of a user to return.
+     * @param phone the landlines phone of a user to return.
      * @return The object of class {@link UserEntity}.
      * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
-    UserEntity findByContactsEntityLandlinePhone(String phone);
+    UserEntity findByContactsLandlinesPhone(String phone);
 
     /**
      * Returns user from a database,
@@ -92,5 +92,5 @@ public interface UserRepository extends DataRepository<UserEntity> {
      * @return The object of class {@link UserEntity}.
      * @see ua.com.ecoteh.entity.contacts.ContactsEntity
      */
-    UserEntity findByContactsEntityFax(String fax);
+    UserEntity findByContactsFax(String fax);
 }

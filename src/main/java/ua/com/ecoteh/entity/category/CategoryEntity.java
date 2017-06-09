@@ -29,7 +29,7 @@ public class CategoryEntity extends ContentEntity {
      * The set of a article entities.
      */
     @OneToMany(
-            mappedBy = "categoryEntity",
+            mappedBy = "category",
             fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.REMOVE,

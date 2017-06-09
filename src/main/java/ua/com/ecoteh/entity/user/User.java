@@ -168,6 +168,20 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public User clone() {
+        final User clone = (User) super.clone();
+        final UserEditor userEditor = clone.getEditor();
+        userEditor.addContacts(this.contacts.clone());
+        userEditor.addPhoto(this.photo.clone());
+        return userEditor.update();
+    }
+
+    /**
      * Indicates whether the user's account has expired.
      * An expired account cannot be authenticated.
      *

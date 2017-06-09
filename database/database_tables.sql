@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `addresses`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `addresses` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `address`     VARCHAR(300)     NOT NULL DEFAULT '',
+  `post_address`     VARCHAR(300)     NOT NULL DEFAULT '',
   `google_maps` TEXT             NOT NULL,
   `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)

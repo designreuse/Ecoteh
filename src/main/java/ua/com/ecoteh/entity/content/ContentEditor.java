@@ -13,8 +13,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @see Content
  */
-public abstract class ContentEditor<T extends Content, R extends ContentEditor<T, R>>
-        extends ModelEditor<T, R> {
+public abstract class ContentEditor<T extends Content, R extends ContentEditor<T, R>> extends ModelEditor<T, R> {
 
     /**
      * The content to edit.
@@ -175,8 +174,8 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @see FileEditor
      */
     protected File getLogo() {
-        final FileEditor fileRedactor = this.content.getLogo().getEditor();
-        fileRedactor.copy(this.logo);
-        return fileRedactor.update();
+        final FileEditor fileEditor = this.content.getLogo().getEditor();
+        fileEditor.copy(this.logo);
+        return fileEditor.update();
     }
 }

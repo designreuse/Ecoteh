@@ -80,7 +80,7 @@ public final class ContactsEditor extends ModelEditor<Contacts, ContactsEditor> 
                 .addValidated(isValidated())
                 .addEmail(getEmail())
                 .addMobilePhone(getMobilePhone())
-                .addLandlinePhone(getLandlinesPhone())
+                .addLandlinesPhone(getLandlinesPhone())
                 .addFax(getFax())
                 .addVkontakte(getVkontakte())
                 .addFacebook(getFacebook())

@@ -347,9 +347,9 @@ public final class UserEditor extends ModelEditor<User, UserEditor> {
      * @see ContactsEditor
      */
     private Contacts getContacts() {
-        final ContactsEditor contactsRedactor = this.user.getContacts().getEditor();
-        contactsRedactor.copy(this.contacts);
-        return contactsRedactor.update();
+        final ContactsEditor contactsEditor = this.user.getContacts().getEditor();
+        contactsEditor.copy(this.contacts);
+        return contactsEditor.update();
     }
 
     /**
@@ -360,9 +360,9 @@ public final class UserEditor extends ModelEditor<User, UserEditor> {
      * @see FileEditor
      */
     private File getPhoto() {
-        final FileEditor fileRedactor = this.user.getPhoto().getEditor();
-        fileRedactor.copy(this.photo);
-        return fileRedactor.update();
+        final FileEditor fileEditor = this.user.getPhoto().getEditor();
+        fileEditor.copy(this.photo);
+        return fileEditor.update();
     }
 
     /**

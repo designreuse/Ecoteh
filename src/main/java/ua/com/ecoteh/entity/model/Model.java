@@ -11,7 +11,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @see ModelEntity
  */
-public abstract class Model implements Serializable {
+public abstract class Model implements Serializable, Cloneable {
 
     /**
      * It is used during deserialization to verify that
@@ -66,6 +66,22 @@ public abstract class Model implements Serializable {
     public boolean equals(final Object object) {
         return isNotNull(object) &&
                 (super.equals(object) || (getClass() == object.getClass()));
+    }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Model clone() {
+        Model clone = null;
+        try {
+            clone = (Model) super.clone();
+        } catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
+        }
+        return clone;
     }
 
     /**

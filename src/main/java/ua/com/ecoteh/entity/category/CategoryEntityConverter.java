@@ -1,12 +1,6 @@
 package ua.com.ecoteh.entity.category;
 
-import ua.com.ecoteh.entity.article.Article;
-import ua.com.ecoteh.entity.article.ArticleEntity;
 import ua.com.ecoteh.entity.content.ContentEntityConverter;
-import ua.com.ecoteh.util.validator.ObjectValidator;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 /**
  * The class implements a set of methods
@@ -48,22 +42,8 @@ final class CategoryEntityConverter extends ContentEntityConverter<CategoryEntit
                 .addUrl(this.entity.getUrl())
                 .addDescription(this.entity.getDescription())
                 .addKeywords(this.entity.getKeywords())
-                .addLogo(this.entity.getLogoEntity().convert())
-                .addArticles(convertArticles());
-        return builder;
-    }
+                .addLogo(this.entity.getLogoEntity().convert());
 
-    /**
-     * Converts the category article entities to an articles collection.
-     *
-     * @return The converted articles collection (newer null).
-     * @see Article
-     * @see ArticleEntity
-     */
-    private Collection<Article> convertArticles() {
-        return this.entity.getArticleEntities().stream()
-                .filter(ObjectValidator::isNotNull)
-                .map(ArticleEntity::convert)
-                .collect(Collectors.toList());
+        return builder;
     }
 }

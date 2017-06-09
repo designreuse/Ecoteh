@@ -170,8 +170,8 @@ public final class MessageEditor extends ModelEditor<Message, MessageEditor> {
      * @see UserEditor
      */
     private User getUser() {
-        final UserEditor userRedactor = this.message.getUser().getEditor();
-        userRedactor.copy(this.user);
-        return userRedactor.update();
+        final UserEditor userEditor = this.message.getUser().getEditor();
+        userEditor.copy(this.user);
+        return userEditor.update();
     }
 }

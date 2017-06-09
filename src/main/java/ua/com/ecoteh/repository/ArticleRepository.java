@@ -29,7 +29,7 @@ public interface ArticleRepository extends ContentRepository<ArticleEntity> {
      * @param id the category id of a articles to return.
      * @return The object of class {@link ArticleEntity}.
      */
-    List<ArticleEntity> findByCategoryEntityId(long id);
+    List<ArticleEntity> findByCategoryId(long id);
 
     /**
      * Returns all articles from a database,
@@ -39,7 +39,7 @@ public interface ArticleRepository extends ContentRepository<ArticleEntity> {
      * @return The object of class {@link ArticleEntity}.
      * @see ua.com.ecoteh.entity.category.CategoryEntity
      */
-    List<ArticleEntity> findByCategoryEntityTitle(String title);
+    List<ArticleEntity> findByCategoryTitle(String title);
 
     /**
      * Removes article from a database,

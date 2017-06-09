@@ -323,9 +323,9 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
      * @see ContactsEditor
      */
     private Contacts getContacts() {
-        final ContactsEditor contactsRedactor = this.company.getContacts().getEditor();
-        contactsRedactor.copy(this.contacts);
-        return contactsRedactor.update();
+        final ContactsEditor contactsEditor = this.company.getContacts().getEditor();
+        contactsEditor.copy(this.contacts);
+        return contactsEditor.update();
     }
 
     /**
@@ -336,9 +336,9 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
      * @see AddressEditor
      */
     private Address getAddress() {
-        final AddressEditor addressRedactor = this.company.getAddress().getEditor();
-        addressRedactor.copy(this.address);
-        return addressRedactor.update();
+        final AddressEditor addressEditor = this.company.getAddress().getEditor();
+        addressEditor.copy(this.address);
+        return addressEditor.update();
     }
 
     /**

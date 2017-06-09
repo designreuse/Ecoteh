@@ -15,6 +15,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Cacheable
 public abstract class ModelEntity implements Serializable, Cloneable {
 
     /**

@@ -60,6 +60,16 @@ public final class Category extends Content {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Category clone() {
+        return (Category) super.clone();
+    }
+
+    /**
      * Returns an collection of articles.
      * Collection can be empty.
      *

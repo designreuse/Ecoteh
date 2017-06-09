@@ -154,6 +154,16 @@ public final class Contacts extends Model {
     }
 
     /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Contacts clone() {
+        return (Contacts) super.clone();
+    }
+
+    /**
      * Returns a E-mail of the contacts.
      *
      * @return The E-mail or empty string (newer null).

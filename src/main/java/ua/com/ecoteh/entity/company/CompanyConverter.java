@@ -2,8 +2,9 @@ package ua.com.ecoteh.entity.company;
 
 import ua.com.ecoteh.entity.content.ContentConverter;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
+import ua.com.ecoteh.util.encryption.Encryptor;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of methods
@@ -19,6 +20,11 @@ final class CompanyConverter extends ContentConverter<Company, CompanyEntity> {
      * The company for converting to company entity.
      */
     private final Company company;
+
+    /**
+     * The instance of the interface for data encryption.
+     */
+    private Encryptor encryptor;
 
     /**
      * Constructor.
@@ -60,11 +66,11 @@ final class CompanyConverter extends ContentConverter<Company, CompanyEntity> {
     /**
      * Encrypts the incoming value and returns it.
      * <pre>
-     *     encrypt(null) -> empty string
-     *     encrypt("") -> empty string
-     *     encrypt(" ") -> empty string
-     *     encrypt("   ") -> empty string
-     *     encrypt("value") -> some encrypted value
+     *     encrypt(null) - empty string
+     *     encrypt("") - empty string
+     *     encrypt(" ") - empty string
+     *     encrypt("   ") - empty string
+     *     encrypt("value") - some encrypted value
      * </pre>
      *
      * @param value the value to encrypt.
@@ -72,6 +78,20 @@ final class CompanyConverter extends ContentConverter<Company, CompanyEntity> {
      * @see Base64Encryptor
      */
     private String encrypt(final String value) {
-        return isNotEmpty(value) ? new Base64Encryptor(value).encrypt() : "";
+        final Encryptor encryptor = getEncryptor();
+        return encryptor.encrypt(value);
+    }
+
+    /**
+     * Creates and returns the object for data encryption.
+     *
+     * @return The object for data encryption.
+     * @see Base64Encryptor
+     */
+    private Encryptor getEncryptor() {
+        if (isNull(this.encryptor)) {
+            this.encryptor = new Base64Encryptor();
+        }
+        return this.encryptor;
     }
 }

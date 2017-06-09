@@ -28,7 +28,7 @@ public class AddressEntity extends ModelEntity {
     /**
      * The post address.
      */
-    @Column(name = "address", nullable = false)
+    @Column(name = "post_address", nullable = false)
     private String postAddress;
 
     /**
