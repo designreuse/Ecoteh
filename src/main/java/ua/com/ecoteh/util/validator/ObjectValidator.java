@@ -24,7 +24,7 @@ public final class ObjectValidator {
      * Checks if a Object is null.
      * <pre>
      *     isNull(null) = true
-     *     isEmpty(new Object()) = false
+     *     isNull(new Object()) = false
      * </pre>
      *
      * @param object the Object to check, may be null
@@ -37,8 +37,8 @@ public final class ObjectValidator {
     /**
      * Checks if a Object is not null.
      * <pre>
-     *     isNull(null) = false
-     *     isEmpty(new Object()) = true
+     *     isNotNull(null) = false
+     *     isNotNull(new Object()) = true
      * </pre>
      *
      * @param object the Object to check, may be null

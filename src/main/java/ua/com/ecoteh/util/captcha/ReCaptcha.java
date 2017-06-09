@@ -114,20 +114,13 @@ public final class ReCaptcha implements Captcha {
      * @return true if captcha is verify, false otherwise.
      */
     @Override
-    public boolean isVerify(
-            final String captcha,
-            final String ipAddress
-    ) {
+    public boolean isVerify(final String captcha, final String ipAddress) {
         this.status = "";
         boolean result = false;
         if (isNotEmpty(captcha) && isNotEmpty(ipAddress)) {
             try {
-                result = new JsonParser(
-                        getResponse(
-                                new URL(this.url),
-                                captcha, ipAddress
-                        )
-                ).parse();
+                final String response = getResponse(new URL(this.url), captcha, ipAddress);
+                result = new JsonParser(response).parse();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -211,10 +204,11 @@ public final class ReCaptcha implements Captcha {
      * @throws IOException If an I/O error occurs.
      */
     private HttpsURLConnection getConnection(final URL url) throws IOException {
-        return new Connection(
+        final Connection connection =  new Connection(
                 url, this.userAgent,
                 this.acceptLanguage, this.doOutput
-        ).getHttpsURLConnection();
+        );
+        return connection.getHttpsURLConnection();
     }
 
     /**
@@ -224,10 +218,7 @@ public final class ReCaptcha implements Captcha {
      * @param ipAddress the request ip address.
      * @return The post params.
      */
-    private String getPostParams(
-            final String captcha,
-            final String ipAddress
-    ) {
+    private String getPostParams(final String captcha, final String ipAddress) {
         return "secret=" + this.serverKey +
                 "&response=" + captcha +
                 "&remoteip=" + ipAddress;
