@@ -1,6 +1,6 @@
 package ua.com.ecoteh.mocks.enity.test;
 
-import ua.com.ecoteh.entity.model.ModelEntity;
+import ua.com.ecoteh.entity.model.Model;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -10,23 +10,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static ua.com.ecoteh.mocks.MockConstants.DEFAULT_SIZE;
 
-public abstract class MockModelTest<T extends ModelEntity> {
+public abstract class MockModelTest<T extends Model> {
 
     @Test
     public void whenGetObjectThenReturnSomeModel() {
-        final T category = getObject();
-        assertNotNull(category);
+        final T model = getObject();
+        assertNotNull(model);
     }
 
     @Test
     public void whenGetObjectsThenReturnSomeModels() {
-        Collection<T> articles = getObjects();
-        assertNotNull(articles);
-        assertEquals(articles.size(), DEFAULT_SIZE);
+        Collection<T> models = getObjects();
+        assertNotNull(models);
+        assertEquals(models.size(), DEFAULT_SIZE);
     }
-
-    @Ignore
-    public abstract void whenGetModelThenReturnValidModel();
 
     @Ignore
     protected abstract T getObject();
