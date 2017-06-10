@@ -1,17 +1,16 @@
 package ua.com.ecoteh.service.seo;
 
-import ua.com.ecoteh.entity.article.ArticleEntity;
-import ua.com.ecoteh.entity.category.CategoryEntity;
-import ua.com.ecoteh.entity.company.Company;
-import ua.com.ecoteh.entity.company.CompanyEntity;
-import ua.com.ecoteh.service.data.ArticleService;
-import ua.com.ecoteh.service.data.CategoryService;
-import ua.com.ecoteh.service.data.CompanyService;
-import ua.com.ecoteh.util.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.entity.article.Article;
+import ua.com.ecoteh.entity.category.Category;
+import ua.com.ecoteh.entity.company.Company;
+import ua.com.ecoteh.service.data.ArticleService;
+import ua.com.ecoteh.service.data.CategoryService;
+import ua.com.ecoteh.service.data.CompanyService;
+import ua.com.ecoteh.util.cache.Cache;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
@@ -43,19 +42,19 @@ public final class SeoServiceImpl implements SeoService {
 
     /**
      * The describes a set of methods for working
-     * with objects of the {@link CompanyEntity} class.
+     * with objects of the {@link Company} class.
      */
     private final CompanyService companyService;
 
     /**
      * The describes a set of methods for working
-     * with objects of the {@link CategoryEntity} class.
+     * with objects of the {@link Category} class.
      */
     private final CategoryService categoryService;
 
     /**
      * The describes a set of methods for working
-     * with objects of the {@link ArticleEntity} class.
+     * with objects of the {@link Article} class.
      */
     private final ArticleService articleService;
 
@@ -137,8 +136,9 @@ public final class SeoServiceImpl implements SeoService {
     }
 
     /**
+     * Returns a domain of the main company.
      *
-     * @return
+     * @return The domain.
      */
     private String getMainCompanyDomain() {
         final Company mainCompany = this.companyService.getMainCompany();
