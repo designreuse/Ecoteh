@@ -38,10 +38,7 @@ public interface MainMVFabric {
      * @param revers   the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
      */
-    ModelAndView allSortArticlesPage(
-            String sortType,
-            boolean revers
-    );
+    ModelAndView allSortArticlesPage(String sortType, boolean revers);
 
     /**
      * Creates and returns a page with information about main company.
@@ -89,11 +86,7 @@ public interface MainMVFabric {
      * @param revers   the sorting direction, true or false.
      * @return The ready object of the ModelAndView class.
      */
-    ModelAndView categoryWithSortArticlesPage(
-            String url,
-            String sortType,
-            boolean revers
-    );
+    ModelAndView categoryWithSortArticlesPage(String url, String sortType, boolean revers);
 
     /**
      * Creates and returns a page with one article with the incoming URL.
