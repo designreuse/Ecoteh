@@ -108,16 +108,4 @@ public final class CategoryBuilder extends ContentBuilder<Category, CategoryBuil
     private Collection<Article> getArticles() {
         return isNotEmpty(this.articles) ? this.articles : Collections.emptyList();
     }
-
-    /*
-    TODO: add this category to the articles
-    private Collection<Article> prepareArticles() {
-        final Collection<Article> result = new HashSet<>();
-        for (Article article : this.articles) {
-            if (isNotNull(article)) {
-                result.add(article);
-            }
-        }
-        return result;
-    }*/
 }

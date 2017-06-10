@@ -49,10 +49,8 @@ public abstract class Model implements Serializable, Cloneable {
      */
     @Override
     public String toString() {
-        return "Model{" +
-                "id=" + this.id +
-                ", validated=" + this.validated +
-                '}';
+        return "Model{id=" + this.id +
+                ", validated=" + this.validated + '}';
     }
 
     /**

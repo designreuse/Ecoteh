@@ -42,7 +42,12 @@ public final class Article extends Content {
     /**
      * The price of this article.
      */
-    private final String price;
+    private final double price;
+
+    /**
+     * The price currency of this article.
+     */
+    private final String currency;
 
     /**
      * The category of this article.
@@ -70,7 +75,7 @@ public final class Article extends Content {
             final String title, final String url,
             final String description, final String keywords,
             final String number, final String text,
-            final Date date, final String price,
+            final Date date, final double price, final String currency,
             final File logo, final Category category
     ) {
         super(id, validated, title, url, description, keywords, logo);
@@ -78,6 +83,7 @@ public final class Article extends Content {
         this.text = text;
         this.date = date;
         this.price = price;
+        this.currency = currency;
         this.category = category;
     }
 
@@ -93,6 +99,7 @@ public final class Article extends Content {
                 ", text='" + this.text + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
+                ", currency=" + this.currency +
                 ", category=" + this.category +
                 '}';
     }
@@ -174,8 +181,17 @@ public final class Article extends Content {
      *
      * @return The article price (newer null).
      */
-    public String getPrice() {
+    public double getPrice() {
         return this.price;
+    }
+
+    /**
+     * Returns a price currency of the article.
+     *
+     * @return The article price currency (newer null).
+     */
+    public String getCurrency() {
+        return this.currency;
     }
 
     /**

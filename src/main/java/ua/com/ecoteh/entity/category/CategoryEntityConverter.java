@@ -43,7 +43,6 @@ final class CategoryEntityConverter extends ContentEntityConverter<CategoryEntit
                 .addDescription(this.entity.getDescription())
                 .addKeywords(this.entity.getKeywords())
                 .addLogo(this.entity.getLogoEntity().convert());
-
         return builder;
     }
 }

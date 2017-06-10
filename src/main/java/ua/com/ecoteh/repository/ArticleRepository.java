@@ -2,7 +2,7 @@ package ua.com.ecoteh.repository;
 
 import ua.com.ecoteh.entity.article.ArticleEntity;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The interface provides a set of JPA methods for working
@@ -29,7 +29,7 @@ public interface ArticleRepository extends ContentRepository<ArticleEntity> {
      * @param id the category id of a articles to return.
      * @return The object of class {@link ArticleEntity}.
      */
-    List<ArticleEntity> findByCategoryId(long id);
+    Collection<ArticleEntity> findByCategoryId(long id);
 
     /**
      * Returns all articles from a database,
@@ -39,7 +39,7 @@ public interface ArticleRepository extends ContentRepository<ArticleEntity> {
      * @return The object of class {@link ArticleEntity}.
      * @see ua.com.ecoteh.entity.category.CategoryEntity
      */
-    List<ArticleEntity> findByCategoryTitle(String title);
+    Collection<ArticleEntity> findByCategoryTitle(String title);
 
     /**
      * Removes article from a database,

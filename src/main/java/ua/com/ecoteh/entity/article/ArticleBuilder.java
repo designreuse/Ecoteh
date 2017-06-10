@@ -36,7 +36,12 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
     /**
      * The price of a new article.
      */
-    private String price;
+    private double price;
+
+    /**
+     * The price currency of this article.
+     */
+    private String currency;
 
     /**
      * The category of a new article.
@@ -61,8 +66,8 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
                 getId(), isValidated(),
                 getTitle(), getUrl(),
                 getDescription(), getKeywords(),
-                getNumber(), getText(),
-                getDate(), getPrice(),
+                getNumber(), getText(), getDate(),
+                getPrice(), getCurrency(),
                 getLogo(), getCategory()
         );
     }
@@ -106,8 +111,19 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      * @param price the new price to a new article.
      * @return the article builder.
      */
-    public ArticleBuilder addPrice(final String price) {
+    public ArticleBuilder addPrice(final double price) {
         this.price = price;
+        return this;
+    }
+
+    /**
+     * Adds a new price currency to a new article.
+     *
+     * @param currency the new price currency to a new article.
+     * @return the article builder.
+     */
+    public ArticleBuilder addCurrency(final String currency) {
+        this.currency = currency;
         return this;
     }
 
@@ -164,8 +180,18 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      *
      * @return The price or "0" (newer null).
      */
-    private String getPrice() {
-        return isNotEmpty(this.price) ? this.price : "0";
+    private double getPrice() {
+        return (this.price > 0) ? this.price : 0;
+    }
+
+    /**
+     * Returns a price currency of a new article.
+     * Returns an empty string if the price currency is null or empty.
+     *
+     * @return The price currency or empty string (newer null).
+     */
+    private String getCurrency() {
+        return isNotEmpty(this.currency) ? this.currency : "";
     }
 
     /**

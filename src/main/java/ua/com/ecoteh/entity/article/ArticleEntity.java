@@ -49,7 +49,13 @@ public class ArticleEntity extends ContentEntity {
      * The price of this article entity.
      */
     @Column(name = "price")
-    private String price;
+    private double price;
+
+    /**
+     * The price currency of this article.
+     */
+    @Column(name = "currency")
+    private String currency;
 
     /**
      * The category entity of this article entity.
@@ -185,7 +191,7 @@ public class ArticleEntity extends ContentEntity {
      *
      * @return The article entity price (newer null).
      */
-    public String getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
@@ -194,8 +200,26 @@ public class ArticleEntity extends ContentEntity {
      *
      * @param price the new price to the article entity.
      */
-    public void setPrice(final String price) {
+    public void setPrice(final double price) {
         this.price = price;
+    }
+
+    /**
+     * Returns a price currency of the article.
+     *
+     * @return The article price currency (newer null).
+     */
+    public String getCurrency() {
+        return this.currency;
+    }
+
+    /**
+     * Sets a new price currency to the article entity.
+     *
+     * @param currency the new price currency to the article entity.
+     */
+    public void setCurrency(final String currency) {
+        this.currency = currency;
     }
 
     /**

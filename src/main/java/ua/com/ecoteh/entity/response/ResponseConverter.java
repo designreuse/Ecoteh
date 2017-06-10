@@ -40,6 +40,6 @@ final class ResponseConverter extends ModelConverter<Response, ResponseEntity> {
         responseEntity.setUsername(this.response.getUsername());
         responseEntity.setText(this.response.getText());
         responseEntity.setDate(this.response.getDate());
-        return null;
+        return responseEntity;
     }
 }

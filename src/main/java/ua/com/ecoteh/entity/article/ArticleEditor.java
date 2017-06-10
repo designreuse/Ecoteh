@@ -40,7 +40,12 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
     /**
      * The new price of the article.
      */
-    private String price;
+    private double price = -1;
+
+    /**
+     * The new price currency of the article.
+     */
+    private String currency;
 
     /**
      * The new category of the article.
@@ -75,6 +80,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
                 .addText(getText())
                 .addDate(getDate())
                 .addPrice(getPrice())
+                .addCurrency(getCurrency())
                 .addLogo(getLogo())
                 .addCategory(getCategory());
         return builder.build();
@@ -94,6 +100,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
                     .addText(article.getText())
                     .addDate(article.getDate())
                     .addPrice(article.getPrice())
+                    .addCurrency(article.getCurrency())
                     .addCategory(article.getCategory());
         }
         return this;
@@ -138,8 +145,19 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      * @param price a new price to the article.
      * @return the article editor.
      */
-    public ArticleEditor addPrice(final String price) {
+    public ArticleEditor addPrice(final double price) {
         this.price = price;
+        return this;
+    }
+
+    /**
+     * Adds a new price currency to the article.
+     *
+     * @param currency the new price currency to athe article.
+     * @return the article editor.
+     */
+    public ArticleEditor addCurrency(final String currency) {
+        this.currency = currency;
         return this;
     }
 
@@ -190,8 +208,18 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      *
      * @return The new article price.
      */
-    private String getPrice() {
-        return isNotNull(this.price) ? this.price : this.article.getPrice();
+    private double getPrice() {
+        return (this.price > 0) ? this.price : this.article.getPrice();
+    }
+
+    /**
+     * Returns a price currency of a new article.
+     * Returns an empty string if the price currency is null or empty.
+     *
+     * @return The price currency or empty string (newer null).
+     */
+    private String getCurrency() {
+        return isNotNull(this.currency) ? this.currency : this.article.getCurrency();
     }
 
     /**
