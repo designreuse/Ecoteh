@@ -21,9 +21,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods
- * for working with objects of the {@link FileEntity} class.
+ * for working with objects of the {@link File} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see File
+ * @see FileEntity
  */
 @Service
 @ComponentScan(
@@ -65,10 +67,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Saves and returns a new fileEntity.
+     * Saves and returns a new file.
      *
-     * @param file the title of a new fileEntity.
-     * @return The new saving fileEntity (newer null).
+     * @param file the title of a new file.
+     * @return The new saving file (newer null).
      */
     @Override
     @Transactional
@@ -91,6 +93,21 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
         return savingFile;
     }
 
+    /**
+     * Saves and returns files.
+     * Returns empty collection if files is empty.
+     * <pre>
+     *     add(null) = empty ArrayList()
+     *     add(new ArrayList()) = empty ArrayList()
+     *
+     *     Collection models = new ArrayList();
+     *     models.add(new Model());
+     *     add(models) = saving models
+     * </pre>
+     *
+     * @param files the files to add.
+     * @return The saving files or empty collection.
+     */
     @Override
     @Transactional
     public Collection<File> add(final Collection<File> files) {
@@ -108,9 +125,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     /**
      * Initializes, updates and returns photo with incoming id.
      *
-     * @param file the id of a fileEntity to update.
+     * @param file the id of a file to update.
      * @return The updating photo with incoming id (newer null).
-     * @throws IllegalArgumentException Throw exception when fileEntity is static.
+     * @throws IllegalArgumentException Throw exception when file is static.
      */
     @Override
     @Transactional
@@ -136,11 +153,11 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Returns fileEntity object with the incoming title.
+     * Returns file object with the incoming title.
      * If a incoming title is null or empty then throws IllegalArgumentException.
      *
-     * @param title the title of a fileEntity to return.
-     * @return The fileEntity with incoming title (newer null).
+     * @param title the title of a file to return.
+     * @return The file with incoming title (newer null).
      * @throws IllegalArgumentException Throw exception when parameter title is blank.
      * @throws NullPointerException     Throw exception when object with parameter title is not exist.
      */
@@ -153,16 +170,16 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
                     getClassSimpleName()
             );
         }
-        final FileEntity fileEntity = this.repository.findByTitle(title);
-        return convertToModel(fileEntity);
+        final FileEntity entity = this.repository.findByTitle(title);
+        return convertToModel(entity);
     }
 
     /**
-     * Returns fileEntity object with the incoming URL.
+     * Returns file object with the incoming URL.
      * If a incoming URL is null or empty then throws IllegalArgumentException.
      *
-     * @param url the URL of a fileEntity to return.
-     * @return The fileEntity with incoming URL (newer null).
+     * @param url the URL of a file to return.
+     * @return The file with incoming URL (newer null).
      * @throws IllegalArgumentException Throw exception when parameter URL is blank.
      */
     @Override
@@ -174,15 +191,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
                     getClassSimpleName()
             );
         }
-        final FileEntity fileEntity = this.repository.findByUrl(url);
-        return convertToModel(fileEntity);
+        final FileEntity entity = this.repository.findByUrl(url);
+        return convertToModel(entity);
     }
 
     /**
-     * Removes fileEntity object with the incoming title.
-     * Removes fileEntity if title is not null and not empty.
+     * Removes file object with the incoming title.
+     * Removes file if title is not null and not empty.
      *
-     * @param title the title of a fileEntity to remove.
+     * @param title the title of a file to remove.
      */
     @Override
     @Transactional
@@ -193,9 +210,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Removes fileEntity object with the incoming URL.
+     * Removes file object with the incoming URL.
      *
-     * @param url the URL of a fileEntity to remove.
+     * @param url the URL of a file to remove.
      */
     @Override
     @Transactional
@@ -204,10 +221,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Removes fileEntity if it is not null.
-     * If incoming fileEntity is static then throws IllegalArgumentException.
+     * Removes file if it is not null.
+     * If incoming file is static then throws IllegalArgumentException.
      *
-     * @param file the fileEntity to remove.
+     * @param file the file to remove.
      */
     @Override
     @Transactional
@@ -222,9 +239,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Removes fileEntities if are not empty.
+     * Removes files if are not empty.
      *
-     * @param files the fileEntities to remove.
+     * @param files the files to remove.
      */
     @Override
     @Transactional
@@ -235,7 +252,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Removes all fileEntities.
+     * Removes all files.
      */
     @Override
     @Transactional
@@ -244,10 +261,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Saves a multipart fileEntity in the fileEntity system in a directory rootPath.
-     * Saves fileEntity if it is not null and not empty.
+     * Saves a multipart file in the file system in a directory rootPath.
+     * Saves file if it is not null and not empty.
      *
-     * @param file     the multipart fileEntity to save.
+     * @param file     the multipart file to save.
      * @param rootPath the root directory path.
      */
     @Override
@@ -263,10 +280,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Saves a multipart fileEntity in the fileEntity system.
-     * Saves fileEntity if it is not null and not empty.
+     * Saves a multipart file in the file system.
+     * Saves file if it is not null and not empty.
      *
-     * @param file the multipart fileEntity to save.
+     * @param file the multipart file to save.
      */
     @Override
     @Transactional
@@ -275,10 +292,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Deletes fileEntity in the fileEntity system.
+     * Deletes file in the file system.
      *
-     * @param path the fileEntity path.
-     * @return Returns true if able to delete the fileEntity,
+     * @param path the file path.
+     * @return Returns true if able to delete the file,
      * otherwise return false.
      */
     @Override
@@ -289,29 +306,29 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Sorts and returns fileEntity objects by title.
+     * Sorts and returns file objects by title.
      * For sorting used {@link FileComparator.ByTitle} comparator.
      *
-     * @param fileEntities the fileEntities to sort.
+     * @param files the files to sort.
      * @param revers       is sort in descending or ascending.
-     * @return The sorted list of fileEntities (newer null).
+     * @return The sorted list of files (newer null).
      */
     @Override
     @Transactional(readOnly = true)
     public List<File> sortByTitle(
-            final Collection<File> fileEntities,
+            final Collection<File> files,
             final boolean revers
     ) {
         final Comparator<File> byTitleComparator = new FileComparator.ByTitle();
-        return sort(fileEntities, byTitleComparator, revers);
+        return sort(files, byTitleComparator, revers);
     }
 
     /**
-     * Returns fileEntities with the incoming type.
+     * Returns files with the incoming type.
      * If a incoming type is null then throws IllegalArgumentException.
      *
-     * @param type the type of fileEntities to return.
-     * @return The fileEntities with the type (newer null).
+     * @param type the type of files to return.
+     * @return The files with the type (newer null).
      * @throws IllegalArgumentException Throw exception when parameter type is null.
      */
     @Override
@@ -323,15 +340,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
                     getClassSimpleName()
             );
         }
-        final Collection<FileEntity> fileEntities = this.repository.findAllByType(type);
-        return convertToModels(fileEntities);
+        final Collection<FileEntity> entities = this.repository.findAllByType(type);
+        return convertToModels(entities);
     }
 
     /**
-     * Returns last fileEntity with the type.
+     * Returns last file with the type.
      *
-     * @param type the type of fileEntity to return.
-     * @return The last fileEntity with the type (newer null).
+     * @param type the type of file to return.
+     * @return The last file with the type (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -357,16 +374,16 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Validated a multipart fileEntity. FileEntity is valid if it is not null, not empty and
+     * Validated a multipart file. FileEntity is valid if it is not null, not empty and
      * it has normal size.
-     * If an incoming multipart fileEntity is null or empty then throws NullPointerException.
-     * If an incoming multipart fileEntity size is greater than max fileEntity size then
+     * If an incoming multipart file is null or empty then throws NullPointerException.
+     * If an incoming multipart file size is greater than max file size then
      * throws IllegalArgumentException.
      *
-     * @param file the multipart fileEntity to check.
-     * @throws NullPointerException     if the incoming fileEntity is null or empty.
-     * @throws IllegalArgumentException if the incoming fileEntity size is greater
-     *                                  than max fileEntity size.
+     * @param file the multipart file to check.
+     * @throws NullPointerException     if the incoming file is null or empty.
+     * @throws IllegalArgumentException if the incoming file size is greater
+     *                                  than max file size.
      */
     private void isValidMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
@@ -382,7 +399,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Checks an incoming fileEntity size.
+     * Checks an incoming file size.
      * <pre>
      *     int maxSize = 1024; - for example
      *     int size = 2048;
@@ -394,8 +411,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      *     isGreatMaxSize(size) = false
      * </pre>
      *
-     * @param size the incoming fileEntity size.
-     * @return true if size is greater than max fileEntity size,
+     * @param size the incoming file size.
+     * @return true if size is greater than max file size,
      * false otherwise.
      */
     private boolean isGreatMaxSize(final long size) {
@@ -403,20 +420,20 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Returns a maximum fileEntity size.
+     * Returns a maximum file size.
      *
-     * @return The maximum fileEntity size.
+     * @return The maximum file size.
      */
     private long getMaxFileSize() {
         return this.properties.getMaxFileSize();
     }
 
     /**
-     * Creates and returns a absolute path to a fileEntity.
+     * Creates and returns a absolute path to a file.
      *
-     * @param file     the multipart fileEntity.
+     * @param file     the multipart file.
      * @param rootPath the root directory path.
-     * @return The absolute path to fileEntity (newer null).
+     * @return The absolute path to file (newer null).
      */
     private String createAbsolutePath(final MultipartFile file, final String rootPath) {
         return createAbsolutePath(rootPath) +
@@ -434,11 +451,11 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Creates and returns a relative path to a fileEntity.
+     * Creates and returns a relative path to a file.
      *
-     * @param title the fileEntity title.
-     * @param file  the multipart fileEntity.
-     * @return The relative path to fileEntity (newer null).
+     * @param title the file title.
+     * @param file  the multipart file.
+     * @return The relative path to file (newer null).
      */
     private String createRelativePath(final String title, final MultipartFile file) {
         return this.properties.getResourcesLocation() +
@@ -448,12 +465,12 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Returns a multipart fileEntity type.
-     * If fileEntity title "FileEntity.txt" them returns ".txt".
-     * If fileEntity title "FileEntity" them returns "" (empty string).
+     * Returns a multipart file type.
+     * If file title "FileEntity.txt" them returns ".txt".
+     * If file title "FileEntity" them returns "" (empty string).
      *
-     * @param file the multipart fileEntity (newer null).
-     * @return The multipart fileEntity type or empty string (newer null).
+     * @param file the multipart file (newer null).
+     * @return The multipart file type or empty string (newer null).
      */
     private String getMultipartFileType(final MultipartFile file) {
         String type;
@@ -467,10 +484,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
-     * Checks an incoming fileEntity is static or not.
+     * Checks an incoming file is static or not.
      *
-     * @param file the fileEntity to check (newer null).
-     * @return true if fileEntity is static, false otherwise.
+     * @param file the file to check (newer null).
+     * @return true if file is static, false otherwise.
      */
     private boolean isStaticFile(final File file) {
         return file.getType().equals(FileType.STATIC);

@@ -17,9 +17,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the {@link ResponseEntity} class.
+ * with objects of the {@link Response} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Response
+ * @see ResponseEntity
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
@@ -38,12 +40,12 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     }
 
     /**
-     * Sorts and returns responseEntities by date.
+     * Sorts and returns responses by date.
      * For sorting used {@link ResponseComparator.ByDate} comparator.
      *
-     * @param responses the responseEntities to sort.
+     * @param responses the responses to sort.
      * @param revers    is sort in descending or ascending.
-     * @return The sorted list of responseEntities (newer null).
+     * @return The sorted list of responses (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -53,11 +55,11 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     }
 
     /**
-     * Sorts and returns responseEntities by date.
+     * Sorts and returns responses by date.
      * For sorting used {@link ResponseComparator.ByDate} comparator.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of responseEntities (newer null).
+     * @return The sorted list of responses (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -66,16 +68,15 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     }
 
     /**
-     * Filters and returns responseEntities by the date.
-     * Return empty list if responseEntities is empty.
-     * Return back responseEntities list if dates are null
+     * Filters and returns responses by the date.
+     * Return empty list if responses is empty.
+     * Return back responses list if dates are null
      * or start date is equals end to finish date.
      * <pre>
      *     filterByDate(null, ..., ...) = empty ArrayList()
      *     filterByDate(new ArrayList(), ..., ...) = empty ArrayList()
      *
-     *     Collection collection = new ArrayList();
-     *     collection.add(new ResponseEntity());
+     *     if the incoming collection is not empty
      *     filterByDate(collection, null, null) = collection
      *     filterByDate(collection, new Date(), null) = collection
      *     filterByDate(collection, null, new Date()) = collection
@@ -85,13 +86,13 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
      *     if startDate greater than finishDate:
      *     filterByDate(collection, startDate, finishDate) = collection
      *     if finishDate greater than startDate:
-     *     filterByDate(collection, startDate, finishDate) = filtered list of responseEntities
+     *     filterByDate(collection, startDate, finishDate) = filtered list of responses
      * </pre>
      *
-     * @param responses  the responseEntities to filter.
+     * @param responses  the responses to filter.
      * @param startDate  the initial date.
      * @param finishDate the final date.
-     * @return The filtered list of responseEntities.
+     * @return The filtered list of responses.
      */
     @Override
     @Transactional(readOnly = true)
@@ -116,23 +117,23 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     }
 
     /**
-     * Filters and returns responseEntities by the date.
+     * Filters and returns responses by the date.
      * <pre>
-     *     getAndFilterByDate(null, null) = all responseEntities
+     *     getAndFilterByDate(null, null) = all responses
      *     getAndFilterByDate(new Date(), null) = all articles
-     *     getAndFilterByDate(null, new Date()) = all responseEntities
+     *     getAndFilterByDate(null, new Date()) = all responses
      *
      *     Date startDate = new Date();
      *     Date finishDate = new Date();
      *     if startDate greater than finishDate:
-     *     filterByDate(startDate, finishDate) = all responseEntities
+     *     filterByDate(startDate, finishDate) = all responses
      *     if finishDate greater than startDate:
-     *     filterByDate(startDate, finishDate) = filtered list of responseEntities
+     *     filterByDate(startDate, finishDate) = filtered list of responses
      * </pre>
      *
      * @param startDate  the initial date.
      * @param finishDate the final date.
-     * @return The filtered list of responseEntities.
+     * @return The filtered list of responses.
      */
     @Override
     @Transactional(readOnly = true)
@@ -141,31 +142,31 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     }
 
     /**
-     * Returns a list valid responseEntities.
-     * Returns empty list if responseEntities is empty.
+     * Returns a list valid responses.
+     * Returns empty list if responses is empty.
      * <pre>
      *     filteredByValid(null) = empty ArrayList()
      *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
-     *     Collection responseEntities = new ArrayList();
+     *     Collection responses = new ArrayList();
      *     ResponseEntity responseEntity = new ResponseEntity();
      *     responseEntity.setValidated(false);
-     *     responseEntities.add(responseEntity);
-     *     filteredByValid(responseEntities) = empty ArrayList()
+     *     responses.add(responseEntity);
+     *     filteredByValid(responses) = empty ArrayList()
      *
      *     responseEntity.setValidated(true);
-     *     filteredByValid(responseEntities) = filtered list of articles
+     *     filteredByValid(responses) = filtered list of articles
      * </pre>
      *
-     * @param responseEntities the articles to filter.
-     * @return The filtered list of responseEntities or empty list (newer null).
+     * @param responses the articles to filter.
+     * @return The filtered list of responses or empty list (newer null).
      */
     @Override
-    public List<Response> filteredByValid(final Collection<Response> responseEntities) {
+    public List<Response> filteredByValid(final Collection<Response> responses) {
         final List<Response> result = new ArrayList<>();
-        if (isNotEmpty(responseEntities)) {
+        if (isNotEmpty(responses)) {
             result.addAll(
-                    responseEntities.stream()
+                    responses.stream()
                             .filter(this::isValidated)
                             .collect(Collectors.toList())
             );

@@ -12,6 +12,7 @@ import java.util.List;
  * for working with objects of the {@link Article} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Article
  */
 public interface ArticleService extends ContentService<Article> {
 
@@ -25,18 +26,18 @@ public interface ArticleService extends ContentService<Article> {
     Article getByNumber(String number, boolean isValid);
 
     /**
-     * Returns all article with the categoryEntity id.
+     * Returns all article with the category id.
      *
-     * @param id the categoryEntity id of articleEntities to return.
-     * @return The list of articleEntities.
+     * @param id the category id of articles to return.
+     * @return The list of articles.
      */
     Collection<Article> getByCategoryId(long id);
 
     /**
-     * Returns all article with the categoryEntity title.
+     * Returns all article with the category title.
      *
-     * @param title the categoryEntity title of articleEntities to return.
-     * @return The list of articleEntities.
+     * @param title the category title of articles to return.
+     * @return The list of articles.
      */
     Collection<Article> getByCategoryTitle(String title);
 
@@ -48,89 +49,106 @@ public interface ArticleService extends ContentService<Article> {
     void removeByNumber(String number);
 
     /**
-     * Sorts and returns articleEntities by number.
+     * Sorts and returns articles by number.
      *
-     * @param articleEntities the articleEntities to sort.
+     * @param articles the articles to sort.
      * @param revers   is sort in descending or ascending.
-     * @return The sorted list of articleEntities.
+     * @return The sorted list of articles.
      */
-    List<Article> sortByNumber(Collection<Article> articleEntities, boolean revers);
+    List<Article> sortByNumber(Collection<Article> articles, boolean revers);
 
     /**
-     * Sorts and returns articleEntities by date.
+     * Sorts and returns articles by date.
      *
-     * @param articleEntities the articleEntities to sort.
+     * @param articles the articles to sort.
      * @param revers   is sort in descending or ascending.
-     * @return The sorted list of articleEntities.
+     * @return The sorted list of articles.
      */
-    List<Article> sortByDate(Collection<Article> articleEntities, boolean revers);
+    List<Article> sortByDate(Collection<Article> articles, boolean revers);
 
     /**
-     * Sorts and returns articleEntities by number.
+     * Sorts and returns articles by price.
+     *
+     * @param articles the articles to sort.
+     * @param revers   is sort in descending or ascending.
+     * @return The sorted list of articles.
+     */
+    List<Article> sortByPrice(Collection<Article> articles, boolean revers);
+
+    /**
+     * Sorts and returns articles by number.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of articleEntities.
+     * @return The sorted list of articles.
      */
     List<Article> getAndSortByNumber(boolean revers);
 
     /**
-     * Sorts and returns articleEntities by date.
+     * Sorts and returns articles by date.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of articleEntities.
+     * @return The sorted list of articles.
      */
     List<Article> getAndSortByDate(boolean revers);
 
     /**
-     * Filters and returns articleEntities by incming dates.
+     * Sorts and returns articles by price.
      *
-     * @param articleEntities  the articleEntities to filter.
+     * @param revers is sort in descending or ascending.
+     * @return The sorted list of articles.
+     */
+    List<Article> getAndSortByPrice(boolean revers);
+
+    /**
+     * Filters and returns articles by incoming dates.
+     *
+     * @param articles  the articles to filter.
      * @param startDate the initial date.
      * @param endDate   the final date.
-     * @return The filtered list of articleEntities.
+     * @return The filtered list of articles.
      */
-    List<Article> filterByDate(Collection<Article> articleEntities, Date startDate, Date endDate);
+    List<Article> filterByDate(Collection<Article> articles, Date startDate, Date endDate);
 
     /**
-     * Filters and returns articleEntities by the categoryEntity.
+     * Filters and returns articles by the category.
      *
-     * @param articleEntities the articleEntities to filter.
-     * @param categoryEntity the categoryEntity filtering.
-     * @return The filtered list of articleEntities.
+     * @param articles the articles to filter.
+     * @param category the category filtering.
+     * @return The filtered list of articles.
      */
-    List<Article> filterByCategory(Collection<Article> articleEntities, Category categoryEntity);
+    List<Article> filterByCategory(Collection<Article> articles, Category category);
 
     /**
-     * Filters and returns articleEntities by the categories.
+     * Filters and returns articles by the categories.
      *
-     * @param articleEntities   the articleEntities to filter.
+     * @param articles   the articles to filter.
      * @param categories the categories filtering.
-     * @return The filtered list of articleEntities.
+     * @return The filtered list of articles.
      */
-    List<Article> filterByCategories(Collection<Article> articleEntities, Collection<Category> categories);
+    List<Article> filterByCategories(Collection<Article> articles, Collection<Category> categories);
 
     /**
-     * Filters and returns articleEntities by the dates.
+     * Filters and returns articles by the dates.
      *
      * @param startDate the initial date.
      * @param endDate   the final date.
-     * @return The filtered list of articleEntities.
+     * @return The filtered list of articles.
      */
     List<Article> getAndFilterByDate(Date startDate, Date endDate);
 
     /**
-     * Filters and returns articleEntities by the categoryEntity.
+     * Filters and returns articles by the category.
      *
-     * @param categoryEntity the categoryEntity filtering.
-     * @return The filtered list of articleEntities.
+     * @param category the category filtering.
+     * @return The filtered list of articles.
      */
-    List<Article> getAndFilterByCategory(Category categoryEntity);
+    List<Article> getAndFilterByCategory(Category category);
 
     /**
-     * Filters and returns articleEntities by the categories.
+     * Filters and returns articles by the categories.
      *
      * @param categories the categories filtering.
-     * @return The filtered list of articleEntities.
+     * @return The filtered list of articles.
      */
     List<Article> getAndFilterByCategories(Collection<Category> categories);
 }

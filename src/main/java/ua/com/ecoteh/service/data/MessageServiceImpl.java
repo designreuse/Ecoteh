@@ -9,9 +9,11 @@ import ua.com.ecoteh.repository.MessageRepository;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the {@link MessageEntity} class.
+ * with objects of the {@link Message} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Message
+ * @see MessageEntity
  */
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.repository")
@@ -30,9 +32,9 @@ public final class MessageServiceImpl extends DataServiceImpl<Message, MessageEn
     }
 
     /**
-     * Return Class object of {@link MessageEntity} or subclasses.
+     * Return Class object of {@link Message} or subclasses.
      *
-     * @return The Class object of {@link MessageEntity} or subclasses.
+     * @return The Class object of {@link Message} or subclasses.
      */
     @Override
     Class<Message> getModelClass() {

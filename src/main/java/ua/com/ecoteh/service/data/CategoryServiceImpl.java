@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.ecoteh.entity.article.Article;
+import ua.com.ecoteh.entity.article.ArticleEntity;
 import ua.com.ecoteh.entity.category.Category;
+import ua.com.ecoteh.entity.category.CategoryEditor;
 import ua.com.ecoteh.entity.category.CategoryEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CategoryRepository;
+import ua.com.ecoteh.util.validator.ObjectValidator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,9 +23,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the class {@link CategoryEntity}.
+ * with objects of the class {@link Category}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Category
+ * @see CategoryEntity
  */
 @Service
 @ComponentScan(
@@ -31,16 +37,19 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
         }
 )
 public final class CategoryServiceImpl
-        extends ContentServiceImpl<Category, CategoryEntity>
-        implements CategoryService {
+        extends ContentServiceImpl<Category, CategoryEntity> implements CategoryService {
 
+    /**
+     * The interface provides a set of standard methods
+     * for working {@link CategoryEntity} objects a the database.
+     */
     private final CategoryRepository repository;
 
     /**
      * Constructor.
      *
-     * @param repository     the implementation  of the {@link CategoryRepository} interface.
-     * @param fileService    the implementation of the {@link FileService} interface.
+     * @param repository  the implementation  of the {@link CategoryRepository} interface.
+     * @param fileService the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -58,8 +67,8 @@ public final class CategoryServiceImpl
      * @param url     the URL of the categoryEntity to return.
      * @param isValid is get valid categoryEntity or not.
      * @return The categoryEntity with the incoming URL (newer null).
-     * @throws IllegalArgumentException
-     * @throws NullPointerException
+     * @throws IllegalArgumentException Throw exception when the incoming url is null or empty.
+     * @throws NullPointerException     Throw exception when object with parameter url is not exist.
      */
     @Override
     @Transactional(readOnly = true)
@@ -68,15 +77,33 @@ public final class CategoryServiceImpl
         if (isEmpty(url)) {
             throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
         }
-        final CategoryEntity categoryEntity = this.repository.findByUrl(url);
-        if (isNotValidated(categoryEntity, isValid)) {
+        final CategoryEntity entity = this.repository.findByUrl(url);
+        if (isNotValidated(entity, isValid)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), url
             );
         }
-        categoryEntity.getArticleEntities().size();
-        return convertToModel(categoryEntity);
+        final Category category = convertToModel(entity);
+        final CategoryEditor categoryEditor = category.getEditor();
+        final Collection<Article> articles = convertArticles(entity.getArticleEntities());
+        categoryEditor.addArticles(articles);
+        return categoryEditor.update();
+    }
+
+    /**
+     * Converts the category article entities to an articles collection.
+     *
+     * @param entities the model entities to convert.
+     * @return The converted articles collection (newer null).
+     * @see Article
+     * @see ArticleEntity
+     */
+    private Collection<Article> convertArticles(final Collection<ArticleEntity> entities) {
+        return entities.stream()
+                .filter(ObjectValidator::isNotNull)
+                .map(ArticleEntity::convert)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -86,13 +113,10 @@ public final class CategoryServiceImpl
      *     filteredByValid(null) = empty ArrayList()
      *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
-     *     Collection categories = new ArrayList();
-     *     CategoryEntity categoryEntity = new CategoryEntity();
-     *     categoryEntity.setValidated(false);
-     *     categories.add(categoryEntity);
+     *     if the incoming collection has a not validated categories
      *     filteredByValid(categories) = empty ArrayList()
      *
-     *     categoryEntity.setValidated(true);
+     *     if the incoming collection has a validated categories
      *     filteredByValid(categories) = filtered list of articles
      * </pre>
      *
@@ -114,9 +138,9 @@ public final class CategoryServiceImpl
     }
 
     /**
-     * Return Class object of {@link CategoryEntity} class.
+     * Return Class object of {@link Category} class.
      *
-     * @return The Class object of {@link CategoryEntity} class.
+     * @return The Class object of {@link Category} class.
      */
     @Override
     protected Class<Category> getModelClass() {

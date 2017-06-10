@@ -7,6 +7,7 @@ import ua.com.ecoteh.entity.category.Category;
  * for working with objects of the {@link Category} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Category
  */
 public interface CategoryService extends ContentService<Category> {
 }

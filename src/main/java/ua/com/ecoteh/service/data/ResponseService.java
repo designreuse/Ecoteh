@@ -11,46 +11,43 @@ import java.util.List;
  * for working with objects of the class {@link Response}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Response
  */
 public interface ResponseService extends DataService<Response> {
 
     /**
-     * Sorts and returns responseEntities by date.
+     * Sorts and returns responses by date.
      *
-     * @param responseEntities the responseEntities to sort.
+     * @param responses the responses to sort.
      * @param revers    Sort in descending or ascending.
-     * @return The sorted list of responseEntities.
+     * @return The sorted list of responses.
      */
-    List<Response> sortByDate(Collection<Response> responseEntities, boolean revers);
+    List<Response> sortByDate(Collection<Response> responses, boolean revers);
 
     /**
-     * Sorts and returns responseEntities by date.
+     * Sorts and returns responses by date.
      *
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of responseEntities.
+     * @return The sorted list of responses.
      */
     List<Response> getAndSortByDate(boolean revers);
 
     /**
-     * Filters and returns responseEntities by the incoming dates.
+     * Filters and returns responses by the incoming dates.
      *
-     * @param responseEntities  the responseEntities to filter.
+     * @param responses  the responses to filter.
      * @param startDate  the initial date.
      * @param finishDate the  date.
-     * @return The filtered list of responseEntities.
+     * @return The filtered list of responses.
      */
-    List<Response> filterByDate(
-            Collection<Response> responseEntities,
-            Date startDate,
-            Date finishDate
-    );
+    List<Response> filterByDate(Collection<Response> responses, Date startDate, Date finishDate);
 
     /**
-     * Filters and returns responseEntities by the incoming dates.
+     * Filters and returns responses by the incoming dates.
      *
      * @param startDate  the initial date.
      * @param finishDate the  date.
-     * @return The filtered list of responseEntities.
+     * @return The filtered list of responses.
      */
     List<Response> getAndFilterByDate(Date startDate, Date finishDate);
 }

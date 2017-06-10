@@ -16,10 +16,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, describes a set of methods
- * for working with objects of {@link ContentEntity} class or subclass.
+ * for working with objects of {@link Content} class or subclass.
  *
- * @param <T> entity type, extends {@link ContentEntity}.
+ * @param <T> model type, extends {@link Content}.
+ * @param <E> entity type, extends {@link ContentEntity}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Content
+ * @see ContentEntity
  */
 public abstract class ContentServiceImpl<T extends Content, E extends ContentEntity>
         extends DataServiceImpl<T, E> implements ContentService<T> {
@@ -54,34 +57,33 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Initializes, updates and returns content with incoming URL.
+     * Initializes, updates and returns content.
      * If a incoming content is null then throws IllegalArgumentException.
      *
-     * @param url     the URL of a content to update.
      * @param content the content object to update.
      * @return The updating content with parameter id (newer null).
      * @throws IllegalArgumentException Throw exception when input content is null.
      */
     @Override
     @Transactional
-    public T update(final String url, final T content) throws IllegalArgumentException {
+    public T update(final T content) throws IllegalArgumentException {
         if (isNull(content)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName()
             );
         }
-        final T contentToUpdate = getByUrl(url, false);
+        final T contentToUpdate = getByUrl(content.getUrl(), false);
         final File newLogo = content.getLogo();
         final File oldLogo = contentToUpdate.getLogo();
         if (isNewLogo(newLogo, oldLogo)) {
             this.fileService.deleteFile(oldLogo.getUrl());
         }
-        return update(content);
+        return super.update(content);
     }
 
     /**
-     * Returns object of {@link ContentEntity} or subclasses with the incoming title.
+     * Returns object of {@link Content} or subclasses with the incoming title.
      * If a incoming title is null or empty then throws IllegalArgumentException.
      * If can`t find content by incoming title then throws NullPointerException.
      *
@@ -112,7 +114,7 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Returns object of {@link ContentEntity} or subclasses with the incoming URL.
+     * Returns object of {@link Content} or subclasses with the incoming URL.
      * If a incoming URL is null or empty then throws IllegalArgumentException.
      * If can`t find content by incoming URL then throws NullPointerException.
      *
@@ -140,7 +142,7 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Removes object of {@link ContentEntity} or subclasses with the incoming title.
+     * Removes object of {@link Content} or subclasses with the incoming title.
      * Removes content if title is not blank.
      *
      * @param title the title of a content to remove.
@@ -154,7 +156,7 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Removes object of {@link ContentEntity} or subclasses with the incoming URL.
+     * Removes object of {@link Content} or subclasses with the incoming URL.
      *
      * @param url the URL of a content to remove.
      */
@@ -167,12 +169,13 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Sorts and returns objects of {@link ContentEntity} class or subclasses by title.
+     * Sorts and returns objects of {@link Content} class or subclasses by title.
      * For sorting used {@link ContentComparator.ByTitle} comparator.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents or empty list (newer null).
+     * @see ContentComparator.ByTitle
      */
     @Override
     @Transactional(readOnly = true)
@@ -181,12 +184,13 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Sorts and returns objects of {@link ContentEntity} class or subclasses by URL.
+     * Sorts and returns objects of {@link Content} class or subclasses by URL.
      * For sorting used {@link ContentComparator.ByUrl} comparator.
      *
      * @param contents the contents to sort.
      * @param revers   is sort in descending or ascending.
      * @return The sorted list of contents or empty list (newer null).
+     * @see ContentComparator.ByUrl
      */
     @Override
     @Transactional(readOnly = true)
@@ -195,11 +199,12 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Sorts and returns objects of {@link ContentEntity} class or subclasses by title.
+     * Sorts and returns objects of {@link Content} class or subclasses by title.
      * For sorting used {@link ContentComparator.ByTitle} comparator.
      *
      * @param revers is sort in descending or ascending.
      * @return The sorted list of contents or empty list (newer null).
+     * @see ContentComparator.ByTitle
      */
     @Override
     @Transactional(readOnly = true)
@@ -208,11 +213,12 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Sorts and returns objects of {@link ContentEntity} class or subclasses by URL.
+     * Sorts and returns objects of {@link Content} class or subclasses by URL.
      * For sorting used {@link ContentComparator.ByUrl} comparator.
      *
      * @param revers Sort in descending or ascending.
      * @return The sorted list of contents or empty list (newer null).
+     * @see ContentComparator.ByUrl
      */
     @Override
     @Transactional(readOnly = true)
@@ -224,13 +230,12 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
      * Checks incoming photos.
      * The new photo must be not equals to the old photo.
      * <pre>
-     *     FileEntity photo1 = new FileEntity();
-     *     isNewLogo(photo1, photo1) = false
+     *     isNewLogo(photo, photo) = false
      *
-     *     FileEntity photo2 = new FileEntity();
+     *     if the photo1 is not equals to the photo2
      *     isNewLogo(photo1, photo2) = false
      *
-     *     photo2.setUrl("photo_2);
+     *     if the photo1 is equals to the photo2
      *     isNewLogo(photo1, photo2) = true
      * </pre>
      *

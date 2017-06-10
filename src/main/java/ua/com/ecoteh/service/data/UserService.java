@@ -12,74 +12,66 @@ import java.util.List;
  * for working with objects of the class {@link User}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see User
  */
 public interface UserService extends DataService<User>, UserDetailsService {
 
     /**
-     * Initializes, updates and returns userEntity with incoming id.
+     * Returns user which the incoming name.
      *
-     * @param url  the URL of a userEntity to update.
-     * @param userEntity the userEntity to update.
-     * @return The updating userEntity with incoming id.
-     */
-    User update(String url, User userEntity);
-
-    /**
-     * Returns userEntity which the incoming name.
-     *
-     * @param name the name of a userEntity to return.
-     * @return The userEntity which the incoming name.
+     * @param name the name of a user to return.
+     * @return The user which the incoming name.
      */
     User getByName(String name);
 
     /**
-     * Returns userEntity which the incoming url.
+     * Returns user which the incoming url.
      *
-     * @param url the URL of a userEntity to return.
-     * @return The userEntity which the incoming url.
+     * @param url the URL of a user to return.
+     * @return The user which the incoming url.
      */
     User getByUrl(String url);
 
     /**
-     * Returns userEntity which the incoming login.
+     * Returns user which the incoming login.
      *
-     * @param login the login of a userEntity to return.
-     * @return The userEntity which the incoming login.
+     * @param login the login of a user to return.
+     * @return The user which the incoming login.
      */
     User getByLogin(String login);
 
     /**
-     * Returns userEntity which the incoming E-mail.
+     * Returns user which the incoming E-mail.
      *
-     * @param email the E-mail of a userEntity to return.
-     * @return The userEntity which the incoming email.
+     * @param email the E-mail of a user to return.
+     * @return The user which the incoming email.
      */
     User getByEmail(String email);
 
     /**
-     * Returns userEntity which the incoming phone.
+     * Returns user which the incoming phone.
      *
-     * @param phone the phone of a userEntity to return.
-     * @return The userEntity which the incoming phone.
+     * @param phone the phone of a user to return.
+     * @return The user which the incoming phone.
      */
     User getByPhone(String phone);
 
     /**
-     * Returns authenticated userEntity.
+     * Returns authenticated user.
      *
-     * @return The authenticated userEntity.
+     * @return The authenticated user.
      */
     User getAuthenticatedUser();
 
     /**
-     * Returns main admin userEntity.
+     * Returns main admin user.
      *
-     * @return The main admin userEntity.
+     * @return The main admin user.
      */
     User getMainAdmin();
 
     /**
-     * Returns userEntities with role "ADMIN".
+     * Returns users with role "ADMIN".
      *
      * @return The all admin.
      */
@@ -93,49 +85,49 @@ public interface UserService extends DataService<User>, UserDetailsService {
     Collection<User> getPersonnel();
 
     /**
-     * Removes userEntity with the incoming name.
+     * Removes user with the incoming name.
      *
-     * @param name the name of a userEntity to remove.
+     * @param name the name of a user to remove.
      */
     void removeByName(String name);
 
     /**
-     * Removes userEntity with the incoming url.
+     * Removes user with the incoming url.
      *
-     * @param url the URL of a userEntity to remove.
+     * @param url the URL of a user to remove.
      */
     void removeByUrl(String url);
 
     /**
-     * Sorts and returns userEntities by name.
+     * Sorts and returns users by name.
      *
-     * @param userEntities  the userEntities to sort.
+     * @param users  the users to sort.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of userEntities.
+     * @return The sorted list of users.
      */
-    List<User> sortByName(Collection<User> userEntities, boolean revers);
+    List<User> sortByName(Collection<User> users, boolean revers);
 
     /**
-     * Sorts and returns userEntities by URL.
+     * Sorts and returns users by URL.
      *
-     * @param userEntities  the userEntities to sort.
+     * @param users  the users to sort.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of userEntities.
+     * @return The sorted list of users.
      */
-    List<User> sortByUrl(Collection<User> userEntities, boolean revers);
+    List<User> sortByUrl(Collection<User> users, boolean revers);
 
     /**
-     * Sorts and returns userEntities by by role.
+     * Sorts and returns users by by role.
      *
-     * @param userEntities  the userEntities to sort.
+     * @param users  the users to sort.
      * @param role   the role filtering.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of userEntities.
+     * @return The sorted list of users.
      */
-    List<User> sortByRole(Collection<User> userEntities, UserRole role, boolean revers);
+    List<User> sortByRole(Collection<User> users, UserRole role, boolean revers);
 
     /**
-     * Sorts and returns userEntities by date.
+     * Sorts and returns users by date.
      *
      * @param revers Sort in descending or ascending.
      * @return The sorted list of articles.
@@ -143,53 +135,62 @@ public interface UserService extends DataService<User>, UserDetailsService {
     List<User> getAndSortByName(boolean revers);
 
     /**
-     * Sorts and returns userEntities by URL.
+     * Sorts and returns users by URL.
      *
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of userEntities.
+     * @return The sorted list of users.
      */
     List<User> getAndSortByUrl(boolean revers);
 
     /**
-     * Sorts and returns userEntities by role.
+     * Sorts and returns users by role.
      *
      * @param role   the role filtering.
      * @param revers Sort in descending or ascending.
-     * @return The sorted list of userEntities.
+     * @return The sorted list of users.
      */
     List<User> getAndSortByRole(UserRole role, boolean revers);
 
     /**
-     * Filters and returns userEntities by role.
+     * Filters and returns users by role.
      *
-     * @param userEntities the userEntities to filter.
+     * @param users the users to filter.
      * @param role  the role filtering.
-     * @return The filtered list of userEntities.
+     * @return The filtered list of users.
      */
-    List<User> filterByRole(Collection<User> userEntities, UserRole role);
+    List<User> filterByRole(Collection<User> users, UserRole role);
 
     /**
-     * Filters and returns userEntities by roles.
+     * Filters and returns users by roles.
      *
-     * @param userEntities the userEntities to filter.
+     * @param users the users to filter.
      * @param roles the roles filtering.
-     * @return The filtered list of userEntities.
+     * @return The filtered list of users.
      */
-    List<User> filterByRoles(Collection<User> userEntities, Collection<UserRole> roles);
+    List<User> filterByRoles(Collection<User> users, Collection<UserRole> roles);
 
     /**
-     * Filters and returns userEntities by role.
+     * Filters and returns users by role.
      *
      * @param role the role filtering.
-     * @return The filtered list of userEntities.
+     * @return The filtered list of users.
      */
     List<User> getAndFilterByRole(UserRole role);
 
     /**
-     * Filters and returns userEntities by roles.
+     * Filters and returns users by roles.
      *
      * @param roles the roles filtering.
-     * @return The filtered list of userEntities.
+     * @return The filtered list of users.
      */
     List<User> getAndFilterByRoles(Collection<UserRole> roles);
+
+    /**
+     * Checks an authenticated user.
+     *
+     * @param user the user to check.
+     * @return true if the user is authenticated user or
+     * if authenticated user has super admin role.
+     */
+    boolean isAuthenticatedUser(User user);
 }

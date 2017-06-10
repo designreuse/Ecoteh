@@ -9,41 +9,42 @@ import java.util.Collection;
  * for working with objects of the {@link Company} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Company
  */
 public interface CompanyService extends ContentService<Company> {
 
     /**
-     * Updates the main companyEntity.
+     * Updates the main company.
      *
-     * @param companyEntity the main companyEntity to update.
-     * @return The updating main companyEntity.
+     * @param company the main company to update.
+     * @return The updating main company.
      */
-    Company updateMainCompany(Company companyEntity);
+    Company updateMainCompany(Company company);
 
     /**
-     * Returns main companyEntity.
+     * Returns main company.
      *
-     * @return The main companyEntity.
+     * @return The main company.
      */
     Company getMainCompany();
 
     /**
-     * Removes main companyEntity.
+     * Removes main company.
      */
     void removeMain();
 
     /**
      * Returns all partners companies.
      *
-     * @param isValid is get valid companyEntity or not.
+     * @param isValid is get valid company or not.
      * @return The partners companies.
      */
     Collection<Company> getPartners(boolean isValid);
 
     /**
-     * Returns companyEntity with the category domain.
+     * Returns company with the category domain.
      *
-     * @param domain the domain of a companyEntity to return.
+     * @param domain the domain of a company to return.
      * @return The object of class {@link Company}.
      */
     Company getByDomain(String domain);

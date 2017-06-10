@@ -21,9 +21,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods for working
- * with objects of the {@link CompanyEntity} class.
+ * with objects of the {@link Company} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Company
+ * @see CompanyEntity
  */
 @Service
 @ComponentScan(
@@ -33,8 +35,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
         }
 )
 public final class CompanyServiceImpl
-        extends ContentServiceImpl<Company, CompanyEntity>
-        implements CompanyService {
+        extends ContentServiceImpl<Company, CompanyEntity> implements CompanyService {
 
     /**
      * The interface provides a set of standard methods for working
@@ -84,10 +85,10 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Updates the main companyEntity.
+     * Updates the main company.
      *
-     * @param company a main companyEntity to update.
-     * @return The updating main companyEntity (newer null).
+     * @param company a main company to update.
+     * @return The updating main company (newer null).
      */
     @Override
     @Transactional
@@ -102,10 +103,10 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Returns main companyEntity.
-     * If can`t find main companyEntity then returns new CompanyEntity().
+     * Returns main company.
+     * If can`t find main company then returns new company.
      *
-     * @return The main companyEntity (newer null).
+     * @return The main company (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -136,24 +137,24 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<Company> getPartners(final boolean isValid) {
-        List<CompanyEntity> companyEntities = this.repository.findByType(CompanyType.PARTNER);
+        List<CompanyEntity> entities = this.repository.findByType(CompanyType.PARTNER);
         if (isValid) {
-            companyEntities = companyEntities.stream()
+            entities = entities.stream()
                     .filter(CompanyEntity::isValidated)
                     .collect(Collectors.toList());
         }
-        return convertToModels(companyEntities);
+        return convertToModels(entities);
     }
 
     /**
-     * Returns companyEntity with the incoming domain.
+     * Returns company with the incoming domain.
      * If a incoming domain is null or empty then throws IllegalArgumentException.
-     * If can`t find companyEntity by incoming domain then throws NullPointerException.
+     * If can`t find company by incoming domain then throws NullPointerException.
      *
-     * @param domain a domain of the companyEntity to return.
-     * @return The companyEntity with the incoming domain (newer null).
+     * @param domain a domain of the company to return.
+     * @return The company with the incoming domain (newer null).
      * @throws IllegalArgumentException Throw exception when parameter domain is blank.
-     * @throws NullPointerException     Throw exception when companyEntity with parameter domain
+     * @throws NullPointerException     Throw exception when company with parameter domain
      *                                  is not exist.
      */
     @Override
@@ -165,22 +166,22 @@ public final class CompanyServiceImpl
                     getClassSimpleName()
             );
         }
-        final CompanyEntity companyEntity = this.repository.findByDomain(domain);
-        if (isNull(companyEntity)) {
+        final CompanyEntity entity = this.repository.findByDomain(domain);
+        if (isNull(entity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), domain
             );
         }
-        return convertToModel(companyEntity);
+        return convertToModel(entity);
     }
 
     /**
-     * Removes companyEntity.
-     * Removes companyEntity if it not null
+     * Removes company.
+     * Removes company if it not null
      * and has not type CompanyType.MAIN.
      *
-     * @param company the companyEntity to remove.
+     * @param company the company to remove.
      */
     @Override
     @Transactional
@@ -191,7 +192,7 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Removes main companyEntity.
+     * Removes main company.
      */
     @Override
     @Transactional
@@ -209,9 +210,9 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Return Class object of {@link CompanyEntity} class.
+     * Return Class object of {@link Company} class.
      *
-     * @return The Class object of {@link CompanyEntity} class.
+     * @return The Class object of {@link Company} class.
      */
     @Override
     protected Class<Company> getModelClass() {
@@ -219,21 +220,20 @@ public final class CompanyServiceImpl
     }
 
     /**
-     * Check if a incoming companyEntity is not main companyEntity.
+     * Check if a incoming company is not main company.
      * <pre>
      *     isNotMainCompany(null) = false
      *
-     *     CompanyEntity companyEntity = new CompanyEntity();
-     *     companyEntity.setType(CompanyType.MAIN);
-     *     isNotMainCompany(companyEntity) = false
+     *     if the incoming company has MAIN type.
+     *     isNotMainCompany(company) = false
      *
-     *     companyEntity.setType(CompanyType.PARTNER);
-     *     isNotMainCompany(companyEntity) = true
+     *     if the incoming company has PARTNER type.
+     *     isNotMainCompany(company) = true
      * </pre>
      *
-     * @param company the companyEntity to check.
-     * @return true if the companyEntity is not null and
-     * it has not MAIN companyEntity type.
+     * @param company the company to check.
+     * @return true if the company is not null and
+     * it has not MAIN company type.
      */
     private boolean isNotMainCompany(final Company company) {
         return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);

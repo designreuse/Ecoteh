@@ -7,6 +7,7 @@ import ua.com.ecoteh.entity.message.Message;
  * for working with objects of the class {@link Message}.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Message
  */
 public interface MessageService extends DataService<Message> {
 }

@@ -12,6 +12,7 @@ import java.util.List;
  * for working with objects of the {@link File} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see File
  */
 public interface FileService extends DataService<File> {
 

@@ -55,15 +55,15 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Returns articleEntity with the incoming number.
+     * Returns article with the incoming number.
      * If a incoming number is null or empty then throws IllegalArgumentException.
-     * If can`t find articleEntity by incoming number then throws NullPointerException.
+     * If can`t find article by incoming number then throws NullPointerException.
      *
-     * @param number  the number of an articleEntity to return.
-     * @param isValid is get valid articleEntity or not.
-     * @return The articleEntity with the incoming number (newer null).
+     * @param number  the number of an article to return.
+     * @param isValid is get valid article or not.
+     * @return The article with the incoming number (newer null).
      * @throws IllegalArgumentException Throw exception when incoming number is blank.
-     * @throws NullPointerException     Throw exception when articleEntity with parameter id is not exist.
+     * @throws NullPointerException     Throw exception when article with parameter id is not exist.
      */
     @Override
     @Transactional(readOnly = true)
@@ -75,36 +75,36 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
                     getClassSimpleName()
             );
         }
-        final ArticleEntity articleEntity = this.repository.findByNumber(number);
-        if (isNotValidated(articleEntity, isValid)) {
+        final ArticleEntity article = this.repository.findByNumber(number);
+        if (isNotValidated(article, isValid)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
                     getClassSimpleName(), number
             );
         }
-        articleEntity.getCategoryEntity().getArticleEntities();
-        return convertToModel(articleEntity);
+        article.getCategoryEntity().getArticleEntities();
+        return convertToModel(article);
     }
 
     /**
-     * Returns articleEntity with the incoming categoryEntity id.
+     * Returns article with the incoming categoryEntity id.
      *
-     * @param id the categoryEntity id of articleEntities to return.
-     * @return The list of articleEntities or empty list (newer null).
+     * @param id the categoryEntity id of articles to return.
+     * @return The list of articles or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
     public Collection<Article> getByCategoryId(final long id) {
-        final Collection<ArticleEntity> entities = this.repository.findByCategoryEntityId(id);
+        final Collection<ArticleEntity> entities = this.repository.findByCategoryId(id);
         return convertToModels(entities);
     }
 
     /**
-     * Returns articleEntity with the categoryEntity title.
+     * Returns article with the categoryEntity title.
      * If a incoming title is null or empty then throws IllegalArgumentException.
      *
-     * @param title the categoryEntity title of the articleEntities to return.
-     * @return The list of articleEntities or empty list (newer null).
+     * @param title the categoryEntity title of the articles to return.
+     * @return The list of articles or empty list (newer null).
      * @throws IllegalArgumentException Throw exception when parameter categoryTitle is blank.
      */
     @Override
@@ -113,52 +113,63 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
         if (isEmpty(title)) {
             throw getIllegalArgumentException(ExceptionMessage.BLANK_CATEGORY_TITLE_MESSAGE);
         }
-        final Collection<ArticleEntity> entities = this.repository.findByCategoryEntityTitle(title);
+        final Collection<ArticleEntity> entities = this.repository.findByCategoryTitle(title);
         return convertToModels(entities);
     }
 
     /**
-     * Sorts and returns articleEntities by number.
+     * Sorts and returns articles by number.
      * For sorting used {@link ArticleComparator.ByNumber} comparator.
      *
-     * @param articleEntities the articleEntities to sort.
-     * @param revers          is sort in descending or ascending.
-     * @return The sorted list of articleEntities or empty list (newer null).
+     * @param articles the articles to sort.
+     * @param revers   is sort in descending or ascending.
+     * @return The sorted list of articles or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Article> sortByNumber(
-            final Collection<Article> articleEntities,
-            final boolean revers
-    ) {
+    public List<Article> sortByNumber(final Collection<Article> articles, final boolean revers) {
         final Comparator<Article> byNumberComparator = new ArticleComparator.ByNumber();
-        return sort(articleEntities, byNumberComparator, revers);
+        return sort(articles, byNumberComparator, revers);
     }
 
     /**
-     * Sorts and returns incoming articleEntities by date.
+     * Sorts and returns incoming articles by date.
      * For sorting used {@link ArticleComparator.ByDate} comparator.
      *
-     * @param articleEntities the articleEntities to sort.
-     * @param revers          is sort in descending or ascending.
-     * @return The sorted list of articleEntities or empty list (newer null).
+     * @param articles the articles to sort.
+     * @param revers   is sort in descending or ascending.
+     * @return The sorted list of articles or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Article> sortByDate(
-            final Collection<Article> articleEntities,
-            final boolean revers
-    ) {
+    public List<Article> sortByDate(final Collection<Article> articles, final boolean revers) {
         final Comparator<Article> byDateComparator = new ArticleComparator.ByDate();
-        return sort(articleEntities, byDateComparator, revers);
+        return sort(articles, byDateComparator, revers);
     }
 
     /**
-     * Sorts and returns all articleEntities by number.
+     * Sorts and returns incoming articles by price.
+     * For sorting used {@link ArticleComparator.ByPrice} comparator.
+     *
+     * @param articles the articles to sort.
+     * @param revers   is sort in descending or ascending.
+     * @return The sorted list of articles or empty list (newer null).
+     * @see ArticleComparator.ByPrice
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Article> sortByPrice(final Collection<Article> articles, final boolean revers) {
+        final Comparator<Article> byPriceComparator = new ArticleComparator.ByPrice();
+        return sort(articles, byPriceComparator, revers);
+    }
+
+    /**
+     * Sorts and returns all articles by number.
      * For sorting used {@link ArticleComparator.ByNumber} comparator.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of articleEntities or empty list (newer null).
+     * @return The sorted list of articles or empty list (newer null).
+     * @see ArticleComparator.ByNumber
      */
     @Override
     @Transactional(readOnly = true)
@@ -167,11 +178,12 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Sorts and returns all articleEntities by date.
+     * Sorts and returns all articles by date.
      * For sorting used {@link ArticleComparator.ByDate} comparator.
      *
      * @param revers is sort in descending or ascending.
-     * @return The sorted list of articleEntities or empty list (newer null).
+     * @return The sorted list of articles or empty list (newer null).
+     * @see ArticleComparator.ByDate
      */
     @Override
     @Transactional(readOnly = true)
@@ -180,7 +192,21 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters and returns incoming articleEntities by the date.
+     * Sorts and returns all articles by price.
+     * For sorting used {@link ArticleComparator.ByPrice} comparator.
+     *
+     * @param revers is sort in descending or ascending.
+     * @return The sorted list of articles or empty list (newer null).
+     * @see ArticleComparator.ByPrice
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Article> getAndSortByPrice(final boolean revers) {
+        return sortByPrice(getAll(), revers);
+    }
+
+    /**
+     * Filters and returns incoming articles by the date.
      * Return empty list if responses is empty.
      * Return back responses list if dates are null
      * or start date is equals to end finish date.
@@ -199,13 +225,13 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *     if startDate greater than finishDate:
      *     filterByDate(collection, startDate, finishDate) = collection
      *     if finishDate greater than startDate:
-     *     filterByDate(collection, startDate, finishDate) = filtered list of articleEntities
+     *     filterByDate(collection, startDate, finishDate) = filtered list of articles
      * </pre>
      *
-     * @param articles   the articleEntities to filter.
+     * @param articles   the articles to filter.
      * @param startDate  the initial date.
      * @param finishDate the final date.
-     * @return The filtered / no filtered list of articleEntities or empty list (newer null).
+     * @return The filtered / no filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
@@ -230,35 +256,32 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters and returns articleEntities by the incoming categoryEntity.
+     * Filters and returns articles by the incoming categoryEntity.
      * <pre>
      *     filterByCategory(null, null) = empty ArrayList()
      *     filterByCategory(null, new CategoryEntity()) = empty ArrayList()
      *
-     *     Collection articleEntities = new ArrayList();
-     *     articleEntities.add(new ArticleEntity());
-     *     filterByCategory(articleEntities, new CategoryEntity()) = filtered list of articleEntities
+     *     Collection articles = new ArrayList();
+     *     articles.add(new ArticleEntity());
+     *     filterByCategory(articles, new CategoryEntity()) = filtered list of articles
      * </pre>
      *
-     * @param articles the articleEntities to filter.
+     * @param articles the articles to filter.
      * @param category the categoryEntity filtering.
-     * @return The filtered list of articleEntities or empty list (newer null).
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
-    public List<Article> filterByCategory(
-            final Collection<Article> articles,
-            final Category category
-    ) {
+    public List<Article> filterByCategory(final Collection<Article> articles, final Category category) {
         final List<Category> categories = new ArrayList<>(1);
         categories.add(category);
         return filterByCategories(articles, categories);
     }
 
     /**
-     * Filters and returns articleEntities by the categories.
-     * Returns empty list if articleEntities is empty.
-     * Returns back articleEntities if categories is empty.
+     * Filters and returns articles by the categories.
+     * Returns empty list if articles is empty.
+     * Returns back articles if categories is empty.
      * <pre>
      *     filterByCategories(null, null) = empty ArrayList()
      *
@@ -266,16 +289,16 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *     categories.add(new CategoryEntity());
      *     filterByCategories(null, categories) = empty ArrayList()
      *
-     *     Collection articleEntities = new ArrayList();
-     *     articleEntities.add(new ArticleEntity());
-     *     filterByCategories(articleEntities, null) = articleEntities
+     *     Collection articles = new ArrayList();
+     *     articles.add(new ArticleEntity());
+     *     filterByCategories(articles, null) = articles
      *
-     *     filterByCategories(articleEntities, categories) = filtered list of articleEntities
+     *     filterByCategories(articles, categories) = filtered list of articles
      * </pre>
      *
-     * @param articles   the articleEntities to filter.
+     * @param articles   the articles to filter.
      * @param categories the categories filtering.
-     * @return The filtered list of articleEntities or empty list (newer null).
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
@@ -302,23 +325,23 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters and returns articleEntities by the date.
+     * Filters and returns articles by the date.
      * <pre>
-     *     getAndFilterByDate(null, null) = all articleEntities
-     *     getAndFilterByDate(new Date(), null) = all articleEntities
-     *     getAndFilterByDate(null, new Date()) = all articleEntities
+     *     getAndFilterByDate(null, null) = all articles
+     *     getAndFilterByDate(new Date(), null) = all articles
+     *     getAndFilterByDate(null, new Date()) = all articles
      *
      *     Date startDate = new Date();
      *     Date finishDate = new Date();
      *     if startDate greater than finishDate:
-     *     filterByDate(startDate, finishDate) = all articleEntities
+     *     filterByDate(startDate, finishDate) = all articles
      *     if finishDate greater than startDate:
-     *     filterByDate(startDate, finishDate) = filtered list of articleEntities
+     *     filterByDate(startDate, finishDate) = filtered list of articles
      * </pre>
      *
      * @param startDate  the initial date.
      * @param finishDate the final date.
-     * @return The filtered list of articleEntities or empty list (newer null).
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
@@ -327,14 +350,14 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters and returns articleEntities by the incoming categoryEntity.
+     * Filters and returns articles by the incoming categoryEntity.
      * <pre>
-     *     getAndFilterByCategory(null) = all articleEntities
-     *     getAndFilterByCategory(new CategoryEntity()) = filtered list of articleEntities
+     *     getAndFilterByCategory(null) = all articles
+     *     getAndFilterByCategory(new CategoryEntity()) = filtered list of articles
      * </pre>
      *
      * @param category the categoryEntity filtering.
-     * @return The filtered list of articleEntities or empty list (newer null).
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
@@ -343,18 +366,18 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters and returns articleEntities by the categories.
+     * Filters and returns articles by the categories.
      * <pre>
-     *     getAndFilterByCategories(null) = all articleEntities
-     *     getAndFilterByCategories(new ArrayList()) = all articleEntities
+     *     getAndFilterByCategories(null) = all articles
+     *     getAndFilterByCategories(new ArrayList()) = all articles
      *
      *     Collection categories = new ArrayList();
      *     categories.add(new CategoryEntity());
-     *     getAndFilterByCategories(categories) = filtered list of articleEntities
+     *     getAndFilterByCategories(categories) = filtered list of articles
      * </pre>
      *
      * @param categories the categories filtering.
-     * @return The filtered list of articleEntities or empty list (newer null).
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
@@ -363,24 +386,24 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Returns a list valid articleEntities.
-     * Returns empty list if articleEntities is empty.
+     * Returns a list valid articles.
+     * Returns empty list if articles is empty.
      * <pre>
      *     filteredByValid(null) = empty ArrayList()
      *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
-     *     Collection articleEntities = new ArrayList();
-     *     ArticleEntity articleEntity = new ArticleEntity();
-     *     articleEntity.setValidated(false);
-     *     articleEntities.add(articleEntity);
-     *     filteredByValid(articleEntities) = empty ArrayList()
+     *     Collection articles = new ArrayList();
+     *     ArticleEntity article = new ArticleEntity();
+     *     article.setValidated(false);
+     *     articles.add(article);
+     *     filteredByValid(articles) = empty ArrayList()
      *
-     *     articleEntity.setValidated(true);
-     *     filteredByValid(articleEntities) = filtered list of articleEntities
+     *     article.setValidated(true);
+     *     filteredByValid(articles) = filtered list of articles
      * </pre>
      *
-     * @param articles the articleEntities to filter.
-     * @return The filtered list of articleEntities or empty list (newer null).
+     * @param articles the articles to filter.
+     * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
@@ -397,11 +420,11 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Removes articleEntity with the incoming number.
-     * Removes articleEntity if the incoming number
+     * Removes article with the incoming number.
+     * Removes article if the incoming number
      * is not null and not empty.
      *
-     * @param number the number of a articleEntity to remove.
+     * @param number the number of a article to remove.
      */
     @Override
     @Transactional
@@ -435,10 +458,10 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters articleEntity object date with input dates.
+     * Filters article object date with input dates.
      * Used the checkTime() method of the {@link Time} class.
      *
-     * @param article    the articleEntity to filter.
+     * @param article    the article to filter.
      * @param startDate  the initial date.
      * @param finishDate the final date.
      * @return true if time is correct, false otherwise.
@@ -450,17 +473,17 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     /**
      * Filters article by the incoming category.
      * <pre>
-     *  categoryFilter(null, not null) -> false
-     *  categoryFilter(not null, null) -> false
+     *  categoryFilter(null, not null) - false
+     *  categoryFilter(not null, null) - false
      *
      *  If article category is null:
-     *  categoryFilter(not null, not null) -> false
+     *  categoryFilter(not null, not null) - false
      *
      *  If article category is not null and not equals incoming category:
-     *  categoryFilter(not null, not null) -> false
+     *  categoryFilter(not null, not null) - false
      *
      *  If article category is not null and equals incoming category:
-     *  categoryFilter(not null, not null) -> true
+     *  categoryFilter(not null, not null) - true
      * </pre>
      *
      * @param article  the article to filter.

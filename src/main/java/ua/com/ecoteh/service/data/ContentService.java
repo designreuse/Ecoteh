@@ -11,17 +11,9 @@ import java.util.List;
  *
  * @param <T> entity type, extends {@link Content}.
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Content
  */
 public interface ContentService<T extends Content> extends DataService<T> {
-
-    /**
-     * Initializes, updates and returns content with the incoming URL
-     *
-     * @param url     the URL of a content to update.
-     * @param content the content to update.
-     * @return The updating content with incoming id.
-     */
-    T update(String url, T content);
 
     /**
      * Returns content object of the {@link Content} class or subclasses
