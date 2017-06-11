@@ -1,14 +1,14 @@
 package ua.com.ecoteh.mocks.enity.test;
 
-import ua.com.ecoteh.entity.model.Model;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import ua.com.ecoteh.entity.model.Model;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static ua.com.ecoteh.mocks.MockConstants.DEFAULT_SIZE;
 
 public abstract class MockModelTest<T extends Model> {
 
@@ -19,10 +19,15 @@ public abstract class MockModelTest<T extends Model> {
     }
 
     @Test
-    public void whenGetObjectsThenReturnSomeModels() {
-        Collection<T> models = getObjects();
-        assertNotNull(models);
-        assertEquals(models.size(), DEFAULT_SIZE);
+    public void whenGetObjectsThenReturnNotEmpty() {
+        final Collection<T> models = getObjects();
+        assertFalse(models.isEmpty());
+    }
+
+    @Test
+    public void whenGetObjectsThenReturnCollectionsWithNotNullObjects() {
+        final Collection<T> models = getObjects();
+        models.forEach(Assert::assertNotNull);
     }
 
     @Ignore

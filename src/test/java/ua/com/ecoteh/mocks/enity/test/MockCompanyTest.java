@@ -47,7 +47,7 @@ public final class MockCompanyTest extends MockContentTest<Company> {
     }
 
     @Test
-    public void whenGetgetWorkTimeFromThenReturnNotEmpty() {
+    public void whenGetWorkTimeFromThenReturnNotEmpty() {
         assertFalse(company.getWorkTimeFrom().isEmpty());
     }
 

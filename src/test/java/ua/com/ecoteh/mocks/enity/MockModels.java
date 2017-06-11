@@ -186,7 +186,7 @@ public final class MockModels {
         return new ArrayList<>(users);
     }
 
-    public static int getRandomInt(final int length) {
+    private static int getRandomInt(final int length) {
         int number = 0;
         for (int i = 0; i < (length > 0 ? length : 10); i++) {
             number += (RANDOM.nextInt(8) + 1) * (int) Math.pow(10, i);
@@ -194,7 +194,7 @@ public final class MockModels {
         return number;
     }
 
-    public static int getRandomInt() {
+    private static int getRandomInt() {
         return getRandomInt(10);
     }
 
@@ -227,7 +227,7 @@ public final class MockModels {
                 .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
                 .addInformation(INFORMATION).addKeywords(KEYWORDS)
                 .addDomain(DOMAIN).addTagline(TAGLINE).addLogo(getFile())
-                .addWorkTimeFrom(TIME).addWorkTimeTo(TIME)
+                .addWorkTimeFrom(TIME).addWorkTimeTo(TIME).addType(COMPANY_TYPE)
                 .addContacts(getContacts()).addAddress(getAddress());
         company = builder.build();
     }
