@@ -3,11 +3,12 @@ package ua.com.ecoteh.mocks.enity.test;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.ecoteh.entity.contacts.Contacts;
-import ua.com.ecoteh.mocks.enity.MockModels;
 
 import java.util.Collection;
 
 import static org.junit.Assert.assertFalse;
+import static ua.com.ecoteh.mocks.enity.MockModels.getContacts;
+import static ua.com.ecoteh.mocks.enity.MockModels.getContactses;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -19,8 +20,8 @@ public class MockContactsTest extends MockModelTest<Contacts> {
 
     @BeforeClass
     public static void beforeClass() {
-        contacts = MockModels.getContacts();
-        contactses = MockModels.getContactses();
+        contacts = getContacts();
+        contactses = getContactses();
     }
 
     @Test

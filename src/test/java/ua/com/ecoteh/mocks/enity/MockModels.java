@@ -209,7 +209,9 @@ public final class MockModels {
         final ArticleBuilder builder = Article.getBuilder();
         builder.addId(ID).addValidated(true)
                 .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
-                .addText(TEXT).addKeywords(KEYWORDS).addNumber(NUMBER);
+                .addText(TEXT).addKeywords(KEYWORDS).addNumber(NUMBER)
+                .addPrice(PRICE).addCurrency(CURRENCY)
+                .addLogo(getFile());
         article = builder.build();
     }
 
@@ -228,6 +230,7 @@ public final class MockModels {
                 .addInformation(INFORMATION).addKeywords(KEYWORDS)
                 .addDomain(DOMAIN).addTagline(TAGLINE).addLogo(getFile())
                 .addWorkTimeFrom(TIME).addWorkTimeTo(TIME).addType(COMPANY_TYPE)
+                .addSenderEmail(EMAIL).addSenderPass(PASSWORD)
                 .addContacts(getContacts()).addAddress(getAddress());
         company = builder.build();
     }

@@ -4,11 +4,12 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.ecoteh.entity.article.Article;
-import ua.com.ecoteh.mocks.enity.MockModels;
 
 import java.util.Collection;
 
 import static org.junit.Assert.*;
+import static ua.com.ecoteh.mocks.enity.MockModels.getArticle;
+import static ua.com.ecoteh.mocks.enity.MockModels.getArticles;
 
 public final class MockArticleTest extends MockContentTest<Article> {
 
@@ -17,8 +18,8 @@ public final class MockArticleTest extends MockContentTest<Article> {
 
     @BeforeClass
     public static void beforeClass() {
-        article = MockModels.getArticle();
-        articles = MockModels.getArticles();
+        article = getArticle();
+        articles = getArticles();
     }
 
     @Test

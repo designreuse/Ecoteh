@@ -3,12 +3,13 @@ package ua.com.ecoteh.mocks.enity.test;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.ecoteh.entity.message.Message;
-import ua.com.ecoteh.mocks.enity.MockModels;
 
 import java.util.Collection;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static ua.com.ecoteh.mocks.enity.MockModels.getMessage;
+import static ua.com.ecoteh.mocks.enity.MockModels.getMessages;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -20,8 +21,8 @@ public class MockMessageTest extends MockModelTest<Message> {
 
     @BeforeClass
     public static void beforeClass() {
-        message = MockModels.getMessage();
-        messages = MockModels.getMessages();
+        message = getMessage();
+        messages = getMessages();
     }
 
     @Test

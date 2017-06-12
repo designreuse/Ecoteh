@@ -3,11 +3,12 @@ package ua.com.ecoteh.mocks.enity.test;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.ecoteh.entity.address.Address;
-import ua.com.ecoteh.mocks.enity.MockModels;
 
 import java.util.Collection;
 
 import static org.junit.Assert.assertFalse;
+import static ua.com.ecoteh.mocks.enity.MockModels.getAddress;
+import static ua.com.ecoteh.mocks.enity.MockModels.getAddresses;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -19,8 +20,8 @@ public class MockAddressTest extends MockModelTest<Address> {
 
     @BeforeClass
     public static void beforeClass() {
-        address = MockModels.getAddress();
-        addresses = MockModels.getAddresses();
+        address = getAddress();
+        addresses = getAddresses();
     }
 
     @Test

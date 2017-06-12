@@ -3,12 +3,13 @@ package ua.com.ecoteh.mocks.enity.test;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.ecoteh.entity.company.Company;
-import ua.com.ecoteh.mocks.enity.MockModels;
 
 import java.util.Collection;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static ua.com.ecoteh.mocks.enity.MockModels.getCompanies;
+import static ua.com.ecoteh.mocks.enity.MockModels.getCompany;
 
 public final class MockCompanyTest extends MockContentTest<Company> {
 
@@ -17,8 +18,8 @@ public final class MockCompanyTest extends MockContentTest<Company> {
 
     @BeforeClass
     public static void beforeClass() {
-        company = MockModels.getCompany();
-        companies = MockModels.getCompanies();
+        company = getCompany();
+        companies = getCompanies();
     }
 
     @Test

@@ -23,6 +23,7 @@ import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserEntity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static ua.com.ecoteh.mocks.enity.MockModels.*;
@@ -73,6 +74,8 @@ public final class MockModelEntities {
         if (categoryEntity == null) {
             final Category category = getCategory();
             categoryEntity = category.convert();
+            final Collection<ArticleEntity> articles = getArticleEntities();
+            categoryEntity.setArticleEntities(articles);
         }
         return categoryEntity.clone();
     }

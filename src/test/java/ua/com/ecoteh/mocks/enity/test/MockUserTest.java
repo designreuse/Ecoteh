@@ -4,12 +4,13 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.ecoteh.entity.user.User;
-import ua.com.ecoteh.mocks.enity.MockModels;
 
 import java.util.Collection;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static ua.com.ecoteh.mocks.enity.MockModels.getUser;
+import static ua.com.ecoteh.mocks.enity.MockModels.getUsers;
 
 public final class MockUserTest extends MockModelTest<User> {
 
@@ -18,8 +19,8 @@ public final class MockUserTest extends MockModelTest<User> {
 
     @BeforeClass
     public static void beforeClass() {
-        user = MockModels.getUser();
-        users = MockModels.getUsers();
+        user = getUser();
+        users = getUsers();
     }
 
     @Test
