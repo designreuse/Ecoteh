@@ -1,6 +1,7 @@
 package ua.com.ecoteh.mocks;
 
 import ua.com.ecoteh.entity.company.CompanyType;
+import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.entity.user.UserRole;
 import org.junit.Ignore;
 
@@ -11,6 +12,7 @@ public interface MockConstants {
     int DEFAULT_SIZE = 10;
     int INDEX = 1;
     long ID = 1L;
+    boolean VALIDATION = true;
     long UNKNOWN_ID = -1L;
     String TITLE = "It`s a title of some content.";
     String URL = "url";
@@ -37,9 +39,11 @@ public interface MockConstants {
     String GOOGLE_MAPS = "google maps";
     String ANY_STRING = "Some unknown text.";
     String PATH = "c:/some_dir/file.txt";
-    String FILE_TYPE = "OTHER";
-    String PRICE = "500 $";
+    String STYLE = "Some CSS styles";
+    double PRICE = 500;
+    String CURRENCY = "$";
     Date DATE = new Date();
     CompanyType COMPANY_TYPE = CompanyType.PARTNER;
     UserRole USER_ROLE = UserRole.ADMIN;
+    FileType FILE_TYPE = FileType.ANOTHER;
 }
