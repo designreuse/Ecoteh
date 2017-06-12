@@ -11,18 +11,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 @Ignore
 public final class ModelAndViews {
 
-    public static void checkModelAndView(
-            final ModelAndView modelAndView,
-            final String view
-    ) {
+    public static void checkModelAndView(final ModelAndView modelAndView, final String view) {
         checkModelAndView(modelAndView, view, null);
     }
 
-    public static void checkModelAndView(
-            final ModelAndView modelAndView,
-            final String view,
-            final String[] keys
-    ) {
+    public static void checkModelAndView(final ModelAndView modelAndView, final String view, final String[] keys) {
         assertNotNull(modelAndView);
         checkView(modelAndView, view);
         checkKeys(modelAndView, keys);
