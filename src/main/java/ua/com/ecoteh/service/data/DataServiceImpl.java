@@ -187,7 +187,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
     public Collection<T> getAll(final boolean valid) {
         final Collection<E> entities = this.repository.findAll();
         final Collection<T> models = convertToModels(entities);
-        return valid ? filteredByValid(models) : models;
+        return valid ? filterByValid(models) : models;
     }
 
     /**
@@ -373,7 +373,7 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      * @return The filter list of models (newer null).
      */
     @Override
-    public List<T> filteredByValid(final Collection<T> models) {
+    public List<T> filterByValid(final Collection<T> models) {
         final List<T> result = new ArrayList<>();
         if (isNotEmpty(models)) {
             result.addAll(

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileBuilder;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.exception.ExceptionMessage;
@@ -163,7 +164,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional(readOnly = true)
-    public File getByTitle(final String title) throws IllegalArgumentException {
+    public File getByTitle(final String title) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(title)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_TITLE_MESSAGE,
@@ -171,6 +172,12 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
             );
         }
         final FileEntity entity = this.repository.findByTitle(title);
+        if (isNull(entity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
         return convertToModel(entity);
     }
 
@@ -181,10 +188,11 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @param url the URL of a file to return.
      * @return The file with incoming URL (newer null).
      * @throws IllegalArgumentException Throw exception when parameter URL is blank.
+     * @throws NullPointerException     Throw exception when object with parameter URL is not exist.
      */
     @Override
     @Transactional(readOnly = true)
-    public File getByUrl(final String url) throws IllegalArgumentException {
+    public File getByUrl(final String url) throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
             throw getIllegalArgumentException(
                     ExceptionMessage.BLANK_URL_MESSAGE,
@@ -192,6 +200,12 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
             );
         }
         final FileEntity entity = this.repository.findByUrl(url);
+        if (isNull(entity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
         return convertToModel(entity);
     }
 
@@ -269,10 +283,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional
-    public void saveFile(
-            final MultipartFile file,
-            final String rootPath
-    ) {
+    public void saveFile(final MultipartFile file, final String rootPath) {
         if (isNotEmpty(file)) {
             final String absolutePath = createAbsolutePath(file, rootPath);
             new MultipartFileLoader(file, absolutePath).write();
@@ -309,16 +320,13 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * Sorts and returns file objects by title.
      * For sorting used {@link FileComparator.ByTitle} comparator.
      *
-     * @param files the files to sort.
-     * @param revers       is sort in descending or ascending.
+     * @param files  the files to sort.
+     * @param revers is sort in descending or ascending.
      * @return The sorted list of files (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<File> sortByTitle(
-            final Collection<File> files,
-            final boolean revers
-    ) {
+    public List<File> sortByTitle(final Collection<File> files, final boolean revers) {
         final Comparator<File> byTitleComparator = new FileComparator.ByTitle();
         return sort(files, byTitleComparator, revers);
     }
@@ -349,16 +357,24 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      *
      * @param type the type of file to return.
      * @return The last file with the type (newer null).
+     * @throws IllegalArgumentException Throw exception when parameter type is null.
      */
     @Override
     @Transactional(readOnly = true)
-    public File getLastByType(final FileType type) {
-        final List<File> files = (List<File>) getByType(type);
+    public File getLastByType(final FileType type) throws IllegalArgumentException {
+        if (isNull(type)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_TYPE_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        final FileEntity entity = this.repository.findLastByType(type);
         final File file;
-        if (isNotEmpty(files)) {
-            file = files.get(files.size() - 1);
+        if (isNotNull(entity)) {
+            file = entity.convert();
         } else {
-            file = File.getBuilder().build();
+            final FileBuilder builder = File.getBuilder();
+            file = builder.build();
         }
         return file;
     }

@@ -164,7 +164,7 @@ public interface DataService<T extends Model> {
      * @param models the models to filter.
      * @return The filtered models.
      */
-    List<T> filteredByValid(Collection<T> models);
+    List<T> filterByValid(Collection<T> models);
 
     /**
      * Shuffles the models and returns it.

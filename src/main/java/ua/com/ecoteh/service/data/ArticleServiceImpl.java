@@ -407,7 +407,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      */
     @Override
     @Transactional
-    public List<Article> filteredByValid(final Collection<Article> articles) {
+    public List<Article> filterByValid(final Collection<Article> articles) {
         final List<Article> result = new ArrayList<>();
         if (isNotEmpty(articles)) {
             result.addAll(

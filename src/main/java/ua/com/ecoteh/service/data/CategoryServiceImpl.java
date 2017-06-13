@@ -125,7 +125,7 @@ public final class CategoryServiceImpl
      */
     @Override
     @Transactional
-    public List<Category> filteredByValid(final Collection<Category> categories) {
+    public List<Category> filterByValid(final Collection<Category> categories) {
         final List<Category> result = new ArrayList<>();
         if (isNotEmpty(categories)) {
             result.addAll(

@@ -98,8 +98,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     @Transactional(readOnly = true)
     public List<Response> filterByDate(
             final Collection<Response> responses,
-            final Date startDate,
-            final Date finishDate
+            final Date startDate, final Date finishDate
     ) {
         final List<Response> result = new ArrayList<>();
         if (isNotEmpty(responses)) {
@@ -162,7 +161,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
      * @return The filtered list of responses or empty list (newer null).
      */
     @Override
-    public List<Response> filteredByValid(final Collection<Response> responses) {
+    public List<Response> filterByValid(final Collection<Response> responses) {
         final List<Response> result = new ArrayList<>();
         if (isNotEmpty(responses)) {
             result.addAll(

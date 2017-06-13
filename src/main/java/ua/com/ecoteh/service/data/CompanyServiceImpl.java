@@ -14,7 +14,6 @@ import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CompanyRepository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.*;
@@ -34,8 +33,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
                 "ua.com.ecoteh.service.data"
         }
 )
-public final class CompanyServiceImpl
-        extends ContentServiceImpl<Company, CompanyEntity> implements CompanyService {
+public final class CompanyServiceImpl extends ContentServiceImpl<Company, CompanyEntity> implements CompanyService {
 
     /**
      * The interface provides a set of standard methods for working
@@ -89,10 +87,17 @@ public final class CompanyServiceImpl
      *
      * @param company a main company to update.
      * @return The updating main company (newer null).
+     * @throws IllegalArgumentException Throw exception when input company is null.
      */
     @Override
     @Transactional
-    public Company updateMainCompany(final Company company) {
+    public Company updateMainCompany(final Company company) throws IllegalArgumentException {
+        if (isNull(company)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
         final Company mainCompany = getMainCompany();
         final File newLogo = company.getLogo();
         final File oldLogo = mainCompany.getLogo();
@@ -113,7 +118,7 @@ public final class CompanyServiceImpl
     public Company getMainCompany() {
         Company mainCompany;
         try {
-            final CompanyEntity mainCompanyEntity = this.repository.findByType(CompanyType.MAIN).get(0);
+            final CompanyEntity mainCompanyEntity = this.repository.findLastByType(CompanyType.MAIN);
             mainCompany = convertToModel(mainCompanyEntity);
         } catch (IndexOutOfBoundsException ex) {
             logException(ex);
@@ -137,7 +142,7 @@ public final class CompanyServiceImpl
     @Override
     @Transactional(readOnly = true)
     public Collection<Company> getPartners(final boolean isValid) {
-        List<CompanyEntity> entities = this.repository.findByType(CompanyType.PARTNER);
+        Collection<CompanyEntity> entities = this.repository.findAllByType(CompanyType.PARTNER);
         if (isValid) {
             entities = entities.stream()
                     .filter(CompanyEntity::isValidated)

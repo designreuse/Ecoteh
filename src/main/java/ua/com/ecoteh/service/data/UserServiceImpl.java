@@ -85,11 +85,44 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
         User user;
         try {
             user = (User) SecurityContextHolder.getContext()
-                    .getAuthentication().getPrincipal();
+                    .getAuthentication()
+                    .getPrincipal();
         } catch (Exception ex) {
             user = null;
         }
         return user;
+    }
+
+    /**
+     * Checks an authenticated user.
+     * <pre>
+     *     If authenticated user is null:
+     *     isAuthenticatedUser(null) = false
+     *     isAuthenticatedUser(user) = false
+     *
+     *     If the incoming user is authenticated user:
+     *     isAuthenticatedUser(user) = true
+     *
+     *     If the incoming user is not authenticated user,
+     *     but the authenticated user has super admin role:
+     *     isAuthenticatedUser(user) = true
+     * </pre>
+     *
+     * @param user the user to check.
+     * @return true if the user is authenticated user or
+     * if authenticated user has super admin role.
+     */
+    @Override
+    public boolean isAuthenticatedUser(final User user) {
+        boolean result = false;
+        if (isNotNull(user)) {
+            final User authenticatedUser = getAuthenticatedUser();
+            if (isNotNull(authenticatedUser)) {
+                result = user.equals(authenticatedUser) ||
+                        authenticatedUser.getRole().equals(UserRole.SUPERADMIN);
+            }
+        }
+        return result;
     }
 
     /**
@@ -121,10 +154,17 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      *
      * @param user the URL of a user to update.
      * @return The updating user with incoming URL (never null).
+     * @throws IllegalArgumentException Throw exception when parameter name is blank.
      */
     @Override
     @Transactional
-    public User update(final User user) {
+    public User update(final User user) throws IllegalArgumentException {
+        if (isNull(user)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
         final User userToUpdate = getByUrl(user.getUrl());
         final File newPhoto = user.getPhoto();
         final File oldPhoto = userToUpdate.getPhoto();
@@ -553,7 +593,7 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      */
     @Override
     @Transactional
-    public List<User> filteredByValid(final Collection<User> users) {
+    public List<User> filterByValid(final Collection<User> users) {
         List<User> result = new ArrayList<>();
         if (isNotEmpty(users)) {
             result.addAll(
@@ -561,38 +601,6 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
                             .filter(this::isValidated)
                             .collect(Collectors.toList())
             );
-        }
-        return result;
-    }
-
-    /**
-     * Checks an authenticated user.
-     * <pre>
-     *     If authenticated user is null:
-     *     isAuthenticatedUser(null) = false
-     *     isAuthenticatedUser(user) = false
-     *
-     *     If the incoming user is authenticated user:
-     *     isAuthenticatedUser(user) = true
-     *
-     *     If the incoming user is not authenticated user,
-     *     but the authenticated user has super admin role:
-     *     isAuthenticatedUser(user) = true
-     * </pre>
-     *
-     * @param user the user to check.
-     * @return true if the user is authenticated user or
-     * if authenticated user has super admin role.
-     */
-    @Override
-    public boolean isAuthenticatedUser(final User user) {
-        boolean result = false;
-        if (isNotNull(user)) {
-            final User authenticatedUser = getAuthenticatedUser();
-            if (isNotNull(authenticatedUser)) {
-                result = user.equals(authenticatedUser) ||
-                        authenticatedUser.getRole().equals(UserRole.SUPERADMIN);
-            }
         }
         return result;
     }
