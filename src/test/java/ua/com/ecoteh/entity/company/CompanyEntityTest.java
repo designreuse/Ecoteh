@@ -192,6 +192,6 @@ public class CompanyEntityTest extends ContentEntityTest {
 
     private String decrypt(final String value) {
         final Encryptor encryptor = new Base64Encryptor();
-        return encryptor.encrypt(value);
+        return encryptor.decrypt(value);
     }
 }
