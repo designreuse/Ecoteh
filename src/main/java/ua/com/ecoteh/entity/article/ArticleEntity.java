@@ -86,6 +86,7 @@ public class ArticleEntity extends ContentEntity {
                 ", text='" + this.text + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
+                ", currency=" + this.currency +
                 ", categoryEntity=" + this.category +
                 '}';
     }

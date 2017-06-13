@@ -2,6 +2,8 @@ package ua.com.ecoteh.entity.category;
 
 import ua.com.ecoteh.entity.content.ContentConverter;
 
+import java.util.ArrayList;
+
 /**
  * The class implements a set of methods
  * for converting categories to category entities.
@@ -42,6 +44,7 @@ final class CategoryConverter extends ContentConverter<Category, CategoryEntity>
         categoryEntity.setDescription(this.category.getDescription());
         categoryEntity.setKeywords(this.category.getKeywords());
         categoryEntity.setLogoEntity(this.category.getLogo().convert());
+        categoryEntity.setArticleEntities(new ArrayList<>());
         return categoryEntity;
     }
 }

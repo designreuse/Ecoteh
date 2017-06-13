@@ -81,7 +81,7 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
      */
     private String decrypt(final String value) {
         final Encryptor encryptor = getEncryptor();
-        return encryptor.encrypt(value);
+        return encryptor.decrypt(value);
     }
 
     /**

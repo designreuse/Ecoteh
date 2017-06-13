@@ -230,7 +230,8 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      * @see CategoryEditor
      */
     private Category getCategory() {
-        final CategoryEditor categoryEditor = this.category.getEditor();
+        final Category articleCategory = this.article.getCategory();
+        final CategoryEditor categoryEditor = articleCategory.getEditor();
         categoryEditor.copy(this.category);
         return categoryEditor.update();
     }

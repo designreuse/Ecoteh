@@ -227,7 +227,6 @@ public class UserEntity extends ModelEntity {
      *
      * @param password the new password to the user entity.
      */
-    @Transient
     public void setPassword(final String password) {
         this.password = password;
     }

@@ -73,7 +73,7 @@ public class MessageEntity extends ModelEntity {
     @Override
     public String toString() {
         return "MessageEntity{" + super.toString() +
-                ", user entity=" + this.user +
+                ", userEntity=" + this.user +
                 ", subject='" + this.subject + '\'' +
                 ", text='" + this.text + '\'' +
                 ", date=" + this.date +

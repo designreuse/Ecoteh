@@ -60,6 +60,7 @@ final class CompanyConverter extends ContentConverter<Company, CompanyEntity> {
         companyEntity.setLogoEntity(this.company.getLogo().convert());
         companyEntity.setContactsEntity(this.company.getContacts().convert());
         companyEntity.setAddressEntity(this.company.getAddress().convert());
+        companyEntity.setType(this.company.getType());
         return companyEntity;
     }
 

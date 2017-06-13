@@ -67,6 +67,7 @@ public final class Article extends Content {
      * @param text        the text of a new article.
      * @param date        the date of a new article.
      * @param price       the price of a new article.
+     * @param currency    the price currency of a new article.
      * @param logo        the logo of a new article.
      * @param category    the category of a new article.
      */

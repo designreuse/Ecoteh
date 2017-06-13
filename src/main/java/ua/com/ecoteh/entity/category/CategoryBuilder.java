@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods
@@ -52,7 +53,9 @@ public final class CategoryBuilder extends ContentBuilder<Category, CategoryBuil
      * @return the category builder.
      */
     public CategoryBuilder addArticle(final Article article) {
-        this.articles.add(article);
+        if (isNotNull(article)) {
+            this.articles.add(article);
+        }
         return this;
     }
 
@@ -63,7 +66,9 @@ public final class CategoryBuilder extends ContentBuilder<Category, CategoryBuil
      * @return the category builder.
      */
     public CategoryBuilder addArticles(final Collection<Article> articles) {
-        this.articles.addAll(articles);
+        if (isNotEmpty(articles)) {
+            this.articles.addAll(articles);
+        }
         return this;
     }
 

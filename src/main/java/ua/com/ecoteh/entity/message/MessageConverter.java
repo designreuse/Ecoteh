@@ -41,6 +41,6 @@ final class MessageConverter extends ModelConverter<Message, MessageEntity> {
         messageEntity.setText(this.message.getText());
         messageEntity.setDate(this.message.getDate());
         messageEntity.setUserEntity(this.message.getUser().convert());
-        return null;
+        return messageEntity;
     }
 }

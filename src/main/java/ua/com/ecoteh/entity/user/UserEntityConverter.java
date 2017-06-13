@@ -46,6 +46,7 @@ final class UserEntityConverter extends ModelEntityConverter<UserEntity, User> {
     protected UserBuilder prepareBuilder() {
         final UserBuilder builder = User.getBuilder();
         builder.addId(this.entity.getId())
+                .addValidated(this.entity.isValidated())
                 .addName(this.entity.getName())
                 .addUrl(this.entity.getUrl())
                 .addLogin(decrypt(this.entity.getLogin()))
