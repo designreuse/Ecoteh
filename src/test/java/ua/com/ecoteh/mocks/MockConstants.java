@@ -13,6 +13,8 @@ public interface MockConstants {
     int INDEX = 1;
     long ID = 1L;
     boolean VALIDATION = true;
+    boolean MAILING = true;
+    boolean LOCKED = false;
     long UNKNOWN_ID = -1L;
     String TITLE = "It`s a title of some content.";
     String URL = "url";
