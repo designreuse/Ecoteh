@@ -2,38 +2,39 @@ package ua.com.ecoteh.exception;
 
 import org.junit.Test;
 
-import static ua.com.ecoteh.mocks.MockConstants.TEXT;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static ua.com.ecoteh.mocks.MockConstants.TEXT;
 
-public final class DuplicateExceptionTest extends ExceptionTest {
+public final class DuplicateExceptionTest {
 
     @Test
     public void duplicateExceptionConstructor_1() throws Exception {
-        checkException(new DuplicateException(), "");
+        final Exception exception = new DuplicateException();
+        final String message = "";
+        checkException(exception, message);
     }
 
     @Test
     public void duplicateExceptionConstructor_2() throws Exception {
-        checkException(new DuplicateException(TEXT), TEXT);
+        final Exception exception = new DuplicateException(TEXT);
+        final String message = TEXT;
+        checkException(exception, message);
     }
 
     @Test
     public void duplicateExceptionConstructor_3() throws Exception {
-        checkException(
-                new DuplicateException(
-                        TEXT,
-                        new DuplicateException(TEXT)
-                ),
-                TEXT
-        );
+        final Exception another = new DuplicateException(TEXT);
+        final Exception exception = new DuplicateException(TEXT, another);
+        final String message = TEXT;
+        checkException(exception, message);
     }
     @Test
     public void duplicateExceptionConstructor_4() throws Exception {
-        assertNotNull(
-                new DuplicateException(
-                        new DuplicateException(TEXT)
-                )
-        );
+        final Exception another = new DuplicateException(TEXT);
+        final Exception exception = new DuplicateException(another);
+        final String message = DuplicateException.class.getName() + ": " + TEXT;
+        checkException(exception, message);
     }
 
 
@@ -49,16 +50,20 @@ public final class DuplicateExceptionTest extends ExceptionTest {
 
     @Test(expected = DuplicateException.class)
     public void throwDuplicateExceptionWithMessageAndThrowable() {
-        throw new DuplicateException(
-                TEXT,
-                new DuplicateException(TEXT)
-        );
+        final Exception another = new DuplicateException(TEXT);
+        throw new DuplicateException(TEXT, another);
     }
 
     @Test(expected = DuplicateException.class)
     public void throwDuplicateExceptionWithThrowable() {
-        throw new DuplicateException(
-                new DuplicateException(TEXT)
-        );
+        final Exception another = new DuplicateException(TEXT);
+        throw new DuplicateException(another);
+    }
+
+    private void checkException(final Exception ex, final String message) {
+        assertNotNull(ex);
+        if (!message.isEmpty()) {
+            assertEquals(ex.getMessage(), message);
+        }
     }
 }
