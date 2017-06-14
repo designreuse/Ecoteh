@@ -594,7 +594,7 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional
     public List<User> filterByValid(final Collection<User> users) {
-        List<User> result = new ArrayList<>();
+        final List<User> result = new ArrayList<>();
         if (isNotEmpty(users)) {
             result.addAll(
                     users.stream()
@@ -611,7 +611,7 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      * @return The Class object of {@link User} class.
      */
     @Override
-    protected Class<User> getModelClass() {
+    Class<User> getModelClass() {
         return User.class;
     }
 

@@ -99,4 +99,48 @@ public class ArticleComparator extends ContentComparator {
             return first.getDate().compareTo(second.getDate());
         }
     }
+
+    /**
+     * The class implements a method for working with comparator
+     * for {@link Article} by price.
+     */
+    public final static class ByPrice implements Comparator<Article> {
+
+        /**
+         * Compares two articles by price.
+         * <pre>
+         *     compare(null, null) = 0
+         *     compare(null, new Article()) = -1
+         *     compare(new Article(), null) = 1
+         *     compare(new Article(), new Article()) = compares by price
+         * </pre>
+         *
+         * @param first  the first article to be compared.
+         * @param second the second article to be compared.
+         * @return A negative integer, zero, or a positive integer as the
+         * first article price is less than, equal to, or greater than the
+         * second article price.
+         */
+        @Override
+        public int compare(final Article first, final Article second) {
+            int result = ArticleComparator.compare(first, second);
+            if (result == 2) {
+                result = compareByPrice(first, second);
+            }
+            return result;
+        }
+
+        /**
+         * Compares two articles by number.
+         *
+         * @param first  the first article to be compared (newer null).
+         * @param second the second article to be compared (newer null).
+         * @return A negative integer, zero, or a positive integer as the
+         * first article price is less than, equal to, or greater than the
+         * second article price.
+         */
+        private int compareByPrice(final Article first, final Article second) {
+            return (int)(first.getPrice() - second.getPrice());
+        }
+    }
 }

@@ -3,7 +3,7 @@ package ua.com.ecoteh.repository;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.file.FileType;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The interface provides a set of JPA methods
@@ -54,5 +54,13 @@ public interface FileRepository extends DataRepository<FileEntity> {
      * @param type the type of files to return.
      * @return The files with the type.
      */
-    List<FileEntity> findAllByType(FileType type);
+    Collection<FileEntity> findAllByType(FileType type);
+
+    /**
+     * Returns all files with the type.
+     *
+     * @param type the type of files to return.
+     * @return The files with the type.
+     */
+    FileEntity findLastByType(FileType type);
 }

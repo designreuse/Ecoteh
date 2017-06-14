@@ -9,7 +9,11 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
+ * The class implements a set of methods
+ * for building an objects of the {@link Company} class.
+ *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
+ * @see Company
  */
 public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder> {
 

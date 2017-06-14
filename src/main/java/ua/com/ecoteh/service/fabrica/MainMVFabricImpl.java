@@ -179,7 +179,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject("company", this.companyService.getMainCompany());
         Collection<User> personnel = this.userService.getPersonnel();
         if (isValidContent()) {
-            personnel = this.userService.filteredByValid(personnel);
+            personnel = this.userService.filterByValid(personnel);
         }
         modelAndView.addObject("users_list", personnel);
         modelAndView.setViewName("company/main");
@@ -506,7 +506,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         if (isNull(category)) {
             articles = Collections.emptyList();
         } else if (isValidContent()) {
-            articles = this.articleService.filteredByValid(category.getArticles());
+            articles = this.articleService.filterByValid(category.getArticles());
         } else {
             articles = category.getArticles();
         }

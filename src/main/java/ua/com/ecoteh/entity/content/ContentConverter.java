@@ -12,8 +12,7 @@ import ua.com.ecoteh.entity.model.ModelConverter;
  * @see Content
  * @see ContentEntity
  */
-public abstract class ContentConverter<T extends Content, E extends ContentEntity>
-        extends ModelConverter<T, E> {
+public abstract class ContentConverter<T extends Content, E extends ContentEntity> extends ModelConverter<T, E> {
 
     /**
      * Constructor.

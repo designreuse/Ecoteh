@@ -220,7 +220,7 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Compan
      * @return The Class object of {@link Company} class.
      */
     @Override
-    protected Class<Company> getModelClass() {
+    Class<Company> getModelClass() {
         return Company.class;
     }
 

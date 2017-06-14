@@ -143,7 +143,7 @@ public final class CategoryServiceImpl
      * @return The Class object of {@link Category} class.
      */
     @Override
-    protected Class<Category> getModelClass() {
+    Class<Category> getModelClass() {
         return Category.class;
     }
 }

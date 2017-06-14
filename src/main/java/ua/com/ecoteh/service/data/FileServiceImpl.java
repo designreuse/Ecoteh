@@ -175,7 +175,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
         if (isNull(entity)) {
             throw getNullPointerException(
                     ExceptionMessage.FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
-                    getClassSimpleName()
+                    getClassSimpleName(), title
             );
         }
         return convertToModel(entity);
@@ -202,8 +202,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
         final FileEntity entity = this.repository.findByUrl(url);
         if (isNull(entity)) {
             throw getNullPointerException(
-                    ExceptionMessage.FINDING_BY_TITLE_OBJECT_IS_NULL_MESSAGE,
-                    getClassSimpleName()
+                    ExceptionMessage.FINDING_BY_URL_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName(), url
             );
         }
         return convertToModel(entity);
@@ -231,7 +231,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional
     public void removeByUrl(final String url) {
-        remove(getByUrl(url));
+        if (isNotEmpty(url)) {
+            remove(getByUrl(url));
+        }
     }
 
     /**
@@ -239,6 +241,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * If incoming file is static then throws IllegalArgumentException.
      *
      * @param file the file to remove.
+     * @throws IllegalArgumentException if the incoming file is static.
      */
     @Override
     @Transactional
@@ -385,7 +388,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @return The Class object of {@link FileEntity} class.
      */
     @Override
-    protected Class<File> getModelClass() {
+    Class<File> getModelClass() {
         return File.class;
     }
 

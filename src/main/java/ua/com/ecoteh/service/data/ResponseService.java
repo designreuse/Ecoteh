@@ -35,19 +35,19 @@ public interface ResponseService extends DataService<Response> {
     /**
      * Filters and returns responses by the incoming dates.
      *
-     * @param responses  the responses to filter.
-     * @param startDate  the initial date.
-     * @param finishDate the  date.
+     * @param responses the responses to filter.
+     * @param start     the initial date.
+     * @param finish    the final date.
      * @return The filtered list of responses.
      */
-    List<Response> filterByDate(Collection<Response> responses, Date startDate, Date finishDate);
+    List<Response> filterByDate(Collection<Response> responses, Date start, Date finish);
 
     /**
      * Filters and returns responses by the incoming dates.
      *
-     * @param startDate  the initial date.
-     * @param finishDate the  date.
+     * @param start  the initial date.
+     * @param finish the final date.
      * @return The filtered list of responses.
      */
-    List<Response> getAndFilterByDate(Date startDate, Date finishDate);
+    List<Response> getAndFilterByDate(Date start, Date finish);
 }

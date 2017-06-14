@@ -102,12 +102,12 @@ public interface ArticleService extends ContentService<Article> {
     /**
      * Filters and returns articles by incoming dates.
      *
-     * @param articles  the articles to filter.
-     * @param startDate the initial date.
-     * @param endDate   the final date.
+     * @param articles the articles to filter.
+     * @param start    the initial date.
+     * @param finish   the final date.
      * @return The filtered list of articles.
      */
-    List<Article> filterByDate(Collection<Article> articles, Date startDate, Date endDate);
+    List<Article> filterByDate(Collection<Article> articles, Date start, Date finish);
 
     /**
      * Filters and returns articles by the category.
@@ -130,11 +130,11 @@ public interface ArticleService extends ContentService<Article> {
     /**
      * Filters and returns articles by the dates.
      *
-     * @param startDate the initial date.
-     * @param endDate   the final date.
+     * @param start  the initial date.
+     * @param finish the final date.
      * @return The filtered list of articles.
      */
-    List<Article> getAndFilterByDate(Date startDate, Date endDate);
+    List<Article> getAndFilterByDate(Date start, Date finish);
 
     /**
      * Filters and returns articles by the category.

@@ -335,18 +335,18 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      * </pre>
      *
      * @param models    the list of models to be processed.
-     * @param fromIndex the initial index.
-     * @param toIndex   the final index.
+     * @param from the initial index.
+     * @param to   the final index.
      * @return The substring list of models (newer null).
      */
     @Override
     @Transactional(readOnly = true)
-    public List<T> subList(final Collection<T> models, final int fromIndex, final int toIndex) {
+    public List<T> subList(final Collection<T> models, final int from, final int to) {
         final List<T> result;
         if (isEmpty(models)) {
             result = new ArrayList<>();
-        } else if (checkIndexes(fromIndex, toIndex, models.size())) {
-            result = new ArrayList<>(models).subList(fromIndex, toIndex);
+        } else if (checkIndexes(from, to, models.size())) {
+            result = new ArrayList<>(models).subList(from, to);
         } else {
             result = new ArrayList<>(models);
         }
@@ -393,8 +393,13 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      */
     @Override
     public List<T> shuffle(final Collection<T> models) {
-        final List<T> list = new ArrayList<>(models);
-        Collections.shuffle(list);
+        final List<T> list;
+        if (isNotEmpty(models)) {
+            list = new ArrayList<>(models);
+            Collections.shuffle(list);
+        } else {
+            list = new ArrayList<>();
+        }
         return list;
     }
 

@@ -47,14 +47,13 @@ public class ContentComparator extends AbstractComparator {
         /**
          * Compares two contents by title.
          *
-         * @param <T>    entity type, extends {@link Content}.
          * @param first  the first content to be compared (newer null).
          * @param second the second content to be compared (newer null).
          * @return A negative integer, zero, or a positive integer as the
          * first content title is less than, equal to, or greater than the
          * second content title.
          */
-        private <T extends Content> int compareByTitle(final T first, final T second) {
+        private int compareByTitle(final T first, final T second) {
             return first.getTitle().compareToIgnoreCase(second.getTitle());
         }
     }
@@ -105,14 +104,13 @@ public class ContentComparator extends AbstractComparator {
          *     compare(new Content(), new Content()) = compares by URL
          * </pre>
          *
-         * @param <T>    entity type, extends {@link Content}.
          * @param first  the first content to be compared (newer null).
          * @param second the second content to be compared (newer null).
          * @return A negative integer, zero, or a positive integer as the
          * first content URL is less than, equal to, or greater than the
          * second content URL.
          */
-        private <T extends Content> int compareByUrl(final T first, final T second) {
+        private int compareByUrl(final T first, final T second) {
             return first.getUrl().compareToIgnoreCase(second.getUrl());
         }
     }

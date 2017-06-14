@@ -22,7 +22,7 @@ public interface DataService<T extends Model> {
      * @param model the model to add.
      * @return The saving model.
      */
-    T add(final T model);
+    T add(T model);
 
     /**
      * Saves and returns objects of {@link Model} class or subclasses.
@@ -30,7 +30,7 @@ public interface DataService<T extends Model> {
      * @param models the models to add.
      * @return The saving models.
      */
-    Collection<T> add(final Collection<T> models);
+    Collection<T> add(Collection<T> models);
 
     /**
      * Updates and returns object of {@link Model} class or subclasses.
@@ -38,7 +38,7 @@ public interface DataService<T extends Model> {
      * @param model the model to update.
      * @return The updating models.
      */
-    T update(final T model);
+    T update(T model);
 
     /**
      * Updates and returns objects of {@link Model} class or subclasses.
@@ -46,7 +46,7 @@ public interface DataService<T extends Model> {
      * @param models the models to update.
      * @return The updating models.
      */
-    Collection<T> update(final Collection<T> models);
+    Collection<T> update(Collection<T> models);
 
     /**
      * Returns object of {@link Model} class or subclasses
@@ -55,7 +55,7 @@ public interface DataService<T extends Model> {
      * @param id is id of object to return.
      * @return The object models with parameter id.
      */
-    T get(final long id);
+    T get(long id);
 
     /**
      * Returns all valid objects of {@link Model} class or subclasses.
@@ -71,28 +71,28 @@ public interface DataService<T extends Model> {
      * @param valid It is returns all or valid objects.
      * @return The all models.
      */
-    Collection<T> getAll(final boolean valid);
+    Collection<T> getAll(boolean valid);
 
     /**
      * Removes object of {@link Model} class or subclasses with incoming id.
      *
      * @param id a id of the model to remove.
      */
-    void remove(final long id);
+    void remove(long id);
 
     /**
      * Removes object of {@link Model} class or subclasses.
      *
      * @param model the model to remove.
      */
-    void remove(final T model);
+    void remove(T model);
 
     /**
      * Removes objects of {@link Model} class or subclasses.
      *
      * @param models the models to remove.
      */
-    void remove(final Collection<T> models);
+    void remove(Collection<T> models);
 
     /**
      * Removes all objects of {@link Model} class or subclasses.
@@ -106,7 +106,7 @@ public interface DataService<T extends Model> {
      * @param id a id of the model to exist.
      * @return Returns true if model is exists, otherwise returns false.
      */
-    boolean exists(final long id);
+    boolean exists(long id);
 
     /**
      * Checks whether the object of {@link Model} class
@@ -115,7 +115,7 @@ public interface DataService<T extends Model> {
      * @param model the model to exists.
      * @return Returns true if model is exists, otherwise returns false.
      */
-    boolean exists(final T model);
+    boolean exists(T model);
 
     /**
      * Sorts and returns objects of {@link Model} class or subclasses
@@ -126,7 +126,7 @@ public interface DataService<T extends Model> {
      * @param revers     Sort in descending or ascending.
      * @return The sorted list of models.
      */
-    List<T> sort(final Collection<T> models, final Comparator<T> comparator, final boolean revers);
+    List<T> sort(Collection<T> models, Comparator<T> comparator, boolean revers);
 
     /**
      * Sorts and returns objects of {@link Model} class or subclasses
@@ -136,27 +136,27 @@ public interface DataService<T extends Model> {
      * @param comparator the comparator to sort models.
      * @return The sorted list of models.
      */
-    List<T> sort(final Collection<T> models, final Comparator<T> comparator);
+    List<T> sort(Collection<T> models, Comparator<T> comparator);
 
     /**
      * Returns a list with the incoming list objects
      * of {@link Model} class or subclasses.
      *
-     * @param models    the models to be processed.
-     * @param fromIndex the initial index.
-     * @param toIndex   the final index.
+     * @param models the models to be processed.
+     * @param from   the initial index.
+     * @param to     the final index.
      * @return The models from initial index to final index.
      */
-    List<T> subList(Collection<T> models, int fromIndex, int toIndex);
+    List<T> subList(Collection<T> models, int from, int to);
 
     /**
      * Returns a list objects of {@link Model} class or subclasses.
      *
-     * @param fromIndex the initial index.
-     * @param toIndex   the final index.
+     * @param from the initial index.
+     * @param to   the final index.
      * @return The models from initial index to final index.
      */
-    List<T> getAndSubList(int fromIndex, int toIndex);
+    List<T> getAndSubList(int from, int to);
 
     /**
      * Returns a list valid objects of {@link Model} class or subclasses.

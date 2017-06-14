@@ -129,7 +129,10 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     public T getByUrl(final String url, final boolean isValid)
             throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
-            throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_URL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final E entity = this.repository.findByUrl(url);
         if (isNotValidated(entity, isValid)) {

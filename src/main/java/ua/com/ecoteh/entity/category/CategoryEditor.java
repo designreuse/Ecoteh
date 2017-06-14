@@ -6,6 +6,7 @@ import ua.com.ecoteh.entity.content.ContentEditor;
 import java.util.Collection;
 import java.util.HashSet;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
@@ -84,8 +85,10 @@ public final class CategoryEditor extends ContentEditor<Category, CategoryEditor
      * @return the category editor.
      */
     public CategoryEditor addArticle(final Article article) {
-        this.articles.add(article);
-        this.isNewArticles = true;
+        if (isNotNull(article)) {
+            this.articles.add(article);
+            this.isNewArticles = true;
+        }
         return this;
     }
 
@@ -96,8 +99,10 @@ public final class CategoryEditor extends ContentEditor<Category, CategoryEditor
      * @return the category editor.
      */
     public CategoryEditor addArticles(final Collection<Article> articles) {
-        this.articles.addAll(articles);
-        this.isNewArticles = true;
+        if (isNotEmpty(articles)) {
+            this.articles.addAll(articles);
+            this.isNewArticles = true;
+        }
         return this;
     }
 
@@ -108,8 +113,10 @@ public final class CategoryEditor extends ContentEditor<Category, CategoryEditor
      * @return the category editor.
      */
     public CategoryEditor removeArticle(final Article article) {
-        this.articles.remove(article);
-        this.isNewArticles = true;
+        if (isNotNull(article)) {
+            this.articles.remove(article);
+            this.isNewArticles = true;
+        }
         return this;
     }
 
@@ -120,8 +127,10 @@ public final class CategoryEditor extends ContentEditor<Category, CategoryEditor
      * @return the category editor.
      */
     public CategoryEditor removeArticles(final Collection<Article> articles) {
-        this.articles.removeAll(articles);
-        this.isNewArticles = true;
+        if (isNotEmpty(articles)) {
+            this.articles.removeAll(articles);
+            this.isNewArticles = true;
+        }
         return this;
     }
 

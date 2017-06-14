@@ -60,6 +60,7 @@ public final class FileEditor extends ModelEditor<File, FileEditor> {
         builder.addId(getId())
                 .addValidated(isValidated())
                 .addTitle(getTitle())
+                .addUrl(getUrl())
                 .addMultipartFile(getMultipartFile())
                 .addType(getType());
         return builder.build();
@@ -76,6 +77,7 @@ public final class FileEditor extends ModelEditor<File, FileEditor> {
         if (isNotNull(file)) {
             super.copy(file)
                     .addTitle(file.getTitle())
+                    .addUrl(file.getUrl())
                     .addMultipartFile(file.getMultipartFile())
                     .addType(file.getType());
         }

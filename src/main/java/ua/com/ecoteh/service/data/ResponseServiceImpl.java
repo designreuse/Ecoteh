@@ -81,31 +81,31 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
      *     filterByDate(collection, new Date(), null) = collection
      *     filterByDate(collection, null, new Date()) = collection
      *
-     *     Date startDate = new Date();
-     *     Date finishDate = new Date();
-     *     if startDate greater than finishDate:
-     *     filterByDate(collection, startDate, finishDate) = collection
-     *     if finishDate greater than startDate:
-     *     filterByDate(collection, startDate, finishDate) = filtered list of responses
+     *     Date start = new Date();
+     *     Date finish = new Date();
+     *     if start date greater than finishDate:
+     *     filterByDate(collection, start, finish) = collection
+     *     if finish date greater than start date:
+     *     filterByDate(collection, start, finish) = filtered list of responses
      * </pre>
      *
-     * @param responses  the responses to filter.
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param responses the responses to filter.
+     * @param start     the initial date.
+     * @param finish    the final date.
      * @return The filtered list of responses.
      */
     @Override
     @Transactional(readOnly = true)
     public List<Response> filterByDate(
             final Collection<Response> responses,
-            final Date startDate, final Date finishDate
+            final Date start, final Date finish
     ) {
         final List<Response> result = new ArrayList<>();
         if (isNotEmpty(responses)) {
-            if (checkDate(startDate, finishDate)) {
+            if (checkDate(start, finish)) {
                 result.addAll(
                         responses.stream()
-                                .filter(response -> compareToDate(response, startDate, finishDate))
+                                .filter(response -> compareToDate(response, start, finish))
                                 .collect(Collectors.toList())
                 );
             } else {
@@ -122,22 +122,22 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
      *     getAndFilterByDate(new Date(), null) = all articles
      *     getAndFilterByDate(null, new Date()) = all responses
      *
-     *     Date startDate = new Date();
-     *     Date finishDate = new Date();
-     *     if startDate greater than finishDate:
-     *     filterByDate(startDate, finishDate) = all responses
-     *     if finishDate greater than startDate:
-     *     filterByDate(startDate, finishDate) = filtered list of responses
+     *     Date start = new Date();
+     *     Date finish = new Date();
+     *     if start date greater than finish date:
+     *     filterByDate(start, finish) = all responses
+     *     if finish date greater than start date:
+     *     filterByDate(start, finish) = filtered list of responses
      * </pre>
      *
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param start  the initial date.
+     * @param finish the final date.
      * @return The filtered list of responses.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Response> getAndFilterByDate(final Date startDate, final Date finishDate) {
-        return filterByDate(getAll(), startDate, finishDate);
+    public List<Response> getAndFilterByDate(final Date start, final Date finish) {
+        return filterByDate(getAll(), start, finish);
     }
 
     /**
@@ -188,24 +188,24 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
      * Dates must be not null and not equals between themselves.
      * Used the checkDate() method of the {@link Time} class.
      *
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param start  the initial date.
+     * @param finish the final date.
      * @return true if dates are correct, false otherwise.
      */
-    private boolean checkDate(final Date startDate, final Date finishDate) {
-        return Time.checkDate(startDate, finishDate);
+    private boolean checkDate(final Date start, final Date finish) {
+        return Time.checkDate(start, finish);
     }
 
     /**
      * Compares response object date to input dates.
      *
-     * @param response   the response to compare.
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param response the response to compare.
+     * @param start    the initial date.
+     * @param finish   the final date.
      * @return true or false.
      */
-    private boolean compareToDate(final Response response, final Date startDate, final Date finishDate) {
-        return (response.getDate().compareTo(startDate) == 1) &&
-                (response.getDate().compareTo(finishDate) == -1);
+    private boolean compareToDate(final Response response, final Date start, final Date finish) {
+        return (response.getDate().compareTo(start) == 1) &&
+                (response.getDate().compareTo(finish) == -1);
     }
 }

@@ -19,7 +19,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class of the service layer, implements a set of methods
- * for working with objects of the {@link ArticleEntity} class.
+ * for working with objects of the {@link Article} class.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
@@ -87,9 +87,9 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Returns article with the incoming categoryEntity id.
+     * Returns article with the incoming category id.
      *
-     * @param id the categoryEntity id of articles to return.
+     * @param id the category id of articles to return.
      * @return The list of articles or empty list (newer null).
      */
     @Override
@@ -100,10 +100,10 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Returns article with the categoryEntity title.
+     * Returns article with the category title.
      * If a incoming title is null or empty then throws IllegalArgumentException.
      *
-     * @param title the categoryEntity title of the articles to return.
+     * @param title the category title of the articles to return.
      * @return The list of articles or empty list (newer null).
      * @throws IllegalArgumentException Throw exception when parameter categoryTitle is blank.
      */
@@ -215,37 +215,36 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *     filterByDate(new ArrayList(), ..., ...) = empty ArrayList()
      *
      *     Collection collection = new ArrayList();
-     *     collection.add(new ArticleEntity());
+     *     collection.add(new Article());
      *     filterByDate(collection, null, null) = collection
      *     filterByDate(collection, new Date(), null) = collection
      *     filterByDate(collection, null, new Date()) = collection
      *
-     *     Date startDate = new Date();
-     *     Date finishDate = new Date();
-     *     if startDate greater than finishDate:
-     *     filterByDate(collection, startDate, finishDate) = collection
-     *     if finishDate greater than startDate:
-     *     filterByDate(collection, startDate, finishDate) = filtered list of articles
+     *     Date start = new Date();
+     *     Date finish = new Date();
+     *     if start date greater than finish date:
+     *     filterByDate(collection, start, finish) = collection
+     *     if finish date greater than start date:
+     *     filterByDate(collection, start, finish) = filtered list of articles
      * </pre>
      *
-     * @param articles   the articles to filter.
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param articles the articles to filter.
+     * @param start    the initial date.
+     * @param finish   the final date.
      * @return The filtered / no filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional(readOnly = true)
     public List<Article> filterByDate(
             final Collection<Article> articles,
-            final Date startDate,
-            final Date finishDate
+            final Date start, final Date finish
     ) {
         final List<Article> result = new ArrayList<>();
         if (isNotEmpty(articles)) {
-            if (checkDate(startDate, finishDate)) {
+            if (checkDate(start, finish)) {
                 result.addAll(
                         articles.stream()
-                                .filter(article -> timeFilter(article, startDate, finishDate))
+                                .filter(article -> timeFilter(article, start, finish))
                                 .collect(Collectors.toList())
                 );
             } else {
@@ -256,25 +255,27 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Filters and returns articles by the incoming categoryEntity.
+     * Filters and returns articles by the incoming category.
      * <pre>
      *     filterByCategory(null, null) = empty ArrayList()
-     *     filterByCategory(null, new CategoryEntity()) = empty ArrayList()
+     *     filterByCategory(null, new Category()) = empty ArrayList()
      *
      *     Collection articles = new ArrayList();
-     *     articles.add(new ArticleEntity());
-     *     filterByCategory(articles, new CategoryEntity()) = filtered list of articles
+     *     articles.add(new Article());
+     *     filterByCategory(articles, new Category()) = filtered list of articles
      * </pre>
      *
      * @param articles the articles to filter.
-     * @param category the categoryEntity filtering.
+     * @param category the category filtering.
      * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
     public List<Article> filterByCategory(final Collection<Article> articles, final Category category) {
         final List<Category> categories = new ArrayList<>(1);
-        categories.add(category);
+        if (isNotNull(category)) {
+            categories.add(category);
+        }
         return filterByCategories(articles, categories);
     }
 
@@ -286,11 +287,11 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *     filterByCategories(null, null) = empty ArrayList()
      *
      *     Collection categories = new ArrayList();
-     *     categories.add(new CategoryEntity());
+     *     categories.add(new Category());
      *     filterByCategories(null, categories) = empty ArrayList()
      *
      *     Collection articles = new ArrayList();
-     *     articles.add(new ArticleEntity());
+     *     articles.add(new Article());
      *     filterByCategories(articles, null) = articles
      *
      *     filterByCategories(articles, categories) = filtered list of articles
@@ -333,30 +334,30 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *
      *     Date startDate = new Date();
      *     Date finishDate = new Date();
-     *     if startDate greater than finishDate:
-     *     filterByDate(startDate, finishDate) = all articles
-     *     if finishDate greater than startDate:
-     *     filterByDate(startDate, finishDate) = filtered list of articles
+     *     if start date greater than finish date:
+     *     filterByDate(start, finish) = all articles
+     *     if finish date greater than start date:
+     *     filterByDate(start, finish) = filtered list of articles
      * </pre>
      *
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param start  the initial date.
+     * @param finish the final date.
      * @return The filtered list of articles or empty list (newer null).
      */
     @Override
     @Transactional
-    public List<Article> getAndFilterByDate(final Date startDate, final Date finishDate) {
-        return filterByDate(getAll(), startDate, finishDate);
+    public List<Article> getAndFilterByDate(final Date start, final Date finish) {
+        return filterByDate(getAll(), start, finish);
     }
 
     /**
-     * Filters and returns articles by the incoming categoryEntity.
+     * Filters and returns articles by the incoming category.
      * <pre>
      *     getAndFilterByCategory(null) = all articles
-     *     getAndFilterByCategory(new CategoryEntity()) = filtered list of articles
+     *     getAndFilterByCategory(new Category()) = filtered list of articles
      * </pre>
      *
-     * @param category the categoryEntity filtering.
+     * @param category the category filtering.
      * @return The filtered list of articles or empty list (newer null).
      */
     @Override
@@ -372,7 +373,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *     getAndFilterByCategories(new ArrayList()) = all articles
      *
      *     Collection categories = new ArrayList();
-     *     categories.add(new CategoryEntity());
+     *     categories.add(new Category());
      *     getAndFilterByCategories(categories) = filtered list of articles
      * </pre>
      *
@@ -393,7 +394,7 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      *     filteredByValid(new ArrayList()) = empty ArrayList()
      *
      *     Collection articles = new ArrayList();
-     *     ArticleEntity article = new ArticleEntity();
+     *     Article article = new Article();
      *     article.setValidated(false);
      *     articles.add(article);
      *     filteredByValid(articles) = empty ArrayList()
@@ -435,12 +436,12 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     }
 
     /**
-     * Return Class object of {@link ArticleEntity} class.
+     * Return Class object of {@link Article} class.
      *
-     * @return The Class object of {@link ArticleEntity} class.
+     * @return The Class object of {@link Article} class.
      */
     @Override
-    protected Class<Article> getModelClass() {
+    Class<Article> getModelClass() {
         return Article.class;
     }
 

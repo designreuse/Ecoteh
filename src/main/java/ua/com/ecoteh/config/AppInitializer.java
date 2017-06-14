@@ -5,6 +5,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -94,11 +95,11 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     public void onStartup(final ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        final FilterRegistration.Dynamic filter = servletContext
-                .addFilter("encodingFilter", new CharacterEncodingFilter());
-        filter.setInitParameter("encoding", ENCODING);
-        filter.setInitParameter("forceEncoding", Boolean.toString(FORCE_ENCODING));
-        filter.addMappingForUrlPatterns(
+        final Filter filter = new CharacterEncodingFilter();
+        final FilterRegistration.Dynamic dynamic = servletContext.addFilter("encodingFilter", filter);
+        dynamic.setInitParameter("encoding", ENCODING);
+        dynamic.setInitParameter("forceEncoding", Boolean.toString(FORCE_ENCODING));
+        dynamic.addMappingForUrlPatterns(
                 null,
                 MAPPING_FOR_URL_IS_MATH_AFTER,
                 MAPPING_FOR_URL_PATTERNS
@@ -113,9 +114,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
      * or subclass thereof.
      */
     @Override
-    protected DispatcherServlet createDispatcherServlet(
-            final WebApplicationContext webApplicationContext
-    ) {
+    protected DispatcherServlet createDispatcherServlet(final WebApplicationContext webApplicationContext) {
         final DispatcherServlet dispatcherServlet =
                 (DispatcherServlet) super.createDispatcherServlet(webApplicationContext);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(THROW_EXCEPTION_IF_NO_HANDLER_FOUND);
