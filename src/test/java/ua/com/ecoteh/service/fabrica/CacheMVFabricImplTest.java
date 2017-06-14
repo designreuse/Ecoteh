@@ -1,16 +1,23 @@
 package ua.com.ecoteh.service.fabrica;
 
-import org.junit.Before;
-import ua.com.ecoteh.mocks.service.fabrica.MockMVFabric;
+import org.junit.BeforeClass;
+
+import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
-public class CacheMVFabricImplTest extends MainMVFabricImplTest {
+public class CacheMVFabricImplTest extends AbstractMainMVFabricImplTest {
 
-    @Before
-    public void beforeTests() {
-        setFabric(MockMVFabric.getCacheMVFabric());
+    private static CacheMVFabric fabric;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fabric = getCacheMVFabric();
+    }
+
+    @Override
+    protected CacheMVFabric getFabric() {
+        return fabric;
     }
 }

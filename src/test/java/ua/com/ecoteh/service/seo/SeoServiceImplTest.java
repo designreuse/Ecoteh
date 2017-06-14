@@ -2,6 +2,10 @@ package ua.com.ecoteh.service.seo;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.service.data.ArticleService;
+import ua.com.ecoteh.service.data.CategoryService;
+import ua.com.ecoteh.service.data.CompanyService;
 
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getArticleService;
@@ -10,7 +14,6 @@ import static ua.com.ecoteh.mocks.service.data.MockServices.getCompanyService;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class SeoServiceImplTest {
 
@@ -18,27 +21,25 @@ public class SeoServiceImplTest {
 
     @Before
     public void beforeTests() {
-        this.seoService = new SeoServiceImpl(
-                getCompanyService(),
-                getCategoryService(),
-                getArticleService()
-        );
+        final CompanyService companyService = getCompanyService();
+        final CategoryService categoryService = getCategoryService();
+        final ArticleService articleService = getArticleService();
+        this.seoService = new SeoServiceImpl(companyService, categoryService, articleService);
     }
 
     @Test
     public void whenGetRobotsTxtThenReturnsSomeModelAndView() {
-        checkModelAndView(
-                this.seoService.getRobotsTxt(),
-                "seo/robots", new String[]{"domain"}
-        );
+        final ModelAndView modelAndView = this.seoService.getRobotsTxt();
+        final String viewName = "seo/robots";
+        final String[] keys = { "domain" };
+        checkModelAndView(modelAndView, viewName, keys);
     }
 
     @Test
     public void whenGetSitemapThenReturnsSomeModelAndView() {
-        checkModelAndView(
-                this.seoService.getSiteMapXml(),
-                "seo/sitemap",
-                new String[]{"domain", "categories", "articles", "companies"}
-        );
+        final ModelAndView modelAndView = this.seoService.getSiteMapXml();
+        final String viewName = "seo/sitemap";
+        final String[] keys = { "domain", "categories", "articles", "companies" };
+        checkModelAndView(modelAndView, viewName, keys);
     }
 }

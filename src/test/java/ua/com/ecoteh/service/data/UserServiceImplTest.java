@@ -628,6 +628,12 @@ public class UserServiceImplTest extends DataServiceImplTest<User> {
         assertFalse(result);
     }
 
+    @Test
+    public void whenIsAuthenticatedThenReturnFalse() {
+        final boolean result = service.isAuthenticatedUser();
+        assertFalse(result);
+    }
+
     @Override
     protected UserService getService() {
         return service;

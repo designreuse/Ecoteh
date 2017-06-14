@@ -22,21 +22,17 @@ public class CaptchaServiceImplTest {
 
     @BeforeClass
     public static void setUp() {
-        Captcha captcha = new ReCaptcha(
-                "userAgent",
-                "acceptLanguage",
-                true,
-                "url",
-                "serverKey",
-                "parameter",
-                "header"
+        final Captcha captcha = new ReCaptcha(
+                "userAgent", "acceptLanguage", true,
+                "url", "serverKey", "parameter", "header"
         );
         service = new CaptchaServiceImpl(captcha);
     }
 
     @Test
     public void isVerifyWithMockHttpServletRequestThenReturnFalse() {
-        assertFalse(service.isVerify(mock(HttpServletRequest.class)));
+        final HttpServletRequest servletRequest = mock(HttpServletRequest.class);
+        assertFalse(service.isVerify(servletRequest));
     }
 
     @Test
