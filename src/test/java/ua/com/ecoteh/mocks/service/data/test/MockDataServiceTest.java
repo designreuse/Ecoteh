@@ -182,34 +182,34 @@ public abstract class MockDataServiceTest<T extends Model> {
     }
 
     @Test
-    public void whenFilteredByValidThenReturnNotEmptyCollection() {
+    public void whenFilterByValidThenReturnNotEmptyCollection() {
         final DataService<T> service = getService();
         final Collection<T> models = getObjects();
-        final Collection<T> filteredModels = service.filteredByValid(models);
+        final Collection<T> filteredModels = service.filterByValid(models);
         assertFalse(filteredModels.isEmpty());
     }
 
     @Test
-    public void whenFilteredByValidThenReturnCollectionWithNotNullObjects() {
+    public void whenFilterByValidThenReturnCollectionWithNotNullObjects() {
         final DataService<T> service = getService();
         final Collection<T> models = getObjects();
-        final Collection<T> filteredModels = service.filteredByValid(models);
+        final Collection<T> filteredModels = service.filterByValid(models);
         filteredModels.forEach(Assert::assertNotNull);
     }
 
     @Test
-    public void whenFilteredEmptyCollectionByValidThenReturnEmptyCollection() {
+    public void whenFilterEmptyCollectionByValidThenReturnEmptyCollection() {
         final DataService<T> service = getService();
         final Collection<T> models = new ArrayList<>();
-        final Collection<T> filteredModels = service.filteredByValid(models);
+        final Collection<T> filteredModels = service.filterByValid(models);
         assertTrue(filteredModels.isEmpty());
     }
 
     @Test
-    public void whenFilteredNullCollectionByValidThenReturnEmptyCollection() {
+    public void whenFilterNullCollectionByValidThenReturnEmptyCollection() {
         final DataService<T> service = getService();
         final Collection<T> models = null;
-        final Collection<T> filteredModels = service.filteredByValid(models);
+        final Collection<T> filteredModels = service.filterByValid(models);
         assertTrue(filteredModels.isEmpty());
     }
 

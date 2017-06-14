@@ -8,9 +8,7 @@ import ua.com.ecoteh.entity.model.ModelTest;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static ua.com.ecoteh.mocks.MockConstants.*;
 import static ua.com.ecoteh.mocks.enity.MockModels.getContacts;
 import static ua.com.ecoteh.mocks.enity.MockModels.getFile;
@@ -52,22 +50,46 @@ public class UserTest extends ModelTest {
 
     @Test
     public void isAccountNonExpired() throws Exception {
-        user.isAccountNonExpired();
+        final UserEditor editor = user.getEditor();
+        editor.isLock();
+        final User lockedUser = editor.update();
+        assertFalse(lockedUser.isAccountNonExpired());
+        editor.isNotLock();
+        final User notLockedUser = editor.update();
+        assertTrue(notLockedUser.isAccountNonExpired());
     }
 
     @Test
     public void isAccountNonLocked() throws Exception {
-        user.isAccountNonLocked();
+        final UserEditor editor = user.getEditor();
+        editor.isLock();
+        final User lockedUser = editor.update();
+        assertFalse(lockedUser.isAccountNonLocked());
+        editor.isNotLock();
+        final User notLockedUser = editor.update();
+        assertTrue(notLockedUser.isAccountNonLocked());
     }
 
     @Test
     public void isCredentialsNonExpired() throws Exception {
-        user.isCredentialsNonExpired();
+        final UserEditor editor = user.getEditor();
+        editor.isLock();
+        final User lockedUser = editor.update();
+        assertFalse(lockedUser.isCredentialsNonExpired());
+        editor.isNotLock();
+        final User notLockedUser = editor.update();
+        assertTrue(notLockedUser.isCredentialsNonExpired());
     }
 
     @Test
     public void isEnabled() throws Exception {
-        user.isEnabled();
+        final UserEditor editor = user.getEditor();
+        editor.isLock();
+        final User lockedUser = editor.update();
+        assertFalse(lockedUser.isEnabled());
+        editor.isNotLock();
+        final User notLockedUser = editor.update();
+        assertTrue(notLockedUser.isEnabled());
     }
 
     @Test

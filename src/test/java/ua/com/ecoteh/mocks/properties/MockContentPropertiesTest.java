@@ -12,7 +12,7 @@ import static ua.com.ecoteh.mocks.properties.MockContentProperties.getContentPro
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public class MockContentEntityPropertiesTest {
+public class MockContentPropertiesTest {
 
     private static ContentProperties contentProperties;
 

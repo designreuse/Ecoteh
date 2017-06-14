@@ -49,7 +49,7 @@ public final class MockUserServiceTest extends MockDataServiceTest<User> {
     @Test
     public void whenNullIsAuthenticatedUserThenReturnFalse() {
         final boolean result = service.isAuthenticatedUser(null);
-        assertTrue(result);
+        assertFalse(result);
     }
 
     @Test
@@ -279,9 +279,9 @@ public final class MockUserServiceTest extends MockDataServiceTest<User> {
     @Test
     public void whenGetAndSortByNameThenReturnNotEmptyCollection() {
         Collection<User> sortedUsers = service.getAndSortByName(true);
-        assertTrue(sortedUsers.isEmpty());
+        assertFalse(sortedUsers.isEmpty());
         sortedUsers = service.getAndSortByName(false);
-        assertTrue(sortedUsers.isEmpty());
+        assertFalse(sortedUsers.isEmpty());
     }
 
     @Test
@@ -295,9 +295,9 @@ public final class MockUserServiceTest extends MockDataServiceTest<User> {
     @Test
     public void whenGetAndSortByUrlThenReturnNotEmptyCollection() {
         Collection<User> sortedUsers = service.getAndSortByUrl(true);
-        assertTrue(sortedUsers.isEmpty());
+        assertFalse(sortedUsers.isEmpty());
         sortedUsers = service.getAndSortByUrl(false);
-        assertTrue(sortedUsers.isEmpty());
+        assertFalse(sortedUsers.isEmpty());
     }
 
     @Test

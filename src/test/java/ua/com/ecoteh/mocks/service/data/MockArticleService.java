@@ -49,7 +49,7 @@ final class MockArticleService extends MockContentService<Article> {
         initGetAndFilterByCategory();
         initFilterByCategories();
         initGetAndFilterByCategories();
-        initFilteredByValid();
+        initFilterByValid();
         return this.service;
     }
     
@@ -187,9 +187,9 @@ final class MockArticleService extends MockContentService<Article> {
         when(this.service.getAndFilterByCategories(null)).thenReturn(new ArrayList<>());
     }
     
-    private void initFilteredByValid() {
-        when(this.service.filteredByValid(this.articles)).thenReturn(new ArrayList<>(this.articles));
-        when(this.service.filteredByValid(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(this.service.filteredByValid(null)).thenReturn(new ArrayList<>());
+    private void initFilterByValid() {
+        when(this.service.filterByValid(this.articles)).thenReturn(new ArrayList<>(this.articles));
+        when(this.service.filterByValid(new ArrayList<>())).thenReturn(new ArrayList<>());
+        when(this.service.filterByValid(null)).thenReturn(new ArrayList<>());
     }
 }

@@ -25,7 +25,6 @@ public class AddressBuilderTest extends ModelBuilderTest<Address> {
     public void whenBuildEmptyThenReturnValidModel() {
         super.whenBuildEmptyThenReturnValidModel();
         final Address address = this.builder.build();
-        assertTrue(address.getId() >= 0);
         assertNotNull(address.getPostAddress());
         assertNotNull(address.getGoogleMaps());
     }

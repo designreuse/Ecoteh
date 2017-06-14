@@ -15,7 +15,7 @@ public class AddressConverterTest extends ModelConverterTest<Address, AddressEnt
     private static Address address;
 
     @BeforeClass
-    public void beforeClass() {
+    public static void beforeClass() {
         address = getAddress();
         converter = new AddressConverter(address);
     }

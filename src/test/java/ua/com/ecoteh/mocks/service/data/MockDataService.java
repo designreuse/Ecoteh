@@ -23,7 +23,7 @@ abstract class MockDataService<T extends Model> {
         initGetAll();
         initExists();
         initSubList();
-        initFilteredByValid();
+        initFilterByValid();
         initShuffle();
         return getService();
     }
@@ -95,12 +95,12 @@ abstract class MockDataService<T extends Model> {
         when(service.getAndSubList(INDEX, INDEX)).thenReturn(new ArrayList<>(models));
     }
 
-    private void initFilteredByValid() {
+    private void initFilterByValid() {
         final DataService<T> service = getService();
         final Collection<T> models = getModels();
-        when(service.filteredByValid(models)).thenReturn(new ArrayList<>(models));
-        when(service.filteredByValid(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(service.filteredByValid(null)).thenReturn(new ArrayList<>());
+        when(service.filterByValid(models)).thenReturn(new ArrayList<>(models));
+        when(service.filterByValid(new ArrayList<>())).thenReturn(new ArrayList<>());
+        when(service.filterByValid(null)).thenReturn(new ArrayList<>());
     }
 
     private void initShuffle() {

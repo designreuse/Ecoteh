@@ -28,6 +28,7 @@ import ua.com.ecoteh.entity.response.ResponseEditor;
 import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserBuilder;
 import ua.com.ecoteh.entity.user.UserEditor;
+import ua.com.ecoteh.entity.user.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,14 +201,14 @@ public final class MockModels {
 
     private static void initAddress() {
         final AddressBuilder builder = Address.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addPostAddress(ADDRESS).addGoogleMaps(GOOGLE_MAPS);
         address = builder.build();
     }
 
     private static void initArticle() {
         final ArticleBuilder builder = Article.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
                 .addText(TEXT).addKeywords(KEYWORDS).addNumber(NUMBER)
                 .addPrice(PRICE).addCurrency(CURRENCY)
@@ -217,7 +218,7 @@ public final class MockModels {
 
     private static void initCategory() {
         final CategoryBuilder builder = Category.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
                 .addKeywords(KEYWORDS).addLogo(getFile()).addArticles(getArticles());
         category = builder.build();
@@ -225,7 +226,7 @@ public final class MockModels {
 
     private static void initCompany() {
         final CompanyBuilder builder = Company.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
                 .addInformation(INFORMATION).addKeywords(KEYWORDS)
                 .addDomain(DOMAIN).addTagline(TAGLINE).addLogo(getFile())
@@ -237,7 +238,7 @@ public final class MockModels {
 
     private static void initContacts() {
         final ContactsBuilder builder = Contacts.getBuilder();
-        builder.addId(ID).addValidated(true).addEmail(EMAIL)
+        builder.addId(ID).addValidated(VALIDATION).addEmail(EMAIL)
                 .addMobilePhone(PHONE).addLandlinesPhone(PHONE).addFax(PHONE)
                 .addVkontakte(VKONTAKTE).addFacebook(FACEBOOK)
                 .addTwitter(TWITTER).addSkype(SKYPE);
@@ -246,29 +247,29 @@ public final class MockModels {
 
     private static void initMessage() {
         final MessageBuilder builder = Message.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addSubject(TITLE).addText(ANY_STRING).addUser(getUser());
         message = builder.build();
     }
 
     private static void initFile() {
         final FileBuilder builder = File.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addTitle(TITLE).addUrl(URL);
         file = builder.build();
     }
 
     private static void initResponse() {
         final ResponseBuilder builder = Response.getBuilder();
-        builder.addId(ID).addValidated(true)
+        builder.addId(ID).addValidated(VALIDATION)
                 .addUsername(NAME).addText(TEXT);
         response = builder.build();
     }
 
     private static void initUser() {
         final UserBuilder builder = User.getBuilder();
-        builder.addId(ID).addValidated(true)
-                .addName(NAME).addDescription(DESCRIPTION)
+        builder.addId(ID).addValidated(VALIDATION).addLocked(!VALIDATION)
+                .addName(NAME).addUrl(URL).addDescription(DESCRIPTION)
                 .addLogin(LOGIN).addPassword(PASSWORD)
                 .addRole(USER_ROLE).addContacts(getContacts());
         user = builder.build();
@@ -358,8 +359,9 @@ public final class MockModels {
         users = new ArrayList<>();
         final User user = getUser();
         final UserEditor editor = user.getEditor();
-        for (int i = 0; i < DEFAULT_SIZE; i++) {
-            editor.addId((long) i)
+        for (UserRole role : UserRole.values()) {
+            editor.addId(user.getId() + 1)
+                    .addRole(role)
                     .addName(user.getName() + " " + getRandomInt())
                     .addLogin(user.getLogin() + " " + getRandomInt())
                     .addPassword(user.getPassword() + " " + getRandomInt());

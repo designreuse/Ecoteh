@@ -37,7 +37,7 @@ public interface MockConstants {
     String TAGLINE = "It`s the best web-site.";
     String INFORMATION = "I am a information about some content.";
     String ADDRESS = "Ukraine, Kyiv, Some Str., 51";
-    String TIME = "00:00";
+    String TIME = "12:00";
     String GOOGLE_MAPS = "google maps";
     String ANY_STRING = "Some unknown text.";
     String PATH = "c:/some_dir/file.txt";

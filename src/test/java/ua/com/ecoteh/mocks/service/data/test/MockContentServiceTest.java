@@ -222,6 +222,7 @@ public abstract class MockContentServiceTest<T extends Content> extends MockData
         sortedModels.forEach(Assert::assertNotNull);
     }
 
+    /*
     @Test
     public void whenSortWithComparatorByTitleThenReturnNotEmptyCollection() {
         final Comparator<T> comparatorByTitle = new ContentComparator.ByTitle<>();
@@ -233,6 +234,7 @@ public abstract class MockContentServiceTest<T extends Content> extends MockData
         final Comparator<T> comparatorByUrl = new ContentComparator.ByUrl<>();
         whenSortWithComparatorThenReturnNotEmptyCollection(comparatorByUrl);
     }
+*/
 
     @Test
     public void whenSortEmptyCollectionWithComparatorByTitleThenReturnEmptyCollection() {

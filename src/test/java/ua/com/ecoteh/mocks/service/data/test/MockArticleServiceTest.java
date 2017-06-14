@@ -484,20 +484,20 @@ public final class MockArticleServiceTest extends MockContentServiceTest<Article
     }
 
     @Test
-    public void whenFilteredByValidThenReturnNotEmptyCollection() {
-        final Collection<Article> filteredArticles = service.filteredByValid(articles);
+    public void whenFilterByValidThenReturnNotEmptyCollection() {
+        final Collection<Article> filteredArticles = service.filterByValid(articles);
         assertFalse(filteredArticles.isEmpty());
     }
 
     @Test
-    public void whenFilteredEmptyCollectionByValidThenReturnEmptyCollection() {
-        final Collection<Article> filteredArticles = service.filteredByValid(new ArrayList<>());
+    public void whenFilterEmptyCollectionByValidThenReturnEmptyCollection() {
+        final Collection<Article> filteredArticles = service.filterByValid(new ArrayList<>());
         assertTrue(filteredArticles.isEmpty());
     }
 
     @Test
-    public void whenFilteredNullCollectionByValidThenReturnEmptyCollection() {
-        final Collection<Article> filteredArticles = service.filteredByValid(null);
+    public void whenFilterNullCollectionByValidThenReturnEmptyCollection() {
+        final Collection<Article> filteredArticles = service.filterByValid(null);
         assertTrue(filteredArticles.isEmpty());
     }
 
