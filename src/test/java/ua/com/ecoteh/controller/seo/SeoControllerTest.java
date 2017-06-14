@@ -2,6 +2,7 @@ package ua.com.ecoteh.controller.seo;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.mocks.controller.MockSeoController;
 
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
@@ -21,19 +22,17 @@ public class SeoControllerTest {
 
     @Test
     public void whenGetRobotsTxtThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.getRobotsTxt(),
-                "seo/robots",
-                new String[]{"domain"}
-        );
+        final ModelAndView modelAndView = controller.getRobotsTxt();
+        final String viewName = "seo/robots";
+        final String[] keys = { "domain" };
+        checkModelAndView(modelAndView, viewName, keys);
     }
 
     @Test
     public void whenGetSiteMapXmlThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.getSiteMapXml(),
-                "seo/sitemap",
-                new String[]{"domain", "categories", "articles", "companies"}
-        );
+        final ModelAndView modelAndView = controller.getSiteMapXml();
+        final String viewName = "seo/sitemap";
+        final String[] keys = { "domain", "categories", "articles", "companies" };
+        checkModelAndView(modelAndView, viewName, keys);
     }
 }
