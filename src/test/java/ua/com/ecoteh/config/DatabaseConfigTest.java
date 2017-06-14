@@ -1,7 +1,10 @@
 package ua.com.ecoteh.config;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
@@ -22,32 +25,35 @@ import static org.mockito.Mockito.mock;
 })
 public class DatabaseConfigTest {
 
+    private static DatabaseConfig config;
+
+    @BeforeClass
+    public static void beforeClass() {
+        config = new DatabaseConfig();
+    }
+
     @Test
     public void dataSourceTest() throws Exception {
-        assertNotNull(new DatabaseConfig().dataSource());
+        assertNotNull(config.dataSource());
     }
 
     @Test
     public void jpaVendorAdapterTest() throws Exception {
-        assertNotNull(new DatabaseConfig().hibernateJpaVendorAdapter());
+        assertNotNull(config.hibernateJpaVendorAdapter());
     }
 
     @Test
     public void entityManagerFactoryTest() throws Exception {
-        assertNotNull(
-                new DatabaseConfig().entityManagerFactory(
-                        mock(DataSource.class),
-                        mock(HibernateJpaVendorAdapter.class)
-                )
-        );
+        final DataSource dataSource = mock(DataSource.class);
+        final HibernateJpaVendorAdapter adapter = mock(HibernateJpaVendorAdapter.class);
+        LocalContainerEntityManagerFactoryBean lcemb = config.entityManagerFactory(dataSource, adapter);
+        assertNotNull(lcemb);
     }
 
     @Test
     public void transactionManagerTest() {
-        assertNotNull(
-                new DatabaseConfig().transactionManager(
-                        mock(EntityManagerFactory.class)
-                )
-        );
+        final EntityManagerFactory factory = mock(EntityManagerFactory.class);
+        final JpaTransactionManager manager = config.transactionManager(factory);
+        assertNotNull(manager);
     }
 }

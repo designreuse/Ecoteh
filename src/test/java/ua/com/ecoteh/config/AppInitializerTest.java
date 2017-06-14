@@ -1,34 +1,45 @@
 package ua.com.ecoteh.config;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public final class AppInitializerTest {
 
-    @Test
-    public void getServletConfigClassesTest() {
-        assertNotNull(new AppInitializer().getServletConfigClasses());
+    private static AppInitializer appInitializer;
+
+    @BeforeClass
+    public static void beforeClass() {
+        appInitializer = new AppInitializer();
     }
 
     @Test
-    public void getRootConfigClassesTest() {
-        assertNotNull(new AppInitializer().getRootConfigClasses());
+    public void whenGetServletConfigClassesThenReturnNotEmptyArray() {
+        final Class<?>[] classes = appInitializer.getServletConfigClasses();
+        assertTrue(classes.length > 0);
     }
 
     @Test
-    public void getServletMappingsTest() {
-        assertNotNull(new AppInitializer().getServletMappings());
+    public void whenGgetRootConfigClassesThenReturnNotEmptyArray() {
+        final Class<?>[] classes = appInitializer.getRootConfigClasses();
+        assertTrue(classes.length > 0);
     }
 
     @Test
-    public void createDispatcherServletTest() {
-        assertNotNull(
-                new AppInitializer().createDispatcherServlet(
-                        mock(WebApplicationContext.class)
-                )
-        );
+    public void whenGetServletMappingsThenReturnNotEmptyArray() {
+        final String[] strings = appInitializer.getServletMappings();
+        assertTrue(strings.length > 0);
+    }
+
+    @Test
+    public void whenCreateDispatcherServletThenReturnNotNull() {
+        final WebApplicationContext context = mock(WebApplicationContext.class);
+        final DispatcherServlet dispatcherServlet = appInitializer.createDispatcherServlet(context);
+        assertNotNull(dispatcherServlet);
     }
 }
