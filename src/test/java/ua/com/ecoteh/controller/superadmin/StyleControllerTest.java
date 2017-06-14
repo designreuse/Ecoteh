@@ -3,15 +3,18 @@ package ua.com.ecoteh.controller.superadmin;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
-import ua.com.ecoteh.mocks.MockConstants;
+import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.service.data.StyleService;
+import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
-import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static ua.com.ecoteh.mocks.controller.MockSuperadminController.getStyleController;
 import static org.junit.Assert.assertEquals;
+import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
+import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getStyleService;
+import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class StyleControllerTest {
 
@@ -19,22 +22,24 @@ public class StyleControllerTest {
 
     @BeforeClass
     public static void setUp() {
-        controller = getStyleController();
+        final MainMVFabric fabric = getCacheMVFabric();
+        final StyleService styleService = getStyleService();
+        controller = new StyleController(fabric, styleService);
     }
 
     @Test
     public void whenGetStylesToEditThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.getStylesToEdit(),
-                "style/edit",
-                new String[] { "styles", "main_company", "categories", "favicon" }
-        );
+        final String viewName = "style/edit";
+        final String[] keys = { "styles", "main_company", "categories", "favicon" };
+        final ModelAndView modelAndView = controller.getStylesToEdit();
+        checkModelAndView(modelAndView, viewName, keys);
     }
 
     @Test
     public void whenUpdateStylesThenReturnSomeModelAndView() {
-        String viewName = controller.updateStyles(MockConstants.ANY_STRING);
-        assertEquals(viewName, "redirect:/superadmin/style");
+        final String expectedViewName = controller.updateStyles(ANY_STRING);
+        final String actualViewName = "redirect:/superadmin/style";
+        assertEquals(expectedViewName, actualViewName);
     }
 
     @Test(expected = IllegalMappingException.class)
@@ -44,7 +49,8 @@ public class StyleControllerTest {
 
     @Test
     public void whenRollbackStylesThenReturnSomeModelAndView() {
-        String viewName = controller.rollbackStyles();
-        assertEquals(viewName, "redirect:/superadmin/style");
+        final String expectedViewName = controller.rollbackStyles();
+        final String actualViewName = "redirect:/superadmin/style";
+        assertEquals(expectedViewName, actualViewName);
     }
 }
