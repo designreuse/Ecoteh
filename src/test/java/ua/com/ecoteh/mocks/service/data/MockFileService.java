@@ -34,6 +34,7 @@ final class MockFileService extends MockDataService<File> {
         initGetByTitle();
         initGetByUrl();
         initGetByType();
+        initGetLastByType();
         initSortByTitle();
         return this.service;
     }
@@ -71,6 +72,13 @@ final class MockFileService extends MockDataService<File> {
         when(this.service.getByType(null)).thenThrow(new IllegalArgumentException());
         for (FileType type : FileType.values()) {
             when(this.service.getByType(type)).thenReturn(new ArrayList<>(this.files));
+        }
+    }
+
+    private void initGetLastByType() {
+        when(this.service.getLastByType(null)).thenThrow(new IllegalArgumentException());
+        for (FileType type : FileType.values()) {
+            when(this.service.getLastByType(type)).thenReturn(this.file);
         }
     }
 

@@ -131,6 +131,20 @@ public final class MockFileServiceTest extends MockDataServiceTest<File> {
         assertTrue(sortedFiles.isEmpty());
     }
 
+    @Test
+    public void whenGetLastByTypeThenReturnNotNull() {
+        File file;
+        for (FileType type : FileType.values()) {
+            file = service.getLastByType(type);
+            assertNotNull(file);
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetLastByNullTypeThenThrowIllegalArgumentException() {
+        service.getLastByType(null);
+    }
+
     @Ignore
     @Override
     protected FileService getService() {
