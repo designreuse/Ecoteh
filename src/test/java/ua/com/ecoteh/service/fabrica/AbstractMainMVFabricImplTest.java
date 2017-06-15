@@ -19,7 +19,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final ModelAndView modelAndView = fabric.homePage();
         final String viewName = "home/index";
         final String[] keys = { "main_company", "categories", "favicon", "company",
-                "partners", "print_partners", "responses",
+                "companies", "print_companies", "responses",
                 "print_responses" };
         checkModelAndView(modelAndView, viewName, keys);
     }
@@ -38,8 +38,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allArticlesPage();
         final String viewName = "article/all";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "articles", "sort", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -48,8 +47,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allSortArticlesPage("price", true);
         final String viewName = "article/all";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "articles", "sort", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -58,8 +56,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allSortArticlesPage("title", true);
         final String viewName = "article/all";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "articles", "sort", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -68,8 +65,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allSortArticlesPage("date", true);
         final String viewName = "article/all";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "articles", "sort", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -78,8 +74,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allSortArticlesPage("number", true);
         final String viewName = "article/all";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "articles", "sort", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -88,8 +83,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allSortArticlesPage("unknown", true);
         final String viewName = "article/all";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "articles", "sort", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -98,8 +92,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.aboutCompanyPage();
         final String viewName = "company/main";
-        final String[] keys = { "main_company", "categories", "favicon",
-                "company", "users_list" };
+        final String[] keys = { "main_company", "categories", "favicon", "company", "users" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -117,7 +110,7 @@ public abstract class AbstractMainMVFabricImplTest {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.allPartnersPage();
         final String viewName = "company/all";
-        final String[] keys = { "main_company", "categories", "favicon", "partners", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "companies", "revers" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 
@@ -125,7 +118,7 @@ public abstract class AbstractMainMVFabricImplTest {
     public void whenGetAllSortPartnersByTitlePageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final String viewName = "company/all";
-        final String[] keys = { "main_company", "categories", "favicon", "partners", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "companies", "revers" };
         ModelAndView modelAndView = fabric.allSortPartnersByTitlePage(true);
         checkModelAndView(modelAndView, viewName, keys);
         modelAndView = fabric.allSortPartnersByTitlePage(false);
@@ -145,8 +138,7 @@ public abstract class AbstractMainMVFabricImplTest {
     public void whenGetCategoryWithSortByPriceArticlesPageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final String viewName = "category/one";
-        final String[] keys = { "main_company", "categories", "favicon", "category",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "category", "articles", "sort", "revers" };
         ModelAndView modelAndView = fabric.categoryWithSortArticlesPage(URL, "price", true);
         checkModelAndView(modelAndView, viewName, keys);
         modelAndView = fabric.categoryWithSortArticlesPage(URL, "title", false);
@@ -157,8 +149,7 @@ public abstract class AbstractMainMVFabricImplTest {
     public void whenGetCategoryWithSortByTitleArticlesPageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final String viewName = "category/one";
-        final String[] keys = { "main_company", "categories", "favicon", "category",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "category", "articles", "sort", "revers" };
         ModelAndView modelAndView = fabric.categoryWithSortArticlesPage(URL, "title", true);
         checkModelAndView(modelAndView, viewName, keys);
         modelAndView = fabric.categoryWithSortArticlesPage(URL, "title", false);
@@ -169,8 +160,7 @@ public abstract class AbstractMainMVFabricImplTest {
     public void whenGetCategoryWithSortByDateArticlesPageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final String viewName = "category/one";
-        final String[] keys = { "main_company", "categories", "favicon", "category",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "category", "articles", "sort", "revers" };
         ModelAndView modelAndView = fabric.categoryWithSortArticlesPage(URL, "date", true);
         checkModelAndView(modelAndView, viewName, keys);
         modelAndView = fabric.categoryWithSortArticlesPage(URL, "date", false);
@@ -181,8 +171,7 @@ public abstract class AbstractMainMVFabricImplTest {
     public void whenGetCategoryWithSortByNumberArticlesPageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final String viewName = "category/one";
-        final String[] keys = { "main_company", "categories", "favicon", "category",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "category", "articles", "sort", "revers" };
         ModelAndView modelAndView = fabric.categoryWithSortArticlesPage(URL, "number", true);
         checkModelAndView(modelAndView, viewName, keys);
         modelAndView = fabric.categoryWithSortArticlesPage(URL, "number", false);
@@ -193,8 +182,7 @@ public abstract class AbstractMainMVFabricImplTest {
     public void whenGetCategoryWithSortByUnknownArticlesPageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final String viewName = "category/one";
-        final String[] keys = { "main_company", "categories", "favicon", "category",
-                "articles_list", "sort", "revers" };
+        final String[] keys = { "main_company", "categories", "favicon", "category", "articles", "sort", "revers" };
         ModelAndView modelAndView = fabric.categoryWithSortArticlesPage(URL, "unknown", true);
         checkModelAndView(modelAndView, viewName, keys);
         modelAndView = fabric.categoryWithSortArticlesPage(URL, "unknown", false);

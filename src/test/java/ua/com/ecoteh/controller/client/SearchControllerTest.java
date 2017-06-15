@@ -2,14 +2,17 @@ package ua.com.ecoteh.controller.client;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import ua.com.ecoteh.mocks.MockConstants;
-import ua.com.ecoteh.mocks.controller.MockSearchController;
+import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.service.fabrica.MainMVFabric;
+import ua.com.ecoteh.service.search.SearchService;
 
+import static ua.com.ecoteh.mocks.MockConstants.KEYWORDS;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getSearchService;
+import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
- * @version 1.0
  */
 public class SearchControllerTest {
 
@@ -17,24 +20,27 @@ public class SearchControllerTest {
 
     @BeforeClass
     public static void setUp() {
-        controller = MockSearchController.getSearchController();
+        final MainMVFabric fabric = getCacheMVFabric();
+        final SearchService searchService = getSearchService();
+        controller = new SearchController(fabric, searchService);
     }
 
     @Test
     public void whenSearchThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.search(),
-                "search/search",
-                null
-        );
+        final String viewName = "search/search";
+        final String[] keys = { "main_company", "categories", "favicon" };
+        final ModelAndView modelAndView = controller.search();
+        checkModelAndView(modelAndView, viewName, keys);
     }
 
     @Test
     public void whenSearchResultByPostMethodThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.searchResult(MockConstants.KEYWORDS, "all", false),
-                "search/search",
-                null
-        );
+        final String content = "all";
+        final boolean howSearch = false;
+        final String viewName = "search/search";
+        final String[] keys = { "main_company", "categories", "favicon", "keywords",
+                "in_categories", "in_articles", "in_companies", "all", "is_search", "how_search" };
+        final ModelAndView modelAndView = controller.searchResult(KEYWORDS, content, howSearch);
+        checkModelAndView(modelAndView, viewName, keys);
     }
 }

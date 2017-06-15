@@ -5,121 +5,88 @@ import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import ua.com.ecoteh.exception.DuplicateException;
+import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static org.mockito.Mockito.mock;
 import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static ua.com.ecoteh.mocks.controller.MockAdviceController.getAdviceController;
+import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 public class AdviceControllerTest {
 
+    private final static String VIEW_NAME = "error/error";
+    private final static String[] KEYS = { "main_company", "categories", "favicon", "status", "message" };
+
     private static AdviceController controller;
+    private static HttpServletRequest httpServletRequest;
 
     @BeforeClass
     public static void setUp() {
-        controller = getAdviceController();
+        final MainMVFabric fabric = getCacheMVFabric();
+        controller = new AdviceController(fabric);
+        httpServletRequest = mock(HttpServletRequest.class);
     }
 
     @Test
     public void whenNoHandlerFoundExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.noHandlerFoundException(
-                        new NoHandlerFoundException(
-                                "httpMethod", "requestURL",
-                                mock(HttpHeaders.class)
-                        ),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final HttpHeaders headers = mock(HttpHeaders.class);
+        final NoHandlerFoundException exception = new NoHandlerFoundException("httpMethod", "requestURL", headers);
+        final ModelAndView modelAndView = controller.noHandlerFoundException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenNullPointerExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.nullPointerException(
-                        new NullPointerException(),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final NullPointerException exception = new NullPointerException();
+        final ModelAndView modelAndView = controller.nullPointerException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenIllegalArgumentExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.illegalArgumentException(
-                        new IllegalArgumentException(),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final IllegalArgumentException exception = new IllegalArgumentException();
+        final ModelAndView modelAndView = controller.illegalArgumentException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenHttpRequestMethodNotSupportedExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.httpRequestMethodNotSupportedException(
-                        new HttpRequestMethodNotSupportedException(ANY_STRING),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final HttpRequestMethodNotSupportedException exception = new HttpRequestMethodNotSupportedException(ANY_STRING);
+        final ModelAndView modelAndView = controller
+                .httpRequestMethodNotSupportedException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenIllegalAccessExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.illegalAccessException(
-                        new IllegalAccessException(),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final IllegalAccessException exception = new IllegalAccessException();
+        final ModelAndView modelAndView = controller.illegalAccessException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenIllegalMappingExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.illegalMappingException(
-                        new IllegalMappingException(ANY_STRING),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final IllegalMappingException exception = new IllegalMappingException(ANY_STRING);
+        final ModelAndView modelAndView = controller.illegalMappingException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenDuplicateExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.duplicateException(
-                        new DuplicateException(),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final DuplicateException exception = new DuplicateException();
+        final ModelAndView modelAndView = controller.duplicateException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 
     @Test
     public void whenOtherExceptionThenReturnSomeModelAndView() {
-        checkModelAndView(
-                controller.otherException(
-                        new Exception(),
-                        mock(HttpServletRequest.class)
-                ),
-                "error/error",
-                new String[] { "main_company", "categories", "status", "message" }
-        );
+        final Exception exception = new Exception();
+        final ModelAndView modelAndView = controller.otherException(exception, httpServletRequest);
+        checkModelAndView(modelAndView, VIEW_NAME, KEYS);
     }
 }

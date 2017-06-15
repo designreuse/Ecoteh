@@ -25,7 +25,11 @@ final class MockSearchService {
 
     private void initSearch() {
         final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("all", true);
+        final String[] keys = { "main_company", "categories", "favicon", "keywords",
+                "in_categories", "in_articles", "in_companies", "all", "is_search", "how_search" };
+        for (String key : keys) {
+            modelAndView.addObject(key, null);
+        }
         modelAndView.setViewName("search/search");
         when(this.searchService.search(KEYWORDS, "all", false)).thenReturn(modelAndView);
         when(this.searchService.search(KEYWORDS, "all", true)).thenReturn(modelAndView);

@@ -3,9 +3,10 @@ package ua.com.ecoteh.controller.seo;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.mocks.controller.MockSeoController;
+import ua.com.ecoteh.service.seo.SeoService;
 
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getSeoService;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -17,7 +18,8 @@ public class SeoControllerTest {
 
     @BeforeClass
     public static void setUp() {
-        controller = MockSeoController.getSeoController();
+        final SeoService seoService = getSeoService();
+        controller = new SeoController(seoService);
     }
 
     @Test
