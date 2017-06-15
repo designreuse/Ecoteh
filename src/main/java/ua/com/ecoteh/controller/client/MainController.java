@@ -111,7 +111,7 @@ public abstract class MainController {
     )
     public ModelAndView getHomePage() {
         final ModelAndView modelAndView = this.fabric.homePage();
-        modelAndView.addObject("captcha", null);
+        modelAndView.addObject("is_captcha", null);
         return modelAndView;
     }
 
@@ -268,7 +268,7 @@ public abstract class MainController {
     )
     public ModelAndView getContactsPage() {
         final ModelAndView modelAndView = this.fabric.contactsPage();
-        modelAndView.addObject("captcha", null);
+        modelAndView.addObject("is_captcha", null);
         return modelAndView;
     }
 
@@ -335,7 +335,7 @@ public abstract class MainController {
     )
     public ModelAndView getResponsesPage() {
         final ModelAndView modelAndView = this.fabric.allResponsesPage();
-        modelAndView.addObject("captcha", null);
+        modelAndView.addObject("is_captcha", null);
         return modelAndView;
     }
 
@@ -355,7 +355,7 @@ public abstract class MainController {
     public ModelAndView getSortResponsesByDatePage(final HttpServletRequest request) {
         final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
         final ModelAndView modelAndView = this.fabric.allSortResponsesByDatePage(revers);
-        modelAndView.addObject("captcha", null);
+        modelAndView.addObject("is_captcha", null);
         return modelAndView;
     }
 
@@ -398,7 +398,7 @@ public abstract class MainController {
         } else {
             modelAndView = getHomePage();
         }
-        modelAndView.addObject("captcha", isCaptcha);
+        modelAndView.addObject("is_captcha", isCaptcha);
         return modelAndView;
     }
 
@@ -459,7 +459,7 @@ public abstract class MainController {
      */
     protected ModelAndView getResponsesMV(final boolean isCaptcha) {
         final ModelAndView modelAndView = getResponsesPage();
-        modelAndView.addObject("captcha", isCaptcha);
+        modelAndView.addObject("is_captcha", isCaptcha);
         return modelAndView;
     }
 }
