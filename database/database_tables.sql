@@ -26,10 +26,10 @@ DROP TABLE IF EXISTS `addresses`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `addresses` (
-  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `post_address`     VARCHAR(300)     NOT NULL DEFAULT '',
-  `google_maps` TEXT             NOT NULL,
-  `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
+  `id`           INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `post_address` VARCHAR(300)     NOT NULL DEFAULT '',
+  `google_maps`  TEXT             NOT NULL DEFAULT '',
+  `validated`    TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -47,19 +47,21 @@ CREATE TABLE `articles` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `category_id` INT(10) UNSIGNED          DEFAULT NULL,
-  `price`       VARCHAR(100)     NOT NULL DEFAULT '',
+  `price`       DOUBLE           NOT NULL DEFAULT 0,
+  `currency`    VARCHAR(100)     NOT NULL DEFAULT '',
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
-  `url`         VARCHAR(200)     NOT NULL DEFAULT '',
-  `number`      VARCHAR(100)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL,
-  `text`        TEXT             NOT NULL,
-  `keywords`    TEXT             NOT NULL,
+  `url`         VARCHAR(200)     NOT NULL DEFAULT '' UNIQUE,
+  `number`      VARCHAR(100)     NOT NULL DEFAULT '' UNIQUE,
+  `description` TEXT             NOT NULL DEFAULT '',
+  `text`        TEXT             NOT NULL DEFAULT '',
+  `keywords`    TEXT             NOT NULL DEFAULT '',
   `date`        TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `number` (`number`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
-  FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+  FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  INDEX (`url`),
+  INDEX (`number`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -76,13 +78,14 @@ CREATE TABLE `categories` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
-  `url`         VARCHAR(200)     NOT NULL DEFAULT '',
-  `description` TEXT             NOT NULL,
-  `keywords`    TEXT             NOT NULL,
+  `url`         VARCHAR(200)     NOT NULL DEFAULT '' UNIQUE,
+  `description` TEXT             NOT NULL DEFAULT '',
+  `keywords`    TEXT             NOT NULL DEFAULT '',
   `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`, `url`),
-  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`)
+  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
+  INDEX (`url`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -103,11 +106,11 @@ CREATE TABLE `companies` (
   `type`           ENUM ('MAIN', 'PARTNER', 'ANOTHER') NOT NULL DEFAULT 'ANOTHER',
   `title`          VARCHAR(100)                        NOT NULL DEFAULT '',
   `domain`         VARCHAR(200)                        NOT NULL DEFAULT '',
-  `url`            VARCHAR(200)                        NOT NULL DEFAULT '',
-  `tagline`        TEXT                                NOT NULL,
-  `description`    TEXT                                NOT NULL,
-  `information`    TEXT                                NOT NULL,
-  `keywords`       TEXT                                NOT NULL,
+  `url`            VARCHAR(200)                        NOT NULL DEFAULT '' UNIQUE,
+  `tagline`        TEXT                                NOT NULL DEFAULT '',
+  `description`    TEXT                                NOT NULL DEFAULT '',
+  `information`    TEXT                                NOT NULL DEFAULT '',
+  `keywords`       TEXT                                NOT NULL DEFAULT '',
   `sender_email`   VARCHAR(200)                        NOT NULL DEFAULT '',
   `sender_pass`    VARCHAR(100)                        NOT NULL DEFAULT '',
   `work_time_from` VARCHAR(10)                         NOT NULL DEFAULT '',
@@ -117,7 +120,8 @@ CREATE TABLE `companies` (
   UNIQUE KEY `title` (`title`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
   FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`),
-  FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`)
+  FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`),
+  INDEX (`url`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -131,16 +135,16 @@ DROP TABLE IF EXISTS `contacts`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contacts` (
-  `id`             INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `mobile_phone`   VARCHAR(100)     NOT NULL DEFAULT '',
+  `id`              INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `mobile_phone`    VARCHAR(100)     NOT NULL DEFAULT '',
   `landlines_phone` VARCHAR(100)     NOT NULL DEFAULT '',
-  `fax`            VARCHAR(100)     NOT NULL DEFAULT '',
-  `email`          VARCHAR(100)     NOT NULL DEFAULT '',
-  `vkontakte`      VARCHAR(200)     NOT NULL DEFAULT '',
-  `facebook`       VARCHAR(200)     NOT NULL DEFAULT '',
-  `twitter`        VARCHAR(200)     NOT NULL DEFAULT '',
-  `skype`          VARCHAR(100)     NOT NULL DEFAULT '',
-  `validated`      TINYINT(1)       NOT NULL DEFAULT '1',
+  `fax`             VARCHAR(100)     NOT NULL DEFAULT '',
+  `email`           VARCHAR(100)     NOT NULL DEFAULT '',
+  `vkontakte`       VARCHAR(200)     NOT NULL DEFAULT '',
+  `facebook`        VARCHAR(200)     NOT NULL DEFAULT '',
+  `twitter`         VARCHAR(200)     NOT NULL DEFAULT '',
+  `skype`           VARCHAR(100)     NOT NULL DEFAULT '',
+  `validated`       TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -160,7 +164,9 @@ CREATE TABLE `files` (
   `type`      ENUM ('FAVICON', 'STATIC', 'SLIDE', 'ANOTHER') NOT NULL DEFAULT 'ANOTHER',
   `url`       VARCHAR(200)                                   NOT NULL DEFAULT '',
   `validated` TINYINT(1)                                     NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX (`id`),
+  INDEX (`url`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -177,18 +183,19 @@ CREATE TABLE `messages` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id`   INT(10) UNSIGNED NOT NULL,
   `subject`   VARCHAR(100)     NOT NULL DEFAULT '',
-  `text`      TEXT             NOT NULL,
+  `text`      TEXT             NOT NULL DEFAULT '',
   `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated` TINYINT(1)       NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  INDEX (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `responses`
+-- Table structure for table `response`
 --
 
 DROP TABLE IF EXISTS `responses`;
@@ -197,17 +204,18 @@ DROP TABLE IF EXISTS `responses`;
 CREATE TABLE `responses` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(100)     NOT NULL DEFAULT '',
-  `text`      TEXT             NOT NULL,
+  `text`      TEXT             NOT NULL DEFAULT '',
   `date`      TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated` TINYINT(1)       NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -219,16 +227,18 @@ CREATE TABLE `users` (
   `contacts_id` INT(10) UNSIGNED                             DEFAULT NULL,
   `role`        ENUM ('ADMIN', 'CLIENT', 'ANOTHER') NOT NULL DEFAULT 'ANOTHER',
   `name`        VARCHAR(100)                        NOT NULL DEFAULT '',
-  `url`         VARCHAR(100)                        NOT NULL DEFAULT '',
+  `url`         VARCHAR(100)                        NOT NULL DEFAULT '' UNIQUE,
   `login`       VARCHAR(300)                        NOT NULL DEFAULT '',
   `password`    VARCHAR(300)                        NOT NULL DEFAULT '',
-  `description` TEXT                                NOT NULL,
+  `description` TEXT                                NOT NULL DEFAULT '',
   `validated`   TINYINT(1)                          NOT NULL DEFAULT '1',
   `mailing`     TINYINT(1)                          NOT NULL DEFAULT '1',
   `locked`      TINYINT(1)                          NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`photo_id`) REFERENCES `files` (`id`),
-  FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`)
+  FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`),
+  INDEX (`url`),
+  INDEX (`login`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -244,4 +254,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-12 09:13:32
+-- Dump completed on 2017-06-15 09:13:32
