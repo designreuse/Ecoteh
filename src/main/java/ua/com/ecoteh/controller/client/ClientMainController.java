@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.contacts.ContactsEntity;
-import ua.com.ecoteh.entity.message.MessageEntity;
-import ua.com.ecoteh.entity.response.ResponseEntity;
-import ua.com.ecoteh.entity.user.UserEntity;
-import ua.com.ecoteh.entity.user.UserRole;
+import ua.com.ecoteh.entity.contacts.Contacts;
+import ua.com.ecoteh.entity.contacts.ContactsBuilder;
+import ua.com.ecoteh.entity.message.Message;
+import ua.com.ecoteh.entity.message.MessageBuilder;
+import ua.com.ecoteh.entity.response.Response;
+import ua.com.ecoteh.entity.response.ResponseBuilder;
+import ua.com.ecoteh.entity.user.User;
+import ua.com.ecoteh.entity.user.UserBuilder;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.captcha.CaptchaService;
 import ua.com.ecoteh.service.data.CompanyService;
@@ -80,13 +83,13 @@ public class ClientMainController extends MainController {
      * Request mapping: /send_message
      * Method: POST
      *
-     * @param url         the URL of a page which must be to redirect.
-     * @param name        the client name.
-     * @param phone       the phone name.
-     * @param email       the email name.
-     * @param userMessage the client message.
-     * @param request     the implementation of the interface to provide
-     *                    request information for HTTP servlets.
+     * @param url     the URL of a page which must be to redirect.
+     * @param name    the client name.
+     * @param phone   the phone name.
+     * @param email   the email name.
+     * @param text    the client message.
+     * @param request the implementation of the interface to provide
+     *                request information for HTTP servlets.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
@@ -95,17 +98,24 @@ public class ClientMainController extends MainController {
     )
     public ModelAndView sendMessage(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name", defaultValue = "") final String name,
-            @RequestParam(value = "phone", defaultValue = "") final String phone,
+            @RequestParam(value = "name") final String name,
+            @RequestParam(value = "phone") final String phone,
             @RequestParam(value = "email", required = false) final String email,
-            @RequestParam(value = "message", required = false) final String userMessage,
+            @RequestParam(value = "message", required = false) final String text,
             final HttpServletRequest request
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            final UserEntity userEntity = new UserEntity(name, new ContactsEntity(email, phone));
-            userEntity.setRole(UserRole.CLIENT);
-            sendMess(new MessageEntity(userEntity, "New MessageEntity", userMessage));
+            final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+            contactsBuilder.addEmail(email).addMobilePhone(phone);
+            final Contacts contacts = contactsBuilder.build();
+            final UserBuilder userBuilder = User.getBuilder();
+            userBuilder.addName(name).addContacts(contacts);
+            final User user = userBuilder.build();
+            final MessageBuilder messageBuilder = Message.getBuilder();
+            messageBuilder.addUser(user).addSubject("New Message").addText(text);
+            final Message message = messageBuilder.build();
+            sendMess(message);
         }
         return getMessageMV(url, isCaptcha);
     }
@@ -125,12 +135,11 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/send_message"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/send_message"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -150,13 +159,16 @@ public class ClientMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendResponse(
-            @RequestParam(value = "name", defaultValue = "") final String name,
-            @RequestParam(value = "response", defaultValue = "") final String text,
+            @RequestParam(value = "name") final String name,
+            @RequestParam(value = "response") final String text,
             final HttpServletRequest request
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
         if (isCaptcha) {
-            sendResp(new ResponseEntity(name, text));
+            final ResponseBuilder responseBuilder = Response.getBuilder();
+            responseBuilder.addUsername(name).addText(text);
+            final Response response = responseBuilder.build();
+            sendResp(response);
         }
         return getResponsesMV(isCaptcha);
     }
@@ -175,11 +187,10 @@ public class ClientMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/response/send"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/response/send"
         );
+        throw new IllegalMappingException(message);
     }
 }

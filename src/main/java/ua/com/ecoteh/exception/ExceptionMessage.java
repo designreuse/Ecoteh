@@ -26,12 +26,6 @@ public interface ExceptionMessage {
             "Saving object of the %s class is null!";
 
     /**
-     * The message that a updating object is null.
-     */
-    String UPDATING_OBJECT_IS_NULL_MESSAGE =
-            "Updating object of the %s class is null!";
-
-    /**
      * The message that a incoming company domain is null or empty.
      */
     String BLANK_DOMAIN_MESSAGE =

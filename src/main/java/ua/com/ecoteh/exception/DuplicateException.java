@@ -33,10 +33,7 @@ public final class DuplicateException extends RuntimeException {
      * @param cause   the cause (which is saved for later retrieval
      *                by the getCause() method).
      */
-    public DuplicateException(
-            final String message,
-            final Throwable cause
-    ) {
+    public DuplicateException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

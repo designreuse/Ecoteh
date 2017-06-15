@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.article.ArticleEntity;
-import ua.com.ecoteh.entity.category.CategoryEntity;
-import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.article.Article;
+import ua.com.ecoteh.entity.article.ArticleBuilder;
+import ua.com.ecoteh.entity.article.ArticleEditor;
+import ua.com.ecoteh.entity.category.Category;
+import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileBuilder;
+import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
@@ -28,7 +32,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link ArticleEntity} class or subclasses for admins.
+ * objects of the {@link Article} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -57,19 +61,19 @@ public class ArticleController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link ArticleEntity} class.
+     * for working with objects of the {@link Article} class.
      */
     private final ArticleService articleService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CategoryEntity} class.
+     * for working with objects of the {@link Category} class.
      */
     private final CategoryService categoryService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link FileEntity} class.
+     * for working with objects of the {@link File} class.
      */
     private final FileService fileService;
 
@@ -97,8 +101,8 @@ public class ArticleController {
     }
 
     /**
-     * Returns a page to add a new articleEntity.
-     * Request mapping: /admin/articleEntity/new
+     * Returns a page to add a new article.
+     * Request mapping: /admin/article/new
      * Method: GET
      *
      * @return The ready object of the ModelAndView class.
@@ -110,68 +114,75 @@ public class ArticleController {
     public ModelAndView getNewArticlePage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("categories", this.categoryService.getAll(false));
-        modelAndView.setViewName("articleEntity/add");
+        modelAndView.setViewName("article/add");
         return modelAndView;
     }
 
     /**
-     * Adds a new articleEntity with the incoming parameters
-     * and redirects by the "/articleEntity/{url}" URL,
-     * where {url} is a URL of a saving articleEntity.
-     * Request mapping: /admin/articleEntity/add
+     * Adds a new article with the incoming parameters
+     * and redirects by the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
+     * Request mapping: /admin/article/add
      * Method: POST
      *
-     * @param title         the title of a new articleEntity.
-     * @param description   the description of a new articleEntity.
-     * @param text          the text of a new articleEntity.
-     * @param keywords      the keywords of a new articleEntity.
-     * @param number        the number of a new articleEntity.
-     * @param price         the price to a new articleEntity.
-     * @param categoryUrl   the categoryEntity URL of a new articleEntity.
-     * @param multipartLogo thea file of photo to a new categoryEntity.
-     * @param validated     the validated of a new articleEntity.
-     * @return The redirect string to the "/articleEntity/{url}" URL,
-     * where {url} is a URL of a saving articleEntity.
+     * @param title         the title of a new article.
+     * @param description   the description of a new article.
+     * @param text          the text of a new article.
+     * @param keywords      the keywords of a new article.
+     * @param number        the number of a new article.
+     * @param price         the price to a new article.
+     * @param currency      the new price currency to a article.
+     * @param categoryUrl   the categoryarticle URL of a new article.
+     * @param multipartLogo thea file of photo to a new categoryarticle.
+     * @param validated     the validated of a new article.
+     * @return The redirect string to the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
      */
     @RequestMapping(
             value = "/add",
             method = RequestMethod.POST
     )
     public String addArticle(
-            @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "desc", defaultValue = "") final String description,
-            @RequestParam(value = "text", defaultValue = "") final String text,
-            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
-            @RequestParam(value = "number", defaultValue = "") final String number,
-            @RequestParam(value = "price", defaultValue = "0") final String price,
-            @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
+            @RequestParam(value = "title") final String title,
+            @RequestParam(value = "desc") final String description,
+            @RequestParam(value = "text") final String text,
+            @RequestParam(value = "keywords") final String keywords,
+            @RequestParam(value = "number") final String number,
+            @RequestParam(value = "price") final double price,
+            @RequestParam(value = "currency") final String currency,
+            @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean validated
     ) {
-        final CategoryEntity categoryEntity = isNotEmpty(categoryUrl) ?
-                this.categoryService.getByUrl(categoryUrl, false) : null;
         final Compressor compressor = new HtmlCompressor();
-        final ArticleEntity articleEntity = new ArticleEntity(
-                title,
-                compressor.compress(description),
-                compressor.compress(text),
-                keywords, number, price
-        );
-        articleEntity.setValidated(validated);
-        articleEntity.setCategoryEntity(categoryEntity);
+        final ArticleBuilder articleBuilder = Article.getBuilder();
+        articleBuilder.addTitle(title).addKeywords(keywords).addNumber(number)
+                .addPrice(price).addCurrency(currency).addValidated(validated)
+                .addDescription(compressor.compress(description))
+                .addText(compressor.compress(text));
+
+        final Category category = this.categoryService.getByUrl(categoryUrl, false);
+        articleBuilder.addCategory(category);
+
         if (isNotEmpty(multipartLogo)) {
-            articleEntity.setLogoEntity(this.fileService.add(articleEntity.getTitle(), multipartLogo));
+            final FileBuilder fileBuilder = File.getBuilder();
+            fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+            final File logo = fileBuilder.build();
+            final File savingLogo = this.fileService.add(logo);
+            articleBuilder.addLogo(savingLogo);
         }
-        this.articleService.add(articleEntity);
+
+        final Article article = articleBuilder.build();
+        final Article savingArticle = this.articleService.add(article);
         Cache.clear();
-        return getViewName(articleEntity);
+        return getViewName(savingArticle);
     }
 
     /**
      * The method throws an exception in the case of reference to it.
      * The exception message:
-     * "GET method in "/admin/articleEntity/add" is not supported!"
-     * Request mapping: /admin/articleEntity/add
+     * "GET method in "/admin/article/add" is not supported!"
+     * Request mapping: /admin/article/add
      * Method: GET
      *
      * @throws IllegalMappingException thrown when an error occurs reading
@@ -182,21 +193,20 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public void addArticle() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/articleEntity/add"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/article/add"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
-     * Returns a page to edit an articleEntity with the incoming URL.
-     * Request mapping: /admin/articleEntity/edit/{url},
-     * where {url} is a URL of an articleEntity to edit.
+     * Returns a page to edit an article with the incoming URL.
+     * Request mapping: /admin/article/edit/{url},
+     * where {url} is a URL of an article to edit.
      * Method: GET
      *
-     * @param url the URL of a articleEntity to edit.
+     * @param url the URL of a article to edit.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
@@ -207,29 +217,30 @@ public class ArticleController {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
         modelAndView.addObject("article", this.articleService.getByUrl(url, false));
         modelAndView.addObject("categories", this.categoryService.getAll(false));
-        modelAndView.setViewName("articleEntity/edit");
+        modelAndView.setViewName("article/edit");
         return modelAndView;
     }
 
     /**
-     * Updates and save an articleEntity with the incoming URL
-     * and redirects by the "/articleEntity/{url}" URL,
-     * where {url} is a URL of a saving articleEntity.
-     * Request mapping: /admin/articleEntity/update
+     * Updates and save an article with the incoming URL
+     * and redirects by the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
+     * Request mapping: /admin/article/update
      * Method: POST
      *
-     * @param url           the URL of a articleEntity to update.
-     * @param title         the new title to a articleEntity.
-     * @param description   the new description to a articleEntity.
-     * @param text          the new text to a articleEntity.
-     * @param keywords      the new keywords to a articleEntity.
-     * @param number        the new number to a articleEntity.
-     * @param price         the new price to a articleEntity.
-     * @param categoryUrl   the categoryEntity URL of a articleEntity.
-     * @param multipartLogo the file of photo to a new categoryEntity.
-     * @param validated     the validated of a articleEntity.
-     * @return The redirect string to the "/articleEntity/{url}" URL,
-     * where {url} is a URL of a saving articleEntity.
+     * @param url           the URL of a article to update.
+     * @param title         the new title to a article.
+     * @param description   the new description to a article.
+     * @param text          the new text to a article.
+     * @param keywords      the new keywords to a article.
+     * @param number        the new number to a article.
+     * @param price         the new price to a article.
+     * @param currency      the new price currency to a article.
+     * @param categoryUrl   the categoryarticle URL of a article.
+     * @param multipartLogo the file of photo to a new categoryarticle.
+     * @param validated     the validated of a article.
+     * @return The redirect string to the "/article/{url}" URL,
+     * where {url} is a URL of a saving article.
      */
     @RequestMapping(
             value = "/update",
@@ -242,35 +253,43 @@ public class ArticleController {
             @RequestParam(value = "text") final String text,
             @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "number") final String number,
-            @RequestParam(value = "price") final String price,
+            @RequestParam(value = "price") final double price,
+            @RequestParam(value = "currency") final String currency,
             @RequestParam(value = "category_url") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid") final boolean validated
     ) {
-        final CategoryEntity categoryEntity = isNotEmpty(categoryUrl) ?
-                this.categoryService.getByUrl(categoryUrl, false) : null;
         final Compressor compressor = new HtmlCompressor();
-        final ArticleEntity articleEntity = new ArticleEntity(
-                title,
-                compressor.compress(description),
-                compressor.compress(text),
-                keywords, number, price
-        );
-        articleEntity.setValidated(validated);
-        articleEntity.setCategoryEntity(categoryEntity);
+        final Article article = this.articleService.getByUrl(url, false);
+        final ArticleEditor articleEditor = article.getEditor();
+        articleEditor.addTitle(title).addKeywords(keywords).addNumber(number)
+                .addPrice(price).addCurrency(currency).addValidated(validated)
+                .addDescription(compressor.compress(description))
+                .addText(compressor.compress(text));
+
+        final Category category = this.categoryService.getByUrl(categoryUrl, false);
+        articleEditor.addCategory(category);
+
         if (isNotEmpty(multipartLogo)) {
-            articleEntity.setLogoEntity(this.fileService.add(articleEntity.getTitle(), multipartLogo));
+            final File logo = article.getLogo();
+            final FileEditor fileEditor = logo.getEditor();
+            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
+            final File updatedLogo = fileEditor.update();
+            this.fileService.update(updatedLogo);
+            articleEditor.addLogo(updatedLogo);
         }
-        this.articleService.update(url, articleEntity);
+
+        final Article updatedArticle = this.articleService.update(article);
+        final Article savingArticle = this.articleService.update(updatedArticle);
         Cache.clear();
-        return getViewName(articleEntity);
+        return getViewName(savingArticle);
     }
 
     /**
      * The method throws an exception in the case of reference to it.
      * The exception message:
-     * "GET method in "/admin/articleEntity/update" is not supported!"
-     * Request mapping: /admin/articleEntity/update
+     * "GET method in "/admin/article/update" is not supported!"
+     * Request mapping: /admin/article/update
      * Method: GET
      *
      * @throws IllegalMappingException thrown when an error occurs reading
@@ -281,22 +300,21 @@ public class ArticleController {
             method = RequestMethod.GET
     )
     public void updateArticle() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/articleEntity/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/article/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
-     * Removes an articleEntity with the incoming URL
+     * Removes an article with the incoming URL
      * and redirects by the "/" URL.
-     * Request mapping: /admin/articleEntity/delete/{url},
-     * where {url} is a URL of an articleEntity to remove.
+     * Request mapping: /admin/article/delete/{url},
+     * where {url} is a URL of an article to remove.
      * Method: GET
      *
-     * @param url the URL of an articleEntity to remove.
+     * @param url the URL of an article to remove.
      * @return The redirect string to the "/" URL.
      */
     @RequestMapping(
@@ -311,7 +329,7 @@ public class ArticleController {
 
     /**
      * Removes an all articles and redirects by the "/" URL.
-     * Request mapping: /admin/articleEntity/delete/all
+     * Request mapping: /admin/article/delete/all
      * Method: GET
      *
      * @return The redirect string to the "/" URL.
@@ -327,47 +345,46 @@ public class ArticleController {
     }
 
     /**
-     * Returns a view name for the articleEntity.
-     * If an articleEntity text is not blank then returns "redirect:/admin/articleEntity/{url}",
-     * where {url} is a URL of an articleEntity;
-     * else if an articleEntity categoryEntity is not null
-     * then returns "redirect:/admin/categoryEntity/{url}",
-     * where {url} is a URL of an articleEntity categoryEntity;
-     * else returns "redirect:/admin/articleEntity/all";
+     * Returns a view name for the article.
+     * If an article text is not blank then returns "redirect:/admin/article/{url}",
+     * where {url} is a URL of an article;
+     * else if an article categoryarticle is not null
+     * then returns "redirect:/admin/categoryarticle/{url}",
+     * where {url} is a URL of an article categoryarticle;
+     * else returns "redirect:/admin/article/all";
      *
-     * @param articleEntity the articleEntity to get view name.
+     * @param article the article to get view name.
      * @return The view name.
      */
-    private static String getViewName(final ArticleEntity articleEntity) {
+    private static String getViewName(final Article article) {
         String viewName;
-        if (isNotEmpty(articleEntity.getText())) {
-            viewName = "redirect:/articleEntity/" + articleEntity.getUrl();
-        } else if (isValidCategory(articleEntity.getCategoryEntity())) {
-            viewName = "redirect:/categoryEntity/" + articleEntity.getCategoryEntity().getUrl();
+        if (isNotEmpty(article.getText())) {
+            viewName = "redirect:/article/" + article.getUrl();
+        } else if (isValidCategory(article.getCategory())) {
+            viewName = "redirect:/category/" + article.getCategory().getUrl();
         } else {
-            viewName = "redirect:/articleEntity/all";
+            viewName = "redirect:/article/all";
         }
         return viewName;
     }
 
     /**
-     * Validated a incoming categoryEntity.
-     * CategoryEntity is valid if it is not null and and it validated.
+     * Validated a incoming categoryarticle.
+     * Categoryarticle is valid if it is not null and and it validated.
      * <pre>
      *     isValidCategory(null) = false
      *
-     *     CategoryEntity categoryEntity = new CategoryEntity();
-     *     categoryEntity.setValidated(false);
-     *     isValidCategory(categoryEntity) = false
+     *     if the incoming category is not null and invalid
+     *     isValidCategory(category) = false
      *
-     *     categoryEntity.setValidated(true);
-     *     isValidCategory(categoryEntity) = true
+     *     if the incoming category is not null and valid
+     *     isValidCategory(category) = true
      * </pre>
      *
-     * @param categoryEntity the categoryEntity to check.
-     * @return true if the categoryEntity is not null and it validated.
+     * @param category the category to check.
+     * @return true if the category is not null and it validated.
      */
-    private static boolean isValidCategory(final CategoryEntity categoryEntity) {
-        return isNotNull(categoryEntity) && categoryEntity.isValidated();
+    private static boolean isValidCategory(final Category category) {
+        return isNotNull(category) && category.isValidated();
     }
 }

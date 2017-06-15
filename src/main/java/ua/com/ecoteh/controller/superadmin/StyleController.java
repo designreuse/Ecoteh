@@ -93,7 +93,7 @@ public class StyleController {
             value = "/update",
             method = RequestMethod.POST
     )
-    public String updateStyles(@RequestParam(value = "styles", defaultValue = "") final String styles) {
+    public String updateStyles(@RequestParam(value = "styles") final String styles) {
         this.styleService.save(styles);
         return "redirect:/superadmin/style";
     }
@@ -112,12 +112,11 @@ public class StyleController {
             method = RequestMethod.GET
     )
     public void updateStyles() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/superadmin/style/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/superadmin/style/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**

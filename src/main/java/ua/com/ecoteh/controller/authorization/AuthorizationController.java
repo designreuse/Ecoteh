@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,6 @@ import ua.com.ecoteh.util.cache.Cache;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The authorization controller.
@@ -73,7 +72,7 @@ public class AuthorizationController {
     )
     public ModelAndView loginPage() {
         ModelAndView modelAndView;
-        if (isAuthenticatedUser()) {
+        if (this.userService.isAuthenticatedUser()) {
             modelAndView = new ModelAndView("redirect:/admin/menu");
         } else {
             try {
@@ -101,16 +100,10 @@ public class AuthorizationController {
             value = "/logout",
             method = RequestMethod.GET
     )
-    public String logoutPage(
-            final HttpServletRequest request,
-            final HttpServletResponse response
-    ) {
-        String viewName;
-        if (isAuthenticatedUser()) {
-            new SecurityContextLogoutHandler().logout(
-                    request, response,
-                    SecurityContextHolder.getContext().getAuthentication()
-            );
+    public String logoutPage(final HttpServletRequest request, final HttpServletResponse response) {
+        final String viewName;
+        if (this.userService.isAuthenticatedUser()) {
+            logout(request, response);
             Cache.removeAll("Admin");
             viewName = "redirect:/login?logout";
         } else {
@@ -120,11 +113,16 @@ public class AuthorizationController {
     }
 
     /**
-     * Returns true if a authenticated user is not null, false otherwise.
+     * Logout user.
      *
-     * @return true if a authenticated user is not null, false otherwise.
+     * @param request  the implementation of the interface to provide
+     *                 request information for HTTP servlets.
+     * @param response the implementation of the interface to provide
+     *                 response information for HTTP servlets.
      */
-    private boolean isAuthenticatedUser() {
-        return isNotNull(this.userService.getAuthenticatedUser());
+    private void logout(final HttpServletRequest request, final HttpServletResponse response) {
+        final SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        logoutHandler.logout(request, response, authentication);
     }
 }

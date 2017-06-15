@@ -224,7 +224,7 @@ public class AdviceController {
      *
      * @param request to provide a requested information for HTTP servlets.
      */
-    private static void logRequest(final HttpServletRequest request) {
+    private void logRequest(final HttpServletRequest request) {
         LOGGER.error(createRequestMessage(request));
     }
 
@@ -233,7 +233,7 @@ public class AdviceController {
      *
      * @param ex the intercepted exception.
      */
-    private static void logException(final Exception ex) {
+    private void logException(final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         ex.printStackTrace();
     }
@@ -245,7 +245,7 @@ public class AdviceController {
      * @param ex the intercepted exception.
      * @return The exception message.
      */
-    private static String createExceptionMessage(final Exception ex) {
+    private String createExceptionMessage(final Exception ex) {
         return ex.getClass().getSimpleName() + " : " + ex.getMessage();
     }
 
@@ -255,7 +255,7 @@ public class AdviceController {
      * @param request to provide a requested information for HTTP servlets.
      * @return The request message.
      */
-    private static String createRequestMessage(final HttpServletRequest request) {
+    private String createRequestMessage(final HttpServletRequest request) {
         return request.getRemoteAddr() + " : " + request.getRequestURL();
     }
 }

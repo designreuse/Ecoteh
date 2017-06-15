@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.config.DefaultAccounts;
+import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.captcha.CaptchaService;
@@ -188,8 +190,8 @@ public class ForgotUserInformationController {
      * @param username the userEntity name for whom to remind information.
      */
     private void searchByLoginAndSend(final String username) {
-        final UserEntity userEntity = this.userService.getByLogin(username);
-        sendUserInformationToEmail(userEntity, userEntity.getContactsEntity().getEmail());
+        final User user = this.userService.getByLogin(username);
+        sendUserInformationToEmail(user, user.getContacts().getEmail());
     }
 
     /**
@@ -198,8 +200,8 @@ public class ForgotUserInformationController {
      * @param email the userEntity E-mail for whom to remind information.
      */
     private void searchByEmailAndSend(final String email) {
-        final UserEntity userEntity = this.userService.getByEmail(email);
-        sendUserInformationToEmail(userEntity, userEntity.getContactsEntity().getEmail());
+        final User user = this.userService.getByEmail(email);
+        sendUserInformationToEmail(user, user.getContacts().getEmail());
     }
 
     /**
@@ -208,8 +210,8 @@ public class ForgotUserInformationController {
      * @param phone the userEntity phone for whom to remind information.
      */
     private void searchByPhoneAndSend(final String phone) {
-        final UserEntity userEntity = this.userService.getByPhone(phone);
-        sendUserInformationToEmail(userEntity, userEntity.getContactsEntity().getEmail());
+        final User user = this.userService.getByPhone(phone);
+        sendUserInformationToEmail(user, user.getContacts().getEmail());
     }
 
     /**
@@ -225,55 +227,51 @@ public class ForgotUserInformationController {
         if (isEmpty(email)) {
             throw new IllegalArgumentException(ExceptionMessage.BLANK_EMAIL_MESSAGE);
         }
-        final String mainEmail = this.companyService.getMainCompany().getContactsEntity().getEmail();
+        final Company mainCompany = this.companyService.getMainCompany();
+        final String mainEmail = mainCompany.getContacts().getEmail();
         if (!mainEmail.equalsIgnoreCase(email)) {
-            throw new NullPointerException(
-                    String.format(
-                            ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
-                            CompanyEntity.class.getSimpleName(), email
-                    )
+            final String message = String.format(
+                    ExceptionMessage.FINDING_BY_NUMBER_OBJECT_IS_NULL_MESSAGE,
+                    CompanyEntity.class.getSimpleName(), email
             );
+            throw new NullPointerException(message);
         }
-        sendUserInformationToEmail(DefaultAccounts.getDefaultAdmin(), mainEmail);
+        final User defaultAdmin = DefaultAccounts.getDefaultAdmin();
+        sendUserInformationToEmail(defaultAdmin, mainEmail);
     }
 
     /**
      * Sends userEntity information to the incoming userEntity e-mail.
      *
-     * @param userEntity           the userEntity for whom to remind information.
+     * @param user           the userEntity for whom to remind information.
      * @param recipientEmail the recipient email.
      */
-    private void sendUserInformationToEmail(
-            final UserEntity userEntity,
-            final String recipientEmail
-    ) {
-        final CompanyEntity companyEntity = this.companyService.getMainCompany();
-        this.senderService.send(
-                "Напоминание пароля | " + companyEntity.getTitle(),
-                getMessageText(userEntity), recipientEmail,
-                companyEntity.getSenderEmail(), companyEntity.getSenderPass()
-        );
+    private void sendUserInformationToEmail(final User user, final String recipientEmail) {
+        final Company mainCompany = this.companyService.getMainCompany();
+        final String subject = "Напоминание пароля | " + mainCompany.getTitle();
+        final String text = getMessageText(user);
+        final String senderEmail = mainCompany.getSenderEmail();
+        final String senderPass = mainCompany.getSenderPass();
+        this.senderService.send(subject, text, recipientEmail, senderEmail, senderPass);
     }
 
     /**
      * Gets message to the userEntity.
      *
-     * @param userEntity the userEntity for whom to send message.
+     * @param user the userEntity for whom to send message.
      * @return The message.
      */
-    private static String getMessageText(final UserEntity userEntity) {
+    private static String getMessageText(final User user) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Информация о пользователе\n\n")
-                .append(userEntity.getName())
-                .append("\nLogin: ").append(userEntity.getLogin())
-                .append("\nPassword: ").append(userEntity.getPassword());
-        if (userEntity.isLocked()) {
+                .append(user.getName())
+                .append("\nLogin: ").append(user.getLogin())
+                .append("\nPassword: ").append(user.getPassword());
+        if (user.isLocked()) {
             sb.append("\n\nПОЛЬЗОВАТЕЛЬ ЗАБЛОКИРОВАН");
         }
-        sb.append("\n\nПосле прочтения этого письма, ")
-                .append("рекомендуется удалить его, ")
-                .append("во избежании потери Ваших ")
-                .append("персональных даных.");
+        sb.append("\n\nПосле прочтения этого письма, рекомендуется удалить его,")
+                .append("во избежании потери Ваших персональных даных.");
         return sb.toString();
     }
 
@@ -285,11 +283,7 @@ public class ForgotUserInformationController {
      * @param isForgot  the result of the search.
      * @return The ready object of the ModelAndView class.
      */
-    private ModelAndView createModelAndView(
-            final String username,
-            final Boolean isCaptcha,
-            final Boolean isForgot
-    ) {
+    private ModelAndView createModelAndView(final String username, final Boolean isCaptcha, final Boolean isForgot) {
         ModelAndView modelAndView;
         try {
             modelAndView = this.fabric.getDefaultModelAndView();

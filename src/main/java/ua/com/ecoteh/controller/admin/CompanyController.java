@@ -12,11 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.address.AddressEntity;
-import ua.com.ecoteh.entity.company.CompanyEntity;
-import ua.com.ecoteh.entity.contacts.ContactsEntity;
-import ua.com.ecoteh.entity.file.FileEntity;
-import ua.com.ecoteh.entity.company.CompanyType;
+import ua.com.ecoteh.entity.address.Address;
+import ua.com.ecoteh.entity.address.AddressBuilder;
+import ua.com.ecoteh.entity.address.AddressEditor;
+import ua.com.ecoteh.entity.company.Company;
+import ua.com.ecoteh.entity.company.CompanyBuilder;
+import ua.com.ecoteh.entity.company.CompanyEditor;
+import ua.com.ecoteh.entity.contacts.Contacts;
+import ua.com.ecoteh.entity.contacts.ContactsBuilder;
+import ua.com.ecoteh.entity.contacts.ContactsEditor;
+import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileBuilder;
+import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
@@ -28,7 +35,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link CompanyEntity} class or subclasses for admins.
+ * objects of the {@link Company} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -57,13 +64,13 @@ public class CompanyController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CompanyEntity} class.
+     * for working with objects of the {@link Company} class.
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link FileEntity} class.
+     * for working with objects of the {@link File} class.
      */
     private final FileService fileService;
 
@@ -112,27 +119,27 @@ public class CompanyController {
      * Request mapping: /admin/company/update/main
      * Method: POST
      *
-     * @param title         the new title to a main company.
-     * @param domain        the new domain to a main company.
-     * @param tagline       the new tagline to a main company.
-     * @param description   the new description to a main company.
-     * @param information   the new information to a main company.
-     * @param keywords      the new keywords to a main company.
-     * @param workTimeFrom  the new start work time to a main company.
-     * @param workTimeTo    the new finish work time to a main company.
-     * @param mobilePhone   the new mobile phone to a main company.
-     * @param landlinePhone the new landline phone to a main company.
-     * @param fax           the new fax to a main company.
-     * @param email         the new E-mail to a main company.
-     * @param senderEmail   the new sender e-mail to a main company.
-     * @param senderPass    the new sender password to a main company.
-     * @param vkontakte     the new Vkontakte URL to a main company.
-     * @param facebook      the new Facebook URL to a main company.
-     * @param twitter       the new Twitter URL to a main company.
-     * @param skype         the new Skype username to a main company.
-     * @param address       the new address to a main company.
-     * @param googleMaps    the new google maps URL to a main company.
-     * @param multipartLogo the new logo to a main company.
+     * @param title          the new title to a main company.
+     * @param domain         the new domain to a main company.
+     * @param tagline        the new tagline to a main company.
+     * @param description    the new description to a main company.
+     * @param information    the new information to a main company.
+     * @param keywords       the new keywords to a main company.
+     * @param workTimeFrom   the new start work time to a main company.
+     * @param workTimeTo     the new finish work time to a main company.
+     * @param mobilePhone    the new mobile phone to a main company.
+     * @param landlinesPhone the new landlines phone to a main company.
+     * @param fax            the new fax to a main company.
+     * @param email          the new E-mail to a main company.
+     * @param senderEmail    the new sender e-mail to a main company.
+     * @param senderPass     the new sender password to a main company.
+     * @param vkontakte      the new Vkontakte URL to a main company.
+     * @param facebook       the new Facebook URL to a main company.
+     * @param twitter        the new Twitter URL to a main company.
+     * @param skype          the new Skype username to a main company.
+     * @param postAddress    the new address to a main company.
+     * @param googleMaps     the new google maps URL to a main company.
+     * @param multipartLogo  the new logo to a main company.
      * @return The redirect string to the "/company/main" URL.
      */
     @RequestMapping(
@@ -140,49 +147,63 @@ public class CompanyController {
             method = RequestMethod.POST
     )
     public String updateMainCompany(
-            @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "domain", defaultValue = "") final String domain,
-            @RequestParam(value = "tagline", defaultValue = "") final String tagline,
-            @RequestParam(value = "text", defaultValue = "") final String description,
-            @RequestParam(value = "information", defaultValue = "") final String information,
-            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
-            @RequestParam(value = "time_from", defaultValue = "00:00") final String workTimeFrom,
-            @RequestParam(value = "time_to", defaultValue = "00:00") final String workTimeTo,
-            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
-            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
-            @RequestParam(value = "fax", defaultValue = "") final String fax,
+            @RequestParam(value = "title") final String title,
+            @RequestParam(value = "domain") final String domain,
+            @RequestParam(value = "tagline") final String tagline,
+            @RequestParam(value = "text") final String description,
+            @RequestParam(value = "information") final String information,
+            @RequestParam(value = "keywords") final String keywords,
+            @RequestParam(value = "time_from") final String workTimeFrom,
+            @RequestParam(value = "time_to") final String workTimeTo,
+            @RequestParam(value = "mobile_phone") final String mobilePhone,
+            @RequestParam(value = "landlines_phone") final String landlinesPhone,
+            @RequestParam(value = "fax") final String fax,
             @RequestParam(value = "email") final String email,
-            @RequestParam(value = "sender_email", defaultValue = "") final String senderEmail,
-            @RequestParam(value = "sender_pass", defaultValue = "") final String senderPass,
-            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
-            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
-            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
-            @RequestParam(value = "skype", defaultValue = "") final String skype,
-            @RequestParam(value = "address", defaultValue = "") final String address,
-            @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
+            @RequestParam(value = "sender_email") final String senderEmail,
+            @RequestParam(value = "sender_pass") final String senderPass,
+            @RequestParam(value = "vkontakte") final String vkontakte,
+            @RequestParam(value = "facebook") final String facebook,
+            @RequestParam(value = "twitter") final String twitter,
+            @RequestParam(value = "skype") final String skype,
+            @RequestParam(value = "post_address") final String postAddress,
+            @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final CompanyEntity companyEntity = new CompanyEntity(title, compressor.compress(description), keywords);
-        companyEntity.setInformation(compressor.compress(information));
-        companyEntity.setDomain(domain);
-        companyEntity.setTagline(tagline);
-        companyEntity.setSenderEmail(senderEmail);
-        companyEntity.setSenderPass(senderPass);
-        companyEntity.setWorkTimeFrom(workTimeFrom);
-        companyEntity.setWorkTimeTo(workTimeTo);
-        companyEntity.setContactsEntity(
-                new ContactsEntity(
-                        email, mobilePhone, landlinePhone, fax,
-                        vkontakte, facebook, twitter, skype
-                )
-        );
-        companyEntity.setAddressEntity(new AddressEntity(address, googleMaps));
+
+        final Company mainCompany = this.companyService.getMainCompany();
+        final CompanyEditor companyEditor = mainCompany.getEditor();
+        companyEditor.addTitle(title).addDomain(domain)
+                .addTagline(tagline).addKeywords(keywords)
+                .addWorkTimeFrom(workTimeFrom).addWorkTimeTo(workTimeTo)
+                .addSenderEmail(senderEmail).addSenderPass(senderPass)
+                .addDescription(compressor.compress(description))
+                .addInformation(compressor.compress(information));
+
+        final ContactsEditor contactsEditor = mainCompany.getContacts().getEditor();
+        contactsEditor.addEmail(email).addMobilePhone(mobilePhone)
+                .addFax(fax).addLandlinesPhone(landlinesPhone)
+                .addVkontakte(vkontakte).addFacebook(facebook)
+                .addTwitter(twitter).addSkype(skype);
+        final Contacts contacts = contactsEditor.update();
+        companyEditor.addContacts(contacts);
+
+        final AddressEditor addressEditor = mainCompany.getAddress().getEditor();
+        addressEditor.addPostAddress(postAddress).addGoogleMaps(googleMaps);
+        final Address address = addressEditor.update();
+        companyEditor.addAddress(address);
+
         if (isNotEmpty(multipartLogo)) {
-            companyEntity.setLogoEntity(this.fileService.add(companyEntity.getTitle(), multipartLogo));
+            final File logo = mainCompany.getLogo();
+            final FileEditor fileEditor = logo.getEditor();
+            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
+            final File updatedLogo = fileEditor.update();
+            this.fileService.update(updatedLogo);
+            companyEditor.addLogo(updatedLogo);
         }
-        companyEntity.setType(CompanyType.MAIN);
-        this.companyService.updateMainCompany(companyEntity);
+
+        final Company updatedMainCompany = companyEditor.update();
+        this.companyService.updateMainCompany(updatedMainCompany);
         Cache.clear();
         return "redirect:/company/main";
     }
@@ -199,12 +220,11 @@ public class CompanyController {
      */
     @RequestMapping(value = "/update/main", method = RequestMethod.GET)
     public void updateMainCompany() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/company/update/main"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/company/update/main"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -238,14 +258,14 @@ public class CompanyController {
      * @param information   the information of a new company.
      * @param keywords      the keywords of a new company.
      * @param mobilePhone   the mobile phone of a new company.
-     * @param landlinePhone the landline phone of a new company.
+     * @param landlinesPhone the landline phone of a new company.
      * @param fax           the fax of a new company.
      * @param email         the e-mail of a new company.
      * @param vkontakte     the vkontakte URL of a new company.
      * @param facebook      the facebook URL of a new company.
      * @param twitter       the twitter URL of a new company.
      * @param skype         the skype username of a new company.
-     * @param address       the address of a new company.
+     * @param postAddress   the post address of a new company.
      * @param googleMaps    the google maps URL of a new company.
      * @param multipartLogo the logo to a new company.
      * @param validated     the validated of a new company.
@@ -257,46 +277,58 @@ public class CompanyController {
             method = RequestMethod.POST
     )
     public String addPartner(
-            @RequestParam(value = "title", defaultValue = "") String title,
-            @RequestParam(value = "domain", defaultValue = "") final String domain,
-            @RequestParam(value = "tagline", defaultValue = "") final String tagline,
-            @RequestParam(value = "text", defaultValue = "") final String description,
-            @RequestParam(value = "information", defaultValue = "") final String information,
-            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
-            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
-            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
-            @RequestParam(value = "fax", defaultValue = "") final String fax,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "domain") final String domain,
+            @RequestParam(value = "tagline") final String tagline,
+            @RequestParam(value = "text") final String description,
+            @RequestParam(value = "information") final String information,
+            @RequestParam(value = "keywords") final String keywords,
+            @RequestParam(value = "mobile_phone") final String mobilePhone,
+            @RequestParam(value = "landlines_phone") final String landlinesPhone,
+            @RequestParam(value = "fax") final String fax,
             @RequestParam(value = "email") final String email,
-            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
-            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
-            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
-            @RequestParam(value = "skype", defaultValue = "") final String skype,
-            @RequestParam(value = "address", defaultValue = "") final String address,
-            @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
+            @RequestParam(value = "vkontakte") final String vkontakte,
+            @RequestParam(value = "facebook") final String facebook,
+            @RequestParam(value = "twitter") final String twitter,
+            @RequestParam(value = "skype") final String skype,
+            @RequestParam(value = "post_address") final String postAddress,
+            @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final CompanyEntity companyEntity = new CompanyEntity(title, compressor.compress(description), keywords);
-        companyEntity.setInformation(compressor.compress(information));
-        companyEntity.setTitle(title);
-        companyEntity.setKeywords(keywords);
-        companyEntity.setDomain(domain);
-        companyEntity.setTagline(tagline);
-        companyEntity.setValidated(validated);
-        companyEntity.setContactsEntity(
-                new ContactsEntity(
-                        email, mobilePhone, landlinePhone, fax,
-                        vkontakte, facebook, twitter, skype
-                )
-        );
-        companyEntity.setAddressEntity(new AddressEntity(address, googleMaps));
+
+        final CompanyBuilder companyBuilder = Company.getBuilder();
+        companyBuilder.addTitle(title).addDomain(domain).addTagline(tagline)
+                .addKeywords(keywords).addValidated(validated)
+                .addDescription(compressor.compress(description))
+                .addInformation(compressor.compress(information));
+
+        final AddressBuilder addressBuilder = Address.getBuilder();
+        addressBuilder.addPostAddress(postAddress).addGoogleMaps(googleMaps);
+        final Address address = addressBuilder.build();
+        companyBuilder.addAddress(address);
+
+        final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+        contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)
+                .addLandlinesPhone(landlinesPhone).addFax(fax)
+                .addVkontakte(vkontakte).addFacebook(facebook)
+                .addTwitter(twitter).addSkype(skype);
+        final Contacts contacts = contactsBuilder.build();
+        companyBuilder.addContacts(contacts);
+
         if (isNotEmpty(multipartLogo)) {
-            companyEntity.setLogoEntity(this.fileService.add(companyEntity.getTitle(), multipartLogo));
+            final FileBuilder fileBuilder = File.getBuilder();
+            fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+            final File logo = fileBuilder.build();
+            final File savingLogo = this.fileService.add(logo);
+            companyBuilder.addLogo(savingLogo);
         }
-        this.companyService.add(companyEntity);
+
+        final Company company = companyBuilder.build();
+        final Company savingCompany = this.companyService.add(company);
         Cache.clear();
-        return "redirect:/companyEntity/" + companyEntity.getUrl();
+        return "redirect:/company/" + savingCompany.getUrl();
     }
 
     /**
@@ -314,12 +346,11 @@ public class CompanyController {
             method = RequestMethod.GET
     )
     public void addPartner() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/company/add"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/company/add"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -357,14 +388,14 @@ public class CompanyController {
      * @param information   the new information to a company.
      * @param keywords      the new keywords to a company.
      * @param mobilePhone   the new mobile phone to a company.
-     * @param landlinePhone the new landline phone to a company.
+     * @param landlinesPhone the new landline phone to a company.
      * @param fax           the new fax to a company.
      * @param email         the new e-mail to a company.
      * @param vkontakte     the new vkontakte URL to a company.
      * @param facebook      the new facebook URL to a company.
      * @param twitter       the new twitter URL to a company.
      * @param skype         the new skype username to a company.
-     * @param address       the new address to a company.
+     * @param postAddress   the new address to a company.
      * @param googleMaps    the new google maps URL to a company.
      * @param multipartLogo the new logo to a company.
      * @param validated     the validated of a article.
@@ -377,46 +408,60 @@ public class CompanyController {
     )
     public String updatePartnerCompany(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "domain", defaultValue = "") final String domain,
-            @RequestParam(value = "tagline", defaultValue = "") final String tagline,
-            @RequestParam(value = "text", defaultValue = "") final String description,
-            @RequestParam(value = "information", defaultValue = "") final String information,
-            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
-            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
-            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
-            @RequestParam(value = "fax", defaultValue = "") final String fax,
-            @RequestParam(value = "email", defaultValue = "") final String email,
-            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
-            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
-            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
-            @RequestParam(value = "skype", defaultValue = "") final String skype,
-            @RequestParam(value = "address", defaultValue = "") final String address,
-            @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
+            @RequestParam(value = "title") final String title,
+            @RequestParam(value = "domain") final String domain,
+            @RequestParam(value = "tagline") final String tagline,
+            @RequestParam(value = "text") final String description,
+            @RequestParam(value = "information") final String information,
+            @RequestParam(value = "keywords") final String keywords,
+            @RequestParam(value = "mobile_phone") final String mobilePhone,
+            @RequestParam(value = "landlines_phone") final String landlinesPhone,
+            @RequestParam(value = "fax") final String fax,
+            @RequestParam(value = "email") final String email,
+            @RequestParam(value = "vkontakte") final String vkontakte,
+            @RequestParam(value = "facebook") final String facebook,
+            @RequestParam(value = "twitter") final String twitter,
+            @RequestParam(value = "skype") final String skype,
+            @RequestParam(value = "post_address") final String postAddress,
+            @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final CompanyEntity companyEntity = new CompanyEntity(title, compressor.compress(description), keywords);
-        companyEntity.setInformation(compressor.compress(information));
-        companyEntity.setTitle(title);
-        companyEntity.setKeywords(keywords);
-        companyEntity.setDomain(domain);
-        companyEntity.setTagline(tagline);
-        companyEntity.setValidated(validated);
-        companyEntity.setContactsEntity(
-                new ContactsEntity(
-                        email, mobilePhone, landlinePhone, fax,
-                        vkontakte, facebook, twitter, skype
-                )
-        );
-        companyEntity.setAddressEntity(new AddressEntity(address, googleMaps));
+
+        final Company company = this.companyService.getByUrl(url, false);
+        final CompanyEditor companyEditor = company.getEditor();
+        companyEditor.addTitle(title).addDomain(domain).addTagline(tagline)
+                .addKeywords(keywords).addValidated(validated)
+                .addDescription(compressor.compress(description))
+                .addInformation(compressor.compress(information));
+
+        final ContactsEditor contactsEditor = company.getContacts().getEditor();
+        contactsEditor.addEmail(email).addMobilePhone(mobilePhone)
+                .addLandlinesPhone(landlinesPhone).addFax(fax)
+                .addVkontakte(vkontakte).addFacebook(facebook)
+                .addTwitter(twitter).addSkype(skype);
+        final Contacts contacts = contactsEditor.update();
+        companyEditor.addContacts(contacts);
+
+        final AddressEditor addressEditor = company.getAddress().getEditor();
+        addressEditor.addPostAddress(postAddress).addGoogleMaps(googleMaps);
+        final Address address = addressEditor.update();
+        companyEditor.addAddress(address);
+
         if (isNotEmpty(multipartLogo)) {
-            companyEntity.setLogoEntity(this.fileService.add(companyEntity.getTitle(), multipartLogo));
+            final File logo = company.getLogo();
+            final FileEditor fileEditor = logo.getEditor();
+            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
+            final File updatedLogo = fileEditor.update();
+            this.fileService.update(updatedLogo);
+            companyEditor.addLogo(updatedLogo);
         }
-        this.companyService.update(url, companyEntity);
+
+        final Company updatedCompany = companyEditor.update();
+        final Company savingCompany = this.companyService.update(updatedCompany);
         Cache.clear();
-        return "redirect:/companyEntity/" + companyEntity.getUrl();
+        return "redirect:/company/" + savingCompany.getUrl();
     }
 
     /**
@@ -434,12 +479,11 @@ public class CompanyController {
             method = RequestMethod.GET
     )
     public void updatePartnerCompany() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/company/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/company/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**

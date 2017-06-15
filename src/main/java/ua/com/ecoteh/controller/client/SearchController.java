@@ -3,13 +3,11 @@ package ua.com.ecoteh.controller.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.search.SearchService;
 
@@ -66,7 +64,7 @@ public class SearchController {
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = { "", "/" },
+            value = { "", "/", "/result" },
             method = RequestMethod.GET
     )
     public ModelAndView search() {
@@ -95,28 +93,5 @@ public class SearchController {
             @RequestParam(value = "how_search", defaultValue = "false") final boolean howSearch
     ) {
         return this.searchService.search(keywords, content, howSearch);
-    }
-
-    /**
-     * The method throws an exception in the case of reference to it.
-     * The exception message:
-     * "GET method in "/result" is not supported!"
-     * Request mapping: /result
-     * Method: POST
-     *
-     * @throws IllegalMappingException thrown when an error occurs reading
-     *                                 the mapping between object and datastore.
-     */
-    @RequestMapping(
-            value = "/result",
-            method = RequestMethod.GET
-    )
-    public void searchResult() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/send_message"
-                )
-        );
     }
 }

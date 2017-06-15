@@ -54,7 +54,7 @@ public class ConfigurationController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ConfigurationController(
-            @Qualifier("cacheMVFabricImpl")final MainMVFabric fabric,
+            @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
             final ContentProperties contentProperties
     ) {
         this.fabric = fabric;
@@ -67,7 +67,7 @@ public class ConfigurationController {
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = {"", "/"},
+            value = { "", "/" },
             method = RequestMethod.GET
     )
     public ModelAndView getPropertiesPage() {

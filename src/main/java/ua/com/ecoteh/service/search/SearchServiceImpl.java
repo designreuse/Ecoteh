@@ -116,7 +116,7 @@ public class SearchServiceImpl implements SearchService {
             modelAndView = prepareDefaultSearchPage(keywords);
         }
         addKeys(_content, howSearch, modelAndView);
-        modelAndView.addObject("", this.userService.getAuthenticatedUser());
+        modelAndView.addObject("authorized_user", this.userService.getAuthenticatedUser());
         return modelAndView;
     }
 
@@ -170,18 +170,9 @@ public class SearchServiceImpl implements SearchService {
     ) {
         if (isNotEmpty(keywords)) {
             if (content.contains("all")) {
-                searchByAllContent(
-                        keywords,
-                        howSearch,
-                        modelAndView
-                );
+                searchByAllContent(keywords, howSearch, modelAndView);
             } else {
-                searchByChooseContent(
-                        content,
-                        keywords,
-                        howSearch,
-                        modelAndView
-                );
+                searchByChooseContent(content, keywords, howSearch, modelAndView);
             }
         }
     }

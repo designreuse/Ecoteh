@@ -4,10 +4,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.company.CompanyEntity;
-import ua.com.ecoteh.entity.message.MessageEntity;
-import ua.com.ecoteh.entity.response.ResponseEntity;
-import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.company.Company;
+import ua.com.ecoteh.entity.contacts.Contacts;
+import ua.com.ecoteh.entity.message.Message;
+import ua.com.ecoteh.entity.response.Response;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.MessageService;
 import ua.com.ecoteh.service.data.ResponseService;
@@ -18,8 +19,10 @@ import ua.com.ecoteh.service.sender.SenderService;
 import ua.com.ecoteh.util.cache.Cache;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The abstract class implements a set of methods for working
@@ -34,7 +37,7 @@ public abstract class MainController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link UserEntity} class.
+     * for working with objects of the {@link User} class.
      */
     protected final UserService userService;
 
@@ -46,19 +49,19 @@ public abstract class MainController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CompanyEntity} class.
+     * for working with objects of the {@link Company} class.
      */
     protected final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link ResponseEntity} class.
+     * for working with objects of the {@link Response} class.
      */
     protected final ResponseService responseService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link MessageEntity} class.
+     * for working with objects of the {@link Message} class.
      */
     protected final MessageService messageService;
 
@@ -108,7 +111,7 @@ public abstract class MainController {
     )
     public ModelAndView getHomePage() {
         final ModelAndView modelAndView = this.fabric.homePage();
-        modelAndView.addObject("is_captcha", null);
+        modelAndView.addObject("captcha", null);
         return modelAndView;
     }
 
@@ -164,10 +167,9 @@ public abstract class MainController {
             @PathVariable("url") final String url,
             final HttpServletRequest request
     ) {
-        return this.fabric.categoryWithSortArticlesPage(
-                url, request.getParameter("type"),
-                Boolean.parseBoolean(request.getParameter("revers"))
-        );
+        final String sortType = request.getParameter("type");
+        final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
+        return this.fabric.categoryWithSortArticlesPage(url, sortType, revers);
     }
 
     /**
@@ -233,10 +235,9 @@ public abstract class MainController {
             method = RequestMethod.GET
     )
     public ModelAndView getAllSortArticlesPage(final HttpServletRequest request) {
-        return this.fabric.allSortArticlesPage(
-                request.getParameter("type"),
-                Boolean.parseBoolean(request.getParameter("revers"))
-        );
+        final String sortType = request.getParameter("type");
+        final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
+        return this.fabric.allSortArticlesPage(sortType, revers);
     }
 
     /**
@@ -267,7 +268,7 @@ public abstract class MainController {
     )
     public ModelAndView getContactsPage() {
         final ModelAndView modelAndView = this.fabric.contactsPage();
-        modelAndView.addObject("is_captcha", null);
+        modelAndView.addObject("captcha", null);
         return modelAndView;
     }
 
@@ -299,10 +300,9 @@ public abstract class MainController {
             value = { "/companies/sort", "/company/all/sort" },
             method = RequestMethod.GET
     )
-    public ModelAndView getAllSortPartnersPage(final HttpServletRequest request) {
-        return this.fabric.allSortPartnersByTitlePage(
-                Boolean.parseBoolean(request.getParameter("revers"))
-        );
+    public ModelAndView getSortPartnersPage(final HttpServletRequest request) {
+        final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
+        return this.fabric.allSortPartnersByTitlePage(revers);
     }
 
     /**
@@ -324,7 +324,7 @@ public abstract class MainController {
 
     /**
      * Returns page with all responses.
-     * Request mapping: /responses, /responseEntity/all
+     * Request mapping: /responses, /response/all
      * Method: GET
      *
      * @return The ready object of the ModelAndView class.
@@ -333,16 +333,15 @@ public abstract class MainController {
             value = { "/responses", "/response/all" },
             method = RequestMethod.GET
     )
-    public ModelAndView getAllResponsesPage() {
+    public ModelAndView getResponsesPage() {
         final ModelAndView modelAndView = this.fabric.allResponsesPage();
-        modelAndView.addObject("is_captcha", null);
-        modelAndView.setViewName("responseEntity/all");
+        modelAndView.addObject("captcha", null);
         return modelAndView;
     }
 
     /**
      * Returns page with an all responses sorted by date.
-     * Request mapping: /responses/sort, /responseEntity/all/sort
+     * Request mapping: /responses/sort, /response/all/sort
      * Method: GET
      *
      * @param request the implementation of the interface to provide
@@ -353,11 +352,10 @@ public abstract class MainController {
             value = { "/responses/sort", "/response/all/sort" },
             method = RequestMethod.GET
     )
-    public ModelAndView getAllSortResponsesByDatePage(final HttpServletRequest request) {
-        final ModelAndView modelAndView = this.fabric.allSortResponsesByDatePage(
-                Boolean.parseBoolean(request.getParameter("revers"))
-        );
-        modelAndView.addObject("is_captcha", null);
+    public ModelAndView getSortResponsesByDatePage(final HttpServletRequest request) {
+        final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
+        final ModelAndView modelAndView = this.fabric.allSortResponsesByDatePage(revers);
+        modelAndView.addObject("captcha", null);
         return modelAndView;
     }
 
@@ -382,7 +380,7 @@ public abstract class MainController {
             final boolean isCaptcha
     ) {
         ModelAndView modelAndView = new ModelAndView();
-        if (isNotEmpty(url)) {
+        if (isNotNull(url)) {
             switch (url) {
             case "":
             case "/":
@@ -398,62 +396,59 @@ public abstract class MainController {
                 modelAndView.setViewName("redirect:" + url);
             }
         } else {
-            modelAndView.setViewName("redirect:" + "/");
+            modelAndView = getHomePage();
         }
-        modelAndView.addObject("is_captcha", isCaptcha);
+        modelAndView.addObject("captcha", isCaptcha);
         return modelAndView;
     }
 
     /**
-     * Sends a client messageEntity to E-mail and saves it.
+     * Sends a client message to E-mail and saves it.
      *
-     * @param messageEntity the messageEntity to send.
+     * @param message the message to send.
      */
-    protected void sendMess(final MessageEntity messageEntity) {
+    protected void sendMess(final Message message) {
         new Thread(() -> {
-            final UserEntity userEntity = messageEntity.getUserEntity();
-            final String text = "UserEntity name: " + userEntity.getName() +
-                    "\nPhone: " + userEntity.getContactsEntity().getMobilePhone() +
-                    (isNotEmpty(userEntity.getContactsEntity().getEmail()) ? "\nE-mail: " + userEntity.getContactsEntity().getEmail() : "") +
-                    (isNotEmpty(messageEntity.getText()) ? "\nText: " + messageEntity.getText() : "");
-            sendToEmail(messageEntity.getSubject(), text);
+            final User user = message.getUser();
+            final Contacts contacts = user.getContacts();
+            final String text = "User name: " + user.getName() +
+                    "\nPhone: " + contacts.getMobilePhone() +
+                    (isNotEmpty(contacts.getEmail()) ? "\nE-mail: " + contacts.getEmail() : "") +
+                    (isNotEmpty(message.getText()) ? "\nText: " + message.getText() : "");
+            sendToEmail(message.getSubject(), text);
         }).start();
-        this.messageService.add(messageEntity);
+        this.messageService.add(message);
     }
 
     /**
-     * Sends a client responseEntity to E-mail and saves it.
+     * Sends a client response to E-mail and saves it.
      *
-     * @param responseEntity the responseEntity.
+     * @param response the response.
      */
-    protected void sendResp(final ResponseEntity responseEntity) {
+    protected void sendResp(final Response response) {
         new Thread(() -> {
-            sendToEmail(
-                    "New ResponseEntity",
-                    "UserEntity name: " + responseEntity.getUsername() +
-                            "\nText: " + responseEntity.getText()
-            );
+            final String subject = "New Response";
+            final String text = "User name: " + response.getUsername() +
+                    "\nText: " + response.getText();
+            sendToEmail(subject, text);
         }).start();
-        this.responseService.add(responseEntity);
-        Cache.removeAll("ResponseEntity");
+        this.responseService.add(response);
+        Cache.removeAll("Response");
     }
 
     /**
-     * Creates and sends a messageEntity to personnel E-mails.
+     * Creates and sends a message to personnel E-mails.
      *
-     * @param subject the subject of a new messageEntity.
-     * @param text    the text of a new messageEntity.
+     * @param subject the subject of a new message.
+     * @param text    the text of a new message.
      */
-    private void sendToEmail(
-            final String subject,
-            final String text
-    ) {
-        final CompanyEntity mainCompanyEntity = this.companyService.getMainCompany();
-        this.senderService.send(
-                subject + " | " + mainCompanyEntity.getTitle(), text,
-                this.userService.getPersonnel(),
-                mainCompanyEntity.getSenderEmail(), mainCompanyEntity.getSenderPass()
-        );
+    private void sendToEmail(final String subject, final String text) {
+        final Company mainCompany = this.companyService.getMainCompany();
+        final String _subject = subject + " | " + mainCompany.getTitle();
+        final String senderEmail = mainCompany.getSenderEmail();
+        final String senderPass = mainCompany.getSenderPass();
+        final Collection<User> personnel = this.userService.getPersonnel();
+        this.senderService.send(_subject, text, personnel, senderEmail, senderPass);
     }
 
     /**
@@ -463,8 +458,8 @@ public abstract class MainController {
      * @return The ready object of the ModelAndView class.
      */
     protected ModelAndView getResponsesMV(final boolean isCaptcha) {
-        final ModelAndView modelAndView = getAllResponsesPage();
-        modelAndView.addObject("is_captcha", isCaptcha);
+        final ModelAndView modelAndView = getResponsesPage();
+        modelAndView.addObject("captcha", isCaptcha);
         return modelAndView;
     }
 }

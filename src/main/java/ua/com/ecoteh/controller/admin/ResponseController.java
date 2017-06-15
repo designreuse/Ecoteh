@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.response.ResponseEntity;
+import ua.com.ecoteh.entity.response.Response;
+import ua.com.ecoteh.entity.response.ResponseEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.ResponseService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
@@ -18,7 +19,7 @@ import ua.com.ecoteh.util.cache.Cache;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link ResponseEntity} class for admins.
+ * objects of the {@link Response} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -42,7 +43,7 @@ public class ResponseController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link ResponseEntity} class.
+     * for working with objects of the {@link Response} class.
      */
     private final ResponseService responseService;
 
@@ -101,12 +102,15 @@ public class ResponseController {
     )
     public String updateResponse(
             @RequestParam(value = "id") final long id,
-            @RequestParam(value = "username", defaultValue = "") final String username,
-            @RequestParam(value = "text", defaultValue = "") final String text,
-            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
+            @RequestParam(value = "username") final String username,
+            @RequestParam(value = "text") final String text,
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
-        final ResponseEntity responseEntity = new ResponseEntity(username, text, validated);
-        this.responseService.update(id, responseEntity);
+        final Response response = this.responseService.get(id);
+        final ResponseEditor editor = response.getEditor();
+        editor.addUsername(username).addText(text).addValidated(validated);
+        final Response updatedResponse = editor.update();
+        this.responseService.update(updatedResponse);
         Cache.clear();
         return "redirect:/responses";
     }
@@ -126,12 +130,11 @@ public class ResponseController {
             method = RequestMethod.GET
     )
     public void updateResponse() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/response/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/response/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -149,9 +152,11 @@ public class ResponseController {
             method = RequestMethod.GET
     )
     public String reverseValidResponse(@PathVariable("id") final long id) {
-        final ResponseEntity responseEntity = this.responseService.get(id);
-        responseEntity.reverseValidated();
-        this.responseService.update(responseEntity);
+        final Response response = this.responseService.get(id);
+        final ResponseEditor editor = response.getEditor();
+        editor.reverseValidated();
+        final Response updatedResponse = editor.update();
+        this.responseService.update(updatedResponse);
         Cache.clear();
         return "redirect:/responses";
     }

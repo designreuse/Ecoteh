@@ -98,10 +98,9 @@ public final class ReCaptcha implements Captcha {
         this.status = "";
         boolean result = false;
         if (isNotNull(request)) {
-            result = isVerify(
-                    request.getParameter(this.parameter),
-                    getIpAddress(request)
-            );
+            final String captcha = request.getParameter(this.parameter);
+            final String ipAddress = getIpAddress(request);
+            result = isVerify(captcha, ipAddress);
         }
         return result;
     }
@@ -119,7 +118,8 @@ public final class ReCaptcha implements Captcha {
         boolean result = false;
         if (isNotEmpty(captcha) && isNotEmpty(ipAddress)) {
             try {
-                final String response = getResponse(new URL(this.url), captcha, ipAddress);
+                final URL url = new URL(this.url);
+                final String response = getResponse(url, captcha, ipAddress);
                 result = new JsonParser(response).parse();
             } catch (IOException ex) {
                 ex.printStackTrace();

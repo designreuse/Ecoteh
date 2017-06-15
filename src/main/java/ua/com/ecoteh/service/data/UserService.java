@@ -193,4 +193,12 @@ public interface UserService extends DataService<User>, UserDetailsService {
      * if authenticated user has super admin role.
      */
     boolean isAuthenticatedUser(User user);
+
+    /**
+     * Checks an authenticated user.
+     *
+     * @return true if the user is authenticated user or
+     * if authenticated user has super admin role.
+     */
+    boolean isAuthenticatedUser();
 }

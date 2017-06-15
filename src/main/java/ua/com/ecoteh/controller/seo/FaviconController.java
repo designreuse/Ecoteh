@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.service.data.FileService;
@@ -44,7 +45,7 @@ public class FaviconController {
             method = RequestMethod.GET
     )
     public String getFavicon() {
-        final FileEntity favicon = this.fileService.getLastByType(FileType.FAVICON);
+        final File favicon = this.fileService.getLastByType(FileType.FAVICON);
         return "forward:" + favicon.getUrl();
     }
 }

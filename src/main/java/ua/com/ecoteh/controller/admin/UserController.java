@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.company.CompanyEntity;
-import ua.com.ecoteh.entity.contacts.ContactsEntity;
-import ua.com.ecoteh.entity.file.FileEntity;
-import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.company.Company;
+import ua.com.ecoteh.entity.contacts.Contacts;
+import ua.com.ecoteh.entity.contacts.ContactsBuilder;
+import ua.com.ecoteh.entity.contacts.ContactsEditor;
+import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileBuilder;
+import ua.com.ecoteh.entity.file.FileEditor;
+import ua.com.ecoteh.entity.user.User;
+import ua.com.ecoteh.entity.user.UserBuilder;
+import ua.com.ecoteh.entity.user.UserEditor;
 import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
@@ -24,12 +30,14 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.sender.SenderService;
 import ua.com.ecoteh.util.cache.Cache;
 
+import java.util.Collection;
+
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
  * The class implements a set of methods for working
- * with main ModelAndView objects and object of the {@link UserEntity}
+ * with main ModelAndView objects and object of the {@link User}
  * class for admins. Class methods create and return modelsAndView,
  * depending on the request. For the work used implementation
  * of the interface {@link MainMVFabric}.
@@ -59,19 +67,19 @@ public class UserController {
     private final MainMVFabric fabric;
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link UserEntity} class.
+     * for working with objects of the {@link User} class.
      */
     private final UserService userService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CompanyEntity} class.
+     * for working with objects of the {@link Company} class.
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link FileEntity} class.
+     * for working with objects of the {@link File} class.
      */
     private final FileService fileService;
 
@@ -120,7 +128,7 @@ public class UserController {
     )
     public ModelAndView getAllUsersPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("users_list", this.userService.getPersonnel());
+        modelAndView.addObject("users", this.userService.getPersonnel());
         modelAndView.addObject("is_captcha", null);
         modelAndView.setViewName("user/all");
         return modelAndView;
@@ -154,16 +162,16 @@ public class UserController {
      * @param password       the password of a new user.
      * @param description    the description of a new user.
      * @param mobilePhone    the mobile phone of a new user.
-     * @param landlinePhone  the landline phone of a new user.
+     * @param landlinesPhone the landlines phone of a new user.
      * @param fax            the fax of a new user.
-     * @param email          the e-mail of a new user.
-     * @param vkontakte      the vkontakte URL of a new user.
-     * @param facebook       the facebook URL of a new user.
-     * @param twitter        the twitter URL of a new user.
-     * @param skype          the skype username of a new user.
+     * @param email          the E-mail of a new user.
+     * @param vkontakte      the Vkontakte URL of a new user.
+     * @param facebook       the Facebook URL of a new user.
+     * @param twitter        the Twitter URL of a new user.
+     * @param skype          the Skype username of a new user.
      * @param multipartPhoto the photo to a new user.
      * @param validated      the validated of a new user.
-     * @param isMailing      the permit to send a letters to a user email.
+     * @param mailing        the permit to send a letters to a user email.
      * @param locked         the locked a user or not.
      * @return The redirect string to the "/admin/user/all" URL.
      */
@@ -177,7 +185,7 @@ public class UserController {
             @RequestParam(value = "password") final String password,
             @RequestParam(value = "description") final String description,
             @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landline_phone") final String landlinePhone,
+            @RequestParam(value = "landlines_phone") final String landlinesPhone,
             @RequestParam(value = "fax") final String fax,
             @RequestParam(value = "email") final String email,
             @RequestParam(value = "vkontakte") final String vkontakte,
@@ -186,27 +194,35 @@ public class UserController {
             @RequestParam(value = "skype") final String skype,
             @RequestParam(value = "photo") final MultipartFile multipartPhoto,
             @RequestParam(value = "is_valid") final boolean validated,
-            @RequestParam(value = "is_mailing") final boolean isMailing,
+            @RequestParam(value = "is_mailing") final boolean mailing,
             @RequestParam(value = "is_locked") final boolean locked
     ) {
-        final UserEntity userEntity = new UserEntity(
-                name, description,
-                new ContactsEntity(
-                        email, mobilePhone, landlinePhone, fax,
-                        vkontakte, facebook, twitter, skype
-                )
-        );
-        userEntity.setLogin(login);
-        userEntity.setPassword(password);
-        userEntity.setValidated(validated);
-        userEntity.setMailing(isMailing);
-        userEntity.setLocked(locked);
-        userEntity.setRole(UserRole.ADMIN);
+
+        final UserBuilder userBuilder = User.getBuilder();
+        userBuilder.addName(name).addLogin(login).addPassword(password)
+                .addDescription(description).addValidated(validated)
+                .addMailing(mailing).addLocked(locked)
+                .addRole(UserRole.ADMIN);
+
+        final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+        contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)
+                .addLandlinesPhone(landlinesPhone).addFax(fax)
+                .addVkontakte(vkontakte).addFacebook(facebook)
+                .addTwitter(twitter).addSkype(skype);
+        final Contacts contacts = contactsBuilder.build();
+        userBuilder.addContacts(contacts);
+
         if (isNotEmpty(multipartPhoto)) {
-            userEntity.setPhotoEntity(this.fileService.add(userEntity.getName(), multipartPhoto));
+            final FileBuilder fileBuilder = File.getBuilder();
+            fileBuilder.addTitle(name).addMultipartFile(multipartPhoto);
+            final File photo = fileBuilder.build();
+            final File updatedPhoto = this.fileService.add(photo);
+            userBuilder.addPhoto(updatedPhoto);
         }
-        this.userService.add(userEntity);
-        Cache.removeAll("Main CompanyEntity");
+
+        final User user = userBuilder.build();
+        this.userService.add(user);
+        Cache.removeAll("Main Company");
         return "redirect:/admin/user/all";
     }
 
@@ -225,12 +241,11 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void addUser() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/user/add"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/user/add"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -265,7 +280,7 @@ public class UserController {
      * @param password       the new password to a user.
      * @param description    the new description to a user.
      * @param mobilePhone    the new mobile phone to a user.
-     * @param landlinePhone  the new landline phone to a user.
+     * @param landlinesPhone the new landlines phone to a user.
      * @param fax            the new fax to a user.
      * @param email          the new E-mail to a user.
      * @param vkontakte      the new Vkontakte URL to a user.
@@ -273,9 +288,9 @@ public class UserController {
      * @param twitter        the new Twitter URL to a user.
      * @param skype          the new Skype username to a user.
      * @param multipartPhoto the photo to a user.
-     * @param isValid        the validated of a user.
-     * @param isMailing      the permit to send a letters to a user E-mail.
-     * @param isLocked       the locked a user or not.
+     * @param validated      the validated of a user.
+     * @param mailing        the permit to send a letters to a user E-mail.
+     * @param locked         the locked a user or not.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
@@ -284,41 +299,49 @@ public class UserController {
     )
     public String updateUser(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name", defaultValue = "") final String name,
-            @RequestParam(value = "login", defaultValue = "") final String login,
-            @RequestParam(value = "password", defaultValue = "") final String password,
-            @RequestParam(value = "description", defaultValue = "") final String description,
-            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
-            @RequestParam(value = "landline_phone", defaultValue = "") final String landlinePhone,
-            @RequestParam(value = "fax", defaultValue = "") final String fax,
-            @RequestParam(value = "email", defaultValue = "") final String email,
-            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
-            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
-            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
-            @RequestParam(value = "skype", defaultValue = "") final String skype,
-            @RequestParam(value = "photo", defaultValue = "") final MultipartFile multipartPhoto,
-            @RequestParam(value = "is_valid", defaultValue = "false") final boolean isValid,
-            @RequestParam(value = "is_mailing", defaultValue = "false") final boolean isMailing,
-            @RequestParam(value = "is_locked", defaultValue = "false") final boolean isLocked
+            @RequestParam(value = "name") final String name,
+            @RequestParam(value = "login") final String login,
+            @RequestParam(value = "password") final String password,
+            @RequestParam(value = "description") final String description,
+            @RequestParam(value = "mobile_phone") final String mobilePhone,
+            @RequestParam(value = "landlines_phone") final String landlinesPhone,
+            @RequestParam(value = "fax") final String fax,
+            @RequestParam(value = "email") final String email,
+            @RequestParam(value = "vkontakte") final String vkontakte,
+            @RequestParam(value = "facebook") final String facebook,
+            @RequestParam(value = "twitter") final String twitter,
+            @RequestParam(value = "skype") final String skype,
+            @RequestParam(value = "photo") final MultipartFile multipartPhoto,
+            @RequestParam(value = "is_valid") final boolean validated,
+            @RequestParam(value = "is_mailing") final boolean mailing,
+            @RequestParam(value = "is_locked") final boolean locked
     ) {
-        final UserEntity userEntity = new UserEntity(
-                name, description,
-                new ContactsEntity(
-                        email, mobilePhone, landlinePhone, fax,
-                        vkontakte, facebook, twitter, skype
-                )
-        );
-        userEntity.setLogin(login);
-        userEntity.setPassword(password);
-        userEntity.setValidated(isValid);
-        userEntity.setMailing(isMailing);
-        userEntity.setLocked(isLocked);
-        userEntity.setRole(UserRole.ADMIN);
+        final User user = this.userService.getByUrl(url);
+        final UserEditor userEditor = user.getEditor();
+        userEditor.addName(name).addLogin(login).addPassword(password)
+                .addDescription(description).addValidated(validated)
+                .addMailing(mailing).addLocked(locked);
+
+        final ContactsEditor contactsEditor = user.getContacts().getEditor();
+        contactsEditor.addEmail(email).addMobilePhone(mobilePhone)
+                .addLandlinesPhone(landlinesPhone).addFax(fax)
+                .addVkontakte(vkontakte).addFacebook(facebook)
+                .addTwitter(twitter).addSkype(skype);
+        final Contacts contacts = contactsEditor.update();
+        userEditor.addContacts(contacts);
+
         if (isNotEmpty(multipartPhoto)) {
-            userEntity.setPhotoEntity(this.fileService.add(userEntity.getName(), multipartPhoto));
+            final File photo = user.getPhoto();
+            final FileEditor fileEditor = photo.getEditor();
+            fileEditor.addTitle(name).addMultipartFile(multipartPhoto);
+            final File updatedPhoto = fileEditor.update();
+            this.fileService.update(updatedPhoto);
+            userEditor.addPhoto(updatedPhoto);
         }
-        this.userService.update(url, userEntity);
-        Cache.removeAll("Main CompanyEntity");
+
+        final User updatedUser = userEditor.update();
+        this.userService.update(updatedUser);
+        Cache.removeAll("Main Company");
         return "redirect:/admin/user/all";
     }
 
@@ -337,12 +360,11 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void updateUser() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/user/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/user/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -361,7 +383,7 @@ public class UserController {
     )
     public String deleteUserByUrl(@PathVariable("url") final String url) {
         this.userService.removeByUrl(url);
-        Cache.removeAll("Main CompanyEntity");
+        Cache.removeAll("Main Company");
         return "redirect:/admin/user/all";
     }
 
@@ -379,7 +401,7 @@ public class UserController {
     )
     public String deleteAllUsers() {
         this.userService.removeAll();
-        Cache.removeAll("Main CompanyEntity");
+        Cache.removeAll("Main Company");
         return "redirect:/admin/user/all";
     }
 
@@ -397,38 +419,11 @@ public class UserController {
             value = "/send_message",
             method = RequestMethod.POST
     )
-    public ModelAndView sendMessage(
-            @RequestParam(value = "subject", defaultValue = "") final String subject,
-            @RequestParam(value = "sender", defaultValue = "") final String text
+    public ModelAndView sendMessageForPersonnel(
+            @RequestParam(value = "subject") final String subject,
+            @RequestParam(value = "sender") final String text
     ) {
-        new Thread(() -> {
-            String _subject = subject;
-            String message = text;
-            final UserEntity userEntity = this.userService.getAuthenticatedUser();
-            if (isNotNull(userEntity)) {
-                if (isNotEmpty(userEntity.getName())) {
-                    _subject += " - " + userEntity.getName();
-                    message += "\n\n" + userEntity.getName();
-                }
-                if (isNotNull(userEntity.getContactsEntity())) {
-                    if (isNotEmpty(userEntity.getContactsEntity().getMobilePhone())) {
-                        message += "\nMobile Phone: " + userEntity.getContactsEntity().getMobilePhone();
-                    }
-                    if (isNotEmpty(userEntity.getContactsEntity().getLandlinePhone())) {
-                        message += "\nLandline Phone: " + userEntity.getContactsEntity().getLandlinePhone();
-                    }
-                    if (isNotEmpty(userEntity.getContactsEntity().getEmail())) {
-                        message += "\nE-mail: " + userEntity.getContactsEntity().getEmail();
-                    }
-                }
-            }
-            final CompanyEntity mainCompanyEntity = this.companyService.getMainCompany();
-            this.senderService.send(
-                    _subject + " | " + mainCompanyEntity.getTitle(), message,
-                    this.userService.getPersonnel(),
-                    mainCompanyEntity.getSenderEmail(), mainCompanyEntity.getSenderPass()
-            );
-        }).start();
+        createAndSendMessage(subject, text);
         final ModelAndView modelAndView = getAllUsersPage();
         modelAndView.addObject("is_captcha", true);
         return modelAndView;
@@ -449,11 +444,48 @@ public class UserController {
             method = RequestMethod.GET
     )
     public void sendMessageForPersonnel() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/user/send_message"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/user/send_message"
         );
+        throw new IllegalMappingException(message);
+    }
+
+    /**
+     * Creates a message with the incoming parameters and
+     * sends it to personnel.
+     *
+     * @param subject the subject of a message.
+     * @param text    the text of a message.
+     */
+    private void createAndSendMessage(final String subject, final String text) {
+        new Thread(() -> {
+            String _subject = subject;
+            String message = text;
+            final User user = this.userService.getAuthenticatedUser();
+            if (isNotNull(user)) {
+                if (isNotEmpty(user.getName())) {
+                    _subject += " - " + user.getName();
+                    message += "\n\n" + user.getName();
+                }
+                if (isNotNull(user.getContacts())) {
+                    if (isNotEmpty(user.getContacts().getMobilePhone())) {
+                        message += "\nMobile Phone: " + user.getContacts().getMobilePhone();
+                    }
+                    if (isNotEmpty(user.getContacts().getLandlinesPhone())) {
+                        message += "\nLandline Phone: " + user.getContacts().getLandlinesPhone();
+                    }
+                    if (isNotEmpty(user.getContacts().getEmail())) {
+                        message += "\nE-mail: " + user.getContacts().getEmail();
+                    }
+                }
+            }
+            final Company mainCompany = this.companyService.getMainCompany();
+            _subject += " | " + mainCompany.getTitle();
+            final Collection<User> recipients = this.userService.getPersonnel();
+            final String senderEmail = mainCompany.getSenderEmail();
+            final String senderPass = mainCompany.getSenderPass();
+            this.senderService.send(_subject, message, recipients, senderEmail, senderPass);
+        }).start();
     }
 }

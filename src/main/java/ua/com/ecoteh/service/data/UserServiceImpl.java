@@ -2,6 +2,7 @@ package ua.com.ecoteh.service.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -84,9 +85,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     public User getAuthenticatedUser() {
         User user;
         try {
-            user = (User) SecurityContextHolder.getContext()
-                    .getAuthentication()
-                    .getPrincipal();
+            final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            user = (User) authentication.getPrincipal();
         } catch (Exception ex) {
             user = null;
         }
@@ -123,6 +123,18 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
             }
         }
         return result;
+    }
+
+    /**
+     * Checks an authenticated user.
+     *
+     * @return true if the user is authenticated user or
+     * if authenticated user has super admin role.
+     */
+    @Override
+    public boolean isAuthenticatedUser() {
+        final User user = getAuthenticatedUser();
+        return isNotNull(user);
     }
 
     /**

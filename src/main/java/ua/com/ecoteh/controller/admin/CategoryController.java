@@ -1,5 +1,6 @@
 package ua.com.ecoteh.controller.admin;
 
+import com.googlecode.htmlcompressor.compressor.Compressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.category.CategoryEntity;
-import ua.com.ecoteh.entity.file.FileEntity;
+import ua.com.ecoteh.entity.category.Category;
+import ua.com.ecoteh.entity.category.CategoryBuilder;
+import ua.com.ecoteh.entity.category.CategoryEditor;
+import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileBuilder;
+import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.data.FileService;
@@ -24,7 +29,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link CategoryEntity} class or subclasses for admins.
+ * objects of the {@link Category} class or subclasses for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -53,13 +58,13 @@ public class CategoryController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CategoryEntity} class.
+     * for working with objects of the {@link Category} class.
      */
     private final CategoryService categoryService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link FileEntity} class.
+     * for working with objects of the {@link File} class.
      */
     private final FileService fileService;
 
@@ -114,24 +119,29 @@ public class CategoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addCategory(
-            @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "text", defaultValue = "") final String description,
-            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "title") final String title,
+            @RequestParam(value = "text") final String description,
+            @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
-        final CategoryEntity categoryEntity = new CategoryEntity(
-                title,
-                new HtmlCompressor().compress(description),
-                keywords
-        );
-        categoryEntity.setValidated(validated);
+        final Compressor compressor = new HtmlCompressor();
+        final CategoryBuilder categoryBuilder = Category.getBuilder();
+        categoryBuilder.addTitle(title).addKeywords(keywords).addValidated(validated)
+                .addDescription(compressor.compress(description));
+
         if (isNotEmpty(multipartLogo)) {
-            categoryEntity.setLogoEntity(this.fileService.add(categoryEntity.getTitle(), multipartLogo));
+            final FileBuilder fileBuilder = File.getBuilder();
+            fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+            final File logo = fileBuilder.build();
+            final File savingLogo = this.fileService.add(logo);
+            categoryBuilder.addLogo(savingLogo);
         }
-        this.categoryService.add(categoryEntity);
+
+        final Category category = categoryBuilder.build();
+        final Category savingCategory = this.categoryService.add(category);
         Cache.clear();
-        return "redirect:/categoryEntity/" + categoryEntity.getUrl();
+        return "redirect:/category/" + savingCategory.getUrl();
     }
 
     /**
@@ -146,12 +156,11 @@ public class CategoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public void addCategory() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/category/add"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/category/add"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -190,24 +199,31 @@ public class CategoryController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateCategory(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "text", defaultValue = "") final String description,
-            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "title") final String title,
+            @RequestParam(value = "text") final String description,
+            @RequestParam(value = "keywords") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
+            @RequestParam(value = "is_valid") final boolean validated
     ) {
-        final CategoryEntity categoryEntity = new CategoryEntity(
-                title,
-                new HtmlCompressor().compress(description),
-                keywords
-        );
-        categoryEntity.setValidated(validated);
+        final Compressor compressor = new HtmlCompressor();
+        final Category category = this.categoryService.getByUrl(url, false);
+        final CategoryEditor categoryEditor = category.getEditor();
+        categoryEditor.addTitle(title).addKeywords(keywords).addValidated(validated)
+                .addDescription(compressor.compress(description));
+
         if (isNotEmpty(multipartLogo)) {
-            categoryEntity.setLogoEntity(this.fileService.add(categoryEntity.getTitle(), multipartLogo));
+            final File logo = category.getLogo();
+            final FileEditor fileEditor = logo.getEditor();
+            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
+            final File updatedLogo = fileEditor.update();
+            this.fileService.update(updatedLogo);
+            categoryEditor.addLogo(updatedLogo);
         }
-        this.categoryService.update(url, categoryEntity);
+
+        final Category updatedCategory = categoryEditor.update();
+        final Category savingCategory = this.categoryService.update(updatedCategory);
         Cache.clear();
-        return "redirect:/categoryEntity/" + categoryEntity.getUrl();
+        return "redirect:/category/" + savingCategory.getUrl();
     }
 
     /**
@@ -222,12 +238,11 @@ public class CategoryController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public void updateCategory() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/category/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/category/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**

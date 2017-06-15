@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.controller.client.MainController;
-import ua.com.ecoteh.entity.contacts.ContactsEntity;
-import ua.com.ecoteh.entity.message.MessageEntity;
-import ua.com.ecoteh.entity.response.ResponseEntity;
-import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.contacts.Contacts;
+import ua.com.ecoteh.entity.contacts.ContactsBuilder;
+import ua.com.ecoteh.entity.message.Message;
+import ua.com.ecoteh.entity.message.MessageBuilder;
+import ua.com.ecoteh.entity.response.Response;
+import ua.com.ecoteh.entity.response.ResponseBuilder;
+import ua.com.ecoteh.entity.user.User;
+import ua.com.ecoteh.entity.user.UserBuilder;
 import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
@@ -59,9 +63,9 @@ public class AdminMainController extends MainController {
             @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
             final CompanyService companyService,
             final UserService userService,
+            final ResponseService responseService,
             final MessageService messageService,
-            final SenderService senderService,
-            final ResponseService responseService
+            final SenderService senderService
     ) {
         super(
                 fabric, companyService, userService,
@@ -103,7 +107,7 @@ public class AdminMainController extends MainController {
      * @param name        the sender name.
      * @param phone       the phone name.
      * @param email       the email name.
-     * @param userMessage the sender sender.
+     * @param text the sender sender.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
@@ -112,14 +116,21 @@ public class AdminMainController extends MainController {
     )
     public ModelAndView sendMessage(
             @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name", defaultValue = "") final String name,
-            @RequestParam(value = "phone", defaultValue = "") final String phone,
+            @RequestParam(value = "name") final String name,
+            @RequestParam(value = "phone") final String phone,
             @RequestParam(value = "email", required = false) final String email,
-            @RequestParam(value = "message", required = false) final String userMessage
+            @RequestParam(value = "message", required = false) final String text
     ) {
-        final UserEntity userEntity = new UserEntity(name, new ContactsEntity(email, phone));
-        userEntity.setRole(UserRole.CLIENT);
-        sendMess(new MessageEntity(userEntity, "New MessageEntity", userMessage));
+        final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+        contactsBuilder.addEmail(email).addMobilePhone(phone);
+        final Contacts contacts = contactsBuilder.build();
+        final UserBuilder userBuilder = User.getBuilder();
+        userBuilder.addName(name).addContacts(contacts).addRole(UserRole.CLIENT);
+        final User user = userBuilder.build();
+        final MessageBuilder messageBuilder = Message.getBuilder();
+        messageBuilder.addSubject("New Message").addText(text).addUser(user);
+        final Message message = messageBuilder.build();
+        sendMess(message);
         return getMessageMV(url, true);
     }
 
@@ -137,12 +148,11 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendMessage() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/send_message"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/send_message"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -151,7 +161,7 @@ public class AdminMainController extends MainController {
      * Request mapping: /admin/response/send
      * Method: POST
      *
-     * @param name the sender name.
+     * @param username the sender name.
      * @param text the sender text.
      * @return The ready object of the ModelAndView class.
      */
@@ -160,10 +170,13 @@ public class AdminMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendResponse(
-            @RequestParam(value = "name") final String name,
+            @RequestParam(value = "name") final String username,
             @RequestParam(value = "response") final String text
     ) {
-        sendResp(new ResponseEntity(name, text));
+        final ResponseBuilder responseBuilder = Response.getBuilder();
+        responseBuilder.addUsername(username).addText(text);
+        final Response response = responseBuilder.build();
+        sendResp(response);
         return getResponsesMV(true);
     }
 
@@ -182,11 +195,10 @@ public class AdminMainController extends MainController {
             method = RequestMethod.GET
     )
     public void sendResponse() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/response/send"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/response/send"
         );
+        throw new IllegalMappingException(message);
     }
 }

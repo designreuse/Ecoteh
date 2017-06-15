@@ -1,8 +1,8 @@
 package ua.com.ecoteh.util.compressor;
 
 import com.googlecode.htmlcompressor.compressor.Compressor;
+import ua.com.ecoteh.exception.ExceptionMessage;
 
-import static ua.com.ecoteh.exception.ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
@@ -26,12 +26,11 @@ abstract class AbstractCompressor implements Compressor {
      */
     AbstractCompressor(final Compressor compressor) throws IllegalArgumentException {
         if (isNull(compressor)) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            INCOMING_OBJECT_IS_NULL_MESSAGE,
-                            Compressor.class.getSimpleName()
-                    )
+            final String message = String.format(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    Compressor.class.getSimpleName()
             );
+            throw new IllegalArgumentException(message);
         }
         this.compressor = compressor;
     }

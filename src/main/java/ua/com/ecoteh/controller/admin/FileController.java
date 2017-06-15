@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.file.FileEntity;
-import ua.com.ecoteh.entity.file.FileType;
+import ua.com.ecoteh.entity.file.*;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 /**
  * The class implements a set of methods for working with
- * objects of the {@link FileEntity} class for admins.
+ * objects of the {@link File} class for admins.
  * Class methods create and return modelsAndView, depending on the request.
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -56,7 +56,7 @@ public class FileController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link FileEntity} class.
+     * for working with objects of the {@link File} class.
      */
     private final FileService fileService;
 
@@ -128,7 +128,11 @@ public class FileController {
             @RequestParam(value = "type") final String type,
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
-        this.fileService.add(title, getType(type), multipartFile);
+        final FileBuilder builder = File.getBuilder();
+        builder.addTitle(title).addType(getType(type))
+                .addMultipartFile(multipartFile);
+        final File file = builder.build();
+        this.fileService.add(file);
         return "redirect:/admin/file/all";
     }
 
@@ -147,12 +151,11 @@ public class FileController {
             method = RequestMethod.GET
     )
     public void addFile() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/file/add"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/file/add"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -193,11 +196,14 @@ public class FileController {
     )
     public String updateFile(
             @RequestParam(value = "id") final long id,
-            @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "type", defaultValue = "") final String type,
+            @RequestParam(value = "title") final String title,
+            @RequestParam(value = "type") final String type,
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
-        this.fileService.update(id, title, getType(type), multipartFile);
+        final File file = this.fileService.get(id);
+        final FileEditor editor = file.getEditor();
+        editor.addTitle(title).addType(getType(type)).addMultipartFile(multipartFile);
+        this.fileService.update(editor.update());
         return "redirect:/admin/file/all";
     }
 
@@ -216,12 +222,11 @@ public class FileController {
             method = RequestMethod.GET
     )
     public void updateFile() throws IllegalMappingException {
-        throw new IllegalMappingException(
-                String.format(
-                        ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
-                        "/admin/file/update"
-                )
+        final String message = String.format(
+                ExceptionMessage.GET_METHOD_NOT_SUPPORTED_MESSAGE,
+                "/admin/file/update"
         );
+        throw new IllegalMappingException(message);
     }
 
     /**
@@ -274,11 +279,8 @@ public class FileController {
             method = RequestMethod.GET
     )
     public ModelAndView getAllFileSortByTitle(final HttpServletRequest request) {
-        return getAllFileSortByTitle(
-                Boolean.parseBoolean(
-                        request.getParameter("revers")
-                )
-        );
+        final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
+        return getAllFileSortByTitle(revers);
     }
 
     /**
@@ -288,13 +290,10 @@ public class FileController {
      * @return The ready object of the ModelAndView class.
      */
     private ModelAndView getAllFileSortByTitle(final boolean revers) {
+        final Collection<File> files = this.fileService.getAll(false);
+        final Collection<File> sortedByTitleFiles = this.fileService.sortByTitle(files, revers);
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject(
-                "files",
-                this.fileService.sortByTitle(
-                        this.fileService.getAll(false), revers
-                )
-        );
+        modelAndView.addObject("files", sortedByTitleFiles);
         modelAndView.addObject("revers", !revers);
         modelAndView.setViewName("file/all");
         return modelAndView;
