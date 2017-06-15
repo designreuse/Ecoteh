@@ -52,7 +52,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <h3 class="text-center" title="Добавление новой статьи">Новая статья</h3>
                     <hr>
                     <div class="text-center">
-                        <%-- Form to add a new article --%>
+                            <%-- Form to add a new article --%>
                         <form action="<c:url value="/admin/article/add"/>" method="post" enctype="multipart/form-data">
                             <table align="center" class="table-size">
                                 <tr>
@@ -97,8 +97,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Цена</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="price" minlength="1"
-                                               maxlength="100" placeholder="Цена">
+                                        <input type="number" class="time form-control" name="price" placeholder="Цена"
+                                               min="0" step="0.5">
+                                        -
+                                        <input type="text" class="time form-control" name="currency" maxlength="10"
+                                               placeholder="Валюта">
                                     </td>
                                 </tr>
                                 <tr>

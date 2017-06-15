@@ -33,7 +33,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <c:set var="length" value="${fn:length(users_list)}"/>
+        <c:set var="length" value="${fn:length(users)}"/>
         <c:if test="${length gt 0}">
             <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
         </c:if>

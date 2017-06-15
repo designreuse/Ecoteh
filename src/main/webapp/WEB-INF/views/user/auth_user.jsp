@@ -59,12 +59,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             </a>
         </h4>
     </c:if>
-    <c:if test="${not empty contacts.landlinePhone}">
+    <c:if test="${not empty contacts.landlinesPhone}">
         <h4>
-            <a href="tel:<c:out value="${contacts.landlinePhone}"/>"
+            <a href="tel:<c:out value="${contacts.landlinesPhone}"/>"
                title="Позвонить на стационарный телефон">
                 <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                &nbsp;<c:out value="${contacts.landlinePhone}"/>
+                &nbsp;<c:out value="${contacts.landlinesPhone}"/>
             </a>
         </h4>
     </c:if>

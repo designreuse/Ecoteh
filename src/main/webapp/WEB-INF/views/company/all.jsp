@@ -22,7 +22,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="title" content="Наши партнеры | <c:out value="${main_company.title}"/>">
         <meta name="description" content="Партнеры компании &quot;<c:out value="${main_company.title}"/>&quot;.">
         <meta name="keywords"
-              content="Партнеры<c:forEach items="${partners_list}" var="partner">, <c:out value="${partner.title}"/></c:forEach>"/>
+              content="Партнеры<c:forEach items="${companies}" var="company">, <c:out value="${company.title}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -33,7 +33,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <c:set var="length" value="${fn:length(partners_list)}"/>
+        <c:set var="length" value="${fn:length(companies)}"/>
         <c:if test="${length gt 0}">
             <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
         </c:if>

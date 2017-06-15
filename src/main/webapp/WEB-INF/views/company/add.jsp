@@ -111,7 +111,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Cтационарный телефон</td>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="landline_phone"
+                                        <input type="text" class="phone form-control" name="landlines_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
@@ -171,7 +171,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Адрес офиса</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="address" maxlength="300"
+                                        <input type="text" class="form-control" name="post_address" maxlength="300"
                                                placeholder="Адрес главного офиса компании">
                                     </td>
                                 </tr>

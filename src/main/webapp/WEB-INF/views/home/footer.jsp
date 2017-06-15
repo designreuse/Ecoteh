@@ -39,6 +39,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                                 <br>
                             </c:if>
+                            <c:if test="${not empty contacts.landlinesPhone}">
+                                <a href="tel:<c:out value="${contacts.landlinesPhone}"/>"
+                                   title="Cтационарный телефон">
+                                    <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+                                    &nbsp;<c:out value="${contacts.landlinesPhone}"/>
+                                </a>
+                                <br>
+                            </c:if>
                             <c:if test="${not empty contacts.fax}">
                                 <a href="tel:<c:out value="${contacts.fax}"/>" title="Телефон / Факс">
                                     <span class="glyphicon glyphicon-print" aria-hidden="true"></span>

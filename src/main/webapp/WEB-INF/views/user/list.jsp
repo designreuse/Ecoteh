@@ -8,7 +8,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:set var="length" value="${fn:length(users_list)}"/>
+<c:set var="length" value="${fn:length(users)}"/>
 <c:choose>
     <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}">
         <c:set var="in_line" value="3"/>
@@ -24,7 +24,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <c:set var="printed_in_line" value="0"/>
 <c:set var="printed" value="0"/>
 
-<c:forEach items="${users_list}" var="user">
+<c:forEach items="${users}" var="user">
     <c:if test="${(last_line ne length) and (printed eq last_line)}">
         <c:set var="in_line" value="${length - last_line}"/>
     </c:if>
@@ -86,12 +86,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     </a>
                 </h4>
             </c:if>
-            <c:if test="${not empty contacts.landlinePhone}">
+            <c:if test="${not empty contacts.landlinesPhone}">
                 <h4>
-                    <a href="tel:<c:out value="$contacts.landlinePhone}"/>"
+                    <a href="tel:<c:out value="${contacts.landlinesPhone}"/>"
                        title="Позвонить на стационарный телефон">
                         <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                        &nbsp;<c:out value="${contacts.landlinePhone}"/>
+                        &nbsp;<c:out value="${contacts.landlinesPhone}"/>
                     </a>
                 </h4>
             </c:if>

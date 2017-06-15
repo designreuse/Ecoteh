@@ -133,9 +133,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Цена</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="price" minlength="1"
-                                               maxlength="100" placeholder="Цена"
-                                               value="<c:out value="${article.price}"/>">
+                                        <input type="number" class="time form-control" name="price" placeholder="Цена"
+                                               min="0" step="0.5" value="<c:out value="${article.price}"/>">
+                                        -
+                                        <input type="text" class="time form-control" name="currency" maxlength="10"
+                                               placeholder="Валюта" value="<c:out value="${article.currency}"/>">
                                     </td>
                                 </tr>
                                 <tr>

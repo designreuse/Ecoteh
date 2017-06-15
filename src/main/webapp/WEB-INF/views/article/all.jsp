@@ -23,7 +23,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="description"
               content="Все товары <c:out value="${main_company.title}"/> - <c:out value="${main_company.tagline}"/>.">
         <meta name="keywords"
-              content="<c:out value="${main_company.title}"/><c:forEach items="${articles_list}" var="article">, <c:out value="${article.title}"/></c:forEach>"/>
+              content="<c:out value="${main_company.title}"/><c:forEach items="${articles}" var="article">, <c:out value="${article.title}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -34,7 +34,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <c:set var="length" value="${fn:length(articles_list)}"/>
+        <c:set var="length" value="${fn:length(articles)}"/>
         <c:if test="${length gt 0}">
             <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
         </c:if>
@@ -84,16 +84,30 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <c:if test="${length gt 1}">
                         <p class="path">
                             <a href="#">Сортировка</a>:
+                            <a href="<c:url value="/article/all/sort?type=price&revers=${revers}"/>"
+                               title="Сортировать по цене">
+                                <c:choose>
+                                    <c:when test="${revers}">
+                                        По&nbsp;цене&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        По&nbsp;цене&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
+                            |
                             <a href="<c:url value="/article/all/sort?type=title&revers=${revers}"/>"
                                title="Сортировать по названию">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet-alt"
-                                        aria-hidden="true"></span>
+                                        По&nbsp;названия&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По&nbsp;названия&nbsp;<span class="glyphicon glyphicon-sort-by-alphabet"
-                                        aria-hidden="true"></span>
+                                        По&nbsp;названия&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
                             </a>
@@ -102,12 +116,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                title="Сортировать по номеру (артиклю)">
                                 <c:choose>
                                     <c:when test="${revers}">
-                                        По&nbsp;номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order-alt"
-                                        aria-hidden="true"></span>
+                                        По&nbsp;номеру&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
                                     </c:when>
                                     <c:otherwise>
-                                        По&nbsp;номеру&nbsp;<span class="glyphicon glyphicon-sort-by-order"
-                                        aria-hidden="true"></span>
+                                        По&nbsp;номеру&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
                                     </c:otherwise>
                                 </c:choose>
                             </a>

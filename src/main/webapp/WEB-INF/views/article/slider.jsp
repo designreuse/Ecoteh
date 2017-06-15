@@ -11,7 +11,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <c:set var="length" value="${fn:length(articles)}"/>
 <c:if test="${length gt 1}">
     <c:if test="${(print_products eq null) or (print_products gt length) or (print_products le 0)}">
-        <c:set var="print_responses" value="3"/>
+        <c:set var="print_products" value="3"/>
     </c:if>
 
     <div class="container">
@@ -22,7 +22,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         Также просматривают:
                     </a>
                 </p>
-                <c:forEach items="${articles}" var="article_s" end="${print_responses}">
+                <c:forEach items="${articles}" var="article_s" end="${print_products}">
                     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         <div class="text-center">
                             <a href="<c:url value="/article/${article_s.url}"/>"
@@ -34,9 +34,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                  value="/resources/img/static/default_file.gif"/>'">
                                 </c:if>
                                 <h5><c:out value="${article_s.title}"/></h5>
-                                <c:if test="${(not empty article_s.price) and (article_s.price ne '0')}">
+                                <c:if test="${article_s.price gt 0}">
                                     <h5 class="green">
-                                        Цена: <c:out value="${article_s.price}"/>
+                                        Цена: <c:out value="${article_s.price}"/>&nbsp;<c:out
+                                            value="${article.currency}"/>
                                     </h5>
                                 </c:if>
                             </a>

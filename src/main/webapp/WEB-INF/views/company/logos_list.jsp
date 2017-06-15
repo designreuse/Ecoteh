@@ -8,26 +8,26 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:set var="length" value="${fn:length(partners)}"/>
+<c:set var="length" value="${fn:length(companies)}"/>
 <c:if test="${length gt 0}">
-    <c:if test="${(print_partners eq null) or (print_partners gt length) or (print_partners le 0)}">
-        <c:set var="print_partners" value="${length}"/>
+    <c:if test="${(print_companies eq null) or (print_companies gt length) or (print_companies le 0)}">
+        <c:set var="print_companies" value="${length}"/>
     </c:if>
     <c:choose>
-        <c:when test="${(print_partners % 4 eq 0) or (print_partners % 4 eq 3)}">
+        <c:when test="${(print_companies % 4 eq 0) or (print_companies % 4 eq 3)}">
             <c:set var="in_line" value="4"/>
         </c:when>
-        <c:when test="${(print_partners % 3 eq 0) or (print_partners % 3 eq 2)}">
+        <c:when test="${(print_companies % 3 eq 0) or (print_companies % 3 eq 2)}">
             <c:set var="in_line" value="3"/>
         </c:when>
-        <c:when test="${(print_partners % 2 eq 0) or (print_partners % 2 eq 1)}">
+        <c:when test="${(print_companies % 2 eq 0) or (print_companies % 2 eq 1)}">
             <c:set var="in_line" value="2"/>
         </c:when>
         <c:otherwise>
             <c:set var="in_line" value="1"/>
         </c:otherwise>
     </c:choose>
-    <c:set var="last_line" value="${print_partners - print_partners % in_line}"/>
+    <c:set var="last_line" value="${print_companies - print_companies % in_line}"/>
     <c:set var="printed_in_line" value="0"/>
     <c:set var="printed" value="0"/>
 
@@ -39,9 +39,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
                 </h3>
                 <hr>
-                <c:forEach items="${partners}" var="partner" end="${print_partners - 1}">
-                    <c:if test="${(last_line ne print_partners) and (printed eq last_line)}">
-                        <c:set var="in_line" value="${print_partners - last_line}"/>
+                <c:forEach items="${companies}" var="partner" end="${print_companies - 1}">
+                    <c:if test="${(last_line ne print_companies) and (printed eq last_line)}">
+                        <c:set var="in_line" value="${print_companies - last_line}"/>
                     </c:if>
                     <div class="col-xs-12 <c:choose>
                                     <c:when test="${in_line eq 1}">col-sm-12 col-md-12 col-lg-12</c:when>
@@ -79,7 +79,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <c:set var="printed_in_line" value="0"/>
                     </c:if>
                 </c:forEach>
-                <c:if test="${length gt print_partners}">
+                <c:if test="${length gt print_companies}">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr class="hidden-md hidden-lg hidden-xl">
                         <p class="text-right">

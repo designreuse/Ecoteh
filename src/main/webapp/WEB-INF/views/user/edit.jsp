@@ -131,8 +131,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">
                                         <c:choose>
-                                            <c:when test="${not empty contacts.landlinePhone}">
-                                                <a href="tel:<c:out value="${contacts.landlinePhone}"/>"
+                                            <c:when test="${not empty contacts.landlinesPhone}">
+                                                <a href="tel:<c:out value="${contacts.landlinesPhone}"/>"
                                                    title="Позвонить &quot;<c:out value="${user.name}"/>&quot; на телефон">
                                                     Стационарный телефон
                                                 </a>
@@ -141,9 +141,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </c:choose>
                                     </td>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="landline_phone"
+                                        <input type="text" class="phone form-control" name="landlines_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000"
-                                               value="<c:out value="${contacts.landlinePhone}"/>">
+                                               value="<c:out value="${contacts.landlinesPhone}"/>">
                                     </td>
                                 </tr>
                                 <tr>

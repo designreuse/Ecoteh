@@ -50,11 +50,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <br>
             </div>
         </c:if>
-        <c:if test="${not empty company.address.address}">
+        <c:if test="${not empty company.address.postAddress}">
             <div class="text-center">
                 <br>
                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                &nbsp;<c:out value="${company.address.address}"/>
+                &nbsp;<c:out value="${company.address.postAddress}"/>
                 <br>
             </div>
         </c:if>
@@ -79,12 +79,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <br>
             </div>
         </c:if>
-        <c:if test="${not empty contacts.landlinePhone}">
+        <c:if test="${not empty contacts.landlinesPhone}">
             <div class="text-center">
-                <a href="tel:<c:out value="${contacts.landlinePhone}"/>"
+                <a href="tel:<c:out value="${contacts.landlinesPhone}"/>"
                    title="Позвонить на стационарный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<c:out value="${contacts.landlinePhone}"/>
+                    &nbsp;&nbsp;<c:out value="${contacts.landlinesPhone}"/>
                 </a>
                 <br>
             </div>

@@ -96,7 +96,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Стационарный телефон</td>
                                     <td class="tds">
-                                        <input type="text" class="phone form-control" name="landline_phone"
+                                        <input type="text" class="phone form-control" name="landlines_phone"
                                                maxlength="20" placeholder="+38 (000) 00-00-000">
                                     </td>
                                 </tr>
