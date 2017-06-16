@@ -14,18 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.entity.category.CategoryBuilder;
-import ua.com.ecoteh.entity.category.CategoryEditor;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileBuilder;
-import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CategoryService;
-import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
@@ -63,29 +58,20 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     /**
-     * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
-     */
-    private final FileService fileService;
-
-    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
      * @param fabric          the implementation of the {@link MainMVFabric} interface.
      * @param categoryService the implementation of the {@link CategoryService} interface.
-     * @param fileService     the implementation of the {@link CategoryService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CategoryController(
             @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
-            final CategoryService categoryService,
-            final FileService fileService
+            final CategoryService categoryService
     ) {
         this.fabric = fabric;
         this.categoryService = categoryService;
-        this.fileService = fileService;
     }
 
     /**
@@ -130,13 +116,10 @@ public class CategoryController {
         categoryBuilder.addTitle(title).addKeywords(keywords).addValidated(validated)
                 .addDescription(compressor.compress(description));
 
-        if (isNotEmpty(multipartLogo)) {
-            final FileBuilder fileBuilder = File.getBuilder();
-            fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
-            final File logo = fileBuilder.build();
-            final File savingLogo = this.fileService.add(logo);
-            categoryBuilder.addLogo(savingLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        categoryBuilder.addLogo(logo);
 
         final Category category = categoryBuilder.build();
         final Category savingCategory = this.categoryService.add(category);
@@ -206,24 +189,19 @@ public class CategoryController {
             @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final Category category = this.categoryService.getByUrl(url, false);
-        final CategoryEditor categoryEditor = category.getEditor();
-        categoryEditor.addTitle(title).addKeywords(keywords).addValidated(validated)
+        final CategoryBuilder categoryBuilder = Category.getBuilder();
+        categoryBuilder.addTitle(title).addKeywords(keywords).addValidated(validated)
                 .addDescription(compressor.compress(description));
 
-        if (isNotEmpty(multipartLogo)) {
-            final File logo = category.getLogo();
-            final FileEditor fileEditor = logo.getEditor();
-            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
-            final File updatedLogo = fileEditor.update();
-            this.fileService.update(updatedLogo);
-            categoryEditor.addLogo(updatedLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        categoryBuilder.addLogo(logo);
 
-        final Category updatedCategory = categoryEditor.update();
-        final Category savingCategory = this.categoryService.update(updatedCategory);
+        final Category category = categoryBuilder.build();
+        final Category updatedCategory = this.categoryService.update(category);
         Cache.clear();
-        return "redirect:/category/" + savingCategory.getUrl();
+        return "redirect:/category/" + updatedCategory.getUrl();
     }
 
     /**

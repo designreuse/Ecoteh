@@ -286,7 +286,6 @@ public final class UserEditor extends ModelEditor<User, UserEditor> {
      */
     @Override
     protected boolean isValidated() {
-        System.out.println();
         return !isLocked() && super.isValidated();
     }
 

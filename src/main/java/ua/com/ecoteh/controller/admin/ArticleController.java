@@ -14,15 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.article.Article;
 import ua.com.ecoteh.entity.article.ArticleBuilder;
-import ua.com.ecoteh.entity.article.ArticleEditor;
 import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileBuilder;
-import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
-import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
@@ -72,32 +69,23 @@ public class ArticleController {
     private final CategoryService categoryService;
 
     /**
-     * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
-     */
-    private final FileService fileService;
-
-    /**
      * Constructor.
      * Initializes a implementations of the interfaces.
      *
      * @param fabric          the implementation of the {@link MainMVFabric} interface.
      * @param articleService  the implementation of the {@link ArticleService} interface.
      * @param categoryService the implementation of the {@link CategoryService} interface.
-     * @param fileService     the implementation of the {@link FileService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public ArticleController(
             @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
             final ArticleService articleService,
-            final CategoryService categoryService,
-            final FileService fileService
+            final CategoryService categoryService
     ) {
         this.fabric = fabric;
         this.articleService = articleService;
         this.categoryService = categoryService;
-        this.fileService = fileService;
     }
 
     /**
@@ -164,13 +152,10 @@ public class ArticleController {
         final Category category = this.categoryService.getByUrl(categoryUrl, false);
         articleBuilder.addCategory(category);
 
-        if (isNotEmpty(multipartLogo)) {
-            final FileBuilder fileBuilder = File.getBuilder();
-            fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
-            final File logo = fileBuilder.build();
-            final File savingLogo = this.fileService.add(logo);
-            articleBuilder.addLogo(savingLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        articleBuilder.addLogo(logo);
 
         final Article article = articleBuilder.build();
         final Article savingArticle = this.articleService.add(article);
@@ -260,29 +245,24 @@ public class ArticleController {
             @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-        final Article article = this.articleService.getByUrl(url, false);
-        final ArticleEditor articleEditor = article.getEditor();
-        articleEditor.addTitle(title).addKeywords(keywords).addNumber(number)
+        final ArticleBuilder articleBuilder = Article.getBuilder();
+        articleBuilder.addUrl(url).addTitle(title).addKeywords(keywords).addNumber(number)
                 .addPrice(price).addCurrency(currency).addValidated(validated)
                 .addDescription(compressor.compress(description))
                 .addText(compressor.compress(text));
 
         final Category category = this.categoryService.getByUrl(categoryUrl, false);
-        articleEditor.addCategory(category);
+        articleBuilder.addCategory(category);
 
-        if (isNotEmpty(multipartLogo)) {
-            final File logo = article.getLogo();
-            final FileEditor fileEditor = logo.getEditor();
-            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
-            final File updatedLogo = fileEditor.update();
-            this.fileService.update(updatedLogo);
-            articleEditor.addLogo(updatedLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        articleBuilder.addLogo(logo);
 
+        final Article article = articleBuilder.build();
         final Article updatedArticle = this.articleService.update(article);
-        final Article savingArticle = this.articleService.update(updatedArticle);
         Cache.clear();
-        return getViewName(savingArticle);
+        return getViewName(updatedArticle);
     }
 
     /**

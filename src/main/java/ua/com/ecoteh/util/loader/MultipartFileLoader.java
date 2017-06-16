@@ -40,10 +40,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      * @param file the multipart file to write.
      * @param path the root path of a file.
      */
-    public MultipartFileLoader(
-            final MultipartFile file,
-            final String path
-    ) {
+    public MultipartFileLoader(final MultipartFile file, final String path) {
         super(path);
         this.file = file;
     }
@@ -73,15 +70,12 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      */
     @Override
     public String read() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException(
-                String.format(
-                        UNSUPPORTED_OPERATION_MESSAGE,
-                        MultipartFileLoader.class.getSimpleName()
-                )
+        final String message = String.format(
+                UNSUPPORTED_OPERATION_MESSAGE,
+                MultipartFileLoader.class.getSimpleName()
         );
+        throw new UnsupportedOperationException(message);
     }
-
-
 
     /**
      * Returns a multipart file.
@@ -98,6 +92,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      * @return The path to file.
      */
     private String getPathToFile() {
-        return isNotEmpty(getPath()) ? getPath() : this.file.getOriginalFilename();
+        final String path = getPath();
+        return isNotEmpty(path) ? path : this.file.getOriginalFilename();
     }
 }

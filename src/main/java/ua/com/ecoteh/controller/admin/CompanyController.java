@@ -168,7 +168,7 @@ public class CompanyController {
             @RequestParam(value = "post_address") final String postAddress,
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo
-    ) {
+    ) { // TODO: 16.06.2017 check this method
         final Compressor compressor = new HtmlCompressor();
 
         final Company mainCompany = this.companyService.getMainCompany();
@@ -251,24 +251,24 @@ public class CompanyController {
      * Request mapping: /admin/company/add
      * Method: POST
      *
-     * @param title         the title of a new company.
-     * @param domain        the domain of a new company.
-     * @param tagline       the tagline of a new company.
-     * @param description   the description of a new company.
-     * @param information   the information of a new company.
-     * @param keywords      the keywords of a new company.
-     * @param mobilePhone   the mobile phone of a new company.
+     * @param title          the title of a new company.
+     * @param domain         the domain of a new company.
+     * @param tagline        the tagline of a new company.
+     * @param description    the description of a new company.
+     * @param information    the information of a new company.
+     * @param keywords       the keywords of a new company.
+     * @param mobilePhone    the mobile phone of a new company.
      * @param landlinesPhone the landline phone of a new company.
-     * @param fax           the fax of a new company.
-     * @param email         the e-mail of a new company.
-     * @param vkontakte     the vkontakte URL of a new company.
-     * @param facebook      the facebook URL of a new company.
-     * @param twitter       the twitter URL of a new company.
-     * @param skype         the skype username of a new company.
-     * @param postAddress   the post address of a new company.
-     * @param googleMaps    the google maps URL of a new company.
-     * @param multipartLogo the logo to a new company.
-     * @param validated     the validated of a new company.
+     * @param fax            the fax of a new company.
+     * @param email          the e-mail of a new company.
+     * @param vkontakte      the vkontakte URL of a new company.
+     * @param facebook       the facebook URL of a new company.
+     * @param twitter        the twitter URL of a new company.
+     * @param skype          the skype username of a new company.
+     * @param postAddress    the post address of a new company.
+     * @param googleMaps     the google maps URL of a new company.
+     * @param multipartLogo  the logo to a new company.
+     * @param validated      the validated of a new company.
      * @return The redirect string to the "/company/{url}" URL,
      * where {url} is a URL of a saving company.
      */
@@ -317,13 +317,10 @@ public class CompanyController {
         final Contacts contacts = contactsBuilder.build();
         companyBuilder.addContacts(contacts);
 
-        if (isNotEmpty(multipartLogo)) {
-            final FileBuilder fileBuilder = File.getBuilder();
-            fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
-            final File logo = fileBuilder.build();
-            final File savingLogo = this.fileService.add(logo);
-            companyBuilder.addLogo(savingLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        companyBuilder.addLogo(logo);
 
         final Company company = companyBuilder.build();
         final Company savingCompany = this.companyService.add(company);
@@ -380,25 +377,25 @@ public class CompanyController {
      * Request mapping: /admin/company/update
      * Method: POST
      *
-     * @param url           the URL of a company to update.
-     * @param title         the new title to a company.
-     * @param domain        the new domain to a company.
-     * @param tagline       the new tagline to a company.
-     * @param description   the new description to a company.
-     * @param information   the new information to a company.
-     * @param keywords      the new keywords to a company.
-     * @param mobilePhone   the new mobile phone to a company.
+     * @param url            the URL of a company to update.
+     * @param title          the new title to a company.
+     * @param domain         the new domain to a company.
+     * @param tagline        the new tagline to a company.
+     * @param description    the new description to a company.
+     * @param information    the new information to a company.
+     * @param keywords       the new keywords to a company.
+     * @param mobilePhone    the new mobile phone to a company.
      * @param landlinesPhone the new landline phone to a company.
-     * @param fax           the new fax to a company.
-     * @param email         the new e-mail to a company.
-     * @param vkontakte     the new vkontakte URL to a company.
-     * @param facebook      the new facebook URL to a company.
-     * @param twitter       the new twitter URL to a company.
-     * @param skype         the new skype username to a company.
-     * @param postAddress   the new address to a company.
-     * @param googleMaps    the new google maps URL to a company.
-     * @param multipartLogo the new logo to a company.
-     * @param validated     the validated of a article.
+     * @param fax            the new fax to a company.
+     * @param email          the new e-mail to a company.
+     * @param vkontakte      the new vkontakte URL to a company.
+     * @param facebook       the new facebook URL to a company.
+     * @param twitter        the new twitter URL to a company.
+     * @param skype          the new skype username to a company.
+     * @param postAddress    the new address to a company.
+     * @param googleMaps     the new google maps URL to a company.
+     * @param multipartLogo  the new logo to a company.
+     * @param validated      the validated of a article.
      * @return The redirect string to the "/company/{url}" URL,
      * where {url} is a URL of a saving company.
      */
@@ -428,40 +425,34 @@ public class CompanyController {
             @RequestParam(value = "is_valid") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
-
-        final Company company = this.companyService.getByUrl(url, false);
-        final CompanyEditor companyEditor = company.getEditor();
-        companyEditor.addTitle(title).addDomain(domain).addTagline(tagline)
+        final CompanyBuilder companyBuilder = Company.getBuilder();
+        companyBuilder.addTitle(title).addDomain(domain).addTagline(tagline)
                 .addKeywords(keywords).addValidated(validated)
                 .addDescription(compressor.compress(description))
                 .addInformation(compressor.compress(information));
 
-        final ContactsEditor contactsEditor = company.getContacts().getEditor();
-        contactsEditor.addEmail(email).addMobilePhone(mobilePhone)
+        final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+        contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)
                 .addLandlinesPhone(landlinesPhone).addFax(fax)
                 .addVkontakte(vkontakte).addFacebook(facebook)
                 .addTwitter(twitter).addSkype(skype);
-        final Contacts contacts = contactsEditor.update();
-        companyEditor.addContacts(contacts);
+        final Contacts contacts = contactsBuilder.build();
+        companyBuilder.addContacts(contacts);
 
-        final AddressEditor addressEditor = company.getAddress().getEditor();
-        addressEditor.addPostAddress(postAddress).addGoogleMaps(googleMaps);
-        final Address address = addressEditor.update();
-        companyEditor.addAddress(address);
+        final AddressBuilder addressBuilder = Address.getBuilder();
+        addressBuilder.addPostAddress(postAddress).addGoogleMaps(googleMaps);
+        final Address address = addressBuilder.build();
+        companyBuilder.addAddress(address);
 
-        if (isNotEmpty(multipartLogo)) {
-            final File logo = company.getLogo();
-            final FileEditor fileEditor = logo.getEditor();
-            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
-            final File updatedLogo = fileEditor.update();
-            this.fileService.update(updatedLogo);
-            companyEditor.addLogo(updatedLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        companyBuilder.addLogo(logo);
 
-        final Company updatedCompany = companyEditor.update();
-        final Company savingCompany = this.companyService.update(updatedCompany);
+        final Company company = companyBuilder.build();
+        final Company updatedCompany = this.companyService.update(company);
         Cache.clear();
-        return "redirect:/company/" + savingCompany.getUrl();
+        return "redirect:/company/" + updatedCompany.getUrl();
     }
 
     /**

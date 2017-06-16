@@ -2,7 +2,9 @@ package ua.com.ecoteh.entity.file;
 
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.model.ModelEditor;
+import ua.com.ecoteh.util.translator.Translator;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
@@ -145,7 +147,19 @@ public final class FileEditor extends ModelEditor<File, FileEditor> {
      * @return The URL (newer null).
      */
     private String getUrl() {
-        return isNotNull(this.url) ? this.url : this.file.getUrl();
+        final String url = isNotNull(this.url) ? this.url : this.file.getUrl();
+        final String result;
+        if (isNotEmpty(url)) {
+            result = url;
+        } else {
+            final String title = getTitle();
+            if (isNotEmpty(title)) {
+                result = Translator.fromCyrillicToLatin(title);
+            } else {
+                result = "";
+            }
+        }
+        return result;
     }
 
     /**

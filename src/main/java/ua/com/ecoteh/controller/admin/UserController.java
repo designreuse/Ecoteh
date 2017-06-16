@@ -14,17 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.contacts.Contacts;
 import ua.com.ecoteh.entity.contacts.ContactsBuilder;
-import ua.com.ecoteh.entity.contacts.ContactsEditor;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileBuilder;
-import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserBuilder;
-import ua.com.ecoteh.entity.user.UserEditor;
 import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
-import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.data.UserService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.sender.SenderService;
@@ -79,12 +75,6 @@ public class UserController {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link File} class.
-     */
-    private final FileService fileService;
-
-    /**
-     * The implementation of the interface describes a set of methods
      * for working with E-mail.
      */
     private final SenderService senderService;
@@ -96,7 +86,6 @@ public class UserController {
      * @param fabric         the implementation of the {@link MainMVFabric} interface.
      * @param userService    the implementation of the {@link UserService} interface.
      * @param companyService the implementation of the {@link CompanyService} interface.
-     * @param fileService    the implementation of the {@link FileService} interface.
      * @param senderService  the implementation of the {@link SenderService} interface.
      */
     @Autowired
@@ -105,13 +94,11 @@ public class UserController {
             @Qualifier("cacheMVFabricImpl") final MainMVFabric fabric,
             final UserService userService,
             final CompanyService companyService,
-            final FileService fileService,
             final SenderService senderService
     ) {
         this.fabric = fabric;
         this.userService = userService;
         this.companyService = companyService;
-        this.fileService = fileService;
         this.senderService = senderService;
     }
 
@@ -212,13 +199,10 @@ public class UserController {
         final Contacts contacts = contactsBuilder.build();
         userBuilder.addContacts(contacts);
 
-        if (isNotEmpty(multipartPhoto)) {
-            final FileBuilder fileBuilder = File.getBuilder();
-            fileBuilder.addTitle(name).addMultipartFile(multipartPhoto);
-            final File photo = fileBuilder.build();
-            final File updatedPhoto = this.fileService.add(photo);
-            userBuilder.addPhoto(updatedPhoto);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(name).addMultipartFile(multipartPhoto);
+        final File photo = fileBuilder.build();
+        userBuilder.addPhoto(photo);
 
         final User user = userBuilder.build();
         this.userService.add(user);
@@ -316,31 +300,27 @@ public class UserController {
             @RequestParam(value = "is_mailing") final boolean mailing,
             @RequestParam(value = "is_locked") final boolean locked
     ) {
-        final User user = this.userService.getByUrl(url);
-        final UserEditor userEditor = user.getEditor();
-        userEditor.addName(name).addLogin(login).addPassword(password)
+        final UserBuilder userBuilder = User.getBuilder();
+        userBuilder.addUrl(url).addName(name).addLogin(login).addPassword(password)
                 .addDescription(description).addValidated(validated)
-                .addMailing(mailing).addLocked(locked);
+                .addMailing(mailing).addLocked(locked)
+                .addRole(UserRole.ADMIN);
 
-        final ContactsEditor contactsEditor = user.getContacts().getEditor();
-        contactsEditor.addEmail(email).addMobilePhone(mobilePhone)
+        final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+        contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)
                 .addLandlinesPhone(landlinesPhone).addFax(fax)
                 .addVkontakte(vkontakte).addFacebook(facebook)
                 .addTwitter(twitter).addSkype(skype);
-        final Contacts contacts = contactsEditor.update();
-        userEditor.addContacts(contacts);
+        final Contacts contacts = contactsBuilder.build();
+        userBuilder.addContacts(contacts);
 
-        if (isNotEmpty(multipartPhoto)) {
-            final File photo = user.getPhoto();
-            final FileEditor fileEditor = photo.getEditor();
-            fileEditor.addTitle(name).addMultipartFile(multipartPhoto);
-            final File updatedPhoto = fileEditor.update();
-            this.fileService.update(updatedPhoto);
-            userEditor.addPhoto(updatedPhoto);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(name).addMultipartFile(multipartPhoto);
+        final File photo = fileBuilder.build();
+        userBuilder.addPhoto(photo);
 
-        final User updatedUser = userEditor.update();
-        this.userService.update(updatedUser);
+        final User user = userBuilder.build();
+        this.userService.update(user);
         Cache.removeAll("Main Company");
         return "redirect:/admin/user/all";
     }
