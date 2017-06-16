@@ -60,15 +60,16 @@ public interface FileService extends DataService<File> {
      *
      * @param file     the multipart file to save.
      * @param rootPath the directory path.
+     * @return
      */
-    void saveFile(MultipartFile file, String rootPath);
+    String saveFile(MultipartFile file, String rootPath);
 
     /**
      * Save a multipart file in the file system.
      *
      * @param file the multipart file to save.
      */
-    void saveFile(MultipartFile file);
+    String saveFile(MultipartFile file);
 
     /**
      * Deletes file in the file system.

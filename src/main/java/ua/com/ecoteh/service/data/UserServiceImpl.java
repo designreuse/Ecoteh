@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.config.DefaultAccounts;
 import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileEditor;
+import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.user.User;
+import ua.com.ecoteh.entity.user.UserEditor;
 import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
@@ -72,6 +75,81 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
         super(repository);
         this.repository = repository;
         this.fileService = fileService;
+    }
+
+    /**
+     * Saves and returns object of User class.
+     *
+     * @param user the user to add.
+     * @return The saving user (newer null).
+     * @throws IllegalArgumentException Throw exception when incoming user is null.
+     * @throws NullPointerException     Throw exception when saving userEntity is null.
+     */
+    @Override
+    @Transactional
+    public User add(final User user) throws IllegalArgumentException, NullPointerException {
+        if (isNull(user)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        final File file = user.getPhoto();
+        final String path = this.fileService.saveFile(file.getMultipartFile());
+        final UserEntity userEntity = convertToEntity(user);
+        final FileEntity fileEntity = userEntity.getPhotoEntity();
+        fileEntity.setUrl(path);
+        final UserEntity savingEntity = this.repository.save(userEntity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        return convertToModel(savingEntity);
+    }
+
+    /**
+     * Updates and returns user with incoming URL.
+     *
+     * @param user the URL of a user to update.
+     * @return The updating user with incoming URL (never null).
+     * @throws IllegalArgumentException Throw exception when parameter name is blank.
+     */
+    @Override
+    @Transactional
+    public User update(final User user) throws IllegalArgumentException {
+        if (isNull(user)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        final User old = getByUrl(user.getUrl());
+        final UserEditor editor = old.getEditor();
+        editor.copy(user);
+        final File newPhoto = user.getPhoto();
+        if (isNotEmpty(newPhoto.getMultipartFile())) {
+            final File oldPhoto = old.getPhoto();
+            this.fileService.deleteFile(oldPhoto.getUrl());
+            final String url = this.fileService.saveFile(newPhoto.getMultipartFile());
+            final FileEditor fileEditor = old.getPhoto().getEditor();
+            fileEditor.addUrl(url);
+            final File updatedPhoto = fileEditor.update();
+            editor.addPhoto(updatedPhoto);
+        } else {
+            editor.addPhoto(old.getPhoto());
+        }
+        final User updatedUser = editor.update();
+        final UserEntity userEntity = convertToEntity(updatedUser);
+        final UserEntity savingEntity = this.repository.save(userEntity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        return convertToModel(savingEntity);
     }
 
     /**
@@ -159,31 +237,6 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
             throw new UsernameNotFoundException(ex.getMessage(), ex);
         }
         return user;
-    }
-
-    /**
-     * Updates and returns user with incoming URL.
-     *
-     * @param user the URL of a user to update.
-     * @return The updating user with incoming URL (never null).
-     * @throws IllegalArgumentException Throw exception when parameter name is blank.
-     */
-    @Override
-    @Transactional
-    public User update(final User user) throws IllegalArgumentException {
-        if (isNull(user)) {
-            throw getIllegalArgumentException(
-                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
-                    getClassSimpleName()
-            );
-        }
-        final User userToUpdate = getByUrl(user.getUrl());
-        final File newPhoto = user.getPhoto();
-        final File oldPhoto = userToUpdate.getPhoto();
-        if (isNewPhoto(newPhoto, oldPhoto)) {
-            this.fileService.deleteFile(oldPhoto.getUrl());
-        }
-        return super.update(userToUpdate);
     }
 
     /**
@@ -382,7 +435,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Transactional
     public void removeByName(final String name) {
         if (isNotEmpty(name)) {
-            this.repository.deleteByName(name);
+            final User user = getByName(name);
+            remove(user);
         }
     }
 
@@ -396,8 +450,49 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotEmpty(url)) {
-            this.repository.deleteByUrl(url);
+            final User user = getByUrl(url);
+            remove(user);
         }
+    }
+
+    /**
+     * Removes object of {@link User} class.
+     * Removes model if it is not null.
+     *
+     * @param user the user to remove.
+     */
+    @Override
+    @Transactional
+    public void remove(final User user) {
+        if (isNotNull(user)) {
+            final File photo = user.getPhoto();
+            this.fileService.deleteFile(photo.getUrl());
+            super.remove(user);
+        }
+    }
+
+    /**
+     * Removes objects of {@link User} class .
+     * Removes users if are not null.
+     *
+     * @param users the users to remove.
+     */
+    @Override
+    @Transactional
+    public void remove(final Collection<User> users) {
+        if (isNotEmpty(users)) {
+            users.forEach(this::remove);
+        }
+    }
+
+    /**
+     * Removes all objects of {@link User} class.
+     */
+    @Override
+    @Transactional
+    public void removeAll() {
+        final Collection<User> users = getAll(false);
+        users.forEach(this::remove);
     }
 
     /**

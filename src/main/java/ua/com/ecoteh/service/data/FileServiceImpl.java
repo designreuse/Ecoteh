@@ -5,13 +5,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ua.com.ecoteh.entity.file.File;
-import ua.com.ecoteh.entity.file.FileBuilder;
-import ua.com.ecoteh.entity.file.FileEntity;
-import ua.com.ecoteh.entity.file.FileType;
+import ua.com.ecoteh.entity.file.*;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.FileRepository;
 import ua.com.ecoteh.util.comparator.FileComparator;
+import ua.com.ecoteh.util.generator.Generator;
+import ua.com.ecoteh.util.generator.StringGenerator;
+import ua.com.ecoteh.util.loader.Loader;
 import ua.com.ecoteh.util.loader.MultipartFileLoader;
 import ua.com.ecoteh.util.properties.ContentProperties;
 import ua.com.ecoteh.util.translator.Translator;
@@ -143,10 +143,13 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
         final MultipartFile multipartFile = file.getMultipartFile();
         if (isNotEmpty(file.getMultipartFile())) {
             isValidMultipartFile(multipartFile);
-            final File toUpdateFile = get(file.getId());
-            deleteFile(toUpdateFile.getUrl());
-            saveFile(multipartFile, file.getUrl());
-            savingFile = super.update(file);
+            final File oldFile = get(file.getId());
+            deleteFile(oldFile.getUrl());
+            saveFile(multipartFile, oldFile.getUrl());
+            final FileEditor editor = oldFile.getEditor();
+            editor.copy(file).addUrl(oldFile.getUrl());
+            final File newFile = editor.update();
+            savingFile = super.update(newFile);
         } else {
             savingFile = File.getBuilder().build();
         }
@@ -286,11 +289,17 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional
-    public void saveFile(final MultipartFile file, final String rootPath) {
+    public String saveFile(final MultipartFile file, final String rootPath) {
+        final String relativePath;
         if (isNotEmpty(file)) {
-            final String absolutePath = createAbsolutePath(file, rootPath);
-            new MultipartFileLoader(file, absolutePath).write();
+            relativePath = createRelativePath(rootPath, file);
+            final String absolutePath = createAbsolutePath(relativePath);
+            final Loader loader = new MultipartFileLoader(file, absolutePath);
+            loader.write();
+        } else {
+            relativePath = "";
         }
+        return relativePath;
     }
 
     /**
@@ -301,8 +310,15 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     @Override
     @Transactional
-    public void saveFile(final MultipartFile file) {
-        saveFile(file, file.getOriginalFilename());
+    public String saveFile(final MultipartFile file) {
+        final String path;
+        if (isNotEmpty(file)) {
+            final String rootPath = file.getOriginalFilename();
+            path = saveFile(file, rootPath);
+        } else {
+            path = "";
+        }
+        return path;
     }
 
     /**
@@ -455,8 +471,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @return The absolute path to file (newer null).
      */
     private String createAbsolutePath(final MultipartFile file, final String rootPath) {
-        return createAbsolutePath(rootPath) +
-                (isEmpty(rootPath) ? file.getOriginalFilename() : "");
+        return createAbsolutePath(rootPath) + (isEmpty(rootPath) ? file.getOriginalFilename() : "");
     }
 
     /**
@@ -477,9 +492,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @return The relative path to file (newer null).
      */
     private String createRelativePath(final String title, final MultipartFile file) {
+        final Generator<String> generator = new StringGenerator();
         return this.properties.getResourcesLocation() +
                 Translator.fromCyrillicToLatin(title) +
-                new Random().nextInt() +
+                generator.generate() +
                 getMultipartFileType(file);
     }
 

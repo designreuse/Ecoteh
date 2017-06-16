@@ -47,7 +47,6 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
 
     /**
      * Saves and returns object of {@link Model} class or subclasses.
-     * Returns input object if model is not valid.
      * If can`t find model then throws NullPointerException.
      *
      * @param model the model to add.

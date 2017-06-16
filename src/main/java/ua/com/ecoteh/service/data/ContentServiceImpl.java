@@ -2,8 +2,10 @@ package ua.com.ecoteh.service.data;
 
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.content.Content;
+import ua.com.ecoteh.entity.content.ContentEditor;
 import ua.com.ecoteh.entity.content.ContentEntity;
 import ua.com.ecoteh.entity.file.File;
+import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ContentRepository;
@@ -57,6 +59,39 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
+     * Saves and returns object of {@link Content} class or subclasses.
+     * If can`t find model then throws NullPointerException.
+     *
+     * @param content the content to add.
+     * @return The saving model (newer null).
+     * @throws IllegalArgumentException Throw exception when incoming model is null.
+     * @throws NullPointerException     Throw exception when saving modelEntity is null.
+     */
+    @Override
+    @Transactional
+    public T add(final T content) throws IllegalArgumentException, NullPointerException {
+        if (isNull(content)) {
+            throw getIllegalArgumentException(
+                    ExceptionMessage.INCOMING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        final File file = content.getLogo();
+        final String path = this.fileService.saveFile(file.getMultipartFile());
+        final E contentEntity = convertToEntity(content);
+        final FileEntity fileEntity = contentEntity.getLogoEntity();
+        fileEntity.setUrl(path);
+        final E savingEntity = this.repository.save(contentEntity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        return convertToModel(savingEntity);
+    }
+
+    /**
      * Initializes, updates and returns content.
      * If a incoming content is null then throws IllegalArgumentException.
      *
@@ -73,13 +108,31 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
                     getClassSimpleName()
             );
         }
-        final T contentToUpdate = getByUrl(content.getUrl(), false);
+        final T old = getByUrl(content.getUrl(), false);
+        final ContentEditor<T, ?> editor = old.getEditor();
+        editor.copy(content);
         final File newLogo = content.getLogo();
-        final File oldLogo = contentToUpdate.getLogo();
-        if (isNewLogo(newLogo, oldLogo)) {
-            this.fileService.deleteFile(oldLogo.getUrl());
+        if (isNotEmpty(newLogo.getMultipartFile())) {
+            final File oldPhoto = old.getLogo();
+            this.fileService.deleteFile(oldPhoto.getUrl());
+            final String url = this.fileService.saveFile(newLogo.getMultipartFile());
+            final FileEditor fileEditor = old.getLogo().getEditor();
+            fileEditor.addUrl(url);
+            final File updatedPhoto = fileEditor.update();
+            editor.addLogo(updatedPhoto);
+        } else {
+            editor.addLogo(old.getLogo());
         }
-        return super.update(content);
+        final T updatedContent = editor.update();
+        final E userEntity = convertToEntity(updatedContent);
+        final E savingEntity = this.repository.save(userEntity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
+        }
+        return convertToModel(savingEntity);
     }
 
     /**
@@ -154,7 +207,8 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Transactional
     public void removeByTitle(final String title) {
         if (isNotEmpty(title)) {
-            this.repository.deleteByTitle(title);
+            final T content = getByTitle(title, false);
+            remove(content);
         }
     }
 
@@ -167,8 +221,49 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotEmpty(url)) {
-            this.repository.deleteByUrl(url);
+            final T content = getByUrl(url, false);
+            remove(content);
         }
+    }
+
+    /**
+     * Removes object of {@link Content} or subclasses.
+     * Removes content if it is not null.
+     *
+     * @param content the content to remove.
+     */
+    @Override
+    @Transactional
+    public void remove(final T content) {
+        if (isNotNull(content)) {
+            final File logo = content.getLogo();
+            this.fileService.deleteFile(logo.getUrl());
+            super.remove(content);
+        }
+    }
+
+    /**
+     * Removes objects of {@link Content} class or subclasses.
+     * Removes contents if are not null.
+     *
+     * @param contents the users to remove.
+     */
+    @Override
+    @Transactional
+    public void remove(final Collection<T> contents) {
+        if (isNotEmpty(contents)) {
+            contents.forEach(this::remove);
+        }
+    }
+
+    /**
+     * Removes all objects of {@link Content} class or subclasses.
+     */
+    @Override
+    @Transactional
+    public void removeAll() {
+        final Collection<T> contents = getAll(false);
+        contents.forEach(this::remove);
     }
 
     /**
