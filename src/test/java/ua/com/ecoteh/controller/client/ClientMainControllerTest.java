@@ -96,7 +96,7 @@ public class ClientMainControllerTest extends MainControllerTest {
     @Test
     public void whenSendResponseThenRedirectPageWithAllResponses() {
         final String viewName = "response/all";
-        final String[] keys = { "main_company", "categories", "favicon", "responses", "revers", "captcha" };
+        final String[] keys = { "main_company", "categories", "favicon", "responses", "revers", "is_captcha" };
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final ModelAndView modelAndView = controller.sendResponse(NAME, TEXT, request);
         checkModelAndView(modelAndView, viewName, keys);
@@ -116,7 +116,7 @@ public class ClientMainControllerTest extends MainControllerTest {
     private void whenSendMessageWithIncomingUrlThenRedirectToHomePage(final String url) {
         final String viewName = "home/index";
         final String[] keys = { "main_company", "categories", "company",
-                "print_companies", "print_responses", "favicon" };
+                "print_companies", "print_responses", "favicon", "is_captcha" };
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final ModelAndView modelAndView = controller.sendMessage(url, NAME, PHONE, EMAIL, TEXT, request);
         checkModelAndView(modelAndView, viewName, keys);
@@ -124,7 +124,7 @@ public class ClientMainControllerTest extends MainControllerTest {
 
     private void whenSendMessageWithIncomingUrlThenRedirectToContactsPage(final String url) {
         final String viewName = "company/main_contacts";
-        final String[] keys = { "main_company", "categories", "favicon", "company", "captcha" };
+        final String[] keys = { "main_company", "categories", "favicon", "company", "is_captcha" };
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final ModelAndView modelAndView = controller.sendMessage(url, NAME, PHONE, EMAIL, TEXT, request);
         checkModelAndView(modelAndView, viewName, keys);

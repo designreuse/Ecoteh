@@ -4,6 +4,7 @@ import ua.com.ecoteh.entity.content.ContentEntityConverter;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 import ua.com.ecoteh.util.encryption.Encryptor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
@@ -22,9 +23,9 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
     private final CompanyEntity entity;
 
     /**
-     * The instance of the interface for data encryption.
+     * The instance of the interface for data decryption.
      */
-    private Encryptor encryptor;
+    private Encryptor decryptor;
 
     /**
      * Constructor.
@@ -80,20 +81,26 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
      * @see Base64Encryptor
      */
     private String decrypt(final String value) {
-        final Encryptor encryptor = getEncryptor();
-        return encryptor.decrypt(value);
+        final String decryptedValue;
+        if (isNotEmpty(value)) {
+            final Encryptor decryptor = getDecryptor();
+            decryptedValue = decryptor.decrypt(value);
+        } else {
+            decryptedValue = "";
+        }
+        return decryptedValue;
     }
 
     /**
-     * Creates and returns the object for data encryption.
+     * Creates and returns the object for data decryption.
      *
-     * @return The object for data encryption.
+     * @return The object for data decryption.
      * @see Base64Encryptor
      */
-    private Encryptor getEncryptor() {
-        if (isNull(this.encryptor)) {
-            this.encryptor = new Base64Encryptor();
+    private Encryptor getDecryptor() {
+        if (isNull(this.decryptor)) {
+            this.decryptor = new Base64Encryptor();
         }
-        return this.encryptor;
+        return this.decryptor;
     }
 }

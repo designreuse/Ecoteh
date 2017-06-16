@@ -4,6 +4,7 @@ import ua.com.ecoteh.entity.content.ContentConverter;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 import ua.com.ecoteh.util.encryption.Encryptor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
@@ -79,8 +80,14 @@ final class CompanyConverter extends ContentConverter<Company, CompanyEntity> {
      * @see Base64Encryptor
      */
     private String encrypt(final String value) {
-        final Encryptor encryptor = getEncryptor();
-        return encryptor.encrypt(value);
+        final String encryptedValue;
+        if (isNotEmpty(value)) {
+            final Encryptor encryptor = getEncryptor();
+            encryptedValue = encryptor.encrypt(value);
+        } else {
+            encryptedValue = "";
+        }
+        return encryptedValue;
     }
 
     /**

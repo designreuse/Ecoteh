@@ -6,6 +6,7 @@ import ua.com.ecoteh.entity.response.ResponseEntity;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 import ua.com.ecoteh.util.encryption.Encryptor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
@@ -50,12 +51,12 @@ final class UserConverter extends ModelConverter<User, UserEntity> {
         userEntity.setValidated(this.user.isValidated());
         userEntity.setName(this.user.getName());
         userEntity.setUrl(this.user.getUrl());
-        userEntity.setLogin(encrypt(this.user.getLogin()));
-        userEntity.setPassword(encrypt(this.user.getPassword()));
         userEntity.setDescription(this.user.getDescription());
         userEntity.setRole(this.user.getRole());
         userEntity.setMailing(this.user.isMailing());
         userEntity.setLocked(this.user.isLocked());
+        userEntity.setLogin(encrypt(this.user.getLogin()));
+        userEntity.setPassword(encrypt(this.user.getPassword()));
         userEntity.setContactsEntity(this.user.getContacts().convert());
         userEntity.setPhotoEntity(this.user.getPhoto().convert());
         return userEntity;
@@ -76,8 +77,14 @@ final class UserConverter extends ModelConverter<User, UserEntity> {
      * @see Base64Encryptor
      */
     private String encrypt(final String value) {
-        final Encryptor encryptor = getEncryptor();
-        return encryptor.encrypt(value);
+        final String encryptedValue;
+        if (isNotEmpty(value)) {
+            final Encryptor encryptor = getEncryptor();
+            encryptedValue = encryptor.encrypt(value);
+        } else {
+            encryptedValue = "";
+        }
+        return encryptedValue;
     }
 
     /**

@@ -107,7 +107,7 @@ public abstract class MainControllerTest {
     public void whenGetContactsPageThenReturnSomeModelAndViewWithTheContacts() {
         final MainController controller = getController();
         final String viewName = "company/main_contacts";
-        final String[] keys = { "main_company", "categories", "favicon", "company", "captcha" };
+        final String[] keys = { "main_company", "categories", "favicon", "company", "is_captcha" };
         final ModelAndView modelAndView = controller.getContactsPage();
         checkModelAndView(modelAndView, viewName, keys);
     }
@@ -146,7 +146,7 @@ public abstract class MainControllerTest {
     public void whenGetResponsesPageThenReturnSomeModelAndViewWithAllResponse() {
         final MainController controller = getController();
         final String viewName = "response/all";
-        final String[] keys = { "main_company", "categories", "favicon", "responses", "revers", "captcha" };
+        final String[] keys = { "main_company", "categories", "favicon", "responses", "revers", "is_captcha" };
         final ModelAndView modelAndView = controller.getResponsesPage();
         checkModelAndView(modelAndView, viewName, keys);
     }
@@ -155,7 +155,7 @@ public abstract class MainControllerTest {
     public void whenGetSortResponsesPageThenReturnSomeModelAndViewWithAllResponse() {
         final MainController controller = getController();
         final String viewName = "response/all";
-        final String[] keys = { "main_company", "categories", "favicon", "responses", "revers", "captcha" };
+        final String[] keys = { "main_company", "categories", "favicon", "responses", "revers", "is_captcha" };
         final HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getParameter("revers")).thenReturn("true");
         final ModelAndView modelAndView = controller.getSortResponsesByDatePage(request);
