@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.service.data.CompanyService;
-import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.data.UserService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.sender.SenderService;
@@ -13,7 +12,8 @@ import ua.com.ecoteh.service.sender.SenderService;
 import static org.junit.Assert.assertEquals;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static ua.com.ecoteh.mocks.service.data.MockServices.*;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getCompanyService;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getUserService;
 import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 import static ua.com.ecoteh.mocks.service.message.MockSenderService.getSenderService;
 
@@ -26,9 +26,8 @@ public class UserControllerTest {
         final MainMVFabric fabric = getCacheMVFabric();
         final UserService userService = getUserService();
         final CompanyService companyService = getCompanyService();
-        final FileService fileService = getFileService();
         final SenderService senderService = getSenderService();
-        controller = new UserController(fabric, userService, companyService, fileService, senderService);
+        controller = new UserController(fabric, userService, companyService, senderService);
     }
 
     @Test

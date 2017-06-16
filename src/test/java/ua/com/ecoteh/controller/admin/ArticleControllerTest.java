@@ -6,13 +6,13 @@ import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
-import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import static org.junit.Assert.assertEquals;
-import static ua.com.ecoteh.mocks.MockConstants.*;
+import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
-import static ua.com.ecoteh.mocks.service.data.MockServices.*;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getArticleService;
+import static ua.com.ecoteh.mocks.service.data.MockServices.getCategoryService;
 import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 /**
@@ -27,8 +27,7 @@ public class ArticleControllerTest {
         final MainMVFabric fabric = getCacheMVFabric();
         final ArticleService articleService = getArticleService();
         final CategoryService categoryService = getCategoryService();
-        final FileService fileService = getFileService();
-        controller = new ArticleController(fabric, articleService, categoryService, fileService);
+        controller = new ArticleController(fabric, articleService, categoryService);
     }
 
     @Test

@@ -5,14 +5,12 @@ import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.service.data.CategoryService;
-import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import static org.junit.Assert.assertEquals;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getCategoryService;
-import static ua.com.ecoteh.mocks.service.data.MockServices.getFileService;
 import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
 public class CategoryControllerTest {
@@ -23,8 +21,7 @@ public class CategoryControllerTest {
     public static void setUp() {
         final MainMVFabric fabric = getCacheMVFabric();
         final CategoryService categoryService = getCategoryService();
-        final FileService fileService = getFileService();
-        controller = new CategoryController(fabric, categoryService, fileService);
+        controller = new CategoryController(fabric, categoryService);
     }
 
     @Test
