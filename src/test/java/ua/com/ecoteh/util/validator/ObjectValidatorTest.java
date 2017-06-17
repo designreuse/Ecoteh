@@ -147,162 +147,226 @@ public class ObjectValidatorTest {
     }
 
     @Test
-    public void isEmptyObjectsArray() throws Exception {
+    public void whenCallIsEmptyForObjectsArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((Object[]) null));
         assertTrue(ObjectValidator.isEmpty(new Object[] {}));
         assertTrue(ObjectValidator.isEmpty(new Object[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForEmptyObjectsArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new Object[10]));
         assertFalse(ObjectValidator.isEmpty(new Object[] { new Object() }));
         assertFalse(ObjectValidator.isEmpty(new Object[] { new Object(), new Object() }));
     }
 
     @Test
-    public void isNotEmptyObjectsArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((Object[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new Object[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new Object[0]));
+    public void whenCallIsNotEmptyForObjectsArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new Object[10]));
         assertTrue(ObjectValidator.isNotEmpty(new Object[] { new Object() }));
         assertTrue(ObjectValidator.isNotEmpty(new Object[] { new Object(), new Object() }));
     }
 
     @Test
-    public void isEmptyByteArray() throws Exception {
+    public void whenCallIsNotEmptyForEmptyObjectsArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((Object[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new Object[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new Object[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForByteArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((byte[]) null));
         assertTrue(ObjectValidator.isEmpty(new byte[] {}));
         assertTrue(ObjectValidator.isEmpty(new byte[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForEmptyByteArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new byte[10]));
         assertFalse(ObjectValidator.isEmpty(new byte[] { 1 }));
         assertFalse(ObjectValidator.isEmpty(new byte[] { 1, 2 }));
     }
 
     @Test
-    public void isNotEmptyByteArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((byte[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new byte[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new byte[0]));
+    public void whenCallIsNotEmptyForByteArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new byte[10]));
         assertTrue(ObjectValidator.isNotEmpty(new byte[] { 1 }));
         assertTrue(ObjectValidator.isNotEmpty(new byte[] { 1, 2 }));
     }
 
     @Test
-    public void isEmptyShortArray() throws Exception {
-        assertTrue(ObjectValidator.isEmpty((short[]) null));
-        assertTrue(ObjectValidator.isEmpty(new short[] {}));
-        assertTrue(ObjectValidator.isEmpty(new short[0]));
+    public void whenCallIsNotEmptyForEmptyByteArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((byte[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new byte[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new byte[0]));
+    }
+
+   @Test
+   public void whenCallIsEmptyForShortArrayThenReturnTrue() {
+       assertTrue(ObjectValidator.isEmpty((short[]) null));
+       assertTrue(ObjectValidator.isEmpty(new short[] {}));
+       assertTrue(ObjectValidator.isEmpty(new short[0]));
+   }
+
+    @Test
+    public void whenCallIsEmptyForEmptyShortArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new short[10]));
         assertFalse(ObjectValidator.isEmpty(new short[] { 1 }));
         assertFalse(ObjectValidator.isEmpty(new short[] { 1, 2 }));
     }
 
     @Test
-    public void isNotEmptyShortArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((short[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new short[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new short[0]));
+    public void whenCallIsNotEmptyForShortArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new short[10]));
         assertTrue(ObjectValidator.isNotEmpty(new short[] { 1 }));
         assertTrue(ObjectValidator.isNotEmpty(new short[] { 1, 2 }));
     }
 
     @Test
-    public void isEmptyCharArray() throws Exception {
+    public void whenCallIsNotEmptyForEmptyShortArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((short[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new short[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new short[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForCharArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((char[]) null));
         assertTrue(ObjectValidator.isEmpty(new char[] {}));
         assertTrue(ObjectValidator.isEmpty(new char[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForEmptyCharArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new char[10]));
         assertFalse(ObjectValidator.isEmpty(new char[] { 1 }));
         assertFalse(ObjectValidator.isEmpty(new char[] { 1, 2 }));
     }
 
     @Test
-    public void isNotEmptyCharArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((char[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new char[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new char[0]));
+    public void whenCallIsNotEmptyForCharArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new char[10]));
         assertTrue(ObjectValidator.isNotEmpty(new char[] { 1 }));
         assertTrue(ObjectValidator.isNotEmpty(new char[] { 1, 2 }));
     }
 
     @Test
-    public void isEmptyIntArray() throws Exception {
+    public void whenCallIsNotEmptyForEmptyCharArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((char[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new char[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new char[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForIntArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((int[]) null));
         assertTrue(ObjectValidator.isEmpty(new int[] {}));
         assertTrue(ObjectValidator.isEmpty(new int[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForEmptyIntArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new int[10]));
         assertFalse(ObjectValidator.isEmpty(new int[] { 1 }));
         assertFalse(ObjectValidator.isEmpty(new int[] { 1, 2 }));
     }
 
     @Test
-    public void isNotEmptyIntArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((int[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new int[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new int[0]));
+    public void whenCallIsNotEmptyForIntArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new int[10]));
         assertTrue(ObjectValidator.isNotEmpty(new int[] { 1 }));
         assertTrue(ObjectValidator.isNotEmpty(new int[] { 1, 2 }));
     }
 
     @Test
-    public void isEmptyLongArray() throws Exception {
+    public void whenCallIsNotEmptyForEmptyIntArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((int[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new int[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new int[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForLongArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((long[]) null));
         assertTrue(ObjectValidator.isEmpty(new long[] {}));
         assertTrue(ObjectValidator.isEmpty(new long[0]));
-        assertFalse(ObjectValidator.isEmpty(new long[10]));
-        assertFalse(ObjectValidator.isEmpty(new long[] { 1 }));
-        assertFalse(ObjectValidator.isEmpty(new long[] { 1, 2 }));
     }
 
     @Test
-    public void isNotEmptyLongArray() throws Exception {
+    public void whenCallIsEmptyForEmptyLongArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isEmpty(new long[10]));
+        assertFalse(ObjectValidator.isEmpty(new long[] { 1L }));
+        assertFalse(ObjectValidator.isEmpty(new long[] { 1L, 2L }));
+    }
+
+    @Test
+    public void whenCallIsNotEmptyForLongArrayThenReturnTrue() {
+        assertTrue(ObjectValidator.isNotEmpty(new long[10]));
+        assertTrue(ObjectValidator.isNotEmpty(new long[] { 1L }));
+        assertTrue(ObjectValidator.isNotEmpty(new long[] { 1L, 2L }));
+    }
+
+    @Test
+    public void whenCallIsNotEmptyForEmptyLongArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isNotEmpty((long[]) null));
         assertFalse(ObjectValidator.isNotEmpty(new long[] {}));
         assertFalse(ObjectValidator.isNotEmpty(new long[0]));
-        assertTrue(ObjectValidator.isNotEmpty(new long[10]));
-        assertTrue(ObjectValidator.isNotEmpty(new long[] { 1 }));
-        assertTrue(ObjectValidator.isNotEmpty(new long[] { 1, 2 }));
     }
 
     @Test
-    public void isEmptyFloatArray() throws Exception {
+    public void whenCallIsEmptyForFloatArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((float[]) null));
         assertTrue(ObjectValidator.isEmpty(new float[] {}));
         assertTrue(ObjectValidator.isEmpty(new float[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForEmptyFloatArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new float[10]));
         assertFalse(ObjectValidator.isEmpty(new float[] { 1.2345F }));
         assertFalse(ObjectValidator.isEmpty(new float[] { 1.2345F, 2.345F }));
     }
 
     @Test
-    public void isNotEmptyFloatArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((float[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new float[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new float[0]));
+    public void whenCallIsNotEmptyForFloatArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new float[10]));
         assertTrue(ObjectValidator.isNotEmpty(new float[] { 1.2345F }));
         assertTrue(ObjectValidator.isNotEmpty(new float[] { 1.2345F, 2.345F }));
     }
 
     @Test
-    public void isEmptyDoubleArray() throws Exception {
+    public void whenCallIsNotEmptyForEmptyFloatArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((float[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new float[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new float[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForDoubleArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isEmpty((double[]) null));
         assertTrue(ObjectValidator.isEmpty(new double[] {}));
         assertTrue(ObjectValidator.isEmpty(new double[0]));
+    }
+
+    @Test
+    public void whenCallIsEmptyForEmptyDoubleArrayThenReturnFalse() {
         assertFalse(ObjectValidator.isEmpty(new double[10]));
         assertFalse(ObjectValidator.isEmpty(new double[] { 1.2345 }));
         assertFalse(ObjectValidator.isEmpty(new double[] { 1.2345, 2.345 }));
     }
 
     @Test
-    public void isNotEmptyDoubleArray() throws Exception {
-        assertFalse(ObjectValidator.isNotEmpty((double[]) null));
-        assertFalse(ObjectValidator.isNotEmpty(new double[] {}));
-        assertFalse(ObjectValidator.isNotEmpty(new double[0]));
+    public void whenCallIsNotEmptyForDoubleArrayThenReturnTrue() {
         assertTrue(ObjectValidator.isNotEmpty(new double[10]));
         assertTrue(ObjectValidator.isNotEmpty(new double[] { 1.2345 }));
         assertTrue(ObjectValidator.isNotEmpty(new double[] { 1.2345, 2.345 }));
+    }
+
+    @Test
+    public void whenCallIsNotEmptyForEmptyDoubleArrayThenReturnFalse() {
+        assertFalse(ObjectValidator.isNotEmpty((double[]) null));
+        assertFalse(ObjectValidator.isNotEmpty(new double[] {}));
+        assertFalse(ObjectValidator.isNotEmpty(new double[0]));
     }
 }
