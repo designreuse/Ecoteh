@@ -13,6 +13,12 @@ import java.util.Comparator;
 public class ContentComparator extends AbstractComparator {
 
     /**
+     * Constructor.
+     */
+    protected ContentComparator() {
+    }
+
+    /**
      * The class implements a method for working
      * with comparator for {@link Content} by title.
      *

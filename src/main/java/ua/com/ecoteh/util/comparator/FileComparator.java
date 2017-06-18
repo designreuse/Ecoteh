@@ -10,7 +10,13 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class FileComparator extends AbstractComparator {
+public final class FileComparator extends AbstractComparator {
+
+    /**
+     * Constructor.
+     */
+    private FileComparator() {
+    }
 
     /**
      * The class implements a method for working 

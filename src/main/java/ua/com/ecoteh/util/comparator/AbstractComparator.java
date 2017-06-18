@@ -13,6 +13,12 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 public abstract class AbstractComparator {
 
     /**
+     * Constructor.
+     */
+    protected AbstractComparator() {
+    }
+
+    /**
      * Compares two models.
      * <pre>
      *     compare(null, null) = 0

@@ -13,7 +13,13 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class UserComparator extends AbstractComparator {
+public final class UserComparator extends AbstractComparator {
+
+    /**
+     * Constructor.
+     */
+    private UserComparator() {
+    }
 
     /**
      * The class implements a method
@@ -178,7 +184,7 @@ public class UserComparator extends AbstractComparator {
          * </pre>
          *
          * @param userEntity the userEntity to equals to role (newer null).
-         * @param role the role to equals (newer null).
+         * @param role       the role to equals (newer null).
          * @return true if the userEntity role is equal to the incoming role.
          */
         private boolean equalsRole(final User userEntity, final UserRole role) {

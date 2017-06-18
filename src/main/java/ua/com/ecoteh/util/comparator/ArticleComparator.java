@@ -10,7 +10,13 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class ArticleComparator extends ContentComparator {
+public final class ArticleComparator extends ContentComparator {
+
+    /**
+     * Constructor.
+     */
+    private ArticleComparator() {
+    }
 
     /**
      * The class implements a method for working with comparator
@@ -140,7 +146,7 @@ public class ArticleComparator extends ContentComparator {
          * second article price.
          */
         private int compareByPrice(final Article first, final Article second) {
-            return (int)(first.getPrice() - second.getPrice());
+            return (int) (first.getPrice() - second.getPrice());
         }
     }
 }

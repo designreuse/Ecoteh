@@ -10,7 +10,13 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class ResponseComparator extends AbstractComparator {
+public final class ResponseComparator extends AbstractComparator {
+
+    /**
+     * Constructor.
+     */
+    private ResponseComparator() {
+    }
 
     /**
      * The class implements a method
