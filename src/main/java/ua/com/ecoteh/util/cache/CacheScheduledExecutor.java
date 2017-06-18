@@ -71,7 +71,8 @@ final class CacheScheduledExecutor {
      * @return the instance of the ScheduledExecutorService class (newer null).
      */
     private ScheduledExecutorService createScheduledExecutorService() {
-        return Executors.newSingleThreadScheduledExecutor(createThreadFactory());
+        final ThreadFactory threadFactory = createThreadFactory();
+        return Executors.newSingleThreadScheduledExecutor(threadFactory);
     }
 
     /**

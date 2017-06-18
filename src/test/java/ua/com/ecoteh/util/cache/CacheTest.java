@@ -133,13 +133,13 @@ public final class CacheTest {
         assertNotNull(Cache.getEntriesToString());
         assertEquals(Cache.getEntriesToString().size(), 1);
 
-        final String key = "key";
         final Map<String, Object> map = new HashMap<>();
 
         Cache.putAll(map);
         assertNotNull(Cache.getEntriesToString());
         assertEquals(Cache.getEntriesToString().size(), 1);
 
+        final String key = "key";
         for (int i = 0; i < 10; i++) {
             map.put(key + i, new Object());
             assertNull(Cache.get(key + i));

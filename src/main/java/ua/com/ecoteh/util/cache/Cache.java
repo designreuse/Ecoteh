@@ -249,7 +249,8 @@ public final class Cache {
     public static <T> Object get(final T key) {
         Object object = null;
         if (isNotNull(key)) {
-            object = get(new Key<>(key));
+            final Key<T> _key = new Key<>(key);
+            object = get(_key);
         }
         return object;
     }
@@ -429,11 +430,12 @@ public final class Cache {
      */
     private static Map<String, String> getNewEntriesToString(final String key) {
         Map<String, String> result = new HashMap<>();
+        String keyValueToString;
+        String valueClassName;
         for (Map.Entry<Key, Object> entry : getCache().entrySet()) {
-            result.put(
-                    entry.getKey().getKey().toString(),
-                    entry.getValue().getClass().getName()
-            );
+            keyValueToString = entry.getKey().getValue().toString();
+            valueClassName = entry.getValue().getClass().getName();
+            result.put(keyValueToString, valueClassName);
         }
         result.put(key, Map.class.getName());
         return result;
@@ -447,7 +449,8 @@ public final class Cache {
      * @return true if key contains subKey, false otherwise.
      */
     private static boolean containsKey(final Key key, final String subKey) {
-        return key.getKey().toString().contains(subKey);
+        final String keyValueToString = key.getValue().toString();
+        return keyValueToString.contains(subKey);
     }
 
     /**
@@ -458,10 +461,7 @@ public final class Cache {
      * @param object the class to equals.
      * @return true if entry class equals to object class, false otherwise.
      */
-    private static <T> boolean filterByClass(
-            final Map.Entry<T, Object> entry,
-            final Class object
-    ) {
+    private static <T> boolean filterByClass(final Map.Entry<T, Object> entry, final Class object) {
         return entry.getValue().getClass().equals(object);
     }
 
