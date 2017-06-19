@@ -286,6 +286,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      *
      * @param file     the multipart file to save.
      * @param rootPath the root directory path.
+     * @return the relative path to the saving file.
      */
     @Override
     @Transactional
@@ -307,6 +308,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * Saves file if it is not null and not empty.
      *
      * @param file the multipart file to save.
+     * @return the path to the saving file.
      */
     @Override
     @Transactional
