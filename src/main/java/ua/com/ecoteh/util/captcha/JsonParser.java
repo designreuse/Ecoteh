@@ -1,6 +1,7 @@
 package ua.com.ecoteh.util.captcha;
 
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.StringReader;
 
@@ -34,12 +35,25 @@ final class JsonParser {
      * @return 'Success' value.
      */
     boolean parse() {
-        boolean result = false;
+        final boolean result;
         if (isNotEmpty(this.response)) {
-            try (final JsonReader jsonReader = Json.createReader(new StringReader(this.response))) {
-                result = jsonReader.readObject().getBoolean("success");
-            }
+            final JsonObject json = readJson();
+            result = json.getBoolean("success");
+        } else {
+            result = false;
         }
         return result;
+    }
+
+    /**
+     * Creates and return a JSON reader using this response.
+     *
+     * @return the JSON object.
+     */
+    private JsonObject readJson() {
+        try (final StringReader stringReader = new StringReader(this.response);
+                final JsonReader jsonReader = Json.createReader(stringReader)) {
+            return jsonReader.readObject();
+        }
     }
 }

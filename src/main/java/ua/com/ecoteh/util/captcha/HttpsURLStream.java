@@ -17,13 +17,15 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 final class HttpsURLStream {
 
     /**
-     *
+     * The https URL connection.
      */
     private final HttpsURLConnection connection;
 
     /**
-     * @param connection
-     * @throws IllegalArgumentException
+     * Constructor.
+     *
+     * @param connection the https URL connection.
+     * @throws IllegalArgumentException Throw exception when incoming connection is null.
      */
     HttpsURLStream(final HttpsURLConnection connection) throws IllegalArgumentException {
         if (isNull(connection)) {
@@ -70,16 +72,20 @@ final class HttpsURLStream {
     }
 
     /**
+     * Return an input stream of this https URL connection.
+     *
      * @return the input stream.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs.
      */
     private InputStream getInputStream() throws IOException {
         return this.connection.getInputStream();
     }
 
     /**
+     * Return an output stream of this https URL connection.
+     *
      * @return the output stream.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs.
      */
     private OutputStream getOutputStream() throws IOException {
         return this.connection.getOutputStream();
