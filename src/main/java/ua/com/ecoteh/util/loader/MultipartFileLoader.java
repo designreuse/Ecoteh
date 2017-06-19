@@ -47,18 +47,26 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
 
     /**
      * Saves a file in the file system.
+     * Returns false if the file is null.
+     *
+     * @return true if a file is saved, false otherwise.
      */
     @Override
-    public void write() {
-        if (isNotNull(this.file)) {
-            final String path = getPathToFile();
-            checkPath(path);
-            try (final OutputStream stream = new FileOutputStream(path)) {
-                stream.write(this.file.getBytes());
-            } catch (IOException ex) {
-                logException(ex);
-            }
+    public boolean write() {
+        return isNotNull(this.file) && saveFile();
+    }
+
+    private boolean saveFile() {
+        boolean result = true;
+        final String path = getPathToFile();
+        checkPath(path);
+        try (final OutputStream stream = new FileOutputStream(path)) {
+            stream.write(this.file.getBytes());
+        } catch (IOException ex) {
+            logException(ex);
+            result = false;
         }
+        return result;
     }
 
     /**
@@ -75,15 +83,6 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
                 MultipartFileLoader.class.getSimpleName()
         );
         throw new UnsupportedOperationException(message);
-    }
-
-    /**
-     * Returns a multipart file.
-     *
-     * @return The multipart file or null if file not initialized.
-     */
-    public MultipartFile getFile() {
-        return this.file;
     }
 
     /**

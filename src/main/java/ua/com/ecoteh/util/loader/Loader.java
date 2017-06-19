@@ -18,7 +18,13 @@ public interface Loader {
     /**
      * Saves a file in the file system.
      */
-    void write();
+
+    /**
+     * Saves a file in the file system.
+     *
+     * @return true if a file is saved, false otherwise.
+     */
+    boolean write();
 
     /**
      * Deletes a file with the rootPath.

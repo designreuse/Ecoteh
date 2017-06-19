@@ -99,7 +99,7 @@ public class Time implements ITime {
     public int getMinutes() {
         int minutes;
         try {
-            minutes = Integer.parseInt(time.split(":")[1]);
+            minutes = Integer.parseInt(this.time.split(":")[1]);
             minutes = (minutes < 0) ? 0 : minutes % 60;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             minutes = 0;
@@ -110,15 +110,12 @@ public class Time implements ITime {
     /**
      * Returns true if now time is the working time.
      *
-     * @param startTime  the start work time of a company.
-     * @param finishTime the finish work time of a company.
+     * @param start  the start work time of a company.
+     * @param finish the finish work time of a company.
      * @return true if now time is the working time, false otherwise.
      */
-    public static boolean isWorkTime(
-            final String startTime,
-            final String finishTime
-    ) {
-        return isWorkDay() && checkWorkTime(startTime, finishTime);
+    public static boolean isWorkTime(final String start, final String finish) {
+        return isWorkDay() && checkWorkTime(start, finish);
     }
 
     /**
@@ -155,20 +152,16 @@ public class Time implements ITime {
      *     checkTime(new Date(), date1, date2) = true
      * </pre>
      *
-     * @param currentTime the time to checks.
-     * @param startDate   the initial date.
-     * @param finishDate  the final date.
+     * @param current the time to checks.
+     * @param start   the initial date.
+     * @param finish  the final date.
      * @return true if time is correct, false otherwise.
      */
-    public static boolean checkTime(
-            final Date currentTime,
-            final Date startDate,
-            final Date finishDate
-    ) {
+    public static boolean checkTime(final Date current, final Date start, final Date finish) {
         boolean result = false;
-        if (isNotNull(currentTime) && checkDate(startDate, finishDate)) {
-            final long time = currentTime.getTime();
-            result = (time >= startDate.getTime()) && (time <= finishDate.getTime());
+        if (isNotNull(current) && checkDate(start, finish)) {
+            final long time = current.getTime();
+            result = (time >= start.getTime()) && (time <= finish.getTime());
         }
         return result;
     }
@@ -188,17 +181,13 @@ public class Time implements ITime {
      *     checkDate(date1, date2) = true
      * </pre>
      *
-     * @param startDate  the initial date.
-     * @param finishDate the final date.
+     * @param start  the initial date.
+     * @param finish the final date.
      * @return true if dates are correct, false otherwise.
      */
-    public static boolean checkDate(
-            final Date startDate,
-            final Date finishDate
-    ) {
-        return isNotNull(startDate) && isNotNull(finishDate) &&
-                !startDate.equals(finishDate) &&
-                (startDate.getTime() <= finishDate.getTime());
+    public static boolean checkDate(final Date start, final Date finish) {
+        return isNotNull(start) && isNotNull(finish) && !start.equals(finish) &&
+                (start.getTime() <= finish.getTime());
     }
 
     /**
@@ -217,7 +206,8 @@ public class Time implements ITime {
      * @return The date in string format.
      */
     public static String getDate(final Date date) {
-        return getDate(date, getDefaultTimeZone());
+        final TimeZone timeZone = getDefaultTimeZone();
+        return getDate(date, timeZone);
     }
 
     /**
@@ -227,13 +217,14 @@ public class Time implements ITime {
      *     getDate(date, dateFormat, timeZone) = dateFormat.format(date)
      * </pre>
      *
-     * @param date       the date to translate in string.
-     * @param timeZone   the represents a timezone offset,
-     *                   and also figures out daylight savings (newer null).
+     * @param date     the date to translate in string.
+     * @param timeZone the represents a timezone offset,
+     *                 and also figures out daylight savings (newer null).
      * @return The model string-date (newer null).
      */
     public static String getDate(final Date date, final TimeZone timeZone) {
-        return getDate(date, getDefaultDateFormat(), timeZone);
+        final DateFormat format = getDefaultDateFormat();
+        return getDate(date, format, timeZone);
     }
 
     /**
@@ -243,21 +234,18 @@ public class Time implements ITime {
      *     getDate(date, dateFormat, timeZone) = dateFormat.format(date)
      * </pre>
      *
-     * @param date       the date to translate in string.
-     * @param dateFormat the object for date/time formatting subclasses
-     *                   which formats and parses dates or time in
-     *                   a language-independent manner (newer null).
-     * @param timeZone   the represents a timezone offset,
-     *                   and also figures out daylight savings (newer null).
+     * @param date     the date to translate in string.
+     * @param format   the object for date/time formatting subclasses
+     *                 which formats and parses dates or time in
+     *                 a language-independent manner (newer null).
+     * @param timeZone the represents a timezone offset,
+     *                 and also figures out daylight savings (newer null).
      * @return The model string-date (newer null).
      */
-    public static String getDate(
-            final Date date,
-            final DateFormat dateFormat,
-            final TimeZone timeZone
-    ) {
-        dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(isNotNull(date) ? date : new Date());
+    public static String getDate(final Date date, final DateFormat format, final TimeZone timeZone) {
+        final Date _date = isNotNull(date) ? date : new Date();
+        format.setTimeZone(timeZone);
+        return format.format(_date);
     }
 
     /**
@@ -278,19 +266,16 @@ public class Time implements ITime {
     /**
      * Checks whether a now time belongs at a given time interval.
      *
-     * @param startTime  the start work time.
-     * @param finishTime the finish work time.
+     * @param start  the start work time.
+     * @param finish the finish work time.
      * @return Returns true if a now time belongs at a given
      * time interval, false otherwise.
      */
-    private static boolean checkWorkTime(
-            final String startTime,
-            final String finishTime
-    ) {
+    private static boolean checkWorkTime(final String start, final String finish) {
         boolean result;
         try {
-            final Time from = new Time(startTime);
-            final Time to = new Time(finishTime);
+            final Time from = new Time(start);
+            final Time to = new Time(finish);
             result = checkHours(getHourOfDay(), from.getHours(), to.getHours());
             if (getHourOfDay() == to.getHours()) {
                 result = getMinutesOfDay() < to.getMinutes();
@@ -354,7 +339,9 @@ public class Time implements ITime {
      * @return The value for the given calendar field.
      */
     private static int getFromCalendar(final int calendarFieldNumber) {
-        return Calendar.getInstance(getDefaultTimeZone()).get(calendarFieldNumber);
+        final TimeZone timeZone = getDefaultTimeZone();
+        final Calendar calendar = Calendar.getInstance(timeZone);
+        return calendar.get(calendarFieldNumber);
     }
 
     /**

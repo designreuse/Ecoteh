@@ -13,7 +13,7 @@ public final class AsciiImpl implements Ascii {
     /**
      * The string to translate.
      */
-    private String value;
+    private final String value;
 
     /**
      * Constructor.
@@ -21,7 +21,7 @@ public final class AsciiImpl implements Ascii {
      * @param value the string to translate.
      */
     public AsciiImpl(final String value) {
-        setValue(value);
+        this.value = value;
     }
 
     /**
@@ -41,17 +41,11 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String to() {
-        String result = "";
+        final String result;
         if (isNotEmpty(this.value)) {
-            final StringBuilder sb = new StringBuilder();
-            final char[] charArray = getValueChars();
-            for (int i = 0; i < charArray.length; i++) {
-                sb.append(charToInt(charArray[i]));
-                if (i != charArray.length - 1) {
-                    sb.append(",");
-                }
-            }
-            result = sb.toString();
+            result = convertToAscii();
+        } else {
+            result = "";
         }
         return result;
     }
@@ -64,39 +58,47 @@ public final class AsciiImpl implements Ascii {
      */
     @Override
     public String from() {
-        String result = "";
+        String result;
         if (isNotEmpty(this.value)) {
             try {
-                final StringBuilder sb = new StringBuilder();
-                for (String number : this.value.split(",")) {
-                    sb.append(numberToChar(number));
-                }
-                result = sb.toString();
+                result = convertFromAscii();
             } catch (NumberFormatException ex) {
                 result = "";
             }
+        } else {
+            result = "";
         }
         return result;
     }
 
     /**
-     * Sets a string to translate.
+     * Translates this value to ASCII.
      *
-     * @param value the string to translate.
+     * @return The translated string.
      */
-    @Override
-    public void setValue(final String value) {
-        this.value = isNotEmpty(value) ? value : "";
+    private String convertToAscii() {
+        final char[] charArray = getValueChars();
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charToInt(charArray[i]));
+            if (i != charArray.length - 1) {
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 
     /**
-     * Sets a integer to translate.
+     * Translates this value from ASCII.
      *
-     * @param value the integer to translate.
+     * @return The translated string or empty string.
      */
-    @Override
-    public void setValue(final int value) {
-        setValue(Integer.toString(value));
+    private String convertFromAscii() {
+        final StringBuilder sb = new StringBuilder();
+        for (String number : this.value.split(",")) {
+            sb.append(numberToChar(number));
+        }
+        return sb.toString();
     }
 
     /**
@@ -104,7 +106,6 @@ public final class AsciiImpl implements Ascii {
      *
      * @return The string to translate.
      */
-    @Override
     public String getValue() {
         return this.value;
     }
@@ -135,6 +136,17 @@ public final class AsciiImpl implements Ascii {
      * @return The char.
      */
     private char numberToChar(final String number) {
-        return (char) Integer.parseInt(number);
+        final int integer = Integer.parseInt(number);
+        return intToChar(integer);
+    }
+
+    /**
+     * Parses the incoming number to char.
+     *
+     * @param number the integer number to parse.
+     * @return The char.
+     */
+    private char intToChar(final int number) {
+        return (char) number;
     }
 }

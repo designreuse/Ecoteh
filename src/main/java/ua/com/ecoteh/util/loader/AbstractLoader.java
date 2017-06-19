@@ -29,27 +29,20 @@ abstract class AbstractLoader implements Loader {
      *
      * @param path the root path of a file.
      */
-    AbstractLoader(final String path) {
+    protected AbstractLoader(final String path) {
         this.path = path;
     }
 
     /**
-     * Deletes a file with the rootPath.
-     * Deletes a file if it is exists
-     * and it is a file (not a directory)
+     * Deletes a file with the path.
+     * Deletes a file if it is exists and it is a file (not a directory).
+     * Returns false if the path is null or empty.
      *
      * @return true if a file is deleted, false otherwise.
      */
     @Override
     public boolean delete() {
-        boolean result = false;
-        if (isNotEmpty(this.path)) {
-            final File file = new File(this.path);
-            if (isFile(file)) {
-                result = file.delete();
-            }
-        }
-        return result;
+        return isNotEmpty(this.path) && deleteFile();
     }
 
     /**
@@ -66,16 +59,16 @@ abstract class AbstractLoader implements Loader {
      * Checks a path to file.
      * Creates directories if it is not exist.
      *
-     * @param path the path to file.
+     * @param path the file path to check.
      * @return true if directories to file is exist, false otherwise.
      */
     protected boolean checkPath(final String path) {
         final File directory = new File(path).getParentFile();
-        boolean isExists = directory.exists();
-        if (!isExists) {
-            isExists = directory.mkdirs();
+        boolean exists = directory.exists();
+        if (!exists) {
+            exists = directory.mkdirs();
         }
-        return isExists;
+        return exists;
     }
 
     /**
@@ -86,6 +79,18 @@ abstract class AbstractLoader implements Loader {
     protected void logException(final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         ex.printStackTrace();
+    }
+
+    /**
+     * Deletes a file with the path.
+     * Deletes a file if it is exists
+     * and it is a file (not a directory)
+     *
+     * @return true if a file is deleted, false otherwise.
+     */
+    private boolean deleteFile() {
+        final File file = new File(this.path);
+        return isFile(file) && file.delete();
     }
 
     /**

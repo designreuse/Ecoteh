@@ -23,25 +23,4 @@ public interface Ascii {
      * @return The translated string or empty string.
      */
     String from();
-
-    /**
-     * Sets a string to translate.
-     *
-     * @param value the string to translate.
-     */
-    void setValue(String value);
-
-    /**
-     * Sets a integer to translate.
-     *
-     * @param value the integer to translate.
-     */
-    void setValue(int value);
-
-    /**
-     * Returns a string to translate.
-     *
-     * @return The string to translate.
-     */
-    String getValue();
 }

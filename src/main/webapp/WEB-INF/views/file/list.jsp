@@ -20,9 +20,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <c:out value="${file.title}"/>
                 </a>
                 <br>
-                <button class="btn-clipboard btn btn-default"
-                        title="Скорировать ссылку файла &quot;<c:out value="${file.title}"/>&quot;"
-                        data-clipboard-text="<c:url value="${file.url}"/>">
+                <button class="btn-clipboard btn btn-default" data-clipboard-text="<c:url value="${file.url}"/>"
+                        title="Скорировать ссылку файла &quot;<c:out value="${file.title}"/>&quot;">
                     <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                 </button>
                 &nbsp;
@@ -36,7 +35,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     &nbsp;
                     <a href="<c:url value="/admin/file/delete/${file.id}"/>"
                        title="Удалить файл &quot;<c:out value="${file.title}"/>&quot;"
-                       onclick="if(confirm('Вы точно хотите удалить все файл &quot;<c:out
+                       onclick="if(confirm('Вы точно хотите удалить файл &quot;<c:out
                                value="${file.title}"/>&quot;? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
                         <button class="btn btn-default">
                             <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>

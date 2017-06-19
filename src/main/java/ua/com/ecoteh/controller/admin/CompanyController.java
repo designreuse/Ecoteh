@@ -14,24 +14,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.address.Address;
 import ua.com.ecoteh.entity.address.AddressBuilder;
-import ua.com.ecoteh.entity.address.AddressEditor;
 import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.company.CompanyBuilder;
-import ua.com.ecoteh.entity.company.CompanyEditor;
+import ua.com.ecoteh.entity.company.CompanyType;
 import ua.com.ecoteh.entity.contacts.Contacts;
 import ua.com.ecoteh.entity.contacts.ContactsBuilder;
-import ua.com.ecoteh.entity.contacts.ContactsEditor;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileBuilder;
-import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
  * The class implements a set of methods for working with
@@ -168,41 +163,34 @@ public class CompanyController {
             @RequestParam(value = "post_address") final String postAddress,
             @RequestParam(value = "google_maps") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo
-    ) { // TODO: 16.06.2017 check this method
+    ) {
         final Compressor compressor = new HtmlCompressor();
-
-        final Company mainCompany = this.companyService.getMainCompany();
-        final CompanyEditor companyEditor = mainCompany.getEditor();
-        companyEditor.addTitle(title).addDomain(domain)
-                .addTagline(tagline).addKeywords(keywords)
-                .addWorkTimeFrom(workTimeFrom).addWorkTimeTo(workTimeTo)
+        final CompanyBuilder companyBuilder = Company.getBuilder();
+        companyBuilder.addType(CompanyType.MAIN).addTitle(title).addDomain(domain).addTagline(tagline)
+                .addKeywords(keywords).addWorkTimeFrom(workTimeFrom).addWorkTimeTo(workTimeTo)
                 .addSenderEmail(senderEmail).addSenderPass(senderPass)
                 .addDescription(compressor.compress(description))
                 .addInformation(compressor.compress(information));
 
-        final ContactsEditor contactsEditor = mainCompany.getContacts().getEditor();
-        contactsEditor.addEmail(email).addMobilePhone(mobilePhone)
-                .addFax(fax).addLandlinesPhone(landlinesPhone)
+        final ContactsBuilder contactsBuilder = Contacts.getBuilder();
+        contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)
+                .addLandlinesPhone(landlinesPhone).addFax(fax)
                 .addVkontakte(vkontakte).addFacebook(facebook)
                 .addTwitter(twitter).addSkype(skype);
-        final Contacts contacts = contactsEditor.update();
-        companyEditor.addContacts(contacts);
+        final Contacts contacts = contactsBuilder.build();
+        companyBuilder.addContacts(contacts);
 
-        final AddressEditor addressEditor = mainCompany.getAddress().getEditor();
-        addressEditor.addPostAddress(postAddress).addGoogleMaps(googleMaps);
-        final Address address = addressEditor.update();
-        companyEditor.addAddress(address);
+        final AddressBuilder addressBuilder = Address.getBuilder();
+        addressBuilder.addPostAddress(postAddress).addGoogleMaps(googleMaps);
+        final Address address = addressBuilder.build();
+        companyBuilder.addAddress(address);
 
-        if (isNotEmpty(multipartLogo)) {
-            final File logo = mainCompany.getLogo();
-            final FileEditor fileEditor = logo.getEditor();
-            fileEditor.addTitle(title).addMultipartFile(multipartLogo);
-            final File updatedLogo = fileEditor.update();
-            this.fileService.update(updatedLogo);
-            companyEditor.addLogo(updatedLogo);
-        }
+        final FileBuilder fileBuilder = File.getBuilder();
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        final File logo = fileBuilder.build();
+        companyBuilder.addLogo(logo);
 
-        final Company updatedMainCompany = companyEditor.update();
+        final Company updatedMainCompany = companyBuilder.build();
         this.companyService.updateMainCompany(updatedMainCompany);
         Cache.clear();
         return "redirect:/company/main";

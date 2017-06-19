@@ -109,23 +109,8 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
             );
         }
         final T old = getByUrl(content.getUrl(), false);
-        final ContentEditor<T, ?> editor = old.getEditor();
-        editor.copy(content);
-        final File newLogo = content.getLogo();
-        if (isNotEmpty(newLogo.getMultipartFile())) {
-            final File oldPhoto = old.getLogo();
-            this.fileService.deleteFile(oldPhoto.getUrl());
-            final String url = this.fileService.saveFile(newLogo.getMultipartFile());
-            final FileEditor fileEditor = old.getLogo().getEditor();
-            fileEditor.addUrl(url);
-            final File updatedPhoto = fileEditor.update();
-            editor.addLogo(updatedPhoto);
-        } else {
-            editor.addLogo(old.getLogo());
-        }
-        final T updatedContent = editor.update();
-        final E userEntity = convertToEntity(updatedContent);
-        final E savingEntity = this.repository.save(userEntity);
+        final E contentEntity = updateContent(content, old);
+        final E savingEntity = this.repository.save(contentEntity);
         if (isNull(savingEntity)) {
             throw getNullPointerException(
                     ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
@@ -325,24 +310,39 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     }
 
     /**
-     * Checks incoming photos.
-     * The new photo must be not equals to the old photo.
-     * <pre>
-     *     isNewLogo(photo, photo) = false
+     * Updates a contents.
      *
-     *     if the photo1 is not equals to the photo2
-     *     isNewLogo(photo1, photo2) = false
-     *
-     *     if the photo1 is equals to the photo2
-     *     isNewLogo(photo1, photo2) = true
-     * </pre>
-     *
-     * @param newLogo the new photo (newer null).
-     * @param oldLogo the old photo (newer null).
-     * @return true if the incoming photos is not equals and
-     * new photo URL is not empty.
+     * @param from the content to copy.
+     * @param to   the content to update.
+     * @return the updated content entity.
      */
-    static boolean isNewLogo(final File newLogo, final File oldLogo) {
-        return !newLogo.equals(oldLogo) && isNotEmpty(newLogo.getUrl());
+    E updateContent(final T from, final T to) {
+        final ContentEditor<T, ?> editor = to.getEditor();
+        editor.copy(from);
+        final File newLogo = from.getLogo();
+        if (isNotEmpty(newLogo.getMultipartFile())) {
+            final File oldLogo = to.getLogo();
+            final File updatedLogo = updateLogo(oldLogo, newLogo);
+            editor.addLogo(updatedLogo);
+        } else {
+            editor.addLogo(to.getLogo());
+        }
+        final T updatedContent = editor.update();
+        return convertToEntity(updatedContent);
+    }
+
+    /**
+     * Updated a logos.
+     *
+     * @param from the logo to copy.
+     * @param to   the logo to update.
+     * @return the updated logo.
+     */
+    private File updateLogo(final File from, final File to) {
+        this.fileService.deleteFile(from.getUrl());
+        final String url = this.fileService.saveFile(to.getMultipartFile());
+        final FileEditor fileEditor = from.getEditor();
+        fileEditor.addUrl(url);
+        return fileEditor.update();
     }
 }

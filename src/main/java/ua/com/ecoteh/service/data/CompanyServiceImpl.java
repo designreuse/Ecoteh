@@ -8,7 +8,6 @@ import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.company.CompanyBuilder;
 import ua.com.ecoteh.entity.company.CompanyEntity;
 import ua.com.ecoteh.entity.company.CompanyType;
-import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.CompanyRepository;
@@ -99,12 +98,15 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Compan
             );
         }
         final Company mainCompany = getMainCompany();
-        final File newLogo = company.getLogo();
-        final File oldLogo = mainCompany.getLogo();
-        if (isNewLogo(newLogo, oldLogo)) {
-            this.fileService.deleteFile(oldLogo.getUrl());
+        final CompanyEntity companyEntity = updateContent(company, mainCompany);
+        final CompanyEntity savingEntity = this.repository.save(companyEntity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
-        return update(company);
+        return convertToModel(savingEntity);
     }
 
     /**

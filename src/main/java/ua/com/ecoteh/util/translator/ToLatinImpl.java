@@ -19,7 +19,7 @@ public final class ToLatinImpl implements ToLatin {
      *
      * @param value the string to translate.
      */
-    public ToLatinImpl(String value) {
+    public ToLatinImpl(final String value) {
         this.value = value;
     }
 
@@ -30,23 +30,27 @@ public final class ToLatinImpl implements ToLatin {
      */
     @Override
     public String fromCyrillic() {
-        final StringBuilder sb = new StringBuilder();
+        final String result;
         if (isNotEmpty(this.value)) {
-            for (char ch : convertToChars(this.value)) {
-                sb.append(translate(ch));
-            }
+            result = convert(this.value);
+        } else {
+            result = "";
         }
-        return sb.toString().replaceAll("__", "_");
+        return result;
     }
 
     /**
-     * Returns a string to translate.
+     * Translates the incoming value from cyrillic to latin.
      *
-     * @return The string to translate.
+     * @param value the string value to translate (newer null).
+     * @return The translated string (newer null).
      */
-    @Override
-    public String getValue() {
-        return this.value;
+    private String convert(final String value) {
+        final StringBuilder sb = new StringBuilder();
+        for (char ch : convertToChars(value)) {
+            sb.append(translate(ch));
+        }
+        return sb.toString().replaceAll("__", "_");
     }
 
     /**
@@ -66,93 +70,130 @@ public final class ToLatinImpl implements ToLatin {
      * @param ch the char to translate.
      * @return The translated char.
      */
-    private String translate(char ch) {
+    private String translate(final char ch) {
+        final String result;
         switch (ch) {
-            case 'а':
-                return "a";
-            case 'б':
-                return "b";
-            case 'в':
-                return "v";
-            case 'г':
-                return "g";
-            case 'д':
-                return "d";
-            case 'е':
-                return "e";
-            case 'ё':
-                return "je";
-            case 'ж':
-                return "zh";
-            case 'з':
-                return "z";
-            case 'і':
-            case 'и':
-                return "i";
-            case 'й':
-                return "y";
-            case 'к':
-                return "k";
-            case 'л':
-                return "l";
-            case 'м':
-                return "m";
-            case 'н':
-                return "n";
-            case 'о':
-                return "o";
-            case 'п':
-                return "p";
-            case 'р':
-                return "r";
-            case 'с':
-                return "s";
-            case 'т':
-                return "t";
-            case 'у':
-                return "u";
-            case 'ф':
-                return "f";
-            case 'х':
-                return "kh";
-            case 'ц':
-                return "c";
-            case 'ч':
-                return "ch";
-            case 'ш':
-                return "sh";
-            case 'щ':
-                return "jsh";
-            case 'ъ':
-                return "hh";
-            case 'ы':
-                return "ih";
-            case 'ь':
-                return "jh";
-            case 'э':
-                return "eh";
-            case 'ю':
-                return "yu";
-            case 'я':
-                return "ja";
-            case ' ':
-            case '.':
-            case ',':
-            case '!':
-            case '?':
-            case '/':
-            case '\\':
-                return "_";
-            case '(':
-            case ')':
-            case '{':
-            case '}':
-            case '[':
-            case ']':
-            case '&':
-                return "";
-            default:
-                return String.valueOf(ch);
+        case 'а':
+            result = "a";
+            break;
+        case 'б':
+            result = "b";
+            break;
+        case 'в':
+            result = "v";
+            break;
+        case 'г':
+            result = "g";
+            break;
+        case 'д':
+            result = "d";
+            break;
+        case 'е':
+            result = "e";
+            break;
+        case 'ё':
+            result = "je";
+            break;
+        case 'ж':
+            result = "zh";
+            break;
+        case 'з':
+            result = "z";
+            break;
+        case 'і':
+        case 'и':
+            result = "i";
+            break;
+        case 'й':
+            result = "y";
+            break;
+        case 'к':
+            result = "k";
+            break;
+        case 'л':
+            result = "l";
+            break;
+        case 'м':
+            result = "m";
+            break;
+        case 'н':
+            result = "n";
+            break;
+        case 'о':
+            result = "o";
+            break;
+        case 'п':
+            result = "p";
+            break;
+        case 'р':
+            result = "r";
+            break;
+        case 'с':
+            result = "s";
+            break;
+        case 'т':
+            result = "t";
+            break;
+        case 'у':
+            result = "u";
+            break;
+        case 'ф':
+            result = "f";
+            break;
+        case 'х':
+            result = "kh";
+            break;
+        case 'ц':
+            result = "c";
+            break;
+        case 'ч':
+            result = "ch";
+            break;
+        case 'ш':
+            result = "sh";
+            break;
+        case 'щ':
+            result = "jsh";
+            break;
+        case 'ъ':
+            result = "hh";
+            break;
+        case 'ы':
+            result = "ih";
+            break;
+        case 'ь':
+            result = "jh";
+            break;
+        case 'э':
+            result = "eh";
+            break;
+        case 'ю':
+            result = "yu";
+            break;
+        case 'я':
+            result = "ja";
+            break;
+        case ' ':
+        case '.':
+        case ',':
+        case '!':
+        case '?':
+        case '/':
+        case '\\':
+            result = "_";
+            break;
+        case '(':
+        case ')':
+        case '{':
+        case '}':
+        case '[':
+        case ']':
+        case '&':
+            result = "";
+            break;
+        default:
+            result = String.valueOf(ch);
         }
+        return result;
     }
 }

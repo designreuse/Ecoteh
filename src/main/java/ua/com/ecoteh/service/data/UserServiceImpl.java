@@ -126,22 +126,7 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
             );
         }
         final User old = getByUrl(user.getUrl());
-        final UserEditor editor = old.getEditor();
-        editor.copy(user);
-        final File newPhoto = user.getPhoto();
-        if (isNotEmpty(newPhoto.getMultipartFile())) {
-            final File oldPhoto = old.getPhoto();
-            this.fileService.deleteFile(oldPhoto.getUrl());
-            final String url = this.fileService.saveFile(newPhoto.getMultipartFile());
-            final FileEditor fileEditor = old.getPhoto().getEditor();
-            fileEditor.addUrl(url);
-            final File updatedPhoto = fileEditor.update();
-            editor.addPhoto(updatedPhoto);
-        } else {
-            editor.addPhoto(old.getPhoto());
-        }
-        final User updatedUser = editor.update();
-        final UserEntity userEntity = convertToEntity(updatedUser);
+        final UserEntity userEntity = updateUser(user, old);
         final UserEntity savingEntity = this.repository.save(userEntity);
         if (isNull(savingEntity)) {
             throw getNullPointerException(
@@ -766,24 +751,39 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     }
 
     /**
-     * Checks incoming photos.
-     * The new photo must be not equals to the old photo.
-     * <pre>
-     *     isNewPhoto(photo, photo) = false
+     * Updates a users.
      *
-     *     if the photo1 is not equals to the photo2
-     *     isNewPhoto(photo1, photo2) = false
-     *
-     *     if the photo1 is equals to the photo2
-     *     isNewPhoto(photo1, photo2) = true
-     * </pre>
-     *
-     * @param newPhoto the new photo (newer null).
-     * @param oldPhoto the old photo (newer null).
-     * @return true if the incoming photos is not equals and
-     * new photo URL is not empty.
+     * @param from the user to copy.
+     * @param to   the user to update.
+     * @return the updated user entity.
      */
-    private boolean isNewPhoto(final File newPhoto, final File oldPhoto) {
-        return !newPhoto.equals(oldPhoto) && isNotEmpty(newPhoto.getUrl());
+    private UserEntity updateUser(final User from, final User to) {
+        final UserEditor editor = to.getEditor();
+        editor.copy(from);
+        final File newPhoto = from.getPhoto();
+        if (isNotEmpty(newPhoto.getMultipartFile())) {
+            final File oldPhoto = to.getPhoto();
+            final File updatedPhoto = updateLogo(oldPhoto, newPhoto);
+            editor.addPhoto(updatedPhoto);
+        } else {
+            editor.addPhoto(to.getPhoto());
+        }
+        final User updatedUser = editor.update();
+        return convertToEntity(updatedUser);
+    }
+
+    /**
+     * Updated a photos.
+     *
+     * @param from the photo to copy.
+     * @param to   the photo to update.
+     * @return the updated photo.
+     */
+    private File updateLogo(final File from, final File to) {
+        this.fileService.deleteFile(from.getUrl());
+        final String url = this.fileService.saveFile(to.getMultipartFile());
+        final FileEditor fileEditor = from.getEditor();
+        fileEditor.addUrl(url);
+        return fileEditor.update();
     }
 }

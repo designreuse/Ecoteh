@@ -14,11 +14,4 @@ public interface ToLatin {
      * @return The translated string or null.
      */
     String fromCyrillic();
-
-    /**
-     * Returns a string to translate.
-     *
-     * @return The string to translate.
-     */
-    String getValue();
 }
