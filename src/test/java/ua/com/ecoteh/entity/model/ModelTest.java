@@ -3,6 +3,7 @@ package ua.com.ecoteh.entity.model;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
 import static ua.com.ecoteh.mocks.MockConstants.ID;
 import static ua.com.ecoteh.mocks.MockConstants.VALIDATION;
 
@@ -20,6 +21,12 @@ public abstract class ModelTest {
     }
 
     @Test
+    public void equalsWithThisObjectThenReturnTrue() throws Exception {
+        final Model model = getInstance();
+        assertTrue(model.equals(model));
+    }
+
+    @Test
     public void equalsWithNull() throws Exception {
         final Model model = getInstance();
         assertFalse(model.equals(null));
@@ -28,8 +35,7 @@ public abstract class ModelTest {
     @Test
     public void equalsWithObjectOfTheAnotherClass() throws Exception {
         final Model model = getInstance();
-        final String string = "Hello World!";
-        assertFalse(model.equals(string));
+        assertFalse(model.equals(ANY_STRING));
     }
 
     @Test
