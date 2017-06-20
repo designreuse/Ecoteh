@@ -28,12 +28,12 @@ interface CachePageKey {
     /**
      * The main company page key.
      */
-    String MAIN_COMPANY_KEY = "Main CompanyEntity";
+    String MAIN_COMPANY_KEY = "Main Company";
 
     /**
      * The contacts (address) page key.
      */
-    String CONTACTS_KEY = "ContactsEntity";
+    String CONTACTS_KEY = "Contacts";
 
     /**
      * The all partners companies page key.
@@ -48,27 +48,27 @@ interface CachePageKey {
     /**
      * The category by URL page key.
      */
-    String CATEGORY_BY_URL_KEY = "CategoryEntity By URL ";
+    String CATEGORY_BY_URL_KEY = "Category By URL ";
 
     /**
      * The category by RUL with sort articles page key.
      */
-    String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "CategoryEntity By URL with sort articles";
+    String CATEGORY_BY_URL_WITH_SORT_ARTICLES_KEY = "Category By URL with sort articles";
 
     /**
      * The article by URL page key.
      */
-    String ARTICLE_BY_URL_KEY = "ArticleEntity By URL";
+    String ARTICLE_BY_URL_KEY = "Article By URL";
 
     /**
      * The article by number page key.
      */
-    String ARTICLE_BY_NUMBER_KEY = "ArticleEntity By Number";
+    String ARTICLE_BY_NUMBER_KEY = "Article By Number";
 
     /**
      * The company by URL page key.
      */
-    String COMPANY_BY_URL_KEY = "CompanyEntity by URL";
+    String COMPANY_BY_URL_KEY = "Company by URL";
 
     /**
      * The all responses page key.
