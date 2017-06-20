@@ -12,7 +12,7 @@ import static ua.com.ecoteh.mocks.enity.MockModelEntities.getResponseEntity;
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class MockResponseRepository extends MockDataRepository<ResponseEntity> {
+final class MockResponseRepository extends MockDataRepository<ResponseEntity> {
 
     private final ResponseRepository repository;
     private final ResponseEntity entity;

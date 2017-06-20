@@ -12,7 +12,7 @@ import static ua.com.ecoteh.mocks.enity.MockModelEntities.getCategoryEntity;
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-class MockCategoryRepository extends MockContentRepository<CategoryEntity> {
+final class MockCategoryRepository extends MockContentRepository<CategoryEntity> {
 
     private final CategoryRepository repository;
     private final CategoryEntity entity;

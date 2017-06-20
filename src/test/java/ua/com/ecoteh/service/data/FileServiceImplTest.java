@@ -226,13 +226,13 @@ public class FileServiceImplTest extends DataServiceImplTest<File> {
         service.getLastByType(null);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void whenAddUnknownModelThenThrowNullPointerException() {
         final File unknownFile = getUnknownModel();
         service.add(unknownFile);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void whenUpdateUnknownModelThenThrowNullPointerException() {
         final File unknownFile = getUnknownModel();
         service.update(unknownFile);
@@ -263,5 +263,9 @@ public class FileServiceImplTest extends DataServiceImplTest<File> {
     @Override
     protected Comparator<File> getComparator() {
         return new FileComparator.ByTitle();
+    }
+
+    @Test
+    public void whenAddModelThenReturnNotNull() {
     }
 }

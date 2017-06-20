@@ -83,7 +83,31 @@ public class FileBuilderTest extends ModelBuilderTest<File> {
 
     @Test
     public void whenAddNullTypeThenBuildWithEmptyIt() {
-        this.builder.addType(null);
+        this.builder.addType((FileType) null);
+        final File file = this.builder.build();
+        assertNotNull(file.getType());
+    }
+
+    @Test
+    public void whenAddTypeNameThenBuildWithIt() {
+        File file;
+        for (FileType type : FileType.values()) {
+            this.builder.addType(type.name());
+            file = this.builder.build();
+            assertEquals(file.getType(), type);
+        }
+    }
+
+    @Test
+    public void whenAddNullTypeNameThenBuildWithEmptyIt() {
+        this.builder.addType((String) null);
+        final File file = this.builder.build();
+        assertNotNull(file.getType());
+    }
+
+    @Test
+    public void whenAddEmptyTypeNameThenBuildWithEmptyIt() {
+        this.builder.addType("");
         final File file = this.builder.build();
         assertNotNull(file.getType());
     }

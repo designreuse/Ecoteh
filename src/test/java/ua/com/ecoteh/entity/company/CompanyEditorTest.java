@@ -7,6 +7,7 @@ import ua.com.ecoteh.entity.contacts.Contacts;
 import ua.com.ecoteh.entity.content.ContentEditorTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static ua.com.ecoteh.mocks.MockConstants.*;
 import static ua.com.ecoteh.mocks.enity.MockModels.*;
 
@@ -43,7 +44,7 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddTaglineThenBuildWithIt() {
-        Company company ;
+        Company company;
         String tagline;
         for (int i = 0; i < 5; i++) {
             tagline = TAGLINE + i;
@@ -62,7 +63,7 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddInformationThenBuildWithIt() {
-        Company company ;
+        Company company;
         String information;
         for (int i = 0; i < 5; i++) {
             information = INFORMATION + i;
@@ -81,7 +82,7 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddDomainThenBuildWithIt() {
-        Company company ;
+        Company company;
         String domain;
         for (int i = 0; i < 5; i++) {
             domain = DOMAIN + i;
@@ -100,7 +101,7 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddSenderEmailThenBuildWithIt() {
-        Company company ;
+        Company company;
         String senderEmail;
         for (int i = 0; i < 5; i++) {
             senderEmail = EMAIL + i;
@@ -119,7 +120,7 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddSenderPassThenBuildWithIt() {
-        Company company ;
+        Company company;
         String senderPass;
         for (int i = 0; i < 5; i++) {
             senderPass = PASSWORD + i;
@@ -196,7 +197,7 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddTypeThenBuildWithIt() {
-        Company company ;
+        Company company;
         for (CompanyType type : CompanyType.values()) {
             this.editor.addType(type);
             company = this.editor.update();
@@ -206,9 +207,33 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
 
     @Test
     public void whenAddNullTypeThenBuildWithEmptyIt() {
-        this.editor.addType(null);
+        this.editor.addType((CompanyType) null);
         final Company company = this.editor.update();
         assertEquals(company.getType(), this.company.getType());
+    }
+
+    @Test
+    public void whenAddTypeNameThenBuildWithIt() {
+        Company company;
+        for (CompanyType type : CompanyType.values()) {
+            this.editor.addType(type.name());
+            company = this.editor.update();
+            assertEquals(company.getType(), type);
+        }
+    }
+
+    @Test
+    public void whenAddNullTypeNameThenBuildWithEmptyIt() {
+        this.editor.addType((String) null);
+        final Company company = this.editor.update();
+        assertNotNull(company.getType());
+    }
+
+    @Test
+    public void whenAddEmptyTypeNameThenBuildWithEmptyIt() {
+        this.editor.addType("");
+        final Company company = this.editor.update();
+        assertNotNull(company.getType());
     }
 
     @Override

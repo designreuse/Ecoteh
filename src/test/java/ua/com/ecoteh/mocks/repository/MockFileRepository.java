@@ -1,5 +1,6 @@
 package ua.com.ecoteh.mocks.repository;
 
+import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.repository.FileRepository;
@@ -11,11 +12,12 @@ import static org.mockito.Mockito.when;
 import static ua.com.ecoteh.mocks.MockConstants.*;
 import static ua.com.ecoteh.mocks.enity.MockModelEntities.getFileEntities;
 import static ua.com.ecoteh.mocks.enity.MockModelEntities.getFileEntity;
+import static ua.com.ecoteh.mocks.enity.MockModels.getFile;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-class MockFileRepository extends MockDataRepository<FileEntity> {
+final class MockFileRepository extends MockDataRepository<FileEntity> {
 
     private final FileRepository repository;
     private final FileEntity entity;
@@ -30,6 +32,7 @@ class MockFileRepository extends MockDataRepository<FileEntity> {
     @Override
     FileRepository create() {
         super.create();
+        initSave();
         initFindByTitle();
         initFindByUrl();
         initFindByType();
@@ -50,6 +53,12 @@ class MockFileRepository extends MockDataRepository<FileEntity> {
     @Override
     Collection<FileEntity> getEntities() {
         return this.entities;
+    }
+
+    private void initSave() {
+        final File file = getFile();
+        final FileEntity entity = file.convert();
+        when(this.repository.save(entity)).thenReturn(entity);
     }
 
     private void initFindByTitle() {

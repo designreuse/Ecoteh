@@ -16,7 +16,7 @@ import static ua.com.ecoteh.mocks.enity.MockModelEntities.getCompanyEntity;
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-class MockCompanyRepository extends MockContentRepository<CompanyEntity> {
+final class MockCompanyRepository extends MockContentRepository<CompanyEntity> {
 
     private final CompanyRepository repository;
     private final CompanyEntity entity;

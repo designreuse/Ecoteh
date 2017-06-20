@@ -164,7 +164,7 @@ public class UserBuilderTest extends ModelBuilderTest<User> {
     }
 
     @Test
-    public void whenAddRoleThenBuildWithIt() {
+    public void whenAddUserRoleThenBuildWithIt() {
         User user;
         for (UserRole role : UserRole.values()) {
             this.builder.addRole(role);
@@ -174,8 +174,32 @@ public class UserBuilderTest extends ModelBuilderTest<User> {
     }
 
     @Test
-    public void whenAddNullRoleThenBuildWithNew() {
-        this.builder.addRole(null);
+    public void whenAddNullUserRoleThenBuildWithNew() {
+        this.builder.addRole((UserRole) null);
+        final User user = this.builder.build();
+        assertNotNull(user.getRole());
+    }
+
+    @Test
+    public void whenAddUserRoleNameThenBuildWithIt() {
+        User user;
+        for (UserRole role : UserRole.values()) {
+            this.builder.addRole(role.name());
+            user = this.builder.build();
+            assertEquals(user.getRole(), role);
+        }
+    }
+
+    @Test
+    public void whenAddNullUserRoleNameThenBuildWithNew() {
+        this.builder.addRole((String) null);
+        final User user = this.builder.build();
+        assertNotNull(user.getRole());
+    }
+
+    @Test
+    public void whenAddEmptyUserRoleNameThenBuildWithNew() {
+        this.builder.addRole("");
         final User user = this.builder.build();
         assertNotNull(user.getRole());
     }

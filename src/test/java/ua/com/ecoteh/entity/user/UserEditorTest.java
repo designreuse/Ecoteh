@@ -180,9 +180,33 @@ public class UserEditorTest extends ModelEditorTest<User> {
 
     @Test
     public void whenAddNullRoleThenBuildWithNew() {
-        this.editor.addRole(null);
+        this.editor.addRole((UserRole) null);
         final User user = this.editor.update();
         assertEquals(user.getRole(), this.user.getRole());
+    }
+
+    @Test
+    public void whenAddUserRoleNameThenBuildWithIt() {
+        User user;
+        for (UserRole role : UserRole.values()) {
+            this.editor.addRole(role.name());
+            user = this.editor.update();
+            assertEquals(user.getRole(), role);
+        }
+    }
+
+    @Test
+    public void whenAddNullUserRoleNameThenBuildWithNew() {
+        this.editor.addRole((String) null);
+        final User user = this.editor.update();
+        assertNotNull(user.getRole());
+    }
+
+    @Test
+    public void whenAddEmptyUserRoleNameThenBuildWithNew() {
+        this.editor.addRole("");
+        final User user = this.editor.update();
+        assertNotNull(user.getRole());
     }
 
     @Test

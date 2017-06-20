@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.model.ModelEditorTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static ua.com.ecoteh.mocks.MockConstants.TITLE;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
@@ -86,9 +87,33 @@ public class FileEditorTest extends ModelEditorTest<File> {
 
     @Test
     public void whenAddNullTypeThenBuildWithEmptyIt() {
-        this.editor.addType(null);
+        this.editor.addType((FileType) null);
         final File file = this.editor.update();
         assertEquals(file.getType(), this.file.getType());
+    }
+
+    @Test
+    public void whenAddTypeNameThenBuildWithIt() {
+        File file;
+        for (FileType type : FileType.values()) {
+            this.editor.addType(type.name());
+            file = this.editor.update();
+            assertEquals(file.getType(), type);
+        }
+    }
+
+    @Test
+    public void whenAddNullTypeNameThenBuildWithEmptyIt() {
+        this.editor.addType((String) null);
+        final File file = this.editor.update();
+        assertNotNull(file.getType());
+    }
+
+    @Test
+    public void whenAddEmptyTypeNameThenBuildWithEmptyIt() {
+        this.editor.addType("");
+        final File file = this.editor.update();
+        assertNotNull(file.getType());
     }
 
     @Test

@@ -18,7 +18,7 @@ import static ua.com.ecoteh.mocks.enity.MockModelEntities.getUserEntity;
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-class MockUserRepository extends MockDataRepository<UserEntity> {
+final class MockUserRepository extends MockDataRepository<UserEntity> {
 
     private final UserRepository repository;
     private final UserEntity entity;

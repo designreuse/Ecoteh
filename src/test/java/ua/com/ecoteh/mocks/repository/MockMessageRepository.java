@@ -12,7 +12,7 @@ import static ua.com.ecoteh.mocks.enity.MockModelEntities.getMessageEntity;
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class MockMessageRepository extends MockDataRepository<MessageEntity> {
+final class MockMessageRepository extends MockDataRepository<MessageEntity> {
 
     private final MessageRepository repository;
     private final MessageEntity entity;

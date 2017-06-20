@@ -44,7 +44,7 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddTaglineThenBuildWithIt() {
-        Company company ;
+        Company company;
         String tagline;
         for (int i = 0; i < 5; i++) {
             tagline = TAGLINE + i;
@@ -63,7 +63,7 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddInformationThenBuildWithIt() {
-        Company company ;
+        Company company;
         String information;
         for (int i = 0; i < 5; i++) {
             information = INFORMATION + i;
@@ -82,7 +82,7 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddDomainThenBuildWithIt() {
-        Company company ;
+        Company company;
         String domain;
         for (int i = 0; i < 5; i++) {
             domain = DOMAIN + i;
@@ -101,7 +101,7 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddSenderEmailThenBuildWithIt() {
-        Company company ;
+        Company company;
         String senderEmail;
         for (int i = 0; i < 5; i++) {
             senderEmail = EMAIL + i;
@@ -120,7 +120,7 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddSenderPassThenBuildWithIt() {
-        Company company ;
+        Company company;
         String senderPass;
         for (int i = 0; i < 5; i++) {
             senderPass = PASSWORD + i;
@@ -197,7 +197,7 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddTypeThenBuildWithIt() {
-        Company company ;
+        Company company;
         for (CompanyType type : CompanyType.values()) {
             this.builder.addType(type);
             company = this.builder.build();
@@ -207,7 +207,31 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
 
     @Test
     public void whenAddNullTypeThenBuildWithEmptyIt() {
-        this.builder.addType(null);
+        this.builder.addType((CompanyType) null);
+        final Company company = this.builder.build();
+        assertNotNull(company.getType());
+    }
+
+    @Test
+    public void whenAddTypeNameThenBuildWithIt() {
+        Company company;
+        for (CompanyType type : CompanyType.values()) {
+            this.builder.addType(type.name());
+            company = this.builder.build();
+            assertEquals(company.getType(), type);
+        }
+    }
+
+    @Test
+    public void whenAddNullTypeNameThenBuildWithEmptyIt() {
+        this.builder.addType((String) null);
+        final Company company = this.builder.build();
+        assertNotNull(company.getType());
+    }
+
+    @Test
+    public void whenAddEmptyTypeNameThenBuildWithEmptyIt() {
+        this.builder.addType("");
         final Company company = this.builder.build();
         assertNotNull(company.getType());
     }
