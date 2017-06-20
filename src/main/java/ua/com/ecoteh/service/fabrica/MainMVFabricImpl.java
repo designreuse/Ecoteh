@@ -256,20 +256,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final boolean revers
     ) {
         final ModelAndView modelAndView;
-        switch (sortType) {
-        case "price":
-            modelAndView = categoryWithSortByPriceArticlesPage(url, revers);
-            break;
-        case "title":
+        if (isEmpty(sortType) || sortType.equalsIgnoreCase("title")) {
             modelAndView = categoryWithSortByTitleArticlesPage(url, revers);
-            break;
-        case "date":
+        } else if (sortType.equalsIgnoreCase("price")) {
+            modelAndView = categoryWithSortByPriceArticlesPage(url, revers);
+        } else if (sortType.equalsIgnoreCase("date")) {
             modelAndView = categoryWithSortByDateArticlesPage(url, revers);
-            break;
-        case "number":
+        } else if (sortType.equalsIgnoreCase("number")) {
             modelAndView = categoryWithSortByNumberArticlesPage(url, revers);
-            break;
-        default:
+        } else {
             modelAndView = categoryPage(url);
         }
         modelAndView.setViewName("category/one");
