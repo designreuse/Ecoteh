@@ -84,7 +84,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                             <input type="radio" name="type" value="SLIDE"/>&nbsp;Слайд
                                         </label>&nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="type" value="OTHER" checked/>&nbsp;Другое
+                                            <input type="radio" name="type" value="ANOTHER" checked/>&nbsp;Другое
                                         </label>&nbsp;&nbsp;
                                     </td>
                                 </tr>

@@ -103,8 +103,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                     &nbsp;Слайд
                                                 </label>&nbsp;&nbsp;
                                                 <label>
-                                                    <input type="radio" name="type" value="OTHER"
-                                                           <c:if test="${file.type eq 'OTHER'}">checked</c:if>/>
+                                                    <input type="radio" name="type" value="ANOTHER"
+                                                           <c:if test="${file.type eq 'ANOTHER'}">checked</c:if>/>
                                                     &nbsp;Другое
                                                 </label>&nbsp;&nbsp;
                                             </td>

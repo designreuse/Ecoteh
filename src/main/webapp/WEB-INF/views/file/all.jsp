@@ -67,11 +67,25 @@
                         </div>
                     </div>
                     <c:if test="${length gt 0}">
+                        <%-- Files sorting --%>
                         <c:if test="${length gt 1}">
                             <p class="path">
                                 <a href="#">Сортировка</a>:
                                 <a href="<c:url value="/admin/file/all/sort?revers=${revers}"/>"
-                                   title="Сортировать по названию">По&nbsp;названия</a>
+                                   title="Сортировать по названию">
+                                    <c:choose>
+                                        <c:when test="${revers}">
+                                            По&nbsp;названия&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                                  aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            По&nbsp;названия&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-alphabet"
+                                                  aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
                             </p>
                             <br>
                         </c:if>
