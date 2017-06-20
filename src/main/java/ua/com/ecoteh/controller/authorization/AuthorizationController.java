@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @ComponentScan(basePackages = "ua.com.ecoteh.service.fabrica")
-public class AuthorizationController {
+public final class AuthorizationController {
 
     /**
      * The object for logging information.

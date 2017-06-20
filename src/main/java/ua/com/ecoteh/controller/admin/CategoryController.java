@@ -43,7 +43,7 @@ import ua.com.ecoteh.util.compressor.HtmlCompressor;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class CategoryController {
+public final class CategoryController {
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -190,7 +190,7 @@ public class CategoryController {
     ) {
         final Compressor compressor = new HtmlCompressor();
         final CategoryBuilder categoryBuilder = Category.getBuilder();
-        categoryBuilder.addTitle(title).addKeywords(keywords).addValidated(validated)
+        categoryBuilder.addUrl(url).addTitle(title).addKeywords(keywords).addValidated(validated)
                 .addDescription(compressor.compress(description));
 
         final FileBuilder fileBuilder = File.getBuilder();

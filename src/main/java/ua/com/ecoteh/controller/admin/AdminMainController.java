@@ -39,7 +39,7 @@ import ua.com.ecoteh.service.sender.SenderService;
 @RequestMapping(value = "/admin")
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdminMainController extends MainController {
+public final class AdminMainController extends MainController {
 
     /**
      * The object for logging information.
@@ -75,13 +75,13 @@ public class AdminMainController extends MainController {
 
     /**
      * Returns page with an administrator menu.
-     * Request mapping: /admin/, /admin/menu
+     * Request mapping: /admin/menu
      * Method: GET
      *
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
-            value = { "", "/", "/menu" },
+            value = "/menu",
             method = RequestMethod.GET
     )
     public ModelAndView getAdminMenu() {
@@ -103,11 +103,11 @@ public class AdminMainController extends MainController {
      * Request mapping: /admin/send_message
      * Method: POST
      *
-     * @param url         the URL of a page which must be to redirect.
-     * @param name        the sender name.
-     * @param phone       the phone name.
-     * @param email       the email name.
-     * @param text the sender sender.
+     * @param url   the URL of a page which must be to redirect.
+     * @param name  the sender name.
+     * @param phone the phone name.
+     * @param email the email name.
+     * @param text  the sender sender.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
@@ -162,7 +162,7 @@ public class AdminMainController extends MainController {
      * Method: POST
      *
      * @param username the sender name.
-     * @param text the sender text.
+     * @param text     the sender text.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(

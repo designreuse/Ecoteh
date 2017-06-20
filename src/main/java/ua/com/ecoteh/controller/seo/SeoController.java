@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @ComponentScan(basePackages = "ua.com.ecoteh.service.data")
-public class SeoController {
+public final class SeoController {
 
     /**
      * The implementation of the {@link SeoService} interface.

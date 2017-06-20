@@ -15,7 +15,7 @@ import ua.com.ecoteh.service.data.FileService;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Controller
-public class FaviconController {
+public final class FaviconController {
 
     /**
      * The implementation of the interface describes a set of methods

@@ -1,5 +1,8 @@
 package ua.com.ecoteh.entity.model;
 
+import ua.com.ecoteh.util.generator.Generator;
+import ua.com.ecoteh.util.generator.StringGenerator;
+
 /**
  * The abstract superclass implements a set of standard methods
  * for building an objects of the {@link Model} class or subclasses.
@@ -83,5 +86,15 @@ public abstract class ModelBuilder<T extends Model, B extends ModelBuilder<T, B>
      */
     protected boolean isValidated() {
         return this.validated;
+    }
+
+    /**
+     * Generate and returns a random string.
+     *
+     * @return The random string.
+     */
+    protected String generateRandomString() {
+        final Generator<String> generator = new StringGenerator();
+        return generator.generate();
     }
 }

@@ -126,7 +126,7 @@ public abstract class ContentBuilder<T extends Content, B extends ContentBuilder
         if (isNotEmpty(this.url)) {
             result = this.url;
         } else if (isNotEmpty(this.title)) {
-            result = Translator.fromCyrillicToLatin(this.title);
+            result = Translator.fromCyrillicToLatin(this.title) + "_" + generateRandomString();
         } else {
             result = "";
         }

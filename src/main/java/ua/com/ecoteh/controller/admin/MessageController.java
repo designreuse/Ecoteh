@@ -33,7 +33,7 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class MessageController {
+public final class MessageController {
 
     /**
      * The implementation of the interface provides a set of standard

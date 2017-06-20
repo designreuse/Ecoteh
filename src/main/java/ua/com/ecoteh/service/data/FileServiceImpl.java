@@ -16,7 +16,10 @@ import ua.com.ecoteh.util.loader.MultipartFileLoader;
 import ua.com.ecoteh.util.properties.ContentProperties;
 import ua.com.ecoteh.util.translator.Translator;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
@@ -82,16 +85,18 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
                     getClassSimpleName()
             );
         }
-        final File savingFile;
         final MultipartFile multipartFile = file.getMultipartFile();
-        if (isNotEmpty(file.getMultipartFile())) {
-            isValidMultipartFile(multipartFile);
-            saveFile(multipartFile, file.getUrl());
-            savingFile = super.add(file);
-        } else {
-            savingFile = File.getBuilder().build();
+        final String path = saveFile(multipartFile);
+        final FileEntity entity = file.convert();
+        entity.setUrl(path);
+        final FileEntity savingEntity = this.repository.save(entity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
-        return savingFile;
+        return convertToModel(savingEntity);
     }
 
     /**
@@ -139,21 +144,16 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
                     getClassSimpleName()
             );
         }
-        final File savingFile;
-        final MultipartFile multipartFile = file.getMultipartFile();
-        if (isNotEmpty(file.getMultipartFile())) {
-            isValidMultipartFile(multipartFile);
-            final File oldFile = get(file.getId());
-            deleteFile(oldFile.getUrl());
-            saveFile(multipartFile, oldFile.getUrl());
-            final FileEditor editor = oldFile.getEditor();
-            editor.copy(file).addUrl(oldFile.getUrl());
-            final File newFile = editor.update();
-            savingFile = super.update(newFile);
-        } else {
-            savingFile = File.getBuilder().build();
+        final File old = get(file.getId());
+        final FileEntity fileEntity = updateFile(file, old);
+        final FileEntity savingEntity = this.repository.save(fileEntity);
+        if (isNull(savingEntity)) {
+            throw getNullPointerException(
+                    ExceptionMessage.SAVING_OBJECT_IS_NULL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
-        return savingFile;
+        return convertToModel(savingEntity);
     }
 
     /**
@@ -213,6 +213,18 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     }
 
     /**
+     * Removes file object with the incoming id.
+     *
+     * @param id the id of a file to remove.
+     */
+    @Override
+    @Transactional
+    public void remove(final long id) {
+        final File file = get(id);
+        remove(file);
+    }
+
+    /**
      * Removes file object with the incoming title.
      * Removes file if title is not null and not empty.
      *
@@ -222,7 +234,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Transactional
     public void removeByTitle(final String title) {
         if (isNotEmpty(title)) {
-            this.repository.deleteByTitle(title);
+            final File file = getByTitle(title);
+            remove(file);
         }
     }
 
@@ -235,7 +248,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Transactional
     public void removeByUrl(final String url) {
         if (isNotEmpty(url)) {
-            remove(getByUrl(url));
+            final File file = getByUrl(url);
+            remove(file);
         }
     }
 
@@ -253,8 +267,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
             if (isStaticFile(file)) {
                 throw getIllegalArgumentException(ExceptionMessage.FORBIDDEN_STATIC_FILE_MESSAGE);
             }
-            deleteFile(file.getUrl());
             super.remove(file);
+            deleteFile(file.getUrl());
         }
     }
 
@@ -277,7 +291,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional
     public void removeAll() {
-        remove(getAll());
+        final Collection<File> files = getAll();
+        remove(files);
     }
 
     /**
@@ -334,7 +349,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Transactional
     public boolean deleteFile(final String path) {
         final String absolutePath = createAbsolutePath(path);
-        return new MultipartFileLoader(absolutePath).delete();
+        final Loader loader = new MultipartFileLoader(absolutePath);
+        return loader.delete();
     }
 
     /**
@@ -528,5 +544,37 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      */
     private boolean isStaticFile(final File file) {
         return file.getType().equals(FileType.STATIC);
+    }
+
+    /**
+     * Updates a users.
+     *
+     * @param from the user to copy.
+     * @param to   the user to update.
+     * @return the updated user entity.
+     */
+    private FileEntity updateFile(final File from, final File to) {
+        final FileEditor editor = to.getEditor();
+        if (isNotEmpty(from.getMultipartFile())) {
+            final File updatedPhoto = updateLogo(to, from);
+            editor.copy(updatedPhoto);
+        }
+        final File updatedFile = editor.update();
+        return convertToEntity(updatedFile);
+    }
+
+    /**
+     * Updated a photos.
+     *
+     * @param from the photo to copy.
+     * @param to   the photo to update.
+     * @return the updated photo.
+     */
+    private File updateLogo(final File from, final File to) {
+        deleteFile(from.getUrl());
+        final String url = saveFile(to.getMultipartFile());
+        final FileEditor fileEditor = from.getEditor();
+        fileEditor.addUrl(url);
+        return fileEditor.update();
     }
 }

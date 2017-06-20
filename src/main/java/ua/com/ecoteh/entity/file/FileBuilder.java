@@ -90,6 +90,17 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
     }
 
     /**
+     * Adds a new type to a new file.
+     *
+     * @param name the new type name to a new file.
+     * @return the file builder.
+     */
+    public FileBuilder addType(final String name) {
+        final FileType type = getType(name);
+        return addType(type);
+    }
+
+    /**
      * Adds a new multipart file to a new file.
      *
      * @param multipartFile the new multipart file to a new file.
@@ -117,7 +128,13 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
      * @return The URL or empty string (newer null).
      */
     private String getUrl() {
-        return isNotEmpty(this.url) ? this.url : "";
+        final String result;
+        if (isNotEmpty(this.url)) {
+            result = this.url;
+        } else {
+            result = "";
+        }
+        return result;
     }
 
     /**
@@ -137,5 +154,21 @@ public final class FileBuilder extends ModelBuilder<File, FileBuilder> {
      */
     private MultipartFile getMultipartFile() {
         return this.multipartFile;
+    }
+
+    /**
+     * Returns a file type by name.
+     *
+     * @param name the type name of a new file.
+     * @return The file type.
+     */
+    private FileType getType(final String name) {
+        FileType type;
+        try {
+            type = FileType.valueOf(name);
+        } catch (Exception ex) {
+            type = FileType.ANOTHER;
+        }
+        return type;
     }
 }

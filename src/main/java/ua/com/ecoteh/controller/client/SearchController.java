@@ -25,7 +25,7 @@ import ua.com.ecoteh.service.search.SearchService;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class SearchController {
+public final class SearchController {
 
     /**
      * The implementation of the interface provides a set of standard methods

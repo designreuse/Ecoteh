@@ -33,7 +33,7 @@ import ua.com.ecoteh.util.cache.Cache;
 )
 @ComponentScan(basePackages = "ua.com.ecoteh.service.data")
 @SuppressWarnings("SpringMVCViewInspection")
-public class ResponseController {
+public final class ResponseController {
 
     /**
      * The implementation of the interface provides a set of standard methods

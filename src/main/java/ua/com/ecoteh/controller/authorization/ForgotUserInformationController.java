@@ -38,7 +38,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class ForgotUserInformationController {
+public final class ForgotUserInformationController {
 
     /**
      * The object for logging information.

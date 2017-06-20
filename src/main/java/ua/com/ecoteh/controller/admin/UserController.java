@@ -54,7 +54,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class UserController {
+public final class UserController {
 
     /**
      * The implementation of the interface provides a set of standard

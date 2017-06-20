@@ -178,6 +178,17 @@ public final class UserBuilder extends ModelBuilder<User, UserBuilder> {
     }
 
     /**
+     * Adds a new role to a new user.
+     *
+     * @param name the new role name to a new user.
+     * @return the user builder.
+     */
+    public UserBuilder addRole(final String name) {
+        final UserRole role = getRole(name);
+        return addRole(role);
+    }
+
+    /**
      * Adds a new mailing to a new user.
      * Adds true if the user is mailing, false is not mailing.
      *
@@ -266,11 +277,11 @@ public final class UserBuilder extends ModelBuilder<User, UserBuilder> {
      * @return The user URL or empty string (newer null).
      */
     private String getUrl() {
-        String result;
+        final String result;
         if (isNotEmpty(this.url)) {
             result = this.url;
         } else if (isNotEmpty(this.name)) {
-            result = Translator.fromCyrillicToLatin(this.name);
+            result = Translator.fromCyrillicToLatin(this.name) + "_" + generateRandomString();
         } else {
             result = "";
         }
@@ -354,5 +365,21 @@ public final class UserBuilder extends ModelBuilder<User, UserBuilder> {
      */
     private boolean isLocked() {
         return this.locked;
+    }
+
+    /**
+     * Returns a company type by name.
+     *
+     * @param name the type name of a new company.
+     * @return The company type.
+     */
+    private UserRole getRole(final String name) {
+        UserRole role;
+        try {
+            role = UserRole.valueOf(name);
+        } catch (Exception ex) {
+            role = UserRole.ANOTHER;
+        }
+        return role;
     }
 }

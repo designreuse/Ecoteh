@@ -40,7 +40,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class ClientMainController extends MainController {
+public final class ClientMainController extends MainController {
 
     /**
      * The implementation of the {@link CaptchaService} interface.

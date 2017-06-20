@@ -49,7 +49,7 @@ import ua.com.ecoteh.util.compressor.HtmlCompressor;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class CompanyController {
+public final class CompanyController {
 
     /**
      * The implementation of the interface provides a set of standard methods
@@ -290,7 +290,8 @@ public class CompanyController {
         companyBuilder.addTitle(title).addDomain(domain).addTagline(tagline)
                 .addKeywords(keywords).addValidated(validated)
                 .addDescription(compressor.compress(description))
-                .addInformation(compressor.compress(information));
+                .addInformation(compressor.compress(information))
+                .addType(CompanyType.PARTNER);
 
         final AddressBuilder addressBuilder = Address.getBuilder();
         addressBuilder.addPostAddress(postAddress).addGoogleMaps(googleMaps);
@@ -414,8 +415,8 @@ public class CompanyController {
     ) {
         final Compressor compressor = new HtmlCompressor();
         final CompanyBuilder companyBuilder = Company.getBuilder();
-        companyBuilder.addTitle(title).addDomain(domain).addTagline(tagline)
-                .addKeywords(keywords).addValidated(validated)
+        companyBuilder.addUrl(url).addTitle(title).addDomain(domain)
+                .addTagline(tagline).addKeywords(keywords).addValidated(validated)
                 .addDescription(compressor.compress(description))
                 .addInformation(compressor.compress(information));
 

@@ -28,7 +28,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 @Service
 @ComponentScan(basePackages = "ua.com.ecoteh.service")
 @SuppressWarnings("SpringMVCViewInspection")
-public class SearchServiceImpl implements SearchService {
+public final class SearchServiceImpl implements SearchService {
 
     /**
      * The implementation of the interface provides a set of standard methods

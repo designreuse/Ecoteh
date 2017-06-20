@@ -375,10 +375,7 @@ public abstract class MainController {
      * @param isCaptcha the result of a google-captcha verification.
      * @return The ready object of the ModelAndView class.
      */
-    protected ModelAndView getMessageMV(
-            final String url,
-            final boolean isCaptcha
-    ) {
+    protected ModelAndView getMessageMV(final String url, final boolean isCaptcha) {
         ModelAndView modelAndView = new ModelAndView();
         if (isNotNull(url)) {
             switch (url) {

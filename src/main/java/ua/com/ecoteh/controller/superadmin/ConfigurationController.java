@@ -31,7 +31,7 @@ import java.util.Date;
                 "ua.com.ecoteh.util.properties"
         }
 )
-public class ConfigurationController {
+public final class ConfigurationController {
 
     /**
      * The implementation of the interface provides a set of standard methods

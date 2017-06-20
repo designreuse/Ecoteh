@@ -11,7 +11,7 @@ import ua.com.ecoteh.exception.ExceptionMessage;
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Controller
-public class IllegalAccessController {
+public final class IllegalAccessController {
 
     /**
      * The method throws an exception in the case of reference to it.

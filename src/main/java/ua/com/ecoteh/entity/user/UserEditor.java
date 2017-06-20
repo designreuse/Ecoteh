@@ -219,6 +219,17 @@ public final class UserEditor extends ModelEditor<User, UserEditor> {
     }
 
     /**
+     * Adds a new role to the user.
+     *
+     * @param name the new role name to the user.
+     * @return the user editor.
+     */
+    public UserEditor addRole(final String name) {
+        final UserRole role = getRole(name);
+        return addRole(role);
+    }
+
+    /**
      * Adds a new mailing to the user.
      * Adds true if the user is mailing, false is not mailing.
      *
@@ -404,5 +415,21 @@ public final class UserEditor extends ModelEditor<User, UserEditor> {
             result = this.user.isLocked();
         }
         return result;
+    }
+
+    /**
+     * Returns a company type by name.
+     *
+     * @param name the type name of a new company.
+     * @return The company type or null.
+     */
+    private UserRole getRole(final String name) {
+        UserRole role;
+        try {
+            role = UserRole.valueOf(name);
+        } catch (Exception ex) {
+            role = null;
+        }
+        return role;
     }
 }

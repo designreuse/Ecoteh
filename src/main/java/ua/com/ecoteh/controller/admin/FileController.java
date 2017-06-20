@@ -41,7 +41,7 @@ import java.util.Collection;
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")
-public class FileController {
+public final class FileController {
 
     /**
      * The object for logging information.
@@ -129,8 +129,7 @@ public class FileController {
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
         final FileBuilder builder = File.getBuilder();
-        builder.addTitle(title).addType(getType(type))
-                .addMultipartFile(multipartFile);
+        builder.addTitle(title).addType(type).addMultipartFile(multipartFile).isValid();
         final File file = builder.build();
         this.fileService.add(file);
         return "redirect:/admin/file/all";
@@ -200,10 +199,10 @@ public class FileController {
             @RequestParam(value = "type") final String type,
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
-        final File file = this.fileService.get(id);
-        final FileEditor editor = file.getEditor();
-        editor.addTitle(title).addType(getType(type)).addMultipartFile(multipartFile);
-        this.fileService.update(editor.update());
+        final FileBuilder builder = File.getBuilder();
+        builder.addId(id).addTitle(title).addType(type).addMultipartFile(multipartFile).isValid();
+        final File file = builder.build();
+        this.fileService.update(file);
         return "redirect:/admin/file/all";
     }
 
@@ -297,22 +296,5 @@ public class FileController {
         modelAndView.addObject("revers", !revers);
         modelAndView.setViewName("file/all");
         return modelAndView;
-    }
-
-    /**
-     * Returns a file type by name.
-     *
-     * @param name the type name of a new file.
-     * @return The file type.
-     */
-    private static FileType getType(final String name) {
-        FileType fileType;
-        try {
-            fileType = FileType.valueOf(name);
-        } catch (IllegalArgumentException ex) {
-            LOGGER.error(ex.getMessage(), ex);
-            fileType = FileType.ANOTHER;
-        }
-        return fileType;
     }
 }

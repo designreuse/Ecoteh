@@ -120,6 +120,17 @@ public final class FileEditor extends ModelEditor<File, FileEditor> {
     }
 
     /**
+     * Adds a new type to a new file.
+     *
+     * @param name the new type name to a new file.
+     * @return the file editor.
+     */
+    public FileEditor addType(final String name) {
+        final FileType type = getType(name);
+        return addType(type);
+    }
+
+    /**
      * Adds a new multipart file to the file.
      *
      * @param multipartFile the new multipart file to the file.
@@ -181,5 +192,21 @@ public final class FileEditor extends ModelEditor<File, FileEditor> {
      */
     private MultipartFile getMultipartFile() {
         return isNotNull(this.multipartFile) ? this.multipartFile : this.file.getMultipartFile();
+    }
+
+    /**
+     * Returns a file type by name.
+     *
+     * @param name the type name of a new file.
+     * @return The file type.
+     */
+    private FileType getType(final String name) {
+        FileType type;
+        try {
+            type = FileType.valueOf(name);
+        } catch (Exception ex) {
+            type = null;
+        }
+        return type;
     }
 }

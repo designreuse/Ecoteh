@@ -205,6 +205,17 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
     }
 
     /**
+     * Adds a new type to a new company.
+     *
+     * @param name the new type name to a new company.
+     * @return the company builder.
+     */
+    public CompanyBuilder addType(final String name) {
+        final CompanyType type = getType(name);
+        return addType(type);
+    }
+
+    /**
      * Returns a tagline of a new company.
      * Returns an empty string if the tagline is null or empty.
      *
@@ -309,5 +320,21 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
      */
     private CompanyType getType() {
         return isNotNull(this.type) ? this.type : CompanyType.ANOTHER;
+    }
+
+    /**
+     * Returns a company type by name.
+     *
+     * @param name the type name of a new company.
+     * @return The company type.
+     */
+    private CompanyType getType(final String name) {
+        CompanyType type;
+        try {
+            type = CompanyType.valueOf(name);
+        } catch (Exception ex) {
+            type = CompanyType.ANOTHER;
+        }
+        return type;
     }
 }

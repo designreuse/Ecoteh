@@ -246,6 +246,17 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
     }
 
     /**
+     * Adds a new type to a new company.
+     *
+     * @param name the new type name to a new company.
+     * @return the company editor.
+     */
+    public CompanyEditor addType(final String name) {
+        final CompanyType type = getType(name);
+        return addType(type);
+    }
+
+    /**
      * Returns a tagline of a new company.
      * Returns the company tagline if the tagline is null.
      *
@@ -349,5 +360,21 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
      */
     private CompanyType getType() {
         return isNotNull(this.type) ? this.type : this.company.getType();
+    }
+
+    /**
+     * Returns a company type by name.
+     *
+     * @param name the type name of a new company.
+     * @return The company type.
+     */
+    private CompanyType getType(final String name) {
+        CompanyType type;
+        try {
+            type = CompanyType.valueOf(name);
+        } catch (Exception ex) {
+            type = null;
+        }
+        return type;
     }
 }

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 @ComponentScan(basePackages = "ua.com.ecoteh.service.fabrica")
 @SuppressWarnings("SpringMVCViewInspection")
-public class AdviceController {
+public final class AdviceController {
 
     /**
      * The object for logging information.

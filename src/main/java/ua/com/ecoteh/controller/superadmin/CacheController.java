@@ -23,7 +23,7 @@ import ua.com.ecoteh.util.cache.Cache;
 @RequestMapping(value = "/superadmin/cache")
 @ComponentScan(basePackages = "ua.com.ecoteh.service.fabric")
 @SuppressWarnings("SpringMVCViewInspection")
-public class CacheController {
+public final class CacheController {
 
     /**
      * The implementation of the interface provides a set of standard
