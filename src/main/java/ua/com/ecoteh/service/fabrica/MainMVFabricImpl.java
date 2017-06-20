@@ -148,20 +148,15 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final boolean revers
     ) {
         final ModelAndView modelAndView;
-        switch (sortType) {
-        case "price":
+        if (isEmpty(sortType) || sortType.equalsIgnoreCase("price")) {
             modelAndView = allSortByPriceArticlesPage(revers);
-            break;
-        case "title":
+        } else if (sortType.equalsIgnoreCase("title")) {
             modelAndView = allSortByTitleArticlesPage(revers);
-            break;
-        case "date":
+        } else if (sortType.equalsIgnoreCase("date")) {
             modelAndView = allSortByDateArticlesPage(revers);
-            break;
-        case "number":
+        } else if (sortType.equalsIgnoreCase("number")) {
             modelAndView = allSortByNumberArticlesPage(revers);
-            break;
-        default:
+        } else {
             modelAndView = allArticlesPage();
         }
         modelAndView.setViewName("article/all");
@@ -256,10 +251,10 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final boolean revers
     ) {
         final ModelAndView modelAndView;
-        if (isEmpty(sortType) || sortType.equalsIgnoreCase("title")) {
-            modelAndView = categoryWithSortByTitleArticlesPage(url, revers);
-        } else if (sortType.equalsIgnoreCase("price")) {
+        if (isEmpty(sortType) || sortType.equalsIgnoreCase("price")) {
             modelAndView = categoryWithSortByPriceArticlesPage(url, revers);
+        } else if (sortType.equalsIgnoreCase("title")) {
+            modelAndView = categoryWithSortByTitleArticlesPage(url, revers);
         } else if (sortType.equalsIgnoreCase("date")) {
             modelAndView = categoryWithSortByDateArticlesPage(url, revers);
         } else if (sortType.equalsIgnoreCase("number")) {
