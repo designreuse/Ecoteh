@@ -47,8 +47,8 @@ final class HttpsURLStream {
     String read() throws IOException {
         final InputStream inputStream = getInputStream();
         final StringBuilder sb = new StringBuilder();
-        try (final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                final BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+        try (InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             String inputLine;
             while (isNotNull(inputLine = bufferedReader.readLine())) {
                 sb.append(inputLine);
@@ -65,7 +65,7 @@ final class HttpsURLStream {
      */
     void write(final String value) throws IOException {
         final OutputStream outputStream = getOutputStream();
-        try (final DataOutputStream stream = new DataOutputStream(outputStream)) {
+        try (DataOutputStream stream = new DataOutputStream(outputStream)) {
             stream.writeBytes(value);
             stream.flush();
         }

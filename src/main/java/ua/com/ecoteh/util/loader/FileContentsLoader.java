@@ -75,7 +75,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
      */
     private String readFromFile(final String path) {
         String result;
-        try (final RandomAccessFile in = new RandomAccessFile(path, "r")) {
+        try (RandomAccessFile in = new RandomAccessFile(path, "r")) {
             byte[] buf = new byte[(int) in.length()];
             in.read(buf);
             result = new String(buf);
@@ -95,7 +95,7 @@ public final class FileContentsLoader extends AbstractLoader implements Loader {
     private boolean writeToFile(final String path) {
         boolean result = true;
         checkPath(path);
-        try (final RandomAccessFile out = new RandomAccessFile(path, "rw")) {
+        try (RandomAccessFile out = new RandomAccessFile(path, "rw")) {
             byte[] buf = this.text.getBytes();
             out.setLength(0);
             out.write(buf);

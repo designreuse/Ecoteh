@@ -60,7 +60,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
         boolean result = true;
         final String path = getPathToFile();
         checkPath(path);
-        try (final OutputStream stream = new FileOutputStream(path)) {
+        try (OutputStream stream = new FileOutputStream(path)) {
             stream.write(this.file.getBytes());
         } catch (IOException ex) {
             logException(ex);
