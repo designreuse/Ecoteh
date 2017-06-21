@@ -15,7 +15,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  *
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class Time implements ITime {
+public final class Time implements ITime {
 
     /**
      * It is s an object for date/time formatting subclasses which formats

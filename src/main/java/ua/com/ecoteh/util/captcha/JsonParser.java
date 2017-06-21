@@ -51,8 +51,8 @@ final class JsonParser {
      * @return the JSON object.
      */
     private JsonObject readJson() {
-        try (final StringReader stringReader = new StringReader(this.response);
-                final JsonReader jsonReader = Json.createReader(stringReader)) {
+        try (StringReader stringReader = new StringReader(this.response);
+                JsonReader jsonReader = Json.createReader(stringReader)) {
             return jsonReader.readObject();
         }
     }
