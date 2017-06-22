@@ -15,10 +15,25 @@ public final class HtmlCompressor extends AbstractCompressor implements Compress
     private final static boolean REMOVED_INTERTAG_SPACES = true;
 
     /**
+     * The instance of the Compressor class.
+     */
+    private final Compressor compressor;
+
+    /**
      * Constructor.
      */
     public HtmlCompressor() {
-        super(createCompressor());
+        compressor = createCompressor();
+    }
+
+    /**
+     * Returns a compressor object
+     * of the HtmlCompressor class.
+     *
+     * @return The HTML compressor instance.
+     */
+    Compressor getCompressor() {
+        return this.compressor;
     }
 
     /**
@@ -27,7 +42,7 @@ public final class HtmlCompressor extends AbstractCompressor implements Compress
      *
      * @return The HTML compressor instance.
      */
-    private static Compressor createCompressor() {
+    private Compressor createCompressor() {
         final com.googlecode.htmlcompressor.compressor.HtmlCompressor compressor =
                 new com.googlecode.htmlcompressor.compressor.HtmlCompressor();
         compressor.setRemoveIntertagSpaces(REMOVED_INTERTAG_SPACES);

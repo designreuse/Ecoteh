@@ -129,7 +129,8 @@ public final class FileController {
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
         final FileBuilder builder = File.getBuilder();
-        builder.addTitle(title).addType(type).addMultipartFile(multipartFile).isValid();
+        builder.addTitle(title).addType(type)
+                .addMultipartFile(multipartFile).isValid();
         final File file = builder.build();
         this.fileService.add(file);
         return "redirect:/admin/file/all";
@@ -200,7 +201,8 @@ public final class FileController {
             @RequestParam(value = "file") final MultipartFile multipartFile
     ) {
         final FileBuilder builder = File.getBuilder();
-        builder.addId(id).addTitle(title).addType(type).addMultipartFile(multipartFile).isValid();
+        builder.addId(id).addTitle(title).addType(type)
+                .addMultipartFile(multipartFile).isValid();
         final File file = builder.build();
         this.fileService.update(file);
         return "redirect:/admin/file/all";

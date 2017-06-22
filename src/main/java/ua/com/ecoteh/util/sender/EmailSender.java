@@ -1,7 +1,5 @@
 package ua.com.ecoteh.util.sender;
 
-import org.apache.log4j.Logger;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -18,11 +16,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 public final class EmailSender implements Sender {
-
-    /**
-     * The object for logging information.
-     */
-    private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
 
     /**
      * The sender charset.
@@ -108,7 +101,7 @@ public final class EmailSender implements Sender {
                     this.senderEmail, this.senderEmailPass
             );
         } catch (UnsupportedEncodingException | MessagingException ex) {
-            LOGGER.error(ex.getMessage(), ex);
+            ex.printStackTrace();
         }
     }
 
@@ -152,7 +145,6 @@ public final class EmailSender implements Sender {
                     recipientEmail, senderEmail, senderEmailPass
             );
         } catch (UnsupportedEncodingException | MessagingException ex) {
-            LOGGER.error(ex.getMessage(), ex);
             final Properties sslProperties = getSSLProperties();
             doWork(
                     sslProperties, subject, text,
@@ -228,12 +220,23 @@ public final class EmailSender implements Sender {
         message.setFrom(address);
         final InternetAddress[] addresses = InternetAddress.parse(recipientEmail);
         message.setRecipients(Message.RecipientType.TO, addresses);
-        final String encodeText = MimeUtility.encodeText(subject, CHARSET, ENCODING);
+        final String encodeText = encodeText(subject);
         message.setSubject(encodeText);
         final String content = getContent();
         message.setContent(text, content);
         message.setSentDate(new Date());
         return message;
+    }
+
+    /**
+     * Encodes the incoming text.
+     *
+     * @param text the text to encode (newer null).
+     * @return The encoded text.
+     * @throws UnsupportedEncodingException
+     */
+    private String encodeText(final String text) throws UnsupportedEncodingException {
+        return MimeUtility.encodeText(text, CHARSET, ENCODING);
     }
 
     /**
@@ -248,31 +251,15 @@ public final class EmailSender implements Sender {
     /**
      * Creates and returns Session object which represents a mail session.
      *
-     * @param properties      the Properties object represents
-     *                        the persistent set of TLS or SSL properties
-     * @param email     the sender E-mail.
-     * @param password the sender E-mail password.
+     * @param properties the Properties object represents
+     *                   the persistent set of TLS or SSL properties
+     * @param email      the sender E-mail.
+     * @param password   the sender E-mail password.
      * @return The Session object (newer null).
      */
     private Session getSession(final Properties properties, final String email, final String password) {
-        final Authenticator authenticator = getAuthenticator(email, password);
+        final Authenticator authenticator = new SenderAuthenticator(email, password);
         return Session.getDefaultInstance(properties, authenticator);
-    }
-
-    /**
-     * Creates and returns Authenticator.
-     *
-     * @param email    the sender E-mail.
-     * @param password the sender E-mail password.
-     * @return The Authenticator object (newer null).
-     */
-    private Authenticator getAuthenticator(final String email, final String password) {
-        return new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(email, password);
-            }
-        };
     }
 
     /**

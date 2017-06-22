@@ -270,7 +270,7 @@ public final class ForgotUserInformationController {
         if (user.isLocked()) {
             sb.append("\n\nПОЛЬЗОВАТЕЛЬ ЗАБЛОКИРОВАН");
         }
-        sb.append("\n\nПосле прочтения этого письма, рекомендуется удалить его,")
+        sb.append("\n\nПосле прочтения этого письма, рекомендуется удалить его, ")
                 .append("во избежании потери Ваших персональных даных.");
         return sb.toString();
     }

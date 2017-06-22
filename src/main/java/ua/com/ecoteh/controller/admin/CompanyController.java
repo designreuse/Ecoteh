@@ -28,6 +28,8 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The class implements a set of methods for working with
  * objects of the {@link Company} class or subclasses for admins.
@@ -186,7 +188,7 @@ public final class CompanyController {
         companyBuilder.addAddress(address);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         companyBuilder.addLogo(logo);
 
@@ -307,14 +309,14 @@ public final class CompanyController {
         companyBuilder.addContacts(contacts);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         companyBuilder.addLogo(logo);
 
         final Company company = companyBuilder.build();
         final Company savingCompany = this.companyService.add(company);
         Cache.clear();
-        return "redirect:/company/" + savingCompany.getUrl();
+        return getViewName(savingCompany);
     }
 
     /**
@@ -434,14 +436,14 @@ public final class CompanyController {
         companyBuilder.addAddress(address);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         companyBuilder.addLogo(logo);
 
         final Company company = companyBuilder.build();
         final Company updatedCompany = this.companyService.update(company);
         Cache.clear();
-        return "redirect:/company/" + updatedCompany.getUrl();
+        return getViewName(updatedCompany);
     }
 
     /**
@@ -501,5 +503,21 @@ public final class CompanyController {
         this.companyService.removeAll();
         Cache.clear();
         return "redirect:/";
+    }
+
+    /**
+     * Returns a view name for the company.
+     *
+     * @param company the company to get view name.
+     * @return The view name.
+     */
+    private String getViewName(final Company company) {
+        final String viewName;
+        if (isNotNull(company)) {
+            viewName = "redirect:/company/" + company.getUrl();
+        } else {
+            viewName = "redirect:/company/all";
+        }
+        return viewName;
     }
 }

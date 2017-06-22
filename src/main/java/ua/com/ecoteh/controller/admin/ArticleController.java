@@ -26,6 +26,7 @@ import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of methods for working with
@@ -120,8 +121,8 @@ public final class ArticleController {
      * @param number        the number of a new article.
      * @param price         the price to a new article.
      * @param currency      the new price currency to a article.
-     * @param categoryUrl   the categoryarticle URL of a new article.
-     * @param multipartLogo thea file of photo to a new categoryarticle.
+     * @param categoryUrl   the category URL of a new article.
+     * @param multipartLogo thea file of photo to a new category.
      * @param validated     the validated of a new article.
      * @return The redirect string to the "/article/{url}" URL,
      * where {url} is a URL of a saving article.
@@ -153,7 +154,7 @@ public final class ArticleController {
         articleBuilder.addCategory(category);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         articleBuilder.addLogo(logo);
 
@@ -221,8 +222,8 @@ public final class ArticleController {
      * @param number        the new number to a article.
      * @param price         the new price to a article.
      * @param currency      the new price currency to a article.
-     * @param categoryUrl   the categoryarticle URL of a article.
-     * @param multipartLogo the file of photo to a new categoryarticle.
+     * @param categoryUrl   the category URL of a article.
+     * @param multipartLogo the file of photo to a new category.
      * @param validated     the validated of a article.
      * @return The redirect string to the "/article/{url}" URL,
      * where {url} is a URL of a saving article.
@@ -255,7 +256,7 @@ public final class ArticleController {
         articleBuilder.addCategory(category);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         articleBuilder.addLogo(logo);
 
@@ -328,17 +329,19 @@ public final class ArticleController {
      * Returns a view name for the article.
      * If an article text is not blank then returns "redirect:/admin/article/{url}",
      * where {url} is a URL of an article;
-     * else if an article categoryarticle is not null
-     * then returns "redirect:/admin/categoryarticle/{url}",
-     * where {url} is a URL of an article categoryarticle;
+     * else if an article category is not null
+     * then returns "redirect:/admin/category/{url}",
+     * where {url} is a URL of an article category;
      * else returns "redirect:/admin/article/all";
      *
      * @param article the article to get view name.
      * @return The view name.
      */
-    private static String getViewName(final Article article) {
-        String viewName;
-        if (isNotEmpty(article.getText())) {
+    private String getViewName(final Article article) {
+        final String viewName;
+        if (isNull(article)) {
+            viewName = "redirect:/article/all";
+        } else if (isNotEmpty(article.getText())) {
             viewName = "redirect:/article/" + article.getUrl();
         } else if (isValidCategory(article.getCategory())) {
             viewName = "redirect:/category/" + article.getCategory().getUrl();
@@ -349,8 +352,8 @@ public final class ArticleController {
     }
 
     /**
-     * Validated a incoming categoryarticle.
-     * Categoryarticle is valid if it is not null and and it validated.
+     * Validated a incoming category.
+     * Category is valid if it is not null and and it validated.
      * <pre>
      *     isValidCategory(null) = false
      *
@@ -364,7 +367,7 @@ public final class ArticleController {
      * @param category the category to check.
      * @return true if the category is not null and it validated.
      */
-    private static boolean isValidCategory(final Category category) {
+    private boolean isValidCategory(final Category category) {
         return isNotNull(category) && category.isValidated();
     }
 }

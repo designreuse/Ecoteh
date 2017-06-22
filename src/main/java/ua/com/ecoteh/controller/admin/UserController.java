@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.config.DefaultAccounts;
 import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.contacts.Contacts;
 import ua.com.ecoteh.entity.contacts.ContactsBuilder;
@@ -200,7 +201,7 @@ public final class UserController {
         userBuilder.addContacts(contacts);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(name).addMultipartFile(multipartPhoto);
+        fileBuilder.addTitle(name).addMultipartFile(multipartPhoto).isValid();
         final File photo = fileBuilder.build();
         userBuilder.addPhoto(photo);
 
@@ -315,7 +316,7 @@ public final class UserController {
         userBuilder.addContacts(contacts);
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(name).addMultipartFile(multipartPhoto);
+        fileBuilder.addTitle(name).addMultipartFile(multipartPhoto).isValid();
         final File photo = fileBuilder.build();
         userBuilder.addPhoto(photo);
 
@@ -348,8 +349,8 @@ public final class UserController {
     }
 
     /**
-     * Removes a user with the incoming URL
-     * and redirects by the "/admin/user/all" URL.
+     * Removes a user with the incoming URL and redirects
+     * by the "/admin/user/all" or "redirect:/logout"URL.
      * Request mapping: /admin/user/delete/{url},
      * where {url} is a URL of a user to remove.
      * Method: GET
@@ -364,12 +365,19 @@ public final class UserController {
     public String deleteUserByUrl(@PathVariable("url") final String url) {
         this.userService.removeByUrl(url);
         Cache.removeAll("Main Company");
-        return "redirect:/admin/user/all";
+        final User authenticatedUser = this.userService.getAuthenticatedUser();
+        final String redirect;
+        if (isNotNull(authenticatedUser) && authenticatedUser.getUrl().equals(url)) {
+            redirect = "redirect:/logout";
+        } else {
+            redirect = "redirect:/admin/user/all";
+        }
+        return redirect;
     }
 
     /**
-     * Removes an all users and redirects
-     * by the "/admin/user/all" URL.
+     * Removes an all users and redirects by
+     * the "/admin/user/all" or "redirect:/logout" URL.
      * Request mapping: /admin/article/user/all
      * Method: GET
      *
@@ -382,7 +390,14 @@ public final class UserController {
     public String deleteAllUsers() {
         this.userService.removeAll();
         Cache.removeAll("Main Company");
-        return "redirect:/admin/user/all";
+        final User authenticatedUser = this.userService.getAuthenticatedUser();
+        final String redirect;
+        if (DefaultAccounts.isDefaultAdmin(authenticatedUser)) {
+            redirect = "redirect:/admin/user/all";
+        } else {
+            redirect = "redirect:/logout";
+        }
+        return redirect;
     }
 
     /**
@@ -401,7 +416,7 @@ public final class UserController {
     )
     public ModelAndView sendMessageForPersonnel(
             @RequestParam(value = "subject") final String subject,
-            @RequestParam(value = "sender") final String text
+            @RequestParam(value = "text") final String text
     ) {
         createAndSendMessage(subject, text);
         final ModelAndView modelAndView = getAllUsersPage();

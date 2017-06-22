@@ -22,6 +22,8 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
 import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * The class implements a set of methods for working with
  * objects of the {@link Category} class or subclasses for admins.
@@ -117,14 +119,14 @@ public final class CategoryController {
                 .addDescription(compressor.compress(description));
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         categoryBuilder.addLogo(logo);
 
         final Category category = categoryBuilder.build();
         final Category savingCategory = this.categoryService.add(category);
         Cache.clear();
-        return "redirect:/category/" + savingCategory.getUrl();
+        return getViewName(savingCategory);
     }
 
     /**
@@ -194,14 +196,14 @@ public final class CategoryController {
                 .addDescription(compressor.compress(description));
 
         final FileBuilder fileBuilder = File.getBuilder();
-        fileBuilder.addTitle(title).addMultipartFile(multipartLogo);
+        fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
         final File logo = fileBuilder.build();
         categoryBuilder.addLogo(logo);
 
         final Category category = categoryBuilder.build();
         final Category updatedCategory = this.categoryService.update(category);
         Cache.clear();
-        return "redirect:/category/" + updatedCategory.getUrl();
+        return getViewName(updatedCategory);
     }
 
     /**
@@ -252,5 +254,21 @@ public final class CategoryController {
         this.categoryService.removeAll();
         Cache.clear();
         return "redirect:/";
+    }
+
+    /**
+     * Returns a view name for the category.
+     *
+     * @param category the category to get view name.
+     * @return The view name.
+     */
+    private String getViewName(final Category category) {
+        final String viewName;
+        if (isNotNull(category)) {
+            viewName = "redirect:/category/" + category.getUrl();
+        } else {
+            viewName = "redirect:/category/all";
+        }
+        return viewName;
     }
 }
