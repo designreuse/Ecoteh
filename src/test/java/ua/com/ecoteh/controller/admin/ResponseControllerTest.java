@@ -4,12 +4,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.service.data.ResponseService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import static org.junit.Assert.assertEquals;
 import static ua.com.ecoteh.mocks.MockConstants.*;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
+import static ua.com.ecoteh.mocks.enity.MockModels.getResponse;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getResponseService;
 import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getMainMVFabric;
 
@@ -34,8 +36,12 @@ public class ResponseControllerTest {
 
     @Test
     public void whenUpdateResponseThenReturnSomeModelAndView() {
+        final Response response = getResponse();
+        final String actualRedirect = controller.updateResponse(
+                response.getId(), response.getUsername(),
+                response.getText(), response.isValidated()
+        );
         final String expectedRedirect = "redirect:/responses";
-        final String actualRedirect = controller.updateResponse(ID, NAME, ANY_STRING, true);
         assertEquals(actualRedirect, expectedRedirect);
     }
 

@@ -1,6 +1,7 @@
 package ua.com.ecoteh.mocks.service.data;
 
 import ua.com.ecoteh.entity.article.Article;
+import ua.com.ecoteh.entity.article.ArticleEditor;
 import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.service.data.ArticleService;
 
@@ -26,14 +27,22 @@ final class MockArticleService extends MockContentService<Article> {
     MockArticleService() {
         this.service = mock(ArticleService.class);
         this.article = getArticle();
-        this.articles = getArticles();
         this.category = getCategory();
+        this.articles = getArticles();
         this.categories = getCategories();
+    }
+
+    private void initAdd() {
+        final ArticleEditor editor = this.article.getEditor();
+        editor.addCategory(this.category);
+        final Article article = editor.update();
+        when(service.add(article)).thenReturn(article);
     }
 
     @Override
     ArticleService create() {
         super.create();
+        initAdd();
         initGetByNumber();
         initGetByCategoryId();
         initGetByCategoryTitle();

@@ -4,6 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static ua.com.ecoteh.mocks.MockConstants.ID;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
+import static ua.com.ecoteh.mocks.enity.MockModels.getFile;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getFileService;
 import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
 
@@ -47,6 +49,17 @@ public class FileControllerTest {
         checkModelAndView(modelAndView, viewName, keys);
     }
 
+    @Test
+    public void whenAddFileThenReturnAllFilesPage() {
+        final File file = getFile();
+        final String actualRedirect = controller.addFile(
+                file.getTitle(), file.getUrl(),
+                file.getMultipartFile()
+        );
+        final String expectedRedirect = "redirect:/admin/file/all";
+        assertEquals(actualRedirect, expectedRedirect);
+    }
+
     @Test(expected = IllegalMappingException.class)
     public void whenAddFileByGetMethodThenThrowIllegalMappingException() {
         controller.addFile();
@@ -58,6 +71,17 @@ public class FileControllerTest {
         final String[] keys = { "main_company", "categories", "favicon", "file" };
         final ModelAndView modelAndView = controller.editFilePage(ID);
         checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenUpdateFileThenReturnAllFilesPage() {
+        final File file = getFile();
+        final String actualRedirect = controller.updateFile(
+                file.getId(), file.getTitle(), file.getUrl(),
+                file.getMultipartFile()
+        );
+        final String expectedRedirect = "redirect:/admin/file/all";
+        assertEquals(actualRedirect, expectedRedirect);
     }
 
     @Test(expected = IllegalMappingException.class)

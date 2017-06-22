@@ -4,6 +4,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.data.mapping.model.IllegalMappingException;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.entity.contacts.Contacts;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.UserService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
@@ -12,6 +14,7 @@ import ua.com.ecoteh.service.sender.SenderService;
 import static org.junit.Assert.assertEquals;
 import static ua.com.ecoteh.mocks.MockConstants.URL;
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
+import static ua.com.ecoteh.mocks.enity.MockModels.getUser;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getCompanyService;
 import static ua.com.ecoteh.mocks.service.data.MockServices.getUserService;
 import static ua.com.ecoteh.mocks.service.fabrica.MockMVFabric.getCacheMVFabric;
@@ -46,6 +49,23 @@ public class UserControllerTest {
         checkModelAndView(modelAndView, viewName, keys);
     }
 
+    @Test
+    public void whenAddUserThenRedirectsToAllUserPage() {
+        final User user = getUser();
+        final Contacts contacts = user.getContacts();
+        final String actualRedirect = controller.addUser(
+                user.getName(), user.getLogin(),user.getPassword(),
+                user.getDescription(), contacts.getMobilePhone(),
+                contacts.getLandlinesPhone(), contacts.getFax(),
+                contacts.getEmail(), contacts.getVkontakte(),
+                contacts.getFacebook(), contacts.getTwitter(),
+                contacts.getSkype(), user.getPhoto().getMultipartFile(),
+                user.isValidated(), user.isMailing(), user.isLocked()
+        );
+        final String expectedRedirect = "redirect:/admin/user/all";
+        assertEquals(actualRedirect, expectedRedirect);
+    }
+
     @Test(expected = IllegalMappingException.class)
     public void whenAddUserByPostMethodThenThrowsIllegalMappingException() {
         controller.addUser();
@@ -59,6 +79,24 @@ public class UserControllerTest {
         checkModelAndView(modelAndView, viewName, keys);
     }
 
+    @Test
+    public void whenUpdateUserThenRedirectsToAllUserPage() {
+        final User user = getUser();
+        final Contacts contacts = user.getContacts();
+        final String actualRedirect = controller.updateUser(
+                user.getUrl(), user.getName(),
+                user.getLogin(),user.getPassword(),
+                user.getDescription(), contacts.getMobilePhone(),
+                contacts.getLandlinesPhone(), contacts.getFax(),
+                contacts.getEmail(), contacts.getVkontakte(),
+                contacts.getFacebook(), contacts.getTwitter(),
+                contacts.getSkype(), user.getPhoto().getMultipartFile(),
+                user.isValidated(), user.isMailing(), user.isLocked()
+        );
+        final String expectedRedirect = "redirect:/admin/user/all";
+        assertEquals(actualRedirect, expectedRedirect);
+    }
+
     @Test(expected = IllegalMappingException.class)
     public void whenUpdateUserByGetMethodThenThrowsIllegalMappingException() {
         controller.updateUser();
@@ -66,14 +104,14 @@ public class UserControllerTest {
 
     @Test
     public void whenDeleteUserByUrlThenReturnSomeModelAndView() {
-        final String expectedRedirect = "redirect:/admin/user/all";
+        final String expectedRedirect = "redirect:/logout";
         final String actualRedirect = controller.deleteUserByUrl(URL);
         assertEquals(actualRedirect, expectedRedirect);
     }
 
     @Test
     public void whenDeleteAllUsersThenReturnSomeModelAndView() {
-        final String expectedRedirect = "redirect:/admin/user/all";
+        final String expectedRedirect = "redirect:/logout";
         final String actualRedirect = controller.deleteAllUsers();
         assertEquals(actualRedirect, expectedRedirect);
     }

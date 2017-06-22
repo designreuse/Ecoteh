@@ -1,6 +1,7 @@
 package ua.com.ecoteh.mocks.repository;
 
 import ua.com.ecoteh.entity.article.ArticleEntity;
+import ua.com.ecoteh.entity.category.CategoryEntity;
 import ua.com.ecoteh.repository.ArticleRepository;
 
 import java.util.ArrayList;
@@ -9,8 +10,7 @@ import java.util.Collection;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static ua.com.ecoteh.mocks.MockConstants.*;
-import static ua.com.ecoteh.mocks.enity.MockModelEntities.getArticleEntities;
-import static ua.com.ecoteh.mocks.enity.MockModelEntities.getArticleEntity;
+import static ua.com.ecoteh.mocks.enity.MockModelEntities.*;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -30,6 +30,7 @@ final class MockArticleRepository extends MockContentRepository<ArticleEntity> {
     @Override
     ArticleRepository create() {
         super.create();
+        initSave();
         initFindByNumber();
         initFindByCategoryId();
         initFindByCategoryTitle();
@@ -49,6 +50,12 @@ final class MockArticleRepository extends MockContentRepository<ArticleEntity> {
     @Override
     Collection<ArticleEntity> getEntities() {
         return this.entities;
+    }
+
+    private void initSave() {
+        final ArticleEntity entity = this.entity.clone();
+        final CategoryEntity categoryEntity = getCategoryEntity();
+        entity.setCategoryEntity(categoryEntity);
     }
 
     private void initFindByNumber() {
