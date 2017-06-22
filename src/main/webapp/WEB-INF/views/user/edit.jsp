@@ -78,20 +78,29 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Логин</td>
                                     <td class="tds">
-                                        <input type="text" class="form-control" name="login" minlength="5"
-                                               maxlength="100" placeholder="Логин для входа на сайт."
+                                        <input type="text" class="form-control" name="login"
+                                        <c:choose>
+                                        <c:when test="${me eq true}">
+                                               minlength="5" maxlength="100" type="text"
+                                               placeholder="Логин для входа на сайт."
                                                value="<c:out value="${user.login}"/>"
-                                               <c:if test="${me eq false}">disabled</c:if>>
+                                        </c:when>
+                                        <c:otherwise>
+                                               type="password" value="******" disabled
+                                        </c:otherwise>
+                                        </c:choose>
+                                        >
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">Пароль</td>
                                     <td class="tds">
-                                        <input class="form-control" name="password" minlength="5"
-                                               maxlength="100" placeholder="Пароль для входа на сайт."
+                                        <input class="form-control" name="password"
                                         <c:choose>
                                         <c:when test="${me eq true}">
-                                               type="text" value="<c:out value="${user.password}"/>"
+                                               minlength="5" maxlength="100" type="text"
+                                               placeholder="Пароль для входа на сайт."
+                                               value="<c:out value="${user.password}"/>"
                                         </c:when>
                                         <c:otherwise>
                                                type="password" value="******" disabled

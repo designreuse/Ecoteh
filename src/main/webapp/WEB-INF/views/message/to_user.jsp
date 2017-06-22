@@ -37,7 +37,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         &nbsp;Текст сообщение:
                     </b>
                 </label>
-                <textarea class="form-control textarea" name="message" rows="6" maxlength="1000"
+                <textarea class="form-control textarea" name="text" rows="6" maxlength="1000"
                           placeholder="Сообщение для колег" required></textarea>
             </div>
             <div class="form-group col-lg-12">
