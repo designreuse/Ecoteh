@@ -8,6 +8,8 @@ import ua.com.ecoteh.entity.user.UserRole;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
+
 /**
  * Class to work with the default users.
  *
@@ -68,6 +70,21 @@ public final class DefaultAccounts {
      */
     public static User getSuperAdmin() {
         return get("superadmin");
+    }
+
+    /**
+     * Check if the incoming user is a default user.
+     * <pre>
+     *      isDefaultAdmin(null) - false
+     *      isDefaultAdmin(unknown_user) - false
+     *      isDefaultAdmin(default_admin) - true
+     * </pre>
+     *
+     * @param user the user to check.
+     * @return true if the incoming user is default admin, false otherwise.
+     */
+    public static boolean isDefaultAdmin(final User user) {
+        return isNotNull(user) && USERS.containsValue(user);
     }
 
     /**
