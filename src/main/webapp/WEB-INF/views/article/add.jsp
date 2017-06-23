@@ -69,8 +69,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <span class="red">*</span>&nbsp;Описание
                                     </td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="desc" rows="10" title="" required
-                                                  placeholder="Краткое описание статьи (анонс)."></textarea>
+                                        <textarea class="form-control textarea" name="description" rows="10" title=""
+                                                  required placeholder="Краткое описание статьи (анонс)."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +108,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
-                                            <option value="">Нет</option>
                                             <c:forEach items="${categories}" var="category">
                                                 <option value="<c:out value="${category.url}"/>"><c:out
                                                         value="${category.title}"/></option>

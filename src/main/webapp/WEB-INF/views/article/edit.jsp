@@ -99,7 +99,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         <span class="red">*</span>&nbsp;Описание
                                     </td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="desc" title="" required
+                                    <textarea class="form-control textarea" name="description" title="" required
                                               placeholder="Краткое описание статьи (анонс)."
                                               rows="10"><c:out value="${article.description}"/></textarea>
                                     </td>
@@ -144,16 +144,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="ths">Категория</td>
                                     <td class="tds">
                                         <select class="form-control" name="category_url">
-                                            <c:choose>
-                                                <c:when test="${article.category eq null}">
-                                                    <option value="">Нет</option>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <option value="<c:out value="${article.category.url}"/>">
-                                                        <c:out value="${article.category.title}"/>
-                                                    </option>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <option value="<c:out value="${article.category.url}"/>">
+                                                <c:out value="${article.category.title}"/>
+                                            </option>
                                             <c:forEach items="${categories}" var="category">
                                                 <c:if test="${category.id ne article.category.id}">
                                                     <option value="<c:out value="${category.url}"/>">

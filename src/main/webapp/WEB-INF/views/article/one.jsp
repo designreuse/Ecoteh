@@ -105,7 +105,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <c:when test="${article.price gt 0}">
                                     Цена: <c:out value="${article.price}"/>&nbsp;<c:out value="${article.currency}"/>
                                 </c:when>
-                                <c:otherwise>Цену уточняйте</c:otherwise>
+                                <c:when test="${article.currency ne '-'}">
+                                    Цену уточняйте
+                                </c:when>
                             </c:choose>
                         </h4>
                         <span class="little">

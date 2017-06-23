@@ -124,7 +124,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <tr>
                                     <td class="ths">Описание</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="text" title=""
+                                    <textarea class="form-control textarea" name="description" title=""
                                               placeholder="Краткое описание компании"
                                               rows="6"><c:out value="${company.description}"/></textarea>
                                     </td>
