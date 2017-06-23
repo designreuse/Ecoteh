@@ -97,11 +97,11 @@ public final class ClientMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendMessage(
-            @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "phone") final String phone,
-            @RequestParam(value = "email", required = false) final String email,
-            @RequestParam(value = "message", required = false) final String text,
+            @RequestParam(value = "url", defaultValue = "") final String url,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "phone", defaultValue = "") final String phone,
+            @RequestParam(value = "email", defaultValue = "", required = false) final String email,
+            @RequestParam(value = "message", defaultValue = "", required = false) final String text,
             final HttpServletRequest request
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);
@@ -159,8 +159,8 @@ public final class ClientMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendResponse(
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "response") final String text,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "response", defaultValue = "") final String text,
             final HttpServletRequest request
     ) {
         final boolean isCaptcha = this.captchaService.isVerify(request);

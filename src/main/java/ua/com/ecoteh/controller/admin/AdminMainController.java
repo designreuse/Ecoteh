@@ -115,11 +115,11 @@ public final class AdminMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendMessage(
-            @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "phone") final String phone,
-            @RequestParam(value = "email", required = false) final String email,
-            @RequestParam(value = "message", required = false) final String text
+            @RequestParam(value = "url", defaultValue = "") final String url,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "phone", defaultValue = "") final String phone,
+            @RequestParam(value = "email", defaultValue = "", required = false) final String email,
+            @RequestParam(value = "message", defaultValue = "", required = false) final String text
     ) {
         final ContactsBuilder contactsBuilder = Contacts.getBuilder();
         contactsBuilder.addEmail(email).addMobilePhone(phone);
@@ -170,8 +170,8 @@ public final class AdminMainController extends MainController {
             method = RequestMethod.POST
     )
     public ModelAndView sendResponse(
-            @RequestParam(value = "name") final String username,
-            @RequestParam(value = "response") final String text
+            @RequestParam(value = "name", defaultValue = "") final String username,
+            @RequestParam(value = "response", defaultValue = "") final String text
     ) {
         final ResponseBuilder responseBuilder = Response.getBuilder();
         responseBuilder.addUsername(username).addText(text);

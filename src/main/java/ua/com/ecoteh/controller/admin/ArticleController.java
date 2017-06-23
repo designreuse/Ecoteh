@@ -132,16 +132,16 @@ public final class ArticleController {
             method = RequestMethod.POST
     )
     public String addArticle(
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "desc") final String description,
-            @RequestParam(value = "text") final String text,
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "number") final String number,
-            @RequestParam(value = "price") final double price,
-            @RequestParam(value = "currency") final String currency,
-            @RequestParam(value = "category_url") final String categoryUrl,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "description", defaultValue = "") final String description,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "number", defaultValue = "") final String number,
+            @RequestParam(value = "price", defaultValue = "0") final double price,
+            @RequestParam(value = "currency", defaultValue = "") final String currency,
+            @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final ArticleBuilder articleBuilder = Article.getBuilder();
@@ -233,17 +233,17 @@ public final class ArticleController {
             method = RequestMethod.POST
     )
     public String updateArticle(
-            @RequestParam(value = "url") final String url,
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "desc") final String description,
-            @RequestParam(value = "text") final String text,
-            @RequestParam(value = "keywords") final String keywords,
-            @RequestParam(value = "number") final String number,
-            @RequestParam(value = "price") final double price,
-            @RequestParam(value = "currency") final String currency,
-            @RequestParam(value = "category_url") final String categoryUrl,
+            @RequestParam(value = "url", defaultValue = "") final String url,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "description", defaultValue = "") final String description,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
+            @RequestParam(value = "number", defaultValue = "") final String number,
+            @RequestParam(value = "price", defaultValue = "0") final double price,
+            @RequestParam(value = "currency", defaultValue = "") final String currency,
+            @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final ArticleBuilder articleBuilder = Article.getBuilder();

@@ -168,22 +168,22 @@ public final class UserController {
             method = RequestMethod.POST
     )
     public String addUser(
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "login") final String login,
-            @RequestParam(value = "password") final String password,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landlines_phone") final String landlinesPhone,
-            @RequestParam(value = "fax") final String fax,
-            @RequestParam(value = "email") final String email,
-            @RequestParam(value = "vkontakte") final String vkontakte,
-            @RequestParam(value = "facebook") final String facebook,
-            @RequestParam(value = "twitter") final String twitter,
-            @RequestParam(value = "skype") final String skype,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "login", defaultValue = "") final String login,
+            @RequestParam(value = "password", defaultValue = "") final String password,
+            @RequestParam(value = "description", defaultValue = "") final String description,
+            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
+            @RequestParam(value = "landlines_phone", defaultValue = "") final String landlinesPhone,
+            @RequestParam(value = "fax", defaultValue = "") final String fax,
+            @RequestParam(value = "email", defaultValue = "") final String email,
+            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
+            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
+            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
+            @RequestParam(value = "skype", defaultValue = "") final String skype,
             @RequestParam(value = "photo") final MultipartFile multipartPhoto,
-            @RequestParam(value = "is_valid") final boolean validated,
-            @RequestParam(value = "is_mailing") final boolean mailing,
-            @RequestParam(value = "is_locked") final boolean locked
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated,
+            @RequestParam(value = "is_mailing", defaultValue = "false") final boolean mailing,
+            @RequestParam(value = "is_locked", defaultValue = "false") final boolean locked
     ) {
 
         final UserBuilder userBuilder = User.getBuilder();
@@ -283,23 +283,23 @@ public final class UserController {
             method = RequestMethod.POST
     )
     public String updateUser(
-            @RequestParam(value = "url") final String url,
-            @RequestParam(value = "name") final String name,
-            @RequestParam(value = "login") final String login,
-            @RequestParam(value = "password") final String password,
-            @RequestParam(value = "description") final String description,
-            @RequestParam(value = "mobile_phone") final String mobilePhone,
-            @RequestParam(value = "landlines_phone") final String landlinesPhone,
-            @RequestParam(value = "fax") final String fax,
-            @RequestParam(value = "email") final String email,
-            @RequestParam(value = "vkontakte") final String vkontakte,
-            @RequestParam(value = "facebook") final String facebook,
-            @RequestParam(value = "twitter") final String twitter,
-            @RequestParam(value = "skype") final String skype,
+            @RequestParam(value = "url", defaultValue = "") final String url,
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "login", defaultValue = "") final String login,
+            @RequestParam(value = "password", defaultValue = "") final String password,
+            @RequestParam(value = "description", defaultValue = "") final String description,
+            @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
+            @RequestParam(value = "landlines_phone", defaultValue = "") final String landlinesPhone,
+            @RequestParam(value = "fax", defaultValue = "") final String fax,
+            @RequestParam(value = "email", defaultValue = "") final String email,
+            @RequestParam(value = "vkontakte", defaultValue = "") final String vkontakte,
+            @RequestParam(value = "facebook", defaultValue = "") final String facebook,
+            @RequestParam(value = "twitter", defaultValue = "") final String twitter,
+            @RequestParam(value = "skype", defaultValue = "") final String skype,
             @RequestParam(value = "photo") final MultipartFile multipartPhoto,
-            @RequestParam(value = "is_valid") final boolean validated,
-            @RequestParam(value = "is_mailing") final boolean mailing,
-            @RequestParam(value = "is_locked") final boolean locked
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated,
+            @RequestParam(value = "is_mailing", defaultValue = "false") final boolean mailing,
+            @RequestParam(value = "is_locked", defaultValue = "false") final boolean locked
     ) {
         final UserBuilder userBuilder = User.getBuilder();
         userBuilder.addUrl(url).addName(name).addLogin(login).addPassword(password)

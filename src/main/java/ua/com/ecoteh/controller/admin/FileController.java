@@ -124,9 +124,9 @@ public final class FileController {
             method = RequestMethod.POST
     )
     public String addFile(
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "type") final String type,
-            @RequestParam(value = "file") final MultipartFile multipartFile
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "type", defaultValue = "") final String type,
+            @RequestParam(value = "file", defaultValue = "") final MultipartFile multipartFile
     ) {
         final FileBuilder builder = File.getBuilder();
         builder.addTitle(title).addType(type)
@@ -195,10 +195,10 @@ public final class FileController {
             method = RequestMethod.POST
     )
     public String updateFile(
-            @RequestParam(value = "id") final long id,
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "type") final String type,
-            @RequestParam(value = "file") final MultipartFile multipartFile
+            @RequestParam(value = "id", defaultValue = "0") final long id,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "type", defaultValue = "") final String type,
+            @RequestParam(value = "file", defaultValue = "") final MultipartFile multipartFile
     ) {
         final FileBuilder builder = File.getBuilder();
         builder.addId(id).addTitle(title).addType(type)

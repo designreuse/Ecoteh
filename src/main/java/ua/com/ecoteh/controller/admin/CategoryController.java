@@ -107,11 +107,11 @@ public final class CategoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addCategory(
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "text") final String description,
-            @RequestParam(value = "keywords") final String keywords,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final CategoryBuilder categoryBuilder = Category.getBuilder();
@@ -183,12 +183,12 @@ public final class CategoryController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateCategory(
-            @RequestParam(value = "url") final String url,
-            @RequestParam(value = "title") final String title,
-            @RequestParam(value = "text") final String description,
-            @RequestParam(value = "keywords") final String keywords,
+            @RequestParam(value = "url", defaultValue = "") final String url,
+            @RequestParam(value = "title", defaultValue = "") final String title,
+            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Compressor compressor = new HtmlCompressor();
         final CategoryBuilder categoryBuilder = Category.getBuilder();

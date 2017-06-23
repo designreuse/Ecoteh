@@ -10,68 +10,57 @@ public interface ExceptionMessage {
     /**
      * The message that a incoming object is null.
      */
-    String INCOMING_OBJECT_IS_NULL_MESSAGE =
-            "Incoming object of the %s class is null!";
+    String INCOMING_OBJECT_IS_NULL_MESSAGE = "Incoming object of the %s class is null!";
 
     /**
      * The message that a incoming type is null.
      */
-    String INCOMING_TYPE_IS_NULL_MESSAGE =
-            "Incoming %s type is null!";
+    String INCOMING_TYPE_IS_NULL_MESSAGE = "Incoming %s type is null!";
 
     /**
      * The message that a saving object is null.
      */
-    String SAVING_OBJECT_IS_NULL_MESSAGE =
-            "Saving object of the %s class is null!";
+    String SAVING_OBJECT_IS_NULL_MESSAGE = "Saving object of the %s class is null!";
 
     /**
      * The message that a incoming company domain is null or empty.
      */
-    String BLANK_DOMAIN_MESSAGE =
-            "Incoming %s domain is null or empty!";
+    String BLANK_DOMAIN_MESSAGE = "Incoming %s domain is null or empty!";
 
     /**
      * The message that a incoming title is null or empty.
      */
-    String BLANK_TITLE_MESSAGE =
-            "Incoming %s title is null or empty!";
+    String BLANK_TITLE_MESSAGE = "Incoming %s title is null or empty!";
 
     /**
      * The message that a incoming user name is null or empty.
      */
-    String BLANK_NAME_MESSAGE =
-            "Incoming %s name is null or empty!";
+    String BLANK_NAME_MESSAGE = "Incoming %s name is null or empty!";
 
     /**
      * The message that a incoming user login is null or empty.
      */
-    String BLANK_LOGIN_MESSAGE =
-            "Incoming %s login is null or empty!";
+    String BLANK_LOGIN_MESSAGE = "Incoming %s login is null or empty!";
 
     /**
      * The message that a incoming user E-mail is null or empty.
      */
-    String BLANK_EMAIL_MESSAGE =
-            "Incoming %s E-mail is null or empty!";
+    String BLANK_EMAIL_MESSAGE = "Incoming %s E-mail is null or empty!";
 
     /**
      * The message that a incoming user phone is null or empty.
      */
-    String BLANK_PHONE_MESSAGE =
-            "Incoming %s phone is null or empty!";
+    String BLANK_PHONE_MESSAGE = "Incoming %s phone is null or empty!";
 
     /**
      * The message that a incoming URL is null or empty.
      */
-    String BLANK_URL_MESSAGE =
-            "Incoming %s URL is null or empty!";
+    String BLANK_URL_MESSAGE = "Incoming %s URL is null or empty!";
 
     /**
      * The message that a incoming number is null or empty.
      */
-    String BLANK_NUMBER_MESSAGE =
-            "Incoming %s number is null or empty!";
+    String BLANK_NUMBER_MESSAGE = "Incoming %s number is null or empty!";
 
     /**
      * The message that a incoming category title is null or empty.
@@ -129,8 +118,7 @@ public interface ExceptionMessage {
     /**
      * The message that a static files are forbidden to remove.
      */
-    String FORBIDDEN_STATIC_FILE_MESSAGE =
-            "Static files are forbidden to remove!";
+    String FORBIDDEN_STATIC_FILE_MESSAGE = "Static files are forbidden to remove!";
 
     /**
      * The message that a incoming multipart file is null or empty.
@@ -149,8 +137,7 @@ public interface ExceptionMessage {
     /**
      * The message that a get method is not supported.
      */
-    String GET_METHOD_NOT_SUPPORTED_MESSAGE =
-            "GET method in \"%s\" is not supported!";
+    String GET_METHOD_NOT_SUPPORTED_MESSAGE = "GET method in \"%s\" is not supported!";
 
     /**
      * The message that a user does not have sufficient permissions to access this page.

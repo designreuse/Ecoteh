@@ -93,7 +93,7 @@ public final class StyleController {
             value = "/update",
             method = RequestMethod.POST
     )
-    public String updateStyles(@RequestParam(value = "styles") final String styles) {
+    public String updateStyles(@RequestParam(value = "styles", defaultValue = "") final String styles) {
         this.styleService.save(styles);
         return "redirect:/superadmin/style";
     }

@@ -75,7 +75,10 @@ public final class CategoryServiceImpl
     public Category getByUrl(final String url, final boolean isValid)
             throws IllegalArgumentException, NullPointerException {
         if (isEmpty(url)) {
-            throw getIllegalArgumentException(ExceptionMessage.BLANK_URL_MESSAGE);
+            throw getIllegalArgumentException(
+                    ExceptionMessage.BLANK_URL_MESSAGE,
+                    getClassSimpleName()
+            );
         }
         final CategoryEntity entity = this.repository.findByUrl(url);
         if (isNotValidated(entity, isValid)) {

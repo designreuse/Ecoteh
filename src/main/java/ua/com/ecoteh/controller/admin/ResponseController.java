@@ -101,10 +101,10 @@ public final class ResponseController {
             method = RequestMethod.POST
     )
     public String updateResponse(
-            @RequestParam(value = "id") final long id,
-            @RequestParam(value = "username") final String username,
-            @RequestParam(value = "text") final String text,
-            @RequestParam(value = "is_valid") final boolean validated
+            @RequestParam(value = "id", defaultValue = "0") final long id,
+            @RequestParam(value = "username", defaultValue = "") final String username,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final Response response = this.responseService.get(id);
         final ResponseEditor editor = response.getEditor();
