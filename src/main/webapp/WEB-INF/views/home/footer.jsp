@@ -30,7 +30,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <%-- Left --%>
                 <div class="hidden-xs col-sm-6 col-md-4 col-lg-4">
                     <div class="text-left">
-                        <p>
+                        <p class="copyright">
                             <c:if test="${not empty contacts.mobilePhone}">
                                 <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
                                    title="Мобильный телефон">
@@ -129,30 +129,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
                     <div class="text-center">
                         <p class="copyright">
-                            <c:if test="${not empty contacts.vkontakte}">
-                                <a href="https://vk.com/<c:out value="${contacts.vkontakte}"/>"
-                                   title="Группа в ВКонтакте" target="_blank">
-                                    <span class="fa fa-vk fa-2x vk"></span>
-                                </a>&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="${not empty contacts.facebook}">
-                                <a href="https://www.facebook.com/<c:out value="${contacts.facebook}"/>"
-                                   title="Группа в Facebook" target="_blank">
-                                    <span class="fa fa-facebook-official fa-2x fb"></span>
-                                </a>&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="${not empty contacts.twitter}">
-                                <a href="https://twitter.com/<c:out value="${contacts.twitter}"/>"
-                                   title="Мы в Twitter" target="_blank">
-                                    <span class="fa fa-twitter fa-2x tw"></span>
-                                </a>&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="${not empty contacts.skype}">
-                                <a href="skype:<c:out value="${contacts.skype}"/>?call" title="Позвонить в Skype">
-                                    <span class="fa fa-skype fa-2x sk"></span>
-                                </a>
-                            </c:if>
-                            <br>
                             <c:if test="${not empty contacts.mobilePhone}">
                                 <a href="tel:<c:out value="${contacts.mobilePhone}"/>" title="Мобильный телефон">
                                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
@@ -192,6 +168,30 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                                 <br>
                             </c:if>
+                            <c:if test="${not empty contacts.vkontakte}">
+                                <a href="https://vk.com/<c:out value="${contacts.vkontakte}"/>"
+                                   title="Группа в ВКонтакте" target="_blank">
+                                    <span class="fa fa-vk fa-2x vk"></span>
+                                </a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${not empty contacts.facebook}">
+                                <a href="https://www.facebook.com/<c:out value="${contacts.facebook}"/>"
+                                   title="Группа в Facebook" target="_blank">
+                                    <span class="fa fa-facebook-official fa-2x fb"></span>
+                                </a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${not empty contacts.twitter}">
+                                <a href="https://twitter.com/<c:out value="${contacts.twitter}"/>"
+                                   title="Мы в Twitter" target="_blank">
+                                    <span class="fa fa-twitter fa-2x tw"></span>
+                                </a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${not empty contacts.skype}">
+                                <a href="skype:<c:out value="${contacts.skype}"/>?call" title="Позвонить в Skype">
+                                    <span class="fa fa-skype fa-2x sk"></span>
+                                </a>
+                            </c:if>
+                            <br>
                             <a href="<c:url value="/company/main"/>">
                                 <c:out value="${main_company.title}"/>
                             </a>

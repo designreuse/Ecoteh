@@ -12,10 +12,24 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <c:otherwise>col-md-12 col-lg-12</c:otherwise>
         </c:choose>">
     <div class="text-contact">
-        <c:if test="${not empty company.domain}">
-            <div class="text-center hidden-xs">
-                <a href="http://<c:out value="${company.domain}"/>" target="_blank"
-                   title="Сайт компании &quot;${company.title}&quot;">
+        <div class="text-center">
+            <c:choose>
+                <c:when test="${not empty company.domain}">
+                    <a href="http://<c:out value="${company.domain}"/>" target="_blank"
+                       title="Сайт компании &quot;<c:out value="${company.title}"/>&quot;">
+                        <c:choose>
+                            <c:when test="${not empty company.logo.url}">
+                                <img class="img-logo" alt="<c:out value="${company.title}"/>"
+                                     src="<c:url value="${company.logo.url}"/>"
+                                     onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
+                            </c:when>
+                            <c:otherwise>
+                                <b><c:out value="${company.title}"/></b>
+                            </c:otherwise>
+                        </c:choose>
+                    </a>
+                </c:when>
+                <c:otherwise>
                     <c:choose>
                         <c:when test="${not empty company.logo.url}">
                             <img class="img-logo" alt="<c:out value="${company.title}"/>"
@@ -23,60 +37,36 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                  onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                         </c:when>
                         <c:otherwise>
-                            <br>
-                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                            &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b>
-                            <br>
+                            <b><c:out value="${company.title}"/></b>
                         </c:otherwise>
                     </c:choose>
-                </a>
-            </div>
-            <div class="text-center visible-xs">
-                <br>
-                <a href="http://<c:out value="${company.domain}"/>" target="_blank"
-                   title="Сайт компании &quot;${company.title}&quot;">
-                    <c:choose>
-                        <c:when test="${not empty company.logo.url}">
-                            <img class="icon-size" alt="<c:out value="${company.title}"/>"
-                                 src="<c:url value="${company.logo.url}"/>"
-                                 onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
-                        </c:when>
-                        <c:otherwise>
-                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-                        </c:otherwise>
-                    </c:choose>
-                    &nbsp;&nbsp;<b><c:out value="${company.domain}"/></b>
-                </a>
-                <br>
-            </div>
-        </c:if>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        <br>
         <c:if test="${not empty company.address.postAddress}">
             <div class="text-center">
-                <br>
                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                 &nbsp;<c:out value="${company.address.postAddress}"/>
-                <br>
-            </div>
-        </c:if>
-        <c:if test="${(not empty company.workTimeFrom) and (not empty company.workTimeTo)}">
-            <div class="text-center">
-                <br>
-                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                &nbsp;Пн&nbsp;-&nbsp;Пт,&nbsp;
-                <c:out value="${company.workTimeFrom}"/>&nbsp;-&nbsp;<c:out value="${company.workTimeTo}"/>
-                <br>
             </div>
         </c:if>
         <br>
+        <c:if test="${company.workTimeFrom ne company.workTimeTo}">
+            <div class="text-center">
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                &nbsp;Пн&nbsp;-&nbsp;Пт,&nbsp;
+                <c:out value="${company.workTimeFrom}"/>&nbsp;-&nbsp;<c:out value="${company.workTimeTo}"/>
+            </div>
+            <br>
+        </c:if>
         <c:set var="contacts" value="${company.contacts}"/>
         <c:if test="${not empty contacts.mobilePhone}">
             <div class="text-center">
                 <a href="tel:<c:out value="${contacts.mobilePhone}"/>"
                    title="Позвонить на мобильный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<b><c:out value="${contacts.mobilePhone}"/></b>
+                    &nbsp;<b><c:out value="${contacts.mobilePhone}"/></b>
                 </a>
-                <br>
             </div>
         </c:if>
         <c:if test="${not empty contacts.landlinesPhone}">
@@ -84,35 +74,41 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 <a href="tel:<c:out value="${contacts.landlinesPhone}"/>"
                    title="Позвонить на стационарный телефон &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<c:out value="${contacts.landlinesPhone}"/>
+                    &nbsp;<c:out value="${contacts.landlinesPhone}"/>
                 </a>
-                <br>
             </div>
         </c:if>
         <c:if test="${not empty contacts.fax}">
             <div class="text-center">
                 <a href="tel:<c:out value="${contacts.fax}"/>" title="Факс &quot;${company.title}&quot;">
                     <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                    &nbsp;&nbsp;<c:out value="${contacts.fax}"/>
+                    &nbsp;<c:out value="${contacts.fax}"/>
                 </a>
-                <br>
             </div>
         </c:if>
+        <br>
         <c:if test="${not empty contacts.email}">
             <div class="text-center">
-                <br>
                 <a href="mailto:<c:out value="${contacts.email}"/>"
                    title="Написать письмо &quot;${company.title}&quot;" target="_blank">
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                     &nbsp;<c:out value="${contacts.email}"/>
                 </a>
-                <br>
             </div>
         </c:if>
+        <c:if test="${not empty company.domain}">
+            <div class="text-center">
+                <a href="http://<c:out value="${company.domain}"/>" target="_blank"
+                   title="Сайт компании &quot;${company.title}&quot;">
+                    <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                    &nbsp;<c:out value="${company.domain}"/>
+                </a>
+            </div>
+        </c:if>
+        <br>
         <c:if test="${(not empty contacts.vkontakte) or (not empty contacts.facebook) or
                              (not empty contacts.twitter) or (not empty contacts.skype)}">
             <div class="text-center">
-                <br>
                 <c:if test="${not empty contacts.vkontakte}">
                     <a href="<c:out value="${contacts.vkontakte}"/>" target="_blank"
                        title="Группа &quot;${company.title}&quot; в ВКонтакте">
@@ -137,7 +133,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <span class="fa fa-skype fa-2x"></span>
                     </a>
                 </c:if>
-                <br>
             </div>
         </c:if>
         <br>
