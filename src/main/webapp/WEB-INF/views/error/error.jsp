@@ -12,29 +12,29 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <%-- Exception description --%>
     <c:choose>
         <c:when test="${status eq 400}">
-            <c:set var="description" value="Ошибка ${status}. Объект не найден!"/>
+            <c:set var="description" value="Ошибка 400. Объект не найден!"/>
         </c:when>
         <c:when test="${status eq 401}">
-            <c:set var="description" value="Ошибка ${status}. Ошибка в запросе!"/>
+            <c:set var="description" value="Ошибка 401. Ошибка в запросе!"/>
         </c:when>
         <c:when test="${status eq 403}">
-            <c:set var="description" value="Ошибка ${status}. Нет прав доступа!"/>
+            <c:set var="description" value="Ошибка 403. Нет прав доступа!"/>
         </c:when>
         <c:when test="${status eq 404}">
-            <c:set var="description" value="Ошибка ${status}. Не найдено!"/>
+            <c:set var="description" value="Ошибка 404. Не найдено!"/>
         </c:when>
         <c:when test="${status eq 405}">
-            <c:set var="description" value="Ошибка ${status}. Запрещенный запрос!"/>
+            <c:set var="description" value="Ошибка 405. Запрещенный запрос!"/>
         </c:when>
         <c:when test="${status eq 406}">
-            <c:set var="description" value="Ошибка ${status}. Ошибка аргументов!"/>
+            <c:set var="description" value="Ошибка 406. Ошибка аргументов!"/>
         </c:when>
         <c:when test="${status eq 409}">
-            <c:set var="description" value="Ошибка ${status}. Объект уже существует!"/>
+            <c:set var="description" value="Ошибка 409. Объект уже существует!"/>
         </c:when>
         <c:when test="${status eq 500}">
             <c:set var="description"
-                   value="Ошибка ${status}. Временные неполадки с сервером... Приносим свои извинения!"/>
+                   value="Ошибка 500. Временные неполадки с сервером... Приносим свои извинения!"/>
         </c:when>
         <c:otherwise>
             <c:set var="description" value="Неизвестная ошибка..."/>
@@ -49,9 +49,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <meta name="robots" content="noindex,nofollow">
-        <title><c:out value="${description}"/></title>
-        <meta name="title" content="<c:out value="${description}"/>">
-        <meta name="description" content="<c:out value="${description}"/> - <c:out value="${message}"/>">
+        <title>${description}</title>
+        <meta name="title" content="${description}">
+        <meta name="description" content="${description} - <c:out value="${message}"/>">
         <link rel="shortcut icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -82,7 +82,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <hr>
                             <br><br>
                             <div class="error-text">
-                                <b><c:out value="${description}"/></b>
+                                <b>${description}</b>
                             </div>
                             <br><br>
                             <div class="error-message">

@@ -28,7 +28,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <c:out value="${main_company.title}"/>
                         </c:when>
                         <c:otherwise>
-                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Главная
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            &nbsp;Главная
                         </c:otherwise>
                     </c:choose>
                 </a>
@@ -95,7 +96,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
                     </li>
                     <li>
-                        <a href="<c:url value="/search"/>" title="Поиск необходимого контента">
+                        <a href="<c:url value="/search/"/>" title="Поиск необходимого контента">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </a>
                     </li>

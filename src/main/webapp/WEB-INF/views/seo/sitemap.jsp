@@ -12,10 +12,10 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
 
 <c:set var="changefreq" value="weekly"/>
 <c:set var="main_priority" value="1.0"/>
-<c:set var="category_priority" value="0.5"/>
-<c:set var="article_priority" value="0.5"/>
-<c:set var="company_priority" value="0.5"/>
-<c:set var="other_priority" value="0.5"/>
+<c:set var="article_priority" value="0.8"/>
+<c:set var="category_priority" value="0.6"/>
+<c:set var="company_priority" value="0.4"/>
+<c:set var="other_priority" value="0.2"/>
 
 <compress:xml removeIntertagSpaces="true">
     <?xml version="1.0" encoding="UTF-8"?>
@@ -81,7 +81,7 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
             <priority>${other_priority}</priority>
         </url>
             <%-- Categories URLs --%>
-        <c:if test="${fn:length(categories) gt 0}">
+        <c:if test="${fn:length(ategories) gt 0}">
             <url>
                 <loc>
                     http://<c:out value="${domain}"/>/category/all
@@ -96,10 +96,10 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
                 <changefreq>${changefreq}</changefreq>
                 <priority>${category_priority}</priority>
             </url>
-            <c:forEach items="${categories}" var="cactegory">
+            <c:forEach items="${categories}" var="category">
                 <url>
                     <loc>
-                        http://<c:out value="${domain}"/>/category/<c:out value="${cactegory.url}"/>
+                        http://<c:out value="${domain}"/>/category/<c:out value="${category.url}"/>
                     </loc>
                     <changefreq>${changefreq}</changefreq>
                     <priority>${category_priority}</priority>

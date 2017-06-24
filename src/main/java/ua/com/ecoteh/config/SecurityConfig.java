@@ -97,20 +97,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(this.requestSuperAdmin)
                 .hasRole(UserRole.SUPERADMIN.name())
                 .antMatchers(this.requestAdmin)
-                .hasAnyRole(
-                        UserRole.ADMIN.name(),
-                        UserRole.SUPERADMIN.name()
-                )
+                .hasAnyRole(UserRole.ADMIN.name(), UserRole.SUPERADMIN.name())
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage(this.requestLogin)
                 .usernameParameter(this.parameterUsername)
                 .passwordParameter(this.parameterPassword)
-                .defaultSuccessUrl(
-                        this.requestDefaultSuccess,
-                        this.alwaysUseDefaultSuccess
-                )
+                .defaultSuccessUrl(this.requestDefaultSuccess, this.alwaysUseDefaultSuccess)
                 .and().exceptionHandling()
                 .accessDeniedPage(this.requestAccessDeniedPage)
                 .and()
