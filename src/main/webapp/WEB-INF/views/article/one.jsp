@@ -23,7 +23,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <title><c:out value="${article.title} | ${main_company.title}"/></title>
         <meta name="title" content="<c:out value="${article.title} | ${main_company.title}"/>">
         <meta name="description" content="<c:out value="${article.title} - ${article.description}"/>">
-        <meta name="keywords" content="Статья<c:out value=", ${article.title}, ${article.keywords}"/>"/>
+        <meta name="keywords" content="Статья <c:out value="${article.title}, ${article.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
