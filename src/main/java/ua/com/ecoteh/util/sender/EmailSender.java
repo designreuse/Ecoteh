@@ -203,10 +203,8 @@ public final class EmailSender implements Sender {
      * @param recipientEmail the recipient E-mail.
      * @param senderEmail    the sender E-mail.
      * @return The Message object.
-     * @throws MessagingException           If the parse failed
-     *                                      in InternetAddress.
-     * @throws UnsupportedEncodingException If the encoding fails
-     *                                      in MimeUtility.encodeText(...).
+     * @throws MessagingException           If the parse failed in InternetAddress.
+     * @throws UnsupportedEncodingException If the encoding fails.
      */
     private Message generateMessage(
             final Session session,
@@ -233,7 +231,8 @@ public final class EmailSender implements Sender {
      *
      * @param text the text to encode (newer null).
      * @return The encoded text.
-     * @throws UnsupportedEncodingException
+     * @throws UnsupportedEncodingException If the encoding fails
+     *                                      in MimeUtility.encodeText(...).
      */
     private String encodeText(final String text) throws UnsupportedEncodingException {
         return MimeUtility.encodeText(text, CHARSET, ENCODING);

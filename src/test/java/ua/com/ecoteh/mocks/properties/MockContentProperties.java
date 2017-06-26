@@ -1,7 +1,7 @@
 package ua.com.ecoteh.mocks.properties;
 
 import ua.com.ecoteh.util.properties.ContentProperties;
-import ua.com.ecoteh.util.properties.ContentPropertiesImpl;
+import ua.com.ecoteh.util.properties.ContentPropertiesBuilder;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)
@@ -19,12 +19,13 @@ public class MockContentProperties {
     }
 
     private static void initContentProperties() {
-        contentProperties = new ContentPropertiesImpl(
-                "catalinaHome", "contentType",
-                "prefix", "suffix", true,
-                "resourcesUrl", "resourcesLocation",
-                10485760L, "loginRequest",
-                "loginViewName", "projectDirectory"
-        );
+        final ContentPropertiesBuilder builder = ContentProperties.getBuilder();
+        builder.addCatalinaHome("catalinaHome").addContentType("catalinaHome")
+                .addPrefix("prefix").addSuffix("suffix")
+                .addExposeContextBeansAsAttributes(true)
+                .addResourcesUrl("resourcesUrl").addResourcesLocation("resourcesLocation")
+                .addLoginRequest("loginRequest").addLoginViewName("loginViewName")
+                .addMaxFileSize(10485760L).addProjectDirectory("projectDirectory");
+        contentProperties = builder.build();
     }
 }

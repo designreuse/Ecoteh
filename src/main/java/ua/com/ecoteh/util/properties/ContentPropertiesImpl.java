@@ -87,7 +87,7 @@ public final class ContentPropertiesImpl implements ContentProperties {
      * @param loginViewName                  the login view name (path).
      * @param projectDirectory               the project directory name.
      */
-    public ContentPropertiesImpl(
+    ContentPropertiesImpl(
             final String catalinaHome,
             final String contentType,
             final String prefix,
@@ -222,7 +222,6 @@ public final class ContentPropertiesImpl implements ContentProperties {
     public String getProjectDirectory() {
         return this.projectDirectory;
     }
-
 
     /**
      * Returns a project absolute path.

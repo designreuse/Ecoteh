@@ -1,11 +1,11 @@
 package ua.com.ecoteh.config;
 
-import ua.com.ecoteh.util.properties.ContentProperties;
-import ua.com.ecoteh.util.properties.ContentPropertiesImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.util.properties.ContentPropertiesBuilder;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
@@ -76,7 +76,7 @@ public class ContentConfig {
      * Request for authorization.
      */
     @Value("${login.request}")
-    private String requestLogin;
+    private String loginRequest;
 
     /**
      * Maximum file size (Mb).
@@ -107,18 +107,13 @@ public class ContentConfig {
      * Initializes the content properties object.
      */
     private void initContentProperties() {
-        contentProperties = new ContentPropertiesImpl(
-                this.catalinaHome,
-                this.contentType,
-                this.prefix,
-                this.suffix,
-                this.exposeContextBeansAsAttributes,
-                this.resourcesUrl,
-                this.resourcesLocation,
-                this.maxFileSize,
-                this.requestLogin,
-                this.loginViewName,
-                this.projectDirectory
-        );
+        final ContentPropertiesBuilder builder = ContentProperties.getBuilder();
+        builder.addCatalinaHome(this.catalinaHome).addContentType(this.contentType)
+                .addPrefix(this.prefix).addSuffix(this.suffix)
+                .addExposeContextBeansAsAttributes(this.exposeContextBeansAsAttributes)
+                .addResourcesUrl(this.resourcesUrl).addResourcesLocation(this.resourcesLocation)
+                .addLoginRequest(this.loginRequest).addLoginViewName(this.loginViewName)
+                .addMaxFileSize(this.maxFileSize).addProjectDirectory(this.projectDirectory);
+        contentProperties = builder.build();
     }
 }

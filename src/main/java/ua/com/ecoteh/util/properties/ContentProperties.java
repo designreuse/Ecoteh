@@ -97,4 +97,13 @@ public interface ContentProperties {
      * @return The resources path.
      */
     String getResourcesAbsolutePath();
+
+    /**
+     * Returns a builder for creating a new content properties implementation.
+     *
+     * @return the content properties builder (newer null).
+     */
+    static ContentPropertiesBuilder getBuilder() {
+        return new ContentPropertiesBuilder();
+    }
 }
