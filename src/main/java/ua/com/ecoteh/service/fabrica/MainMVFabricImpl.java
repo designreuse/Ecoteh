@@ -2,7 +2,6 @@ package ua.com.ecoteh.service.fabrica;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.article.Article;
 import ua.com.ecoteh.entity.category.Category;
@@ -98,7 +97,6 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * @return The ready object of the ModelAndView class.
      */
     @Override
-    @Transactional(readOnly = true)
     public ModelAndView homePage() {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("company", this.companyService.getMainCompany());
@@ -108,6 +106,23 @@ public final class MainMVFabricImpl implements MainMVFabric {
         modelAndView.addObject("responses", this.responseService.getAndSortByDate(true));
         modelAndView.addObject("print_responses", 3);
         modelAndView.setViewName("home/index");
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a home page with one category.
+     *
+     * @param url the category URL.
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView homeCategory(final String url) {
+        final ModelAndView home = homePage();
+        final ModelAndView modelAndView = new ModelAndView("home/home_category", home.getModel());
+        final Category category = this.categoryService.getByUrl(url, false);
+        final Collection<Article> articles = category.getArticles();
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("articles", articles);
         return modelAndView;
     }
 

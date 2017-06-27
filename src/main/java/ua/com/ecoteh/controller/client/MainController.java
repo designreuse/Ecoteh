@@ -9,10 +9,7 @@ import ua.com.ecoteh.entity.contacts.Contacts;
 import ua.com.ecoteh.entity.message.Message;
 import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.user.User;
-import ua.com.ecoteh.service.data.CompanyService;
-import ua.com.ecoteh.service.data.MessageService;
-import ua.com.ecoteh.service.data.ResponseService;
-import ua.com.ecoteh.service.data.UserService;
+import ua.com.ecoteh.service.data.*;
 import ua.com.ecoteh.service.fabrica.CacheMVFabric;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.service.sender.SenderService;
@@ -113,6 +110,23 @@ public abstract class MainController {
         final ModelAndView modelAndView = this.fabric.homePage();
         modelAndView.addObject("is_captcha", null);
         return modelAndView;
+    }
+
+    /**
+     * Returns a home page with a category with the incoming URL.
+     * Request mapping: /{url},
+     * where {url} is a URL of a category to return.
+     * Method: GET
+     *
+     * @param url the URL of a category to return.
+     * @return The ready object of the ModelAndView class.
+     */
+    @RequestMapping(
+            value = "/{url}",
+            method = RequestMethod.GET
+    )
+    public ModelAndView homeCategory(@PathVariable("url") final String url) {
+        return this.fabric.homeCategory(url);
     }
 
     /**

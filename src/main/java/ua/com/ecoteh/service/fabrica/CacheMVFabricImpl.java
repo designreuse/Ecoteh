@@ -2,8 +2,8 @@ package ua.com.ecoteh.service.fabrica;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.com.ecoteh.util.cache.Cache;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.ecoteh.util.cache.Cache;
 
 import static ua.com.ecoteh.service.fabrica.CachePageKey.*;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
@@ -45,6 +45,24 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
         if (isNull(modelAndView)) {
             modelAndView = this.fabric.homePage();
             putToCache(modelAndView, HOME_PAGE_KEY);
+        }
+        addAuthUser(modelAndView);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a home page with one category.
+     *
+     * @param url the category URL.
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView homeCategory(final String url) {
+        final String key = HOME_PAGE_KEY + url;
+        ModelAndView modelAndView = getFromCache(key);
+        if (isNull(modelAndView)) {
+            modelAndView = this.fabric.homeCategory(url);
+            putToCache(modelAndView, key);
         }
         addAuthUser(modelAndView);
         return modelAndView;

@@ -18,6 +18,14 @@ public interface MainMVFabric {
     ModelAndView homePage();
 
     /**
+     * Creates and returns a home page with one category.
+     *
+     * @param url the category URL.
+     * @return The ready object of the ModelAndView class.
+     */
+    ModelAndView homeCategory(String url);
+
+    /**
      * Creates and returns a page with all categories.
      *
      * @return The ready object of the ModelAndView class.

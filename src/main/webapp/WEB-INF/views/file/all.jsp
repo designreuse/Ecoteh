@@ -40,6 +40,7 @@
                         → <a href="<c:url value="/admin/menu"/>" title="Меню администратора">Меню</a>
                         → <a href="<c:url value="/admin/file/all"/>">Файлы</a>
                     </p>
+                    <c:set var="length" value="${fn:length(files)}"/>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
                         <h3 class="text-center">
@@ -53,7 +54,6 @@
                                     &nbsp;Добавить
                                 </button>
                             </a>
-                            <c:set var="length" value="${fn:length(files)}"/>
                             <c:if test="${length gt 0}">
                                 &nbsp;&nbsp;
                                 <a href="<c:url value="/admin/file/delete/all"/>" title="Удалить все файлы"
