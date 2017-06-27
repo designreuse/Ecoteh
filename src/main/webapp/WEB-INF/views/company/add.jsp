@@ -80,17 +80,19 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="ths">
+                                        <span class="red">*</span>&nbsp;Основной текст
+                                    </td>
+                                    <td class="tds">
+                                    <textarea class="form-control textarea" name="text" rows="10" title="" required
+                                              placeholder="Основная информация статьи."></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="ths">Описание</td>
                                     <td class="tds">
                                         <textarea class="form-control textarea" name="description" rows="6" title=""
                                                   placeholder="Краткое описание компании"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">Информация</td>
-                                    <td class="tds">
-                                        <textarea class="form-control textarea" name="information" rows="10" title=""
-                                                  placeholder="Основная информация о компании"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -256,7 +258,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
     <script>CKEDITOR.replace("text");</script>
-    <script>CKEDITOR.replace("information");</script>
+    <script>CKEDITOR.replace("description");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>

@@ -26,7 +26,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <hr>
                             <h3 class="intro-text text-center">О нас</h3>
                             <hr>
-                            <p><${company.information}</p>
+                            <p><${company.text}</p>
                         </c:otherwise>
                     </c:choose>
                     <hr>

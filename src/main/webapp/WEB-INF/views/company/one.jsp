@@ -20,9 +20,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <title>О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/></title>
         <meta name="title"
               content="О компании &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/>">
-        <meta name="description"
-              content="Описание компании &quot;<c:out value="${company.title}"/>&quot;: <c:out value="${company.description}"/>.">
-        <meta name="keywords" content="Партнер, <c:out value="${company.keywords}"/>"/>
+        <meta name="description" content="<c:out value="${company.description}"/>.">
+        <meta name="keywords" content="<c:out value="${company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
@@ -95,8 +94,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p>
                             <c:choose>
-                                <c:when test="${not empty company.information}">
-                                    ${company.information}
+                                <c:when test="${not empty company.text}">
+                                    ${company.text}
                                 </c:when>
                                 <c:otherwise>
                                     ${company.description}

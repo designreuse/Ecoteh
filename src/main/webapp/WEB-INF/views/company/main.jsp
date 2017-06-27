@@ -20,9 +20,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title>О компании | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="О компании | <c:out value="${main_company.title}"/>">
-        <meta name="description"
-              content="Описание компании &quot;<c:out value="${main_company.title}"/>&quot;: <c:out value="${main_company.description}"/>.">
-        <meta name="keywords" content="Главная компания, <c:out value="${main_company.keywords}"/>"/>
+        <meta name="description" content="<c:out value="${main_company.description}"/>.">
+        <meta name="keywords" content="<c:out value="${main_company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>

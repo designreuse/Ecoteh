@@ -51,8 +51,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <c:when test="${not empty company.description}">
                                 <p>${company.description}</p>
                             </c:when>
-                            <c:when test="${not empty company.information}">
-                                <p>${company.information}</p>
+                            <c:when test="${not empty company.text}">
+                                <p>${company.text}</p>
                             </c:when>
                             <c:otherwise>
                                 <p>${company.tagline}</p>

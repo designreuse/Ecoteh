@@ -53,7 +53,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 <c:when test="${article.price gt 0}">
                                     Цена: <c:out value="${article.price}"/>&nbsp;<c:out value="${article.currency}"/>
                                 </c:when>
-                                <c:when test="${article.currency ne '-'}">
+                                <c:when test="${empty article.currency}">
                                     Цену уточняйте
                                 </c:when>
                             </c:choose>
@@ -70,10 +70,17 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </span>
                         <c:choose>
                             <c:when test="${not empty article.description}">
-                                <p>${article.description}</p>
+                                <p>
+                                    <a href="<c:url value="${article.logo.url}"/>" rel="lightgallery"
+                                       title="<c:out value="${article.title}"/>">
+                                        <img src="<c:url value="${article.logo.url}"/>" class="content-logo"
+                                             title="<c:out value="${article.title}"/>">
+                                    </a>
+                                    <c:out value="${article.description}"/>
+                                </p>
                             </c:when>
                             <c:when test="${not empty article.text}">
-                                ${article.text}
+                                <p>${article.text}</p>
                             </c:when>
                             <c:otherwise>
                                 <a href="<c:url value="/article/${article.logo.url}"/>"

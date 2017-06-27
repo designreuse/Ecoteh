@@ -58,7 +58,7 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <%-- Category --%>
-        <jsp:include page="/WEB-INF/views/category/category.jsp"/>
+        <jsp:include page="/WEB-INF/views/category/to_home.jsp"/>
             <%-- Main company description --%>
         <%@include file="/WEB-INF/views/company/to_home.jsp" %>
             <%-- Partner-companies logo list  --%>

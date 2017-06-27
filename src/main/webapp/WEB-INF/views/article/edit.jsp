@@ -94,32 +94,31 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                value="<c:out value="${article.title}"/>">
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="ths">
-                                        <span class="red">*</span>&nbsp;Описание
+                                        <span class="red">*</span>&nbsp;Основной текст
                                     </td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="description" title="" required
-                                              placeholder="Краткое описание статьи (анонс)."
-                                              rows="10"><c:out value="${article.description}"/></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">Основной текст</td>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="text"
+                                    <textarea class="form-control textarea" name="text" required
                                               placeholder="Основная информация статьи." title=""
                                               rows="10"><c:out value="${article.text}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">
-                                        <span class="red">*</span>&nbsp;Ключевые слова
-                                    </td>
+                                    <td class="ths">Ключевые слова</td>
                                     <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" required title=""
+                                    <textarea class="form-control textarea" name="keywords" title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
                                               rows="7"><c:out value="${article.keywords}"/></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Описание</td>
+                                    <td class="tds">
+                                    <textarea class="form-control textarea" name="description" title=""
+                                              placeholder="Краткое описание статьи (анонс)."
+                                              rows="10"><c:out value="${article.description}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -235,7 +234,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
-    <script>CKEDITOR.replace("desc");</script>
     <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>

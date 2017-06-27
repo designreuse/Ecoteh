@@ -66,17 +66,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </tr>
                                 <tr>
                                     <td class="ths">
-                                        <span class="red">*</span>&nbsp;Описание
+                                        <span class="red">*</span>&nbsp;Основной текст
                                     </td>
                                     <td class="tds">
-                                        <textarea class="form-control textarea" name="description" rows="10" title=""
-                                                  required placeholder="Краткое описание статьи (анонс)."></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ths">Основной текст</td>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="text" rows="10" title=""
+                                    <textarea class="form-control textarea" name="text" rows="10" title="" required
                                               placeholder="Основная информация статьи."></textarea>
                                     </td>
                                 </tr>
@@ -85,6 +78,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="keywords" rows="7" title=""
                                               placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Описание</td>
+                                    <td class="tds">
+                                        <textarea class="form-control textarea" name="description" rows="10" title=""
+                                                  placeholder="Краткое описание статьи (анонс)."></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -171,7 +171,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>" type="text/javascript"></script>
-    <script>CKEDITOR.replace("desc");</script>
     <script>CKEDITOR.replace("text");</script>
     <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>

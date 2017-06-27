@@ -20,7 +20,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title><c:out value="${category.title} | ${main_company.title}"/></title>
         <meta name="title" content="<c:out value="${category.title} | ${main_company.title}"/>">
-        <meta name="description" content="<c:out value="${category.title} - ${category.description}"/>">
+        <meta name="description" content="${category.description}"/>
         <meta name="keywords"
               content="Категория <c:out value="${category.title}, ${category.keywords}"/><c:forEach items="${articles_list}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
@@ -33,10 +33,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
         <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <c:set var="length" value="${fn:length(articles)}"/>
-        <c:if test="${(length gt 0) or (not empty category.description)}">
-            <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
-        </c:if>
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%-- Navigation bar --%>
@@ -55,6 +52,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             <c:out value="${category.title}"/>
                         </a>
                     </p>
+                    <c:set var="length" value="${fn:length(articles)}"/>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
                         <h3 class="text-center">
@@ -88,74 +86,81 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                             </div>
                         </c:if>
+
+                            <%-- Articles sorting --%>
+                        <c:if test="${length gt 1}">
+                            <p class="path">
+                                <a href="#">Сортировка</a>:
+                                <a href="<c:url value="/category/${category.url}/sort?type=price&revers=${revers}"/>"
+                                   title="Сортировать по цене">
+                                    <c:choose>
+                                        <c:when test="${revers}">
+                                            По&nbsp;цене&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-order-alt"
+                                                  aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            По&nbsp;цене&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                                |
+                                <a href="<c:url value="/category/${category.url}/sort?type=title&revers=${revers}"/>"
+                                   title="Сортировать по названию">
+                                    <c:choose>
+                                        <c:when test="${revers}">
+                                            По&nbsp;названия&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-alphabet-alt"
+                                              aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            По&nbsp;названия&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-alphabet"
+                                                  aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                                |
+                                <a href="<c:url value="/category/${category.url}/sort?type=number&revers=${revers}"/>"
+                                   title="Сортировать по номеру (артиклю)">
+                                    <c:choose>
+                                        <c:when test="${revers}">
+                                            По&nbsp;номеру&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-order-alt"
+                                                  aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            По&nbsp;номеру&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                                |
+                                <a href="<c:url value="/category/${category.url}/sort?type=date&revers=${revers}"/>"
+                                   title="Сортировать по дате">
+                                    <c:choose>
+                                        <c:when test="${revers}">
+                                            По&nbsp;дате&nbsp;
+                                        <span class="glyphicon glyphicon-sort-by-attributes-alt"
+                                              aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            По&nbsp;дате&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-attributes"
+                                                  aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                            </p>
+                        </c:if>
+                            <%-- Articles list --%>
+                        <jsp:include page="/WEB-INF/views/article/short_list.jsp"/>
                     </div>
-                        <%-- Articles sorting --%>
-                    <c:if test="${length gt 1}">
-                        <p class="path">
-                            <a href="#">Сортировка</a>:
-                            <a href="<c:url value="/category/${category.url}/sort?type=price&revers=${revers}"/>"
-                               title="Сортировать по цене">
-                                <c:choose>
-                                    <c:when test="${revers}">
-                                        По&nbsp;цене&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        По&nbsp;цене&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
-                            |
-                            <a href="<c:url value="/category/${category.url}/sort?type=title&revers=${revers}"/>"
-                               title="Сортировать по названию">
-                                <c:choose>
-                                    <c:when test="${revers}">
-                                        По&nbsp;названия&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        По&nbsp;названия&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
-                            |
-                            <a href="<c:url value="/category/${category.url}/sort?type=number&revers=${revers}"/>"
-                               title="Сортировать по номеру (артиклю)">
-                                <c:choose>
-                                    <c:when test="${revers}">
-                                        По&nbsp;номеру&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        По&nbsp;номеру&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
-                            |
-                            <a href="<c:url value="/category/${category.url}/sort?type=date&revers=${revers}"/>"
-                               title="Сортировать по дате">
-                                <c:choose>
-                                    <c:when test="${revers}">
-                                        По&nbsp;дате&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        По&nbsp;дате&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
-                        </p>
-                    </c:if>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-            <%-- Articles list --%>
-        <jsp:include page="/WEB-INF/views/article/list.jsp"/>
             <%-- The category description --%>
         <%@include file="/WEB-INF/views/category/description.jsp" %>
     </div>
@@ -164,7 +169,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
-    <c:if test="${(length gt 0) or (not empty category.description)}">
+    <c:if test="${(length gt 0) or (not empty category.text)}">
         <script src="<c:url value="/resources/js/lightgallery.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
         <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>

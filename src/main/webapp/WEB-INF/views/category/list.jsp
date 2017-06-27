@@ -34,8 +34,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <c:when test="${in_line eq 2}">col-md-6 col-lg-6</c:when>
                                     <c:otherwise>col-md-4 col-lg-4</c:otherwise>
                                     </c:choose>">
-        <a href="<c:url value="/category/${category.url}"/>"
-           title="Перейти к категории &quot;<c:out value="${category.title}"/>&quot;">
+        <c:choose>
+            <c:when test="${not empty category.description}">
+                <c:set var="title" value="${category.title} - ${category.description}"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="title" value="${category.title}"/>
+            </c:otherwise>
+        </c:choose>
+        <a href="<c:url value="/category/${category.url}"/>" title="<c:out value="${title}"/>">
             <c:if test="${not empty category.logo.url}">
                 <img class="img-responsive img-in-list" alt="<c:out value="${category.title}"/>"
                      src="<c:url value="${category.logo.url}"/>" onerror="this.src='<c:url
@@ -69,4 +76,3 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </a>
     </p>
 </div>
-

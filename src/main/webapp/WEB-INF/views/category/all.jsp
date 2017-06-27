@@ -20,8 +20,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title>Все категории | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Все категории | <c:out value="${main_company.title}"/>">
-        <meta name="description"
-              content="Все категории <c:out value="${main_company.title}"/> - <c:out value="${main_company.tagline}"/>.">
+        <meta name="description" content="Все категории <c:out value="${main_company.title}"/>.">
         <meta name="keywords"
               content="Все категории<c:forEach items="${categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">

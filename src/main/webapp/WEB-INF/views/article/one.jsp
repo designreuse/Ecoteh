@@ -9,6 +9,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
 
 <compress:html removeIntertagSpaces="true">
@@ -22,7 +23,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title><c:out value="${article.title} | ${main_company.title}"/></title>
         <meta name="title" content="<c:out value="${article.title} | ${main_company.title}"/>">
-        <meta name="description" content="<c:out value="${article.title} - ${article.description}"/>">
+        <meta name="description" content="<c:out value="${article.description}"/>"/>
         <meta name="keywords" content="Статья <c:out value="${article.title}, ${article.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
@@ -71,7 +72,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     </p>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <hr>
-                        <h3 class="text-center"><c:out value="${article.title}"/></h3>
+                        <h3 class="text-center">
+                            <c:out value="${article.title}"/>
+                        </h3>
                         <hr>
                             <%-- Administrator actions --%>
                         <c:if test="${authorized_user ne null}">
@@ -100,16 +103,18 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </a>
                             </div>
                         </c:if>
-                        <h4 class="green">
-                            <c:choose>
-                                <c:when test="${article.price gt 0}">
+                        <c:choose>
+                            <c:when test="${article.price gt 0}">
+                                <h4 class="green">
                                     Цена: <c:out value="${article.price}"/>&nbsp;<c:out value="${article.currency}"/>
-                                </c:when>
-                                <c:when test="${article.currency ne '-'}">
+                                </h4>
+                            </c:when>
+                            <c:when test="${empty article.currency}">
+                                <h4 class="green">
                                     Цену уточняйте
-                                </c:when>
-                            </c:choose>
-                        </h4>
+                                </h4>
+                            </c:when>
+                        </c:choose>
                         <span class="little">
                             <c:if test="${!article.validated}">
                                 <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"

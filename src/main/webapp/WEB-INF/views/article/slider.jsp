@@ -7,6 +7,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="length" value="${fn:length(articles)}"/>
 <c:if test="${length gt 1}">
@@ -33,13 +34,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                          onerror="this.src='<c:url
                                                  value="/resources/img/static/default_file.gif"/>'">
                                 </c:if>
-                                <h5><c:out value="${article_s.title}"/></h5>
                                 <c:if test="${article_s.price gt 0}">
-                                    <h5 class="green">
-                                        Цена: <c:out value="${article_s.price}"/>&nbsp;<c:out
-                                            value="${article.currency}"/>
+                                    <h5 class="price-top">
+                                        <fmt:formatNumber type="number" value="${article_s.price}"/>&nbsp;<c:out
+                                            value="${article_s.currency}"/>
                                     </h5>
                                 </c:if>
+                                <h5><c:out value="${article_s.title}"/></h5>
                             </a>
                         </div>
                     </div>
