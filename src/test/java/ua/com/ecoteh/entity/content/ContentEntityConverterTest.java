@@ -17,6 +17,7 @@ public abstract class ContentEntityConverterTest<E extends ContentEntity, T exte
         final E entity = getEntity();
         assertEquals(content.getTitle(), entity.getTitle());
         assertEquals(content.getUrl(), entity.getUrl());
+        assertEquals(content.getText(), entity.getText());
         assertEquals(content.getDescription(), entity.getDescription());
         assertEquals(content.getKeywords(), entity.getKeywords());
         assertNotNull(content.getLogo());

@@ -47,12 +47,12 @@ public class ArticleEntityTest extends ContentEntityTest {
                 '}'+
                 ", title='" + this.article.getTitle() + '\'' +
                 ", url='" + this.article.getUrl() + '\'' +
+                ", text='" + this.article.getText() + '\'' +
                 ", description='" + this.article.getDescription() + '\'' +
                 ", keywords='" + this.article.getKeywords() + '\'' +
                 ", logo=" + this.article.getLogoEntity() +
                 '}'+
                 ", number='" + this.article.getNumber() + '\'' +
-                ", text='" + this.article.getText() + '\'' +
                 ", date=" + this.article.getDate() +
                 ", price=" + this.article.getPrice() +
                 ", currency=" + this.article.getCurrency() +
@@ -68,16 +68,6 @@ public class ArticleEntityTest extends ContentEntityTest {
             number = NUMBER + i;
             this.article.setNumber(number);
             assertEquals(this.article.getNumber(), number);
-        }
-    }
-
-    @Test
-    public void whenSetTextThenGetIt() {
-        String text;
-        for (int i = 0; i < 5; i++) {
-            text = TEXT + i;
-            this.article.setText(text);
-            assertEquals(this.article.getText(), text);
         }
     }
 

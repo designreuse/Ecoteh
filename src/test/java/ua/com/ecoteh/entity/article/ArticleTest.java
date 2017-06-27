@@ -21,8 +21,8 @@ public class ArticleTest extends ContentTest {
     @BeforeClass
     public static void setUp() throws Exception {
         article = new Article(
-                ID, VALIDATION, TITLE, URL, DESCRIPTION, KEYWORDS, NUMBER,
-                TEXT, DATE, PRICE, CURRENCY, getFile(), getCategory()
+                ID, VALIDATION, TITLE, URL, TEXT, DESCRIPTION, KEYWORDS, NUMBER,
+                DATE, PRICE, CURRENCY, getFile(), getCategory()
         );
     }
 
@@ -35,11 +35,11 @@ public class ArticleTest extends ContentTest {
                 ", validated=" + article.isValidated() + '}' +
                 ", title='" + article.getTitle() + '\'' +
                 ", url='" + article.getUrl() + '\'' +
+                ", text='" + article.getText() + '\'' +
                 ", description='" + article.getDescription() + '\'' +
                 ", keywords='" + article.getKeywords() + '\'' +
                 ", logo=" + article.getLogo() + '}' +
                 ", number='" + article.getNumber() + '\'' +
-                ", text='" + article.getText() + '\'' +
                 ", date=" + article.getDate() +
                 ", price=" + article.getPrice() +
                 ", currency=" + article.getCurrency() +

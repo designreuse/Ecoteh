@@ -27,7 +27,6 @@ public class CompanyConverterTest extends ContentConverterTest<Company, CompanyE
     protected void checkEntity(final CompanyEntity entity) {
         super.checkEntity(entity);
         assertEquals(entity.getTagline(), company.getTagline());
-        assertEquals(entity.getInformation(), company.getInformation());
         assertEquals(entity.getDomain(), company.getDomain());
         assertEquals(entity.getSenderEmail(), company.getSenderEmail());
         assertEquals(entity.getSenderPass(), encrypt(company.getSenderPass()));

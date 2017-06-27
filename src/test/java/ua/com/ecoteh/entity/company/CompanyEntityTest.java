@@ -27,11 +27,11 @@ public class CompanyEntityTest extends ContentEntityTest {
         this.company.setValidated(VALIDATION);
         this.company.setTitle(TITLE);
         this.company.setUrl(URL);
+        this.company.setText(TEXT);
         this.company.setDescription(DESCRIPTION);
         this.company.setKeywords(KEYWORDS);
         this.company.setLogoEntity(getFileEntity());
         this.company.setTagline(TAGLINE);
-        this.company.setInformation(INFORMATION);
         this.company.setDomain(DOMAIN);
         this.company.setSenderEmail(EMAIL);
         this.company.setSenderPass(PASSWORD);
@@ -53,6 +53,7 @@ public class CompanyEntityTest extends ContentEntityTest {
                 '}' +
                 ", title='" + this.company.getTitle() + '\'' +
                 ", url='" + this.company.getUrl() + '\'' +
+                ", text='" + this.company.getText() + '\'' +
                 ", description='" + this.company.getDescription() + '\'' +
                 ", keywords='" + this.company.getKeywords() + '\'' +
                 ", logo=" + this.company.getLogoEntity() +
@@ -60,7 +61,6 @@ public class CompanyEntityTest extends ContentEntityTest {
                 ", contactsEntity=" + this.company.getContactsEntity() +
                 ", addressEntity=" + this.company.getAddressEntity() +
                 ", tagline='" + this.company.getTagline() + '\'' +
-                ", information='" + this.company.getInformation() + '\'' +
                 ", domain='" + this.company.getDomain() + '\'' +
                 ", senderEmail='" + this.company.getSenderEmail() + '\'' +
                 ", senderPass='" + this.company.getSenderPass() + '\'' +
@@ -88,16 +88,6 @@ public class CompanyEntityTest extends ContentEntityTest {
             tagline = TAGLINE + i;
             this.company.setTagline(tagline);
             assertEquals(this.company.getTagline(), tagline);
-        }
-    }
-
-    @Test
-    public void whenSetInformationThenGetIt() {
-        String information;
-        for (int i = 0; i < 5; i++) {
-            information = INFORMATION + i;
-            this.company.setInformation(information);
-            assertEquals(this.company.getInformation(), information);
         }
     }
 
@@ -170,10 +160,10 @@ public class CompanyEntityTest extends ContentEntityTest {
         assertEquals(company.isValidated(), this.company.isValidated());
         assertEquals(company.getTitle(), this.company.getTitle());
         assertEquals(company.getUrl(), this.company.getUrl());
+        assertEquals(company.getText(), this.company.getText());
         assertEquals(company.getDescription(), this.company.getDescription());
         assertEquals(company.getKeywords(), this.company.getKeywords());
         assertEquals(company.getTagline(), this.company.getTagline());
-        assertEquals(company.getInformation(), this.company.getInformation());
         assertEquals(company.getDomain(), this.company.getDomain());
         assertEquals(company.getSenderEmail(), this.company.getSenderEmail());
         assertEquals(company.getWorkTimeFrom(), this.company.getWorkTimeFrom());

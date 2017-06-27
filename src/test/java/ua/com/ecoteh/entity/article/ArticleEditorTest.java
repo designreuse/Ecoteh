@@ -32,7 +32,6 @@ public class ArticleEditorTest extends ContentEditorTest<Article> {
         super.whenBuildEmptyThenReturnValidModel();
         final Article updatedArticle = this.editor.update();
         assertEquals(updatedArticle.getNumber(), this.article.getNumber());
-        assertEquals(updatedArticle.getText(), this.article.getText());
         assertEquals(updatedArticle.getDate(), this.article.getDate());
         assertTrue(updatedArticle.getPrice() == this.article.getPrice());
         assertEquals(updatedArticle.getCurrency(), this.article.getCurrency());
@@ -56,25 +55,6 @@ public class ArticleEditorTest extends ContentEditorTest<Article> {
         this.editor.addNumber(null);
         final Article article = this.editor.update();
         assertEquals(article.getNumber(), this.article.getNumber());
-    }
-
-    @Test
-    public void whenAddTextThenBuildWithIt() {
-        Article article;
-        String text;
-        for (int i = 0; i < 5; i++) {
-            text = TEXT + i;
-            this.editor.addText(text);
-            article = this.editor.update();
-            assertEquals(article.getText(), text);
-        }
-    }
-
-    @Test
-    public void whenAddNullTextThenBuildWithEmptyIt() {
-        this.editor.addText(null);
-        final Article article = this.editor.update();
-        assertEquals(article.getText(), this.article.getText());
     }
 
     @Test

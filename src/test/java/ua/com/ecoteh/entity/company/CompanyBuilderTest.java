@@ -31,7 +31,6 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
         super.whenBuildEmptyThenReturnValidModel();
         final Company company = this.builder.build();
         assertNotNull(company.getTagline());
-        assertNotNull(company.getInformation());
         assertNotNull(company.getDomain());
         assertNotNull(company.getSenderEmail());
         assertNotNull(company.getSenderPass());
@@ -59,25 +58,6 @@ public class CompanyBuilderTest extends ContentBuilderTest<Company> {
         this.builder.addTagline(null);
         final Company company = this.builder.build();
         assertTrue(company.getTagline().isEmpty());
-    }
-
-    @Test
-    public void whenAddInformationThenBuildWithIt() {
-        Company company;
-        String information;
-        for (int i = 0; i < 5; i++) {
-            information = INFORMATION + i;
-            this.builder.addInformation(information);
-            company = this.builder.build();
-            assertEquals(company.getInformation(), information);
-        }
-    }
-
-    @Test
-    public void whenAddNullInformationThenBuildWithEmptyIt() {
-        this.builder.addInformation(null);
-        final Company company = this.builder.build();
-        assertTrue(company.getInformation().isEmpty());
     }
 
     @Test

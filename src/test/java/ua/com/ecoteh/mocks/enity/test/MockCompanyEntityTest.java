@@ -31,11 +31,6 @@ public class MockCompanyEntityTest extends MockContentEntityTest<CompanyEntity> 
     }
 
     @Test
-    public void whenGetInformationThenReturnNotEmpty() {
-        assertFalse(company.getInformation().isEmpty());
-    }
-
-    @Test
     public void whenGetDomainThenReturnNotEmpty() {
         assertFalse(company.getDomain().isEmpty());
     }

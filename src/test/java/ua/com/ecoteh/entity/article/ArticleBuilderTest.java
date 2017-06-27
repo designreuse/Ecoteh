@@ -29,7 +29,6 @@ public class ArticleBuilderTest extends ContentBuilderTest<Article> {
         super.whenBuildEmptyThenReturnValidModel();
         final Article article = this.builder.build();
         assertNotNull(article.getNumber());
-        assertNotNull(article.getText());
         assertNotNull(article.getDate());
         assertTrue(article.getPrice() >= 0);
         assertNotNull(article.getCurrency());
@@ -53,25 +52,6 @@ public class ArticleBuilderTest extends ContentBuilderTest<Article> {
         this.builder.addNumber(null);
         final Article article = this.builder.build();
         assertFalse(article.getNumber().isEmpty());
-    }
-
-    @Test
-    public void whenAddTextThenBuildWithIt() {
-        Article article;
-        String text;
-        for (int i = 0; i < 5; i++) {
-            text = TEXT + i;
-            this.builder.addText(text);
-            article = this.builder.build();
-            assertEquals(article.getText(), text);
-        }
-    }
-
-    @Test
-    public void whenAddNullTextThenBuildWithEmptyIt() {
-        this.builder.addText(null);
-        final Article article = this.builder.build();
-        assertTrue(article.getText().isEmpty());
     }
 
     @Test

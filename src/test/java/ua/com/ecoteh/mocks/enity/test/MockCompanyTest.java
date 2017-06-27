@@ -28,11 +28,6 @@ public final class MockCompanyTest extends MockContentTest<Company> {
     }
 
     @Test
-    public void whenGetInformationThenReturnNotEmpty() {
-        assertFalse(company.getInformation().isEmpty());
-    }
-
-    @Test
     public void whenGetDomainThenReturnNotEmpty() {
         assertFalse(company.getDomain().isEmpty());
     }

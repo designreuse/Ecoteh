@@ -31,7 +31,6 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
         super.whenBuildEmptyThenReturnValidModel();
         final Company updatedCompany = this.editor.update();
         assertEquals(updatedCompany.getTagline(), this.company.getTagline());
-        assertEquals(updatedCompany.getInformation(), this.company.getInformation());
         assertEquals(updatedCompany.getDomain(), this.company.getDomain());
         assertEquals(updatedCompany.getSenderEmail(), this.company.getSenderEmail());
         assertEquals(updatedCompany.getSenderPass(), this.company.getSenderPass());
@@ -59,25 +58,6 @@ public class CompanyEditorTest extends ContentEditorTest<Company> {
         this.editor.addTagline(null);
         final Company company = this.editor.update();
         assertEquals(company.getTagline(), this.company.getTagline());
-    }
-
-    @Test
-    public void whenAddInformationThenBuildWithIt() {
-        Company company;
-        String information;
-        for (int i = 0; i < 5; i++) {
-            information = INFORMATION + i;
-            this.editor.addInformation(information);
-            company = this.editor.update();
-            assertEquals(company.getInformation(), information);
-        }
-    }
-
-    @Test
-    public void whenAddNullInformationThenBuildWithEmptyIt() {
-        this.editor.addInformation(null);
-        final Company company = this.editor.update();
-        assertEquals(company.getInformation(), this.company.getInformation());
     }
 
     @Test

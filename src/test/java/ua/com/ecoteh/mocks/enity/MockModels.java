@@ -209,9 +209,9 @@ public final class MockModels {
     private static void initArticle() {
         final ArticleBuilder builder = Article.getBuilder();
         builder.addId(ID).addValidated(VALIDATION)
-                .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
-                .addText(TEXT).addKeywords(KEYWORDS).addNumber(NUMBER)
-                .addPrice(PRICE).addCurrency(CURRENCY)
+                .addTitle(TITLE).addUrl(URL).addText(TEXT)
+                .addDescription(DESCRIPTION).addKeywords(KEYWORDS)
+                .addNumber(NUMBER).addPrice(PRICE).addCurrency(CURRENCY)
                 .addLogo(getFile());
         article = builder.build();
     }
@@ -219,16 +219,17 @@ public final class MockModels {
     private static void initCategory() {
         final CategoryBuilder builder = Category.getBuilder();
         builder.addId(ID).addValidated(VALIDATION)
-                .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
-                .addKeywords(KEYWORDS).addLogo(getFile()).addArticles(getArticles());
+                .addTitle(TITLE).addUrl(URL).addText(TEXT)
+                .addDescription(DESCRIPTION).addKeywords(KEYWORDS)
+                .addLogo(getFile()).addArticles(getArticles());
         category = builder.build();
     }
 
     private static void initCompany() {
         final CompanyBuilder builder = Company.getBuilder();
         builder.addId(ID).addValidated(VALIDATION)
-                .addTitle(TITLE).addUrl(URL).addDescription(DESCRIPTION)
-                .addInformation(INFORMATION).addKeywords(KEYWORDS)
+                .addTitle(TITLE).addUrl(URL).addText(TEXT)
+                .addDescription(DESCRIPTION).addKeywords(KEYWORDS)
                 .addDomain(DOMAIN).addTagline(TAGLINE).addLogo(getFile())
                 .addWorkTimeFrom(TIME).addWorkTimeTo(TIME).addType(COMPANY_TYPE)
                 .addSenderEmail(EMAIL).addSenderPass(PASSWORD)

@@ -24,6 +24,12 @@ public abstract class MockContentEntityTest<E extends ContentEntity> extends Moc
     }
 
     @Test
+    public void whenGetTextThenReturnNotEmpty() {
+        final E content = getObject();
+        assertFalse(content.getText().isEmpty());
+    }
+
+    @Test
     public void whenGetDescriptionThenReturnNotEmpty() {
         final E content = getObject();
         assertFalse(content.getDescription().isEmpty());

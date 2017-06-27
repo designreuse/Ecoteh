@@ -22,7 +22,7 @@ public class CategoryTest extends ContentTest {
     @BeforeClass
     public static void beforeClass() {
         category = new Category(
-                ID, VALIDATION, TITLE, URL, DESCRIPTION, KEYWORDS,
+                ID, VALIDATION, TITLE, URL, TEXT, DESCRIPTION, KEYWORDS,
                 getFile(), getArticles()
         );
     }
@@ -34,6 +34,7 @@ public class CategoryTest extends ContentTest {
                 ", validated=" + category.isValidated() + '}' +
                 ", title='" + category.getTitle() + '\'' +
                 ", url='" + category.getUrl() + '\'' +
+                ", text='" + category.getText() + '\'' +
                 ", description='" + category.getDescription() + '\'' +
                 ", keywords='" + category.getKeywords() + '\'' +
                 ", logo=" + category.getLogo() +
@@ -56,6 +57,7 @@ public class CategoryTest extends ContentTest {
         assertEquals(entity.isValidated(), category.isValidated());
         assertEquals(entity.getTitle(), category.getTitle());
         assertEquals(entity.getUrl(), category.getUrl());
+        assertEquals(entity.getText(), category.getText());
         assertEquals(entity.getDescription(), category.getDescription());
         assertEquals(entity.getKeywords(), category.getKeywords());
         assertNotNull(entity.getLogoEntity());

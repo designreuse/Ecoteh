@@ -48,7 +48,7 @@ public class CompanyControllerTest {
         final File file = company.getLogo();
         final String actualRedirect = controller.updateMainCompany(
                 company.getTitle(), company.getDomain(), company.getTagline(),
-                company.getDescription(), company.getInformation(), company.getKeywords(),
+                company.getText(), company.getDescription(), company.getKeywords(),
                 company.getWorkTimeFrom(), company.getWorkTimeTo(),
                 contacts.getMobilePhone(), contacts.getLandlinesPhone(),
                 contacts.getFax(), contacts.getEmail(),
@@ -83,8 +83,8 @@ public class CompanyControllerTest {
         final File file = company.getLogo();
         final String actualRedirect = controller.addPartner(
                 company.getTitle(), company.getDomain(),
-                company.getTagline(), company.getDescription(),
-                company.getInformation(), company.getKeywords(),
+                company.getTagline(), company.getText(),
+                company.getDescription(), company.getKeywords(),
                 contacts.getMobilePhone(), contacts.getLandlinesPhone(),
                 contacts.getFax(), contacts.getEmail(),
                 contacts.getVkontakte(), contacts.getFacebook(),
@@ -117,8 +117,8 @@ public class CompanyControllerTest {
         final File file = company.getLogo();
         final String actualRedirect = controller.updatePartnerCompany(
                 company.getUrl(), company.getTitle(), company.getDomain(),
-                company.getTagline(), company.getDescription(),
-                company.getInformation(), company.getKeywords(),
+                company.getTagline(), company.getText(),
+                company.getDescription(), company.getKeywords(),
                 contacts.getMobilePhone(), contacts.getLandlinesPhone(),
                 contacts.getFax(), contacts.getEmail(),
                 contacts.getVkontakte(), contacts.getFacebook(),

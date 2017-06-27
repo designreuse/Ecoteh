@@ -40,8 +40,9 @@ public class CategoryControllerTest {
         final Category category = getCategory();
         final File file = category.getLogo();
         final String actualViewName = controller.addCategory(
-                category.getTitle(), category.getDescription(),
-                category.getKeywords(), file.getMultipartFile(),
+                category.getTitle(), category.getText(),
+                category.getDescription(), category.getKeywords(),
+                file.getMultipartFile(),
                 category.isValidated()
         );
         final String expectedViewName = "redirect:/category/all";
@@ -53,7 +54,7 @@ public class CategoryControllerTest {
         final Category category = getCategory();
         final File file = category.getLogo();
         final String actualViewName = controller.updateCategory(
-                category.getUrl(), category.getTitle(),
+                category.getUrl(), category.getTitle(), category.getText(),
                 category.getDescription(), category.getKeywords(),
                 file.getMultipartFile(),
                 category.isValidated()

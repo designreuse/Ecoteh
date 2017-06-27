@@ -49,9 +49,9 @@ public class ArticleControllerTest {
         final Category category = getCategory();
         final File file = article.getLogo();
         final String actualRedirect = controller.addArticle(
-                article.getTitle(), article.getDescription(), article.getText(),
-                article.getKeywords(), article.getNumber(),
-                article.getPrice(), article.getCurrency(),
+                article.getTitle(), article.getText(),
+                article.getDescription(), article.getKeywords(),
+                article.getNumber(), article.getPrice(), article.getCurrency(),
                 category.getUrl(),
                 file.getMultipartFile(),
                 article.isValidated()
@@ -79,9 +79,8 @@ public class ArticleControllerTest {
         final Category category = getCategory();
         final File file = article.getLogo();
         final String actualRedirect = controller.updateArticle(
-                article.getUrl(), article.getTitle(),
-                article.getDescription(), article.getText(),
-                article.getKeywords(), article.getNumber(),
+                article.getUrl(), article.getTitle(), article.getText(),
+                article.getDescription(), article.getKeywords(), article.getNumber(),
                 article.getPrice(), article.getCurrency(),
                 category.getUrl(),
                 file.getMultipartFile(),

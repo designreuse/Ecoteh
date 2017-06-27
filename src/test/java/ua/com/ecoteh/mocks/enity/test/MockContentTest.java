@@ -24,6 +24,12 @@ public abstract class MockContentTest<T extends Content> extends MockModelTest<T
     }
 
     @Test
+    public void whenGetTextThenReturnNotEmpty() {
+        final T content = getObject();
+        assertFalse(content.getText().isEmpty());
+    }
+
+    @Test
     public void whenGetDescriptionThenReturnNotEmpty() {
         final T content = getObject();
         assertFalse(content.getDescription().isEmpty());

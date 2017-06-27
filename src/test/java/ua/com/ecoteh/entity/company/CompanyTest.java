@@ -18,8 +18,8 @@ public class CompanyTest extends ContentTest {
     @BeforeClass
     public static void beforeClass() {
         company = new Company(
-                ID, VALIDATION, TITLE, URL, DESCRIPTION, KEYWORDS,
-                TAGLINE, INFORMATION, DOMAIN, EMAIL, PASSWORD, TIME, TIME,
+                ID, VALIDATION, TITLE, URL, TEXT, DESCRIPTION, KEYWORDS,
+                TAGLINE, DOMAIN, EMAIL, PASSWORD, TIME, TIME,
                 getFile(), getContacts(), getAddress(), COMPANY_TYPE
         );
     }
@@ -33,6 +33,7 @@ public class CompanyTest extends ContentTest {
                 ", validated=" + company.isValidated() + '}' +
                 ", title='" + company.getTitle() + '\'' +
                 ", url='" + company.getUrl() + '\'' +
+                ", text='" + company.getText() + '\'' +
                 ", description='" + company.getDescription() + '\'' +
                 ", keywords='" + company.getKeywords() + '\'' +
                 ", logo=" + company.getLogo() +
@@ -40,7 +41,6 @@ public class CompanyTest extends ContentTest {
                 ", contacts=" + company.getContacts() +
                 ", address=" + company.getAddress() +
                 ", tagline='" + company.getTagline() + '\'' +
-                ", information='" + company.getInformation() + '\'' +
                 ", domain='" + company.getDomain() + '\'' +
                 ", senderEmail='" + company.getSenderEmail() + '\'' +
                 ", senderPass='" + company.getSenderPass() + '\'' +
@@ -115,10 +115,10 @@ public class CompanyTest extends ContentTest {
         assertEquals(entity.isValidated(), company.isValidated());
         assertEquals(entity.getTitle(), company.getTitle());
         assertEquals(entity.getUrl(), company.getUrl());
+        assertEquals(entity.getText(), company.getText());
         assertEquals(entity.getDescription(), company.getDescription());
         assertEquals(entity.getKeywords(), company.getKeywords());
         assertEquals(entity.getTagline(), company.getTagline());
-        assertEquals(entity.getInformation(), company.getInformation());
         assertEquals(entity.getDomain(), company.getDomain());
         assertEquals(entity.getSenderEmail(), company.getSenderEmail());
         assertFalse(entity.getSenderPass().isEmpty());

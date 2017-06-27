@@ -21,6 +21,7 @@ public abstract class ContentEditorTest<T extends Content> extends ModelEditorTe
         final T content = getModel();
         assertEquals(updatedContent.getTitle(), content.getTitle());
         assertEquals(updatedContent.getUrl(), content.getUrl());
+        assertEquals(updatedContent.getText(), content.getText());
         assertEquals(updatedContent.getDescription(), content.getDescription());
         assertEquals(updatedContent.getKeywords(), content.getKeywords());
         assertEquals(updatedContent.getLogo(), content.getLogo());
@@ -68,6 +69,28 @@ public abstract class ContentEditorTest<T extends Content> extends ModelEditorTe
         final T updatedContent = editor.update();
         final T content = getModel();
         assertEquals(updatedContent.getUrl(), content.getUrl());
+    }
+
+    @Test
+    public void whenAddTextThenBuildWithIt() {
+        final ContentEditor<T, ?> editor = getEditor();
+        T content;
+        String text;
+        for (int i = 0; i < 5; i++) {
+            text = TEXT + i;
+            editor.addText(text);
+            content = editor.update();
+            assertEquals(content.getText(), text);
+        }
+    }
+
+    @Test
+    public void whenAddNullTextThenBuildWithEmptyIt() {
+        final T thisContent = getModel();
+        final ContentEditor<T, ?> editor = getEditor();
+        editor.addText(null);
+        final T content = editor.update();
+        assertEquals(content.getText(), thisContent.getText());
     }
 
     @Test

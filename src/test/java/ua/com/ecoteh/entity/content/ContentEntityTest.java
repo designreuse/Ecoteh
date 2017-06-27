@@ -23,6 +23,7 @@ public abstract class ContentEntityTest extends ModelEntityTest {
                 '}' +
                 ", title='" + entity.getTitle() + '\'' +
                 ", url='" + entity.getUrl() + '\'' +
+                ", text='" + entity.getText() + '\'' +
                 ", description='" + entity.getDescription() + '\'' +
                 ", keywords='" + entity.getKeywords() + '\'' +
                 ", logo=" + entity.getLogoEntity() +
@@ -47,6 +48,16 @@ public abstract class ContentEntityTest extends ModelEntityTest {
             final String url = URL + i;
             entity.setUrl(url);
             assertEquals(entity.getUrl(), url);
+        }
+    }
+
+    @Test
+    public void whenSetTextThenGetIt() {
+        final ContentEntity entity = getInstance();
+        for (int i = 0; i < 5; i++) {
+            final String text = TEXT + i;
+            entity.setText(text);
+            assertEquals(entity.getText(), text);
         }
     }
 

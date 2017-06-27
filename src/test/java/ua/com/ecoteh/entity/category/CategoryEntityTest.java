@@ -27,6 +27,7 @@ public class CategoryEntityTest extends ContentEntityTest {
         this.category.setValidated(VALIDATION);
         this.category.setTitle(TITLE);
         this.category.setUrl(URL);
+        this.category.setText(TEXT);
         this.category.setDescription(DESCRIPTION);
         this.category.setKeywords(KEYWORDS);
         this.category.setLogoEntity(getFileEntity());
@@ -44,6 +45,7 @@ public class CategoryEntityTest extends ContentEntityTest {
                 '}' +
                 ", title='" + this.category.getTitle() + '\'' +
                 ", url='" + this.category.getUrl() + '\'' +
+                ", text='" + this.category.getText() + '\'' +
                 ", description='" + this.category.getDescription() + '\'' +
                 ", keywords='" + this.category.getKeywords() + '\'' +
                 ", logo=" + this.category.getLogoEntity() +

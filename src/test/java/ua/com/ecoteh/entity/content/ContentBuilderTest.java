@@ -1,6 +1,7 @@
 package ua.com.ecoteh.entity.content;
 
 import org.junit.Test;
+import ua.com.ecoteh.entity.article.Article;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.model.ModelBuilderTest;
 
@@ -22,6 +23,7 @@ public abstract class ContentBuilderTest<T extends Content> extends ModelBuilder
         final T content = builder.build();
         assertNotNull(content.getTitle());
         assertNotNull(content.getUrl());
+        assertNotNull(content.getText());
         assertNotNull(content.getDescription());
         assertNotNull(content.getKeywords());
         assertNotNull(content.getLogo());
@@ -67,6 +69,27 @@ public abstract class ContentBuilderTest<T extends Content> extends ModelBuilder
         builder.addUrl(null);
         final T content = builder.build();
         assertTrue(content.getUrl().isEmpty());
+    }
+
+    @Test
+    public void whenAddTextThenBuildWithIt() {
+        final ContentBuilder<T, ?> builder = getBuilder();
+        T content;
+        String text;
+        for (int i = 0; i < 5; i++) {
+            text = TEXT + i;
+            builder.addText(text);
+            content = builder.build();
+            assertEquals(content.getText(), text);
+        }
+    }
+
+    @Test
+    public void whenAddNullTextThenBuildWithEmptyIt() {
+        final ContentBuilder<T, ?> builder = getBuilder();
+        builder.addText(null);
+        final T content = builder.build();
+        assertTrue(content.getText().isEmpty());
     }
 
     @Test

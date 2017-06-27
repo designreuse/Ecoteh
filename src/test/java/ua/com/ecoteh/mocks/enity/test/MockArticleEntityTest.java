@@ -26,11 +26,6 @@ public class MockArticleEntityTest extends MockContentEntityTest<ArticleEntity> 
     }
 
     @Test
-    public void whenGetTextThenReturnNotEmpty() {
-        assertFalse(article.getText().isEmpty());
-    }
-
-    @Test
     public void whenGetNumberThenReturnNotEmpty() {
         assertFalse(article.getNumber().isEmpty());
     }
