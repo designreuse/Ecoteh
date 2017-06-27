@@ -2,7 +2,6 @@ package ua.com.ecoteh.config;
 
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Configuration
-@ComponentScan(basePackages = "ua.com.ecoteh.entity")
 public class RootConfig {
 
     /**
