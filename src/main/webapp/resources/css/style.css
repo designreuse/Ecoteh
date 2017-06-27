@@ -86,10 +86,12 @@ img.img-logo {
 }
 
 img.img-in-list {
+    display: block;
+    height: auto;
     float: none;
     margin: 0 auto;
     max-height: 200px;
-    max-width: 300px
+    max-width: 250px
 }
 
 img.img-responsive {
@@ -112,6 +114,13 @@ img.auth-logo {
 img.file {
     width: 150px;
     height: 150px
+}
+
+img.content-logo {
+    float: left;
+    max-height: 200px;
+    max-width: 250px;
+    margin: 5px 10px
 }
 
 img.map {
@@ -2180,6 +2189,18 @@ a.label:focus {
 
 .yellow {
     color: #f90
+}
+
+.price-top {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    padding: .2em .6em .3em;
+    background-color: #00ce1b;
+    border-radius: 10% / 50%;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1
 }
 
 #toTop {
