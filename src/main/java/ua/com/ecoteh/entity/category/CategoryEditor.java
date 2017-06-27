@@ -56,6 +56,7 @@ public final class CategoryEditor extends ContentEditor<Category, CategoryEditor
                 .addValidated(isValidated())
                 .addTitle(getTitle())
                 .addUrl(getUrl())
+                .addText(getText())
                 .addDescription(getDescription())
                 .addKeywords(getKeywords())
                 .addLogo(getLogo())
@@ -72,8 +73,7 @@ public final class CategoryEditor extends ContentEditor<Category, CategoryEditor
     @Override
     public CategoryEditor copy(final Category category) {
         if (isNotNull(category)) {
-            super.copy(category)
-                    .addArticles(getArticles());
+            super.copy(category).addArticles(getArticles());
         }
         return this;
     }

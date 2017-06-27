@@ -23,11 +23,6 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
     private String tagline;
 
     /**
-     * The information of a new company.
-     */
-    private String information;
-
-    /**
      * The domain of a new company.
      */
     private String domain;
@@ -83,9 +78,9 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
     public Company build() {
         return new Company(
                 getId(), isValidated(),
-                getTitle(), getUrl(),
+                getTitle(), getUrl(), getText(),
                 getDescription(), getKeywords(),
-                getTagline(), getInformation(), getDomain(),
+                getTagline(), getDomain(),
                 getSenderEmail(), getSenderPass(),
                 getWorkTimeFrom(), getWorkTimeTo(),
                 getLogo(), getContacts(), getAddress(),
@@ -101,17 +96,6 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
      */
     public CompanyBuilder addTagline(final String tagline) {
         this.tagline = tagline;
-        return this;
-    }
-
-    /**
-     * Adds a new information to a new company.
-     *
-     * @param information the new information to a new company.
-     * @return the company builder.
-     */
-    public CompanyBuilder addInformation(final String information) {
-        this.information = information;
         return this;
     }
 
@@ -226,13 +210,20 @@ public final class CompanyBuilder extends ContentBuilder<Company, CompanyBuilder
     }
 
     /**
-     * Returns a information of a new company.
-     * Returns an empty string if the information is null or empty.
+     * Returns a description of a new content.
+     * Returns an empty string if the description is null or empty.
      *
-     * @return The information or empty string (newer null).
+     * @return The content description or empty string (newer null).
      */
-    private String getInformation() {
-        return isNotEmpty(this.information) ? this.information : "";
+    protected String getDescription() {
+        final String description = super.getDescription();
+        final String result;
+        if (isNotEmpty(description)) {
+            result = compress(description);
+        } else {
+            result = "";
+        }
+        return result;
     }
 
     /**

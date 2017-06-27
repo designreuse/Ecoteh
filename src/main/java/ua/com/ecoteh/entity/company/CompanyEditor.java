@@ -29,11 +29,6 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
     private String tagline;
 
     /**
-     * The new information of the company.
-     */
-    private String information;
-
-    /**
      * The new domain of the company.
      */
     private String domain;
@@ -95,10 +90,10 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
                 .addValidated(isValidated())
                 .addTitle(getTitle())
                 .addUrl(getUrl())
+                .addText(getText())
                 .addDescription(getDescription())
                 .addKeywords(getKeywords())
                 .addTagline(getTagline())
-                .addInformation(getInformation())
                 .addDomain(getDomain())
                 .addSenderEmail(getSenderEmail())
                 .addSenderPass(getSenderPass())
@@ -122,7 +117,7 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
         if (isNotNull(company)) {
             super.copy(company)
                     .addTagline(company.getTagline())
-                    .addInformation(company.getInformation())
+                    .addText(company.getText())
                     .addDomain(company.getDomain())
                     .addSenderEmail(company.getSenderEmail())
                     .addSenderPass(company.getSenderPass())
@@ -143,17 +138,6 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
      */
     public CompanyEditor addTagline(final String tagline) {
         this.tagline = tagline;
-        return this;
-    }
-
-    /**
-     * Adds a new information to the company.
-     *
-     * @param information the new information to the company.
-     * @return the company editor.
-     */
-    public CompanyEditor addInformation(final String information) {
-        this.information = information;
         return this;
     }
 
@@ -264,16 +248,6 @@ public final class CompanyEditor extends ContentEditor<Company, CompanyEditor> {
      */
     private String getTagline() {
         return isNotEmpty(this.tagline) ? this.tagline : this.company.getTagline();
-    }
-
-    /**
-     * Returns a information of a new company.
-     * Returns the company information if the information is null.
-     *
-     * @return The information (newer null).
-     */
-    private String getInformation() {
-        return isNotEmpty(this.information) ? this.information : this.company.getInformation();
     }
 
     /**

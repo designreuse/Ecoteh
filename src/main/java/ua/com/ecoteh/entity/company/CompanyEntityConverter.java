@@ -1,11 +1,6 @@
 package ua.com.ecoteh.entity.company;
 
 import ua.com.ecoteh.entity.content.ContentEntityConverter;
-import ua.com.ecoteh.util.encryption.Base64Encryptor;
-import ua.com.ecoteh.util.encryption.Encryptor;
-
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 
 /**
  * The class implements a set of methods
@@ -21,11 +16,6 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
      * The company entity for converting to company.
      */
     private final CompanyEntity entity;
-
-    /**
-     * The instance of the interface for data decryption.
-     */
-    private Encryptor decryptor;
 
     /**
      * Constructor.
@@ -50,9 +40,9 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
                 .addValidated(this.entity.isValidated())
                 .addTitle(this.entity.getTitle())
                 .addUrl(this.entity.getUrl())
+                .addText(this.entity.getText())
                 .addDomain(this.entity.getDomain())
                 .addTagline(this.entity.getTagline())
-                .addInformation(this.entity.getInformation())
                 .addDescription(this.entity.getDescription())
                 .addKeywords(this.entity.getKeywords())
                 .addSenderEmail(this.entity.getSenderEmail())
@@ -64,43 +54,5 @@ final class CompanyEntityConverter extends ContentEntityConverter<CompanyEntity,
                 .addContacts(this.entity.getContactsEntity().convert())
                 .addAddress(this.entity.getAddressEntity().convert());
         return builder;
-    }
-
-    /**
-     * Decrypts the incoming value and returns it.
-     * <pre>
-     *     decrypt(null) - empty string
-     *     decrypt("") - empty string
-     *     decrypt(" ") - empty string
-     *     decrypt("   ") - empty string
-     *     decrypt("value") - some decrypted value
-     * </pre>
-     *
-     * @param value the value to decrypt.
-     * @return the decrypted value or empty string (newer null).
-     * @see Base64Encryptor
-     */
-    private String decrypt(final String value) {
-        final String decryptedValue;
-        if (isNotEmpty(value)) {
-            final Encryptor decryptor = getDecryptor();
-            decryptedValue = decryptor.decrypt(value);
-        } else {
-            decryptedValue = "";
-        }
-        return decryptedValue;
-    }
-
-    /**
-     * Creates and returns the object for data decryption.
-     *
-     * @return The object for data decryption.
-     * @see Base64Encryptor
-     */
-    private Encryptor getDecryptor() {
-        if (isNull(this.decryptor)) {
-            this.decryptor = new Base64Encryptor();
-        }
-        return this.decryptor;
     }
 }

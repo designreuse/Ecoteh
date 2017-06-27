@@ -29,11 +29,6 @@ public final class Company extends Content {
     private final String tagline;
 
     /**
-     * The information of this company.
-     */
-    private final String information;
-
-    /**
      * The domain of this company.
      */
     private final String domain;
@@ -80,11 +75,11 @@ public final class Company extends Content {
      * @param validated    the validations of a new company.
      * @param title        the title of a new company.
      * @param url          the URL of a new company.
+     * @param text         the text of a new company.
      * @param description  the description of a new company.
      * @param keywords     the keywords of a new company.
      * @param logo         the logo of a new company.
      * @param tagline      the tagline of a new company.
-     * @param information  the information of a new company.
      * @param domain       the domain of a new company.
      * @param senderEmail  the sender E-mail of a new company.
      * @param senderPass   the sender password of a new company.
@@ -96,17 +91,16 @@ public final class Company extends Content {
      */
     public Company(
             final long id, final boolean validated,
-            final String title, final String url,
+            final String title, final String url, final String text,
             final String description, final String keywords,
-            final String tagline, final String information, final String domain,
+            final String tagline, final String domain,
             final String senderEmail, final String senderPass,
             final String workTimeFrom, final String workTimeTo,
             final File logo, final Contacts contacts, final Address address,
             final CompanyType type
     ) {
-        super(id, validated, title, url, description, keywords, logo);
+        super(id, validated, title, url, text, description, keywords, logo);
         this.tagline = tagline;
-        this.information = information;
         this.domain = domain;
         this.senderEmail = senderEmail;
         this.senderPass = senderPass;
@@ -128,7 +122,6 @@ public final class Company extends Content {
                 ", contacts=" + this.contacts +
                 ", address=" + this.address +
                 ", tagline='" + this.tagline + '\'' +
-                ", information='" + this.information + '\'' +
                 ", domain='" + this.domain + '\'' +
                 ", senderEmail='" + this.senderEmail + '\'' +
                 ", senderPass='" + this.senderPass + '\'' +
@@ -152,8 +145,7 @@ public final class Company extends Content {
             final Company other = (Company) object;
             result = (this.type.equals(other.type)) &&
                     this.domain.equalsIgnoreCase(other.domain) &&
-                    this.tagline.equals(other.tagline) &&
-                    this.information.equals(other.information);
+                    this.tagline.equals(other.tagline);
         }
         return result;
     }
@@ -167,11 +159,8 @@ public final class Company extends Content {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() +
-                this.type.hashCode() +
-                this.domain.hashCode() +
-                this.tagline.hashCode() +
-                this.information.hashCode();
+        return super.hashCode() + this.type.hashCode() +
+                this.domain.hashCode() + this.tagline.hashCode();
     }
 
     /**
@@ -204,15 +193,6 @@ public final class Company extends Content {
      */
     public String getTagline() {
         return this.tagline;
-    }
-
-    /**
-     * Returns a information of the company.
-     *
-     * @return The company domain or empty string (newer null).
-     */
-    public String getInformation() {
-        return this.information;
     }
 
     /**

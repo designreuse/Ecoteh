@@ -24,11 +24,6 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
     private String number;
 
     /**
-     * The text of a new article.
-     */
-    private String text;
-
-    /**
      * The date of a new article.
      */
     private Date date;
@@ -64,9 +59,9 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
     public Article build() {
         return new Article(
                 getId(), isValidated(),
-                getTitle(), getUrl(),
+                getTitle(), getUrl(), getText(),
                 getDescription(), getKeywords(),
-                getNumber(), getText(), getDate(),
+                getNumber(), getDate(),
                 getPrice(), getCurrency(),
                 getLogo(), getCategory()
         );
@@ -80,17 +75,6 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      */
     public ArticleBuilder addNumber(final String number) {
         this.number = number;
-        return this;
-    }
-
-    /**
-     * Adds a new text to a new article.
-     *
-     * @param text the new text to a new article.
-     * @return the article builder.
-     */
-    public ArticleBuilder addText(final String text) {
-        this.text = text;
         return this;
     }
 
@@ -152,16 +136,6 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
             number = new StringGenerator().generate();
         }
         return number;
-    }
-
-    /**
-     * Returns a text of a new article.
-     * Returns an empty string if the text is null or empty.
-     *
-     * @return The text or empty string (newer null).
-     */
-    private String getText() {
-        return isNotEmpty(this.text) ? this.text : "";
     }
 
     /**

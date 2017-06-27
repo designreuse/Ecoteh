@@ -30,11 +30,6 @@ public final class Article extends Content {
     private final String number;
 
     /**
-     * The text of this article.
-     */
-    private final String text;
-
-    /**
      * The date of this article.
      */
     private final Date date;
@@ -73,15 +68,13 @@ public final class Article extends Content {
      */
     Article(
             final long id, final boolean validated,
-            final String title, final String url,
-            final String description, final String keywords,
-            final String number, final String text,
+            final String title, final String url, final String text,
+            final String description, final String keywords, final String number,
             final Date date, final double price, final String currency,
             final File logo, final Category category
     ) {
-        super(id, validated, title, url, description, keywords, logo);
+        super(id, validated, title, url, text, description, keywords, logo);
         this.number = number;
-        this.text = text;
         this.date = date;
         this.price = price;
         this.currency = currency;
@@ -97,7 +90,6 @@ public final class Article extends Content {
     public String toString() {
         return "Article{" + super.toString() +
                 ", number='" + this.number + '\'' +
-                ", text='" + this.text + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
                 ", currency=" + this.currency +
@@ -117,8 +109,7 @@ public final class Article extends Content {
         boolean result = super.equals(object);
         if (result) {
             final Article other = (Article) object;
-            result = this.number.equalsIgnoreCase(other.number) &&
-                    this.text.equalsIgnoreCase(other.text);
+            result = this.number.equalsIgnoreCase(other.number);
         }
         return result;
     }
@@ -132,9 +123,7 @@ public final class Article extends Content {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() +
-                this.number.hashCode() +
-                this.text.hashCode();
+        return super.hashCode() + this.number.hashCode();
     }
 
     /**
@@ -157,15 +146,6 @@ public final class Article extends Content {
      */
     public String getNumber() {
         return this.number;
-    }
-
-    /**
-     * Returns a text of the article.
-     *
-     * @return The article text or empty string (newer null).
-     */
-    public String getText() {
-        return this.text;
     }
 
     /**

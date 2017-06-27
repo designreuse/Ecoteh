@@ -36,15 +36,16 @@ final class CategoryConverter extends ContentConverter<Category, CategoryEntity>
      */
     @Override
     public CategoryEntity convert() {
-        final CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(this.category.getId());
-        categoryEntity.setValidated(this.category.isValidated());
-        categoryEntity.setTitle(this.category.getTitle());
-        categoryEntity.setUrl(this.category.getUrl());
-        categoryEntity.setDescription(this.category.getDescription());
-        categoryEntity.setKeywords(this.category.getKeywords());
-        categoryEntity.setLogoEntity(this.category.getLogo().convert());
-        categoryEntity.setArticleEntities(new ArrayList<>());
-        return categoryEntity;
+        final CategoryEntity entity = new CategoryEntity();
+        entity.setId(this.category.getId());
+        entity.setValidated(this.category.isValidated());
+        entity.setTitle(this.category.getTitle());
+        entity.setUrl(this.category.getUrl());
+        entity.setText(this.category.getText());
+        entity.setDescription(this.category.getDescription());
+        entity.setKeywords(this.category.getKeywords());
+        entity.setLogoEntity(this.category.getLogo().convert());
+        entity.setArticleEntities(new ArrayList<>());
+        return entity;
     }
 }

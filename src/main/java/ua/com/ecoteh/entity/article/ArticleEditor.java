@@ -28,11 +28,6 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
     private String number;
 
     /**
-     * The new text of the article.
-     */
-    private String text;
-
-    /**
      * The new date of the article.
      */
     private Date date;
@@ -118,17 +113,6 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
     }
 
     /**
-     * Adds new text to the article.
-     *
-     * @param text a new text to the article.
-     * @return the article editor.
-     */
-    public ArticleEditor addText(final String text) {
-        this.text = text;
-        return this;
-    }
-
-    /**
      * Adds new date to the article.
      *
      * @param date a new date to the article.
@@ -180,16 +164,6 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      */
     private String getNumber() {
         return isNotNull(this.number) ? this.number : this.article.getNumber();
-    }
-
-    /**
-     * Returns a new text of the article.
-     * Returns the article text if the text is null.
-     *
-     * @return The new article text.
-     */
-    private String getText() {
-        return isNotNull(this.text) ? this.text : this.article.getText();
     }
 
     /**

@@ -35,6 +35,7 @@ public final class Category extends Content {
      * @param validated   the validations of a new category.
      * @param title       the title of a new category.
      * @param url         the URL of a new category.
+     * @param text        the text of a new category.
      * @param description the description of a new category.
      * @param keywords    the keywords of a new category.
      * @param logo        the logo of a new category.
@@ -42,10 +43,11 @@ public final class Category extends Content {
      */
     Category(
             final long id, final boolean validated, final String title,
-            final String url, final String description, final String keywords,
+            final String url, final String text,
+            final String description, final String keywords,
             final File logo, final Collection<Article> articles
     ) {
-        super(id, validated, title, url, description, keywords, logo);
+        super(id, validated, title, url, text, description, keywords, logo);
         this.articles = articles;
     }
 

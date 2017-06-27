@@ -115,8 +115,8 @@ public final class ArticleController {
      * Method: POST
      *
      * @param title         the title of a new article.
+     * @param text          the new text to a article.
      * @param description   the description of a new article.
-     * @param text          the text of a new article.
      * @param keywords      the keywords of a new article.
      * @param number        the number of a new article.
      * @param price         the price to a new article.
@@ -133,8 +133,8 @@ public final class ArticleController {
     )
     public String addArticle(
             @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "number", defaultValue = "") final String number,
             @RequestParam(value = "price", defaultValue = "0") final double price,
@@ -216,8 +216,8 @@ public final class ArticleController {
      *
      * @param url           the URL of a article to update.
      * @param title         the new title to a article.
-     * @param description   the new description to a article.
      * @param text          the new text to a article.
+     * @param description   the new description to a article.
      * @param keywords      the new keywords to a article.
      * @param number        the new number to a article.
      * @param price         the new price to a article.
@@ -235,8 +235,8 @@ public final class ArticleController {
     public String updateArticle(
             @RequestParam(value = "url", defaultValue = "") final String url,
             @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "number", defaultValue = "") final String number,
             @RequestParam(value = "price", defaultValue = "0") final double price,

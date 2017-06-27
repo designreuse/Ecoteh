@@ -41,7 +41,8 @@ public final class CategoryBuilder extends ContentBuilder<Category, CategoryBuil
     public Category build() {
         return new Category(
                 getId(), isValidated(), getTitle(),
-                getUrl(), getDescription(), getKeywords(),
+                getUrl(), getText(),
+                getDescription(), getKeywords(),
                 getLogo(), getArticles()
         );
     }

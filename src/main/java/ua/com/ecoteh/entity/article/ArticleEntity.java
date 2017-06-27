@@ -34,12 +34,6 @@ public class ArticleEntity extends ContentEntity {
     private String number;
 
     /**
-     * The text of this article entity.
-     */
-    @Column(name = "text", nullable = false)
-    private String text;
-
-    /**
      * The date of this article entity.
      */
     @Column(name = "date", nullable = false)
@@ -83,7 +77,6 @@ public class ArticleEntity extends ContentEntity {
     public String toString() {
         return "ArticleEntity{" + super.toString() +
                 ", number='" + this.number + '\'' +
-                ", text='" + this.text + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
                 ", currency=" + this.currency +
@@ -103,8 +96,7 @@ public class ArticleEntity extends ContentEntity {
         boolean result = super.equals(object);
         if (result) {
             final ArticleEntity other = (ArticleEntity) object;
-            result = this.number.equalsIgnoreCase(other.number) &&
-                    this.text.equalsIgnoreCase(other.text);
+            result = this.number.equalsIgnoreCase(other.number);
         }
         return result;
     }
@@ -118,9 +110,7 @@ public class ArticleEntity extends ContentEntity {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() +
-                this.number.hashCode() +
-                this.text.hashCode();
+        return super.hashCode() + this.number.hashCode();
     }
 
     /**
@@ -149,24 +139,6 @@ public class ArticleEntity extends ContentEntity {
      */
     public void setNumber(final String number) {
         this.number = number;
-    }
-
-    /**
-     * Returns a text of the article entity.
-     *
-     * @return The article entity text or empty string (newer null).
-     */
-    public String getText() {
-        return this.text;
-    }
-
-    /**
-     * Sets a new text to the article entity.
-     *
-     * @param text a new text to the article entity.
-     */
-    public void setText(final String text) {
-        this.text = text;
     }
 
     /**

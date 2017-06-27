@@ -1,6 +1,5 @@
 package ua.com.ecoteh.controller.admin;
 
-import com.googlecode.htmlcompressor.compressor.Compressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +25,6 @@ import ua.com.ecoteh.service.data.CompanyService;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
-import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
@@ -119,8 +117,8 @@ public final class CompanyController {
      * @param title          the new title to a main company.
      * @param domain         the new domain to a main company.
      * @param tagline        the new tagline to a main company.
+     * @param text           the new text to a main company.
      * @param description    the new description to a main company.
-     * @param information    the new information to a main company.
      * @param keywords       the new keywords to a main company.
      * @param workTimeFrom   the new start work time to a main company.
      * @param workTimeTo     the new finish work time to a main company.
@@ -147,8 +145,8 @@ public final class CompanyController {
             @RequestParam(value = "title", defaultValue = "") final String title,
             @RequestParam(value = "domain", defaultValue = "") final String domain,
             @RequestParam(value = "tagline", defaultValue = "") final String tagline,
+            @RequestParam(value = "text", defaultValue = "") final String text,
             @RequestParam(value = "description", defaultValue = "") final String description,
-            @RequestParam(value = "information", defaultValue = "") final String information,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "time_from", defaultValue = "") final String workTimeFrom,
             @RequestParam(value = "time_to", defaultValue = "") final String workTimeTo,
@@ -166,13 +164,12 @@ public final class CompanyController {
             @RequestParam(value = "google_maps", defaultValue = "") final String googleMaps,
             @RequestParam(value = "logo") final MultipartFile multipartLogo
     ) {
-        final Compressor compressor = new HtmlCompressor();
         final CompanyBuilder companyBuilder = Company.getBuilder();
-        companyBuilder.addType(CompanyType.MAIN).addTitle(title).addDomain(domain).addTagline(tagline)
-                .addKeywords(keywords).addWorkTimeFrom(workTimeFrom).addWorkTimeTo(workTimeTo)
-                .addSenderEmail(senderEmail).addSenderPass(senderPass)
-                .addDescription(compressor.compress(description))
-                .addInformation(compressor.compress(information));
+        companyBuilder.addType(CompanyType.MAIN).addTitle(title).addDomain(domain)
+                .addTagline(tagline).addText(text)
+                .addKeywords(keywords).addDescription(description)
+                .addWorkTimeFrom(workTimeFrom).addWorkTimeTo(workTimeTo)
+                .addSenderEmail(senderEmail).addSenderPass(senderPass);
 
         final ContactsBuilder contactsBuilder = Contacts.getBuilder();
         contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)
@@ -244,8 +241,8 @@ public final class CompanyController {
      * @param title          the title of a new company.
      * @param domain         the domain of a new company.
      * @param tagline        the tagline of a new company.
+     * @param text           the text of a new company.
      * @param description    the description of a new company.
-     * @param information    the information of a new company.
      * @param keywords       the keywords of a new company.
      * @param mobilePhone    the mobile phone of a new company.
      * @param landlinesPhone the landline phone of a new company.
@@ -270,8 +267,8 @@ public final class CompanyController {
             @RequestParam(value = "title", defaultValue = "") String title,
             @RequestParam(value = "domain", defaultValue = "") final String domain,
             @RequestParam(value = "tagline", defaultValue = "") final String tagline,
+            @RequestParam(value = "text", defaultValue = "") final String text,
             @RequestParam(value = "description", defaultValue = "") final String description,
-            @RequestParam(value = "information", defaultValue = "") final String information,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
             @RequestParam(value = "landlines_phone", defaultValue = "") final String landlinesPhone,
@@ -286,14 +283,11 @@ public final class CompanyController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Compressor compressor = new HtmlCompressor();
-
         final CompanyBuilder companyBuilder = Company.getBuilder();
-        companyBuilder.addTitle(title).addDomain(domain).addTagline(tagline)
-                .addKeywords(keywords).addValidated(validated)
-                .addDescription(compressor.compress(description))
-                .addInformation(compressor.compress(information))
-                .addType(CompanyType.PARTNER);
+        companyBuilder.addTitle(title).addDomain(domain)
+                .addTagline(tagline).addText(text)
+                .addKeywords(keywords).addDescription(description)
+                .addValidated(validated).addType(CompanyType.PARTNER);
 
         final AddressBuilder addressBuilder = Address.getBuilder();
         addressBuilder.addPostAddress(postAddress).addGoogleMaps(googleMaps);
@@ -372,8 +366,8 @@ public final class CompanyController {
      * @param title          the new title to a company.
      * @param domain         the new domain to a company.
      * @param tagline        the new tagline to a company.
+     * @param text           the new text to a company.
      * @param description    the new description to a company.
-     * @param information    the new information to a company.
      * @param keywords       the new keywords to a company.
      * @param mobilePhone    the new mobile phone to a company.
      * @param landlinesPhone the new landline phone to a company.
@@ -399,8 +393,8 @@ public final class CompanyController {
             @RequestParam(value = "title", defaultValue = "") final String title,
             @RequestParam(value = "domain", defaultValue = "") final String domain,
             @RequestParam(value = "tagline", defaultValue = "") final String tagline,
+            @RequestParam(value = "text", defaultValue = "") final String text,
             @RequestParam(value = "description", defaultValue = "") final String description,
-            @RequestParam(value = "information", defaultValue = "") final String information,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "mobile_phone", defaultValue = "") final String mobilePhone,
             @RequestParam(value = "landlines_phone", defaultValue = "") final String landlinesPhone,
@@ -415,12 +409,11 @@ public final class CompanyController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Compressor compressor = new HtmlCompressor();
         final CompanyBuilder companyBuilder = Company.getBuilder();
         companyBuilder.addUrl(url).addTitle(title).addDomain(domain)
-                .addTagline(tagline).addKeywords(keywords).addValidated(validated)
-                .addDescription(compressor.compress(description))
-                .addInformation(compressor.compress(information));
+                .addTagline(tagline).addText(text)
+                .addKeywords(keywords).addDescription(description)
+                .addValidated(validated);
 
         final ContactsBuilder contactsBuilder = Contacts.getBuilder();
         contactsBuilder.addEmail(email).addMobilePhone(mobilePhone)

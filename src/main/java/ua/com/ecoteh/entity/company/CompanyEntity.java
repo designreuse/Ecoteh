@@ -34,12 +34,6 @@ public class CompanyEntity extends ContentEntity {
     private String tagline;
 
     /**
-     * The information of this company entity.
-     */
-    @Column(name = "information", nullable = false)
-    private String information;
-
-    /**
      * The domain of this company entity.
      */
     @Column(name = "domain", nullable = false)
@@ -121,7 +115,6 @@ public class CompanyEntity extends ContentEntity {
                 ", contactsEntity=" + this.contacts +
                 ", addressEntity=" + this.address +
                 ", tagline='" + this.tagline + '\'' +
-                ", information='" + this.information + '\'' +
                 ", domain='" + this.domain + '\'' +
                 ", senderEmail='" + this.senderEmail + '\'' +
                 ", senderPass='" + this.senderPass + '\'' +
@@ -145,8 +138,7 @@ public class CompanyEntity extends ContentEntity {
             final CompanyEntity other = (CompanyEntity) object;
             result = (this.type.equals(other.type)) &&
                     this.domain.equalsIgnoreCase(other.domain) &&
-                    this.tagline.equals(other.tagline) &&
-                    this.information.equals(other.information);
+                    this.tagline.equals(other.tagline);
         }
         return result;
     }
@@ -160,11 +152,8 @@ public class CompanyEntity extends ContentEntity {
      */
     @Override
     public int hashCode() {
-        return super.hashCode() +
-                this.type.hashCode() +
-                this.domain.hashCode() +
-                this.tagline.hashCode() +
-                this.information.hashCode();
+        return super.hashCode() + this.type.hashCode() +
+                this.domain.hashCode() + this.tagline.hashCode();
     }
 
     /**
@@ -214,24 +203,6 @@ public class CompanyEntity extends ContentEntity {
      */
     public void setTagline(final String tagline) {
         this.tagline = tagline;
-    }
-
-    /**
-     * Returns a information of the company entity.
-     *
-     * @return The information domain or empty string (newer null).
-     */
-    public String getInformation() {
-        return this.information;
-    }
-
-    /**
-     * Sets a new information to the company entity.
-     *
-     * @param information a new information to the company entity.
-     */
-    public void setInformation(final String information) {
-        this.information = information;
     }
 
     /**

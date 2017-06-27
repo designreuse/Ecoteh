@@ -1,6 +1,5 @@
 package ua.com.ecoteh.controller.admin;
 
-import com.googlecode.htmlcompressor.compressor.Compressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +19,6 @@ import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
-import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
@@ -98,6 +96,7 @@ public final class CategoryController {
      * Method: POST
      *
      * @param title         the title of the a category.
+     * @param text          the new text to a category.
      * @param description   the description of a new category.
      * @param keywords      the keywords of the a category.
      * @param multipartLogo the file of photo to a new category.
@@ -108,15 +107,16 @@ public final class CategoryController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addCategory(
             @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Compressor compressor = new HtmlCompressor();
         final CategoryBuilder categoryBuilder = Category.getBuilder();
-        categoryBuilder.addTitle(title).addKeywords(keywords).addValidated(validated)
-                .addDescription(compressor.compress(description));
+        categoryBuilder.addTitle(title).addText(text)
+                .addKeywords(keywords).addDescription(description)
+                .addValidated(validated);
 
         final FileBuilder fileBuilder = File.getBuilder();
         fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();
@@ -174,6 +174,7 @@ public final class CategoryController {
      *
      * @param url           the URL of a category to update.
      * @param title         the new title to a category.
+     * @param text          the new text to a category.
      * @param description   the new description to a category.
      * @param keywords      the new description to a category.
      * @param multipartLogo the new file of photo to a category.
@@ -185,15 +186,16 @@ public final class CategoryController {
     public String updateCategory(
             @RequestParam(value = "url", defaultValue = "") final String url,
             @RequestParam(value = "title", defaultValue = "") final String title,
-            @RequestParam(value = "text", defaultValue = "") final String description,
+            @RequestParam(value = "text", defaultValue = "") final String text,
+            @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Compressor compressor = new HtmlCompressor();
         final CategoryBuilder categoryBuilder = Category.getBuilder();
-        categoryBuilder.addUrl(url).addTitle(title).addKeywords(keywords).addValidated(validated)
-                .addDescription(compressor.compress(description));
+        categoryBuilder.addUrl(url).addTitle(title).addText(text)
+                .addKeywords(keywords).addDescription(description)
+                .addValidated(validated);
 
         final FileBuilder fileBuilder = File.getBuilder();
         fileBuilder.addTitle(title).addMultipartFile(multipartLogo).isValid();

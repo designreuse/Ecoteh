@@ -40,6 +40,7 @@ final class CategoryEntityConverter extends ContentEntityConverter<CategoryEntit
                 .addValidated(this.entity.isValidated())
                 .addTitle(this.entity.getTitle())
                 .addUrl(this.entity.getUrl())
+                .addText(this.entity.getText())
                 .addDescription(this.entity.getDescription())
                 .addKeywords(this.entity.getKeywords())
                 .addLogo(this.entity.getLogoEntity().convert());

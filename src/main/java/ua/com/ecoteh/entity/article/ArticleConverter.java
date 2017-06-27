@@ -34,20 +34,20 @@ final class ArticleConverter extends ContentConverter<Article, ArticleEntity> {
      */
     @Override
     public ArticleEntity convert() {
-        final ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setId(this.article.getId());
-        articleEntity.setValidated(this.article.isValidated());
-        articleEntity.setTitle(this.article.getTitle());
-        articleEntity.setUrl(this.article.getUrl());
-        articleEntity.setDescription(this.article.getDescription());
-        articleEntity.setKeywords(this.article.getKeywords());
-        articleEntity.setNumber(this.article.getNumber());
-        articleEntity.setText(this.article.getText());
-        articleEntity.setDate(this.article.getDate());
-        articleEntity.setPrice(this.article.getPrice());
-        articleEntity.setCurrency(this.article.getCurrency());
-        articleEntity.setLogoEntity(this.article.getLogo().convert());
-        articleEntity.setCategoryEntity(this.article.getCategory().convert());
-        return articleEntity;
+        final ArticleEntity entity = new ArticleEntity();
+        entity.setId(this.article.getId());
+        entity.setValidated(this.article.isValidated());
+        entity.setTitle(this.article.getTitle());
+        entity.setUrl(this.article.getUrl());
+        entity.setDescription(this.article.getDescription());
+        entity.setKeywords(this.article.getKeywords());
+        entity.setNumber(this.article.getNumber());
+        entity.setText(this.article.getText());
+        entity.setDate(this.article.getDate());
+        entity.setPrice(this.article.getPrice());
+        entity.setCurrency(this.article.getCurrency());
+        entity.setLogoEntity(this.article.getLogo().convert());
+        entity.setCategoryEntity(this.article.getCategory().convert());
+        return entity;
     }
 }
