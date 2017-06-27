@@ -34,12 +34,12 @@ final class ResponseConverter extends ModelConverter<Response, ResponseEntity> {
      */
     @Override
     public ResponseEntity convert() {
-        final ResponseEntity responseEntity = new ResponseEntity();
-        responseEntity.setId(this.response.getId());
-        responseEntity.setValidated(this.response.isValidated());
-        responseEntity.setUsername(this.response.getUsername());
-        responseEntity.setText(this.response.getText());
-        responseEntity.setDate(this.response.getDate());
-        return responseEntity;
+        final ResponseEntity entity = new ResponseEntity();
+        entity.setId(this.response.getId());
+        entity.setValidated(this.response.isValidated());
+        entity.setUsername(this.response.getUsername());
+        entity.setText(this.response.getText());
+        entity.setDate(this.response.getDate());
+        return entity;
     }
 }

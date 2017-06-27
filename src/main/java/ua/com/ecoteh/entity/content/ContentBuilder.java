@@ -28,6 +28,11 @@ public abstract class ContentBuilder<T extends Content, B extends ContentBuilder
     private String url;
 
     /**
+     * The text of a new content.
+     */
+    private String text;
+
+    /**
      * The description of a new contentE.
      */
     private String description;
@@ -67,6 +72,17 @@ public abstract class ContentBuilder<T extends Content, B extends ContentBuilder
      */
     public B addUrl(final String url) {
         this.url = url;
+        return (B) this;
+    }
+
+    /**
+     * Adds a new text to a new content.
+     *
+     * @param text the new text to a new content.
+     * @return the content builder.
+     */
+    public B addText(final String text) {
+        this.text = text;
         return (B) this;
     }
 
@@ -127,6 +143,22 @@ public abstract class ContentBuilder<T extends Content, B extends ContentBuilder
             result = this.url;
         } else if (isNotEmpty(this.title)) {
             result = Translator.fromCyrillicToLatin(this.title) + "_" + generateRandomString();
+        } else {
+            result = "";
+        }
+        return result;
+    }
+
+    /**
+     * Returns a text of a new content.
+     * Returns an empty string if the text is null or empty.
+     *
+     * @return The text or empty string (newer null).
+     */
+    protected String getText() {
+        final String result;
+        if (isNotEmpty(this.text)) {
+            result = compress(this.text);
         } else {
             result = "";
         }

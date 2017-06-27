@@ -39,6 +39,12 @@ public abstract class ContentEntity extends ModelEntity {
     private String url;
 
     /**
+     * The text of this content entity.
+     */
+    @Column(name = "text", nullable = false)
+    private String text;
+
+    /**
      * The description of this content entity.
      */
     @Column(name = "description", nullable = false)
@@ -80,6 +86,7 @@ public abstract class ContentEntity extends ModelEntity {
         return "ContentEntity{" + super.toString() +
                 ", title='" + this.title + '\'' +
                 ", url='" + this.url + '\'' +
+                ", text='" + this.text + '\'' +
                 ", description='" + this.description + '\'' +
                 ", keywords='" + this.keywords + '\'' +
                 ", logo=" + this.logo +
@@ -100,6 +107,7 @@ public abstract class ContentEntity extends ModelEntity {
             final ContentEntity other = (ContentEntity) object;
             result = this.title.equalsIgnoreCase(other.title) &&
                     this.url.equalsIgnoreCase(other.url) &&
+                    this.text.equalsIgnoreCase(other.text) &&
                     this.description.equalsIgnoreCase(other.description);
         }
         return result;
@@ -114,9 +122,8 @@ public abstract class ContentEntity extends ModelEntity {
      */
     @Override
     public int hashCode() {
-        return this.title.hashCode() +
-                this.url.hashCode() +
-                this.description.hashCode();
+        return this.title.hashCode() + this.url.hashCode() +
+                this.text.hashCode() + this.description.hashCode();
     }
 
     /**
@@ -165,6 +172,24 @@ public abstract class ContentEntity extends ModelEntity {
      */
     public void setUrl(final String url) {
         this.url = url;
+    }
+
+    /**
+     * Returns a text of the content entity.
+     *
+     * @return The content entity text or empty string (newer null).
+     */
+    public String getText() {
+        return this.text;
+    }
+
+    /**
+     * Sets a new text to the content entity.
+     *
+     * @param text a new text to the content entity.
+     */
+    public void setText(final String text) {
+        this.text = text;
     }
 
     /**

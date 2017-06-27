@@ -1,5 +1,11 @@
 package ua.com.ecoteh.entity.model;
 
+import ua.com.ecoteh.util.encryption.Base64Encryptor;
+import ua.com.ecoteh.util.encryption.Encryptor;
+
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+
 /**
  * The class implements a set of methods
  * for converting model entities to models.
@@ -16,6 +22,11 @@ public abstract class ModelEntityConverter<E extends ModelEntity, T extends Mode
      * The model entity for converting to model.
      */
     private final E entity;
+
+    /**
+     * The instance of the interface for data decryption.
+     */
+    private Encryptor decryptor;
 
     /**
      * Constructor.
@@ -50,10 +61,48 @@ public abstract class ModelEntityConverter<E extends ModelEntity, T extends Mode
     }
 
     /**
+     * Decrypts the incoming value and returns it.
+     * <pre>
+     *     decrypt(null) - empty string
+     *     decrypt("") - empty string
+     *     decrypt(" ") - empty string
+     *     decrypt("   ") - empty string
+     *     decrypt("value") - some decrypted value
+     * </pre>
+     *
+     * @param value the value to decrypt.
+     * @return the decrypted value or empty string (newer null).
+     * @see Base64Encryptor
+     */
+    protected String decrypt(final String value) {
+        final String decryptedValue;
+        if (isNotEmpty(value)) {
+            final Encryptor decryptor = getDecryptor();
+            decryptedValue = decryptor.decrypt(value);
+        } else {
+            decryptedValue = "";
+        }
+        return decryptedValue;
+    }
+
+    /**
      * Prepares and returns a model builder for creating
      * a new converted model.
      *
      * @return the prepared model builder.
      */
     protected abstract ModelBuilder<T, ?> prepareBuilder();
+
+    /**
+     * Creates and returns the object for data decryption.
+     *
+     * @return The object for data decryption.
+     * @see Base64Encryptor
+     */
+    private Encryptor getDecryptor() {
+        if (isNull(this.decryptor)) {
+            this.decryptor = new Base64Encryptor();
+        }
+        return this.decryptor;
+    }
 }

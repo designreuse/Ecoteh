@@ -31,6 +31,11 @@ public abstract class Content extends Model {
     private final String url;
 
     /**
+     * The text of this contentE.
+     */
+    private final String text;
+
+    /**
      * The description of this content.
      */
     private final String description;
@@ -52,19 +57,21 @@ public abstract class Content extends Model {
      * @param validated   the validations of a new content.
      * @param title       the title of a new content.
      * @param url         the URL of a new content.
+     * @param text        the text of a new article.
      * @param description the description of a new content.
      * @param keywords    the keywords of a new content.
      * @param logo        the logo of a new content.
      */
     protected Content(
             final long id, final boolean validated,
-            final String title, final String url,
+            final String title, final String url, final String text,
             final String description, final String keywords,
             final File logo
     ) {
         super(id, validated);
         this.title = title;
         this.url = url;
+        this.text = text;
         this.description = description;
         this.keywords = keywords;
         this.logo = logo;
@@ -80,6 +87,7 @@ public abstract class Content extends Model {
         return "Content{" + super.toString() +
                 ", title='" + this.title + '\'' +
                 ", url='" + this.url + '\'' +
+                ", text='" + this.text + '\'' +
                 ", description='" + this.description + '\'' +
                 ", keywords='" + this.keywords + '\'' +
                 ", logo=" + this.logo +
@@ -100,6 +108,7 @@ public abstract class Content extends Model {
             final Content other = (Content) object;
             result = this.title.equalsIgnoreCase(other.title) &&
                     this.url.equalsIgnoreCase(other.url) &&
+                    this.text.equalsIgnoreCase(other.text) &&
                     this.description.equalsIgnoreCase(other.description);
         }
         return result;
@@ -127,9 +136,8 @@ public abstract class Content extends Model {
      */
     @Override
     public int hashCode() {
-        return this.title.hashCode() +
-                this.url.hashCode() +
-                this.description.hashCode();
+        return this.title.hashCode() + this.url.hashCode() +
+                this.text.hashCode() + this.description.hashCode();
     }
 
     /**
@@ -148,6 +156,15 @@ public abstract class Content extends Model {
      */
     public String getUrl() {
         return this.url;
+    }
+
+    /**
+     * Returns a text of the content.
+     *
+     * @return The content text or empty string (newer null).
+     */
+    public String getText() {
+        return this.text;
     }
 
     /**

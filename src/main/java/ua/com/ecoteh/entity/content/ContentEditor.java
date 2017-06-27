@@ -31,6 +31,11 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
     private String url;
 
     /**
+     * The new text of the article.
+     */
+    private String text;
+
+    /**
      * The new description of the contentE.
      */
     private String description;
@@ -66,6 +71,7 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
         return super.copy(content)
                 .addTitle(content.getTitle())
                 .addUrl(content.getUrl())
+                .addText(content.getText())
                 .addDescription(content.getDescription())
                 .addKeywords(content.getKeywords())
                 .addLogo(content.getLogo());
@@ -90,6 +96,17 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      */
     public R addUrl(final String url) {
         this.url = url;
+        return (R) this;
+    }
+
+    /**
+     * Adds new text to the content.
+     *
+     * @param text a new text to the content.
+     * @return the content editor.
+     */
+    public R addText(final String text) {
+        this.text = text;
         return (R) this;
     }
 
@@ -144,6 +161,16 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      */
     protected String getUrl() {
         return isNotNull(this.url) ? this.url : this.content.getUrl();
+    }
+
+    /**
+     * Returns a new text of the content.
+     * Returns the content text if the text is null.
+     *
+     * @return The new content text.
+     */
+    protected String getText() {
+        return isNotNull(this.text) ? this.text : this.content.getText();
     }
 
     /**

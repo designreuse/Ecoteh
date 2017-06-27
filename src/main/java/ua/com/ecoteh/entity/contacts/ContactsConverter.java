@@ -34,17 +34,17 @@ final class ContactsConverter extends ModelConverter<Contacts, ContactsEntity> {
      */
     @Override
     public ContactsEntity convert() {
-        final ContactsEntity contactsEntity = new ContactsEntity();
-        contactsEntity.setId(this.contacts.getId());
-        contactsEntity.setValidated(this.contacts.isValidated());
-        contactsEntity.setEmail(this.contacts.getEmail());
-        contactsEntity.setMobilePhone(this.contacts.getMobilePhone());
-        contactsEntity.setLandlinesPhone(this.contacts.getLandlinesPhone());
-        contactsEntity.setFax(this.contacts.getFax());
-        contactsEntity.setVkontakte(this.contacts.getVkontakte());
-        contactsEntity.setFacebook(this.contacts.getFacebook());
-        contactsEntity.setTwitter(this.contacts.getTwitter());
-        contactsEntity.setSkype(this.contacts.getSkype());
-        return contactsEntity;
+        final ContactsEntity entity = new ContactsEntity();
+        entity.setId(this.contacts.getId());
+        entity.setValidated(this.contacts.isValidated());
+        entity.setEmail(this.contacts.getEmail());
+        entity.setMobilePhone(this.contacts.getMobilePhone());
+        entity.setLandlinesPhone(this.contacts.getLandlinesPhone());
+        entity.setFax(this.contacts.getFax());
+        entity.setVkontakte(this.contacts.getVkontakte());
+        entity.setFacebook(this.contacts.getFacebook());
+        entity.setTwitter(this.contacts.getTwitter());
+        entity.setSkype(this.contacts.getSkype());
+        return entity;
     }
 }

@@ -34,12 +34,12 @@ final class FileConverter extends ModelConverter<File, FileEntity> {
      */
     @Override
     public FileEntity convert() {
-        final FileEntity fileEntity = new FileEntity();
-        fileEntity.setId(this.file.getId());
-        fileEntity.setValidated(this.file.isValidated());
-        fileEntity.setTitle(this.file.getTitle());
-        fileEntity.setUrl(this.file.getUrl());
-        fileEntity.setType(this.file.getType());
-        return fileEntity;
+        final FileEntity entity = new FileEntity();
+        entity.setId(this.file.getId());
+        entity.setValidated(this.file.isValidated());
+        entity.setTitle(this.file.getTitle());
+        entity.setUrl(this.file.getUrl());
+        entity.setType(this.file.getType());
+        return entity;
     }
 }

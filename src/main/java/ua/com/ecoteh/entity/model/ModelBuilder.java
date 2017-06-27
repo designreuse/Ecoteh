@@ -1,5 +1,7 @@
 package ua.com.ecoteh.entity.model;
 
+import com.googlecode.htmlcompressor.compressor.Compressor;
+import ua.com.ecoteh.util.compressor.HtmlCompressor;
 import ua.com.ecoteh.util.generator.Generator;
 import ua.com.ecoteh.util.generator.StringGenerator;
 
@@ -96,5 +98,16 @@ public abstract class ModelBuilder<T extends Model, B extends ModelBuilder<T, B>
     protected String generateRandomString() {
         final Generator<String> generator = new StringGenerator();
         return generator.generate();
+    }
+
+    /**
+     * Compresses the given source and returns a compressed result.
+     *
+     * @param source The source to compress.
+     * @return Compressed result.
+     */
+    protected String compress(final String source) {
+        final Compressor compressor = new HtmlCompressor();
+        return compressor.compress(source);
     }
 }

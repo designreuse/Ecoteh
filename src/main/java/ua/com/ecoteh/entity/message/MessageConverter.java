@@ -34,13 +34,13 @@ final class MessageConverter extends ModelConverter<Message, MessageEntity> {
      */
     @Override
     public MessageEntity convert() {
-        final MessageEntity messageEntity = new MessageEntity();
-        messageEntity.setId(this.message.getId());
-        messageEntity.setValidated(this.message.isValidated());
-        messageEntity.setSubject(this.message.getSubject());
-        messageEntity.setText(this.message.getText());
-        messageEntity.setDate(this.message.getDate());
-        messageEntity.setUserEntity(this.message.getUser().convert());
-        return messageEntity;
+        final MessageEntity entity = new MessageEntity();
+        entity.setId(this.message.getId());
+        entity.setValidated(this.message.isValidated());
+        entity.setSubject(this.message.getSubject());
+        entity.setText(this.message.getText());
+        entity.setDate(this.message.getDate());
+        entity.setUserEntity(this.message.getUser().convert());
+        return entity;
     }
 }
