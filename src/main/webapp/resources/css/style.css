@@ -2157,6 +2157,35 @@ a.label:focus {
     min-height: 250px
 }
 
+.price-slider,
+.price-col-4,
+.price-col-6,
+.price-col-12 {
+    position: absolute;
+    top: 0;
+    padding: .2em .6em .3em;
+    border-radius: 10% / 50%;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1
+}
+
+.price-slider {
+    left: 10%
+}
+
+.price-col-4 {
+    left: 0
+}
+
+.price-col-6 {
+    left: 20%
+}
+
+.price-col-12 {
+    left: 35%
+}
+
 .no-valid {
     font-size: 15px;
     color: #f00;
@@ -2191,16 +2220,12 @@ a.label:focus {
     color: #f90
 }
 
-.price-top {
-    position: absolute;
-    top: 0;
-    left: 60%;
-    padding: .2em .6em .3em;
+.back-green {
     background-color: #00ce1b;
-    border-radius: 10% / 50%;
-    color: #fff;
-    font-weight: 700;
-    line-height: 1
+}
+
+.back-grey {
+    background-color: #aaa;
 }
 
 #toTop {
