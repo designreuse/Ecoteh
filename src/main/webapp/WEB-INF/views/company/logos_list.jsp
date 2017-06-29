@@ -13,6 +13,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <c:if test="${(print_companies eq null) or (print_companies gt length) or (print_companies le 0)}">
         <c:set var="print_companies" value="${length}"/>
     </c:if>
+    <%-- How many companies in the each line --%>
     <c:choose>
         <c:when test="${(print_companies % 4 eq 0) or (print_companies % 4 eq 3)}">
             <c:set var="in_line" value="4"/>
@@ -27,6 +28,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <c:set var="in_line" value="1"/>
         </c:otherwise>
     </c:choose>
+    <%-- How many companies in the last line --%>
     <c:set var="last_line" value="${print_companies - print_companies % in_line}"/>
     <c:set var="printed_in_line" value="0"/>
     <c:set var="printed" value="0"/>
@@ -40,14 +42,23 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 </h3>
                 <hr>
                 <c:forEach items="${companies}" var="partner" end="${print_companies - 1}">
+                    <%-- Articles in the last line --%>
                     <c:if test="${(last_line ne print_companies) and (printed eq last_line)}">
                         <c:set var="in_line" value="${print_companies - last_line}"/>
                     </c:if>
-                    <div class="col-xs-12 <c:choose>
-                                    <c:when test="${in_line eq 1}">col-sm-12 col-md-12 col-lg-12</c:when>
-                                    <c:when test="${in_line eq 2}">col-sm-6 col-md-6 col-lg-6</c:when>
-                                    <c:otherwise>col-sm-4 col-md-4 col-lg-4</c:otherwise>
-                                    </c:choose>">
+                    <%-- Div CSS class --%>
+                    <c:choose>
+                        <c:when test="${in_line eq 1}">
+                            <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-12 col-lg-12"/>
+                        </c:when>
+                        <c:when test="${in_line eq 2}">
+                            <c:set var="div_class" value="col-xs-12 col-sm-6 col-md-6 col-lg-6"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="div_class" value="col-xs-12 col-sm-4 col-md-4 col-lg-4"/>
+                        </c:otherwise>
+                    </c:choose>
+                    <div class="${div_class}">
                         <div class="text-center">
                             <c:choose>
                                 <c:when test="${not empty partner.logo.url}">

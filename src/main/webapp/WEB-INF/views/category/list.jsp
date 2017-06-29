@@ -9,6 +9,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="length" value="${fn:length(categories)}"/>
+<%-- How many categories in the each line --%>
 <c:choose>
     <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}">
         <c:set var="in_line" value="3"/>
@@ -20,20 +21,29 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <c:set var="in_line" value="1"/>
     </c:otherwise>
 </c:choose>
+<%-- How many categories in the last line --%>
 <c:set var="last_line" value="${length - length % in_line}"/>
 <c:set var="printed_in_line" value="0"/>
 <c:set var="printed" value="0"/>
 
 <c:forEach items="${categories}" var="category">
+    <%-- Categories in the last line --%>
     <c:if test="${(last_line ne length ) and (printed eq last_line)}">
         <c:set var="in_line" value="${length - last_line}"/>
     </c:if>
-    <div class="col-xs-12 col-sm-12
-                                    <c:choose>
-                                    <c:when test="${in_line eq 1}">col-md-12 col-lg-12</c:when>
-                                    <c:when test="${in_line eq 2}">col-md-6 col-lg-6</c:when>
-                                    <c:otherwise>col-md-4 col-lg-4</c:otherwise>
-                                    </c:choose>">
+    <%-- Div CSS class --%>
+    <c:choose>
+        <c:when test="${in_line eq 1}">
+            <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-12 col-lg-12"/>
+        </c:when>
+        <c:when test="${in_line eq 2}">
+            <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-6 col-lg-6"/>
+        </c:when>
+        <c:otherwise>
+            <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-4 col-lg-4"/>
+        </c:otherwise>
+    </c:choose>
+    <div class="${div_class}">
         <c:choose>
             <c:when test="${not empty category.description}">
                 <c:set var="title" value="${category.title} - ${category.description}"/>

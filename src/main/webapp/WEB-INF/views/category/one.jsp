@@ -136,22 +136,23 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                         </c:otherwise>
                                     </c:choose>
                                 </a>
-                                |
-                                <a href="<c:url value="/category/${category.url}/sort?type=date&revers=${revers}"/>"
-                                   title="Сортировать по дате">
-                                    <c:choose>
-                                        <c:when test="${revers}">
-                                            По&nbsp;дате&nbsp;
-                                        <span class="glyphicon glyphicon-sort-by-attributes-alt"
-                                              aria-hidden="true"></span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            По&nbsp;дате&nbsp;
-                                            <span class="glyphicon glyphicon-sort-by-attributes"
+                                    <%--|
+                                    <a href="<c:url value="/category/${category.url}/sort?type=date&revers=${revers}"/>"
+                                       title="Сортировать по дате">
+                                        <c:choose>
+                                            <c:when test="${revers}">
+                                                По&nbsp;дате&nbsp;
+                                            <span class="glyphicon glyphicon-sort-by-attributes-alt"
                                                   aria-hidden="true"></span>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                По&nbsp;дате&nbsp;
+                                                <span class="glyphicon glyphicon-sort-by-attributes"
+                                                      aria-hidden="true"></span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                    --%>
                             </p>
                         </c:if>
                             <%-- Articles list --%>

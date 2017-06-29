@@ -35,7 +35,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                                  value="/resources/img/static/default_file.gif"/>'">
                                 </c:if>
                                 <c:if test="${article_s.price gt 0}">
-                                    <h5 class="price-top">
+                                    <h5 class="price-slider back-green">
                                         <fmt:formatNumber type="number" value="${article_s.price}"/>&nbsp;<c:out
                                             value="${article_s.currency}"/>
                                     </h5>

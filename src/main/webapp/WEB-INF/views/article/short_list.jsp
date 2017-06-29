@@ -11,6 +11,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 
 <c:set var="length" value="${fn:length(articles)}"/>
 <c:if test="${length gt 0}">
+    <%-- How many articles in the each line --%>
     <c:choose>
         <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}">
             <c:set var="in_line" value="3"/>
@@ -22,20 +23,32 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <c:set var="in_line" value="1"/>
         </c:otherwise>
     </c:choose>
+    <%-- How many articles in the last line --%>
     <c:set var="last_line" value="${length - length % in_line}"/>
     <c:set var="printed_in_line" value="0"/>
     <c:set var="printed" value="0"/>
 
     <c:forEach items="${articles}" var="article">
+        <%-- Articles in the last line --%>
         <c:if test="${(last_line ne length ) and (printed eq last_line)}">
             <c:set var="in_line" value="${length - last_line}"/>
         </c:if>
-        <div class="col-xs-12 col-sm-12
-                                    <c:choose>
-                                    <c:when test="${in_line eq 1}">col-md-12 col-lg-12</c:when>
-                                    <c:when test="${in_line eq 2}">col-md-6 col-lg-6</c:when>
-                                    <c:otherwise>col-md-4 col-lg-4</c:otherwise>
-                                    </c:choose>">
+        <%-- Div CSS class and price class --%>
+        <c:choose>
+            <c:when test="${in_line eq 1}">
+                <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-12 col-lg-12"/>
+                <c:set var="price_class" value="price-col-12"/>
+            </c:when>
+            <c:when test="${in_line eq 2}">
+                <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-6 col-lg-6"/>
+                <c:set var="price_class" value="price-col-6"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-4 col-lg-4"/>
+                <c:set var="price_class" value="price-col-4"/>
+            </c:otherwise>
+        </c:choose>
+        <div class="${div_class}">
             <c:choose>
                 <c:when test="${not empty article.description}">
                     <c:set var="title" value="${article.title} - ${article.description}"/>
@@ -44,7 +57,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     <c:set var="title" value="${article.title}"/>
                 </c:otherwise>
             </c:choose>
-
             <c:if test="${not empty article.logo.url}">
                 <a href="<c:url value="/article/${article.url}"/>" title="<c:out value="${title}"/>">
                     <img class="img-in-list" alt="<c:out value="${article.title}"/>"
@@ -54,23 +66,27 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             </c:if>
             <c:choose>
                 <c:when test="${article.price gt 0}">
-                    <h4 class="price-top">
+                    <h4 class="${price_class} back-green">
                         <fmt:formatNumber type="number" value="${article.price}"/>&nbsp;<c:out
                             value="${article.currency}"/>
                     </h4>
                 </c:when>
                 <c:when test="${empty article.currency}">
-                    <h5 class="price-top">
+                    <h5 class="${price_class} back-grey">
                         Цену уточняйте
                     </h5>
                 </c:when>
             </c:choose>
-            <c:if test="${!article.validated}">
-                <p class="little">
+            <h6 class="little text-center">
+                <c:if test="${!article.validated}">
                     <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"
-                          title="Не отображается для клиентов"></span>
-                </p>
-            </c:if>
+                          title="Не отображается для клиентов"></span>&nbsp;
+                </c:if>
+                <c:out value="${article.dateToString}"/>,&nbsp;&nbsp;Артикль:
+                <a href="<c:url value="/article/num_${article.number}"/>">
+                    <c:out value="${article.number}"/>
+                </a>
+            </h6>
             <a href="<c:url value="/article/${article.url}"/>" title="<c:out value="${title}"/>">
                 <h4 class="text-center">
                     <c:out value="${article.title}"/>
