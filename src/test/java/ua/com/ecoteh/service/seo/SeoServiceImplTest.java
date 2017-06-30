@@ -39,7 +39,7 @@ public class SeoServiceImplTest {
     public void whenGetSitemapThenReturnsSomeModelAndView() {
         final ModelAndView modelAndView = this.seoService.getSiteMapXml();
         final String viewName = "seo/sitemap";
-        final String[] keys = { "domain", "categories", "articles", "companies" };
+        final String[] keys = { "domain", "categories", "articles" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 }

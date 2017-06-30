@@ -17,7 +17,7 @@ public class SearchServiceImplTest {
 
     private final static String[] KEYWORDS = new String[] {
             "main_company", "categories", "in_categories", "in_articles",
-            "in_companies", "all", "is_search", "how_search"
+            "in_companies", "all", "is_search",
     };
 
     private static SearchService searchService;
@@ -37,19 +37,19 @@ public class SearchServiceImplTest {
 
     @Test
     public void whenSearchWithNullKeywordsAndContent() {
-        ModelAndView modelAndView = searchService.search(null, null, true);
+        ModelAndView modelAndView = searchService.search(null, null);
         final String viewName = "search/search";
         checkModelAndView(modelAndView, viewName, KEYWORDS);
-        modelAndView = searchService.search(null, null, false);
+        modelAndView = searchService.search(null, null);
         checkModelAndView(modelAndView, viewName, KEYWORDS);
     }
 
     @Test
     public void whenSearchWithEmptyKeywordsAndContent() {
-        ModelAndView modelAndView = searchService.search("", "", true);
+        ModelAndView modelAndView = searchService.search("", "");
         final String viewName = "search/search";
         checkModelAndView(modelAndView, viewName, KEYWORDS);
-        modelAndView = searchService.search("", "", false);
+        modelAndView = searchService.search("", "");
         checkModelAndView(modelAndView, viewName, KEYWORDS);
     }
 
@@ -59,7 +59,7 @@ public class SearchServiceImplTest {
         final String viewName = "redirect:/home";
         final String[] keywords = new String[] { "домой", "главная", "index", "home" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "", true);
+            modelAndView = searchService.search(keyword, "");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -70,7 +70,7 @@ public class SearchServiceImplTest {
         final String viewName = "redirect:/category/all";
         final String[] keywords = new String[] { "все категории", "all categories" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "in_categories", true);
+            modelAndView = searchService.search(keyword, "in_categories");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -81,7 +81,7 @@ public class SearchServiceImplTest {
         final String viewName = "redirect:/article/all";
         final String[] keywords = new String[] { "все статьи", "all articles" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "in_articles", true);
+            modelAndView = searchService.search(keyword, "in_articles");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -93,7 +93,7 @@ public class SearchServiceImplTest {
         final String[] keywords = new String[] { "о компании", "описание", "main company",
                 "about company", "about main company" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "in_companies", true);
+            modelAndView = searchService.search(keyword, "in_companies");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -106,7 +106,7 @@ public class SearchServiceImplTest {
                 "как доехать", "почта", "электронная почта", "e-mail",
                 "contacts", "address" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "", true);
+            modelAndView = searchService.search(keyword, "");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -117,7 +117,7 @@ public class SearchServiceImplTest {
         final String viewName = "redirect:/company/all";
         final String[] keywords = new String[] { "все партнеры", "все компании", "all company", "all partners" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "", true);
+            modelAndView = searchService.search(keyword, "");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -128,7 +128,7 @@ public class SearchServiceImplTest {
         final String viewName = "redirect:/responses";
         final String[] keywords = new String[] { "все отзывы", "all responses" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "", true);
+            modelAndView = searchService.search(keyword, "");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
@@ -139,7 +139,7 @@ public class SearchServiceImplTest {
         final String viewName = "redirect:/company/main";
         final String[] keywords = new String[] { "персонал", "работники" };
         for (String keyword : keywords) {
-            modelAndView = searchService.search(keyword, "", true);
+            modelAndView = searchService.search(keyword, "");
             checkModelAndView(modelAndView, viewName, null);
         }
     }

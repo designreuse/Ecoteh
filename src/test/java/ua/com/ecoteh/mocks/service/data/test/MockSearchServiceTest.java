@@ -25,9 +25,9 @@ public class MockSearchServiceTest {
     @Test
     public void whenSearchThenReturnNotNull() {
         final String content = "all";
-        ModelAndView modelAndView = service.search(KEYWORDS, content, true);
+        ModelAndView modelAndView = service.search(KEYWORDS, content);
         assertNotNull(modelAndView);
-        modelAndView = service.search(KEYWORDS, content, false);
+        modelAndView = service.search(KEYWORDS, content);
         assertNotNull(modelAndView);
     }
 
@@ -36,9 +36,9 @@ public class MockSearchServiceTest {
         final String content = "all";
         final String[] keys = { "all" };
         final String viewName = "search/search";
-        ModelAndView modelAndView = service.search(KEYWORDS, content, true);
+        ModelAndView modelAndView = service.search(KEYWORDS, content);
         checkModelAndView(modelAndView, viewName, keys);
-        modelAndView = service.search(KEYWORDS, content, false);
+        modelAndView = service.search(KEYWORDS, content);
         checkModelAndView(modelAndView, viewName, keys);
     }
 }

@@ -39,8 +39,8 @@ public class SearchControllerTest {
         final boolean howSearch = false;
         final String viewName = "search/search";
         final String[] keys = { "main_company", "categories", "favicon", "keywords",
-                "in_categories", "in_articles", "in_companies", "all", "is_search", "how_search" };
-        final ModelAndView modelAndView = controller.searchResult(KEYWORDS, content, howSearch);
+                "in_categories", "in_articles", "in_companies", "all", "is_search" };
+        final ModelAndView modelAndView = controller.searchResult(KEYWORDS, content);
         checkModelAndView(modelAndView, viewName, keys);
     }
 }
