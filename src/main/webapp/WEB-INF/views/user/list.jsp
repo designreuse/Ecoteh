@@ -9,6 +9,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="length" value="${fn:length(users)}"/>
+<%-- How many users in the each line --%>
 <c:choose>
     <c:when test="${(length % 3 eq 0) or (length % 3 eq 2)}">
         <c:set var="in_line" value="3"/>
@@ -20,11 +21,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <c:set var="in_line" value="1"/>
     </c:otherwise>
 </c:choose>
+<%-- How many users in the last line --%>
 <c:set var="last_line" value="${length - length % in_line}"/>
 <c:set var="printed_in_line" value="0"/>
 <c:set var="printed" value="0"/>
 
 <c:forEach items="${users}" var="user">
+    <%-- Users in the last line --%>
     <c:if test="${(last_line ne length) and (printed eq last_line)}">
         <c:set var="in_line" value="${length - last_line}"/>
     </c:if>

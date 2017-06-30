@@ -130,7 +130,6 @@ public final class SeoServiceImpl implements SeoService {
         modelAndView.addObject("domain", getMainCompanyDomain());
         modelAndView.addObject("categories", this.categoryService.getAll());
         modelAndView.addObject("articles", this.articleService.getAll());
-        modelAndView.addObject("companies", this.companyService.getPartners(true));
         modelAndView.setViewName("seo/sitemap");
         return modelAndView;
     }
@@ -142,6 +141,7 @@ public final class SeoServiceImpl implements SeoService {
      */
     private String getMainCompanyDomain() {
         final Company mainCompany = this.companyService.getMainCompany();
-        return mainCompany.getDomain().replace("http://", "").replace("https://", "");
+        final String domain = mainCompany.getDomain();
+        return domain.replace("http://", "").replace("https://", "");
     }
 }

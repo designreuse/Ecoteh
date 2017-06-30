@@ -75,7 +75,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p>${company.description}</p>
-                        <p>${company.information}</p>
+                        <p>${company.text}</p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

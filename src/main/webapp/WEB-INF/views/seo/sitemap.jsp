@@ -81,7 +81,7 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
             <priority>${other_priority}</priority>
         </url>
             <%-- Categories URLs --%>
-        <c:if test="${fn:length(ategories) gt 0}">
+        <c:if test="${fn:length(categories) gt 0}">
             <url>
                 <loc>
                     http://<c:out value="${domain}"/>/category/all
@@ -100,6 +100,13 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
                 <url>
                     <loc>
                         http://<c:out value="${domain}"/>/category/<c:out value="${category.url}"/>
+                    </loc>
+                    <changefreq>${changefreq}</changefreq>
+                    <priority>${category_priority}</priority>
+                </url>
+                <url>
+                    <loc>
+                        http://<c:out value="${domain}"/>/<c:out value="${category.url}"/>
                     </loc>
                     <changefreq>${changefreq}</changefreq>
                     <priority>${category_priority}</priority>
@@ -129,39 +136,6 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
                     </loc>
                     <changefreq>${changefreq}</changefreq>
                     <priority>${article_priority}</priority>
-                </url>
-            </c:forEach>
-        </c:if>
-            <%-- Companies URLs --%>
-        <c:if test="${fn:length(companies) gt 0}">
-            <url>
-                <loc>
-                    http://<c:out value="${domain}"/>/company/all
-                </loc>
-                <changefreq>${changefreq}</changefreq>
-                <priority>${company_priority}</priority>
-            </url>
-            <url>
-                <loc>
-                    http://<c:out value="${domain}"/>/companies
-                </loc>
-                <changefreq>${changefreq}</changefreq>
-                <priority>${company_priority}</priority>
-            </url>
-            <url>
-                <loc>
-                    http://<c:out value="${domain}"/>/partners
-                </loc>
-                <changefreq>${changefreq}</changefreq>
-                <priority>${company_priority}</priority>
-            </url>
-            <c:forEach items="${companies}" var="company">
-                <url>
-                    <loc>
-                        http://<c:out value="${domain}"/>/company/<c:out value="${company.url}"/>
-                    </loc>
-                    <changefreq>${changefreq}</changefreq>
-                    <priority>${company_priority}</priority>
                 </url>
             </c:forEach>
         </c:if>
