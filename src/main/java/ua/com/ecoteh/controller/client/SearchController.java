@@ -80,7 +80,6 @@ public final class SearchController {
      *
      * @param keywords  the keywords for a content search.
      * @param content   the objects list for a content search.
-     * @param howSearch the search mode.
      * @return The ready object of the ModelAndView class.
      */
     @RequestMapping(
@@ -89,9 +88,8 @@ public final class SearchController {
     )
     public ModelAndView searchResult(
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
-            @RequestParam(value = "content", defaultValue = "") final String content,
-            @RequestParam(value = "how_search", defaultValue = "false") final boolean howSearch
+            @RequestParam(value = "content", defaultValue = "") final String content
     ) {
-        return this.searchService.search(keywords, content, howSearch);
+        return this.searchService.search(keywords, content);
     }
 }

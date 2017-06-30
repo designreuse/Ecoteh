@@ -15,8 +15,7 @@ public interface SearchService {
      *
      * @param keywords  a keywords for content search.
      * @param content   a objects list for content search.
-     * @param howSearch a search mode.
      * @return The ready object of class ModelAndView.
      */
-    ModelAndView search(String keywords, String content, boolean howSearch);
+    ModelAndView search(String keywords, String content);
 }

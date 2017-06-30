@@ -14,6 +14,7 @@ import ua.com.ecoteh.service.data.*;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static ua.com.ecoteh.service.search.DefaultPage.*;
@@ -95,27 +96,22 @@ public final class SearchServiceImpl implements SearchService {
      *
      * @param keywords  the keywords for content search.
      * @param content   the objects list for content search.
-     * @param howSearch the search mode.
      * @return The ready object of class ModelAndView.
      */
     @Override
-    public ModelAndView search(
-            final String keywords,
-            final String content,
-            final boolean howSearch
-    ) {
+    public ModelAndView search(final String keywords, final String content) {
         final String _content = isNotEmpty(content) ? content : "all";
         ModelAndView modelAndView = new ModelAndView();
         if (isNotEmpty(keywords)) {
-            final boolean isPage = getPageBySearch(keywords, modelAndView);
+            final boolean isPage = addViewName(keywords, modelAndView);
             if (!isPage) {
                 modelAndView = prepareDefaultSearchPage(keywords);
-                searchFromContent(keywords, howSearch, _content, modelAndView);
+                searchFromContent(keywords, _content, modelAndView);
             }
         } else {
             modelAndView = prepareDefaultSearchPage(keywords);
         }
-        addKeys(_content, howSearch, modelAndView);
+        addKeys(_content, modelAndView);
         modelAndView.addObject("authorized_user", this.userService.getAuthenticatedUser());
         return modelAndView;
     }
@@ -127,7 +123,7 @@ public final class SearchServiceImpl implements SearchService {
      * @param modelAndView the object of class ModelAndView for to update.
      * @return true if page is exist, false otherwise.
      */
-    private boolean getPageBySearch(
+    private boolean addViewName(
             final String keywords,
             final ModelAndView modelAndView
     ) {
@@ -158,21 +154,19 @@ public final class SearchServiceImpl implements SearchService {
      * Searches for all content.
      *
      * @param keywords     the keywords for content search.
-     * @param howSearch    the search mode.
      * @param content      the objects list for content search.
      * @param modelAndView the object of class ModelAndView for to update.
      */
     private void searchFromContent(
             final String keywords,
-            final boolean howSearch,
             final String content,
             final ModelAndView modelAndView
     ) {
         if (isNotEmpty(keywords)) {
             if (content.contains("all")) {
-                searchByAllContent(keywords, howSearch, modelAndView);
+                searchByAllContent(keywords, modelAndView);
             } else {
-                searchByChooseContent(content, keywords, howSearch, modelAndView);
+                searchByChooseContent(content, keywords, modelAndView);
             }
         }
     }
@@ -181,35 +175,30 @@ public final class SearchServiceImpl implements SearchService {
      * Search by all content.
      *
      * @param keywords     the keywords for content search.
-     * @param howSearch    the search mode.
      * @param modelAndView the object of class ModelAndView for to update.
      */
-    private void searchByAllContent(
-            final String keywords,
-            final boolean howSearch,
-            final ModelAndView modelAndView
-    ) {
+    private void searchByAllContent(final String keywords, final ModelAndView modelAndView) {
         final String[] keywordArray = keywords.toLowerCase().split(", ");
         searchFromModelAndAdd(
-                keywordArray, howSearch,
+                keywordArray,
                 this.categoryService,
                 "categories_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray, howSearch,
+                keywordArray,
                 this.articleService,
                 "articles_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray, howSearch,
+                keywordArray,
                 this.companyService,
-                "partners_list",
+                "companies_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray, howSearch,
+                keywordArray,
                 this.userService,
                 "users_list",
                 modelAndView
@@ -221,19 +210,17 @@ public final class SearchServiceImpl implements SearchService {
      *
      * @param content      the objects list for content search.
      * @param keywords     the keywords for content search.
-     * @param howSearch    the search mode.
      * @param modelAndView the object of class ModelAndView for to update.
      */
     private void searchByChooseContent(
             final String content,
             final String keywords,
-            final boolean howSearch,
             final ModelAndView modelAndView
     ) {
         final String[] keywordArray = keywords.toLowerCase().split(", ");
         if (content.contains("in_categories")) {
             searchFromModelAndAdd(
-                    keywordArray, howSearch,
+                    keywordArray,
                     this.categoryService,
                     "categories_list",
                     modelAndView
@@ -241,7 +228,7 @@ public final class SearchServiceImpl implements SearchService {
         }
         if (content.contains("in_articles")) {
             searchFromModelAndAdd(
-                    keywordArray, howSearch,
+                    keywordArray,
                     this.articleService,
                     "articles_list",
                     modelAndView
@@ -249,9 +236,9 @@ public final class SearchServiceImpl implements SearchService {
         }
         if (content.contains("in_companies")) {
             searchFromModelAndAdd(
-                    keywordArray, howSearch,
+                    keywordArray,
                     this.companyService,
-                    "partners_list",
+                    "companies_list",
                     modelAndView
             );
         }
@@ -261,52 +248,57 @@ public final class SearchServiceImpl implements SearchService {
      * Searches for some content and adds it to modelAndView.
      *
      * @param <T>          the entity type, extends {@link Model}.
-     * @param keywordArray the keyword array for content search.
-     * @param howSearch    the search mode.
+     * @param keywords     the keyword array for content search.
      * @param dataService  the implementation of the interface describes a set
      *                     of methods for working with objects.
      * @param name         the name of the object to add in modelAndView.
      * @param modelAndView the object of class ModelAndView for to update.
      */
     private <T extends Model> void searchFromModelAndAdd(
-            final String[] keywordArray,
-            final boolean howSearch,
+            final String[] keywords,
             final DataService<T> dataService,
             final String name,
             final ModelAndView modelAndView
     ) {
-        final List<T> result = searchFromModel(keywordArray, howSearch, dataService);
+        final List<T> result = searchFromModel(keywords, dataService);
         modelAndView.addObject(name, result);
     }
 
     /**
      * Searches for some content.
      *
-     * @param <T>          the entity type, extends {@link Model}.
-     * @param keywordArray the keyword array for content search.
-     * @param howSearch    the search mode.
-     * @param dataService  the implementation of the interface describes a set
-     *                     of methods for working with objects.
+     * @param <T>         the entity type, extends {@link Model}.
+     * @param keywords    the keyword array for content search.
+     * @param dataService the implementation of the interface describes a set
+     *                    of methods for working with objects.
      * @return The list of found objects.
      */
     private <T extends Model> List<T> searchFromModel(
-            final String[] keywordArray,
-            final boolean howSearch,
+            final String[] keywords,
             final DataService<T> dataService
     ) {
-        final List<T> models = new ArrayList<>();
-        for (T model : dataService.getAll()) {
-            for (String keyword : keywordArray) {
-                if (howSearch) {
-                    keyword = " " + keyword + " ";
-                }
-                if (model.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                    models.add(model);
+        final List<T> result = new ArrayList<>();
+        final Collection<T> models = dataService.getAll();
+        for (T model : models) {
+            for (String keyword : keywords) {
+                if (containsKeyword(model, keyword)) {
+                    result.add(model);
                     break;
                 }
             }
         }
-        return models;
+        return result;
+    }
+
+    /**
+     * @param model   then model to check.
+     * @param keyword the keyword to check.
+     * @param <T>     the entity type, extends {@link Model}.
+     * @return
+     */
+    private <T extends Model> boolean containsKeyword(final T model, final String keyword) {
+        final String modelToSearch = model.toSearch().toLowerCase();
+        return modelToSearch.contains(keyword.toLowerCase());
     }
 
     /**
@@ -326,12 +318,10 @@ public final class SearchServiceImpl implements SearchService {
      * Adds content keys to modelAndView.
      *
      * @param content      the objects list for content search.
-     * @param howSearch    the search mode.
      * @param modelAndView the object of class ModelAndView for to update.
      */
     private void addKeys(
             final String content,
-            final boolean howSearch,
             final ModelAndView modelAndView
     ) {
         modelAndView.addObject("in_categories", content.contains("in_categories"));
@@ -339,6 +329,5 @@ public final class SearchServiceImpl implements SearchService {
         modelAndView.addObject("in_companies", content.contains("in_companies"));
         modelAndView.addObject("all", content.contains("all"));
         modelAndView.addObject("is_search", true);
-        modelAndView.addObject("how_search", howSearch);
     }
 }
