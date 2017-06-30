@@ -62,16 +62,16 @@ public final class Contacts extends Model {
     /**
      * Constructor.
      *
-     * @param id            the unique identifier for each contacts.
-     * @param validated     the validations of a new contacts.
-     * @param email         the E-mail of a new contacts.
-     * @param mobilePhone   the mobile phone of a new contacts.
+     * @param id             the unique identifier for each contacts.
+     * @param validated      the validations of a new contacts.
+     * @param email          the E-mail of a new contacts.
+     * @param mobilePhone    the mobile phone of a new contacts.
      * @param landlinesPhone the landlines phone of a new contacts.
-     * @param fax           the fax of a new contacts.
-     * @param vkontakte     the Vkontakte URL of a new contacts.
-     * @param facebook      the Facebook URL of a new contacts.
-     * @param twitter       the Twitter URL of a new contacts.
-     * @param skype         the Skype username of a new contacts.
+     * @param fax            the fax of a new contacts.
+     * @param vkontakte      the Vkontakte URL of a new contacts.
+     * @param facebook       the Facebook URL of a new contacts.
+     * @param twitter        the Twitter URL of a new contacts.
+     * @param skype          the Skype username of a new contacts.
      */
     Contacts(
             final long id, final boolean validated,
@@ -108,6 +108,19 @@ public final class Contacts extends Model {
                 ", twitter='" + this.twitter + '\'' +
                 ", skype='" + this.skype + '\'' +
                 '}';
+    }
+
+    /**
+     * Returns a string representation of the object to search.
+     *
+     * @return A string representation of the object (newer null).
+     */
+    @Override
+    public String toSearch() {
+        return " " + this.email + '\'' + ", " + this.mobilePhone +
+                ", " + this.landlinesPhone + ", " + this.fax +
+                ", " + this.vkontakte + ", " + this.facebook +
+                ", " + this.twitter + ", " + this.skype + " ";
     }
 
     /**

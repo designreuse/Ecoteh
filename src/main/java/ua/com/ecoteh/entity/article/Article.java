@@ -98,6 +98,18 @@ public final class Article extends Content {
     }
 
     /**
+     * Returns a string representation of the object to search.
+     *
+     * @return A string representation of the object (newer null).
+     */
+    @Override
+    public String toSearch() {
+        return super.toSearch() +
+                ", " + this.number + ", " + this.date +
+                ", " + this.price + ", " + this.currency + " ";
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.

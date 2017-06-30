@@ -132,6 +132,19 @@ public final class Company extends Content {
     }
 
     /**
+     * Returns a string representation of the object to search.
+     *
+     * @return A string representation of the object (newer null).
+     */
+    @Override
+    public String toSearch() {
+        return super.toSearch() +
+                ", " + this.contacts.toSearch() + ", " + this.address.toSearch() +
+                ", " + this.tagline + ", " + this.domain + ", " + this.senderEmail +
+                ", " + this.workTimeFrom + ", " + this.workTimeTo + ", " + this.type + " ";
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.

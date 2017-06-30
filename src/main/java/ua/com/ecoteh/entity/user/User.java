@@ -135,6 +135,18 @@ public final class User extends Model implements UserDetails {
     }
 
     /**
+     * Returns a string representation of the object to search.
+     *
+     * @return A string representation of the object (newer null).
+     */
+    @Override
+    public String toSearch() {
+        return " " + this.name + ", " + this.url +
+                ", " + this.description + ", " + this.role +
+                ", " + this.contacts.toSearch() + " ";
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param object The reference object with which to compare.

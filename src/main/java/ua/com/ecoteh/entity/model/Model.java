@@ -110,6 +110,8 @@ public abstract class Model implements Serializable, Cloneable {
     @Override
     public abstract int hashCode();
 
+    public abstract String toSearch();
+
     /**
      * Returns a editor for updating this model.
      *
