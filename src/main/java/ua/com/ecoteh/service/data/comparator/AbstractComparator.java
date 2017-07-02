@@ -1,4 +1,4 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import ua.com.ecoteh.entity.model.Model;
 
@@ -10,7 +10,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public abstract class AbstractComparator {
+abstract class AbstractComparator {
 
     /**
      * Constructor.
@@ -33,7 +33,7 @@ public abstract class AbstractComparator {
      * @return A negative integer, zero, or a positive integer.
      */
     protected static <T extends Model> int compare(final T first, final T second) {
-        int result;
+        final int result;
         if (isNull(first) && isNull(second)) {
             result = 0;
         } else if (isNull(first)) {

@@ -1,4 +1,4 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import ua.com.ecoteh.entity.content.Content;
 
@@ -10,7 +10,7 @@ import java.util.Comparator;
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class ContentComparator extends AbstractComparator {
+public abstract class ContentComparator extends AbstractComparator {
 
     /**
      * Constructor.
@@ -60,7 +60,9 @@ public class ContentComparator extends AbstractComparator {
          * second content title.
          */
         private int compareByTitle(final T first, final T second) {
-            return first.getTitle().compareToIgnoreCase(second.getTitle());
+            final String firstTitle = first.getTitle();
+            final String secondTitle = second.getTitle();
+            return firstTitle.compareToIgnoreCase(secondTitle);
         }
     }
 
@@ -117,7 +119,9 @@ public class ContentComparator extends AbstractComparator {
          * second content URL.
          */
         private int compareByUrl(final T first, final T second) {
-            return first.getUrl().compareToIgnoreCase(second.getUrl());
+            final String firstUrl = first.getUrl();
+            final String secondUrl = second.getUrl();
+            return firstUrl.compareToIgnoreCase(secondUrl);
         }
     }
 }

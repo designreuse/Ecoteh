@@ -1,8 +1,9 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import ua.com.ecoteh.entity.response.Response;
 
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  * The class implements a set of methods for working
@@ -58,7 +59,9 @@ public final class ResponseComparator extends AbstractComparator {
          * second response date.
          */
         private int compareByDate(final Response first, final Response second) {
-            return first.getDate().compareTo(second.getDate());
+            final Date firstDate = first.getDate();
+            final Date secondDate = second.getDate();
+            return firstDate.compareTo(secondDate);
         }
     }
 }

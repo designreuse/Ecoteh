@@ -1,4 +1,4 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserRole;
@@ -36,8 +36,8 @@ public final class UserComparator extends AbstractComparator {
          *     compare(new User(), new User()) = compares by name
          * </pre>
          *
-         * @param first  the first article to be compared.
-         * @param second the second article to be compared.
+         * @param first  the first user to be compared.
+         * @param second the second user to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first userEntity name is less than, equal to, or greater than the
          * second userEntity name.
@@ -54,14 +54,16 @@ public final class UserComparator extends AbstractComparator {
         /**
          * Compares two users by name.
          *
-         * @param first  the first article to be compared (newer null).
-         * @param second the second article to be compared (newer null).
+         * @param first  the first user to be compared (newer null).
+         * @param second the second user to be compared (newer null).
          * @return A negative integer, zero, or a positive integer as the
          * first userEntity name is less than, equal to, or greater than the
          * second userEntity name.
          */
         private static int compareByName(final User first, final User second) {
-            return first.getName().compareToIgnoreCase(second.getName());
+            final String firstName = first.getName();
+            final String secondName = second.getName();
+            return firstName.compareToIgnoreCase(secondName);
         }
     }
 
@@ -80,8 +82,8 @@ public final class UserComparator extends AbstractComparator {
          *     compare(new User(), new User()) = compares by URL
          * </pre>
          *
-         * @param first  the first article to be compared.
-         * @param second the second article to be compared.
+         * @param first  the first user to be compared.
+         * @param second the second user to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first userEntity URL is less than, equal to, or greater than the
          * second userEntity URL.
@@ -98,14 +100,16 @@ public final class UserComparator extends AbstractComparator {
         /**
          * Compares two users by URL.
          *
-         * @param first  the first article to be compared (newer null).
-         * @param second the second article to be compared (newer null).
+         * @param first  the first user to be compared (newer null).
+         * @param second the second user to be compared (newer null).
          * @return A negative integer, zero, or a positive integer as the
          * first userEntity URL is less than, equal to, or greater than the
          * second userEntity URL.
          */
         private static int compareByUrl(final User first, final User second) {
-            return first.getUrl().compareToIgnoreCase(second.getUrl());
+            final String firstUrl = first.getUrl();
+            final String secondUrl = second.getUrl();
+            return firstUrl.compareToIgnoreCase(secondUrl);
         }
     }
 
@@ -138,8 +142,8 @@ public final class UserComparator extends AbstractComparator {
          *     compare(new User(), new User()) = compares by role
          * </pre>
          *
-         * @param first  the first article to be compared.
-         * @param second the second article to be compared.
+         * @param first  the first user to be compared.
+         * @param second the second user to be compared.
          * @return A negative integer, zero, or a positive integer as the
          * first userEntity role is less than, equal to, or greater than the
          * second userEntity role.
@@ -156,8 +160,8 @@ public final class UserComparator extends AbstractComparator {
         /**
          * Compares two users by role.
          *
-         * @param first  the first article to be compared (newer null).
-         * @param second the second article to be compared (newer null).
+         * @param first  the first user to be compared (newer null).
+         * @param second the second user to be compared (newer null).
          * @return A negative integer, zero, or a positive integer as the
          * first userEntity role is less than, equal to, or greater than the
          * second userEntity role.
@@ -175,20 +179,21 @@ public final class UserComparator extends AbstractComparator {
         }
 
         /**
-         * Returns true if the userEntity role is equal to the incoming role.
+         * Returns true if the user role is equal to the incoming role.
          * <pre>
-         *     User userEntity = new User();
+         *     User user = new User();
          *     userEntity.setRole(UserRole.ANOTHER);
          *     equalsRole(userEntity, UserRole.ANOTHER) = true
          *     equalsRole(userEntity, UserRole.ADMIN) = false
          * </pre>
          *
-         * @param userEntity the userEntity to equals to role (newer null).
-         * @param role       the role to equals (newer null).
-         * @return true if the userEntity role is equal to the incoming role.
+         * @param user the user to equals to role (newer null).
+         * @param role the role to equals (newer null).
+         * @return true if the user role is equal to the incoming role.
          */
-        private boolean equalsRole(final User userEntity, final UserRole role) {
-            return userEntity.getRole().equals(role);
+        private boolean equalsRole(final User user, final UserRole role) {
+            final UserRole userRole = user.getRole();
+            return userRole.equals(role);
         }
     }
 }

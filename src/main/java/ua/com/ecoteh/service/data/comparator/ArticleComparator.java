@@ -1,8 +1,9 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import ua.com.ecoteh.entity.article.Article;
 
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  * The class implements a set of methods for working
@@ -58,7 +59,9 @@ public final class ArticleComparator extends ContentComparator {
          * second article number.
          */
         private int compareByNumber(final Article first, final Article second) {
-            return first.getNumber().compareTo(second.getNumber());
+            final String firstNumber = first.getNumber();
+            final String secondNumber = second.getNumber();
+            return firstNumber.compareTo(secondNumber);
         }
     }
 
@@ -102,7 +105,9 @@ public final class ArticleComparator extends ContentComparator {
          * second article date.
          */
         private int compareByDate(final Article first, final Article second) {
-            return first.getDate().compareTo(second.getDate());
+            final Date firstDate = first.getDate();
+            final Date secondDate = second.getDate();
+            return firstDate.compareTo(secondDate);
         }
     }
 
@@ -146,7 +151,9 @@ public final class ArticleComparator extends ContentComparator {
          * second article price.
          */
         private int compareByPrice(final Article first, final Article second) {
-            return (int) (first.getPrice() - second.getPrice());
+            final double firstPrice = first.getPrice();
+            final double secondPrice = second.getPrice();
+            return (int) (firstPrice - secondPrice);
         }
     }
 }

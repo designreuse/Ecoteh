@@ -1,4 +1,4 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import ua.com.ecoteh.entity.file.File;
 
@@ -58,7 +58,9 @@ public final class FileComparator extends AbstractComparator {
          * second file title.
          */
         private int compareByTitle(final File first, final File second) {
-            return first.getTitle().compareToIgnoreCase(second.getTitle());
+            final String firstTitle = first.getTitle();
+            final String secondTitle = second.getTitle();
+            return firstTitle.compareToIgnoreCase(secondTitle);
         }
     }
 
@@ -102,7 +104,9 @@ public final class FileComparator extends AbstractComparator {
          * second file URL.
          */
         private int compareByUrl(final File first, final File second) {
-            return first.getUrl().compareToIgnoreCase(second.getUrl());
+            final String firstUrl = first.getUrl();
+            final String secondUrl = second.getUrl();
+            return firstUrl.compareToIgnoreCase(secondUrl);
         }
     }
 }
