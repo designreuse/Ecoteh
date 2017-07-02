@@ -8,7 +8,7 @@ import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.entity.user.UserBuilder;
 import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.repository.UserRepository;
-import ua.com.ecoteh.util.comparator.UserComparator;
+import ua.com.ecoteh.service.data.comparator.UserComparator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

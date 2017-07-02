@@ -1,4 +1,4 @@
-package ua.com.ecoteh.util.properties;
+package ua.com.ecoteh.config.properties;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

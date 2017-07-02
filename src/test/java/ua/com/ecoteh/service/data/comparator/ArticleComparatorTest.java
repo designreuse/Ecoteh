@@ -1,4 +1,4 @@
-package ua.com.ecoteh.util.comparator;
+package ua.com.ecoteh.service.data.comparator;
 
 import org.junit.Test;
 import ua.com.ecoteh.entity.article.Article;

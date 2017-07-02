@@ -1,7 +1,7 @@
 package ua.com.ecoteh.mocks.properties;
 
-import ua.com.ecoteh.util.properties.ContentProperties;
-import ua.com.ecoteh.util.properties.ContentPropertiesBuilder;
+import ua.com.ecoteh.config.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentPropertiesBuilder;
 
 /**
  * @author Yuriy Salimov (yuriy.alex.salimov@gmail.com)

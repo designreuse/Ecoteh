@@ -14,13 +14,22 @@ import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
 public abstract class AbstractMainMVFabricImplTest {
 
     @Test
-    public void whenGetHomepageThenReturnSomeModelAndView() {
+    public void whenGetHomePageThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.homePage();
         final String viewName = "home/index";
         final String[] keys = { "main_company", "categories", "favicon", "company",
-                "companies", "print_companies", "responses",
-                "print_responses" };
+                "companies", "print_companies", "responses", "print_responses" };
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetHomePageWithCategryThenReturnSomeModelAndView() {
+        final MainMVFabric fabric = getFabric();
+        final ModelAndView modelAndView = fabric.homeCategory(URL);
+        final String viewName = "home/index";
+        final String[] keys = { "main_company", "categories", "favicon", "company", "companies",
+                "print_companies", "responses", "print_responses", "category", "articles" };
         checkModelAndView(modelAndView, viewName, keys);
     }
 

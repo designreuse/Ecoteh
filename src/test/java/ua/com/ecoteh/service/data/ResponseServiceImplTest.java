@@ -6,7 +6,7 @@ import org.junit.Test;
 import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.response.ResponseBuilder;
 import ua.com.ecoteh.repository.ResponseRepository;
-import ua.com.ecoteh.util.comparator.ResponseComparator;
+import ua.com.ecoteh.service.data.comparator.ResponseComparator;
 
 import java.util.ArrayList;
 import java.util.Collection;

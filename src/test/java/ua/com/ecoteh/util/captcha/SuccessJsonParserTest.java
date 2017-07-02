@@ -8,12 +8,12 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-public class JsonParserTest {
+public class SuccessJsonParserTest {
 
     @Test
     public void whenNullResponseThenReturnFalse() {
         final String response = null;
-        final JsonParser parser = new JsonParser(response);
+        final SuccessJsonParser parser = new SuccessJsonParser(response);
         final boolean result = parser.parse();
         assertFalse(result);
     }
@@ -21,7 +21,7 @@ public class JsonParserTest {
     @Test
     public void whenEmptyResponseThenReturnFalse() {
         final String response = "";
-        final JsonParser parser = new JsonParser(response);
+        final SuccessJsonParser parser = new SuccessJsonParser(response);
         final boolean result = parser.parse();
         assertFalse(result);
     }
@@ -29,7 +29,7 @@ public class JsonParserTest {
     @Test
     public void whenTrueResponseThenReturnTrue() {
         final String response = "{\"success\":true}";
-        final JsonParser parser = new JsonParser(response);
+        final SuccessJsonParser parser = new SuccessJsonParser(response);
         final boolean result = parser.parse();
         assertTrue(result);
     }
@@ -37,7 +37,7 @@ public class JsonParserTest {
     @Test
     public void whenFalseResponseThenReturnFalse() {
         final String response = "{\"success\":false}";
-        final JsonParser parser = new JsonParser(response);
+        final SuccessJsonParser parser = new SuccessJsonParser(response);
         final boolean result = parser.parse();
         assertFalse(result);
     }

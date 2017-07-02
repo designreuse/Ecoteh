@@ -25,6 +25,16 @@ public abstract class MainControllerTest {
     }
 
     @Test
+    public void whenGetHomePageWithCategoryThenReturnSomeModelAndView() {
+        final MainController controller = getController();
+        final String viewName = "home/index";
+        final String[] keys = { "main_company", "categories", "company",
+                "print_companies", "print_responses", "favicon", "category", "articles" };
+        final ModelAndView modelAndView = controller.homeCategory(URL);
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
     public void whenGetAllCategoriesPageThenReturnSomeModelAndView() {
         final MainController controller = getController();
         final String viewName = "category/all";

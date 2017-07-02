@@ -7,8 +7,8 @@ import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileBuilder;
 import ua.com.ecoteh.entity.file.FileType;
 import ua.com.ecoteh.repository.FileRepository;
-import ua.com.ecoteh.util.comparator.FileComparator;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.service.data.comparator.FileComparator;
+import ua.com.ecoteh.config.properties.ContentProperties;
 
 import java.util.ArrayList;
 import java.util.Collection;

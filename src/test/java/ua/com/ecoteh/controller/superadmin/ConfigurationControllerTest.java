@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentProperties;
 
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
 import static ua.com.ecoteh.mocks.properties.MockContentProperties.getContentProperties;

@@ -2,7 +2,7 @@ package ua.com.ecoteh.mocks.properties;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentProperties;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

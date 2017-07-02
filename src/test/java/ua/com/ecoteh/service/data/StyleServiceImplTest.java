@@ -2,7 +2,7 @@ package ua.com.ecoteh.service.data;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentProperties;
 
 import static ua.com.ecoteh.mocks.MockConstants.ANY_STRING;
 import static ua.com.ecoteh.mocks.properties.MockContentProperties.getContentProperties;

@@ -3,7 +3,7 @@ package ua.com.ecoteh.service.data;
 import org.junit.Assert;
 import org.junit.Test;
 import ua.com.ecoteh.entity.content.Content;
-import ua.com.ecoteh.util.comparator.ContentComparator;
+import ua.com.ecoteh.service.data.comparator.ContentComparator;
 
 import java.util.ArrayList;
 import java.util.Collection;
