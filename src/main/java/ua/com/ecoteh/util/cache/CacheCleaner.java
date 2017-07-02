@@ -1,9 +1,9 @@
 package ua.com.ecoteh.util.cache;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.cache.CacheConstants.CACHE_MAX_SIZE;
+import static ua.com.ecoteh.util.cache.CacheConstants.CACHE_NORMAL_SIZE;
 
 /**
  * The class implements a set of methods for checking cache at old objects.
@@ -11,12 +11,6 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 final class CacheCleaner implements Runnable {
-
-    /**
-     * The default maximum size of objects
-     * which can be stored in the cache.
-     */
-    private final static int DEFAULT_MAX_SIZE = 150;
 
     /**
      * The maximum size of objects
@@ -38,7 +32,7 @@ final class CacheCleaner implements Runnable {
      */
     CacheCleaner(final Map<Key, Object> cache, final int maxSize) {
         this.cache = cache;
-        this.maxSize = (maxSize > 0) ? maxSize : DEFAULT_MAX_SIZE;
+        this.maxSize = (maxSize > 0) ? maxSize : CACHE_MAX_SIZE;
     }
 
     /**
@@ -47,7 +41,7 @@ final class CacheCleaner implements Runnable {
      * @param cache the map where can be stored some objects.
      */
     CacheCleaner(final Map<Key, Object> cache) {
-        this(cache, DEFAULT_MAX_SIZE);
+        this(cache, 0);
     }
 
     /**
@@ -76,12 +70,13 @@ final class CacheCleaner implements Runnable {
      * Removes dead objects from cache.
      */
     private void removeDeadObject() {
-        final List<Key> deadKeys = this.cache.keySet()
-                .stream()
-                .filter(Key::isDead)
-                .collect(Collectors.toList());
-        if (isNotEmpty(deadKeys)) {
-            deadKeys.forEach(this.cache::remove);
+        final Iterator<Key> iterator = this.cache.keySet().iterator();
+        Key key;
+        while (iterator.hasNext()) {
+            key = iterator.next();
+            if (key.isDead()) {
+                iterator.remove();
+            }
         }
     }
 
@@ -90,15 +85,25 @@ final class CacheCleaner implements Runnable {
      */
     private void cleanCache() {
         if (isGreatMaxSize()) {
-            final List<Key> keys = new ArrayList<>(this.cache.keySet());
-            final Comparator<Key> comparator = new KeyComparator();
-            Collections.sort(keys, comparator);
+            final List<Key> keys = getSortedKeys();
             cleanToNormalSize(keys);
         }
     }
 
     /**
-     * Cleans cache. Leaves last maxSize / 2 objects.
+     * Sorted and return the cache keys.
+     *
+     * @return The lit of the sorted keys.
+     */
+    private List<Key> getSortedKeys() {
+        final List<Key> keys = new ArrayList<>(this.cache.keySet());
+        final Comparator<Key> comparator = new KeyComparator();
+        Collections.sort(keys, comparator);
+        return keys;
+    }
+
+    /**
+     * Cleans cache.
      *
      * @param keys the keys list.
      */
@@ -121,11 +126,12 @@ final class CacheCleaner implements Runnable {
     }
 
     /**
-     * Checks if cache.size() great normalSize is maxSize / 2.
+     * Checks if cache.size() great then normal size.
+     * normal size = max size * default load factor.
      *
      * @return true if cache.size() great normalSize, false otherwise.
      */
     private boolean isNormalSize() {
-        return (this.cache.size() <= this.maxSize / 2);
+        return (this.cache.size() <= CACHE_NORMAL_SIZE);
     }
 }
