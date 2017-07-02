@@ -128,8 +128,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional(readOnly = true)
     public List<Article> sortByNumber(final Collection<Article> articles, final boolean revers) {
-        final Comparator<Article> byNumberComparator = new ArticleComparator.ByNumber();
-        return sort(articles, byNumberComparator, revers);
+        final Comparator<Article> comparator = new ArticleComparator.ByNumber();
+        return sort(articles, comparator, revers);
     }
 
     /**
@@ -143,8 +143,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional(readOnly = true)
     public List<Article> sortByDate(final Collection<Article> articles, final boolean revers) {
-        final Comparator<Article> byDateComparator = new ArticleComparator.ByDate();
-        return sort(articles, byDateComparator, revers);
+        final Comparator<Article> comparator = new ArticleComparator.ByDate();
+        return sort(articles, comparator, revers);
     }
 
     /**
@@ -159,8 +159,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional(readOnly = true)
     public List<Article> sortByPrice(final Collection<Article> articles, final boolean revers) {
-        final Comparator<Article> byPriceComparator = new ArticleComparator.ByPrice();
-        return sort(articles, byPriceComparator, revers);
+        final Comparator<Article> comparator = new ArticleComparator.ByPrice();
+        return sort(articles, comparator, revers);
     }
 
     /**
@@ -174,7 +174,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional(readOnly = true)
     public List<Article> getAndSortByNumber(final boolean revers) {
-        return sortByNumber(getAll(), revers);
+        final Collection<Article> articles = getAll();
+        return sortByNumber(articles, revers);
     }
 
     /**
@@ -188,7 +189,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional(readOnly = true)
     public List<Article> getAndSortByDate(final boolean revers) {
-        return sortByDate(getAll(), revers);
+        final Collection<Article> articles = getAll();
+        return sortByDate(articles, revers);
     }
 
     /**
@@ -202,7 +204,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional(readOnly = true)
     public List<Article> getAndSortByPrice(final boolean revers) {
-        return sortByPrice(getAll(), revers);
+        final Collection<Article> articles = getAll();
+        return sortByPrice(articles, revers);
     }
 
     /**
@@ -347,7 +350,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional
     public List<Article> getAndFilterByDate(final Date start, final Date finish) {
-        return filterByDate(getAll(), start, finish);
+        final Collection<Article> articles = getAll();
+        return filterByDate(articles, start, finish);
     }
 
     /**
@@ -363,7 +367,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional
     public List<Article> getAndFilterByCategory(final Category category) {
-        return filterByCategory(getAll(), category);
+        final Collection<Article> articles = getAll();
+        return filterByCategory(articles, category);
     }
 
     /**
@@ -383,7 +388,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
     @Override
     @Transactional
     public List<Article> getAndFilterByCategories(final Collection<Category> categories) {
-        return filterByCategories(getAll(), categories);
+        final Collection<Article> articles = getAll();
+        return filterByCategories(articles, categories);
     }
 
     /**

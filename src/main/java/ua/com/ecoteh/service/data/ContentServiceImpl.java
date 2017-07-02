@@ -12,6 +12,7 @@ import ua.com.ecoteh.repository.ContentRepository;
 import ua.com.ecoteh.service.data.comparator.ContentComparator;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.*;
@@ -221,9 +222,9 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Transactional
     public void remove(final T content) {
         if (isNotNull(content)) {
+            super.remove(content);
             final File logo = content.getLogo();
             this.fileService.deleteFile(logo.getUrl());
-            super.remove(content);
         }
     }
 
@@ -263,7 +264,8 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Override
     @Transactional(readOnly = true)
     public List<T> sortByTitle(final Collection<T> contents, final boolean revers) {
-        return sort(contents, new ContentComparator.ByTitle<>(), revers);
+        final Comparator<T> comparator = new ContentComparator.ByTitle<>();
+        return sort(contents, comparator, revers);
     }
 
     /**
@@ -278,7 +280,8 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Override
     @Transactional(readOnly = true)
     public List<T> sortByUrl(final Collection<T> contents, final boolean revers) {
-        return sort(contents, new ContentComparator.ByUrl<>(), revers);
+        final Comparator<T> comparator = new ContentComparator.ByUrl<>();
+        return sort(contents, comparator, revers);
     }
 
     /**
@@ -292,7 +295,8 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Override
     @Transactional(readOnly = true)
     public List<T> getAndSortByTitle(final boolean revers) {
-        return sortByTitle(getAll(), revers);
+        final Collection<T> contents = getAll();
+        return sortByTitle(contents, revers);
     }
 
     /**
@@ -306,7 +310,8 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
     @Override
     @Transactional(readOnly = true)
     public List<T> getAndSortByUrl(final boolean revers) {
-        return sortByUrl(getAll(), revers);
+        final Collection<T> contents = getAll();
+        return sortByUrl(contents, revers);
     }
 
     /**

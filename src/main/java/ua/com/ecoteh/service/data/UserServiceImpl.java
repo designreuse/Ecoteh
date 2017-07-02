@@ -25,6 +25,7 @@ import ua.com.ecoteh.util.encryption.Encryptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -450,9 +451,9 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Transactional
     public void remove(final User user) {
         if (isNotNull(user)) {
+            super.remove(user);
             final File photo = user.getPhoto();
             this.fileService.deleteFile(photo.getUrl());
-            super.remove(user);
         }
     }
 
@@ -505,7 +506,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> sortByUrl(final Collection<User> users, final boolean revers) {
-        return sort(users, new UserComparator.ByUrl(), revers);
+        final Comparator<User> comparator = new UserComparator.ByUrl();
+        return sort(users, comparator, revers);
     }
 
     /**
@@ -520,7 +522,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> sortByRole(final Collection<User> users, final UserRole role, final boolean revers) {
-        return sort(users, new UserComparator.ByRole(role), revers);
+        final Comparator<User> comparator = new UserComparator.ByRole(role);
+        return sort(users, comparator, revers);
     }
 
     /**
@@ -533,7 +536,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndSortByName(final boolean revers) {
-        return sortByName(getAll(), revers);
+        final Collection<User> users = getAll();
+        return sortByName(users, revers);
     }
 
     /**
@@ -547,7 +551,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndSortByUrl(final boolean revers) {
-        return sortByUrl(getAll(), revers);
+        final Collection<User> users = getAll();
+        return sortByUrl(users, revers);
     }
 
     /**
@@ -562,7 +567,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndSortByRole(final UserRole role, final boolean revers) {
-        return sortByRole(getAll(), role, revers);
+        final Collection<User> users = getAll();
+        return sortByRole(users, role, revers);
     }
 
     /**
@@ -643,7 +649,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndFilterByRole(final UserRole role) {
-        return filterByRole(getAll(false), role);
+        final Collection<User> users = getAll();
+        return filterByRole(users, role);
     }
 
     /**
@@ -663,7 +670,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Override
     @Transactional(readOnly = true)
     public List<User> getAndFilterByRoles(final Collection<UserRole> roles) {
-        return filterByRoles(getAll(), roles);
+        final Collection<User> users = getAll();
+        return filterByRoles(users, roles);
     }
 
     /**
@@ -747,7 +755,8 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      * false otherwise.
      */
     private boolean roleFilter(final User user, final UserRole role) {
-        return user.getRole().equals(role);
+        final UserRole userRole = user.getRole();
+        return userRole.equals(role);
     }
 
     /**

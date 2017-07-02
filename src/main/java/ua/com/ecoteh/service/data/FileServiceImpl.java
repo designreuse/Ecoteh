@@ -220,8 +220,10 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional
     public void remove(final long id) {
-        final File file = get(id);
-        remove(file);
+        if (id > 0) {
+            final File file = get(id);
+            remove(file);
+        }
     }
 
     /**
@@ -306,15 +308,11 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional
     public String saveFile(final MultipartFile file, final String rootPath) {
-        final String relativePath;
-        if (isNotEmpty(file)) {
-            relativePath = createRelativePath(rootPath, file);
-            final String absolutePath = createAbsolutePath(relativePath);
-            final Loader loader = new MultipartFileLoader(file, absolutePath);
-            loader.write();
-        } else {
-            relativePath = "";
-        }
+        checkMultipartFile(file);
+        final String relativePath = createRelativePath(rootPath, file);
+        final String absolutePath = createAbsolutePath(relativePath);
+        final Loader loader = new MultipartFileLoader(file, absolutePath);
+        loader.write();
         return relativePath;
     }
 
@@ -328,14 +326,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional
     public String saveFile(final MultipartFile file) {
-        final String path;
-        if (isNotEmpty(file)) {
-            final String rootPath = file.getOriginalFilename();
-            path = saveFile(file, rootPath);
-        } else {
-            path = "";
-        }
-        return path;
+        checkMultipartFile(file);
+        final String rootPath = file.getOriginalFilename();
+        return saveFile(file, rootPath);
     }
 
     /**
@@ -364,8 +357,8 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     @Override
     @Transactional(readOnly = true)
     public List<File> sortByTitle(final Collection<File> files, final boolean revers) {
-        final Comparator<File> byTitleComparator = new FileComparator.ByTitle();
-        return sort(files, byTitleComparator, revers);
+        final Comparator<File> comparator = new FileComparator.ByTitle();
+        return sort(files, comparator, revers);
     }
 
     /**
@@ -438,7 +431,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @throws IllegalArgumentException if the incoming file size is greater
      *                                  than max file size.
      */
-    private void isValidMultipartFile(final MultipartFile file)
+    private void checkMultipartFile(final MultipartFile file)
             throws NullPointerException, IllegalArgumentException {
         if (isEmpty(file)) {
             throw getNullPointerException(ExceptionMessage.MULTIPART_FILE_IS_EMPTY_MESSAGE);

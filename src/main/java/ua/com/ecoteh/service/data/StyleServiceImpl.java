@@ -1,5 +1,6 @@
 package ua.com.ecoteh.service.data;
 
+import com.googlecode.htmlcompressor.compressor.Compressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -89,8 +90,17 @@ public final class StyleServiceImpl implements StyleService {
      */
     @Override
     public void rollback() {
-        final String defaultStyles = read(DEFAULT_STYLES_PATH);
+        final String defaultStyles = readDefaultStyles();
         save(defaultStyles);
+    }
+
+    /**
+     * Reads and returns a default CSS styles.
+     *
+     * @return The default CSS styles.
+     */
+    private String readDefaultStyles() {
+        return read(DEFAULT_STYLES_PATH);
     }
 
     /**
@@ -99,7 +109,7 @@ public final class StyleServiceImpl implements StyleService {
      * @param styles the styles to write.
      */
     private void saveStyles(final String styles) {
-        save(styles, STYLES_PATH);
+        write(styles, STYLES_PATH);
     }
 
     /**
@@ -108,8 +118,19 @@ public final class StyleServiceImpl implements StyleService {
      * @param styles the styles to write.
      */
     private void saveCompressStyles(final String styles) {
-        final String compressedStyles = new CssCompressor().compress(styles);
-        save(compressedStyles, MIN_STYLES_PATH);
+        final String compressedStyles = compress(styles);
+        write(compressedStyles, MIN_STYLES_PATH);
+    }
+
+    /**
+     * Compresses the given styles and returns a compressed result.
+     *
+     * @param styles The styles to compress.
+     * @return Compressed result.
+     */
+    private String compress(final String styles) {
+        final Compressor compressor = new CssCompressor();
+        return compressor.compress(styles);
     }
 
     /**
@@ -118,7 +139,7 @@ public final class StyleServiceImpl implements StyleService {
      * @param styles the styles to write.
      * @param path   the path to a file.
      */
-    private void save(final String styles, final String path) {
+    private void write(final String styles, final String path) {
         final String absolutePath = getAbsolutePath(path);
         final Loader loader = new FileContentsLoader(absolutePath, styles);
         loader.write();

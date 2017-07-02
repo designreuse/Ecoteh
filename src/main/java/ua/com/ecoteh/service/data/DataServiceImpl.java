@@ -198,7 +198,9 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
     @Override
     @Transactional
     public void remove(final long id) {
-        this.repository.delete(id);
+        if (id > 0) {
+            this.repository.delete(id);
+        }
     }
 
     /**
@@ -333,9 +335,9 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      *     subList(modelsList, 1, 5) = substring list of models.
      * </pre>
      *
-     * @param models    the list of models to be processed.
-     * @param from the initial index.
-     * @param to   the final index.
+     * @param models the list of models to be processed.
+     * @param from   the initial index.
+     * @param to     the final index.
      * @return The substring list of models (newer null).
      */
     @Override

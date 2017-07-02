@@ -50,8 +50,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     @Override
     @Transactional(readOnly = true)
     public List<Response> sortByDate(final Collection<Response> responses, final boolean revers) {
-        final Comparator<Response> byDateComparator = new ResponseComparator.ByDate();
-        return sort(responses, byDateComparator, revers);
+        final Comparator<Response> comparator = new ResponseComparator.ByDate();
+        return sort(responses, comparator, revers);
     }
 
     /**
@@ -64,7 +64,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     @Override
     @Transactional(readOnly = true)
     public List<Response> getAndSortByDate(final boolean revers) {
-        return sortByDate(getAll(), revers);
+        final Collection<Response> responses = getAll();
+        return sortByDate(responses, revers);
     }
 
     /**
@@ -137,7 +138,8 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
     @Override
     @Transactional(readOnly = true)
     public List<Response> getAndFilterByDate(final Date start, final Date finish) {
-        return filterByDate(getAll(), start, finish);
+        final Collection<Response> responses = getAll();
+        return filterByDate(responses, start, finish);
     }
 
     /**
@@ -205,7 +207,7 @@ public final class ResponseServiceImpl extends DataServiceImpl<Response, Respons
      * @return true or false.
      */
     private boolean compareToDate(final Response response, final Date start, final Date finish) {
-        return (response.getDate().compareTo(start) == 1) &&
-                (response.getDate().compareTo(finish) == -1);
+        final Date responseDate = response.getDate();
+        return (responseDate.compareTo(start) == 1) && (responseDate.compareTo(finish) == -1);
     }
 }

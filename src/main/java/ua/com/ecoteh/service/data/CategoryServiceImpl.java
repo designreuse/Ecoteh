@@ -95,21 +95,6 @@ public final class CategoryServiceImpl
     }
 
     /**
-     * Converts the category article entities to an articles collection.
-     *
-     * @param entities the model entities to convert.
-     * @return The converted articles collection (newer null).
-     * @see Article
-     * @see ArticleEntity
-     */
-    private Collection<Article> convertArticles(final Collection<ArticleEntity> entities) {
-        return entities.stream()
-                .filter(ObjectValidator::isNotNull)
-                .map(ArticleEntity::convert)
-                .collect(Collectors.toList());
-    }
-
-    /**
      * Returns a list valid categories.
      * Returns empty list if categories collection is empty.
      * <pre>
@@ -148,5 +133,20 @@ public final class CategoryServiceImpl
     @Override
     Class<Category> getModelClass() {
         return Category.class;
+    }
+
+    /**
+     * Converts the category article entities to an articles collection.
+     *
+     * @param entities the model entities to convert.
+     * @return The converted articles collection (newer null).
+     * @see Article
+     * @see ArticleEntity
+     */
+    private Collection<Article> convertArticles(final Collection<ArticleEntity> entities) {
+        return entities.stream()
+                .filter(ObjectValidator::isNotNull)
+                .map(ArticleEntity::convert)
+                .collect(Collectors.toList());
     }
 }

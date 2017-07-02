@@ -14,7 +14,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 public final class FileContentsLoader extends AbstractLoader implements Loader {
 
     /**
-     * Thr text to save.
+     * The text to save.
      */
     private final String text;
 

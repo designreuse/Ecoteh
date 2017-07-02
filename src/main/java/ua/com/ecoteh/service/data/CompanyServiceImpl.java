@@ -204,7 +204,8 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Compan
     @Override
     @Transactional
     public void removeMain() {
-        super.remove(getMainCompany());
+        final Company main = getMainCompany();
+        super.remove(main);
     }
 
     /**
@@ -213,7 +214,8 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Compan
     @Override
     @Transactional
     public void removeAll() {
-        remove(getPartners(false));
+        Collection<Company> partners = getPartners(false);
+        remove(partners);
     }
 
     /**
@@ -243,6 +245,13 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Compan
      * it has not MAIN company type.
      */
     private boolean isNotMainCompany(final Company company) {
-        return isNotNull(company) && !company.getType().equals(CompanyType.MAIN);
+        final boolean result;
+        if (isNotNull(company)) {
+            final CompanyType companyType = company.getType();
+            result = !companyType.equals(CompanyType.MAIN);
+        } else {
+            result = false;
+        }
+        return result;
     }
 }
