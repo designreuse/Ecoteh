@@ -60,7 +60,7 @@ public final class StringGenerator implements Generator<String> {
      * @param length the length to generate string.
      */
     public StringGenerator(final long length) {
-        this(DEFAULT_PATTERN, length);
+        this(new char[] {}, length);
     }
 
     /**
@@ -69,7 +69,7 @@ public final class StringGenerator implements Generator<String> {
      * @param pattern the pattern to generated new string.
      */
     public StringGenerator(final char[] pattern) {
-        this(pattern, DEFAULT_LENGTH);
+        this(pattern, 0);
     }
 
     /**
@@ -107,7 +107,8 @@ public final class StringGenerator implements Generator<String> {
      * @return The random char.
      */
     private char getRandomChar() {
-        return this.pattern[getRandomInt()];
+        final int charNumber = getRandomPatternNumber();
+        return this.pattern[charNumber];
     }
 
     /**
@@ -115,7 +116,17 @@ public final class StringGenerator implements Generator<String> {
      *
      * @return The random integer.
      */
-    private int getRandomInt() {
-        return RANDOM.nextInt(this.pattern.length);
+    private int getRandomPatternNumber() {
+        final int bound = patternLength();
+        return RANDOM.nextInt(bound);
+    }
+
+    /**
+     * Return the pattern array length.
+     *
+     * @return The pattern length.
+     */
+    private int patternLength() {
+        return this.pattern.length;
     }
 }

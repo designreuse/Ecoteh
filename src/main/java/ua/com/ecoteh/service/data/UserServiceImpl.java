@@ -19,7 +19,7 @@ import ua.com.ecoteh.entity.user.UserEntity;
 import ua.com.ecoteh.entity.user.UserRole;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.UserRepository;
-import ua.com.ecoteh.util.comparator.UserComparator;
+import ua.com.ecoteh.service.data.comparator.UserComparator;
 import ua.com.ecoteh.util.encryption.Base64Encryptor;
 import ua.com.ecoteh.util.encryption.Encryptor;
 

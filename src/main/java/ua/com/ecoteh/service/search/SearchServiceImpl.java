@@ -94,8 +94,8 @@ public final class SearchServiceImpl implements SearchService {
     /**
      * Returns the page with the found content.
      *
-     * @param keywords  the keywords for content search.
-     * @param content   the objects list for content search.
+     * @param keywords the keywords for content search.
+     * @param content  the objects list for content search.
      * @return The ready object of class ModelAndView.
      */
     @Override
@@ -291,10 +291,14 @@ public final class SearchServiceImpl implements SearchService {
     }
 
     /**
-     * @param model   then model to check.
-     * @param keyword the keyword to check.
+     * Returns true if and only if model search information
+     * contains the specified keyword.
+     *
+     * @param model   then model to check (newer null).
+     * @param keyword the keyword to check (newer null).
      * @param <T>     the entity type, extends {@link Model}.
-     * @return
+     * @return true if model search information contains the incoming keyword,
+     * false otherwise.
      */
     private <T extends Model> boolean containsKeyword(final T model, final String keyword) {
         final String modelToSearch = model.toSearch().toLowerCase();

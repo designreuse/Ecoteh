@@ -9,7 +9,7 @@ import ua.com.ecoteh.entity.article.ArticleEntity;
 import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ArticleRepository;
-import ua.com.ecoteh.util.comparator.ArticleComparator;
+import ua.com.ecoteh.service.data.comparator.ArticleComparator;
 import ua.com.ecoteh.util.time.Time;
 
 import java.util.*;
@@ -468,7 +468,8 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      * @return true if time is correct, false otherwise.
      */
     private boolean timeFilter(final Article article, final Date startDate, final Date finishDate) {
-        return Time.checkTime(article.getDate(), startDate, finishDate);
+        final Date articleDate = article.getDate();
+        return Time.checkTime(articleDate, startDate, finishDate);
     }
 
     /**

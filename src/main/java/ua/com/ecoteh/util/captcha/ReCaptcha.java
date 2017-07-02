@@ -90,6 +90,7 @@ public final class ReCaptcha implements Captcha {
         this.serverKey = serverKey;
         this.parameter = parameter;
         this.header = header;
+        this.status = "";
     }
 
     /**

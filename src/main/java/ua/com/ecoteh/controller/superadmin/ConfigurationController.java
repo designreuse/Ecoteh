@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentProperties;
 import ua.com.ecoteh.util.time.Time;
 
 import java.util.Date;
@@ -28,7 +28,7 @@ import java.util.Date;
 @ComponentScan(
         basePackages = {
                 "ua.com.ecoteh.service.fabrica",
-                "ua.com.ecoteh.util.properties"
+                "ua.com.ecoteh.config.properties"
         }
 )
 public final class ConfigurationController {

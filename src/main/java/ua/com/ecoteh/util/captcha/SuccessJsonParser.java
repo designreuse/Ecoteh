@@ -14,6 +14,9 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  */
 final class SuccessJsonParser {
 
+    /**
+     * The 'success' associate.
+     */
     private final static String ASSOCIATE = "success";
 
     /**
@@ -24,16 +27,16 @@ final class SuccessJsonParser {
     /**
      * Constructor.
      *
-     * @param response a SuccessJsonParser response.
+     * @param response a response to parse.
      */
     SuccessJsonParser(final String response) {
         this.response = response;
     }
 
     /**
-     * Parses SuccessJsonParser response and return 'success' value.
+     * Parses the response and return 'success' value.
      *
-     * @return 'Success' value.
+     * @return The 'Success' value.
      */
     boolean parse() {
         final boolean result;

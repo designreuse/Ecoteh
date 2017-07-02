@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import static ua.com.ecoteh.exception.ExceptionMessage.UNSUPPORTED_OPERATION_MESSAGE;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
+import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
@@ -91,7 +91,10 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
      * @return The path to file.
      */
     private String getPathToFile() {
-        final String path = getPath();
-        return isNotEmpty(path) ? path : this.file.getOriginalFilename();
+        String path = getPath();
+        if (isEmpty(path)) {
+            path = this.file.getOriginalFilename();
+        }
+        return path;
     }
 }

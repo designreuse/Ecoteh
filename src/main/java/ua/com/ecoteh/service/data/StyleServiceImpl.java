@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.com.ecoteh.util.compressor.CssCompressor;
 import ua.com.ecoteh.util.loader.FileContentsLoader;
 import ua.com.ecoteh.util.loader.Loader;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentProperties;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
@@ -17,7 +17,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
 @Service
-@ComponentScan(basePackages = "ua.com.ecoteh.util.properties")
+@ComponentScan(basePackages = "ua.com.ecoteh.config.properties")
 public final class StyleServiceImpl implements StyleService {
 
     /**

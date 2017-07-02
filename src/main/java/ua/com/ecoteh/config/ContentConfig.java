@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import ua.com.ecoteh.util.properties.ContentProperties;
-import ua.com.ecoteh.util.properties.ContentPropertiesBuilder;
+import ua.com.ecoteh.config.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentPropertiesBuilder;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
 

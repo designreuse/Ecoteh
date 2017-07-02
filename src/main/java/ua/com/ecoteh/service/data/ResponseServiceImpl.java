@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.response.ResponseEntity;
 import ua.com.ecoteh.repository.ResponseRepository;
-import ua.com.ecoteh.util.comparator.ResponseComparator;
+import ua.com.ecoteh.service.data.comparator.ResponseComparator;
 import ua.com.ecoteh.util.time.Time;
 
 import java.util.*;

@@ -29,7 +29,7 @@ import ua.com.ecoteh.service.fabrica.MainMVFabric;
 @ComponentScan(
         basePackages = {
                 "ua.com.ecoteh.service.fabrica",
-                "ua.com.ecoteh.util.properties"
+                "ua.com.ecoteh.config.properties"
         }
 )
 @SuppressWarnings("SpringMVCViewInspection")

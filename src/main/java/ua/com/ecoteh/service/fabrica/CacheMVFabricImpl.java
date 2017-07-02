@@ -58,7 +58,7 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView homeCategory(final String url) {
-        final String key = HOME_PAGE_KEY + url;
+        final String key = HOME_PAGE_KEY + " " + url;
         ModelAndView modelAndView = getFromCache(key);
         if (isNull(modelAndView)) {
             modelAndView = this.fabric.homeCategory(url);
@@ -332,13 +332,13 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
      */
     @Override
     public ModelAndView getDefaultModelAndView() {
-        ModelAndView temp = getFromCache(DEFAULT_MAV_KEY);
-        if (isNull(temp)) {
-            temp = this.fabric.getDefaultModelAndView();
-            putToCache(temp, DEFAULT_MAV_KEY);
+        ModelAndView home = getFromCache(DEFAULT_MAV_KEY);
+        if (isNull(home)) {
+            home = this.fabric.getDefaultModelAndView();
+            putToCache(home, DEFAULT_MAV_KEY);
         }
-        addAuthUser(temp);
-        return new ModelAndView(temp.getViewName(), temp.getModel());
+        addAuthUser(home);
+        return new ModelAndView(home.getViewName(), home.getModel());
     }
 
     /**

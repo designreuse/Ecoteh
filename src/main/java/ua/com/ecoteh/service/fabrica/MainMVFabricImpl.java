@@ -118,7 +118,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
     @Override
     public ModelAndView homeCategory(final String url) {
         final ModelAndView home = homePage();
-        final ModelAndView modelAndView = new ModelAndView("home/home_category", home.getModel());
+        final ModelAndView modelAndView = new ModelAndView(home.getViewName(), home.getModel());
         final Category category = this.categoryService.getByUrl(url, false);
         final Collection<Article> articles = category.getArticles();
         modelAndView.addObject("category", category);

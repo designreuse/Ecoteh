@@ -8,12 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.com.ecoteh.entity.file.*;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.FileRepository;
-import ua.com.ecoteh.util.comparator.FileComparator;
+import ua.com.ecoteh.service.data.comparator.FileComparator;
 import ua.com.ecoteh.util.generator.Generator;
 import ua.com.ecoteh.util.generator.StringGenerator;
 import ua.com.ecoteh.util.loader.Loader;
 import ua.com.ecoteh.util.loader.MultipartFileLoader;
-import ua.com.ecoteh.util.properties.ContentProperties;
+import ua.com.ecoteh.config.properties.ContentProperties;
 import ua.com.ecoteh.util.translator.Translator;
 
 import java.util.Collection;
@@ -35,7 +35,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 @ComponentScan(
         basePackages = {
                 "ua.com.ecoteh.repository",
-                "ua.com.ecoteh.util.properties"
+                "ua.com.ecoteh.config.properties"
         }
 )
 public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> implements FileService {

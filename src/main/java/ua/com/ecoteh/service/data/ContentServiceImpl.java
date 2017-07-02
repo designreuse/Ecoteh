@@ -9,7 +9,7 @@ import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.entity.file.FileEntity;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.repository.ContentRepository;
-import ua.com.ecoteh.util.comparator.ContentComparator;
+import ua.com.ecoteh.service.data.comparator.ContentComparator;
 
 import java.util.Collection;
 import java.util.List;
