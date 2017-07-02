@@ -44,26 +44,6 @@ public final class Cache {
     /**
      * Saves object in the cache.
      *
-     * @param <T>    the type of a key.
-     * @param key    the object key in the cache.
-     * @param object the object to save.
-     * @return The saving object.
-     */
-    private static <T> Object put(
-            final Key<T> key,
-            final Object object
-    ) {
-        Object savingObject = null;
-        if (isNotNull(key) && isNotNull(object)) {
-            savingObject = cache.put(key, object);
-            setNewCache();
-        }
-        return isNotNull(savingObject) ? savingObject : object;
-    }
-
-    /**
-     * Saves object in the cache.
-     *
      * @param <T>          the type of a key.
      * @param key          the object key in the cache.
      * @param object       the object to save.
@@ -390,6 +370,26 @@ public final class Cache {
      */
     public static int getSize() {
         return cache.size();
+    }
+
+    /**
+     * Saves object in the cache.
+     *
+     * @param <T>    the type of a key.
+     * @param key    the object key in the cache.
+     * @param object the object to save.
+     * @return The saving object.
+     */
+    private static <T> Object put(
+            final Key<T> key,
+            final Object object
+    ) {
+        Object savingObject = null;
+        if (isNotNull(key) && isNotNull(object)) {
+            savingObject = cache.put(key, object);
+            setNewCache();
+        }
+        return isNotNull(savingObject) ? savingObject : object;
     }
 
     /**
