@@ -8,29 +8,30 @@ import java.io.StringReader;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 
 /**
- * The class implements a set of methods for working
- * with JsonParser parser.
+ * The class implements a set of methods for working with JSON parser.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  */
-final class JsonParser {
+final class SuccessJsonParser {
+
+    private final static String ASSOCIATE = "success";
 
     /**
-     * The JsonParser response.
+     * The JSON parser response.
      */
     private final String response;
 
     /**
      * Constructor.
      *
-     * @param response a JsonParser response.
+     * @param response a SuccessJsonParser response.
      */
-    JsonParser(final String response) {
+    SuccessJsonParser(final String response) {
         this.response = response;
     }
 
     /**
-     * Parses JsonParser response and return 'success' value.
+     * Parses SuccessJsonParser response and return 'success' value.
      *
      * @return 'Success' value.
      */
@@ -38,7 +39,7 @@ final class JsonParser {
         final boolean result;
         if (isNotEmpty(this.response)) {
             final JsonObject json = readJson();
-            result = json.getBoolean("success");
+            result = json.getBoolean(ASSOCIATE);
         } else {
             result = false;
         }

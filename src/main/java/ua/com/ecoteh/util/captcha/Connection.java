@@ -67,7 +67,7 @@ final class Connection {
      */
     HttpsURLConnection getHttpsURLConnection() throws IOException {
         if (isNull(this.connection)) {
-            prepareHttpsURLConnection();
+            createHttpsURLConnection();
         }
         return this.connection;
     }
@@ -77,11 +77,22 @@ final class Connection {
      *
      * @throws IOException If an I/O error occurs.
      */
-    private void prepareHttpsURLConnection() throws IOException {
-        this.connection = (HttpsURLConnection) this.url.openConnection();
+    private void createHttpsURLConnection() throws IOException {
+        this.connection = openHttpsURLConnection();
         this.connection.setRequestMethod("POST");
         this.connection.setRequestProperty("User-Agent", this.userAgent);
         this.connection.setRequestProperty("Accept-Language", this.acceptLanguage);
         this.connection.setDoOutput(this.doOutput);
+    }
+
+    /**
+     * Returns a HttpsURLConnection instance that represents
+     * a connection to the remote object referred to by the URL.
+     *
+     * @return a HttpsURLConnection linking to the URL.
+     * @throws IOException if an I/O exception occurs.
+     */
+    private HttpsURLConnection openHttpsURLConnection() throws IOException {
+        return (HttpsURLConnection) this.url.openConnection();
     }
 }

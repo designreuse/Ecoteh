@@ -90,7 +90,6 @@ public final class ReCaptcha implements Captcha {
         this.serverKey = serverKey;
         this.parameter = parameter;
         this.header = header;
-        this.status = "";
     }
 
     /**
@@ -104,9 +103,9 @@ public final class ReCaptcha implements Captcha {
         this.status = "";
         boolean result = false;
         if (isNotNull(request)) {
-            final String captcha = request.getParameter(this.parameter);
-            final String ipAddress = getIpAddress(request);
-            result = isVerify(captcha, ipAddress);
+            final String captcha = getCaptchaValue(request);
+            final String ip = getIpAddress(request);
+            result = isVerify(captcha, ip);
         }
         return result;
     }
@@ -114,27 +113,18 @@ public final class ReCaptcha implements Captcha {
     /**
      * Verifies captcha from ip address.
      *
-     * @param captcha   the StaticCaptcha for check.
-     * @param ipAddress the request ip address.
+     * @param captcha the captcha value for check.
+     * @param ip      the request ip address.
      * @return true if captcha is verify, false otherwise.
      */
     @Override
-    public boolean isVerify(final String captcha, final String ipAddress) {
+    public boolean isVerify(final String captcha, final String ip) {
         this.status = "";
         boolean result = false;
-        if (isNotEmpty(captcha) && isNotEmpty(ipAddress)) {
-            try {
-                final URL url = new URL(this.url);
-                final String response = getResponse(url, captcha, ipAddress);
-                final JsonParser parser = new JsonParser(response);
-                result = parser.parse();
-            } catch (IOException ex) {
-                LOGGER.error(ex.getMessage(), ex);
-            }
+        if (isNotEmpty(captcha) && isNotEmpty(ip)) {
+            result = verify(captcha, ip);
         }
-        if (isNotEmpty(this.status)) {
-            this.status += "\nSuccess = " + result;
-        }
+        addStatusSuccess(result);
         return result;
     }
 
@@ -149,20 +139,43 @@ public final class ReCaptcha implements Captcha {
     }
 
     /**
-     * Create work status.
+     * Verifies captcha from ip address.
      *
-     * @param url          the request URL.
-     * @param postParams   the post parameters.
-     * @param responseCode the response code.
+     * @param captcha the captcha value for check.
+     * @param ip      the request ip address.
+     * @return true if captcha is verify, false otherwise.
      */
-    private void setStatus(
-            final URL url,
-            final String postParams,
-            final int responseCode
-    ) {
-        this.status = "Sending 'POST' request to URL : " + url
-                + "\nPost parameters : " + postParams
-                + "\nResponse Code : " + responseCode;
+    private boolean verify(final String captcha, final String ip) {
+        boolean result;
+        try {
+            final String response = getResponse(captcha, ip);
+            result = parseSuccess(response);
+        } catch (IOException ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            result = false;
+        }
+        return result;
+    }
+
+    /**
+     * Parse success request from the JSON object.
+     *
+     * @param response the response to parse.
+     * @return true or false.
+     */
+    private boolean parseSuccess(final String response) {
+        final SuccessJsonParser parser = new SuccessJsonParser(response);
+        return parser.parse();
+    }
+
+    /**
+     * Returns a captcha value from the incoming request.
+     *
+     * @param request the request from client (newer null).
+     * @return the captcha value.
+     */
+    private String getCaptchaValue(final HttpServletRequest request) {
+        return request.getParameter(this.parameter);
     }
 
     /**
@@ -172,13 +185,13 @@ public final class ReCaptcha implements Captcha {
      * @return The ip address.
      */
     private String getIpAddress(final HttpServletRequest request) {
-        final String ipAddress;
+        final String ip;
         if (isNotNull(request)) {
-            ipAddress = getHeaderFromRequest(request);
+            ip = getHeaderFromRequest(request);
         } else {
-            ipAddress = null;
+            ip = "";
         }
-        return ipAddress;
+        return ip;
     }
 
     /**
@@ -198,21 +211,16 @@ public final class ReCaptcha implements Captcha {
     /**
      * Send request and return response.
      *
-     * @param url       the request URL.
-     * @param captcha   the StaticCaptcha for check.
-     * @param ipAddress the request ip address.
+     * @param captcha the captcha value for check.
+     * @param ip      the request ip address.
      * @return The response to string.
      * @throws IOException If an I/O error occurs.
      */
-    private String getResponse(
-            final URL url,
-            final String captcha,
-            final String ipAddress
-    ) throws IOException {
-        final HttpsURLConnection connection = getConnection(url);
-        final String postParams = getPostParams(captcha, ipAddress);
+    private String getResponse(final String captcha, final String ip) throws IOException {
+        final HttpsURLConnection connection = getConnection();
+        final String postParams = getPostParams(captcha, ip);
         writeToConnection(postParams, connection);
-        setStatus(url, postParams, connection.getResponseCode());
+        setStatus(postParams, connection.getResponseCode());
         return readFromConnection(connection);
     }
 
@@ -236,35 +244,65 @@ public final class ReCaptcha implements Captcha {
      * @throws IOException If an I/O error occurs.
      */
     private String readFromConnection(final HttpsURLConnection connection) throws IOException {
-        final HttpsURLStream httpsURLStream = new HttpsURLStream(connection);
-        return httpsURLStream.read();
+        final HttpsURLStream stream = new HttpsURLStream(connection);
+        return stream.read();
     }
 
     /**
      * Returns a https URL connection.
      *
-     * @param url the request URL.
      * @return The https URL connection.
      * @throws IOException If an I/O error occurs.
      */
-    private HttpsURLConnection getConnection(final URL url) throws IOException {
-        final Connection connection = new Connection(
-                url, this.userAgent,
-                this.acceptLanguage, this.doOutput
-        );
+    private HttpsURLConnection getConnection() throws IOException {
+        final URL url = getUrl();
+        final Connection connection = new Connection(url, this.userAgent, this.acceptLanguage, this.doOutput);
         return connection.getHttpsURLConnection();
+    }
+
+    /**
+     * Creates a URL object from the String (this url) representation.
+     *
+     * @return The URL object.
+     * @throws IOException If an I/O error occurs.
+     */
+    private URL getUrl() throws IOException {
+        return new URL(this.url);
     }
 
     /**
      * Returns a post params.
      *
-     * @param captcha   the StaticCaptcha for check.
-     * @param ipAddress the request ip address.
+     * @param captcha the captcha value for check.
+     * @param ip      the request ip address.
      * @return The post params.
      */
-    private String getPostParams(final String captcha, final String ipAddress) {
+    private String getPostParams(final String captcha, final String ip) {
         return "secret=" + this.serverKey +
                 "&response=" + captcha +
-                "&remoteip=" + ipAddress;
+                "&remoteip=" + ip;
+    }
+
+    /**
+     * Create work status.
+     *
+     * @param postParams   the post parameters.
+     * @param responseCode the response code.
+     */
+    private void setStatus(final String postParams, final int responseCode) {
+        this.status = "Sending 'POST' request to URL : " + url
+                + "\nPost parameters : " + postParams
+                + "\nResponse Code : " + responseCode;
+    }
+
+    /**
+     * Adds the incoming success value to the status.
+     *
+     * @param success the success value.
+     */
+    private void addStatusSuccess(final boolean success) {
+        if (isNotEmpty(this.status)) {
+            this.status += "\nSuccess = " + success;
+        }
     }
 }
