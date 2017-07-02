@@ -12,8 +12,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <c:when test="${not empty company.logo.url}">
             <div class="brand">
                 <a href="http://<c:out value="${company.domain}"/>">
-                    <img src="<c:url value="${company.logo.url}"/>"
-                         class="main-logo" alt="<c:out value="${company.title}"/>"
+                    <img src="<c:url value="${company.logo.url}"/>" class="main-logo" alt=""
                          onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
                 </a>
             </div>

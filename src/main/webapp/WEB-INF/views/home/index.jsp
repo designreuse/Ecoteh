@@ -57,23 +57,29 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%-- Categories list --%>
-        <c:if test="${fn:length(categories) gt 0}">
-            <div class="container">
-                <div class="row">
-                    <div class="box">
-                        <hr>
-                        <h3 class="intro-text text-center">
-                            <a href="<c:url value="/category/all"/>" title="Категории товаров">Товары</a>
-                        </h3>
-                        <hr>
-                            <%-- Product categories --%>
-                        <jsp:include page="/WEB-INF/views/category/list.jsp"/>
-                        <div class="clearfix"></div>
+        <c:choose>
+            <c:when test="${category ne null}">
+                <%-- Category --%>
+                <%@include file="/WEB-INF/views/category/to_home.jsp" %>
+            </c:when>
+            <c:when test="${fn:length(categories) gt 0}">
+                <%-- Categories list --%>
+                <div class="container">
+                    <div class="row">
+                        <div class="box">
+                            <hr>
+                            <h3 class="intro-text text-center">
+                                <a href="<c:url value="/category/all"/>" title="Категории товаров">Товары</a>
+                            </h3>
+                            <hr>
+                                <%-- Product categories --%>
+                            <jsp:include page="/WEB-INF/views/category/list.jsp"/>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:if>
+            </c:when>
+        </c:choose>
             <%-- Main company description --%>
         <%@include file="/WEB-INF/views/company/to_home.jsp" %>
             <%-- Partner-companies logo list  --%>

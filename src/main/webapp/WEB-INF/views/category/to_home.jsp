@@ -38,7 +38,6 @@
                         </a>
                     </div>
                 </c:if>
-
                 <%-- Articles list --%>
                 <jsp:include page="/WEB-INF/views/article/short_list.jsp"/>
             </div>

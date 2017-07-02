@@ -24,6 +24,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 </button>
                 <a href="<c:url value="/"/>" class="navbar-brand">
                     <c:choose>
+                        <c:when test="${not empty main_company.logo.url}">
+                            <img src="<c:url value="${main_company.logo.url}"/>" class="main-logo" alt=""
+                                 onerror="this.src='<c:url value="/resources/img/static/default_file.gif"/>'">
+                        </c:when>
                         <c:when test="${main_company ne null}">
                             <c:out value="${main_company.title}"/>
                         </c:when>
