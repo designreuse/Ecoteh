@@ -7,7 +7,7 @@ package ua.com.ecoteh.entity.model;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @see Model
  */
-public abstract class ModelEditor<T extends Model, R extends ModelEditor<T, R>> implements Editor<T> {
+public abstract class ModelEditor<T extends Model, E extends ModelEditor<T, E>> implements Editor<T> {
 
     /**
      * The model to edit.
@@ -40,7 +40,7 @@ public abstract class ModelEditor<T extends Model, R extends ModelEditor<T, R>> 
      * @return the model editor.
      */
     @Override
-    public R copy(final T model) {
+    public E copy(final T model) {
         return addId(model.getId())
                 .addValidated(model.isValidated());
     }
@@ -51,9 +51,9 @@ public abstract class ModelEditor<T extends Model, R extends ModelEditor<T, R>> 
      * @param id a new identifier to the model.
      * @return the model editor.
      */
-    public R addId(final long id) {
+    public E addId(final long id) {
         this.id = id;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -62,9 +62,9 @@ public abstract class ModelEditor<T extends Model, R extends ModelEditor<T, R>> 
      * @param validated a new validated to the model.
      * @return the model editor.
      */
-    public R addValidated(final boolean validated) {
+    public E addValidated(final boolean validated) {
         this.validated = validated ? 1 : 2;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -72,7 +72,7 @@ public abstract class ModelEditor<T extends Model, R extends ModelEditor<T, R>> 
      *
      * @return the model editor.
      */
-    public R isValid() {
+    public E isValid() {
         return addValidated(true);
     }
 
@@ -81,7 +81,7 @@ public abstract class ModelEditor<T extends Model, R extends ModelEditor<T, R>> 
      *
      * @return the model editor.
      */
-    public R isNotValid() {
+    public E isNotValid() {
         return addValidated(false);
     }
 

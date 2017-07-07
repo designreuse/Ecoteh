@@ -25,12 +25,14 @@ public final class TimeTest {
 
     @Test
     public void whenSetNullTimeThenGetCorrectTime() {
-        assertEquals(new Time(null).getCorrectTime(), "00:00");
+        final Time time = new Time(null);
+        assertEquals(time.getCorrectTime(), "00:00");
     }
 
     @Test
     public void whenSetInvalidTimeThenGetCorrectTime() {
-        assertEquals(new Time(ANY_STRING).getCorrectTime(), "00:00");
+        final Time time = new Time(ANY_STRING);
+        assertEquals(time.getCorrectTime(), "00:00");
     }
 
     @Test

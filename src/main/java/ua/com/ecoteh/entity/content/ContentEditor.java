@@ -13,7 +13,7 @@ import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @see Content
  */
-public abstract class ContentEditor<T extends Content, R extends ContentEditor<T, R>> extends ModelEditor<T, R> {
+public abstract class ContentEditor<T extends Content, E extends ContentEditor<T, E>> extends ModelEditor<T, E> {
 
     /**
      * The content to edit.
@@ -67,7 +67,7 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @return the content editor.
      */
     @Override
-    public R copy(final T content) {
+    public E copy(final T content) {
         return super.copy(content)
                 .addTitle(content.getTitle())
                 .addUrl(content.getUrl())
@@ -83,9 +83,9 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @param title a new title to the content.
      * @return the content editor.
      */
-    public R addTitle(final String title) {
+    public E addTitle(final String title) {
         this.title = title;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -94,9 +94,9 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @param url a new URL to the content.
      * @return the content editor.
      */
-    public R addUrl(final String url) {
+    public E addUrl(final String url) {
         this.url = url;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -105,9 +105,9 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @param text a new text to the content.
      * @return the content editor.
      */
-    public R addText(final String text) {
+    public E addText(final String text) {
         this.text = text;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -116,9 +116,9 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @param description a new description to the content.
      * @return the content editor.
      */
-    public R addDescription(final String description) {
+    public E addDescription(final String description) {
         this.description = description;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -127,9 +127,9 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @param keywords a new keywords to the content.
      * @return the content editor.
      */
-    public R addKeywords(final String keywords) {
+    public E addKeywords(final String keywords) {
         this.keywords = keywords;
-        return (R) this;
+        return (E) this;
     }
 
     /**
@@ -138,9 +138,9 @@ public abstract class ContentEditor<T extends Content, R extends ContentEditor<T
      * @param logo a new logo to the content.
      * @return the content editor.
      */
-    public R addLogo(final File logo) {
+    public E addLogo(final File logo) {
         this.logo = logo;
-        return (R) this;
+        return (E) this;
     }
 
     /**

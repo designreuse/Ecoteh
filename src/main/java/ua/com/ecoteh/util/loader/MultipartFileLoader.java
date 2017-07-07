@@ -1,12 +1,12 @@
 package ua.com.ecoteh.util.loader;
 
 import org.springframework.web.multipart.MultipartFile;
+import ua.com.ecoteh.exception.ExceptionMessage;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import static ua.com.ecoteh.exception.ExceptionMessage.UNSUPPORTED_OPERATION_MESSAGE;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
@@ -79,7 +79,7 @@ public final class MultipartFileLoader extends AbstractLoader implements Loader 
     @Override
     public String read() throws UnsupportedOperationException {
         final String message = String.format(
-                UNSUPPORTED_OPERATION_MESSAGE,
+                ExceptionMessage.UNSUPPORTED_OPERATION_MESSAGE,
                 MultipartFileLoader.class.getSimpleName()
         );
         throw new UnsupportedOperationException(message);

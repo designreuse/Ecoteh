@@ -138,7 +138,7 @@ public abstract class ContentBuilder<T extends Content, B extends ContentBuilder
      * @return The content URL or empty string (newer null).
      */
     protected String getUrl() {
-        String result;
+        final String result;
         if (isNotEmpty(this.url)) {
             result = this.url;
         } else if (isNotEmpty(this.title)) {
