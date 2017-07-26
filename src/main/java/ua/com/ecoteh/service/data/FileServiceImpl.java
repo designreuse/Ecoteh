@@ -549,7 +549,7 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
     private FileEntity updateFile(final File from, final File to) {
         final FileEditor editor = to.getEditor();
         if (isNotEmpty(from.getMultipartFile())) {
-            final File updatedPhoto = updateLogo(to, from);
+            final File updatedPhoto = updateLogo(from, to);
             editor.copy(updatedPhoto);
         }
         final File updatedFile = editor.update();
@@ -564,9 +564,9 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * @return the updated photo.
      */
     private File updateLogo(final File from, final File to) {
-        deleteFile(from.getUrl());
-        final String url = saveFile(to.getMultipartFile());
-        final FileEditor fileEditor = from.getEditor();
+        deleteFile(to.getUrl());
+        final String url = saveFile(from.getMultipartFile());
+        final FileEditor fileEditor = to.getEditor();
         fileEditor.addUrl(url);
         return fileEditor.update();
     }
