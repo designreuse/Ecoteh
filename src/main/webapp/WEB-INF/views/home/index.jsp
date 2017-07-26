@@ -86,6 +86,18 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
         <%@include file="/WEB-INF/views/company/logos_list.jsp" %>
             <%-- Client responses--%>
         <%@include file="/WEB-INF/views/response/list_to_home.jsp" %>
+
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <hr>
+                    <h3 class="text-center">Контакты</h3>
+                    <hr>
+                        <%-- Contact information of the main company --%>
+                    <jsp:include page="/WEB-INF/views/company/contacts.jsp"/>
+                </div>
+            </div>
+        </div>
     </div>
         <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
