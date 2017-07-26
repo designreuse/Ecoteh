@@ -92,6 +92,31 @@ CREATE TABLE `categories` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `posts` (
+  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
+  `title`       VARCHAR(200)     NOT NULL DEFAULT '',
+  `url`         VARCHAR(200)     NOT NULL DEFAULT '' UNIQUE,
+  `description` TEXT             NOT NULL DEFAULT '',
+  `text`        TEXT             NOT NULL DEFAULT '',
+  `keywords`    TEXT             NOT NULL DEFAULT '',
+  `date`        TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
+  INDEX (`url`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `companies`
 --
 
@@ -254,4 +279,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-15 09:13:32
+-- Dump completed on 2017-07-26 09:13:32
