@@ -136,6 +136,30 @@ public interface MainMVFabric {
     ModelAndView allSortResponsesByDatePage(boolean revers);
 
     /**
+     * Creates and returns a blog page with all posts sorted by sortType.
+     *
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
+     */
+    ModelAndView allSortBlogPage(String sortType, boolean revers);
+
+    /**
+     * Creates and returns a page with all blog posts.
+     *
+     * @return The ready object of the ModelAndView class.
+     */
+    ModelAndView blogPage();
+
+    /**
+     * Creates and returns a page with one post with the incoming URL.
+     *
+     * @param url the URL of a post to return.
+     * @return The ready object of the ModelAndView class.
+     */
+    ModelAndView postByUrlPage(String url);
+
+    /**
      * Creates and returns a default modelAndView.
      *
      * @return The ready object of the ModelAndView class.

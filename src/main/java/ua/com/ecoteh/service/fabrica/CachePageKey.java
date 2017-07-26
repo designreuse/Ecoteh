@@ -81,6 +81,21 @@ interface CachePageKey {
     String ALL_SORT_RESPONSES_KEY = "All Sort Responses";
 
     /**
+     * The blog page key.
+     */
+    String BLOG_KEY = "Blog page";
+
+    /**
+     * The all sort by date blog page key.
+     */
+    String SORT_BLOG_KEY = "Sort Blog page";
+
+    /**
+     * The post by URL page key.
+     */
+    String POST_BY_URL_KEY = "Post By URL";
+
+    /**
      * The default modelAndView key.
      */
     String DEFAULT_MAV_KEY = "Default ModelAndView";

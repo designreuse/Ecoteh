@@ -255,6 +255,57 @@ public abstract class MainController {
     }
 
     /**
+     * Returns a page with an all posts.
+     * Request mapping: /blog, /posts, /post/all
+     * Method: GET
+     *
+     * @return The ready object of the ModelAndView class.
+     */
+    @RequestMapping(
+            value = { "/blog", "/posts", "/post/all" },
+            method = RequestMethod.GET
+    )
+    public ModelAndView getBlogPage() {
+        return this.fabric.blogPage();
+    }
+
+    /**
+     * Returns a page with an all posts sorted by date.
+     * Request mapping: /blog/sort, /posts/sort, /post/all/sort
+     * Method: GET
+     *
+     * @param request the implementation of the interface to provide
+     *                request information for HTTP servlets.
+     * @return The ready object of the ModelAndView class.
+     */
+    @RequestMapping(
+            value = { "/blog/sort", "/posts/sort", "/post/all/sort" },
+            method = RequestMethod.GET
+    )
+    public ModelAndView getSortBlogPage(final HttpServletRequest request) {
+        final String sortType = request.getParameter("type");
+        final boolean revers = Boolean.parseBoolean(request.getParameter("revers"));
+        return this.fabric.allSortBlogPage(sortType, revers);
+    }
+
+    /**
+     * Returns a page with a post with the incoming URL.
+     * Request mapping: /post/{url},
+     * where {url} is a URL of an post to return.
+     * Method: GET
+     *
+     * @param url the URL of a post to return.
+     * @return The ready object of the ModelAndView class.
+     */
+    @RequestMapping(
+            value = {"/blog/{url}", "/post/{url}"},
+            method = RequestMethod.GET
+    )
+    public ModelAndView getPostPage(@PathVariable("url") final String url) {
+        return this.fabric.postByUrlPage(url);
+    }
+
+    /**
      * Returns a page with main company.
      * Request mapping: /company/main
      * Method: GET

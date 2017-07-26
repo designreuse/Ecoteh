@@ -326,6 +326,59 @@ public final class CacheMVFabricImpl implements CacheMVFabric {
     }
 
     /**
+     * Creates and returns a page with all posts sorted by date.
+     *
+     * @param revers the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView allSortBlogPage(final String sortType, boolean revers) {
+        final String key = SORT_BLOG_KEY + ", " + sortType + ", " + revers;
+        ModelAndView modelAndView = getFromCache(key);
+        if (isNull(modelAndView)) {
+            modelAndView = this.fabric.allSortBlogPage(sortType, revers);
+            putToCache(modelAndView, key);
+        }
+        addAuthUser(modelAndView);
+        modelAndView.addObject("revers", !revers);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a page with all blog posts.
+     *
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView blogPage() {
+        ModelAndView modelAndView = getFromCache(BLOG_KEY);
+        if (isNull(modelAndView)) {
+            modelAndView = this.fabric.blogPage();
+            putToCache(modelAndView, BLOG_KEY);
+        }
+        addAuthUser(modelAndView);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a page with one post with the incoming URL.
+     *
+     * @param url the URL of a post to return.
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView postByUrlPage(final String url) {
+        final String key = POST_BY_URL_KEY + " " + url;
+        ModelAndView modelAndView = getFromCache(key);
+        if (isNull(modelAndView)) {
+            modelAndView = this.fabric.postByUrlPage(url);
+            putToCache(modelAndView, key);
+        }
+        addAuthUser(modelAndView);
+        return modelAndView;
+    }
+
+    /**
      * Creates and returns default modelAndView.
      *
      * @return The ready object of the ModelAndView class.

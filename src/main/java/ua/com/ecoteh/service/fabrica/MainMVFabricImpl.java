@@ -8,6 +8,7 @@ import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.entity.file.FileType;
+import ua.com.ecoteh.entity.post.Post;
 import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.service.data.*;
@@ -65,6 +66,12 @@ public final class MainMVFabricImpl implements MainMVFabric {
     private final UserService userService;
 
     /**
+     * The interface of the service layer, describes a set of methods
+     * for working with objects of the class {@link Post}.
+     */
+    private final PostService postService;
+
+    /**
      * Constructor.
      *
      * @param articleService  the implementation  of the {@link ArticleService} interface.
@@ -73,6 +80,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * @param fileService     the implementation of the {@link FileService} interface.
      * @param responseService the implementation of the {@link ResponseService} interface.
      * @param userService     the implementation of the {@link UserService} interface.
+     * @param postService     the implementation of the {@link PostService} interface.
      */
     @Autowired
     public MainMVFabricImpl(
@@ -81,7 +89,8 @@ public final class MainMVFabricImpl implements MainMVFabric {
             final CompanyService companyService,
             final FileService fileService,
             final ResponseService responseService,
-            final UserService userService
+            final UserService userService,
+            final PostService postService
     ) {
         this.articleService = articleService;
         this.categoryService = categoryService;
@@ -89,6 +98,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
         this.fileService = fileService;
         this.responseService = responseService;
         this.userService = userService;
+        this.postService = postService;
     }
 
     /**
@@ -158,10 +168,7 @@ public final class MainMVFabricImpl implements MainMVFabric {
      * @return The ready object of the ModelAndView class.
      */
     @Override
-    public ModelAndView allSortArticlesPage(
-            final String sortType,
-            final boolean revers
-    ) {
+    public ModelAndView allSortArticlesPage(final String sortType, final boolean revers) {
         final ModelAndView modelAndView;
         if (isEmpty(sortType) || sortType.equalsIgnoreCase("price")) {
             modelAndView = allSortByPriceArticlesPage(revers);
@@ -348,6 +355,60 @@ public final class MainMVFabricImpl implements MainMVFabric {
     }
 
     /**
+     * Creates and returns a blog page with all posts sorted by sortType.
+     *
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView allSortBlogPage(String sortType, boolean revers) {
+        final ModelAndView modelAndView;
+        if (isEmpty(sortType) || sortType.equalsIgnoreCase("title")) {
+            modelAndView = allSortByTitlePostsPage(revers);
+        } else if (sortType.equalsIgnoreCase("date")) {
+            modelAndView = allSortByDatePostsPage(revers);
+        } else {
+            modelAndView = blogPage();
+        }
+        modelAndView.setViewName("post/all");
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a page with all blog posts.
+     *
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView blogPage() {
+        final Collection<Post> posts = this.postService.getAll(isValidContent());
+        final ModelAndView modelAndView = getDefaultModelAndView();
+        modelAndView.addObject("posts", posts);
+        modelAndView.setViewName("post/all");
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a page with one post with the incoming URL.
+     *
+     * @param url the URL of a post to return.
+     * @return The ready object of the ModelAndView class.
+     */
+    @Override
+    public ModelAndView postByUrlPage(final String url) {
+        final Post post = this.postService.getByUrl(url, isValidContent());
+        final Collection<Post> posts = this.postService.getAll(isValidContent());
+        posts.remove(post);
+        final List<Post> shuffledPosts = this.postService.shuffle(posts);
+        final ModelAndView modelAndView = getDefaultModelAndView();
+        modelAndView.addObject("post", post);
+        modelAndView.addObject("posts", shuffledPosts);
+        modelAndView.setViewName("post/one");
+        return modelAndView;
+    }
+
+    /**
      * Creates and returns a default modelAndView.
      *
      * @return The ready object of the ModelAndView class.
@@ -447,6 +508,50 @@ public final class MainMVFabricImpl implements MainMVFabric {
     ) {
         final ModelAndView modelAndView = getDefaultModelAndView();
         modelAndView.addObject("articles", articles);
+        modelAndView.addObject("sort", sortType);
+        modelAndView.addObject("revers", !revers);
+        return modelAndView;
+    }
+
+    /**
+     * Creates and returns a page with all posts sorted by title.
+     *
+     * @param revers the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
+     */
+    private ModelAndView allSortByTitlePostsPage(final boolean revers) {
+        final Collection<Post> posts = this.postService.getAll(isValidContent());
+        final List<Post> sortedPosts = this.postService.sortByTitle(posts, revers);
+        return sortPostsPage("title", revers, sortedPosts);
+    }
+
+    /**
+     * Creates and returns a page with all posts sorted by date.
+     *
+     * @param revers the sorting direction, true or false.
+     * @return The ready object of the ModelAndView class.
+     */
+    private ModelAndView allSortByDatePostsPage(final boolean revers) {
+        final Collection<Post> posts = this.postService.getAll(isValidContent());
+        final List<Post> sortedByDatePost = this.postService.sortByDate(posts, revers);
+        return sortPostsPage("date", revers, sortedByDatePost);
+    }
+
+    /**
+     * Creates and returns a page with a posts sorted by the incoming sort type.
+     *
+     * @param sortType the sort type.
+     * @param revers   the sorting direction, true or false.
+     * @param posts    the sorted posts.
+     * @return The ready object of the ModelAndView class.
+     */
+    private ModelAndView sortPostsPage(
+            final String sortType,
+            final boolean revers,
+            final List<Post> posts
+    ) {
+        final ModelAndView modelAndView = getDefaultModelAndView();
+        modelAndView.addObject("posts", posts);
         modelAndView.addObject("sort", sortType);
         modelAndView.addObject("revers", !revers);
         return modelAndView;
