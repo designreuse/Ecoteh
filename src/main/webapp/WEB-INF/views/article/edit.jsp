@@ -106,19 +106,19 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Ключевые слова</td>
-                                    <td class="tds">
-                                    <textarea class="form-control textarea" name="keywords" title=""
-                                              placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
-                                              rows="7"><c:out value="${article.keywords}"/></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td class="ths">Описание</td>
                                     <td class="tds">
                                     <textarea class="form-control textarea" name="description" title=""
                                               placeholder="Краткое описание статьи (анонс)."
                                               rows="10"><c:out value="${article.description}"/></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">Ключевые слова</td>
+                                    <td class="tds">
+                                    <textarea class="form-control textarea" name="keywords" title=""
+                                              placeholder="Ключевые слова, которые описывают статью, необходимы для ботов-поисковиков, на страницах сайта не отображаются."
+                                              rows="7"><c:out value="${article.keywords}"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>

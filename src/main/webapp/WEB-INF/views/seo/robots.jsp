@@ -5,6 +5,7 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
 --%>
 
 <%@ page contentType="text/plain;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%-- Yandex search engine --%>
 User-agent: Yandex
@@ -18,7 +19,7 @@ Disallow: /resources/fonts
 Disallow: /resources/js
 Disallow: /resources/img/static
 Disallow: /resources/img/users
-Host: ${domain}
+Host: <c:out value="${domain}"/>
 
 <%-- Google search engine --%>
 User-agent: Googlebot
@@ -47,6 +48,5 @@ Disallow: /resources/js
 Disallow: /resources/img/static
 Disallow: /resources/img/users
 
-
 <%-- Sitemap.xml link --%>
-Sitemap: http://${domain}/sitemap.xml
+Sitemap: http://<c:out value="${domain}"/>/sitemap.xml

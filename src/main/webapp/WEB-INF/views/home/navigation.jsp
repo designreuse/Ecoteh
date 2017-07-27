@@ -57,7 +57,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </a>
                     </li>
                     <li class="dropdown-top">
-                        <a class="dropdown-top" href="<c:url value="/category/all"/>">Продукция</a>
+                        <a class="dropdown-top" href="<c:url value="/categories"/>">Продукция</a>
                         <ul class="dropdown-inside" role="menu">
                             <c:forEach items="${categories}" var="category">
                                 <li class="text-center">
@@ -77,6 +77,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="<c:url value="/blog"/>">Блог</a>
+                    </li>
                     <c:if test="${main_company ne null}">
                         <li class="dropdown-top">
                             <a class="dropdown-top" href="<c:url value="/company/main"/>">О&nbsp;компании</a>
@@ -92,13 +95,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </li>
                                 <li class="text-center">
                                     <a href="<c:url value="/responses"/>" title="Отзывы о нашей компании">Отзывы</a>
+                                    <hr>
+                                </li>
+                                <li class="text-center">
+                                    <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
                                 </li>
                             </ul>
                         </li>
                     </c:if>
-                    <li>
-                        <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
-                    </li>
                     <li>
                         <a href="<c:url value="/search/"/>" title="Поиск необходимого контента">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -162,7 +166,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </a>
                     </li>
                     <li>
-                        <a href="<c:url value="/category/all"/>">Продукция</a>
+                        <a href="<c:url value="/categories"/>">Продукция</a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/blog"/>">Блог</a>
                     </li>
                     <c:if test="${main_company ne null}">
                         <li>

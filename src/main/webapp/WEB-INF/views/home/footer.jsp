@@ -204,3 +204,5 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </div>
     </footer>
 </div>
+<%-- Jivosite plugin --%>
+<script src="<c:url value="/resources/js/jivosite.min.js"/>" type="text/javascript" async></script>

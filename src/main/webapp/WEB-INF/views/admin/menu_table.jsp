@@ -64,6 +64,26 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     </tr>
     <tr>
         <th class="pad">
+            <a href="<c:url value="/blog"/>" title="Блог компании">Блог</a>
+        </th>
+        <td class="pad">
+            <a href="<c:url value="/admin/post/new"/>" title="Добавить новый пост">
+                <button class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    &nbsp;Новый
+                </button>
+            </a>&nbsp;&nbsp;
+            <a href="<c:url value="/admin/posts/delete/all"/>" title="Удалить все посты"
+               onclick="if(confirm('Вы точно хотите удалить все посты? Удаленные объекты восстановлению не подлежат!')) this.submit; else return false;">
+                <button class="btn btn-default">
+                    <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                    &nbsp;Удалить&nbsp;все
+                </button>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <th class="pad">
             <a href="<c:url value="/company/all"/>" title="Наши партнеры">Партнеры</a>
         </th>
         <td class="pad">

@@ -20,9 +20,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title><c:out value="${category.title} | ${main_company.title}"/></title>
         <meta name="title" content="<c:out value="${category.title} | ${main_company.title}"/>">
-        <meta name="description" content="${category.description}"/>
+        <meta name="description" content="${category.description}">
         <meta name="keywords"
-              content="Категория <c:out value="${category.title}, ${category.keywords}"/><c:forEach items="${articles_list}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
+              content="Категория <c:out value="${category.title}, ${category.keywords}"/><c:forEach items="${articles}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
