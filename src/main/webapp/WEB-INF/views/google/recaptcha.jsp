@@ -17,5 +17,5 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="g-recaptcha" data-sitekey="<c:out value="${key}"/>"></div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async></script>
+    <script src="https://www.google.com/recaptcha/api.js" async></script>
 </c:if>

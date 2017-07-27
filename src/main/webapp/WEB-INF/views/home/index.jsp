@@ -102,14 +102,14 @@ Yurii Salimov (yurii.alex.salimov@gmail.com)
         <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
-    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <c:if test="${fn:length(slides) gt 0}">
-        <script src="<c:url value="/resources/js/carousel.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/resources/js/carousel.min.js"/>"></script>
     </c:if>
-    <script src="<c:url value="/resources/js/mask.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/easing.min.js"/>" type="text/javascript" async></script>
-    <script src="<c:url value="/resources/js/totop.min.js"/>" type="text/javascript" async></script>
+    <script src="<c:url value="/resources/js/mask.min.js"/>" async></script>
+    <script src="<c:url value="/resources/js/easing.min.js"/>" async></script>
+    <script src="<c:url value="/resources/js/totop.min.js"/>" async></script>
     </body>
     </html>
 </compress:html>

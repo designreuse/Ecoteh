@@ -119,8 +119,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>
-    <script src="<c:url value="/resources/js/jquery.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     </body>
     </html>
 </compress:html>
