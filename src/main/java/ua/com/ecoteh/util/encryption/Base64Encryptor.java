@@ -28,7 +28,7 @@ public final class Base64Encryptor implements Encryptor {
     /**
      * Default key.
      */
-    private final static String KEY = "default_key";
+    private final static String KEY = "6Lex4goUAAAAACmMLbkj";
 
     /**
      * Default secret key.
@@ -78,10 +78,7 @@ public final class Base64Encryptor implements Encryptor {
      * @param charsetName the name of supported Charset.
      */
     public Base64Encryptor(final String secretKey, String charsetName) {
-        this(
-                isNotEmpty(secretKey) ? secretKey.getBytes() : KEY.getBytes(),
-                charsetName
-        );
+        this(isNotEmpty(secretKey) ? secretKey.getBytes() : KEY.getBytes(), charsetName);
     }
 
     /**

@@ -74,24 +74,29 @@ public final class StyleServiceImpl implements StyleService {
      * </pre>
      *
      * @param styles the new CSS styles to save.
+     * @return true if styles is saved, false otherwise.
      */
     @Override
-    public void save(final String styles) {
-        if (isNotEmpty(styles)) {
+    public boolean save(final String styles) {
+        final boolean result = isNotEmpty(styles);
+        if (result) {
             saveStyles(styles);
             saveCompressStyles(styles);
         }
+        return result;
     }
 
     /**
      * Rollbacks a CSS styles to default.
      * Read styles from the DEFAULT_STYLES_PATH file
      * with the default styles and save it.
+     *
+     * @return true if styles is rollback, false otherwise.
      */
     @Override
-    public void rollback() {
+    public boolean rollback() {
         final String defaultStyles = readDefaultStyles();
-        save(defaultStyles);
+        return save(defaultStyles);
     }
 
     /**
@@ -107,19 +112,21 @@ public final class StyleServiceImpl implements StyleService {
      * Saves styles in the STYLES_PATH files.
      *
      * @param styles the styles to write.
+     * @return true if styles is saved, false otherwise.
      */
-    private void saveStyles(final String styles) {
-        write(styles, STYLES_PATH);
+    private boolean saveStyles(final String styles) {
+        return write(styles, STYLES_PATH);
     }
 
     /**
      * Compresses and saves styles in the MIN_STYLES_PATH files.
      *
      * @param styles the styles to write.
+     * @return true if styles is saved, false otherwise.
      */
-    private void saveCompressStyles(final String styles) {
+    private boolean saveCompressStyles(final String styles) {
         final String compressedStyles = compress(styles);
-        write(compressedStyles, MIN_STYLES_PATH);
+        return write(compressedStyles, MIN_STYLES_PATH);
     }
 
     /**
@@ -138,11 +145,12 @@ public final class StyleServiceImpl implements StyleService {
      *
      * @param styles the styles to write.
      * @param path   the path to a file.
+     * @return true if styles is saved, false otherwise.
      */
-    private void write(final String styles, final String path) {
+    private boolean write(final String styles, final String path) {
         final String absolutePath = getAbsolutePath(path);
         final Loader loader = new FileContentsLoader(absolutePath, styles);
-        loader.write();
+        return loader.write();
     }
 
     /**

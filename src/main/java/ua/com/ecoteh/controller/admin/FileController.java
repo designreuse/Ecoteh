@@ -16,6 +16,7 @@ import ua.com.ecoteh.entity.file.*;
 import ua.com.ecoteh.exception.ExceptionMessage;
 import ua.com.ecoteh.service.data.FileService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
+import ua.com.ecoteh.util.cache.Cache;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -245,7 +246,10 @@ public final class FileController {
             method = RequestMethod.GET
     )
     public String deleteFileById(@PathVariable("id") final long id) {
-        this.fileService.remove(id);
+        final boolean result = this.fileService.remove(id);
+        if (result) {
+            Cache.clear();
+        }
         return "redirect:/admin/file/all";
     }
 
@@ -263,6 +267,7 @@ public final class FileController {
     )
     public String deleteAllFiles() {
         this.fileService.removeAll();
+        Cache.clear();
         return "redirect:/admin/file/all";
     }
 

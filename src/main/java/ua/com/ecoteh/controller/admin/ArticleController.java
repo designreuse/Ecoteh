@@ -1,6 +1,5 @@
 package ua.com.ecoteh.controller.admin;
 
-import com.googlecode.htmlcompressor.compressor.Compressor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,11 +21,8 @@ import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 import ua.com.ecoteh.util.cache.Cache;
-import ua.com.ecoteh.util.compressor.HtmlCompressor;
 
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
-import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
+import static ua.com.ecoteh.util.validator.ObjectValidator.*;
 
 /**
  * The class implements a set of methods for working with
@@ -122,7 +118,7 @@ public final class ArticleController {
      * @param price         the price to a new article.
      * @param currency      the new price currency to a article.
      * @param categoryUrl   the category URL of a new article.
-     * @param multipartLogo thea file of photo to a new category.
+     * @param multipartLogo the file of photo to a new article.
      * @param validated     the validated of a new article.
      * @return The redirect string to the "/article/{url}" URL,
      * where {url} is a URL of a saving article.
@@ -143,12 +139,11 @@ public final class ArticleController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Compressor compressor = new HtmlCompressor();
         final ArticleBuilder articleBuilder = Article.getBuilder();
         articleBuilder.addTitle(title).addKeywords(keywords).addNumber(number)
                 .addPrice(price).addCurrency(currency).addValidated(validated)
-                .addDescription(compressor.compress(description))
-                .addText(compressor.compress(text));
+                .addDescription(description)
+                .addText(text);
 
         final Category category = this.categoryService.getByUrl(categoryUrl, false);
         articleBuilder.addCategory(category);
@@ -223,7 +218,7 @@ public final class ArticleController {
      * @param price         the new price to a article.
      * @param currency      the new price currency to a article.
      * @param categoryUrl   the category URL of a article.
-     * @param multipartLogo the file of photo to a new category.
+     * @param multipartLogo the file of photo to a new article.
      * @param validated     the validated of a article.
      * @return The redirect string to the "/article/{url}" URL,
      * where {url} is a URL of a saving article.
@@ -245,12 +240,11 @@ public final class ArticleController {
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
-        final Compressor compressor = new HtmlCompressor();
         final ArticleBuilder articleBuilder = Article.getBuilder();
         articleBuilder.addUrl(url).addTitle(title).addKeywords(keywords).addNumber(number)
                 .addPrice(price).addCurrency(currency).addValidated(validated)
-                .addDescription(compressor.compress(description))
-                .addText(compressor.compress(text));
+                .addDescription(description)
+                .addText(text);
 
         final Category category = this.categoryService.getByUrl(categoryUrl, false);
         articleBuilder.addCategory(category);
@@ -303,8 +297,10 @@ public final class ArticleController {
             method = RequestMethod.GET
     )
     public String deleteArticleByUrl(@PathVariable("url") final String url) {
-        this.articleService.removeByUrl(url);
-        Cache.clear();
+        final boolean result = this.articleService.removeByUrl(url);
+        if (result) {
+            Cache.clear();
+        }
         return "redirect:/";
     }
 

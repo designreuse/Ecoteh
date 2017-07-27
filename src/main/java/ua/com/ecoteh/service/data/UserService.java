@@ -88,15 +88,17 @@ public interface UserService extends DataService<User>, UserDetailsService {
      * Removes user with the incoming name.
      *
      * @param name the name of a user to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByName(String name);
+    boolean removeByName(String name);
 
     /**
      * Removes user with the incoming url.
      *
      * @param url the URL of a user to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByUrl(String url);
+    boolean removeByUrl(String url);
 
     /**
      * Sorts and returns users by name.

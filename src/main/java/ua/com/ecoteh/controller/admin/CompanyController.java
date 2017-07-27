@@ -476,8 +476,10 @@ public final class CompanyController {
             method = RequestMethod.GET
     )
     public String deletePartnerByUrl(@PathVariable("url") final String url) {
-        this.companyService.removeByUrl(url);
-        Cache.clear();
+        final boolean result = this.companyService.removeByUrl(url);
+        if (result) {
+            Cache.clear();
+        }
         return "redirect:/";
     }
 

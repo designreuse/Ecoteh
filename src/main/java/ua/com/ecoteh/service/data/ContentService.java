@@ -40,16 +40,18 @@ public interface ContentService<T extends Content> extends DataService<T> {
      * with the incoming title.
      *
      * @param title the title of a content to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByTitle(String title);
+    boolean removeByTitle(String title);
 
     /**
      * Removes content object of the {@link Content} class or subclasses
      * with the incoming url.
      *
      * @param url the URL of a content to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByUrl(String url);
+    boolean removeByUrl(String url);
 
     /**
      * Sorts and returns objects of {@link Content} class

@@ -36,10 +36,12 @@ public final class MockMVFabric {
         final FileService fileService = getFileService();
         final ResponseService responseService = getResponseService();
         final UserService userService = getUserService();
+        final PostService postService = getPostService();
         return new MainMVFabricImpl(
                 articleService, categoryService,
                 companyService, fileService,
-                responseService, userService
+                responseService, userService,
+                postService
         );
     }
 

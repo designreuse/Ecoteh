@@ -363,7 +363,7 @@ public final class UserController {
             method = RequestMethod.GET
     )
     public String deleteUserByUrl(@PathVariable("url") final String url) {
-        this.userService.removeByUrl(url);
+        final  boolean result = this.userService.removeByUrl(url);
         Cache.removeAll("Main Company");
         final User authenticatedUser = this.userService.getAuthenticatedUser();
         final String redirect;

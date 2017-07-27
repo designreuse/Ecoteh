@@ -45,8 +45,9 @@ public interface ArticleService extends ContentService<Article> {
      * Removes all article with the parameter number.
      *
      * @param number the number of an article to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByNumber(String number);
+    boolean removeByNumber(String number);
 
     /**
      * Sorts and returns articles by number.

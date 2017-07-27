@@ -19,11 +19,14 @@ public interface StyleService {
      * Saves a new CSS styles of the site.
      *
      * @param styles the new CSS styles to save.
+     * @return true if styles is saved, false otherwise.
      */
-    void save(String styles);
+    boolean save(String styles);
 
     /**
      * Rollbacks a CSS styles.
+     *
+     * @return true if styles is rollback, false otherwise.
      */
-    void rollback();
+    boolean rollback();
 }

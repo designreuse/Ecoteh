@@ -15,6 +15,7 @@ public final class MockRepository {
     private static CompanyRepository companyRepository;
     private static FileRepository fileRepository;
     private static MessageRepository messageRepository;
+    private static PostRepository postRepository;
     private static ResponseRepository responseRepository;
     private static UserRepository userRepository;
 
@@ -56,6 +57,14 @@ public final class MockRepository {
             messageRepository = mockMessageRepository.create();
         }
         return messageRepository;
+    }
+
+    public static PostRepository getPostRepository() {
+        if (postRepository == null) {
+            final MockPostRepository mockPostRepository = new MockPostRepository();
+            postRepository = mockPostRepository.create();
+        }
+        return postRepository;
     }
 
     public static ResponseRepository getResponseRepository() {

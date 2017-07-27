@@ -416,14 +416,17 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      * Removes user if name is not null and not empty.
      *
      * @param name the name of a user to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByName(final String name) {
-        if (isNotEmpty(name)) {
+    public boolean removeByName(final String name) {
+        boolean result = isNotEmpty(name);
+        if (result) {
             final User user = getByName(name);
-            remove(user);
+            result = remove(user);
         }
+        return result;
     }
 
     /**
@@ -431,14 +434,17 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      * Removes user if URL is not null and not empty.
      *
      * @param url the URL of a user to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByUrl(final String url) {
-        if (isNotEmpty(url)) {
+    public boolean removeByUrl(final String url) {
+        boolean result = isNotEmpty(url);
+        if (result) {
             final User user = getByUrl(url);
-            remove(user);
+            result = remove(user);
         }
+        return result;
     }
 
     /**
@@ -446,15 +452,20 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      * Removes model if it is not null.
      *
      * @param user the user to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final User user) {
-        if (isNotNull(user)) {
-            super.remove(user);
-            final File photo = user.getPhoto();
-            this.fileService.deleteFile(photo.getUrl());
+    public boolean remove(final User user) {
+        boolean result = isNotNull(user);
+        if (result) {
+            result = super.remove(user);
+            if (result) {
+                final File photo = user.getPhoto();
+                this.fileService.deleteFile(photo.getUrl());
+            }
         }
+        return result;
     }
 
     /**
@@ -462,13 +473,16 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
      * Removes users if are not null.
      *
      * @param users the users to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final Collection<User> users) {
-        if (isNotEmpty(users)) {
+    public boolean remove(final Collection<User> users) {
+        final boolean result = isNotEmpty(users);
+        if (result) {
             users.forEach(this::remove);
         }
+        return result;
     }
 
     /**

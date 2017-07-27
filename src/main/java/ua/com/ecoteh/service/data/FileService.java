@@ -36,15 +36,17 @@ public interface FileService extends DataService<File> {
      * Removes file object with the incoming title.
      *
      * @param title the title of a file to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByTitle(String title);
+    boolean removeByTitle(String title);
 
     /**
      * Removes file object with the incoming url.
      *
      * @param url a URL of the file to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void removeByUrl(String url);
+    boolean removeByUrl(String url);
 
     /**
      * Sorts and returns file objects by title.

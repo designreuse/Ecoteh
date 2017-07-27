@@ -239,8 +239,10 @@ public final class CategoryController {
      */
     @RequestMapping(value = "/delete/{url}", method = RequestMethod.GET)
     public String deleteCategoryByUrl(@PathVariable("url") final String url) {
-        this.categoryService.removeByUrl(url);
-        Cache.clear();
+        final boolean result = this.categoryService.removeByUrl(url);
+        if (result) {
+            Cache.clear();
+        }
         return "redirect:/";
     }
 

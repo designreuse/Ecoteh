@@ -77,22 +77,25 @@ public interface DataService<T extends Model> {
      * Removes object of {@link Model} class or subclasses with incoming id.
      *
      * @param id a id of the model to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void remove(long id);
+    boolean remove(long id);
 
     /**
      * Removes object of {@link Model} class or subclasses.
      *
      * @param model the model to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void remove(T model);
+    boolean remove(T model);
 
     /**
      * Removes objects of {@link Model} class or subclasses.
      *
      * @param models the models to remove.
+     * @return true if model is deleted, false otherwise.
      */
-    void remove(Collection<T> models);
+    boolean remove(Collection<T> models);
 
     /**
      * Removes all objects of {@link Model} class or subclasses.

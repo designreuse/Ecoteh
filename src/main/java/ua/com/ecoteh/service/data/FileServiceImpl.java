@@ -216,14 +216,17 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * Removes file object with the incoming id.
      *
      * @param id the id of a file to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final long id) {
+    public boolean remove(final long id) {
+        boolean result = id > 0;
         if (id > 0) {
             final File file = get(id);
-            remove(file);
+            result = remove(file);
         }
+        return result;
     }
 
     /**
@@ -231,28 +234,34 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * Removes file if title is not null and not empty.
      *
      * @param title the title of a file to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByTitle(final String title) {
+    public boolean removeByTitle(final String title) {
+        boolean result = isNotEmpty(title);
         if (isNotEmpty(title)) {
             final File file = getByTitle(title);
-            remove(file);
+            result = remove(file);
         }
+        return result;
     }
 
     /**
      * Removes file object with the incoming URL.
      *
      * @param url the URL of a file to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByUrl(final String url) {
+    public boolean removeByUrl(final String url) {
+        boolean result = isNotEmpty(url);
         if (isNotEmpty(url)) {
             final File file = getByUrl(url);
-            remove(file);
+            result = remove(file);
         }
+        return result;
     }
 
     /**
@@ -260,31 +269,36 @@ public final class FileServiceImpl extends DataServiceImpl<File, FileEntity> imp
      * If incoming file is static then throws IllegalArgumentException.
      *
      * @param file the file to remove.
+     * @return true if model is deleted, false otherwise.
      * @throws IllegalArgumentException if the incoming file is static.
      */
     @Override
     @Transactional
-    public void remove(final File file) throws IllegalArgumentException {
+    public boolean remove(final File file) throws IllegalArgumentException {
+        boolean result = isNotNull(file);
         if (isNotNull(file)) {
             if (isStaticFile(file)) {
                 throw getIllegalArgumentException(ExceptionMessage.FORBIDDEN_STATIC_FILE_MESSAGE);
             }
-            super.remove(file);
-            deleteFile(file.getUrl());
+            result = super.remove(file) && deleteFile(file.getUrl());
         }
+        return result;
     }
 
     /**
      * Removes files if are not empty.
      *
      * @param files the files to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final Collection<File> files) {
-        if (isNotEmpty(files)) {
+    public boolean remove(final Collection<File> files) {
+        boolean result = isNotEmpty(files);
+        if (result) {
             files.forEach(this::remove);
         }
+        return result;
     }
 
     /**

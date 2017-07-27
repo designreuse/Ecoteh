@@ -246,6 +246,51 @@ public abstract class AbstractMainMVFabricImplTest {
     }
 
     @Test
+    public void whenGetBlogPageThenReturnSomeModelAndView() {
+        final MainMVFabric fabric = getFabric();
+        final String viewName = "post/all";
+        final String[] keys = { "main_company", "categories", "favicon", "posts" };
+        ModelAndView modelAndView = fabric.blogPage();
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetPostByUrlPageThenReturnSomeModelAndView() {
+        final MainMVFabric fabric = getFabric();
+        final ModelAndView modelAndView = fabric.postByUrlPage(URL);
+        final String viewName = "post/one";
+        final String[] keys = { "main_company", "categories", "favicon", "post", "posts" };
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetAllSortByTitlePostsPageThenReturnSomeModelAndView() {
+        final MainMVFabric fabric = getFabric();
+        final ModelAndView modelAndView = fabric.allSortBlogPage("title", true);
+        final String viewName = "post/all";
+        final String[] keys = { "main_company", "categories", "favicon", "posts", "sort", "revers" };
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetAllSortByDatePostsPageThenReturnSomeModelAndView() {
+        final MainMVFabric fabric = getFabric();
+        final ModelAndView modelAndView = fabric.allSortBlogPage("date", true);
+        final String viewName = "post/all";
+        final String[] keys = { "main_company", "categories", "favicon", "posts", "sort", "revers" };
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetAllSortByOtherPostsPageThenReturnSomeModelAndView() {
+        final MainMVFabric fabric = getFabric();
+        final ModelAndView modelAndView = fabric.allSortBlogPage("unknown", true);
+        final String viewName = "post/all";
+        final String[] keys = { "main_company", "categories", "favicon", "posts" };
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
     public void whenGetDefaultModelAndViewThenReturnSomeModelAndView() {
         final MainMVFabric fabric = getFabric();
         final ModelAndView modelAndView = fabric.getDefaultModelAndView();

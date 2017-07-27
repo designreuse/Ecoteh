@@ -218,7 +218,7 @@ public final class PostController {
         final Post post = postBuilder.build();
         final Post updatedPost = this.postService.update(post);
         Cache.clear();
-        return "redirect:/post" + updatedPost.getUrl();
+        return "redirect:/post/" + updatedPost.getUrl();
     }
 
     /**

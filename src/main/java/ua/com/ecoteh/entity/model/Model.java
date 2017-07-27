@@ -110,6 +110,11 @@ public abstract class Model implements Serializable, Cloneable {
     @Override
     public abstract int hashCode();
 
+    /**
+     * Returns a string representation of the object to search.
+     *
+     * @return A string representation of the object (newer null).
+     */
     public abstract String toSearch();
 
     /**

@@ -432,13 +432,16 @@ public final class ArticleServiceImpl extends ContentServiceImpl<Article, Articl
      * is not null and not empty.
      *
      * @param number the number of a article to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByNumber(final String number) {
-        if (isNotEmpty(number)) {
+    public boolean removeByNumber(final String number) {
+        final boolean result = isNotEmpty(number);
+        if (result) {
             this.repository.deleteByNumber(number);
         }
+        return result;
     }
 
     /**

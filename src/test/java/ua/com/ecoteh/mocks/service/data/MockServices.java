@@ -18,6 +18,7 @@ public final class MockServices {
     private static SearchService searchService;
     private static SeoService seoService;
     private static StyleService styleService;
+    private static PostService postService;
 
     public static ArticleService getArticleService() {
         if (articleService == null) {
@@ -97,5 +98,13 @@ public final class MockServices {
             styleService = mockStyleService.create();
         }
         return styleService;
+    }
+
+    public static PostService getPostService() {
+        if (postService == null) {
+            final MockPostService mockPostService = new MockPostService();
+            postService = mockPostService.create();
+        }
+        return postService;
     }
 }

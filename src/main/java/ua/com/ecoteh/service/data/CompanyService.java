@@ -30,8 +30,10 @@ public interface CompanyService extends ContentService<Company> {
 
     /**
      * Removes main company.
+     *
+     * @return true if model is deleted, false otherwise.
      */
-    void removeMain();
+    boolean removeMain();
 
     /**
      * Returns all partners companies.

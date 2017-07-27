@@ -77,11 +77,13 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
                     getClassSimpleName()
             );
         }
-        final File file = content.getLogo();
-        final String path = this.fileService.saveFile(file.getMultipartFile());
         final E contentEntity = convertToEntity(content);
-        final FileEntity fileEntity = contentEntity.getLogoEntity();
-        fileEntity.setUrl(path);
+        final File file = content.getLogo();
+        if (isNotEmpty(file.getMultipartFile())) {
+            final String path = this.fileService.saveFile(file.getMultipartFile());
+            final FileEntity fileEntity = contentEntity.getLogoEntity();
+            fileEntity.setUrl(path);
+        }
         final E savingEntity = this.repository.save(contentEntity);
         if (isNull(savingEntity)) {
             throw getNullPointerException(
@@ -188,28 +190,34 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
      * Removes content if title is not blank.
      *
      * @param title the title of a content to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByTitle(final String title) {
-        if (isNotEmpty(title)) {
+    public boolean removeByTitle(final String title) {
+        final boolean result = isNotEmpty(title);
+        if (result) {
             final T content = getByTitle(title, false);
             remove(content);
         }
+        return result;
     }
 
     /**
      * Removes object of {@link Content} or subclasses with the incoming URL.
      *
      * @param url the URL of a content to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeByUrl(final String url) {
-        if (isNotEmpty(url)) {
+    public boolean removeByUrl(final String url) {
+        final boolean result = isNotEmpty(url);
+        if (result) {
             final T content = getByUrl(url, false);
             remove(content);
         }
+        return result;
     }
 
     /**
@@ -217,15 +225,17 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
      * Removes content if it is not null.
      *
      * @param content the content to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final T content) {
-        if (isNotNull(content)) {
-            super.remove(content);
+    public boolean remove(final T content) {
+        final boolean result = super.remove(content);
+        if (result) {
             final File logo = content.getLogo();
             this.fileService.deleteFile(logo.getUrl());
         }
+        return result;
     }
 
     /**
@@ -233,13 +243,16 @@ public abstract class ContentServiceImpl<T extends Content, E extends ContentEnt
      * Removes contents if are not null.
      *
      * @param contents the users to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final Collection<T> contents) {
+    public boolean remove(final Collection<T> contents) {
+        final boolean result = isNotEmpty(contents);
         if (isNotEmpty(contents)) {
             contents.forEach(this::remove);
         }
+        return result;
     }
 
     /**

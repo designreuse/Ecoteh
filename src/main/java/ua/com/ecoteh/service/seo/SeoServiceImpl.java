@@ -7,9 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.ecoteh.entity.article.Article;
 import ua.com.ecoteh.entity.category.Category;
 import ua.com.ecoteh.entity.company.Company;
+import ua.com.ecoteh.entity.post.Post;
 import ua.com.ecoteh.service.data.ArticleService;
 import ua.com.ecoteh.service.data.CategoryService;
 import ua.com.ecoteh.service.data.CompanyService;
+import ua.com.ecoteh.service.data.PostService;
 import ua.com.ecoteh.util.cache.Cache;
 
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNull;
@@ -59,22 +61,31 @@ public final class SeoServiceImpl implements SeoService {
     private final ArticleService articleService;
 
     /**
+     * The describes a set of methods for working
+     * with objects of the {@link Post} class.
+     */
+    private final PostService postService;
+
+    /**
      * Constructor.
      * Initializes a implementation of the interface.
      *
      * @param companyService  the implementation of the {@link CompanyService} interface.
      * @param categoryService the implementation of the {@link CategoryService} interface.
      * @param articleService  the implementation of the {@link ArticleService} interface.
+     *                        @param postService  the implementation of the {@link PostService} interface.
      */
     @Autowired
     public SeoServiceImpl(
             final CompanyService companyService,
             final CategoryService categoryService,
-            final ArticleService articleService
+            final ArticleService articleService,
+            final PostService postService
     ) {
         this.companyService = companyService;
         this.categoryService = categoryService;
         this.articleService = articleService;
+        this.postService = postService;
     }
 
     /**
@@ -130,6 +141,7 @@ public final class SeoServiceImpl implements SeoService {
         modelAndView.addObject("domain", getMainCompanyDomain());
         modelAndView.addObject("categories", this.categoryService.getAll());
         modelAndView.addObject("articles", this.articleService.getAll());
+        modelAndView.addObject("posts", this.postService.getAll());
         modelAndView.setViewName("seo/sitemap");
         return modelAndView;
     }

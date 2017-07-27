@@ -26,12 +26,12 @@ public abstract class Content extends Model {
     private final String title;
 
     /**
-     * The URL of this contentE.
+     * The URL of this content.
      */
     private final String url;
 
     /**
-     * The text of this contentE.
+     * The text of this content.
      */
     private final String text;
 
@@ -57,7 +57,7 @@ public abstract class Content extends Model {
      * @param validated   the validations of a new content.
      * @param title       the title of a new content.
      * @param url         the URL of a new content.
-     * @param text        the text of a new article.
+     * @param text        the text of a new content.
      * @param description the description of a new content.
      * @param keywords    the keywords of a new content.
      * @param logo        the logo of a new content.
@@ -126,19 +126,6 @@ public abstract class Content extends Model {
     }
 
     /**
-     * Creates and returns a copy of this object.
-     *
-     * @return A clone of this instance (newer null).
-     */
-    @Override
-    public Content clone() {
-        final Content clone = (Content) super.clone();
-        final ContentEditor contentEditor = clone.getEditor();
-        contentEditor.addLogo(this.logo.clone());
-        return (Content) contentEditor.update();
-    }
-
-    /**
      * Returns a hash code value for the object.
      * This method is supported for the benefit
      * of hash tables such as those provided by HashMap.
@@ -149,6 +136,19 @@ public abstract class Content extends Model {
     public int hashCode() {
         return this.title.hashCode() + this.url.hashCode() +
                 this.text.hashCode() + this.description.hashCode();
+    }
+
+    /**
+     * Creates and returns a copy of this object.
+     *
+     * @return A clone of this instance (newer null).
+     */
+    @Override
+    public Content clone() {
+        final Content clone = (Content) super.clone();
+        final ContentEditor contentEditor = clone.getEditor();
+        contentEditor.addLogo(this.logo.clone());
+        return (Content) contentEditor.update();
     }
 
     /**

@@ -173,6 +173,36 @@ public abstract class MainControllerTest {
     }
 
     @Test
+    public void whenGetPostPageThenReturnSomeModelAndViewWithThePost() {
+        final MainController controller = getController();
+        final String viewName = "post/one";
+        final String[] keys = { "main_company", "categories", "favicon", "post" };
+        final ModelAndView modelAndView = controller.getPostPage(URL);
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetBlogPageThenReturnSomeModelAndViewWithPosts() {
+        final MainController controller = getController();
+        final String viewName = "post/all";
+        final String[] keys = { "main_company", "categories", "favicon", "posts" };
+        final ModelAndView modelAndView = controller.getBlogPage();
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
+    public void whenGetAllSortPostsPageThenReturnSomeModelAndViewWithAllPosts() {
+        final MainController controller = getController();
+        final String viewName = "post/all";
+        final String[] keys = { "main_company", "categories", "favicon", "posts", "sort", "revers" };
+        final HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("type")).thenReturn("title");
+        when(request.getParameter("revers")).thenReturn("true");
+        final ModelAndView modelAndView = controller.getSortBlogPage(request);
+        checkModelAndView(modelAndView, viewName, keys);
+    }
+
+    @Test
     public void whenGetControllerThenReturnNotNull() {
         final MainController controller = getController();
         assertNotNull(controller);

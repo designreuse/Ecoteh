@@ -22,6 +22,9 @@ import ua.com.ecoteh.entity.file.FileEditor;
 import ua.com.ecoteh.entity.message.Message;
 import ua.com.ecoteh.entity.message.MessageBuilder;
 import ua.com.ecoteh.entity.message.MessageEditor;
+import ua.com.ecoteh.entity.post.Post;
+import ua.com.ecoteh.entity.post.PostBuilder;
+import ua.com.ecoteh.entity.post.PostEditor;
 import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.response.ResponseBuilder;
 import ua.com.ecoteh.entity.response.ResponseEditor;
@@ -48,6 +51,7 @@ public final class MockModels {
     private static Contacts contacts;
     private static File file;
     private static Message message;
+    private static Post post;
     private static Response response;
     private static User user;
 
@@ -58,6 +62,7 @@ public final class MockModels {
     private static List<Contacts> contactses;
     private static List<File> files;
     private static List<Message> messages;
+    private static List<Post> posts;
     private static List<Response> responses;
     private static List<User> users;
 
@@ -96,6 +101,13 @@ public final class MockModels {
         return contacts.clone();
     }
 
+    public static File getFile() {
+        if (file == null) {
+            initFile();
+        }
+        return file.clone();
+    }
+
     public static Message getMessage() {
         if (message == null) {
             initMessage();
@@ -103,11 +115,11 @@ public final class MockModels {
         return message.clone();
     }
 
-    public static File getFile() {
-        if (file == null) {
-            initFile();
+    public static Post getPost() {
+        if (post == null) {
+            initPost();
         }
-        return file.clone();
+        return post.clone();
     }
 
     public static Response getResponse() {
@@ -159,6 +171,13 @@ public final class MockModels {
         return new ArrayList<>(contactses);
     }
 
+    public static List<File> getFiles() {
+        if (files == null || files.isEmpty()) {
+            initFiles();
+        }
+        return new ArrayList<>(files);
+    }
+
     public static List<Message> getMessages() {
         if (messages == null || messages.isEmpty()) {
             initMessages();
@@ -166,11 +185,11 @@ public final class MockModels {
         return new ArrayList<>(messages);
     }
 
-    public static List<File> getFiles() {
-        if (files == null || files.isEmpty()) {
-            initFiles();
+    public static List<Post> getPosts() {
+        if (posts == null || posts.isEmpty()) {
+            initPosts();
         }
-        return new ArrayList<>(files);
+        return new ArrayList<>(posts);
     }
 
     public static List<Response> getResponses() {
@@ -246,6 +265,13 @@ public final class MockModels {
         contacts = builder.build();
     }
 
+    private static void initFile() {
+        final FileBuilder builder = File.getBuilder();
+        builder.addId(ID).addValidated(VALIDATION)
+                .addTitle(TITLE).addUrl(URL);
+        file = builder.build();
+    }
+
     private static void initMessage() {
         final MessageBuilder builder = Message.getBuilder();
         builder.addId(ID).addValidated(VALIDATION)
@@ -253,11 +279,13 @@ public final class MockModels {
         message = builder.build();
     }
 
-    private static void initFile() {
-        final FileBuilder builder = File.getBuilder();
+    private static void initPost() {
+        final PostBuilder builder = Post.getBuilder();
         builder.addId(ID).addValidated(VALIDATION)
-                .addTitle(TITLE).addUrl(URL);
-        file = builder.build();
+                .addTitle(TITLE).addUrl(URL).addText(TEXT)
+                .addDescription(DESCRIPTION).addKeywords(KEYWORDS)
+                .addLogo(getFile());
+        post = builder.build();
     }
 
     private static void initResponse() {
@@ -326,6 +354,16 @@ public final class MockModels {
         }
     }
 
+    private static void initFiles() {
+        files = new ArrayList<>();
+        final File file = getFile();
+        final FileEditor editor = file.getEditor();
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
+            editor.addId((long) i);
+            files.add(editor.update());
+        }
+    }
+
     private static void initMessages() {
         messages = new ArrayList<>();
         final Message message = getMessage();
@@ -336,13 +374,13 @@ public final class MockModels {
         }
     }
 
-    private static void initFiles() {
-        files = new ArrayList<>();
-        final File file = getFile();
-        final FileEditor editor = file.getEditor();
+    private static void initPosts() {
+        posts = new ArrayList<>();
+        final Post post = getPost();
+        final PostEditor editor = post.getEditor();
         for (int i = 0; i < DEFAULT_SIZE; i++) {
             editor.addId((long) i);
-            files.add(editor.update());
+            posts.add(editor.update());
         }
     }
 

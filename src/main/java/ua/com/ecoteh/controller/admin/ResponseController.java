@@ -176,8 +176,10 @@ public final class ResponseController {
             method = RequestMethod.GET
     )
     public String deleteResponseById(@PathVariable("id") final long id) {
-        this.responseService.remove(id);
-        Cache.clear();
+        final  boolean result = this.responseService.remove(id);
+        if (result) {
+            Cache.clear();
+        }
         return "redirect:/responses";
     }
 

@@ -17,6 +17,8 @@ import ua.com.ecoteh.entity.message.Message;
 import ua.com.ecoteh.entity.message.MessageEntity;
 import ua.com.ecoteh.entity.model.Model;
 import ua.com.ecoteh.entity.model.ModelEntity;
+import ua.com.ecoteh.entity.post.Post;
+import ua.com.ecoteh.entity.post.PostEntity;
 import ua.com.ecoteh.entity.response.Response;
 import ua.com.ecoteh.entity.response.ResponseEntity;
 import ua.com.ecoteh.entity.user.User;
@@ -41,6 +43,7 @@ public final class MockModelEntities {
     private static ContactsEntity contactsEntity;
     private static FileEntity fileEntity;
     private static MessageEntity messageEntity;
+    private static PostEntity postEntity;
     private static ResponseEntity responseEntity;
     private static UserEntity userEntity;
 
@@ -51,6 +54,7 @@ public final class MockModelEntities {
     private static List<ContactsEntity> contactsEntities;
     private static List<FileEntity> fileEntities;
     private static List<MessageEntity> messageEntities;
+    private static List<PostEntity> postEntities;
     private static List<ResponseEntity> responsEntities;
     private static List<UserEntity> userEntities;
 
@@ -96,6 +100,14 @@ public final class MockModelEntities {
         return contactsEntity.clone();
     }
 
+    public static FileEntity getFileEntity() {
+        if (fileEntity == null) {
+            final File file = getFile();
+            fileEntity = file.convert();
+        }
+        return fileEntity.clone();
+    }
+
     public static MessageEntity getMessageEntity() {
         if (messageEntity == null) {
             final Message message = getMessage();
@@ -104,12 +116,12 @@ public final class MockModelEntities {
         return messageEntity.clone();
     }
 
-    public static FileEntity getFileEntity() {
-        if (fileEntity == null) {
-            final File file = getFile();
-            fileEntity = file.convert();
+    public static PostEntity getPostEntity() {
+        if (postEntity == null) {
+            final Post file = getPost();
+            postEntity = file.convert();
         }
-        return fileEntity.clone();
+        return postEntity.clone();
     }
 
     public static ResponseEntity getResponseEntity() {
@@ -168,6 +180,14 @@ public final class MockModelEntities {
         return new ArrayList<>(contactsEntities);
     }
 
+    public static List<FileEntity> getFileEntities() {
+        if (fileEntities == null || fileEntities.isEmpty()) {
+            final List<File> files = getFiles();
+            fileEntities = convert(files);
+        }
+        return new ArrayList<>(fileEntities);
+    }
+
     public static List<MessageEntity> getMessageEntities() {
         if (messageEntities == null || messageEntities.isEmpty()) {
             final List<Message> messages = getMessages();
@@ -176,12 +196,12 @@ public final class MockModelEntities {
         return new ArrayList<>(messageEntities);
     }
 
-    public static List<FileEntity> getFileEntities() {
-        if (fileEntities == null || fileEntities.isEmpty()) {
-            final List<File> files = getFiles();
-            fileEntities = convert(files);
+    public static List<PostEntity> getPostEntities() {
+        if (postEntities == null || postEntities.isEmpty()) {
+            final List<Post> posts = getPosts();
+            postEntities = convert(posts);
         }
-        return new ArrayList<>(fileEntities);
+        return new ArrayList<>(postEntities);
     }
 
     public static List<ResponseEntity> getResponseEntities() {

@@ -194,13 +194,16 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      * with parameter id.
      *
      * @param id the id of a model to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final long id) {
-        if (id > 0) {
+    public boolean remove(final long id) {
+        final boolean result = id > 0;
+        if (result) {
             this.repository.delete(id);
         }
+        return result;
     }
 
     /**
@@ -208,14 +211,17 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      * Removes model if it is not null.
      *
      * @param model the model to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final T model) {
-        if (isNotNull(model)) {
+    public boolean remove(final T model) {
+        final boolean result = isNotNull(model);
+        if (result) {
             final E entity = convertToEntity(model);
             this.repository.delete(entity);
         }
+        return result;
     }
 
     /**
@@ -223,14 +229,17 @@ public abstract class DataServiceImpl<T extends Model, E extends ModelEntity> im
      * Removes models if are not null.
      *
      * @param models the models to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final Collection<T> models) {
-        if (isNotEmpty(models)) {
+    public boolean remove(final Collection<T> models) {
+        final boolean result = isNotEmpty(models);
+        if (result) {
             final Collection<E> entities = convertToEntities(models);
             this.repository.delete(entities);
         }
+        return result;
     }
 
     /**

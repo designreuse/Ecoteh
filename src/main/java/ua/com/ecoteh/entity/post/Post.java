@@ -1,7 +1,6 @@
 package ua.com.ecoteh.entity.post;
 
 import ua.com.ecoteh.entity.content.Content;
-import ua.com.ecoteh.entity.content.ContentEditor;
 import ua.com.ecoteh.entity.file.File;
 import ua.com.ecoteh.util.time.Time;
 
@@ -131,7 +130,7 @@ public final class Post extends Content {
      * @return the post editor (newer null).
      */
     @Override
-    public ContentEditor getEditor() {
+    public PostEditor getEditor() {
         return new PostEditor(this);
     }
 

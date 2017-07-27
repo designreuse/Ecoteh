@@ -189,23 +189,28 @@ public final class CompanyServiceImpl extends ContentServiceImpl<Company, Compan
      * and has not type CompanyType.MAIN.
      *
      * @param company the company to remove.
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void remove(final Company company) {
-        if (isNotMainCompany(company)) {
-            super.remove(company);
+    public boolean remove(final Company company) {
+        boolean result = isNotMainCompany(company);
+        if (result) {
+            result = super.remove(company);
         }
+        return result;
     }
 
     /**
      * Removes main company.
+     *
+     * @return true if model is deleted, false otherwise.
      */
     @Override
     @Transactional
-    public void removeMain() {
+    public boolean removeMain() {
         final Company main = getMainCompany();
-        super.remove(main);
+        return super.remove(main);
     }
 
     /**

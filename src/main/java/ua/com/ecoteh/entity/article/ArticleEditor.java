@@ -92,7 +92,6 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
         if (isNotNull(article)) {
             super.copy(article)
                     .addNumber(article.getNumber())
-                    .addText(article.getText())
                     .addDate(article.getDate())
                     .addPrice(article.getPrice())
                     .addCurrency(article.getCurrency())
