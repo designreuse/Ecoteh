@@ -21,8 +21,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <title>Персонал | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Персонал | <c:out value="${main_company.title}"/>">
         <meta name="description" content="На этой странице отображаются весь персонал компании.">
-        <meta name="keywords"
-              content="<c:out value="${main_company.title}"/><c:forEach items="${users}" var="user">, <c:out value="${user.name}"/></c:forEach>"/>
+        <meta name="keywords" content="Персонал, <c:out value="${main_company.title}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
