@@ -116,7 +116,7 @@ public final class UserController {
     )
     public ModelAndView getAllUsersPage() {
         final ModelAndView modelAndView = this.fabric.getDefaultModelAndView();
-        modelAndView.addObject("users", this.userService.getPersonnel());
+        modelAndView.addObject("users", this.userService.getPersonnel(false));
         modelAndView.addObject("is_captcha", null);
         modelAndView.setViewName("user/all");
         return modelAndView;

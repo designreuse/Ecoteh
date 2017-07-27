@@ -78,11 +78,27 @@ public interface UserService extends DataService<User>, UserDetailsService {
     Collection<User> getAdmins();
 
     /**
+     * Returns users with role "ADMIN".
+     *
+     * @param valid is returns all or valid models.
+     * @return The all admin.
+     */
+    Collection<User> getAdmins(boolean valid);
+
+    /**
      * Returns personnel.
      *
      * @return The all personnel.
      */
     Collection<User> getPersonnel();
+
+    /**
+     * Returns personnel.
+     *
+     * @param valid is returns all or valid models.
+     * @return The all personnel.
+     */
+    Collection<User> getPersonnel(boolean valid);
 
     /**
      * Removes user with the incoming name.

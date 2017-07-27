@@ -401,6 +401,19 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     }
 
     /**
+     * Returns users with role UserRole.ADMIN.
+     *
+     * @param valid is returns all or valid models.
+     * @return The users with role UserRole.ADMIN (never null).
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<User> getAdmins(final boolean valid) {
+        final Collection<User> users = getAll(valid);
+        return filterByRole(users, UserRole.ADMIN);
+    }
+
+    /**
      * Returns personnel.
      *
      * @return The all personnel (never null).
@@ -409,6 +422,18 @@ public final class UserServiceImpl extends DataServiceImpl<User, UserEntity>
     @Transactional(readOnly = true)
     public Collection<User> getPersonnel() {
         return getAdmins();
+    }
+
+    /**
+     * Returns personnel.
+     *
+     * @param valid is returns all or valid models.
+     * @return The all personnel (never null).
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<User> getPersonnel(final boolean valid) {
+        return getAdmins(valid);
     }
 
     /**
