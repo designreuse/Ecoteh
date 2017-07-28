@@ -3,10 +3,7 @@ package ua.com.ecoteh.service.search;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.service.data.ArticleService;
-import ua.com.ecoteh.service.data.CategoryService;
-import ua.com.ecoteh.service.data.CompanyService;
-import ua.com.ecoteh.service.data.UserService;
+import ua.com.ecoteh.service.data.*;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
 import static ua.com.ecoteh.mocks.ModelAndViews.checkModelAndView;
@@ -29,9 +26,10 @@ public class SearchServiceImplTest {
         final ArticleService articleService = getArticleService();
         final CompanyService companyService = getCompanyService();
         final UserService userService = getUserService();
+        final PostService postService = getPostService();
         searchService = new SearchServiceImpl(
                 fabric, categoryService, articleService,
-                companyService, userService
+                companyService, userService, postService
         );
     }
 
@@ -79,9 +77,20 @@ public class SearchServiceImplTest {
     public void whenSearchByArticlesKeywordsThenRedirectToAllArticles() {
         ModelAndView modelAndView;
         final String viewName = "redirect:/article/all";
-        final String[] keywords = new String[] { "все статьи", "all articles" };
+        final String[] keywords = new String[] { "товары", "products" };
         for (String keyword : keywords) {
             modelAndView = searchService.search(keyword, "in_articles");
+            checkModelAndView(modelAndView, viewName, null);
+        }
+    }
+
+    @Test
+    public void whenSearchByBlogKeywordsThenRedirectToAllArticles() {
+        ModelAndView modelAndView;
+        final String viewName = "redirect:/blog";
+        final String[] keywords = new String[] { "статьи", "blog" };
+        for (String keyword : keywords) {
+            modelAndView = searchService.search(keyword, "in_blog");
             checkModelAndView(modelAndView, viewName, null);
         }
     }
