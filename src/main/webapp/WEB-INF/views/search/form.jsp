@@ -30,6 +30,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <input type="checkbox" name="content" title="" value="in_articles"
                    <c:if test="${in_articles}">checked</c:if>>&nbsp;Статьи
         </label>&nbsp;&nbsp;&nbsp;
+        <label title="Искать среди статьей">
+            <input type="checkbox" name="content" title="" value="in_posts"
+                   <c:if test="${in_posts}">checked</c:if>>&nbsp;Блог
+        </label>&nbsp;&nbsp;&nbsp;
         <label title="Искать среди партнеров">
             <input type="checkbox" name="content" title="" value="in_companies"
                    <c:if test="${in_companies}">checked</c:if>>&nbsp;Партнеры

@@ -12,10 +12,11 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 
 <c:set var="categories_length" value="${fn:length(categories_list)}" scope="page"/>
 <c:set var="articles_length" value="${fn:length(articles_list)}" scope="page"/>
+<c:set var="posts_length" value="${fn:length(posts_list)}" scope="page"/>
 <c:set var="companies_length" value="${fn:length(companies_list)}" scope="page"/>
 <c:set var="users_length" value="${fn:length(users_list)}" scope="page"/>
-<c:set var="result"
-       value="${(categories_length gt 0) or (articles_length gt 0) or (companies_length gt 0) or (users_length gt 0)}"/>
+<c:set var="result" value="${(categories_length gt 0) or (articles_length gt 0) or
+ (posts_length gt 0) or (companies_length gt 0) or (users_length gt 0)}"/>
 
 <compress:html removeIntertagSpaces="true">
     <!DOCTYPE HTML>
@@ -83,7 +84,23 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </div>
     </div>
         <%-- Search result --%>
-    <%@include file="/WEB-INF/views/search/result.jsp" %>
+    <c:choose>
+        <c:when test="${result}">
+            <%-- Categories list --%>
+            <%@include file="/WEB-INF/views/category/search_list.jsp" %>
+            <%-- Articles list --%>
+            <%@include file="/WEB-INF/views/article/search_list.jsp" %>
+            <%-- Posts list --%>
+            <%@include file="/WEB-INF/views/post/search_list.jsp" %>
+            <%-- Partners list --%>
+            <%@include file="/WEB-INF/views/company/search_list.jsp" %>
+            <%-- Users list --%>
+            <%@include file="/WEB-INF/views/user/search_list.jsp" %>
+        </c:when>
+        <c:otherwise>
+            <br><br><br>
+        </c:otherwise>
+    </c:choose>
         <%-- Footer --%>
     <jsp:include page="/WEB-INF/views/home/footer.jsp"/>
         <%-- Scripts --%>

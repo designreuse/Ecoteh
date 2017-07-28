@@ -5,17 +5,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.ecoteh.entity.article.ArticleEntity;
-import ua.com.ecoteh.entity.category.CategoryEntity;
-import ua.com.ecoteh.entity.company.CompanyEntity;
+import ua.com.ecoteh.entity.article.Article;
+import ua.com.ecoteh.entity.category.Category;
+import ua.com.ecoteh.entity.company.Company;
 import ua.com.ecoteh.entity.model.Model;
-import ua.com.ecoteh.entity.user.UserEntity;
+import ua.com.ecoteh.entity.post.Post;
+import ua.com.ecoteh.entity.user.User;
 import ua.com.ecoteh.service.data.*;
 import ua.com.ecoteh.service.fabrica.MainMVFabric;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ua.com.ecoteh.service.search.DefaultPage.*;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
@@ -39,31 +40,38 @@ public final class SearchServiceImpl implements SearchService {
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CategoryEntity}
+     * for working with objects of the {@link Category}
      * class.
      */
     private final CategoryService categoryService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link ArticleEntity}
+     * for working with objects of the {@link Article}
      * class.
      */
     private final ArticleService articleService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link CompanyEntity}
+     * for working with objects of the {@link Company}
      * class.
      */
     private final CompanyService companyService;
 
     /**
      * The implementation of the interface describes a set of methods
-     * for working with objects of the {@link UserEntity}
+     * for working with objects of the {@link User}
      * class.
      */
     private final UserService userService;
+
+    /**
+     * The implementation of the interface describes a set of methods
+     * for working with objects of the {@link Post}
+     * class.
+     */
+    private final PostService postService;
 
     /**
      * Constructor.
@@ -74,6 +82,7 @@ public final class SearchServiceImpl implements SearchService {
      * @param articleService  the implementation of the {@link ArticleService} interface.
      * @param companyService  the implementation of the {@link CompanyService} interface.
      * @param userService     the implementation of the {@link UserService} interface.
+     * @param postService     the implementation of the {@link PostService} interface.
      */
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -82,13 +91,15 @@ public final class SearchServiceImpl implements SearchService {
             final CategoryService categoryService,
             final ArticleService articleService,
             final CompanyService companyService,
-            final UserService userService
+            final UserService userService,
+            final PostService postService
     ) {
         this.fabric = fabric;
         this.categoryService = categoryService;
         this.articleService = articleService;
         this.companyService = companyService;
         this.userService = userService;
+        this.postService = postService;
     }
 
     /**
@@ -139,8 +150,10 @@ public final class SearchServiceImpl implements SearchService {
             viewName = ABOUT_COMPANY_URL;
         } else if (CONTACTS_KEYWORDS.contains(temp)) {
             viewName = CONTACTS_URL;
-        } else if (COMPANY_KEYWORDS.contains(temp)) {
-            viewName = COMPANY_URL;
+        } else if (CONTACTS_KEYWORDS.contains(temp)) {
+            viewName = CONTACTS_URL;
+        } else if (BLOG_KEYWORDS.contains(temp)) {
+            viewName = BLOG_URL;
         } else if (RESPONSES_KEYWORDS.contains(temp)) {
             viewName = RESPONSES_URL;
         } else if (USERS_KEYWORDS.contains(temp)) {
@@ -178,27 +191,32 @@ public final class SearchServiceImpl implements SearchService {
      * @param modelAndView the object of class ModelAndView for to update.
      */
     private void searchByAllContent(final String keywords, final ModelAndView modelAndView) {
-        final String[] keywordArray = keywords.toLowerCase().split(", ");
         searchFromModelAndAdd(
-                keywordArray,
+                keywords,
                 this.categoryService,
                 "categories_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray,
+                keywords,
                 this.articleService,
                 "articles_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray,
+                keywords,
+                this.postService,
+                "posts_list",
+                modelAndView
+        );
+        searchFromModelAndAdd(
+                keywords,
                 this.companyService,
                 "companies_list",
                 modelAndView
         );
         searchFromModelAndAdd(
-                keywordArray,
+                keywords,
                 this.userService,
                 "users_list",
                 modelAndView
@@ -217,10 +235,9 @@ public final class SearchServiceImpl implements SearchService {
             final String keywords,
             final ModelAndView modelAndView
     ) {
-        final String[] keywordArray = keywords.toLowerCase().split(", ");
         if (content.contains("in_categories")) {
             searchFromModelAndAdd(
-                    keywordArray,
+                    keywords,
                     this.categoryService,
                     "categories_list",
                     modelAndView
@@ -228,15 +245,23 @@ public final class SearchServiceImpl implements SearchService {
         }
         if (content.contains("in_articles")) {
             searchFromModelAndAdd(
-                    keywordArray,
+                    keywords,
                     this.articleService,
                     "articles_list",
                     modelAndView
             );
         }
+        if (content.contains("in_posts")) {
+            searchFromModelAndAdd(
+                    keywords,
+                    this.postService,
+                    "posts_list",
+                    modelAndView
+            );
+        }
         if (content.contains("in_companies")) {
             searchFromModelAndAdd(
-                    keywordArray,
+                    keywords,
                     this.companyService,
                     "companies_list",
                     modelAndView
@@ -255,7 +280,7 @@ public final class SearchServiceImpl implements SearchService {
      * @param modelAndView the object of class ModelAndView for to update.
      */
     private <T extends Model> void searchFromModelAndAdd(
-            final String[] keywords,
+            final String keywords,
             final DataService<T> dataService,
             final String name,
             final ModelAndView modelAndView
@@ -274,20 +299,13 @@ public final class SearchServiceImpl implements SearchService {
      * @return The list of found objects.
      */
     private <T extends Model> List<T> searchFromModel(
-            final String[] keywords,
+            final String keywords,
             final DataService<T> dataService
     ) {
-        final List<T> result = new ArrayList<>();
         final Collection<T> models = dataService.getAll();
-        for (T model : models) {
-            for (String keyword : keywords) {
-                if (containsKeyword(model, keyword)) {
-                    result.add(model);
-                    break;
-                }
-            }
-        }
-        return result;
+        return models.stream()
+                .filter(model -> containsKeyword(model, keywords))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -330,6 +348,7 @@ public final class SearchServiceImpl implements SearchService {
     ) {
         modelAndView.addObject("in_categories", content.contains("in_categories"));
         modelAndView.addObject("in_articles", content.contains("in_articles"));
+        modelAndView.addObject("in_posts", content.contains("in_posts"));
         modelAndView.addObject("in_companies", content.contains("in_companies"));
         modelAndView.addObject("all", content.contains("all"));
         modelAndView.addObject("is_search", true);

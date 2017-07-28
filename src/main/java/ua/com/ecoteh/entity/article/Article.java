@@ -104,9 +104,7 @@ public final class Article extends Content {
      */
     @Override
     public String toSearch() {
-        return super.toSearch() +
-                ", " + this.number + ", " + this.date +
-                ", " + this.price + ", " + this.currency + " ";
+        return super.toSearch() + " , " + this.number;
     }
 
     /**

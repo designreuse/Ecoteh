@@ -101,8 +101,8 @@ public abstract class Content extends Model {
      */
     @Override
     public String toSearch() {
-        return " " + this.title + ", " + this.url + ", " + this.text +
-                ", " + this.description + ", " + this.keywords + " ";
+        return " " + this.title + " , " + this.url + /*" , " + this.text +*/
+                " , " + this.description + ", " + this.keywords + " ";
     }
 
     /**

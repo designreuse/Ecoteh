@@ -138,10 +138,8 @@ public final class Company extends Content {
      */
     @Override
     public String toSearch() {
-        return super.toSearch() +
-                ", " + this.contacts.toSearch() + ", " + this.address.toSearch() +
-                ", " + this.tagline + ", " + this.domain + ", " + this.senderEmail +
-                ", " + this.workTimeFrom + ", " + this.workTimeTo + ", " + this.type + " ";
+        return super.toSearch() + " , " + this.contacts.toSearch() +
+                " , " + this.address.toSearch() + " , " + this.tagline + " , " + this.domain;
     }
 
     /**

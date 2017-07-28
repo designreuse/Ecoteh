@@ -28,7 +28,7 @@ interface DefaultPage {
     /**
      * The keywords of page with all articles.
      */
-    String ALL_ARTICLES_KEYWORDS = "статьи, все статьи, all articles";
+    String ALL_ARTICLES_KEYWORDS = "товары, все товары, продукция, products";
 
     /**
      * The URL of the page with all articles.
@@ -87,4 +87,14 @@ interface DefaultPage {
      * The URL of page with personnel.
      */
     String USERS_URL = "redirect:/company/main";
+
+    /**
+     * The keywords of blog page.
+     */
+    String BLOG_KEYWORDS = "блог, статьи, все статьи, all articles, blog";
+
+    /**
+     * The URL of blog page.
+     */
+    String BLOG_URL = "redirect:/blog";
 }

@@ -117,10 +117,10 @@ public final class Contacts extends Model {
      */
     @Override
     public String toSearch() {
-        return " " + this.email + '\'' + ", " + this.mobilePhone +
-                ", " + this.landlinesPhone + ", " + this.fax +
-                ", " + this.vkontakte + ", " + this.facebook +
-                ", " + this.twitter + ", " + this.skype + " ";
+        return " " + this.email + " , " + this.mobilePhone +
+                " , " + this.landlinesPhone + " , " + this.fax +
+                " , " + this.vkontakte + " , " + this.facebook +
+                " , " + this.twitter + " , " + this.skype + " ";
     }
 
     /**

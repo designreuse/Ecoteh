@@ -141,9 +141,9 @@ public final class User extends Model implements UserDetails {
      */
     @Override
     public String toSearch() {
-        return " " + this.name + ", " + this.url +
-                ", " + this.description + ", " + this.role +
-                ", " + this.contacts.toSearch() + " ";
+        return " " + this.name + " , " + this.url +
+                " , " + this.description + " , " + this.role +
+                " , " + this.contacts.toSearch() + " ";
     }
 
     /**

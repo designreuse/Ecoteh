@@ -83,7 +83,7 @@ public final class File extends Model {
      */
     @Override
     public String toSearch() {
-        return " " + this.title + ", " + this.type + ", " + this.url + " ";
+        return " " + this.title + " , " + this.type + " , " + this.url + " ";
     }
 
     /**

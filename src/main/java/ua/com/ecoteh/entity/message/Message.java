@@ -86,7 +86,7 @@ public final class Message extends Model {
      */
     @Override
     public String toSearch() {
-        return " " + this.subject + ", " + this.text + ", " + this.date + " ";
+        return " " + this.subject + " , " + this.text + " ";
     }
 
     /**

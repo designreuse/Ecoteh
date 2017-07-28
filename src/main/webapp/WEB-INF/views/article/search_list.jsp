@@ -1,5 +1,5 @@
 <%--
-Categories list.
+Articles list.
 
 Yurii Salimov (yuriy.alex.salimov@gmail.com)
 --%>

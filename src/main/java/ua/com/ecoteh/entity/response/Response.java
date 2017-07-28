@@ -78,7 +78,7 @@ public final class Response extends Model {
      */
     @Override
     public String toSearch() {
-        return " " + this.text + ", " + this.date + " ";
+        return " " + this.text + " ";
     }
 
     /**
