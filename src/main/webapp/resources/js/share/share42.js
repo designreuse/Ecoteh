@@ -2,7 +2,7 @@
 window.addEventListener('load', function () {
     var e = document.getElementsByTagName('div');
     for (var k = 0; k < e.length; k++) {
-        if (e[k].className.indexOf('share-init') != -1) {
+        if (e[k].className.indexOf('share42init') != -1) {
             if (e[k].getAttribute('data-url') != -1)var u = e[k].getAttribute('data-url');
             if (e[k].getAttribute('data-title') != -1)var t = e[k].getAttribute('data-title');
             if (e[k].getAttribute('data-image') != -1)var i = e[k].getAttribute('data-image');
@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
                     return null;
                 }
 
-                f = path('share.min.js');
+                f = path('share42.min.js');
             }
             if (!u)u = location.href;
             if (!t)t = document.title;
@@ -52,14 +52,16 @@ window.addEventListener('load', function () {
             if (i != 'null' && i != '')vkImage = '&image=' + i;
             var s = [
                 '"#" data-count="fb" onclick="window.open(\'//www.facebook.com/sharer/sharer.php?u=' + u + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Поделиться в Facebook"',
-                '"#" data-count="vk" onclick="window.open(\'//vk.com/share.php?url=' + u + '&title=' + t + vkImage + '&description=' + d + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Поделиться В Контакте"',
-                '"#" data-count="odkl" onclick="window.open(\'//ok.ru/dk?st.cmd=addShare&st._surl=' + u + '&title=' + t + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Добавить в Одноклассники"',
                 '"#" data-count="twi" onclick="window.open(\'//twitter.com/intent/tweet?text=' + t + '&url=' + u + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Добавить в Twitter"',
                 '"#" data-count="gplus" onclick="window.open(\'//plus.google.com/share?url=' + u + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Поделиться в Google+"',
-                '"#" onclick="print();return false" title="Распечатать"'];
+                '"#" data-count="vk" onclick="window.open(\'//vk.com/share.php?url=' + u + '&title=' + t + vkImage + '&description=' + d + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Поделиться В Контакте"',
+                '"#" data-count="odkl" onclick="window.open(\'//ok.ru/dk?st.cmd=addShare&st._surl=' + u + '&title=' + t + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Добавить в Одноклассники"',
+                '"#" data-count="mail" onclick="window.open(\'//connect.mail.ru/share?url=' + u + '&title=' + t + '&description=' + d + '&imageurl=' + i + '\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=100, top=100, width=550, height=440, toolbar=0, status=0\');return false" title="Поделиться в Моем Мире@Mail.Ru"',
+                '"#" onclick="print();return false" title="Распечатать"'
+            ];
             var l = '';
-            for (j = 0; j < s.length; j++)l += '<a rel="nofollow" style="display:inline-block;vertical-align:bottom;width:32px;height:32px;margin:0 6px 6px 0;padding:0;outline:none;background:url(' + f + fn + ') -' + 32 * j + 'px 0 no-repeat" href=' + s[j] + ' target="_blank"></a>';
-            e[k].innerHTML = '<span id="share">' + l + '</span>';
+            for (j = 0; j < s.length; j++)l += '<a rel="nofollow" style="display:inline-block;vertical-align:bottom;width:24px;height:24px;margin:0 6px 6px 0;padding:0;outline:none;background:url(' + f + fn + ') -' + 24 * j + 'px 0 no-repeat" href=' + s[j] + ' target="_blank"></a>';
+            e[k].innerHTML = '<span id="share42">' + l + '</span>';
         }
     }
 }, false);
