@@ -19,25 +19,20 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="author" content="Yurii Salimov (yuriy.alex.salimov@gmail.com)">
         <meta name="robots" content="noindex,nofollow">
         <title>
-            Редактирование &quot;<c:out value="${company.title}"/>&quot; |
-            <c:out value="${main_company.title}"/>
+            Редактирование <c:out value="&quot;${company.title}&quot; | ${main_company.title}"/>
         </title>
         <meta name="title"
-              content="Редактирование &quot;<c:out value="${company.title}"/>&quot; | <c:out value="${main_company.title}"/>">
-        <meta name="description"
-              content="Форма для редактирования информации о компании &quot;<c:out value="${company.title}"/>&quot;">
-        <meta name="keywords" content="Редактирование компании, <c:out value="${company.keywords}"/>"/>
+              content="Редактирование <c:out value="&quot;${company.title}&quot; | ${main_company.title}"/>">
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-              rel="stylesheet" type="text/css">
+              rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-              rel="stylesheet" type="text/css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-              type="text/css">
-        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
+              rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet">
     </head>
     <body>
         <%-- Navigation bar --%>

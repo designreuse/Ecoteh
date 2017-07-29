@@ -20,19 +20,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title>Сообщения от пользователей | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Сообщения от пользователей | <c:out value="${main_company.title}"/>">
-        <meta name="description"
-              content="Сообщения от пользователей &quot;<c:out value="${main_company.title}"/>&quot;.">
-        <meta name="keywords" content="Сообщения от пользователей, <c:out value="${main_company.keywords}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-              rel="stylesheet" type="text/css">
+              rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-              rel="stylesheet" type="text/css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-              type="text/css">
-        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+              rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet">
     </head>
     <body>
         <%-- Navigation bar --%>
