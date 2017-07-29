@@ -122,9 +122,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <div class="text-center share-init" data-title="<c:out value="${post.title}"/>"
-                             data-description="<c:out value="${post.description}"/>"
-                             data-image="<c:url value="${post.logo.url}"/>"></div>
+                        <div class="text-center share42init"></div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -142,7 +140,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <script src="<c:url value="/resources/js/easing.min.js"/>" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" async></script>
         <%-- Share plugin --%>
-    <script src="<c:url value="/resources/js/share/share.min.js"/>" async></script>
+    <script src="<c:url value="/resources/js/share/share42.min.js"/>" async></script>
     </body>
     </html>
 </compress:html>
