@@ -14,7 +14,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 
 <compress:html removeIntertagSpaces="true">
     <!DOCTYPE HTML>
-    <html lang="ru">
+    <html lang="ru" prefix="og: http://ogp.me/ns#">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,18 +25,27 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="title" content="<c:out value="${article.title} | ${main_company.title}"/>">
         <meta name="description" content="<c:out value="${article.description}"/>"/>
         <meta name="keywords" content="Статья <c:out value="${article.title}, ${article.keywords}"/>"/>
+        <meta property="og:title" content="<c:out value="${article.title}"/>"/>
+        <meta property="og:type" content="product"/>
+        <meta property="og:description" content="<c:out value="${article.description}"/>"/>
+        <meta property="og:image" content="<c:url value="${article.logo.url}"/>"/>
+        <meta name="twitter:title" content="<c:out value="${article.title}"/>">
+        <meta name="twitter:description" content="<c:out value="${article.description}"/>">
+        <meta name="twitter:image" content="<c:url value="${article.logo.url}"/>">
+        <meta itemprop="name" content="<c:out value="${article.title}"/>"/>
+        <meta itemprop="description" content="<c:out value="${article.description}"/>"/>
+        <meta itemprop="image" content="<c:url value="${article.logo.url}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-              rel="stylesheet" type="text/css">
+              rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-              rel="stylesheet" type="text/css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-              type="text/css">
-        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet" type="text/css">
-        <link href="<c:url value="/resources/css/carousel.min.css"/>" rel="stylesheet" type="text/css">
+              rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet">
+        <link href="<c:url value="/resources/css/lightgallery.min.css"/>" rel="stylesheet">
+        <link href="<c:url value="/resources/css/carousel.min.css"/>" rel="stylesheet">
     </head>
     <body>
         <%-- Navigation bar --%>
@@ -131,11 +140,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     ${article.text}
                                 </c:when>
                                 <c:otherwise>
-                                    ${article.description}
+                                    <c:out value="${article.description}"/>
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <div class="text-center share-init"></div>
+                        <div class="text-center share-init" data-title="<c:out value="${article.title}"/>"
+                             data-description="<c:out value="${article.description}"/>"
+                             data-image="<c:url value="${article.logo.url}"/>"></div>
                     </div>
                     <div class="clearfix"></div>
                 </div>

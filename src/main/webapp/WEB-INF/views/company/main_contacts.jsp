@@ -10,7 +10,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
 
 <compress:html removeIntertagSpaces="true">
     <!DOCTYPE HTML>
-    <html lang="ru">
+    <html lang="ru" prefix="og: http://ogp.me/ns#">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,16 +22,25 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="description" content="Контакты и адрес нашей компании.">
         <meta name="keywords"
               content="Контакты, адрес, как проехать, карта, google maps, телефон, e-mail, электронная почта"/>
+        <meta property="og:title" content="Контакты | <c:out value="${main_company.title}"/>"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:description" content="<c:out value="${main_company.tagline}"/>"/>
+        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>"/>
+        <meta name="twitter:title" content="Контакты | <c:out value="${main_company.title}"/>">
+        <meta name="twitter:description" content="<c:out value="${main_company.tagline}"/>">
+        <meta name="twitter:image" content="<c:url value="${main_company.logo.url}"/>">
+        <meta itemprop="name" content="Контакты | <c:out value="${main_company.title}"/>"/>
+        <meta itemprop="description" content="<c:out value="${main_company.tagline}"/>"/>
+        <meta itemprop="image" content="<c:url value="${main_company.logo.url}"/>"/>
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-              rel="stylesheet" type="text/css">
+              rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-              rel="stylesheet" type="text/css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-              type="text/css">
-        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet" type="text/css">
+              rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<c:url value="/resources/css/style.min.css"/>" rel="stylesheet">
     </head>
     <body>
     <jsp:include page="/WEB-INF/views/home/navigation.jsp"/>
