@@ -27,12 +27,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta property="og:type" content="website"/>
         <meta property="og:description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>"/>
         <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>"/>
-        <meta name="twitter:title" content="Категории товаров | <c:out value="${main_company.title}"/>">
-        <meta name="twitter:description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>">
-        <meta name="twitter:image" content="<c:url value="${main_company.logo.url}"/>">
-        <meta itemprop="name" content="Категории товаров | <c:out value="${main_company.title}"/>"/>
-        <meta itemprop="description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>"/>
-        <meta itemprop="image" content="<c:url value="${main_company.logo.url}"/>"/>
+        <meta property="og:url" content="http://${main_company.domain}/categories"/>
+        <meta property="fb:admins" content="100002639406164" />
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>

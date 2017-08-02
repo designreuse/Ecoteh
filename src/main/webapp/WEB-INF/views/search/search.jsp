@@ -33,9 +33,10 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="keywords" content="Результаты поиска | <c:out value="${main_company.title}"/>">
         <meta property="og:title" content="<c:out value="${main_company.title}"/>"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="<c:url value="/index"/>"/>
         <meta property="og:description" content="<c:out value="${main_company.description}"/>"/>
         <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>"/>
+        <meta property="og:url" content="http://${main_company.domain}/search"/>
+        <meta property="fb:admins" content="100002639406164" />
         <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
         <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
             <%-- CSS styles --%>
