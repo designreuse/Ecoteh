@@ -95,7 +95,7 @@ public final class DefaultAccounts {
     private static void addDefaultAdmin() {
         final User user = createUser(
                 "Default Admin",
-                "admin", "eco20pass17",
+                "LOGIN", "PASSWORD",
                 UserRole.ADMIN
         );
         USERS.put(user.getLogin(), user);
@@ -109,7 +109,7 @@ public final class DefaultAccounts {
     private static void addSuperAdmin() {
         final User user = createUser(
                 "Super Admin",
-                "superadmin", "super20pass17",
+                "LOGIN", "PASSWORD",
                 UserRole.SUPERADMIN
         );
         USERS.put(user.getLogin(), user);
