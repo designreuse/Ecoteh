@@ -28,7 +28,7 @@ public final class Base64Encryptor implements Encryptor {
     /**
      * Default key.
      */
-    private final static String KEY = "SOME_KEY";
+    private final static String KEY = "6Lex4goUAAAAACmMLbkj";
 
     /**
      * Default secret key.

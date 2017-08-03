@@ -474,6 +474,7 @@ public abstract class MainController {
             final User user = message.getUser();
             final Contacts contacts = user.getContacts();
             final String text = "User name: " + user.getName() +
+                    "\nDate: " + message.getDateToString() +
                     "\nPhone: " + contacts.getMobilePhone() +
                     (isNotEmpty(contacts.getEmail()) ? "\nE-mail: " + contacts.getEmail() : "") +
                     (isNotEmpty(message.getText()) ? "\nText: " + message.getText() : "");
@@ -491,6 +492,7 @@ public abstract class MainController {
         new Thread(() -> {
             final String subject = "New Response";
             final String text = "User name: " + response.getUsername() +
+                    "\nDate: " + response.getDateToString() +
                     "\nText: " + response.getText();
             sendToEmail(subject, text);
         }).start();
@@ -509,7 +511,7 @@ public abstract class MainController {
         final String _subject = subject + " | " + mainCompany.getTitle();
         final String senderEmail = mainCompany.getSenderEmail();
         final String senderPass = mainCompany.getSenderPass();
-        final Collection<User> personnel = this.userService.getPersonnel();
+        final Collection<User> personnel = this.userService.getPersonnel(false);
         this.senderService.send(_subject, text, personnel, senderEmail, senderPass);
     }
 
