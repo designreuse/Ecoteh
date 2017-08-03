@@ -11,12 +11,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
     <br>
     <c:choose>
         <c:when test="${not empty authorized_user.photo.url}">
-            <a href="<c:url value="${authorized_user.photo.url}"/>" rel="lightgallery"
-               title="<c:out value="${user.name}"/>">
+            <%--<a href="<c:url value="${authorized_user.photo.url}"/>" rel="lightgallery"
+               title="<c:out value="${user.name}"/>">--%>
                 <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"
                      src="<c:url value="${authorized_user.photo.url}"/>"
                      onerror="this.src='<c:url value="/resources/img/static/default_user.png"/>'">
-            </a>
+            <%--</a>--%>
         </c:when>
         <c:otherwise>
             <img class="img-responsive img-in-list" alt="<c:out value="${authorized_user.name}"/>"

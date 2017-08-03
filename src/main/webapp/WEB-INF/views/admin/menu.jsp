@@ -74,9 +74,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <%-- Scripts --%>
     <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-    <c:if test="${not empty authorized_user.photo.url}">
+    <%--<c:if test="${not empty authorized_user.photo.url}">
         <script src="<c:url value="/resources/js/lightgallery.min.js"/>"></script>
-    </c:if>
+    </c:if>--%>
     <script src="<c:url value="/resources/js/easing.min.js"/>" async></script>
     <script src="<c:url value="/resources/js/totop.min.js"/>" async></script>
     </body>
