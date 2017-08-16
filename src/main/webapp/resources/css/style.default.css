@@ -2186,6 +2186,40 @@ a.label:focus {
     left: 35%
 }
 
+.novelty-slider,
+.novelty-col-4,
+.novelty-col-6,
+.novelty-col-12,
+.top-novelty-slider {
+    position: absolute;
+    top: 30px;
+    padding: .2em .6em .3em;
+    border-radius: 10% / 50%;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1
+}
+
+.top-novelty-slider {
+    top: 0;
+}
+
+.novelty-slider {
+    left: 10%
+}
+
+.novelty-col-4 {
+    left: 0
+}
+
+.novelty-col-6 {
+    left: 20%
+}
+
+.novelty-col-12 {
+    left: 35%
+}
+
 .no-valid {
     font-size: 15px;
     color: #f00;
@@ -2226,6 +2260,10 @@ a.label:focus {
 
 .back-grey {
     background-color: #aaa;
+}
+
+.back-yellow {
+    background-color: #f90;
 }
 
 #toTop {
