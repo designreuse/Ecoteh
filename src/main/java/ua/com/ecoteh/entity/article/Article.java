@@ -45,6 +45,11 @@ public final class Article extends Content {
     private final String currency;
 
     /**
+     * It`s novelty product.
+     */
+    private final boolean isNovelty;
+
+    /**
      * The category of this article.
      */
     private final Category category;
@@ -71,13 +76,14 @@ public final class Article extends Content {
             final String title, final String url, final String text,
             final String description, final String keywords, final String number,
             final Date date, final double price, final String currency,
-            final File logo, final Category category
+            final File logo, final boolean isNovelty, final Category category
     ) {
         super(id, validated, title, url, text, description, keywords, logo);
         this.number = number;
         this.date = date;
         this.price = price;
         this.currency = currency;
+        this.isNovelty = isNovelty;
         this.category = category;
     }
 
@@ -93,6 +99,7 @@ public final class Article extends Content {
                 ", date=" + this.date +
                 ", price=" + this.price +
                 ", currency=" + this.currency +
+                ", isNovelty=" + this.isNovelty +
                 ", category=" + this.category +
                 '}';
     }
@@ -183,6 +190,15 @@ public final class Article extends Content {
      */
     public String getCurrency() {
         return this.currency;
+    }
+
+    /**
+     * Novelty the model entity.
+     *
+     * @return true if the model entity is novelty, false otherwise.
+     */
+    public boolean isNovelty() {
+        return this.isNovelty;
     }
 
     /**

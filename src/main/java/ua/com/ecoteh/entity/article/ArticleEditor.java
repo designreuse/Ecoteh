@@ -43,6 +43,11 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
     private String currency;
 
     /**
+     * The new value of novelty of the article.
+     */
+    private int isNovelty;
+
+    /**
      * The new category of the article.
      */
     private Category category;
@@ -76,6 +81,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
                 .addDate(getDate())
                 .addPrice(getPrice())
                 .addCurrency(getCurrency())
+                .addNovelty(isNoveltyA())
                 .addLogo(getLogo())
                 .addCategory(getCategory());
         return builder.build();
@@ -95,6 +101,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
                     .addDate(article.getDate())
                     .addPrice(article.getPrice())
                     .addCurrency(article.getCurrency())
+                    .addNovelty(article.isNovelty())
                     .addCategory(article.getCategory());
         }
         return this;
@@ -142,6 +149,35 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
     public ArticleEditor addCurrency(final String currency) {
         this.currency = currency;
         return this;
+    }
+
+    /**
+     * Adds new novelty to the article.
+     *
+     * @param isNovelty a new novelty to the article.
+     * @return the article editor.
+     */
+    public ArticleEditor addNovelty(final boolean isNovelty) {
+        this.isNovelty = isNovelty ? 1 : 2;
+        return this;
+    }
+
+    /**
+     * Sets novelty article.
+     *
+     * @return the article editor.
+     */
+    public ArticleEditor isNovelty() {
+        return addNovelty(true);
+    }
+
+    /**
+     * Sets not novelty article.
+     *
+     * @return the article editor.
+     */
+    public ArticleEditor isNotNovelty() {
+        return addNovelty(false);
     }
 
     /**
@@ -193,6 +229,21 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      */
     private String getCurrency() {
         return isNotNull(this.currency) ? this.currency : this.article.getCurrency();
+    }
+
+    /**
+     * Validates the model.
+     *
+     * @return true if the model is valid, false otherwise.
+     */
+    protected boolean isNoveltyA() {
+        final boolean result;
+        if (this.isNovelty > 0) {
+            result = (this.isNovelty == 1);
+        } else {
+            result = this.article.isValidated();
+        }
+        return result;
     }
 
     /**

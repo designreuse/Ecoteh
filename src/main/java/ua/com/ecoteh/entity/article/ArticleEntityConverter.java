@@ -47,6 +47,7 @@ final class ArticleEntityConverter extends ContentEntityConverter<ArticleEntity,
                 .addDate(this.entity.getDate())
                 .addPrice(this.entity.getPrice())
                 .addCurrency(this.entity.getCurrency())
+                .addNovelty(this.entity.isNovelty())
                 .addLogo(this.entity.getLogoEntity().convert())
                 .addCategory(this.entity.getCategoryEntity().convert());
         return builder;

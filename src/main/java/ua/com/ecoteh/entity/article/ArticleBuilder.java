@@ -39,6 +39,11 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
     private String currency;
 
     /**
+     * It`s novelty product.
+     */
+    private boolean isNovelty;
+
+    /**
      * The category of a new article.
      */
     private Category category;
@@ -63,7 +68,8 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
                 getDescription(), getKeywords(),
                 getNumber(), getDate(),
                 getPrice(), getCurrency(),
-                getLogo(), getCategory()
+                getLogo(), isNoveltyA(),
+                getCategory()
         );
     }
 
@@ -112,6 +118,36 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
     }
 
     /**
+     * Adds a new novelty to a new model.
+     * Adds true if the model is novelty, false otherwise.
+     *
+     * @param isNovelty the validations of the model.
+     * @return the model builder.
+     */
+    public ArticleBuilder addNovelty(final boolean isNovelty) {
+        this.isNovelty = isNovelty;
+        return this;
+    }
+
+    /**
+     * Adds novelty model.
+     *
+     * @return the model builder.
+     */
+    public ArticleBuilder isNovelty() {
+        return addNovelty(true);
+    }
+
+    /**
+     * Adds not novelty model.
+     *
+     * @return the model builder.
+     */
+    public ArticleBuilder isNotNovelty() {
+        return addNovelty(false);
+    }
+
+    /**
      * Adds a new category to a new article.
      *
      * @param category the new category to a new article.
@@ -129,7 +165,7 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      * @return The number or random number (newer null).
      */
     private String getNumber() {
-        String number;
+        final String number;
         if (isNotEmpty(this.number)) {
             number = this.number;
         } else {
@@ -166,6 +202,15 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      */
     private String getCurrency() {
         return isNotEmpty(this.currency) ? this.currency : "";
+    }
+
+    /**
+     * Novelty the model.
+     *
+     * @return true if the model is novelty, false otherwise.
+     */
+    private boolean isNoveltyA() {
+        return this.isNovelty;
     }
 
     /**

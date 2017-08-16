@@ -52,6 +52,12 @@ public class ArticleEntity extends ContentEntity {
     private String currency;
 
     /**
+     * It`s novelty product.
+     */
+    @Column(name = "currency")
+    private boolean isNovelty;
+
+    /**
      * The category entity of this article entity.
      */
     @ManyToOne(fetch = FetchType.EAGER)
@@ -80,6 +86,7 @@ public class ArticleEntity extends ContentEntity {
                 ", date=" + this.date +
                 ", price=" + this.price +
                 ", currency=" + this.currency +
+                ", isNovelty=" + this.isNovelty +
                 ", categoryEntity=" + this.category +
                 '}';
     }
@@ -193,6 +200,25 @@ public class ArticleEntity extends ContentEntity {
      */
     public void setCurrency(final String currency) {
         this.currency = currency;
+    }
+
+    /**
+     * Novelty the model entity.
+     *
+     * @return true if the model entity is novelty, false otherwise.
+     */
+    public boolean isNovelty() {
+        return this.isNovelty;
+    }
+
+    /**
+     * Sets novelty of the model entity.
+     * Sets true if the model entity is novelty, false otherwise.
+     *
+     * @param isNovelty a novelty of the model entity.
+     */
+    public void setNovelty(final boolean isNovelty) {
+        this.isNovelty = isNovelty;
     }
 
     /**
