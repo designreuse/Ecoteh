@@ -57,6 +57,7 @@ CREATE TABLE `articles` (
   `keywords`    TEXT             NOT NULL DEFAULT '',
   `date`        TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
+  `noveltу`     TINYINT(1)       NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
   FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
@@ -79,6 +80,7 @@ CREATE TABLE `categories` (
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '' UNIQUE,
+  `text`        TEXT             NOT NULL DEFAULT '',
   `description` TEXT             NOT NULL DEFAULT '',
   `keywords`    TEXT             NOT NULL DEFAULT '',
   `validated`   TINYINT(1)       NOT NULL DEFAULT '1',
@@ -129,12 +131,12 @@ CREATE TABLE `companies` (
   `contacts_id`    INT(10) UNSIGNED                             DEFAULT NULL,
   `address_id`     INT(10) UNSIGNED                             DEFAULT NULL,
   `type`           ENUM ('MAIN', 'PARTNER', 'ANOTHER') NOT NULL DEFAULT 'ANOTHER',
-  `title`          VARCHAR(100)                        NOT NULL DEFAULT '',
+  `title`          VARCHAR(100)                        NOT NULL DEFAULT '' UNIQUE,
   `domain`         VARCHAR(200)                        NOT NULL DEFAULT '',
   `url`            VARCHAR(200)                        NOT NULL DEFAULT '' UNIQUE,
   `tagline`        TEXT                                NOT NULL DEFAULT '',
   `description`    TEXT                                NOT NULL DEFAULT '',
-  `information`    TEXT                                NOT NULL DEFAULT '',
+  `text`           TEXT                                NOT NULL DEFAULT '',
   `keywords`       TEXT                                NOT NULL DEFAULT '',
   `sender_email`   VARCHAR(200)                        NOT NULL DEFAULT '',
   `sender_pass`    VARCHAR(100)                        NOT NULL DEFAULT '',
@@ -142,7 +144,6 @@ CREATE TABLE `companies` (
   `work_time_to`   VARCHAR(10)                         NOT NULL DEFAULT '',
   `validated`      TINYINT(1)                          NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`, `url`),
   FOREIGN KEY (`logo_id`) REFERENCES `files` (`id`),
   FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`id`),
   FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`),
@@ -220,7 +221,7 @@ CREATE TABLE `messages` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `response`
+-- Table structure for table `responses`
 --
 
 DROP TABLE IF EXISTS `responses`;
@@ -240,7 +241,7 @@ CREATE TABLE `responses` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -279,4 +280,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-26 09:13:32
+-- Dump completed on 2017-08-16 10:58:42
