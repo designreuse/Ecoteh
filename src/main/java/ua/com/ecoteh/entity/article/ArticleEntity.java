@@ -54,7 +54,7 @@ public class ArticleEntity extends ContentEntity {
     /**
      * It`s novelty product.
      */
-    @Column(name = "currency")
+    @Column(name = "noveltу")
     private boolean isNovelty;
 
     /**
