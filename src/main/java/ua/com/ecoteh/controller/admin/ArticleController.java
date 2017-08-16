@@ -137,13 +137,14 @@ public final class ArticleController {
             @RequestParam(value = "currency", defaultValue = "") final String currency,
             @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
+            @RequestParam(value = "is_novelty", defaultValue = "false") final boolean isNovelty,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final ArticleBuilder articleBuilder = Article.getBuilder();
         articleBuilder.addTitle(title).addKeywords(keywords).addNumber(number)
-                .addPrice(price).addCurrency(currency).addValidated(validated)
-                .addDescription(description)
-                .addText(text);
+                .addPrice(price).addCurrency(currency)
+                .addValidated(validated).addNovelty(isNovelty)
+                .addDescription(description).addText(text);
 
         final Category category = this.categoryService.getByUrl(categoryUrl, false);
         articleBuilder.addCategory(category);
@@ -238,13 +239,14 @@ public final class ArticleController {
             @RequestParam(value = "currency", defaultValue = "") final String currency,
             @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
+            @RequestParam(value = "is_novelty", defaultValue = "false") final boolean isNovelty,
             @RequestParam(value = "is_valid", defaultValue = "false") final boolean validated
     ) {
         final ArticleBuilder articleBuilder = Article.getBuilder();
         articleBuilder.addUrl(url).addTitle(title).addKeywords(keywords).addNumber(number)
-                .addPrice(price).addCurrency(currency).addValidated(validated)
-                .addDescription(description)
-                .addText(text);
+                .addPrice(price).addCurrency(currency)
+                .addValidated(validated).addNovelty(isNovelty)
+                .addDescription(description).addText(text);
 
         final Category category = this.categoryService.getByUrl(categoryUrl, false);
         articleBuilder.addCategory(category);
