@@ -38,14 +38,17 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <c:when test="${in_line eq 1}">
                 <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-12 col-lg-12"/>
                 <c:set var="price_class" value="price-col-12"/>
+                <c:set var="novelty_class" value="novelty-col-12"/>
             </c:when>
             <c:when test="${in_line eq 2}">
                 <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-6 col-lg-6"/>
                 <c:set var="price_class" value="price-col-6"/>
+                <c:set var="novelty_class" value="novelty-col-6"/>
             </c:when>
             <c:otherwise>
                 <c:set var="div_class" value="col-xs-12 col-sm-12 col-md-4 col-lg-4"/>
                 <c:set var="price_class" value="price-col-4"/>
+                <c:set var="novelty_class" value="novelty-col-4"/>
             </c:otherwise>
         </c:choose>
         <div class="${div_class}">
@@ -77,6 +80,9 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                     </h5>
                 </c:when>
             </c:choose>
+            <c:if test="${article.novelty}">
+                <h4 class="${novelty_class} back-yellow">Новинка</h4>
+            </c:if>
             <h6 class="little text-center">
                 <c:if test="${!article.validated}">
                     <span class="glyphicon glyphicon-eye-close red" aria-hidden="true"

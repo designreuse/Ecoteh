@@ -177,6 +177,26 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                 </tr>
                                 <tr>
                                     <td class="ths">
+                                        <label title="Это новый товар.">
+                                            Новинка&nbsp;
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </label>
+                                    </td>
+                                    <td class="tds">
+                                        <label title="Это новый товар.">
+                                            <input type="radio" name="is_novelty" value="true" required
+                                                   <c:if test="${article.novelty}">checked</c:if>/>
+                                            &nbsp;Новинка
+                                        </label>&nbsp;&nbsp;
+                                        <label title="Это не новинка.">
+                                            <input type="radio" name="is_novelty" value="false" required
+                                                   <c:if test="${!article.novelty}">checked</c:if>/>
+                                            &nbsp;Не&nbsp;новинка
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths">
                                         <label title="Если статья позначеная для отображения, она будет доступна любому пользователю, иначе ее сможет увидеть только адмиистратор.">
                                             Отображение&nbsp;
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>

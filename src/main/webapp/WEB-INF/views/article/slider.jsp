@@ -40,6 +40,16 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                             value="${article_s.currency}"/>
                                     </h5>
                                 </c:if>
+                                <c:if test="${article_s.novelty}">
+                                    <c:choose>
+                                        <c:when test="${article_s.price gt 0}">
+                                            <h5 class="novelty-slider back-yellow">Новинка</h5>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h5 class="top-novelty-slider back-yellow">Новинка</h5>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
                                 <h5><c:out value="${article_s.title}"/></h5>
                             </a>
                         </div>
