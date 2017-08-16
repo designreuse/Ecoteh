@@ -101,7 +101,7 @@ public abstract class ModelEditor<T extends Model, E extends ModelEditor<T, E>> 
      * @return true if the model is valid, false otherwise.
      */
     protected boolean isValidated() {
-        boolean result;
+        final boolean result;
         if (this.validated > 0) {
             result = (this.validated == 1);
         } else {
