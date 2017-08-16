@@ -121,9 +121,9 @@ public class SearchServiceImplTest {
     }
 
     @Test
-    public void whenSearchByCompanyKeywordsThenRedirectToCompanies() {
+    public void whenSearchByCompanyKeywordsThenReturnSearchPage() {
         ModelAndView modelAndView;
-        final String viewName = "redirect:/company/all";
+        final String viewName = "search/search";
         final String[] keywords = new String[] { "все партнеры", "все компании", "all company", "all partners" };
         for (String keyword : keywords) {
             modelAndView = searchService.search(keyword, "");
