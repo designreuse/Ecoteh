@@ -54,7 +54,7 @@ public class ArticleControllerTest {
                 article.getNumber(), article.getPrice(), article.getCurrency(),
                 category.getUrl(),
                 file.getMultipartFile(),
-                article.isValidated()
+                article.isNovelty(), article.isValidated()
         );
         final String expectedRedirect = "redirect:/article/all";
         assertEquals(actualRedirect, expectedRedirect);
@@ -84,7 +84,7 @@ public class ArticleControllerTest {
                 article.getPrice(), article.getCurrency(),
                 category.getUrl(),
                 file.getMultipartFile(),
-                article.isValidated()
+                article.isNovelty(), article.isValidated()
         );
         final String expectedRedirect = "redirect:/article/" + article.getUrl();
         assertEquals(actualRedirect, expectedRedirect);

@@ -56,6 +56,7 @@ public class ArticleEntityTest extends ContentEntityTest {
                 ", date=" + this.article.getDate() +
                 ", price=" + this.article.getPrice() +
                 ", currency=" + this.article.getCurrency() +
+                ", isNovelty=" + article.isNovelty() +
                 ", categoryEntity=" + this.article.getCategoryEntity() +
                 '}';
         assertEquals(this.article.toString(), toStringTest);
@@ -97,6 +98,14 @@ public class ArticleEntityTest extends ContentEntityTest {
             this.article.setCurrency(currency);
             assertEquals(this.article.getCurrency(), currency);
         }
+    }
+
+    @Test
+    public void whenSetNoveltyThenGetIt() {
+        this.article.setNovelty(false);
+        assertFalse(this.article.isNovelty());
+        this.article.setNovelty(true);
+        assertTrue(this.article.isNovelty());
     }
 
     @Test

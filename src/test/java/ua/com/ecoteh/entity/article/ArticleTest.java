@@ -22,7 +22,7 @@ public class ArticleTest extends ContentTest {
     public static void setUp() throws Exception {
         article = new Article(
                 ID, VALIDATION, TITLE, URL, TEXT, DESCRIPTION, KEYWORDS, NUMBER,
-                DATE, PRICE, CURRENCY, getFile(), getCategory()
+                DATE, PRICE, CURRENCY, getFile(), VALIDATION, getCategory()
         );
     }
 
@@ -43,6 +43,7 @@ public class ArticleTest extends ContentTest {
                 ", date=" + article.getDate() +
                 ", price=" + article.getPrice() +
                 ", currency=" + article.getCurrency() +
+                ", isNovelty=" + article.isNovelty() +
                 ", category=" + article.getCategory() +
                 '}';
         assertEquals(article.toString(), testString);

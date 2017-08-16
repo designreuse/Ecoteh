@@ -113,6 +113,17 @@ public class ArticleEditorTest extends ContentEditorTest<Article> {
     }
 
     @Test
+    public void whenAddNoveltyThenBuildWithIt() {
+        this.editor.addNovelty(false);
+        Article article = this.editor.update();
+        assertFalse(article.isNovelty());
+
+        this.editor.addNovelty(true);
+        article = this.editor.update();
+        assertTrue(article.isNovelty());
+    }
+
+    @Test
     public void whenAddCategoryThenBuildWithIt() {
         final Category category = getCategory();
         this.editor.addCategory(category);

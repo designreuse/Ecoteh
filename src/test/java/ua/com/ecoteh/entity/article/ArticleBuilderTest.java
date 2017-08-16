@@ -110,6 +110,17 @@ public class ArticleBuilderTest extends ContentBuilderTest<Article> {
     }
 
     @Test
+    public void whenAddNoveltyThenBuildWithIt() {
+        this.builder.addNovelty(false);
+        Article article = this.builder.build();
+        assertFalse(article.isNovelty());
+
+        this.builder.addNovelty(true);
+        article = this.builder.build();
+        assertTrue(article.isNovelty());
+    }
+
+    @Test
     public void whenAddCategoryThenBuildWithIt() {
         final Category category = getCategory();
         this.builder.addCategory(category);
