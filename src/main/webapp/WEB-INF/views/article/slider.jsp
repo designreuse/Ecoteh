@@ -20,7 +20,7 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
             <div class="box">
                 <p class="alert">
                     <a href="<c:url value="/category/${category.url}"/>" title="${category.title}">
-                        Также просматривают:
+                        Другие товары:
                     </a>
                 </p>
                 <c:forEach items="${articles}" var="article_s" end="${print_products}">
@@ -34,15 +34,14 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                          onerror="this.src='<c:url
                                                  value="/resources/img/static/default_file.gif"/>'">
                                 </c:if>
-                                <c:if test="${article_s.price gt 0}">
+                                <c:if test="${not empty article_s.price}">
                                     <h5 class="price-slider back-green">
-                                        <fmt:formatNumber type="number" value="${article_s.price}"/>&nbsp;<c:out
-                                            value="${article_s.currency}"/>
+                                        <c:out value="${article_s.price}"/>
                                     </h5>
                                 </c:if>
                                 <c:if test="${article_s.novelty}">
                                     <c:choose>
-                                        <c:when test="${article_s.price gt 0}">
+                                        <c:when test="${not empty article_s.price}">
                                             <h5 class="novelty-slider back-yellow">Новинка</h5>
                                         </c:when>
                                         <c:otherwise>

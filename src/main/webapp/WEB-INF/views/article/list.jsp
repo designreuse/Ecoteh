@@ -50,12 +50,12 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                         </c:if>
                         <h4 class="green">
                             <c:choose>
-                                <c:when test="${article.price gt 0}">
-                                    Цена: <c:out value="${article.price}"/>&nbsp;<c:out value="${article.currency}"/>
+                                <c:when test="${not empty article.price}">
+                                    Цена: <c:out value="${article.price}"/>
                                 </c:when>
-                                <c:when test="${empty article.currency}">
+                                <c:otherwise>
                                     Цену уточняйте
-                                </c:when>
+                                </c:otherwise>
                             </c:choose>
                         </h4>
                         <span class="little">

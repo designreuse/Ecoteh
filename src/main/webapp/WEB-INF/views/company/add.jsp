@@ -171,13 +171,13 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     <td class="ths">Адрес офиса</td>
                                     <td class="tds">
                                         <input type="text" class="form-control" name="post_address" maxlength="300"
-                                               placeholder="Адрес главного офиса компании">
+                                               placeholder="Адрес компании">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="ths">
                                         <a href="<c:url value="/resources/img/static/google_maps_1.jpg"/>"
-                                           rel="lightgallery[maps]" title="Офис на карте Google Maps. Где это взять?">
+                                           rel="lightgallery[maps]" title="Компания на карте Google Maps. Где это взять?">
                                             Google Maps&nbsp;
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </a>&nbsp;

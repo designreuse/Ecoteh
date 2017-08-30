@@ -92,13 +92,23 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="ths">Цена</td>
+                                    <td class="ths"
+                                        title="Если это поле оставить пустым, тогда на сайте для товара будет отображаться надпись: Цену уточнйте">
+                                        Цена&nbsp;<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                    </td>
                                     <td class="tds">
-                                        <input type="number" class="time form-control" name="price" placeholder="Цена"
-                                               min="0" step="0.5">
-                                        -
-                                        <input type="text" class="time form-control" name="currency" maxlength="10"
-                                               placeholder="Валюта">
+                                        <input type="text" class="form-control" name="price" placeholder="Цена">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ths"
+                                        title="Эта цена будет использована для сортировки товаров по цене. Значение этого поля будет сохранятся, если введено значение цены.">
+                                        Цена для сортировки&nbsp;<span class="glyphicon glyphicon-info-sign"
+                                                                       aria-hidden="true"></span>
+                                    </td>
+                                    <td class="tds">
+                                        <input type="number" class="form-control" name="price" min="0" step="0.5"
+                                               placeholder="Сортировочная цена">
                                     </td>
                                 </tr>
                                 <tr>

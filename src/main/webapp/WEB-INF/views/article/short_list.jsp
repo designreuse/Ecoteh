@@ -68,17 +68,16 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
                 </a>
             </c:if>
             <c:choose>
-                <c:when test="${article.price gt 0}">
+                <c:when test="${not empty article.price}">
                     <h4 class="${price_class} back-green">
-                        <fmt:formatNumber type="number" value="${article.price}"/>&nbsp;<c:out
-                            value="${article.currency}"/>
+                        <c:out value="${article.price}"/>
                     </h4>
                 </c:when>
-                <c:when test="${empty article.currency}">
+                <c:otherwise>
                     <h5 class="${price_class} back-grey">
                         Цену уточняйте
                     </h5>
-                </c:when>
+                </c:otherwise>
             </c:choose>
             <c:if test="${article.novelty}">
                 <h4 class="${novelty_class} back-yellow">Новинка</h4>
