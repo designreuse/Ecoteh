@@ -33,8 +33,7 @@ public class ArticleEditorTest extends ContentEditorTest<Article> {
         final Article updatedArticle = this.editor.update();
         assertEquals(updatedArticle.getNumber(), this.article.getNumber());
         assertEquals(updatedArticle.getDate(), this.article.getDate());
-        assertTrue(updatedArticle.getPrice() == this.article.getPrice());
-        assertEquals(updatedArticle.getCurrency(), this.article.getCurrency());
+        assertTrue(updatedArticle.getPrice().equals(this.article.getPrice()));
         assertEquals(updatedArticle.getCategory(), this.article.getCategory());
     }
 
@@ -80,36 +79,10 @@ public class ArticleEditorTest extends ContentEditorTest<Article> {
     public void whenAddPriceThenBuildWithIt() {
         Article article;
         for (int i = 1; i < 5; i++) {
-            this.editor.addPrice(i);
+            this.editor.addPrice("" + i);
             article = this.editor.update();
-            assertTrue(article.getPrice() == i);
+            assertEquals(article.getPrice(), "" + i);
         }
-    }
-
-    @Test
-    public void whenAddNegativePriceThenBuildWithZero() {
-        this.editor.addPrice(-PRICE);
-        final Article article = this.editor.update();
-        assertTrue(article.getPrice() == this.article.getPrice());
-    }
-
-    @Test
-    public void whenAddCurrencyThenBuildWithIt() {
-        Article article;
-        String currency;
-        for (int i = 0; i < 5; i++) {
-            currency = CURRENCY + i;
-            this.editor.addCurrency(currency);
-            article = this.editor.update();
-            assertEquals(article.getCurrency(), currency);
-        }
-    }
-
-    @Test
-    public void whenAddNullCurrencyThenBuildWithEmptyIt() {
-        this.editor.addCurrency(null);
-        final Article article = this.editor.update();
-        assertEquals(article.getCurrency(), this.article.getCurrency());
     }
 
     @Test

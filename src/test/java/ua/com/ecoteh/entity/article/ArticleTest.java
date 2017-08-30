@@ -22,7 +22,7 @@ public class ArticleTest extends ContentTest {
     public static void setUp() throws Exception {
         article = new Article(
                 ID, VALIDATION, TITLE, URL, TEXT, DESCRIPTION, KEYWORDS, NUMBER,
-                DATE, PRICE, CURRENCY, getFile(), VALIDATION, getCategory()
+                DATE, PRICE, SORT_PRICE, getFile(), VALIDATION, getCategory()
         );
     }
 
@@ -42,7 +42,6 @@ public class ArticleTest extends ContentTest {
                 ", number='" + article.getNumber() + '\'' +
                 ", date=" + article.getDate() +
                 ", price=" + article.getPrice() +
-                ", currency=" + article.getCurrency() +
                 ", isNovelty=" + article.isNovelty() +
                 ", category=" + article.getCategory() +
                 '}';
@@ -66,12 +65,7 @@ public class ArticleTest extends ContentTest {
 
     @Test
     public void getPrice() throws Exception {
-        assertTrue(article.getPrice() >= 0);
-    }
-
-    @Test
-    public void getCurrency() throws Exception {
-        assertFalse(article.getCurrency().isEmpty());
+        assertNotNull(article.getPrice());
     }
 
     @Test
@@ -98,8 +92,7 @@ public class ArticleTest extends ContentTest {
         assertEquals(entity.getNumber(), article.getNumber());
         assertEquals(entity.getText(), article.getText());
         assertEquals(entity.getDate(), article.getDate());
-        assertTrue(entity.getPrice() == article.getPrice());
-        assertEquals(entity.getCurrency(), article.getCurrency());
+        assertEquals(entity.getPrice(), article.getPrice());
         assertNotNull(entity.getLogoEntity());
         assertNotNull(entity.getCategoryEntity());
     }

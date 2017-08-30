@@ -230,7 +230,7 @@ public final class MockModels {
         builder.addId(ID).addValidated(VALIDATION)
                 .addTitle(TITLE).addUrl(URL).addText(TEXT)
                 .addDescription(DESCRIPTION).addKeywords(KEYWORDS)
-                .addNumber(NUMBER).addPrice(PRICE).addCurrency(CURRENCY)
+                .addNumber(NUMBER).addPrice(PRICE)
                 .addLogo(getFile());
         article = builder.build();
     }

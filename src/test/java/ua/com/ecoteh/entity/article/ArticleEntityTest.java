@@ -31,7 +31,6 @@ public class ArticleEntityTest extends ContentEntityTest {
         this.article.setText(TEXT);
         this.article.setDate(DATE);
         this.article.setPrice(PRICE);
-        this.article.setCurrency(CURRENCY);
         this.article.setLogoEntity(getFileEntity());
         this.article.setCategoryEntity(getCategoryEntity());
     }
@@ -44,18 +43,17 @@ public class ArticleEntityTest extends ContentEntityTest {
                 "ModelEntity{" +
                 "id=" + this.article.getId() +
                 ", validated=" + this.article.isValidated() +
-                '}'+
+                '}' +
                 ", title='" + this.article.getTitle() + '\'' +
                 ", url='" + this.article.getUrl() + '\'' +
                 ", text='" + this.article.getText() + '\'' +
                 ", description='" + this.article.getDescription() + '\'' +
                 ", keywords='" + this.article.getKeywords() + '\'' +
                 ", logo=" + this.article.getLogoEntity() +
-                '}'+
+                '}' +
                 ", number='" + this.article.getNumber() + '\'' +
                 ", date=" + this.article.getDate() +
                 ", price=" + this.article.getPrice() +
-                ", currency=" + this.article.getCurrency() +
                 ", isNovelty=" + article.isNovelty() +
                 ", categoryEntity=" + this.article.getCategoryEntity() +
                 '}';
@@ -85,18 +83,8 @@ public class ArticleEntityTest extends ContentEntityTest {
     @Test
     public void whenSetPriceThenGetIt() {
         for (int i = 0; i < 5; i++) {
-            this.article.setPrice(i);
-            assertTrue(this.article.getPrice() == i);
-        }
-    }
-
-    @Test
-    public void whenSetCurrencyThenGetIt() {
-        String currency;
-        for (int i = 0; i < 5; i++) {
-            currency = CURRENCY + i;
-            this.article.setCurrency(currency);
-            assertEquals(this.article.getCurrency(), currency);
+            this.article.setPrice("" + i);
+            assertEquals(this.article.getPrice(), "" + i);
         }
     }
 
@@ -125,8 +113,7 @@ public class ArticleEntityTest extends ContentEntityTest {
         assertEquals(article.getNumber(), this.article.getNumber());
         assertEquals(article.getText(), this.article.getText());
         assertEquals(article.getDate(), this.article.getDate());
-        assertTrue(article.getPrice() == this.article.getPrice());
-        assertEquals(article.getCurrency(), this.article.getCurrency());
+        assertEquals(article.getPrice(), this.article.getPrice());
         assertNotNull(article.getLogo());
         assertNotNull(article.getCategory());
     }

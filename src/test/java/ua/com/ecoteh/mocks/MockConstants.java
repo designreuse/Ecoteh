@@ -42,8 +42,8 @@ public interface MockConstants {
     String ANY_STRING = "Some unknown text.";
     String PATH = "c:/some_dir/file.txt";
     String STYLE = "Some CSS styles";
-    double PRICE = 500;
-    String CURRENCY = "$";
+    String PRICE = "500";
+    int SORT_PRICE = 500;
     Date DATE = new Date();
     CompanyType COMPANY_TYPE = CompanyType.PARTNER;
     UserRole USER_ROLE = UserRole.ADMIN;

@@ -30,8 +30,7 @@ public class ArticleBuilderTest extends ContentBuilderTest<Article> {
         final Article article = this.builder.build();
         assertNotNull(article.getNumber());
         assertNotNull(article.getDate());
-        assertTrue(article.getPrice() >= 0);
-        assertNotNull(article.getCurrency());
+        assertNotNull(article.getPrice());
         assertNotNull(article.getCategory());
     }
 
@@ -77,36 +76,10 @@ public class ArticleBuilderTest extends ContentBuilderTest<Article> {
     public void whenAddPriceThenBuildWithIt() {
         Article article;
         for (int i = 0; i < 5; i++) {
-            this.builder.addPrice(i);
+            this.builder.addPrice("" + i);
             article = this.builder.build();
-            assertTrue(article.getPrice() == i);
+            assertEquals(article.getPrice(), "" + i);
         }
-    }
-
-    @Test
-    public void whenAddNegativePriceThenBuildWithZero() {
-        this.builder.addPrice(-PRICE);
-        final Article article = this.builder.build();
-        assertTrue(article.getPrice() == 0);
-    }
-
-    @Test
-    public void whenAddCurrencyThenBuildWithIt() {
-        Article article;
-        String currency;
-        for (int i = 0; i < 5; i++) {
-            currency = CURRENCY + i;
-            this.builder.addCurrency(currency);
-            article = this.builder.build();
-            assertEquals(article.getCurrency(), currency);
-        }
-    }
-
-    @Test
-    public void whenAddNullCurrencyThenBuildWithEmptyIt() {
-        this.builder.addCurrency(null);
-        final Article article = this.builder.build();
-        assertTrue(article.getCurrency().isEmpty());
     }
 
     @Test

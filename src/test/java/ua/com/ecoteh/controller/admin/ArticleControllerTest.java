@@ -51,7 +51,7 @@ public class ArticleControllerTest {
         final String actualRedirect = controller.addArticle(
                 article.getTitle(), article.getText(),
                 article.getDescription(), article.getKeywords(),
-                article.getNumber(), article.getPrice(), article.getCurrency(),
+                article.getNumber(), article.getPrice(), article.getSortPrice(),
                 category.getUrl(),
                 file.getMultipartFile(),
                 article.isNovelty(), article.isValidated()
@@ -81,7 +81,7 @@ public class ArticleControllerTest {
         final String actualRedirect = controller.updateArticle(
                 article.getUrl(), article.getTitle(), article.getText(),
                 article.getDescription(), article.getKeywords(), article.getNumber(),
-                article.getPrice(), article.getCurrency(),
+                article.getPrice(), article.getSortPrice(),
                 category.getUrl(),
                 file.getMultipartFile(),
                 article.isNovelty(), article.isValidated()

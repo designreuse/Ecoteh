@@ -25,8 +25,7 @@ public class ArticleEntityConverterTest extends ContentEntityConverterTest<Artic
         super.checkEntity(article);
         assertEquals(article.getNumber(), entity.getNumber());
         assertEquals(article.getDate(), entity.getDate());
-        assertTrue(article.getPrice() == entity.getPrice());
-        assertEquals(article.getCurrency(), entity.getCurrency());
+        assertTrue(article.getPrice().equals(entity.getPrice()));
         assertNotNull(article.getCategory());
     }
 

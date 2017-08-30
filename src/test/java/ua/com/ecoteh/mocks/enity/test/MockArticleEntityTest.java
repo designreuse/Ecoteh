@@ -41,13 +41,8 @@ public class MockArticleEntityTest extends MockContentEntityTest<ArticleEntity> 
     }
 
     @Test
-    public void whenGetCurrencyThenReturnNotEmpty() {
-        assertFalse(article.getCurrency().isEmpty());
-    }
-
-    @Test
-    public void whenGetPriceThenReturnNotNegative() {
-        assertTrue(article.getPrice() > 0);
+    public void whenGetPriceThenReturnNotNull() {
+        assertNotNull(article.getPrice());
     }
 
     @Ignore
