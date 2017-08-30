@@ -45,13 +45,13 @@ DROP TABLE IF EXISTS `articles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `articles` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `number`      VARCHAR(100)     NOT NULL DEFAULT '' UNIQUE,
   `logo_id`     INT(10) UNSIGNED          DEFAULT NULL,
   `category_id` INT(10) UNSIGNED          DEFAULT NULL,
-  `price`       DOUBLE           NOT NULL DEFAULT 0,
-  `currency`    VARCHAR(100)     NOT NULL DEFAULT '',
+  `price`       VARCHAR(200)     NOT NULL DEFAULT '',
+  `sort_price`  INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `title`       VARCHAR(200)     NOT NULL DEFAULT '',
   `url`         VARCHAR(200)     NOT NULL DEFAULT '' UNIQUE,
-  `number`      VARCHAR(100)     NOT NULL DEFAULT '' UNIQUE,
   `description` TEXT             NOT NULL DEFAULT '',
   `text`        TEXT             NOT NULL DEFAULT '',
   `keywords`    TEXT             NOT NULL DEFAULT '',
