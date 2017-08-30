@@ -31,12 +31,12 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
     /**
      * The price of a new article.
      */
-    private double price;
+    private String price;
 
     /**
-     * The price currency of this article.
+     * The sort price of a new article.
      */
-    private String currency;
+    private int sortPrice;
 
     /**
      * It`s novelty product.
@@ -67,8 +67,8 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
                 getTitle(), getUrl(), getText(),
                 getDescription(), getKeywords(),
                 getNumber(), getDate(),
-                getPrice(), getCurrency(),
-                getLogo(), isNoveltyA(),
+                getPrice(), getSortPrice(),
+                getLogo(), isNovelty(),
                 getCategory()
         );
     }
@@ -101,19 +101,19 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      * @param price the new price to a new article.
      * @return the article builder.
      */
-    public ArticleBuilder addPrice(final double price) {
+    public ArticleBuilder addPrice(final String price) {
         this.price = price;
         return this;
     }
 
     /**
-     * Adds a new price currency to a new article.
+     * Adds a new sort price to a new article.
      *
-     * @param currency the new price currency to a new article.
+     * @param sortPrice the new sort price to a new article.
      * @return the article builder.
      */
-    public ArticleBuilder addCurrency(final String currency) {
-        this.currency = currency;
+    public ArticleBuilder addSortPrice(final int sortPrice) {
+        this.sortPrice = sortPrice;
         return this;
     }
 
@@ -134,7 +134,7 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      *
      * @return the model builder.
      */
-    public ArticleBuilder isNovelty() {
+    public ArticleBuilder setNovelty() {
         return addNovelty(true);
     }
 
@@ -143,7 +143,7 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      *
      * @return the model builder.
      */
-    public ArticleBuilder isNotNovelty() {
+    public ArticleBuilder setNotNovelty() {
         return addNovelty(false);
     }
 
@@ -186,22 +186,27 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
 
     /**
      * Returns a price of a new article.
-     * Returns a "0" if the price is null or empty.
+     * Returns an empty string if the price is null or empty.
      *
-     * @return The price or "0" (newer null).
+     * @return The price or empty string (newer null).
      */
-    private double getPrice() {
-        return (this.price > 0) ? this.price : 0;
+    private String getPrice() {
+        return isNotEmpty(this.price) ? this.price : "";
     }
 
     /**
-     * Returns a price currency of a new article.
-     * Returns an empty string if the price currency is null or empty.
+     * Returns a sort price of a new article.
      *
-     * @return The price currency or empty string (newer null).
+     * @return The sort price (newer null).
      */
-    private String getCurrency() {
-        return isNotEmpty(this.currency) ? this.currency : "";
+    private int getSortPrice() {
+        final int sortPrice;
+        if (isNotEmpty(getPrice())) {
+            sortPrice = (this.sortPrice > 0) ? this.sortPrice : 0;
+        } else {
+            sortPrice = 0;
+        }
+        return sortPrice;
     }
 
     /**
@@ -209,7 +214,7 @@ public final class ArticleBuilder extends ContentBuilder<Article, ArticleBuilder
      *
      * @return true if the model is novelty, false otherwise.
      */
-    private boolean isNoveltyA() {
+    private boolean isNovelty() {
         return this.isNovelty;
     }
 

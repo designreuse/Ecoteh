@@ -45,7 +45,7 @@ final class ArticleConverter extends ContentConverter<Article, ArticleEntity> {
         entity.setText(this.article.getText());
         entity.setDate(this.article.getDate());
         entity.setPrice(this.article.getPrice());
-        entity.setCurrency(this.article.getCurrency());
+        entity.setSortPrice(this.article.getSortPrice());
         entity.setNovelty(this.article.isNovelty());
         entity.setLogoEntity(this.article.getLogo().convert());
         entity.setCategoryEntity(this.article.getCategory().convert());

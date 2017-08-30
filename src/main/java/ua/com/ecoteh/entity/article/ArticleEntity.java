@@ -43,13 +43,13 @@ public class ArticleEntity extends ContentEntity {
      * The price of this article entity.
      */
     @Column(name = "price")
-    private double price;
+    private String price;
 
     /**
-     * The price currency of this article.
+     * The sort price of this article entity.
      */
-    @Column(name = "currency")
-    private String currency;
+    @Column(name = "sort_price")
+    private int sortPrice;
 
     /**
      * It`s novelty product.
@@ -85,7 +85,7 @@ public class ArticleEntity extends ContentEntity {
                 ", number='" + this.number + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
-                ", currency=" + this.currency +
+                ", sortPrice=" + this.sortPrice +
                 ", isNovelty=" + this.isNovelty +
                 ", categoryEntity=" + this.category +
                 '}';
@@ -171,7 +171,7 @@ public class ArticleEntity extends ContentEntity {
      *
      * @return The article entity price (newer null).
      */
-    public double getPrice() {
+    public String getPrice() {
         return this.price;
     }
 
@@ -180,26 +180,26 @@ public class ArticleEntity extends ContentEntity {
      *
      * @param price the new price to the article entity.
      */
-    public void setPrice(final double price) {
+    public void setPrice(final String price) {
         this.price = price;
     }
 
     /**
-     * Returns a price currency of the article.
+     * Returns a sort price of the article entity.
      *
-     * @return The article price currency (newer null).
+     * @return The article entity sort price (newer null).
      */
-    public String getCurrency() {
-        return this.currency;
+    public int getSortPrice() {
+        return this.sortPrice;
     }
 
     /**
-     * Sets a new price currency to the article entity.
+     * Sets a new sort price to the article entity.
      *
-     * @param currency the new price currency to the article entity.
+     * @param sortPrice the new sort price to the article entity.
      */
-    public void setCurrency(final String currency) {
-        this.currency = currency;
+    public void setSortPrice(final int sortPrice) {
+        this.sortPrice = sortPrice;
     }
 
     /**

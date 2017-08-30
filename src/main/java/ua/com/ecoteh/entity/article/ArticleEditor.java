@@ -6,6 +6,7 @@ import ua.com.ecoteh.entity.content.ContentEditor;
 
 import java.util.Date;
 
+import static ua.com.ecoteh.util.validator.ObjectValidator.isNotEmpty;
 import static ua.com.ecoteh.util.validator.ObjectValidator.isNotNull;
 
 /**
@@ -35,12 +36,12 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
     /**
      * The new price of the article.
      */
-    private double price = -1;
+    private String price;
 
     /**
-     * The new price currency of the article.
+     * The sort price of the article.
      */
-    private String currency;
+    private int sortPrice;
 
     /**
      * The new value of novelty of the article.
@@ -80,8 +81,8 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
                 .addText(getText())
                 .addDate(getDate())
                 .addPrice(getPrice())
-                .addCurrency(getCurrency())
-                .addNovelty(isNoveltyA())
+                .addSortPrice(getSortPrice())
+                .addNovelty(isNovelty())
                 .addLogo(getLogo())
                 .addCategory(getCategory());
         return builder.build();
@@ -100,7 +101,6 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
                     .addNumber(article.getNumber())
                     .addDate(article.getDate())
                     .addPrice(article.getPrice())
-                    .addCurrency(article.getCurrency())
                     .addNovelty(article.isNovelty())
                     .addCategory(article.getCategory());
         }
@@ -135,19 +135,19 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      * @param price a new price to the article.
      * @return the article editor.
      */
-    public ArticleEditor addPrice(final double price) {
+    public ArticleEditor addPrice(final String price) {
         this.price = price;
         return this;
     }
 
     /**
-     * Adds a new price currency to the article.
+     * Adds a new sort price to the article.
      *
-     * @param currency the new price currency to athe article.
+     * @param sortPrice a new sort price to the article.
      * @return the article editor.
      */
-    public ArticleEditor addCurrency(final String currency) {
-        this.currency = currency;
+    public ArticleEditor addSortPrice(final int sortPrice) {
+        this.sortPrice = sortPrice;
         return this;
     }
 
@@ -167,7 +167,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      *
      * @return the article editor.
      */
-    public ArticleEditor isNovelty() {
+    public ArticleEditor setNovelty() {
         return addNovelty(true);
     }
 
@@ -176,7 +176,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      *
      * @return the article editor.
      */
-    public ArticleEditor isNotNovelty() {
+    public ArticleEditor setNotNovelty() {
         return addNovelty(false);
     }
 
@@ -217,18 +217,23 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      *
      * @return The new article price.
      */
-    private double getPrice() {
-        return (this.price > 0) ? this.price : this.article.getPrice();
+    private String getPrice() {
+        return isNotNull(this.price) ? this.price : this.article.getPrice();
     }
 
     /**
-     * Returns a price currency of a new article.
-     * Returns an empty string if the price currency is null or empty.
+     * Returns a sort price of a new article.
      *
-     * @return The price currency or empty string (newer null).
+     * @return The sort price (newer null).
      */
-    private String getCurrency() {
-        return isNotNull(this.currency) ? this.currency : this.article.getCurrency();
+    private int getSortPrice() {
+        final int sortPrice;
+        if (isNotEmpty(getPrice())) {
+            sortPrice = (this.sortPrice >= 0) ? this.sortPrice : this.article.getSortPrice();
+        } else {
+            sortPrice = 0;
+        }
+        return sortPrice;
     }
 
     /**
@@ -236,7 +241,7 @@ public final class ArticleEditor extends ContentEditor<Article, ArticleEditor> {
      *
      * @return true if the model is valid, false otherwise.
      */
-    protected boolean isNoveltyA() {
+    private boolean isNovelty() {
         final boolean result;
         if (this.isNovelty > 0) {
             result = (this.isNovelty == 1);

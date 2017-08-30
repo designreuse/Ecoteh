@@ -37,12 +37,12 @@ public final class Article extends Content {
     /**
      * The price of this article.
      */
-    private final double price;
+    private final String price;
 
     /**
-     * The price currency of this article.
+     * The sort price of this article.
      */
-    private final String currency;
+    private int sortPrice;
 
     /**
      * It`s novelty product.
@@ -67,7 +67,7 @@ public final class Article extends Content {
      * @param text        the text of a new article.
      * @param date        the date of a new article.
      * @param price       the price of a new article.
-     * @param currency    the price currency of a new article.
+     * @param sortPrice   the sort price of a new article.
      * @param logo        the logo of a new article.
      * @param category    the category of a new article.
      */
@@ -75,14 +75,14 @@ public final class Article extends Content {
             final long id, final boolean validated,
             final String title, final String url, final String text,
             final String description, final String keywords, final String number,
-            final Date date, final double price, final String currency,
+            final Date date, final String price, final int sortPrice,
             final File logo, final boolean isNovelty, final Category category
     ) {
         super(id, validated, title, url, text, description, keywords, logo);
         this.number = number;
         this.date = date;
         this.price = price;
-        this.currency = currency;
+        this.sortPrice = sortPrice;
         this.isNovelty = isNovelty;
         this.category = category;
     }
@@ -98,7 +98,7 @@ public final class Article extends Content {
                 ", number='" + this.number + '\'' +
                 ", date=" + this.date +
                 ", price=" + this.price +
-                ", currency=" + this.currency +
+                ", sortPrice=" + this.sortPrice +
                 ", isNovelty=" + this.isNovelty +
                 ", category=" + this.category +
                 '}';
@@ -179,17 +179,17 @@ public final class Article extends Content {
      *
      * @return The article price (newer null).
      */
-    public double getPrice() {
+    public String getPrice() {
         return this.price;
     }
 
     /**
-     * Returns a price currency of the article.
+     * Returns a sort price of the article entity.
      *
-     * @return The article price currency (newer null).
+     * @return The article entity sort price (newer null).
      */
-    public String getCurrency() {
-        return this.currency;
+    public int getSortPrice() {
+        return this.sortPrice;
     }
 
     /**
