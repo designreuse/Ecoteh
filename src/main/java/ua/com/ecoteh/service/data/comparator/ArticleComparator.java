@@ -151,9 +151,9 @@ public final class ArticleComparator extends ContentComparator {
          * second article price.
          */
         private int compareByPrice(final Article first, final Article second) {
-            final double firstPrice = first.getPrice();
-            final double secondPrice = second.getPrice();
-            return (int) (firstPrice - secondPrice);
+            final int firstPrice = first.getSortPrice();
+            final int secondPrice = second.getSortPrice();
+            return firstPrice - secondPrice;
         }
     }
 }

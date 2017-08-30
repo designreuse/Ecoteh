@@ -116,7 +116,6 @@ public final class ArticleController {
      * @param keywords      the keywords of a new article.
      * @param number        the number of a new article.
      * @param price         the price to a new article.
-     * @param currency      the new price currency to a article.
      * @param categoryUrl   the category URL of a new article.
      * @param multipartLogo the file of photo to a new article.
      * @param validated     the validated of a new article.
@@ -133,8 +132,8 @@ public final class ArticleController {
             @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "number", defaultValue = "") final String number,
-            @RequestParam(value = "price", defaultValue = "0") final double price,
-            @RequestParam(value = "currency", defaultValue = "") final String currency,
+            @RequestParam(value = "price", defaultValue = "") final String price,
+            @RequestParam(value = "sort_price", defaultValue = "0") final int sortPrice,
             @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_novelty", defaultValue = "false") final boolean isNovelty,
@@ -142,7 +141,7 @@ public final class ArticleController {
     ) {
         final ArticleBuilder articleBuilder = Article.getBuilder();
         articleBuilder.addTitle(title).addKeywords(keywords).addNumber(number)
-                .addPrice(price).addCurrency(currency)
+                .addPrice(price).addSortPrice(sortPrice)
                 .addValidated(validated).addNovelty(isNovelty)
                 .addDescription(description).addText(text);
 
@@ -217,7 +216,6 @@ public final class ArticleController {
      * @param keywords      the new keywords to a article.
      * @param number        the new number to a article.
      * @param price         the new price to a article.
-     * @param currency      the new price currency to a article.
      * @param categoryUrl   the category URL of a article.
      * @param multipartLogo the file of photo to a new article.
      * @param validated     the validated of a article.
@@ -235,8 +233,8 @@ public final class ArticleController {
             @RequestParam(value = "description", defaultValue = "") final String description,
             @RequestParam(value = "keywords", defaultValue = "") final String keywords,
             @RequestParam(value = "number", defaultValue = "") final String number,
-            @RequestParam(value = "price", defaultValue = "0") final double price,
-            @RequestParam(value = "currency", defaultValue = "") final String currency,
+            @RequestParam(value = "price", defaultValue = "") final String price,
+            @RequestParam(value = "sort_price", defaultValue = "0") final int sortPrice,
             @RequestParam(value = "category_url", defaultValue = "") final String categoryUrl,
             @RequestParam(value = "logo") final MultipartFile multipartLogo,
             @RequestParam(value = "is_novelty", defaultValue = "false") final boolean isNovelty,
@@ -244,7 +242,7 @@ public final class ArticleController {
     ) {
         final ArticleBuilder articleBuilder = Article.getBuilder();
         articleBuilder.addUrl(url).addTitle(title).addKeywords(keywords).addNumber(number)
-                .addPrice(price).addCurrency(currency)
+                .addPrice(price).addSortPrice(sortPrice)
                 .addValidated(validated).addNovelty(isNovelty)
                 .addDescription(description).addText(text);
 
