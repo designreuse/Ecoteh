@@ -21,15 +21,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <title>О компании | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="О компании | <c:out value="${main_company.title}"/>">
         <meta name="description" content="<c:out value="${main_company.description}"/>.">
-        <meta name="keywords" content="<c:out value="${main_company.keywords}"/>"/>
-        <meta property="og:title" content="<c:out value="${main_company.title}"/>"/>
+        <meta name="keywords" content="<c:out value="${main_company.keywords}"/>">
+        <meta property="og:title" content="<c:out value="${main_company.title}"/>">
         <meta property="og:type" content="website"/>
-        <meta property="og:description" content="<c:out value="${main_company.tagline}"/>"/>
-        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>"/>
-        <meta property="og:url" content="http://${main_company.domain}/company/main"/>
-        <meta property="fb:admins" content="100002639406164" />
-        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <meta property="og:description" content="<c:out value="${main_company.tagline}"/>">
+        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>">
+        <meta property="og:url" content="http://${main_company.domain}/company/main">
+        <meta property="fb:admins" content="100002639406164">
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">

@@ -22,15 +22,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="title" content="Категории товаров | <c:out value="${main_company.title}"/>">
         <meta name="description" content="Категории товаров <c:out value="${main_company.title}"/>.">
         <meta name="keywords"
-              content="Все категории<c:forEach items="${categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>"/>
-        <meta property="og:title" content="Категории товаров | <c:out value="${main_company.title}"/>"/>
+              content="Все категории<c:forEach items="${categories_list}" var="category">, <c:out value="${category.title}"/></c:forEach>">
+        <meta property="og:title" content="Категории товаров | <c:out value="${main_company.title}"/>">
         <meta property="og:type" content="website"/>
-        <meta property="og:description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>"/>
-        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>"/>
-        <meta property="og:url" content="http://${main_company.domain}/categories"/>
-        <meta property="fb:admins" content="100002639406164" />
-        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <meta property="og:description" content="<c:out value="${main_company.title} - ${main_company.tagline}"/>">
+        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>">
+        <meta property="og:url" content="http://${main_company.domain}/categories">
+        <meta property="fb:admins" content="100002639406164">
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">

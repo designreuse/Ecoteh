@@ -52,8 +52,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <title>${description}</title>
         <meta name="title" content="${description}">
         <meta name="description" content="${description} - <c:out value="${message}"/>">
-        <link rel="shortcut icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/img/static/error.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/error.ico"/>">
+        <link rel="icon" href="<c:url value="/resources/img/static/error.ico"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">

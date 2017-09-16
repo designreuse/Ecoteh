@@ -44,24 +44,6 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         </label>
         <input type="hidden" name="content" value="">
     </div>
-    <%--
-    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <label>
-            <b>
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                &nbsp;Как искать?
-            </b>
-        </label>&nbsp;&nbsp;&nbsp;
-        <label title="Искать по точному совпадению слов">
-            <input type="radio" name="how_search" title="" value="true" required
-                   <c:if test="${how_search}">checked</c:if>>&nbsp;Точное совпадение
-        </label>&nbsp;&nbsp;&nbsp;
-        <label title="Искать по любое из ключевых слов">
-            <input type="radio" name="how_search" title="" value="false" required
-                   <c:if test="${!how_search}">checked</c:if>>&nbsp;Любое из ключевых слов
-        </label>&nbsp;&nbsp;&nbsp;
-    </div>
-    --%>
     <div class="text-center form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <button type="submit" class="btn btn-default">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Поиск

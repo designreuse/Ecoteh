@@ -22,15 +22,15 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="title" content="<c:out value="${category.title} | ${main_company.title}"/>">
         <meta name="description" content="${category.description}">
         <meta name="keywords"
-              content="Категория <c:out value="${category.title}, ${category.keywords}"/><c:forEach items="${articles}" var="article"><c:out value=", ${article.title}"/></c:forEach>"/>
-        <meta property="og:title" content="<c:out value="${category.title}"/>"/>
+              content="Категория <c:out value="${category.title}, ${category.keywords}"/><c:forEach items="${articles}" var="article"><c:out value=", ${article.title}"/></c:forEach>">
+        <meta property="og:title" content="<c:out value="${category.title}"/>">
         <meta property="og:type" content="website"/>
-        <meta property="og:description" content="<c:out value="${category.description}"/>"/>
-        <meta property="og:image" content="<c:url value="${category.logo.url}"/>"/>
-        <meta property="og:url" content="http://${main_company.domain}/category/${category.url}"/>
-        <meta property="fb:admins" content="100002639406164" />
-        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <meta property="og:description" content="<c:out value="${category.description}"/>">
+        <meta property="og:image" content="<c:url value="${category.logo.url}"/>">
+        <meta property="og:url" content="http://${main_company.domain}/category/${category.url}">
+        <meta property="fb:admins" content="100002639406164">
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">

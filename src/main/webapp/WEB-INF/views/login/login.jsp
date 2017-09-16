@@ -19,8 +19,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="noindex,nofollow">
         <title>Авторизация</title>
         <meta name="title" content="Авторизация">
-        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="/resources/img/static/login.ico"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="/resources/img/static/login.ico"/>">
+        <link rel="icon" href="<c:url value="/resources/img/static/login.ico"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">

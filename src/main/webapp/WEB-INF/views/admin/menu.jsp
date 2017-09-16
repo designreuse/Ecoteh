@@ -21,8 +21,8 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <title>Меню | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Меню | <c:out value="${main_company.title}"/>">
         <meta name="description" content="Возможности администратора этого прекрасного сайта.">
-        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">

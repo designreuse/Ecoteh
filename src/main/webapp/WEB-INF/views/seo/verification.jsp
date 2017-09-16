@@ -14,5 +14,5 @@ Yuriy Salimov (yuriy.alex.salimov@gmail.com)
 <fmt:message var="google" bundle="${verification}" key="google.verification" scope="application"/>
 <fmt:message var="yandex" bundle="${verification}" key="yandex.verification" scope="application"/>
 
-<meta name="google-site-verification" content="<c:out value="${google}"/>"/>
-<meta name="yandex-verification" content="<c:out value="${yandex}"/>"/>
+<meta name="google-site-verification" content="<c:out value="${google}"/>">
+<meta name="yandex-verification" content="<c:out value="${yandex}"/>">

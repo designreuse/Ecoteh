@@ -20,17 +20,17 @@ Yurii Salimov (yuriy.alex.salimov@gmail.com)
         <meta name="robots" content="index,follow">
         <title>Наш блог | <c:out value="${main_company.title}"/></title>
         <meta name="title" content="Наш блог | <c:out value="${main_company.title}"/>">
-        <meta name="description" content="Блог компании <c:out value="${main_company.title}"/>"/>
+        <meta name="description" content="Блог компании <c:out value="${main_company.title}"/>">
         <meta name="keywords"
-              content="Блог <c:out value="${main_company.title}"/><c:forEach items="${posts}" var="post"><c:out value=", ${post.title}"/></c:forEach>"/>
-        <meta property="og:title" content="Блог | <c:out value="${main_company.title}"/>"/>
-        <meta property="og:type" content="article"/>
-        <meta property="og:description" content="<c:out value="${main_company.title} | ${main_company.tagline}"/>"/>
-        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>"/>
-        <meta property="og:url" content="http://${main_company.domain}/blog"/>
-        <meta property="fb:admins" content="100002639406164" />
-        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
-        <link rel="icon" href="<c:url value="${favicon.url}"/>" type="image/x-icon">
+              content="Блог <c:out value="${main_company.title}"/><c:forEach items="${posts}" var="post"><c:out value=", ${post.title}"/></c:forEach>">
+        <meta property="og:title" content="Блог | <c:out value="${main_company.title}"/>">
+        <meta property="og:type" content="article">
+        <meta property="og:description" content="<c:out value="${main_company.title} | ${main_company.tagline}"/>">
+        <meta property="og:image" content="<c:url value="${main_company.logo.url}"/>">
+        <meta property="og:url" content="http://${main_company.domain}/blog">
+        <meta property="fb:admins" content="100002639406164">
+        <link rel="shortcut icon" href="<c:url value="${favicon.url}"/>">
+        <link rel="icon" href="<c:url value="${favicon.url}"/>">
             <%-- CSS styles --%>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
               rel="stylesheet">
